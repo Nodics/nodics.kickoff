@@ -24,6 +24,29 @@ framework module. Use a later-loaded extension module before forking a standard
 functional module. Create a new functional module only when the business
 capability is genuinely new.
 
+## Customization decision tree
+
+Use this decision tree before changing code:
+
+```mermaid
+flowchart TD
+  Need["Need to change behavior or content"] --> Config{"Can configuration solve it?"}
+  Config -- "yes" --> Env["Use project, environment, server, node, tenant, or provider configuration"]
+  Config -- "no" --> Existing{"Does an existing functional module own it?"}
+  Existing -- "yes" --> ProjectModule{"Is it customer-specific?"}
+  ProjectModule -- "yes" --> Overlay["Create or update a customer/project module loaded after the framework owner"]
+  ProjectModule -- "no" --> Framework["Change the owning framework module with tests and docs"]
+  Existing -- "no" --> NewModule["Design a new functional module with explicit ownership"]
+  Env --> Verify["Regenerate artifacts and run acceptance"]
+  Overlay --> Verify
+  Framework --> Verify
+  NewModule --> Verify
+```
+
+If you cannot answer the ownership question, do not code yet. A wrong owner is
+more expensive than a missing implementation because it creates a hidden
+contract future teams will inherit.
+
 ## How a developer or AI tool should think
 
 Kickoff is a reference customer project, so every change teaches future
@@ -58,6 +81,20 @@ Use these examples when deciding where code or data belongs:
 | Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |
 | Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |
 | Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |
+
+## Configuration-first examples
+
+Configuration-first does not mean "put everything in properties." It means use
+the correct configuration owner before writing code.
+
+| Example change | Better first move | Why |
+| --- | --- | --- |
+| Local WCMS port must change | Server config under `envs/.../wcmsServer/config` | Port is topology, not shared framework behavior. |
+| A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |
+| A local dependency path differs | `.env` with `NODICS_FRAMEWORK_ROOT`, then `configure:framework` | Workspace layout is developer-specific. |
+| A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |
+| A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |
+| A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |
 
 ## Safe customization model
 
@@ -110,6 +147,32 @@ in the backend owner. For example, changing a demo site logo should become a
 governed WCMS, Media, or content update, not a hard-coded replacement inside
 the Axis source repository.
 
+### Documentation customization
+
+Documentation customization is content customization. If a customer wants
+their own onboarding guide, project setup page, API usage note, operational
+runbook, or business process explanation, the content belongs in the customer
+project documentation pack.
+
+The source lives under:
+
+```text
+data/core/source/documentation/
+  catalogue.json
+  pages/
+```
+
+The generated files live under:
+
+```text
+data/core/data/documentation/
+manifest/docs-content-pack.json
+```
+
+Edit the source, bump the catalogue version, regenerate, test, import, and
+verify in Axis. Never hand-edit the generated CMS records to make a page look
+right.
+
 ## What not to customize in Kickoff
 
 Do not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not
@@ -161,6 +224,22 @@ verify the route in Axis.
 6. Add or update tests proving the project behavior.
 7. Update Kickoff documentation if the customization is part of the reference
    journey.
+
+### Example: adding a project service
+
+Suppose a customer wants a project-only greeting service for a demo dashboard.
+The safe thought process is:
+
+1. The behavior is not framework-wide.
+2. The behavior belongs to the customer project.
+3. The implementation should live under a project module, for example
+   `modules/kickoffCore`.
+4. The service should be exported so a later module can override or compose it.
+5. A test should prove the default behavior and the override path.
+6. The documentation should explain the example if it teaches future partners.
+
+Do not add that demo service to `nodics.core` only because every runtime loads
+Core. Core is the shared foundation, not a bucket for convenient code.
 
 Do not use this flow to move framework behavior into Kickoff. If the behavior
 belongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and

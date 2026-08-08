@@ -45,7 +45,7 @@ module.exports = {
             "operator"
           ],
           "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
-          "searchText": "Kickoff project overview Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs. # Kickoff Project Overview\n\nNodics Kickoff is the reference customer project for running Nodics locally and\ndemonstrating how a partner or customer project consumes the framework. It is\nnot a standard Nodics functional module such as Core, Platform, WCMS, or Cron.\nIt is a project-owned runtime composition that shows how those modules can be\nassembled without copying framework source.\n\nKickoff owns project structure, local environment wiring, project modules,\nsample customization points, and project documentation. Framework\ndocumentation belongs in `nodics.docs`; Axis product documentation belongs in\nthe Platform `axis` backend module; browser renderers belong in `nodics.axis`.\nKickoff documentation that becomes CMS data belongs in this repository under\n`data/core/source/documentation` and is generated into this repository's own\ncontent pack.\n\n## Why Kickoff exists\n\nKickoff exists so a new team can feel Nodics before they design their own\nproject. A partner should be able to clone the framework, clone the reference\nproject, run a small set of commands, log in to Axis, and see the major backend\ncapabilities working together.\n\nThis matters because enterprise framework adoption usually fails at the first\nhour. If the first experience requires a developer to understand every module,\nevery dependency, every data import, and every environment property, the\nframework feels heavy even when the architecture is good. Kickoff keeps the\nfirst journey small: start the runtime, import governed seed data, open Axis,\nread the documentation, and then make one safe customization.\n\nFor a business evaluator, Kickoff demonstrates that Nodics can support a real\ncustomer project without asking the customer to fork framework code. For a\ndeveloper, it shows the concrete folder shape, package dependency model,\nenvironment wiring, server start commands, and project-owned extension points.\nFor an operator, it shows how one local project can run Platform, WCMS, and\nCron as separate processes while preserving the same module ownership rules\nthat production will use.\n\n## Beginner mental model\n\nThink of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample\nproduction line, and `nodics.axis` as the control room screen. The factory\nequipment provides standard capabilities such as Core, Platform, WCMS, Media,\nand Cron. The sample production line decides which equipment to connect for a\nlocal demonstration. The control room screen connects to the running backend\nand shows only the capabilities that the backend says are available and\nauthorized.\n\nKickoff is not the product every customer must ship. It is the smallest\ncomplete example of how a customer product can be structured.\n\n## What Kickoff demonstrates\n\n- how a customer project depends on Nodics framework packages;\n- how environment and server modules load after standard functional modules;\n- how Platform, WCMS, and Cron can run as separate local servers;\n- how project modules can customize runtime behavior without renaming the\n  standard functional module identity;\n- how customer-owned documentation can appear in Axis beside Framework,\n  Swaggers, and Nodics Axis.\n\n## Source map\n\nThe important Kickoff locations are:\n\n- `package.json` describes the project package and local scripts;\n- `.env` describes developer-specific framework checkout location and local\n  overrides;\n- `src/sync-framework-dependencies.js` prepares local framework package links;\n- `src/start-platform-server.js`, `src/start-wcms-server.js`, and\n  `src/start-cron-server.js` start local runtime servers;\n- `config/` contains project-level defaults;\n- `envs/kickoffLocal/` contains local environment and server composition;\n- `modules/` contains project-owned modules and customization examples;\n- `data/core/source/documentation/` contains authored Kickoff documentation;\n- `data/core/data/documentation/` and `manifest/docs-content-pack.json` are\n  generated content-pack outputs.\n\nAuthored documentation is the source. Generated records are the importable CMS\nprojection. Do not hand-edit generated records to fix documentation.\n\n## Runtime boundary\n\nKickoff is loaded after framework modules. That means it can contribute\nconfiguration, project modules, and project-owned documentation, but it must not\nmove framework behavior into the customer repository. A customer extension such\nas `kickoff.platform` may customize Platform implementation while the\nbusiness-facing functional identity remains `nodics.platform`.\n\nRuntime composition and code dependency are related but different. Package\ndependencies make framework modules available to the project. Server\nconfiguration decides which modules are loaded, in which order, for a specific\nruntime process. Service override behavior follows module loading and indexes,\nnot simply the order in `package.json`.\n\n```mermaid\nflowchart LR\n  FrameworkRoot[\"Framework checkout<br/>nodics.ai\"] --> Core[\"nodics.core\"]\n  FrameworkRoot --> Platform[\"nodics.platform\"]\n  FrameworkRoot --> WCMS[\"nodics.wcms\"]\n  FrameworkRoot --> Cron[\"nodics.cron\"]\n  Core --> Project[\"nodics.kickoff<br/>reference customer project\"]\n  Platform --> Project\n  WCMS --> Project\n  Cron --> Project\n  Project --> Servers[\"kickoffLocal servers<br/>platformServer, wcmsServer, cronServer\"]\n  Servers --> Axis[\"nodics.axis<br/>frontend renderer\"]\n```\n\nThis diagram is intentionally simple. Kickoff does not own the framework\nmodules and Axis does not own backend data. Kickoff composes the backend\nruntime, and Axis renders whatever Platform/WCMS say is active, authorized,\nand available.\n\n## Beginner story\n\nA new developer can think of Kickoff as a training project:\n\n1. It shows where a customer project keeps project modules.\n2. It shows where local environment/server configuration lives.\n3. It shows how to point at a framework checkout that may live anywhere on the\n   machine.\n4. It starts Platform, WCMS, and Cron without asking the developer to create a\n   production topology first.\n5. It ships project-owned documentation so Axis can show framework docs,\n   Axis docs, and customer-project docs side by side.\n\nAfter the developer understands this reference shape, they can create a real\ncustomer project with the same rules but different business modules, branding,\ndata, environments, and deployment choices.\n\n## Documentation boundary\n\nKickoff docs are imported through WCMS like any other governed CMS content\npack. Axis renders the resolved CMS page and does not own the documentation\nrecords. The BackOffice registry exposes the documentation source so the Axis\nDocumentation dashboard can discover it.\n\n## Common mistakes\n\n- Do not put framework documentation in Kickoff unless the page is explaining\n  how Kickoff consumes the framework.\n- Do not copy `nodics.core`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`\n  source into this repository.\n- Do not move Axis renderers or browser code into Kickoff.\n- Do not assume a customer project will always sit beside `nodics.ai`; use the\n  framework-root configuration.\n- Do not change generated content-pack files without regenerating from source.\n- Do not rename functional capabilities when a customer module only customizes\n  their implementation.\n\n## How to know Kickoff is working\n\nKickoff is healthy when Platform starts, WCMS starts, the module registry shows\nmandatory functional modules as active, optional modules can be registered\nthrough Axis, documentation content packs can be imported or updated through\nBackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and\nNodics Kickoff documentation from backend-owned sources.\n\n## Continue\n\n- [Local runtime topology](local-runtime.md)\n- [Customer customization guide](customization-guide.md)\n"
+          "searchText": "Kickoff project overview Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs. # Kickoff Project Overview\n\nNodics Kickoff is the reference customer project for running Nodics locally and\ndemonstrating how a partner or customer project consumes the framework. It is\nnot a standard Nodics functional module such as Core, Platform, WCMS, or Cron.\nIt is a project-owned runtime composition that shows how those modules can be\nassembled without copying framework source.\n\nKickoff owns project structure, local environment wiring, project modules,\nsample customization points, and project documentation. Framework\ndocumentation belongs in `nodics.docs`; Axis product documentation belongs in\nthe Platform `axis` backend module; browser renderers belong in `nodics.axis`.\nKickoff documentation that becomes CMS data belongs in this repository under\n`data/core/source/documentation` and is generated into this repository's own\ncontent pack.\n\n## Why Kickoff exists\n\nKickoff exists so a new team can feel Nodics before they design their own\nproject. A partner should be able to clone the framework, clone the reference\nproject, run a small set of commands, log in to Axis, and see the major backend\ncapabilities working together.\n\nThis matters because enterprise framework adoption usually fails at the first\nhour. If the first experience requires a developer to understand every module,\nevery dependency, every data import, and every environment property, the\nframework feels heavy even when the architecture is good. Kickoff keeps the\nfirst journey small: start the runtime, import governed seed data, open Axis,\nread the documentation, and then make one safe customization.\n\nFor a business evaluator, Kickoff demonstrates that Nodics can support a real\ncustomer project without asking the customer to fork framework code. For a\ndeveloper, it shows the concrete folder shape, package dependency model,\nenvironment wiring, server start commands, and project-owned extension points.\nFor an operator, it shows how one local project can run Platform, WCMS, and\nCron as separate processes while preserving the same module ownership rules\nthat production will use.\n\n## What a new customer should learn\n\nKickoff should answer the questions a new customer asks before trusting a\nframework:\n\n| Question | Kickoff answer |\n| --- | --- |\n| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Cron, and Axis wiring. |\n| Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |\n| Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |\n| Can optional modules be added later? | Yes. Cron demonstrates observed optional runtime capability and registry lifecycle. |\n| Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |\n\nThis makes Kickoff more than a sample app. It is the adoption proof for the\nwhole framework.\n\n## Beginner mental model\n\nThink of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample\nproduction line, and `nodics.axis` as the control room screen. The factory\nequipment provides standard capabilities such as Core, Platform, WCMS, Media,\nand Cron. The sample production line decides which equipment to connect for a\nlocal demonstration. The control room screen connects to the running backend\nand shows only the capabilities that the backend says are available and\nauthorized.\n\nKickoff is not the product every customer must ship. It is the smallest\ncomplete example of how a customer product can be structured.\n\n```mermaid\nflowchart LR\n  Framework[\"Framework equipment<br/>nodics.ai\"] --> Project[\"Reference production line<br/>nodics.kickoff\"]\n  Project --> Servers[\"Local runtime servers\"]\n  Servers --> Platform[\"Platform: login and BackOffice\"]\n  Servers --> WCMS[\"WCMS: content and docs\"]\n  Servers --> Cron[\"Cron: scheduled capability\"]\n  Axis[\"Control room<br/>nodics.axis\"] --> Platform\n  Axis --> WCMS\n  Axis --> Cron\n```\n\nThe metaphor is useful because it prevents a common mistake. You do not move\nfactory equipment into the control room, and you do not hardcode control-room\nscreens into the production line. Each part has a job.\n\n## What Kickoff demonstrates\n\n- how a customer project depends on Nodics framework packages;\n- how environment and server modules load after standard functional modules;\n- how Platform, WCMS, and Cron can run as separate local servers;\n- how project modules can customize runtime behavior without renaming the\n  standard functional module identity;\n- how customer-owned documentation can appear in Axis beside Framework,\n  Swaggers, and Nodics Axis.\n\n## Source map\n\nThe important Kickoff locations are:\n\n- `package.json` describes the project package and local scripts;\n- `.env` describes developer-specific framework checkout location and local\n  overrides;\n- `src/sync-framework-dependencies.js` prepares local framework package links;\n- `src/start-platform-server.js`, `src/start-wcms-server.js`, and\n  `src/start-cron-server.js` start local runtime servers;\n- `config/` contains project-level defaults;\n- `envs/kickoffLocal/` contains local environment and server composition;\n- `modules/` contains project-owned modules and customization examples;\n- `data/core/source/documentation/` contains authored Kickoff documentation;\n- `data/core/data/documentation/` and `manifest/docs-content-pack.json` are\n  generated content-pack outputs.\n\nAuthored documentation is the source. Generated records are the importable CMS\nprojection. Do not hand-edit generated records to fix documentation.\n\n## Runtime boundary\n\nKickoff is loaded after framework modules. That means it can contribute\nconfiguration, project modules, and project-owned documentation, but it must not\nmove framework behavior into the customer repository. A customer extension such\nas `kickoff.platform` may customize Platform implementation while the\nbusiness-facing functional identity remains `nodics.platform`.\n\nRuntime composition and code dependency are related but different. Package\ndependencies make framework modules available to the project. Server\nconfiguration decides which modules are loaded, in which order, for a specific\nruntime process. Service override behavior follows module loading and indexes,\nnot simply the order in `package.json`.\n\n```mermaid\nflowchart LR\n  FrameworkRoot[\"Framework checkout<br/>nodics.ai\"] --> Core[\"nodics.core\"]\n  FrameworkRoot --> Platform[\"nodics.platform\"]\n  FrameworkRoot --> WCMS[\"nodics.wcms\"]\n  FrameworkRoot --> Cron[\"nodics.cron\"]\n  Core --> Project[\"nodics.kickoff<br/>reference customer project\"]\n  Platform --> Project\n  WCMS --> Project\n  Cron --> Project\n  Project --> Servers[\"kickoffLocal servers<br/>platformServer, wcmsServer, cronServer\"]\n  Servers --> Axis[\"nodics.axis<br/>frontend renderer\"]\n```\n\nThis diagram is intentionally simple. Kickoff does not own the framework\nmodules and Axis does not own backend data. Kickoff composes the backend\nruntime, and Axis renders whatever Platform/WCMS say is active, authorized,\nand available.\n\n## First customization promise\n\nA beginner should be able to make a first safe customization without fear.\nGood first customizations are intentionally small:\n\n- change a local property in the correct environment or server file;\n- add or update a Kickoff documentation page;\n- add a project-only service in a Kickoff module;\n- add project sample data that belongs to the customer project;\n- change WCMS-managed content through Axis after import.\n\nBad first customizations are also easy to name:\n\n- editing `nodics.core` because a project-specific rule is needed;\n- putting CMS import data into `nodics.axis`;\n- changing generated files without changing their source;\n- changing a standard functional module identity because a project customized\n  implementation;\n- hiding a status, error code, permission, or lifecycle state in an unrelated\n  property file.\n\nKickoff exists to teach the safe path first.\n\n## Beginner story\n\nA new developer can think of Kickoff as a training project:\n\n1. It shows where a customer project keeps project modules.\n2. It shows where local environment/server configuration lives.\n3. It shows how to point at a framework checkout that may live anywhere on the\n   machine.\n4. It starts Platform, WCMS, and Cron without asking the developer to create a\n   production topology first.\n5. It ships project-owned documentation so Axis can show framework docs,\n   Axis docs, and customer-project docs side by side.\n\nAfter the developer understands this reference shape, they can create a real\ncustomer project with the same rules but different business modules, branding,\ndata, environments, and deployment choices.\n\n## Documentation boundary\n\nKickoff docs are imported through WCMS like any other governed CMS content\npack. Axis renders the resolved CMS page and does not own the documentation\nrecords. The BackOffice registry exposes the documentation source so the Axis\nDocumentation dashboard can discover it.\n\n## Common mistakes\n\n- Do not put framework documentation in Kickoff unless the page is explaining\n  how Kickoff consumes the framework.\n- Do not copy `nodics.core`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`\n  source into this repository.\n- Do not move Axis renderers or browser code into Kickoff.\n- Do not assume a customer project will always sit beside `nodics.ai`; use the\n  framework-root configuration.\n- Do not change generated content-pack files without regenerating from source.\n- Do not rename functional capabilities when a customer module only customizes\n  their implementation.\n\n## How to know Kickoff is working\n\nKickoff is healthy when Platform starts, WCMS starts, the module registry shows\nmandatory functional modules as active, optional modules can be registered\nthrough Axis, documentation content packs can be imported or updated through\nBackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and\nNodics Kickoff documentation from backend-owned sources.\n\n## What to read next\n\nRead Kickoff in this order:\n\n1. **Local runtime topology** to understand which servers start and why.\n2. **Local acceptance checklist** to prove the environment from a fresh local\n   database.\n3. **Customer customization guide** to learn how to change behavior without\n   damaging framework ownership.\n4. Framework documentation for Core, Platform, WCMS, Cron, imports, and DevOps\n   once the local system is running.\n\n## Continue\n\n- [Local runtime topology](local-runtime.md)\n- [Customer customization guide](customization-guide.md)\n"
         },
         {
           "code": "kickoff.local-runtime",
@@ -93,7 +93,7 @@ module.exports = {
             "operator"
           ],
           "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
-          "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. # Customer Customization Guide\n\nKickoff is intentionally small. It should teach partners how to customize\nNodics safely without turning the reference project into another framework\nrepository.\n\nFor a beginner developer, the most important lesson is restraint. Do not start\nby editing framework files because they are easy to find. Start by asking who\nowns the behavior, whether configuration can solve the need, and which runtime\nserver should load the customization. That habit keeps the customer project\nupgradeable.\n\n## Why customization needs rules\n\nMost enterprise projects start with one urgent customer request. The quickest\nsolution is often to edit whatever file is easiest to find. That works for a\ndemo, but it becomes expensive when more customers, tenants, brands, modules,\nand releases arrive. Nodics customization rules keep the framework upgradeable\nand keep customer behavior visible in the customer project.\n\nThe rule is simple: customize in the most specific owner that needs the\nchange. Use configuration before code. Use a project module before editing a\nframework module. Use a later-loaded extension module before forking a standard\nfunctional module. Create a new functional module only when the business\ncapability is genuinely new.\n\n## How a developer or AI tool should think\n\nKickoff is a reference customer project, so every change teaches future\ncustomers what “good” looks like. A developer or AI tool should not behave like\na script that only edits the nearest file. It should behave like a small expert\nteam:\n\n| Role | What to check in Kickoff |\n| --- | --- |\n| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |\n| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |\n| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |\n| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |\n| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |\n| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |\n| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |\n\nIf the answer is unclear, stop and name the ownership decision before editing.\nFor example, changing the local WCMS database name belongs in server\nconfiguration, while changing the import checksum rule belongs in the owning\nframework import service.\n\n## File placement examples\n\nUse these examples when deciding where code or data belongs:\n\n| Need | Correct owner | Why |\n| --- | --- | --- |\n| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |\n| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |\n| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |\n| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |\n| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |\n| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |\n\n## Safe customization model\n\nCustomer projects can add project modules under `modules/` and environment or\nserver contributions under `envs/`. These contributions load after standard\nNodics functional modules and can override or extend services through the\nnormal module merge process.\n\nSafe customizations include:\n\n- project-specific configuration;\n- customer modules such as `kickoffCore`, `kickoffApi`, or `kickoffInt`;\n- customer extension modules such as a future `kickoff.platform`;\n- environment-specific properties for local, testing, pre-production, and\n  production;\n- project-owned CMS documentation content packs;\n- sample data or initialization flows that belong to the customer project.\n\n## Two customization types\n\n### Code-level customization\n\nUse code-level customization when behavior changes: a service needs different\nlogic, a route needs a project-specific policy, a schema needs project fields,\nor an integration must call a customer system. Keep the implementation in a\nKickoff module or a customer extension module. Add tests next to the changed\nowner and document the boundary in the module README or documentation page.\n\nExample mental model:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nHere `kickoff.platform` can override or compose Platform services because it\nloads later. Axis and BackOffice should still show the functional capability as\nPlatform unless the customer intentionally exposes a new business capability.\n\n### Axis and WCMS customization\n\nUse governed frontend customization when an administrator changes content,\nlabels, navigation, documentation, images, or page composition through Axis\nand WCMS. The browser renderer stays in `nodics.axis`; the content records live\nin the backend owner. For example, changing a demo site logo should become a\ngoverned WCMS, Media, or content update, not a hard-coded replacement inside\nthe Axis source repository.\n\n## What not to customize in Kickoff\n\nDo not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not\nrename standard functional identities such as `nodics.platform` just because a\ncustomer extension customizes their behavior. Do not put backend-importable CMS\ndata into the frontend repository. Do not place framework documentation in the\ncustomer project unless it is truly project-specific guidance.\n\n## Extension example\n\nA customer may later create a module such as `kickoff.platform` to customize\nPlatform behavior. A Platform server could load:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nBackOffice and Axis should still present the functional capability as Platform\nunless the customer explicitly exposes a separate functional module. The\nextension changes implementation; it does not create a new product identity.\n\n## Documentation rule\n\nCustomer documentation follows the same ownership rule:\n\n- framework guidance goes to `nodics.docs`;\n- Axis product guidance goes to Platform `modules/axis`;\n- Kickoff/project guidance goes to `nodics.kickoff`;\n- browser rendering remains in `nodics.axis`.\n\nWhen Kickoff docs change, update the source page, bump the catalogue version if\nthe generated content changes, regenerate the pack, import it through WCMS, and\nverify the route in Axis.\n\n## Step-by-step: add a small project module\n\n1. Create or choose a module under `modules/`.\n2. Give the module a clear package identity and index so load order is\n   intentional.\n3. Add only project-owned services, data, configuration, or routes.\n4. Register the module in the relevant environment/server composition.\n5. Start the server and verify logs show the module loading after framework\n   modules.\n6. Add or update tests proving the project behavior.\n7. Update Kickoff documentation if the customization is part of the reference\n   journey.\n\nDo not use this flow to move framework behavior into Kickoff. If the behavior\nbelongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and\nimplement it in the owning framework module instead.\n\n## Step-by-step: add project documentation\n\n1. Add or update Markdown under\n   `data/core/source/documentation/pages/`.\n2. Update `data/core/source/documentation/catalogue.json`.\n3. Bump the catalogue version when generated content changes.\n4. Run `npm run docs:generate`.\n5. Run `npm run test:documentation`.\n6. Import or update the content pack through Axis.\n7. Open the generated `/docs/nodics-kickoff` route in Axis and verify\n   navigation, search, headings, and previous/next links.\n\n## DevOps and rollback notes\n\nProject customizations should be deployable and reversible. Keep project\nconfiguration separate from private secrets. Record which environment and\nserver a customization affects. If a release fails, rollback should remove or\ndisable the project layer without requiring a framework source rollback.\n\nOperators should be able to answer three questions during rollback: which\nproject module introduced the change, which server graph loaded it, and which\ncontent-pack or configuration version went live. If those answers are unclear,\nthe customization is not ready for a production environment.\n\nGenerated documentation and seed data should be versioned immutably. If content\nchanges with the same version, the import service should reject it so operators\ndo not silently install a different release under an already-trusted identity.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Local runtime topology](local-runtime.md)\n"
+          "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. # Customer Customization Guide\n\nKickoff is intentionally small. It should teach partners how to customize\nNodics safely without turning the reference project into another framework\nrepository.\n\nFor a beginner developer, the most important lesson is restraint. Do not start\nby editing framework files because they are easy to find. Start by asking who\nowns the behavior, whether configuration can solve the need, and which runtime\nserver should load the customization. That habit keeps the customer project\nupgradeable.\n\n## Why customization needs rules\n\nMost enterprise projects start with one urgent customer request. The quickest\nsolution is often to edit whatever file is easiest to find. That works for a\ndemo, but it becomes expensive when more customers, tenants, brands, modules,\nand releases arrive. Nodics customization rules keep the framework upgradeable\nand keep customer behavior visible in the customer project.\n\nThe rule is simple: customize in the most specific owner that needs the\nchange. Use configuration before code. Use a project module before editing a\nframework module. Use a later-loaded extension module before forking a standard\nfunctional module. Create a new functional module only when the business\ncapability is genuinely new.\n\n## Customization decision tree\n\nUse this decision tree before changing code:\n\n```mermaid\nflowchart TD\n  Need[\"Need to change behavior or content\"] --> Config{\"Can configuration solve it?\"}\n  Config -- \"yes\" --> Env[\"Use project, environment, server, node, tenant, or provider configuration\"]\n  Config -- \"no\" --> Existing{\"Does an existing functional module own it?\"}\n  Existing -- \"yes\" --> ProjectModule{\"Is it customer-specific?\"}\n  ProjectModule -- \"yes\" --> Overlay[\"Create or update a customer/project module loaded after the framework owner\"]\n  ProjectModule -- \"no\" --> Framework[\"Change the owning framework module with tests and docs\"]\n  Existing -- \"no\" --> NewModule[\"Design a new functional module with explicit ownership\"]\n  Env --> Verify[\"Regenerate artifacts and run acceptance\"]\n  Overlay --> Verify\n  Framework --> Verify\n  NewModule --> Verify\n```\n\nIf you cannot answer the ownership question, do not code yet. A wrong owner is\nmore expensive than a missing implementation because it creates a hidden\ncontract future teams will inherit.\n\n## How a developer or AI tool should think\n\nKickoff is a reference customer project, so every change teaches future\ncustomers what “good” looks like. A developer or AI tool should not behave like\na script that only edits the nearest file. It should behave like a small expert\nteam:\n\n| Role | What to check in Kickoff |\n| --- | --- |\n| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |\n| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |\n| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |\n| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |\n| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |\n| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |\n| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |\n\nIf the answer is unclear, stop and name the ownership decision before editing.\nFor example, changing the local WCMS database name belongs in server\nconfiguration, while changing the import checksum rule belongs in the owning\nframework import service.\n\n## File placement examples\n\nUse these examples when deciding where code or data belongs:\n\n| Need | Correct owner | Why |\n| --- | --- | --- |\n| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |\n| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |\n| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |\n| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |\n| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |\n| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |\n\n## Configuration-first examples\n\nConfiguration-first does not mean \"put everything in properties.\" It means use\nthe correct configuration owner before writing code.\n\n| Example change | Better first move | Why |\n| --- | --- | --- |\n| Local WCMS port must change | Server config under `envs/.../wcmsServer/config` | Port is topology, not shared framework behavior. |\n| A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |\n| A local dependency path differs | `.env` with `NODICS_FRAMEWORK_ROOT`, then `configure:framework` | Workspace layout is developer-specific. |\n| A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |\n| A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |\n| A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |\n\n## Safe customization model\n\nCustomer projects can add project modules under `modules/` and environment or\nserver contributions under `envs/`. These contributions load after standard\nNodics functional modules and can override or extend services through the\nnormal module merge process.\n\nSafe customizations include:\n\n- project-specific configuration;\n- customer modules such as `kickoffCore`, `kickoffApi`, or `kickoffInt`;\n- customer extension modules such as a future `kickoff.platform`;\n- environment-specific properties for local, testing, pre-production, and\n  production;\n- project-owned CMS documentation content packs;\n- sample data or initialization flows that belong to the customer project.\n\n## Two customization types\n\n### Code-level customization\n\nUse code-level customization when behavior changes: a service needs different\nlogic, a route needs a project-specific policy, a schema needs project fields,\nor an integration must call a customer system. Keep the implementation in a\nKickoff module or a customer extension module. Add tests next to the changed\nowner and document the boundary in the module README or documentation page.\n\nExample mental model:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nHere `kickoff.platform` can override or compose Platform services because it\nloads later. Axis and BackOffice should still show the functional capability as\nPlatform unless the customer intentionally exposes a new business capability.\n\n### Axis and WCMS customization\n\nUse governed frontend customization when an administrator changes content,\nlabels, navigation, documentation, images, or page composition through Axis\nand WCMS. The browser renderer stays in `nodics.axis`; the content records live\nin the backend owner. For example, changing a demo site logo should become a\ngoverned WCMS, Media, or content update, not a hard-coded replacement inside\nthe Axis source repository.\n\n### Documentation customization\n\nDocumentation customization is content customization. If a customer wants\ntheir own onboarding guide, project setup page, API usage note, operational\nrunbook, or business process explanation, the content belongs in the customer\nproject documentation pack.\n\nThe source lives under:\n\n```text\ndata/core/source/documentation/\n  catalogue.json\n  pages/\n```\n\nThe generated files live under:\n\n```text\ndata/core/data/documentation/\nmanifest/docs-content-pack.json\n```\n\nEdit the source, bump the catalogue version, regenerate, test, import, and\nverify in Axis. Never hand-edit the generated CMS records to make a page look\nright.\n\n## What not to customize in Kickoff\n\nDo not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not\nrename standard functional identities such as `nodics.platform` just because a\ncustomer extension customizes their behavior. Do not put backend-importable CMS\ndata into the frontend repository. Do not place framework documentation in the\ncustomer project unless it is truly project-specific guidance.\n\n## Extension example\n\nA customer may later create a module such as `kickoff.platform` to customize\nPlatform behavior. A Platform server could load:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nBackOffice and Axis should still present the functional capability as Platform\nunless the customer explicitly exposes a separate functional module. The\nextension changes implementation; it does not create a new product identity.\n\n## Documentation rule\n\nCustomer documentation follows the same ownership rule:\n\n- framework guidance goes to `nodics.docs`;\n- Axis product guidance goes to Platform `modules/axis`;\n- Kickoff/project guidance goes to `nodics.kickoff`;\n- browser rendering remains in `nodics.axis`.\n\nWhen Kickoff docs change, update the source page, bump the catalogue version if\nthe generated content changes, regenerate the pack, import it through WCMS, and\nverify the route in Axis.\n\n## Step-by-step: add a small project module\n\n1. Create or choose a module under `modules/`.\n2. Give the module a clear package identity and index so load order is\n   intentional.\n3. Add only project-owned services, data, configuration, or routes.\n4. Register the module in the relevant environment/server composition.\n5. Start the server and verify logs show the module loading after framework\n   modules.\n6. Add or update tests proving the project behavior.\n7. Update Kickoff documentation if the customization is part of the reference\n   journey.\n\n### Example: adding a project service\n\nSuppose a customer wants a project-only greeting service for a demo dashboard.\nThe safe thought process is:\n\n1. The behavior is not framework-wide.\n2. The behavior belongs to the customer project.\n3. The implementation should live under a project module, for example\n   `modules/kickoffCore`.\n4. The service should be exported so a later module can override or compose it.\n5. A test should prove the default behavior and the override path.\n6. The documentation should explain the example if it teaches future partners.\n\nDo not add that demo service to `nodics.core` only because every runtime loads\nCore. Core is the shared foundation, not a bucket for convenient code.\n\nDo not use this flow to move framework behavior into Kickoff. If the behavior\nbelongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and\nimplement it in the owning framework module instead.\n\n## Step-by-step: add project documentation\n\n1. Add or update Markdown under\n   `data/core/source/documentation/pages/`.\n2. Update `data/core/source/documentation/catalogue.json`.\n3. Bump the catalogue version when generated content changes.\n4. Run `npm run docs:generate`.\n5. Run `npm run test:documentation`.\n6. Import or update the content pack through Axis.\n7. Open the generated `/docs/nodics-kickoff` route in Axis and verify\n   navigation, search, headings, and previous/next links.\n\n## DevOps and rollback notes\n\nProject customizations should be deployable and reversible. Keep project\nconfiguration separate from private secrets. Record which environment and\nserver a customization affects. If a release fails, rollback should remove or\ndisable the project layer without requiring a framework source rollback.\n\nOperators should be able to answer three questions during rollback: which\nproject module introduced the change, which server graph loaded it, and which\ncontent-pack or configuration version went live. If those answers are unclear,\nthe customization is not ready for a production environment.\n\nGenerated documentation and seed data should be versioned immutably. If content\nchanges with the same version, the import service should reject it so operators\ndo not silently install a different release under an already-trusted identity.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Local runtime topology](local-runtime.md)\n"
         }
       ]
     },
@@ -123,48 +123,63 @@ module.exports = {
           "level": 2
         },
         {
+          "text": "What a new customer should learn",
+          "anchor": "kickoffOverview-2-what-a-new-customer-should-learn",
+          "level": 2
+        },
+        {
           "text": "Beginner mental model",
-          "anchor": "kickoffOverview-2-beginner-mental-model",
+          "anchor": "kickoffOverview-3-beginner-mental-model",
           "level": 2
         },
         {
           "text": "What Kickoff demonstrates",
-          "anchor": "kickoffOverview-3-what-kickoff-demonstrates",
+          "anchor": "kickoffOverview-4-what-kickoff-demonstrates",
           "level": 2
         },
         {
           "text": "Source map",
-          "anchor": "kickoffOverview-4-source-map",
+          "anchor": "kickoffOverview-5-source-map",
           "level": 2
         },
         {
           "text": "Runtime boundary",
-          "anchor": "kickoffOverview-5-runtime-boundary",
+          "anchor": "kickoffOverview-6-runtime-boundary",
+          "level": 2
+        },
+        {
+          "text": "First customization promise",
+          "anchor": "kickoffOverview-7-first-customization-promise",
           "level": 2
         },
         {
           "text": "Beginner story",
-          "anchor": "kickoffOverview-6-beginner-story",
+          "anchor": "kickoffOverview-8-beginner-story",
           "level": 2
         },
         {
           "text": "Documentation boundary",
-          "anchor": "kickoffOverview-7-documentation-boundary",
+          "anchor": "kickoffOverview-9-documentation-boundary",
           "level": 2
         },
         {
           "text": "Common mistakes",
-          "anchor": "kickoffOverview-8-common-mistakes",
+          "anchor": "kickoffOverview-10-common-mistakes",
           "level": 2
         },
         {
           "text": "How to know Kickoff is working",
-          "anchor": "kickoffOverview-9-how-to-know-kickoff-is-working",
+          "anchor": "kickoffOverview-11-how-to-know-kickoff-is-working",
+          "level": 2
+        },
+        {
+          "text": "What to read next",
+          "anchor": "kickoffOverview-12-what-to-read-next",
           "level": 2
         },
         {
           "text": "Continue",
-          "anchor": "kickoffOverview-10-continue",
+          "anchor": "kickoffOverview-13-continue",
           "level": 2
         }
       ],
@@ -198,8 +213,51 @@ module.exports = {
         {
           "kind": "heading",
           "level": 2,
+          "text": "What a new customer should learn",
+          "anchor": "kickoffOverview-2-what-a-new-customer-should-learn"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Kickoff should answer the questions a new customer asks before trusting a framework:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Question",
+            "Kickoff answer"
+          ],
+          "rows": [
+            [
+              "Can I run it locally without designing my full product first?",
+              "Yes. Kickoff provides ready local Platform, WCMS, Cron, and Axis wiring."
+            ],
+            [
+              "Do I have to edit framework source to customize?",
+              "No. Customer modules and server/environment configuration load after framework modules."
+            ],
+            [
+              "Can documentation and content be imported like real governed data?",
+              "Yes. Kickoff ships a project-owned documentation content pack."
+            ],
+            [
+              "Can optional modules be added later?",
+              "Yes. Cron demonstrates observed optional runtime capability and registry lifecycle."
+            ],
+            [
+              "Can my real project use a different folder layout?",
+              "Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "This makes Kickoff more than a sample app. It is the adoption proof for the whole framework."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
           "text": "Beginner mental model",
-          "anchor": "kickoffOverview-2-beginner-mental-model"
+          "anchor": "kickoffOverview-3-beginner-mental-model"
         },
         {
           "kind": "paragraph",
@@ -210,10 +268,19 @@ module.exports = {
           "text": "Kickoff is not the product every customer must ship. It is the smallest complete example of how a customer product can be structured."
         },
         {
+          "kind": "diagram",
+          "language": "mermaid",
+          "text": "flowchart LR\n  Framework[\"Framework equipment<br/>nodics.ai\"] --> Project[\"Reference production line<br/>nodics.kickoff\"]\n  Project --> Servers[\"Local runtime servers\"]\n  Servers --> Platform[\"Platform: login and BackOffice\"]\n  Servers --> WCMS[\"WCMS: content and docs\"]\n  Servers --> Cron[\"Cron: scheduled capability\"]\n  Axis[\"Control room<br/>nodics.axis\"] --> Platform\n  Axis --> WCMS\n  Axis --> Cron"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The metaphor is useful because it prevents a common mistake. You do not move factory equipment into the control room, and you do not hardcode control-room screens into the production line. Each part has a job."
+        },
+        {
           "kind": "heading",
           "level": 2,
           "text": "What Kickoff demonstrates",
-          "anchor": "kickoffOverview-3-what-kickoff-demonstrates"
+          "anchor": "kickoffOverview-4-what-kickoff-demonstrates"
         },
         {
           "kind": "unordered-list",
@@ -229,7 +296,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Source map",
-          "anchor": "kickoffOverview-4-source-map"
+          "anchor": "kickoffOverview-5-source-map"
         },
         {
           "kind": "paragraph",
@@ -257,7 +324,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Runtime boundary",
-          "anchor": "kickoffOverview-5-runtime-boundary"
+          "anchor": "kickoffOverview-6-runtime-boundary"
         },
         {
           "kind": "paragraph",
@@ -279,8 +346,46 @@ module.exports = {
         {
           "kind": "heading",
           "level": 2,
+          "text": "First customization promise",
+          "anchor": "kickoffOverview-7-first-customization-promise"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A beginner should be able to make a first safe customization without fear. Good first customizations are intentionally small:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "change a local property in the correct environment or server file;",
+            "add or update a Kickoff documentation page;",
+            "add a project-only service in a Kickoff module;",
+            "add project sample data that belongs to the customer project;",
+            "change WCMS-managed content through Axis after import."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Bad first customizations are also easy to name:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "editing `nodics.core` because a project-specific rule is needed;",
+            "putting CMS import data into `nodics.axis`;",
+            "changing generated files without changing their source;",
+            "changing a standard functional module identity because a project customized implementation;",
+            "hiding a status, error code, permission, or lifecycle state in an unrelated property file."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Kickoff exists to teach the safe path first."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
           "text": "Beginner story",
-          "anchor": "kickoffOverview-6-beginner-story"
+          "anchor": "kickoffOverview-8-beginner-story"
         },
         {
           "kind": "paragraph",
@@ -304,7 +409,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Documentation boundary",
-          "anchor": "kickoffOverview-7-documentation-boundary"
+          "anchor": "kickoffOverview-9-documentation-boundary"
         },
         {
           "kind": "paragraph",
@@ -314,7 +419,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Common mistakes",
-          "anchor": "kickoffOverview-8-common-mistakes"
+          "anchor": "kickoffOverview-10-common-mistakes"
         },
         {
           "kind": "unordered-list",
@@ -331,7 +436,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "How to know Kickoff is working",
-          "anchor": "kickoffOverview-9-how-to-know-kickoff-is-working"
+          "anchor": "kickoffOverview-11-how-to-know-kickoff-is-working"
         },
         {
           "kind": "paragraph",
@@ -340,8 +445,27 @@ module.exports = {
         {
           "kind": "heading",
           "level": 2,
+          "text": "What to read next",
+          "anchor": "kickoffOverview-12-what-to-read-next"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Read Kickoff in this order:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "**Local runtime topology** to understand which servers start and why.",
+            "**Local acceptance checklist** to prove the environment from a fresh local database.",
+            "**Customer customization guide** to learn how to change behavior without damaging framework ownership.",
+            "Framework documentation for Core, Platform, WCMS, Cron, imports, and DevOps once the local system is running."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
           "text": "Continue",
-          "anchor": "kickoffOverview-10-continue"
+          "anchor": "kickoffOverview-13-continue"
         },
         {
           "kind": "unordered-list",
@@ -351,7 +475,7 @@ module.exports = {
           ]
         }
       ],
-      "searchText": "Kickoff project overview Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs. # Kickoff Project Overview\n\nNodics Kickoff is the reference customer project for running Nodics locally and\ndemonstrating how a partner or customer project consumes the framework. It is\nnot a standard Nodics functional module such as Core, Platform, WCMS, or Cron.\nIt is a project-owned runtime composition that shows how those modules can be\nassembled without copying framework source.\n\nKickoff owns project structure, local environment wiring, project modules,\nsample customization points, and project documentation. Framework\ndocumentation belongs in `nodics.docs`; Axis product documentation belongs in\nthe Platform `axis` backend module; browser renderers belong in `nodics.axis`.\nKickoff documentation that becomes CMS data belongs in this repository under\n`data/core/source/documentation` and is generated into this repository's own\ncontent pack.\n\n## Why Kickoff exists\n\nKickoff exists so a new team can feel Nodics before they design their own\nproject. A partner should be able to clone the framework, clone the reference\nproject, run a small set of commands, log in to Axis, and see the major backend\ncapabilities working together.\n\nThis matters because enterprise framework adoption usually fails at the first\nhour. If the first experience requires a developer to understand every module,\nevery dependency, every data import, and every environment property, the\nframework feels heavy even when the architecture is good. Kickoff keeps the\nfirst journey small: start the runtime, import governed seed data, open Axis,\nread the documentation, and then make one safe customization.\n\nFor a business evaluator, Kickoff demonstrates that Nodics can support a real\ncustomer project without asking the customer to fork framework code. For a\ndeveloper, it shows the concrete folder shape, package dependency model,\nenvironment wiring, server start commands, and project-owned extension points.\nFor an operator, it shows how one local project can run Platform, WCMS, and\nCron as separate processes while preserving the same module ownership rules\nthat production will use.\n\n## Beginner mental model\n\nThink of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample\nproduction line, and `nodics.axis` as the control room screen. The factory\nequipment provides standard capabilities such as Core, Platform, WCMS, Media,\nand Cron. The sample production line decides which equipment to connect for a\nlocal demonstration. The control room screen connects to the running backend\nand shows only the capabilities that the backend says are available and\nauthorized.\n\nKickoff is not the product every customer must ship. It is the smallest\ncomplete example of how a customer product can be structured.\n\n## What Kickoff demonstrates\n\n- how a customer project depends on Nodics framework packages;\n- how environment and server modules load after standard functional modules;\n- how Platform, WCMS, and Cron can run as separate local servers;\n- how project modules can customize runtime behavior without renaming the\n  standard functional module identity;\n- how customer-owned documentation can appear in Axis beside Framework,\n  Swaggers, and Nodics Axis.\n\n## Source map\n\nThe important Kickoff locations are:\n\n- `package.json` describes the project package and local scripts;\n- `.env` describes developer-specific framework checkout location and local\n  overrides;\n- `src/sync-framework-dependencies.js` prepares local framework package links;\n- `src/start-platform-server.js`, `src/start-wcms-server.js`, and\n  `src/start-cron-server.js` start local runtime servers;\n- `config/` contains project-level defaults;\n- `envs/kickoffLocal/` contains local environment and server composition;\n- `modules/` contains project-owned modules and customization examples;\n- `data/core/source/documentation/` contains authored Kickoff documentation;\n- `data/core/data/documentation/` and `manifest/docs-content-pack.json` are\n  generated content-pack outputs.\n\nAuthored documentation is the source. Generated records are the importable CMS\nprojection. Do not hand-edit generated records to fix documentation.\n\n## Runtime boundary\n\nKickoff is loaded after framework modules. That means it can contribute\nconfiguration, project modules, and project-owned documentation, but it must not\nmove framework behavior into the customer repository. A customer extension such\nas `kickoff.platform` may customize Platform implementation while the\nbusiness-facing functional identity remains `nodics.platform`.\n\nRuntime composition and code dependency are related but different. Package\ndependencies make framework modules available to the project. Server\nconfiguration decides which modules are loaded, in which order, for a specific\nruntime process. Service override behavior follows module loading and indexes,\nnot simply the order in `package.json`.\n\n```mermaid\nflowchart LR\n  FrameworkRoot[\"Framework checkout<br/>nodics.ai\"] --> Core[\"nodics.core\"]\n  FrameworkRoot --> Platform[\"nodics.platform\"]\n  FrameworkRoot --> WCMS[\"nodics.wcms\"]\n  FrameworkRoot --> Cron[\"nodics.cron\"]\n  Core --> Project[\"nodics.kickoff<br/>reference customer project\"]\n  Platform --> Project\n  WCMS --> Project\n  Cron --> Project\n  Project --> Servers[\"kickoffLocal servers<br/>platformServer, wcmsServer, cronServer\"]\n  Servers --> Axis[\"nodics.axis<br/>frontend renderer\"]\n```\n\nThis diagram is intentionally simple. Kickoff does not own the framework\nmodules and Axis does not own backend data. Kickoff composes the backend\nruntime, and Axis renders whatever Platform/WCMS say is active, authorized,\nand available.\n\n## Beginner story\n\nA new developer can think of Kickoff as a training project:\n\n1. It shows where a customer project keeps project modules.\n2. It shows where local environment/server configuration lives.\n3. It shows how to point at a framework checkout that may live anywhere on the\n   machine.\n4. It starts Platform, WCMS, and Cron without asking the developer to create a\n   production topology first.\n5. It ships project-owned documentation so Axis can show framework docs,\n   Axis docs, and customer-project docs side by side.\n\nAfter the developer understands this reference shape, they can create a real\ncustomer project with the same rules but different business modules, branding,\ndata, environments, and deployment choices.\n\n## Documentation boundary\n\nKickoff docs are imported through WCMS like any other governed CMS content\npack. Axis renders the resolved CMS page and does not own the documentation\nrecords. The BackOffice registry exposes the documentation source so the Axis\nDocumentation dashboard can discover it.\n\n## Common mistakes\n\n- Do not put framework documentation in Kickoff unless the page is explaining\n  how Kickoff consumes the framework.\n- Do not copy `nodics.core`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`\n  source into this repository.\n- Do not move Axis renderers or browser code into Kickoff.\n- Do not assume a customer project will always sit beside `nodics.ai`; use the\n  framework-root configuration.\n- Do not change generated content-pack files without regenerating from source.\n- Do not rename functional capabilities when a customer module only customizes\n  their implementation.\n\n## How to know Kickoff is working\n\nKickoff is healthy when Platform starts, WCMS starts, the module registry shows\nmandatory functional modules as active, optional modules can be registered\nthrough Axis, documentation content packs can be imported or updated through\nBackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and\nNodics Kickoff documentation from backend-owned sources.\n\n## Continue\n\n- [Local runtime topology](local-runtime.md)\n- [Customer customization guide](customization-guide.md)\n",
+      "searchText": "Kickoff project overview Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs. # Kickoff Project Overview\n\nNodics Kickoff is the reference customer project for running Nodics locally and\ndemonstrating how a partner or customer project consumes the framework. It is\nnot a standard Nodics functional module such as Core, Platform, WCMS, or Cron.\nIt is a project-owned runtime composition that shows how those modules can be\nassembled without copying framework source.\n\nKickoff owns project structure, local environment wiring, project modules,\nsample customization points, and project documentation. Framework\ndocumentation belongs in `nodics.docs`; Axis product documentation belongs in\nthe Platform `axis` backend module; browser renderers belong in `nodics.axis`.\nKickoff documentation that becomes CMS data belongs in this repository under\n`data/core/source/documentation` and is generated into this repository's own\ncontent pack.\n\n## Why Kickoff exists\n\nKickoff exists so a new team can feel Nodics before they design their own\nproject. A partner should be able to clone the framework, clone the reference\nproject, run a small set of commands, log in to Axis, and see the major backend\ncapabilities working together.\n\nThis matters because enterprise framework adoption usually fails at the first\nhour. If the first experience requires a developer to understand every module,\nevery dependency, every data import, and every environment property, the\nframework feels heavy even when the architecture is good. Kickoff keeps the\nfirst journey small: start the runtime, import governed seed data, open Axis,\nread the documentation, and then make one safe customization.\n\nFor a business evaluator, Kickoff demonstrates that Nodics can support a real\ncustomer project without asking the customer to fork framework code. For a\ndeveloper, it shows the concrete folder shape, package dependency model,\nenvironment wiring, server start commands, and project-owned extension points.\nFor an operator, it shows how one local project can run Platform, WCMS, and\nCron as separate processes while preserving the same module ownership rules\nthat production will use.\n\n## What a new customer should learn\n\nKickoff should answer the questions a new customer asks before trusting a\nframework:\n\n| Question | Kickoff answer |\n| --- | --- |\n| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Cron, and Axis wiring. |\n| Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |\n| Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |\n| Can optional modules be added later? | Yes. Cron demonstrates observed optional runtime capability and registry lifecycle. |\n| Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |\n\nThis makes Kickoff more than a sample app. It is the adoption proof for the\nwhole framework.\n\n## Beginner mental model\n\nThink of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample\nproduction line, and `nodics.axis` as the control room screen. The factory\nequipment provides standard capabilities such as Core, Platform, WCMS, Media,\nand Cron. The sample production line decides which equipment to connect for a\nlocal demonstration. The control room screen connects to the running backend\nand shows only the capabilities that the backend says are available and\nauthorized.\n\nKickoff is not the product every customer must ship. It is the smallest\ncomplete example of how a customer product can be structured.\n\n```mermaid\nflowchart LR\n  Framework[\"Framework equipment<br/>nodics.ai\"] --> Project[\"Reference production line<br/>nodics.kickoff\"]\n  Project --> Servers[\"Local runtime servers\"]\n  Servers --> Platform[\"Platform: login and BackOffice\"]\n  Servers --> WCMS[\"WCMS: content and docs\"]\n  Servers --> Cron[\"Cron: scheduled capability\"]\n  Axis[\"Control room<br/>nodics.axis\"] --> Platform\n  Axis --> WCMS\n  Axis --> Cron\n```\n\nThe metaphor is useful because it prevents a common mistake. You do not move\nfactory equipment into the control room, and you do not hardcode control-room\nscreens into the production line. Each part has a job.\n\n## What Kickoff demonstrates\n\n- how a customer project depends on Nodics framework packages;\n- how environment and server modules load after standard functional modules;\n- how Platform, WCMS, and Cron can run as separate local servers;\n- how project modules can customize runtime behavior without renaming the\n  standard functional module identity;\n- how customer-owned documentation can appear in Axis beside Framework,\n  Swaggers, and Nodics Axis.\n\n## Source map\n\nThe important Kickoff locations are:\n\n- `package.json` describes the project package and local scripts;\n- `.env` describes developer-specific framework checkout location and local\n  overrides;\n- `src/sync-framework-dependencies.js` prepares local framework package links;\n- `src/start-platform-server.js`, `src/start-wcms-server.js`, and\n  `src/start-cron-server.js` start local runtime servers;\n- `config/` contains project-level defaults;\n- `envs/kickoffLocal/` contains local environment and server composition;\n- `modules/` contains project-owned modules and customization examples;\n- `data/core/source/documentation/` contains authored Kickoff documentation;\n- `data/core/data/documentation/` and `manifest/docs-content-pack.json` are\n  generated content-pack outputs.\n\nAuthored documentation is the source. Generated records are the importable CMS\nprojection. Do not hand-edit generated records to fix documentation.\n\n## Runtime boundary\n\nKickoff is loaded after framework modules. That means it can contribute\nconfiguration, project modules, and project-owned documentation, but it must not\nmove framework behavior into the customer repository. A customer extension such\nas `kickoff.platform` may customize Platform implementation while the\nbusiness-facing functional identity remains `nodics.platform`.\n\nRuntime composition and code dependency are related but different. Package\ndependencies make framework modules available to the project. Server\nconfiguration decides which modules are loaded, in which order, for a specific\nruntime process. Service override behavior follows module loading and indexes,\nnot simply the order in `package.json`.\n\n```mermaid\nflowchart LR\n  FrameworkRoot[\"Framework checkout<br/>nodics.ai\"] --> Core[\"nodics.core\"]\n  FrameworkRoot --> Platform[\"nodics.platform\"]\n  FrameworkRoot --> WCMS[\"nodics.wcms\"]\n  FrameworkRoot --> Cron[\"nodics.cron\"]\n  Core --> Project[\"nodics.kickoff<br/>reference customer project\"]\n  Platform --> Project\n  WCMS --> Project\n  Cron --> Project\n  Project --> Servers[\"kickoffLocal servers<br/>platformServer, wcmsServer, cronServer\"]\n  Servers --> Axis[\"nodics.axis<br/>frontend renderer\"]\n```\n\nThis diagram is intentionally simple. Kickoff does not own the framework\nmodules and Axis does not own backend data. Kickoff composes the backend\nruntime, and Axis renders whatever Platform/WCMS say is active, authorized,\nand available.\n\n## First customization promise\n\nA beginner should be able to make a first safe customization without fear.\nGood first customizations are intentionally small:\n\n- change a local property in the correct environment or server file;\n- add or update a Kickoff documentation page;\n- add a project-only service in a Kickoff module;\n- add project sample data that belongs to the customer project;\n- change WCMS-managed content through Axis after import.\n\nBad first customizations are also easy to name:\n\n- editing `nodics.core` because a project-specific rule is needed;\n- putting CMS import data into `nodics.axis`;\n- changing generated files without changing their source;\n- changing a standard functional module identity because a project customized\n  implementation;\n- hiding a status, error code, permission, or lifecycle state in an unrelated\n  property file.\n\nKickoff exists to teach the safe path first.\n\n## Beginner story\n\nA new developer can think of Kickoff as a training project:\n\n1. It shows where a customer project keeps project modules.\n2. It shows where local environment/server configuration lives.\n3. It shows how to point at a framework checkout that may live anywhere on the\n   machine.\n4. It starts Platform, WCMS, and Cron without asking the developer to create a\n   production topology first.\n5. It ships project-owned documentation so Axis can show framework docs,\n   Axis docs, and customer-project docs side by side.\n\nAfter the developer understands this reference shape, they can create a real\ncustomer project with the same rules but different business modules, branding,\ndata, environments, and deployment choices.\n\n## Documentation boundary\n\nKickoff docs are imported through WCMS like any other governed CMS content\npack. Axis renders the resolved CMS page and does not own the documentation\nrecords. The BackOffice registry exposes the documentation source so the Axis\nDocumentation dashboard can discover it.\n\n## Common mistakes\n\n- Do not put framework documentation in Kickoff unless the page is explaining\n  how Kickoff consumes the framework.\n- Do not copy `nodics.core`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`\n  source into this repository.\n- Do not move Axis renderers or browser code into Kickoff.\n- Do not assume a customer project will always sit beside `nodics.ai`; use the\n  framework-root configuration.\n- Do not change generated content-pack files without regenerating from source.\n- Do not rename functional capabilities when a customer module only customizes\n  their implementation.\n\n## How to know Kickoff is working\n\nKickoff is healthy when Platform starts, WCMS starts, the module registry shows\nmandatory functional modules as active, optional modules can be registered\nthrough Axis, documentation content packs can be imported or updated through\nBackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and\nNodics Kickoff documentation from backend-owned sources.\n\n## What to read next\n\nRead Kickoff in this order:\n\n1. **Local runtime topology** to understand which servers start and why.\n2. **Local acceptance checklist** to prove the environment from a fresh local\n   database.\n3. **Customer customization guide** to learn how to change behavior without\n   damaging framework ownership.\n4. Framework documentation for Core, Platform, WCMS, Cron, imports, and DevOps\n   once the local system is running.\n\n## Continue\n\n- [Local runtime topology](local-runtime.md)\n- [Customer customization guide](customization-guide.md)\n",
       "previous": null,
       "next": {
         "title": "Local runtime topology",
@@ -362,8 +486,8 @@ module.exports = {
         "functionalModule": "nodics.kickoff",
         "technicalModule": "nodics.kickoff",
         "path": "data/core/source/documentation/pages/project-overview.md",
-        "wordCount": 1063,
-        "checksum": "cf03f8ecc6c99357c2bedf0b0670151348179ebf236832fc7709edbaf06112d2"
+        "wordCount": 1472,
+        "checksum": "c7e6055f049d108f0da22e48ddc97afc675493fc812dad3702cf8b9e429f16dd"
       }
     },
     "active": true
@@ -1486,68 +1610,88 @@ module.exports = {
           "level": 2
         },
         {
+          "text": "Customization decision tree",
+          "anchor": "kickoffCustomization-2-customization-decision-tree",
+          "level": 2
+        },
+        {
           "text": "How a developer or AI tool should think",
-          "anchor": "kickoffCustomization-2-how-a-developer-or-ai-tool-should-think",
+          "anchor": "kickoffCustomization-3-how-a-developer-or-ai-tool-should-think",
           "level": 2
         },
         {
           "text": "File placement examples",
-          "anchor": "kickoffCustomization-3-file-placement-examples",
+          "anchor": "kickoffCustomization-4-file-placement-examples",
+          "level": 2
+        },
+        {
+          "text": "Configuration-first examples",
+          "anchor": "kickoffCustomization-5-configuration-first-examples",
           "level": 2
         },
         {
           "text": "Safe customization model",
-          "anchor": "kickoffCustomization-4-safe-customization-model",
+          "anchor": "kickoffCustomization-6-safe-customization-model",
           "level": 2
         },
         {
           "text": "Two customization types",
-          "anchor": "kickoffCustomization-5-two-customization-types",
+          "anchor": "kickoffCustomization-7-two-customization-types",
           "level": 2
         },
         {
           "text": "Code-level customization",
-          "anchor": "kickoffCustomization-6-code-level-customization",
+          "anchor": "kickoffCustomization-8-code-level-customization",
           "level": 3
         },
         {
           "text": "Axis and WCMS customization",
-          "anchor": "kickoffCustomization-7-axis-and-wcms-customization",
+          "anchor": "kickoffCustomization-9-axis-and-wcms-customization",
+          "level": 3
+        },
+        {
+          "text": "Documentation customization",
+          "anchor": "kickoffCustomization-10-documentation-customization",
           "level": 3
         },
         {
           "text": "What not to customize in Kickoff",
-          "anchor": "kickoffCustomization-8-what-not-to-customize-in-kickoff",
+          "anchor": "kickoffCustomization-11-what-not-to-customize-in-kickoff",
           "level": 2
         },
         {
           "text": "Extension example",
-          "anchor": "kickoffCustomization-9-extension-example",
+          "anchor": "kickoffCustomization-12-extension-example",
           "level": 2
         },
         {
           "text": "Documentation rule",
-          "anchor": "kickoffCustomization-10-documentation-rule",
+          "anchor": "kickoffCustomization-13-documentation-rule",
           "level": 2
         },
         {
           "text": "Step-by-step: add a small project module",
-          "anchor": "kickoffCustomization-11-step-by-step-add-a-small-project-module",
+          "anchor": "kickoffCustomization-14-step-by-step-add-a-small-project-module",
           "level": 2
         },
         {
+          "text": "Example: adding a project service",
+          "anchor": "kickoffCustomization-15-example-adding-a-project-service",
+          "level": 3
+        },
+        {
           "text": "Step-by-step: add project documentation",
-          "anchor": "kickoffCustomization-12-step-by-step-add-project-documentation",
+          "anchor": "kickoffCustomization-16-step-by-step-add-project-documentation",
           "level": 2
         },
         {
           "text": "DevOps and rollback notes",
-          "anchor": "kickoffCustomization-13-devops-and-rollback-notes",
+          "anchor": "kickoffCustomization-17-devops-and-rollback-notes",
           "level": 2
         },
         {
           "text": "Continue",
-          "anchor": "kickoffCustomization-14-continue",
+          "anchor": "kickoffCustomization-18-continue",
           "level": 2
         }
       ],
@@ -1577,8 +1721,27 @@ module.exports = {
         {
           "kind": "heading",
           "level": 2,
+          "text": "Customization decision tree",
+          "anchor": "kickoffCustomization-2-customization-decision-tree"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use this decision tree before changing code:"
+        },
+        {
+          "kind": "diagram",
+          "language": "mermaid",
+          "text": "flowchart TD\n  Need[\"Need to change behavior or content\"] --> Config{\"Can configuration solve it?\"}\n  Config -- \"yes\" --> Env[\"Use project, environment, server, node, tenant, or provider configuration\"]\n  Config -- \"no\" --> Existing{\"Does an existing functional module own it?\"}\n  Existing -- \"yes\" --> ProjectModule{\"Is it customer-specific?\"}\n  ProjectModule -- \"yes\" --> Overlay[\"Create or update a customer/project module loaded after the framework owner\"]\n  ProjectModule -- \"no\" --> Framework[\"Change the owning framework module with tests and docs\"]\n  Existing -- \"no\" --> NewModule[\"Design a new functional module with explicit ownership\"]\n  Env --> Verify[\"Regenerate artifacts and run acceptance\"]\n  Overlay --> Verify\n  Framework --> Verify\n  NewModule --> Verify"
+        },
+        {
+          "kind": "paragraph",
+          "text": "If you cannot answer the ownership question, do not code yet. A wrong owner is more expensive than a missing implementation because it creates a hidden contract future teams will inherit."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
           "text": "How a developer or AI tool should think",
-          "anchor": "kickoffCustomization-2-how-a-developer-or-ai-tool-should-think"
+          "anchor": "kickoffCustomization-3-how-a-developer-or-ai-tool-should-think"
         },
         {
           "kind": "paragraph",
@@ -1629,7 +1792,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "File placement examples",
-          "anchor": "kickoffCustomization-3-file-placement-examples"
+          "anchor": "kickoffCustomization-4-file-placement-examples"
         },
         {
           "kind": "paragraph",
@@ -1678,8 +1841,58 @@ module.exports = {
         {
           "kind": "heading",
           "level": 2,
+          "text": "Configuration-first examples",
+          "anchor": "kickoffCustomization-5-configuration-first-examples"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Configuration-first does not mean \"put everything in properties.\" It means use the correct configuration owner before writing code."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Example change",
+            "Better first move",
+            "Why"
+          ],
+          "rows": [
+            [
+              "Local WCMS port must change",
+              "Server config under `envs/.../wcmsServer/config`",
+              "Port is topology, not shared framework behavior."
+            ],
+            [
+              "A project wants a different public label",
+              "WCMS/Axis content or project-owned documentation/content data",
+              "The label is presentation/content, not service logic."
+            ],
+            [
+              "A local dependency path differs",
+              "`.env` with `NODICS_FRAMEWORK_ROOT`, then `configure:framework`",
+              "Workspace layout is developer-specific."
+            ],
+            [
+              "A new API category should be enabled",
+              "Owning module default property, with server override only to disable or narrow it",
+              "Defaults belong to the module that owns the API."
+            ],
+            [
+              "A new lifecycle state is needed",
+              "Owning status-definition file",
+              "Status values are contracts, not casual properties."
+            ],
+            [
+              "A customer needs different Profile behavior",
+              "Customer extension module loaded after Platform/Profile owner",
+              "Customer behavior should not fork framework source."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
           "text": "Safe customization model",
-          "anchor": "kickoffCustomization-4-safe-customization-model"
+          "anchor": "kickoffCustomization-6-safe-customization-model"
         },
         {
           "kind": "paragraph",
@@ -1704,13 +1917,13 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Two customization types",
-          "anchor": "kickoffCustomization-5-two-customization-types"
+          "anchor": "kickoffCustomization-7-two-customization-types"
         },
         {
           "kind": "heading",
           "level": 3,
           "text": "Code-level customization",
-          "anchor": "kickoffCustomization-6-code-level-customization"
+          "anchor": "kickoffCustomization-8-code-level-customization"
         },
         {
           "kind": "paragraph",
@@ -1733,7 +1946,7 @@ module.exports = {
           "kind": "heading",
           "level": 3,
           "text": "Axis and WCMS customization",
-          "anchor": "kickoffCustomization-7-axis-and-wcms-customization"
+          "anchor": "kickoffCustomization-9-axis-and-wcms-customization"
         },
         {
           "kind": "paragraph",
@@ -1741,9 +1954,41 @@ module.exports = {
         },
         {
           "kind": "heading",
+          "level": 3,
+          "text": "Documentation customization",
+          "anchor": "kickoffCustomization-10-documentation-customization"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Documentation customization is content customization. If a customer wants their own onboarding guide, project setup page, API usage note, operational runbook, or business process explanation, the content belongs in the customer project documentation pack."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The source lives under:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "data/core/source/documentation/\n  catalogue.json\n  pages/"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The generated files live under:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "data/core/data/documentation/\nmanifest/docs-content-pack.json"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Edit the source, bump the catalogue version, regenerate, test, import, and verify in Axis. Never hand-edit the generated CMS records to make a page look right."
+        },
+        {
+          "kind": "heading",
           "level": 2,
           "text": "What not to customize in Kickoff",
-          "anchor": "kickoffCustomization-8-what-not-to-customize-in-kickoff"
+          "anchor": "kickoffCustomization-11-what-not-to-customize-in-kickoff"
         },
         {
           "kind": "paragraph",
@@ -1753,7 +1998,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Extension example",
-          "anchor": "kickoffCustomization-9-extension-example"
+          "anchor": "kickoffCustomization-12-extension-example"
         },
         {
           "kind": "paragraph",
@@ -1772,7 +2017,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Documentation rule",
-          "anchor": "kickoffCustomization-10-documentation-rule"
+          "anchor": "kickoffCustomization-13-documentation-rule"
         },
         {
           "kind": "paragraph",
@@ -1795,7 +2040,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Step-by-step: add a small project module",
-          "anchor": "kickoffCustomization-11-step-by-step-add-a-small-project-module"
+          "anchor": "kickoffCustomization-14-step-by-step-add-a-small-project-module"
         },
         {
           "kind": "ordered-list",
@@ -1810,6 +2055,31 @@ module.exports = {
           ]
         },
         {
+          "kind": "heading",
+          "level": 3,
+          "text": "Example: adding a project service",
+          "anchor": "kickoffCustomization-15-example-adding-a-project-service"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Suppose a customer wants a project-only greeting service for a demo dashboard. The safe thought process is:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "The behavior is not framework-wide.",
+            "The behavior belongs to the customer project.",
+            "The implementation should live under a project module, for example `modules/kickoffCore`.",
+            "The service should be exported so a later module can override or compose it.",
+            "A test should prove the default behavior and the override path.",
+            "The documentation should explain the example if it teaches future partners."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Do not add that demo service to `nodics.core` only because every runtime loads Core. Core is the shared foundation, not a bucket for convenient code."
+        },
+        {
           "kind": "paragraph",
           "text": "Do not use this flow to move framework behavior into Kickoff. If the behavior belongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and implement it in the owning framework module instead."
         },
@@ -1817,7 +2087,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Step-by-step: add project documentation",
-          "anchor": "kickoffCustomization-12-step-by-step-add-project-documentation"
+          "anchor": "kickoffCustomization-16-step-by-step-add-project-documentation"
         },
         {
           "kind": "ordered-list",
@@ -1835,7 +2105,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "DevOps and rollback notes",
-          "anchor": "kickoffCustomization-13-devops-and-rollback-notes"
+          "anchor": "kickoffCustomization-17-devops-and-rollback-notes"
         },
         {
           "kind": "paragraph",
@@ -1853,7 +2123,7 @@ module.exports = {
           "kind": "heading",
           "level": 2,
           "text": "Continue",
-          "anchor": "kickoffCustomization-14-continue"
+          "anchor": "kickoffCustomization-18-continue"
         },
         {
           "kind": "unordered-list",
@@ -1863,7 +2133,7 @@ module.exports = {
           ]
         }
       ],
-      "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. # Customer Customization Guide\n\nKickoff is intentionally small. It should teach partners how to customize\nNodics safely without turning the reference project into another framework\nrepository.\n\nFor a beginner developer, the most important lesson is restraint. Do not start\nby editing framework files because they are easy to find. Start by asking who\nowns the behavior, whether configuration can solve the need, and which runtime\nserver should load the customization. That habit keeps the customer project\nupgradeable.\n\n## Why customization needs rules\n\nMost enterprise projects start with one urgent customer request. The quickest\nsolution is often to edit whatever file is easiest to find. That works for a\ndemo, but it becomes expensive when more customers, tenants, brands, modules,\nand releases arrive. Nodics customization rules keep the framework upgradeable\nand keep customer behavior visible in the customer project.\n\nThe rule is simple: customize in the most specific owner that needs the\nchange. Use configuration before code. Use a project module before editing a\nframework module. Use a later-loaded extension module before forking a standard\nfunctional module. Create a new functional module only when the business\ncapability is genuinely new.\n\n## How a developer or AI tool should think\n\nKickoff is a reference customer project, so every change teaches future\ncustomers what “good” looks like. A developer or AI tool should not behave like\na script that only edits the nearest file. It should behave like a small expert\nteam:\n\n| Role | What to check in Kickoff |\n| --- | --- |\n| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |\n| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |\n| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |\n| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |\n| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |\n| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |\n| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |\n\nIf the answer is unclear, stop and name the ownership decision before editing.\nFor example, changing the local WCMS database name belongs in server\nconfiguration, while changing the import checksum rule belongs in the owning\nframework import service.\n\n## File placement examples\n\nUse these examples when deciding where code or data belongs:\n\n| Need | Correct owner | Why |\n| --- | --- | --- |\n| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |\n| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |\n| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |\n| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |\n| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |\n| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |\n\n## Safe customization model\n\nCustomer projects can add project modules under `modules/` and environment or\nserver contributions under `envs/`. These contributions load after standard\nNodics functional modules and can override or extend services through the\nnormal module merge process.\n\nSafe customizations include:\n\n- project-specific configuration;\n- customer modules such as `kickoffCore`, `kickoffApi`, or `kickoffInt`;\n- customer extension modules such as a future `kickoff.platform`;\n- environment-specific properties for local, testing, pre-production, and\n  production;\n- project-owned CMS documentation content packs;\n- sample data or initialization flows that belong to the customer project.\n\n## Two customization types\n\n### Code-level customization\n\nUse code-level customization when behavior changes: a service needs different\nlogic, a route needs a project-specific policy, a schema needs project fields,\nor an integration must call a customer system. Keep the implementation in a\nKickoff module or a customer extension module. Add tests next to the changed\nowner and document the boundary in the module README or documentation page.\n\nExample mental model:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nHere `kickoff.platform` can override or compose Platform services because it\nloads later. Axis and BackOffice should still show the functional capability as\nPlatform unless the customer intentionally exposes a new business capability.\n\n### Axis and WCMS customization\n\nUse governed frontend customization when an administrator changes content,\nlabels, navigation, documentation, images, or page composition through Axis\nand WCMS. The browser renderer stays in `nodics.axis`; the content records live\nin the backend owner. For example, changing a demo site logo should become a\ngoverned WCMS, Media, or content update, not a hard-coded replacement inside\nthe Axis source repository.\n\n## What not to customize in Kickoff\n\nDo not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not\nrename standard functional identities such as `nodics.platform` just because a\ncustomer extension customizes their behavior. Do not put backend-importable CMS\ndata into the frontend repository. Do not place framework documentation in the\ncustomer project unless it is truly project-specific guidance.\n\n## Extension example\n\nA customer may later create a module such as `kickoff.platform` to customize\nPlatform behavior. A Platform server could load:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nBackOffice and Axis should still present the functional capability as Platform\nunless the customer explicitly exposes a separate functional module. The\nextension changes implementation; it does not create a new product identity.\n\n## Documentation rule\n\nCustomer documentation follows the same ownership rule:\n\n- framework guidance goes to `nodics.docs`;\n- Axis product guidance goes to Platform `modules/axis`;\n- Kickoff/project guidance goes to `nodics.kickoff`;\n- browser rendering remains in `nodics.axis`.\n\nWhen Kickoff docs change, update the source page, bump the catalogue version if\nthe generated content changes, regenerate the pack, import it through WCMS, and\nverify the route in Axis.\n\n## Step-by-step: add a small project module\n\n1. Create or choose a module under `modules/`.\n2. Give the module a clear package identity and index so load order is\n   intentional.\n3. Add only project-owned services, data, configuration, or routes.\n4. Register the module in the relevant environment/server composition.\n5. Start the server and verify logs show the module loading after framework\n   modules.\n6. Add or update tests proving the project behavior.\n7. Update Kickoff documentation if the customization is part of the reference\n   journey.\n\nDo not use this flow to move framework behavior into Kickoff. If the behavior\nbelongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and\nimplement it in the owning framework module instead.\n\n## Step-by-step: add project documentation\n\n1. Add or update Markdown under\n   `data/core/source/documentation/pages/`.\n2. Update `data/core/source/documentation/catalogue.json`.\n3. Bump the catalogue version when generated content changes.\n4. Run `npm run docs:generate`.\n5. Run `npm run test:documentation`.\n6. Import or update the content pack through Axis.\n7. Open the generated `/docs/nodics-kickoff` route in Axis and verify\n   navigation, search, headings, and previous/next links.\n\n## DevOps and rollback notes\n\nProject customizations should be deployable and reversible. Keep project\nconfiguration separate from private secrets. Record which environment and\nserver a customization affects. If a release fails, rollback should remove or\ndisable the project layer without requiring a framework source rollback.\n\nOperators should be able to answer three questions during rollback: which\nproject module introduced the change, which server graph loaded it, and which\ncontent-pack or configuration version went live. If those answers are unclear,\nthe customization is not ready for a production environment.\n\nGenerated documentation and seed data should be versioned immutably. If content\nchanges with the same version, the import service should reject it so operators\ndo not silently install a different release under an already-trusted identity.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Local runtime topology](local-runtime.md)\n",
+      "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. # Customer Customization Guide\n\nKickoff is intentionally small. It should teach partners how to customize\nNodics safely without turning the reference project into another framework\nrepository.\n\nFor a beginner developer, the most important lesson is restraint. Do not start\nby editing framework files because they are easy to find. Start by asking who\nowns the behavior, whether configuration can solve the need, and which runtime\nserver should load the customization. That habit keeps the customer project\nupgradeable.\n\n## Why customization needs rules\n\nMost enterprise projects start with one urgent customer request. The quickest\nsolution is often to edit whatever file is easiest to find. That works for a\ndemo, but it becomes expensive when more customers, tenants, brands, modules,\nand releases arrive. Nodics customization rules keep the framework upgradeable\nand keep customer behavior visible in the customer project.\n\nThe rule is simple: customize in the most specific owner that needs the\nchange. Use configuration before code. Use a project module before editing a\nframework module. Use a later-loaded extension module before forking a standard\nfunctional module. Create a new functional module only when the business\ncapability is genuinely new.\n\n## Customization decision tree\n\nUse this decision tree before changing code:\n\n```mermaid\nflowchart TD\n  Need[\"Need to change behavior or content\"] --> Config{\"Can configuration solve it?\"}\n  Config -- \"yes\" --> Env[\"Use project, environment, server, node, tenant, or provider configuration\"]\n  Config -- \"no\" --> Existing{\"Does an existing functional module own it?\"}\n  Existing -- \"yes\" --> ProjectModule{\"Is it customer-specific?\"}\n  ProjectModule -- \"yes\" --> Overlay[\"Create or update a customer/project module loaded after the framework owner\"]\n  ProjectModule -- \"no\" --> Framework[\"Change the owning framework module with tests and docs\"]\n  Existing -- \"no\" --> NewModule[\"Design a new functional module with explicit ownership\"]\n  Env --> Verify[\"Regenerate artifacts and run acceptance\"]\n  Overlay --> Verify\n  Framework --> Verify\n  NewModule --> Verify\n```\n\nIf you cannot answer the ownership question, do not code yet. A wrong owner is\nmore expensive than a missing implementation because it creates a hidden\ncontract future teams will inherit.\n\n## How a developer or AI tool should think\n\nKickoff is a reference customer project, so every change teaches future\ncustomers what “good” looks like. A developer or AI tool should not behave like\na script that only edits the nearest file. It should behave like a small expert\nteam:\n\n| Role | What to check in Kickoff |\n| --- | --- |\n| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |\n| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |\n| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |\n| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |\n| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |\n| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |\n| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |\n\nIf the answer is unclear, stop and name the ownership decision before editing.\nFor example, changing the local WCMS database name belongs in server\nconfiguration, while changing the import checksum rule belongs in the owning\nframework import service.\n\n## File placement examples\n\nUse these examples when deciding where code or data belongs:\n\n| Need | Correct owner | Why |\n| --- | --- | --- |\n| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |\n| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |\n| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |\n| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |\n| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |\n| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |\n\n## Configuration-first examples\n\nConfiguration-first does not mean \"put everything in properties.\" It means use\nthe correct configuration owner before writing code.\n\n| Example change | Better first move | Why |\n| --- | --- | --- |\n| Local WCMS port must change | Server config under `envs/.../wcmsServer/config` | Port is topology, not shared framework behavior. |\n| A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |\n| A local dependency path differs | `.env` with `NODICS_FRAMEWORK_ROOT`, then `configure:framework` | Workspace layout is developer-specific. |\n| A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |\n| A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |\n| A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |\n\n## Safe customization model\n\nCustomer projects can add project modules under `modules/` and environment or\nserver contributions under `envs/`. These contributions load after standard\nNodics functional modules and can override or extend services through the\nnormal module merge process.\n\nSafe customizations include:\n\n- project-specific configuration;\n- customer modules such as `kickoffCore`, `kickoffApi`, or `kickoffInt`;\n- customer extension modules such as a future `kickoff.platform`;\n- environment-specific properties for local, testing, pre-production, and\n  production;\n- project-owned CMS documentation content packs;\n- sample data or initialization flows that belong to the customer project.\n\n## Two customization types\n\n### Code-level customization\n\nUse code-level customization when behavior changes: a service needs different\nlogic, a route needs a project-specific policy, a schema needs project fields,\nor an integration must call a customer system. Keep the implementation in a\nKickoff module or a customer extension module. Add tests next to the changed\nowner and document the boundary in the module README or documentation page.\n\nExample mental model:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nHere `kickoff.platform` can override or compose Platform services because it\nloads later. Axis and BackOffice should still show the functional capability as\nPlatform unless the customer intentionally exposes a new business capability.\n\n### Axis and WCMS customization\n\nUse governed frontend customization when an administrator changes content,\nlabels, navigation, documentation, images, or page composition through Axis\nand WCMS. The browser renderer stays in `nodics.axis`; the content records live\nin the backend owner. For example, changing a demo site logo should become a\ngoverned WCMS, Media, or content update, not a hard-coded replacement inside\nthe Axis source repository.\n\n### Documentation customization\n\nDocumentation customization is content customization. If a customer wants\ntheir own onboarding guide, project setup page, API usage note, operational\nrunbook, or business process explanation, the content belongs in the customer\nproject documentation pack.\n\nThe source lives under:\n\n```text\ndata/core/source/documentation/\n  catalogue.json\n  pages/\n```\n\nThe generated files live under:\n\n```text\ndata/core/data/documentation/\nmanifest/docs-content-pack.json\n```\n\nEdit the source, bump the catalogue version, regenerate, test, import, and\nverify in Axis. Never hand-edit the generated CMS records to make a page look\nright.\n\n## What not to customize in Kickoff\n\nDo not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not\nrename standard functional identities such as `nodics.platform` just because a\ncustomer extension customizes their behavior. Do not put backend-importable CMS\ndata into the frontend repository. Do not place framework documentation in the\ncustomer project unless it is truly project-specific guidance.\n\n## Extension example\n\nA customer may later create a module such as `kickoff.platform` to customize\nPlatform behavior. A Platform server could load:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nBackOffice and Axis should still present the functional capability as Platform\nunless the customer explicitly exposes a separate functional module. The\nextension changes implementation; it does not create a new product identity.\n\n## Documentation rule\n\nCustomer documentation follows the same ownership rule:\n\n- framework guidance goes to `nodics.docs`;\n- Axis product guidance goes to Platform `modules/axis`;\n- Kickoff/project guidance goes to `nodics.kickoff`;\n- browser rendering remains in `nodics.axis`.\n\nWhen Kickoff docs change, update the source page, bump the catalogue version if\nthe generated content changes, regenerate the pack, import it through WCMS, and\nverify the route in Axis.\n\n## Step-by-step: add a small project module\n\n1. Create or choose a module under `modules/`.\n2. Give the module a clear package identity and index so load order is\n   intentional.\n3. Add only project-owned services, data, configuration, or routes.\n4. Register the module in the relevant environment/server composition.\n5. Start the server and verify logs show the module loading after framework\n   modules.\n6. Add or update tests proving the project behavior.\n7. Update Kickoff documentation if the customization is part of the reference\n   journey.\n\n### Example: adding a project service\n\nSuppose a customer wants a project-only greeting service for a demo dashboard.\nThe safe thought process is:\n\n1. The behavior is not framework-wide.\n2. The behavior belongs to the customer project.\n3. The implementation should live under a project module, for example\n   `modules/kickoffCore`.\n4. The service should be exported so a later module can override or compose it.\n5. A test should prove the default behavior and the override path.\n6. The documentation should explain the example if it teaches future partners.\n\nDo not add that demo service to `nodics.core` only because every runtime loads\nCore. Core is the shared foundation, not a bucket for convenient code.\n\nDo not use this flow to move framework behavior into Kickoff. If the behavior\nbelongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and\nimplement it in the owning framework module instead.\n\n## Step-by-step: add project documentation\n\n1. Add or update Markdown under\n   `data/core/source/documentation/pages/`.\n2. Update `data/core/source/documentation/catalogue.json`.\n3. Bump the catalogue version when generated content changes.\n4. Run `npm run docs:generate`.\n5. Run `npm run test:documentation`.\n6. Import or update the content pack through Axis.\n7. Open the generated `/docs/nodics-kickoff` route in Axis and verify\n   navigation, search, headings, and previous/next links.\n\n## DevOps and rollback notes\n\nProject customizations should be deployable and reversible. Keep project\nconfiguration separate from private secrets. Record which environment and\nserver a customization affects. If a release fails, rollback should remove or\ndisable the project layer without requiring a framework source rollback.\n\nOperators should be able to answer three questions during rollback: which\nproject module introduced the change, which server graph loaded it, and which\ncontent-pack or configuration version went live. If those answers are unclear,\nthe customization is not ready for a production environment.\n\nGenerated documentation and seed data should be versioned immutably. If content\nchanges with the same version, the import service should reject it so operators\ndo not silently install a different release under an already-trusted identity.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Local runtime topology](local-runtime.md)\n",
       "previous": {
         "title": "Local acceptance checklist",
         "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
@@ -1874,8 +2144,8 @@ module.exports = {
         "functionalModule": "nodics.kickoff",
         "technicalModule": "modules",
         "path": "data/core/source/documentation/pages/customization-guide.md",
-        "wordCount": 1292,
-        "checksum": "2febd5d0a232714d29f135e430ce95f2ed4660ec4b520afd222a69d09ce0bb9b"
+        "wordCount": 1775,
+        "checksum": "cb17eace9d3801c1cc25c1706321998b7a8ea42c67dcd5772d4322209cfe90ba"
       }
     },
     "active": true

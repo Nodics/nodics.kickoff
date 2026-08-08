@@ -36,6 +36,22 @@ For an operator, it shows how one local project can run Platform, WCMS, and
 Cron as separate processes while preserving the same module ownership rules
 that production will use.
 
+## What a new customer should learn
+
+Kickoff should answer the questions a new customer asks before trusting a
+framework:
+
+| Question | Kickoff answer |
+| --- | --- |
+| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Cron, and Axis wiring. |
+| Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |
+| Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |
+| Can optional modules be added later? | Yes. Cron demonstrates observed optional runtime capability and registry lifecycle. |
+| Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |
+
+This makes Kickoff more than a sample app. It is the adoption proof for the
+whole framework.
+
 ## Beginner mental model
 
 Think of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample
@@ -48,6 +64,22 @@ authorized.
 
 Kickoff is not the product every customer must ship. It is the smallest
 complete example of how a customer product can be structured.
+
+```mermaid
+flowchart LR
+  Framework["Framework equipment<br/>nodics.ai"] --> Project["Reference production line<br/>nodics.kickoff"]
+  Project --> Servers["Local runtime servers"]
+  Servers --> Platform["Platform: login and BackOffice"]
+  Servers --> WCMS["WCMS: content and docs"]
+  Servers --> Cron["Cron: scheduled capability"]
+  Axis["Control room<br/>nodics.axis"] --> Platform
+  Axis --> WCMS
+  Axis --> Cron
+```
+
+The metaphor is useful because it prevents a common mistake. You do not move
+factory equipment into the control room, and you do not hardcode control-room
+screens into the production line. Each part has a job.
 
 ## What Kickoff demonstrates
 
@@ -112,6 +144,29 @@ modules and Axis does not own backend data. Kickoff composes the backend
 runtime, and Axis renders whatever Platform/WCMS say is active, authorized,
 and available.
 
+## First customization promise
+
+A beginner should be able to make a first safe customization without fear.
+Good first customizations are intentionally small:
+
+- change a local property in the correct environment or server file;
+- add or update a Kickoff documentation page;
+- add a project-only service in a Kickoff module;
+- add project sample data that belongs to the customer project;
+- change WCMS-managed content through Axis after import.
+
+Bad first customizations are also easy to name:
+
+- editing `nodics.core` because a project-specific rule is needed;
+- putting CMS import data into `nodics.axis`;
+- changing generated files without changing their source;
+- changing a standard functional module identity because a project customized
+  implementation;
+- hiding a status, error code, permission, or lifecycle state in an unrelated
+  property file.
+
+Kickoff exists to teach the safe path first.
+
 ## Beginner story
 
 A new developer can think of Kickoff as a training project:
@@ -156,6 +211,18 @@ mandatory functional modules as active, optional modules can be registered
 through Axis, documentation content packs can be imported or updated through
 BackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and
 Nodics Kickoff documentation from backend-owned sources.
+
+## What to read next
+
+Read Kickoff in this order:
+
+1. **Local runtime topology** to understand which servers start and why.
+2. **Local acceptance checklist** to prove the environment from a fresh local
+   database.
+3. **Customer customization guide** to learn how to change behavior without
+   damaging framework ownership.
+4. Framework documentation for Core, Platform, WCMS, Cron, imports, and DevOps
+   once the local system is running.
 
 ## Continue
 
