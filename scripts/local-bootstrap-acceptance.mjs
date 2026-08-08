@@ -26,6 +26,7 @@ const axisRoot = resolve(
 const platformUrl = process.env.AXIS_PLATFORM_URL || "http://127.0.0.1:4300";
 const wcmsUrl = process.env.AXIS_WCMS_URL || "http://127.0.0.1:4310";
 const cronUrl = process.env.AXIS_CRON_URL || "http://127.0.0.1:4320";
+const processUrl = process.env.AXIS_PROCESS_URL || "http://127.0.0.1:4330";
 const axisUrl = process.env.AXIS_URL || "http://127.0.0.1:3100";
 const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
@@ -33,7 +34,12 @@ const password = process.env.AXIS_PASSWORD || "adminPassword";
 const projectCode = process.env.AXIS_PROJECT || "nodics.kickoff";
 const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
-const mongoDatabases = ["kickoffLocal", "kickoffLocalWcms", "kickoffLocalCron"];
+const mongoDatabases = [
+  "kickoffLocal",
+  "kickoffLocalWcms",
+  "kickoffLocalCron",
+  "kickoffLocalProcess",
+];
 const documentationPacks = [
   {
     code: "nodicsDocumentation",
@@ -54,10 +60,34 @@ const documentationPacks = [
     site: "kickoffDocumentationSite",
   },
 ];
+const expectedCatalogs = Object.freeze([
+  Object.freeze({
+    code: "axisContentCatalog",
+    catalogType: "CONTENT",
+  }),
+  Object.freeze({
+    code: "defaultContentCatalog",
+    catalogType: "CONTENT",
+  }),
+  Object.freeze({
+    code: "documentationContentCatalog",
+    catalogType: "CONTENT",
+  }),
+  Object.freeze({
+    code: "defaultProductCatalog",
+    catalogType: "PRODUCT",
+  }),
+]);
+const retiredDocumentationCatalogs = Object.freeze([
+  "nodicsDocumentationContentCatalog",
+  "axisDocumentationContentCatalog",
+  "kickoffDocumentationContentCatalog",
+]);
 const localPorts = [
   { label: "Platform", port: 4300 },
   { label: "WCMS", port: 4310 },
   { label: "Cron", port: 4320 },
+  { label: "Process", port: 4330 },
   { label: "Axis", port: 3100 },
 ];
 const managedProcesses = [];
@@ -338,6 +368,9 @@ async function verifyDocumentationRecords() {
 
 async function verifyMongoCounts() {
   const script = [
+    `const expectedCatalogs=${JSON.stringify(expectedCatalogs)};`,
+    `const retiredDocumentationCatalogs=${JSON.stringify(retiredDocumentationCatalogs)};`,
+    `const documentationPacks=${JSON.stringify(documentationPacks)};`,
     'const d=db.getSiblingDB("kickoffLocalWcms");',
     "const counts={",
     "  catalogs: d.CatalogModel.countDocuments(),",
@@ -346,7 +379,10 @@ async function verifyMongoCounts() {
     "  components: d.CmsComponentModel.countDocuments(),",
     "  routes: d.CmsPageRouteModel.countDocuments()",
     "};",
-    "printjson(counts);",
+    "const catalogs=d.CatalogModel.find({}, { _id: 0, code: 1, catalogType: 1 }).sort({ code: 1 }).toArray();",
+    "const retired=d.CatalogModel.find({ code: { $in: retiredDocumentationCatalogs } }, { _id: 0, code: 1 }).toArray();",
+    "const documentationSites=d.CmsSiteModel.find({ code: { $in: documentationPacks.map(pack => pack.site) } }, { _id: 0, code: 1, catalog: 1 }).sort({ code: 1 }).toArray();",
+    "print(JSON.stringify({ counts, catalogs, expectedCatalogs, retired, documentationSites }));",
   ].join("\n");
   const { stdout } = await execFileAsync(
     "mongosh",
@@ -355,10 +391,42 @@ async function verifyMongoCounts() {
       cwd: projectRoot,
     },
   );
-  log(`WCMS counts ${stdout.trim()}`);
-  const numbers = stdout.match(/\d+/g)?.map(Number) || [];
+  const result = JSON.parse(stdout);
+  log(`WCMS counts ${JSON.stringify(result.counts)}`);
+  const numbers = Object.values(result.counts);
   if (numbers.length < 5 || numbers.some((value) => value <= 0)) {
     throw new Error(`WCMS imported counts are not healthy: ${stdout.trim()}`);
+  }
+  if (result.catalogs.length !== expectedCatalogs.length) {
+    throw new Error(
+      `WCMS catalog count drifted: ${JSON.stringify(result.catalogs)}`,
+    );
+  }
+  const actualByCode = new Map(
+    result.catalogs.map((catalog) => [catalog.code, catalog.catalogType]),
+  );
+  for (const catalog of expectedCatalogs) {
+    if (actualByCode.get(catalog.code) !== catalog.catalogType) {
+      throw new Error(
+        `WCMS catalog ${catalog.code} is missing or has wrong type: ${JSON.stringify(result.catalogs)}`,
+      );
+    }
+  }
+  if (result.retired.length > 0) {
+    throw new Error(
+      `Retired documentation catalogs still exist: ${JSON.stringify(result.retired)}`,
+    );
+  }
+  const unhealthyDocumentationSites = result.documentationSites.filter(
+    (site) => site.catalog !== "documentationContentCatalog",
+  );
+  if (
+    result.documentationSites.length !== documentationPacks.length ||
+    unhealthyDocumentationSites.length > 0
+  ) {
+    throw new Error(
+      `Documentation sites must share documentationContentCatalog: ${JSON.stringify(result.documentationSites)}`,
+    );
   }
 }
 
@@ -427,6 +495,14 @@ async function main() {
     cronUrl,
     "/nodics/system/v0/health/ready",
   );
+  await ensureProcess(
+    "Process",
+    4330,
+    projectRoot,
+    "start:process",
+    processUrl,
+    "/nodics/system/v0/health/ready",
+  );
   if (!(await portListening(3100))) {
     if (!existsSync(resolve(axisRoot, "package.json"))) {
       throw new Error(`Axis repository not found at ${axisRoot}`);
@@ -442,6 +518,11 @@ async function main() {
   requireModule(
     [...registry.registered, ...registry.available],
     "nodics.cron",
+    "observed modules",
+  );
+  requireModule(
+    [...registry.registered, ...registry.available],
+    "nodics.process",
     "observed modules",
   );
   await importDocumentationPacks(headers);

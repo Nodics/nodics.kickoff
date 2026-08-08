@@ -81,7 +81,7 @@ function main() {
         throw new Error(
             'NODICS_FRAMEWORK_ROOT is not configured. Copy .env.example to .env ' +
             'and point it to the folder containing nodics.core, nodics.platform, ' +
-            'nodics.wcms, and nodics.cron.'
+            'nodics.wcms, nodics.cron, and nodics.process.'
         );
     }
 

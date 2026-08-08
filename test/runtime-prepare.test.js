@@ -56,6 +56,20 @@ const scenarios = Object.freeze([
             'kickoffLocal',
             'cronServer'
         ])
+    }),
+    Object.freeze({
+        server: 'processServer',
+        frameworkModules: Object.freeze(['nodics.process']),
+        expectedModules: Object.freeze([
+            'nodics.core',
+            'nodics.process',
+            'nodics.kickoff',
+            'kickoffCore',
+            'kickoffApi',
+            'kickoffInt',
+            'kickoffLocal',
+            'processServer'
+        ])
     })
 ]);
 

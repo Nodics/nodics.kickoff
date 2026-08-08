@@ -24,6 +24,7 @@
     "nodics.core": "file:.nodics/framework/nodics.core",
     "nodics.cron": "file:.nodics/framework/nodics.cron",
     "nodics.platform": "file:.nodics/framework/nodics.platform",
+    "nodics.process": "file:.nodics/framework/nodics.process",
     "nodics.wcms": "file:.nodics/framework/nodics.wcms"
   },
   "scripts": {
@@ -32,6 +33,7 @@
     "docs:check": "node scripts/generate-documentation-content.mjs --check",
     "start:cron": "node src/start-cron-server.js",
     "start:platform": "node src/start-platform-server.js",
+    "start:process": "node src/start-process-server.js",
     "start:wcms": "node src/start-wcms-server.js",
     "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
