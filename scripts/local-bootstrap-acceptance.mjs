@@ -35,9 +35,24 @@ const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
 const mongoDatabases = ["kickoffLocal", "kickoffLocalWcms", "kickoffLocalCron"];
 const documentationPacks = [
-  "nodicsDocumentation",
-  "axisDocumentation",
-  "kickoffDocumentation",
+  {
+    code: "nodicsDocumentation",
+    minimumRoutes: 9,
+    navigationComponent: "nodicsDocumentationNavigation",
+    site: "nodicsDocumentationSite",
+  },
+  {
+    code: "axisDocumentation",
+    minimumRoutes: 14,
+    navigationComponent: "axisDocumentationNavigation",
+    site: "axisDocumentationSite",
+  },
+  {
+    code: "kickoffDocumentation",
+    minimumRoutes: 4,
+    navigationComponent: "kickoffDocumentationNavigation",
+    site: "kickoffDocumentationSite",
+  },
 ];
 const localPorts = [
   { label: "Platform", port: 4300 },
@@ -258,7 +273,8 @@ function requireModule(modules, functionalModule, label) {
 }
 
 async function importDocumentationPacks(headers) {
-  for (const packCode of documentationPacks) {
+  for (const pack of documentationPacks) {
+    const packCode = pack.code;
     const status = await requestJson(
       wcmsUrl,
       `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}`,
@@ -280,6 +296,43 @@ async function importDocumentationPacks(headers) {
       throw new Error(`${packCode} is ${String(current.state)} after import`);
     }
     log(`${packCode} is CURRENT (${current.installedVersion})`);
+  }
+}
+
+async function verifyDocumentationRecords() {
+  const script = [
+    `const packs=${JSON.stringify(documentationPacks)};`,
+    'const d=db.getSiblingDB("kickoffLocalWcms");',
+    "const results=packs.map(pack => ({",
+    "  code: pack.code,",
+    "  site: pack.site,",
+    "  sites: d.CmsSiteModel.countDocuments({ code: pack.site }),",
+    "  routes: d.CmsPageRouteModel.countDocuments({ site: pack.site, path: /^\\/docs/ }),",
+    "  navigationComponents: d.CmsComponentModel.countDocuments({ code: pack.navigationComponent })",
+    "}));",
+    "print(JSON.stringify(results));",
+  ].join("\n");
+  const { stdout } = await execFileAsync(
+    "mongosh",
+    ["--quiet", "--eval", script],
+    {
+      cwd: projectRoot,
+    },
+  );
+  log(`documentation records ${stdout.trim()}`);
+  const results = JSON.parse(stdout);
+  for (const result of results) {
+    const pack = documentationPacks.find((item) => item.code === result.code);
+    if (
+      !pack ||
+      result.sites !== 1 ||
+      result.navigationComponents !== 1 ||
+      result.routes < pack.minimumRoutes
+    ) {
+      throw new Error(
+        `Documentation records are not healthy for ${result.code}: ${JSON.stringify(result)}`,
+      );
+    }
   }
 }
 
@@ -392,6 +445,7 @@ async function main() {
     "observed modules",
   );
   await importDocumentationPacks(headers);
+  await verifyDocumentationRecords();
   for (const route of [
     "/",
     "/docs",

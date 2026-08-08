@@ -4,6 +4,12 @@ Kickoff is intentionally small. It should teach partners how to customize
 Nodics safely without turning the reference project into another framework
 repository.
 
+For a beginner developer, the most important lesson is restraint. Do not start
+by editing framework files because they are easy to find. Start by asking who
+owns the behavior, whether configuration can solve the need, and which runtime
+server should load the customization. That habit keeps the customer project
+upgradeable.
+
 ## Why customization needs rules
 
 Most enterprise projects start with one urgent customer request. The quickest
@@ -143,6 +149,11 @@ Project customizations should be deployable and reversible. Keep project
 configuration separate from private secrets. Record which environment and
 server a customization affects. If a release fails, rollback should remove or
 disable the project layer without requiring a framework source rollback.
+
+Operators should be able to answer three questions during rollback: which
+project module introduced the change, which server graph loaded it, and which
+content-pack or configuration version went live. If those answers are unclear,
+the customization is not ready for a production environment.
 
 Generated documentation and seed data should be versioned immutably. If content
 changes with the same version, the import service should reject it so operators
