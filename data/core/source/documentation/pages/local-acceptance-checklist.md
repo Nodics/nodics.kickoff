@@ -364,8 +364,9 @@ PASS Axis route /media/items
 PASS Axis route /media/folders
 PASS Axis route /cron
 PASS Axis route /system-integrations
-PASS Axis route /system
-PASS Axis route /system/modules
+PASS Axis route /registry
+PASS Axis route /operations/imports-exports
+PASS Axis route /docs/swaggers
 PASS BackOffice public bootstrap
 PASS authenticated login for admin
 PASS module registry reachable

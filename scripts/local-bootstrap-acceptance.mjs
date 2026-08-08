@@ -455,7 +455,10 @@ async function main() {
     "/content",
     "/media",
     "/cron",
-    "/system/modules",
+    "/system-integrations",
+    "/registry",
+    "/operations/imports-exports",
+    "/docs/swaggers",
   ]) {
     await expectHttpOk(axisUrl, route);
     log(`Axis route ${route} returned HTTP 200`);
