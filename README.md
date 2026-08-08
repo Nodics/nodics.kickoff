@@ -52,6 +52,20 @@ For a complete zero-state local verification, use the Kickoff documentation
 page "Local acceptance checklist" after importing the Kickoff documentation
 content pack into WCMS.
 
+When the stack is running, open Axis at <http://localhost:3100> and use the
+Documentation group to read:
+
+- Framework documentation from `nodics.ai/nodics.docs`;
+- Nodics Axis product documentation from
+  `nodics.ai/nodics.platform/modules/axis`;
+- Nodics Kickoff project documentation from this repository;
+- Swagger/OpenAPI reference grouped by backend-published runtime and module
+  metadata.
+
+Kickoff documentation should explain project setup, local bootstrap, sample
+customization, environment/server topology, and project-owned data. It should
+not document reusable framework behavior as if Kickoff owns it.
+
 You can also run the automated local acceptance gates:
 
 ```text
