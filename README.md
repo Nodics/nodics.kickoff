@@ -52,6 +52,21 @@ For a complete zero-state local verification, use the Kickoff documentation
 page "Local acceptance checklist" after importing the Kickoff documentation
 content pack into WCMS.
 
+You can also run the automated local acceptance gates:
+
+```text
+npm run acceptance:local
+npm run acceptance:local:fresh
+```
+
+`acceptance:local` verifies the currently running local stack without dropping
+data. `acceptance:local:fresh` drops only `kickoffLocal`, `kickoffLocalWcms`,
+and `kickoffLocalCron`, starts the local reference stack, imports
+documentation packs, verifies Axis routes, and runs the module/documentation/Cron
+live smoke gates. It stops the servers it started unless you pass
+`--leave-started`. Stop Platform, WCMS, Cron, and Axis before using the fresh
+command so the bootstrap is truly from zero.
+
 Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
 located at the default sample location. The value may be absolute or relative
 to this Nodics Kickoff project root. `npm run configure:framework` creates generated

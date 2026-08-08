@@ -97,6 +97,72 @@ The reset should remove only the local Kickoff runtime databases/schemas used
 by those servers. It must not delete a broad MongoDB instance, user home
 folder, workspace folder, or unrelated project database.
 
+## Automated acceptance path
+
+Most maintainers should use the automated path first. It proves the same
+contracts as the manual checklist and reduces human mistakes during repeated
+bootstrap tests.
+
+Run this from `nodics.kickoff`:
+
+```bash
+npm run acceptance:local:fresh
+```
+
+This command intentionally drops only the three reference local databases:
+
+- `kickoffLocal`
+- `kickoffLocalWcms`
+- `kickoffLocalCron`
+
+It then starts any missing local servers, waits for Platform, WCMS, Cron, and
+Axis to become reachable, authenticates the local admin, imports the Framework,
+Nodics Axis, and Nodics Kickoff documentation packs through WCMS, checks key
+Axis routes, verifies WCMS content counts, and runs the Axis live smoke with
+the documentation and Cron lifecycle gates enabled.
+
+Use the safer non-destructive form when you only want to verify the current
+local state:
+
+```bash
+npm run acceptance:local
+```
+
+That version does not drop databases. It checks the currently running or
+started local topology and imports missing documentation packs if required.
+
+### What the automated command proves
+
+```mermaid
+flowchart TD
+  Start["Developer runs npm run acceptance:local:fresh"] --> Drop["Drop only Kickoff local DBs"]
+  Drop --> Platform["Start or reuse Platform on 4300"]
+  Platform --> WCMS["Start or reuse WCMS on 4310"]
+  WCMS --> Cron["Start or reuse Cron on 4320"]
+  Cron --> Axis["Start or reuse Axis on 3100"]
+  Axis --> Auth["Authenticate default/admin"]
+  Auth --> Registry["Verify Core, Platform, WCMS, Cron observation"]
+  Registry --> Docs["Import documentation packs through WCMS"]
+  Docs --> Routes["Verify Axis routes"]
+  Routes --> Counts["Verify WCMS catalog/site/page/component/route counts"]
+  Counts --> Lifecycle["Run Cron register, activate, deactivate, deregister"]
+  Lifecycle --> Pass["Acceptance pass"]
+```
+
+The command stops the servers it started after the acceptance gates complete.
+If you want to keep the stack running so you can inspect Axis after the run,
+use:
+
+```bash
+node scripts/local-bootstrap-acceptance.mjs --drop-local-db --leave-started
+```
+
+The command is deliberately conservative. It does not discover and drop random
+MongoDB databases. It does not kill unrelated processes. It does not create
+another importer. It uses the existing Profile login, BackOffice registry,
+WCMS content-pack API, and Axis smoke test. This matters because acceptance
+must prove the same path a real developer or operator uses.
+
 ## Start the backend servers
 
 Open three terminals from `nodics.kickoff`.
@@ -262,6 +328,17 @@ Expected behavior:
 - Activate changes lifecycle state without freezing buttons.
 - Deactivate and deregister return it to the correct next state.
 
+The automated acceptance runner performs the full optional Cron lifecycle:
+
+```text
+available → register → registered/inactive → activate → registered/active
+registered/active → deactivate → registered/inactive → deregister → available
+```
+
+Cron is optional for the project, so the final accepted state after the
+automated lifecycle test is **available** rather than permanently registered.
+That proves both the runtime observation path and the governed removal path.
+
 If an action succeeds but the UI does not update, inspect the module registry
 API response immediately after the action. The frontend should refresh local
 query state after each lifecycle operation.
@@ -273,6 +350,8 @@ After the servers and Axis are running, use the live smoke script from
 
 ```bash
 AXIS_EXPECT_MODULES=1 npm run smoke:live
+AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 npm run smoke:live
+AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live
 ```
 
 Expected result:
@@ -292,6 +371,13 @@ PASS authenticated login for admin
 PASS module registry reachable
 PASS required modules registered: nodics.core, nodics.platform, nodics.wcms
 PASS optional runtime modules observed: nodics.cron
+PASS documentation pack nodicsDocumentation is CURRENT
+PASS documentation pack axisDocumentation is CURRENT
+PASS documentation pack kickoffDocumentation is CURRENT
+PASS cron lifecycle register
+PASS cron lifecycle activate
+PASS cron lifecycle deactivate
+PASS cron lifecycle deregister returns module to available
 ```
 
 ## Troubleshooting quick map
@@ -316,7 +402,9 @@ The local acceptance run is complete when:
 4. Module registry shows mandatory modules and optional Cron correctly.
 5. Documentation products are visible.
 6. Content and media routes render the expected workspaces.
-7. `AXIS_EXPECT_MODULES=1 npm run smoke:live` passes.
+7. `npm run acceptance:local:fresh` passes, or the manual equivalent plus
+   `AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live`
+   passes.
 8. No repo in the three-repo set has uncommitted acceptance changes.
 
 When all eight are true, the modularized foundation is ready for the next

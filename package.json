@@ -33,6 +33,8 @@
     "start:cron": "node src/start-cron-server.js",
     "start:platform": "node src/start-platform-server.js",
     "start:wcms": "node src/start-wcms-server.js",
+    "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
+    "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
