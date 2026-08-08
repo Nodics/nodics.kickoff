@@ -16,7 +16,7 @@ module.exports = {
   "record0": {
     "code": "kickoffDocumentationSite",
     "name": "Nodics Kickoff Documentation",
-    "catalog": "kickoffDocumentationContentCatalog",
+    "catalog": "documentationContentCatalog",
     "active": true
   }
 };

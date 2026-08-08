@@ -67,7 +67,7 @@ assert.strictEqual(source.id, 'nodics-kickoff');
 assert.strictEqual(source.label, 'Nodics Kickoff');
 assert.strictEqual(source.route, '/docs/nodics-kickoff');
 assert.strictEqual(source.site, 'kickoffDocumentationSite');
-assert.strictEqual(source.catalog, 'kickoffDocumentationContentCatalog');
+assert.strictEqual(source.catalog, 'documentationContentCatalog');
 assert.strictEqual(source.defaultPage, '/docs/nodics-kickoff');
 assert.strictEqual(source.packCode, 'kickoffDocumentation');
 assert.strictEqual(navigationItem.id, 'documentation-nodics-kickoff');

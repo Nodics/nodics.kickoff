@@ -13,9 +13,6 @@
 
 /** @description Nodics Kickoff core-import header for project documentation. */
 module.exports = {
-  catalog: {
-    kickoffDocumentationCatalogData: { options: { enabled: true, schemaName: 'catalog', operation: 'saveAll', dataFilePrefix: 'kickoffDocumentationCatalogData' }, query: { code: '$code' } },
-  },
   cms: {
     kickoffDocumentationSiteData: { options: { enabled: true, schemaName: 'cmsSite', operation: 'saveAll', dataFilePrefix: 'kickoffDocumentationSiteData' }, query: { code: '$code' } },
     kickoffDocumentationTypeCodeData: { options: { enabled: true, schemaName: 'cmsTypeCode', operation: 'saveAll', dataFilePrefix: 'kickoffDocumentationTypeCodeData' }, query: { code: '$code' } },

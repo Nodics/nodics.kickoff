@@ -21,7 +21,7 @@ module.exports = Object.freeze({
                     order: 400,
                     connectionModule: 'cms',
                     site: 'kickoffDocumentationSite',
-                    catalog: 'kickoffDocumentationContentCatalog',
+                    catalog: 'documentationContentCatalog',
                     defaultPage: '/docs/nodics-kickoff',
                     packCode: 'kickoffDocumentation',
                     dashboard: Object.freeze({
