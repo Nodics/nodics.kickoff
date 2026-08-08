@@ -8,10 +8,10 @@
     "kickoffDocumentationSite"
   ],
   "accessMode": "AUTHENTICATED",
-  "pages": 3,
-  "components": 4,
-  "routes": 3,
-  "releaseChecksum": "72694a0bf43e5bd7f979ed91ffbaaddcffbce90183f6d25bd1e58a15f5a99906",
+  "pages": 4,
+  "components": 5,
+  "routes": 4,
+  "releaseChecksum": "3bdede8edec7808cfe68128c60328b8bc49b9cb965a8eaf04edf29467eab8b39",
   "generatedHashes": {
     "data/core/data/documentation/kickoffDocumentationCatalogData.js": "2014abcd3f177d65369059f0b6f4db67ab511e3eb8973684d0c1f00dd8cc822f",
     "data/core/data/documentation/kickoffDocumentationSiteData.js": "3f2216b9b263ea2b5c8be122fc8a12f8d281930bce002b82a3e8f2e47811cf1c",
@@ -19,9 +19,9 @@
     "data/core/data/documentation/kickoffDocumentationRendererData.js": "1e932e18f056850d6515b2eccc057a36679cf7e8fa996dd10979f6f9b12c11f0",
     "data/core/data/documentation/kickoffDocumentationSlotData.js": "39558778d2df54b630167a771c5e60c6adf4a4cb0b17c840ffebc69f9e98ba36",
     "data/core/data/documentation/kickoffDocumentationTemplateData.js": "a9ec8b50975094fcfb85f36639839d7075566d3fef7e0a69addc0ddbb6470b2b",
-    "data/core/data/documentation/kickoffDocumentationComponentData.js": "9af375e631552afc0214f339d3ab9b401f7e58f9bcb9cb704449ca6265c7e5ac",
-    "data/core/data/documentation/kickoffDocumentationPageData.js": "b7072474cedc6a9e5a81d024311f9735295eb1261c37710ded776da28b7e5223",
-    "data/core/data/documentation/kickoffDocumentationRouteData.js": "3ac95ef374528483ed5549644219b0ecae3386f201b52f9123e8229bf99fdffa",
+    "data/core/data/documentation/kickoffDocumentationComponentData.js": "9332722a2aa54780eb0035bc478518a0c162d66034426ad60353c6fcea87b579",
+    "data/core/data/documentation/kickoffDocumentationPageData.js": "def0a9fd1bf8a3d22bd4797e21c905f1c1242d8c097aac3ec3d8687ec36f30b7",
+    "data/core/data/documentation/kickoffDocumentationRouteData.js": "a0b6c868d392cd5561b436e06809504d7fb349e3f0b97f82aaa13f74084d7fe1",
     "data/core/headers/kickoffDocumentationContentPackHeader.js": "22c7bd16a06b11720da812c4afd84065b0627802951c83adbb4a1f72aec994c8"
   }
 }

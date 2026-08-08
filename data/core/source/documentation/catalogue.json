@@ -21,6 +21,14 @@
       "content": "data/core/source/documentation/pages/local-runtime.md"
     },
     {
+      "id": "kickoff.local-acceptance",
+      "title": "Local acceptance checklist",
+      "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "kickoffLocal",
+      "content": "data/core/source/documentation/pages/local-acceptance-checklist.md"
+    },
+    {
       "id": "kickoff.customization",
       "title": "Customer customization guide",
       "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",

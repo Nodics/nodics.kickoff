@@ -27,6 +27,18 @@ module.exports = {
     "active": true
   },
   "record2": {
+    "code": "kickoffDocsRoutekickoffLocalAcceptance",
+    "site": "kickoffDocumentationSite",
+    "path": "/docs/nodics-kickoff/kickoff-local-acceptance",
+    "locale": "en",
+    "channel": "web",
+    "page": "kickoffDocsPagekickoffLocalAcceptance",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "AUTHENTICATED",
+    "active": true
+  },
+  "record3": {
     "code": "kickoffDocsRoutekickoffCustomization",
     "site": "kickoffDocumentationSite",
     "path": "/docs/nodics-kickoff/kickoff-customization",

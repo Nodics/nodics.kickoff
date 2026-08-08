@@ -48,6 +48,10 @@ npm test
 npm run start:platform
 ```
 
+For a complete zero-state local verification, use the Kickoff documentation
+page "Local acceptance checklist" after importing the Kickoff documentation
+content pack into WCMS.
+
 Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
 located at the default sample location. The value may be absolute or relative
 to this Nodics Kickoff project root. `npm run configure:framework` creates generated

@@ -53,6 +53,31 @@ module.exports = {
     "active": true
   },
   "record2": {
+    "code": "kickoffDocsPagekickoffLocalAcceptance",
+    "name": "Local acceptance checklist",
+    "cmsSite": [
+      "kickoffDocumentationSite"
+    ],
+    "typeCode": "kickoffDocumentationArticlePageType",
+    "template": "kickoffDocumentationArticleTemplate",
+    "renderer": "documentation.page.article",
+    "cmsComponents": [
+      {
+        "target": "kickoffDocumentationNavigation",
+        "slot": "navigation",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "kickoffDocsComponentkickoffLocalAcceptance",
+        "slot": "article",
+        "index": 10,
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  "record3": {
     "code": "kickoffDocsPagekickoffCustomization",
     "name": "Customer customization guide",
     "cmsSite": [

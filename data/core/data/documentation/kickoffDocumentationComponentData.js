@@ -53,13 +53,29 @@ module.exports = {
           "searchText": "Local runtime topology Start and reason about the local Platform, WCMS, and Cron servers that make the reference project usable. # Local Runtime Topology\n\nKickoff provides a local reference topology so a developer can start Nodics and\nsee the major runtime surfaces without creating a new customer project first.\nThe local environment is `kickoffLocal`.\n\n## What this is\n\nThe local runtime topology is the smallest practical Nodics deployment on a\ndeveloper machine. It runs the framework as real backend servers, not as mocked\nscreens. That is important because Axis, BackOffice, module registration,\ncontent-pack import, API contracts, authentication, and WCMS routing all depend\non backend authority.\n\nThe goal is not to teach every production option on day one. The goal is to\ngive a beginner a reliable local loop: configure framework location, install\ndependencies, start servers, log in, import/update data, and observe the\nruntime from Axis.\n\n## Servers\n\nThe current local topology uses separate runtime servers:\n\n- `platformServer` starts the Platform runtime. It loads Core, Platform,\n  Profile, BackOffice, the Platform `axis` backend module, and Kickoff project\n  modules.\n- `wcmsServer` starts the WCMS runtime. It loads Core, WCMS, CMS, Media, and\n  Kickoff project modules. WCMS owns CMS sites, catalogs, pages, components,\n  routes, and documentation content-pack import.\n- `cronServer` starts the Cron runtime. It loads Core, Cron, cron jobs, and\n  Kickoff project modules.\n\nAxis is a separate frontend application. It connects to Platform for employee\nauthentication and BackOffice bootstrap, then uses the registered module\ncontracts to reach the authorized backend surfaces.\n\n## Start locally\n\nUse separate terminals from the Kickoff repository:\n\n```bash\nnpm run start:platform\nnpm run start:wcms\nnpm run start:cron\n```\n\nAxis normally runs from the `nodics.axis` repository:\n\n```bash\nnpm run dev\n```\n\nThe default local ports are:\n\n- Axis: `http://localhost:3100`\n- Platform: `http://localhost:4300`\n- WCMS: `http://localhost:4310`\n\n## Before starting\n\nFrom `nodics.kickoff`, copy and review local environment configuration:\n\n```bash\ncp .env.example .env\n```\n\nSet the framework checkout location:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nThe path may be absolute or relative to the Kickoff project root. This avoids a\nhard dependency on a fixed workspace layout. One developer may keep framework\ncode beside Kickoff; another may keep it in a different projects directory.\n\nThen prepare local file dependencies:\n\n```bash\nnpm run configure:framework\nnpm install\n```\n\n`configure:framework` updates the project-local dependency links so npm can\ninstall framework packages from the configured checkout. It does not make\nKickoff the owner of those modules.\n\n## Start sequence\n\nUse separate terminals so logs stay readable:\n\n1. Start Platform first. It owns Profile login, BackOffice bootstrap, module\n   registry, runtime catalogue projection, and OpenAPI contract discovery.\n2. Start WCMS second. It owns documentation sites, catalogs, pages, components,\n   routes, media metadata, and content delivery.\n3. Start Cron when scheduled behavior is needed. It proves optional functional\n   modules can be observed, registered, activated, deactivated, and\n   deregistered through the same registry lifecycle.\n4. Start Axis after backend servers are reachable. Axis reads its public\n   configuration, connects to Platform, authenticates the employee, and\n   discovers registered module endpoints from BackOffice.\n\n## Login and first checks\n\nOpen Axis at `http://localhost:3100`. For the local reference data, use:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nAfter login:\n\n- open the System and Integrations area and check the module registry;\n- confirm Core, Platform, and WCMS are active and not treated as optional;\n- if Cron is running, confirm it appears as an optional module that can move\n  through the lifecycle;\n- open Documentation and verify Framework, Swaggers, Nodics Axis, and Nodics\n  Kickoff are shown as separate documentation products;\n- import or update documentation packs only through the authorized Axis action.\n\n## Documentation import\n\nProject documentation is generated into a Kickoff content pack and imported\nthrough WCMS. The pack code is `kickoffDocumentation`; the CMS Site is\n`kickoffDocumentationSite`; the default route is `/docs/nodics-kickoff`.\n\nIf the documentation page is unavailable in Axis, check that WCMS is running,\nthe content pack is generated, and the latest pack version has been imported.\nThe content-pack service rejects changed content with the same immutable\nversion, so update the catalogue version whenever generated hashes change.\n\n## Troubleshooting\n\nIf Axis shows a BackOffice registry recovery page, Platform is not reachable,\nthe Platform port is wrong, or Axis public configuration points at the wrong\nbase URL. If Axis logs in but documentation routes show CMS recovery, WCMS may\nnot be running, the documentation source may not be registered, or the content\npack may not be imported. If an optional module appears only after refresh,\ncheck the module registry API response after each lifecycle operation before\nassuming the frontend state is wrong.\n\nIf npm cannot install framework packages, check `NODICS_FRAMEWORK_ROOT`, rerun\n`npm run configure:framework`, and confirm the configured directory contains\n`nodics.core`, `nodics.platform`, `nodics.wcms`, and any optional framework\nmodules used by the local server.\n\n## Production note\n\nThe local topology teaches ownership, not final infrastructure. Production may\nrun modules in separate processes, hosts, containers, or release units. That\ndoes not change documentation ownership, module identity, API authority, or the\nrule that Axis discovers runtime capability from BackOffice instead of keeping\nits own endpoint registry.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Customer customization guide](customization-guide.md)\n"
         },
         {
+          "code": "kickoff.local-acceptance",
+          "title": "Local acceptance checklist",
+          "route": "/docs/nodics-kickoff/kickoff-local-acceptance",
+          "section": "nodics-kickoff",
+          "sectionTitle": "Nodics Kickoff",
+          "sectionOrder": 10,
+          "order": 30,
+          "audience": [
+            "architect",
+            "developer",
+            "operator"
+          ],
+          "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+          "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. # Local Acceptance Checklist\n\nThis checklist is the beginner-friendly path for proving a fresh Nodics local\ninstallation from zero database state. Use it when you have cloned the three\nworking repositories, configured Kickoff, and want to confirm the backend\nframework, customer project, and Axis frontend are working together.\n\nThe checklist is intentionally explicit. A new developer should be able to\nfollow it without already knowing Nodics module loading, BackOffice bootstrap,\nWCMS content packs, or functional-module registration.\n\n## What this checklist proves\n\nThe acceptance run proves five things:\n\n| Area | What must be true |\n| --- | --- |\n| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root. |\n| Runtime topology | Platform, WCMS, and Cron can start from the Kickoff local environment. |\n| Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |\n| Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |\n| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module. |\n\nIf any one of these fails, do not continue adding new functional modules. Fix\nthe contract break first, otherwise every later module will inherit a shaky\nlocal foundation.\n\n## Repository layout used by the reference run\n\nThe local reference setup normally looks like this:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.axis/\n  nodics.kickoff/\n```\n\nThis layout is only a convenience. Customer projects may live anywhere. The\nimportant contract is that `nodics.kickoff/.env` tells Kickoff where the\nframework checkout lives.\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nUse an absolute path if your repositories are not parallel:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai\n```\n\n## Mandatory prerequisites\n\nBefore running the checklist, confirm these local services and tools are\navailable:\n\n1. Node.js 24 and npm.\n2. MongoDB running locally.\n3. The three repositories are cloned:\n   - `nodics.ai`\n   - `nodics.axis`\n   - `nodics.kickoff`\n4. `nodics.kickoff/.env` exists and points to the framework root.\n5. `nodics.axis/.env` points to the local Platform server.\n\nRun this from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm run configure:framework\nnpm install\n```\n\nRun this from `nodics.axis`:\n\n```bash\ncp .env.example .env\nnpm install\n```\n\n## Fresh database reset\n\nUse a fresh database reset only for local developer acceptance. Do not run this\nagainst a shared development, QA, pre-production, or production database.\n\nThe local server configs own the exact database names. Read them before\ndropping anything. In the reference topology, the relevant server configs are:\n\n```text\nenvs/kickoffLocal/platformServer/config/properties.js\nenvs/kickoffLocal/wcmsServer/config/properties.js\nenvs/kickoffLocal/cronServer/config/properties.js\n```\n\nThe reset should remove only the local Kickoff runtime databases/schemas used\nby those servers. It must not delete a broad MongoDB instance, user home\nfolder, workspace folder, or unrelated project database.\n\n## Start the backend servers\n\nOpen three terminals from `nodics.kickoff`.\n\nTerminal 1:\n\n```bash\nnpm run start:platform\n```\n\nTerminal 2:\n\n```bash\nnpm run start:wcms\n```\n\nTerminal 3:\n\n```bash\nnpm run start:cron\n```\n\nExpected local ports:\n\n| Runtime | Port | Why it matters |\n| --- | ---: | --- |\n| Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |\n| WCMS | 4310 | CMS sites, content catalogs, page/component data, documentation packs, media metadata. |\n| Cron | 4320 | Optional runtime module observation and registry lifecycle testing. |\n\nIf a port is already in use, confirm whether it is an earlier Nodics server\nfrom the same checkout. Do not kill unrelated processes by guessing.\n\n## Start Axis\n\nOpen another terminal from `nodics.axis`:\n\n```bash\nnpm run dev\n```\n\nAxis should be available at:\n\n```text\nhttp://localhost:3100\n```\n\n## Login\n\nOpen Axis and use the local reference credentials:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nSuccessful login proves:\n\n1. Axis can load public bootstrap from Platform.\n2. Profile can authenticate the local admin.\n3. Axis can retrieve authenticated BackOffice bootstrap data.\n4. Axis receives authorized navigation and runtime module projections.\n\n## Import initialization data\n\nIn Axis, open the import/initialization workspace and install the available\ninitialization releases.\n\nYou should see releases owned by active modules only. The system must not ask\nAxis to invent import data. Axis presents the operation; the owning backend\nmodule and nImport execute the import.\n\nExpected outcome:\n\n- mandatory Profile/bootstrap identity data is available;\n- core framework data required by Platform and WCMS is present;\n- documentation content packs can be imported or updated;\n- repeated import attempts with unchanged immutable releases do not corrupt\n  existing data.\n\n## Verify module registry\n\nOpen:\n\n```text\nSystem and Integrations → Module Registry\n```\n\nExpected state:\n\n| Functional module | Expected state | Why |\n| --- | --- | --- |\n| `nodics.core` | Registered and active | Required by every runtime. |\n| `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |\n| `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |\n| `nodics.cron` | Optional, observed when Cron is running | Proves optional runtime modules can join the lifecycle. |\n\nCore, Platform, and WCMS are mandatory for this local Axis-backed acceptance\ntopology. They should not appear as removable optional modules. Cron may be\nregistered, activated, deactivated, and deregistered as an optional module.\n\n## Verify documentation\n\nOpen:\n\n```text\nDocumentation\n```\n\nExpected documentation products:\n\n- Framework\n- Swaggers\n- Nodics Axis\n- Nodics Kickoff\n\nThe products are intentionally separated by ownership:\n\n| Documentation product | Owning repository/module |\n| --- | --- |\n| Framework | `nodics.ai/nodics.docs` |\n| Nodics Axis | `nodics.ai/nodics.platform/modules/axis` |\n| Nodics Kickoff | `nodics.kickoff` |\n| Swagger/OpenAPI | Platform BackOffice/OpenAPI contracts |\n\nAxis is only the renderer. It must not own backend-importable documentation\ncontent.\n\n## Verify content and media\n\nOpen these Axis routes:\n\n```text\n/content\n/media\n/media/items\n/media/folders\n```\n\nExpected behavior:\n\n- `/content` shows the content dashboard and WCMS-owned summary sections.\n- `/media` shows media management, media records, and media-by-source sections.\n- `/media/items` and `/media/folders` open focused media workspaces instead of\n  falling into CMS recovery.\n- Any unavailable backend schema is reported as a backend/schema discovery\n  issue, not as a frontend-owned data model.\n\n## Verify Cron\n\nOpen:\n\n```text\n/cron\n```\n\nExpected behavior:\n\n- If Cron is running, Axis can observe the `nodics.cron` functional module.\n- If Cron is not registered, it appears as available to register.\n- Register moves it into the registered list without requiring a page refresh.\n- Activate changes lifecycle state without freezing buttons.\n- Deactivate and deregister return it to the correct next state.\n\nIf an action succeeds but the UI does not update, inspect the module registry\nAPI response immediately after the action. The frontend should refresh local\nquery state after each lifecycle operation.\n\n## Command-line smoke test\n\nAfter the servers and Axis are running, use the live smoke script from\n`nodics.axis`:\n\n```bash\nAXIS_EXPECT_MODULES=1 npm run smoke:live\n```\n\nExpected result:\n\n```text\nPASS Axis route /\nPASS Axis route /content\nPASS Axis route /media\nPASS Axis route /media/items\nPASS Axis route /media/folders\nPASS Axis route /cron\nPASS Axis route /system-integrations\nPASS Axis route /system\nPASS Axis route /system/modules\nPASS BackOffice public bootstrap\nPASS authenticated login for admin\nPASS module registry reachable\nPASS required modules registered: nodics.core, nodics.platform, nodics.wcms\nPASS optional runtime modules observed: nodics.cron\n```\n\n## Troubleshooting quick map\n\n| Symptom | Most likely boundary |\n| --- | --- |\n| Axis recovery says BackOffice registry unavailable | Platform server is not reachable or Axis points at the wrong Platform URL. |\n| Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |\n| Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |\n| Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |\n| Cron does not appear | Cron server is not running or has not reported its functional module observation. |\n| Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |\n| Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |\n\n## Acceptance sign-off\n\nThe local acceptance run is complete when:\n\n1. Platform, WCMS, Cron, and Axis are running.\n2. Fresh local databases were created from module-owned import data.\n3. Admin login works.\n4. Module registry shows mandatory modules and optional Cron correctly.\n5. Documentation products are visible.\n6. Content and media routes render the expected workspaces.\n7. `AXIS_EXPECT_MODULES=1 npm run smoke:live` passes.\n8. No repo in the three-repo set has uncommitted acceptance changes.\n\nWhen all eight are true, the modularized foundation is ready for the next\nfunctional module.\n"
+        },
+        {
           "code": "kickoff.customization",
           "title": "Customer customization guide",
           "route": "/docs/nodics-kickoff/kickoff-customization",
           "section": "nodics-kickoff",
           "sectionTitle": "Nodics Kickoff",
           "sectionOrder": 10,
-          "order": 30,
+          "order": 40,
           "audience": [
             "architect",
             "developer",
@@ -634,8 +650,8 @@ module.exports = {
         "route": "/docs/nodics-kickoff"
       },
       "next": {
-        "title": "Customer customization guide",
-        "route": "/docs/nodics-kickoff/kickoff-customization"
+        "title": "Local acceptance checklist",
+        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
       },
       "source": {
         "repository": "nodics.kickoff",
@@ -649,6 +665,698 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "kickoffDocsComponentkickoffLocalAcceptance",
+    "typeCode": "kickoffDocumentationArticleComponentType",
+    "renderer": "documentation.component.article",
+    "accessMode": "AUTHENTICATED",
+    "properties": {
+      "code": "kickoff.local-acceptance",
+      "title": "Local acceptance checklist",
+      "route": "/docs/nodics-kickoff/kickoff-local-acceptance",
+      "section": "nodics-kickoff",
+      "sectionTitle": "Nodics Kickoff",
+      "audience": [
+        "architect",
+        "developer",
+        "operator"
+      ],
+      "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+      "headings": [
+        {
+          "text": "What this checklist proves",
+          "anchor": "kickoffLocalAcceptance-1-what-this-checklist-proves",
+          "level": 2
+        },
+        {
+          "text": "Repository layout used by the reference run",
+          "anchor": "kickoffLocalAcceptance-2-repository-layout-used-by-the-reference-run",
+          "level": 2
+        },
+        {
+          "text": "Mandatory prerequisites",
+          "anchor": "kickoffLocalAcceptance-3-mandatory-prerequisites",
+          "level": 2
+        },
+        {
+          "text": "Fresh database reset",
+          "anchor": "kickoffLocalAcceptance-4-fresh-database-reset",
+          "level": 2
+        },
+        {
+          "text": "Start the backend servers",
+          "anchor": "kickoffLocalAcceptance-5-start-the-backend-servers",
+          "level": 2
+        },
+        {
+          "text": "Start Axis",
+          "anchor": "kickoffLocalAcceptance-6-start-axis",
+          "level": 2
+        },
+        {
+          "text": "Login",
+          "anchor": "kickoffLocalAcceptance-7-login",
+          "level": 2
+        },
+        {
+          "text": "Import initialization data",
+          "anchor": "kickoffLocalAcceptance-8-import-initialization-data",
+          "level": 2
+        },
+        {
+          "text": "Verify module registry",
+          "anchor": "kickoffLocalAcceptance-9-verify-module-registry",
+          "level": 2
+        },
+        {
+          "text": "Verify documentation",
+          "anchor": "kickoffLocalAcceptance-10-verify-documentation",
+          "level": 2
+        },
+        {
+          "text": "Verify content and media",
+          "anchor": "kickoffLocalAcceptance-11-verify-content-and-media",
+          "level": 2
+        },
+        {
+          "text": "Verify Cron",
+          "anchor": "kickoffLocalAcceptance-12-verify-cron",
+          "level": 2
+        },
+        {
+          "text": "Command-line smoke test",
+          "anchor": "kickoffLocalAcceptance-13-command-line-smoke-test",
+          "level": 2
+        },
+        {
+          "text": "Troubleshooting quick map",
+          "anchor": "kickoffLocalAcceptance-14-troubleshooting-quick-map",
+          "level": 2
+        },
+        {
+          "text": "Acceptance sign-off",
+          "anchor": "kickoffLocalAcceptance-15-acceptance-sign-off",
+          "level": 2
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "This checklist is the beginner-friendly path for proving a fresh Nodics local installation from zero database state. Use it when you have cloned the three working repositories, configured Kickoff, and want to confirm the backend framework, customer project, and Axis frontend are working together."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The checklist is intentionally explicit. A new developer should be able to follow it without already knowing Nodics module loading, BackOffice bootstrap, WCMS content packs, or functional-module registration."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "What this checklist proves",
+          "anchor": "kickoffLocalAcceptance-1-what-this-checklist-proves"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The acceptance run proves five things:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Area",
+            "What must be true"
+          ],
+          "rows": [
+            [
+              "Framework checkout",
+              "Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root."
+            ],
+            [
+              "Runtime topology",
+              "Platform, WCMS, and Cron can start from the Kickoff local environment."
+            ],
+            [
+              "Bootstrap data",
+              "Mandatory initialization data can be imported from module-owned releases."
+            ],
+            [
+              "Axis access",
+              "Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data."
+            ],
+            [
+              "Module lifecycle",
+              "Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "If any one of these fails, do not continue adding new functional modules. Fix the contract break first, otherwise every later module will inherit a shaky local foundation."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Repository layout used by the reference run",
+          "anchor": "kickoffLocalAcceptance-2-repository-layout-used-by-the-reference-run"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The local reference setup normally looks like this:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "nodicsRoot/\n  nodics.ai/\n  nodics.axis/\n  nodics.kickoff/"
+        },
+        {
+          "kind": "paragraph",
+          "text": "This layout is only a convenience. Customer projects may live anywhere. The important contract is that `nodics.kickoff/.env` tells Kickoff where the framework checkout lives."
+        },
+        {
+          "kind": "code",
+          "language": "dotenv",
+          "text": "NODICS_FRAMEWORK_ROOT=../nodics.ai"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use an absolute path if your repositories are not parallel:"
+        },
+        {
+          "kind": "code",
+          "language": "dotenv",
+          "text": "NODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai"
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Mandatory prerequisites",
+          "anchor": "kickoffLocalAcceptance-3-mandatory-prerequisites"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Before running the checklist, confirm these local services and tools are available:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "Node.js 24 and npm.",
+            "MongoDB running locally.",
+            "The three repositories are cloned:"
+          ]
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "`nodics.ai`",
+            "`nodics.axis`",
+            "`nodics.kickoff`"
+          ]
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "`nodics.kickoff/.env` exists and points to the framework root.",
+            "`nodics.axis/.env` points to the local Platform server."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run this from `nodics.kickoff`:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "cp .env.example .env\nnpm run configure:framework\nnpm install"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run this from `nodics.axis`:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "cp .env.example .env\nnpm install"
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Fresh database reset",
+          "anchor": "kickoffLocalAcceptance-4-fresh-database-reset"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use a fresh database reset only for local developer acceptance. Do not run this against a shared development, QA, pre-production, or production database."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The local server configs own the exact database names. Read them before dropping anything. In the reference topology, the relevant server configs are:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "envs/kickoffLocal/platformServer/config/properties.js\nenvs/kickoffLocal/wcmsServer/config/properties.js\nenvs/kickoffLocal/cronServer/config/properties.js"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The reset should remove only the local Kickoff runtime databases/schemas used by those servers. It must not delete a broad MongoDB instance, user home folder, workspace folder, or unrelated project database."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Start the backend servers",
+          "anchor": "kickoffLocalAcceptance-5-start-the-backend-servers"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open three terminals from `nodics.kickoff`."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Terminal 1:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run start:platform"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Terminal 2:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run start:wcms"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Terminal 3:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run start:cron"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected local ports:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Runtime",
+            "Port",
+            "Why it matters"
+          ],
+          "rows": [
+            [
+              "Platform",
+              "4300",
+              "Profile login, BackOffice bootstrap, module registry, OpenAPI discovery."
+            ],
+            [
+              "WCMS",
+              "4310",
+              "CMS sites, content catalogs, page/component data, documentation packs, media metadata."
+            ],
+            [
+              "Cron",
+              "4320",
+              "Optional runtime module observation and registry lifecycle testing."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "If a port is already in use, confirm whether it is an earlier Nodics server from the same checkout. Do not kill unrelated processes by guessing."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Start Axis",
+          "anchor": "kickoffLocalAcceptance-6-start-axis"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open another terminal from `nodics.axis`:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run dev"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Axis should be available at:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100"
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Login",
+          "anchor": "kickoffLocalAcceptance-7-login"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open Axis and use the local reference credentials:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "Enterprise: default\nLogin ID: admin\nPassword: adminPassword"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Successful login proves:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "Axis can load public bootstrap from Platform.",
+            "Profile can authenticate the local admin.",
+            "Axis can retrieve authenticated BackOffice bootstrap data.",
+            "Axis receives authorized navigation and runtime module projections."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Import initialization data",
+          "anchor": "kickoffLocalAcceptance-8-import-initialization-data"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In Axis, open the import/initialization workspace and install the available initialization releases."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You should see releases owned by active modules only. The system must not ask Axis to invent import data. Axis presents the operation; the owning backend module and nImport execute the import."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected outcome:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "mandatory Profile/bootstrap identity data is available;",
+            "core framework data required by Platform and WCMS is present;",
+            "documentation content packs can be imported or updated;",
+            "repeated import attempts with unchanged immutable releases do not corrupt existing data."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verify module registry",
+          "anchor": "kickoffLocalAcceptance-9-verify-module-registry"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "System and Integrations → Module Registry"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected state:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Functional module",
+            "Expected state",
+            "Why"
+          ],
+          "rows": [
+            [
+              "`nodics.core`",
+              "Registered and active",
+              "Required by every runtime."
+            ],
+            [
+              "`nodics.platform`",
+              "Registered and active",
+              "Required for Profile, BackOffice, and Axis bootstrap."
+            ],
+            [
+              "`nodics.wcms`",
+              "Registered and active",
+              "Required for CMS, documentation, and media/content management."
+            ],
+            [
+              "`nodics.cron`",
+              "Optional, observed when Cron is running",
+              "Proves optional runtime modules can join the lifecycle."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Core, Platform, and WCMS are mandatory for this local Axis-backed acceptance topology. They should not appear as removable optional modules. Cron may be registered, activated, deactivated, and deregistered as an optional module."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verify documentation",
+          "anchor": "kickoffLocalAcceptance-10-verify-documentation"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "Documentation"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected documentation products:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "Framework",
+            "Swaggers",
+            "Nodics Axis",
+            "Nodics Kickoff"
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "The products are intentionally separated by ownership:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Documentation product",
+            "Owning repository/module"
+          ],
+          "rows": [
+            [
+              "Framework",
+              "`nodics.ai/nodics.docs`"
+            ],
+            [
+              "Nodics Axis",
+              "`nodics.ai/nodics.platform/modules/axis`"
+            ],
+            [
+              "Nodics Kickoff",
+              "`nodics.kickoff`"
+            ],
+            [
+              "Swagger/OpenAPI",
+              "Platform BackOffice/OpenAPI contracts"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Axis is only the renderer. It must not own backend-importable documentation content."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verify content and media",
+          "anchor": "kickoffLocalAcceptance-11-verify-content-and-media"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open these Axis routes:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "/content\n/media\n/media/items\n/media/folders"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected behavior:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "`/content` shows the content dashboard and WCMS-owned summary sections.",
+            "`/media` shows media management, media records, and media-by-source sections.",
+            "`/media/items` and `/media/folders` open focused media workspaces instead of falling into CMS recovery.",
+            "Any unavailable backend schema is reported as a backend/schema discovery issue, not as a frontend-owned data model."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verify Cron",
+          "anchor": "kickoffLocalAcceptance-12-verify-cron"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "/cron"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected behavior:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "If Cron is running, Axis can observe the `nodics.cron` functional module.",
+            "If Cron is not registered, it appears as available to register.",
+            "Register moves it into the registered list without requiring a page refresh.",
+            "Activate changes lifecycle state without freezing buttons.",
+            "Deactivate and deregister return it to the correct next state."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "If an action succeeds but the UI does not update, inspect the module registry API response immediately after the action. The frontend should refresh local query state after each lifecycle operation."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Command-line smoke test",
+          "anchor": "kickoffLocalAcceptance-13-command-line-smoke-test"
+        },
+        {
+          "kind": "paragraph",
+          "text": "After the servers and Axis are running, use the live smoke script from `nodics.axis`:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "AXIS_EXPECT_MODULES=1 npm run smoke:live"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Expected result:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "PASS Axis route /\nPASS Axis route /content\nPASS Axis route /media\nPASS Axis route /media/items\nPASS Axis route /media/folders\nPASS Axis route /cron\nPASS Axis route /system-integrations\nPASS Axis route /system\nPASS Axis route /system/modules\nPASS BackOffice public bootstrap\nPASS authenticated login for admin\nPASS module registry reachable\nPASS required modules registered: nodics.core, nodics.platform, nodics.wcms\nPASS optional runtime modules observed: nodics.cron"
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Troubleshooting quick map",
+          "anchor": "kickoffLocalAcceptance-14-troubleshooting-quick-map"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Symptom",
+            "Most likely boundary"
+          ],
+          "rows": [
+            [
+              "Axis recovery says BackOffice registry unavailable",
+              "Platform server is not reachable or Axis points at the wrong Platform URL."
+            ],
+            [
+              "Login fails",
+              "Profile data was not imported, credentials changed, or Platform is using a different database."
+            ],
+            [
+              "Documentation route shows CMS recovery",
+              "WCMS is down, documentation pack is not imported, or the documentation source is not registered."
+            ],
+            [
+              "Import page says API category is disabled",
+              "API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level."
+            ],
+            [
+              "Cron does not appear",
+              "Cron server is not running or has not reported its functional module observation."
+            ],
+            [
+              "Module action succeeds only after refresh",
+              "Axis query invalidation or backend response envelope needs review."
+            ],
+            [
+              "Media schema discovery unavailable",
+              "WCMS/media runtime is not exposing the expected schema workbench contract."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Acceptance sign-off",
+          "anchor": "kickoffLocalAcceptance-15-acceptance-sign-off"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The local acceptance run is complete when:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "Platform, WCMS, Cron, and Axis are running.",
+            "Fresh local databases were created from module-owned import data.",
+            "Admin login works.",
+            "Module registry shows mandatory modules and optional Cron correctly.",
+            "Documentation products are visible.",
+            "Content and media routes render the expected workspaces.",
+            "`AXIS_EXPECT_MODULES=1 npm run smoke:live` passes.",
+            "No repo in the three-repo set has uncommitted acceptance changes."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "When all eight are true, the modularized foundation is ready for the next functional module."
+        }
+      ],
+      "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. # Local Acceptance Checklist\n\nThis checklist is the beginner-friendly path for proving a fresh Nodics local\ninstallation from zero database state. Use it when you have cloned the three\nworking repositories, configured Kickoff, and want to confirm the backend\nframework, customer project, and Axis frontend are working together.\n\nThe checklist is intentionally explicit. A new developer should be able to\nfollow it without already knowing Nodics module loading, BackOffice bootstrap,\nWCMS content packs, or functional-module registration.\n\n## What this checklist proves\n\nThe acceptance run proves five things:\n\n| Area | What must be true |\n| --- | --- |\n| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root. |\n| Runtime topology | Platform, WCMS, and Cron can start from the Kickoff local environment. |\n| Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |\n| Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |\n| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module. |\n\nIf any one of these fails, do not continue adding new functional modules. Fix\nthe contract break first, otherwise every later module will inherit a shaky\nlocal foundation.\n\n## Repository layout used by the reference run\n\nThe local reference setup normally looks like this:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.axis/\n  nodics.kickoff/\n```\n\nThis layout is only a convenience. Customer projects may live anywhere. The\nimportant contract is that `nodics.kickoff/.env` tells Kickoff where the\nframework checkout lives.\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nUse an absolute path if your repositories are not parallel:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai\n```\n\n## Mandatory prerequisites\n\nBefore running the checklist, confirm these local services and tools are\navailable:\n\n1. Node.js 24 and npm.\n2. MongoDB running locally.\n3. The three repositories are cloned:\n   - `nodics.ai`\n   - `nodics.axis`\n   - `nodics.kickoff`\n4. `nodics.kickoff/.env` exists and points to the framework root.\n5. `nodics.axis/.env` points to the local Platform server.\n\nRun this from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm run configure:framework\nnpm install\n```\n\nRun this from `nodics.axis`:\n\n```bash\ncp .env.example .env\nnpm install\n```\n\n## Fresh database reset\n\nUse a fresh database reset only for local developer acceptance. Do not run this\nagainst a shared development, QA, pre-production, or production database.\n\nThe local server configs own the exact database names. Read them before\ndropping anything. In the reference topology, the relevant server configs are:\n\n```text\nenvs/kickoffLocal/platformServer/config/properties.js\nenvs/kickoffLocal/wcmsServer/config/properties.js\nenvs/kickoffLocal/cronServer/config/properties.js\n```\n\nThe reset should remove only the local Kickoff runtime databases/schemas used\nby those servers. It must not delete a broad MongoDB instance, user home\nfolder, workspace folder, or unrelated project database.\n\n## Start the backend servers\n\nOpen three terminals from `nodics.kickoff`.\n\nTerminal 1:\n\n```bash\nnpm run start:platform\n```\n\nTerminal 2:\n\n```bash\nnpm run start:wcms\n```\n\nTerminal 3:\n\n```bash\nnpm run start:cron\n```\n\nExpected local ports:\n\n| Runtime | Port | Why it matters |\n| --- | ---: | --- |\n| Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |\n| WCMS | 4310 | CMS sites, content catalogs, page/component data, documentation packs, media metadata. |\n| Cron | 4320 | Optional runtime module observation and registry lifecycle testing. |\n\nIf a port is already in use, confirm whether it is an earlier Nodics server\nfrom the same checkout. Do not kill unrelated processes by guessing.\n\n## Start Axis\n\nOpen another terminal from `nodics.axis`:\n\n```bash\nnpm run dev\n```\n\nAxis should be available at:\n\n```text\nhttp://localhost:3100\n```\n\n## Login\n\nOpen Axis and use the local reference credentials:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nSuccessful login proves:\n\n1. Axis can load public bootstrap from Platform.\n2. Profile can authenticate the local admin.\n3. Axis can retrieve authenticated BackOffice bootstrap data.\n4. Axis receives authorized navigation and runtime module projections.\n\n## Import initialization data\n\nIn Axis, open the import/initialization workspace and install the available\ninitialization releases.\n\nYou should see releases owned by active modules only. The system must not ask\nAxis to invent import data. Axis presents the operation; the owning backend\nmodule and nImport execute the import.\n\nExpected outcome:\n\n- mandatory Profile/bootstrap identity data is available;\n- core framework data required by Platform and WCMS is present;\n- documentation content packs can be imported or updated;\n- repeated import attempts with unchanged immutable releases do not corrupt\n  existing data.\n\n## Verify module registry\n\nOpen:\n\n```text\nSystem and Integrations → Module Registry\n```\n\nExpected state:\n\n| Functional module | Expected state | Why |\n| --- | --- | --- |\n| `nodics.core` | Registered and active | Required by every runtime. |\n| `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |\n| `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |\n| `nodics.cron` | Optional, observed when Cron is running | Proves optional runtime modules can join the lifecycle. |\n\nCore, Platform, and WCMS are mandatory for this local Axis-backed acceptance\ntopology. They should not appear as removable optional modules. Cron may be\nregistered, activated, deactivated, and deregistered as an optional module.\n\n## Verify documentation\n\nOpen:\n\n```text\nDocumentation\n```\n\nExpected documentation products:\n\n- Framework\n- Swaggers\n- Nodics Axis\n- Nodics Kickoff\n\nThe products are intentionally separated by ownership:\n\n| Documentation product | Owning repository/module |\n| --- | --- |\n| Framework | `nodics.ai/nodics.docs` |\n| Nodics Axis | `nodics.ai/nodics.platform/modules/axis` |\n| Nodics Kickoff | `nodics.kickoff` |\n| Swagger/OpenAPI | Platform BackOffice/OpenAPI contracts |\n\nAxis is only the renderer. It must not own backend-importable documentation\ncontent.\n\n## Verify content and media\n\nOpen these Axis routes:\n\n```text\n/content\n/media\n/media/items\n/media/folders\n```\n\nExpected behavior:\n\n- `/content` shows the content dashboard and WCMS-owned summary sections.\n- `/media` shows media management, media records, and media-by-source sections.\n- `/media/items` and `/media/folders` open focused media workspaces instead of\n  falling into CMS recovery.\n- Any unavailable backend schema is reported as a backend/schema discovery\n  issue, not as a frontend-owned data model.\n\n## Verify Cron\n\nOpen:\n\n```text\n/cron\n```\n\nExpected behavior:\n\n- If Cron is running, Axis can observe the `nodics.cron` functional module.\n- If Cron is not registered, it appears as available to register.\n- Register moves it into the registered list without requiring a page refresh.\n- Activate changes lifecycle state without freezing buttons.\n- Deactivate and deregister return it to the correct next state.\n\nIf an action succeeds but the UI does not update, inspect the module registry\nAPI response immediately after the action. The frontend should refresh local\nquery state after each lifecycle operation.\n\n## Command-line smoke test\n\nAfter the servers and Axis are running, use the live smoke script from\n`nodics.axis`:\n\n```bash\nAXIS_EXPECT_MODULES=1 npm run smoke:live\n```\n\nExpected result:\n\n```text\nPASS Axis route /\nPASS Axis route /content\nPASS Axis route /media\nPASS Axis route /media/items\nPASS Axis route /media/folders\nPASS Axis route /cron\nPASS Axis route /system-integrations\nPASS Axis route /system\nPASS Axis route /system/modules\nPASS BackOffice public bootstrap\nPASS authenticated login for admin\nPASS module registry reachable\nPASS required modules registered: nodics.core, nodics.platform, nodics.wcms\nPASS optional runtime modules observed: nodics.cron\n```\n\n## Troubleshooting quick map\n\n| Symptom | Most likely boundary |\n| --- | --- |\n| Axis recovery says BackOffice registry unavailable | Platform server is not reachable or Axis points at the wrong Platform URL. |\n| Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |\n| Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |\n| Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |\n| Cron does not appear | Cron server is not running or has not reported its functional module observation. |\n| Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |\n| Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |\n\n## Acceptance sign-off\n\nThe local acceptance run is complete when:\n\n1. Platform, WCMS, Cron, and Axis are running.\n2. Fresh local databases were created from module-owned import data.\n3. Admin login works.\n4. Module registry shows mandatory modules and optional Cron correctly.\n5. Documentation products are visible.\n6. Content and media routes render the expected workspaces.\n7. `AXIS_EXPECT_MODULES=1 npm run smoke:live` passes.\n8. No repo in the three-repo set has uncommitted acceptance changes.\n\nWhen all eight are true, the modularized foundation is ready for the next\nfunctional module.\n",
+      "previous": {
+        "title": "Local runtime topology",
+        "route": "/docs/nodics-kickoff/kickoff-local-runtime"
+      },
+      "next": {
+        "title": "Customer customization guide",
+        "route": "/docs/nodics-kickoff/kickoff-customization"
+      },
+      "source": {
+        "repository": "nodics.kickoff",
+        "functionalModule": "nodics.kickoff",
+        "technicalModule": "kickoffLocal",
+        "path": "data/core/source/documentation/pages/local-acceptance-checklist.md",
+        "wordCount": 1336,
+        "checksum": "00dcf42ceca9475b0f941813c48937afcd637c129a495df80b28b843796e19ab"
+      }
+    },
+    "active": true
+  },
+  "record4": {
     "code": "kickoffDocsComponentkickoffCustomization",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -932,8 +1640,8 @@ module.exports = {
       ],
       "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. # Customer Customization Guide\n\nKickoff is intentionally small. It should teach partners how to customize\nNodics safely without turning the reference project into another framework\nrepository.\n\n## Why customization needs rules\n\nMost enterprise projects start with one urgent customer request. The quickest\nsolution is often to edit whatever file is easiest to find. That works for a\ndemo, but it becomes expensive when more customers, tenants, brands, modules,\nand releases arrive. Nodics customization rules keep the framework upgradeable\nand keep customer behavior visible in the customer project.\n\nThe rule is simple: customize in the most specific owner that needs the\nchange. Use configuration before code. Use a project module before editing a\nframework module. Use a later-loaded extension module before forking a standard\nfunctional module. Create a new functional module only when the business\ncapability is genuinely new.\n\n## Safe customization model\n\nCustomer projects can add project modules under `modules/` and environment or\nserver contributions under `envs/`. These contributions load after standard\nNodics functional modules and can override or extend services through the\nnormal module merge process.\n\nSafe customizations include:\n\n- project-specific configuration;\n- customer modules such as `kickoffCore`, `kickoffApi`, or `kickoffInt`;\n- customer extension modules such as a future `kickoff.platform`;\n- environment-specific properties for local, testing, pre-production, and\n  production;\n- project-owned CMS documentation content packs;\n- sample data or initialization flows that belong to the customer project.\n\n## Two customization types\n\n### Code-level customization\n\nUse code-level customization when behavior changes: a service needs different\nlogic, a route needs a project-specific policy, a schema needs project fields,\nor an integration must call a customer system. Keep the implementation in a\nKickoff module or a customer extension module. Add tests next to the changed\nowner and document the boundary in the module README or documentation page.\n\nExample mental model:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nHere `kickoff.platform` can override or compose Platform services because it\nloads later. Axis and BackOffice should still show the functional capability as\nPlatform unless the customer intentionally exposes a new business capability.\n\n### Axis and WCMS customization\n\nUse governed frontend customization when an administrator changes content,\nlabels, navigation, documentation, images, or page composition through Axis\nand WCMS. The browser renderer stays in `nodics.axis`; the content records live\nin the backend owner. For example, changing a demo site logo should become a\ngoverned WCMS, Media, or content update, not a hard-coded replacement inside\nthe Axis source repository.\n\n## What not to customize in Kickoff\n\nDo not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not\nrename standard functional identities such as `nodics.platform` just because a\ncustomer extension customizes their behavior. Do not put backend-importable CMS\ndata into the frontend repository. Do not place framework documentation in the\ncustomer project unless it is truly project-specific guidance.\n\n## Extension example\n\nA customer may later create a module such as `kickoff.platform` to customize\nPlatform behavior. A Platform server could load:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nBackOffice and Axis should still present the functional capability as Platform\nunless the customer explicitly exposes a separate functional module. The\nextension changes implementation; it does not create a new product identity.\n\n## Documentation rule\n\nCustomer documentation follows the same ownership rule:\n\n- framework guidance goes to `nodics.docs`;\n- Axis product guidance goes to Platform `modules/axis`;\n- Kickoff/project guidance goes to `nodics.kickoff`;\n- browser rendering remains in `nodics.axis`.\n\nWhen Kickoff docs change, update the source page, bump the catalogue version if\nthe generated content changes, regenerate the pack, import it through WCMS, and\nverify the route in Axis.\n\n## Step-by-step: add a small project module\n\n1. Create or choose a module under `modules/`.\n2. Give the module a clear package identity and index so load order is\n   intentional.\n3. Add only project-owned services, data, configuration, or routes.\n4. Register the module in the relevant environment/server composition.\n5. Start the server and verify logs show the module loading after framework\n   modules.\n6. Add or update tests proving the project behavior.\n7. Update Kickoff documentation if the customization is part of the reference\n   journey.\n\nDo not use this flow to move framework behavior into Kickoff. If the behavior\nbelongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and\nimplement it in the owning framework module instead.\n\n## Step-by-step: add project documentation\n\n1. Add or update Markdown under\n   `data/core/source/documentation/pages/`.\n2. Update `data/core/source/documentation/catalogue.json`.\n3. Bump the catalogue version when generated content changes.\n4. Run `npm run docs:generate`.\n5. Run `npm run test:documentation`.\n6. Import or update the content pack through Axis.\n7. Open the generated `/docs/nodics-kickoff` route in Axis and verify\n   navigation, search, headings, and previous/next links.\n\n## DevOps and rollback notes\n\nProject customizations should be deployable and reversible. Keep project\nconfiguration separate from private secrets. Record which environment and\nserver a customization affects. If a release fails, rollback should remove or\ndisable the project layer without requiring a framework source rollback.\n\nGenerated documentation and seed data should be versioned immutably. If content\nchanges with the same version, the import service should reject it so operators\ndo not silently install a different release under an already-trusted identity.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Local runtime topology](local-runtime.md)\n",
       "previous": {
-        "title": "Local runtime topology",
-        "route": "/docs/nodics-kickoff/kickoff-local-runtime"
+        "title": "Local acceptance checklist",
+        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
       },
       "next": null,
       "source": {
