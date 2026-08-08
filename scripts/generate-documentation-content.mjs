@@ -34,39 +34,185 @@ function wordCount(value) {
   return (value.match(/\b[\p{L}\p{N}][\p{L}\p{N}'’-]*\b/gu) || []).length;
 }
 
-function headings(value) {
-  return value.split(/\r?\n/).flatMap((line) => {
-    const match = /^#{2,4}\s+(.+)$/.exec(line.trim());
-    return match?.[1] ? [match[1]] : [];
-  });
+function tableCells(line) {
+  return line
+    .trim()
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((cell) => cell.trim());
 }
 
-function markdownBlocks(markdown) {
+function isTableSeparator(line) {
+  const cells = tableCells(line);
+  return (
+    cells.length > 0 &&
+    cells.every((cell) => /^:?-{3,}:?$/.test(cell.replace(/\s/g, '')))
+  );
+}
+
+function markdownBlocks(markdown, pageCode) {
   const blocks = [];
+  const lines = markdown.replace(/\r\n/g, '\n').split('\n');
   let pending = [];
+  let index = 0;
+  let headingIndex = 0;
+
   const flushParagraph = () => {
-    if (!pending.length) return;
-    blocks.push({ kind: 'paragraph', text: pending.join(' ') });
+    const value = pending.join(' ').trim();
     pending = [];
+    if (value) blocks.push({ kind: 'paragraph', text: value });
   };
-  for (const line of markdown.split(/\r?\n/)) {
+
+  while (index < lines.length) {
+    const line = lines[index];
     const trimmed = line.trim();
+
+    if (trimmed.startsWith('```')) {
+      flushParagraph();
+      const language = trimmed.slice(3).trim() || 'text';
+      const code = [];
+      index += 1;
+      while (index < lines.length && !lines[index].trim().startsWith('```')) {
+        code.push(lines[index]);
+        index += 1;
+      }
+      blocks.push({
+        kind: language === 'mermaid' ? 'diagram' : 'code',
+        language,
+        text: code.join('\n'),
+      });
+      index += 1;
+      continue;
+    }
+
+    const heading = /^(#{1,4})\s+(.+)$/.exec(trimmed);
+    if (heading) {
+      flushParagraph();
+      const level = heading[1].length;
+      const text = heading[2].trim();
+      if (level > 1) {
+        headingIndex += 1;
+        blocks.push({
+          kind: 'heading',
+          level,
+          text,
+          anchor: `${pageCode}-${headingIndex}-${slug(text)}`,
+        });
+      }
+      index += 1;
+      continue;
+    }
+
+    const image = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+["']([^"']+)["'])?\)$/.exec(trimmed);
+    if (image) {
+      flushParagraph();
+      blocks.push({
+        kind: 'image',
+        alt: image[1] || 'Documentation illustration',
+        source: image[2],
+        title: image[3] || image[1] || '',
+      });
+      index += 1;
+      continue;
+    }
+
+    if (
+      trimmed.includes('|') &&
+      index + 1 < lines.length &&
+      isTableSeparator(lines[index + 1])
+    ) {
+      flushParagraph();
+      const headers = tableCells(trimmed);
+      const rows = [];
+      index += 2;
+      while (index < lines.length && lines[index].trim().includes('|')) {
+        rows.push(tableCells(lines[index]));
+        index += 1;
+      }
+      blocks.push({ kind: 'table', headers, rows });
+      continue;
+    }
+
+    const unordered = /^[-*]\s+(.+)$/.exec(trimmed);
+    if (unordered) {
+      flushParagraph();
+      const items = [unordered[1]];
+      index += 1;
+      while (index < lines.length && lines[index].trim()) {
+        const current = lines[index].trim();
+        const item = /^[-*]\s+(.+)$/.exec(current);
+        if (item) {
+          items.push(item[1]);
+          index += 1;
+          continue;
+        }
+        if (
+          /^(#{1,4})\s+/.test(current) ||
+          /^\d+\.\s+/.test(current) ||
+          current.startsWith('```') ||
+          current.startsWith('>') ||
+          /^!\[/.test(current)
+        ) {
+          break;
+        }
+        items[items.length - 1] += ` ${current}`;
+        index += 1;
+      }
+      blocks.push({ kind: 'unordered-list', items });
+      continue;
+    }
+
+    const ordered = /^\d+\.\s+(.+)$/.exec(trimmed);
+    if (ordered) {
+      flushParagraph();
+      const items = [ordered[1]];
+      index += 1;
+      while (index < lines.length && lines[index].trim()) {
+        const current = lines[index].trim();
+        const item = /^\d+\.\s+(.+)$/.exec(current);
+        if (item) {
+          items.push(item[1]);
+          index += 1;
+          continue;
+        }
+        if (
+          /^(#{1,4})\s+/.test(current) ||
+          /^[-*]\s+/.test(current) ||
+          current.startsWith('```') ||
+          current.startsWith('>') ||
+          /^!\[/.test(current)
+        ) {
+          break;
+        }
+        items[items.length - 1] += ` ${current}`;
+        index += 1;
+      }
+      blocks.push({ kind: 'ordered-list', items });
+      continue;
+    }
+
+    if (trimmed.startsWith('>')) {
+      flushParagraph();
+      const quote = [];
+      while (index < lines.length && lines[index].trim().startsWith('>')) {
+        quote.push(lines[index].trim().replace(/^>\s?/, ''));
+        index += 1;
+      }
+      blocks.push({ kind: 'blockquote', text: quote.join(' ').trim() });
+      continue;
+    }
+
     if (!trimmed) {
       flushParagraph();
-    } else if (/^#{1,4}\s+/.test(trimmed)) {
-      flushParagraph();
-      const [, hashes, text] = /^(#{1,4})\s+(.+)$/.exec(trimmed);
-      blocks.push({ kind: 'heading', level: hashes.length, text });
-    } else if (/^[-*]\s+/.test(trimmed)) {
-      flushParagraph();
-      blocks.push({ kind: 'list', ordered: false, items: [trimmed.replace(/^[-*]\s+/, '')] });
-    } else if (/^```/.test(trimmed)) {
-      flushParagraph();
-      blocks.push({ kind: 'paragraph', text: trimmed });
-    } else {
-      pending.push(trimmed);
+      index += 1;
+      continue;
     }
+
+    pending.push(trimmed);
+    index += 1;
   }
+
   flushParagraph();
   return blocks;
 }
@@ -88,11 +234,18 @@ function jsModule(description, value) {
 
 const sourcePages = documents.map((document, index) => {
   const markdown = fs.readFileSync(path.join(root, document.content), 'utf8');
+  const codeSuffix = camel(document.id);
+  const blocks = markdownBlocks(markdown, codeSuffix);
+  const documentHeadings = blocks
+    .filter((block) => block.kind === 'heading')
+    .map((block) => ({ text: block.text, anchor: block.anchor, level: block.level }));
   return {
     ...document,
     markdown,
+    blocks,
+    headings: documentHeadings,
     route: index === 0 ? '/docs/nodics-kickoff' : `/docs/nodics-kickoff/${slug(document.id.replace(/\./g, '-'))}`,
-    codeSuffix: camel(document.id),
+    codeSuffix,
   };
 });
 
@@ -151,8 +304,8 @@ const articleComponents = Object.fromEntries(
         sectionTitle: 'Nodics Kickoff',
         audience: ['architect', 'developer', 'operator'],
         summary: document.summary,
-        headings: headings(document.markdown),
-        blocks: markdownBlocks(document.markdown),
+        headings: document.headings,
+        blocks: document.blocks,
         searchText: `${document.title} ${document.summary} ${document.markdown}`,
         previous: index > 0 ? {
           title: sourcePages[index - 1].title,

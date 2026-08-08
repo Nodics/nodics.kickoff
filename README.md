@@ -65,5 +65,11 @@ Kickoff configuration follows the framework classification contract:
 - local shared environment defaults belong in `envs/kickoffLocal/config/`;
 - server topology, ports, server database names, and active module lists belong
   under each server config;
+- module-owned defaults such as `apiExposure`, import/export, media management,
+  provider defaults, permissions, limits, discovery flags, and tooling gates
+  belong in the owning framework or customer module;
+- project, environment, server, and node config files should contain only
+  intentional deltas: topology, local coordinates, secret references, active
+  runtime composition, or explicit enable/disable overrides;
 - generated `temp/` files are runtime state, not authored project
   configuration.

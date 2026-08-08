@@ -12,22 +12,6 @@ module.exports = {
             'wcmsServer'
         ]
     },
-    apiExposure: {
-        categories: {
-            schemaWorkbench: {
-                enabled: true
-            },
-            schemaMaintenance: {
-                enabled: true
-            },
-            openApiContract: {
-                enabled: true
-            },
-            mediaManagement: {
-                enabled: true
-            }
-        }
-    },
     database: {
         default: {
             mongodb: {

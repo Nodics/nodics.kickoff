@@ -21,7 +21,8 @@ const scenarios = Object.freeze([
             'kickoffInt',
             'kickoffLocal',
             'platformServer'
-        ])
+        ]),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport'])
     }),
     Object.freeze({
         server: 'wcmsServer',
@@ -38,7 +39,8 @@ const scenarios = Object.freeze([
             'kickoffInt',
             'kickoffLocal',
             'wcmsServer'
-        ])
+        ]),
+        expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport'])
     }),
     Object.freeze({
         server: 'cronServer',
@@ -84,6 +86,14 @@ async function prepareScenario(scenario) {
     assert.equal(NODICS.getServerName(), scenario.server);
     assert.equal(NODICS.getEnvironmentName(), 'nodics.kickoff');
     assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');
+    const apiExposure = CONFIG.get('apiExposure') || {};
+    (scenario.expectedApiExposure || []).forEach(category => {
+        assert.equal(
+            apiExposure.categories && apiExposure.categories[category] && apiExposure.categories[category].enabled,
+            true,
+            `${category} API exposure should be enabled for ${scenario.server}`
+        );
+    });
     console.log(`Kickoff ${scenario.server} preparation passed`);
 }
 

@@ -93,6 +93,42 @@ configuration decides which modules are loaded, in which order, for a specific
 runtime process. Service override behavior follows module loading and indexes,
 not simply the order in `package.json`.
 
+```mermaid
+flowchart LR
+  FrameworkRoot["Framework checkout<br/>nodics.ai"] --> Core["nodics.core"]
+  FrameworkRoot --> Platform["nodics.platform"]
+  FrameworkRoot --> WCMS["nodics.wcms"]
+  FrameworkRoot --> Cron["nodics.cron"]
+  Core --> Project["nodics.kickoff<br/>reference customer project"]
+  Platform --> Project
+  WCMS --> Project
+  Cron --> Project
+  Project --> Servers["kickoffLocal servers<br/>platformServer, wcmsServer, cronServer"]
+  Servers --> Axis["nodics.axis<br/>frontend renderer"]
+```
+
+This diagram is intentionally simple. Kickoff does not own the framework
+modules and Axis does not own backend data. Kickoff composes the backend
+runtime, and Axis renders whatever Platform/WCMS say is active, authorized,
+and available.
+
+## Beginner story
+
+A new developer can think of Kickoff as a training project:
+
+1. It shows where a customer project keeps project modules.
+2. It shows where local environment/server configuration lives.
+3. It shows how to point at a framework checkout that may live anywhere on the
+   machine.
+4. It starts Platform, WCMS, and Cron without asking the developer to create a
+   production topology first.
+5. It ships project-owned documentation so Axis can show framework docs,
+   Axis docs, and customer-project docs side by side.
+
+After the developer understands this reference shape, they can create a real
+customer project with the same rules but different business modules, branding,
+data, environments, and deployment choices.
+
 ## Documentation boundary
 
 Kickoff docs are imported through WCMS like any other governed CMS content
