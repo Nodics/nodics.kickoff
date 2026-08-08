@@ -1,0 +1,38 @@
+{
+  "name": "nodics.kickoff",
+  "version": "0.0.1",
+  "index": "1000.00",
+  "private": true,
+  "description": "Reference customer project for running Nodics locally and demonstrating framework customization.",
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "application",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "composition",
+      "configuration"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
+    "displayName": "Nodics Kickoff"
+  },
+  "dependencies": {
+    "nodics.core": "file:.nodics/framework/nodics.core",
+    "nodics.cron": "file:.nodics/framework/nodics.cron",
+    "nodics.platform": "file:.nodics/framework/nodics.platform",
+    "nodics.wcms": "file:.nodics/framework/nodics.wcms"
+  },
+  "scripts": {
+    "configure:framework": "node src/sync-framework-dependencies.js",
+    "start:cron": "node src/start-cron-server.js",
+    "start:platform": "node src/start-platform-server.js",
+    "start:wcms": "node src/start-wcms-server.js",
+    "prepare:platform": "node test/runtime-prepare.test.js platformServer",
+    "prepare:runtime": "node test/runtime-prepare.test.js",
+    "test": "npm run prepare:runtime"
+  }
+}

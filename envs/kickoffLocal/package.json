@@ -1,0 +1,15 @@
+{
+  "name": "kickoffLocal",
+  "version": "0.0.1",
+  "index": "1001.10",
+  "private": true,
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "group",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["composition", "configuration"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Kickoff Local"
+  }
+}

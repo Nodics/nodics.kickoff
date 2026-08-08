@@ -1,0 +1,15 @@
+{
+  "name": "kickoff.environments",
+  "version": "0.0.1",
+  "index": "1001.00",
+  "private": true,
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "group",
+    "runtimeModule": false,
+    "loadableByNodicsModuleLoader": false,
+    "owns": ["composition", "configuration"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Kickoff Environments"
+  }
+}
