@@ -24,6 +24,41 @@ framework module. Use a later-loaded extension module before forking a standard
 functional module. Create a new functional module only when the business
 capability is genuinely new.
 
+## How a developer or AI tool should think
+
+Kickoff is a reference customer project, so every change teaches future
+customers what “good” looks like. A developer or AI tool should not behave like
+a script that only edits the nearest file. It should behave like a small expert
+team:
+
+| Role | What to check in Kickoff |
+| --- | --- |
+| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |
+| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |
+| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |
+| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |
+| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |
+| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |
+| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |
+
+If the answer is unclear, stop and name the ownership decision before editing.
+For example, changing the local WCMS database name belongs in server
+configuration, while changing the import checksum rule belongs in the owning
+framework import service.
+
+## File placement examples
+
+Use these examples when deciding where code or data belongs:
+
+| Need | Correct owner | Why |
+| --- | --- | --- |
+| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |
+| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |
+| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |
+| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |
+| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |
+| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |
+
 ## Safe customization model
 
 Customer projects can add project modules under `modules/` and environment or

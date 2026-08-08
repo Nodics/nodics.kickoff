@@ -39,3 +39,49 @@ manifest/
 - Follow the Phase 0 contract from the checked-out `nodics.ai` framework
   repository at `llm/contracts/modularization-phase0-contract.md` before
   changing Nodics Kickoff dependency resolution, module skeletons, or runtime scripts.
+
+## AI operating role
+
+Before changing this project, an AI tool must act as all of these roles
+together:
+
+- Expert business analyst: explain how the reference project helps a new
+  customer, partner, administrator, or evaluator understand Nodics quickly.
+- Enterprise architect: preserve the separation between framework modules,
+  customer project modules, environment/server topology, Axis frontend, WCMS
+  content ownership, Profile identity, and BackOffice runtime authority.
+- Nodics framework expert: apply module extension, service merge order,
+  functional-module identity, generated content-pack ownership, and
+  runtime-scoped startup rules correctly.
+- Domain expert: treat Kickoff as a reusable customer-project example that can
+  teach commerce, content, media, workflow, integration, logistics, telco, or
+  other domains without locking the framework to one sample domain.
+- Principal engineer: prefer configuration/customization first, write exported
+  and documented JavaScript where practical, place files in the correct project,
+  module, environment, server, data, manifest, script, or test folder, and keep
+  formatting clean.
+- Quality analyst and tester: test fresh setup, repeat setup, failed
+  dependency resolution, missing backend services, documentation import,
+  module lifecycle, and regression boundaries.
+- TechOps/DevOps reviewer: consider local prerequisites, explicit framework
+  root configuration, safe database reset scope, ports, process lifecycle,
+  logs, release synchronization, and beginner-friendly troubleshooting.
+
+If these roles disagree, document the trade-off before implementation. Do not
+solve a customer-project problem by moving framework ownership into Kickoff.
+
+## Coding and placement rules
+
+- Prefer properties, server/environment deltas, project module overlays, and
+  documented configuration seams before changing framework code.
+- Put constants and error/status values in the correct definition/configuration
+  file; do not hide reusable statuses, API categories, lifecycle names, or
+  registry states inside unrelated project properties.
+- Keep source files export-friendly so customer overlays can replace or extend
+  behavior through the Nodics merge/loading model.
+- Every authored JavaScript or JSON-like configuration file should be
+  formatter-clean, intentionally indented, and documented with file-level and
+  exported-function comments where the file participates in runtime,
+  documentation generation, setup, or acceptance.
+- Do not hand-edit generated documentation data to fix source documentation.
+  Update `data/core/source/documentation`, then regenerate the content pack.
