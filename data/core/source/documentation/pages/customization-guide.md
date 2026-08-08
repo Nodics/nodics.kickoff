@@ -273,6 +273,35 @@ Generated documentation and seed data should be versioned immutably. If content
 changes with the same version, the import service should reject it so operators
 do not silently install a different release under an already-trusted identity.
 
+## Common mistakes
+
+- Editing framework files for a project-only demonstration change.
+- Treating the reference project name as a requirement for every customer
+  project.
+- Putting customer documentation into the framework docs module.
+- Changing a standard functional module identity when only a customer overlay
+  is being added.
+- Copying whole framework property trees into an environment/server config
+  instead of overriding only the narrow property the project needs.
+- Editing generated documentation data after a checksum failure instead of
+  updating source Markdown, regenerating, and bumping the release when
+  required.
+
+## Verification
+
+Verify a customer customization from the outside and from the owner. From the
+outside, start the relevant local server, open Axis, and confirm the visible
+behavior changes only for the project that owns it. From the owner, run the
+project tests, regenerate project documentation content when docs changed,
+validate the content-pack manifest, and run the local acceptance script when
+runtime, import, module registry, documentation, or Axis behavior is affected.
+
+If a customization changes Platform, WCMS, Cron, or another framework
+capability through a project overlay, the evidence must show both the default
+framework behavior and the project-specific override. A beginner should be
+able to read the evidence and understand where the change lives, why it does
+not fork the framework, and how to remove or roll it back.
+
 ## Continue
 
 - [Kickoff project overview](project-overview.md)

@@ -39,6 +39,14 @@ function assertDocumentationDepth(document) {
         document.id + ' must keep clear documentation sections; found ' + sectionCount
     );
     assert(
+        /^## Common mistakes\b/im.test(body),
+        document.id + ' must explain common project-documentation mistakes'
+    );
+    assert(
+        /^## Verification\b/im.test(body),
+        document.id + ' must explain how to verify the documented behavior'
+    );
+    assert(
         /\bbeginners?\b/i.test(body) ||
         /\bdeveloper\b/i.test(body) ||
         /\bdevelopers\b/i.test(body) ||

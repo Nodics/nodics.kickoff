@@ -212,6 +212,23 @@ through Axis, documentation content packs can be imported or updated through
 BackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and
 Nodics Kickoff documentation from backend-owned sources.
 
+## Verification
+
+Verify Kickoff as a reference customer project by proving that it can run the
+framework without becoming framework source. The local proof is to configure
+the framework root, install dependencies, start Platform, WCMS, and Cron when
+needed, start Axis, log in, import required data releases, and open the
+Kickoff documentation product. The project should contribute its own docs and
+sample behavior while framework docs still come from `nodics.docs` and Axis
+product docs still come from the Platform Axis backend module.
+
+For repository verification, run the Kickoff documentation contract test,
+runtime prepare tests, and local acceptance script when project behavior,
+environment/server configuration, documentation packs, or generated data
+change. If a future customer copies the reference project, the docs should
+teach them where to replace the project name and where not to create
+framework-level assumptions.
+
 ## What to read next
 
 Read Kickoff in this order:

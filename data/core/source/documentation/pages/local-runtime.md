@@ -154,6 +154,34 @@ does not change documentation ownership, module identity, API authority, or the
 rule that Axis discovers runtime capability from BackOffice instead of keeping
 its own endpoint registry.
 
+## Common mistakes
+
+- Starting only the frontend and assuming backend discovery should work.
+- Putting long inherited property blocks into a server config when the project
+  only needs a small override.
+- Assuming every framework module in the checkout is active for every server.
+  The configured runtime graph decides what loads.
+- Treating Cron as mandatory just because the reference workspace can start a
+  Cron server.
+- Using local ports, database names, or project names as permanent framework
+  assumptions.
+- Forgetting that restart should preserve persisted registry and imported
+  content state.
+
+## Verification
+
+Verify local runtime topology by starting each server from the customer
+project, not from framework internals. Platform should expose login,
+BackOffice bootstrap, registry, and API discovery. WCMS should expose content,
+documentation, media, and import/export delivery. Cron should report optional
+runtime availability when it is running. Axis should connect through Platform
+and WCMS instead of local hardcoded module state.
+
+For a beginner-friendly proof, open Axis after the servers start and inspect
+Dashboard, System and Integrations, Module Registry, Imports and Exports,
+Content and Experience, Media, Cron where active, and Documentation. The UI
+should explain the same topology that the server configuration declares.
+
 ## Continue
 
 - [Kickoff project overview](project-overview.md)

@@ -409,3 +409,32 @@ The local acceptance run is complete when:
 
 When all eight are true, the modularized foundation is ready for the next
 functional module.
+
+## Common mistakes
+
+- Treating a running Node process as proof that the customer project is ready.
+- Skipping content-pack import and then wondering why Axis documentation or
+  WCMS pages are unavailable.
+- Dropping or modifying broad databases during a local test instead of using
+  the bounded fresh-bootstrap command intended for the reference environment.
+- Accepting a module lifecycle flow that requires a browser refresh after
+  register, activate, deactivate, or deregister.
+- Ignoring an `INVALID RELEASE` message because the release still appears in
+  the list.
+- Verifying only Platform while forgetting WCMS, documentation, media, Cron,
+  and Axis routes.
+
+## Verification
+
+Run the checklist twice when confidence matters: once against the currently
+running local database and once with the bounded fresh-bootstrap option. The
+expected result is repeatability. The system should rebuild from backend-owned
+data, import documentation and initialization releases through governed APIs,
+show healthy CMS record counts, expose mandatory modules, handle optional Cron
+lifecycle, and render Axis routes without manual database edits.
+
+For project documentation changes, regenerate the Kickoff documentation pack,
+run the documentation contract test, start Platform and WCMS, import or update
+the Kickoff docs release, and open `/docs/nodics-kickoff` in Axis. If the page
+only works because it was hardcoded in the frontend, the acceptance result is
+not valid.
