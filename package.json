@@ -28,11 +28,14 @@
   },
   "scripts": {
     "configure:framework": "node src/sync-framework-dependencies.js",
+    "docs:generate": "node scripts/generate-documentation-content.mjs",
+    "docs:check": "node scripts/generate-documentation-content.mjs --check",
     "start:cron": "node src/start-cron-server.js",
     "start:platform": "node src/start-platform-server.js",
     "start:wcms": "node src/start-wcms-server.js",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
-    "test": "npm run prepare:runtime"
+    "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
+    "test": "npm run test:documentation && npm run prepare:runtime"
   }
 }

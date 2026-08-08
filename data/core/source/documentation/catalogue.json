@@ -1,0 +1,32 @@
+{
+  "pack": "nodics.kickoff",
+  "version": "0.2.0",
+  "contractVersion": 1,
+  "title": "Nodics Kickoff",
+  "documents": [
+    {
+      "id": "kickoff.overview",
+      "title": "Kickoff project overview",
+      "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "nodics.kickoff",
+      "content": "data/core/source/documentation/pages/project-overview.md"
+    },
+    {
+      "id": "kickoff.local-runtime",
+      "title": "Local runtime topology",
+      "summary": "Start and reason about the local Platform, WCMS, and Cron servers that make the reference project usable.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "kickoffLocal",
+      "content": "data/core/source/documentation/pages/local-runtime.md"
+    },
+    {
+      "id": "kickoff.customization",
+      "title": "Customer customization guide",
+      "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "modules",
+      "content": "data/core/source/documentation/pages/customization-guide.md"
+    }
+  ]
+}
