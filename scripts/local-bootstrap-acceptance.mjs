@@ -370,7 +370,7 @@ async function verifyDocumentationRecords() {
   }
 }
 
-async function verifyDesignerAuthoringModel(headers) {
+async function verifyWcmsDesignerAuthoringAvailability(headers) {
   const model = await requestJson(
     wcmsUrl,
     "/nodics/cms/v0/designer/composition/model",
@@ -386,10 +386,10 @@ async function verifyDesignerAuthoringModel(headers) {
     !operations.includes("saveDraftComposition")
   ) {
     throw new Error(
-      `CMS Designer authoring contract is unhealthy: ${JSON.stringify(model)}`,
+      `WCMS Designer authoring model is not available to the reference runtime: ${JSON.stringify(model)}`,
     );
   }
-  log("CMS Designer authoring contract is catalog-first and backend-owned");
+  log("Reference runtime can observe the WCMS-owned Designer authoring model");
 }
 
 async function verifyMongoCounts() {
@@ -547,7 +547,7 @@ async function main() {
   );
   await importDocumentationPacks(headers);
   await verifyDocumentationRecords();
-  await verifyDesignerAuthoringModel(headers);
+  await verifyWcmsDesignerAuthoringAvailability(headers);
   for (const route of [
     "/",
     "/docs",
