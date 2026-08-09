@@ -532,6 +532,7 @@ async function main() {
     "/docs/nodics-axis",
     "/docs/nodics-kickoff",
     "/content",
+    "/content/designer",
     "/media",
     "/process",
     "/process/definitions",
