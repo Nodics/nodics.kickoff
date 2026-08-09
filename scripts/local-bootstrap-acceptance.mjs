@@ -441,6 +441,7 @@ async function runAxisSmoke() {
         AXIS_EXPECT_MODULES: "1",
         AXIS_EXPECT_DOCUMENTATION: "1",
         AXIS_CRON_LIFECYCLE: "1",
+        AXIS_PROCESS_LIFECYCLE: "1",
         AXIS_URL: axisUrl,
         AXIS_PLATFORM_URL: platformUrl,
         AXIS_PROCESS_URL: processUrl,
