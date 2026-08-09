@@ -53,6 +53,12 @@ const documentationPacks = [
     site: "axisDocumentationSite",
   },
   {
+    code: "processDocumentation",
+    minimumRoutes: 7,
+    navigationComponent: "processDocumentationNavigation",
+    site: "processDocumentationSite",
+  },
+  {
     code: "kickoffDocumentation",
     minimumRoutes: 4,
     navigationComponent: "kickoffDocumentationNavigation",
@@ -530,10 +536,14 @@ async function main() {
     "/process",
     "/process/definitions",
     "/process/tasks",
+    "/process/triggers",
+    "/process/designer",
     "/cron",
     "/system-integrations",
     "/registry",
     "/operations/imports-exports",
+    "/docs/framework/process",
+    "/docs/framework/process/visual-designer",
     "/docs/swaggers",
   ]) {
     await expectHttpOk(axisUrl, route);
