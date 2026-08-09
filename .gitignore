@@ -1,6 +1,7 @@
 node_modules/
 coverage/
 temp/
+envs/**/generated/
 *.log
 .DS_Store
 .env

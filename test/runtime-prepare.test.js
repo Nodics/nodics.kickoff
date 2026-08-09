@@ -62,6 +62,10 @@ const scenarios = Object.freeze([
         frameworkModules: Object.freeze(['nodics.process']),
         expectedModules: Object.freeze([
             'nodics.core',
+            'flowSchema',
+            'flowCore',
+            'flowApi',
+            'workflow',
             'nodics.process',
             'nodics.kickoff',
             'kickoffCore',
@@ -69,7 +73,8 @@ const scenarios = Object.freeze([
             'kickoffInt',
             'kickoffLocal',
             'processServer'
-        ])
+        ]),
+        expectedApiExposure: Object.freeze(['processManagement'])
     })
 ]);
 
