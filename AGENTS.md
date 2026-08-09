@@ -70,6 +70,19 @@ together:
 If these roles disagree, document the trade-off before implementation. Do not
 solve a customer-project problem by moving framework ownership into Kickoff.
 
+## Acceptance ownership language
+
+- Kickoff acceptance checks may verify that the reference local stack can
+  observe, consume, or compose framework-owned contracts.
+- Kickoff acceptance checks must not name themselves, helper functions, log
+  messages, errors, or documentation as if Kickoff owns a framework module
+  contract.
+- Use language such as "reference runtime observes the WCMS-owned Designer
+  authoring model" instead of "Kickoff CMS Designer authoring contract".
+- If a check validates framework behavior directly, the owning framework module
+  must also have the real contract test. Kickoff can keep only the local
+  bootstrap/acceptance evidence.
+
 ## Coding and placement rules
 
 - Prefer properties, server/environment deltas, project module overlays, and
