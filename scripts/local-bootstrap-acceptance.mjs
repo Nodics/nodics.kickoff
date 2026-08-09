@@ -25,7 +25,6 @@ const axisRoot = resolve(
 );
 const platformUrl = process.env.AXIS_PLATFORM_URL || "http://127.0.0.1:4300";
 const wcmsUrl = process.env.AXIS_WCMS_URL || "http://127.0.0.1:4310";
-const cronUrl = process.env.AXIS_CRON_URL || "http://127.0.0.1:4320";
 const processUrl = process.env.AXIS_PROCESS_URL || "http://127.0.0.1:4330";
 const axisUrl = process.env.AXIS_URL || "http://127.0.0.1:3100";
 const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
@@ -86,7 +85,6 @@ const retiredDocumentationCatalogs = Object.freeze([
 const localPorts = [
   { label: "Platform", port: 4300 },
   { label: "WCMS", port: 4310 },
-  { label: "Cron", port: 4320 },
   { label: "Process", port: 4330 },
   { label: "Axis", port: 3100 },
 ];
@@ -189,7 +187,7 @@ async function assertFreshResetPortsAvailable() {
       [
         "Fresh database bootstrap requires the local stack to be stopped first.",
         `Busy ports: ${busy.join(", ")}.`,
-        "Stop Platform, WCMS, Cron, and Axis before running acceptance:local:fresh,",
+        "Stop Platform, WCMS, Process, and Axis before running acceptance:local:fresh,",
         "or run npm run acceptance:local for a non-destructive verification against the current stack.",
       ].join(" "),
     );
@@ -434,7 +432,7 @@ async function runAxisSmoke() {
   if (!existsSync(resolve(axisRoot, "package.json"))) {
     throw new Error(`Axis repository not found at ${axisRoot}`);
   }
-  log("running Axis smoke with documentation and Cron lifecycle gates");
+  log("running Axis smoke with documentation and Process-composed Cron lifecycle gates");
   await new Promise((resolvePromise, rejectPromise) => {
     const child = spawn("npm", ["run", "smoke:live"], {
       cwd: axisRoot,
@@ -488,15 +486,7 @@ async function main() {
     "BackOffice public bootstrap",
   );
   await ensureProcess(
-    "Cron",
-    4320,
-    projectRoot,
-    "start:cron",
-    cronUrl,
-    "/nodics/system/v0/health/ready",
-  );
-  await ensureProcess(
-    "Process",
+    "Process and Automation",
     4330,
     projectRoot,
     "start:process",

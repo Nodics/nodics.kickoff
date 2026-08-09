@@ -16,7 +16,7 @@ The acceptance run proves five things:
 | Area | What must be true |
 | --- | --- |
 | Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root. |
-| Runtime topology | Platform, WCMS, and Cron can start from the Kickoff local environment. |
+| Runtime topology | Platform, WCMS, and the composed Process/Cron automation runtime can start from the Kickoff local environment. |
 | Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |
 | Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |
 | Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module. |
@@ -90,7 +90,7 @@ dropping anything. In the reference topology, the relevant server configs are:
 ```text
 envs/kickoffLocal/platformServer/config/properties.js
 envs/kickoffLocal/wcmsServer/config/properties.js
-envs/kickoffLocal/cronServer/config/properties.js
+envs/kickoffLocal/processServer/config/properties.js
 ```
 
 The reset should remove only the local Kickoff runtime databases/schemas used
@@ -109,17 +109,19 @@ Run this from `nodics.kickoff`:
 npm run acceptance:local:fresh
 ```
 
-This command intentionally drops only the three reference local databases:
+This command intentionally drops only the bounded reference local databases:
 
 - `kickoffLocal`
 - `kickoffLocalWcms`
 - `kickoffLocalCron`
+- `kickoffLocalProcess`
 
-It then starts any missing local servers, waits for Platform, WCMS, Cron, and
-Axis to become reachable, authenticates the local admin, imports the Framework,
-Nodics Axis, and Nodics Kickoff documentation packs through WCMS, checks key
-Axis routes, verifies WCMS content counts, and runs the Axis live smoke with
-the documentation and Cron lifecycle gates enabled.
+It then starts any missing local servers, waits for Platform, WCMS, the
+composed Process/Cron automation runtime, and Axis to become reachable,
+authenticates the local admin, imports the Framework, Nodics Axis, and Nodics
+Kickoff documentation packs through WCMS, checks key Axis routes, verifies WCMS
+content counts, and runs the Axis live smoke with the documentation and Cron
+lifecycle gates enabled.
 
 Use the safer non-destructive form when you only want to verify the current
 local state:
@@ -138,8 +140,8 @@ flowchart TD
   Start["Developer runs npm run acceptance:local:fresh"] --> Drop["Drop only Kickoff local DBs"]
   Drop --> Platform["Start or reuse Platform on 4300"]
   Platform --> WCMS["Start or reuse WCMS on 4310"]
-  WCMS --> Cron["Start or reuse Cron on 4320"]
-  Cron --> Axis["Start or reuse Axis on 3100"]
+  WCMS --> Process["Start or reuse Process/Cron on 4330"]
+  Process --> Axis["Start or reuse Axis on 3100"]
   Axis --> Auth["Authenticate default/admin"]
   Auth --> Registry["Verify Core, Platform, WCMS, Cron observation"]
   Registry --> Docs["Import documentation packs through WCMS"]
@@ -182,7 +184,7 @@ npm run start:wcms
 Terminal 3:
 
 ```bash
-npm run start:cron
+npm run start:process
 ```
 
 Expected local ports:
@@ -191,7 +193,7 @@ Expected local ports:
 | --- | ---: | --- |
 | Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |
 | WCMS | 4310 | CMS sites, content catalogs, page/component data, documentation packs, media metadata. |
-| Cron | 4320 | Optional runtime module observation and registry lifecycle testing. |
+| Process and Automation | 4330 | Process/workflow APIs plus optional Cron observation and registry lifecycle testing. |
 
 If a port is already in use, confirm whether it is an earlier Nodics server
 from the same checkout. Do not kill unrelated processes by guessing.
@@ -259,7 +261,8 @@ Expected state:
 | `nodics.core` | Registered and active | Required by every runtime. |
 | `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |
 | `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |
-| `nodics.cron` | Optional, observed when Cron is running | Proves optional runtime modules can join the lifecycle. |
+| `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |
+| `nodics.cron` | Optional, observed when Process and Automation or standalone Cron is running | Proves optional runtime modules can join the lifecycle. |
 
 Core, Platform, and WCMS are mandatory for this local Axis-backed acceptance
 topology. They should not appear as removable optional modules. Cron may be
@@ -322,7 +325,8 @@ Open:
 
 Expected behavior:
 
-- If Cron is running, Axis can observe the `nodics.cron` functional module.
+- If Process and Automation is running, Axis can observe both `nodics.process`
+  and `nodics.cron` from the same runtime.
 - If Cron is not registered, it appears as available to register.
 - Register moves it into the registered list without requiring a page refresh.
 - Activate changes lifecycle state without freezing buttons.
@@ -389,7 +393,7 @@ PASS cron lifecycle deregister returns module to available
 | Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |
 | Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |
 | Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |
-| Cron does not appear | Cron server is not running or has not reported its functional module observation. |
+| Cron does not appear | Process and Automation server or standalone Cron server is not running, or the runtime has not reported its functional module observation. |
 | Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |
 | Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |
 
@@ -397,7 +401,7 @@ PASS cron lifecycle deregister returns module to available
 
 The local acceptance run is complete when:
 
-1. Platform, WCMS, Cron, and Axis are running.
+1. Platform, WCMS, Process and Automation, and Axis are running.
 2. Fresh local databases were created from module-owned import data.
 3. Admin login works.
 4. Module registry shows mandatory modules and optional Cron correctly.
@@ -422,8 +426,8 @@ functional module.
   register, activate, deactivate, or deregister.
 - Ignoring an `INVALID RELEASE` message because the release still appears in
   the list.
-- Verifying only Platform while forgetting WCMS, documentation, media, Cron,
-  and Axis routes.
+- Verifying only Platform while forgetting WCMS, documentation, media, Process,
+  Cron, and Axis routes.
 
 ## Verification
 

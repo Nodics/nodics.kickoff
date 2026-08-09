@@ -59,7 +59,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'processServer',
-        frameworkModules: Object.freeze(['nodics.process']),
+        frameworkModules: Object.freeze(['nodics.process', 'nodics.cron']),
         expectedModules: Object.freeze([
             'nodics.core',
             'flowSchema',
@@ -67,6 +67,8 @@ const scenarios = Object.freeze([
             'flowApi',
             'workflow',
             'nodics.process',
+            'nodics.cron',
+            'cronjob',
             'nodics.kickoff',
             'kickoffCore',
             'kickoffApi',

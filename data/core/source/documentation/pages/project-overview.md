@@ -32,9 +32,9 @@ For a business evaluator, Kickoff demonstrates that Nodics can support a real
 customer project without asking the customer to fork framework code. For a
 developer, it shows the concrete folder shape, package dependency model,
 environment wiring, server start commands, and project-owned extension points.
-For an operator, it shows how one local project can run Platform, WCMS, and
-Cron as separate processes while preserving the same module ownership rules
-that production will use.
+For an operator, it shows how one local project can run Platform, WCMS, and a
+combined Business Process & Automation runtime while preserving the same module
+ownership rules that production will use.
 
 ## What a new customer should learn
 
@@ -43,7 +43,7 @@ framework:
 
 | Question | Kickoff answer |
 | --- | --- |
-| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Cron, and Axis wiring. |
+| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Process/Cron, and Axis wiring. |
 | Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |
 | Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |
 | Can optional modules be added later? | Yes. Cron demonstrates observed optional runtime capability and registry lifecycle. |
@@ -57,10 +57,10 @@ whole framework.
 Think of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample
 production line, and `nodics.axis` as the control room screen. The factory
 equipment provides standard capabilities such as Core, Platform, WCMS, Media,
-and Cron. The sample production line decides which equipment to connect for a
-local demonstration. The control room screen connects to the running backend
-and shows only the capabilities that the backend says are available and
-authorized.
+Cron, and Process. The sample production line decides which equipment to
+connect for a local demonstration. The control room screen connects to the
+running backend and shows only the capabilities that the backend says are
+available and authorized.
 
 Kickoff is not the product every customer must ship. It is the smallest
 complete example of how a customer product can be structured.
@@ -71,10 +71,10 @@ flowchart LR
   Project --> Servers["Local runtime servers"]
   Servers --> Platform["Platform: login and BackOffice"]
   Servers --> WCMS["WCMS: content and docs"]
-  Servers --> Cron["Cron: scheduled capability"]
+  Servers --> Automation["Process server: workflows and scheduled capability"]
   Axis["Control room<br/>nodics.axis"] --> Platform
   Axis --> WCMS
-  Axis --> Cron
+  Axis --> Automation
 ```
 
 The metaphor is useful because it prevents a common mistake. You do not move
@@ -85,7 +85,8 @@ screens into the production line. Each part has a job.
 
 - how a customer project depends on Nodics framework packages;
 - how environment and server modules load after standard functional modules;
-- how Platform, WCMS, and Cron can run as separate local servers;
+- how Platform, WCMS, and Process/Cron can run as separate ownership domains
+  while sharing a local automation server;
 - how project modules can customize runtime behavior without renaming the
   standard functional module identity;
 - how customer-owned documentation can appear in Axis beside Framework,
@@ -135,7 +136,7 @@ flowchart LR
   Platform --> Project
   WCMS --> Project
   Cron --> Project
-  Project --> Servers["kickoffLocal servers<br/>platformServer, wcmsServer, cronServer"]
+  Project --> Servers["kickoffLocal servers<br/>platformServer, wcmsServer, processServer"]
   Servers --> Axis["nodics.axis<br/>frontend renderer"]
 ```
 
@@ -175,8 +176,8 @@ A new developer can think of Kickoff as a training project:
 2. It shows where local environment/server configuration lives.
 3. It shows how to point at a framework checkout that may live anywhere on the
    machine.
-4. It starts Platform, WCMS, and Cron without asking the developer to create a
-   production topology first.
+4. It starts Platform, WCMS, and the composed Process/Cron automation runtime
+   without asking the developer to create a production topology first.
 5. It ships project-owned documentation so Axis can show framework docs,
    Axis docs, and customer-project docs side by side.
 
@@ -216,8 +217,8 @@ Nodics Kickoff documentation from backend-owned sources.
 
 Verify Kickoff as a reference customer project by proving that it can run the
 framework without becoming framework source. The local proof is to configure
-the framework root, install dependencies, start Platform, WCMS, and Cron when
-needed, start Axis, log in, import required data releases, and open the
+the framework root, install dependencies, start Platform, WCMS, and Process
+when needed, start Axis, log in, import required data releases, and open the
 Kickoff documentation product. The project should contribute its own docs and
 sample behavior while framework docs still come from `nodics.docs` and Axis
 product docs still come from the Platform Axis backend module.

@@ -15,13 +15,16 @@ nodics.kickoff/
     kickoffLocal/
       platformServer/
       wcmsServer/
+      processServer/
       cronServer/
 ```
 
 `platformServer extends nodics.platform`, which makes `nodics.core`
 functionally available through Platform. `wcmsServer extends nodics.wcms`, and
-`cronServer extends nodics.cron`. Effective runtime loading and service merging
-remain controlled by module indexes.
+`processServer extends nodics.process` while including `nodics.cron` in the
+same Business Process & Automation runtime. `cronServer` remains available for
+standalone Cron-focused development. Effective runtime loading and service
+merging remain controlled by module indexes.
 
 Kickoff may default to the sample layout where it sits parallel to
 `nodics.ai`, the Nodics framework repository root. Customer projects may use
@@ -75,11 +78,12 @@ npm run acceptance:local:fresh
 
 `acceptance:local` verifies the currently running local stack without dropping
 data. `acceptance:local:fresh` drops only `kickoffLocal`, `kickoffLocalWcms`,
-and `kickoffLocalCron`, starts the local reference stack, imports
-documentation packs, verifies Axis routes, and runs the module/documentation/Cron
-live smoke gates. It stops the servers it started unless you pass
-`--leave-started`. Stop Platform, WCMS, Cron, and Axis before using the fresh
-command so the bootstrap is truly from zero.
+`kickoffLocalCron`, and `kickoffLocalProcess`, starts the local reference
+stack, imports documentation packs, verifies Axis routes, and runs the
+module/documentation/Cron lifecycle smoke gates through the composed
+`processServer`. It stops the servers it started unless you pass
+`--leave-started`. Stop Platform, WCMS, Process, and Axis before using the
+fresh command so the bootstrap is truly from zero.
 
 Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
 located at the default sample location. The value may be absolute or relative

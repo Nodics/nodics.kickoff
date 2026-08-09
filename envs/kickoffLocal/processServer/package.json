@@ -7,12 +7,13 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.process"
+      "nodics.process",
+      "nodics.cron"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
     "owns": ["composition", "configuration"],
     "runtime": { "router": false, "publish": false, "web": false },
-    "displayName": "Process Server"
+    "displayName": "Business Process & Automation Server"
   }
 }

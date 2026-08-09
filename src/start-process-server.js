@@ -13,10 +13,10 @@
 
 /**
  * @module nodics.kickoff/src/start-process-server
- * @description Starts the local Kickoff Process server using the nodics.process functional module group.
+ * @description Starts the local Kickoff Business Process and Automation server using process and cron functional module groups.
  * @layer project-runtime
  * @owner nodics.kickoff
- * @override Customer projects may create their own process server topology while keeping Process module defaults in nodics.process.
+ * @override Customer projects may create their own process and automation server topology while keeping Process and Cron module defaults in their owning framework modules.
  */
 const path = require('node:path');
 const core = require('nodics.core');
@@ -35,6 +35,7 @@ core.start(Object.freeze({
     MODULE_ROOTS: Object.freeze([
         packageRoot('nodics.core'),
         packageRoot('nodics.process'),
+        packageRoot('nodics.cron'),
         path.resolve(__dirname, '..')
     ]),
     defaultEnvironment: 'kickoffLocal',

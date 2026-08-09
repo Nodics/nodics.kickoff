@@ -27,8 +27,12 @@ The current local topology uses separate runtime servers:
 - `wcmsServer` starts the WCMS runtime. It loads Core, WCMS, CMS, Media, and
   Kickoff project modules. WCMS owns CMS sites, catalogs, pages, components,
   routes, and documentation content-pack import.
-- `cronServer` starts the Cron runtime. It loads Core, Cron, cron jobs, and
-  Kickoff project modules.
+- `processServer` starts the combined Business Process & Automation runtime.
+  It loads Core, Cron, Process, cron jobs, workflow modules, and Kickoff
+  project modules. Process owns process/workflow definitions; Cron still owns
+  job definitions, triggers, scheduler state, and execution lifecycle.
+- `cronServer` remains available for standalone Cron-focused development. It
+  loads Core, Cron, cron jobs, and Kickoff project modules without Process.
 
 Axis is a separate frontend application. It connects to Platform for employee
 authentication and BackOffice bootstrap, then uses the registered module
@@ -41,7 +45,7 @@ Use separate terminals from the Kickoff repository:
 ```bash
 npm run start:platform
 npm run start:wcms
-npm run start:cron
+npm run start:process
 ```
 
 Axis normally runs from the `nodics.axis` repository:
@@ -55,6 +59,7 @@ The default local ports are:
 - Axis: `http://localhost:3100`
 - Platform: `http://localhost:4300`
 - WCMS: `http://localhost:4310`
+- Process and Automation: `http://localhost:4330`
 
 ## Before starting
 
@@ -93,9 +98,9 @@ Use separate terminals so logs stay readable:
    registry, runtime catalogue projection, and OpenAPI contract discovery.
 2. Start WCMS second. It owns documentation sites, catalogs, pages, components,
    routes, media metadata, and content delivery.
-3. Start Cron when scheduled behavior is needed. It proves optional functional
-   modules can be observed, registered, activated, deactivated, and
-   deregistered through the same registry lifecycle.
+3. Start Process and Automation when process/workflow or scheduled behavior is
+   needed. It proves `nodics.process` and `nodics.cron` can share one runtime
+   environment while keeping separate functional ownership.
 4. Start Axis after backend servers are reachable. Axis reads its public
    configuration, connects to Platform, authenticates the employee, and
    discovers registered module endpoints from BackOffice.
@@ -114,8 +119,8 @@ After login:
 
 - open the System and Integrations area and check the module registry;
 - confirm Core, Platform, and WCMS are active and not treated as optional;
-- if Cron is running, confirm it appears as an optional module that can move
-  through the lifecycle;
+- if Process and Automation is running, confirm Process and Cron appear from
+  the composed runtime and Cron can move through the optional lifecycle;
 - open Documentation and verify Framework, Swaggers, Nodics Axis, and Nodics
   Kickoff are shown as separate documentation products;
 - import or update documentation packs only through the authorized Axis action.
@@ -161,8 +166,8 @@ its own endpoint registry.
   only needs a small override.
 - Assuming every framework module in the checkout is active for every server.
   The configured runtime graph decides what loads.
-- Treating Cron as mandatory just because the reference workspace can start a
-  Cron server.
+- Treating Cron as owned by Process just because the reference workspace can
+  run both in the same `processServer`.
 - Using local ports, database names, or project names as permanent framework
   assumptions.
 - Forgetting that restart should preserve persisted registry and imported
@@ -173,14 +178,16 @@ its own endpoint registry.
 Verify local runtime topology by starting each server from the customer
 project, not from framework internals. Platform should expose login,
 BackOffice bootstrap, registry, and API discovery. WCMS should expose content,
-documentation, media, and import/export delivery. Cron should report optional
-runtime availability when it is running. Axis should connect through Platform
-and WCMS instead of local hardcoded module state.
+documentation, media, and import/export delivery. Process and Automation should
+report Process and optional Cron runtime availability from the composed server.
+Axis should connect through Platform and WCMS instead of local hardcoded module
+state.
 
 For a beginner-friendly proof, open Axis after the servers start and inspect
 Dashboard, System and Integrations, Module Registry, Imports and Exports,
-Content and Experience, Media, Cron where active, and Documentation. The UI
-should explain the same topology that the server configuration declares.
+Content and Experience, Media, Business Process & Automation, and
+Documentation. The UI should explain the same topology that the server
+configuration declares.
 
 ## Continue
 
