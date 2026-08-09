@@ -37,9 +37,10 @@
     "start:wcms": "node src/start-wcms-server.js",
     "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
+    "quality:ownership": "node .nodics/framework/nodics.core/modules/nTooling/bin/nodics-tool.js quality:ownership --home=.",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
-    "test": "npm run test:documentation && npm run prepare:runtime"
+    "test": "npm run quality:ownership && npm run test:documentation && npm run prepare:runtime"
   }
 }

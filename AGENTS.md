@@ -78,7 +78,8 @@ solve a customer-project problem by moving framework ownership into Kickoff.
   messages, errors, or documentation as if Kickoff owns a framework module
   contract.
 - Use language such as "reference runtime observes the WCMS-owned Designer
-  authoring model" instead of "Kickoff CMS Designer authoring contract".
+  authoring model"; avoid any wording that sounds like this repository owns
+  the provider module's Designer contract.
 - If a check validates framework behavior directly, the owning framework module
   must also have the real contract test. Kickoff can keep only the local
   bootstrap/acceptance evidence.

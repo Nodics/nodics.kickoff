@@ -357,6 +357,12 @@ flowchart TD
   Route --> Nav
 ```
 
+This acceptance step proves only that the reference local stack can consume the
+WCMS-owned authoring model. The contract itself belongs to WCMS. If the
+Designer metadata is wrong, fix the owning WCMS contract and tests first; do
+not move catalog, site, template, slot, page, component, or media authority
+into the reference project or into the Axis frontend.
+
 Expected Designer evidence:
 
 | Area | Expected behavior |
