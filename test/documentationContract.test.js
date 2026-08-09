@@ -17,6 +17,9 @@ const root = path.resolve(__dirname, '..');
 const properties = require('../config/properties');
 const manifest = require('../manifest/docs-content-pack.json');
 const catalogue = require('../data/core/source/documentation/catalogue.json');
+const siteRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationSiteData'));
+const pageRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPageData'));
+const routeRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationRouteData'));
 
 const capability = properties.backofficeCapabilities['nodics.kickoff'];
 const source = capability.documentation[0];
@@ -77,6 +80,21 @@ assert.strictEqual(navigationItem.label, 'Nodics Kickoff');
 assert.strictEqual(navigationItem.route, '/docs/nodics-kickoff');
 assert.strictEqual(navigationItem.group.id, 'documentation');
 assert.strictEqual(navigationItem.featureState, 'ACTIVE');
+
+const siteCodes = new Set(siteRecords.map(site => site.code));
+siteRecords.forEach(site => {
+    assert.strictEqual(site.catalog, 'documentationContentCatalog',
+        site.code + ' must use the shared documentation content catalog');
+});
+pageRecords.forEach(page => {
+    const pageSites = Array.isArray(page.cmsSite) ? page.cmsSite : [];
+    assert(pageSites.length > 0, page.code + ' must declare CMS site ownership');
+    pageSites.forEach(siteCode => assert(siteCodes.has(siteCode),
+        page.code + ' references unknown CMS site ' + siteCode));
+});
+routeRecords.forEach(route => {
+    assert(siteCodes.has(route.site), route.code + ' references unknown CMS site ' + route.site);
+});
 
 Object.entries(manifest.generatedHashes).forEach(([relativePath, hash]) => {
     assert(fs.existsSync(path.join(root, relativePath)), relativePath + ' must exist');
