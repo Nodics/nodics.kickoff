@@ -146,7 +146,8 @@ flowchart TD
   Auth --> Registry["Verify Core, Platform, WCMS, Cron observation"]
   Registry --> Docs["Import documentation packs through WCMS"]
   Docs --> Routes["Verify Axis routes"]
-  Routes --> Counts["Verify WCMS catalog/site/page/component/route counts"]
+  Routes --> Designer["Verify Content Designer catalog-first route"]
+  Designer --> Counts["Verify WCMS catalog/site/page/component/route counts"]
   Counts --> Lifecycle["Run Cron register, activate, deactivate, deregister"]
   Lifecycle --> Pass["Acceptance pass"]
 ```
@@ -301,6 +302,7 @@ Open these Axis routes:
 
 ```text
 /content
+/content/designer
 /media
 /media/items
 /media/folders
@@ -309,11 +311,66 @@ Open these Axis routes:
 Expected behavior:
 
 - `/content` shows the content dashboard and WCMS-owned summary sections.
+- `/content/designer` shows the governed Page Designer foundation. It should
+  explain the catalog-first sequence and support dynamic template slots rather
+  than assuming a fixed header/main/footer page shape.
 - `/media` shows media management, media records, and media-by-source sections.
 - `/media/items` and `/media/folders` open focused media workspaces instead of
   falling into CMS recovery.
 - Any unavailable backend schema is reported as a backend/schema discovery
   issue, not as a frontend-owned data model.
+
+### Verify Page Designer authoring model
+
+Open:
+
+```text
+Content and Experience → Web Content Management System → Page Designer
+```
+
+The Designer is not expected to look exactly like the final website in a
+browser. It is the authoring and structure view. A beginner should understand
+this chain:
+
+```mermaid
+flowchart TD
+  Catalog["Content Catalog"]
+  Site["Site"]
+  Template["Page Template"]
+  Page["Page"]
+  Slots["Template Slots: any number"]
+  Sections["Page Sections"]
+  Components["Component Instances"]
+  Media["Governed Media"]
+  Route["Page Route"]
+  Nav["Navigation Node"]
+
+  Catalog --> Site
+  Catalog --> Template
+  Site --> Page
+  Template --> Page
+  Page --> Slots
+  Slots --> Sections
+  Sections --> Components
+  Components --> Media
+  Page --> Route
+  Route --> Nav
+```
+
+Expected Designer evidence:
+
+| Area | Expected behavior |
+| --- | --- |
+| Catalog-first sequence | The UI starts from content catalog, then site, template, page, slots, sections, components, media, route, and navigation. |
+| Dynamic slots | Slot names come from template data; the UI must not assume only three slots. |
+| Backend authority | Save/validate actions call WCMS/CMS authoring APIs, not browser-local persistence. |
+| Media governance | Media association points to nMedia records or sets; it never asks for a filesystem path. |
+| Publish readiness | Designer can validate readiness, but publishing remains CMS/nPublish authority. |
+
+If Designer loads but cannot validate or save, inspect the WCMS server first:
+`cmsAuthoring` API exposure must be enabled, the user must have
+`cms.backoffice.manage`, the selected Site must belong to the selected Content
+Catalog, and the selected Template must expose the slots being edited.
 
 ## Verify Cron
 
@@ -363,6 +420,7 @@ Expected result:
 ```text
 PASS Axis route /
 PASS Axis route /content
+PASS Axis route /content/designer
 PASS Axis route /media
 PASS Axis route /media/items
 PASS Axis route /media/folders
@@ -407,12 +465,14 @@ The local acceptance run is complete when:
 4. Module registry shows mandatory modules and optional Cron correctly.
 5. Documentation products are visible.
 6. Content and media routes render the expected workspaces.
-7. `npm run acceptance:local:fresh` passes, or the manual equivalent plus
+7. The Page Designer route shows the catalog-first model and does not invent a
+   fixed slot shape or frontend-owned content persistence.
+8. `npm run acceptance:local:fresh` passes, or the manual equivalent plus
    `AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live`
    passes.
-8. No repo in the three-repo set has uncommitted acceptance changes.
+9. No repo in the three-repo set has uncommitted acceptance changes.
 
-When all eight are true, the modularized foundation is ready for the next
+When all nine are true, the modularized foundation is ready for the next
 functional module.
 
 ## Common mistakes

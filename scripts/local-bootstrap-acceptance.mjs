@@ -370,6 +370,28 @@ async function verifyDocumentationRecords() {
   }
 }
 
+async function verifyDesignerAuthoringModel(headers) {
+  const model = await requestJson(
+    wcmsUrl,
+    "/nodics/cms/v0/designer/composition/model",
+    { headers },
+  );
+  const hierarchy = Array.isArray(model.hierarchy) ? model.hierarchy : [];
+  const operations = Array.isArray(model.operations) ? model.operations : [];
+  if (
+    model?.rules?.catalogFirst !== true ||
+    model?.rules?.arbitrarySlots !== true ||
+    model?.rules?.frontendPersistence !== false ||
+    hierarchy[0] !== "Content Catalog" ||
+    !operations.includes("saveDraftComposition")
+  ) {
+    throw new Error(
+      `CMS Designer authoring contract is unhealthy: ${JSON.stringify(model)}`,
+    );
+  }
+  log("CMS Designer authoring contract is catalog-first and backend-owned");
+}
+
 async function verifyMongoCounts() {
   const script = [
     `const expectedCatalogs=${JSON.stringify(expectedCatalogs)};`,
@@ -525,6 +547,7 @@ async function main() {
   );
   await importDocumentationPacks(headers);
   await verifyDocumentationRecords();
+  await verifyDesignerAuthoringModel(headers);
   for (const route of [
     "/",
     "/docs",
