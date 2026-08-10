@@ -22,6 +22,7 @@ const pageRecords = Object.values(require('../data/core/data/documentation/kicko
 const routeRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationRouteData'));
 
 const capability = properties.backofficeCapabilities['nodics.kickoff'];
+const contentPack = properties.data.contentPacks.packs.kickoffDocumentation;
 const source = capability.documentation[0];
 const navigationItem = capability.navigation[0];
 
@@ -64,6 +65,14 @@ assert.strictEqual(manifest.version, catalogue.version);
 assert.strictEqual(manifest.contractVersion, 1);
 assert.deepStrictEqual(manifest.sites, ['kickoffDocumentationSite']);
 assert.strictEqual(manifest.pages, catalogue.documents.length);
+assert.strictEqual(contentPack.enabled, true);
+assert.strictEqual(contentPack.manifestPack, 'nodics.kickoff');
+assert.deepStrictEqual(contentPack.source, {
+    type: 'LOCAL_PROJECT',
+    contentPath: 'data/core',
+    manifestPath: 'manifest/docs-content-pack.json'
+});
+assert.strictEqual(contentPack.updatePolicy.sameVersionContentChange, 'REJECT');
 assert.strictEqual(capability.enabled, true);
 assert.deepStrictEqual(capability.roles, ['UI_COMPOSITION_PROVIDER']);
 assert.strictEqual(source.id, 'nodics-kickoff');

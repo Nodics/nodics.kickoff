@@ -1,0 +1,17 @@
+{
+  "name": "commerceServer",
+  "version": "0.0.1",
+  "index": "1001.16",
+  "private": true,
+  "main": "nodics.js",
+  "description": "Reference customer full Commerce server.",
+  "nodics": {
+    "kind": "server",
+    "extends": ["nodics.process", "nodics.commerce"],
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["composition", "configuration"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Commerce Server"
+  }
+}

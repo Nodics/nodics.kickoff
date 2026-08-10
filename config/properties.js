@@ -2,6 +2,33 @@
 
 module.exports = Object.freeze({
     project: Object.freeze({ code: 'nodics.kickoff' }),
+    data: Object.freeze({
+        contentPacks: Object.freeze({
+            packs: Object.freeze({
+                kickoffDocumentation: Object.freeze({
+                    enabled: true,
+                    manifestPack: 'nodics.kickoff',
+                    source: Object.freeze({
+                        type: 'LOCAL_PROJECT',
+                        contentPath: 'data/core',
+                        manifestPath: 'manifest/docs-content-pack.json'
+                    }),
+                    updatePolicy: Object.freeze({
+                        allowDowngrade: false,
+                        sameVersionContentChange: 'REJECT'
+                    }),
+                    presentation: Object.freeze({
+                        title: 'Nodics Kickoff documentation',
+                        unavailableMessage: 'Kickoff documentation has not been installed for this environment.',
+                        disabledMessage: 'Documentation imports are not enabled for this environment.',
+                        importAction: 'Import Kickoff documentation',
+                        updateAction: 'Update Kickoff documentation',
+                        retryAction: 'Retry import'
+                    })
+                })
+            })
+        })
+    }),
     backofficeCapabilities: Object.freeze({
         'nodics.kickoff': Object.freeze({
             enabled: true,

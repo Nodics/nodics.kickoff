@@ -17,13 +17,19 @@ nodics.kickoff/
       wcmsServer/
       processServer/
       cronServer/
+      commerceServer/
+      engagementServer/
 ```
 
 `platformServer extends nodics.platform`, which makes `nodics.core`
 functionally available through Platform. `wcmsServer extends nodics.wcms`, and
 `processServer extends nodics.process` while including `nodics.cron` in the
 same Business Process & Automation runtime. `cronServer` remains available for
-standalone Cron-focused development. Effective runtime loading and service
+standalone Cron-focused development. `commerceServer extends nodics.commerce`
+and composes Process for the full local Commerce lifecycle. `engagementServer`
+extends `nodics.engagement`, includes `nodics.communication`, and enables the
+reference contact experience while Process remains a separate runtime
+dependency. Effective runtime loading and service
 merging remain controlled by module indexes.
 
 Kickoff may default to the sample layout where it sits parallel to
@@ -46,10 +52,18 @@ Run:
 ```text
 cp .env.example .env
 npm run configure:framework
-npm install
+npm ci
 npm test
 npm run start:platform
+npm run start:commerce
+npm run start:engagement
 ```
+
+The committed `.npmrc` keeps npm local `file:` dependencies as symbolic links
+(`install-links=false`). This is required because `.nodics/framework/` is a
+generated framework-link directory, not a registry-style packed dependency.
+Use `npm ci` for deterministic clean installs; rerun `configure:framework`
+first whenever the framework checkout moves.
 
 For a complete zero-state local verification, use the Kickoff documentation
 page "Local acceptance checklist" after importing the Kickoff documentation

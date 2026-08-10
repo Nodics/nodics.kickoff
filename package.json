@@ -22,7 +22,10 @@
   },
   "dependencies": {
     "nodics.core": "file:.nodics/framework/nodics.core",
+    "nodics.commerce": "file:.nodics/framework/nodics.commerce",
+    "nodics.communication": "file:.nodics/framework/nodics.communication",
     "nodics.cron": "file:.nodics/framework/nodics.cron",
+    "nodics.engagement": "file:.nodics/framework/nodics.engagement",
     "nodics.platform": "file:.nodics/framework/nodics.platform",
     "nodics.process": "file:.nodics/framework/nodics.process",
     "nodics.wcms": "file:.nodics/framework/nodics.wcms"
@@ -32,6 +35,8 @@
     "docs:generate": "node scripts/generate-documentation-content.mjs",
     "docs:check": "node scripts/generate-documentation-content.mjs --check",
     "start:cron": "node src/start-cron-server.js",
+    "start:commerce": "node src/start-commerce-server.js",
+    "start:engagement": "node src/start-engagement-server.js",
     "start:platform": "node src/start-platform-server.js",
     "start:process": "node src/start-process-server.js",
     "start:wcms": "node src/start-wcms-server.js",

@@ -8,6 +8,29 @@ const packageRoot = packageName => path.dirname(require.resolve(packageName + '/
 
 const scenarios = Object.freeze([
     Object.freeze({
+        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.commerce']),
+        expectedModules: Object.freeze([
+            'nodics.core', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
+            'nodics.process', 'store', 'product', 'pricing', 'tax', 'promotion',
+            'inventory', 'baseCommerce', 'checkoutCore', 'cart', 'order',
+            'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
+            'cashOnDeliveryPayment', 'bankTransferPayment', 'paymentMethods',
+            'paymentProviderCore', 'stripeProvider', 'paypalProvider',
+            'cyberSourceProvider', 'visaProvider', 'paymentProviders', 'payment',
+            'fulfillmentCore', 'fulfillment', 'nodics.commerce', 'nodics.kickoff',
+            'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal',
+            'commerceServer'
+        ]),
+        verify: function () {
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerce');
+        }
+    }),
+    Object.freeze({
+        server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
+        expectedModules: Object.freeze(['nodics.core', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'engagementServer']),
+        verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
+    }),
+    Object.freeze({
         server: 'platformServer',
         frameworkModules: Object.freeze(['nodics.platform']),
         expectedModules: Object.freeze([
@@ -115,6 +138,7 @@ async function prepareScenario(scenario) {
             `${category} API exposure should be enabled for ${scenario.server}`
         );
     });
+    if (scenario.verify) scenario.verify();
     console.log(`Kickoff ${scenario.server} preparation passed`);
 }
 
