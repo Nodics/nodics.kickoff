@@ -80,13 +80,29 @@ module.exports = {
           "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. # Local Acceptance Checklist\n\nThis checklist is the beginner-friendly path for proving a fresh Nodics local\ninstallation from zero database state. Use it when you have cloned the three\nworking repositories, configured Kickoff, and want to confirm the backend\nframework, customer project, and Axis frontend are working together.\n\nThe checklist is intentionally explicit. A new developer should be able to\nfollow it without already knowing Nodics module loading, BackOffice bootstrap,\nWCMS content packs, or functional-module registration.\n\n## What this checklist proves\n\nThe acceptance run proves five things:\n\n| Area | What must be true |\n| --- | --- |\n| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root. |\n| Runtime topology | Platform, WCMS, and the composed Process/Cron automation runtime can start from the Kickoff local environment. |\n| Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |\n| Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |\n| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module. |\n\nIf any one of these fails, do not continue adding new functional modules. Fix\nthe contract break first, otherwise every later module will inherit a shaky\nlocal foundation.\n\n## Repository layout used by the reference run\n\nThe local reference setup normally looks like this:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.axis/\n  nodics.kickoff/\n```\n\nThis layout is only a convenience. Customer projects may live anywhere. The\nimportant contract is that `nodics.kickoff/.env` tells Kickoff where the\nframework checkout lives.\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nUse an absolute path if your repositories are not parallel:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai\n```\n\n## Mandatory prerequisites\n\nBefore running the checklist, confirm these local services and tools are\navailable:\n\n1. Node.js 24 and npm.\n2. MongoDB running locally.\n3. The three repositories are cloned:\n   - `nodics.ai`\n   - `nodics.axis`\n   - `nodics.kickoff`\n4. `nodics.kickoff/.env` exists and points to the framework root.\n5. `nodics.axis/.env` points to the local Platform server.\n\nRun this from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm run configure:framework\nnpm install\n```\n\nRun this from `nodics.axis`:\n\n```bash\ncp .env.example .env\nnpm install\n```\n\n## Fresh database reset\n\nUse a fresh database reset only for local developer acceptance. Do not run this\nagainst a shared development, QA, pre-production, or production database.\n\nThe local server configs own the exact database names. Read them before\ndropping anything. In the reference topology, the relevant server configs are:\n\n```text\nenvs/kickoffLocal/platformServer/config/properties.js\nenvs/kickoffLocal/wcmsServer/config/properties.js\nenvs/kickoffLocal/processServer/config/properties.js\n```\n\nThe reset should remove only the local Kickoff runtime databases/schemas used\nby those servers. It must not delete a broad MongoDB instance, user home\nfolder, workspace folder, or unrelated project database.\n\n## Automated acceptance path\n\nMost maintainers should use the automated path first. It proves the same\ncontracts as the manual checklist and reduces human mistakes during repeated\nbootstrap tests.\n\nRun this from `nodics.kickoff`:\n\n```bash\nnpm run acceptance:local:fresh\n```\n\nThis command intentionally drops only the bounded reference local databases:\n\n- `kickoffLocal`\n- `kickoffLocalWcms`\n- `kickoffLocalCron`\n- `kickoffLocalProcess`\n\nIt then starts any missing local servers, waits for Platform, WCMS, the\ncomposed Process/Cron automation runtime, and Axis to become reachable,\nauthenticates the local admin, imports the Framework, Nodics Axis, and Nodics\nKickoff documentation packs through WCMS, checks key Axis routes, verifies WCMS\ncontent counts, and runs the Axis live smoke with the documentation and Cron\nlifecycle gates enabled.\n\nUse the safer non-destructive form when you only want to verify the current\nlocal state:\n\n```bash\nnpm run acceptance:local\n```\n\nThat version does not drop databases. It checks the currently running or\nstarted local topology and imports missing documentation packs if required.\n\n### What the automated command proves\n\n```mermaid\nflowchart TD\n  Start[\"Developer runs npm run acceptance:local:fresh\"] --> Drop[\"Drop only Kickoff local DBs\"]\n  Drop --> Platform[\"Start or reuse Platform on 4300\"]\n  Platform --> WCMS[\"Start or reuse WCMS on 4310\"]\n  WCMS --> Process[\"Start or reuse Process/Cron on 4330\"]\n  Process --> Axis[\"Start or reuse Axis on 3100\"]\n  Axis --> Auth[\"Authenticate default/admin\"]\n  Auth --> Registry[\"Verify Core, Platform, WCMS, Cron observation\"]\n  Registry --> Docs[\"Import documentation packs through WCMS\"]\n  Docs --> Routes[\"Verify Axis routes\"]\n  Routes --> Designer[\"Verify Content Designer catalog-first route\"]\n  Designer --> Counts[\"Verify WCMS catalog/site/page/component/route counts\"]\n  Counts --> Lifecycle[\"Run Cron register, activate, deactivate, deregister\"]\n  Lifecycle --> Pass[\"Acceptance pass\"]\n```\n\nThe command stops the servers it started after the acceptance gates complete.\nIf you want to keep the stack running so you can inspect Axis after the run,\nuse:\n\n```bash\nnode scripts/local-bootstrap-acceptance.mjs --drop-local-db --leave-started\n```\n\nThe command is deliberately conservative. It does not discover and drop random\nMongoDB databases. It does not kill unrelated processes. It does not create\nanother importer. It uses the existing Profile login, BackOffice registry,\nWCMS content-pack API, and Axis smoke test. This matters because acceptance\nmust prove the same path a real developer or operator uses.\n\n## Start the backend servers\n\nOpen three terminals from `nodics.kickoff`.\n\nTerminal 1:\n\n```bash\nnpm run start:platform\n```\n\nTerminal 2:\n\n```bash\nnpm run start:wcms\n```\n\nTerminal 3:\n\n```bash\nnpm run start:process\n```\n\nExpected local ports:\n\n| Runtime | Port | Why it matters |\n| --- | ---: | --- |\n| Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |\n| WCMS | 4310 | CMS sites, content catalogs, page/component data, documentation packs, media metadata. |\n| Process and Automation | 4330 | Process/workflow APIs plus optional Cron observation and registry lifecycle testing. |\n\nIf a port is already in use, confirm whether it is an earlier Nodics server\nfrom the same checkout. Do not kill unrelated processes by guessing.\n\n## Start Axis\n\nOpen another terminal from `nodics.axis`:\n\n```bash\nnpm run dev\n```\n\nAxis should be available at:\n\n```text\nhttp://localhost:3100\n```\n\n## Login\n\nOpen Axis and use the local reference credentials:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nSuccessful login proves:\n\n1. Axis can load public bootstrap from Platform.\n2. Profile can authenticate the local admin.\n3. Axis can retrieve authenticated BackOffice bootstrap data.\n4. Axis receives authorized navigation and runtime module projections.\n\n## Import initialization data\n\nIn Axis, open the import/initialization workspace and install the available\ninitialization releases.\n\nYou should see releases owned by active modules only. The system must not ask\nAxis to invent import data. Axis presents the operation; the owning backend\nmodule and nImport execute the import.\n\nExpected outcome:\n\n- mandatory Profile/bootstrap identity data is available;\n- core framework data required by Platform and WCMS is present;\n- documentation content packs can be imported or updated;\n- repeated import attempts with unchanged immutable releases do not corrupt\n  existing data.\n\n## Verify module registry\n\nOpen:\n\n```text\nSystem and Integrations → Module Registry\n```\n\nExpected state:\n\n| Functional module | Expected state | Why |\n| --- | --- | --- |\n| `nodics.core` | Registered and active | Required by every runtime. |\n| `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |\n| `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |\n| `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |\n| `nodics.cron` | Optional, observed when Process and Automation or standalone Cron is running | Proves optional runtime modules can join the lifecycle. |\n\nCore, Platform, and WCMS are mandatory for this local Axis-backed acceptance\ntopology. They should not appear as removable optional modules. Cron may be\nregistered, activated, deactivated, and deregistered as an optional module.\n\n## Verify documentation\n\nOpen:\n\n```text\nDocumentation\n```\n\nExpected documentation products:\n\n- Framework\n- Swaggers\n- Nodics Axis\n- Nodics Kickoff\n\nThe products are intentionally separated by ownership:\n\n| Documentation product | Owning repository/module |\n| --- | --- |\n| Framework | `nodics.ai/nodics.docs` |\n| Nodics Axis | `nodics.ai/nodics.platform/modules/axis` |\n| Nodics Kickoff | `nodics.kickoff` |\n| Swagger/OpenAPI | Platform BackOffice/OpenAPI contracts |\n\nAxis is only the renderer. It must not own backend-importable documentation\ncontent.\n\n## Verify content and media\n\nOpen these Axis routes:\n\n```text\n/content\n/content/designer\n/media\n/media/items\n/media/folders\n```\n\nExpected behavior:\n\n- `/content` shows the content dashboard and WCMS-owned summary sections.\n- `/content/designer` shows the governed Page Designer foundation. It should\n  explain the catalog-first sequence and support dynamic template slots rather\n  than assuming a fixed header/main/footer page shape.\n- `/media` shows media management, media records, and media-by-source sections.\n- `/media/items` and `/media/folders` open focused media workspaces instead of\n  falling into CMS recovery.\n- Any unavailable backend schema is reported as a backend/schema discovery\n  issue, not as a frontend-owned data model.\n\n### Verify Page Designer authoring model\n\nOpen:\n\n```text\nContent and Experience → Web Content Management System → Page Designer\n```\n\nThe Designer is not expected to look exactly like the final website in a\nbrowser. It is the authoring and structure view. A beginner should understand\nthis chain:\n\n```mermaid\nflowchart TD\n  Catalog[\"Content Catalog\"]\n  Site[\"Site\"]\n  Template[\"Page Template\"]\n  Page[\"Page\"]\n  Slots[\"Template Slots: any number\"]\n  Sections[\"Page Sections\"]\n  Components[\"Component Instances\"]\n  Media[\"Governed Media\"]\n  Route[\"Page Route\"]\n  Nav[\"Navigation Node\"]\n\n  Catalog --> Site\n  Catalog --> Template\n  Site --> Page\n  Template --> Page\n  Page --> Slots\n  Slots --> Sections\n  Sections --> Components\n  Components --> Media\n  Page --> Route\n  Route --> Nav\n```\n\nThis acceptance step proves only that the reference local stack can consume the\nWCMS-owned authoring model. The contract itself belongs to WCMS. If the\nDesigner metadata is wrong, fix the owning WCMS contract and tests first; do\nnot move catalog, site, template, slot, page, component, or media authority\ninto the reference project or into the Axis frontend.\n\nExpected Designer evidence:\n\n| Area | Expected behavior |\n| --- | --- |\n| Catalog-first sequence | The UI starts from content catalog, then site, template, page, slots, sections, components, media, route, and navigation. |\n| Dynamic slots | Slot names come from template data; the UI must not assume only three slots. |\n| Backend authority | Save/validate actions call WCMS/CMS authoring APIs, not browser-local persistence. |\n| Media governance | Media association points to nMedia records or sets; it never asks for a filesystem path. |\n| Publish readiness | Designer can validate readiness, but publishing remains CMS/nPublish authority. |\n\nIf Designer loads but cannot validate or save, inspect the WCMS server first:\n`cmsAuthoring` API exposure must be enabled, the user must have\n`cms.backoffice.manage`, the selected Site must belong to the selected Content\nCatalog, and the selected Template must expose the slots being edited.\n\n## Verify Cron\n\nOpen:\n\n```text\n/cron\n```\n\nExpected behavior:\n\n- If Process and Automation is running, Axis can observe both `nodics.process`\n  and `nodics.cron` from the same runtime.\n- If Cron is not registered, it appears as available to register.\n- Register moves it into the registered list without requiring a page refresh.\n- Activate changes lifecycle state without freezing buttons.\n- Deactivate and deregister return it to the correct next state.\n\nThe automated acceptance runner performs the full optional Cron lifecycle:\n\n```text\navailable → register → registered/inactive → activate → registered/active\nregistered/active → deactivate → registered/inactive → deregister → available\n```\n\nCron is optional for the project, so the final accepted state after the\nautomated lifecycle test is **available** rather than permanently registered.\nThat proves both the runtime observation path and the governed removal path.\n\nIf an action succeeds but the UI does not update, inspect the module registry\nAPI response immediately after the action. The frontend should refresh local\nquery state after each lifecycle operation.\n\n## Command-line smoke test\n\nAfter the servers and Axis are running, use the live smoke script from\n`nodics.axis`:\n\n```bash\nAXIS_EXPECT_MODULES=1 npm run smoke:live\nAXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 npm run smoke:live\nAXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live\n```\n\nExpected result:\n\n```text\nPASS Axis route /\nPASS Axis route /content\nPASS Axis route /content/designer\nPASS Axis route /media\nPASS Axis route /media/items\nPASS Axis route /media/folders\nPASS Axis route /cron\nPASS Axis route /system-integrations\nPASS Axis route /registry\nPASS Axis route /operations/imports-exports\nPASS Axis route /docs/swaggers\nPASS BackOffice public bootstrap\nPASS authenticated login for admin\nPASS module registry reachable\nPASS required modules registered: nodics.core, nodics.platform, nodics.wcms\nPASS optional runtime modules observed: nodics.cron\nPASS documentation pack nodicsDocumentation is CURRENT\nPASS documentation pack axisDocumentation is CURRENT\nPASS documentation pack kickoffDocumentation is CURRENT\nPASS cron lifecycle register\nPASS cron lifecycle activate\nPASS cron lifecycle deactivate\nPASS cron lifecycle deregister returns module to available\n```\n\n## Troubleshooting quick map\n\n| Symptom | Most likely boundary |\n| --- | --- |\n| Axis recovery says BackOffice registry unavailable | Platform server is not reachable or Axis points at the wrong Platform URL. |\n| Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |\n| Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |\n| Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |\n| Cron does not appear | Process and Automation server or standalone Cron server is not running, or the runtime has not reported its functional module observation. |\n| Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |\n| Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |\n\n## Acceptance sign-off\n\nThe local acceptance run is complete when:\n\n1. Platform, WCMS, Process and Automation, and Axis are running.\n2. Fresh local databases were created from module-owned import data.\n3. Admin login works.\n4. Module registry shows mandatory modules and optional Cron correctly.\n5. Documentation products are visible.\n6. Content and media routes render the expected workspaces.\n7. The Page Designer route shows the catalog-first model and does not invent a\n   fixed slot shape or frontend-owned content persistence.\n8. `npm run acceptance:local:fresh` passes, or the manual equivalent plus\n   `AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live`\n   passes.\n9. No repo in the three-repo set has uncommitted acceptance changes.\n\nWhen all nine are true, the modularized foundation is ready for the next\nfunctional module.\n\n## Common mistakes\n\n- Treating a running Node process as proof that the customer project is ready.\n- Skipping content-pack import and then wondering why Axis documentation or\n  WCMS pages are unavailable.\n- Dropping or modifying broad databases during a local test instead of using\n  the bounded fresh-bootstrap command intended for the reference environment.\n- Accepting a module lifecycle flow that requires a browser refresh after\n  register, activate, deactivate, or deregister.\n- Ignoring an `INVALID RELEASE` message because the release still appears in\n  the list.\n- Verifying only Platform while forgetting WCMS, documentation, media, Process,\n  Cron, and Axis routes.\n\n## Verification\n\nRun the checklist twice when confidence matters: once against the currently\nrunning local database and once with the bounded fresh-bootstrap option. The\nexpected result is repeatability. The system should rebuild from backend-owned\ndata, import documentation and initialization releases through governed APIs,\nshow healthy CMS record counts, expose mandatory modules, handle optional Cron\nlifecycle, and render Axis routes without manual database edits.\n\nFor project documentation changes, regenerate the Kickoff documentation pack,\nrun the documentation contract test, start Platform and WCMS, import or update\nthe Kickoff docs release, and open `/docs/nodics-kickoff` in Axis. If the page\nonly works because it was hardcoded in the frontend, the acceptance result is\nnot valid.\n"
         },
         {
+          "code": "kickoff.deployment-qualification",
+          "title": "Deployment qualification",
+          "route": "/docs/nodics-kickoff/kickoff-deployment-qualification",
+          "section": "nodics-kickoff",
+          "sectionTitle": "Nodics Kickoff",
+          "sectionOrder": 10,
+          "order": 40,
+          "audience": [
+            "architect",
+            "developer",
+            "operator"
+          ],
+          "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
+          "searchText": "Deployment qualification Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off. # Deployment qualification\n\nDeployment qualification is the bridge between a release candidate that works\nlocally and a release that accountable owners may approve for production. The\nKickoff runner coordinates evidence from the framework, reference project,\nAxis, and local Redis, but it deliberately cannot approve production by itself.\n\n## Start here\n\nFrom `nodics.kickoff`, print the plan without running anything:\n\n```bash\nnpm run qualification:deployment\n```\n\nThe JSON plan identifies each gate, its owner, the command that would run, and\nwhat it proves. It contains no credentials or provider URLs.\n\nRun the safe local gates:\n\n```bash\nnpm run qualification:deployment:local\n```\n\nThe runner executes the strict framework release gate, retained-data Kickoff\nacceptance, Axis verification, and the live Redis cache and distributed\nregistry contracts. It writes sanitized evidence to:\n\n```text\nenvs/kickoffLocal/generated/deployment-qualification/latest.json\n```\n\nThe generated report is local operational evidence and is intentionally\nignored by Git. Archive it in the deployment system that owns the release.\n\n## Fresh bootstrap is intentionally separate\n\nFresh acceptance drops only the documented Kickoff local databases. Because it\nmutates local data, it is never included by default:\n\n```bash\nnode scripts/deployment-qualification.mjs --execute-local --include-fresh\n```\n\nNever use this flag against a shared development, qualification,\npre-production, or production database. Use an isolated disposable Kickoff\nenvironment and verify the configured database names first.\n\n## What local evidence does and does not prove\n\n| Gate | Local proof | Still required before production |\n| --- | --- | --- |\n| Framework | Clean build, generated contracts, governance, dependency audit, and automated suites | Deployment-image and target-runtime confirmation |\n| Kickoff | Integrated runtime, documentation, lifecycle, and business-user smoke journey | Production topology and operational ownership |\n| Axis | Formatting, lint, type safety, automated tests, and production bundle | Supported browser/device and human assistive-technology matrix |\n| Redis | Real local cache and distributed-registry behavior | Managed TLS/authentication, topology, isolation, failover, and recovery |\n| Payments/providers | Mock and offline contract behavior | Real non-production credentials, callbacks, failure handling, and rollback |\n\nLocal success must never be translated into `productionApproved: true`. The\nreport fixes this value to `false` and keeps every external evidence class at\n`NOT_EXECUTED`.\n\n## Production-only evidence register\n\nNamed owners must attach evidence for all applicable rows:\n\n| Evidence | Accountable owner | Minimum completion evidence |\n| --- | --- | --- |\n| Peak load | Performance owner | Workload model, dataset, topology, p95/p99, throughput, error rate, saturation, queue age, projection lag, and integrity reconciliation |\n| Soak | Operations owner | Sustained duration, memory/CPU trends, retry growth, drift, storage/index growth, and post-run reconciliation |\n| Penetration | Security owner | Authenticated attack surface, tenant isolation, validation, replay, export, webhook, and privilege-escalation results with disposition |\n| Managed cache failover | Platform owner | TLS/authentication, topology, tenant isolation, node/provider loss, recovery time, and data-consistency results |\n| Backup and restore | Data owner | Backup identity, restore procedure, authoritative counts/hashes, projection rebuild, and reconciliation |\n| Regional residency | Infrastructure and privacy owners | Allowed-region routing, evacuation, deletion propagation, and cross-region leakage results |\n| RPO/RTO | Operations owner | Measured recovery point and recovery time compared with approved objectives |\n| External providers | Provider owners | Credential source, consent, callbacks, residency, observability, degraded behavior, rollback, and key rotation |\n| Accessibility | Product accessibility owner | Keyboard, screen reader, zoom/reflow, contrast, browser, and supported-device results |\n\n## Recommended execution order\n\n```mermaid\nflowchart TD\n  Plan[\"Print qualification plan\"] --> Local[\"Run safe local evidence\"]\n  Local --> Fresh{\"Isolated fresh environment available?\"}\n  Fresh -- \"yes\" --> Bootstrap[\"Run bounded fresh bootstrap\"]\n  Fresh -- \"no\" --> Provision[\"Provision qualification environment\"]\n  Bootstrap --> Provision\n  Provision --> Providers[\"Qualify managed cache and external providers\"]\n  Providers --> Load[\"Run peak load and soak\"]\n  Load --> Recovery[\"Run failover, backup restore, and RPO/RTO\"]\n  Recovery --> Security[\"Complete penetration and residency review\"]\n  Security --> Accessibility[\"Complete human accessibility matrix\"]\n  Accessibility --> Review[\"Accountable-owner evidence review\"]\n  Review --> Decision{\"All gates passed or residual risk accepted?\"}\n  Decision -- \"no\" --> Hold[\"Keep publication blocked\"]\n  Decision -- \"yes\" --> Release[\"Approve merge, tag, and publication\"]\n```\n\nRun functional success paths before destructive resilience tests. Run load\nbefore failover only when the test plan explicitly needs a stable baseline.\nRestore the environment and reconcile data after every destructive exercise.\n\n## Failure and recovery\n\nThe runner continues through local gates so one report shows every attempted\ncheck. Any non-zero command becomes `FAILED` with a stable failure code; raw\nenvironment variables and secrets are excluded. Investigate the owning\nrepository first, rerun the focused failing command, then rerun the pack.\n\nIf Redis is unavailable, start or configure an approved test endpoint and set\n`NODICS_CACHE_REDIS_URL` only in the execution environment. Do not commit it.\nIf the framework, Axis, or Kickoff checkout lives elsewhere, provide\n`NODICS_QUALIFICATION_FRAMEWORK_ROOT` or `NODICS_QUALIFICATION_AXIS_ROOT`.\n\n## Customization boundary\n\nThis runner belongs to the reference customer project because it coordinates a\nspecific multi-repository deployment journey. A real customer project should\ncopy the pattern into its own project tooling, change only its repository\ncoordinates and qualification gates, and retain the safety properties:\n\n- dry plan by default;\n- destructive checks explicitly opted in;\n- no secrets or provider URLs in reports;\n- external evidence remains separate from local automation;\n- no automatic production approval;\n- named owners and measurable completion criteria.\n\nDo not move customer workloads, credentials, environments, acceptance targets,\nor risk decisions into `nodics.ai`. Framework modules own reusable contracts;\nthe customer deployment owns its qualification and release decision.\n\n## Common mistakes\n\n- Treating local Redis as proof of a managed Redis topology, TLS, authentication,\n  failover, or regional recovery.\n- Calling mock Stripe or offline provider contracts a live-provider test.\n- running `--include-fresh` without checking that the target is the isolated\n  Kickoff local environment;\n- publishing the generated JSON as a production approval even though it records\n  only command outcomes and fixes `productionApproved` to `false`;\n- pasting secrets, bearer tokens, provider URLs, customer data, or raw security\n  findings into a shared evidence report;\n- accepting average latency while ignoring p95/p99, errors, saturation, queue\n  age, projection lag, and post-run data integrity;\n- running failover or restore exercises without a rollback plan and named\n  operational owner;\n- letting Axis automation replace keyboard, screen-reader, zoom, contrast, and\n  supported-device testing by a qualified human;\n- merging or tagging merely because local gates passed while production-only\n  evidence still says `NOT_EXECUTED`.\n\n## Verification\n\nDevelopers can verify the runner contract without starting the full stack:\n\n```bash\nnpm run test:qualification\nnpm run qualification:deployment\n```\n\nConfirm the plan contains five non-destructive local gates, nine explicit\nexternal gates, no environment values, and `productionApproved: false`. Then\nrun `npm run qualification:deployment:local` in the prepared local workspace.\nConfirm every attempted local gate is `PASSED`, the report is written only\nunder the ignored `envs/kickoffLocal/generated` path, and all production-only\ngates remain visible.\n\nOperators should archive the local report with the immutable repository commit\nidentifiers, deployment image identifiers, environment name, external test\nreports, and accountable-owner decisions. Before approval, independently\nconfirm that each external result belongs to the same release candidate and\nenvironment topology. A missing, stale, differently scoped, or unverifiable\nartifact remains pending; silence is never a pass.\n"
+        },
+        {
           "code": "kickoff.customization",
           "title": "Customer customization guide",
           "route": "/docs/nodics-kickoff/kickoff-customization",
           "section": "nodics-kickoff",
           "sectionTitle": "Nodics Kickoff",
           "sectionOrder": 10,
-          "order": 40,
+          "order": 50,
           "audience": [
             "architect",
             "developer",
@@ -1753,8 +1769,8 @@ module.exports = {
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
       },
       "next": {
-        "title": "Customer customization guide",
-        "route": "/docs/nodics-kickoff/kickoff-customization"
+        "title": "Deployment qualification",
+        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
       },
       "source": {
         "repository": "nodics.kickoff",
@@ -1768,6 +1784,363 @@ module.exports = {
     "active": true
   },
   "record4": {
+    "code": "kickoffDocsComponentkickoffDeploymentQualification",
+    "typeCode": "kickoffDocumentationArticleComponentType",
+    "renderer": "documentation.component.article",
+    "accessMode": "AUTHENTICATED",
+    "properties": {
+      "code": "kickoff.deployment-qualification",
+      "title": "Deployment qualification",
+      "route": "/docs/nodics-kickoff/kickoff-deployment-qualification",
+      "section": "nodics-kickoff",
+      "sectionTitle": "Nodics Kickoff",
+      "audience": [
+        "architect",
+        "developer",
+        "operator"
+      ],
+      "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
+      "headings": [
+        {
+          "text": "Start here",
+          "anchor": "kickoffDeploymentQualification-1-start-here",
+          "level": 2
+        },
+        {
+          "text": "Fresh bootstrap is intentionally separate",
+          "anchor": "kickoffDeploymentQualification-2-fresh-bootstrap-is-intentionally-separate",
+          "level": 2
+        },
+        {
+          "text": "What local evidence does and does not prove",
+          "anchor": "kickoffDeploymentQualification-3-what-local-evidence-does-and-does-not-prove",
+          "level": 2
+        },
+        {
+          "text": "Production-only evidence register",
+          "anchor": "kickoffDeploymentQualification-4-production-only-evidence-register",
+          "level": 2
+        },
+        {
+          "text": "Recommended execution order",
+          "anchor": "kickoffDeploymentQualification-5-recommended-execution-order",
+          "level": 2
+        },
+        {
+          "text": "Failure and recovery",
+          "anchor": "kickoffDeploymentQualification-6-failure-and-recovery",
+          "level": 2
+        },
+        {
+          "text": "Customization boundary",
+          "anchor": "kickoffDeploymentQualification-7-customization-boundary",
+          "level": 2
+        },
+        {
+          "text": "Common mistakes",
+          "anchor": "kickoffDeploymentQualification-8-common-mistakes",
+          "level": 2
+        },
+        {
+          "text": "Verification",
+          "anchor": "kickoffDeploymentQualification-9-verification",
+          "level": 2
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Deployment qualification is the bridge between a release candidate that works locally and a release that accountable owners may approve for production. The Kickoff runner coordinates evidence from the framework, reference project, Axis, and local Redis, but it deliberately cannot approve production by itself."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Start here",
+          "anchor": "kickoffDeploymentQualification-1-start-here"
+        },
+        {
+          "kind": "paragraph",
+          "text": "From `nodics.kickoff`, print the plan without running anything:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run qualification:deployment"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The JSON plan identifies each gate, its owner, the command that would run, and what it proves. It contains no credentials or provider URLs."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run the safe local gates:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run qualification:deployment:local"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The runner executes the strict framework release gate, retained-data Kickoff acceptance, Axis verification, and the live Redis cache and distributed registry contracts. It writes sanitized evidence to:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "envs/kickoffLocal/generated/deployment-qualification/latest.json"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The generated report is local operational evidence and is intentionally ignored by Git. Archive it in the deployment system that owns the release."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Fresh bootstrap is intentionally separate",
+          "anchor": "kickoffDeploymentQualification-2-fresh-bootstrap-is-intentionally-separate"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Fresh acceptance drops only the documented Kickoff local databases. Because it mutates local data, it is never included by default:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "node scripts/deployment-qualification.mjs --execute-local --include-fresh"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Never use this flag against a shared development, qualification, pre-production, or production database. Use an isolated disposable Kickoff environment and verify the configured database names first."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "What local evidence does and does not prove",
+          "anchor": "kickoffDeploymentQualification-3-what-local-evidence-does-and-does-not-prove"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Gate",
+            "Local proof",
+            "Still required before production"
+          ],
+          "rows": [
+            [
+              "Framework",
+              "Clean build, generated contracts, governance, dependency audit, and automated suites",
+              "Deployment-image and target-runtime confirmation"
+            ],
+            [
+              "Kickoff",
+              "Integrated runtime, documentation, lifecycle, and business-user smoke journey",
+              "Production topology and operational ownership"
+            ],
+            [
+              "Axis",
+              "Formatting, lint, type safety, automated tests, and production bundle",
+              "Supported browser/device and human assistive-technology matrix"
+            ],
+            [
+              "Redis",
+              "Real local cache and distributed-registry behavior",
+              "Managed TLS/authentication, topology, isolation, failover, and recovery"
+            ],
+            [
+              "Payments/providers",
+              "Mock and offline contract behavior",
+              "Real non-production credentials, callbacks, failure handling, and rollback"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Local success must never be translated into `productionApproved: true`. The report fixes this value to `false` and keeps every external evidence class at `NOT_EXECUTED`."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Production-only evidence register",
+          "anchor": "kickoffDeploymentQualification-4-production-only-evidence-register"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Named owners must attach evidence for all applicable rows:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Evidence",
+            "Accountable owner",
+            "Minimum completion evidence"
+          ],
+          "rows": [
+            [
+              "Peak load",
+              "Performance owner",
+              "Workload model, dataset, topology, p95/p99, throughput, error rate, saturation, queue age, projection lag, and integrity reconciliation"
+            ],
+            [
+              "Soak",
+              "Operations owner",
+              "Sustained duration, memory/CPU trends, retry growth, drift, storage/index growth, and post-run reconciliation"
+            ],
+            [
+              "Penetration",
+              "Security owner",
+              "Authenticated attack surface, tenant isolation, validation, replay, export, webhook, and privilege-escalation results with disposition"
+            ],
+            [
+              "Managed cache failover",
+              "Platform owner",
+              "TLS/authentication, topology, tenant isolation, node/provider loss, recovery time, and data-consistency results"
+            ],
+            [
+              "Backup and restore",
+              "Data owner",
+              "Backup identity, restore procedure, authoritative counts/hashes, projection rebuild, and reconciliation"
+            ],
+            [
+              "Regional residency",
+              "Infrastructure and privacy owners",
+              "Allowed-region routing, evacuation, deletion propagation, and cross-region leakage results"
+            ],
+            [
+              "RPO/RTO",
+              "Operations owner",
+              "Measured recovery point and recovery time compared with approved objectives"
+            ],
+            [
+              "External providers",
+              "Provider owners",
+              "Credential source, consent, callbacks, residency, observability, degraded behavior, rollback, and key rotation"
+            ],
+            [
+              "Accessibility",
+              "Product accessibility owner",
+              "Keyboard, screen reader, zoom/reflow, contrast, browser, and supported-device results"
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Recommended execution order",
+          "anchor": "kickoffDeploymentQualification-5-recommended-execution-order"
+        },
+        {
+          "kind": "diagram",
+          "language": "mermaid",
+          "text": "flowchart TD\n  Plan[\"Print qualification plan\"] --> Local[\"Run safe local evidence\"]\n  Local --> Fresh{\"Isolated fresh environment available?\"}\n  Fresh -- \"yes\" --> Bootstrap[\"Run bounded fresh bootstrap\"]\n  Fresh -- \"no\" --> Provision[\"Provision qualification environment\"]\n  Bootstrap --> Provision\n  Provision --> Providers[\"Qualify managed cache and external providers\"]\n  Providers --> Load[\"Run peak load and soak\"]\n  Load --> Recovery[\"Run failover, backup restore, and RPO/RTO\"]\n  Recovery --> Security[\"Complete penetration and residency review\"]\n  Security --> Accessibility[\"Complete human accessibility matrix\"]\n  Accessibility --> Review[\"Accountable-owner evidence review\"]\n  Review --> Decision{\"All gates passed or residual risk accepted?\"}\n  Decision -- \"no\" --> Hold[\"Keep publication blocked\"]\n  Decision -- \"yes\" --> Release[\"Approve merge, tag, and publication\"]"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run functional success paths before destructive resilience tests. Run load before failover only when the test plan explicitly needs a stable baseline. Restore the environment and reconcile data after every destructive exercise."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Failure and recovery",
+          "anchor": "kickoffDeploymentQualification-6-failure-and-recovery"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The runner continues through local gates so one report shows every attempted check. Any non-zero command becomes `FAILED` with a stable failure code; raw environment variables and secrets are excluded. Investigate the owning repository first, rerun the focused failing command, then rerun the pack."
+        },
+        {
+          "kind": "paragraph",
+          "text": "If Redis is unavailable, start or configure an approved test endpoint and set `NODICS_CACHE_REDIS_URL` only in the execution environment. Do not commit it. If the framework, Axis, or Kickoff checkout lives elsewhere, provide `NODICS_QUALIFICATION_FRAMEWORK_ROOT` or `NODICS_QUALIFICATION_AXIS_ROOT`."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Customization boundary",
+          "anchor": "kickoffDeploymentQualification-7-customization-boundary"
+        },
+        {
+          "kind": "paragraph",
+          "text": "This runner belongs to the reference customer project because it coordinates a specific multi-repository deployment journey. A real customer project should copy the pattern into its own project tooling, change only its repository coordinates and qualification gates, and retain the safety properties:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "dry plan by default;",
+            "destructive checks explicitly opted in;",
+            "no secrets or provider URLs in reports;",
+            "external evidence remains separate from local automation;",
+            "no automatic production approval;",
+            "named owners and measurable completion criteria."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Do not move customer workloads, credentials, environments, acceptance targets, or risk decisions into `nodics.ai`. Framework modules own reusable contracts; the customer deployment owns its qualification and release decision."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Common mistakes",
+          "anchor": "kickoffDeploymentQualification-8-common-mistakes"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "Treating local Redis as proof of a managed Redis topology, TLS, authentication, failover, or regional recovery.",
+            "Calling mock Stripe or offline provider contracts a live-provider test.",
+            "running `--include-fresh` without checking that the target is the isolated Kickoff local environment;",
+            "publishing the generated JSON as a production approval even though it records only command outcomes and fixes `productionApproved` to `false`;",
+            "pasting secrets, bearer tokens, provider URLs, customer data, or raw security findings into a shared evidence report;",
+            "accepting average latency while ignoring p95/p99, errors, saturation, queue age, projection lag, and post-run data integrity;",
+            "running failover or restore exercises without a rollback plan and named operational owner;",
+            "letting Axis automation replace keyboard, screen-reader, zoom, contrast, and supported-device testing by a qualified human;",
+            "merging or tagging merely because local gates passed while production-only evidence still says `NOT_EXECUTED`."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verification",
+          "anchor": "kickoffDeploymentQualification-9-verification"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Developers can verify the runner contract without starting the full stack:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run test:qualification\nnpm run qualification:deployment"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Confirm the plan contains five non-destructive local gates, nine explicit external gates, no environment values, and `productionApproved: false`. Then run `npm run qualification:deployment:local` in the prepared local workspace. Confirm every attempted local gate is `PASSED`, the report is written only under the ignored `envs/kickoffLocal/generated` path, and all production-only gates remain visible."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Operators should archive the local report with the immutable repository commit identifiers, deployment image identifiers, environment name, external test reports, and accountable-owner decisions. Before approval, independently confirm that each external result belongs to the same release candidate and environment topology. A missing, stale, differently scoped, or unverifiable artifact remains pending; silence is never a pass."
+        }
+      ],
+      "searchText": "Deployment qualification Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off. # Deployment qualification\n\nDeployment qualification is the bridge between a release candidate that works\nlocally and a release that accountable owners may approve for production. The\nKickoff runner coordinates evidence from the framework, reference project,\nAxis, and local Redis, but it deliberately cannot approve production by itself.\n\n## Start here\n\nFrom `nodics.kickoff`, print the plan without running anything:\n\n```bash\nnpm run qualification:deployment\n```\n\nThe JSON plan identifies each gate, its owner, the command that would run, and\nwhat it proves. It contains no credentials or provider URLs.\n\nRun the safe local gates:\n\n```bash\nnpm run qualification:deployment:local\n```\n\nThe runner executes the strict framework release gate, retained-data Kickoff\nacceptance, Axis verification, and the live Redis cache and distributed\nregistry contracts. It writes sanitized evidence to:\n\n```text\nenvs/kickoffLocal/generated/deployment-qualification/latest.json\n```\n\nThe generated report is local operational evidence and is intentionally\nignored by Git. Archive it in the deployment system that owns the release.\n\n## Fresh bootstrap is intentionally separate\n\nFresh acceptance drops only the documented Kickoff local databases. Because it\nmutates local data, it is never included by default:\n\n```bash\nnode scripts/deployment-qualification.mjs --execute-local --include-fresh\n```\n\nNever use this flag against a shared development, qualification,\npre-production, or production database. Use an isolated disposable Kickoff\nenvironment and verify the configured database names first.\n\n## What local evidence does and does not prove\n\n| Gate | Local proof | Still required before production |\n| --- | --- | --- |\n| Framework | Clean build, generated contracts, governance, dependency audit, and automated suites | Deployment-image and target-runtime confirmation |\n| Kickoff | Integrated runtime, documentation, lifecycle, and business-user smoke journey | Production topology and operational ownership |\n| Axis | Formatting, lint, type safety, automated tests, and production bundle | Supported browser/device and human assistive-technology matrix |\n| Redis | Real local cache and distributed-registry behavior | Managed TLS/authentication, topology, isolation, failover, and recovery |\n| Payments/providers | Mock and offline contract behavior | Real non-production credentials, callbacks, failure handling, and rollback |\n\nLocal success must never be translated into `productionApproved: true`. The\nreport fixes this value to `false` and keeps every external evidence class at\n`NOT_EXECUTED`.\n\n## Production-only evidence register\n\nNamed owners must attach evidence for all applicable rows:\n\n| Evidence | Accountable owner | Minimum completion evidence |\n| --- | --- | --- |\n| Peak load | Performance owner | Workload model, dataset, topology, p95/p99, throughput, error rate, saturation, queue age, projection lag, and integrity reconciliation |\n| Soak | Operations owner | Sustained duration, memory/CPU trends, retry growth, drift, storage/index growth, and post-run reconciliation |\n| Penetration | Security owner | Authenticated attack surface, tenant isolation, validation, replay, export, webhook, and privilege-escalation results with disposition |\n| Managed cache failover | Platform owner | TLS/authentication, topology, tenant isolation, node/provider loss, recovery time, and data-consistency results |\n| Backup and restore | Data owner | Backup identity, restore procedure, authoritative counts/hashes, projection rebuild, and reconciliation |\n| Regional residency | Infrastructure and privacy owners | Allowed-region routing, evacuation, deletion propagation, and cross-region leakage results |\n| RPO/RTO | Operations owner | Measured recovery point and recovery time compared with approved objectives |\n| External providers | Provider owners | Credential source, consent, callbacks, residency, observability, degraded behavior, rollback, and key rotation |\n| Accessibility | Product accessibility owner | Keyboard, screen reader, zoom/reflow, contrast, browser, and supported-device results |\n\n## Recommended execution order\n\n```mermaid\nflowchart TD\n  Plan[\"Print qualification plan\"] --> Local[\"Run safe local evidence\"]\n  Local --> Fresh{\"Isolated fresh environment available?\"}\n  Fresh -- \"yes\" --> Bootstrap[\"Run bounded fresh bootstrap\"]\n  Fresh -- \"no\" --> Provision[\"Provision qualification environment\"]\n  Bootstrap --> Provision\n  Provision --> Providers[\"Qualify managed cache and external providers\"]\n  Providers --> Load[\"Run peak load and soak\"]\n  Load --> Recovery[\"Run failover, backup restore, and RPO/RTO\"]\n  Recovery --> Security[\"Complete penetration and residency review\"]\n  Security --> Accessibility[\"Complete human accessibility matrix\"]\n  Accessibility --> Review[\"Accountable-owner evidence review\"]\n  Review --> Decision{\"All gates passed or residual risk accepted?\"}\n  Decision -- \"no\" --> Hold[\"Keep publication blocked\"]\n  Decision -- \"yes\" --> Release[\"Approve merge, tag, and publication\"]\n```\n\nRun functional success paths before destructive resilience tests. Run load\nbefore failover only when the test plan explicitly needs a stable baseline.\nRestore the environment and reconcile data after every destructive exercise.\n\n## Failure and recovery\n\nThe runner continues through local gates so one report shows every attempted\ncheck. Any non-zero command becomes `FAILED` with a stable failure code; raw\nenvironment variables and secrets are excluded. Investigate the owning\nrepository first, rerun the focused failing command, then rerun the pack.\n\nIf Redis is unavailable, start or configure an approved test endpoint and set\n`NODICS_CACHE_REDIS_URL` only in the execution environment. Do not commit it.\nIf the framework, Axis, or Kickoff checkout lives elsewhere, provide\n`NODICS_QUALIFICATION_FRAMEWORK_ROOT` or `NODICS_QUALIFICATION_AXIS_ROOT`.\n\n## Customization boundary\n\nThis runner belongs to the reference customer project because it coordinates a\nspecific multi-repository deployment journey. A real customer project should\ncopy the pattern into its own project tooling, change only its repository\ncoordinates and qualification gates, and retain the safety properties:\n\n- dry plan by default;\n- destructive checks explicitly opted in;\n- no secrets or provider URLs in reports;\n- external evidence remains separate from local automation;\n- no automatic production approval;\n- named owners and measurable completion criteria.\n\nDo not move customer workloads, credentials, environments, acceptance targets,\nor risk decisions into `nodics.ai`. Framework modules own reusable contracts;\nthe customer deployment owns its qualification and release decision.\n\n## Common mistakes\n\n- Treating local Redis as proof of a managed Redis topology, TLS, authentication,\n  failover, or regional recovery.\n- Calling mock Stripe or offline provider contracts a live-provider test.\n- running `--include-fresh` without checking that the target is the isolated\n  Kickoff local environment;\n- publishing the generated JSON as a production approval even though it records\n  only command outcomes and fixes `productionApproved` to `false`;\n- pasting secrets, bearer tokens, provider URLs, customer data, or raw security\n  findings into a shared evidence report;\n- accepting average latency while ignoring p95/p99, errors, saturation, queue\n  age, projection lag, and post-run data integrity;\n- running failover or restore exercises without a rollback plan and named\n  operational owner;\n- letting Axis automation replace keyboard, screen-reader, zoom, contrast, and\n  supported-device testing by a qualified human;\n- merging or tagging merely because local gates passed while production-only\n  evidence still says `NOT_EXECUTED`.\n\n## Verification\n\nDevelopers can verify the runner contract without starting the full stack:\n\n```bash\nnpm run test:qualification\nnpm run qualification:deployment\n```\n\nConfirm the plan contains five non-destructive local gates, nine explicit\nexternal gates, no environment values, and `productionApproved: false`. Then\nrun `npm run qualification:deployment:local` in the prepared local workspace.\nConfirm every attempted local gate is `PASSED`, the report is written only\nunder the ignored `envs/kickoffLocal/generated` path, and all production-only\ngates remain visible.\n\nOperators should archive the local report with the immutable repository commit\nidentifiers, deployment image identifiers, environment name, external test\nreports, and accountable-owner decisions. Before approval, independently\nconfirm that each external result belongs to the same release candidate and\nenvironment topology. A missing, stale, differently scoped, or unverifiable\nartifact remains pending; silence is never a pass.\n",
+      "previous": {
+        "title": "Local acceptance checklist",
+        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+      },
+      "next": {
+        "title": "Customer customization guide",
+        "route": "/docs/nodics-kickoff/kickoff-customization"
+      },
+      "source": {
+        "repository": "nodics.kickoff",
+        "functionalModule": "nodics.kickoff",
+        "technicalModule": "kickoffLocal",
+        "path": "data/core/source/documentation/pages/deployment-qualification.md",
+        "wordCount": 1078,
+        "checksum": "878403101cf7672ea77dca3f72daed9a73eb53b1193439fa8b45ae0041308aac"
+      }
+    },
+    "active": true
+  },
+  "record5": {
     "code": "kickoffDocsComponentkickoffCustomization",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -2357,8 +2730,8 @@ module.exports = {
       ],
       "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. # Customer Customization Guide\n\nKickoff is intentionally small. It should teach partners how to customize\nNodics safely without turning the reference project into another framework\nrepository.\n\nFor a beginner developer, the most important lesson is restraint. Do not start\nby editing framework files because they are easy to find. Start by asking who\nowns the behavior, whether configuration can solve the need, and which runtime\nserver should load the customization. That habit keeps the customer project\nupgradeable.\n\n## Why customization needs rules\n\nMost enterprise projects start with one urgent customer request. The quickest\nsolution is often to edit whatever file is easiest to find. That works for a\ndemo, but it becomes expensive when more customers, tenants, brands, modules,\nand releases arrive. Nodics customization rules keep the framework upgradeable\nand keep customer behavior visible in the customer project.\n\nThe rule is simple: customize in the most specific owner that needs the\nchange. Use configuration before code. Use a project module before editing a\nframework module. Use a later-loaded extension module before forking a standard\nfunctional module. Create a new functional module only when the business\ncapability is genuinely new.\n\n## Customization decision tree\n\nUse this decision tree before changing code:\n\n```mermaid\nflowchart TD\n  Need[\"Need to change behavior or content\"] --> Config{\"Can configuration solve it?\"}\n  Config -- \"yes\" --> Env[\"Use project, environment, server, node, tenant, or provider configuration\"]\n  Config -- \"no\" --> Existing{\"Does an existing functional module own it?\"}\n  Existing -- \"yes\" --> ProjectModule{\"Is it customer-specific?\"}\n  ProjectModule -- \"yes\" --> Overlay[\"Create or update a customer/project module loaded after the framework owner\"]\n  ProjectModule -- \"no\" --> Framework[\"Change the owning framework module with tests and docs\"]\n  Existing -- \"no\" --> NewModule[\"Design a new functional module with explicit ownership\"]\n  Env --> Verify[\"Regenerate artifacts and run acceptance\"]\n  Overlay --> Verify\n  Framework --> Verify\n  NewModule --> Verify\n```\n\nIf you cannot answer the ownership question, do not code yet. A wrong owner is\nmore expensive than a missing implementation because it creates a hidden\ncontract future teams will inherit.\n\n## How a developer or AI tool should think\n\nKickoff is a reference customer project, so every change teaches future\ncustomers what “good” looks like. A developer or AI tool should not behave like\na script that only edits the nearest file. It should behave like a small expert\nteam:\n\n| Role | What to check in Kickoff |\n| --- | --- |\n| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |\n| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |\n| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |\n| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |\n| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |\n| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |\n| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |\n\nIf the answer is unclear, stop and name the ownership decision before editing.\nFor example, changing the local WCMS database name belongs in server\nconfiguration, while changing the import checksum rule belongs in the owning\nframework import service.\n\n## File placement examples\n\nUse these examples when deciding where code or data belongs:\n\n| Need | Correct owner | Why |\n| --- | --- | --- |\n| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |\n| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |\n| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |\n| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |\n| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |\n| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |\n\n## Configuration-first examples\n\nConfiguration-first does not mean \"put everything in properties.\" It means use\nthe correct configuration owner before writing code.\n\n| Example change | Better first move | Why |\n| --- | --- | --- |\n| Local WCMS port must change | Server config under `envs/.../wcmsServer/config` | Port is topology, not shared framework behavior. |\n| A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |\n| A local dependency path differs | `.env` with `NODICS_FRAMEWORK_ROOT`, then `configure:framework` | Workspace layout is developer-specific. |\n| A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |\n| A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |\n| A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |\n\n## Safe customization model\n\nCustomer projects can add project modules under `modules/` and environment or\nserver contributions under `envs/`. These contributions load after standard\nNodics functional modules and can override or extend services through the\nnormal module merge process.\n\nSafe customizations include:\n\n- project-specific configuration;\n- customer modules such as `kickoffCore`, `kickoffApi`, or `kickoffInt`;\n- customer extension modules such as a future `kickoff.platform`;\n- environment-specific properties for local, testing, pre-production, and\n  production;\n- project-owned CMS documentation content packs;\n- sample data or initialization flows that belong to the customer project.\n\n## Two customization types\n\n### Code-level customization\n\nUse code-level customization when behavior changes: a service needs different\nlogic, a route needs a project-specific policy, a schema needs project fields,\nor an integration must call a customer system. Keep the implementation in a\nKickoff module or a customer extension module. Add tests next to the changed\nowner and document the boundary in the module README or documentation page.\n\nExample mental model:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nHere `kickoff.platform` can override or compose Platform services because it\nloads later. Axis and BackOffice should still show the functional capability as\nPlatform unless the customer intentionally exposes a new business capability.\n\n### Axis and WCMS customization\n\nUse governed frontend customization when an administrator changes content,\nlabels, navigation, documentation, images, or page composition through Axis\nand WCMS. The browser renderer stays in `nodics.axis`; the content records live\nin the backend owner. For example, changing a demo site logo should become a\ngoverned WCMS, Media, or content update, not a hard-coded replacement inside\nthe Axis source repository.\n\n### Documentation customization\n\nDocumentation customization is content customization. If a customer wants\ntheir own onboarding guide, project setup page, API usage note, operational\nrunbook, or business process explanation, the content belongs in the customer\nproject documentation pack.\n\nThe source lives under:\n\n```text\ndata/core/source/documentation/\n  catalogue.json\n  pages/\n```\n\nThe generated files live under:\n\n```text\ndata/core/data/documentation/\nmanifest/docs-content-pack.json\n```\n\nEdit the source, bump the catalogue version, regenerate, test, import, and\nverify in Axis. Never hand-edit the generated CMS records to make a page look\nright.\n\n## What not to customize in Kickoff\n\nDo not copy Core, Platform, WCMS, Cron, or Axis source into Kickoff. Do not\nrename standard functional identities such as `nodics.platform` just because a\ncustomer extension customizes their behavior. Do not put backend-importable CMS\ndata into the frontend repository. Do not place framework documentation in the\ncustomer project unless it is truly project-specific guidance.\n\n## Extension example\n\nA customer may later create a module such as `kickoff.platform` to customize\nPlatform behavior. A Platform server could load:\n\n```text\nnodics.core\nnodics.platform\nkickoff.platform\nnodics.kickoff\nkickoffLocal\nplatformServer\n```\n\nBackOffice and Axis should still present the functional capability as Platform\nunless the customer explicitly exposes a separate functional module. The\nextension changes implementation; it does not create a new product identity.\n\n## Documentation rule\n\nCustomer documentation follows the same ownership rule:\n\n- framework guidance goes to `nodics.docs`;\n- Axis product guidance goes to Platform `modules/axis`;\n- Kickoff/project guidance goes to `nodics.kickoff`;\n- browser rendering remains in `nodics.axis`.\n\nWhen Kickoff docs change, update the source page, bump the catalogue version if\nthe generated content changes, regenerate the pack, import it through WCMS, and\nverify the route in Axis.\n\n## Step-by-step: add a small project module\n\n1. Create or choose a module under `modules/`.\n2. Give the module a clear package identity and index so load order is\n   intentional.\n3. Add only project-owned services, data, configuration, or routes.\n4. Register the module in the relevant environment/server composition.\n5. Start the server and verify logs show the module loading after framework\n   modules.\n6. Add or update tests proving the project behavior.\n7. Update Kickoff documentation if the customization is part of the reference\n   journey.\n\n### Example: adding a project service\n\nSuppose a customer wants a project-only greeting service for a demo dashboard.\nThe safe thought process is:\n\n1. The behavior is not framework-wide.\n2. The behavior belongs to the customer project.\n3. The implementation should live under a project module, for example\n   `modules/kickoffCore`.\n4. The service should be exported so a later module can override or compose it.\n5. A test should prove the default behavior and the override path.\n6. The documentation should explain the example if it teaches future partners.\n\nDo not add that demo service to `nodics.core` only because every runtime loads\nCore. Core is the shared foundation, not a bucket for convenient code.\n\nDo not use this flow to move framework behavior into Kickoff. If the behavior\nbelongs to Core, Platform, WCMS, Cron, or Media for all customers, propose and\nimplement it in the owning framework module instead.\n\n## Step-by-step: add project documentation\n\n1. Add or update Markdown under\n   `data/core/source/documentation/pages/`.\n2. Update `data/core/source/documentation/catalogue.json`.\n3. Bump the catalogue version when generated content changes.\n4. Run `npm run docs:generate`.\n5. Run `npm run test:documentation`.\n6. Import or update the content pack through Axis.\n7. Open the generated `/docs/nodics-kickoff` route in Axis and verify\n   navigation, search, headings, and previous/next links.\n\n## DevOps and rollback notes\n\nProject customizations should be deployable and reversible. Keep project\nconfiguration separate from private secrets. Record which environment and\nserver a customization affects. If a release fails, rollback should remove or\ndisable the project layer without requiring a framework source rollback.\n\nOperators should be able to answer three questions during rollback: which\nproject module introduced the change, which server graph loaded it, and which\ncontent-pack or configuration version went live. If those answers are unclear,\nthe customization is not ready for a production environment.\n\nGenerated documentation and seed data should be versioned immutably. If content\nchanges with the same version, the import service should reject it so operators\ndo not silently install a different release under an already-trusted identity.\n\n## Common mistakes\n\n- Editing framework files for a project-only demonstration change.\n- Treating the reference project name as a requirement for every customer\n  project.\n- Putting customer documentation into the framework docs module.\n- Changing a standard functional module identity when only a customer overlay\n  is being added.\n- Copying whole framework property trees into an environment/server config\n  instead of overriding only the narrow property the project needs.\n- Editing generated documentation data after a checksum failure instead of\n  updating source Markdown, regenerating, and bumping the release when\n  required.\n\n## Verification\n\nVerify a customer customization from the outside and from the owner. From the\noutside, start the relevant local server, open Axis, and confirm the visible\nbehavior changes only for the project that owns it. From the owner, run the\nproject tests, regenerate project documentation content when docs changed,\nvalidate the content-pack manifest, and run the local acceptance script when\nruntime, import, module registry, documentation, or Axis behavior is affected.\n\nIf a customization changes Platform, WCMS, Cron, or another framework\ncapability through a project overlay, the evidence must show both the default\nframework behavior and the project-specific override. A beginner should be\nable to read the evidence and understand where the change lives, why it does\nnot fork the framework, and how to remove or roll it back.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Local runtime topology](local-runtime.md)\n",
       "previous": {
-        "title": "Local acceptance checklist",
-        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+        "title": "Deployment qualification",
+        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
       },
       "next": null,
       "source": {

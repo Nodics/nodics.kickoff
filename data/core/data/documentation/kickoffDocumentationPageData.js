@@ -89,6 +89,31 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "kickoffDocsPagekickoffDeploymentQualification",
+    "name": "Deployment qualification",
+    "cmsSite": [
+      "kickoffDocumentationSite"
+    ],
+    "typeCode": "kickoffDocumentationArticlePageType",
+    "template": "kickoffDocumentationArticleTemplate",
+    "renderer": "documentation.page.article",
+    "cmsComponents": [
+      {
+        "target": "kickoffDocumentationNavigation",
+        "slot": "navigation",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "kickoffDocsComponentkickoffDeploymentQualification",
+        "slot": "article",
+        "index": 10,
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  "record4": {
     "code": "kickoffDocsPagekickoffCustomization",
     "name": "Customer customization guide",
     "cmsSite": [

@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "documents": [
@@ -27,6 +27,14 @@
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
       "content": "data/core/source/documentation/pages/local-acceptance-checklist.md"
+    },
+    {
+      "id": "kickoff.deployment-qualification",
+      "title": "Deployment qualification",
+      "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "kickoffLocal",
+      "content": "data/core/source/documentation/pages/deployment-qualification.md"
     },
     {
       "id": "kickoff.customization",

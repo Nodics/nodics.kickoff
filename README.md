@@ -99,6 +99,24 @@ module/documentation/Cron lifecycle smoke gates through the composed
 `--leave-started`. Stop Platform, WCMS, Process, and Axis before using the
 fresh command so the bootstrap is truly from zero.
 
+After local acceptance, use the project-owned deployment qualification pack:
+
+```text
+npm run qualification:deployment
+npm run qualification:deployment:local
+```
+
+The first command prints a non-mutating plan. The second runs the strict
+framework release gate, retained-data project acceptance, Axis verification,
+and live Redis contracts, then writes sanitized local evidence under
+`envs/kickoffLocal/generated/deployment-qualification/`. It never approves
+production. Peak load, soak, penetration, managed-provider failover,
+backup/restore, measured RPO/RTO, residency, real external providers, and human
+accessibility remain named-owner deployment gates. See the generated Kickoff
+documentation page “Deployment qualification” for the beginner and operator
+journey. The bounded fresh-database variant requires the explicit
+`--include-fresh` flag.
+
 Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
 located at the default sample location. The value may be absolute or relative
 to this Nodics Kickoff project root. `npm run configure:framework` creates generated

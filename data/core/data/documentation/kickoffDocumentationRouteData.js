@@ -50,6 +50,18 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "kickoffDocsRoutekickoffDeploymentQualification",
+    "site": "kickoffDocumentationSite",
+    "path": "/docs/nodics-kickoff/kickoff-deployment-qualification",
+    "locale": "en",
+    "channel": "web",
+    "page": "kickoffDocsPagekickoffDeploymentQualification",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "AUTHENTICATED",
+    "active": true
+  },
+  "record4": {
     "code": "kickoffDocsRoutekickoffCustomization",
     "site": "kickoffDocumentationSite",
     "path": "/docs/nodics-kickoff/kickoff-customization",

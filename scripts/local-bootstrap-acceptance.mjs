@@ -581,7 +581,7 @@ async function main() {
   if (noisy.length > 0) {
     throw new Error(`Startup emitted error-level output:\n${noisy.join("\n")}`);
   }
-  log("fresh local bootstrap acceptance completed successfully");
+  log(`${dropLocalDb ? 'fresh' : 'retained-data'} local bootstrap acceptance completed successfully`);
 }
 
 main()
