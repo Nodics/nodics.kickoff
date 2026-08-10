@@ -14,7 +14,9 @@ module.exports = {
             allowedOrigins: [
                 'http://localhost:3100',
                 'http://127.0.0.1:3100',
-                'http://172.20.10.2:3100'
+                'http://172.20.10.2:3100',
+                'http://localhost:3200',
+                'http://127.0.0.1:3200'
             ],
             allowedMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
             allowedHeaders: [

@@ -1,0 +1,768 @@
+/*
+ *  Copyright (c) 2026 Nodics All rights reserved.
+ *
+ *  This source code is licensed under the license found in the
+ *  LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+/** @description Nexus corporate CMS components. */
+module.exports = {
+  "record0": {
+    "code": "nexusHomeBannerCarousel",
+    "typeCode": "nexusBannerCarouselType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "rotationIntervalMs": 10000,
+      "fadeDurationMs": 1400,
+      "imageTransitionMs": 1800,
+      "automaticRotation": true,
+      "transitionStrategy": "RANDOM"
+    },
+    "subComponents": [
+      {
+        "target": "nexusMicroservicesBanner",
+        "slot": "slides",
+        "index": 10,
+        "active": true
+      },
+      {
+        "target": "nexusModularBanner",
+        "slot": "slides",
+        "index": 20,
+        "active": true
+      },
+      {
+        "target": "nexusSecureBanner",
+        "slot": "slides",
+        "index": 30,
+        "active": true
+      }
+    ]
+  },
+  "record1": {
+    "code": "nexusMicroservicesBanner",
+    "typeCode": "nexusBannerSlideType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "title": "Microservices architecture",
+      "heading": "Enterprise capabilities that evolve independently.",
+      "subheading": "Compose focused services through governed APIs, explicit ownership and observable runtime contracts.",
+      "referenceImageCode": "nodicsMicroservicesHero",
+      "imageAlt": "Connected services representing the Nodics microservices architecture",
+      "buttons": [
+        {
+          "label": "Explore Nodics",
+          "href": "#platform",
+          "style": "PRIMARY"
+        },
+        {
+          "label": "Read documentation",
+          "href": "https://docs.nodics.in",
+          "style": "SECONDARY"
+        }
+      ]
+    }
+  },
+  "record2": {
+    "code": "nexusModularBanner",
+    "typeCode": "nexusBannerSlideType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "title": "AI-enabled and modular",
+      "heading": "Build with clear boundaries, not framework forks.",
+      "subheading": "Use governed AI assistance for coding and administration while keeping decisions, permissions, and project ownership explicit.",
+      "referenceImageCode": "nodicsModularHero",
+      "imageAlt": "Composable modules representing the Nodics modular framework",
+      "buttons": [
+        {
+          "label": "Explore features",
+          "href": "/#features",
+          "style": "PRIMARY"
+        },
+        {
+          "label": "Developer journey",
+          "href": "/developers",
+          "style": "SECONDARY"
+        }
+      ]
+    }
+  },
+  "record3": {
+    "code": "nexusSecureBanner",
+    "typeCode": "nexusBannerSlideType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "title": "Secure enterprise framework",
+      "heading": "Govern every journey from contract to operation.",
+      "subheading": "Make identity, authorization, data boundaries, observability and operational controls explicit from the start.",
+      "referenceImageCode": "nodicsSecureHero",
+      "imageAlt": "Protected enterprise data flows representing Nodics security",
+      "buttons": [
+        {
+          "label": "Explore the ecosystem",
+          "href": "/ecosystem",
+          "style": "PRIMARY"
+        },
+        {
+          "label": "Contact Nodics",
+          "href": "/contact",
+          "style": "SECONDARY"
+        }
+      ]
+    }
+  },
+  "record4": {
+    "code": "nexusHomeAbout",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "aboutus",
+      "kicker": "About Nodics",
+      "heading": "An AI-enabled application factory for durable enterprise platforms.",
+      "body": "Nodics combines governed AI assistance for coding and administration with modular runtime composition, content, commerce, workflow, communication, security, and operational contracts—without forcing customers into a framework fork.",
+      "metrics": [
+        {
+          "value": "01",
+          "label": "Composable foundation"
+        },
+        {
+          "value": "02",
+          "label": "AI-assisted delivery"
+        },
+        {
+          "value": "03",
+          "label": "Governed operation"
+        }
+      ],
+      "href": "/about",
+      "linkLabel": "Discover our story",
+      "referenceImageCode": "nodicsAboutCollaboration",
+      "imageAlt": "Enterprise engineers collaborating around connected modular Nodics capabilities and a governed AI module"
+    }
+  },
+  "record5": {
+    "code": "nexusHomeWhy",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "features",
+      "kicker": "Framework features",
+      "heading": "Everything needed to compose, operate, and evolve enterprise journeys.",
+      "referenceImageCode": "nodicsFeaturesArchitecture",
+      "imageAlt": "A gold service module completing an interconnected Nodics enterprise capability system",
+      "href": "/features",
+      "linkLabel": "Explore all features",
+      "items": [
+        {
+          "symbol": "AI",
+          "title": "AI-enabled delivery",
+          "text": "Assist developers with coding and Axis administrators with governed operational work, while preserving human authority and auditability."
+        },
+        {
+          "symbol": "MOD",
+          "title": "Modular architecture",
+          "text": "Compose independently owned capabilities through explicit, upgradeable contracts."
+        },
+        {
+          "symbol": "µS",
+          "title": "Microservices runtime",
+          "text": "Deploy focused services with governed APIs, configuration, discovery, and health visibility."
+        },
+        {
+          "symbol": "CMS",
+          "title": "Content experiences",
+          "text": "Model catalogs, pages, components, renderers, media, and channel-specific delivery."
+        },
+        {
+          "symbol": "COM",
+          "title": "Commerce journeys",
+          "text": "Connect product, pricing, promotion, inventory, checkout, order, and fulfillment capabilities."
+        },
+        {
+          "symbol": "WF",
+          "title": "Workflow automation",
+          "text": "Coordinate human and system work through observable processes, tasks, triggers, and schedules."
+        },
+        {
+          "symbol": "SEC",
+          "title": "Security and operations",
+          "text": "Make identity, authorization, audit, observability, and operational controls explicit."
+        }
+      ]
+    }
+  },
+  "record6": {
+    "code": "nexusHomeProducts",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "products",
+      "kicker": "Nodics products",
+      "heading": "Focused products built on the Nodics foundation.",
+      "body": "Use productized capabilities where a reusable enterprise journey needs more than framework primitives, while retaining modular ownership and governed extension points.",
+      "items": [
+        {
+          "symbol": "TEE",
+          "title": "Task Execution Engine",
+          "text": "A reusable execution product for persisted scheduling, distributed task coordination, retries, operational visibility, and controlled execution across enterprise applications."
+        },
+        {
+          "symbol": "DEAP",
+          "title": "Data Engineering & Analytics Platform",
+          "text": "A governed data product direction for source onboarding, ingestion, transformation, quality, analysis, visualization, and publishing to approved destinations."
+        }
+      ]
+    }
+  },
+  "record7": {
+    "code": "nexusHomePlatform",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "platform",
+      "kicker": "Platform overview",
+      "heading": "One governed, AI-enabled foundation composed for each journey.",
+      "referenceImageCode": "oxaviaHeroTwo",
+      "imageAlt": "Team collaborating around a table",
+      "items": [
+        {
+          "title": "Framework",
+          "text": "Reusable functional modules, contracts, and AI-ready context."
+        },
+        {
+          "title": "Kickoff",
+          "text": "Runnable reference backend and project data for AI-assisted implementation."
+        },
+        {
+          "title": "Axis",
+          "text": "BackOffice administration with governed AI assistance for operators."
+        },
+        {
+          "title": "Nexus",
+          "text": "Public corporate and demonstration experiences."
+        }
+      ],
+      "href": "/platform",
+      "linkLabel": "See the platform"
+    }
+  },
+  "record8": {
+    "code": "nexusHomeTechnology",
+    "typeCode": "nexusTechnologyType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Technology stack",
+      "heading": "Modern tools behind governed, AI-enabled enterprise delivery.",
+      "referenceImageCode": "nodicsAboutArchitecture",
+      "imageAlt": "Enterprise architects collaboratively mapping a governed technology journey",
+      "items": [
+        "AI-assisted engineering",
+        "AI-assisted administration",
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "React",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch",
+        "Apache Kafka",
+        "ActiveMQ",
+        "OpenAPI",
+        "Container-ready"
+      ]
+    }
+  },
+  "record9": {
+    "code": "nexusHomeSupport",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "support",
+      "kicker": "Customer support",
+      "heading": "Contracted support with clear accountability.",
+      "body": "Choose coverage around your operating model, then manage every issue through agreed severity, response, communication, escalation, and resolution practices. The targets shown are the proposed Nodics model and become binding only through an executed support agreement.",
+      "href": "/contact",
+      "linkLabel": "Discuss a support contract",
+      "items": [
+        {
+          "symbol": "CONTRACT",
+          "title": "Choose your coverage",
+          "text": "Select Standard business-hours, Priority extended-hours, or Enterprise 24×7 coverage. The agreement defines supported environments, channels, contacts, exclusions, and service targets."
+        },
+        {
+          "symbol": "RESPONSE",
+          "title": "Respond by business impact",
+          "text": "Proposed initial-response targets: Critical 30 minutes, High 2 hours, Standard 8 business hours, and Guidance 1 business day—subject to the contracted support level."
+        },
+        {
+          "symbol": "RESOLVE",
+          "title": "Restore, resolve, and learn",
+          "text": "A named owner coordinates triage and updates, restores service first, then drives the permanent correction and root-cause review. Resolution timing depends on cause, access, and customer or vendor dependencies."
+        }
+      ]
+    }
+  },
+  "record10": {
+    "code": "nexusHomeDevelopers",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "AI-enabled developer experience",
+      "heading": "Run the reference solution, then build with an informed AI collaborator.",
+      "body": "Start the framework, Kickoff, Axis, and Nexus locally. Let AI inspect the working contracts and accelerate project-owned code, configuration, tests, and integrations without hiding architectural decisions.",
+      "href": "/developers",
+      "linkLabel": "Developer journey",
+      "referenceImageCode": "nodicsDeveloperExperience",
+      "imageAlt": "Enterprise software engineer working with a connected modular application architecture"
+    }
+  },
+  "record11": {
+    "code": "nexusHomeGithub",
+    "typeCode": "nexusGithubType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "GitHub and open source",
+      "heading": "One workspace. Four clear project responsibilities.",
+      "body": "Explore the framework, reference runtime, administrative experience, and public storefront together. Each repository owns a distinct layer while participating in one end-to-end Nodics developer journey.",
+      "organizationHref": "https://github.com/Nodics",
+      "organizationLabel": "Explore the Nodics organization",
+      "developerKicker": "AI-enabled developer experience",
+      "developerHeading": "Run the reference solution, then build with an informed AI collaborator.",
+      "developerBody": "Start the framework, Kickoff, Axis, and Nexus locally. Let AI inspect the working contracts and accelerate project-owned code, configuration, tests, and integrations without hiding architectural decisions.",
+      "developerHref": "/developers",
+      "developerLinkLabel": "Developer journey",
+      "referenceImageCode": "nodicsDeveloperExperience",
+      "imageAlt": "Enterprise software engineer working with a connected modular application architecture",
+      "repositories": [
+        {
+          "name": "nodics.ai",
+          "role": "Framework",
+          "description": "Enterprise framework, modular contracts, reusable capabilities, and governed runtime foundations.",
+          "href": "https://github.com/Nodics/nodics.ai"
+        },
+        {
+          "name": "nodics.kickoff",
+          "role": "Reference runtime",
+          "description": "Runnable project composition, environment configuration, and reference data for local evaluation.",
+          "href": "https://github.com/Nodics/nodics.kickoff"
+        },
+        {
+          "name": "nodics.axis",
+          "role": "Administration",
+          "description": "BackOffice experience for discovering and operating the capabilities exposed by the runtime.",
+          "href": "https://github.com/Nodics/nodics.axis"
+        },
+        {
+          "name": "nodics.nexus",
+          "role": "Public experience",
+          "description": "Corporate and reference storefront frontend built from backend-managed content components.",
+          "href": "https://github.com/Nodics/nodics.nexus"
+        }
+      ]
+    }
+  },
+  "record12": {
+    "code": "nexusHomeEcosystem",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "ecosystem",
+      "kicker": "Ecosystem and partners",
+      "heading": "Build together without blurring ownership.",
+      "body": "Nodics connects framework maintainers, delivery partners, developers, and customers through explicit contracts. Reuse what belongs to the platform, extend what belongs to the project, and contribute improvements at the right boundary.",
+      "items": [
+        {
+          "title": "Build with Nodics",
+          "text": "Developers use documented modules, APIs, renderers, and reference applications to move from evaluation to working journeys."
+        },
+        {
+          "title": "Deliver as a partner",
+          "text": "Implementation partners accelerate customer delivery through reusable expertise while keeping integrations and customization project-owned."
+        },
+        {
+          "title": "Evolve as a customer",
+          "text": "Customers retain control of business policy, data, branding, providers, and operational decisions on an upgradeable foundation."
+        }
+      ],
+      "href": "/ecosystem",
+      "linkLabel": "Explore partnership paths"
+    }
+  },
+  "record13": {
+    "code": "nexusHomeTestimonials",
+    "typeCode": "nexusTestimonialsType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "testimonials",
+      "kicker": "Testimonials",
+      "heading": "Partner and customer perspectives.",
+      "body": "Illustrative profiles preview the intended experience and will be replaced with approved customer testimonials.",
+      "items": [
+        {
+          "quote": "Nodics gave our engineering teams a shared foundation without taking away their freedom to deliver domain-specific experiences.",
+          "name": "Aarohi Mehta",
+          "role": "Illustrative profile · Director of Platform Engineering",
+          "avatarReferenceImageCode": "nexusTestimonialAarohi",
+          "avatarAlt": "Illustrative portrait of Aarohi Mehta"
+        },
+        {
+          "quote": "The modular architecture made complex enterprise boundaries easier to understand, govern, and evolve across delivery teams.",
+          "name": "Marcus Reed",
+          "role": "Illustrative profile · Enterprise Solutions Architect",
+          "avatarReferenceImageCode": "nexusTestimonialMarcus",
+          "avatarAlt": "Illustrative portrait of Marcus Reed"
+        },
+        {
+          "quote": "With Axis and AI-assisted workflows, our teams can move from configuration to a working customer journey with far greater clarity.",
+          "name": "Daniel Kim",
+          "role": "Illustrative profile · Head of Commerce Technology",
+          "avatarReferenceImageCode": "nexusTestimonialDaniel",
+          "avatarAlt": "Illustrative portrait of Daniel Kim"
+        }
+      ],
+      "emptyMessage": "Verified partner and customer perspectives are being prepared."
+    }
+  },
+  "record14": {
+    "code": "nexusHomeNews",
+    "typeCode": "nexusNewsCarouselType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "news",
+      "kicker": "Latest news",
+      "heading": "What is taking shape across Nodics.",
+      "items": [
+        {
+          "label": "Local preview",
+          "title": "Nodics Nexus brings the public experience into the reference workspace.",
+          "summary": "The corporate site now resolves backend-managed pages and components through WCMS while keeping executable renderers inside the Nexus frontend.",
+          "referenceImageCode": "nodicsMicroservicesHero",
+          "imageAlt": "Connected enterprise services representing the Nodics Nexus local preview"
+        },
+        {
+          "label": "Platform evolution",
+          "title": "AI-enabled engineering and administration become first-class capabilities.",
+          "summary": "Nodics now presents governed AI assistance as part of developer delivery and Axis administration, with human authority, permissions, and auditability kept explicit.",
+          "referenceImageCode": "nodicsSecureHero",
+          "imageAlt": "Governed AI-enabled enterprise platform controls"
+        },
+        {
+          "label": "Documentation gateway",
+          "title": "Framework knowledge is being prepared for docs.nodics.in.",
+          "summary": "Nexus will connect visitors to the existing backend-managed documentation experience while documentation ownership remains with its source modules.",
+          "referenceImageCode": "nodicsAboutArchitecture",
+          "imageAlt": "Enterprise architects preparing a connected documentation gateway"
+        }
+      ]
+    }
+  },
+  "record15": {
+    "code": "nexusHomeBlogs",
+    "typeCode": "nexusBlogCarouselType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "blogs",
+      "kicker": "From the Nodics blog",
+      "heading": "Architecture, delivery, and enterprise evolution.",
+      "items": [
+        {
+          "label": "Architecture",
+          "title": "Why enterprise platforms need explicit module ownership.",
+          "summary": "Clear capability boundaries reduce duplicated authority, customer forks, and the cost of change as a platform grows.",
+          "href": "https://docs.nodics.in",
+          "linkLabel": "Explore the architecture",
+          "referenceImageCode": "nodicsFeaturesArchitecture",
+          "imageAlt": "A modular enterprise capability completing a connected architecture"
+        },
+        {
+          "label": "Developer journey",
+          "title": "From framework checkout to a working reference experience.",
+          "summary": "Run the framework, Kickoff, Axis, and Nexus together, understand the contracts, then customize only what the customer project owns.",
+          "href": "https://docs.nodics.in",
+          "linkLabel": "Open the developer guide",
+          "referenceImageCode": "oxaviaAboutOne",
+          "imageAlt": "Developer working with the Nodics reference workspace"
+        },
+        {
+          "label": "Responsible AI",
+          "title": "Designing AI assistance without surrendering human authority.",
+          "summary": "AI can accelerate coding and administration while permissions, approvals, audit trails, and business decisions remain governed.",
+          "href": "https://docs.nodics.in",
+          "linkLabel": "Read the guidance",
+          "referenceImageCode": "nodicsAboutCollaboration",
+          "imageAlt": "Enterprise team collaborating with governed AI assistance"
+        }
+      ]
+    }
+  },
+  "record16": {
+    "code": "nexusHomeContact",
+    "typeCode": "nexusContactType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "contact",
+      "kicker": "Start a conversation",
+      "heading": "Turn your next enterprise challenge into a working journey.",
+      "body": "Tell us where you are starting and what outcome matters. We can explore the framework, shape an implementation path, or define how we work together.",
+      "href": "/contact",
+      "linkLabel": "Start the conversation",
+      "items": [
+        {
+          "title": "Evaluate Nodics",
+          "text": "Understand the framework, reference applications, architecture, and fit for your enterprise landscape."
+        },
+        {
+          "title": "Plan an implementation",
+          "text": "Shape the journey, ownership boundaries, integrations, delivery model, and practical path from reference to production."
+        },
+        {
+          "title": "Build a partnership",
+          "text": "Discuss implementation expertise, reusable contributions, customer delivery, and long-term ecosystem participation."
+        }
+      ],
+      "referenceImageCode": "nodicsContactArchitecture",
+      "imageAlt": "Modern enterprise innovation center with connected golden modular light nodes",
+      "formKicker": "Contact Nodics",
+      "formHeading": "Let's start working.",
+      "formBody": "Share a little about your organization, the journey you want to create, and where you need support. The form is presented for local experience validation while secure submission is being implemented.",
+      "formFields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "name": "email",
+          "label": "Business email",
+          "type": "email"
+        },
+        {
+          "name": "company",
+          "label": "Company",
+          "type": "text"
+        },
+        {
+          "name": "conversationType",
+          "label": "Conversation type",
+          "type": "text"
+        },
+        {
+          "name": "message",
+          "label": "Message",
+          "multiline": true
+        }
+      ],
+      "formSubmitLabel": "Send enquiry",
+      "formStatus": "Online submission will be enabled with the approved contact service."
+    }
+  },
+  "record17": {
+    "code": "nexusAboutContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "About us",
+      "heading": "Nodics exists to make enterprise change manageable.",
+      "body": "The platform connects reusable capabilities, project-owned customization, governed AI assistance, content, BackOffice operations, and public experiences while keeping human authority, permissions, and auditability explicit."
+    }
+  },
+  "record18": {
+    "code": "nexusFeaturesContent",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Features",
+      "heading": "Enterprise capabilities designed to work together.",
+      "items": [
+        {
+          "title": "AI-enabled engineering",
+          "text": "Use context-aware assistance for coding, configuration, testing, documentation, and framework customization."
+        },
+        {
+          "title": "AI-enabled administration",
+          "text": "Assist Axis operators with discovery, guided actions, diagnostics, and governed administrative workflows."
+        },
+        {
+          "title": "Modular architecture",
+          "text": "Compose independently owned capabilities through explicit contracts."
+        },
+        {
+          "title": "Microservices ready",
+          "text": "Deploy and evolve services around clear runtime and data boundaries."
+        },
+        {
+          "title": "Secure by design",
+          "text": "Build identity, authorization, governance, auditability, and observability into every journey."
+        }
+      ]
+    }
+  },
+  "record19": {
+    "code": "nexusSupportContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Support",
+      "heading": "Get the guidance needed to move from evaluation to delivery.",
+      "body": "Use Nodics documentation and approved support channels for framework evaluation, implementation planning, technical questions, and operational guidance.",
+      "href": "https://docs.nodics.in",
+      "linkLabel": "Open documentation"
+    }
+  },
+  "record20": {
+    "code": "nexusInvestorsContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Investors",
+      "heading": "Help shape a durable enterprise technology ecosystem.",
+      "body": "Connect with Nodics to discuss the platform vision, ecosystem strategy, and responsible opportunities to support its growth.",
+      "href": "/contact",
+      "linkLabel": "Contact Nodics"
+    }
+  },
+  "record21": {
+    "code": "nexusDonateContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Donate",
+      "heading": "Support the continued development of Nodics.",
+      "body": "Donation options will be published after the approved contribution channel and governance process are available. Contact Nodics if you would like to help today.",
+      "href": "/contact",
+      "linkLabel": "Contact Nodics"
+    }
+  },
+  "record22": {
+    "code": "nexusPlatformContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Platform",
+      "heading": "A modular, AI-enabled enterprise application framework.",
+      "body": "Nodics combines AI-assisted engineering and administration with runtime composition, content, commerce, identity, workflow, communication, media, security, and observability. Detailed architecture and APIs remain in documentation.",
+      "href": "https://docs.nodics.in",
+      "linkLabel": "Open documentation"
+    }
+  },
+  "record23": {
+    "code": "nexusDevelopersContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Developers",
+      "heading": "From checkout to an AI-assisted working reference journey.",
+      "body": "Run nodics.ai, nodics.kickoff, nodics.axis, and nodics.nexus locally. Use Kickoff as the project template, then use AI assistance to understand contracts, rename the solution, and customize project-owned code, data, tests, and integrations.",
+      "href": "https://docs.nodics.in",
+      "linkLabel": "Get started"
+    }
+  },
+  "record24": {
+    "code": "nexusEcosystemContent",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Ecosystem",
+      "heading": "Connect framework maintainers, partners, developers, and customers.",
+      "items": [
+        {
+          "title": "Evaluate",
+          "text": "Run a complete local reference experience."
+        },
+        {
+          "title": "Implement",
+          "text": "Customize data, integrations, providers, and presentation."
+        },
+        {
+          "title": "Contribute",
+          "text": "Improve reusable capability contracts without customer coupling."
+        }
+      ]
+    }
+  },
+  "record25": {
+    "code": "nexusTestimonialsContent",
+    "typeCode": "nexusTestimonialsType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Testimonials",
+      "heading": "Approved experiences from the Nodics ecosystem.",
+      "items": [],
+      "emptyMessage": "No verified public testimonials are available yet."
+    }
+  },
+  "record26": {
+    "code": "nexusContactContent",
+    "typeCode": "nexusContactType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Contact us",
+      "heading": "Tell us what you want to build.",
+      "body": "Use an approved Nodics contact channel for framework evaluation, implementation, partnership, or contribution.",
+      "emailLabel": "Email Nodics",
+      "emailHref": "mailto:nodics.framework@gmail.com"
+    }
+  },
+  "record27": {
+    "code": "nexusPrivacyContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Legal",
+      "heading": "Privacy Policy",
+      "body": "Publication requires approved legal copy. This local placeholder must not be deployed as production policy."
+    }
+  },
+  "record28": {
+    "code": "nexusTermsContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Legal",
+      "heading": "Terms of Use",
+      "body": "Publication requires approved legal copy. This local placeholder must not be deployed as production terms."
+    }
+  },
+  "record29": {
+    "code": "nexusCookiesContent",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Legal",
+      "heading": "Cookie Policy",
+      "body": "The initial local site uses no marketing cookies. Production policy must reflect the deployed analytics and consent configuration."
+    }
+  }
+};

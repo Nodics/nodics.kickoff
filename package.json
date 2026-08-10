@@ -35,6 +35,9 @@
     "configure:framework": "node src/sync-framework-dependencies.js",
     "docs:generate": "node scripts/generate-documentation-content.mjs",
     "docs:check": "node scripts/generate-documentation-content.mjs --check",
+    "nexus:generate": "node modules/nexusData/scripts/generate-corporate-content.mjs",
+    "nexus:check": "node modules/nexusData/scripts/generate-corporate-content.mjs --check",
+    "nexus:test": "node modules/nexusData/test/nexusCorporateContentContract.test.mjs",
     "start:cron": "node src/start-cron-server.js",
     "start:commerce": "node src/start-commerce-server.js",
     "start:engagement": "node src/start-engagement-server.js",
@@ -52,6 +55,6 @@
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
     "test:qualification": "node test/deploymentQualificationContract.test.mjs",
-    "test": "npm run quality:ownership && npm run test:documentation && npm run test:qualification && npm run prepare:runtime"
+    "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:qualification && npm run prepare:runtime"
   }
 }

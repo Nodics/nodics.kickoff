@@ -1,0 +1,26 @@
+{
+  "policy": "Use nMedia folder nexusContentAssets; browser components reference mediaCode or mediaSetCode only.",
+  "initialAssets": [
+    {"code":"oxaviaHeroOne","source":"https://myrathemes.in/oxavia/images/home/home-bg-3.jpg","localPath":"/assets/reference/oxavia/hero-1.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"oxaviaHeroTwo","source":"https://myrathemes.in/oxavia/images/home/home-bg-2.jpg","localPath":"/assets/reference/oxavia/hero-2.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"oxaviaAboutOne","source":"https://myrathemes.in/oxavia/images/about/1.jpg","localPath":"/assets/reference/oxavia/about-1.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"oxaviaAboutTwo","source":"https://myrathemes.in/oxavia/images/about/2.jpg","localPath":"/assets/reference/oxavia/about-2.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"oxaviaWorkOne","source":"https://myrathemes.in/oxavia/images/portfolio/work-1.jpg","localPath":"/assets/reference/oxavia/work-1.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"oxaviaWorkEight","source":"https://myrathemes.in/oxavia/images/portfolio/work-8.jpg","localPath":"/assets/reference/oxavia/work-8.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"azotaHeroOne","source":"https://up2client.com/envato/azota/assets/images/hero/hero-1.jpg","localPath":"/assets/reference/azota/hero-1.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"azotaHeroTwo","source":"https://up2client.com/envato/azota/assets/images/hero/hero-2.jpg","localPath":"/assets/reference/azota/hero-2.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"azotaHeroThree","source":"https://up2client.com/envato/azota/assets/images/hero/hero-3.jpg","localPath":"/assets/reference/azota/hero-3.jpg","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"nodicsMicroservicesHero","source":"generated-from-axis-auth-microservices","localPath":"/assets/reference/azota/hero-microservices-axis-v2.png","usage":"nodics-generated-banner","replaceBeforePublicRelease":false},
+    {"code":"nodicsModularHero","source":"generated-from-axis-auth-microservices","localPath":"/assets/reference/azota/hero-modular-axis-v2.png","usage":"nodics-generated-banner","replaceBeforePublicRelease":false},
+    {"code":"nodicsSecureHero","source":"generated-from-axis-auth-microservices","localPath":"/assets/reference/azota/hero-secure-axis-v2.png","usage":"nodics-generated-banner","replaceBeforePublicRelease":false},
+    {"code":"nodicsContactArchitecture","source":"generated-for-nexus-contact","localPath":"/assets/nodics/contact/contact-architecture-v1.png","usage":"nodics-generated-contact-visual","replaceBeforePublicRelease":false},
+    {"code":"nodicsDeveloperExperience","source":"generated-for-nexus-developer-experience","localPath":"/assets/nodics/developers/ai-assisted-engineering-v1.png","usage":"nodics-generated-developer-visual","replaceBeforePublicRelease":false},
+    {"code":"azotaAboutOne","source":"https://up2client.com/envato/azota/assets/images/about/about-1.png","localPath":"/assets/reference/azota/about-1.png","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"azotaSkillOne","source":"https://up2client.com/envato/azota/assets/images/skill/skill-1.png","localPath":"/assets/reference/azota/skill-1.png","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"azotaContactOne","source":"https://up2client.com/envato/azota/assets/images/contact/contact-1.png","localPath":"/assets/reference/azota/contact-1.png","usage":"temporary-local-reference","replaceBeforePublicRelease":true},
+    {"code":"nexusTestimonialAarohi","source":"generated-fictional-profile","localPath":"/assets/nodics/testimonials/aarohi-mehta-illustrative.png","usage":"illustrative-testimonial-profile","replaceBeforePublicRelease":true},
+    {"code":"nexusTestimonialMarcus","source":"generated-fictional-profile","localPath":"/assets/nodics/testimonials/marcus-reed-illustrative.png","usage":"illustrative-testimonial-profile","replaceBeforePublicRelease":true},
+    {"code":"nexusTestimonialDaniel","source":"generated-fictional-profile","localPath":"/assets/nodics/testimonials/daniel-kim-illustrative.png","usage":"illustrative-testimonial-profile","replaceBeforePublicRelease":true}
+  ],
+  "legacyAssetRule": "No WordPress stock image is approved for production use without recorded provenance and rights approval."
+}

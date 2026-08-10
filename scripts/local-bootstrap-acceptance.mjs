@@ -67,6 +67,14 @@ const documentationPacks = [
     site: "kickoffDocumentationSite",
   },
 ];
+const nexusPacks = [
+  {
+    code: "nexusCorporate",
+    minimumRoutes: 10,
+    site: "nexusCorporateSite",
+  },
+];
+const contentPacks = [...documentationPacks, ...nexusPacks];
 const expectedCatalogs = Object.freeze([
   Object.freeze({
     code: "axisContentCatalog",
@@ -78,6 +86,10 @@ const expectedCatalogs = Object.freeze([
   }),
   Object.freeze({
     code: "documentationContentCatalog",
+    catalogType: "CONTENT",
+  }),
+  Object.freeze({
+    code: "nexusContentCatalog",
     catalogType: "CONTENT",
   }),
   Object.freeze({
@@ -310,8 +322,8 @@ function requireModule(modules, functionalModule, label) {
   return match;
 }
 
-async function importDocumentationPacks(headers) {
-  for (const pack of documentationPacks) {
+async function importContentPacks(headers) {
+  for (const pack of contentPacks) {
     const packCode = pack.code;
     const status = await requestJson(
       wcmsUrl,
@@ -334,6 +346,41 @@ async function importDocumentationPacks(headers) {
       throw new Error(`${packCode} is ${String(current.state)} after import`);
     }
     log(`${packCode} is CURRENT (${current.installedVersion})`);
+  }
+}
+
+async function verifyNexusRecords() {
+  const script = [
+    `const packs=${JSON.stringify(nexusPacks)};`,
+    'const d=db.getSiblingDB("kickoffLocalWcms");',
+    "const results=packs.map(pack => ({",
+    "  code: pack.code,",
+    "  site: pack.site,",
+    "  sites: d.CmsSiteModel.countDocuments({ code: pack.site }),",
+    "  routes: d.CmsPageRouteModel.countDocuments({ site: pack.site }),",
+    "  pages: d.CmsPageModel.countDocuments({ cmsSite: pack.site })",
+    "}));",
+    "print(JSON.stringify(results));",
+  ].join("\n");
+  const { stdout } = await execFileAsync(
+    "mongosh",
+    ["--quiet", "--eval", script],
+    { cwd: projectRoot },
+  );
+  log(`Nexus records ${stdout.trim()}`);
+  const results = JSON.parse(stdout);
+  for (const result of results) {
+    const pack = nexusPacks.find((item) => item.code === result.code);
+    if (
+      !pack ||
+      result.sites !== 1 ||
+      result.routes < pack.minimumRoutes ||
+      result.pages < pack.minimumRoutes
+    ) {
+      throw new Error(
+        `Nexus records are not healthy for ${result.code}: ${JSON.stringify(result)}`,
+      );
+    }
   }
 }
 
@@ -549,8 +596,9 @@ async function main() {
     "nodics.process",
     "observed modules",
   );
-  await importDocumentationPacks(headers);
+  await importContentPacks(headers);
   await verifyDocumentationRecords();
+  await verifyNexusRecords();
   await verifyWcmsDesignerAuthoringAvailability(headers);
   for (const route of [
     "/",

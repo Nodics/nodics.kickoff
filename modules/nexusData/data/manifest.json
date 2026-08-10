@@ -1,0 +1,45 @@
+{
+  "contractVersion": 2,
+  "module": "nexusData",
+  "sections": {
+    "core": {
+      "kind": "CONTENT_PACK",
+      "contentPath": "core",
+      "pack": "nexus.corporate",
+      "version": "0.5.11",
+      "sourceMode": "structured-json-source",
+      "sourceAuthority": "data/core/source",
+      "sites": [
+        "nexusCorporateSite"
+      ],
+      "catalogs": [
+        "nexusContentCatalog"
+      ],
+      "accessMode": "PUBLIC",
+      "pages": 14,
+      "components": 30,
+      "routes": 14,
+      "releaseChecksum": "23e6626802fef42726acc73b7fd296ca41668caf675b86a9bcbf1a8eafb3c962",
+      "sourceHashes": {
+        "core/source/catalog/corporate-catalog.json": "c2a9276cdab8f45942efafd384da626906cc206f54c6379423604a50e6cb4147",
+        "core/source/site/corporate-site.json": "ce34e166805ca2db65adbcf7a6712e399f71bc452e5627fb147e674e0cd0c30f",
+        "core/source/media/corporate-media.json": "a127d49c0a53c98b053b9028c1a371a84d5b830ceda76e6b9dc9dd33bf1a5a0c",
+        "core/source/content/corporate-content.json": "3d5c566d8a66b7a79fca84f197ff31df0d649f78cd44891d777f20d006d02279"
+      },
+      "generatedHashes": {
+        "core/data/corporate/nexusCatalogData.js": "5117aebe336ed06e2a1f6d97dbe87de7aa09c7621532fd612e7243d908476997",
+        "core/data/corporate/nexusSiteData.js": "f15dada9930d58f1d22d22837ac199d31f207116faa69be2a830aa5100f55c87",
+        "core/data/corporate/nexusTypeCodeData.js": "f4a247818780be031325e7714ae1414fd3a54c1f34d81680978026cba3c6d88f",
+        "core/data/corporate/nexusRendererData.js": "4a599f85a9d426f15de0f3e46a00e8e9690663abef7acdf886b72ea388af090a",
+        "core/data/corporate/nexusComponentTypeGroupData.js": "81fda572a522ca95563b7fd83d4b448c89cb36e3e3baebd021e7fb04bec5572d",
+        "core/data/corporate/nexusTemplateData.js": "494159a9c701f8c90b3b9523ce48ac5d62fb6a7546d4d1e49c620d99d6e4e82b",
+        "core/data/corporate/nexusSlotData.js": "f6b39507b7178b0be62f1feae5ca1f9944f91bc93f457e70f0966f1b3c5610d4",
+        "core/data/corporate/nexusComponentData.js": "fdac4043ecbba3c2ddca750e65a25b94652f90b289d11c7fd3cde4d9aaaeb0ee",
+        "core/data/corporate/nexusPageData.js": "3b4d8e28d24cd786c29807dbfc9a3e0cba8e4812d52e04e5bc88054a6e4b307c",
+        "core/data/corporate/nexusRouteData.js": "3a11a1a0276af37e72adcb3f9432402fdfb741041bbaee1dd435830ed11da5e9",
+        "core/data/corporate/nexusNavigationData.js": "acf380207fe4a6b25ec1a6fb257726ec67996cdfc7e82e5f25dcda64eae3eb75",
+        "core/headers/nexusCorporateContentHeader.js": "be89c76adefe3bb4bb73f5dce8344b75586035ba954dce9b8ee70b40bf3bebc1"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "nexusData",
+  "version": "0.1.0",
+  "index": "3100.21",
+  "private": true,
+  "description": "Project-owned corporate content data for Nodics Nexus.",
+  "main": "nodics.js",
+  "scripts": {
+    "generate": "node scripts/generate-corporate-content.mjs",
+    "check": "node scripts/generate-corporate-content.mjs --check",
+    "test": "node test/nexusCorporateContentContract.test.mjs"
+  },
+  "nodics": {
+    "kind": "content-pack",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["configuration", "data", "test", "documentation"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Nexus Data"
+  }
+}
