@@ -72,5 +72,17 @@ module.exports = {
     "deliveryState": "ONLINE",
     "accessMode": "AUTHENTICATED",
     "active": true
+  },
+  "record5": {
+    "code": "kickoffDocsRoutekickoffFunctionalJourneys",
+    "site": "kickoffDocumentationSite",
+    "path": "/docs/nodics-kickoff/kickoff-functional-journeys",
+    "locale": "en",
+    "channel": "web",
+    "page": "kickoffDocsPagekickoffFunctionalJourneys",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "AUTHENTICATED",
+    "active": true
   }
 };

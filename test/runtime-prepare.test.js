@@ -32,12 +32,15 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'platformServer',
-        frameworkModules: Object.freeze(['nodics.platform']),
+        frameworkModules: Object.freeze(['nodics.platform', 'nodics.localization']),
         expectedModules: Object.freeze([
             'nodics.core',
             'nodics.platform',
             'profile',
             'backoffice',
+            'localizationCore',
+            'localizationApi',
+            'nodics.localization',
             'nodics.kickoff',
             'kickoffCore',
             'kickoffApi',
@@ -99,7 +102,11 @@ const scenarios = Object.freeze([
             'kickoffLocal',
             'processServer'
         ]),
-        expectedApiExposure: Object.freeze(['processManagement'])
+        expectedApiExposure: Object.freeze(['processManagement']),
+        verify: function () {
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalProcess');
+            assert.equal(CONFIG.get('database').cronjob.mongodb.master.databaseName, 'kickoffLocalCron');
+        }
     })
 ]);
 

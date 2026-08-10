@@ -137,5 +137,30 @@ module.exports = {
       }
     ],
     "active": true
+  },
+  "record5": {
+    "code": "kickoffDocsPagekickoffFunctionalJourneys",
+    "name": "Commerce and Engagement functional journeys",
+    "cmsSite": [
+      "kickoffDocumentationSite"
+    ],
+    "typeCode": "kickoffDocumentationArticlePageType",
+    "template": "kickoffDocumentationArticleTemplate",
+    "renderer": "documentation.page.article",
+    "cmsComponents": [
+      {
+        "target": "kickoffDocumentationNavigation",
+        "slot": "navigation",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "kickoffDocsComponentkickoffFunctionalJourneys",
+        "slot": "article",
+        "index": 10,
+        "active": true
+      }
+    ],
+    "active": true
   }
 };

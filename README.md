@@ -88,6 +88,7 @@ You can also run the automated local acceptance gates:
 ```text
 npm run acceptance:local
 npm run acceptance:local:fresh
+npm run acceptance:capability-registry
 ```
 
 `acceptance:local` verifies the currently running local stack without dropping
@@ -98,6 +99,12 @@ module/documentation/Cron lifecycle smoke gates through the composed
 `processServer`. It stops the servers it started unless you pass
 `--leave-started`. Stop Platform, WCMS, Process, and Axis before using the
 fresh command so the bootstrap is truly from zero.
+
+`acceptance:capability-registry` is non-destructive to business data and expects
+Platform plus the consolidated Process server to be running. It verifies that
+Process and Cron are observed through `processServer`, temporarily exercises
+Process registration and Axis activation, proves disabled Cron remains hidden,
+and restores the original functional-module lifecycle state.
 
 After local acceptance, use the project-owned deployment qualification pack:
 

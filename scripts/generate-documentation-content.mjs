@@ -7,7 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cataloguePath = path.join(root, 'data/core/source/documentation/catalogue.json');
 const dataRoot = path.join(root, 'data/core');
 const dataPath = path.join(dataRoot, 'data/documentation');
-const manifestPath = path.join(root, 'manifest/docs-content-pack.json');
+const manifestPath = path.join(root, 'data/manifest.json');
 const checkOnly = process.argv.includes('--check');
 const copyrightHeader = `/*
     Nodics - Enterprice Micro-Services Management Framework
@@ -441,7 +441,7 @@ for (const [relativePath, content] of Object.entries(files)) {
 
 const generatedHashes = Object.fromEntries(
   Object.keys(files).map((relativePath) => [
-    relativePath,
+    relativePath.replace(/^data\//, ''),
     sha256(fs.readFileSync(path.join(root, relativePath))),
   ]),
 );
@@ -451,10 +451,11 @@ const releaseChecksum = sha256(
     .map((fileName) => `${fileName}:${generatedHashes[fileName]}`)
     .join('|'),
 );
-const manifest = {
+const documentationSection = {
+  kind: 'CONTENT_PACK',
+  contentPath: 'core',
   pack: catalogue.pack,
   version: catalogue.version,
-  contractVersion: catalogue.contractVersion,
   sourceMode: 'catalogue-markdown-source',
   sourceAuthority: 'data/core/source/documentation/catalogue.json',
   sites: ['kickoffDocumentationSite'],
@@ -465,7 +466,15 @@ const manifest = {
   releaseChecksum,
   generatedHashes,
 };
+const previousManifest = fs.existsSync(manifestPath)
+  ? JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+  : { contractVersion: 2, module: 'nodics.kickoff', sections: {} };
+const manifest = {
+  contractVersion: 2,
+  module: 'nodics.kickoff',
+  sections: { ...(previousManifest.sections || {}), documentation: documentationSection },
+};
 
-await writeOrCheck('manifest/docs-content-pack.json', `${JSON.stringify(manifest, null, 2)}\n`);
+await writeOrCheck('data/manifest.json', `${JSON.stringify(manifest, null, 2)}\n`);
 
 console.log(`${checkOnly ? 'Validated' : 'Generated'} ${sourcePages.length} Kickoff documentation pages`);

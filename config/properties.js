@@ -11,7 +11,8 @@ module.exports = Object.freeze({
                     source: Object.freeze({
                         type: 'LOCAL_PROJECT',
                         contentPath: 'data/core',
-                        manifestPath: 'manifest/docs-content-pack.json'
+                        manifestPath: 'data/manifest.json',
+                        manifestSection: 'documentation'
                     }),
                     updatePolicy: Object.freeze({
                         allowDowngrade: false,

@@ -1,0 +1,33 @@
+{
+  "contractVersion": 2,
+  "module": "nodics.kickoff",
+  "sections": {
+    "documentation": {
+      "kind": "CONTENT_PACK",
+      "contentPath": "core",
+      "pack": "nodics.kickoff",
+      "version": "0.5.1",
+      "sourceMode": "catalogue-markdown-source",
+      "sourceAuthority": "data/core/source/documentation/catalogue.json",
+      "sites": [
+        "kickoffDocumentationSite"
+      ],
+      "accessMode": "AUTHENTICATED",
+      "pages": 6,
+      "components": 7,
+      "routes": 6,
+      "releaseChecksum": "e69243ec1ad4a9c0ffcf1514e1b304ea8e60cc2c029c0b2ae3632100a666dcb7",
+      "generatedHashes": {
+        "core/data/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "core/data/documentation/kickoffDocumentationTypeCodeData.js": "d460a5c337beaf18229ba62707d2b44b75bea7aafdd56168e8d50ca8398d7d83",
+        "core/data/documentation/kickoffDocumentationRendererData.js": "dc62c929243dbec941213af98ae859abd5dfbff78f534a21af18c382107b10a7",
+        "core/data/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "core/data/documentation/kickoffDocumentationTemplateData.js": "a0f3d02988f650d82f0907fed7646e2379652d64df09dc7433f0fc704f57eb8f",
+        "core/data/documentation/kickoffDocumentationComponentData.js": "1708ac2068eb9021f7fbc53fee347aa6135abbbe3313374494a935c52c9c5b1f",
+        "core/data/documentation/kickoffDocumentationPageData.js": "e15bbbd4aa51463e6aaa69f44a7d980d1840b251ef9bce1cce9435ad27217cbe",
+        "core/data/documentation/kickoffDocumentationRouteData.js": "db6b863242961e0fd55979f73abde6cde72f457682a2b51ce14a6b8ca7897b2c",
+        "core/headers/kickoffDocumentationContentPackHeader.js": "ea7720255c19510e9adabd2a3eaa60de8efd9ea915dc3f0860e1ffb4787635f4"
+      }
+    }
+  }
+}

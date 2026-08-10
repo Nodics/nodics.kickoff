@@ -9,6 +9,7 @@ module.exports = Object.freeze({
     CUSTOM_HOME: path.resolve(__dirname, '..'),
     MODULE_ROOTS: Object.freeze([
         packageRoot('nodics.core'),
+        packageRoot('nodics.localization'),
         packageRoot('nodics.platform'),
         path.resolve(__dirname, '..')
     ]),

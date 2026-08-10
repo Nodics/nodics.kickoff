@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.3.0",
+  "version": "0.5.1",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "documents": [
@@ -43,6 +43,14 @@
       "functionalModule": "nodics.kickoff",
       "technicalModule": "modules",
       "content": "data/core/source/documentation/pages/customization-guide.md"
+    },
+    {
+      "id": "kickoff.functional-journeys",
+      "title": "Commerce and Engagement functional journeys",
+      "summary": "Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "kickoffLocal",
+      "content": "data/core/source/documentation/pages/functional-journeys.md"
     }
   ]
 }

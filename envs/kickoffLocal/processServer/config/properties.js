@@ -35,6 +35,13 @@ module.exports = {
                     databaseName: 'kickoffLocalProcess'
                 }
             }
+        },
+        cronjob: {
+            mongodb: {
+                master: {
+                    databaseName: 'kickoffLocalCron'
+                }
+            }
         }
     },
     servers: {

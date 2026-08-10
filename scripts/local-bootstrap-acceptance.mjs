@@ -38,6 +38,8 @@ const mongoDatabases = [
   "kickoffLocalWcms",
   "kickoffLocalCron",
   "kickoffLocalProcess",
+  "kickoffLocalEngagement",
+  "kickoffLocalCommerce",
 ];
 const documentationPacks = [
   {
@@ -92,6 +94,8 @@ const localPorts = [
   { label: "Platform", port: 4300 },
   { label: "WCMS", port: 4310 },
   { label: "Process", port: 4330 },
+  { label: "Engagement", port: 4340 },
+  { label: "Commerce", port: 4350 },
   { label: "Axis", port: 3100 },
 ];
 const managedProcesses = [];
@@ -193,7 +197,7 @@ async function assertFreshResetPortsAvailable() {
       [
         "Fresh database bootstrap requires the local stack to be stopped first.",
         `Busy ports: ${busy.join(", ")}.`,
-        "Stop Platform, WCMS, Process, and Axis before running acceptance:local:fresh,",
+        "Stop Platform, WCMS, Process, Engagement, Commerce, and Axis before running acceptance:local:fresh,",
         "or run npm run acceptance:local for a non-destructive verification against the current stack.",
       ].join(" "),
     );

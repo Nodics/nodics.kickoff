@@ -26,6 +26,7 @@
     "nodics.communication": "file:.nodics/framework/nodics.communication",
     "nodics.cron": "file:.nodics/framework/nodics.cron",
     "nodics.engagement": "file:.nodics/framework/nodics.engagement",
+    "nodics.localization": "file:.nodics/framework/nodics.localization",
     "nodics.platform": "file:.nodics/framework/nodics.platform",
     "nodics.process": "file:.nodics/framework/nodics.process",
     "nodics.wcms": "file:.nodics/framework/nodics.wcms"
@@ -42,6 +43,8 @@
     "start:wcms": "node src/start-wcms-server.js",
     "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
+    "acceptance:functional": "node scripts/functional-journey-acceptance.mjs",
+    "acceptance:capability-registry": "node scripts/capability-registry-acceptance.mjs",
     "qualification:deployment": "node scripts/deployment-qualification.mjs",
     "qualification:deployment:local": "node scripts/deployment-qualification.mjs --execute-local",
     "quality:ownership": "node .nodics/framework/nodics.core/modules/nTooling/bin/nodics-tool.js quality:ownership --home=.",

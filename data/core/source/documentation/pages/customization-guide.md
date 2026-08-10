@@ -166,7 +166,7 @@ The generated files live under:
 
 ```text
 data/core/data/documentation/
-manifest/docs-content-pack.json
+data/manifest.json
 ```
 
 Edit the source, bump the catalogue version, regenerate, test, import, and

@@ -22,8 +22,8 @@ data/
     data/
       documentation/
     headers/
-manifest/
-  docs-content-pack.json
+data/
+  manifest.json
 ```
 
 - Use that structure for Kickoff setup, demo business flows, sample data,

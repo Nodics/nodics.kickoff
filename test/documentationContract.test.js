@@ -15,7 +15,8 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const properties = require('../config/properties');
-const manifest = require('../manifest/docs-content-pack.json');
+const manifestEnvelope = require('../data/manifest.json');
+const manifest = manifestEnvelope.sections.documentation;
 const catalogue = require('../data/core/source/documentation/catalogue.json');
 const siteRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationSiteData'));
 const pageRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPageData'));
@@ -60,9 +61,10 @@ function assertDocumentationDepth(document) {
 }
 
 assert.strictEqual(catalogue.pack, 'nodics.kickoff');
+assert.strictEqual(manifestEnvelope.contractVersion, 2);
+assert.strictEqual(manifestEnvelope.module, 'nodics.kickoff');
 assert.strictEqual(manifest.pack, 'nodics.kickoff');
 assert.strictEqual(manifest.version, catalogue.version);
-assert.strictEqual(manifest.contractVersion, 1);
 assert.deepStrictEqual(manifest.sites, ['kickoffDocumentationSite']);
 assert.strictEqual(manifest.pages, catalogue.documents.length);
 assert.strictEqual(contentPack.enabled, true);
@@ -70,7 +72,8 @@ assert.strictEqual(contentPack.manifestPack, 'nodics.kickoff');
 assert.deepStrictEqual(contentPack.source, {
     type: 'LOCAL_PROJECT',
     contentPath: 'data/core',
-    manifestPath: 'manifest/docs-content-pack.json'
+    manifestPath: 'data/manifest.json',
+    manifestSection: 'documentation'
 });
 assert.strictEqual(contentPack.updatePolicy.sameVersionContentChange, 'REJECT');
 assert.strictEqual(capability.enabled, true);
@@ -106,7 +109,7 @@ routeRecords.forEach(route => {
 });
 
 Object.entries(manifest.generatedHashes).forEach(([relativePath, hash]) => {
-    assert(fs.existsSync(path.join(root, relativePath)), relativePath + ' must exist');
+    assert(fs.existsSync(path.join(root, 'data', relativePath)), relativePath + ' must exist');
     assert.strictEqual(typeof hash, 'string');
     assert.strictEqual(hash.length, 64);
 });
