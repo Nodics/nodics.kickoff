@@ -20,6 +20,11 @@ const loginId = process.env.AXIS_LOGIN_ID || 'admin';
 const password = process.env.AXIS_PASSWORD || 'adminPassword';
 const functionalModule = 'nodics.process';
 const unwrap = value => value?.result || value?.data || value;
+const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+const restorableState = state => ({
+  registrationState: state.registrationState,
+  enabled: state.registrationState === 'REGISTERED' ? state.enabled : false,
+});
 
 async function request(path, token, options = {}) {
   const response = await fetch(new URL(path, platformUrl), {
@@ -45,6 +50,24 @@ async function transition(token, action, revision) {
   });
 }
 
+async function waitForRegistrationState(token, expected) {
+  let registration;
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    registration = await request(
+      `/nodics/backoffice/v0/runtime/modules/registrations/${functionalModule}?project=${project}`,
+      token,
+    );
+    if (
+      registration.registrationState === expected.registrationState &&
+      registration.enabled === expected.enabled
+    ) {
+      return registration;
+    }
+    await delay(100);
+  }
+  return registration;
+}
+
 async function main() {
   const authentication = await request('/nodics/profile/v0/employee/browser/authenticate', undefined, {
     method: 'POST',
@@ -61,6 +84,7 @@ async function main() {
   assert.deepEqual(cron.observedServers, ['kickoffLocal:processServer:default'], 'Cron must not require standalone cronServer');
 
   const original = { registrationState: process.registrationState, enabled: process.enabled };
+  const expectedRestored = restorableState(original);
   let registeredByTest = false;
   let activatedByTest = false;
   try {
@@ -79,9 +103,12 @@ async function main() {
     if (activatedByTest) process = await transition(token, 'deactivate', process.catalogueRevision);
     if (registeredByTest) process = await transition(token, 'deregister', process.catalogueRevision);
   }
-  const restored = await request(`/nodics/backoffice/v0/runtime/modules/registrations/${functionalModule}?project=${project}`, token);
-  assert.equal(restored.registrationState, original.registrationState);
-  assert.equal(restored.enabled, original.enabled);
+  const restored = await waitForRegistrationState(token, expectedRestored);
+  console.log(
+    `Capability Registry restored state: original=${JSON.stringify(original)}, expected=${JSON.stringify(expectedRestored)}, restored=${JSON.stringify({ registrationState: restored.registrationState, enabled: restored.enabled })}`,
+  );
+  assert.equal(restored.registrationState, expectedRestored.registrationState);
+  assert.equal(restored.enabled, expectedRestored.enabled);
   console.log('Capability Registry acceptance passed: consolidated runtime, activation projection, isolation, and state restoration');
 }
 

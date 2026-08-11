@@ -22,61 +22,121 @@ module.exports = {
     "active": true
   },
   "record2": {
-    "code": "nexusBannerCarouselType",
+    "code": "nexusPageHeroType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record3": {
-    "code": "nexusBannerSlideType",
+    "code": "nexusBannerCarouselType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record4": {
-    "code": "nexusContentSectionType",
+    "code": "nexusBannerSlideType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record5": {
-    "code": "nexusCardGridType",
+    "code": "nexusContentSectionType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record6": {
-    "code": "nexusTechnologyType",
+    "code": "nexusCardGridType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record7": {
-    "code": "nexusGithubType",
+    "code": "nexusTechnologyType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record8": {
-    "code": "nexusTestimonialsType",
+    "code": "nexusGithubType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record9": {
-    "code": "nexusNewsCarouselType",
+    "code": "nexusTestimonialsType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record10": {
-    "code": "nexusBlogCarouselType",
+    "code": "nexusNewsCarouselType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true
   },
   "record11": {
+    "code": "nexusBlogCarouselType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record12": {
     "code": "nexusContactType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record13": {
+    "code": "nexusEditorialListingType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record14": {
+    "code": "nexusEditorialCardType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record15": {
+    "code": "nexusEditorialDetailType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record16": {
+    "code": "nexusEditorialFeaturedType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record17": {
+    "code": "nexusEditorialLatestType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record18": {
+    "code": "nexusEditorialTaxonomyType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record19": {
+    "code": "nexusEditorialAuthorType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record20": {
+    "code": "nexusEditorialRelatedType",
+    "kind": "COMPONENT",
+    "contractVersion": 1,
+    "active": true
+  },
+  "record21": {
+    "code": "nexusEditorialSeriesType",
     "kind": "COMPONENT",
     "contractVersion": 1,
     "active": true

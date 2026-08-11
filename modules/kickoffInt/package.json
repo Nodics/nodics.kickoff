@@ -16,6 +16,9 @@
         "url": "https://github.com/Nodics/nodics.kickoff.git"
     },
     "dependencies": {},
+    "scripts": {
+        "test": "node --test test/*.test.mjs"
+    },
     "nodics": {
         "kind": "capability",
         "runtimeModule": true,

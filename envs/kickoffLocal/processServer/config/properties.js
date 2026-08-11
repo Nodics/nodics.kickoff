@@ -44,6 +44,34 @@ module.exports = {
             }
         }
     },
+    process: {
+        actionAdapters: {
+            allowedActions: [
+                {
+                    moduleName: 'nodics.process',
+                    operation: 'noop',
+                    description: 'Safe no-op adapter for framework smoke tests and beginner demos'
+                },
+                {
+                    moduleName: 'editorial',
+                    operation: 'applyDecision',
+                    service: 'DefaultKickoffEditorialProcessAdapterService',
+                    method: 'applyDecision',
+                    description: 'Delegates Editorial approval decisions from Process to the WCMS-owned Editorial API'
+                },
+                {
+                    moduleName: 'editorial',
+                    operation: 'publishApproved',
+                    service: 'DefaultKickoffEditorialProcessAdapterService',
+                    method: 'publishApproved',
+                    description: 'Delegates approved Editorial publication from Process to the WCMS-owned Editorial API'
+                }
+            ]
+        }
+    },
+    editorialProcessAdapter: {
+        wcmsBaseUrl: 'http://127.0.0.1:4310'
+    },
     servers: {
         default: {
             endpoint: {

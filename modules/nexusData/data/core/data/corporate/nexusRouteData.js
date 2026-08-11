@@ -46,6 +46,18 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "nexusProductsRoute",
+    "path": "/products",
+    "page": "nexusProductsPage",
+    "site": "nexusCorporateSite",
+    "locale": "en",
+    "channel": "web",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "PUBLIC",
+    "active": true
+  },
+  "record4": {
     "code": "nexusSupportRoute",
     "path": "/support",
     "page": "nexusSupportPage",
@@ -57,7 +69,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record4": {
+  "record5": {
     "code": "nexusInvestorsRoute",
     "path": "/investors",
     "page": "nexusInvestorsPage",
@@ -69,7 +81,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "nexusDonateRoute",
     "path": "/donate",
     "page": "nexusDonatePage",
@@ -81,7 +93,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record6": {
+  "record7": {
     "code": "nexusPlatformRoute",
     "path": "/platform",
     "page": "nexusPlatformPage",
@@ -93,7 +105,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record7": {
+  "record8": {
     "code": "nexusDevelopersRoute",
     "path": "/developers",
     "page": "nexusDevelopersPage",
@@ -105,7 +117,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record8": {
+  "record9": {
     "code": "nexusEcosystemRoute",
     "path": "/ecosystem",
     "page": "nexusEcosystemPage",
@@ -117,7 +129,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record9": {
+  "record10": {
     "code": "nexusTestimonialsRoute",
     "path": "/testimonials",
     "page": "nexusTestimonialsPage",
@@ -129,7 +141,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record10": {
+  "record11": {
     "code": "nexusContactRoute",
     "path": "/contact",
     "page": "nexusContactPage",
@@ -141,7 +153,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record11": {
+  "record12": {
     "code": "nexusPrivacyRoute",
     "path": "/privacy",
     "page": "nexusPrivacyPage",
@@ -153,7 +165,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record12": {
+  "record13": {
     "code": "nexusTermsRoute",
     "path": "/terms",
     "page": "nexusTermsPage",
@@ -165,10 +177,34 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record13": {
+  "record14": {
     "code": "nexusCookiesRoute",
     "path": "/cookies",
     "page": "nexusCookiesPage",
+    "site": "nexusCorporateSite",
+    "locale": "en",
+    "channel": "web",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "PUBLIC",
+    "active": true
+  },
+  "record15": {
+    "code": "nexusEditorialListingRoute",
+    "path": "/editorial",
+    "page": "nexusEditorialListingPage",
+    "site": "nexusCorporateSite",
+    "locale": "en",
+    "channel": "web",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "PUBLIC",
+    "active": true
+  },
+  "record16": {
+    "code": "nexusEditorialDetailRoute",
+    "path": "/blog/editorial-introduction",
+    "page": "nexusEditorialDetailPage",
     "site": "nexusCorporateSite",
     "locale": "en",
     "channel": "web",

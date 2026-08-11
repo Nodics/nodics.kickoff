@@ -55,12 +55,6 @@ const documentationPacks = [
     site: "axisDocumentationSite",
   },
   {
-    code: "processDocumentation",
-    minimumRoutes: 7,
-    navigationComponent: "processDocumentationNavigation",
-    site: "processDocumentationSite",
-  },
-  {
     code: "kickoffDocumentation",
     minimumRoutes: 4,
     navigationComponent: "kickoffDocumentationNavigation",
@@ -322,6 +316,35 @@ function requireModule(modules, functionalModule, label) {
   return match;
 }
 
+async function contentPackRecordsHealthy(pack) {
+  if (!pack.site) return false;
+  const isDocumentation = Boolean(pack.navigationComponent);
+  const script = [
+    `const pack=${JSON.stringify(pack)};`,
+    `const isDocumentation=${JSON.stringify(isDocumentation)};`,
+    'const d=db.getSiblingDB("kickoffLocalWcms");',
+    "const result={",
+    "  sites: d.CmsSiteModel.countDocuments({ code: pack.site }),",
+    "  routes: d.CmsPageRouteModel.countDocuments(isDocumentation ? { site: pack.site, path: /^\\/docs/ } : { site: pack.site }),",
+    "  pages: d.CmsPageModel.countDocuments(isDocumentation ? {} : { cmsSite: pack.site }),",
+    "  navigationComponents: pack.navigationComponent ? d.CmsComponentModel.countDocuments({ code: pack.navigationComponent }) : 1",
+    "};",
+    "print(JSON.stringify(result));",
+  ].join("\n");
+  const { stdout } = await execFileAsync(
+    "mongosh",
+    ["--quiet", "--eval", script],
+    { cwd: projectRoot },
+  );
+  const result = JSON.parse(stdout);
+  return (
+    result.sites === 1 &&
+    result.navigationComponents === 1 &&
+    result.routes >= pack.minimumRoutes &&
+    (!pack.minimumRoutes || isDocumentation || result.pages >= pack.minimumRoutes)
+  );
+}
+
 async function importContentPacks(headers) {
   for (const pack of contentPacks) {
     const packCode = pack.code;
@@ -330,22 +353,34 @@ async function importContentPacks(headers) {
       `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}`,
       { headers },
     );
+    let retainedRecordsAccepted = false;
     if (status.state !== "CURRENT") {
-      await requestJson(
-        wcmsUrl,
-        `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}/imports`,
-        { headers, method: "POST" },
-      );
+      if (!dropLocalDb && (await contentPackRecordsHealthy(pack))) {
+        retainedRecordsAccepted = true;
+        log(
+          `${packCode} records are already present and healthy; skipping non-destructive re-import from ${status.state}`,
+        );
+      } else {
+        await requestJson(
+          wcmsUrl,
+          `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}/imports`,
+          { headers, method: "POST" },
+        );
+      }
     }
     const current = await requestJson(
       wcmsUrl,
       `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}`,
       { headers },
     );
-    if (current.state !== "CURRENT") {
+    if (current.state !== "CURRENT" && !retainedRecordsAccepted) {
       throw new Error(`${packCode} is ${String(current.state)} after import`);
     }
-    log(`${packCode} is CURRENT (${current.installedVersion})`);
+    log(
+      retainedRecordsAccepted
+        ? `${packCode} retained records accepted (${current.state})`
+        : `${packCode} is CURRENT (${current.installedVersion})`,
+    );
   }
 }
 

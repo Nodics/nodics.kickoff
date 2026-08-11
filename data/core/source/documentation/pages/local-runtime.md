@@ -31,8 +31,10 @@ The current local topology uses separate runtime servers:
   It loads Core, Cron, Process, cron jobs, workflow modules, and Kickoff
   project modules. Process owns process/workflow definitions; Cron still owns
   job definitions, triggers, scheduler state, and execution lifecycle.
-- `cronServer` remains available for standalone Cron-focused development. It
-  loads Core, Cron, cron jobs, and Kickoff project modules without Process.
+
+Kickoff intentionally has no standalone Cron server. Scheduled automation is
+available only through `processServer`, preventing accidental duplicate
+scheduler processes while Cron retains ownership of its job lifecycle.
 
 Axis is a separate frontend application. It connects to Platform for employee
 authentication and BackOffice bootstrap, then uses the registered module

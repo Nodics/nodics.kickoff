@@ -209,6 +209,8 @@ module.exports = {
       "kicker": "Nodics products",
       "heading": "Focused products built on the Nodics foundation.",
       "body": "Use productized capabilities where a reusable enterprise journey needs more than framework primitives, while retaining modular ownership and governed extension points.",
+      "href": "/products",
+      "linkLabel": "Explore Nodics products",
       "items": [
         {
           "symbol": "TEE",
@@ -293,8 +295,8 @@ module.exports = {
       "kicker": "Customer support",
       "heading": "Contracted support with clear accountability.",
       "body": "Choose coverage around your operating model, then manage every issue through agreed severity, response, communication, escalation, and resolution practices. The targets shown are the proposed Nodics model and become binding only through an executed support agreement.",
-      "href": "/contact",
-      "linkLabel": "Discuss a support contract",
+      "href": "/support",
+      "linkLabel": "Explore support options",
       "items": [
         {
           "symbol": "CONTRACT",
@@ -482,6 +484,8 @@ module.exports = {
       "anchor": "blogs",
       "kicker": "From the Nodics blog",
       "heading": "Architecture, delivery, and enterprise evolution.",
+      "href": "/editorial",
+      "linkLabel": "View all insights",
       "items": [
         {
           "label": "Architecture",
@@ -576,17 +580,300 @@ module.exports = {
     }
   },
   "record17": {
+    "code": "nexusAboutHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "About Nodics",
+      "heading": "Built to make enterprise change manageable.",
+      "breadcrumbLabel": "About",
+      "body": "Discover the purpose, principles, and people-first thinking behind an AI-enabled framework designed for durable enterprise evolution.",
+      "referenceImageCode": "nodicsAboutArchitecture",
+      "imageAlt": "Enterprise architects shaping a connected modular Nodics platform"
+    }
+  },
+  "record18": {
+    "code": "nexusFeaturesHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Features",
+      "heading": "Capabilities that compose into enterprise journeys.",
+      "breadcrumbLabel": "Features",
+      "body": "Explore the framework capabilities that help teams build, operate, secure, and evolve project-owned experiences on a reusable foundation.",
+      "referenceImageCode": "nodicsFeaturesArchitecture",
+      "imageAlt": "A golden service module completing an interconnected Nodics enterprise capability system"
+    }
+  },
+  "record19": {
+    "code": "nexusProductsHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Products",
+      "heading": "Focused product directions on the Nodics foundation.",
+      "breadcrumbLabel": "Products",
+      "body": "Reusable products package repeatable enterprise needs while keeping ownership, extension, and governance explicit.",
+      "referenceImageCode": "nodicsModularHero",
+      "imageAlt": "Composable modules representing Nodics product directions"
+    }
+  },
+  "record20": {
+    "code": "nexusSupportHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Support",
+      "heading": "Support that moves evaluation into delivery.",
+      "breadcrumbLabel": "Support",
+      "body": "Understand support paths, response expectations, and the practical guidance available for implementation and operation.",
+      "referenceImageCode": "nodicsSecureHero",
+      "imageAlt": "Governed enterprise support and operational controls"
+    }
+  },
+  "record21": {
+    "code": "nexusInvestorsHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Investors",
+      "heading": "Support a durable enterprise technology ecosystem.",
+      "breadcrumbLabel": "Investors",
+      "body": "Connect with Nodics to discuss the platform vision, ecosystem strategy, and responsible growth opportunities.",
+      "referenceImageCode": "nodicsAboutArchitecture",
+      "imageAlt": "Enterprise architects shaping a connected platform strategy"
+    }
+  },
+  "record22": {
+    "code": "nexusDonateHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Support Nodics",
+      "heading": "Help continue the development of Nodics.",
+      "breadcrumbLabel": "Donate",
+      "body": "Approved contribution channels and governance will be published when ready. Until then, contact Nodics to discuss how you can help.",
+      "referenceImageCode": "nodicsAboutCollaboration",
+      "imageAlt": "Enterprise team collaborating around Nodics platform evolution"
+    }
+  },
+  "record23": {
+    "code": "nexusPlatformHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Platform",
+      "heading": "A modular, AI-enabled enterprise application framework.",
+      "breadcrumbLabel": "Platform",
+      "body": "Understand how the framework connects reusable capabilities, project-owned customization, and governed runtime operations.",
+      "referenceImageCode": "nodicsMicroservicesHero",
+      "imageAlt": "Connected services representing the Nodics platform foundation"
+    }
+  },
+  "record24": {
+    "code": "nexusDevelopersHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Developer Experience",
+      "heading": "From checkout to an AI-assisted working reference journey.",
+      "breadcrumbLabel": "Developers",
+      "body": "Run the reference solution locally, understand the contracts in context, then customize only what your customer project owns.",
+      "referenceImageCode": "nodicsDeveloperExperience",
+      "imageAlt": "Enterprise software engineer working with a connected modular application architecture"
+    }
+  },
+  "record25": {
+    "code": "nexusEcosystemHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Ecosystem",
+      "heading": "Build together without blurring ownership.",
+      "breadcrumbLabel": "Ecosystem",
+      "body": "Nodics connects maintainers, partners, developers, and customers through explicit contracts and clean contribution boundaries.",
+      "referenceImageCode": "nodicsAboutCollaboration",
+      "imageAlt": "Enterprise collaborators working across a connected Nodics ecosystem"
+    }
+  },
+  "record26": {
+    "code": "nexusTestimonialsHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Testimonials",
+      "heading": "Perspectives from the Nodics ecosystem.",
+      "breadcrumbLabel": "Testimonials",
+      "body": "Approved customer and partner perspectives will appear here as the public ecosystem grows.",
+      "referenceImageCode": "nodicsAboutArchitecture",
+      "imageAlt": "Enterprise leaders reviewing a connected Nodics platform vision"
+    }
+  },
+  "record27": {
+    "code": "nexusContactHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Contact Nodics",
+      "heading": "Start a conversation about your next enterprise journey.",
+      "breadcrumbLabel": "Contact",
+      "body": "Tell us where you are starting, what outcome matters, and how Nodics can help you evaluate, implement, or partner.",
+      "referenceImageCode": "nodicsContactArchitecture",
+      "imageAlt": "Modern enterprise innovation center with connected golden modular light nodes"
+    }
+  },
+  "record28": {
+    "code": "nexusPrivacyHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Legal",
+      "heading": "Privacy Policy.",
+      "breadcrumbLabel": "Privacy",
+      "body": "Publication requires approved legal copy before production deployment.",
+      "referenceImageCode": "nodicsSecureHero",
+      "imageAlt": "Secure enterprise controls representing Nodics privacy governance"
+    }
+  },
+  "record29": {
+    "code": "nexusTermsHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Legal",
+      "heading": "Terms of Use.",
+      "breadcrumbLabel": "Terms",
+      "body": "Publication requires approved legal copy before production deployment.",
+      "referenceImageCode": "nodicsSecureHero",
+      "imageAlt": "Secure enterprise controls representing Nodics terms governance"
+    }
+  },
+  "record30": {
+    "code": "nexusCookiesHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Legal",
+      "heading": "Cookie Policy.",
+      "breadcrumbLabel": "Cookies",
+      "body": "Production policy must reflect the deployed analytics and consent configuration.",
+      "referenceImageCode": "nodicsSecureHero",
+      "imageAlt": "Secure enterprise controls representing Nodics cookie governance"
+    }
+  },
+  "record31": {
+    "code": "nexusEditorialListingHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Editorial",
+      "heading": "News and insights from the Nodics ecosystem.",
+      "breadcrumbLabel": "Blogs",
+      "body": "Read architecture notes, platform updates, developer guidance, and ecosystem stories as the public editorial capability evolves.",
+      "referenceImageCode": "nodicsAboutArchitecture",
+      "imageAlt": "Enterprise architects preparing a connected documentation and editorial gateway"
+    }
+  },
+  "record32": {
+    "code": "nexusEditorialDetailHero",
+    "typeCode": "nexusPageHeroType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics Blog",
+      "heading": "Build governed editorial journeys.",
+      "breadcrumbLabel": "Article",
+      "body": "A reference article detail showing how Nexus renders editorial content through backend-managed composition.",
+      "referenceImageCode": "nodicsFeaturesArchitecture",
+      "imageAlt": "A modular enterprise capability completing a connected architecture"
+    }
+  },
+  "record33": {
     "code": "nexusAboutContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
     "active": true,
     "properties": {
-      "kicker": "About us",
-      "heading": "Nodics exists to make enterprise change manageable.",
-      "body": "The platform connects reusable capabilities, project-owned customization, governed AI assistance, content, BackOffice operations, and public experiences while keeping human authority, permissions, and auditability explicit."
+      "anchor": "about-story",
+      "kicker": "Our story",
+      "heading": "A platform for change without the cost of constant reinvention.",
+      "body": "Nodics began with a practical belief: enterprise teams should be able to compose sophisticated customer and operational journeys without duplicating foundations or surrendering ownership. The framework connects reusable capabilities, project-owned customization, governed AI assistance, content, commerce, workflow, communication, security, and BackOffice operations through explicit contracts.",
+      "metrics": [
+        {
+          "value": "01",
+          "label": "Framework foundation"
+        },
+        {
+          "value": "02",
+          "label": "Project ownership"
+        },
+        {
+          "value": "03",
+          "label": "Human authority"
+        }
+      ],
+      "referenceImageCode": "nodicsAboutCollaboration",
+      "imageAlt": "Enterprise engineers collaborating with modular Nodics capabilities and governed AI assistance"
     }
   },
-  "record18": {
+  "record34": {
+    "code": "nexusAboutPrinciples",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "anchor": "about-principles",
+      "kicker": "What guides us",
+      "heading": "Designed around boundaries that help teams move faster.",
+      "body": "Every capability should have a clear owner, every extension should remain upgradeable, and every automated decision should preserve security, observability, and human accountability.",
+      "items": [
+        {
+          "symbol": "OWN",
+          "title": "Explicit ownership",
+          "text": "Keep framework, project, data, frontend, and operational responsibilities visible so teams can evolve without parallel authority."
+        },
+        {
+          "symbol": "AI",
+          "title": "Governed intelligence",
+          "text": "Use AI to accelerate engineering and administration while permissions, approvals, evidence, and final authority remain human-controlled."
+        },
+        {
+          "symbol": "EVO",
+          "title": "Evolution by design",
+          "text": "Compose modular capabilities through stable contracts so customer journeys can change without rebuilding the foundation."
+        }
+      ]
+    }
+  },
+  "record35": {
+    "code": "nexusAboutPromise",
+    "typeCode": "nexusContentSectionType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Our promise",
+      "heading": "Useful on the first day. Durable for the journey ahead.",
+      "body": "Nodics is built to help developers understand, partners deliver, administrators operate, and customers retain control. Start with a working reference solution, learn the contracts in context, then customize only what your project genuinely owns.",
+      "href": "/docs",
+      "linkLabel": "Explore the Nodics Wiki"
+    }
+  },
+  "record36": {
     "code": "nexusFeaturesContent",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",
@@ -618,7 +905,30 @@ module.exports = {
       ]
     }
   },
-  "record19": {
+  "record37": {
+    "code": "nexusProductsContent",
+    "typeCode": "nexusCardGridType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Products",
+      "heading": "Reusable product directions on the Nodics foundation.",
+      "body": "Nodics products package repeatable enterprise needs on top of the same modular framework principles, keeping ownership, extension, and governance explicit.",
+      "items": [
+        {
+          "symbol": "TEE",
+          "title": "Task Execution Engine",
+          "text": "Coordinate persisted tasks, distributed execution, retry policy, visibility, and controlled operations across project runtimes."
+        },
+        {
+          "symbol": "DEAP",
+          "title": "Data Engineering & Analytics Platform",
+          "text": "Shape governed data onboarding, ingestion, transformation, quality, analysis, visualization, and publishing capabilities."
+        }
+      ]
+    }
+  },
+  "record38": {
     "code": "nexusSupportContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -631,7 +941,7 @@ module.exports = {
       "linkLabel": "Open documentation"
     }
   },
-  "record20": {
+  "record39": {
     "code": "nexusInvestorsContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -644,7 +954,7 @@ module.exports = {
       "linkLabel": "Contact Nodics"
     }
   },
-  "record21": {
+  "record40": {
     "code": "nexusDonateContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -657,7 +967,7 @@ module.exports = {
       "linkLabel": "Contact Nodics"
     }
   },
-  "record22": {
+  "record41": {
     "code": "nexusPlatformContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -670,7 +980,7 @@ module.exports = {
       "linkLabel": "Open documentation"
     }
   },
-  "record23": {
+  "record42": {
     "code": "nexusDevelopersContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -683,7 +993,7 @@ module.exports = {
       "linkLabel": "Get started"
     }
   },
-  "record24": {
+  "record43": {
     "code": "nexusEcosystemContent",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",
@@ -707,7 +1017,7 @@ module.exports = {
       ]
     }
   },
-  "record25": {
+  "record44": {
     "code": "nexusTestimonialsContent",
     "typeCode": "nexusTestimonialsType",
     "accessMode": "PUBLIC",
@@ -719,7 +1029,7 @@ module.exports = {
       "emptyMessage": "No verified public testimonials are available yet."
     }
   },
-  "record26": {
+  "record45": {
     "code": "nexusContactContent",
     "typeCode": "nexusContactType",
     "accessMode": "PUBLIC",
@@ -732,7 +1042,7 @@ module.exports = {
       "emailHref": "mailto:nodics.framework@gmail.com"
     }
   },
-  "record27": {
+  "record46": {
     "code": "nexusPrivacyContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -743,7 +1053,7 @@ module.exports = {
       "body": "Publication requires approved legal copy. This local placeholder must not be deployed as production policy."
     }
   },
-  "record28": {
+  "record47": {
     "code": "nexusTermsContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -754,7 +1064,7 @@ module.exports = {
       "body": "Publication requires approved legal copy. This local placeholder must not be deployed as production terms."
     }
   },
-  "record29": {
+  "record48": {
     "code": "nexusCookiesContent",
     "typeCode": "nexusContentSectionType",
     "accessMode": "PUBLIC",
@@ -763,6 +1073,37 @@ module.exports = {
       "kicker": "Legal",
       "heading": "Cookie Policy",
       "body": "The initial local site uses no marketing cookies. Production policy must reflect the deployed analytics and consent configuration."
+    }
+  },
+  "record49": {
+    "code": "nexusEditorialListing",
+    "typeCode": "nexusEditorialListingType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "kicker": "Nodics editorial",
+      "heading": "News and insights",
+      "articles": [
+        {
+          "code": "editorial-introduction",
+          "contentTypeCode": "BLOG",
+          "title": "Build governed editorial journeys",
+          "summary": "A reference record showing how customer projects compose Editorial delivery with Nexus renderers.",
+          "href": "/blog/editorial-introduction"
+        }
+      ]
+    }
+  },
+  "record50": {
+    "code": "nexusEditorialDetail",
+    "typeCode": "nexusEditorialDetailType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "contentTypeCode": "BLOG",
+      "title": "Build governed editorial journeys",
+      "summary": "A safe reference article detail.",
+      "bodyText": "Customer projects own CMS composition data while Editorial owns article truth and Nexus owns executable presentation."
     }
   }
 };

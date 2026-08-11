@@ -51,6 +51,16 @@ module.exports = {
             }
         }
     },
+    data: {
+        dataReleases: {
+            types: {
+                sample: {
+                    enabled: true,
+                    operatorExecution: true
+                }
+            }
+        }
+    },
     database: {
         default: {
             mongodb: {

@@ -9,6 +9,7 @@ module.exports = {
             'kickoffApi',
             'kickoffInt',
             'nexusData',
+            'nexusEditorialData',
             'kickoffLocal',
             'wcmsServer'
         ]
@@ -20,6 +21,11 @@ module.exports = {
                     databaseName: 'kickoffLocalWcms'
                 }
             }
+        }
+    },
+    editorial: {
+        workflow: {
+            processBaseUrl: 'http://127.0.0.1:4330'
         }
     },
     servers: {

@@ -27,7 +27,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
-        expectedModules: Object.freeze(['nodics.core', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'engagementServer']),
+        expectedModules: Object.freeze(['nodics.core', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusEngagementData', 'kickoffLocal', 'engagementServer']),
         verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
@@ -63,25 +63,12 @@ const scenarios = Object.freeze([
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
+            'nexusData',
+            'nexusEditorialData',
             'kickoffLocal',
             'wcmsServer'
         ]),
         expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport'])
-    }),
-    Object.freeze({
-        server: 'cronServer',
-        frameworkModules: Object.freeze(['nodics.cron']),
-        expectedModules: Object.freeze([
-            'nodics.core',
-            'nodics.cron',
-            'cronjob',
-            'nodics.kickoff',
-            'kickoffCore',
-            'kickoffApi',
-            'kickoffInt',
-            'kickoffLocal',
-            'cronServer'
-        ])
     }),
     Object.freeze({
         server: 'processServer',

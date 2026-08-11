@@ -16,7 +16,6 @@ nodics.kickoff/
       platformServer/
       wcmsServer/
       processServer/
-      cronServer/
       commerceServer/
       engagementServer/
 ```
@@ -24,8 +23,8 @@ nodics.kickoff/
 `platformServer extends nodics.platform`, which makes `nodics.core`
 functionally available through Platform. `wcmsServer extends nodics.wcms`, and
 `processServer extends nodics.process` while including `nodics.cron` in the
-same Business Process & Automation runtime. `cronServer` remains available for
-standalone Cron-focused development. `commerceServer extends nodics.commerce`
+same Business Process & Automation runtime. There is no standalone Cron server
+in Kickoff. `commerceServer extends nodics.commerce`
 and composes Process for the full local Commerce lifecycle. `engagementServer`
 extends `nodics.engagement`, includes `nodics.communication`, and enables the
 reference contact experience while Process remains a separate runtime

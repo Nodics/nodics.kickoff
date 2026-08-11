@@ -14,6 +14,12 @@ npm run check
 npm test
 ```
 
-The initial release contains only `nexusCorporateSite` and
-`nexusContentCatalog`. It intentionally excludes Wiki documentation, News,
-Blogs, and all commerce-demo data.
+The release contains only `nexusCorporateSite` and `nexusContentCatalog`. It
+includes project-owned reference CMS contracts for Editorial listing/detail
+pages and all nine standard Nexus Editorial renderer mappings. It excludes
+Wiki documentation and commerce-demo data.
+
+Customers customize the pattern by editing structured source, registering a
+project renderer key in their Nexus frontend, regenerating the aggregate
+manifest, and retaining the backend/frontend contract version. Executable
+renderer code never belongs in this data module.

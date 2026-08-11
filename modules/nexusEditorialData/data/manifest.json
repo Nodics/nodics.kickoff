@@ -1,0 +1,16 @@
+{
+  "contractVersion": 2,
+  "module": "nexusEditorialData",
+  "sections": {
+    "sample": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "version": "0.1.0",
+      "description": "Nexus public Editorial sample data: published online article projections for news and blog delivery.",
+      "files": {
+        "sample/headers/editorial/nexusEditorialSampleDataHeader.js": "e4306c621c3366e72c34690c6697db78a95c972138bd479e78c1d7212bfabe03",
+        "sample/data/editorial/nexusEditorialOnlineArticleData.js": "3f4c42fcd691e38b9ed64c201727633656200b02db98616f5fc5b74f40e5b0fc"
+      }
+    }
+  }
+}

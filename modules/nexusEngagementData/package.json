@@ -1,0 +1,16 @@
+{
+  "name": "nexusEngagementData",
+  "version": "0.1.0",
+  "index": "3100.22",
+  "private": true,
+  "description": "Project-owned Engagement sample data for Nodics Nexus.",
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "data-pack",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["data", "documentation"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Nexus Engagement Data"
+  }
+}

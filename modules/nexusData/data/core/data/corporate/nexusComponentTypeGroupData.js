@@ -14,6 +14,7 @@ module.exports = {
     "name": "Nexus Corporate Sections",
     "description": "Allowlisted corporate presentation components rendered by nodics.nexus.",
     "componentTypeCodes": [
+      "nexusPageHeroType",
       "nexusBannerCarouselType",
       "nexusContentSectionType",
       "nexusCardGridType",
@@ -22,7 +23,16 @@ module.exports = {
       "nexusTestimonialsType",
       "nexusNewsCarouselType",
       "nexusBlogCarouselType",
-      "nexusContactType"
+      "nexusContactType",
+      "nexusEditorialListingType",
+      "nexusEditorialCardType",
+      "nexusEditorialDetailType",
+      "nexusEditorialFeaturedType",
+      "nexusEditorialLatestType",
+      "nexusEditorialTaxonomyType",
+      "nexusEditorialAuthorType",
+      "nexusEditorialRelatedType",
+      "nexusEditorialSeriesType"
     ],
     "status": "ACTIVE",
     "sortOrder": 10,

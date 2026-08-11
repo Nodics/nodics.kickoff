@@ -9,8 +9,10 @@
 
 /** @description Core import header for the Nodics Nexus corporate content release. */
 module.exports = {
+    catalog: {
+        nexusCatalogData: { options: { enabled: true, schemaName: 'catalog', operation: 'saveAll', dataFilePrefix: 'nexusCatalogData' }, query: { code: '$code' } }
+    },
     cms: {
-        nexusCatalogData: { options: { enabled: true, schemaName: 'catalog', operation: 'saveAll', dataFilePrefix: 'nexusCatalogData' }, query: { code: '$code' } },
         nexusSiteData: { options: { enabled: true, schemaName: 'cmsSite', operation: 'saveAll', dataFilePrefix: 'nexusSiteData' }, query: { code: '$code' } },
         nexusTypeCodeData: { options: { enabled: true, schemaName: 'cmsTypeCode', operation: 'saveAll', dataFilePrefix: 'nexusTypeCodeData' }, query: { code: '$code' } },
         nexusRendererData: { options: { enabled: true, schemaName: 'cmsTypeCode2Renderer', operation: 'saveAll', dataFilePrefix: 'nexusRendererData' }, query: { code: '$code' } },

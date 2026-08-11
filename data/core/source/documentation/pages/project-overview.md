@@ -101,7 +101,7 @@ The important Kickoff locations are:
   overrides;
 - `src/sync-framework-dependencies.js` prepares local framework package links;
 - `src/start-platform-server.js`, `src/start-wcms-server.js`, and
-  `src/start-cron-server.js` start local runtime servers;
+  `src/start-process-server.js` start the core local runtime servers;
 - `config/` contains project-level defaults;
 - `envs/kickoffLocal/` contains local environment and server composition;
 - `modules/` contains project-owned modules and customization examples;

@@ -21,6 +21,10 @@ const catalog = await source('data/core/source/catalog/corporate-catalog.json');
 const siteSource = await source('data/core/source/site/corporate-site.json');
 const content = await source('data/core/source/content/corporate-content.json');
 const site = { code: siteSource.code, name: siteSource.name, catalog: siteSource.catalog, active: siteSource.active };
+const components = content.components.map((component) => ({
+    ...component,
+    active: component.active !== false
+}));
 const pages = content.pages.map((page) => ({
     code: page.code,
     name: page.name,
@@ -69,14 +73,13 @@ const outputs = new Map([
     ['data/core/data/corporate/nexusComponentTypeGroupData.js', records('Nexus corporate authoring component group.', [content.componentTypeGroup])],
     ['data/core/data/corporate/nexusTemplateData.js', records('Nexus corporate page template.', [content.template])],
     ['data/core/data/corporate/nexusSlotData.js', records('Nexus corporate page slot.', [content.slot])],
-    ['data/core/data/corporate/nexusComponentData.js', records('Nexus corporate CMS components.', content.components)],
+    ['data/core/data/corporate/nexusComponentData.js', records('Nexus corporate CMS components.', components)],
     ['data/core/data/corporate/nexusPageData.js', records('Nexus corporate CMS pages.', pages)],
     ['data/core/data/corporate/nexusRouteData.js', records('Nexus corporate public routes.', routes)],
     ['data/core/data/corporate/nexusNavigationData.js', records('Nexus corporate navigation.', navigation)]
 ]);
 
 const importEntries = [
-    ['nexusCatalogData', 'catalog'],
     ['nexusSiteData', 'cmsSite'],
     ['nexusTypeCodeData', 'cmsTypeCode'],
     ['nexusRendererData', 'cmsTypeCode2Renderer'],
@@ -88,7 +91,7 @@ const importEntries = [
     ['nexusRouteData', 'cmsPageRoute'],
     ['nexusNavigationData', 'cmsNavigationNode']
 ];
-const headerBody = `${header}/** @description Core import header for the Nodics Nexus corporate content release. */\nmodule.exports = {\n    cms: {\n${importEntries.map(([name, schema, operation = 'saveAll']) => `        ${name}: { options: { enabled: true, schemaName: '${schema}', operation: '${operation}', dataFilePrefix: '${name}' }, query: { code: '$code' } }`).join(',\n')}\n    }\n};\n`;
+const headerBody = `${header}/** @description Core import header for the Nodics Nexus corporate content release. */\nmodule.exports = {\n    catalog: {\n        nexusCatalogData: { options: { enabled: true, schemaName: 'catalog', operation: 'saveAll', dataFilePrefix: 'nexusCatalogData' }, query: { code: '$code' } }\n    },\n    cms: {\n${importEntries.map(([name, schema, operation = 'saveAll']) => `        ${name}: { options: { enabled: true, schemaName: '${schema}', operation: '${operation}', dataFilePrefix: '${name}' }, query: { code: '$code' } }`).join(',\n')}\n    }\n};\n`;
 outputs.set('data/core/headers/nexusCorporateContentHeader.js', headerBody);
 
 const generatedHashes = Object.fromEntries([...outputs].map(([path, value]) => [path.replace('data/', ''), hash(value)]));
@@ -110,14 +113,14 @@ const manifest = `${JSON.stringify({
             kind: 'CONTENT_PACK',
             contentPath: 'core',
             pack: 'nexus.corporate',
-            version: '0.5.11',
+            version: '0.5.17',
             sourceMode: 'structured-json-source',
             sourceAuthority: 'data/core/source',
             sites: [site.code],
             catalogs: [catalog.code],
             accessMode: 'PUBLIC',
             pages: pages.length,
-            components: content.components.length,
+            components: components.length,
             routes: routes.length,
             releaseChecksum,
             sourceHashes,
