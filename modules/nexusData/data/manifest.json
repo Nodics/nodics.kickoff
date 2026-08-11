@@ -40,6 +40,20 @@
         "core/data/corporate/nexusNavigationData.js": "52992d392b1cbab10df1cd8774eff3e803007fdc0df41a6f55f3b64aab1686a3",
         "core/headers/nexusCorporateContentHeader.js": "e812ed9e7e1ad354a9bd83d5d1675804a8ecc95f6a8dd5ed43eb49a84647beb0"
       }
+    },
+    "sample": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "version": "0.1.1",
+      "description": "Nexus public sample data: Engagement contact/testimonial records and Editorial news/blog online projections.",
+      "files": {
+        "sample/headers/engagement/nexusEngagementSampleDataHeader.js": "1af9e313be5d147d36521390d9c10e02394864aa549c87606f2d5732ef63a3df",
+        "sample/data/engagement/nexusContactFormDefinitionData.js": "0e7f10a5db9dab16d8f3c705dab7ab09126b9d4a8b4da9a74d0a3b3b72b8a156",
+        "sample/data/engagement/nexusContactFormVersionData.js": "ce33a7982583439a8356fa0a981e92ae3fb626be42a04dda8f84d93f56c5bf76",
+        "sample/data/engagement/nexusTestimonialProjectionData.js": "9341526e30698e8d312e9382d4bae3275249037e4bd50ecca12f4bb6f9b58fc2",
+        "sample/headers/editorial/nexusEditorialSampleDataHeader.js": "e4306c621c3366e72c34690c6697db78a95c972138bd479e78c1d7212bfabe03",
+        "sample/data/editorial/nexusEditorialOnlineArticleData.js": "42034935d6ceaf84680438f9ef67ee11f1fbb101f97d153c512e3667bbdd60cb"
+      }
     }
   }
 }

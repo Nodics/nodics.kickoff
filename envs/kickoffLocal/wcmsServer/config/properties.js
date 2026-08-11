@@ -9,7 +9,6 @@ module.exports = {
             'kickoffApi',
             'kickoffInt',
             'nexusData',
-            'nexusEditorialData',
             'kickoffLocal',
             'wcmsServer'
         ]

@@ -125,7 +125,14 @@ const manifest = `${JSON.stringify({
             releaseChecksum,
             sourceHashes,
             generatedHashes
-        }
+        },
+        ...Object.fromEntries(
+            Object.entries(
+                JSON.parse(
+                    await readFile(resolve(moduleRoot, 'data/manifest.json'), 'utf8')
+                ).sections || {}
+            ).filter(([sectionName]) => sectionName !== 'core')
+        )
     }
 }, null, 2)}\n`;
 outputs.set('data/manifest.json', manifest);
