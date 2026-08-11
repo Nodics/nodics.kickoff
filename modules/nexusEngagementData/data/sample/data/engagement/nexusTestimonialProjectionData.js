@@ -65,5 +65,24 @@ module.exports = {
         publishedAt: new Date('2026-08-11T00:00:00.000Z'),
         revision: 0,
         correlationId: 'nexus-testimonial-daniel-published'
+    },
+    record3: {
+        code: 'nexus-testimonial-sofia-web-en',
+        active: true,
+        tenant: 'default',
+        candidateCode: 'nexus-testimonial-sofia',
+        versionCode: 'nexus-testimonial-sofia-v1',
+        projectionVersion: 1,
+        publicText: 'Nodics helped us treat customer-facing experience, operations, and governance as one connected product instead of separate delivery islands.',
+        attribution: { name: 'Sofia Alvarez', role: 'VP Digital Transformation', organization: 'Illustrative profile' },
+        disclosures: ['Illustrative reference profile for local Nexus validation.'],
+        channel: 'web',
+        region: 'global',
+        locale: 'en',
+        wcmsPlacementCodes: ['nexusHomeTestimonials'],
+        status: 'PUBLISHED',
+        publishedAt: new Date('2026-08-11T00:00:00.000Z'),
+        revision: 0,
+        correlationId: 'nexus-testimonial-sofia-published'
     }
 };
