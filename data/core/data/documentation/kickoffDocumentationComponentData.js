@@ -17,7 +17,7 @@ module.exports = {
     "code": "kickoffDocumentationNavigation",
     "typeCode": "kickoffDocumentationNavigationComponentType",
     "renderer": "documentation.component.navigation",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "title": "Nodics Kickoff",
       "searchLabel": "Search Kickoff documentation",
@@ -135,7 +135,7 @@ module.exports = {
     "code": "kickoffDocsComponentkickoffOverview",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "code": "kickoff.overview",
       "title": "Kickoff project overview",
@@ -547,7 +547,7 @@ module.exports = {
     "code": "kickoffDocsComponentkickoffLocalRuntime",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "code": "kickoff.local-runtime",
       "title": "Local runtime topology",
@@ -900,7 +900,7 @@ module.exports = {
     "code": "kickoffDocsComponentkickoffLocalAcceptance",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "code": "kickoff.local-acceptance",
       "title": "Local acceptance checklist",
@@ -1806,7 +1806,7 @@ module.exports = {
     "code": "kickoffDocsComponentkickoffDeploymentQualification",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "code": "kickoff.deployment-qualification",
       "title": "Deployment qualification",
@@ -2163,7 +2163,7 @@ module.exports = {
     "code": "kickoffDocsComponentkickoffCustomization",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "code": "kickoff.customization",
       "title": "Customer customization guide",
@@ -2771,7 +2771,7 @@ module.exports = {
     "code": "kickoffDocsComponentkickoffFunctionalJourneys",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "properties": {
       "code": "kickoff.functional-journeys",
       "title": "Commerce and Engagement functional journeys",

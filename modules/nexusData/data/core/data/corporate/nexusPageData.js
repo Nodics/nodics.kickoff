@@ -124,9 +124,15 @@ module.exports = {
         "active": true
       },
       {
-        "target": "nexusAboutPromise",
+        "target": "nexusAboutMvpScale",
         "slot": "main",
         "index": 3,
+        "active": true
+      },
+      {
+        "target": "nexusAboutPromise",
+        "slot": "main",
+        "index": 4,
         "active": true
       }
     ]
@@ -152,6 +158,36 @@ module.exports = {
         "slot": "main",
         "index": 1,
         "active": true
+      },
+      {
+        "target": "nexusFeaturesPillars",
+        "slot": "main",
+        "index": 2,
+        "active": true
+      },
+      {
+        "target": "nexusFeaturesArchitecture",
+        "slot": "main",
+        "index": 3,
+        "active": true
+      },
+      {
+        "target": "nexusFeaturesCapabilities",
+        "slot": "main",
+        "index": 4,
+        "active": true
+      },
+      {
+        "target": "nexusFeaturesMvpScale",
+        "slot": "main",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "nexusFeaturesJourney",
+        "slot": "main",
+        "index": 6,
+        "active": true
       }
     ]
   },
@@ -176,6 +212,24 @@ module.exports = {
         "slot": "main",
         "index": 1,
         "active": true
+      },
+      {
+        "target": "nexusProductsSuite",
+        "slot": "main",
+        "index": 2,
+        "active": true
+      },
+      {
+        "target": "nexusProductsOperatingModel",
+        "slot": "main",
+        "index": 3,
+        "active": true
+      },
+      {
+        "target": "nexusProductsReadiness",
+        "slot": "main",
+        "index": 4,
+        "active": true
       }
     ]
   },
@@ -199,6 +253,30 @@ module.exports = {
         "target": "nexusSupportContent",
         "slot": "main",
         "index": 1,
+        "active": true
+      },
+      {
+        "target": "nexusSupportPaths",
+        "slot": "main",
+        "index": 2,
+        "active": true
+      },
+      {
+        "target": "nexusSupportResponseModel",
+        "slot": "main",
+        "index": 3,
+        "active": true
+      },
+      {
+        "target": "nexusSupportRequestChecklist",
+        "slot": "main",
+        "index": 4,
+        "active": true
+      },
+      {
+        "target": "nexusSupportBoundaries",
+        "slot": "main",
+        "index": 5,
         "active": true
       }
     ]
@@ -296,6 +374,24 @@ module.exports = {
         "slot": "main",
         "index": 1,
         "active": true
+      },
+      {
+        "target": "nexusDevelopersLocalJourney",
+        "slot": "main",
+        "index": 2,
+        "active": true
+      },
+      {
+        "target": "nexusDevelopersAiAssisted",
+        "slot": "main",
+        "index": 3,
+        "active": true
+      },
+      {
+        "target": "nexusDevelopersOwnership",
+        "slot": "main",
+        "index": 4,
+        "active": true
       }
     ]
   },
@@ -320,29 +416,23 @@ module.exports = {
         "slot": "main",
         "index": 1,
         "active": true
-      }
-    ]
-  },
-  "record10": {
-    "code": "nexusTestimonialsPage",
-    "name": "Testimonials",
-    "active": true,
-    "cmsSite": [
-      "nexusCorporateSite"
-    ],
-    "typeCode": "nexusCorporateStandardPageType",
-    "template": "nexusCorporatePageTemplate",
-    "cmsComponents": [
+      },
       {
-        "target": "nexusTestimonialsHero",
+        "target": "nexusEcosystemRoles",
         "slot": "main",
-        "index": 0,
+        "index": 2,
         "active": true
       },
       {
-        "target": "nexusTestimonialsContent",
+        "target": "nexusEcosystemContribution",
         "slot": "main",
-        "index": 1,
+        "index": 3,
+        "active": true
+      },
+      {
+        "target": "nexusEcosystemJourney",
+        "slot": "main",
+        "index": 4,
         "active": true
       }
     ]
@@ -485,6 +575,246 @@ module.exports = {
       },
       {
         "target": "nexusEditorialDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record17": {
+    "code": "nexusNewsListingPage",
+    "name": "Nodics News",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusNewsListingHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusNewsListing",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record18": {
+    "code": "nexusNewsPublicExperiencePage",
+    "name": "Nexus public experience governed by WCMS",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusNewsPublicExperienceHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusNewsPublicExperienceDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record19": {
+    "code": "nexusNewsAxisBusinessJourneyPage",
+    "name": "Axis business journeys align with runtime capability",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusNewsAxisBusinessJourneyHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusNewsAxisBusinessJourneyDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record20": {
+    "code": "nexusNewsEngagementPublicApiPage",
+    "name": "Engagement APIs power Nexus journeys",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusNewsEngagementPublicApiHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusNewsEngagementPublicApiDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record21": {
+    "code": "nexusNewsEditorialReleaseFlowPage",
+    "name": "Editorial release flow validates publishing",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusNewsEditorialReleaseFlowHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusNewsEditorialReleaseFlowDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record22": {
+    "code": "nexusBlogListingPage",
+    "name": "Nodics Blogs",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusBlogListingHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusBlogListing",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record23": {
+    "code": "nexusBlogEngagementFrameworkPage",
+    "name": "Building customer engagement as an enterprise capability",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusBlogEngagementFrameworkHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusBlogEngagementFrameworkDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record24": {
+    "code": "nexusBlogEditorialPublicationPage",
+    "name": "Editorial publication without frontend data ownership",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusBlogEditorialPublicationHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusBlogEditorialPublicationDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record25": {
+    "code": "nexusBlogRuntimeDiscoveryPage",
+    "name": "Why runtime discovery beats hardcoded service URLs",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusBlogRuntimeDiscoveryHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusBlogRuntimeDiscoveryDetail",
+        "slot": "main",
+        "index": 1,
+        "active": true
+      }
+    ]
+  },
+  "record26": {
+    "code": "nexusBlogAxisBusinessOperationsPage",
+    "name": "Designing Axis for clean business operations",
+    "active": true,
+    "cmsSite": [
+      "nexusCorporateSite"
+    ],
+    "typeCode": "nexusCorporateStandardPageType",
+    "template": "nexusCorporatePageTemplate",
+    "cmsComponents": [
+      {
+        "target": "nexusBlogAxisBusinessOperationsHero",
+        "slot": "main",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusBlogAxisBusinessOperationsDetail",
         "slot": "main",
         "index": 1,
         "active": true

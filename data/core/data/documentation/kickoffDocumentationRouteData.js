@@ -22,7 +22,7 @@ module.exports = {
     "page": "kickoffDocsPagekickoffOverview",
     "routeType": "PAGE",
     "deliveryState": "ONLINE",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "active": true
   },
   "record1": {
@@ -34,7 +34,7 @@ module.exports = {
     "page": "kickoffDocsPagekickoffLocalRuntime",
     "routeType": "PAGE",
     "deliveryState": "ONLINE",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "active": true
   },
   "record2": {
@@ -46,7 +46,7 @@ module.exports = {
     "page": "kickoffDocsPagekickoffLocalAcceptance",
     "routeType": "PAGE",
     "deliveryState": "ONLINE",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "active": true
   },
   "record3": {
@@ -58,7 +58,7 @@ module.exports = {
     "page": "kickoffDocsPagekickoffDeploymentQualification",
     "routeType": "PAGE",
     "deliveryState": "ONLINE",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "active": true
   },
   "record4": {
@@ -70,7 +70,7 @@ module.exports = {
     "page": "kickoffDocsPagekickoffCustomization",
     "routeType": "PAGE",
     "deliveryState": "ONLINE",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "active": true
   },
   "record5": {
@@ -82,7 +82,7 @@ module.exports = {
     "page": "kickoffDocsPagekickoffFunctionalJourneys",
     "routeType": "PAGE",
     "deliveryState": "ONLINE",
-    "accessMode": "AUTHENTICATED",
+    "accessMode": "PUBLIC",
     "active": true
   }
 };

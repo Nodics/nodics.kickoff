@@ -1,7 +1,0 @@
-{
-  "code": "nexusContentCatalog",
-  "name": "Nodics Nexus Corporate Content",
-  "catalogType": "CONTENT",
-  "accessGroups": ["contentUserGroup", "employeeUserGroup"],
-  "active": true
-}

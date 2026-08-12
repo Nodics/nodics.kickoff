@@ -6,9 +6,7 @@
       "kind": "CONTENT_PACK",
       "contentPath": "core",
       "pack": "nexus.corporate",
-      "version": "0.5.17",
-      "sourceMode": "structured-json-source",
-      "sourceAuthority": "data/core/source",
+      "version": "0.5.50",
       "sites": [
         "nexusCorporateSite"
       ],
@@ -16,16 +14,10 @@
         "nexusContentCatalog"
       ],
       "accessMode": "PUBLIC",
-      "pages": 17,
-      "components": 51,
-      "routes": 17,
-      "releaseChecksum": "931b7adba72df44f4da2254c356f0b6cb1d6560bbdfc6924f71f3ce9040f5f08",
-      "sourceHashes": {
-        "core/source/catalog/corporate-catalog.json": "c2a9276cdab8f45942efafd384da626906cc206f54c6379423604a50e6cb4147",
-        "core/source/site/corporate-site.json": "ce34e166805ca2db65adbcf7a6712e399f71bc452e5627fb147e674e0cd0c30f",
-        "core/source/media/corporate-media.json": "a127d49c0a53c98b053b9028c1a371a84d5b830ceda76e6b9dc9dd33bf1a5a0c",
-        "core/source/content/corporate-content.json": "f47f2a44757b8e5e88515866db88f11f37ecc9579d86d04a4390a8f650c3c2ba"
-      },
+      "pages": 26,
+      "components": 85,
+      "routes": 26,
+      "releaseChecksum": "f3e4e6114b6c43b4295813995f67bdaf32caba08ad951de72ba757086aa9cb3e",
       "generatedHashes": {
         "core/data/corporate/nexusCatalogData.js": "5117aebe336ed06e2a1f6d97dbe87de7aa09c7621532fd612e7243d908476997",
         "core/data/corporate/nexusSiteData.js": "f15dada9930d58f1d22d22837ac199d31f207116faa69be2a830aa5100f55c87",
@@ -34,23 +26,23 @@
         "core/data/corporate/nexusComponentTypeGroupData.js": "a6a3ca2841514d21559a2a74f602d1849ec6321697730b7d24db1167f567cdf4",
         "core/data/corporate/nexusTemplateData.js": "494159a9c701f8c90b3b9523ce48ac5d62fb6a7546d4d1e49c620d99d6e4e82b",
         "core/data/corporate/nexusSlotData.js": "f6b39507b7178b0be62f1feae5ca1f9944f91bc93f457e70f0966f1b3c5610d4",
-        "core/data/corporate/nexusComponentData.js": "017ab73782dc8f804853f325d058070196c77246bd0e7adca5749d84a047bc02",
-        "core/data/corporate/nexusPageData.js": "6a5239f4e2d26fb561284f8e2958cdb7b6a27ad8f8e44d02d79934c743649179",
-        "core/data/corporate/nexusRouteData.js": "44a264e8664b233c3a1f75b8dda306b7bd416fca0ac78484709a64dae1533f91",
-        "core/data/corporate/nexusNavigationData.js": "52992d392b1cbab10df1cd8774eff3e803007fdc0df41a6f55f3b64aab1686a3",
+        "core/data/corporate/nexusComponentData.js": "d0a75664aea43bdb72a204b3077259926973e602ca91902cc3c906eb030b78c3",
+        "core/data/corporate/nexusPageData.js": "355c52d750736db62632312010284f9f018ef02842936b82c24defb4fc7e63be",
+        "core/data/corporate/nexusRouteData.js": "3eaad3819ecc47542a1f280d3e1c91a1abec70c5e3b1b6e398c82ec6678b2e32",
+        "core/data/corporate/nexusNavigationData.js": "77867912bbf3f67c0f7678f057c3c55495f43959a33618a84042cf038a0a763e",
         "core/headers/nexusCorporateContentHeader.js": "e812ed9e7e1ad354a9bd83d5d1675804a8ecc95f6a8dd5ed43eb49a84647beb0"
       }
     },
     "sample": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "description": "Nexus public sample data: Engagement contact/testimonial records and Editorial news/blog online projections.",
       "files": {
         "sample/headers/engagement/nexusEngagementSampleDataHeader.js": "1af9e313be5d147d36521390d9c10e02394864aa549c87606f2d5732ef63a3df",
         "sample/data/engagement/nexusContactFormDefinitionData.js": "0e7f10a5db9dab16d8f3c705dab7ab09126b9d4a8b4da9a74d0a3b3b72b8a156",
         "sample/data/engagement/nexusContactFormVersionData.js": "ce33a7982583439a8356fa0a981e92ae3fb626be42a04dda8f84d93f56c5bf76",
-        "sample/data/engagement/nexusTestimonialProjectionData.js": "9341526e30698e8d312e9382d4bae3275249037e4bd50ecca12f4bb6f9b58fc2",
+        "sample/data/engagement/nexusTestimonialProjectionData.js": "f42dfbc8ec8aad863d7bb3c357f1099e454513f8454f7ff74230d821bcecde8a",
         "sample/headers/editorial/nexusEditorialSampleDataHeader.js": "e4306c621c3366e72c34690c6697db78a95c972138bd479e78c1d7212bfabe03",
         "sample/data/editorial/nexusEditorialOnlineArticleData.js": "42034935d6ceaf84680438f9ef67ee11f1fbb101f97d153c512e3667bbdd60cb"
       }

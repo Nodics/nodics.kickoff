@@ -1,9 +1,0 @@
-{
-  "code": "nexusCorporateSite",
-  "name": "Nodics Nexus Corporate Site",
-  "catalog": "nexusContentCatalog",
-  "hosts": ["localhost", "127.0.0.1", "nodics.in", "www.nodics.in"],
-  "defaultLocale": "en",
-  "channel": "web",
-  "active": true
-}

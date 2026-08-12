@@ -6,8 +6,7 @@
   "description": "Project-owned corporate content data for Nodics Nexus.",
   "main": "nodics.js",
   "scripts": {
-    "generate": "node scripts/generate-corporate-content.mjs",
-    "check": "node scripts/generate-corporate-content.mjs --check",
+    "check": "npm test",
     "test": "node test/nexusCorporateContentContract.test.mjs"
   },
   "nodics": {
