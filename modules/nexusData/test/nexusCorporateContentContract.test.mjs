@@ -32,9 +32,50 @@ const sites = require(
 const catalogs = require(
   resolve(moduleRoot, "data/core/data/corporate/nexusCatalogData.js"),
 );
+const editorialAuthors = require(
+  resolve(moduleRoot, "data/sample/data/editorial/nexusEditorialAuthorData.js"),
+);
+const editorialTaxonomyTerms = require(
+  resolve(
+    moduleRoot,
+    "data/sample/data/editorial/nexusEditorialTaxonomyTermData.js",
+  ),
+);
+const editorialArticles = require(
+  resolve(
+    moduleRoot,
+    "data/sample/data/editorial/nexusEditorialArticleData.js",
+  ),
+);
+const editorialArticleLocalizations = require(
+  resolve(
+    moduleRoot,
+    "data/sample/data/editorial/nexusEditorialArticleLocalizationData.js",
+  ),
+);
+const editorialArticleTaxonomies = require(
+  resolve(
+    moduleRoot,
+    "data/sample/data/editorial/nexusEditorialArticleTaxonomyData.js",
+  ),
+);
+const editorialOnlineArticles = require(
+  resolve(
+    moduleRoot,
+    "data/sample/data/editorial/nexusEditorialOnlineArticleData.js",
+  ),
+);
 const componentValues = Object.values(components);
 const pageValues = Object.values(pages);
 const rendererValues = Object.values(renderers);
+const editorialAuthorValues = Object.values(editorialAuthors);
+const editorialTaxonomyTermValues = Object.values(editorialTaxonomyTerms);
+const editorialArticleValues = Object.values(editorialArticles);
+const editorialArticleLocalizationValues = Object.values(
+  editorialArticleLocalizations,
+);
+const editorialArticleTaxonomyValues = Object.values(editorialArticleTaxonomies);
+const editorialOnlineArticleValues = Object.values(editorialOnlineArticles);
 const site = Object.values(sites)[0];
 const catalog = Object.values(catalogs)[0];
 const homePage = pageValues.find((page) => page.code === "nexusHomePage");
@@ -352,6 +393,108 @@ componentByCode
       `${article.code} must expose a boolean special flag for Axis management`,
     );
   });
+const expectedEditorialArticleCodes = [
+  ...componentByCode.get("nexusNewsListing").properties.articles,
+  ...componentByCode.get("nexusBlogListing").properties.articles,
+]
+  .map((article) => article.code)
+  .sort();
+assert.equal(
+  editorialAuthorValues.length,
+  1,
+  "Nexus sample Editorial data must include the owning authoring identity for Axis",
+);
+assert.equal(
+  editorialTaxonomyTermValues.length,
+  6,
+  "Nexus sample Editorial data must include reusable taxonomy terms for Axis filters",
+);
+assert.deepEqual(
+  editorialArticleValues.map((article) => article.code).sort(),
+  expectedEditorialArticleCodes,
+  "Nexus News and Blog listing samples must have matching Editorial authoring records for Axis",
+);
+assert.deepEqual(
+  editorialArticleLocalizationValues
+    .map((localization) => localization.articleCode)
+    .sort(),
+  expectedEditorialArticleCodes,
+  "Every Nexus Editorial authoring article must have one English localization",
+);
+assert.deepEqual(
+  editorialOnlineArticleValues.map((article) => article.articleCode).sort(),
+  expectedEditorialArticleCodes,
+  "Nexus online projections must remain aligned to the authoring records",
+);
+assert.deepEqual(
+  editorialArticleTaxonomyValues.map((link) => link.articleCode).sort(),
+  expectedEditorialArticleCodes,
+  "Every Nexus Editorial authoring article must have a taxonomy link for filterable Axis data",
+);
+editorialArticleValues.forEach((article) => {
+  assert.equal(
+    article.status,
+    "APPROVED",
+    `${article.code} must be Axis-editable authoring data approved for local preview`,
+  );
+  assert.equal(
+    article.siteCodes.includes("nexusCorporateSite"),
+    true,
+    `${article.code} must belong to the Nexus corporate site`,
+  );
+  assert.deepEqual(
+    article.authorCodes,
+    ["nodicsEditorialTeam"],
+    `${article.code} must reference the Nexus Editorial authoring identity`,
+  );
+});
+assert.deepEqual(
+  editorialArticleValues
+    .filter((article) => article.contentTypeCode === "NEWS" && article.special)
+    .map((article) => article.code),
+  ["nexus-news-public-experience"],
+  "News featured state must be owned by Editorial authoring data",
+);
+assert.deepEqual(
+  editorialArticleValues
+    .filter((article) => article.contentTypeCode === "BLOG" && article.special)
+    .map((article) => article.code),
+  ["nexus-blog-editorial-publication"],
+  "Blog featured state must be owned by Editorial authoring data",
+);
+editorialArticleLocalizationValues.forEach((localization) => {
+  assert.equal(
+    localization.status,
+    "READY",
+    `${localization.code} must be ready for Editorial publication`,
+  );
+  assert.equal(
+    localization.localeCode,
+    "en",
+    `${localization.code} must seed the default Nexus locale`,
+  );
+  assert.equal(
+    Array.isArray(localization.takeaways) && localization.takeaways.length > 0,
+    true,
+    `${localization.code} must seed article-specific takeaways`,
+  );
+});
+editorialOnlineArticleValues.forEach((onlineArticle) => {
+  assert.equal(
+    Array.isArray(onlineArticle.payload.takeaways) &&
+      onlineArticle.payload.takeaways.length > 0,
+    true,
+    `${onlineArticle.code} must publish article-specific takeaways`,
+  );
+  const authoringArticle = editorialArticleValues.find(
+    (article) => article.code === onlineArticle.articleCode,
+  );
+  assert.equal(
+    onlineArticle.payload.special,
+    authoringArticle?.special === true,
+    `${onlineArticle.code} must publish the authoring special flag`,
+  );
+});
 blogDetailPages.forEach((page) => {
   const detailComponentCodes = page.cmsComponents
     .sort((first, second) => first.index - second.index)
@@ -441,6 +584,12 @@ assert.equal(
   9,
   "Reference data must declare the nine standard Editorial renderer contracts",
 );
+editorialArticleValues.forEach((article) => {
+  assert(
+    article.featuredMediaCode,
+    `Editorial authoring article ${article.code} must expose a featured media code for Axis and Nexus previews`,
+  );
+});
 assert.equal(manifest.sections.core.sites[0], site.code);
 assert.equal(manifest.sections.core.catalogs[0], catalog.code);
 assert.equal(manifest.sections.core.accessMode, "PUBLIC");

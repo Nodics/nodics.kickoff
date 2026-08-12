@@ -245,19 +245,20 @@ async function main() {
   await saveModel('/nodics/editorial/v0/editorialarticlelocalization', localization, headers);
   console.log('PASS 1 created Editorial Article and related records in Staged authoring');
 
-  const readiness = payload(
-    await requestJson(wcmsUrl, '/nodics/editorial/v0/authoring/articles/readiness', {
+  const validation = payload(
+    await requestJson(wcmsUrl, '/nodics/editorial/v0/authoring/articles/validate', {
       body: JSON.stringify({ article, localizations: [localization] }),
       headers,
       method: 'POST',
     }),
   );
-  if (!readiness?.ready) throw new Error(`Editorial readiness blocked: ${JSON.stringify(readiness)}`);
-  console.log('PASS 2 validated Editorial readiness before workflow');
+  if (!validation?.valid || validation?.article?.status !== 'READY') throw new Error(`Editorial validation blocked: ${JSON.stringify(validation)}`);
+  const readyArticle = Object.assign({}, article, validation.article);
+  console.log('PASS 2 validated Editorial content and marked article READY before workflow');
 
   const submitted = payload(
     await requestJson(wcmsUrl, `/nodics/editorial/v0/authoring/articles/${encodeURIComponent(articleCode)}/submit`, {
-      body: JSON.stringify({ article, localizations: [localization] }),
+      body: JSON.stringify({ article: readyArticle, localizations: [localization] }),
       headers,
       method: 'POST',
     }),

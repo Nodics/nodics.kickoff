@@ -7,9 +7,33 @@
 
 'use strict';
 
+const components = require('../../../core/data/corporate/nexusComponentData');
+const authoringArticles = require('./nexusEditorialArticleData');
+
 const publishedAt = new Date('2026-08-11T23:59:00.000Z');
 const created = new Date('2026-08-11T00:00:00.000Z');
 const updated = new Date('2026-08-11T00:00:00.000Z');
+const authoringByCode = new Map(Object.values(authoringArticles).map((article) => [article.code, article]));
+
+const takeawaysByTitle = new Map(Object.values(components)
+    .filter((component) => component.typeCode === 'nexusEditorialDetailType' && component.properties && component.properties.title)
+    .map((component) => [component.properties.title, component.properties.takeaways || []]));
+
+function takeaways(title) {
+    return takeawaysByTitle.get(title) || [];
+}
+
+function special(articleCode) {
+    const article = authoringByCode.get(articleCode) || {};
+    return {
+        special: article.special === true,
+        specialLabel: article.specialLabel,
+        specialRank: article.specialRank,
+        specialFrom: article.specialFrom || null,
+        specialUntil: article.specialUntil || null,
+        specialVariant: article.specialVariant
+    };
+}
 
 /** @description Published Editorial Online projections for the Nexus reference site. */
 module.exports = {
@@ -31,7 +55,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Nexus public experience now reads governed backend content.',
             summary: 'News, blogs, testimonials, and contact forms are moving from static preview data to backend-owned delivery contracts.',
-            body: 'Nexus renders the customer-facing experience while WCMS and Engagement own the content, submission, approval, and publication records.',
+            body: { blocks: [{ type: 'paragraph', text: 'Nodics Nexus is becoming the public gateway for the framework, product direction, documentation, and partner-facing evaluation journeys. The first corporate pages are now modeled as CMS-managed pages, components, and renderers instead of being hidden as frontend-only content.' }, { type: 'paragraph', text: 'Nexus renders the customer-facing experience while WCMS and Engagement own the content, submission, approval, and publication records.' }] },
+            takeaways: takeaways('Nexus public experience now reads governed backend content.'),
+            ...special('nexus-news-public-experience'),
             publishFrom: null,
             publishUntil: null
         },
@@ -58,7 +84,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Axis business journeys align with registered runtime capability.',
             summary: 'BackOffice navigation and workspaces now present authorized backend capability rather than frontend-owned assumptions.',
-            body: 'The platform keeps business operations discoverable from module contracts, schema metadata, and project-owned data releases.',
+            body: { blocks: [{ type: 'paragraph', text: 'Axis is the operational control plane for Nodics. Its navigation and workspaces should reflect registered modules, schemas, APIs, and business capabilities exposed by the running backend, not a hardcoded frontend wish list.' }, { type: 'paragraph', text: 'The platform keeps business operations discoverable from module contracts, schema metadata, and project-owned data releases.' }] },
+            takeaways: takeaways('Axis business journeys align with registered runtime capability.'),
+            ...special('nexus-news-axis-business-journey'),
             publishFrom: null,
             publishUntil: null
         },
@@ -85,7 +113,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Engagement APIs now power Nexus contact and testimonial journeys.',
             summary: 'The reference site can load approved testimonial projections and submit contact requests through the registered Engagement runtime.',
-            body: 'Nexus resolves the Engagement endpoint from Platform bootstrap, then reads public testimonial projections and posts validated contact submissions without owning customer data.',
+            body: { blocks: [{ type: 'paragraph', text: 'Nexus needs public interaction points, but public pages should not own internal customer records. Engagement provides the boundary for contact journeys, testimonial projections, editorial projections, and future customer-facing interaction data.' }, { type: 'paragraph', text: 'Nexus resolves the Engagement endpoint from Platform bootstrap, then reads public testimonial projections and posts validated contact submissions without owning customer data.' }] },
+            takeaways: takeaways('Engagement APIs now power Nexus contact and testimonial journeys.'),
+            ...special('nexus-news-engagement-public-api'),
             publishFrom: null,
             publishUntil: null
         },
@@ -112,7 +142,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Editorial release flow validates governed News and Blog publishing.',
             summary: 'Authoring, approval, nPublish activation, online projection, and Nexus delivery now have a repeatable acceptance path.',
-            body: 'The live journey creates editorial records, routes them through workflow, publishes online projections, verifies delivery, and confirms rollback evidence.',
+            body: { blocks: [{ type: 'paragraph', text: 'Editorial publishing in Nodics should be treated as a business capability. Articles and news updates need draft control, approval, public projection, route availability, and release validation so the website never becomes a collection of unmanaged static edits.' }, { type: 'paragraph', text: 'The live journey creates editorial records, routes them through workflow, publishes online projections, verifies delivery, and confirms rollback evidence.' }] },
+            takeaways: takeaways('Editorial release flow validates governed News and Blog publishing.'),
+            ...special('nexus-news-editorial-release-flow'),
             publishFrom: null,
             publishUntil: null
         },
@@ -139,7 +171,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Building customer engagement as an enterprise capability.',
             summary: 'Reviews, feedback, testimonials, and contact submissions need one governed process from intake to approval and visibility.',
-            body: 'Engagement keeps customer-originated records, consent, moderation, lifecycle, and safe public projections behind explicit API contracts.',
+            body: { blocks: [{ type: 'paragraph', text: 'Customer-originated content looks simple on a website, but it becomes operationally sensitive as soon as it includes consent, moderation, routing, approval, privacy, and public visibility. Nodics treats Engagement as a capability so those concerns are modeled once and reused across journeys.' }, { type: 'paragraph', text: 'Engagement keeps customer-originated records, consent, moderation, lifecycle, and safe public projections behind explicit API contracts.' }] },
+            takeaways: takeaways('Building customer engagement as an enterprise capability.'),
+            ...special('nexus-blog-engagement-framework'),
             publishFrom: null,
             publishUntil: null
         },
@@ -166,7 +200,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Editorial publication without frontend data ownership.',
             summary: 'Nexus renderers stay executable and reusable while article truth is governed, localized, published, and delivered by WCMS.',
-            body: 'The customer project can seed sample records, WCMS can publish online projections, and Nexus can render lists and details through public delivery APIs.',
+            body: { blocks: [{ type: 'paragraph', text: 'A corporate website becomes fragile when articles are hardcoded into components. Nodics keeps the renderer in the frontend and the editorial truth in backend-managed records, making publishing inspectable and eventually business-managed.' }, { type: 'paragraph', text: 'The customer project can seed sample records, WCMS can publish online projections, and Nexus can render lists and details through public delivery APIs.' }] },
+            takeaways: takeaways('Editorial publication without frontend data ownership.'),
+            ...special('nexus-blog-editorial-publication'),
             publishFrom: null,
             publishUntil: null
         },
@@ -193,7 +229,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Why runtime discovery beats hardcoded service URLs.',
             summary: 'Customer projects stay portable when frontend experiences resolve backend ownership from the module registry and public bootstrap.',
-            body: 'Nexus only knows the Platform bootstrap. Platform tells it where CMS, Editorial, Engagement, Localization, and Profile capabilities are available for the current runtime.',
+            body: { blocks: [{ type: 'paragraph', text: 'Hardcoded service URLs make local demos, partner projects, and production deployments harder to trust. Nodics frontend applications should ask the platform where capabilities live for the current runtime and environment.' }, { type: 'paragraph', text: 'Nexus only knows the Platform bootstrap. Platform tells it where CMS, Editorial, Engagement, Localization, and Profile capabilities are available for the current runtime.' }] },
+            takeaways: takeaways('Why runtime discovery beats hardcoded service URLs.'),
+            ...special('nexus-blog-runtime-discovery'),
             publishFrom: null,
             publishUntil: null
         },
@@ -220,7 +258,9 @@ module.exports = {
             localeCode: 'en',
             title: 'Designing Axis for clean business operations.',
             summary: 'A usable BackOffice should expose governed tasks clearly without duplicating module authority or overwhelming the operator.',
-            body: 'Axis composes capability, schema, workflow, and runtime evidence into crisp pages while backend modules remain the authority for operations and data contracts.',
+            body: { blocks: [{ type: 'paragraph', text: 'Axis should help business users and developers operate Nodics without turning every backend capability into a maze. The goal is not to expose everything everywhere; it is to expose the right evidence, actions, and boundaries for each task.' }, { type: 'paragraph', text: 'Axis composes capability, schema, workflow, and runtime evidence into crisp pages while backend modules remain the authority for operations and data contracts.' }] },
+            takeaways: takeaways('Designing Axis for clean business operations.'),
+            ...special('nexus-blog-axis-business-operations'),
             publishFrom: null,
             publishUntil: null
         },
