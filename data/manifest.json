@@ -6,7 +6,7 @@
       "kind": "CONTENT_PACK",
       "contentPath": "core",
       "pack": "nodics.kickoff",
-      "version": "0.6.3",
+      "version": "0.6.4",
       "owningDomain": "kickoff.documentation",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
