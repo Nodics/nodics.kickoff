@@ -62,6 +62,22 @@ export function selectRuntimes(includeFrontends = false) {
   return includeFrontends ? [...backendRuntimes, ...frontendRuntimes] : [...backendRuntimes];
 }
 
+/** Performs non-mutating Local topology checks without opening database connections directly. */
+export async function preflight(includeFrontends = false) {
+  const runtimes = selectRuntimes(includeFrontends);
+  const checks = [];
+  for (const runtime of runtimes) {
+    const cwd = runtime.cwd || projectRoot;
+    checks.push({ id: `project:${runtime.code}`, state: fs.existsSync(path.join(cwd, 'package.json')) ? 'PASSED' : 'FAILED', path: cwd });
+    checks.push({ id: `port:${runtime.code}`, state: await portListening(runtime.port) ? 'BUSY' : 'AVAILABLE', port: runtime.port });
+  }
+  const frameworkRoot = process.env.NODICS_FRAMEWORK_ROOT || path.join(workspaceRoot, 'nodics.ai');
+  checks.push({ id: 'framework-root', state: fs.existsSync(path.join(frameworkRoot, 'AGENTS.md')) ? 'PASSED' : 'FAILED', path: frameworkRoot });
+  checks.push({ id: 'database-authority', state: 'DEFERRED_TO_RUNTIME_READINESS', detail: 'Database connectivity and credentials are validated by Nodics runtime services; preflight never performs direct database access.' });
+  return { environment: 'kickoffLocal', checkedAt: new Date().toISOString(), checks,
+    ready: checks.every(check => !['FAILED', 'BUSY'].includes(check.state)) };
+}
+
 async function waitUntilReady(runtime, timeoutMs = 90000) {
   const startedAt = Date.now();
   let lastError = 'not reachable';
@@ -165,6 +181,7 @@ async function main() {
   const includeFrontends = process.argv.includes('--include-frontends');
   if (command === 'start') return start(includeFrontends);
   if (command === 'stop') return stop();
+  if (command === 'preflight') { const result = await preflight(includeFrontends); console.log(JSON.stringify(result, null, 2)); if (!result.ready) process.exitCode = 1; return; }
   if (command === 'status') { console.log(JSON.stringify(await inspect(selectRuntimes(includeFrontends)), null, 2)); return; }
   throw new Error(`Unknown topology command: ${command}`);
 }

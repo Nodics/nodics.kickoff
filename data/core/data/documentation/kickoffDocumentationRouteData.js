@@ -50,6 +50,18 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "kickoffDocsRoutekickoffLocalPublishingOperations",
+    "site": "kickoffDocumentationSite",
+    "path": "/docs/nodics-kickoff/kickoff-local-publishing-operations",
+    "locale": "en",
+    "channel": "web",
+    "page": "kickoffDocsPagekickoffLocalPublishingOperations",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "PUBLIC",
+    "active": true
+  },
+  "record4": {
     "code": "kickoffDocsRoutekickoffDeploymentQualification",
     "site": "kickoffDocumentationSite",
     "path": "/docs/nodics-kickoff/kickoff-deployment-qualification",
@@ -61,7 +73,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record4": {
+  "record5": {
     "code": "kickoffDocsRoutekickoffCustomization",
     "site": "kickoffDocumentationSite",
     "path": "/docs/nodics-kickoff/kickoff-customization",
@@ -73,7 +85,7 @@ module.exports = {
     "accessMode": "PUBLIC",
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "kickoffDocsRoutekickoffFunctionalJourneys",
     "site": "kickoffDocumentationSite",
     "path": "/docs/nodics-kickoff/kickoff-functional-journeys",

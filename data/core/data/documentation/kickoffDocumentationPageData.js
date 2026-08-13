@@ -89,6 +89,31 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "kickoffDocsPagekickoffLocalPublishingOperations",
+    "name": "Local publishing operations",
+    "cmsSite": [
+      "kickoffDocumentationSite"
+    ],
+    "typeCode": "kickoffDocumentationArticlePageType",
+    "template": "kickoffDocumentationArticleTemplate",
+    "renderer": "documentation.page.article",
+    "cmsComponents": [
+      {
+        "target": "kickoffDocumentationNavigation",
+        "slot": "navigation",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "kickoffDocsComponentkickoffLocalPublishingOperations",
+        "slot": "article",
+        "index": 10,
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  "record4": {
     "code": "kickoffDocsPagekickoffDeploymentQualification",
     "name": "Deployment qualification",
     "cmsSite": [
@@ -113,7 +138,7 @@ module.exports = {
     ],
     "active": true
   },
-  "record4": {
+  "record5": {
     "code": "kickoffDocsPagekickoffCustomization",
     "name": "Customer customization guide",
     "cmsSite": [
@@ -138,7 +163,7 @@ module.exports = {
     ],
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "kickoffDocsPagekickoffFunctionalJourneys",
     "name": "Commerce and Engagement functional journeys",
     "cmsSite": [

@@ -80,13 +80,29 @@ module.exports = {
           "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. # Local Acceptance Checklist\n\nThis checklist is the beginner-friendly path for proving a fresh Nodics local\ninstallation from zero database state. Use it when you have cloned the three\nworking repositories, configured Kickoff, and want to confirm the backend\nframework, customer project, and Axis frontend are working together.\n\nThe checklist is intentionally explicit. A new developer should be able to\nfollow it without already knowing Nodics module loading, BackOffice bootstrap,\nWCMS content packs, or functional-module registration.\n\n## What this checklist proves\n\nThe acceptance run proves five things:\n\n| Area | What must be true |\n| --- | --- |\n| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root. |\n| Runtime topology | Platform, WCMS, and the composed Process/Cron automation runtime can start from the Kickoff local environment. |\n| Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |\n| Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |\n| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module. |\n\nIf any one of these fails, do not continue adding new functional modules. Fix\nthe contract break first, otherwise every later module will inherit a shaky\nlocal foundation.\n\n## Repository layout used by the reference run\n\nThe local reference setup normally looks like this:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.axis/\n  nodics.kickoff/\n```\n\nThis layout is only a convenience. Customer projects may live anywhere. The\nimportant contract is that `nodics.kickoff/.env` tells Kickoff where the\nframework checkout lives.\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nUse an absolute path if your repositories are not parallel:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai\n```\n\n## Mandatory prerequisites\n\nBefore running the checklist, confirm these local services and tools are\navailable:\n\n1. Node.js 24 and npm.\n2. MongoDB running locally.\n3. The three repositories are cloned:\n   - `nodics.ai`\n   - `nodics.axis`\n   - `nodics.kickoff`\n4. `nodics.kickoff/.env` exists and points to the framework root.\n5. `nodics.axis/.env` points to the local Platform server.\n\nRun this from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm run configure:framework\nnpm install\n```\n\nRun this from `nodics.axis`:\n\n```bash\ncp .env.example .env\nnpm install\n```\n\n## Fresh schema reset\n\nNo contributor, AI agent, test, migration, or acceptance script may read or\nmutate Nodics databases directly. A fresh-schema run is therefore blocked until\nPlatform provides a secured, bounded Local reset API/service with authorization,\naudit, explicit runtime targets, and recovery evidence. Never substitute a\ndatabase shell command.\n\n## Automated acceptance path\n\nMost maintainers should use the automated path first. It proves the same\ncontracts as the manual checklist and reduces human mistakes during repeated\nbootstrap tests.\n\nUse the non-destructive API-only form:\n\n```bash\nnpm run acceptance:local\n```\n\nThis checks the running or newly started split WCMS topology and imports\nmissing releases only through Nodics APIs. `acceptance:local:fresh` deliberately\nfails closed until the governed reset capability exists.\n\n### What the automated command proves\n\n```mermaid\nflowchart TD\n  Start[\"Developer runs npm run acceptance:local\"] --> Platform[\"Start or reuse Platform on 4300\"]\n  Platform --> Staged[\"Start or reuse WCMS Staged on 4312\"]\n  Staged --> Online[\"Start or reuse WCMS Online on 4314\"]\n  Online --> Process[\"Start or reuse Process/Cron on 4330\"]\n  Process --> Axis[\"Start or reuse Axis on 3100\"]\n  Axis --> Auth[\"Authenticate default/admin\"]\n  Auth --> Registry[\"Verify Core, Platform, WCMS, Cron observation\"]\n  Registry --> Docs[\"Import documentation packs through WCMS\"]\n  Docs --> Routes[\"Verify Axis routes\"]\n  Routes --> Designer[\"Verify Content Designer catalog-first route\"]\n  Designer --> Lifecycle[\"Run Cron register, activate, deactivate, deregister\"]\n  Lifecycle --> Pass[\"Acceptance pass\"]\n```\n\nThe command stops the servers it started after the acceptance gates complete.\nTo keep the API-qualified stack running, use:\n\n```bash\nnode scripts/local-bootstrap-acceptance.mjs --leave-started\n```\n\nThe command does not inspect or mutate a database directly, kill unrelated\nprocesses, or create another importer. It uses the existing Profile login, BackOffice registry,\nWCMS content-pack API, and Axis smoke test. This matters because acceptance\nmust prove the same path a real developer or operator uses.\n\n## Start and stop the complete Local topology\n\nThe normal direct-Node workflow is supervised from one terminal:\n\n```bash\nnpm run topology:start\n```\n\nThis starts Platform, WCMS Online, Process, WCMS Staged, Engagement, and\nCommerce in dependency-aware order. It waits for each low-disclosure readiness\nendpoint before starting the next runtime and writes generated logs and PID\nownership beneath `envs/kickoffLocal/generated/local-topology`.\n\nTo include the separate Axis and Nexus frontend repositories:\n\n```bash\nnpm run topology:start:all\n```\n\nFrom another terminal, inspect readiness and ownership:\n\n```bash\nnpm run topology:status\n```\n\nStop only the topology owned by this checkout:\n\n```bash\nnpm run topology:stop\n```\n\nThe stop command validates the recorded supervisor PID and command before\nsending a signal. A busy port without matching ownership is reported as\n`EXTERNAL_OR_UNKNOWN` and is never killed. Ctrl+C in the supervisor terminal\nperforms the same bounded reverse-order graceful shutdown.\n\n## Start individual backend servers\n\nFor focused debugging, open separate terminals from `nodics.kickoff`.\n\nTerminal 1:\n\n```bash\nnpm run start:platform\n```\n\nTerminal 2:\n\n```bash\nnpm run start:wcms:staged\n```\n\nTerminal 3:\n\n```bash\nnpm run start:wcms:online\n```\n\nTerminal 4:\n\n```bash\nnpm run start:process\n```\n\nExpected local ports:\n\n| Runtime | Port | Why it matters |\n| --- | ---: | --- |\n| Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |\n| WCMS Staged | 4312 | Versioned CMS authoring, imports, validation, and publication source. |\n| WCMS Online | 4314 | Published CMS delivery and authenticated publication target only. |\n| Process and Automation | 4330 | Process/workflow APIs plus optional Cron observation and registry lifecycle testing. |\n\nIf a port is already in use, confirm whether it is an earlier Nodics server\nfrom the same checkout. Do not kill unrelated processes by guessing.\n\n## Start Axis\n\nOpen another terminal from `nodics.axis`:\n\n```bash\nnpm run dev\n```\n\nAxis should be available at:\n\n```text\nhttp://localhost:3100\n```\n\n## Login\n\nOpen Axis and use the local reference credentials:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nSuccessful login proves:\n\n1. Axis can load public bootstrap from Platform.\n2. Profile can authenticate the local admin.\n3. Axis can retrieve authenticated BackOffice bootstrap data.\n4. Axis receives authorized navigation and runtime module projections.\n\n## Import initialization data\n\nIn Axis, open the import/initialization workspace and install the available\ninitialization releases.\n\nYou should see releases owned by active modules only. The system must not ask\nAxis to invent import data. Axis presents the operation; the owning backend\nmodule and nImport execute the import.\n\nExpected outcome:\n\n- mandatory Profile/bootstrap identity data is available;\n- core framework data required by Platform and WCMS is present;\n- documentation content packs can be imported or updated;\n- repeated import attempts with unchanged immutable releases do not corrupt\n  existing data.\n\n## Verify module registry\n\nOpen:\n\n```text\nSystem and Integrations → Module Registry\n```\n\nExpected state:\n\n| Functional module | Expected state | Why |\n| --- | --- | --- |\n| `nodics.core` | Registered and active | Required by every runtime. |\n| `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |\n| `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |\n| `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |\n| `nodics.cron` | Optional, observed when Process and Automation or standalone Cron is running | Proves optional runtime modules can join the lifecycle. |\n\nCore, Platform, and WCMS are mandatory for this local Axis-backed acceptance\ntopology. They should not appear as removable optional modules. Cron may be\nregistered, activated, deactivated, and deregistered as an optional module.\n\n## Verify documentation\n\nOpen:\n\n```text\nDocumentation\n```\n\nExpected documentation products:\n\n- Framework\n- Swaggers\n- Nodics Axis\n- Nodics Kickoff\n\nThe products are intentionally separated by ownership:\n\n| Documentation product | Owning repository/module |\n| --- | --- |\n| Framework | `nodics.ai/nodics.docs` |\n| Nodics Axis | `nodics.ai/nodics.platform/modules/axis` |\n| Nodics Kickoff | `nodics.kickoff` |\n| Swagger/OpenAPI | Platform BackOffice/OpenAPI contracts |\n\nAxis is only the renderer. It must not own backend-importable documentation\ncontent.\n\n## Verify content and media\n\nOpen these Axis routes:\n\n```text\n/content\n/content/designer\n/media\n/media/items\n/media/folders\n```\n\nExpected behavior:\n\n- `/content` shows the content dashboard and WCMS-owned summary sections.\n- `/content/designer` shows the governed Page Designer foundation. It should\n  explain the catalog-first sequence and support dynamic template slots rather\n  than assuming a fixed header/main/footer page shape.\n- `/media` shows media management, media records, and media-by-source sections.\n- `/media/items` and `/media/folders` open focused media workspaces instead of\n  falling into CMS recovery.\n- Any unavailable backend schema is reported as a backend/schema discovery\n  issue, not as a frontend-owned data model.\n\n### Verify Page Designer authoring model\n\nOpen:\n\n```text\nContent and Experience → Web Content Management System → Page Designer\n```\n\nThe Designer is not expected to look exactly like the final website in a\nbrowser. It is the authoring and structure view. A beginner should understand\nthis chain:\n\n```mermaid\nflowchart TD\n  Catalog[\"Content Catalog\"]\n  Site[\"Site\"]\n  Template[\"Page Template\"]\n  Page[\"Page\"]\n  Slots[\"Template Slots: any number\"]\n  Sections[\"Page Sections\"]\n  Components[\"Component Instances\"]\n  Media[\"Governed Media\"]\n  Route[\"Page Route\"]\n  Nav[\"Navigation Node\"]\n\n  Catalog --> Site\n  Catalog --> Template\n  Site --> Page\n  Template --> Page\n  Page --> Slots\n  Slots --> Sections\n  Sections --> Components\n  Components --> Media\n  Page --> Route\n  Route --> Nav\n```\n\nThis acceptance step proves only that the reference local stack can consume the\nWCMS-owned authoring model. The contract itself belongs to WCMS. If the\nDesigner metadata is wrong, fix the owning WCMS contract and tests first; do\nnot move catalog, site, template, slot, page, component, or media authority\ninto the reference project or into the Axis frontend.\n\nExpected Designer evidence:\n\n| Area | Expected behavior |\n| --- | --- |\n| Catalog-first sequence | The UI starts from content catalog, then site, template, page, slots, sections, components, media, route, and navigation. |\n| Dynamic slots | Slot names come from template data; the UI must not assume only three slots. |\n| Backend authority | Save/validate actions call WCMS/CMS authoring APIs, not browser-local persistence. |\n| Media governance | Media association points to nMedia records or sets; it never asks for a filesystem path. |\n| Publish readiness | Designer can validate readiness, but publishing remains CMS/nPublish authority. |\n\nIf Designer loads but cannot validate or save, inspect the WCMS server first:\n`cmsAuthoring` API exposure must be enabled, the user must have\n`cms.backoffice.manage`, the selected Site must belong to the selected Content\nCatalog, and the selected Template must expose the slots being edited.\n\n## Verify Cron\n\nOpen:\n\n```text\n/cron\n```\n\nExpected behavior:\n\n- If Process and Automation is running, Axis can observe both `nodics.process`\n  and `nodics.cron` from the same runtime.\n- If Cron is not registered, it appears as available to register.\n- Register moves it into the registered list without requiring a page refresh.\n- Activate changes lifecycle state without freezing buttons.\n- Deactivate and deregister return it to the correct next state.\n\nThe automated acceptance runner performs the full optional Cron lifecycle:\n\n```text\navailable → register → registered/inactive → activate → registered/active\nregistered/active → deactivate → registered/inactive → deregister → available\n```\n\nCron is optional for the project, so the final accepted state after the\nautomated lifecycle test is **available** rather than permanently registered.\nThat proves both the runtime observation path and the governed removal path.\n\nIf an action succeeds but the UI does not update, inspect the module registry\nAPI response immediately after the action. The frontend should refresh local\nquery state after each lifecycle operation.\n\n## Command-line smoke test\n\nAfter the servers and Axis are running, use the live smoke script from\n`nodics.axis`:\n\n```bash\nAXIS_EXPECT_MODULES=1 npm run smoke:live\nAXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 npm run smoke:live\nAXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live\n```\n\nExpected result:\n\n```text\nPASS Axis route /\nPASS Axis route /content\nPASS Axis route /content/designer\nPASS Axis route /media\nPASS Axis route /media/items\nPASS Axis route /media/folders\nPASS Axis route /cron\nPASS Axis route /system-integrations\nPASS Axis route /registry\nPASS Axis route /operations/imports-exports\nPASS Axis route /docs/swaggers\nPASS BackOffice public bootstrap\nPASS authenticated login for admin\nPASS module registry reachable\nPASS required modules registered: nodics.core, nodics.platform, nodics.wcms\nPASS optional runtime modules observed: nodics.cron\nPASS documentation pack nodicsDocumentation is CURRENT\nPASS documentation pack axisDocumentation is CURRENT\nPASS documentation pack kickoffDocumentation is CURRENT\nPASS cron lifecycle register\nPASS cron lifecycle activate\nPASS cron lifecycle deactivate\nPASS cron lifecycle deregister returns module to available\n```\n\n## Troubleshooting quick map\n\n| Symptom | Most likely boundary |\n| --- | --- |\n| Axis recovery says BackOffice registry unavailable | Platform server is not reachable or Axis points at the wrong Platform URL. |\n| Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |\n| Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |\n| Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |\n| Cron does not appear | Process and Automation server or standalone Cron server is not running, or the runtime has not reported its functional module observation. |\n| Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |\n| Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |\n\n## Acceptance sign-off\n\nThe local acceptance run is complete when:\n\n1. Platform, WCMS, Process and Automation, and Axis are running.\n2. Required releases were qualified through Nodics import/publication APIs.\n3. Admin login works.\n4. Module registry shows mandatory modules and optional Cron correctly.\n5. Documentation products are visible.\n6. Content and media routes render the expected workspaces.\n7. The Page Designer route shows the catalog-first model and does not invent a\n   fixed slot shape or frontend-owned content persistence.\n8. `npm run acceptance:local` passes, or the manual equivalent plus\n   `AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live`\n   passes.\n9. No repo in the three-repo set has uncommitted acceptance changes.\n\nWhen all nine are true, the modularized foundation is ready for the next\nfunctional module.\n\n## Common mistakes\n\n- Treating a running Node process as proof that the customer project is ready.\n- Skipping content-pack import and then wondering why Axis documentation or\n  WCMS pages are unavailable.\n- Reading, dropping, or modifying a database directly during a test instead of\n  using an authorized Nodics API/service.\n- Accepting a module lifecycle flow that requires a browser refresh after\n  register, activate, deactivate, or deregister.\n- Ignoring an `INVALID RELEASE` message because the release still appears in\n  the list.\n- Verifying only Platform while forgetting WCMS, documentation, media, Process,\n  Cron, and Axis routes.\n\n## Verification\n\nRun the API-only checklist repeatedly when confidence matters. The expected\nresult is idempotent release qualification, mandatory module visibility,\noptional Cron lifecycle handling, and Axis rendering without manual database\ninspection or edits. Fresh-schema proof resumes only after the governed reset\nAPI/service is implemented.\n\nFor project documentation changes, regenerate the Kickoff documentation pack,\nrun the documentation contract test, start Platform and WCMS, import or update\nthe Kickoff docs release, and open `/docs/nodics-kickoff` in Axis. If the page\nonly works because it was hardcoded in the frontend, the acceptance result is\nnot valid.\n"
         },
         {
+          "code": "kickoff.local-publishing-operations",
+          "title": "Local publishing operations",
+          "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations",
+          "section": "nodics-kickoff",
+          "sectionTitle": "Nodics Kickoff",
+          "sectionOrder": 10,
+          "order": 40,
+          "audience": [
+            "architect",
+            "developer",
+            "operator"
+          ],
+          "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
+          "searchText": "Local publishing operations Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access. # Local publishing operations\n\n## Scope and authority\n\nThis runbook operates the `kickoffLocal` Staged-to-Online publishing lifecycle.\nIt is Local evidence only: it does not approve Development, QA, PreProd, Prod,\nphysical datastore switching, or Agora. WCMS Staged owns authoring and release\nfreeze, `nPublish` owns lifecycle transitions, Process owns approval workflow\nstate, WCMS Online owns deployed visibility, and Axis is the employee control\nplane. Nexus consumes Online only.\n\nOperators and automation must use Nodics APIs, generated services, and the\nproject commands below. They must never repair, seed, version, publish, restore,\nor verify content through direct database CRUD. Database credentials and\nconnectivity are evaluated by runtime readiness; the topology preflight does\nnot open its own database connection.\n\n## Preflight, start, inspect, and stop\n\nRun from `nodics.kickoff`:\n\n```text\nnpm run topology:preflight\nnpm run topology:start:all\nnpm run topology:status\nnpm run topology:stop\n```\n\nPreflight verifies repository availability and required ports. Startup refuses\nbusy ports, starts dependencies in order, waits for HTTP readiness, records only\nits own process identities, and fails closed if a managed child exits. Stop\nsignals only the validated supervisor and releases children in reverse order.\n\n## Supported initialization and release upgrade\n\nUse `npm run acceptance:local:fresh` only when a bounded Local reset is intended.\nThe command resets through the governed Platform API; it does not issue database\ncommands. Use `npm run acceptance:local` for retained-schema initialization,\ncontent-pack upgrade, repeat installation, and publication verification.\n\nImmutable content-pack files use portable source revision zero. During a\ngoverned content-pack upgrade, nImport reads the latest Staged record through its\ngenerated schema service and supplies the next optimistic revision. A concurrent\nwriter can still win between read and save; persistence then rejects the import,\nand the operator reviews import-run diagnostics before retrying. Ordinary imports\nand API writes do not receive this release-only reconciliation.\n\nAn upgrade is successful only when the content-pack status is `CURRENT`, the\nexpected release version and checksum are visible, Staged import diagnostics have\nno unresolved failures, publication reaches `ONLINE`, and Online delivery returns\nthe expected projection. Never resolve an upgrade by changing stored revisions.\n\n## Failure, retry, rollback, and recovery\n\n- A validation or approval rejection leaves Online unchanged. Correct Staged\n  content, create or select the intended version, and submit again.\n- Workflow timeouts and response loss are retried only through the bounded,\n  idempotent Process and publication contracts. Correlation ID and operation key\n  must remain stable for the retry.\n- A Staged, Process, or Online interruption is recovered by restarting the\n  supervised topology and running retained acceptance. Reconciliation resumes\n  durable lifecycle and outbox state; it must not manufacture database state.\n- A failed deployment is reconciled before retry. If activation cannot be\n  completed safely, invoke the governed publication rollback operation and\n  verify the prior Online pointer and delivery response.\n- Unexpected supervised child exit must stop the remaining topology. Inspect the\n  generated runtime logs, correct the cause, run preflight, and start again.\n\n## Import, export, backup, and restore boundaries\n\nLocal acceptance proves secured Staged export, checksum and provenance, media-\nbacked validation/import, tenant rejection, and Online/Process export denial.\nThis is a logical data portability and recovery exercise, not a physical database\nbackup certification. Physical backup, restore, point-in-time recovery, RPO, and\nRTO require database-provider procedures and non-Local qualification. Restored\nauthoritative data must be followed by Nodics projection rebuild and API-based\ncount/checksum reconciliation.\n\n## Observability and audit\n\nUse publication operations and diagnostics APIs to inspect lifecycle state,\nfailure and stuck totals, safe failure codes, actor identity, correlation ID,\nrevision, target version, deployment receipts, audit reconciliation, and outbox\ndelivery. Logs must omit tokens, credentials, provider paths, raw payloads, and\nprotected business or personal data. Exported evidence is sanitized before it is\nshared.\n\nRequired Local signals are publication count, failure count, stuck count,\nduration per bounded contract, retry outcome, rollback outcome, readiness, and\nOnline delivery verification. Production queue depth, p95/p99, throughput, soak,\nprojection lag, alerts, and capacity targets remain external evidence.\n\n## Concurrency, retention, and cleanup\n\nLifecycle revisions prevent conflicting transitions. Stable publication codes,\noperation keys, receipts, Online pointers, and outbox identities make identical\nreplays converge. Concurrent editors must publish explicit frozen versions;\npublishing never means “latest at execution time.”\n\nPrevious content versions remain governed history. Online manifests and rollback\nreferences protect required versions. Media cleanup uses retention time, active\nand rollback references, batch limits, and legal hold; it removes only expired,\nunreferenced publication media through the media service. Generated supervisor\nstate and import staging follow their owning cleanup lifecycle.\n\n## Qualification and evidence\n\nRun:\n\n```text\nnpm run qualification:publishing-capacity\nnpm run qualification:deployment:local -- --include-fresh\n```\n\nThe bounded capacity suite covers freeze, deployment, activation, delivery,\nresponse-loss retry, rollback, transaction abort, media retention, concurrent\nactivation/receipt convergence, workflow handoff, publication operations, and\naudit reconciliation. The deployment report records command outcomes, durations,\nrepository commits, explicit external gaps, and an integrity digest. It never\nself-approves production.\n\nTroubleshoot using stable error codes. `ERR_IMP_00003` indicates immutable release\nintegrity/version policy, `ERR_IMP_00010` is an aggregate record-dispatch failure,\nand `ERR_MDL_00004` indicates an optimistic revision conflict. Preserve the\ncorrelation ID and sanitized import/publication diagnostics when escalating.\n\n## Common mistakes\n\nA common mistake is treating a content-pack update as a database migration and\nmanually changing `versionId`, installed-release history, or the Online pointer.\nThat destroys the evidence needed for retry and rollback. Another mistake is\nstarting Nexus against Staged because authoring content appears there first;\npublic clients must remain Online-only. Do not run multiple unmanaged copies of\nthe same Local server, kill a PID copied from stale state, reuse an old checksum\nunder the same release version, or declare success only because processes are\nlistening. Readiness, authority, workflow, publication, and delivery must all be\nverified.\n\nOperators should also avoid interpreting Local contract timing as production\ncapacity, logical export as physical backup, retryable-phase warnings as final\nfailure, or an integrity digest as human approval. Inspect the final import-run\nand publication states. Documentation source belongs in this project, generated\nCMS data comes from the generator, and frontend applications must not become the\nauthority for content-pack installation or publication state.\n\n## Verification\n\nFor a normal retained upgrade, run preflight, retained acceptance, publishing\ncapacity qualification, and the project test suite. For a deliberate clean-room\nexercise, run fresh acceptance once and retained acceptance immediately after it\nto prove restart-safe idempotency. Confirm that all expected packs are `CURRENT`,\nthe new documentation page is delivered from Online, the publication operations\nsummary has no unexplained failed or stuck item, and `topology:status` reports no\nmanaged process after shutdown.\n\nReview the generated qualification report for command exit codes, durations,\nsource commits, explicit external gaps, and a valid SHA-256 digest. Independently\nrun Framework, Axis, and Nexus verification before committing the coordinated\nbaseline. Finally run `git diff --check`, documentation generation in check mode,\ncredential-pattern scanning, and the zero-direct-database audit over the changed\nfiles. A beginner or partner developer should be able to follow this sequence\nwithout knowing a MongoDB collection name or using a database shell.\n"
+        },
+        {
           "code": "kickoff.deployment-qualification",
           "title": "Deployment qualification",
           "route": "/docs/nodics-kickoff/kickoff-deployment-qualification",
           "section": "nodics-kickoff",
           "sectionTitle": "Nodics Kickoff",
           "sectionOrder": 10,
-          "order": 40,
+          "order": 50,
           "audience": [
             "architect",
             "developer",
@@ -102,7 +118,7 @@ module.exports = {
           "section": "nodics-kickoff",
           "sectionTitle": "Nodics Kickoff",
           "sectionOrder": 10,
-          "order": 50,
+          "order": 60,
           "audience": [
             "architect",
             "developer",
@@ -118,7 +134,7 @@ module.exports = {
           "section": "nodics-kickoff",
           "sectionTitle": "Nodics Kickoff",
           "sectionOrder": 10,
-          "order": 60,
+          "order": 70,
           "audience": [
             "architect",
             "developer",
@@ -1818,8 +1834,8 @@ module.exports = {
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
       },
       "next": {
-        "title": "Deployment qualification",
-        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
+        "title": "Local publishing operations",
+        "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations"
       },
       "source": {
         "repository": "nodics.kickoff",
@@ -1833,6 +1849,253 @@ module.exports = {
     "active": true
   },
   "record4": {
+    "code": "kickoffDocsComponentkickoffLocalPublishingOperations",
+    "typeCode": "kickoffDocumentationArticleComponentType",
+    "renderer": "documentation.component.article",
+    "accessMode": "PUBLIC",
+    "properties": {
+      "code": "kickoff.local-publishing-operations",
+      "title": "Local publishing operations",
+      "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations",
+      "section": "nodics-kickoff",
+      "sectionTitle": "Nodics Kickoff",
+      "audience": [
+        "architect",
+        "developer",
+        "operator"
+      ],
+      "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
+      "headings": [
+        {
+          "text": "Scope and authority",
+          "anchor": "kickoffLocalPublishingOperations-1-scope-and-authority",
+          "level": 2
+        },
+        {
+          "text": "Preflight, start, inspect, and stop",
+          "anchor": "kickoffLocalPublishingOperations-2-preflight-start-inspect-and-stop",
+          "level": 2
+        },
+        {
+          "text": "Supported initialization and release upgrade",
+          "anchor": "kickoffLocalPublishingOperations-3-supported-initialization-and-release-upgrade",
+          "level": 2
+        },
+        {
+          "text": "Failure, retry, rollback, and recovery",
+          "anchor": "kickoffLocalPublishingOperations-4-failure-retry-rollback-and-recovery",
+          "level": 2
+        },
+        {
+          "text": "Import, export, backup, and restore boundaries",
+          "anchor": "kickoffLocalPublishingOperations-5-import-export-backup-and-restore-boundaries",
+          "level": 2
+        },
+        {
+          "text": "Observability and audit",
+          "anchor": "kickoffLocalPublishingOperations-6-observability-and-audit",
+          "level": 2
+        },
+        {
+          "text": "Concurrency, retention, and cleanup",
+          "anchor": "kickoffLocalPublishingOperations-7-concurrency-retention-and-cleanup",
+          "level": 2
+        },
+        {
+          "text": "Qualification and evidence",
+          "anchor": "kickoffLocalPublishingOperations-8-qualification-and-evidence",
+          "level": 2
+        },
+        {
+          "text": "Common mistakes",
+          "anchor": "kickoffLocalPublishingOperations-9-common-mistakes",
+          "level": 2
+        },
+        {
+          "text": "Verification",
+          "anchor": "kickoffLocalPublishingOperations-10-verification",
+          "level": 2
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Scope and authority",
+          "anchor": "kickoffLocalPublishingOperations-1-scope-and-authority"
+        },
+        {
+          "kind": "paragraph",
+          "text": "This runbook operates the `kickoffLocal` Staged-to-Online publishing lifecycle. It is Local evidence only: it does not approve Development, QA, PreProd, Prod, physical datastore switching, or Agora. WCMS Staged owns authoring and release freeze, `nPublish` owns lifecycle transitions, Process owns approval workflow state, WCMS Online owns deployed visibility, and Axis is the employee control plane. Nexus consumes Online only."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Operators and automation must use Nodics APIs, generated services, and the project commands below. They must never repair, seed, version, publish, restore, or verify content through direct database CRUD. Database credentials and connectivity are evaluated by runtime readiness; the topology preflight does not open its own database connection."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Preflight, start, inspect, and stop",
+          "anchor": "kickoffLocalPublishingOperations-2-preflight-start-inspect-and-stop"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run from `nodics.kickoff`:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "npm run topology:preflight\nnpm run topology:start:all\nnpm run topology:status\nnpm run topology:stop"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Preflight verifies repository availability and required ports. Startup refuses busy ports, starts dependencies in order, waits for HTTP readiness, records only its own process identities, and fails closed if a managed child exits. Stop signals only the validated supervisor and releases children in reverse order."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Supported initialization and release upgrade",
+          "anchor": "kickoffLocalPublishingOperations-3-supported-initialization-and-release-upgrade"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use `npm run acceptance:local:fresh` only when a bounded Local reset is intended. The command resets through the governed Platform API; it does not issue database commands. Use `npm run acceptance:local` for retained-schema initialization, content-pack upgrade, repeat installation, and publication verification."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Immutable content-pack files use portable source revision zero. During a governed content-pack upgrade, nImport reads the latest Staged record through its generated schema service and supplies the next optimistic revision. A concurrent writer can still win between read and save; persistence then rejects the import, and the operator reviews import-run diagnostics before retrying. Ordinary imports and API writes do not receive this release-only reconciliation."
+        },
+        {
+          "kind": "paragraph",
+          "text": "An upgrade is successful only when the content-pack status is `CURRENT`, the expected release version and checksum are visible, Staged import diagnostics have no unresolved failures, publication reaches `ONLINE`, and Online delivery returns the expected projection. Never resolve an upgrade by changing stored revisions."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Failure, retry, rollback, and recovery",
+          "anchor": "kickoffLocalPublishingOperations-4-failure-retry-rollback-and-recovery"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "A validation or approval rejection leaves Online unchanged. Correct Staged content, create or select the intended version, and submit again.",
+            "Workflow timeouts and response loss are retried only through the bounded, idempotent Process and publication contracts. Correlation ID and operation key must remain stable for the retry.",
+            "A Staged, Process, or Online interruption is recovered by restarting the supervised topology and running retained acceptance. Reconciliation resumes durable lifecycle and outbox state; it must not manufacture database state.",
+            "A failed deployment is reconciled before retry. If activation cannot be completed safely, invoke the governed publication rollback operation and verify the prior Online pointer and delivery response.",
+            "Unexpected supervised child exit must stop the remaining topology. Inspect the generated runtime logs, correct the cause, run preflight, and start again."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Import, export, backup, and restore boundaries",
+          "anchor": "kickoffLocalPublishingOperations-5-import-export-backup-and-restore-boundaries"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Local acceptance proves secured Staged export, checksum and provenance, media- backed validation/import, tenant rejection, and Online/Process export denial. This is a logical data portability and recovery exercise, not a physical database backup certification. Physical backup, restore, point-in-time recovery, RPO, and RTO require database-provider procedures and non-Local qualification. Restored authoritative data must be followed by Nodics projection rebuild and API-based count/checksum reconciliation."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Observability and audit",
+          "anchor": "kickoffLocalPublishingOperations-6-observability-and-audit"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use publication operations and diagnostics APIs to inspect lifecycle state, failure and stuck totals, safe failure codes, actor identity, correlation ID, revision, target version, deployment receipts, audit reconciliation, and outbox delivery. Logs must omit tokens, credentials, provider paths, raw payloads, and protected business or personal data. Exported evidence is sanitized before it is shared."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Required Local signals are publication count, failure count, stuck count, duration per bounded contract, retry outcome, rollback outcome, readiness, and Online delivery verification. Production queue depth, p95/p99, throughput, soak, projection lag, alerts, and capacity targets remain external evidence."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Concurrency, retention, and cleanup",
+          "anchor": "kickoffLocalPublishingOperations-7-concurrency-retention-and-cleanup"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Lifecycle revisions prevent conflicting transitions. Stable publication codes, operation keys, receipts, Online pointers, and outbox identities make identical replays converge. Concurrent editors must publish explicit frozen versions; publishing never means “latest at execution time.”"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Previous content versions remain governed history. Online manifests and rollback references protect required versions. Media cleanup uses retention time, active and rollback references, batch limits, and legal hold; it removes only expired, unreferenced publication media through the media service. Generated supervisor state and import staging follow their owning cleanup lifecycle."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Qualification and evidence",
+          "anchor": "kickoffLocalPublishingOperations-8-qualification-and-evidence"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "npm run qualification:publishing-capacity\nnpm run qualification:deployment:local -- --include-fresh"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The bounded capacity suite covers freeze, deployment, activation, delivery, response-loss retry, rollback, transaction abort, media retention, concurrent activation/receipt convergence, workflow handoff, publication operations, and audit reconciliation. The deployment report records command outcomes, durations, repository commits, explicit external gaps, and an integrity digest. It never self-approves production."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Troubleshoot using stable error codes. `ERR_IMP_00003` indicates immutable release integrity/version policy, `ERR_IMP_00010` is an aggregate record-dispatch failure, and `ERR_MDL_00004` indicates an optimistic revision conflict. Preserve the correlation ID and sanitized import/publication diagnostics when escalating."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Common mistakes",
+          "anchor": "kickoffLocalPublishingOperations-9-common-mistakes"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A common mistake is treating a content-pack update as a database migration and manually changing `versionId`, installed-release history, or the Online pointer. That destroys the evidence needed for retry and rollback. Another mistake is starting Nexus against Staged because authoring content appears there first; public clients must remain Online-only. Do not run multiple unmanaged copies of the same Local server, kill a PID copied from stale state, reuse an old checksum under the same release version, or declare success only because processes are listening. Readiness, authority, workflow, publication, and delivery must all be verified."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Operators should also avoid interpreting Local contract timing as production capacity, logical export as physical backup, retryable-phase warnings as final failure, or an integrity digest as human approval. Inspect the final import-run and publication states. Documentation source belongs in this project, generated CMS data comes from the generator, and frontend applications must not become the authority for content-pack installation or publication state."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verification",
+          "anchor": "kickoffLocalPublishingOperations-10-verification"
+        },
+        {
+          "kind": "paragraph",
+          "text": "For a normal retained upgrade, run preflight, retained acceptance, publishing capacity qualification, and the project test suite. For a deliberate clean-room exercise, run fresh acceptance once and retained acceptance immediately after it to prove restart-safe idempotency. Confirm that all expected packs are `CURRENT`, the new documentation page is delivered from Online, the publication operations summary has no unexplained failed or stuck item, and `topology:status` reports no managed process after shutdown."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Review the generated qualification report for command exit codes, durations, source commits, explicit external gaps, and a valid SHA-256 digest. Independently run Framework, Axis, and Nexus verification before committing the coordinated baseline. Finally run `git diff --check`, documentation generation in check mode, credential-pattern scanning, and the zero-direct-database audit over the changed files. A beginner or partner developer should be able to follow this sequence without knowing a MongoDB collection name or using a database shell."
+        }
+      ],
+      "searchText": "Local publishing operations Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access. # Local publishing operations\n\n## Scope and authority\n\nThis runbook operates the `kickoffLocal` Staged-to-Online publishing lifecycle.\nIt is Local evidence only: it does not approve Development, QA, PreProd, Prod,\nphysical datastore switching, or Agora. WCMS Staged owns authoring and release\nfreeze, `nPublish` owns lifecycle transitions, Process owns approval workflow\nstate, WCMS Online owns deployed visibility, and Axis is the employee control\nplane. Nexus consumes Online only.\n\nOperators and automation must use Nodics APIs, generated services, and the\nproject commands below. They must never repair, seed, version, publish, restore,\nor verify content through direct database CRUD. Database credentials and\nconnectivity are evaluated by runtime readiness; the topology preflight does\nnot open its own database connection.\n\n## Preflight, start, inspect, and stop\n\nRun from `nodics.kickoff`:\n\n```text\nnpm run topology:preflight\nnpm run topology:start:all\nnpm run topology:status\nnpm run topology:stop\n```\n\nPreflight verifies repository availability and required ports. Startup refuses\nbusy ports, starts dependencies in order, waits for HTTP readiness, records only\nits own process identities, and fails closed if a managed child exits. Stop\nsignals only the validated supervisor and releases children in reverse order.\n\n## Supported initialization and release upgrade\n\nUse `npm run acceptance:local:fresh` only when a bounded Local reset is intended.\nThe command resets through the governed Platform API; it does not issue database\ncommands. Use `npm run acceptance:local` for retained-schema initialization,\ncontent-pack upgrade, repeat installation, and publication verification.\n\nImmutable content-pack files use portable source revision zero. During a\ngoverned content-pack upgrade, nImport reads the latest Staged record through its\ngenerated schema service and supplies the next optimistic revision. A concurrent\nwriter can still win between read and save; persistence then rejects the import,\nand the operator reviews import-run diagnostics before retrying. Ordinary imports\nand API writes do not receive this release-only reconciliation.\n\nAn upgrade is successful only when the content-pack status is `CURRENT`, the\nexpected release version and checksum are visible, Staged import diagnostics have\nno unresolved failures, publication reaches `ONLINE`, and Online delivery returns\nthe expected projection. Never resolve an upgrade by changing stored revisions.\n\n## Failure, retry, rollback, and recovery\n\n- A validation or approval rejection leaves Online unchanged. Correct Staged\n  content, create or select the intended version, and submit again.\n- Workflow timeouts and response loss are retried only through the bounded,\n  idempotent Process and publication contracts. Correlation ID and operation key\n  must remain stable for the retry.\n- A Staged, Process, or Online interruption is recovered by restarting the\n  supervised topology and running retained acceptance. Reconciliation resumes\n  durable lifecycle and outbox state; it must not manufacture database state.\n- A failed deployment is reconciled before retry. If activation cannot be\n  completed safely, invoke the governed publication rollback operation and\n  verify the prior Online pointer and delivery response.\n- Unexpected supervised child exit must stop the remaining topology. Inspect the\n  generated runtime logs, correct the cause, run preflight, and start again.\n\n## Import, export, backup, and restore boundaries\n\nLocal acceptance proves secured Staged export, checksum and provenance, media-\nbacked validation/import, tenant rejection, and Online/Process export denial.\nThis is a logical data portability and recovery exercise, not a physical database\nbackup certification. Physical backup, restore, point-in-time recovery, RPO, and\nRTO require database-provider procedures and non-Local qualification. Restored\nauthoritative data must be followed by Nodics projection rebuild and API-based\ncount/checksum reconciliation.\n\n## Observability and audit\n\nUse publication operations and diagnostics APIs to inspect lifecycle state,\nfailure and stuck totals, safe failure codes, actor identity, correlation ID,\nrevision, target version, deployment receipts, audit reconciliation, and outbox\ndelivery. Logs must omit tokens, credentials, provider paths, raw payloads, and\nprotected business or personal data. Exported evidence is sanitized before it is\nshared.\n\nRequired Local signals are publication count, failure count, stuck count,\nduration per bounded contract, retry outcome, rollback outcome, readiness, and\nOnline delivery verification. Production queue depth, p95/p99, throughput, soak,\nprojection lag, alerts, and capacity targets remain external evidence.\n\n## Concurrency, retention, and cleanup\n\nLifecycle revisions prevent conflicting transitions. Stable publication codes,\noperation keys, receipts, Online pointers, and outbox identities make identical\nreplays converge. Concurrent editors must publish explicit frozen versions;\npublishing never means “latest at execution time.”\n\nPrevious content versions remain governed history. Online manifests and rollback\nreferences protect required versions. Media cleanup uses retention time, active\nand rollback references, batch limits, and legal hold; it removes only expired,\nunreferenced publication media through the media service. Generated supervisor\nstate and import staging follow their owning cleanup lifecycle.\n\n## Qualification and evidence\n\nRun:\n\n```text\nnpm run qualification:publishing-capacity\nnpm run qualification:deployment:local -- --include-fresh\n```\n\nThe bounded capacity suite covers freeze, deployment, activation, delivery,\nresponse-loss retry, rollback, transaction abort, media retention, concurrent\nactivation/receipt convergence, workflow handoff, publication operations, and\naudit reconciliation. The deployment report records command outcomes, durations,\nrepository commits, explicit external gaps, and an integrity digest. It never\nself-approves production.\n\nTroubleshoot using stable error codes. `ERR_IMP_00003` indicates immutable release\nintegrity/version policy, `ERR_IMP_00010` is an aggregate record-dispatch failure,\nand `ERR_MDL_00004` indicates an optimistic revision conflict. Preserve the\ncorrelation ID and sanitized import/publication diagnostics when escalating.\n\n## Common mistakes\n\nA common mistake is treating a content-pack update as a database migration and\nmanually changing `versionId`, installed-release history, or the Online pointer.\nThat destroys the evidence needed for retry and rollback. Another mistake is\nstarting Nexus against Staged because authoring content appears there first;\npublic clients must remain Online-only. Do not run multiple unmanaged copies of\nthe same Local server, kill a PID copied from stale state, reuse an old checksum\nunder the same release version, or declare success only because processes are\nlistening. Readiness, authority, workflow, publication, and delivery must all be\nverified.\n\nOperators should also avoid interpreting Local contract timing as production\ncapacity, logical export as physical backup, retryable-phase warnings as final\nfailure, or an integrity digest as human approval. Inspect the final import-run\nand publication states. Documentation source belongs in this project, generated\nCMS data comes from the generator, and frontend applications must not become the\nauthority for content-pack installation or publication state.\n\n## Verification\n\nFor a normal retained upgrade, run preflight, retained acceptance, publishing\ncapacity qualification, and the project test suite. For a deliberate clean-room\nexercise, run fresh acceptance once and retained acceptance immediately after it\nto prove restart-safe idempotency. Confirm that all expected packs are `CURRENT`,\nthe new documentation page is delivered from Online, the publication operations\nsummary has no unexplained failed or stuck item, and `topology:status` reports no\nmanaged process after shutdown.\n\nReview the generated qualification report for command exit codes, durations,\nsource commits, explicit external gaps, and a valid SHA-256 digest. Independently\nrun Framework, Axis, and Nexus verification before committing the coordinated\nbaseline. Finally run `git diff --check`, documentation generation in check mode,\ncredential-pattern scanning, and the zero-direct-database audit over the changed\nfiles. A beginner or partner developer should be able to follow this sequence\nwithout knowing a MongoDB collection name or using a database shell.\n",
+      "previous": {
+        "title": "Local acceptance checklist",
+        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+      },
+      "next": {
+        "title": "Deployment qualification",
+        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
+      },
+      "source": {
+        "repository": "nodics.kickoff",
+        "functionalModule": "nodics.kickoff",
+        "technicalModule": "kickoffLocal",
+        "path": "data/core/source/documentation/pages/local-publishing-operations.md",
+        "wordCount": 1126,
+        "checksum": "06d22e8157686cf564421fbe20bb45c9fa4fc2e71fa0c53b3b5e1e5ceaef2a73"
+      }
+    },
+    "active": true
+  },
+  "record5": {
     "code": "kickoffDocsComponentkickoffDeploymentQualification",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -2171,8 +2434,8 @@ module.exports = {
       ],
       "searchText": "Deployment qualification Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off. # Deployment qualification\n\nDeployment qualification is the bridge between a release candidate that works\nlocally and a release that accountable owners may approve for production. The\nKickoff runner coordinates evidence from the framework, reference project,\nAxis, and local Redis, but it deliberately cannot approve production by itself.\n\n## Start here\n\nFrom `nodics.kickoff`, print the plan without running anything:\n\n```bash\nnpm run qualification:deployment\n```\n\nThe JSON plan identifies each gate, its owner, the command that would run, and\nwhat it proves. It contains no credentials or provider URLs.\n\nRun the safe local gates:\n\n```bash\nnpm run qualification:deployment:local\n```\n\nThe runner executes the strict framework release gate, retained-data Kickoff\nacceptance, Axis verification, and the live Redis cache and distributed\nregistry contracts. It writes sanitized evidence to:\n\n```text\nenvs/kickoffLocal/generated/deployment-qualification/latest.json\n```\n\nThe generated report is local operational evidence and is intentionally\nignored by Git. Archive it in the deployment system that owns the release.\n\n## Fresh bootstrap is intentionally separate\n\nFresh acceptance drops only the documented Kickoff local databases. Because it\nmutates local data, it is never included by default:\n\n```bash\nnode scripts/deployment-qualification.mjs --execute-local --include-fresh\n```\n\nNever use this flag against a shared development, qualification,\npre-production, or production database. Use an isolated disposable Kickoff\nenvironment and verify the configured database names first.\n\n## What local evidence does and does not prove\n\n| Gate | Local proof | Still required before production |\n| --- | --- | --- |\n| Framework | Clean build, generated contracts, governance, dependency audit, and automated suites | Deployment-image and target-runtime confirmation |\n| Kickoff | Integrated runtime, documentation, lifecycle, and business-user smoke journey | Production topology and operational ownership |\n| Axis | Formatting, lint, type safety, automated tests, and production bundle | Supported browser/device and human assistive-technology matrix |\n| Redis | Real local cache and distributed-registry behavior | Managed TLS/authentication, topology, isolation, failover, and recovery |\n| Payments/providers | Mock and offline contract behavior | Real non-production credentials, callbacks, failure handling, and rollback |\n\nLocal success must never be translated into `productionApproved: true`. The\nreport fixes this value to `false` and keeps every external evidence class at\n`NOT_EXECUTED`.\n\n## Production-only evidence register\n\nNamed owners must attach evidence for all applicable rows:\n\n| Evidence | Accountable owner | Minimum completion evidence |\n| --- | --- | --- |\n| Peak load | Performance owner | Workload model, dataset, topology, p95/p99, throughput, error rate, saturation, queue age, projection lag, and integrity reconciliation |\n| Soak | Operations owner | Sustained duration, memory/CPU trends, retry growth, drift, storage/index growth, and post-run reconciliation |\n| Penetration | Security owner | Authenticated attack surface, tenant isolation, validation, replay, export, webhook, and privilege-escalation results with disposition |\n| Managed cache failover | Platform owner | TLS/authentication, topology, tenant isolation, node/provider loss, recovery time, and data-consistency results |\n| Backup and restore | Data owner | Backup identity, restore procedure, authoritative counts/hashes, projection rebuild, and reconciliation |\n| Regional residency | Infrastructure and privacy owners | Allowed-region routing, evacuation, deletion propagation, and cross-region leakage results |\n| RPO/RTO | Operations owner | Measured recovery point and recovery time compared with approved objectives |\n| External providers | Provider owners | Credential source, consent, callbacks, residency, observability, degraded behavior, rollback, and key rotation |\n| Accessibility | Product accessibility owner | Keyboard, screen reader, zoom/reflow, contrast, browser, and supported-device results |\n\n## Recommended execution order\n\n```mermaid\nflowchart TD\n  Plan[\"Print qualification plan\"] --> Local[\"Run safe local evidence\"]\n  Local --> Fresh{\"Isolated fresh environment available?\"}\n  Fresh -- \"yes\" --> Bootstrap[\"Run bounded fresh bootstrap\"]\n  Fresh -- \"no\" --> Provision[\"Provision qualification environment\"]\n  Bootstrap --> Provision\n  Provision --> Providers[\"Qualify managed cache and external providers\"]\n  Providers --> Load[\"Run peak load and soak\"]\n  Load --> Recovery[\"Run failover, backup restore, and RPO/RTO\"]\n  Recovery --> Security[\"Complete penetration and residency review\"]\n  Security --> Accessibility[\"Complete human accessibility matrix\"]\n  Accessibility --> Review[\"Accountable-owner evidence review\"]\n  Review --> Decision{\"All gates passed or residual risk accepted?\"}\n  Decision -- \"no\" --> Hold[\"Keep publication blocked\"]\n  Decision -- \"yes\" --> Release[\"Approve merge, tag, and publication\"]\n```\n\nRun functional success paths before destructive resilience tests. Run load\nbefore failover only when the test plan explicitly needs a stable baseline.\nRestore the environment and reconcile data after every destructive exercise.\n\n## Failure and recovery\n\nThe runner continues through local gates so one report shows every attempted\ncheck. Any non-zero command becomes `FAILED` with a stable failure code; raw\nenvironment variables and secrets are excluded. Investigate the owning\nrepository first, rerun the focused failing command, then rerun the pack.\n\nIf Redis is unavailable, start or configure an approved test endpoint and set\n`NODICS_CACHE_REDIS_URL` only in the execution environment. Do not commit it.\nIf the framework, Axis, or Kickoff checkout lives elsewhere, provide\n`NODICS_QUALIFICATION_FRAMEWORK_ROOT` or `NODICS_QUALIFICATION_AXIS_ROOT`.\n\n## Customization boundary\n\nThis runner belongs to the reference customer project because it coordinates a\nspecific multi-repository deployment journey. A real customer project should\ncopy the pattern into its own project tooling, change only its repository\ncoordinates and qualification gates, and retain the safety properties:\n\n- dry plan by default;\n- destructive checks explicitly opted in;\n- no secrets or provider URLs in reports;\n- external evidence remains separate from local automation;\n- no automatic production approval;\n- named owners and measurable completion criteria.\n\nDo not move customer workloads, credentials, environments, acceptance targets,\nor risk decisions into `nodics.ai`. Framework modules own reusable contracts;\nthe customer deployment owns its qualification and release decision.\n\n## Common mistakes\n\n- Treating local Redis as proof of a managed Redis topology, TLS, authentication,\n  failover, or regional recovery.\n- Calling mock Stripe or offline provider contracts a live-provider test.\n- running `--include-fresh` without checking that the target is the isolated\n  Kickoff local environment;\n- publishing the generated JSON as a production approval even though it records\n  only command outcomes and fixes `productionApproved` to `false`;\n- pasting secrets, bearer tokens, provider URLs, customer data, or raw security\n  findings into a shared evidence report;\n- accepting average latency while ignoring p95/p99, errors, saturation, queue\n  age, projection lag, and post-run data integrity;\n- running failover or restore exercises without a rollback plan and named\n  operational owner;\n- letting Axis automation replace keyboard, screen-reader, zoom, contrast, and\n  supported-device testing by a qualified human;\n- merging or tagging merely because local gates passed while production-only\n  evidence still says `NOT_EXECUTED`.\n\n## Verification\n\nDevelopers can verify the runner contract without starting the full stack:\n\n```bash\nnpm run test:qualification\nnpm run qualification:deployment\n```\n\nConfirm the plan contains five non-destructive local gates, nine explicit\nexternal gates, no environment values, and `productionApproved: false`. Then\nrun `npm run qualification:deployment:local` in the prepared local workspace.\nConfirm every attempted local gate is `PASSED`, the report is written only\nunder the ignored `envs/kickoffLocal/generated` path, and all production-only\ngates remain visible.\n\nOperators should archive the local report with the immutable repository commit\nidentifiers, deployment image identifiers, environment name, external test\nreports, and accountable-owner decisions. Before approval, independently\nconfirm that each external result belongs to the same release candidate and\nenvironment topology. A missing, stale, differently scoped, or unverifiable\nartifact remains pending; silence is never a pass.\n",
       "previous": {
-        "title": "Local acceptance checklist",
-        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+        "title": "Local publishing operations",
+        "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations"
       },
       "next": {
         "title": "Customer customization guide",
@@ -2189,7 +2452,7 @@ module.exports = {
     },
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "kickoffDocsComponentkickoffCustomization",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -2797,7 +3060,7 @@ module.exports = {
     },
     "active": true
   },
-  "record6": {
+  "record7": {
     "code": "kickoffDocsComponentkickoffFunctionalJourneys",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",

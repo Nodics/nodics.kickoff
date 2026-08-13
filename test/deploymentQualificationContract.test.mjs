@@ -14,6 +14,7 @@ import {
   createQualificationPlan,
   createReport,
   executeLocalPlan,
+  resolveSourceCommits,
   sanitizeStep,
 } from '../scripts/deployment-qualification.mjs';
 
@@ -62,5 +63,8 @@ assert.strictEqual(report.productionApproved, false, 'Tooling must not self-appr
 assert.strictEqual(report.summary.passed, 1);
 assert.strictEqual(report.summary.failed, 1);
 assert.strictEqual(report.summary.externalPending, 9);
+assert.match(report.integrity.digest, /^[a-f0-9]{64}$/);
+const commits = resolveSourceCommits({ framework: '/framework' }, () => ({ status: 0, stdout: 'abc123\n' }));
+assert.deepStrictEqual(commits, { framework: 'abc123' });
 
 console.log('Deployment qualification contract validated');

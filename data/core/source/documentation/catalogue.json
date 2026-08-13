@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "documents": [
@@ -27,6 +27,14 @@
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
       "content": "data/core/source/documentation/pages/local-acceptance-checklist.md"
+    },
+    {
+      "id": "kickoff.local-publishing-operations",
+      "title": "Local publishing operations",
+      "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "kickoffLocal",
+      "content": "data/core/source/documentation/pages/local-publishing-operations.md"
     },
     {
       "id": "kickoff.deployment-qualification",

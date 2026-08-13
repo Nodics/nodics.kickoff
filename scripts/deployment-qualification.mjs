@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -135,7 +136,7 @@ export function executeLocalPlan(plan, options = {}) {
 export function createReport(plan, localResults, options = {}) {
   const createdAt = (options.now ? options.now() : new Date()).toISOString();
   const results = localResults || plan.local.map((step) => Object.assign(sanitizeStep(step), { state: 'PLANNED' }));
-  return {
+  const report = {
     contractVersion: 1,
     qualificationEnvironment: options.environmentName || 'kickoffLocal',
     createdAt,
@@ -150,6 +151,21 @@ export function createReport(plan, localResults, options = {}) {
     externalEvidence: plan.external,
     decision: 'Local evidence cannot approve production. Named owners must attach external evidence and explicitly accept residual risk.',
   };
+  report.sourceCommits = options.sourceCommits || {};
+  report.integrity = {
+    algorithm: 'sha256',
+    digest: createHash('sha256').update(JSON.stringify(report)).digest('hex'),
+    meaning: 'Integrity digest for this sanitized report; it is not a human or production approval signature.',
+  };
+  return report;
+}
+
+/** Resolves source commit identities without including remotes, branches, or credentials. */
+export function resolveSourceCommits(workspace, spawn = spawnSync) {
+  return Object.fromEntries(Object.entries(workspace).map(([name, cwd]) => {
+    const result = spawn('git', ['rev-parse', 'HEAD'], { cwd, encoding: 'utf8' });
+    return [name, result.status === 0 ? String(result.stdout).trim() : 'UNAVAILABLE'];
+  }));
 }
 
 export function writeReport(report, outputPath) {
@@ -163,7 +179,8 @@ async function main() {
   const requireExternal = process.argv.includes('--require-external');
   const plan = createQualificationPlan({ includeFresh });
   const localResults = executeLocal ? executeLocalPlan(plan) : null;
-  const report = createReport(plan, localResults);
+  const workspace = resolveWorkspace();
+  const report = createReport(plan, localResults, { sourceCommits: resolveSourceCommits(workspace) });
   if (executeLocal) {
     const outputPath = path.join(projectRoot, 'envs', 'kickoffLocal', 'generated', 'deployment-qualification', 'latest.json');
     writeReport(report, outputPath);

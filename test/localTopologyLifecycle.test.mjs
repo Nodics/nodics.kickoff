@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { backendRuntimes, frontendRuntimes, isOwnedSupervisor, selectRuntimes } from '../scripts/local-topology.mjs';
+import { backendRuntimes, frontendRuntimes, isOwnedSupervisor, preflight, selectRuntimes } from '../scripts/local-topology.mjs';
 
 assert.deepEqual(backendRuntimes.map(runtime => runtime.port), [4300, 4314, 4330, 4312, 4340, 4350]);
 assert.equal(new Set(backendRuntimes.map(runtime => runtime.port)).size, backendRuntimes.length);
@@ -13,5 +13,8 @@ assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: process.cwd() 
 const supervisorSource = fs.readFileSync(new URL('../scripts/local-topology.mjs', import.meta.url), 'utf8');
 assert.match(supervisorSource, /stopping the remaining topology/);
 assert.match(supervisorSource, /Refusing to start because required ports are busy/);
+const preflightResult = await preflight(false);
+assert.equal(preflightResult.checks.some(check => check.id === 'database-authority' && check.state === 'DEFERRED_TO_RUNTIME_READINESS'), true);
+assert.equal(preflightResult.checks.some(check => check.id === 'framework-root' && check.state === 'PASSED'), true);
 
 console.log('kickoffLocal topology lifecycle contract validated');
