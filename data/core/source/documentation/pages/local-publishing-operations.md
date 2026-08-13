@@ -129,6 +129,21 @@ mutation, import/export, remote transport, BackOffice, Engagement, publication
 authority, and atomic-audit contracts. These close Local regression evidence;
 they do not replace production-scale soak or an independent penetration test.
 
+For the isolated `kickoffDockerLocal` production simulation, run the Docker
+Local build, start, acceptance, qualification, resilience, interruption, and
+soak commands defined in `package.json`. Keep this environment separate from
+native `kickoffLocal`; it owns its own ports, secrets, databases, Redis
+topology, networks, and Staged/Online media volumes.
+
+The qualified 2026-08-13 closure completed API-only retained-data acceptance,
+seven target-release reconciliations, Redis Sentinel promotion with
+authentication and publication continuity, a 1.744-second backup/RPO rehearsal,
+a 55.420-second restore/RTO against the 300-second Local target, and a 30-minute
+soak of 20,088 requests with zero errors, six publication runs, 12 ms p95, 15 ms
+p99, and 56 resource samples. This is reproducible Local evidence, not a
+production approval. Independent penetration testing and human
+assistive-technology review remain external.
+
 Troubleshoot using stable error codes. `ERR_IMP_00003` indicates immutable release
 integrity/version policy, `ERR_IMP_00010` is an aggregate record-dispatch failure,
 and `ERR_MDL_00004` indicates an optimistic revision conflict. Preserve the
