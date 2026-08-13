@@ -66,6 +66,15 @@ runtimes from one terminal. Use `topology:start:all` to include sibling Axis
 and Nexus development servers. The supervisor refuses unknown busy ports and
 stops only processes whose generated PID ownership belongs to this checkout.
 
+For an independently configured containerized production simulation, use
+`envs/kickoffDockerLocal`. It has separate ports, generated secrets,
+authenticated MongoDB and Redis infrastructure, databases, media volumes,
+Staged/Online runtimes, and Axis/Nexus containers. See
+[envs/kickoffDockerLocal/README.md](envs/kickoffDockerLocal/README.md).
+Its `docker-local:resilience` command qualifies checksum-backed recovery,
+measured local RPO/RTO, restored publication state, bounded load, and Sentinel
+promotion while preserving explicit external-evidence limitations.
+
 The committed `.npmrc` keeps npm local `file:` dependencies as symbolic links
 (`install-links=false`). This is required because `.nodics/framework/` is a
 generated framework-link directory, not a registry-style packed dependency.

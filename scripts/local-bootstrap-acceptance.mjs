@@ -33,6 +33,10 @@ const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
 const password = process.env.AXIS_PASSWORD || "adminPassword";
 const projectCode = process.env.AXIS_PROJECT || "nodics.kickoff";
+const runtimeMode = process.env.NODICS_ACCEPTANCE_RUNTIME || "kickoffLocal";
+const managedStartupEnabled = runtimeMode === "kickoffLocal";
+const nexusUrl = process.env.NEXUS_URL || "http://127.0.0.1:3200";
+const urlPort = (value) => Number(new URL(value).port || (new URL(value).protocol === "https:" ? 443 : 80));
 const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
 const documentationPacks = [
@@ -85,13 +89,13 @@ const retiredDocumentationCatalogs = Object.freeze([
   "kickoffDocumentationContentCatalog",
 ]);
 const localPorts = [
-  { label: "Platform", port: 4300 },
-  { label: "WCMS Staged", port: 4312 },
-  { label: "WCMS Online", port: 4314 },
-  { label: "Process", port: 4330 },
+  { label: "Platform", port: urlPort(platformUrl) },
+  { label: "WCMS Staged", port: urlPort(wcmsUrl) },
+  { label: "WCMS Online", port: urlPort(wcmsOnlineUrl) },
+  { label: "Process", port: urlPort(processUrl) },
   { label: "Engagement", port: 4340 },
   { label: "Commerce", port: 4350 },
-  { label: "Axis", port: 3100 },
+  { label: "Axis", port: urlPort(axisUrl) },
 ];
 const managedProcesses = [];
 
@@ -190,8 +194,8 @@ async function expectHttpOk(baseUrl, path) {
 
 /** Proves the Local browser/runtime security matrix through HTTP without database access. */
 async function verifyLocalRouteSecurityMatrix() {
-  const nexusOrigin = "http://127.0.0.1:3200";
-  const axisOrigin = "http://127.0.0.1:3100";
+  const nexusOrigin = new URL(nexusUrl).origin;
+  const axisOrigin = new URL(axisUrl).origin;
   const probe = (baseUrl, path, origin, options = {}) => fetch(endpoint(baseUrl, path), {
     redirect: "manual",
     ...options,
@@ -302,10 +306,12 @@ function startProcess(label, cwd, command, args, readyPort) {
 }
 
 async function ensureProcess(label, port, cwd, scriptName, baseUrl, readyPath) {
+  if (!managedStartupEnabled) return waitForHttp(baseUrl, readyPath, label);
   if (await portListening(port)) {
     log(`${label} already listening on ${String(port)}`);
     return;
   }
+  if (!managedStartupEnabled) throw new Error(`${label} is not listening on ${String(port)} for ${runtimeMode}`);
   startProcess(label, cwd, "npm", ["run", scriptName], port);
   await waitForHttp(baseUrl, readyPath, label);
 }
@@ -925,7 +931,7 @@ async function main() {
   await assertGovernedFreshResetAvailable();
   await ensureProcess(
     "Platform",
-    4300,
+    urlPort(platformUrl),
     projectRoot,
     "start:platform",
     platformUrl,
@@ -933,7 +939,7 @@ async function main() {
   );
   await ensureProcess(
     "WCMS Staged",
-    4312,
+    urlPort(wcmsUrl),
     projectRoot,
     "start:wcms:staged",
     wcmsUrl,
@@ -941,7 +947,7 @@ async function main() {
   );
   await ensureProcess(
     "WCMS Online",
-    4314,
+    urlPort(wcmsOnlineUrl),
     projectRoot,
     "start:wcms:online",
     wcmsOnlineUrl,
@@ -949,7 +955,7 @@ async function main() {
   );
   await ensureProcess(
     "Process and Automation",
-    4330,
+    urlPort(processUrl),
     projectRoot,
     "start:process",
     processUrl,
@@ -970,11 +976,13 @@ async function main() {
     "/nodics/backoffice/v0/bootstrap/public",
     "BackOffice public bootstrap",
   );
-  if (!(await portListening(3100))) {
+  if (!managedStartupEnabled) {
+    await waitForHttp(axisUrl, "/", "Axis");
+  } else if (!(await portListening(urlPort(axisUrl)))) {
     if (!existsSync(resolve(axisRoot, "package.json"))) {
       throw new Error(`Axis repository not found at ${axisRoot}`);
     }
-    startProcess("Axis", axisRoot, "npm", ["run", "dev"], 3100);
+    startProcess("Axis", axisRoot, "npm", ["run", "dev"], urlPort(axisUrl));
   }
   await waitForHttp(axisUrl, "/", "Axis");
   const headers = await authenticate();

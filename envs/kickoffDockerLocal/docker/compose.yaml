@@ -1,0 +1,191 @@
+name: nodics-kickoff-docker-local
+
+x-backend: &backend
+  image: nodics/kickoff-backend:docker-local
+  build:
+    context: ${NODICS_WORKSPACE_ROOT}
+    dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/backend.Dockerfile
+  restart: unless-stopped
+  read_only: true
+  env_file: ["../generated/docker.env"]
+  init: true
+  security_opt: ["no-new-privileges:true"]
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=128m"]
+  environment:
+    ENV: kickoffDockerLocal
+    NODE_ENV: production
+    REDIS_URL: redis://:${REDIS_PASSWORD}@redis-primary:6379
+  networks: [operator, application, data]
+  depends_on:
+    mongodb: { condition: service_healthy }
+    redis-primary: { condition: service_healthy }
+    media-permissions: { condition: service_completed_successfully }
+  deploy:
+    resources:
+      limits: { memory: 768m, cpus: "1.50" }
+
+x-backend-health: &backend-health
+  interval: 10s
+  timeout: 5s
+  retries: 20
+  start_period: 60s
+
+services:
+  media-permissions:
+    image: nodics/kickoff-backend:docker-local
+    user: "0:0"
+    entrypoint: ["sh", "-c"]
+    command: ["chown -R 1000:1000 /var/lib/nodics/media-staged /var/lib/nodics/media-online"]
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    networks: [data]
+    volumes: ["media-staged:/var/lib/nodics/media-staged", "media-online:/var/lib/nodics/media-online"]
+
+  mongodb:
+    image: mongo:8.0
+    entrypoint: ["sh", "-c"]
+    command: ["printf '%s' \"$${MONGO_REPLICA_KEY}\" > /tmp/mongo-keyfile && chmod 400 /tmp/mongo-keyfile && chown mongodb:mongodb /tmp/mongo-keyfile && exec /usr/local/bin/docker-entrypoint.sh mongod --replSet nodicsDockerLocal --bind_ip_all --keyFile /tmp/mongo-keyfile"]
+    environment: { MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USERNAME}", MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}", MONGO_REPLICA_KEY: "${MONGO_REPLICA_KEY}" }
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    networks: [data]
+    volumes: ["mongodb-data:/data/db"]
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet -u \"$${MONGO_INITDB_ROOT_USERNAME}\" -p \"$${MONGO_INITDB_ROOT_PASSWORD}\" --authenticationDatabase admin --eval 'try { rs.status().ok } catch (e) { rs.initiate({_id:\"nodicsDockerLocal\",members:[{_id:0,host:\"mongodb:27017\"}]}).ok }' | grep 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+    deploy: { resources: { limits: { memory: 1024m, cpus: "2.00" } } }
+
+  redis-primary:
+    image: redis:8.2-alpine
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$${REDIS_PASSWORD}\""]
+    environment: { REDIS_PASSWORD: "${REDIS_PASSWORD}" }
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    networks: [data]
+    volumes: ["redis-primary-data:/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    deploy: { resources: { limits: { memory: 256m, cpus: "0.50" } } }
+
+  redis-replica:
+    image: redis:8.2-alpine
+    command: ["sh", "-c", "exec redis-server --replicaof redis-primary 6379 --masterauth \"$${REDIS_PASSWORD}\" --requirepass \"$${REDIS_PASSWORD}\""]
+    environment: { REDIS_PASSWORD: "${REDIS_PASSWORD}" }
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    networks: [data]
+    depends_on: { redis-primary: { condition: service_healthy } }
+    deploy: { resources: { limits: { memory: 256m, cpus: "0.50" } } }
+
+  redis-sentinel:
+    image: redis:8.2-alpine
+    command: ["sh", "-c", "printf 'port 26379\nsentinel resolve-hostnames yes\nsentinel monitor nodics redis-primary 6379 1\nsentinel auth-pass nodics %s\nsentinel down-after-milliseconds nodics 5000\nsentinel failover-timeout nodics 15000\n' \"$${REDIS_PASSWORD}\" > /tmp/sentinel.conf && exec redis-sentinel /tmp/sentinel.conf"]
+    environment: { REDIS_PASSWORD: "${REDIS_PASSWORD}" }
+    restart: unless-stopped
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=16m"]
+    security_opt: ["no-new-privileges:true"]
+    networks: [data]
+    depends_on: { redis-primary: { condition: service_healthy }, redis-replica: { condition: service_started } }
+    deploy: { resources: { limits: { memory: 128m, cpus: "0.25" } } }
+
+  platform:
+    <<: *backend
+    command: ["src/start-platform-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: platformServer, NODICS_DATABASE_NAME: kickoffDockerLocalPlatform }
+    ports: ["5300:4300"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/platformServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4300/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
+  wcms-online:
+    <<: *backend
+    command: ["src/start-wcms-online-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: wcmsOnlineServer, NODICS_DATABASE_NAME: kickoffDockerLocalWcmsOnline }
+    ports: ["5314:4314"]
+    volumes: ["media-online:/var/lib/nodics/media-online"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/wcmsOnlineServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4314/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
+  process:
+    <<: *backend
+    command: ["src/start-process-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: processServer, NODICS_DATABASE_NAME: kickoffDockerLocalProcess }
+    ports: ["5330:4330"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/processServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4330/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
+  wcms-staged:
+    <<: *backend
+    command: ["src/start-wcms-staged-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: wcmsStagedServer, NODICS_DATABASE_NAME: kickoffDockerLocalWcmsStaged }
+    ports: ["5312:4312"]
+    volumes: ["media-staged:/var/lib/nodics/media-staged"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/wcmsStagedServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, process: { condition: service_healthy }, wcms-online: { condition: service_healthy } }
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4312/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
+  engagement:
+    <<: *backend
+    command: ["src/start-engagement-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: engagementServer, NODICS_DATABASE_NAME: kickoffDockerLocalEngagement }
+    ports: ["5340:4340"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/engagementServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4340/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
+  commerce:
+    <<: *backend
+    command: ["src/start-commerce-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: commerceServer, NODICS_DATABASE_NAME: kickoffDockerLocalCommerce }
+    ports: ["5350:4350"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/commerceServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4350/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
+  axis:
+    image: nodics/axis:docker-local
+    build: { context: "${NODICS_WORKSPACE_ROOT}", dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile, args: { FRONTEND_PROJECT: nodics.axis } }
+    restart: unless-stopped
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101", "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101"]
+    networks: [public]
+    ports: ["4100:8080"]
+    volumes: ["./axis-config.json:/usr/share/nginx/html/axis-config.json:ro"]
+    depends_on: { platform: { condition: service_healthy }, wcms-staged: { condition: service_healthy }, wcms-online: { condition: service_healthy } }
+    healthcheck: { test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"], interval: 10s, timeout: 3s, retries: 10 }
+    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
+
+  nexus:
+    image: nodics/nexus:docker-local
+    build: { context: "${NODICS_WORKSPACE_ROOT}", dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile, args: { FRONTEND_PROJECT: nodics.nexus } }
+    restart: unless-stopped
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101", "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101"]
+    networks: [public]
+    ports: ["4200:8080"]
+    volumes: ["./nexus-config.json:/usr/share/nginx/html/nexus-config.json:ro"]
+    depends_on: { wcms-online: { condition: service_healthy } }
+    healthcheck: { test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"], interval: 10s, timeout: 3s, retries: 10 }
+    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
+
+networks:
+  public: { name: nodics-kickoff-docker-local-public }
+  operator: { name: nodics-kickoff-docker-local-operator }
+  application: { name: nodics-kickoff-docker-local-application, internal: true }
+  data: { name: nodics-kickoff-docker-local-data, internal: true }
+
+volumes:
+  mongodb-data: { name: nodics-kickoff-docker-local-mongodb }
+  redis-primary-data: { name: nodics-kickoff-docker-local-redis }
+  media-staged: { name: nodics-kickoff-docker-local-media-staged }
+  media-online: { name: nodics-kickoff-docker-local-media-online }

@@ -1,0 +1,11 @@
+{
+  "backofficeBaseUrl": "http://localhost:5300",
+  "enterpriseCode": "default",
+  "projectCode": "nodics.kickoff",
+  "clientContractVersion": 1,
+  "requestTimeoutMs": 10000,
+  "browserSessionCsrfCookieName": "nodics_axis_csrf",
+  "assistantMaximumEventBytes": 65536,
+  "assistantReconnectWindowMs": 120000,
+  "assistantIdleTimeoutMs": 45000
+}
