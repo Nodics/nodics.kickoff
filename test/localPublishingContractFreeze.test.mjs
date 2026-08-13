@@ -11,6 +11,7 @@ const cmsRoutes = read('nodics.ai/nodics.wcms/modules/cms/src/router/routers.js'
 const staged = read('nodics.kickoff/envs/kickoffLocal/wcmsStagedServer/config/properties.js');
 const online = read('nodics.kickoff/envs/kickoffLocal/wcmsOnlineServer/config/properties.js');
 const process = read('nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js');
+const dockerLocal = read('nodics.kickoff/envs/kickoffDockerLocal/config/runtime-properties.js');
 
 for (const permission of ['publish.operations.view', 'publish.operations.reconcile', 'publish.operations.recover']) {
   assert(publishRoutes.includes(permission), `Missing frozen nPublish permission ${permission}`);
@@ -27,6 +28,17 @@ assert(online.includes("runtimeRole: 'ONLINE'") && online.includes('publishEnabl
 assert(process.includes("runtimeRole: { code: 'PROCESS'"), 'Process runtime contract must remain independently composed');
 assert.notStrictEqual(staged.match(/databaseName:\s*'([^']+)'/)?.[1], online.match(/databaseName:\s*'([^']+)'/)?.[1],
   'Staged and Online database identities must not converge');
+
+for (const documentation of [
+  { packCode: 'nodicsDocumentation', manifestPath: 'nodics.ai/nodics.docs/data/manifest.json' },
+  { packCode: 'kickoffDocumentation', manifestPath: 'nodics.kickoff/data/manifest.json' },
+]) {
+  const manifest = JSON.parse(read(documentation.manifestPath));
+  const releaseVersion = manifest.sections.documentation.version;
+  const descriptor = new RegExp(`contentPackCode:\\s*'${documentation.packCode}'[^}]*releaseVersion:\\s*'${releaseVersion}'`);
+  assert(descriptor.test(staged), `kickoffLocal ${documentation.packCode} baseline must match its immutable manifest`);
+  assert(descriptor.test(dockerLocal), `kickoffDockerLocal ${documentation.packCode} baseline must match its immutable manifest`);
+}
 
 for (const manifestPath of [
   'nodics.kickoff/modules/nexusData/data/manifest.json',

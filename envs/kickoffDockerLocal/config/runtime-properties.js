@@ -84,9 +84,9 @@ module.exports = function runtimeProperties(server) {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
                 nexus: { releaseCode: 'nexusData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusupdate: { releaseCode: 'nexusData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.14.2', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
+                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.15.0', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
                 axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.3.32', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
-                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.6.6', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
+                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.7.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
                 workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 target: { moduleName: 'cms', connectionName: 'cmsOnline', connectionType: 'abstract' } } },
