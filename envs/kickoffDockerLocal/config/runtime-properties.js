@@ -23,7 +23,16 @@ const distributedAuthCache = {
             enabled: true,
             distributed: true,
             atomicConsume: true,
-            options: { url: process.env.REDIS_URL, host: null, port: null, database: 0, prefix: 'kickoffCore' }
+            options: {
+                url: process.env.REDIS_URL, host: null, port: null, database: 0, prefix: 'kickoffCore',
+                password: process.env.REDIS_PASSWORD,
+                sentinel: {
+                    enabled: true, name: 'nodics', password: process.env.REDIS_PASSWORD,
+                    endpoints: [{ host: 'redis-sentinel', port: 26379 }],
+                    connectTimeout: 5000, commandTimeout: 3000,
+                    retryDelayMs: 250, maximumRetryDelayMs: 5000
+                }
+            }
         }
     }
 };

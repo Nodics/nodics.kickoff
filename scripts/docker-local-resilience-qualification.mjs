@@ -12,6 +12,8 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const workspaceRoot = path.resolve(projectRoot, '..');
 const generatedRoot = path.join(projectRoot, 'envs', 'kickoffDockerLocal', 'generated');
+const environmentValues = Object.fromEntries(fs.readFileSync(path.join(generatedRoot, 'docker.env'), 'utf8').trim()
+  .split(/\n/).map(line => { const separator = line.indexOf('='); return [line.slice(0, separator), line.slice(separator + 1)]; }));
 const docker = fs.existsSync('/Applications/Docker.app/Contents/Resources/bin/docker')
   ? '/Applications/Docker.app/Contents/Resources/bin/docker' : 'docker';
 const dockerEnvironment = { ...process.env, DOCKER_CONFIG: path.join(generatedRoot, 'docker-cli'),
@@ -45,6 +47,7 @@ async function waitReady(port, timeoutMs = 120000) {
 let backupId;
 let recoveryCompleted = false;
 let lifecycleAcceptanceCompleted = false;
+let sentinelContinuityCompleted = false;
 await check('recovery-point-objective', () => {
   const started = performance.now();
   const output = run(process.execPath, ['scripts/docker-local-resilience.mjs', 'backup']);
@@ -97,8 +100,10 @@ await check('bounded-sustained-read-load', async () => {
 });
 await check('redis-sentinel-promotion-observed', async () => {
   if (!backupId) throw new Error('Backup is unavailable for post-failover recovery.');
-  run(docker, ['pause', 'nodics-kickoff-docker-local-redis-primary-1'], { env: dockerEnvironment });
-  const deadline = Date.now() + 45000; let promoted = '';
+  run(docker, ['exec', '-e', `REDISCLI_AUTH=${environmentValues.REDIS_PASSWORD}`,
+    'nodics-kickoff-docker-local-redis-primary-1', 'redis-cli', 'CLIENT', 'PAUSE', '20000', 'ALL'],
+  { env: dockerEnvironment });
+  const deadline = Date.now() + 90000; let promoted = '';
   while (Date.now() < deadline) {
     try {
       promoted = run(docker, ['exec', 'nodics-kickoff-docker-local-redis-sentinel-1', 'redis-cli', '-p', '26379', '--raw',
@@ -115,11 +120,14 @@ await check('redis-sentinel-promotion-observed', async () => {
   const promotedAddress = promoted.trim().split(/\s+/)[0];
   const replicaAddress = run(docker, ['inspect', '--format', '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}',
     'nodics-kickoff-docker-local-redis-replica-1'], { env: dockerEnvironment }).trim();
-  if (promotedAddress !== replicaAddress) throw new Error('Sentinel did not promote redis-replica within 45 seconds.');
-  run(docker, ['unpause', 'nodics-kickoff-docker-local-redis-primary-1'], { env: dockerEnvironment });
+  if (promotedAddress !== replicaAddress) throw new Error('Sentinel did not promote redis-replica within 90 seconds.');
+  await Promise.all([5300, 5312, 5314, 5330, 5340, 5350].map(port => waitReady(port, 90000)));
+  run(process.execPath, ['scripts/docker-local-acceptance.mjs']);
+  sentinelContinuityCompleted = true;
   run(process.execPath, ['scripts/docker-local-resilience.mjs', 'restore', backupId, '--confirm-replace-docker-local-data']);
   await Promise.all([5300, 5312, 5314, 5330, 5340, 5350].map(port => waitReady(port)));
-  return { promotedNode: 'redis-replica', recovery: 'baseline backup restored after destructive failover simulation' };
+  return { promotedNode: 'redis-replica', applicationReconnect: 'PASSED', authenticationStampContinuity: 'PASSED',
+    publicationLifecycleDuringPromotion: 'PASSED', recovery: 'baseline backup restored after Redis service-interruption failover simulation' };
 });
 await check('dependency-security-audit', () => {
   const result = spawnSync('npm', ['audit', '--omit=dev', '--json'], { cwd: projectRoot, encoding: 'utf8' });
@@ -139,8 +147,10 @@ await check('axis-bundled-login-accessibility-contract', () => {
   return { classification: 'AUTOMATED_STATIC_CONTRACT_ONLY' };
 }, 'AUTOMATED_STATIC_CONTRACT_ONLY');
 
-evidence.push({ id: 'redis-application-transparent-failover', state: 'NOT_QUALIFIED',
-  classification: 'KNOWN_ARCHITECTURE_GAP', message: 'Runtime REDIS_URL names redis-primary directly; Sentinel promotion is observable but not yet application-discoverable.' });
+evidence.push({ id: 'redis-application-transparent-failover', state: sentinelContinuityCompleted ? 'PASSED' : 'FAILED',
+  classification: 'LOCAL_PRODUCTION_SIMULATION', message: sentinelContinuityCompleted
+    ? 'Sentinel-aware runtimes remained ready and completed authenticated publishing acceptance after replica promotion.'
+    : 'Sentinel promotion continuity did not complete; no transparent-failover claim is permitted.' });
 evidence.push({ id: 'independent-penetration-and-human-accessibility', state: 'EXTERNAL_EVIDENCE_REQUIRED',
   classification: 'EXTERNAL', message: 'Automation does not replace independent penetration testing or assistive-technology review.' });
 

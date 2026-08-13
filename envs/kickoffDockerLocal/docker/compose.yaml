@@ -19,6 +19,7 @@ x-backend: &backend
   depends_on:
     mongodb: { condition: service_healthy }
     redis-primary: { condition: service_healthy }
+    redis-sentinel: { condition: service_healthy }
     media-permissions: { condition: service_completed_successfully }
   deploy:
     resources:
@@ -93,6 +94,11 @@ services:
     security_opt: ["no-new-privileges:true"]
     networks: [data]
     depends_on: { redis-primary: { condition: service_healthy }, redis-replica: { condition: service_started } }
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -p 26379 --raw SENTINEL get-master-addr-by-name nodics | grep -q ."]
+      interval: 5s
+      timeout: 3s
+      retries: 20
     deploy: { resources: { limits: { memory: 128m, cpus: "0.25" } } }
 
   platform:
@@ -109,7 +115,7 @@ services:
     environment: { ENV: kickoffDockerLocal, SERVER: wcmsOnlineServer, NODICS_DATABASE_NAME: kickoffDockerLocalWcmsOnline }
     ports: ["5314:4314"]
     volumes: ["media-online:/var/lib/nodics/media-online"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/wcmsOnlineServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4314/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
@@ -118,7 +124,7 @@ services:
     command: ["src/start-process-server.js"]
     environment: { ENV: kickoffDockerLocal, SERVER: processServer, NODICS_DATABASE_NAME: kickoffDockerLocalProcess }
     ports: ["5330:4330"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/processServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4330/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
@@ -129,7 +135,7 @@ services:
     ports: ["5312:4312"]
     volumes: ["media-staged:/var/lib/nodics/media-staged"]
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/wcmsStagedServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, process: { condition: service_healthy }, wcms-online: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, process: { condition: service_healthy }, wcms-online: { condition: service_healthy } }
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4312/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
   engagement:
@@ -137,7 +143,7 @@ services:
     command: ["src/start-engagement-server.js"]
     environment: { ENV: kickoffDockerLocal, SERVER: engagementServer, NODICS_DATABASE_NAME: kickoffDockerLocalEngagement }
     ports: ["5340:4340"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/engagementServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4340/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
@@ -146,7 +152,7 @@ services:
     command: ["src/start-commerce-server.js"]
     environment: { ENV: kickoffDockerLocal, SERVER: commerceServer, NODICS_DATABASE_NAME: kickoffDockerLocalCommerce }
     ports: ["5350:4350"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/commerceServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4350/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 

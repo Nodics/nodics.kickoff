@@ -61,6 +61,8 @@
     "docker-local:backup": "node scripts/docker-local-resilience.mjs backup",
     "docker-local:restore": "node scripts/docker-local-resilience.mjs restore",
     "docker-local:resilience": "node scripts/docker-local-resilience-qualification.mjs",
+    "docker-local:publishing-interruption-contracts": "node scripts/docker-local-publishing-interruption-contracts.mjs",
+    "docker-local:soak": "node scripts/docker-local-soak-qualification.mjs",
     "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
     "acceptance:functional": "node scripts/functional-journey-acceptance.mjs",

@@ -15,6 +15,8 @@ npm run docker-local:acceptance
 npm run docker-local:qualify
 npm run docker-local:backup
 npm run docker-local:resilience
+npm run docker-local:publishing-interruption-contracts
+npm run docker-local:soak
 npm run docker-local:stop
 ```
 
@@ -30,9 +32,15 @@ Generated credentials live in the ignored `generated/docker.env` file with mode 
 npm run docker-local:restore -- <backup-id> --confirm-replace-docker-local-data
 ```
 
-`docker-local:resilience` performs the full destructive qualification: backup and checksum verification, isolated volume reset, restore, health recovery, API-level publishing/workflow acceptance, Staged/Online isolation, bounded load, Sentinel promotion observation, dependency audit, and the Axis bundled-login static accessibility contract. The measured evidence is emitted as JSON.
+`docker-local:resilience` performs the full destructive qualification: backup and checksum verification, isolated volume reset, restore, health recovery, API-level publishing/workflow acceptance, Staged/Online isolation, bounded load, Redis service interruption, Sentinel replica promotion, application reconnect, dependency audit, and the Axis bundled-login static accessibility contract. The measured evidence is emitted as JSON. The failure simulation pauses Redis command processing while preserving service discovery; deleting a container is not a valid Sentinel test because it also deletes the Docker DNS record.
 
-Sentinel promotion is infrastructure-qualified, but application-transparent Redis failover is not: the current runtime `REDIS_URL` resolves `redis-primary` directly. Independent penetration testing and assistive-technology accessibility review also remain external evidence. This environment must not be described as production-certified.
+The runtime keeps the direct `REDIS_URL` compatibility path but enables the framework Sentinel provider for Docker Local. The qualification must observe replica promotion and complete authenticated publishing acceptance through the reconnected applications before transparent failover is reported as passed.
+
+`docker-local:publishing-interruption-contracts` executes the framework's manifest idempotency, response-loss retry, outbox after-commit delivery, duplicate suppression, lease recovery, startup reconciliation, workflow decision callback, and Process lifecycle contracts. These are deterministic interruption/reconciliation contracts; they do not claim that a live container was killed at an exact publication instruction boundary.
+
+`docker-local:soak` runs for 30 minutes by default with concurrent readiness traffic across all six backends and a complete governed publication acceptance every five minutes. Its default synthetic rate is 120 requests per minute per runtime, leaving explicit capacity below the 600-per-minute framework guardrail for Docker health probes and publication traffic. Set `NODICS_DOCKER_SOAK_SECONDS` only when deliberately running a shorter diagnostic; shortened runs are not the standard qualification.
+
+Independent penetration testing and assistive-technology accessibility review remain external evidence. Docker Local verifies local production-simulation contracts and must not be described as production-certified.
 
 | Runtime | Host port |
 | --- | ---: |

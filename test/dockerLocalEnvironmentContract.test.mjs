@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const environment = path.join(root, 'envs', 'kickoffDockerLocal');
 const compose = fs.readFileSync(path.join(environment, 'docker', 'compose.yaml'), 'utf8');
+const runtimeProperties = fs.readFileSync(path.join(environment, 'config', 'runtime-properties.js'), 'utf8');
 const servers = ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'processServer', 'engagementServer', 'commerceServer'];
 assert.notEqual(environment, path.join(root, 'envs', 'kickoffLocal'));
 servers.forEach(server => {
@@ -26,4 +27,7 @@ assert.match(compose, /read_only:\s*true/);
 assert.match(compose, /no-new-privileges:true/);
 assert.match(compose, /5312:4312/);
 assert.match(compose, /5314:4314/);
+assert.match(runtimeProperties, /sentinel:\s*\{/);
+assert.match(runtimeProperties, /host: 'redis-sentinel'/);
+assert.match(runtimeProperties, /password: process\.env\.REDIS_PASSWORD/);
 console.log('kickoffDockerLocal environment contract validated');

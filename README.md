@@ -72,8 +72,11 @@ authenticated MongoDB and Redis infrastructure, databases, media volumes,
 Staged/Online runtimes, and Axis/Nexus containers. See
 [envs/kickoffDockerLocal/README.md](envs/kickoffDockerLocal/README.md).
 Its `docker-local:resilience` command qualifies checksum-backed recovery,
-measured local RPO/RTO, restored publication state, bounded load, and Sentinel
-promotion while preserving explicit external-evidence limitations.
+measured local RPO/RTO, restored publication state, bounded load, Sentinel
+promotion, and application-transparent cache reconnection. Separate commands
+qualify deterministic publication interruption/reconciliation contracts and a
+30-minute mixed-read/publication soak while preserving explicit
+external-evidence limitations.
 
 The committed `.npmrc` keeps npm local `file:` dependencies as symbolic links
 (`install-links=false`). This is required because `.nodics/framework/` is a
