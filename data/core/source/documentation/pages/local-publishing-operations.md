@@ -109,6 +109,8 @@ Run:
 
 ```text
 npm run qualification:publishing-capacity
+npm run qualification:publishing-soak
+npm run qualification:security-boundary
 npm run qualification:deployment:local -- --include-fresh
 ```
 
@@ -118,6 +120,14 @@ activation/receipt convergence, workflow handoff, publication operations, and
 audit reconciliation. The deployment report records command outcomes, durations,
 repository commits, explicit external gaps, and an integrity digest. It never
 self-approves production.
+
+The Local sustained-reliability gate repeats six publication, workflow,
+outbox, reconciliation, rollback, and media-retention contracts for 25 cycles
+(150 executions) under explicit elapsed-time and process-memory-growth budgets.
+The automated security boundary executes authentication, authorization, cache
+mutation, import/export, remote transport, BackOffice, Engagement, publication
+authority, and atomic-audit contracts. These close Local regression evidence;
+they do not replace production-scale soak or an independent penetration test.
 
 Troubleshoot using stable error codes. `ERR_IMP_00003` indicates immutable release
 integrity/version policy, `ERR_IMP_00010` is an aggregate record-dispatch failure,

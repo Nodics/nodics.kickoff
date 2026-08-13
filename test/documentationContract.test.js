@@ -21,6 +21,7 @@ const catalogue = require('../data/core/source/documentation/catalogue.json');
 const siteRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationSiteData'));
 const pageRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPageData'));
 const routeRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationRouteData'));
+const contentPackHeader = require('../data/core/headers/kickoffDocumentationContentPackHeader');
 
 const capability = properties.backofficeCapabilities['nodics.kickoff'];
 const contentPack = properties.data.contentPacks.packs.kickoffDocumentation;
@@ -92,6 +93,13 @@ assert.strictEqual(navigationItem.label, 'Nodics Kickoff');
 assert.strictEqual(navigationItem.route, '/docs/nodics-kickoff');
 assert.strictEqual(navigationItem.group.id, 'documentation');
 assert.strictEqual(navigationItem.featureState, 'ACTIVE');
+
+const importOrder = Object.keys(contentPackHeader.cms);
+assert(
+    importOrder.indexOf('kickoffDocumentationTemplateData') <
+        importOrder.indexOf('kickoffDocumentationSlotData'),
+    'documentation templates must be imported before their dependent slot definitions'
+);
 
 const siteCodes = new Set(siteRecords.map(site => site.code));
 siteRecords.forEach(site => {

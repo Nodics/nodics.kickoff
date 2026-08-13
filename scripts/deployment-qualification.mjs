@@ -45,6 +45,16 @@ export function createQualificationPlan(options = {}) {
       proves: 'Bounded Local freeze, media promotion, deploy, activation, delivery, retry, transaction, and rollback regression timings.',
     },
     {
+      id: 'publishing-sustained-reliability', owner: 'nodics publishing', cwd: workspace.kickoff,
+      command: 'npm', args: ['run', 'qualification:publishing-soak'],
+      proves: 'Twenty-five repeated Local contract cycles covering lifecycle, manifest, workflow, outbox, audit reconciliation, and media retention within bounded time and memory growth.',
+    },
+    {
+      id: 'automated-security-boundary', owner: 'nodics security', cwd: workspace.kickoff,
+      command: 'npm', args: ['run', 'qualification:security-boundary'],
+      proves: 'Automated Local authentication, authorization, cache mutation, import/export, remote transport, BackOffice, Engagement, publication authority, and atomic-audit boundaries.',
+    },
+    {
       id: 'framework-release', owner: 'nodics.ai', cwd: workspace.framework,
       command: 'npm', args: ['run', 'release:check', '--', '--execute', '--full'],
       proves: 'Clean framework build, governance, generated contracts, dependency audit, and full automated suite.',
@@ -52,7 +62,7 @@ export function createQualificationPlan(options = {}) {
     {
       id: 'project-retained-acceptance', owner: 'nodics.kickoff', cwd: workspace.kickoff,
       command: 'npm', args: ['run', 'acceptance:local'],
-      proves: 'Integrated retained-data runtime, documentation, module lifecycle, and Axis smoke journey.',
+      proves: 'Integrated retained-data runtime, documentation, module lifecycle, Axis smoke, governed export/import, rejection, rollback, retirement, recovery, and reconciliation journey.',
     },
     {
       id: 'axis-verification', owner: 'nodics.axis', cwd: workspace.axis,

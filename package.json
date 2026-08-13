@@ -57,6 +57,8 @@
     "qualification:deployment": "node scripts/deployment-qualification.mjs",
     "qualification:deployment:local": "node scripts/deployment-qualification.mjs --execute-local",
     "qualification:publishing-capacity": "node scripts/publishing-capacity-baseline.mjs",
+    "qualification:publishing-soak": "node scripts/local-sustained-publishing-qualification.mjs",
+    "qualification:security-boundary": "node scripts/local-security-boundary-qualification.mjs",
     "quality:ownership": "node .nodics/framework/nodics.core/modules/nTooling/bin/nodics-tool.js quality:ownership --home=.",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",

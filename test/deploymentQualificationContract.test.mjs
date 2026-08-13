@@ -22,6 +22,8 @@ const workspace = { framework: '/framework', kickoff: '/project', axis: '/axis',
 const plan = createQualificationPlan({ workspace });
 assert.deepStrictEqual(plan.local.map((step) => step.id), [
   'publishing-capacity-baseline',
+  'publishing-sustained-reliability',
+  'automated-security-boundary',
   'framework-release',
   'project-retained-acceptance',
   'axis-verification',
