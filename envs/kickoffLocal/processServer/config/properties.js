@@ -17,6 +17,17 @@
  * @override Customer projects may change local host/port/topology without copying framework Process defaults.
  */
 module.exports = {
+    httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100'],
+        deniedOrigins: ['http://localhost:3200', 'http://127.0.0.1:3200'] } },
+    apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: false } } },
+    localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], serviceNames: [
+        'DefaultProcessAuditEventService', 'DefaultProcessTaskService', 'DefaultProcessIncidentService', 'DefaultProcessInstanceService',
+        'DefaultProcessTriggerService', 'DefaultProcessDefinitionVersionService', 'DefaultProcessDefinitionService',
+        'DefaultCronJobLogService', 'DefaultCronJobService', 'DefaultCatalogService', 'DefaultConfigurationService',
+        'DefaultDataInstallationService', 'DefaultEmsFailedMessagesService', 'DefaultEventListenerService', 'DefaultImportDefinitionService',
+        'DefaultImportRunService', 'DefaultIndexService', 'DefaultIndexerLogService', 'DefaultIndexerService', 'DefaultInterceptorService',
+        'DefaultSearchService', 'DefaultTokenService', 'DefaultValidatorService', 'DefaultWorkflow2SchemaService'
+    ] },
     activeModules: {
         groups: [],
         modules: [
@@ -27,6 +38,17 @@ module.exports = {
             'kickoffLocal',
             'processServer'
         ]
+    },
+    runtimeRole: { code: 'PROCESS', publication: 'OPERATIONAL' },
+    data: {
+        dataReleases: {
+            lifecycleMetadataRequired: true,
+            destinationEnforced: true,
+            environmentClass: 'LOCAL',
+            allowedDestinationRoles: ['PROCESS'],
+            contributions: [{ moduleName: 'cms', sections: ['cmsPublicationApproval'] }],
+            installers: { PROCESS_DEFINITION: 'DefaultProcessDefinitionContributionService' }
+        }
     },
     database: {
         default: {
@@ -45,6 +67,10 @@ module.exports = {
         }
     },
     process: {
+        publicationDecisionCallback: {
+            target: { moduleName: 'cms', connectionName: 'cmsStaged', connectionType: 'abstract',
+                timeoutMs: 10000, maxAttempts: 2 }
+        },
         actionAdapters: {
             allowedActions: [
                 {
@@ -65,12 +91,19 @@ module.exports = {
                     service: 'DefaultKickoffEditorialProcessAdapterService',
                     method: 'publishApproved',
                     description: 'Delegates approved Editorial publication from Process to the WCMS-owned Editorial API'
+                },
+                {
+                    moduleName: 'cms',
+                    operation: 'applyPublicationDecision',
+                    service: 'DefaultProcessPublicationDecisionCallbackService',
+                    method: 'applyPublicationDecision',
+                    description: 'Returns the approved or rejected workflow decision to the WCMS Staged publication authority'
                 }
             ]
         }
     },
     editorialProcessAdapter: {
-        wcmsBaseUrl: 'http://127.0.0.1:4310'
+        wcmsBaseUrl: 'http://127.0.0.1:4312'
     },
     servers: {
         default: {
@@ -114,6 +147,10 @@ module.exports = {
                 httpsHost: '127.0.0.1',
                 httpsPort: 4301
             }
+        },
+        cmsStaged: {
+            endpoint: { httpHost: '127.0.0.1', httpPort: 4312, httpsHost: '127.0.0.1', httpsPort: 4313 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4312, httpsHost: 'localhost', httpsPort: 4313 }
         }
     }
 };

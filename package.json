@@ -42,6 +42,8 @@
     "start:platform": "node src/start-platform-server.js",
     "start:process": "node src/start-process-server.js",
     "start:wcms": "node src/start-wcms-server.js",
+    "start:wcms:staged": "node src/start-wcms-staged-server.js",
+    "start:wcms:online": "node src/start-wcms-online-server.js",
     "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
     "acceptance:functional": "node scripts/functional-journey-acceptance.mjs",
@@ -49,11 +51,12 @@
     "acceptance:capability-registry": "node scripts/capability-registry-acceptance.mjs",
     "qualification:deployment": "node scripts/deployment-qualification.mjs",
     "qualification:deployment:local": "node scripts/deployment-qualification.mjs --execute-local",
+    "qualification:publishing-capacity": "node scripts/publishing-capacity-baseline.mjs",
     "quality:ownership": "node .nodics/framework/nodics.core/modules/nTooling/bin/nodics-tool.js quality:ownership --home=.",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
-    "test:qualification": "node test/deploymentQualificationContract.test.mjs",
+    "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/localPublishingContractFreeze.test.mjs",
     "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:qualification && npm run prepare:runtime"
   }
 }

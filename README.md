@@ -90,14 +90,10 @@ npm run acceptance:local:fresh
 npm run acceptance:capability-registry
 ```
 
-`acceptance:local` verifies the currently running local stack without dropping
-data. `acceptance:local:fresh` drops only `kickoffLocal`, `kickoffLocalWcms`,
-`kickoffLocalCron`, and `kickoffLocalProcess`, starts the local reference
-stack, imports documentation packs, verifies Axis routes, and runs the
-module/documentation/Cron lifecycle smoke gates through the composed
-`processServer`. It stops the servers it started unless you pass
-`--leave-started`. Stop Platform, WCMS, Process, and Axis before using the
-fresh command so the bootstrap is truly from zero.
+`acceptance:local` verifies the current split Local stack through Nodics APIs
+without directly reading or changing a database. `acceptance:local:fresh` is a
+fail-closed placeholder until Platform owns a secured, bounded Local reset
+API/service; it must not use a database shell as an acceptance shortcut.
 
 `acceptance:capability-registry` is non-destructive to business data and expects
 Platform plus the consolidated Process server to be running. It verifies that

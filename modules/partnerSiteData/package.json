@@ -1,0 +1,20 @@
+{
+  "name": "partnerSiteData",
+  "version": "0.1.0",
+  "index": "3100.22",
+  "private": true,
+  "description": "Later-loaded partner-owned Nexus website customization proof.",
+  "main": "nodics.js",
+  "scripts": {
+    "check": "npm test",
+    "test": "node test/partnerSiteCustomizationContract.test.mjs"
+  },
+  "nodics": {
+    "kind": "content-pack",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["configuration", "data", "test", "documentation"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Partner Site Data"
+  }
+}

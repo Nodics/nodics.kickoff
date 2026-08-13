@@ -24,7 +24,9 @@ const axisRoot = resolve(
   process.env.NODICS_AXIS_ROOT || resolve(workspaceRoot, "nodics.axis"),
 );
 const platformUrl = process.env.AXIS_PLATFORM_URL || "http://127.0.0.1:4300";
-const wcmsUrl = process.env.AXIS_WCMS_URL || "http://127.0.0.1:4310";
+const wcmsUrl = process.env.AXIS_WCMS_URL || "http://127.0.0.1:4312";
+const wcmsOnlineUrl =
+  process.env.NEXUS_CMS_URL || "http://127.0.0.1:4314";
 const processUrl = process.env.AXIS_PROCESS_URL || "http://127.0.0.1:4330";
 const axisUrl = process.env.AXIS_URL || "http://127.0.0.1:3100";
 const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
@@ -33,14 +35,6 @@ const password = process.env.AXIS_PASSWORD || "adminPassword";
 const projectCode = process.env.AXIS_PROJECT || "nodics.kickoff";
 const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
-const mongoDatabases = [
-  "kickoffLocal",
-  "kickoffLocalWcms",
-  "kickoffLocalCron",
-  "kickoffLocalProcess",
-  "kickoffLocalEngagement",
-  "kickoffLocalCommerce",
-];
 const documentationPacks = [
   {
     code: "nodicsDocumentation",
@@ -61,13 +55,7 @@ const documentationPacks = [
     site: "kickoffDocumentationSite",
   },
 ];
-const nexusPacks = [
-  {
-    code: "nexusCorporate",
-    minimumRoutes: 10,
-    site: "nexusCorporateSite",
-  },
-];
+const nexusPacks = [];
 const contentPacks = [...documentationPacks, ...nexusPacks];
 const expectedCatalogs = Object.freeze([
   Object.freeze({
@@ -98,7 +86,8 @@ const retiredDocumentationCatalogs = Object.freeze([
 ]);
 const localPorts = [
   { label: "Platform", port: 4300 },
-  { label: "WCMS", port: 4310 },
+  { label: "WCMS Staged", port: 4312 },
+  { label: "WCMS Online", port: 4314 },
   { label: "Process", port: 4330 },
   { label: "Engagement", port: 4340 },
   { label: "Commerce", port: 4350 },
@@ -149,6 +138,45 @@ async function requestJson(baseUrl, path, options = {}) {
   return body?.result || body?.data || body;
 }
 
+/** Executes an authenticated JSON request while preserving expected error responses for negative gates. */
+async function requestJsonResponse(baseUrl, path, options = {}) {
+  const response = await fetch(endpoint(baseUrl, path), {
+    ...options,
+    headers: {
+      Accept: "application/json",
+      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      "x-enterprise-code": enterpriseCode,
+      ...(options.headers || {}),
+    },
+  });
+  const text = await response.text();
+  let body;
+  try {
+    body = text ? JSON.parse(text) : undefined;
+  } catch {
+    throw new Error(`${path} returned non-JSON response: ${text.slice(0, 200)}`);
+  }
+  return { status: response.status, body: body?.result || body?.data || body };
+}
+
+/** Proves bounded operator diagnostics and dry-run reconciliation through nPublish APIs only. */
+async function verifyPublicationOperations(headers) {
+  const diagnostics = await requestJson(wcmsUrl, "/nodics/publish/v0/publications/operations/diagnostics", { headers });
+  if (!diagnostics?.metrics || !["READY", "DEGRADED"].includes(diagnostics.readiness)) {
+    throw new Error(`Publication diagnostics are invalid: ${JSON.stringify(diagnostics)}`);
+  }
+  const reconciliation = await requestJson(wcmsUrl, "/nodics/publish/v0/publications/operations/reconcile", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ repairEvidence: false }),
+  });
+  if (!reconciliation?.projection || !Array.isArray(reconciliation.target) ||
+      reconciliation.target.some((entry) => entry.result?.status === "FAILED")) {
+    throw new Error(`Publication reconciliation is invalid: ${JSON.stringify(reconciliation)}`);
+  }
+  log(`publication diagnostics and dry-run reconciliation passed for ${String(reconciliation.target.length)} target releases`);
+}
+
 async function expectHttpOk(baseUrl, path) {
   const response = await fetch(endpoint(baseUrl, path), {
     headers: { "x-enterprise-code": enterpriseCode },
@@ -158,6 +186,42 @@ async function expectHttpOk(baseUrl, path) {
       `${endpoint(baseUrl, path)} returned HTTP ${String(response.status)}`,
     );
   }
+}
+
+/** Proves the Local browser/runtime security matrix through HTTP without database access. */
+async function verifyLocalRouteSecurityMatrix() {
+  const nexusOrigin = "http://127.0.0.1:3200";
+  const axisOrigin = "http://127.0.0.1:3100";
+  const probe = (baseUrl, path, origin, options = {}) => fetch(endpoint(baseUrl, path), {
+    redirect: "manual",
+    ...options,
+    headers: { Origin: origin, ...(options.headers || {}) },
+  });
+  const platformBootstrap = await probe(platformUrl, "/nodics/backoffice/v0/bootstrap/public", nexusOrigin);
+  if (platformBootstrap.status !== 200 || platformBootstrap.headers.get("access-control-allow-origin") !== nexusOrigin) {
+    throw new Error("Nexus must reach only the Platform low-disclosure public bootstrap boundary");
+  }
+  for (const [label, baseUrl] of [["WCMS Staged", wcmsUrl], ["Process", processUrl]]) {
+    const denied = await probe(baseUrl, "/nodics/system/v0/health/ready", nexusOrigin);
+    if (denied.status !== 403 || denied.headers.get("access-control-allow-origin")) {
+      throw new Error(`${label} did not reject the Nexus browser origin`);
+    }
+  }
+  const axisStaged = await probe(wcmsUrl, "/nodics/system/v0/health/ready", axisOrigin);
+  if (axisStaged.status !== 200 || axisStaged.headers.get("access-control-allow-origin") !== axisOrigin) {
+    throw new Error("WCMS Staged did not accept the Axis browser origin");
+  }
+  const onlinePreflight = await probe(wcmsOnlineUrl, "/nodics/cms/v0/delivery/pages/resolve", nexusOrigin, {
+    method: "OPTIONS", headers: { "Access-Control-Request-Method": "GET" },
+  });
+  if (onlinePreflight.status !== 204 || onlinePreflight.headers.get("access-control-allow-origin") !== nexusOrigin) {
+    throw new Error("WCMS Online did not accept the Nexus delivery preflight");
+  }
+  if (platformBootstrap.status >= 300 && platformBootstrap.status < 400) throw new Error("Public bootstrap redirected unexpectedly");
+  for (const header of ["content-security-policy", "x-content-type-options", "x-frame-options", "referrer-policy", "cache-control"]) {
+    if (!platformBootstrap.headers.get(header)) throw new Error(`Platform response omitted ${header}`);
+  }
+  log("Local route-security matrix passed live origin, CORS, redirect, and header boundaries");
 }
 
 async function waitForHttp(baseUrl, path, label, timeoutMs = 60000) {
@@ -246,30 +310,47 @@ async function ensureProcess(label, port, cwd, scriptName, baseUrl, readyPath) {
   await waitForHttp(baseUrl, readyPath, label);
 }
 
-async function dropDatabases() {
+async function assertGovernedFreshResetAvailable() {
   if (!dropLocalDb) {
     log(
-      "database drop skipped; pass --drop-local-db to reset the local bootstrap databases",
+      "fresh reset skipped; retained data will be verified only through Nodics APIs",
     );
     return;
   }
-  const script = [
-    `const targets=${JSON.stringify(mongoDatabases)};`,
-    "for (const name of targets) {",
-    "  const existed = db.getMongo().getDBNames().includes(name);",
-    "  const result = db.getSiblingDB(name).dropDatabase();",
-    "  printjson({ database: name, existed, ok: result.ok });",
-    "}",
-    "printjson({ remainingTargets: db.getMongo().getDBNames().filter(name => targets.includes(name)) });",
-  ].join("\n");
-  const { stdout } = await execFileAsync(
-    "mongosh",
-    ["--quiet", "--eval", script],
-    {
-      cwd: projectRoot,
-    },
-  );
-  process.stdout.write(stdout);
+  log("fresh reset requested; only the governed Platform reset API will be used");
+}
+
+async function stopManagedProcesses() {
+  managedProcesses.forEach(({ child }) => child.kill("SIGTERM"));
+  const started = Date.now();
+  while (Date.now() - started < 15000) {
+    const busy = [];
+    for (const candidate of localPorts.filter((item) => item.port !== 3100)) {
+      if (await portListening(candidate.port)) busy.push(candidate.port);
+    }
+    if (!busy.length) break;
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  managedProcesses.length = 0;
+}
+
+async function executeGovernedFreshReset(headers) {
+  if (!dropLocalDb) return false;
+  const status = await requestJson(platformUrl, "/nodics/backoffice/v0/operations/local-reset", { headers });
+  if (status.ready !== true || status.apiOnly !== true) {
+    throw new Error(`governed Local reset is not ready: ${JSON.stringify(status)}`);
+  }
+  const result = await requestJson(platformUrl, "/nodics/backoffice/v0/operations/local-reset", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ confirmation: "RESET_LOCAL_NODICS_DATA", reason: "fresh local publishing acceptance verification" }),
+  });
+  if (result.acknowledged !== true || result.providerCount !== 4) {
+    throw new Error(`governed Local reset was not fully acknowledged: ${JSON.stringify(result)}`);
+  }
+  log("all four runtime owners acknowledged API-only Local reset");
+  await stopManagedProcesses();
+  return true;
 }
 
 async function authenticate() {
@@ -316,35 +397,6 @@ function requireModule(modules, functionalModule, label) {
   return match;
 }
 
-async function contentPackRecordsHealthy(pack) {
-  if (!pack.site) return false;
-  const isDocumentation = Boolean(pack.navigationComponent);
-  const script = [
-    `const pack=${JSON.stringify(pack)};`,
-    `const isDocumentation=${JSON.stringify(isDocumentation)};`,
-    'const d=db.getSiblingDB("kickoffLocalWcms");',
-    "const result={",
-    "  sites: d.CmsSiteModel.countDocuments({ code: pack.site }),",
-    "  routes: d.CmsPageRouteModel.countDocuments(isDocumentation ? { site: pack.site, path: /^\\/docs/ } : { site: pack.site }),",
-    "  pages: d.CmsPageModel.countDocuments(isDocumentation ? {} : { cmsSite: pack.site }),",
-    "  navigationComponents: pack.navigationComponent ? d.CmsComponentModel.countDocuments({ code: pack.navigationComponent }) : 1",
-    "};",
-    "print(JSON.stringify(result));",
-  ].join("\n");
-  const { stdout } = await execFileAsync(
-    "mongosh",
-    ["--quiet", "--eval", script],
-    { cwd: projectRoot },
-  );
-  const result = JSON.parse(stdout);
-  return (
-    result.sites === 1 &&
-    result.navigationComponents === 1 &&
-    result.routes >= pack.minimumRoutes &&
-    (!pack.minimumRoutes || isDocumentation || result.pages >= pack.minimumRoutes)
-  );
-}
-
 async function importContentPacks(headers) {
   for (const pack of contentPacks) {
     const packCode = pack.code;
@@ -353,107 +405,461 @@ async function importContentPacks(headers) {
       `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}`,
       { headers },
     );
-    let retainedRecordsAccepted = false;
     if (status.state !== "CURRENT") {
-      if (!dropLocalDb && (await contentPackRecordsHealthy(pack))) {
-        retainedRecordsAccepted = true;
-        log(
-          `${packCode} records are already present and healthy; skipping non-destructive re-import from ${status.state}`,
-        );
-      } else {
-        await requestJson(
-          wcmsUrl,
-          `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}/imports`,
-          { headers, method: "POST" },
-        );
-      }
+      await requestJson(
+        wcmsUrl,
+        `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}/imports`,
+        { headers, method: "POST" },
+      );
     }
     const current = await requestJson(
       wcmsUrl,
       `/nodics/system/v0/content-packs/${encodeURIComponent(packCode)}`,
       { headers },
     );
-    if (current.state !== "CURRENT" && !retainedRecordsAccepted) {
+    if (current.state !== "CURRENT") {
       throw new Error(`${packCode} is ${String(current.state)} after import`);
     }
     log(
-      retainedRecordsAccepted
-        ? `${packCode} retained records accepted (${current.state})`
-        : `${packCode} is CURRENT (${current.installedVersion})`,
+      `${packCode} is CURRENT (${current.installedVersion})`,
     );
   }
 }
 
-async function verifyNexusRecords() {
-  const script = [
-    `const packs=${JSON.stringify(nexusPacks)};`,
-    'const d=db.getSiblingDB("kickoffLocalWcms");',
-    "const results=packs.map(pack => ({",
-    "  code: pack.code,",
-    "  site: pack.site,",
-    "  sites: d.CmsSiteModel.countDocuments({ code: pack.site }),",
-    "  routes: d.CmsPageRouteModel.countDocuments({ site: pack.site }),",
-    "  pages: d.CmsPageModel.countDocuments({ cmsSite: pack.site })",
-    "}));",
-    "print(JSON.stringify(results));",
-  ].join("\n");
-  const { stdout } = await execFileAsync(
-    "mongosh",
-    ["--quiet", "--eval", script],
-    { cwd: projectRoot },
+async function importNexusStagedRelease(headers) {
+  const releaseCode = "nexusData:nexusCorporateSite";
+  const catalogue = await requestJson(wcmsUrl, "/nodics/import/v0/core", {
+    headers,
+  });
+  const releases = catalogue.data || catalogue.items || catalogue;
+  const release = [].concat(releases || []).find(
+    (item) => item.releaseCode === releaseCode,
   );
-  log(`Nexus records ${stdout.trim()}`);
-  const results = JSON.parse(stdout);
-  for (const result of results) {
-    const pack = nexusPacks.find((item) => item.code === result.code);
-    if (
-      !pack ||
-      result.sites !== 1 ||
-      result.routes < pack.minimumRoutes ||
-      result.pages < pack.minimumRoutes
-    ) {
-      throw new Error(
-        `Nexus records are not healthy for ${result.code}: ${JSON.stringify(result)}`,
-      );
-    }
+  if (!release) {
+    throw new Error(`${releaseCode} is unavailable from WCMS Staged nImport`);
   }
+  if (release.status !== "CURRENT") {
+    await requestJson(wcmsUrl, "/nodics/import/v0/core/install", {
+      headers,
+      method: "POST",
+      body: JSON.stringify({
+        releaseCodes: [releaseCode],
+        expectedReleases: { [releaseCode]: release.version },
+      }),
+    });
+  }
+  log(`${releaseCode} is qualified through WCMS Staged nImport`);
 }
 
-async function verifyDocumentationRecords() {
-  const script = [
-    `const packs=${JSON.stringify(documentationPacks)};`,
-    'const d=db.getSiblingDB("kickoffLocalWcms");',
-    "const results=packs.map(pack => ({",
-    "  code: pack.code,",
-    "  site: pack.site,",
-    "  sites: d.CmsSiteModel.countDocuments({ code: pack.site }),",
-    "  routes: d.CmsPageRouteModel.countDocuments({ site: pack.site, path: /^\\/docs/ }),",
-    "  navigationComponents: d.CmsComponentModel.countDocuments({ code: pack.navigationComponent })",
-    "}));",
-    "print(JSON.stringify(results));",
-  ].join("\n");
-  const { stdout } = await execFileAsync(
-    "mongosh",
-    ["--quiet", "--eval", script],
-    {
-      cwd: projectRoot,
-    },
-  );
-  log(`documentation records ${stdout.trim()}`);
-  const results = JSON.parse(stdout);
-  for (const result of results) {
-    const pack = documentationPacks.find((item) => item.code === result.code);
-    if (
-      !pack ||
-      result.sites !== 1 ||
-      result.navigationComponents !== 1 ||
-      result.routes < pack.minimumRoutes
-    ) {
-      throw new Error(
-        `Documentation records are not healthy for ${result.code}: ${JSON.stringify(result)}`,
-      );
-    }
+async function importMandatoryProcessRelease(headers) {
+  const releaseCode = "cms:cmsPublicationApproval";
+  const catalogue = await requestJson(processUrl, "/nodics/import/v0/init", { headers });
+  const releases = catalogue.data || catalogue.items || catalogue;
+  const release = [].concat(releases || []).find((item) => item.releaseCode === releaseCode);
+  if (!release) throw new Error(`${releaseCode} is unavailable from Process nImport`);
+  if (release.status !== "CURRENT") {
+    await requestJson(processUrl, "/nodics/import/v0/init/install", {
+      headers,
+      method: "POST",
+      body: JSON.stringify({ releaseCodes: [releaseCode], expectedReleases: { [releaseCode]: release.version } }),
+    });
   }
+  log(`${releaseCode} mandatory workflow is CURRENT in Process`);
+}
+
+async function publishAxisBaseline(headers) {
+  let status = await requestJson(platformUrl, "/nodics/backoffice/v0/axis/initialization", { headers });
+  if (status.readiness === "READY" && status.publication?.state === "ONLINE") {
+    log("Axis baseline publication is already ONLINE");
+    return;
+  }
+  const initiated = await requestJson(platformUrl, "/nodics/backoffice/v0/axis/initialization/initiate", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ reason: "Local end-to-end baseline acceptance" }),
+  });
+  const publicationCode = initiated.publication?.code;
+  if (!publicationCode || initiated.publication?.state !== "PENDING_APPROVAL") {
+    throw new Error(`Axis baseline did not enter approval: ${JSON.stringify(initiated)}`);
+  }
+  const instances = await requestJson(processUrl, "/nodics/process/v0/instances?limit=100", { headers });
+  const instance = [].concat(instances.items || instances || []).find(
+    (item) => item.definitionCode === "cmsPublicationApproval" && item.context?.publicationCode === publicationCode && item.status === "WAITING",
+  );
+  if (!instance) throw new Error(`Axis publication workflow instance is unavailable for ${publicationCode}`);
+  const tasks = await requestJson(
+    processUrl,
+    `/nodics/process/v0/tasks?instanceCode=${encodeURIComponent(instance.code)}&limit=20`,
+    { headers },
+  );
+  const task = [].concat(tasks.items || tasks || []).find(
+    (item) => item.instanceCode === instance.code && item.nodeCode === "publicationReview" && ["OPEN", "CLAIMED"].includes(item.status),
+  );
+  if (!task) throw new Error(`Axis publication approval task is unavailable for ${instance.code}`);
+  if (task.status === "OPEN") {
+    await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/claim`, {
+      headers,
+      method: "POST",
+    });
+  }
+  const completed = await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/complete`, {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ decision: { approved: true, action: "APPROVE", reason: "Local end-to-end baseline acceptance" } }),
+  });
+  if (completed.instance?.status !== "COMPLETED") {
+    throw new Error(`Axis publication workflow did not complete: ${JSON.stringify(completed)}`);
+  }
+  status = await requestJson(platformUrl, "/nodics/backoffice/v0/axis/initialization", { headers });
+  if (status.readiness !== "READY" || status.publication?.state !== "ONLINE") {
+    throw new Error(`Axis baseline is not ONLINE after approval: ${JSON.stringify(status)}`);
+  }
+  log(`Axis baseline ${publicationCode} is ONLINE through Process approval`);
+}
+
+/** Proves the reusable Platform profile can initialize and publish the Nexus website bundle. */
+async function publishNexusApplicationBundle(headers) {
+  let status = await requestJson(platformUrl, "/nodics/backoffice/v0/applications/nexus/initialization", { headers });
+  if (status.readiness !== "READY") {
+    const initiated = await requestJson(platformUrl, "/nodics/backoffice/v0/applications/nexus/initialization/initiate", {
+      headers,
+      method: "POST",
+      body: JSON.stringify({ reason: "Local reusable Nexus website bundle qualification" }),
+    });
+    const publicationCode = initiated.publication?.code;
+    if (!publicationCode || initiated.publication?.state !== "PENDING_APPROVAL") {
+      throw new Error(`Nexus application bundle did not enter approval: ${JSON.stringify(initiated)}`);
+    }
+    const instances = await requestJson(processUrl, "/nodics/process/v0/instances?limit=100", { headers });
+    const instance = [].concat(instances.items || instances || []).find(
+      (item) => item.definitionCode === "cmsPublicationApproval" && item.context?.publicationCode === publicationCode && item.status === "WAITING",
+    );
+    if (!instance) throw new Error(`Nexus publication workflow instance is unavailable for ${publicationCode}`);
+    const tasks = await requestJson(processUrl, `/nodics/process/v0/tasks?instanceCode=${encodeURIComponent(instance.code)}&limit=20`, { headers });
+    const task = [].concat(tasks.items || tasks || []).find(
+      (item) => item.instanceCode === instance.code && item.nodeCode === "publicationReview" && ["OPEN", "CLAIMED"].includes(item.status),
+    );
+    if (!task) throw new Error(`Nexus publication approval task is unavailable for ${instance.code}`);
+    if (task.status === "OPEN") {
+      await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/claim`, { headers, method: "POST" });
+    }
+    await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/complete`, {
+      headers, method: "POST",
+      body: JSON.stringify({ decision: { approved: true, action: "APPROVE", reason: "Local reusable Nexus website bundle qualification" } }),
+    });
+    status = await requestJson(platformUrl, "/nodics/backoffice/v0/applications/nexus/initialization", { headers });
+  }
+  if (status.readiness !== "READY" || status.publication?.state !== "ONLINE") {
+    throw new Error(`Nexus application bundle is not READY Online: ${JSON.stringify(status)}`);
+  }
+  const repeat = await requestJson(platformUrl, "/nodics/backoffice/v0/applications/nexus/initialization/initiate", {
+    headers, method: "POST", body: JSON.stringify({ reason: "Idempotent Nexus initialization qualification" }),
+  });
+  if (repeat.readiness !== "READY" || repeat.publication?.code !== status.publication?.code) {
+    throw new Error(`Nexus application bundle repeat was not idempotent: ${JSON.stringify(repeat)}`);
+  }
+  const delivered = await requestJson(wcmsOnlineUrl, "/nodics/cms/v0/delivery/pages/resolve?site=nexusCorporateSite&path=/&locale=en&channel=web", { headers });
+  if (!delivered || !delivered.page) throw new Error(`Nexus Online delivery probe failed: ${JSON.stringify(delivered)}`);
+  log("reusable Nexus application bundle is READY through Staged, Process approval, and Online delivery");
+}
+
+/** Completes the current publication review through Process without bypassing workflow authority. */
+async function decidePublication(headers, publicationCode, approved, reason) {
+  let instance;
+  for (let attempt = 0; attempt < 20 && !instance; attempt += 1) {
+    const instances = await requestJson(processUrl, "/nodics/process/v0/instances?limit=200", { headers });
+    instance = [].concat(instances.items || instances || []).find(
+      (item) => item.definitionCode === "cmsPublicationApproval" && item.context?.publicationCode === publicationCode && item.status === "WAITING",
+    );
+    if (!instance) await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  if (!instance) throw new Error(`Publication workflow instance is unavailable for ${publicationCode}`);
+  const tasks = await requestJson(processUrl, `/nodics/process/v0/tasks?instanceCode=${encodeURIComponent(instance.code)}&limit=20`, { headers });
+  const task = [].concat(tasks.items || tasks || []).find(
+    (item) => item.instanceCode === instance.code && item.nodeCode === "publicationReview" && ["OPEN", "CLAIMED"].includes(item.status),
+  );
+  if (!task) throw new Error(`Publication review task is unavailable for ${instance.code}`);
+  if (task.status === "OPEN") {
+    await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/claim`, { headers, method: "POST" });
+  }
+  return requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/complete`, {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ decision: { approved, action: approved ? "APPROVE" : "REJECT", reason } }),
+  });
+}
+
+/** Qualifies a real v1 -> v2 Nexus lifecycle with rejection, rollback, retirement, and governed recovery. */
+async function qualifyNexusApplicationUpdate(headers) {
+  const profilePath = "/nodics/backoffice/v0/applications/nexusupdate/initialization";
+  const deliveryPath = "/nodics/cms/v0/delivery/pages/resolve?site=nexusCorporateSite&path=/&locale=en&channel=web";
+  const initiate = async (reason) => requestJson(platformUrl, `${profilePath}/initiate`, {
+    headers, method: "POST", body: JSON.stringify({ reason }),
+  });
+  const waitOnline = async (label) => {
+    let current;
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+      current = await requestJson(platformUrl, profilePath, { headers });
+      if (current.readiness === "READY" && current.publication?.state === "ONLINE") return current;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    throw new Error(`${label} did not reach ONLINE: ${JSON.stringify(current)}`);
+  };
+  const assertMarker = async (expected, label) => {
+    let response;
+    let present;
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+      response = await requestJsonResponse(wcmsOnlineUrl, deliveryPath, { headers });
+      present = response.status === 200 && JSON.stringify(response.body).includes("nexus-corporate-1.0.1");
+      if (present === expected) return;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    throw new Error(`${label} marker expectation failed: expected=${String(expected)} actual=${String(present)} status=${String(response?.status)}`);
+  };
+
+  const initialStatus = await requestJson(platformUrl, profilePath, { headers });
+  if (initialStatus.publication?.state === "FAILED") {
+    throw new Error(`Nexus v2 retained lifecycle requires recovery: ${JSON.stringify(initialStatus)}`);
+  }
+  if (initialStatus.readiness === "READY" && initialStatus.publication?.state === "ONLINE") {
+    const partnerStatus = await requestJson(platformUrl,
+      "/nodics/backoffice/v0/applications/partnernexus/initialization", { headers });
+    if (partnerStatus.readiness === "READY" && partnerStatus.publication?.state === "ONLINE") {
+      log("Nexus v2 lifecycle remains ONLINE and is superseded by the retained partner customization");
+    } else {
+      await assertMarker(true, "Retained v2");
+      log("Nexus v2 lifecycle is already ONLINE with its delivery marker on retained data");
+    }
+    return;
+  }
+
+  let update = await initiate("Nexus v2 rejection qualification");
+  if (update.publication?.state !== "PENDING_APPROVAL") throw new Error(`Nexus v2 did not enter approval: ${JSON.stringify(update)}`);
+  await decidePublication(headers, update.publication.code, false, "Acceptance rejection proves Online v1 remains unchanged");
+  let status = await requestJson(platformUrl, profilePath, { headers });
+  if (status.publication?.state !== "REJECTED") throw new Error(`Nexus v2 was not rejected: ${JSON.stringify(status)}`);
+  await assertMarker(false, "Rejected v2");
+
+  update = await initiate("Governed Nexus v2 resubmission qualification");
+  if (update.publication?.state !== "PENDING_APPROVAL") throw new Error(`Rejected Nexus v2 did not re-enter approval: ${JSON.stringify(update)}`);
+  await decidePublication(headers, update.publication.code, true, "Approve immutable Nexus v2");
+  status = await requestJson(platformUrl, profilePath, { headers });
+  if (status.readiness !== "READY" || status.publication?.state !== "ONLINE" || !status.publication.previousOnlineVersion) {
+    throw new Error(`Nexus v2 is not Online with captured v1: ${JSON.stringify(status)}`);
+  }
+  await assertMarker(true, "Approved v2");
+  const replay = await initiate("Response-loss and idempotency replay qualification");
+  if (replay.publication?.code !== status.publication.code || replay.publication?.state !== "ONLINE") {
+    throw new Error(`Nexus v2 initiate replay was not idempotent: ${JSON.stringify(replay)}`);
+  }
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const lifecycle = await requestJson(platformUrl, profilePath, { headers });
+  if (lifecycle.publication?.state !== "ONLINE") {
+    throw new Error(`Nexus v2 lifecycle diverged before retirement: ${JSON.stringify(lifecycle)}`);
+  }
+
+  const retired = await requestJson(platformUrl, `${profilePath}/retire`, { headers, method: "POST" });
+  if (retired.readiness !== "RETIRED" || retired.publication?.state !== "WITHDRAWN") {
+    throw new Error(`Nexus v2 retirement failed: ${JSON.stringify(retired)}`);
+  }
+  const retirementErrorWindow = managedProcesses.map((entry) => ({ entry, errorCount: entry.errors.length }));
+  const unavailable = await requestJsonResponse(wcmsOnlineUrl, deliveryPath, { headers });
+  if (unavailable.status !== 404) throw new Error(`Retired Nexus delivery remained visible: ${JSON.stringify(unavailable)}`);
+  retirementErrorWindow.forEach(({ entry, errorCount }) => entry.errors.splice(errorCount));
+  update = await initiate("Governed Nexus v2 recovery after retirement");
+  await decidePublication(headers, update.publication.code, true, "Reapprove Nexus v2 after retirement");
+  await assertMarker(true, "Recovered v2 after retirement");
+  await waitOnline("Retirement recovery");
+
+  const rolledBack = await requestJson(platformUrl, `${profilePath}/rollback`, { headers, method: "POST" });
+  if (rolledBack.publication?.state !== "ROLLED_BACK") throw new Error(`Nexus v2 rollback failed: ${JSON.stringify(rolledBack)}`);
+  await assertMarker(false, "Rolled back v1");
+  update = await initiate("Governed Nexus v2 recovery after rollback");
+  await decidePublication(headers, update.publication.code, true, "Reapprove Nexus v2 after rollback");
+  await assertMarker(true, "Recovered v2 after rollback");
+  status = await waitOnline("Rollback recovery");
+  const lifecycleOperations = new Set([].concat(status.lineage?.target?.receipts || []).map((item) => item.operation));
+  const lifecycleStates = new Set([].concat(status.lineage?.publication?.transitions || []).map((item) => item.toState));
+  for (const operation of ["DEPLOY", "WITHDRAW", "ROLLBACK"]) {
+    if (!lifecycleOperations.has(operation)) throw new Error(`Nexus v2 lineage lacks ${operation}: ${JSON.stringify(status.lineage)}`);
+  }
+  for (const state of ["REJECTED", "ONLINE", "WITHDRAWN", "ROLLED_BACK"]) {
+    if (!lifecycleStates.has(state)) throw new Error(`Nexus v2 audit lineage lacks ${state}: ${JSON.stringify(status.lineage)}`);
+  }
+  if (!status.lineage?.actor || !status.lineage?.source?.releaseCode || !status.lineage?.publication?.workflowRef ||
+      !status.lineage?.target?.manifest?.contentHash) {
+    throw new Error(`Nexus v2 lineage is incomplete: ${JSON.stringify(status.lineage)}`);
+  }
+  log("Nexus v1 -> v2 rejection, publication, retry, rollback, retirement, and recovery are qualified");
+}
+
+/** Proves a later-loaded partner module can publish an independently owned Nexus customization. */
+async function qualifyPartnerWebsiteCustomization(headers) {
+  const profilePath = "/nodics/backoffice/v0/applications/partnernexus/initialization";
+  const deliveryPath = "/nodics/cms/v0/delivery/pages/resolve?site=nexusCorporateSite&path=/&locale=en&channel=web";
+  const marker = "partner-site-1.0.2";
+  const assertMarker = async () => {
+    let response;
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+      response = await requestJsonResponse(wcmsOnlineUrl, deliveryPath, { headers });
+      if (response.status === 200 && JSON.stringify(response.body).includes(marker)) return;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    throw new Error(`Partner website marker is not Online: ${JSON.stringify(response)}`);
+  };
+
+  let status = await requestJson(platformUrl, profilePath, { headers });
+  if (status.readiness !== "READY") {
+    const initiated = await requestJson(platformUrl, `${profilePath}/initiate`, {
+      headers,
+      method: "POST",
+      body: JSON.stringify({ reason: "Qualify later-loaded partner website customization" }),
+    });
+    if (initiated.publication?.state !== "PENDING_APPROVAL") {
+      throw new Error(`Partner website customization did not enter approval: ${JSON.stringify(initiated)}`);
+    }
+    await decidePublication(headers, initiated.publication.code, true,
+      "Approve independently owned partner website customization");
+    status = await requestJson(platformUrl, profilePath, { headers });
+  }
+  if (status.readiness !== "READY" || status.publication?.state !== "ONLINE" ||
+      !status.publication.previousOnlineVersion) {
+    throw new Error(`Partner website customization is not Online over a previous release: ${JSON.stringify(status)}`);
+  }
+  const lineage = status.lineage;
+  const deliveredPartnerEvent = lineage?.target?.outbox?.find(
+    (item) => item.operation === "DEPLOY" && item.status === "DELIVERED",
+  );
+  if (lineage?.actor !== loginId || lineage?.source?.releaseCode !== "partnerSiteData:partnerNexusCustomization" ||
+      lineage?.source?.releaseVersion !== "1.0.2" || !lineage?.publication?.workflowRef ||
+      lineage?.target?.manifest?.createdBy !== loginId ||
+      !lineage?.target?.receipts?.some((item) => item.operation === "DEPLOY") ||
+      !deliveredPartnerEvent || !deliveredPartnerEvent.operationKey ||
+      !Number.isInteger(deliveredPartnerEvent.sequence) || deliveredPartnerEvent.attempts !== 1) {
+    throw new Error(`Partner website correlation lineage is incomplete: ${JSON.stringify(lineage)}`);
+  }
+  await assertMarker();
+  const replay = await requestJson(platformUrl, `${profilePath}/initiate`, {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ reason: "Partner website customization idempotency replay" }),
+  });
+  if (replay.readiness !== "READY" || replay.publication?.code !== status.publication.code) {
+    throw new Error(`Partner website customization replay was not idempotent: ${JSON.stringify(replay)}`);
+  }
+  log("later-loaded partner website customization is READY without changing the original Nexus release authority");
+}
+
+/** Proves optional documentation packs are administered by Axis/Platform and published through the normal approval path. */
+async function publishDocumentationBundles(headers) {
+  const profiles = [
+    { code: "frameworkdocs", site: "nodicsDocumentationSite", path: "/docs/framework" },
+    { code: "axisdocs", site: "axisDocumentationSite", path: "/docs/nodics-axis" },
+    { code: "kickoffdocs", site: "kickoffDocumentationSite", path: "/docs/nodics-kickoff" },
+  ];
+  for (const profile of profiles) {
+    let status = await requestJson(platformUrl, `/nodics/backoffice/v0/applications/${profile.code}/initialization`, { headers });
+    if (status.readiness !== "READY") {
+      const initiated = await requestJson(platformUrl, `/nodics/backoffice/v0/applications/${profile.code}/initialization/initiate`, {
+        headers, method: "POST", body: JSON.stringify({ reason: "Optional Axis documentation publication qualification" }),
+      });
+      const publicationCode = initiated.publication?.code;
+      if (!publicationCode || initiated.publication?.state !== "PENDING_APPROVAL") {
+        throw new Error(`${profile.code} did not enter approval: ${JSON.stringify(initiated)}`);
+      }
+      const instances = await requestJson(processUrl, "/nodics/process/v0/instances?limit=100", { headers });
+      const instance = [].concat(instances.items || instances || []).find(
+        (item) => item.definitionCode === "cmsPublicationApproval" && item.context?.publicationCode === publicationCode && item.status === "WAITING",
+      );
+      if (!instance) throw new Error(`${profile.code} workflow instance is unavailable for ${publicationCode}`);
+      const tasks = await requestJson(processUrl, `/nodics/process/v0/tasks?instanceCode=${encodeURIComponent(instance.code)}&limit=20`, { headers });
+      const task = [].concat(tasks.items || tasks || []).find(
+        (item) => item.instanceCode === instance.code && item.nodeCode === "publicationReview" && ["OPEN", "CLAIMED"].includes(item.status),
+      );
+      if (!task) throw new Error(`${profile.code} approval task is unavailable for ${instance.code}`);
+      if (task.status === "OPEN") {
+        await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/claim`, { headers, method: "POST" });
+      }
+      await requestJson(processUrl, `/nodics/process/v0/tasks/${encodeURIComponent(task.code)}/complete`, {
+        headers, method: "POST",
+        body: JSON.stringify({ decision: { approved: true, action: "APPROVE", reason: "Optional Axis documentation publication qualification" } }),
+      });
+      status = await requestJson(platformUrl, `/nodics/backoffice/v0/applications/${profile.code}/initialization`, { headers });
+    }
+    if (status.readiness !== "READY" || status.publication?.state !== "ONLINE") {
+      throw new Error(`${profile.code} is not READY Online: ${JSON.stringify(status)}`);
+    }
+    const delivered = await requestJson(wcmsOnlineUrl,
+      `/nodics/cms/v0/delivery/pages/resolve?site=${encodeURIComponent(profile.site)}&path=${encodeURIComponent(profile.path)}&locale=en&channel=web`,
+      { headers });
+    if (!delivered?.page) throw new Error(`${profile.code} Online delivery failed: ${JSON.stringify(delivered)}`);
+  }
+  log("optional documentation bundles are READY through Axis/Platform, Staged, Process, and Online delivery");
+}
+
+/** Proves export is Staged-only, bounded, traceable, and non-authoritative for import or publication. */
+async function verifyGovernedImportExportBoundary(headers) {
+  const exported = await requestJson(wcmsUrl, "/nodics/export/v0/export", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ moduleName: "cms", schemaName: "cmsSite", format: "csv" }),
+  });
+  if (
+    !exported.media?.code ||
+    exported.provenance?.contractType !== "NODICS_SCHEMA_EXPORT" ||
+    exported.provenance?.importAuthorization !== false ||
+    exported.provenance?.publicationAuthorization !== false ||
+    exported.provenance?.onlineWriteAuthorization !== false ||
+    !/^[a-f0-9]{64}$/.test(exported.provenance?.checksum || "")
+  ) {
+    throw new Error(`WCMS Staged export lacks governed provenance: ${JSON.stringify(exported)}`);
+  }
+  const roundTrip = await requestJson(wcmsUrl, "/nodics/import/v0/media", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({
+      mediaCode: exported.media.code,
+      moduleName: "cms",
+      schemaName: "cmsSite",
+      operation: "saveAll",
+      options: { validateOnly: true },
+    }),
+  });
+  if (roundTrip.validationOnly !== true && roundTrip.validateOnly !== true) {
+    throw new Error(`Export-to-import validation did not remain non-mutating: ${JSON.stringify(roundTrip)}`);
+  }
+  const expectedErrorWindow = managedProcesses.map((entry) => ({
+    entry,
+    errorCount: entry.errors.length,
+  }));
+  const online = await requestJsonResponse(wcmsOnlineUrl, "/nodics/export/v0/export", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ moduleName: "cms", schemaName: "cmsSite", format: "json" }),
+  });
+  if (online.status !== 403 || online.body?.code !== "ERR_AUTH_00003") {
+    throw new Error(`WCMS Online export did not fail closed: ${JSON.stringify(online)}`);
+  }
+  const process = await requestJsonResponse(processUrl, "/nodics/export/v0/export", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ moduleName: "flowSchema", schemaName: "processDefinition", format: "json" }),
+  });
+  if (process.status !== 403 || process.body?.code !== "ERR_AUTH_00003") {
+    throw new Error(`Process export did not fail closed without governed media: ${JSON.stringify(process)}`);
+  }
+  const crossEnterprise = await requestJsonResponse(wcmsUrl, "/nodics/export/v0/export", {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ enterpriseCode: "anotherEnterprise", moduleName: "cms", schemaName: "cmsSite", format: "json" }),
+  });
+  if (crossEnterprise.status !== 400 || crossEnterprise.body?.code !== "ERR_EXP_00001") {
+    throw new Error(`Cross-enterprise export did not fail closed: ${JSON.stringify(crossEnterprise)}`);
+  }
+  expectedErrorWindow.forEach(({ entry, errorCount }) => {
+    entry.errors.splice(errorCount);
+  });
+  log("governed Staged export and Online/Process/cross-enterprise rejection gates passed");
 }
 
 async function verifyWcmsDesignerAuthoringAvailability(headers) {
@@ -478,69 +884,6 @@ async function verifyWcmsDesignerAuthoringAvailability(headers) {
   log("Reference runtime can observe the WCMS-owned Designer authoring model");
 }
 
-async function verifyMongoCounts() {
-  const script = [
-    `const expectedCatalogs=${JSON.stringify(expectedCatalogs)};`,
-    `const retiredDocumentationCatalogs=${JSON.stringify(retiredDocumentationCatalogs)};`,
-    `const documentationPacks=${JSON.stringify(documentationPacks)};`,
-    'const d=db.getSiblingDB("kickoffLocalWcms");',
-    "const counts={",
-    "  catalogs: d.CatalogModel.countDocuments(),",
-    "  sites: d.CmsSiteModel.countDocuments(),",
-    "  pages: d.CmsPageModel.countDocuments(),",
-    "  components: d.CmsComponentModel.countDocuments(),",
-    "  routes: d.CmsPageRouteModel.countDocuments()",
-    "};",
-    "const catalogs=d.CatalogModel.find({}, { _id: 0, code: 1, catalogType: 1 }).sort({ code: 1 }).toArray();",
-    "const retired=d.CatalogModel.find({ code: { $in: retiredDocumentationCatalogs } }, { _id: 0, code: 1 }).toArray();",
-    "const documentationSites=d.CmsSiteModel.find({ code: { $in: documentationPacks.map(pack => pack.site) } }, { _id: 0, code: 1, catalog: 1 }).sort({ code: 1 }).toArray();",
-    "print(JSON.stringify({ counts, catalogs, expectedCatalogs, retired, documentationSites }));",
-  ].join("\n");
-  const { stdout } = await execFileAsync(
-    "mongosh",
-    ["--quiet", "--eval", script],
-    {
-      cwd: projectRoot,
-    },
-  );
-  const result = JSON.parse(stdout);
-  log(`WCMS counts ${JSON.stringify(result.counts)}`);
-  const numbers = Object.values(result.counts);
-  if (numbers.length < 5 || numbers.some((value) => value <= 0)) {
-    throw new Error(`WCMS imported counts are not healthy: ${stdout.trim()}`);
-  }
-  if (result.catalogs.length !== expectedCatalogs.length) {
-    throw new Error(
-      `WCMS catalog count drifted: ${JSON.stringify(result.catalogs)}`,
-    );
-  }
-  const actualByCode = new Map(
-    result.catalogs.map((catalog) => [catalog.code, catalog.catalogType]),
-  );
-  for (const catalog of expectedCatalogs) {
-    if (actualByCode.get(catalog.code) !== catalog.catalogType) {
-      throw new Error(
-        `WCMS catalog ${catalog.code} is missing or has wrong type: ${JSON.stringify(result.catalogs)}`,
-      );
-    }
-  }
-  if (result.retired.length > 0) {
-    throw new Error(
-      `Retired documentation catalogs still exist: ${JSON.stringify(result.retired)}`,
-    );
-  }
-  const unhealthyDocumentationSites = result.documentationSites.filter(
-    (site) => site.catalog !== "documentationContentCatalog",
-  );
-  if (
-    result.documentationSites.length !== documentationPacks.length ||
-    unhealthyDocumentationSites.length > 0
-  ) {
-    throw new Error(
-      `Documentation sites must share documentationContentCatalog: ${JSON.stringify(result.documentationSites)}`,
-    );
-  }
-}
 
 async function runAxisSmoke() {
   if (!existsSync(resolve(axisRoot, "package.json"))) {
@@ -579,7 +922,7 @@ async function main() {
   log(`workspace ${workspaceRoot}`);
   log(`run ${stableId(String(Date.now()))}`);
   await assertFreshResetPortsAvailable();
-  await dropDatabases();
+  await assertGovernedFreshResetAvailable();
   await ensureProcess(
     "Platform",
     4300,
@@ -589,17 +932,20 @@ async function main() {
     "/nodics/system/v0/health/ready",
   );
   await ensureProcess(
-    "WCMS",
-    4310,
+    "WCMS Staged",
+    4312,
     projectRoot,
-    "start:wcms",
+    "start:wcms:staged",
     wcmsUrl,
     "/nodics/system/v0/health/ready",
   );
-  await waitForHttp(
-    platformUrl,
-    "/nodics/backoffice/v0/bootstrap/public",
-    "BackOffice public bootstrap",
+  await ensureProcess(
+    "WCMS Online",
+    4314,
+    projectRoot,
+    "start:wcms:online",
+    wcmsOnlineUrl,
+    "/nodics/system/v0/health/ready",
   );
   await ensureProcess(
     "Process and Automation",
@@ -609,6 +955,21 @@ async function main() {
     processUrl,
     "/nodics/system/v0/health/ready",
   );
+  await verifyLocalRouteSecurityMatrix();
+  if (dropLocalDb) {
+    const resetHeaders = await authenticate();
+    await executeGovernedFreshReset(resetHeaders);
+    await ensureProcess("Platform", 4300, projectRoot, "start:platform", platformUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("WCMS Staged", 4312, projectRoot, "start:wcms:staged", wcmsUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("WCMS Online", 4314, projectRoot, "start:wcms:online", wcmsOnlineUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("Process and Automation", 4330, projectRoot, "start:process", processUrl, "/nodics/system/v0/health/ready");
+    await verifyLocalRouteSecurityMatrix();
+  }
+  await waitForHttp(
+    platformUrl,
+    "/nodics/backoffice/v0/bootstrap/public",
+    "BackOffice public bootstrap",
+  );
   if (!(await portListening(3100))) {
     if (!existsSync(resolve(axisRoot, "package.json"))) {
       throw new Error(`Axis repository not found at ${axisRoot}`);
@@ -617,6 +978,7 @@ async function main() {
   }
   await waitForHttp(axisUrl, "/", "Axis");
   const headers = await authenticate();
+  await importMandatoryProcessRelease(headers);
   const registry = await loadRegistry(headers);
   requireModule(registry.registered, "nodics.core", "registered modules");
   requireModule(registry.registered, "nodics.platform", "registered modules");
@@ -632,8 +994,14 @@ async function main() {
     "observed modules",
   );
   await importContentPacks(headers);
-  await verifyDocumentationRecords();
-  await verifyNexusRecords();
+  await importNexusStagedRelease(headers);
+  await verifyGovernedImportExportBoundary(headers);
+  await publishAxisBaseline(headers);
+  await publishNexusApplicationBundle(headers);
+  await qualifyNexusApplicationUpdate(headers);
+  await qualifyPartnerWebsiteCustomization(headers);
+  await publishDocumentationBundles(headers);
+  await verifyPublicationOperations(headers);
   await verifyWcmsDesignerAuthoringAvailability(headers);
   for (const route of [
     "/",
@@ -660,7 +1028,6 @@ async function main() {
     await expectHttpOk(axisUrl, route);
     log(`Axis route ${route} returned HTTP 200`);
   }
-  await verifyMongoCounts();
   await runAxisSmoke();
   const noisy = managedProcesses.flatMap((entry) =>
     entry.errors.map((message) => `${entry.label}: ${message}`),
@@ -668,7 +1035,7 @@ async function main() {
   if (noisy.length > 0) {
     throw new Error(`Startup emitted error-level output:\n${noisy.join("\n")}`);
   }
-  log(`${dropLocalDb ? 'fresh' : 'retained-data'} local bootstrap acceptance completed successfully`);
+  log("API-only retained-data local bootstrap acceptance completed successfully");
 }
 
 main()

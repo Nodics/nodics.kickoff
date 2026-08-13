@@ -36,6 +36,9 @@ core.start(Object.freeze({
         packageRoot('nodics.core'),
         packageRoot('nodics.process'),
         packageRoot('nodics.cron'),
+        // Discover CMS-owned immutable Process contributions without activating
+        // the WCMS runtime graph in this server.
+        packageRoot('nodics.wcms'),
         path.resolve(__dirname, '..')
     ]),
     defaultEnvironment: 'kickoffLocal',

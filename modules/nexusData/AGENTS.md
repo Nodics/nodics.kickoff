@@ -19,3 +19,9 @@
   belongs in the independent `nodics.nexus` frontend.
 - Public content must not contain secrets, credentials, private endpoints,
   unverified claims, or unlicensed media.
+- Every executable file must be declared by exactly one immutable manifest
+  section whose `sourceRoot`, lifecycle, and destination role match its
+  physical folder. Never place expected Online projections under `data/`.
+- WCMS publishable releases must contain authoring source only. Engagement
+  schemas remain on the Engagement runtime and must be classified
+  `OPERATIONAL_VERSIONED`, not disguised as WCMS Staged content.

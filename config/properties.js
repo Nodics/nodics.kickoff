@@ -52,6 +52,7 @@ module.exports = Object.freeze({
                     catalog: 'documentationContentCatalog',
                     defaultPage: '/docs/nodics-kickoff',
                     packCode: 'kickoffDocumentation',
+                    initializationProfile: 'kickoffdocs',
                     dashboard: Object.freeze({
                         kind: 'Customer project guide',
                         icon: 'content',

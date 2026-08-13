@@ -18,51 +18,51 @@ const manifest = JSON.parse(
   await readFile(resolve(moduleRoot, "data/manifest.json")),
 );
 const components = require(
-  resolve(moduleRoot, "data/core/data/corporate/nexusComponentData.js"),
+  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusComponentData.js"),
 );
 const pages = require(
-  resolve(moduleRoot, "data/core/data/corporate/nexusPageData.js"),
+  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusPageData.js"),
 );
 const renderers = require(
-  resolve(moduleRoot, "data/core/data/corporate/nexusRendererData.js"),
+  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusRendererData.js"),
 );
 const sites = require(
-  resolve(moduleRoot, "data/core/data/corporate/nexusSiteData.js"),
+  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusSiteData.js"),
 );
 const catalogs = require(
-  resolve(moduleRoot, "data/core/data/corporate/nexusCatalogData.js"),
+  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusCatalogData.js"),
 );
 const editorialAuthors = require(
-  resolve(moduleRoot, "data/sample/data/editorial/nexusEditorialAuthorData.js"),
+  resolve(moduleRoot, "data/staged/editorial/data/nexusEditorialAuthorData.js"),
 );
 const editorialTaxonomyTerms = require(
   resolve(
     moduleRoot,
-    "data/sample/data/editorial/nexusEditorialTaxonomyTermData.js",
+    "data/staged/editorial/data/nexusEditorialTaxonomyTermData.js",
   ),
 );
 const editorialArticles = require(
   resolve(
     moduleRoot,
-    "data/sample/data/editorial/nexusEditorialArticleData.js",
+    "data/staged/editorial/data/nexusEditorialArticleData.js",
   ),
 );
 const editorialArticleLocalizations = require(
   resolve(
     moduleRoot,
-    "data/sample/data/editorial/nexusEditorialArticleLocalizationData.js",
+    "data/staged/editorial/data/nexusEditorialArticleLocalizationData.js",
   ),
 );
 const editorialArticleTaxonomies = require(
   resolve(
     moduleRoot,
-    "data/sample/data/editorial/nexusEditorialArticleTaxonomyData.js",
+    "data/staged/editorial/data/nexusEditorialArticleTaxonomyData.js",
   ),
 );
 const editorialOnlineArticles = require(
   resolve(
     moduleRoot,
-    "data/sample/data/editorial/nexusEditorialOnlineArticleData.js",
+    "test/expectedOnlineProjections/nexusEditorialOnlineArticleData.js",
   ),
 );
 const componentValues = Object.values(components);
@@ -590,27 +590,44 @@ editorialArticleValues.forEach((article) => {
     `Editorial authoring article ${article.code} must expose a featured media code for Axis and Nexus previews`,
   );
 });
-assert.equal(manifest.sections.core.sites[0], site.code);
-assert.equal(manifest.sections.core.catalogs[0], catalog.code);
-assert.equal(manifest.sections.core.accessMode, "PUBLIC");
+const corporateRelease = manifest.sections.nexusCorporateSite;
+const editorialRelease = manifest.sections.nexusEditorialSource;
+const engagementRelease = manifest.sections.nexusEngagementOperational;
+assert.equal(corporateRelease.lifecycle, "PUBLISHABLE");
+assert.equal(corporateRelease.destinationRole, "WCMS_STAGED");
+assert.equal(corporateRelease.sourceRoot, "staged");
+assert.equal(editorialRelease.lifecycle, "PUBLISHABLE");
+assert.equal(editorialRelease.destinationRole, "WCMS_STAGED");
+assert.equal(editorialRelease.sourceRoot, "staged");
+assert.equal(engagementRelease.lifecycle, "OPERATIONAL_VERSIONED");
+assert.equal(engagementRelease.destinationRole, "ENGAGEMENT");
+assert.equal(engagementRelease.sourceRoot, "operational");
+assert.equal(engagementRelease.publicationPolicy, "NONE");
 
-for (const [relativePath, expectedHash] of Object.entries(
-  manifest.sections.core.generatedHashes,
-)) {
-  assert.equal(
-    await sha256(relativePath),
-    expectedHash,
-    `Manifest hash must match import payload ${relativePath}`,
-  );
+for (const release of Object.values(manifest.sections)) {
+  for (const [relativePath, expectedHash] of Object.entries(release.files)) {
+    assert.equal(
+      await sha256(relativePath),
+      expectedHash,
+      `Manifest hash must match import payload ${relativePath}`,
+    );
+  }
 }
-for (const [relativePath, expectedHash] of Object.entries(
-  manifest.sections.sample.files,
-)) {
-  assert.equal(
-    await sha256(relativePath),
-    expectedHash,
-    `Manifest hash must match sample payload ${relativePath}`,
-  );
-}
+assert(
+  Object.keys(corporateRelease.files).every((path) => path.startsWith("staged/wcms/")),
+  "The corporate release must contain only WCMS Staged source files",
+);
+assert(
+  Object.keys(editorialRelease.files).every((path) => path.startsWith("staged/editorial/")),
+  "The Editorial release must contain only Staged authoring source files",
+);
+assert(
+  Object.keys(engagementRelease.files).every((path) => path.startsWith("operational/engagement/")),
+  "The Engagement release must contain only operational versioned files",
+);
+assert(
+  !JSON.stringify(manifest).includes("nexusEditorialOnlineArticleData"),
+  "Expected Online projections must never be runtime-importable manifest data",
+);
 
 console.log("Nexus corporate content contract passed.");

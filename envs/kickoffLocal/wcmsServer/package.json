@@ -1,5 +1,5 @@
 {
-  "name": "wcmsServer",
+  "name": "wcmsServerRetired",
   "version": "0.0.1",
   "index": "1001.12",
   "private": true,
@@ -13,6 +13,8 @@
     "loadableByNodicsModuleLoader": true,
     "owns": ["composition", "configuration"],
     "runtime": { "router": false, "publish": false, "web": false },
-    "displayName": "WCMS Server"
+    "displayName": "WCMS Server (Retired)",
+    "retired": true,
+    "replacementServers": ["wcmsStagedServer", "wcmsOnlineServer"]
   }
 }

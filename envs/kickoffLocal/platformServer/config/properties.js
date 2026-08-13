@@ -1,6 +1,67 @@
 'use strict';
 
 module.exports = {
+    httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
+        'http://localhost:3200', 'http://127.0.0.1:3200'] } },
+    backofficeApplicationInitialization: {
+        profiles: {
+            nexus: {
+                code: 'nexus',
+                type: 'WEBSITE_BUNDLE',
+                owner: 'nexusData',
+                applicationCode: 'nexus',
+                siteCode: 'nexusCorporateSite',
+                baselineCode: 'nexus',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            nexusupdate: {
+                code: 'nexusupdate',
+                type: 'WEBSITE_BUNDLE_UPDATE',
+                owner: 'nexusData',
+                applicationCode: 'nexus',
+                siteCode: 'nexusCorporateSite',
+                baselineCode: 'nexusupdate',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            frameworkdocs: {
+                code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs',
+                applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            axisdocs: {
+                code: 'axisdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'axis',
+                applicationCode: 'axis', siteCode: 'axisDocumentationSite', baselineCode: 'axisdocs',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            kickoffdocs: {
+                code: 'kickoffdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.kickoff',
+                applicationCode: 'axis', siteCode: 'kickoffDocumentationSite', baselineCode: 'kickoffdocs',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            }
+        }
+    },
+    backofficeLocalReset: {
+        enabled: true,
+        environmentAllowlist: ['kickoffLocal'],
+        providers: [
+            { code: 'wcmsStaged', moduleName: 'system', connectionName: 'wcmsStaged' },
+            { code: 'wcmsOnline', moduleName: 'system', connectionName: 'wcmsOnline' },
+            { code: 'process', moduleName: 'system', connectionName: 'process' },
+            { code: 'platform', moduleName: 'system', connectionName: 'default' }
+        ]
+    },
+    localResetProvider: {
+        enabled: true, environmentAllowlist: ['kickoffLocal'],
+        serviceNames: ['DefaultAddressService', 'DefaultBackofficeAxisPolicyService', 'DefaultBackofficeContractActivationService',
+            'DefaultBackofficeContractSnapshotService', 'DefaultBackofficeFunctionalModuleRegistrationService', 'DefaultCatalogService',
+            'DefaultConfigurationService', 'DefaultContactService', 'DefaultCustomerService', 'DefaultDataInstallationService',
+            'DefaultEmsFailedMessagesService', 'DefaultEnterpriseService', 'DefaultEventListenerService', 'DefaultIdentityMigrationAuditService',
+            'DefaultImportDefinitionService', 'DefaultImportRunService', 'DefaultIndexService', 'DefaultIndexerLogService', 'DefaultIndexerService',
+            'DefaultInterceptorService', 'DefaultLocalizationKeyService', 'DefaultLocalizationOnlinePointerService', 'DefaultLocalizationReleaseService',
+            'DefaultLocalizationValueService', 'DefaultPrincipalScopeAssignmentService', 'DefaultSearchService', 'DefaultTenantService',
+            'DefaultUserStateService', 'DefaultValidatorService', 'DefaultWorkflow2SchemaService', 'DefaultUserGroupService',
+            'DefaultPasswordService', 'DefaultTokenService', 'DefaultEmployeeService']
+    },
     activeModules: {
         groups: [],
         modules: [
@@ -8,6 +69,8 @@ module.exports = {
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
+            'axis',
+            'partnerSiteData',
             'kickoffLocal',
             'platformServer'
         ]
@@ -36,6 +99,14 @@ module.exports = {
                 httpsHost: 'localhost',
                 httpsPort: 4301
             }
-        }
+        },
+        wcmsStaged: {
+            endpoint: { httpHost: '127.0.0.1', httpPort: 4312, httpsHost: '127.0.0.1', httpsPort: 4313 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4312, httpsHost: 'localhost', httpsPort: 4313 }
+        },
+        wcmsOnline: { endpoint: { httpHost: '127.0.0.1', httpPort: 4314, httpsHost: '127.0.0.1', httpsPort: 4315 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4314, httpsHost: 'localhost', httpsPort: 4315 } },
+        process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4330, httpsHost: 'localhost', httpsPort: 4331 } }
     }
 };

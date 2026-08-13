@@ -79,23 +79,13 @@ cp .env.example .env
 npm install
 ```
 
-## Fresh database reset
+## Fresh schema reset
 
-Use a fresh database reset only for local developer acceptance. Do not run this
-against a shared development, QA, pre-production, or production database.
-
-The local server configs own the exact database names. Read them before
-dropping anything. In the reference topology, the relevant server configs are:
-
-```text
-envs/kickoffLocal/platformServer/config/properties.js
-envs/kickoffLocal/wcmsServer/config/properties.js
-envs/kickoffLocal/processServer/config/properties.js
-```
-
-The reset should remove only the local Kickoff runtime databases/schemas used
-by those servers. It must not delete a broad MongoDB instance, user home
-folder, workspace folder, or unrelated project database.
+No contributor, AI agent, test, migration, or acceptance script may read or
+mutate Nodics databases directly. A fresh-schema run is therefore blocked until
+Platform provides a secured, bounded Local reset API/service with authorization,
+audit, explicit runtime targets, and recovery evidence. Never substitute a
+database shell command.
 
 ## Automated acceptance path
 
@@ -103,72 +93,49 @@ Most maintainers should use the automated path first. It proves the same
 contracts as the manual checklist and reduces human mistakes during repeated
 bootstrap tests.
 
-Run this from `nodics.kickoff`:
-
-```bash
-npm run acceptance:local:fresh
-```
-
-This command intentionally drops only the bounded reference local databases:
-
-- `kickoffLocal`
-- `kickoffLocalWcms`
-- `kickoffLocalCron`
-- `kickoffLocalProcess`
-
-It then starts any missing local servers, waits for Platform, WCMS, the
-composed Process/Cron automation runtime, and Axis to become reachable,
-authenticates the local admin, imports the Framework, Nodics Axis, and Nodics
-Kickoff documentation packs through WCMS, checks key Axis routes, verifies WCMS
-content counts, and runs the Axis live smoke with the documentation and Cron
-lifecycle gates enabled.
-
-Use the safer non-destructive form when you only want to verify the current
-local state:
+Use the non-destructive API-only form:
 
 ```bash
 npm run acceptance:local
 ```
 
-That version does not drop databases. It checks the currently running or
-started local topology and imports missing documentation packs if required.
+This checks the running or newly started split WCMS topology and imports
+missing releases only through Nodics APIs. `acceptance:local:fresh` deliberately
+fails closed until the governed reset capability exists.
 
 ### What the automated command proves
 
 ```mermaid
 flowchart TD
-  Start["Developer runs npm run acceptance:local:fresh"] --> Drop["Drop only Kickoff local DBs"]
-  Drop --> Platform["Start or reuse Platform on 4300"]
-  Platform --> WCMS["Start or reuse WCMS on 4310"]
-  WCMS --> Process["Start or reuse Process/Cron on 4330"]
+  Start["Developer runs npm run acceptance:local"] --> Platform["Start or reuse Platform on 4300"]
+  Platform --> Staged["Start or reuse WCMS Staged on 4312"]
+  Staged --> Online["Start or reuse WCMS Online on 4314"]
+  Online --> Process["Start or reuse Process/Cron on 4330"]
   Process --> Axis["Start or reuse Axis on 3100"]
   Axis --> Auth["Authenticate default/admin"]
   Auth --> Registry["Verify Core, Platform, WCMS, Cron observation"]
   Registry --> Docs["Import documentation packs through WCMS"]
   Docs --> Routes["Verify Axis routes"]
   Routes --> Designer["Verify Content Designer catalog-first route"]
-  Designer --> Counts["Verify WCMS catalog/site/page/component/route counts"]
-  Counts --> Lifecycle["Run Cron register, activate, deactivate, deregister"]
+  Designer --> Lifecycle["Run Cron register, activate, deactivate, deregister"]
   Lifecycle --> Pass["Acceptance pass"]
 ```
 
 The command stops the servers it started after the acceptance gates complete.
-If you want to keep the stack running so you can inspect Axis after the run,
-use:
+To keep the API-qualified stack running, use:
 
 ```bash
-node scripts/local-bootstrap-acceptance.mjs --drop-local-db --leave-started
+node scripts/local-bootstrap-acceptance.mjs --leave-started
 ```
 
-The command is deliberately conservative. It does not discover and drop random
-MongoDB databases. It does not kill unrelated processes. It does not create
-another importer. It uses the existing Profile login, BackOffice registry,
+The command does not inspect or mutate a database directly, kill unrelated
+processes, or create another importer. It uses the existing Profile login, BackOffice registry,
 WCMS content-pack API, and Axis smoke test. This matters because acceptance
 must prove the same path a real developer or operator uses.
 
 ## Start the backend servers
 
-Open three terminals from `nodics.kickoff`.
+Open four terminals from `nodics.kickoff`.
 
 Terminal 1:
 
@@ -179,10 +146,16 @@ npm run start:platform
 Terminal 2:
 
 ```bash
-npm run start:wcms
+npm run start:wcms:staged
 ```
 
 Terminal 3:
+
+```bash
+npm run start:wcms:online
+```
+
+Terminal 4:
 
 ```bash
 npm run start:process
@@ -193,7 +166,8 @@ Expected local ports:
 | Runtime | Port | Why it matters |
 | --- | ---: | --- |
 | Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |
-| WCMS | 4310 | CMS sites, content catalogs, page/component data, documentation packs, media metadata. |
+| WCMS Staged | 4312 | Versioned CMS authoring, imports, validation, and publication source. |
+| WCMS Online | 4314 | Published CMS delivery and authenticated publication target only. |
 | Process and Automation | 4330 | Process/workflow APIs plus optional Cron observation and registry lifecycle testing. |
 
 If a port is already in use, confirm whether it is an earlier Nodics server
@@ -466,14 +440,14 @@ PASS cron lifecycle deregister returns module to available
 The local acceptance run is complete when:
 
 1. Platform, WCMS, Process and Automation, and Axis are running.
-2. Fresh local databases were created from module-owned import data.
+2. Required releases were qualified through Nodics import/publication APIs.
 3. Admin login works.
 4. Module registry shows mandatory modules and optional Cron correctly.
 5. Documentation products are visible.
 6. Content and media routes render the expected workspaces.
 7. The Page Designer route shows the catalog-first model and does not invent a
    fixed slot shape or frontend-owned content persistence.
-8. `npm run acceptance:local:fresh` passes, or the manual equivalent plus
+8. `npm run acceptance:local` passes, or the manual equivalent plus
    `AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live`
    passes.
 9. No repo in the three-repo set has uncommitted acceptance changes.
@@ -486,8 +460,8 @@ functional module.
 - Treating a running Node process as proof that the customer project is ready.
 - Skipping content-pack import and then wondering why Axis documentation or
   WCMS pages are unavailable.
-- Dropping or modifying broad databases during a local test instead of using
-  the bounded fresh-bootstrap command intended for the reference environment.
+- Reading, dropping, or modifying a database directly during a test instead of
+  using an authorized Nodics API/service.
 - Accepting a module lifecycle flow that requires a browser refresh after
   register, activate, deactivate, or deregister.
 - Ignoring an `INVALID RELEASE` message because the release still appears in
@@ -497,12 +471,11 @@ functional module.
 
 ## Verification
 
-Run the checklist twice when confidence matters: once against the currently
-running local database and once with the bounded fresh-bootstrap option. The
-expected result is repeatability. The system should rebuild from backend-owned
-data, import documentation and initialization releases through governed APIs,
-show healthy CMS record counts, expose mandatory modules, handle optional Cron
-lifecycle, and render Axis routes without manual database edits.
+Run the API-only checklist repeatedly when confidence matters. The expected
+result is idempotent release qualification, mandatory module visibility,
+optional Cron lifecycle handling, and Axis rendering without manual database
+inspection or edits. Fresh-schema proof resumes only after the governed reset
+API/service is implemented.
 
 For project documentation changes, regenerate the Kickoff documentation pack,
 run the documentation contract test, start Platform and WCMS, import or update

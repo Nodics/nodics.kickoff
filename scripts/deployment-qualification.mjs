@@ -30,6 +30,7 @@ export function resolveWorkspace(environment = process.env) {
     kickoff: projectRoot,
     framework: path.resolve(environment.NODICS_QUALIFICATION_FRAMEWORK_ROOT || path.join(workspaceRoot, 'nodics.ai')),
     axis: path.resolve(environment.NODICS_QUALIFICATION_AXIS_ROOT || path.join(workspaceRoot, 'nodics.axis')),
+    nexus: path.resolve(environment.NODICS_QUALIFICATION_NEXUS_ROOT || path.join(workspaceRoot, 'nodics.nexus')),
   };
 }
 
@@ -37,6 +38,11 @@ export function createQualificationPlan(options = {}) {
   const workspace = options.workspace || resolveWorkspace(options.environment);
   const includeFresh = options.includeFresh === true;
   const local = [
+    {
+      id: 'publishing-capacity-baseline', owner: 'nodics publishing', cwd: workspace.kickoff,
+      command: 'npm', args: ['run', 'qualification:publishing-capacity'],
+      proves: 'Bounded Local freeze, media promotion, deploy, activation, delivery, retry, transaction, and rollback regression timings.',
+    },
     {
       id: 'framework-release', owner: 'nodics.ai', cwd: workspace.framework,
       command: 'npm', args: ['run', 'release:check', '--', '--execute', '--full'],
@@ -51,6 +57,11 @@ export function createQualificationPlan(options = {}) {
       id: 'axis-verification', owner: 'nodics.axis', cwd: workspace.axis,
       command: 'npm', args: ['run', 'verify'],
       proves: 'Formatting, lint, type safety, automated accessibility-oriented component contracts, tests, and production bundle.',
+    },
+    {
+      id: 'nexus-verification', owner: 'nodics.nexus', cwd: workspace.nexus,
+      command: 'npm', args: ['run', 'verify'],
+      proves: 'Public delivery client tests, type safety, lint, and production bundle remain compatible with Online-only delivery.',
     },
     {
       id: 'redis-cache-live', owner: 'nodics.core/nCache', cwd: workspace.framework,

@@ -51,27 +51,47 @@ const scenarios = Object.freeze([
         expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport'])
     }),
     Object.freeze({
-        server: 'wcmsServer',
+        server: 'wcmsStagedServer',
+        frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
+        expectedModules: Object.freeze([
+            'nodics.core', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
+            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData',
+            'kickoffLocal', 'wcmsStagedServer'
+        ]),
+        expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),
+        verify: function () {
+            assert.equal(CONFIG.get('publishEnabled'), true);
+            assert.equal(CONFIG.get('runtimeRole').code, 'WCMS_STAGED');
+            assert.equal(CONFIG.get('cms').publication.runtimeRole, 'STAGED');
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWcmsStaged');
+            assert.equal(CONFIG.get('servers').cmsOnline.abstractEndpoint.httpPort, 4314);
+            assert.ok(NODICS.getRawModule('axis'), 'Axis baseline contribution owner should be discoverable');
+            assert.equal(NODICS.isModuleActive('axis'), false, 'Axis backend behavior must remain inactive');
+            assert.equal(NODICS.isModuleActive('nodics.platform'), false, 'Platform group must remain inactive');
+        }
+    }),
+    Object.freeze({
+        server: 'wcmsOnlineServer',
         frameworkModules: Object.freeze(['nodics.wcms']),
         expectedModules: Object.freeze([
-            'nodics.core',
-            'nodics.wcms',
-            'media',
-            'cms',
-            'wcms',
-            'nodics.kickoff',
-            'kickoffCore',
-            'kickoffApi',
-            'kickoffInt',
-            'nexusData',
-            'kickoffLocal',
-            'wcmsServer'
+            'nodics.core', 'nodics.wcms', 'media', 'cms', 'wcms', 'nodics.kickoff',
+            'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'wcmsOnlineServer'
         ]),
-        expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport'])
+        verify: function () {
+            assert.notEqual(CONFIG.get('publishEnabled'), true);
+            assert.equal(CONFIG.get('runtimeRole').code, 'WCMS_ONLINE');
+            assert.equal(CONFIG.get('cms').publication.runtimeRole, 'ONLINE');
+            assert.equal(CONFIG.get('cms').publication.enabled, true);
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWcmsOnline');
+            assert.equal(NODICS.isModuleActive('vDatabase'), false);
+            assert.equal(NODICS.isModuleActive('vMongodb'), false);
+            assert.equal(NODICS.isModuleActive('vService'), false);
+            assert.equal(NODICS.isModuleActive('nexusData'), false);
+        }
     }),
     Object.freeze({
         server: 'processServer',
-        frameworkModules: Object.freeze(['nodics.process', 'nodics.cron']),
+        frameworkModules: Object.freeze(['nodics.process', 'nodics.cron', 'nodics.wcms']),
         expectedModules: Object.freeze([
             'nodics.core',
             'flowSchema',
@@ -92,6 +112,9 @@ const scenarios = Object.freeze([
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalProcess');
             assert.equal(CONFIG.get('database').cronjob.mongodb.master.databaseName, 'kickoffLocalCron');
+            assert.ok(NODICS.getRawModule('cms'), 'CMS contribution owner should be discoverable');
+            assert.equal(NODICS.isModuleActive('cms'), false, 'CMS runtime behavior must remain inactive');
+            assert.equal(NODICS.isModuleActive('nodics.wcms'), false, 'WCMS group must remain inactive');
         }
     })
 ]);

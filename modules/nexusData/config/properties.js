@@ -15,22 +15,6 @@
  * @override A deployment may replace the local provider coordinates without changing CMS content records.
  */
 module.exports = {
-    data: {
-        contentPacks: {
-            enabled: true,
-            packs: {
-                nexusCorporate: {
-                    manifestPack: 'nexus.corporate',
-                    source: {
-                        type: 'LOCAL_PROJECT',
-                        contentPath: 'modules/nexusData/data/core',
-                        manifestPath: 'modules/nexusData/data/manifest.json',
-                        manifestSection: 'core'
-                    }
-                }
-            }
-        }
-    },
     media: {
         folders: {
             nexusContentAssets: {

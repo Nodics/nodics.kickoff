@@ -1,18 +1,8 @@
 'use strict';
 
-const path = require('node:path');
-const core = require('nodics.core');
-
-const packageRoot = packageName => path.dirname(require.resolve(packageName + '/package.json'));
-
-core.start(Object.freeze({
-    NODICS_HOME: packageRoot('nodics.core'),
-    CUSTOM_HOME: path.resolve(__dirname, '..'),
-    MODULE_ROOTS: Object.freeze([
-        packageRoot('nodics.core'),
-        packageRoot('nodics.wcms'),
-        path.resolve(__dirname, '..')
-    ]),
-    defaultEnvironment: 'kickoffLocal',
-    defaultServer: 'wcmsServer'
-}));
+throw new Error([
+    'The combined Local WCMS runtime is retired.',
+    'Use `npm run start:wcms:staged` for authoring and publication source operations,',
+    'or `npm run start:wcms:online` for delivery and publication target operations.',
+    'The legacy configuration and database are retained temporarily as rollback evidence; they are not runtime authorities.'
+].join(' '));
