@@ -56,7 +56,15 @@ npm test
 npm run start:platform
 npm run start:commerce
 npm run start:engagement
+npm run topology:start
+npm run topology:status
+npm run topology:stop
 ```
+
+`topology:start` supervises all six direct-Node `kickoffLocal` backend
+runtimes from one terminal. Use `topology:start:all` to include sibling Axis
+and Nexus development servers. The supervisor refuses unknown busy ports and
+stops only processes whose generated PID ownership belongs to this checkout.
 
 The committed `.npmrc` keeps npm local `file:` dependencies as symbolic links
 (`install-links=false`). This is required because `.nodics/framework/` is a

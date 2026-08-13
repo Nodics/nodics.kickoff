@@ -133,9 +133,45 @@ processes, or create another importer. It uses the existing Profile login, BackO
 WCMS content-pack API, and Axis smoke test. This matters because acceptance
 must prove the same path a real developer or operator uses.
 
-## Start the backend servers
+## Start and stop the complete Local topology
 
-Open four terminals from `nodics.kickoff`.
+The normal direct-Node workflow is supervised from one terminal:
+
+```bash
+npm run topology:start
+```
+
+This starts Platform, WCMS Online, Process, WCMS Staged, Engagement, and
+Commerce in dependency-aware order. It waits for each low-disclosure readiness
+endpoint before starting the next runtime and writes generated logs and PID
+ownership beneath `envs/kickoffLocal/generated/local-topology`.
+
+To include the separate Axis and Nexus frontend repositories:
+
+```bash
+npm run topology:start:all
+```
+
+From another terminal, inspect readiness and ownership:
+
+```bash
+npm run topology:status
+```
+
+Stop only the topology owned by this checkout:
+
+```bash
+npm run topology:stop
+```
+
+The stop command validates the recorded supervisor PID and command before
+sending a signal. A busy port without matching ownership is reported as
+`EXTERNAL_OR_UNKNOWN` and is never killed. Ctrl+C in the supervisor terminal
+performs the same bounded reverse-order graceful shutdown.
+
+## Start individual backend servers
+
+For focused debugging, open separate terminals from `nodics.kickoff`.
 
 Terminal 1:
 

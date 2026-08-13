@@ -44,6 +44,10 @@
     "start:wcms": "node src/start-wcms-server.js",
     "start:wcms:staged": "node src/start-wcms-staged-server.js",
     "start:wcms:online": "node src/start-wcms-online-server.js",
+    "topology:start": "node scripts/local-topology.mjs start",
+    "topology:start:all": "node scripts/local-topology.mjs start --include-frontends",
+    "topology:status": "node scripts/local-topology.mjs status --include-frontends",
+    "topology:stop": "node scripts/local-topology.mjs stop",
     "acceptance:local": "node scripts/local-bootstrap-acceptance.mjs",
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
     "acceptance:functional": "node scripts/functional-journey-acceptance.mjs",
@@ -56,7 +60,7 @@
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
-    "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/localPublishingContractFreeze.test.mjs",
+    "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/localPublishingContractFreeze.test.mjs && node test/localTopologyLifecycle.test.mjs",
     "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:qualification && npm run prepare:runtime"
   }
 }

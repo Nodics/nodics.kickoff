@@ -47,7 +47,7 @@ module.exports = {
             rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
         axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.3.32',
             rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
-        kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.6.1',
+        kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.6.2',
             rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' } },
         workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract',
             timeoutMs: 10000, maxAttempts: 2 } },
