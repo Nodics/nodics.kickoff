@@ -1,4 +1,14 @@
 #!/usr/bin/env node
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 
@@ -47,7 +57,7 @@ function ensureEnvironment() {
       REDIS_PASSWORD: randomSecret(),
       AUTH_JWT_SECRET: randomSecret(),
       AUTH_API_KEY_PEPPER: randomSecret(),
-      BOOTSTRAP_ADMIN_PASSWORD: randomSecret(),
+      BOOTSTRAP_ADMIN_PASSWORD: process.env.NODICS_DOCKER_ADMIN_PASSWORD || 'NodicsLocal@2026',
       BOOTSTRAP_SERVICE_PASSWORD: randomSecret(),
       BOOTSTRAP_SERVICE_API_KEY: randomSecret(),
     };

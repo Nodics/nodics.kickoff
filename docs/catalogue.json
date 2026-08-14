@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.7.0",
+  "version": "0.8.1",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "documents": [
@@ -10,7 +10,7 @@
       "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "nodics.kickoff",
-      "content": "data/core/source/documentation/pages/project-overview.md"
+      "content": "docs/pages/project-overview.md"
     },
     {
       "id": "kickoff.local-runtime",
@@ -18,7 +18,7 @@
       "summary": "Start and reason about the local Platform, WCMS, and Cron servers that make the reference project usable.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "data/core/source/documentation/pages/local-runtime.md"
+      "content": "docs/pages/local-runtime.md"
     },
     {
       "id": "kickoff.local-acceptance",
@@ -26,7 +26,7 @@
       "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "data/core/source/documentation/pages/local-acceptance-checklist.md"
+      "content": "docs/pages/local-acceptance-checklist.md"
     },
     {
       "id": "kickoff.local-publishing-operations",
@@ -34,7 +34,7 @@
       "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "data/core/source/documentation/pages/local-publishing-operations.md"
+      "content": "docs/pages/local-publishing-operations.md"
     },
     {
       "id": "kickoff.deployment-qualification",
@@ -42,7 +42,7 @@
       "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "data/core/source/documentation/pages/deployment-qualification.md"
+      "content": "docs/pages/deployment-qualification.md"
     },
     {
       "id": "kickoff.customization",
@@ -50,7 +50,7 @@
       "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "modules",
-      "content": "data/core/source/documentation/pages/customization-guide.md"
+      "content": "docs/pages/customization-guide.md"
     },
     {
       "id": "kickoff.functional-journeys",
@@ -58,7 +58,7 @@
       "summary": "Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "data/core/source/documentation/pages/functional-journeys.md"
+      "content": "docs/pages/functional-journeys.md"
     }
   ]
 }

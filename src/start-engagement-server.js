@@ -11,6 +11,6 @@
 'use strict';
 /** @module nodics.kickoff/src/start-engagement-server @description Starts the local reference Engagement runtime without moving framework ownership into Kickoff. @layer project-runtime @owner nodics.kickoff @override Customer projects may compose their own Engagement topology and coordinates. */
 const path = require('node:path');
-const core = require('nodics.core');
+const foundation = require('nodics.foundation');
 const packageRoot = packageName => path.dirname(require.resolve(packageName + '/package.json'));
-core.start(Object.freeze({ NODICS_HOME: packageRoot('nodics.core'), CUSTOM_HOME: path.resolve(__dirname, '..'), MODULE_ROOTS: Object.freeze([packageRoot('nodics.core'), packageRoot('nodics.communication'), packageRoot('nodics.engagement'), path.resolve(__dirname, '..')]), defaultEnvironment: 'kickoffLocal', defaultServer: 'engagementServer' }));
+foundation.start(Object.freeze({ NODICS_HOME: packageRoot('nodics.foundation'), CUSTOM_HOME: path.resolve(__dirname, '..'), MODULE_ROOTS: Object.freeze([packageRoot('nodics.foundation'), packageRoot('nodics.communication'), packageRoot('nodics.engagement'), path.resolve(__dirname, '..')]), defaultEnvironment: 'kickoffLocal', defaultServer: 'engagementServer' }));

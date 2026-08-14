@@ -1,3 +1,14 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 'use strict';
 
 /** @module wcmsStagedServer/config/properties @description Defines Local WCMS Staged role, coordinates, persistence, and Online target connection. */
@@ -29,6 +40,11 @@ module.exports = {
     runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['WCMS_STAGED'],
+        initializationProfiles: { localWcmsFoundation: { enabled: true,
+            label: 'Local WCMS foundation',
+            description: 'Install the required initialization and core releases for the Local Staged content runtime.',
+            completionMessage: 'The Staged content foundation is ready. You can review content in Axis and submit approved versions for Online publication.',
+            steps: [{ dataType: 'init' }, { dataType: 'core' }] } },
         contributions: [{ moduleName: 'axis', sections: ['axisBaseline'] }] } },
     database: { default: { mongodb: { master: {
         URI: 'mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal',
@@ -43,11 +59,11 @@ module.exports = {
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         nexusupdate: { releaseCode: 'nexusData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core',
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-        frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.15.0',
+        frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1',
             rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
-        axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.3.32',
+        axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.4.1',
             rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
-        kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.7.0',
+        kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.8.1',
             rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' } },
         workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract',
             timeoutMs: 10000, maxAttempts: 2 } },

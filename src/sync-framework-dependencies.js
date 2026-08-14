@@ -1,3 +1,14 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 'use strict';
 
 /**
@@ -80,7 +91,7 @@ function main() {
     if (!frameworkRootValue) {
         throw new Error(
             'NODICS_FRAMEWORK_ROOT is not configured. Copy .env.example to .env ' +
-            'and point it to the folder containing nodics.core, nodics.platform, ' +
+            'and point it to the folder containing nodics.foundation, nodics.platform, ' +
             'nodics.wcms, nodics.cron, and nodics.process.'
         );
     }
@@ -95,6 +106,20 @@ function main() {
     }
 
     fs.mkdirSync(frameworkLinkRoot, { recursive: true });
+
+    fs.readdirSync(frameworkLinkRoot).filter(name => name.startsWith('nodics.')
+        && !frameworkDependencies.includes(name)).forEach(name => {
+        const stalePath = path.join(frameworkLinkRoot, name);
+        const staleStats = fs.lstatSync(stalePath);
+        if (!staleStats.isSymbolicLink()) {
+            throw new Error(
+                `Refusing to remove stale non-symlink framework path: ${stalePath}. ` +
+                'Remove it manually if it is safe, then rerun configure:framework.'
+            );
+        }
+        fs.unlinkSync(stalePath);
+        console.log(`Removed stale framework link ${name}`);
+    });
 
     frameworkDependencies.forEach(moduleName => {
         assertCommittedDependency(dependencies, moduleName);

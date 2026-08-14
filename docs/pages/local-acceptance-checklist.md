@@ -269,7 +269,7 @@ Expected state:
 
 | Functional module | Expected state | Why |
 | --- | --- | --- |
-| `nodics.core` | Registered and active | Required by every runtime. |
+| `nodics.foundation` | Registered and active | Required by every runtime. |
 | `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |
 | `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |
 | `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |
@@ -448,7 +448,7 @@ PASS Axis route /docs/swaggers
 PASS BackOffice public bootstrap
 PASS authenticated login for admin
 PASS module registry reachable
-PASS required modules registered: nodics.core, nodics.platform, nodics.wcms
+PASS required modules registered: nodics.foundation, nodics.platform, nodics.wcms
 PASS optional runtime modules observed: nodics.cron
 PASS documentation pack nodicsDocumentation is CURRENT
 PASS documentation pack axisDocumentation is CURRENT

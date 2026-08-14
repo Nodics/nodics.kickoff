@@ -1,4 +1,14 @@
 #!/usr/bin/env node
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 
@@ -9,15 +19,15 @@ import { fileURLToPath } from 'node:url';
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const framework = path.resolve(project, '../nodics.ai');
 const cases = [
-  'nodics.core/modules/nAuth/test/authSecurityContract.test.js',
-  'nodics.core/modules/nCache/cache/test/cacheMutationSecurityContract.test.js',
-  'nodics.core/modules/nData/nImport/import/test/importExportAccessPolicy.test.js',
-  'nodics.core/modules/nData/nImport/import/test/remoteImportTransportGovernance.test.js',
+  'nodics.foundation/modules/nAuth/test/authSecurityContract.test.js',
+  'nodics.foundation/modules/nCache/cache/test/cacheMutationSecurityContract.test.js',
+  'nodics.foundation/modules/nData/nImport/import/test/importExportAccessPolicy.test.js',
+  'nodics.foundation/modules/nData/nImport/import/test/remoteImportTransportGovernance.test.js',
   'nodics.platform/modules/profile/test/profileAuthenticationRouteSecurity.test.js',
   'nodics.platform/modules/backoffice/test/backofficeAdministrativeSecurityService.test.js',
   'nodics.engagement/modules/engagementApi/test/engagementApiSecurityContract.test.js',
-  'nodics.core/modules/nPublish/test/publicationAuthorityContract.test.js',
-  'nodics.core/modules/nPublish/test/publicationAtomicAuditContract.test.js',
+  'nodics.foundation/modules/nPublish/test/publicationAuthorityContract.test.js',
+  'nodics.foundation/modules/nPublish/test/publicationAtomicAuditContract.test.js',
 ];
 
 const evidence = cases.map(file => {

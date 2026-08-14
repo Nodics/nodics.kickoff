@@ -20,7 +20,34 @@ npm run docker-local:soak
 npm run docker-local:stop
 ```
 
-Generated credentials live in the ignored `generated/docker.env` file with mode `0600`. Read `BOOTSTRAP_ADMIN_PASSWORD` to sign in as `admin`; never commit this file.
+To prove the optional documentation lifecycle from an empty schema, reset and
+start the isolated topology before invoking the strict fresh-state gate:
+
+```bash
+npm run docker-local:reset
+npm run docker-local:start
+npm run docker-local:acceptance -- --expect-documentation-not-installed
+```
+
+The strict gate requires every documentation pack to begin as `NOT_INSTALLED`,
+rejects unauthenticated/public installation, imports through the secured Staged
+API, proves that Online delivery remains absent before approval, and then
+completes the normal Process-controlled publication journey. Do not use this
+flag against a retained Docker Local database.
+
+After installing a legitimate newer framework and Axis documentation release
+over retained Docker Local volumes, run the update rollback gate:
+
+```bash
+npm run docker-local:acceptance -- --qualify-documentation-rollback
+```
+
+This requires both updated publications to retain a real previous Online
+version. It rolls them back through the Platform application-initialization
+APIs, verifies receipt lineage, and republishes the current versions through
+the normal approval workflow.
+
+Generated credentials live in the ignored `generated/docker.env` file with mode `0600`. The local operator signs in as `admin` with the readable default password `NodicsLocal@2026`; set `NODICS_DOCKER_ADMIN_PASSWORD` before the first preflight to replace it. Database, Redis, JWT, service-password, and API-key credentials remain randomly generated. Never commit `generated/docker.env`.
 
 `docker-local:stop` preserves the isolated MongoDB, Redis, and media volumes. `docker-local:reset` irreversibly removes only those Docker Local volumes and requires its explicit confirmation token. Application initialization, import, export, and publication verification use Nodics APIs; database shell access is limited to infrastructure health and replica-set administration.
 

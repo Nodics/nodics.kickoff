@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-
 /*
- * Nodics Kickoff local bootstrap acceptance runner.
- *
- * Copyright (c) 2026 Nodics All rights reserved.
- *
- * This software is governed by the Nodics Source-Available Commercial License.
- * You may use, copy, modify, deploy, or distribute it only as permitted by the
- * root LICENSE file or a separate written agreement with Nodics.
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 import { execFile, spawn } from "node:child_process";
@@ -39,6 +39,8 @@ const nexusUrl = process.env.NEXUS_URL || "http://127.0.0.1:3200";
 const urlPort = (value) => Number(new URL(value).port || (new URL(value).protocol === "https:" ? 443 : 80));
 const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
+const expectDocumentationNotInstalled = process.argv.includes("--expect-documentation-not-installed");
+const qualifyDocumentationRollback = process.argv.includes("--qualify-documentation-rollback");
 const documentationPacks = [
   {
     code: "nodicsDocumentation",
@@ -432,6 +434,50 @@ async function importContentPacks(headers) {
   }
 }
 
+/** Proves a clean environment does not install optional documentation before an Axis administrator requests it. */
+async function verifyDocumentationInitiallyNotInstalled(headers) {
+  if (!expectDocumentationNotInstalled) return;
+  for (const pack of documentationPacks) {
+    const status = await requestJson(
+      wcmsUrl,
+      `/nodics/system/v0/content-packs/${encodeURIComponent(pack.code)}`,
+      { headers },
+    );
+    if (status.state !== "NOT_INSTALLED") {
+      throw new Error(`${pack.code} must be NOT_INSTALLED before Axis initiation; received ${String(status.state)}`);
+    }
+    const publicInstall = await requestJsonResponse(
+      wcmsUrl,
+      `/nodics/system/v0/content-packs/${encodeURIComponent(pack.code)}/imports`,
+      { method: "POST", headers: { Origin: nexusUrl } },
+    );
+    if (![401, 403].includes(publicInstall.status)) {
+      throw new Error(`${pack.code} public/Nexus installation request returned HTTP ${String(publicInstall.status)}`);
+    }
+  }
+  log("optional documentation packs are NOT_INSTALLED and public/Nexus installation is denied");
+}
+
+/** Proves importing optional documentation writes only to Staged until the publication workflow completes. */
+async function verifyDocumentationNotOnlineBeforePublication() {
+  if (!expectDocumentationNotInstalled) return;
+  const profiles = [
+    { site: "nodicsDocumentationSite", path: "/docs/framework" },
+    { site: "axisDocumentationSite", path: "/docs/nodics-axis" },
+    { site: "kickoffDocumentationSite", path: "/docs/nodics-kickoff" },
+  ];
+  for (const profile of profiles) {
+    const delivered = await requestJsonResponse(
+      wcmsOnlineUrl,
+      `/nodics/cms/v0/delivery/pages/resolve?site=${encodeURIComponent(profile.site)}&path=${encodeURIComponent(profile.path)}&locale=en&channel=web`,
+    );
+    if (delivered.status === 200 && delivered.body?.page) {
+      throw new Error(`${profile.site} became visible Online before publication approval`);
+    }
+  }
+  log("documentation imports remain isolated from Online before publication approval");
+}
+
 async function importNexusStagedRelease(headers) {
   const releaseCode = "nexusData:nexusCorporateSite";
   const catalogue = await requestJson(wcmsUrl, "/nodics/import/v0/core", {
@@ -803,6 +849,30 @@ async function publishDocumentationBundles(headers) {
   log("optional documentation bundles are READY through Axis/Platform, Staged, Process, and Online delivery");
 }
 
+/** Proves that updated framework and Axis documentation can roll back to their prior Online versions and recover. */
+async function qualifyDocumentationReleaseRollback(headers) {
+  if (!qualifyDocumentationRollback) return;
+  for (const profileCode of ["frameworkdocs", "axisdocs"]) {
+    const rolledBack = await requestJson(
+      platformUrl,
+      `/nodics/backoffice/v0/applications/${profileCode}/initialization/rollback`,
+      {
+        headers,
+        method: "POST",
+        body: JSON.stringify({ reason: "Docker Local documentation release rollback qualification" }),
+      },
+    );
+    const previousOnlineVersion = rolledBack.lineage?.target?.receipts?.find(
+      (receipt) => receipt.operation === "DEPLOY",
+    )?.previousOnlineVersion;
+    if (rolledBack.readiness !== "ROLLED_BACK" || rolledBack.publication?.state !== "ROLLED_BACK" || !previousOnlineVersion) {
+      throw new Error(`${profileCode} rollback evidence is incomplete: ${JSON.stringify(rolledBack)}`);
+    }
+  }
+  await publishDocumentationBundles(headers);
+  log("framework and Axis documentation rollback to prior Online versions and governed recovery passed");
+}
+
 /** Proves export is Staged-only, bounded, traceable, and non-authoritative for import or publication. */
 async function verifyGovernedImportExportBoundary(headers) {
   const exported = await requestJson(wcmsUrl, "/nodics/export/v0/export", {
@@ -988,7 +1058,7 @@ async function main() {
   const headers = await authenticate();
   await importMandatoryProcessRelease(headers);
   const registry = await loadRegistry(headers);
-  requireModule(registry.registered, "nodics.core", "registered modules");
+  requireModule(registry.registered, "nodics.foundation", "registered modules");
   requireModule(registry.registered, "nodics.platform", "registered modules");
   requireModule(registry.registered, "nodics.wcms", "registered modules");
   requireModule(
@@ -1001,7 +1071,9 @@ async function main() {
     "nodics.process",
     "observed modules",
   );
+  await verifyDocumentationInitiallyNotInstalled(headers);
   await importContentPacks(headers);
+  await verifyDocumentationNotOnlineBeforePublication();
   await importNexusStagedRelease(headers);
   await verifyGovernedImportExportBoundary(headers);
   await publishAxisBaseline(headers);
@@ -1009,6 +1081,7 @@ async function main() {
   await qualifyNexusApplicationUpdate(headers);
   await qualifyPartnerWebsiteCustomization(headers);
   await publishDocumentationBundles(headers);
+  await qualifyDocumentationReleaseRollback(headers);
   await verifyPublicationOperations(headers);
   await verifyWcmsDesignerAuthoringAvailability(headers);
   for (const route of [

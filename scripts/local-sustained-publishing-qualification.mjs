@@ -1,4 +1,14 @@
 #!/usr/bin/env node
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 
@@ -12,8 +22,8 @@ const iterations = 25;
 const maximumDurationMs = 30000;
 const maximumRssGrowthBytes = 64 * 1024 * 1024;
 const cases = [
-  'nodics.core/modules/nPublish/test/publicationLifecycleService.test.js',
-  'nodics.core/modules/nPublish/test/publicationAuditReconciliationService.test.js',
+  'nodics.foundation/modules/nPublish/test/publicationLifecycleService.test.js',
+  'nodics.foundation/modules/nPublish/test/publicationAuditReconciliationService.test.js',
   'nodics.wcms/modules/cms/test/cmsPublicationManifestContract.test.js',
   'nodics.wcms/modules/cms/test/cmsPublicationOutboxReliability.test.js',
   'nodics.wcms/modules/cms/test/cmsPublicationWorkflowService.test.js',

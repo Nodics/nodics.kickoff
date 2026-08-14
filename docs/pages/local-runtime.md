@@ -150,7 +150,7 @@ assuming the frontend state is wrong.
 
 If npm cannot install framework packages, check `NODICS_FRAMEWORK_ROOT`, rerun
 `npm run configure:framework`, and confirm the configured directory contains
-`nodics.core`, `nodics.platform`, `nodics.wcms`, and any optional framework
+`nodics.foundation`, `nodics.platform`, `nodics.wcms`, and any optional framework
 modules used by the local server.
 
 ## Production note

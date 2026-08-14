@@ -21,7 +21,7 @@
     "displayName": "Nodics Kickoff"
   },
   "dependencies": {
-    "nodics.core": "file:.nodics/framework/nodics.core",
+    "nodics.foundation": "file:.nodics/framework/nodics.foundation",
     "nodics.commerce": "file:.nodics/framework/nodics.commerce",
     "nodics.communication": "file:.nodics/framework/nodics.communication",
     "nodics.cron": "file:.nodics/framework/nodics.cron",
@@ -68,12 +68,13 @@
     "acceptance:functional": "node scripts/functional-journey-acceptance.mjs",
     "acceptance:editorial-live": "node scripts/editorial-live-journey-acceptance.mjs",
     "acceptance:capability-registry": "node scripts/capability-registry-acceptance.mjs",
+    "acceptance:guided-initialization": "node scripts/guided-initialization-acceptance.mjs",
     "qualification:deployment": "node scripts/deployment-qualification.mjs",
     "qualification:deployment:local": "node scripts/deployment-qualification.mjs --execute-local",
     "qualification:publishing-capacity": "node scripts/publishing-capacity-baseline.mjs",
     "qualification:publishing-soak": "node scripts/local-sustained-publishing-qualification.mjs",
     "qualification:security-boundary": "node scripts/local-security-boundary-qualification.mjs",
-    "quality:ownership": "node .nodics/framework/nodics.core/modules/nTooling/bin/nodics-tool.js quality:ownership --home=.",
+    "quality:ownership": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-tool.js quality:ownership --home=.",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",

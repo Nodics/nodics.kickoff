@@ -19,7 +19,7 @@
  * @override Customer projects may create their own process and automation server topology while keeping Process and Cron module defaults in their owning framework modules.
  */
 const path = require('node:path');
-const core = require('nodics.core');
+const foundation = require('nodics.foundation');
 
 /**
  * Resolves an installed package root for Nodics runtime module discovery.
@@ -29,11 +29,11 @@ const core = require('nodics.core');
  */
 const packageRoot = packageName => path.dirname(require.resolve(packageName + '/package.json'));
 
-core.start(Object.freeze({
-    NODICS_HOME: packageRoot('nodics.core'),
+foundation.start(Object.freeze({
+    NODICS_HOME: packageRoot('nodics.foundation'),
     CUSTOM_HOME: path.resolve(__dirname, '..'),
     MODULE_ROOTS: Object.freeze([
-        packageRoot('nodics.core'),
+        packageRoot('nodics.foundation'),
         packageRoot('nodics.process'),
         packageRoot('nodics.cron'),
         // Discover CMS-owned immutable Process contributions without activating

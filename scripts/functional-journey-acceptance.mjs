@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-
 /*
- * Nodics Kickoff functional-journey acceptance runner.
- *
- * Copyright (c) 2026 Nodics All rights reserved.
- *
- * This software is governed by the Nodics Source-Available Commercial License.
- * You may use, copy, modify, deploy, or distribute it only as permitted by the
- * root LICENSE file or a separate written agreement with Nodics.
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 import { execFile, spawn } from "node:child_process";

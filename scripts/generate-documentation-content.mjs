@@ -1,10 +1,24 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const cataloguePath = path.join(root, 'data/core/source/documentation/catalogue.json');
+const require = createRequire(import.meta.url);
+const applicationDocumentationContract = require('nodics.foundation/modules/nTooling/src/service/defaultApplicationDocumentationContractService.js');
+const cataloguePath = path.join(root, 'docs/catalogue.json');
 const dataRoot = path.join(root, 'data/core');
 const dataPath = path.join(dataRoot, 'data/documentation');
 const manifestPath = path.join(root, 'data/manifest.json');
@@ -23,6 +37,12 @@ const copyrightHeader = `/*
 `;
 const catalogue = JSON.parse(fs.readFileSync(cataloguePath, 'utf8'));
 const documents = catalogue.documents || [];
+applicationDocumentationContract.validateCatalogue({
+  ownerRoot: root,
+  sourceDirectory: 'docs',
+  cataloguePath: 'docs/catalogue.json',
+  catalogue,
+});
 
 function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
@@ -445,36 +465,20 @@ const generatedHashes = Object.fromEntries(
     sha256(fs.readFileSync(path.join(root, relativePath))),
   ]),
 );
-const releaseChecksum = sha256(
-  Object.keys(generatedHashes)
-    .sort()
-    .map((fileName) => `${fileName}:${generatedHashes[fileName]}`)
-    .join('|'),
-);
-const documentationSection = {
-  kind: 'CONTENT_PACK',
+const documentationSection = applicationDocumentationContract.buildReleaseSection({
+  catalogue,
+  generatedHashes,
   contentPath: 'core',
-  pack: catalogue.pack,
-  version: catalogue.version,
   owningDomain: 'kickoff.documentation',
-  lifecycle: 'PUBLISHABLE',
-  destinationRole: 'WCMS_STAGED',
   environmentScope: ['ALL'],
   sensitivity: 'PUBLIC',
-  versioningPolicy: 'IMMUTABLE',
-  publicationPolicy: 'REQUIRED',
-  initialPublicationPolicy: 'ADMIN_INITIATED',
-  removalPolicy: 'UNPUBLISH_OR_RETIRE',
-  sourceMode: 'catalogue-markdown-source',
-  sourceAuthority: 'data/core/source/documentation/catalogue.json',
+  sourceAuthority: 'docs/catalogue.json',
   sites: ['kickoffDocumentationSite'],
   accessMode: 'PUBLIC',
   pages: sourcePages.length,
   components: Object.keys(componentRecords).length,
   routes: sourcePages.length,
-  releaseChecksum,
-  generatedHashes,
-};
+});
 const previousManifest = fs.existsSync(manifestPath)
   ? JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
   : { contractVersion: 2, module: 'nodics.kickoff', sections: {} };

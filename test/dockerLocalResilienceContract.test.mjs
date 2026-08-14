@@ -1,4 +1,14 @@
 #!/usr/bin/env node
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 
@@ -9,6 +19,8 @@ const lifecycle = fs.readFileSync(new URL('../scripts/docker-local-resilience.mj
 const qualification = fs.readFileSync(new URL('../scripts/docker-local-resilience-qualification.mjs', import.meta.url), 'utf8');
 const soak = fs.readFileSync(new URL('../scripts/docker-local-soak-qualification.mjs', import.meta.url), 'utf8');
 const interruption = fs.readFileSync(new URL('../scripts/docker-local-publishing-interruption-contracts.mjs', import.meta.url), 'utf8');
+const acceptance = fs.readFileSync(new URL('../scripts/docker-local-acceptance.mjs', import.meta.url), 'utf8');
+const bootstrapAcceptance = fs.readFileSync(new URL('../scripts/local-bootstrap-acceptance.mjs', import.meta.url), 'utf8');
 const packageDefinition = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 assert.match(lifecycle, /mongodump/);
@@ -20,6 +32,10 @@ assert.match(lifecycle, /nodics-kickoff-docker-local-media-online/);
 assert.match(qualification, /recovery-point-objective/);
 assert.match(qualification, /recovery-time-objective/);
 assert.match(qualification, /unpublished-staged-isolation/);
+assert.match(acceptance, /--expect-documentation-not-installed/);
+assert.match(acceptance, /--qualify-documentation-rollback/);
+assert.match(bootstrapAcceptance, /optional documentation packs are NOT_INSTALLED/);
+assert.match(bootstrapAcceptance, /documentation rollback to prior Online versions/);
 assert.match(qualification, /redis-sentinel-promotion-observed/);
 assert.match(qualification, /CLIENT', 'PAUSE'/);
 assert.match(soak, /NODICS_DOCKER_SOAK_SECONDS/);

@@ -17,7 +17,7 @@ const root = path.resolve(__dirname, '..');
 const properties = require('../config/properties');
 const manifestEnvelope = require('../data/manifest.json');
 const manifest = manifestEnvelope.sections.documentation;
-const catalogue = require('../data/core/source/documentation/catalogue.json');
+const catalogue = require('../docs/catalogue.json');
 const siteRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationSiteData'));
 const pageRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPageData'));
 const routeRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationRouteData'));
@@ -66,6 +66,8 @@ assert.strictEqual(manifestEnvelope.contractVersion, 2);
 assert.strictEqual(manifestEnvelope.module, 'nodics.kickoff');
 assert.strictEqual(manifest.pack, 'nodics.kickoff');
 assert.strictEqual(manifest.version, catalogue.version);
+assert.strictEqual(manifest.sourceAuthority, 'docs/catalogue.json');
+assert.strictEqual(manifest.installationPolicy, 'OPTIONAL_AXIS_INITIATED');
 assert.deepStrictEqual(manifest.sites, ['kickoffDocumentationSite']);
 assert.strictEqual(manifest.pages, catalogue.documents.length);
 assert.strictEqual(contentPack.enabled, true);
@@ -122,6 +124,21 @@ Object.entries(manifest.generatedHashes).forEach(([relativePath, hash]) => {
     assert.strictEqual(hash.length, 64);
 });
 
-catalogue.documents.forEach(assertDocumentationDepth);
+catalogue.documents.forEach(document => {
+    assert(
+        document.content.startsWith('docs/pages/'),
+        document.id + ' must use the repository-owned docs source boundary'
+    );
+    assertDocumentationDepth(document);
+});
+assert.strictEqual(
+    fs.existsSync(path.join(root, 'data/core/source/documentation')),
+    false,
+    'legacy documentation source must not remain under the generated data tree'
+);
+assert(
+    fs.existsSync(path.join(root, 'modules/nexusData/docs/README.md')),
+    'Nexus application documentation must have a module-owned docs boundary'
+);
 
 console.log('Kickoff documentation contract validated');

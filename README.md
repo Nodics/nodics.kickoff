@@ -20,7 +20,7 @@ nodics.kickoff/
       engagementServer/
 ```
 
-`platformServer extends nodics.platform`, which makes `nodics.core`
+`platformServer extends nodics.platform`, which makes `nodics.foundation`
 functionally available through Platform. `wcmsServer extends nodics.wcms`, and
 `processServer extends nodics.process` while including `nodics.cron` in the
 same Business Process & Automation runtime. There is no standalone Cron server
@@ -106,6 +106,7 @@ You can also run the automated local acceptance gates:
 
 ```text
 npm run acceptance:local
+npm run acceptance:guided-initialization
 npm run acceptance:local:fresh
 npm run acceptance:capability-registry
 ```
@@ -114,6 +115,13 @@ npm run acceptance:capability-registry
 without directly reading or changing a database. `acceptance:local:fresh` is a
 fail-closed placeholder until Platform owns a secured, bounded Local reset
 API/service; it must not use a database shell as an acceptance shortcut.
+
+`acceptance:guided-initialization` exercises the developer-facing foundation
+profile through authenticated Nodics APIs. It resolves WCMS Staged and Online
+by their semantic publication roles, validates and installs the ordered Init
+and Foundation releases, proves repeat execution is an idempotent no-op, checks the
+import history, confirms Online cannot expose data-import operations, and
+verifies the resulting publication lineage and Nexus Online delivery.
 
 `acceptance:capability-registry` is non-destructive to business data and expects
 Platform plus the consolidated Process server to be running. It verifies that
@@ -147,7 +155,7 @@ from those stable local links.
 
 Do not commit `.nodics/`; it is machine-local generated setup.
 
-Phase 0 work must stabilize dependency resolution, module skeletons, formatting,
+Framework integration work must stabilize dependency resolution, module skeletons, formatting,
 and runtime-scoped clean/build behavior before more broad code movement.
 
 Kickoff configuration follows the framework classification contract:

@@ -1,3 +1,14 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 /* Local publishing contract freeze: static, deterministic, and database-free. */
 import assert from 'node:assert';
 import fs from 'node:fs';
@@ -6,12 +17,13 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
-const publishRoutes = read('nodics.ai/nodics.core/modules/nPublish/src/router/routers.js');
+const publishRoutes = read('nodics.ai/nodics.foundation/modules/nPublish/src/router/routers.js');
 const cmsRoutes = read('nodics.ai/nodics.wcms/modules/cms/src/router/routers.js');
 const staged = read('nodics.kickoff/envs/kickoffLocal/wcmsStagedServer/config/properties.js');
 const online = read('nodics.kickoff/envs/kickoffLocal/wcmsOnlineServer/config/properties.js');
 const process = read('nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js');
 const dockerLocal = read('nodics.kickoff/envs/kickoffDockerLocal/config/runtime-properties.js');
+const guidedAcceptance = read('nodics.kickoff/scripts/guided-initialization-acceptance.mjs');
 
 for (const permission of ['publish.operations.view', 'publish.operations.reconcile', 'publish.operations.recover']) {
   assert(publishRoutes.includes(permission), `Missing frozen nPublish permission ${permission}`);
@@ -28,6 +40,16 @@ assert(online.includes("runtimeRole: 'ONLINE'") && online.includes('publishEnabl
 assert(process.includes("runtimeRole: { code: 'PROCESS'"), 'Process runtime contract must remain independently composed');
 assert.notStrictEqual(staged.match(/databaseName:\s*'([^']+)'/)?.[1], online.match(/databaseName:\s*'([^']+)'/)?.[1],
   'Staged and Online database identities must not converge');
+assert(staged.includes('initializationProfiles') && staged.includes('localWcmsFoundation'),
+  'Local WCMS Staged must retain its guided initialization profile');
+assert(guidedAcceptance.includes("runtimeRole?.publication === 'STAGED'"),
+  'Guided acceptance must resolve the authoring runtime by semantic publication role');
+assert(guidedAcceptance.includes("runtimeRole?.publication === 'ONLINE'"),
+  'Guided acceptance must resolve the delivery runtime by semantic publication role');
+assert(guidedAcceptance.includes('onlineResponse.status === 403') && guidedAcceptance.includes("includes('dataImport')"),
+  'Guided acceptance must prove that Online cannot execute data imports');
+assert(!/mongodb|mongoose|MongoClient|deleteMany|dropDatabase/i.test(guidedAcceptance),
+  'Guided acceptance must not use a database driver or direct database CRUD');
 
 for (const documentation of [
   { packCode: 'nodicsDocumentation', manifestPath: 'nodics.ai/nodics.docs/data/manifest.json' },

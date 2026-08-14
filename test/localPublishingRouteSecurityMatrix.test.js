@@ -6,6 +6,7 @@
     This software is governed by the Nodics Source-Available Commercial License.
     You may use, copy, modify, deploy, or distribute it only as permitted by the
     root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 /**
@@ -19,7 +20,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const frameworkRoot = path.resolve(projectRoot, '..', 'nodics.ai');
 const load = relative => require(path.resolve(projectRoot, relative));
 const routers = require(path.resolve(frameworkRoot, 'nodics.wcms/modules/cms/src/router/routers')).cms;
-const defaultHardening = require(path.resolve(frameworkRoot, 'nodics.core/modules/nRouter/config/properties')).httpHardening;
+const defaultHardening = require(path.resolve(frameworkRoot, 'nodics.foundation/modules/nRouter/config/properties')).httpHardening;
 const environment = load('envs/kickoffLocal/config/properties').httpHardening;
 const runtime = code => load('envs/kickoffLocal/' + code + '/config/properties').httpHardening;
 const origins = code => runtime(code).cors.allowedOrigins;

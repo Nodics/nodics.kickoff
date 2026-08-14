@@ -21,6 +21,13 @@ application. They are not a static-site authoring model and are not the
 standard way partners should maintain live content. See
 `LIFECYCLE.md` for the executable classification matrix.
 
+Application-specific documentation source belongs under `docs/`. When Nexus
+documentation is introduced, its generator must emit only governed WCMS Staged
+records under this module's `data/` tree and declare them in an immutable,
+destination-qualified manifest section. Kickoff-wide setup and runtime guidance
+remains in the repository-level `docs/`; executable renderer code remains in
+the independent `nodics.nexus` frontend.
+
 Verify the release contract with:
 
 ```bash

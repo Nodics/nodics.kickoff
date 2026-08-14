@@ -10,9 +10,10 @@ Kickoff owns project structure, local environment wiring, project modules,
 sample customization points, and project documentation. Framework
 documentation belongs in `nodics.docs`; Axis product documentation belongs in
 the Platform `axis` backend module; browser renderers belong in `nodics.axis`.
-Kickoff documentation that becomes CMS data belongs in this repository under
-`data/core/source/documentation` and is generated into this repository's own
-content pack.
+Kickoff-wide documentation source belongs in this repository under `docs/` and
+is generated into this repository's governed content pack. Documentation for a
+specific installed application belongs under that application's data module,
+for example `modules/nexusData/docs/` or `modules/agoraData/docs/`.
 
 ## Why Kickoff exists
 
@@ -105,7 +106,7 @@ The important Kickoff locations are:
 - `config/` contains project-level defaults;
 - `envs/kickoffLocal/` contains local environment and server composition;
 - `modules/` contains project-owned modules and customization examples;
-- `data/core/source/documentation/` contains authored Kickoff documentation;
+- `docs/` contains authored Kickoff-wide documentation;
 - `data/core/data/documentation/` and the documentation section in `data/manifest.json` are
   generated content-pack outputs.
 
@@ -128,7 +129,7 @@ not simply the order in `package.json`.
 
 ```mermaid
 flowchart LR
-  FrameworkRoot["Framework checkout<br/>nodics.ai"] --> Core["nodics.core"]
+  FrameworkRoot["Framework checkout<br/>nodics.ai"] --> Core["nodics.foundation"]
   FrameworkRoot --> Platform["nodics.platform"]
   FrameworkRoot --> WCMS["nodics.wcms"]
   FrameworkRoot --> Cron["nodics.cron"]
@@ -158,7 +159,7 @@ Good first customizations are intentionally small:
 
 Bad first customizations are also easy to name:
 
-- editing `nodics.core` because a project-specific rule is needed;
+- editing `nodics.foundation` because a project-specific rule is needed;
 - putting CMS import data into `nodics.axis`;
 - changing generated files without changing their source;
 - changing a standard functional module identity because a project customized
@@ -196,7 +197,7 @@ Documentation dashboard can discover it.
 
 - Do not put framework documentation in Kickoff unless the page is explaining
   how Kickoff consumes the framework.
-- Do not copy `nodics.core`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`
+- Do not copy `nodics.foundation`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`
   source into this repository.
 - Do not move Axis renderers or browser code into Kickoff.
 - Do not assume a customer project will always sit beside `nodics.ai`; use the

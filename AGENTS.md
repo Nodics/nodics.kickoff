@@ -9,27 +9,29 @@
 - Customer modules such as `nodics.kickoff.platform` or `nodics.kickoff.cron` may extend
   framework functional modules to customize implementation. They do not rename
   the standard functional module identity exposed to BackOffice/Axis.
-- Kickoff-specific documentation belongs in this customer backend project, not
-  in `nodics.docs`, `nodics.platform/modules/axis`, or the `nodics.axis`
-  frontend. When Kickoff supplies CMS-importable documentation, use this
-  project-owned content-pack structure:
+- Kickoff-wide documentation belongs in this customer backend project, not in
+  `nodics.docs`, `nodics.platform/modules/axis`, or the `nodics.axis` frontend.
+  Author permanent Kickoff-wide source under `docs/`; generate CMS-importable
+  records into the governed project data tree:
 
 ```text
+docs/
+  catalogue.json
+  pages/
 data/
   core/
-    source/
-      documentation/
     data/
       documentation/
     headers/
-data/
   manifest.json
 ```
 
-- Use that structure for Kickoff setup, demo business flows, sample data,
-  project modules, custom API behavior, onboarding, and project extension
-  guidance. Keep `README.md` as a concise human overview and keep permanent
-  detailed guidance in the generated documentation content pack.
+- Use Kickoff `docs/` for project-wide setup, runtime composition, onboarding,
+  customization, qualification and operations. Application-specific
+  documentation belongs under the owning application data module, for example
+  `modules/nexusData/docs/` or `modules/agoraData/docs/`; its generated records
+  belong in that module's lifecycle-qualified `data/` release. Keep `README.md`
+  files concise.
 - Project, environment, and server contributions load after product modules by
   index and customize services through the standard merge process.
 - Add environments and servers only when Nodics Kickoff owns those runnable
@@ -98,4 +100,4 @@ solve a customer-project problem by moving framework ownership into Kickoff.
   exported-function comments where the file participates in runtime,
   documentation generation, setup, or acceptance.
 - Do not hand-edit generated documentation data to fix source documentation.
-  Update `data/core/source/documentation`, then regenerate the content pack.
+  Update the owning `docs/` source, then regenerate the content pack.

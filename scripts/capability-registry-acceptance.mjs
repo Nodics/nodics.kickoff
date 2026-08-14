@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-
 /*
- * Nodics Kickoff Capability Registry acceptance runner.
- *
- * Copyright (c) 2026 Nodics All rights reserved.
- *
- * This software is governed by the Nodics Source-Available Commercial License.
- * You may use, copy, modify, deploy, or distribute it only as permitted by the
- * root LICENSE file or a separate written agreement with Nodics.
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 import assert from 'node:assert/strict';
@@ -76,6 +76,11 @@ async function main() {
   });
   const token = authentication.authToken;
   assert(token, 'Employee authentication must return an access token');
+  const registrations = await request(`/nodics/backoffice/v0/runtime/modules/registrations?project=${project}`, token);
+  const foundationRegistrations = registrations.items.filter(item => item.functionalModule === 'nodics.foundation');
+  assert.equal(foundationRegistrations.length, 1, 'Foundation must appear exactly once in the Axis functional-module registry');
+  assert(!registrations.items.some(item => item.functionalModule === 'nodics.core'),
+    'The retired framework identity must not be exposed by the Axis functional-module registry');
   let process = await request(`/nodics/backoffice/v0/runtime/modules/registrations/${functionalModule}?project=${project}`, token);
   assert(process.observedServers.includes('kickoffLocal:processServer:default'), 'Process must be observed through processServer');
   const available = await request(`/nodics/backoffice/v0/runtime/modules/available?project=${project}`, token);

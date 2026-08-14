@@ -77,7 +77,7 @@ Use these examples when deciding where code or data belongs:
 | --- | --- | --- |
 | Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |
 | Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |
-| Explain Kickoff setup in Axis docs | `nodics.kickoff/data/core/source/documentation` | Kickoff owns project documentation that becomes CMS data. |
+| Explain Kickoff setup in Axis docs | `nodics.kickoff/docs` | Kickoff owns project-wide documentation that becomes CMS data. |
 | Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |
 | Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |
 | Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |
@@ -126,7 +126,7 @@ owner and document the boundary in the module README or documentation page.
 Example mental model:
 
 ```text
-nodics.core
+nodics.foundation
 nodics.platform
 kickoff.platform
 nodics.kickoff
@@ -157,7 +157,7 @@ project documentation pack.
 The source lives under:
 
 ```text
-data/core/source/documentation/
+docs/
   catalogue.json
   pages/
 ```
@@ -187,7 +187,7 @@ A customer may later create a module such as `kickoff.platform` to customize
 Platform behavior. A Platform server could load:
 
 ```text
-nodics.core
+nodics.foundation
 nodics.platform
 kickoff.platform
 nodics.kickoff
@@ -238,7 +238,7 @@ The safe thought process is:
 5. A test should prove the default behavior and the override path.
 6. The documentation should explain the example if it teaches future partners.
 
-Do not add that demo service to `nodics.core` only because every runtime loads
+Do not add that demo service to `nodics.foundation` only because every runtime loads
 Core. Core is the shared foundation, not a bucket for convenient code.
 
 Do not use this flow to move framework behavior into Kickoff. If the behavior
@@ -248,8 +248,8 @@ implement it in the owning framework module instead.
 ## Step-by-step: add project documentation
 
 1. Add or update Markdown under
-   `data/core/source/documentation/pages/`.
-2. Update `data/core/source/documentation/catalogue.json`.
+   `docs/pages/`.
+2. Update `docs/catalogue.json`.
 3. Bump the catalogue version when generated content changes.
 4. Run `npm run docs:generate`.
 5. Run `npm run test:documentation`.

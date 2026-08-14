@@ -1,8 +1,12 @@
 /*
- *  Copyright (c) 2026 Nodics All rights reserved.
- *
- *  This source code is licensed under the license found in the
- *  LICENSE file in the root directory of this source tree.
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 import assert from "node:assert/strict";
@@ -16,6 +20,10 @@ const moduleRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 const manifest = JSON.parse(
   await readFile(resolve(moduleRoot, "data/manifest.json")),
+);
+const documentationBoundary = await readFile(
+  resolve(moduleRoot, "docs/README.md"),
+  "utf8",
 );
 const components = require(
   resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusComponentData.js"),
@@ -114,6 +122,11 @@ async function sha256(relativePath) {
 }
 
 assert.equal(site.code, "nexusCorporateSite");
+assert.match(
+  documentationBoundary,
+  /ownership boundary for future Nexus-specific authored\s+documentation/,
+  "Nexus application documentation must remain module-owned",
+);
 assert.equal(site.catalog, "nexusContentCatalog");
 assert.equal(catalog.code, "nexusContentCatalog");
 assert.equal(

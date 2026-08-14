@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-
 /*
- * Nodics Editorial live Staged-to-Online journey acceptance.
- *
- * Copyright (c) 2026 Nodics All rights reserved.
- *
- * This software is governed by the Nodics Source-Available Commercial License.
- * You may use, copy, modify, deploy, or distribute it only as permitted by the
- * root LICENSE file or a separate written agreement with Nodics.
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 import { randomUUID } from 'node:crypto';
@@ -165,7 +165,7 @@ async function runNexusEvidence() {
 
 async function runRollbackContractEvidence() {
   await execFileAsync('node', ['--test', 'modules/nPublish/test/publicationLifecycleService.test.js', 'modules/nPublish/test/publicationWithdrawalContract.test.js'], {
-    cwd: '../nodics.ai/nodics.core',
+    cwd: '../nodics.ai/nodics.foundation',
   });
 }
 

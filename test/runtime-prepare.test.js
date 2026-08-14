@@ -1,3 +1,14 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 'use strict';
 
 const assert = require('node:assert/strict');
@@ -10,7 +21,7 @@ const scenarios = Object.freeze([
     Object.freeze({
         server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.commerce']),
         expectedModules: Object.freeze([
-            'nodics.core', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
+            'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
             'nodics.process', 'store', 'product', 'pricing', 'tax', 'promotion',
             'inventory', 'baseCommerce', 'checkoutCore', 'cart', 'order',
             'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
@@ -27,14 +38,14 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
-        expectedModules: Object.freeze(['nodics.core', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'kickoffLocal', 'engagementServer']),
+        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'kickoffLocal', 'engagementServer']),
         verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
         server: 'platformServer',
         frameworkModules: Object.freeze(['nodics.platform', 'nodics.localization']),
         expectedModules: Object.freeze([
-            'nodics.core',
+            'nodics.foundation',
             'nodics.platform',
             'profile',
             'backoffice',
@@ -54,7 +65,7 @@ const scenarios = Object.freeze([
         server: 'wcmsStagedServer',
         frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
         expectedModules: Object.freeze([
-            'nodics.core', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
+            'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
             'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
@@ -74,7 +85,7 @@ const scenarios = Object.freeze([
         server: 'wcmsOnlineServer',
         frameworkModules: Object.freeze(['nodics.wcms']),
         expectedModules: Object.freeze([
-            'nodics.core', 'nodics.wcms', 'media', 'cms', 'wcms', 'nodics.kickoff',
+            'nodics.foundation', 'nodics.wcms', 'media', 'cms', 'wcms', 'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'wcmsOnlineServer'
         ]),
         verify: function () {
@@ -93,7 +104,7 @@ const scenarios = Object.freeze([
         server: 'processServer',
         frameworkModules: Object.freeze(['nodics.process', 'nodics.cron', 'nodics.wcms']),
         expectedModules: Object.freeze([
-            'nodics.core',
+            'nodics.foundation',
             'flowSchema',
             'flowCore',
             'flowApi',
@@ -120,7 +131,7 @@ const scenarios = Object.freeze([
 ]);
 
 async function prepareScenario(scenario) {
-    const coreRoot = packageRoot('nodics.core');
+    const coreRoot = packageRoot('nodics.foundation');
     const config = require(path.join(coreRoot, 'modules/nConfig'));
     const moduleRoots = [
         coreRoot,

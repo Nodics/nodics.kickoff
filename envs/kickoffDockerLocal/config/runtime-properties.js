@@ -1,3 +1,14 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
 
@@ -63,12 +74,17 @@ module.exports = function runtimeProperties(server) {
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 nexusupdate: { code: 'nexusupdate', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexusData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusupdate',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                frameworkdocs: { code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs', applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs',
+                frameworkdocs: { code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs', applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                axisdocs: { code: 'axisdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'axis', applicationCode: 'axis', siteCode: 'axisDocumentationSite', baselineCode: 'axisdocs',
+                axisdocs: { code: 'axisdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'axis', applicationCode: 'axis', siteCode: 'axisDocumentationSite', baselineCode: 'axisdocs', contentPackCode: 'axisDocumentation',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                kickoffdocs: { code: 'kickoffdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.kickoff', applicationCode: 'axis', siteCode: 'kickoffDocumentationSite', baselineCode: 'kickoffdocs',
+                kickoffdocs: { code: 'kickoffdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.kickoff', applicationCode: 'axis', siteCode: 'kickoffDocumentationSite', baselineCode: 'kickoffdocs', contentPackCode: 'kickoffDocumentation',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } }
+            } },
+            backofficeRegistry: { clientEndpoints: {
+                platformServer: 'http://localhost:5300/', wcmsStagedServer: 'http://localhost:5312/',
+                wcmsOnlineServer: 'http://localhost:5314/', processServer: 'http://localhost:5330/',
+                engagementServer: 'http://localhost:5340/', commerceServer: 'http://localhost:5350/'
             } },
             servers: { default: endpoint('platform', 4300), ...publicationConnections }
         },
@@ -84,9 +100,9 @@ module.exports = function runtimeProperties(server) {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
                 nexus: { releaseCode: 'nexusData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusupdate: { releaseCode: 'nexusData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.15.0', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
-                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.3.32', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
-                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.7.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
+                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
+                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.4.1', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
+                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.8.1', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
                 workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 target: { moduleName: 'cms', connectionName: 'cmsOnline', connectionType: 'abstract' } } },
@@ -109,7 +125,7 @@ module.exports = function runtimeProperties(server) {
             activeModules: { groups: [], modules: [...projectModules, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'PROCESS', publication: 'OPERATIONAL' }, data: { dataReleases: { ...dataReleases(['PROCESS'], [{ moduleName: 'cms', sections: ['cmsPublicationApproval'] }]),
                 installers: { PROCESS_DEFINITION: 'DefaultProcessDefinitionContributionService' } } },
-            apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: false } } },
+            apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true }, dataExport: { enabled: false } } },
             database: { ...database('kickoffDockerLocalProcess'), cronjob: { mongodb: { master: { URI: process.env.NODICS_MONGODB_URI, databaseName: 'kickoffDockerLocalCron' } } } },
             process: { publicationDecisionCallback: { target: { moduleName: 'cms', connectionName: 'cmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 actionAdapters: { allowedActions: [

@@ -1,4 +1,4 @@
-# kickoffCore Agent Contract
+# kickoffFoundation Agent Contract
 
 ## Inheritance
 

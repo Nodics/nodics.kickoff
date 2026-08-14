@@ -1,3 +1,14 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
 
@@ -10,7 +21,9 @@ module.exports = {
     defaultAuthDetail: { tenant: 'default', entCode: 'default', loginId: 'apiAdmin', apiKey: process.env.BOOTSTRAP_SERVICE_API_KEY },
     bootstrapIdentity: { source: 'environment', adminPassword: process.env.BOOTSTRAP_ADMIN_PASSWORD,
         servicePassword: process.env.BOOTSTRAP_SERVICE_PASSWORD, serviceApiKey: process.env.BOOTSTRAP_SERVICE_API_KEY },
-    httpHardening: { cors: {
+    httpHardening: { securityHeaders: { headers: {
+        'Cross-Origin-Resource-Policy': 'cross-origin'
+    } }, cors: {
         enabled: true,
         allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100', 'http://localhost:4200', 'http://127.0.0.1:4200'],
         allowedMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

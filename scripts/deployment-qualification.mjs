@@ -75,9 +75,9 @@ export function createQualificationPlan(options = {}) {
       proves: 'Public delivery client tests, type safety, lint, and production bundle remain compatible with Online-only delivery.',
     },
     {
-      id: 'redis-cache-live', owner: 'nodics.core/nCache', cwd: workspace.framework,
+      id: 'redis-cache-live', owner: 'nodics.foundation/nCache', cwd: workspace.framework,
       command: process.execPath,
-      args: ['nodics.core/modules/nCache/redisCache/test/cacheRedisLive.test.js', '--require-live'],
+      args: ['nodics.foundation/modules/nCache/redisCache/test/cacheRedisLive.test.js', '--require-live'],
       environment: { NODICS_CACHE_REDIS_URL: process.env.NODICS_CACHE_REDIS_URL || 'redis://127.0.0.1:6379' },
       proves: 'Cache adapter behavior against a real Redis endpoint.',
     },
