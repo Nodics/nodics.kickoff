@@ -364,17 +364,46 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
   assert.equal(lifecyclePanel.properties.showRefundPreview, true);
   assert.equal(lifecyclePanel.properties.showReconciliationRequired, true);
   assert.equal(lifecyclePanel.properties.replacementSelectionSupported, true);
+  assert.deepEqual(lifecyclePanel.properties.customerMilestones.map((milestone) => milestone.title), [
+    'Cancellation before fulfillment release',
+    'Return logistics and receipt',
+    'Inspection and disposition',
+    'Refund calculation and reconciliation',
+    'Appeal and delayed-resolution review'
+  ]);
   assert(lifecyclePanel.properties.automationGates.includes('Delayed-refund reconciliation automation'));
   assert.deepEqual(accountCenter.properties.resolverKeys, ['profile.customer.self', 'profile.customer.addressBook', 'commerce.order.customer.history']);
+  assert.deepEqual(accountCenter.properties.operationGroups.map((group) => group.title), [
+    'Profile and identity',
+    'Address book',
+    'Order self-service',
+    'Operator-only overrides'
+  ]);
+  assert.equal(accountCenter.properties.operationGroups.find((group) => group.title === 'Operator-only overrides').status, 'BACKOFFICE_ONLY');
   assert.deepEqual(productionGateSummary.properties.gates.map((gate) => gate.code), [
     'MEDIA_RIGHTS',
     'LIVE_PROVIDERS',
     'PROMOTION_BUILDER_DEPTH',
     'REVERSE_LIFECYCLE_AUTOMATION'
   ]);
+  assert(productionGateSummary.properties.nonProviderImplementationBacklog.includes('Source-owned test-folder structure stabilization'));
   assert(navigations.some((node) => node.targetRoute === 'agoraCartRoute'));
   assert(navigations.some((node) => node.targetRoute === 'agoraOrderHistoryRoute'));
   assert(navigations.some((node) => node.targetRoute === 'agoraAccountProfileRoute'));
+});
+
+test('module-owned docs track non-provider Agora implementation work only', () => {
+  const docPath = path.join(moduleRoot, 'docs/agora-non-provider-implementation-plan.md');
+  const readme = fs.readFileSync(path.join(moduleRoot, 'README.md'), 'utf8');
+  const doc = fs.readFileSync(docPath, 'utf8');
+
+  assert.match(readme, /docs\/agora-non-provider-implementation-plan\.md/);
+  assert.match(doc, /Promotions Builder depth/);
+  assert.match(doc, /Media production readiness/);
+  assert.match(doc, /Customer account self-service/);
+  assert.match(doc, /Reverse lifecycle depth/);
+  assert.match(doc, /Test folder structure/);
+  assert.match(doc, /Provider certification remains an external release gate/);
 });
 
 test('Product seed uses only Product-owned source schemas and expected first-slice counts', async () => {

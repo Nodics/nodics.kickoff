@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Agora storefront discovery WCMS source",
       "owningDomain": "agora.wcms",
       "lifecycle": "PUBLISHABLE",
@@ -21,7 +21,7 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/agoraCatalogData.js": "f9281abc2fc8476e89ecdfc3da54a0c521001a9dc8fed68bdbd64d12e2b904b0",
-        "staged/wcms/data/agoraComponentData.js": "914aeadd53ee69d50d1ac56cf1e3643968a5d97d27f5b8aea0394278ee0c18be",
+        "staged/wcms/data/agoraComponentData.js": "752725de52ca8e6b4eb2c89c56c4f0c7a47987231393acb454969ac4133e0287",
         "staged/wcms/data/agoraComponentTypeGroupData.js": "799ba7aeb50bb5337c59998d04d2e398f50cf8e24f886fcb6ffb06017de7044e",
         "staged/wcms/data/agoraNavigationData.js": "5d311668d62cca7a587b858ba11564f0042eab026be1a4fb7228c79293560323",
         "staged/wcms/data/agoraPageData.js": "8c4a5a85c1b397e521665f50028793cb2b089fccf35a1fe420282132eb015b2f",

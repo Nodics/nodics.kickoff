@@ -235,6 +235,33 @@ module.exports = {
       showReconciliationRequired: true,
       replacementSelectionSupported: true,
       appealSupportedByPolicy: true,
+      customerMilestones: [
+        {
+          title: 'Cancellation before fulfillment release',
+          owner: 'Order + Inventory',
+          visibleEvidence: ['eligibility preview', 'requested quantity', 'reservation release status']
+        },
+        {
+          title: 'Return logistics and receipt',
+          owner: 'Fulfillment',
+          visibleEvidence: ['return method', 'RMA code', 'shipment or store-return tracking']
+        },
+        {
+          title: 'Inspection and disposition',
+          owner: 'Fulfillment + Inventory',
+          visibleEvidence: ['inspection required', 'disposition result', 'replacement eligibility']
+        },
+        {
+          title: 'Refund calculation and reconciliation',
+          owner: 'Payment',
+          visibleEvidence: ['refund preview', 'refund method', 'reconciliation-required status']
+        },
+        {
+          title: 'Appeal and delayed-resolution review',
+          owner: 'Order + Process',
+          visibleEvidence: ['appeal reference', 'appeal reason', 'SLA/review state']
+        }
+      ],
       automationGates: [
         'Replacement stock reservation',
         'Exchange shipment creation',
@@ -258,6 +285,32 @@ module.exports = {
         'Address book handoff to Profile APIs',
         'Order history and lifecycle self-service',
         'Wishlist and compare synchronization'
+      ],
+      operationGroups: [
+        {
+          title: 'Profile and identity',
+          resolverKeys: ['profile.customer.self'],
+          actions: ['view profile summary', 'edit profile handoff', 'session refresh'],
+          status: 'BACKEND_HANDOFF'
+        },
+        {
+          title: 'Address book',
+          resolverKeys: ['profile.customer.addressBook'],
+          actions: ['list addresses', 'create/update address handoff', 'select checkout address'],
+          status: 'BACKEND_HANDOFF'
+        },
+        {
+          title: 'Order self-service',
+          resolverKeys: ['commerce.order.customer.history', 'commerce.order.lifecycle.customer'],
+          actions: ['view order history', 'preview lifecycle eligibility', 'submit lifecycle request'],
+          status: 'CUSTOMER_VISIBLE'
+        },
+        {
+          title: 'Operator-only overrides',
+          resolverKeys: ['commerce.order.operator.lifecycle', 'payment.refund.reconciliation'],
+          actions: ['override refund reconciliation', 'approve appeal', 'force disposition correction'],
+          status: 'BACKOFFICE_ONLY'
+        }
       ]
     }
   },
@@ -274,6 +327,13 @@ module.exports = {
         { code: 'LIVE_PROVIDERS', owner: 'Commerce integration owners' },
         { code: 'PROMOTION_BUILDER_DEPTH', owner: 'Promotion + Axis' },
         { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process' }
+      ],
+      nonProviderImplementationBacklog: [
+        'Promotion visual rule composer and coupon allocation workspace',
+        'Media rights, checksum, target-usage approval and emergency deactivation',
+        'Customer profile, address-book and order self-service handoff depth',
+        'Cancellation, return, refund, exchange, replacement and appeal automation depth',
+        'Source-owned test-folder structure stabilization'
       ]
     }
   }

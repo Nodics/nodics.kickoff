@@ -40,6 +40,12 @@ backend contracts, while real carrier/payment-provider certification and
 licensed production media remain release-gate work. This module must not seed
 executable behavior for those capabilities.
 
+The remaining non-provider implementation work is tracked in
+[`docs/agora-non-provider-implementation-plan.md`](docs/agora-non-provider-implementation-plan.md).
+It covers Promotions Builder depth, media readiness, account self-service,
+reverse lifecycle depth, and test-folder structure without treating live
+provider certification as locally complete.
+
 Live qualification follows the enterprise storefront data flow:
 
 ```text
