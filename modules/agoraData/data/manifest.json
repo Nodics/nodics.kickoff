@@ -61,6 +61,28 @@
         "staged/product/headers/agoraProductCatalogHeader.js": "6e98df86002301a95a9b333feb3513c8bc47735c682638901d592fef71ebf73c"
       }
     },
+    "agoraMediaReferenceSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora product and content Media target reference source",
+      "owningDomain": "agora.media",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/media/data/agoraMediaReferenceData.js": "59701ada18e3f7b7110aa42c59ffef96011f54e1787d0f9f972de7fa7d7e02c9",
+        "staged/media/headers/agoraMediaReferenceHeader.js": "1edbf8c0c56a5c72a8ea105bc2e3df1c87a5969e9efe6dedf05cd38ed0b13039"
+      }
+    },
     "agoraPricingSource": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",

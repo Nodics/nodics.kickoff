@@ -46,6 +46,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   const manifest = readJson('data/manifest.json');
   const wcmsSection = manifest.sections.agoraStorefrontSite;
   const productSection = manifest.sections.agoraProductCatalogSource;
+  const mediaSection = manifest.sections.agoraMediaReferenceSource;
   const pricingSection = manifest.sections.agoraPricingSource;
   const inventorySection = manifest.sections.agoraInventorySource;
   const taxSection = manifest.sections.agoraTaxSource;
@@ -59,6 +60,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   assert.deepEqual(Object.keys(manifest.sections), [
     'agoraStorefrontSite',
     'agoraProductCatalogSource',
+    'agoraMediaReferenceSource',
     'agoraPricingSource',
     'agoraInventorySource',
     'agoraTaxSource',
@@ -89,6 +91,17 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   assert.equal(productSection.publicationPolicy, 'REQUIRED');
   assert.equal(productSection.initialPublicationPolicy, 'ADMIN_INITIATED');
   assert.equal(productSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
+  assert.equal(mediaSection.kind, 'DATA_RELEASE');
+  assert.equal(mediaSection.dataType, 'sample');
+  assert.equal(mediaSection.sourceRoot, 'staged');
+  assert.equal(mediaSection.lifecycle, 'PUBLISHABLE');
+  assert.equal(mediaSection.destinationRole, 'WCMS_STAGED');
+  assert.deepEqual(mediaSection.environmentScope, ['LOCAL']);
+  assert.equal(mediaSection.sensitivity, 'PUBLIC');
+  assert.equal(mediaSection.versioningPolicy, 'IMMUTABLE');
+  assert.equal(mediaSection.publicationPolicy, 'REQUIRED');
+  assert.equal(mediaSection.initialPublicationPolicy, 'ADMIN_INITIATED');
+  assert.equal(mediaSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
   for (const section of [pricingSection, inventorySection, taxSection, promotionSection, commerceSearchSection, discoverySection]) {
     assert.equal(section.kind, 'DATA_RELEASE');
     assert.equal(section.dataType, 'sample');
@@ -113,6 +126,23 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   assert.equal(reviewSection.publicationPolicy, 'REQUIRED');
   assert.equal(reviewSection.initialPublicationPolicy, 'ADMIN_INITIATED');
   assert.equal(reviewSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
+});
+
+test('Media reference seed maps product and content targets without approving reference-site assets', async () => {
+  const manifest = readJson('data/manifest.json');
+  const section = manifest.sections.agoraMediaReferenceSource;
+  const references = Object.values(await readDataModule('data/staged/media/data/agoraMediaReferenceData.js'));
+
+  assert(Object.keys(section.files).every((relativePath) => relativePath.startsWith('staged/media/')));
+  assert(references.some((record) => record.ownerModule === 'cms' && record.ownerCode === 'agoraHomeHero'));
+  assert(references.some((record) => record.ownerModule === 'product' && record.ownerCode === 'agoraLinenWrapDress'));
+  for (const record of references) {
+    assert.equal(record.status, 'INACTIVE');
+    assert.equal(record.evidence.rightsStatus, 'REPLACEMENT_REQUIRED');
+    assert.equal(record.evidence.approvedReferenceSiteAsset, false);
+    assert.match(record.mediaCode, /^agora-owned-/);
+    assert.doesNotMatch(JSON.stringify(record), /themesflat|modave|REFERENCE_BOOTSTRAP|https?:\/\//i);
+  }
 });
 
 test('every declared manifest file exists and has a matching checksum', () => {
