@@ -62,3 +62,16 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
   reconciliation and appeal SLA review.
 - `agoraData` content and media references carry matching gate, runbook and
   approval evidence fields for import/acceptance checks.
+
+## Backend-depth batch update
+
+- Promotion now compensates coupon usage and budget spend when an applied
+  promotion redemption is reversed.
+- Media now owns approval, activation and emergency deactivation coordination
+  for media references, including checksum, rights, target-usage and rollback
+  evidence.
+- Order lifecycle preview/create now returns a backend-owned automation plan so
+  Agora and Axis can display owner-specific next steps without executing
+  Fulfillment, Inventory, Payment or Workflow logic in the browser.
+- Agora consumes backend `automationPlan` entries when present and keeps its
+  local runbook display as a fallback.
