@@ -33,6 +33,13 @@ function dataOf(body) {
   return body?.data || body?.result || body;
 }
 
+function requireAutomationStep(preview, step, owner, label) {
+  const plan = preview?.automationPlan;
+  if (!Array.isArray(plan) || !plan.some((item) => item.step === step && (!owner || item.owner === owner))) {
+    throw new Error(`${label} did not expose automation step ${step}: ${JSON.stringify(preview)}`);
+  }
+}
+
 async function listening(port) {
   return new Promise((resolve) => {
     const child = spawn("lsof", ["-nP", `-iTCP:${port}`, "-sTCP:LISTEN"], {
@@ -338,11 +345,12 @@ async function exerciseCustomerCheckout(cartSmoke, customer) {
     policyVersion: "1",
     evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [cartSmoke.productCode], refundMethod: "ORIGINAL_PAYMENT" },
   };
-  await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle/preview`, {
+  const cancellationPreview = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle/preview`, {
     method: "POST",
     headers: cartSmoke.headers,
     body: JSON.stringify(cancellationPayload),
-  });
+  }));
+  requireAutomationStep(cancellationPreview, "cancellation-compensation", "order+payment", "Customer cancellation preview");
   const lifecycle = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle`, {
     method: "POST",
     headers: { ...cartSmoke.headers, "idempotency-key": `${placedOrderCode}:cancellation` },
@@ -365,6 +373,9 @@ async function exerciseCustomerCheckout(cartSmoke, customer) {
   if (returnPreview?.eligible === false || !returnPreview?.rmaCode && !Array.isArray(returnPreview?.returnMethods)) {
     throw new Error(`Customer return preview returned unexpected response: ${JSON.stringify(returnPreview)}`);
   }
+  requireAutomationStep(returnPreview, "return-logistics", "fulfillment", "Customer return preview");
+  requireAutomationStep(returnPreview, "inspection-disposition", "fulfillment+inventory", "Customer return preview");
+  requireAutomationStep(returnPreview, "refund-reconciliation", "payment", "Customer return preview");
   const returnLifecycle = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle`, {
     method: "POST",
     headers: { ...cartSmoke.headers, "idempotency-key": `${placedOrderCode}:return` },
@@ -394,6 +405,7 @@ async function exerciseCustomerCheckout(cartSmoke, customer) {
   if (refundPreview?.eligible === false || !refundPreview?.refundPreview && !Array.isArray(refundPreview?.refundMethods)) {
     throw new Error(`Customer refund preview returned unexpected response: ${JSON.stringify(refundPreview)}`);
   }
+  requireAutomationStep(refundPreview, "refund-reconciliation", "payment", "Customer refund preview");
   const refundLifecycle = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle`, {
     method: "POST",
     headers: { ...cartSmoke.headers, "idempotency-key": `${placedOrderCode}:refund` },
@@ -402,7 +414,33 @@ async function exerciseCustomerCheckout(cartSmoke, customer) {
   if (refundLifecycle?.status !== "SUBMITTED") {
     throw new Error(`Customer refund lifecycle create returned unexpected response: ${JSON.stringify(refundLifecycle)}`);
   }
-  log(`customer checkout/order/cancellation/return/refund smoke passed for ${placedOrderCode}`);
+  const exchangePreview = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle/preview`, {
+    method: "POST",
+    headers: cartSmoke.headers,
+    body: JSON.stringify({
+      code: `${placedOrderCode}:exchange`,
+      requestType: "EXCHANGE",
+      reasonCode: "SIZE_EXCHANGE",
+      policyVersion: "1",
+      evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [cartSmoke.productCode], returnMethod: "STORE_RETURN", replacementProductCode: cartSmoke.productCode },
+    }),
+  }));
+  requireAutomationStep(exchangePreview, "replacement-reservation", "inventory", "Customer exchange preview");
+  requireAutomationStep(exchangePreview, "exchange-shipment", "fulfillment", "Customer exchange preview");
+  const appealPreview = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle/preview`, {
+    method: "POST",
+    headers: cartSmoke.headers,
+    body: JSON.stringify({
+      code: `${placedOrderCode}:appeal`,
+      requestType: "APPEAL",
+      reasonCode: "RETURN_REJECTED",
+      policyVersion: "1",
+      appealReferenceCode: `${placedOrderCode}:return`,
+      appealReason: "Acceptance appeal smoke",
+    }),
+  }));
+  requireAutomationStep(appealPreview, "appeal-sla-review", "workflow+order", "Customer appeal preview");
+  log(`customer checkout/order/cancellation/return/refund/exchange/appeal smoke passed for ${placedOrderCode}`);
   return { orderCode: placedOrderCode, cartCode: cartSmoke.cartCode };
 }
 

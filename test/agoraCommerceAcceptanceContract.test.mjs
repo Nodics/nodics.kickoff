@@ -60,11 +60,21 @@ test("Agora Commerce acceptance covers backend route surface and secured generat
   assert.match(source, /customer cart add\/update\/remove\/calculate smoke passed/);
   assert.match(source, /tok_test_storefront_4242/);
   assert.match(source, /exerciseCustomerCheckout/);
+  assert.match(source, /requireAutomationStep/);
+  assert.match(source, /cancellation-compensation/);
+  assert.match(source, /return-logistics/);
+  assert.match(source, /inspection-disposition/);
+  assert.match(source, /refund-reconciliation/);
+  assert.match(source, /replacement-reservation/);
+  assert.match(source, /exchange-shipment/);
+  assert.match(source, /appeal-sla-review/);
   assert.match(source, /requestType: "RETURN"/);
   assert.match(source, /requestType: "REFUND"/);
+  assert.match(source, /requestType: "EXCHANGE"/);
+  assert.match(source, /requestType: "APPEAL"/);
   assert.match(source, /expectReadRejected/);
   assert.match(source, /correctly rejected for non-owner/);
-  assert.match(source, /customer checkout\/order\/cancellation\/return\/refund smoke passed/);
+  assert.match(source, /customer checkout\/order\/cancellation\/return\/refund\/exchange\/appeal smoke passed/);
 });
 
 test("Agora Commerce Docker acceptance targets Docker Local host ports without shell-sourcing secrets", () => {
