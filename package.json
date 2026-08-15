@@ -71,6 +71,7 @@
     "acceptance:agora-commerce": "node scripts/agora-commerce-acceptance.mjs",
     "acceptance:agora-commerce-data": "node scripts/agora-commerce-data-acceptance.mjs",
     "acceptance:agora-commerce-publication": "node scripts/agora-commerce-publication-acceptance.mjs",
+    "acceptance:agora-commerce:ci": "npm run test:agora-commerce && npm run acceptance:agora-commerce-data && npm run acceptance:agora-commerce-publication && npm run acceptance:agora-commerce",
     "acceptance:editorial-live": "node scripts/editorial-live-journey-acceptance.mjs",
     "acceptance:capability-registry": "node scripts/capability-registry-acceptance.mjs",
     "acceptance:guided-initialization": "node scripts/guided-initialization-acceptance.mjs",
@@ -83,6 +84,7 @@
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
+    "test:agora-commerce": "node --test modules/agoraData/test/agoraDataContentContract.test.mjs test/agoraCommerceDataAcceptanceContract.test.mjs test/agoraCommercePublicationAcceptanceContract.test.mjs test/agoraCommerceAcceptanceContract.test.mjs test/agoraProductCatalogReleaseExecutionContract.test.js test/agoraProductSearchPublicationContract.test.js test/agoraCommerceSearchPublicationContract.test.js",
     "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/localPublishingContractFreeze.test.mjs && node test/localTopologyLifecycle.test.mjs && node test/dockerLocalEnvironmentContract.test.mjs && node test/dockerLocalResilienceContract.test.mjs",
     "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:qualification && npm run prepare:runtime"
   }
