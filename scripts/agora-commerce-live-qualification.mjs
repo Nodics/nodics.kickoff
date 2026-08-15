@@ -19,6 +19,7 @@ function run(command, args, options = {}) {
 }
 
 async function main() {
+  console.log("[agora-commerce-live-qualification] expected flow: data folder -> Staged schemas -> Online schemas -> search indexing -> Agora frontend");
   console.log("[agora-commerce-live-qualification] starting local topology preflight");
   await run("npm", ["run", "topology:preflight"]);
   console.log("[agora-commerce-live-qualification] validating staged agoraData release contracts");

@@ -171,7 +171,7 @@ test('Agora Commerce discovery releases separate Product Pricing Inventory Promo
   const releaseRequest = {
     dataType: 'sample',
     releaseCodes,
-    expectedReleases: Object.fromEntries(releaseCodes.map((code) => [code, '1.0.0']))
+    expectedReleases: Object.fromEntries(releases.map((release) => [release.releaseCode, release.version]))
   };
   const execution = await dataReleaseService.execute({ tenant: 'default', releaseRequest });
 

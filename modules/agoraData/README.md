@@ -17,7 +17,7 @@ Current V1 data scope:
 
 ```text
 Home -> PLP/Search -> PDP -> cart -> checkout -> order confirmation ->
-order history -> cancellation/return/refund request surfaces
+order history -> cancellation/return/refund/exchange/replacement/appeal request surfaces
 ```
 
 Current records:
@@ -34,10 +34,18 @@ Current records:
 Reviews/ratings are consumed through `nodics.engagement` public/customer APIs
 and are not authored as Commerce data in this module. Wishlist/compare is a
 storefront-local V1 interaction until a backend customer-list/preference module
-is approved. Exchange, appeal, reconciliation-required handling, real
-carrier/payment-provider certification, and licensed production media remain
-later owned-capability or release-gate work. This module must not seed
-executable behavior for those capabilities.
+is approved. Exchange, replacement, appeal, and reconciliation-required handling
+are represented in the customer journey and backend contracts, while real
+carrier/payment-provider certification and licensed production media remain
+release-gate work. This module must not seed executable behavior for those
+capabilities.
+
+Live qualification follows the enterprise storefront data flow:
+
+```text
+agoraData files -> Commerce/WCMS Staged schemas -> publication to Online
+schemas -> Product/Discovery indexing -> nodics.agora customer frontend
+```
 
 Verify the scaffold boundary with:
 

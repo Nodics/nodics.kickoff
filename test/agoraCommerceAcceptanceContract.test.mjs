@@ -68,6 +68,7 @@ test("Agora Commerce live qualification sequences topology data publication and 
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
   assert.equal(pkg.scripts["qualification:agora-commerce:live"], "node scripts/agora-commerce-live-qualification.mjs");
+  assert.match(source, /data folder -> Staged schemas -> Online schemas -> search indexing -> Agora frontend/);
   [
     '"topology:preflight"',
     '"test:agora-commerce"',
