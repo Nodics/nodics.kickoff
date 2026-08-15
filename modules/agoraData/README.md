@@ -28,13 +28,16 @@ Current records:
   variant localization;
 - Product publication/search projection inputs through Product publication or
   governed import/search-target dispatch;
-- price, inventory, tax, discovery configuration, and commerce-search ranking
-  inputs where the first storefront slice needs them.
+- price, inventory, tax, promotion, discovery configuration, and
+  commerce-search ranking inputs where the first storefront slice needs them.
 
-Promotions, reviews/ratings, wishlist/compare, exchange, appeal,
-reconciliation-required handling, real carrier/payment-provider certification,
-and licensed production media remain later owned-capability or release-gate
-work. This module must not seed executable behavior for those capabilities.
+Reviews/ratings are consumed through `nodics.engagement` public/customer APIs
+and are not authored as Commerce data in this module. Wishlist/compare is a
+storefront-local V1 interaction until a backend customer-list/preference module
+is approved. Exchange, appeal, reconciliation-required handling, real
+carrier/payment-provider certification, and licensed production media remain
+later owned-capability or release-gate work. This module must not seed
+executable behavior for those capabilities.
 
 Verify the scaffold boundary with:
 

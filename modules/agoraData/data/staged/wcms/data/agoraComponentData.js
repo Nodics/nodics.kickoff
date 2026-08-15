@@ -102,7 +102,8 @@ module.exports = {
       listingMode: 'CATEGORY',
       pageSize: 12,
       allowedFacets: ['category', 'color', 'size', 'availability'],
-      allowedSorts: ['relevance', 'newest', 'nameAsc']
+      allowedSorts: ['relevance', 'newest', 'nameAsc'],
+      cardActions: ['QUICK_VIEW', 'ADD_TO_CART', 'WISHLIST', 'COMPARE']
     }
   },
   record7: {
@@ -116,7 +117,8 @@ module.exports = {
       listingMode: 'SEARCH',
       pageSize: 12,
       allowedFacets: ['category', 'color', 'size', 'availability'],
-      allowedSorts: ['relevance', 'newest', 'nameAsc']
+      allowedSorts: ['relevance', 'newest', 'nameAsc'],
+      cardActions: ['QUICK_VIEW', 'ADD_TO_CART', 'WISHLIST', 'COMPARE']
     }
   },
   record8: {
@@ -131,7 +133,10 @@ module.exports = {
       includeVariantSummary: true,
       includePrice: true,
       includeInventory: true,
-      includeReviews: false
+      includeReviews: true,
+      includePromotionBadges: true,
+      supportsWishlist: true,
+      supportsCompare: true
     }
   },
   record9: {
@@ -169,6 +174,7 @@ module.exports = {
     properties: {
       resolverKey: 'commerce.cart.customer',
       supportsLocalFallback: true,
+      promotionEstimate: 'DISPLAY_ONLY_UNTIL_BACKEND_REDEMPTION_API',
       actions: ['UPDATE_QUANTITY', 'REMOVE_ENTRY', 'PROCEED_TO_CHECKOUT'],
       calculationRequiredBeforeCheckout: true
     }

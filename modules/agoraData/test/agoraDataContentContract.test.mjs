@@ -49,6 +49,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   const pricingSection = manifest.sections.agoraPricingSource;
   const inventorySection = manifest.sections.agoraInventorySource;
   const taxSection = manifest.sections.agoraTaxSource;
+  const promotionSection = manifest.sections.agoraPromotionSource;
   const commerceSearchSection = manifest.sections.agoraCommerceSearchSource;
   const discoverySection = manifest.sections.agoraDiscoveryConfigurationSource;
 
@@ -60,6 +61,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
     'agoraPricingSource',
     'agoraInventorySource',
     'agoraTaxSource',
+    'agoraPromotionSource',
     'agoraCommerceSearchSource',
     'agoraDiscoveryConfigurationSource'
   ]);
@@ -85,7 +87,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   assert.equal(productSection.publicationPolicy, 'REQUIRED');
   assert.equal(productSection.initialPublicationPolicy, 'ADMIN_INITIATED');
   assert.equal(productSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
-  for (const section of [pricingSection, inventorySection, taxSection, commerceSearchSection, discoverySection]) {
+  for (const section of [pricingSection, inventorySection, taxSection, promotionSection, commerceSearchSection, discoverySection]) {
     assert.equal(section.kind, 'DATA_RELEASE');
     assert.equal(section.dataType, 'sample');
     assert.equal(section.sourceRoot, 'staged');
@@ -157,17 +159,19 @@ test('Product seed files stay inside the Commerce Staged Product boundary', () =
   }
 });
 
-test('Pricing, Inventory and Tax seed files stay inside Commerce Staged domain boundaries', () => {
+test('Pricing, Inventory, Tax and Promotion seed files stay inside Commerce Staged domain boundaries', () => {
   const manifest = readJson('data/manifest.json');
   const pricingSection = manifest.sections.agoraPricingSource;
   const inventorySection = manifest.sections.agoraInventorySource;
   const taxSection = manifest.sections.agoraTaxSource;
+  const promotionSection = manifest.sections.agoraPromotionSource;
 
   assert(Object.keys(pricingSection.files).every((relativePath) => relativePath.startsWith('staged/pricing/')));
   assert(Object.keys(inventorySection.files).every((relativePath) => relativePath.startsWith('staged/inventory/')));
   assert(Object.keys(taxSection.files).every((relativePath) => relativePath.startsWith('staged/tax/')));
+  assert(Object.keys(promotionSection.files).every((relativePath) => relativePath.startsWith('staged/promotion/')));
 
-  for (const section of [pricingSection, inventorySection, taxSection]) {
+  for (const section of [pricingSection, inventorySection, taxSection, promotionSection]) {
     for (const relativePath of Object.keys(section.files)) {
       const content = fs.readFileSync(path.join(moduleRoot, 'data', relativePath), 'utf8');
       assert.match(content, /@lifecycle PUBLISHABLE/);
@@ -265,6 +269,9 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
   ];
   const lifecyclePanel = componentByCode.get('agoraOrderLifecyclePanel');
   const checkoutFlow = componentByCode.get('agoraCheckoutFlow');
+  const productListing = componentByCode.get('agoraCategoryListing');
+  const productDetail = componentByCode.get('agoraProductDetail');
+  const cartSummary = componentByCode.get('agoraCartSummary');
 
   for (const pageType of requiredPageTypes) {
     assert.equal(typeCodeSet.has(pageType), true, `${pageType} should be declared`);
@@ -282,6 +289,11 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
   assert.equal(routeByCode.get('agoraOrderHistoryRoute').accessMode, 'CUSTOMER');
   assert.deepEqual(checkoutFlow.properties.steps, ['CUSTOMER', 'SHIPPING', 'PAYMENT', 'REVIEW']);
   assert.equal(checkoutFlow.properties.paymentCollectionMode, 'PROVIDER_TOKEN_ONLY');
+  assert.deepEqual(productListing.properties.cardActions, ['QUICK_VIEW', 'ADD_TO_CART', 'WISHLIST', 'COMPARE']);
+  assert.equal(productDetail.properties.includeReviews, true);
+  assert.equal(productDetail.properties.supportsWishlist, true);
+  assert.equal(productDetail.properties.supportsCompare, true);
+  assert.equal(cartSummary.properties.promotionEstimate, 'DISPLAY_ONLY_UNTIL_BACKEND_REDEMPTION_API');
   assert.deepEqual(lifecyclePanel.properties.requestTypes, ['CANCELLATION', 'RETURN', 'REFUND']);
   assert.deepEqual(lifecyclePanel.properties.returnMethods, ['PICKUP', 'DROP_OFF', 'STORE_RETURN']);
   assert.equal(lifecyclePanel.properties.showRefundPreview, true);
@@ -325,27 +337,33 @@ test('Product seed uses only Product-owned source schemas and expected first-sli
   assert(Object.values(variantLocalizations).every((record) => record.status === 'READY'));
 });
 
-test('Pricing, Inventory and Tax seed use only their owned source schemas and expected first-slice counts', async () => {
+test('Pricing, Inventory, Tax and Promotion seed use only their owned source schemas and expected first-slice counts', async () => {
   const pricingHeader = await readDataModule('data/staged/pricing/headers/agoraPricingHeader.js');
   const inventoryHeader = await readDataModule('data/staged/inventory/headers/agoraInventoryHeader.js');
   const taxHeader = await readDataModule('data/staged/tax/headers/agoraTaxHeader.js');
+  const promotionHeader = await readDataModule('data/staged/promotion/headers/agoraPromotionHeader.js');
   const priceBooks = await readDataModule('data/staged/pricing/data/agoraPriceBookData.js');
   const priceRows = await readDataModule('data/staged/pricing/data/agoraPriceRowData.js');
   const warehouses = await readDataModule('data/staged/inventory/data/agoraWarehouseData.js');
   const balances = await readDataModule('data/staged/inventory/data/agoraInventoryBalanceData.js');
   const taxPolicies = await readDataModule('data/staged/tax/data/agoraTaxPolicyData.js');
+  const promotions = await readDataModule('data/staged/promotion/data/agoraPromotionData.js');
 
   assert.deepEqual(Object.values(pricingHeader.pricing).map((entry) => entry.options.schemaName).sort(), ['priceBook', 'priceRow']);
   assert.deepEqual(Object.values(inventoryHeader.inventory).map((entry) => entry.options.schemaName).sort(), ['inventoryBalance', 'warehouse']);
   assert.deepEqual(Object.values(taxHeader.tax).map((entry) => entry.options.schemaName).sort(), ['taxPolicy']);
+  assert.deepEqual(Object.values(promotionHeader.promotion).map((entry) => entry.options.schemaName).sort(), ['promotion']);
   assert.equal(Object.keys(priceBooks).length, 1);
   assert.equal(Object.keys(priceRows).length, 12);
   assert.equal(Object.keys(warehouses).length, 1);
   assert.equal(Object.keys(balances).length, 24);
   assert.equal(Object.keys(taxPolicies).length, 1);
+  assert.equal(Object.keys(promotions).length, 2);
   assert(Object.values(priceRows).every((record) => record.tenant === 'default' && record.currency === 'USD' && record.priceBookCode === 'agoraRetailUsd'));
   assert(Object.values(balances).every((record) => record.tenant === 'default' && record.warehouseCode === 'agoraMainWarehouse' && record.sku.startsWith('AGORA-')));
   assert(Object.values(taxPolicies).every((record) => record.tenant === 'default' && record.jurisdiction === 'AE' && record.status === 'ACTIVE'));
+  assert(Object.values(promotions).every((record) => record.tenant === 'default' && record.status === 'ACTIVE' && record.actions.discountAmount));
+  assert.deepEqual(Object.values(promotions).map((record) => record.code), ['agoraWelcome10', 'agoraBagsBundle15']);
 });
 
 test('Commerce Search seed uses only Commerce Search-owned schemas and expected first-slice rules', async () => {
@@ -393,10 +411,9 @@ test('Discovery seed wires Product index configuration without owning Product da
   assert.deepEqual(fieldMapping.sensitiveFields, []);
 });
 
-test('seed batch has no promotion, cart or checkout import data', () => {
+test('seed batch has no cart or checkout import data because those remain operational APIs', () => {
   const dataFiles = walkFiles(path.join(moduleRoot, 'data')).map((filePath) => path.relative(moduleRoot, filePath));
 
-  assert(dataFiles.every((relativePath) => !relativePath.includes('operational/promotion')));
   assert(dataFiles.every((relativePath) => !relativePath.includes('cart')));
   assert(dataFiles.every((relativePath) => !relativePath.includes('checkout')));
 });

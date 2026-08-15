@@ -21,7 +21,7 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/agoraCatalogData.js": "f9281abc2fc8476e89ecdfc3da54a0c521001a9dc8fed68bdbd64d12e2b904b0",
-        "staged/wcms/data/agoraComponentData.js": "bb9a6132c44c816d9cee5158b0dc0486feb27ec550dd2a48460491220ea22c2e",
+        "staged/wcms/data/agoraComponentData.js": "efd2391d59db7adff347c1900eaba030d12f4acdb43ddadf497c07ca0416ece8",
         "staged/wcms/data/agoraComponentTypeGroupData.js": "799ba7aeb50bb5337c59998d04d2e398f50cf8e24f886fcb6ffb06017de7044e",
         "staged/wcms/data/agoraNavigationData.js": "61a091d68e2546db232401acf9a4e7170d7f8c703e8166244b511ff08b29ad4f",
         "staged/wcms/data/agoraPageData.js": "db28c1633d685a586c8b8a41b570bd9b93c05b156dff2c860ffac5f2faa1f4d6",
@@ -127,6 +127,28 @@
       "files": {
         "staged/tax/data/agoraTaxPolicyData.js": "60f5a54a05e04cb1e3ece59edec14bb3deebb72d5ab5d13a6dd895ac80514303",
         "staged/tax/headers/agoraTaxHeader.js": "70ae294422f7a39a1f864bdce990da4197f06939850efb43aa99e8886282aec7"
+      }
+    },
+    "agoraPromotionSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora checkout Promotion source",
+      "owningDomain": "agora.promotion",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/promotion/data/agoraPromotionData.js": "3ec20f86580d86f5c2fa4675ef639b8a522cc8857c8c572f4b641e42fb6282ad",
+        "staged/promotion/headers/agoraPromotionHeader.js": "e5dfdfb3e334ab8f79cb211541c0575aa17bdd83da8a4b5f08b34ad5cc376396"
       }
     },
     "agoraCommerceSearchSource": {
