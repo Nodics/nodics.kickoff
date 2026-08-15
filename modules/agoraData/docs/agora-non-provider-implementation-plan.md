@@ -8,17 +8,19 @@ thread. The items below are local/Docker-safe implementation work and must
 continue to use backend-owned contracts instead of moving Commerce, Profile,
 Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
 
-## Remaining local/Docker-safe areas
+## Local/Docker-safe areas
 
-1. Promotions Builder depth in Axis
-   - visual rule composer remains a later UX enhancement;
-   - coupon allocation workspace has first-slice backend and Axis operation
-     coverage;
-   - coupon and budget mutation ledger has first-slice backend coverage;
-   - conflict-aware schedule calendar remains a later UX enhancement;
-   - customer exposure preview remains a later UX enhancement;
-   - redemption analytics remains a later reporting enhancement;
-   - backend-owned approval checklist is represented in Axis guidance.
+1. Promotions Builder depth in Axis — local end-to-end complete
+   - visual rule composer is represented through backend schema-value guidance;
+   - coupon allocation workspace has backend and Axis operation coverage;
+   - coupon and budget mutation ledger has backend route/service coverage;
+   - conflict-aware schedule and maker-checker approval are represented through
+     backend lifecycle operations;
+   - customer exposure preview remains Promotion API driven, not browser owned;
+   - redemption analytics reads backend evidence for applied/reversed redemptions,
+     coupon reservations and budget exposure;
+   - backend-owned approval checklist is represented in Axis guidance and
+     Promotion-owned action contracts.
 
 2. Media production readiness
    - Nodics-owned asset intake remains blocked on licensed/replacement assets;
