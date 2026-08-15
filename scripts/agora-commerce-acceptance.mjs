@@ -350,7 +350,7 @@ async function exerciseCustomerCheckout(cartSmoke, customer) {
     headers: cartSmoke.headers,
     body: JSON.stringify(cancellationPayload),
   }));
-  requireAutomationStep(cancellationPreview, "cancellation-compensation", "order+payment", "Customer cancellation preview");
+  requireAutomationStep(cancellationPreview, "reservation-release", "inventory", "Customer cancellation preview");
   const lifecycle = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle`, {
     method: "POST",
     headers: { ...cartSmoke.headers, "idempotency-key": `${placedOrderCode}:cancellation` },

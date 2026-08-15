@@ -61,7 +61,7 @@ test("Agora Commerce acceptance covers backend route surface and secured generat
   assert.match(source, /tok_test_storefront_4242/);
   assert.match(source, /exerciseCustomerCheckout/);
   assert.match(source, /requireAutomationStep/);
-  assert.match(source, /cancellation-compensation/);
+  assert.match(source, /reservation-release/);
   assert.match(source, /return-logistics/);
   assert.match(source, /inspection-disposition/);
   assert.match(source, /refund-reconciliation/);

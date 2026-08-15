@@ -11,21 +11,22 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
 ## Remaining local/Docker-safe areas
 
 1. Promotions Builder depth in Axis
-   - visual rule composer;
-   - coupon allocation workspace;
-   - coupon and budget mutation ledger;
-   - conflict-aware schedule calendar;
-   - customer exposure preview;
-   - redemption analytics;
-   - backend-owned approval checklist.
+   - visual rule composer remains a later UX enhancement;
+   - coupon allocation workspace has first-slice backend and Axis operation
+     coverage;
+   - coupon and budget mutation ledger has first-slice backend coverage;
+   - conflict-aware schedule calendar remains a later UX enhancement;
+   - customer exposure preview remains a later UX enhancement;
+   - redemption analytics remains a later reporting enhancement;
+   - backend-owned approval checklist is represented in Axis guidance.
 
 2. Media production readiness
-   - Nodics-owned asset intake;
-   - checksum and source evidence;
-   - rights and target-usage approval;
-   - active media reference promotion;
-   - activation revision and rollback evidence;
-   - emergency deactivation evidence.
+   - Nodics-owned asset intake remains blocked on licensed/replacement assets;
+   - checksum and source evidence has backend media-reference coverage;
+   - rights and target-usage approval has backend media-reference coverage;
+   - active media reference promotion has backend route/facade coverage;
+   - activation revision and rollback evidence has backend coverage;
+   - emergency deactivation evidence has backend coverage.
 
 3. Customer account self-service
    - profile summary and edit handoff through Profile;
@@ -34,13 +35,18 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
    - operator-only overrides remaining in Axis/backoffice.
 
 4. Reverse lifecycle depth
-   - cancellation before fulfillment release;
-   - return logistics, RMA, shipment and receipt tracking;
-   - inspection and disposition evidence;
-   - refund preview, refund method and reconciliation-required handling;
-   - exchange, replacement, rejection and appeal review;
+   - cancellation before fulfillment release is represented through Inventory
+     reservation-release automation planning;
+   - return logistics, RMA, shipment and receipt tracking have customer
+     preview/request and operator-hook first slices;
+   - inspection and disposition evidence has Fulfillment owner hook coverage;
+   - refund preview, refund method and reconciliation-required handling has
+     Payment owner evidence coverage;
+   - exchange, replacement, rejection and appeal review have preview and
+     approval-hook first slices;
    - operator runbooks for reservation, inspection, refund reconciliation and
-     appeal SLA review.
+     appeal SLA review are represented by backend automation plans and Agora
+     customer-visible status messaging.
 
 5. Test folder structure
    - keep implementation-near unit contracts beside `src/`;
@@ -75,3 +81,25 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
   Fulfillment, Inventory, Payment or Workflow logic in the browser.
 - Agora consumes backend `automationPlan` entries when present and keeps its
   local runbook display as a fallback.
+
+## Closure qualification update
+
+- `npm run test:agora-commerce` passed with 40/40 contract tests.
+- `npm run qualification:agora-commerce:live` passed for the enterprise flow:
+  data files to Staged schemas, publication to Online schemas, indexing, and
+  customer journey acceptance.
+- Docker Local was rebuilt from the current workspace sources and recreated
+  with preserved volumes.
+- `npm run docker-local:qualify` passed the local production-simulation checks:
+  runtime health, frontend health, bounded reads, Redis replication/sentinel,
+  MongoDB replica authentication, Elasticsearch health, hardening, and network
+  separation.
+- `npm run acceptance:agora-commerce:docker` passed against the rebuilt Docker
+  runtime, including product discovery, PDP, cart, checkout, order lifecycle
+  requests, exchange/appeal previews, and non-owner rejection.
+
+Remaining items after this closure batch are not normal local implementation
+blockers: licensed/replacement production media intake, real payment/carrier/POS
+provider certification, and deeper post-V1 business UX such as visual Promotion
+Builder composition, analytics, account self-service, and secondary commerce
+scenarios.
