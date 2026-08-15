@@ -103,7 +103,7 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/inventory/data/agoraInventoryBalanceData.js": "4a05b0763917a440ff2cf07c56b2da3325ca53337f342b37b6ff45401f00aaf7",
-        "staged/inventory/data/agoraWarehouseData.js": "6100c582e96230623f7a7570cefe03efacad30b9435e77448829dc0b8ba2cbe2",
+        "staged/inventory/data/agoraWarehouseData.js": "34a143809898a2ff6f0eb54c70d2845ba658350dfb6875be440a1bb2bd7894f4",
         "staged/inventory/headers/agoraInventoryHeader.js": "d7f18111ac5bf08373c1c3d10f2fba3717ed3fe3bd854c576d8aaff3115801a5"
       }
     },
@@ -149,6 +149,32 @@
       "files": {
         "staged/promotion/data/agoraPromotionData.js": "3ec20f86580d86f5c2fa4675ef639b8a522cc8857c8c572f4b641e42fb6282ad",
         "staged/promotion/headers/agoraPromotionHeader.js": "e5dfdfb3e334ab8f79cb211541c0575aa17bdd83da8a4b5f08b34ad5cc376396"
+      }
+    },
+    "agoraCustomerReviewSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora customer review and moderation source",
+      "owningDomain": "agora.engagement.customerReview",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "ENGAGEMENT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/engagement/data/agoraCustomerReviewAggregateData.js": "366537518c0026e8553ce58abcc01ffc5ddeba913fc0d1e4bea5ab36e4d60b42",
+        "staged/engagement/data/agoraCustomerReviewAuthenticityEvidenceData.js": "79bc2e3838afa01a0fd5b04beda378c9da8d174cd87c4630048db1978ffdf6ed",
+        "staged/engagement/data/agoraCustomerReviewData.js": "a4c3ea2f0878197f5ccc8759a01c08dc0d88414bd441ed69477c00a33c224cbd",
+        "staged/engagement/data/agoraCustomerReviewModerationData.js": "fb56c99da894095c43b691157d5506935a88fc622fb2dfe6da3364b2b0917c49",
+        "staged/engagement/data/agoraCustomerReviewProjectionData.js": "34e5115568c9eb9c2ffd686a242d1bd813f1ec6b1852cc9b1ff27b5fc0e1bb1c",
+        "staged/engagement/headers/agoraCustomerReviewHeader.js": "e73880ff383a8288d48c2f4c97692a4148798273c9f00f7d586f7fd341456b42"
       }
     },
     "agoraCommerceSearchSource": {

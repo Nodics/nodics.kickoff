@@ -146,9 +146,9 @@ test('Agora Product catalog release follows Commerce Staged nImport execution co
   assert.equal(installations[0].status, 'CURRENT');
 });
 
-test('Agora Commerce discovery releases separate Product Pricing Inventory Promotion and Tax import plans', async () => {
+test('Agora Commerce discovery releases separate Product Pricing Inventory Promotion Tax Search and Discovery import plans', async () => {
   const dataReleaseService = service();
-  const releases = dataReleaseService.discoverReleases('sample');
+  const releases = dataReleaseService.discoverReleases('sample').filter((item) => item.destinationRole === 'COMMERCE_STAGED');
   const releaseCodes = releases.map((item) => item.releaseCode).sort();
 
   assert.deepEqual(releaseCodes, [

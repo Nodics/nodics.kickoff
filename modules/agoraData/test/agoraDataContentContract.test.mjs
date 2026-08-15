@@ -50,6 +50,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   const inventorySection = manifest.sections.agoraInventorySource;
   const taxSection = manifest.sections.agoraTaxSource;
   const promotionSection = manifest.sections.agoraPromotionSource;
+  const reviewSection = manifest.sections.agoraCustomerReviewSource;
   const commerceSearchSection = manifest.sections.agoraCommerceSearchSource;
   const discoverySection = manifest.sections.agoraDiscoveryConfigurationSource;
 
@@ -62,6 +63,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
     'agoraInventorySource',
     'agoraTaxSource',
     'agoraPromotionSource',
+    'agoraCustomerReviewSource',
     'agoraCommerceSearchSource',
     'agoraDiscoveryConfigurationSource'
   ]);
@@ -100,6 +102,17 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
     assert.equal(section.initialPublicationPolicy, 'ADMIN_INITIATED');
     assert.equal(section.removalPolicy, 'UNPUBLISH_OR_RETIRE');
   }
+  assert.equal(reviewSection.kind, 'DATA_RELEASE');
+  assert.equal(reviewSection.dataType, 'sample');
+  assert.equal(reviewSection.sourceRoot, 'staged');
+  assert.equal(reviewSection.lifecycle, 'PUBLISHABLE');
+  assert.equal(reviewSection.destinationRole, 'ENGAGEMENT');
+  assert.deepEqual(reviewSection.environmentScope, ['LOCAL']);
+  assert.equal(reviewSection.sensitivity, 'PUBLIC');
+  assert.equal(reviewSection.versioningPolicy, 'IMMUTABLE');
+  assert.equal(reviewSection.publicationPolicy, 'REQUIRED');
+  assert.equal(reviewSection.initialPublicationPolicy, 'ADMIN_INITIATED');
+  assert.equal(reviewSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
 });
 
 test('every declared manifest file exists and has a matching checksum', () => {
@@ -206,6 +219,20 @@ test('Discovery configuration seed files stay inside the Commerce Staged Discove
     assert.match(content, /@lifecycle PUBLISHABLE/);
     assert.match(content, /@destination COMMERCE_STAGED/);
     assert.doesNotMatch(content, /WCMS_STAGED|WCMS_ONLINE|ENGAGEMENT/);
+  }
+});
+
+test('Engagement review seed files stay inside the Engagement operational boundary', () => {
+  const manifest = readJson('data/manifest.json');
+  const section = manifest.sections.agoraCustomerReviewSource;
+
+  assert(Object.keys(section.files).every((relativePath) => relativePath.startsWith('staged/engagement/')));
+
+  for (const relativePath of Object.keys(section.files)) {
+    const content = fs.readFileSync(path.join(moduleRoot, 'data', relativePath), 'utf8');
+    assert.match(content, /@lifecycle PUBLISHABLE/);
+    assert.match(content, /@destination ENGAGEMENT/);
+    assert.doesNotMatch(content, /WCMS_STAGED|WCMS_ONLINE|COMMERCE_STAGED/);
   }
 });
 
@@ -361,9 +388,44 @@ test('Pricing, Inventory, Tax and Promotion seed use only their owned source sch
   assert.equal(Object.keys(promotions).length, 2);
   assert(Object.values(priceRows).every((record) => record.tenant === 'default' && record.currency === 'USD' && record.priceBookCode === 'agoraRetailUsd'));
   assert(Object.values(balances).every((record) => record.tenant === 'default' && record.warehouseCode === 'agoraMainWarehouse' && record.sku.startsWith('AGORA-')));
+  assert.equal(warehouses.record0.pickupEnabled, true);
+  assert.equal(warehouses.record0.storeCode, 'agoraMainStore');
+  assert.equal(warehouses.record0.posCode, 'agoraCrystalLakePos');
+  assert.deepEqual(warehouses.record0.fulfillmentTypes, ['SHIP_TO_HOME', 'STORE_PICKUP']);
   assert(Object.values(taxPolicies).every((record) => record.tenant === 'default' && record.jurisdiction === 'AE' && record.status === 'ACTIVE'));
   assert(Object.values(promotions).every((record) => record.tenant === 'default' && record.status === 'ACTIVE' && record.actions.discountAmount));
   assert.deepEqual(Object.values(promotions).map((record) => record.code), ['agoraWelcome10', 'agoraBagsBundle15']);
+});
+
+test('Agora review seed uses Customer Review-owned schemas and sanitized public projection', async () => {
+  const header = await readDataModule('data/staged/engagement/headers/agoraCustomerReviewHeader.js');
+  const reviews = await readDataModule('data/staged/engagement/data/agoraCustomerReviewData.js');
+  const authenticity = await readDataModule('data/staged/engagement/data/agoraCustomerReviewAuthenticityEvidenceData.js');
+  const moderation = await readDataModule('data/staged/engagement/data/agoraCustomerReviewModerationData.js');
+  const projections = await readDataModule('data/staged/engagement/data/agoraCustomerReviewProjectionData.js');
+  const aggregates = await readDataModule('data/staged/engagement/data/agoraCustomerReviewAggregateData.js');
+  const schemaNames = Object.values(header.customerReview).map((entry) => entry.options.schemaName).sort();
+
+  assert.deepEqual(schemaNames, [
+    'customerReview',
+    'customerReviewAggregate',
+    'customerReviewAuthenticityEvidence',
+    'customerReviewModeration',
+    'customerReviewProjection'
+  ]);
+  assert.equal(Object.keys(reviews).length, 1);
+  assert.equal(Object.keys(authenticity).length, 1);
+  assert.equal(Object.keys(moderation).length, 1);
+  assert.equal(Object.keys(projections).length, 1);
+  assert.equal(Object.keys(aggregates).length, 1);
+  assert.equal(reviews.record0.status, 'APPROVED');
+  assert.equal(moderation.record0.action, 'APPROVE');
+  assert.equal(authenticity.record0.verificationStatus, 'VERIFIED');
+  assert.equal(projections.record0.status, 'PUBLISHED');
+  assert.equal(projections.record0.authenticity.verified, true);
+  assert.equal(aggregates.record0.average, 5);
+  assert.equal(JSON.stringify(projections.record0).includes('internalNotes'), false);
+  assert.equal(JSON.stringify(projections.record0).includes('actorId'), false);
 });
 
 test('Commerce Search seed uses only Commerce Search-owned schemas and expected first-slice rules', async () => {
@@ -438,6 +500,18 @@ test('Commerce Staged local runtimes activate agoraData for Product import disco
   assert.match(localConfig, /allowedDestinationRoles:\s*\['COMMERCE_STAGED'\]/);
   assert.match(dockerConfig, /commerceStagedServer:\s*\{/);
   assert.match(dockerConfig, /dataReleases\(\['COMMERCE_STAGED'\]\)/);
+});
+
+test('Engagement local runtimes activate agoraData for customer review import discovery', () => {
+  const localConfig = fs.readFileSync(path.join(projectRoot, 'envs/kickoffLocal/engagementServer/config/properties.js'), 'utf8');
+  const dockerConfig = fs.readFileSync(path.join(projectRoot, 'envs/kickoffDockerLocal/config/runtime-properties.js'), 'utf8');
+
+  assert.match(localConfig, /'agoraData'/);
+  assert.match(dockerConfig, /engagementServer:\s*\{/);
+  assert.match(dockerConfig, /'agoraData'/);
+  assert.match(localConfig, /runtimeRole:\s*\{\s*code:\s*'ENGAGEMENT'/);
+  assert.match(localConfig, /allowedDestinationRoles:\s*\['ENGAGEMENT'\]/);
+  assert.match(dockerConfig, /dataReleases\(\['ENGAGEMENT'\]\)/);
 });
 
 test('expected Product discovery projections are test-only and customer-safe', async () => {

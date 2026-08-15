@@ -145,7 +145,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('process', 4330), ...connections }
         },
         engagementServer: {
-            activeModules: { groups: [], modules: [...projectModules, 'nexusData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: [...projectModules, 'nexusData', 'agoraData', 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' }, data: { dataReleases: dataReleases(['ENGAGEMENT']) },
             engagement: { capabilities: { contactSubmission: true, testimonial: true, customerReview: true, customerFeedback: true } },
             customerFeedback: { enabled: true }, database: database('kickoffDockerLocalEngagement'),

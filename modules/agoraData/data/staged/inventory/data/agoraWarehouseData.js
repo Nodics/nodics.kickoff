@@ -16,6 +16,28 @@ module.exports = {
     tenant: 'default',
     name: 'Agora Main Warehouse',
     status: 'ACTIVE',
+    fulfillmentTypes: ['SHIP_TO_HOME', 'STORE_PICKUP'],
+    storeCode: 'agoraMainStore',
+    posCode: 'agoraCrystalLakePos',
+    pickupEnabled: true,
+    address: {
+      line1: '549 Oak St',
+      city: 'Crystal Lake',
+      region: 'IL',
+      postalCode: '60014',
+      country: 'US'
+    },
+    operatingHours: {
+      timezone: 'America/Chicago',
+      mondayToFriday: '10:00-18:00',
+      saturday: '10:00-16:00',
+      sunday: 'CLOSED'
+    },
+    providerReadiness: {
+      inventoryProvider: 'LOCAL_REFERENCE',
+      posProvider: 'LOCAL_REFERENCE',
+      certificationStatus: 'NOT_REQUIRED_FOR_LOCAL_REFERENCE'
+    },
     priority: 1,
     revision: 1,
     active: true
