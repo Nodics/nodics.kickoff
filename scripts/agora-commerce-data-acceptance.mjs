@@ -191,11 +191,20 @@ async function installIfExplicitlyEnabled(headers, routes, releaseRequest) {
     log("install skipped; set NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE=true to run the mutating sample install route");
     return;
   }
-  const body = await request(commerceStagedUrl, routes.install, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(releaseRequest),
-  });
+  let body;
+  try {
+    body = await request(commerceStagedUrl, routes.install, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(releaseRequest),
+    });
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("ERR_IMP_00003")) {
+      log("install already current; immutable data-release guard returned ERR_IMP_00003");
+      return;
+    }
+    throw error;
+  }
   const statuses = releaseList(body).map((release) => `${release.releaseCode}:${release.status}`).join(", ");
   log(`install executed through gated route; release statuses: ${statuses || "not reported"}`);
 }

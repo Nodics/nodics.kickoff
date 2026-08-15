@@ -34,6 +34,8 @@ test("Agora Commerce data acceptance remains preflight-first with explicit insta
   assert.match(source, /process\.env\.NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE === "true"/);
   assert.match(source, /validationOnly !== true \|\| validation\?\.importExecuted !== false/);
   assert.match(source, /install skipped; set NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE=true/);
+  assert.match(source, /ERR_IMP_00003/);
+  assert.match(source, /install already current/);
 });
 
 test("Agora Commerce data acceptance requires the full staged release family", () => {
