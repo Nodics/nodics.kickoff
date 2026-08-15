@@ -29,7 +29,11 @@ module.exports = {
       approvedReferenceSiteAsset: false,
       checksumRequired: true,
       reviewerRequired: true,
-      productionUseAllowed: false
+      productionUseAllowed: false,
+      requiredProof: ['original filename', 'source system', 'checksum', 'intake run'],
+      approvalChecklist: ['license type', 'asset owner', 'reviewer', 'approval timestamp'],
+      activationChecklist: ['target type', 'target code', 'usage scope', 'activation revision'],
+      rollbackChecklist: ['previous reference', 'deactivation reason', 'audit trail', 'recovery note']
     }
   },
   record1: {
@@ -50,7 +54,11 @@ module.exports = {
       approvedReferenceSiteAsset: false,
       checksumRequired: true,
       reviewerRequired: true,
-      productionUseAllowed: false
+      productionUseAllowed: false,
+      requiredProof: ['original filename', 'source system', 'checksum', 'intake run'],
+      approvalChecklist: ['license type', 'asset owner', 'reviewer', 'approval timestamp'],
+      activationChecklist: ['target type', 'target code', 'usage scope', 'activation revision'],
+      rollbackChecklist: ['previous reference', 'deactivation reason', 'audit trail', 'recovery note']
     }
   },
   record2: {
@@ -71,7 +79,11 @@ module.exports = {
       approvedReferenceSiteAsset: false,
       checksumRequired: true,
       reviewerRequired: true,
-      productionUseAllowed: false
+      productionUseAllowed: false,
+      requiredProof: ['original filename', 'source system', 'checksum', 'intake run'],
+      approvalChecklist: ['license type', 'asset owner', 'reviewer', 'approval timestamp'],
+      activationChecklist: ['target type', 'target code', 'usage scope', 'activation revision'],
+      rollbackChecklist: ['previous reference', 'deactivation reason', 'audit trail', 'recovery note']
     }
   }
 };

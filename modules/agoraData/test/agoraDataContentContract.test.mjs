@@ -144,6 +144,10 @@ test('Media reference seed maps product and content targets without approving re
     assert.equal(record.evidence.checksumRequired, true);
     assert.equal(record.evidence.reviewerRequired, true);
     assert.equal(record.evidence.productionUseAllowed, false);
+    assert.deepEqual(record.evidence.requiredProof, ['original filename', 'source system', 'checksum', 'intake run']);
+    assert.deepEqual(record.evidence.approvalChecklist, ['license type', 'asset owner', 'reviewer', 'approval timestamp']);
+    assert.deepEqual(record.evidence.activationChecklist, ['target type', 'target code', 'usage scope', 'activation revision']);
+    assert.deepEqual(record.evidence.rollbackChecklist, ['previous reference', 'deactivation reason', 'audit trail', 'recovery note']);
     assert.match(record.mediaCode, /^agora-owned-/);
     assert.doesNotMatch(JSON.stringify(record), /themesflat|modave|REFERENCE_BOOTSTRAP|https?:\/\//i);
   }
@@ -372,6 +376,12 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
     'Appeal and delayed-resolution review'
   ]);
   assert(lifecyclePanel.properties.automationGates.includes('Delayed-refund reconciliation automation'));
+  assert.deepEqual(lifecyclePanel.properties.operatorRunbooks.map((runbook) => runbook.title), [
+    'Exchange replacement reservation',
+    'Return inspection disposition',
+    'Delayed refund reconciliation',
+    'Appeal SLA review'
+  ]);
   assert.deepEqual(accountCenter.properties.resolverKeys, ['profile.customer.self', 'profile.customer.addressBook', 'commerce.order.customer.history']);
   assert.deepEqual(accountCenter.properties.operationGroups.map((group) => group.title), [
     'Profile and identity',
@@ -382,10 +392,11 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
   assert.equal(accountCenter.properties.operationGroups.find((group) => group.title === 'Operator-only overrides').status, 'BACKOFFICE_ONLY');
   assert.deepEqual(productionGateSummary.properties.gates.map((gate) => gate.code), [
     'MEDIA_RIGHTS',
-    'LIVE_PROVIDERS',
     'PROMOTION_BUILDER_DEPTH',
     'REVERSE_LIFECYCLE_AUTOMATION'
   ]);
+  assert.deepEqual(productionGateSummary.properties.parkedExternalGates.map((gate) => gate.code), ['LIVE_PROVIDERS']);
+  assert.match(productionGateSummary.properties.parkedExternalGates[0].reason, /Parked from this thread/);
   assert(productionGateSummary.properties.nonProviderImplementationBacklog.includes('Source-owned test-folder structure stabilization'));
   assert(navigations.some((node) => node.targetRoute === 'agoraCartRoute'));
   assert(navigations.some((node) => node.targetRoute === 'agoraOrderHistoryRoute'));
@@ -399,11 +410,14 @@ test('module-owned docs track non-provider Agora implementation work only', () =
 
   assert.match(readme, /docs\/agora-non-provider-implementation-plan\.md/);
   assert.match(doc, /Promotions Builder depth/);
+  assert.match(doc, /coupon and budget mutation ledger/);
   assert.match(doc, /Media production readiness/);
+  assert.match(doc, /activation revision and rollback evidence/);
   assert.match(doc, /Customer account self-service/);
   assert.match(doc, /Reverse lifecycle depth/);
+  assert.match(doc, /operator runbooks/);
   assert.match(doc, /Test folder structure/);
-  assert.match(doc, /Provider certification remains an external release gate/);
+  assert.match(doc, /Provider certification remains an external release gate and is parked from this/);
 });
 
 test('Product seed uses only Product-owned source schemas and expected first-slice counts', async () => {

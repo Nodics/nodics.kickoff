@@ -268,6 +268,32 @@ module.exports = {
         'Inspection and disposition integration',
         'Appeal SLA workflow',
         'Delayed-refund reconciliation automation'
+      ],
+      operatorRunbooks: [
+        {
+          title: 'Exchange replacement reservation',
+          owner: 'Inventory + Fulfillment',
+          customerVisibleState: 'Replacement selection received',
+          backofficeAction: 'Reserve replacement stock and create outbound exchange shipment'
+        },
+        {
+          title: 'Return inspection disposition',
+          owner: 'Fulfillment + Inventory',
+          customerVisibleState: 'Return received for inspection',
+          backofficeAction: 'Record inspection result, disposition and restock/quarantine decision'
+        },
+        {
+          title: 'Delayed refund reconciliation',
+          owner: 'Payment + Order',
+          customerVisibleState: 'Refund requires operator review',
+          backofficeAction: 'Recalculate refund, reconcile provider evidence and publish safe customer status'
+        },
+        {
+          title: 'Appeal SLA review',
+          owner: 'Process + Order',
+          customerVisibleState: 'Appeal submitted',
+          backofficeAction: 'Start SLA timer, assign reviewer and capture approve/reject evidence'
+        }
       ]
     }
   },
@@ -324,15 +350,21 @@ module.exports = {
       heading: 'Production release gates',
       gates: [
         { code: 'MEDIA_RIGHTS', owner: 'nMedia + agoraData' },
-        { code: 'LIVE_PROVIDERS', owner: 'Commerce integration owners' },
         { code: 'PROMOTION_BUILDER_DEPTH', owner: 'Promotion + Axis' },
         { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process' }
       ],
+      parkedExternalGates: [
+        {
+          code: 'LIVE_PROVIDERS',
+          owner: 'Commerce integration owners',
+          reason: 'Parked from this thread; requires real or approved sandbox provider certification evidence.'
+        }
+      ],
       nonProviderImplementationBacklog: [
-        'Promotion visual rule composer and coupon allocation workspace',
-        'Media rights, checksum, target-usage approval and emergency deactivation',
+        'Promotion visual rule composer, coupon allocation, budget mutation ledger and approval checklist',
+        'Media rights, checksum, target-usage approval, activation revision and emergency deactivation',
         'Customer profile, address-book and order self-service handoff depth',
-        'Cancellation, return, refund, exchange, replacement and appeal automation depth',
+        'Cancellation, return, refund, exchange, replacement and appeal automation runbooks',
         'Source-owned test-folder structure stabilization'
       ]
     }
