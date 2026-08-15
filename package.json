@@ -72,6 +72,7 @@
     "acceptance:agora-commerce-data": "node scripts/agora-commerce-data-acceptance.mjs",
     "acceptance:agora-commerce-publication": "node scripts/agora-commerce-publication-acceptance.mjs",
     "acceptance:agora-commerce:ci": "npm run test:agora-commerce && npm run acceptance:agora-commerce-data && npm run acceptance:agora-commerce-publication && npm run acceptance:agora-commerce",
+    "qualification:agora-commerce:live": "node scripts/agora-commerce-live-qualification.mjs",
     "acceptance:editorial-live": "node scripts/editorial-live-journey-acceptance.mjs",
     "acceptance:capability-registry": "node scripts/capability-registry-acceptance.mjs",
     "acceptance:guided-initialization": "node scripts/guided-initialization-acceptance.mjs",

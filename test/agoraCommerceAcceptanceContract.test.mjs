@@ -19,6 +19,7 @@ import test from "node:test";
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const scriptPath = path.join(projectRoot, "scripts/agora-commerce-acceptance.mjs");
+const liveQualificationPath = path.join(projectRoot, "scripts/agora-commerce-live-qualification.mjs");
 const packagePath = path.join(projectRoot, "package.json");
 
 test("Agora Commerce acceptance covers backend route surface and secured generated customer journey", () => {
@@ -60,4 +61,19 @@ test("Agora Commerce acceptance covers backend route surface and secured generat
   assert.match(source, /expectReadRejected/);
   assert.match(source, /correctly rejected for non-owner/);
   assert.match(source, /customer checkout\/order\/cancellation\/return\/refund smoke passed/);
+});
+
+test("Agora Commerce live qualification sequences topology data publication and customer journey acceptance", () => {
+  const source = fs.readFileSync(liveQualificationPath, "utf8");
+  const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+
+  assert.equal(pkg.scripts["qualification:agora-commerce:live"], "node scripts/agora-commerce-live-qualification.mjs");
+  [
+    '"topology:preflight"',
+    '"test:agora-commerce"',
+    '"acceptance:agora-commerce-data"',
+    '"acceptance:agora-commerce-publication"',
+    '"acceptance:agora-commerce"',
+  ].forEach((script) => assert.match(source, new RegExp(script)));
+  assert.match(source, /PASS/);
 });
