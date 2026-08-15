@@ -9,7 +9,7 @@
 
 /** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner agoraData */
 
-/** @description Agora storefront CMS pages for Home, listing, search and PDP shells. */
+/** @description Agora storefront CMS pages for the V1 customer commerce journey shells. */
 module.exports = {
   record0: {
     code: 'agoraHomePage',
@@ -24,7 +24,8 @@ module.exports = {
       { target: 'agoraHomeHero', slot: 'main', index: 10, active: true },
       { target: 'agoraHomeCategoryRail', slot: 'main', index: 20, active: true },
       { target: 'agoraHomeProductRail', slot: 'main', index: 30, active: true },
-      { target: 'agoraDiscoveryReadinessNote', slot: 'main', index: 40, active: true },
+      { target: 'agoraServicePromiseStrip', slot: 'main', index: 40, active: true },
+      { target: 'agoraDiscoveryReadinessNote', slot: 'main', index: 50, active: true },
       { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
     ]
   },
@@ -69,6 +70,65 @@ module.exports = {
       { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
       { target: 'agoraListingBreadcrumb', slot: 'main', index: 10, active: true },
       { target: 'agoraProductDetail', slot: 'main', index: 20, active: true },
+      { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
+    ]
+  },
+  record4: {
+    code: 'agoraCartPage',
+    name: 'Nodics Agora Cart',
+    active: true,
+    cmsSite: ['agoraStorefrontSite'],
+    typeCode: 'agoraCartPageType',
+    template: 'agoraStorefrontPageTemplate',
+    renderer: 'agora.page.cart',
+    cmsComponents: [
+      { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
+      { target: 'agoraCartSummary', slot: 'main', index: 20, active: true },
+      { target: 'agoraServicePromiseStrip', slot: 'main', index: 40, active: true },
+      { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
+    ]
+  },
+  record5: {
+    code: 'agoraCheckoutPage',
+    name: 'Nodics Agora Checkout',
+    active: true,
+    cmsSite: ['agoraStorefrontSite'],
+    typeCode: 'agoraCheckoutPageType',
+    template: 'agoraStorefrontPageTemplate',
+    renderer: 'agora.page.checkout',
+    cmsComponents: [
+      { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
+      { target: 'agoraCheckoutFlow', slot: 'main', index: 20, active: true },
+      { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
+    ]
+  },
+  record6: {
+    code: 'agoraOrderConfirmationPage',
+    name: 'Nodics Agora Order Confirmation',
+    active: true,
+    cmsSite: ['agoraStorefrontSite'],
+    typeCode: 'agoraOrderConfirmationPageType',
+    template: 'agoraStorefrontPageTemplate',
+    renderer: 'agora.page.order-confirmation',
+    cmsComponents: [
+      { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
+      { target: 'agoraOrderConfirmation', slot: 'main', index: 20, active: true },
+      { target: 'agoraOrderLifecyclePanel', slot: 'main', index: 30, active: true },
+      { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
+    ]
+  },
+  record7: {
+    code: 'agoraOrderHistoryPage',
+    name: 'Nodics Agora Order History',
+    active: true,
+    cmsSite: ['agoraStorefrontSite'],
+    typeCode: 'agoraOrderHistoryPageType',
+    template: 'agoraStorefrontPageTemplate',
+    renderer: 'agora.page.order-history',
+    cmsComponents: [
+      { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
+      { target: 'agoraOrderHistory', slot: 'main', index: 20, active: true },
+      { target: 'agoraOrderLifecyclePanel', slot: 'main', index: 30, active: true },
       { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
     ]
   }

@@ -9,7 +9,7 @@
 
 /** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner agoraData */
 
-/** @description Agora storefront public page routes. */
+/** @description Agora storefront page routes for public discovery and customer commerce surfaces. */
 module.exports = {
   record0: {
     code: 'agoraHomeRoute',
@@ -57,6 +57,54 @@ module.exports = {
     routeType: 'PAGE',
     deliveryState: 'ONLINE',
     accessMode: 'PUBLIC',
+    active: true
+  },
+  record4: {
+    code: 'agoraCartRoute',
+    path: '/cart',
+    page: 'agoraCartPage',
+    site: 'agoraStorefrontSite',
+    locale: 'en',
+    channel: 'web',
+    routeType: 'PAGE',
+    deliveryState: 'ONLINE',
+    accessMode: 'PUBLIC',
+    active: true
+  },
+  record5: {
+    code: 'agoraCheckoutRoute',
+    path: '/checkout',
+    page: 'agoraCheckoutPage',
+    site: 'agoraStorefrontSite',
+    locale: 'en',
+    channel: 'web',
+    routeType: 'PAGE',
+    deliveryState: 'ONLINE',
+    accessMode: 'CUSTOMER',
+    active: true
+  },
+  record6: {
+    code: 'agoraOrderConfirmationRoute',
+    path: '/order/confirmation',
+    page: 'agoraOrderConfirmationPage',
+    site: 'agoraStorefrontSite',
+    locale: 'en',
+    channel: 'web',
+    routeType: 'PAGE',
+    deliveryState: 'ONLINE',
+    accessMode: 'CUSTOMER',
+    active: true
+  },
+  record7: {
+    code: 'agoraOrderHistoryRoute',
+    path: '/account/orders',
+    page: 'agoraOrderHistoryPage',
+    site: 'agoraStorefrontSite',
+    locale: 'en',
+    channel: 'web',
+    routeType: 'PAGE',
+    deliveryState: 'ONLINE',
+    accessMode: 'CUSTOMER',
     active: true
   }
 };

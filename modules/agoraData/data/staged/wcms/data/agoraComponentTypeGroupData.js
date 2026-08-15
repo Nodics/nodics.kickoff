@@ -13,8 +13,8 @@
 module.exports = {
   record0: {
     code: 'agoraStorefrontDiscoveryGroup',
-    name: 'Agora Storefront Discovery Components',
-    description: 'Allowlisted Home, listing, search and PDP composition components rendered by nodics.agora.',
+    name: 'Agora Storefront Journey Components',
+    description: 'Allowlisted Home, listing, search, PDP, cart, checkout, order and lifecycle composition components rendered by nodics.agora.',
     componentTypeCodes: [
       'agoraHeaderType',
       'agoraFooterType',
@@ -24,6 +24,12 @@ module.exports = {
       'agoraProductListingType',
       'agoraSearchListingType',
       'agoraProductDetailType',
+      'agoraCartSummaryType',
+      'agoraCheckoutFlowType',
+      'agoraOrderConfirmationType',
+      'agoraOrderHistoryType',
+      'agoraOrderLifecycleType',
+      'agoraServicePromiseType',
       'agoraBreadcrumbType',
       'agoraRichTextType'
     ],

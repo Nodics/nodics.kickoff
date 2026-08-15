@@ -21,8 +21,8 @@ module.exports = {
       logoText: 'Nodics Agora',
       navigationCode: 'agoraMainNavigation',
       searchEnabled: true,
-      cartPreviewEnabled: false,
-      accountPreviewEnabled: false
+      cartPreviewEnabled: true,
+      accountPreviewEnabled: true
     }
   },
   record1: {
@@ -129,8 +129,8 @@ module.exports = {
       resolverKey: 'commerce.product.detail',
       includeMedia: true,
       includeVariantSummary: true,
-      includePrice: false,
-      includeInventory: false,
+      includePrice: true,
+      includeInventory: true,
       includeReviews: false
     }
   },
@@ -141,8 +141,93 @@ module.exports = {
     accessMode: 'PUBLIC',
     active: true,
     properties: {
-      heading: 'Discovery slice boundary',
-      body: 'This storefront seed renders page composition only. Product, price, inventory, cart and checkout data are resolved through backend-owned customer APIs when those contracts are active.'
+      heading: 'Agora authority boundary',
+      body: 'This storefront seed renders page composition only. Product, price, inventory, cart, checkout, order and lifecycle data are resolved through backend-owned customer APIs.'
+    }
+  },
+  record10: {
+    code: 'agoraServicePromiseStrip',
+    typeCode: 'agoraServicePromiseType',
+    renderer: 'agora.servicePromiseStrip',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      promises: [
+        { label: '14-day returns', detail: 'Eligibility is calculated by the Commerce lifecycle API.' },
+        { label: 'Free shipping threshold', detail: 'Shipping methods are resolved from backend configuration.' },
+        { label: 'Secure checkout', detail: 'Payment uses provider tokens only; raw card data is never collected.' },
+        { label: 'Order self-service', detail: 'Cancellation, return and refund requests stay policy-governed.' }
+      ]
+    }
+  },
+  record11: {
+    code: 'agoraCartSummary',
+    typeCode: 'agoraCartSummaryType',
+    renderer: 'agora.cartSummary',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      resolverKey: 'commerce.cart.customer',
+      supportsLocalFallback: true,
+      actions: ['UPDATE_QUANTITY', 'REMOVE_ENTRY', 'PROCEED_TO_CHECKOUT'],
+      calculationRequiredBeforeCheckout: true
+    }
+  },
+  record12: {
+    code: 'agoraCheckoutFlow',
+    typeCode: 'agoraCheckoutFlowType',
+    renderer: 'agora.checkoutFlow',
+    accessMode: 'CUSTOMER',
+    active: true,
+    properties: {
+      resolverKey: 'commerce.checkout.customer',
+      steps: ['CUSTOMER', 'SHIPPING', 'PAYMENT', 'REVIEW'],
+      paymentCollectionMode: 'PROVIDER_TOKEN_ONLY',
+      requiresCustomerSessionForPlacement: true
+    }
+  },
+  record13: {
+    code: 'agoraOrderConfirmation',
+    typeCode: 'agoraOrderConfirmationType',
+    renderer: 'agora.orderConfirmation',
+    accessMode: 'CUSTOMER',
+    active: true,
+    properties: {
+      resolverKey: 'commerce.order.customer.detail',
+      showCompletedCheckoutSteps: true,
+      showShippingPromise: true,
+      lifecycleActions: ['CANCELLATION', 'RETURN', 'REFUND']
+    }
+  },
+  record14: {
+    code: 'agoraOrderHistory',
+    typeCode: 'agoraOrderHistoryType',
+    renderer: 'agora.orderHistory',
+    accessMode: 'CUSTOMER',
+    active: true,
+    properties: {
+      resolverKey: 'commerce.order.customer.history',
+      showEntries: true,
+      showLifecycleRecords: true
+    }
+  },
+  record15: {
+    code: 'agoraOrderLifecyclePanel',
+    typeCode: 'agoraOrderLifecycleType',
+    renderer: 'agora.orderLifecycle',
+    accessMode: 'CUSTOMER',
+    active: true,
+    properties: {
+      resolverKey: 'commerce.order.lifecycle.customer',
+      requestTypes: ['CANCELLATION', 'RETURN', 'REFUND'],
+      reasonSelectionRequired: true,
+      itemQuantitySelectionRequired: true,
+      returnMethods: ['PICKUP', 'DROP_OFF', 'STORE_RETURN'],
+      refundMethods: ['ORIGINAL_PAYMENT', 'STORE_CREDIT', 'MANUAL_REVIEW'],
+      showRma: true,
+      showRefundPreview: true,
+      showReconciliationRequired: true,
+      appealSupportedByPolicy: true
     }
   }
 };

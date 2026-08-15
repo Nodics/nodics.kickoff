@@ -9,7 +9,7 @@
 
 /** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner agoraData */
 
-/** @description Agora storefront navigation nodes for the first discovery slice. */
+/** @description Agora storefront navigation nodes for the V1 customer journey. */
 module.exports = {
   record0: {
     code: 'agoraMainNavigation',
@@ -66,12 +66,54 @@ module.exports = {
     active: true
   },
   record4: {
+    code: 'agoraNavCart',
+    site: 'agoraStorefrontSite',
+    parent: 'agoraMainNavigation',
+    name: 'Cart',
+    title: 'Cart',
+    nodeType: 'ROUTE',
+    targetRoute: 'agoraCartRoute',
+    position: 40,
+    status: 'ACTIVE',
+    locale: 'en',
+    channel: 'web',
+    active: true
+  },
+  record5: {
+    code: 'agoraNavOrders',
+    site: 'agoraStorefrontSite',
+    parent: 'agoraMainNavigation',
+    name: 'My Orders',
+    title: 'My Orders',
+    nodeType: 'ROUTE',
+    targetRoute: 'agoraOrderHistoryRoute',
+    position: 50,
+    status: 'ACTIVE',
+    locale: 'en',
+    channel: 'web',
+    active: true
+  },
+  record6: {
     code: 'agoraFooterNavigation',
     site: 'agoraStorefrontSite',
     name: 'Agora Footer Navigation',
     title: 'Support',
     nodeType: 'CONTAINER',
     position: 100,
+    status: 'ACTIVE',
+    locale: 'en',
+    channel: 'web',
+    active: true
+  },
+  record7: {
+    code: 'agoraFooterReturns',
+    site: 'agoraStorefrontSite',
+    parent: 'agoraFooterNavigation',
+    name: 'Returns & refunds',
+    title: 'Returns & refunds',
+    nodeType: 'ROUTE',
+    targetRoute: 'agoraOrderHistoryRoute',
+    position: 110,
     status: 'ACTIVE',
     locale: 'en',
     channel: 'web',

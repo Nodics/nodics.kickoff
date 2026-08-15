@@ -11,7 +11,9 @@
       "owningDomain": "agora.wcms",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
-      "environmentScope": ["ALL"],
+      "environmentScope": [
+        "ALL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -19,16 +21,16 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/agoraCatalogData.js": "f9281abc2fc8476e89ecdfc3da54a0c521001a9dc8fed68bdbd64d12e2b904b0",
-        "staged/wcms/data/agoraComponentData.js": "39ae9c2fc37bacd268b1c4884b3fbcf1279de3fb6b3dcf3673ea874569a71217",
-        "staged/wcms/data/agoraComponentTypeGroupData.js": "83ceac2213c7f5028c555c8c0b0903dbd5da77bea9f789935523e94b1f656176",
-        "staged/wcms/data/agoraNavigationData.js": "98428e1c1820b321963fdb24c3e5c1a2de54f22d8988805d0daa6fc73e61d81e",
-        "staged/wcms/data/agoraPageData.js": "0766f90b4cc7d9a3cd41a5e98aabb66a110e9a4db71c91cee381c78a30a62049",
-        "staged/wcms/data/agoraRendererData.js": "56cf37cd3aad43b642d7763fd52d3499bb9d568b9f66c1734d54e6e9f6c980af",
-        "staged/wcms/data/agoraRouteData.js": "4864baa76b85e2634c646c2f5247f9e721402b77f37e44ca84f242dab3a3e047",
+        "staged/wcms/data/agoraComponentData.js": "bb9a6132c44c816d9cee5158b0dc0486feb27ec550dd2a48460491220ea22c2e",
+        "staged/wcms/data/agoraComponentTypeGroupData.js": "799ba7aeb50bb5337c59998d04d2e398f50cf8e24f886fcb6ffb06017de7044e",
+        "staged/wcms/data/agoraNavigationData.js": "61a091d68e2546db232401acf9a4e7170d7f8c703e8166244b511ff08b29ad4f",
+        "staged/wcms/data/agoraPageData.js": "db28c1633d685a586c8b8a41b570bd9b93c05b156dff2c860ffac5f2faa1f4d6",
+        "staged/wcms/data/agoraRendererData.js": "d68a47c6328b6e0783cc10495882e58fc93fb2e17fb4b2ea289d5c79b04fbbee",
+        "staged/wcms/data/agoraRouteData.js": "4e9900de2647ac54e2ae4a9184655c76955149999fa35803d2c5eb1b4a555ac4",
         "staged/wcms/data/agoraSiteData.js": "695ea44370c79fdeb4a6a6e9bfabcb9bab979e8d327755244ddee1350530499b",
         "staged/wcms/data/agoraSlotData.js": "a63d9e7fc84f0d913068ed2a758801547e87bf1c29b4bd7578e18740bbbcd7d5",
         "staged/wcms/data/agoraTemplateData.js": "2d3a25784884111fb950cb576535883bb7960dbffc4c619c46c61d6ec7aed761",
-        "staged/wcms/data/agoraTypeCodeData.js": "1baf1320d6cad0b450b267024c69bca8d38acadba5947ede61f9bc0b87a9544d",
+        "staged/wcms/data/agoraTypeCodeData.js": "b8adfee5a0b250d887d8b3764620407b8a1155f357dcf6fb6bf35319f2d2d956",
         "staged/wcms/headers/agoraStorefrontContentHeader.js": "a6e2ba2081e6975f557f3062b1b3aaec2f50533946f16fbe2762268a5f239efa"
       }
     },
@@ -41,7 +43,9 @@
       "owningDomain": "agora.product",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -66,7 +70,9 @@
       "owningDomain": "agora.pricing",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -87,7 +93,9 @@
       "owningDomain": "agora.inventory",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -108,7 +116,9 @@
       "owningDomain": "agora.tax",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -128,7 +138,9 @@
       "owningDomain": "agora.commerceSearch",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -148,7 +160,9 @@
       "owningDomain": "agora.discovery",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",

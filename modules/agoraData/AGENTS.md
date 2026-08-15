@@ -18,8 +18,8 @@
   physical folder.
 - Expected Online projections and acceptance fixtures belong under `test/`, not
   under `data/`.
-- The first implementation scope is Home -> PLP/Search -> PDP only. Cart,
-  checkout, payment, order tracking, cancellation, return, refund, exchange,
-  appeal, and reconciliation data must wait until their backend customer APIs
-  are implemented or explicitly verified.
-
+- The implemented V1 customer journey scope is Home -> PLP/Search -> PDP ->
+  cart -> checkout -> order confirmation -> order history -> cancellation,
+  return and refund lifecycle request surfaces. This module may seed the WCMS
+  composition and sample catalog/operational inputs for that journey only after
+  the owning backend customer APIs are implemented or explicitly verified.

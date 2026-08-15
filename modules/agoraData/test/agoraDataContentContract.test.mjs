@@ -222,6 +222,74 @@ test('renderer values are logical keys and no executable frontend code is embedd
   assert.doesNotMatch(combined, /<script|javascript:|onerror=|onclick=|<style|<\/style>/i);
 });
 
+test('WCMS seed covers the implemented Agora V1 customer journey without owning runtime logic', async () => {
+  const typeCodes = Object.values(await readDataModule('data/staged/wcms/data/agoraTypeCodeData.js'));
+  const renderers = Object.values(await readDataModule('data/staged/wcms/data/agoraRendererData.js'));
+  const components = Object.values(await readDataModule('data/staged/wcms/data/agoraComponentData.js'));
+  const pages = Object.values(await readDataModule('data/staged/wcms/data/agoraPageData.js'));
+  const routes = Object.values(await readDataModule('data/staged/wcms/data/agoraRouteData.js'));
+  const navigations = Object.values(await readDataModule('data/staged/wcms/data/agoraNavigationData.js'));
+  const typeCodeSet = new Set(typeCodes.map((record) => record.code));
+  const rendererByCode = new Map(renderers.map((record) => [record.code, record.renderer]));
+  const componentByCode = new Map(components.map((record) => [record.code, record]));
+  const pageByCode = new Map(pages.map((record) => [record.code, record]));
+  const routeByCode = new Map(routes.map((record) => [record.code, record]));
+  const requiredPageTypes = [
+    'agoraHomePageType',
+    'agoraListingPageType',
+    'agoraProductDetailPageType',
+    'agoraCartPageType',
+    'agoraCheckoutPageType',
+    'agoraOrderConfirmationPageType',
+    'agoraOrderHistoryPageType'
+  ];
+  const requiredJourneyPages = [
+    'agoraHomePage',
+    'agoraCategoryListingPage',
+    'agoraSearchPage',
+    'agoraProductDetailPage',
+    'agoraCartPage',
+    'agoraCheckoutPage',
+    'agoraOrderConfirmationPage',
+    'agoraOrderHistoryPage'
+  ];
+  const requiredRoutes = [
+    '/',
+    '/c/:categoryCode',
+    '/search',
+    '/p/:productCode',
+    '/cart',
+    '/checkout',
+    '/order/confirmation',
+    '/account/orders'
+  ];
+  const lifecyclePanel = componentByCode.get('agoraOrderLifecyclePanel');
+  const checkoutFlow = componentByCode.get('agoraCheckoutFlow');
+
+  for (const pageType of requiredPageTypes) {
+    assert.equal(typeCodeSet.has(pageType), true, `${pageType} should be declared`);
+    assert.equal(rendererByCode.has(pageType), true, `${pageType} should have a logical renderer mapping`);
+  }
+  for (const pageCode of requiredJourneyPages) {
+    const page = pageByCode.get(pageCode);
+    assert(page, `${pageCode} should be declared`);
+    assert.equal(page.active, true);
+    assert.equal(page.template, 'agoraStorefrontPageTemplate');
+    assert(page.cmsComponents.every((component) => componentByCode.has(component.target)), `${pageCode} should reference known components`);
+  }
+  assert.deepEqual(routes.map((route) => route.path), requiredRoutes);
+  assert.equal(routeByCode.get('agoraCheckoutRoute').accessMode, 'CUSTOMER');
+  assert.equal(routeByCode.get('agoraOrderHistoryRoute').accessMode, 'CUSTOMER');
+  assert.deepEqual(checkoutFlow.properties.steps, ['CUSTOMER', 'SHIPPING', 'PAYMENT', 'REVIEW']);
+  assert.equal(checkoutFlow.properties.paymentCollectionMode, 'PROVIDER_TOKEN_ONLY');
+  assert.deepEqual(lifecyclePanel.properties.requestTypes, ['CANCELLATION', 'RETURN', 'REFUND']);
+  assert.deepEqual(lifecyclePanel.properties.returnMethods, ['PICKUP', 'DROP_OFF', 'STORE_RETURN']);
+  assert.equal(lifecyclePanel.properties.showRefundPreview, true);
+  assert.equal(lifecyclePanel.properties.showReconciliationRequired, true);
+  assert(navigations.some((node) => node.targetRoute === 'agoraCartRoute'));
+  assert(navigations.some((node) => node.targetRoute === 'agoraOrderHistoryRoute'));
+});
+
 test('Product seed uses only Product-owned source schemas and expected first-slice counts', async () => {
   const header = await readDataModule('data/staged/product/headers/agoraProductCatalogHeader.js');
   const categories = await readDataModule('data/staged/product/data/agoraCategoryData.js');
