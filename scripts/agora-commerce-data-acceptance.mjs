@@ -14,6 +14,7 @@ const requiredReleaseCodes = Object.freeze([
   "agoraData:agoraInventorySource",
   "agoraData:agoraPricingSource",
   "agoraData:agoraProductCatalogSource",
+  "agoraData:agoraTaxSource",
 ]);
 
 function log(message) {
@@ -191,22 +192,30 @@ async function installIfExplicitlyEnabled(headers, routes, releaseRequest) {
     log("install skipped; set NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE=true to run the mutating sample install route");
     return;
   }
-  let body;
-  try {
-    body = await request(commerceStagedUrl, routes.install, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(releaseRequest),
-    });
-  } catch (error) {
-    if (error instanceof Error && error.message.includes("ERR_IMP_00003")) {
-      log("install already current; immutable data-release guard returned ERR_IMP_00003");
-      return;
+  const installed = [];
+  for (const releaseCode of releaseRequest.releaseCodes) {
+    const singleReleaseRequest = {
+      dataType: releaseRequest.dataType,
+      releaseCodes: [releaseCode],
+      expectedReleases: { [releaseCode]: releaseRequest.expectedReleases[releaseCode] },
+    };
+    try {
+      const body = await request(commerceStagedUrl, routes.install, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(singleReleaseRequest),
+      });
+      const statuses = releaseList(body).map((release) => `${release.releaseCode}:${release.status}`).join(", ");
+      installed.push(statuses || `${releaseCode}:UNKNOWN`);
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("ERR_IMP_00003")) {
+        log(`install already current for ${releaseCode}; immutable data-release guard returned ERR_IMP_00003`);
+        continue;
+      }
+      throw error;
     }
-    throw error;
   }
-  const statuses = releaseList(body).map((release) => `${release.releaseCode}:${release.status}`).join(", ");
-  log(`install executed through gated route; release statuses: ${statuses || "not reported"}`);
+  log(`install executed through gated route; release statuses: ${installed.join(", ") || "all releases already current"}`);
 }
 
 async function cleanup() {

@@ -41,7 +41,7 @@ function configureGlobals() {
           dataReleases: {
             allowedContractVersions: [1, 2],
             maximumFilesPerRelease: 50,
-            maximumModulesPerRun: 5,
+            maximumModulesPerRun: 6,
             allowDowngrade: false,
             destinationEnforced: true,
             allowedDestinationRoles: ['COMMERCE_STAGED'],
@@ -156,11 +156,13 @@ test('Agora Commerce discovery releases separate Product Pricing and Inventory i
     'agoraData:agoraDiscoveryConfigurationSource',
     'agoraData:agoraInventorySource',
     'agoraData:agoraPricingSource',
-    'agoraData:agoraProductCatalogSource'
+    'agoraData:agoraProductCatalogSource',
+    'agoraData:agoraTaxSource'
   ]);
   assert(releases.find((item) => item.releaseCode === 'agoraData:agoraProductCatalogSource').declaredFiles.every((file) => file.startsWith('staged/product/')));
   assert(releases.find((item) => item.releaseCode === 'agoraData:agoraPricingSource').declaredFiles.every((file) => file.startsWith('staged/pricing/')));
   assert(releases.find((item) => item.releaseCode === 'agoraData:agoraInventorySource').declaredFiles.every((file) => file.startsWith('staged/inventory/')));
+  assert(releases.find((item) => item.releaseCode === 'agoraData:agoraTaxSource').declaredFiles.every((file) => file.startsWith('staged/tax/')));
   assert(releases.find((item) => item.releaseCode === 'agoraData:agoraCommerceSearchSource').declaredFiles.every((file) => file.startsWith('staged/commerceSearch/')));
   assert(releases.find((item) => item.releaseCode === 'agoraData:agoraDiscoveryConfigurationSource').declaredFiles.every((file) => file.startsWith('staged/discovery/')));
 
@@ -171,8 +173,8 @@ test('Agora Commerce discovery releases separate Product Pricing and Inventory i
   };
   const execution = await dataReleaseService.execute({ tenant: 'default', releaseRequest });
 
-  assert.equal(execution.data.releases.length, 5);
+  assert.equal(execution.data.releases.length, 6);
   assert.deepEqual(importRequests[0].dataReleasePlan.map((item) => item.releaseCode).sort(), releaseCodes);
-  assert.equal(importRequests[0].dataReleasePlan.flatMap((item) => item.declaredFiles).length, 23);
-  assert.equal(installations.length, 5);
+  assert.equal(importRequests[0].dataReleasePlan.flatMap((item) => item.declaredFiles).length, 25);
+  assert.equal(installations.length, 6);
 });

@@ -47,5 +47,6 @@ test("Agora Commerce data acceptance requires the full staged release family", (
     "agoraData:agoraInventorySource",
     "agoraData:agoraPricingSource",
     "agoraData:agoraProductCatalogSource",
+    "agoraData:agoraTaxSource",
   ].forEach((releaseCode) => assert.match(source, new RegExp(releaseCode)));
 });

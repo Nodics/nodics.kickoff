@@ -104,6 +104,12 @@ async function authenticateEmployee() {
   throw lastError || new Error("Platform employee authentication returned no token");
 }
 
+async function dataRecords(relativePath) {
+  const module = await import(new URL(`../modules/agoraData/${relativePath}`, import.meta.url));
+  const records = module.default || module;
+  return Object.values(records);
+}
+
 async function validatePublicationContract(headers) {
   const stagedContract = await request(commerceStagedUrl, "/nodics/system/v0/contract/openapi", { headers });
   const stagedPaths = stagedContract?.paths || stagedContract?.openapi?.paths || {};
@@ -120,6 +126,9 @@ async function validatePublicationContract(headers) {
   const onlinePaths = onlineContract?.paths || onlineContract?.openapi?.paths || {};
   const onlineRequired = {
     "/nodics/product/v0/internal/products/publication/search/restore": "post",
+    "/nodics/pricing/v0/internal/pricing/publication/operational/restore": "post",
+    "/nodics/inventory/v0/internal/inventory/publication/operational/restore": "post",
+    "/nodics/tax/v0/internal/tax/publication/operational/restore": "post",
     "/nodics/product/v0/customer/products/discovery": "get",
     "/nodics/product/v0/customer/products/{productCode}": "get",
   };
@@ -166,6 +175,36 @@ async function restoreOnline(headers, publication) {
   log(`restored ${summary.restored} Products into ${summary.projectionCount} Commerce Online search projections`);
 }
 
+async function restoreOperationalOnline(headers) {
+  const priceBooks = await dataRecords("data/staged/pricing/data/agoraPriceBookData.js");
+  const priceRows = await dataRecords("data/staged/pricing/data/agoraPriceRowData.js");
+  const warehouses = await dataRecords("data/staged/inventory/data/agoraWarehouseData.js");
+  const inventoryBalances = await dataRecords("data/staged/inventory/data/agoraInventoryBalanceData.js");
+  const taxPolicies = await dataRecords("data/staged/tax/data/agoraTaxPolicyData.js");
+  const pricing = await request(commerceOnlineUrl, "/nodics/pricing/v0/internal/pricing/publication/operational/restore", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ priceBooks, priceRows }),
+  });
+  const inventory = await request(commerceOnlineUrl, "/nodics/inventory/v0/internal/inventory/publication/operational/restore", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ warehouses, inventoryBalances }),
+  });
+  const tax = await request(commerceOnlineUrl, "/nodics/tax/v0/internal/tax/publication/operational/restore", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ taxPolicies }),
+  });
+  const pricingCount = Number((pricing?.data || pricing?.result || pricing)?.restored || 0);
+  const inventoryCount = Number((inventory?.data || inventory?.result || inventory)?.restored || 0);
+  const taxCount = Number((tax?.data || tax?.result || tax)?.restored || 0);
+  if (pricingCount <= 0 || inventoryCount <= 0 || taxCount <= 0) {
+    throw new Error(`Commerce Online operational restoration was incomplete: ${JSON.stringify({ pricing, inventory, tax })}`);
+  }
+  log(`restored Online operational Pricing (${pricingCount}), Inventory (${inventoryCount}), and Tax (${taxCount}) records`);
+}
+
 async function validateDiscovery(headers, storeCode) {
   const locale = process.env.NODICS_STOREFRONT_LOCALE || "en";
   const body = await request(commerceOnlineUrl, `/nodics/product/v0/customer/products/discovery?storeCode=${encodeURIComponent(storeCode)}&locale=${encodeURIComponent(locale)}&pageSize=12`, {
@@ -203,6 +242,7 @@ async function run() {
     await validatePublicationContract(employeeHeaders);
     const publication = await publishSearch(employeeHeaders);
     await restoreOnline(employeeHeaders, publication);
+    await restoreOperationalOnline(employeeHeaders);
     await validateDiscovery(employeeHeaders, publication.storeCode);
     log("Agora Commerce publication acceptance passed");
   } finally {

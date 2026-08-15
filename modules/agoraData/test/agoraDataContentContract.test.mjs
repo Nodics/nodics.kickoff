@@ -48,6 +48,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   const productSection = manifest.sections.agoraProductCatalogSource;
   const pricingSection = manifest.sections.agoraPricingSource;
   const inventorySection = manifest.sections.agoraInventorySource;
+  const taxSection = manifest.sections.agoraTaxSource;
   const commerceSearchSection = manifest.sections.agoraCommerceSearchSource;
   const discoverySection = manifest.sections.agoraDiscoveryConfigurationSource;
 
@@ -58,6 +59,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
     'agoraProductCatalogSource',
     'agoraPricingSource',
     'agoraInventorySource',
+    'agoraTaxSource',
     'agoraCommerceSearchSource',
     'agoraDiscoveryConfigurationSource'
   ]);
@@ -83,7 +85,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   assert.equal(productSection.publicationPolicy, 'REQUIRED');
   assert.equal(productSection.initialPublicationPolicy, 'ADMIN_INITIATED');
   assert.equal(productSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
-  for (const section of [pricingSection, inventorySection, commerceSearchSection, discoverySection]) {
+  for (const section of [pricingSection, inventorySection, taxSection, commerceSearchSection, discoverySection]) {
     assert.equal(section.kind, 'DATA_RELEASE');
     assert.equal(section.dataType, 'sample');
     assert.equal(section.sourceRoot, 'staged');
@@ -155,15 +157,17 @@ test('Product seed files stay inside the Commerce Staged Product boundary', () =
   }
 });
 
-test('Pricing and Inventory seed files stay inside Commerce Staged domain boundaries', () => {
+test('Pricing, Inventory and Tax seed files stay inside Commerce Staged domain boundaries', () => {
   const manifest = readJson('data/manifest.json');
   const pricingSection = manifest.sections.agoraPricingSource;
   const inventorySection = manifest.sections.agoraInventorySource;
+  const taxSection = manifest.sections.agoraTaxSource;
 
   assert(Object.keys(pricingSection.files).every((relativePath) => relativePath.startsWith('staged/pricing/')));
   assert(Object.keys(inventorySection.files).every((relativePath) => relativePath.startsWith('staged/inventory/')));
+  assert(Object.keys(taxSection.files).every((relativePath) => relativePath.startsWith('staged/tax/')));
 
-  for (const section of [pricingSection, inventorySection]) {
+  for (const section of [pricingSection, inventorySection, taxSection]) {
     for (const relativePath of Object.keys(section.files)) {
       const content = fs.readFileSync(path.join(moduleRoot, 'data', relativePath), 'utf8');
       assert.match(content, /@lifecycle PUBLISHABLE/);
@@ -253,22 +257,27 @@ test('Product seed uses only Product-owned source schemas and expected first-sli
   assert(Object.values(variantLocalizations).every((record) => record.status === 'READY'));
 });
 
-test('Pricing and Inventory seed use only their owned source schemas and expected first-slice counts', async () => {
+test('Pricing, Inventory and Tax seed use only their owned source schemas and expected first-slice counts', async () => {
   const pricingHeader = await readDataModule('data/staged/pricing/headers/agoraPricingHeader.js');
   const inventoryHeader = await readDataModule('data/staged/inventory/headers/agoraInventoryHeader.js');
+  const taxHeader = await readDataModule('data/staged/tax/headers/agoraTaxHeader.js');
   const priceBooks = await readDataModule('data/staged/pricing/data/agoraPriceBookData.js');
   const priceRows = await readDataModule('data/staged/pricing/data/agoraPriceRowData.js');
   const warehouses = await readDataModule('data/staged/inventory/data/agoraWarehouseData.js');
   const balances = await readDataModule('data/staged/inventory/data/agoraInventoryBalanceData.js');
+  const taxPolicies = await readDataModule('data/staged/tax/data/agoraTaxPolicyData.js');
 
   assert.deepEqual(Object.values(pricingHeader.pricing).map((entry) => entry.options.schemaName).sort(), ['priceBook', 'priceRow']);
   assert.deepEqual(Object.values(inventoryHeader.inventory).map((entry) => entry.options.schemaName).sort(), ['inventoryBalance', 'warehouse']);
+  assert.deepEqual(Object.values(taxHeader.tax).map((entry) => entry.options.schemaName).sort(), ['taxPolicy']);
   assert.equal(Object.keys(priceBooks).length, 1);
   assert.equal(Object.keys(priceRows).length, 12);
   assert.equal(Object.keys(warehouses).length, 1);
   assert.equal(Object.keys(balances).length, 24);
+  assert.equal(Object.keys(taxPolicies).length, 1);
   assert(Object.values(priceRows).every((record) => record.tenant === 'default' && record.currency === 'USD' && record.priceBookCode === 'agoraRetailUsd'));
   assert(Object.values(balances).every((record) => record.tenant === 'default' && record.warehouseCode === 'agoraMainWarehouse' && record.sku.startsWith('AGORA-')));
+  assert(Object.values(taxPolicies).every((record) => record.tenant === 'default' && record.jurisdiction === 'AE' && record.status === 'ACTIVE'));
 });
 
 test('Commerce Search seed uses only Commerce Search-owned schemas and expected first-slice rules', async () => {

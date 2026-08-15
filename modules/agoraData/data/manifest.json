@@ -99,6 +99,26 @@
         "staged/inventory/headers/agoraInventoryHeader.js": "d7f18111ac5bf08373c1c3d10f2fba3717ed3fe3bd854c576d8aaff3115801a5"
       }
     },
+    "agoraTaxSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora checkout Tax source",
+      "owningDomain": "agora.tax",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": ["LOCAL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/tax/data/agoraTaxPolicyData.js": "60f5a54a05e04cb1e3ece59edec14bb3deebb72d5ab5d13a6dd895ac80514303",
+        "staged/tax/headers/agoraTaxHeader.js": "70ae294422f7a39a1f864bdce990da4197f06939850efb43aa99e8886282aec7"
+      }
+    },
     "agoraCommerceSearchSource": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",

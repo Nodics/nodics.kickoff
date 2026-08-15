@@ -100,39 +100,38 @@ async function authenticateEmployee() {
   throw lastError || new Error("Platform employee authentication returned no token");
 }
 
-async function authenticateCustomerIfConfigured() {
-  const loginId = process.env.NODICS_STOREFRONT_CUSTOMER_LOGIN_ID;
-  const password = process.env.NODICS_STOREFRONT_CUSTOMER_PASSWORD;
-  if (!loginId || !password) {
-    log("customer mutation smoke skipped; set NODICS_STOREFRONT_CUSTOMER_LOGIN_ID and NODICS_STOREFRONT_CUSTOMER_PASSWORD to exercise live secured customer APIs");
-    return null;
+function storefrontCustomerCredentials(scope = "PRIMARY") {
+  const prefix = scope === "SECONDARY" ? "NODICS_STOREFRONT_SECONDARY_CUSTOMER" : "NODICS_STOREFRONT_CUSTOMER";
+  const loginId = process.env[`${prefix}_LOGIN_ID`];
+  const password = process.env[`${prefix}_PASSWORD`];
+  if (loginId && password) {
+    return {
+      loginId,
+      password,
+      generated: false,
+      register: process.env[`${prefix}_REGISTER`] === "true" || process.env.NODICS_STOREFRONT_CUSTOMER_REGISTER === "true",
+    };
   }
-  const result = await request(platformUrl, "/nodics/profile/v0/customer/authenticate", {
-    method: "POST",
-    headers: { "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default" },
-    body: JSON.stringify({ loginId, password }),
-  });
-  const authToken = result?.authToken || result?.result?.authToken || result?.data?.authToken;
-  if (!authToken) throw new Error("Platform customer authentication returned no token");
-  log(`customer ${loginId} authenticated`);
-  return { Authorization: `Bearer ${authToken}` };
+  const suffix = randomUUID().slice(0, 12);
+  return {
+    loginId: `storefront.customer.${scope.toLowerCase()}.${suffix}@example.com`,
+    password: `NodicsStorefront#${suffix}1a`,
+    generated: true,
+    register: true,
+  };
 }
 
-async function ensureCustomerIfConfigured(employeeHeaders) {
-  const loginId = process.env.NODICS_STOREFRONT_CUSTOMER_LOGIN_ID;
-  const password = process.env.NODICS_STOREFRONT_CUSTOMER_PASSWORD;
-  if (!loginId || !password || process.env.NODICS_STOREFRONT_CUSTOMER_REGISTER !== "true") return;
+async function ensureStorefrontCustomer(employeeHeaders, credentials, scope = "primary") {
+  if (!credentials?.register) return;
   const payload = {
-    code: loginId,
-    loginId,
+    code: credentials.loginId,
+    loginId: credentials.loginId,
     name: {
       title: "Mx.",
-      firstName: process.env.NODICS_STOREFRONT_CUSTOMER_FIRST_NAME || "Storefront",
+      firstName: process.env.NODICS_STOREFRONT_CUSTOMER_FIRST_NAME || `Storefront ${scope}`,
       lastName: process.env.NODICS_STOREFRONT_CUSTOMER_LAST_NAME || "Customer",
     },
-    password: { loginId, password, confirmPassword: password },
-    contacts: [],
-    addresses: [],
+    password: { loginId: credentials.loginId, password: credentials.password, confirmPassword: credentials.password, active: true },
   };
   try {
     await request(platformUrl, "/nodics/profile/v0/customer/signup", {
@@ -140,11 +139,23 @@ async function ensureCustomerIfConfigured(employeeHeaders) {
       headers: employeeHeaders,
       body: JSON.stringify(payload),
     });
-    log(`storefront customer ${loginId} registered for local acceptance`);
+    log(`storefront ${scope} customer ${credentials.loginId} registered for local acceptance`);
   } catch (error) {
     if (!String(error.message || error).match(/exist|duplicate|already/i)) throw error;
-    log(`storefront customer ${loginId} already exists`);
+    log(`storefront ${scope} customer ${credentials.loginId} already exists`);
   }
+}
+
+async function authenticateCustomer(credentials, scope = "primary") {
+  const result = await request(platformUrl, "/nodics/profile/v0/customer/authenticate", {
+    method: "POST",
+    headers: { "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default" },
+    body: JSON.stringify({ loginId: credentials.loginId, password: credentials.password }),
+  });
+  const authToken = result?.authToken || result?.result?.authToken || result?.data?.authToken;
+  if (!authToken) throw new Error(`Platform ${scope} customer authentication returned no token`);
+  log(`storefront ${scope} customer ${credentials.loginId} authenticated`);
+  return { headers: { Authorization: `Bearer ${authToken}` }, credentials };
 }
 
 async function validateCommerceContract(headers) {
@@ -187,21 +198,31 @@ async function exerciseProductDiscovery(headers) {
   if (listing.discovery && listing.discovery.source !== "SEARCH_INDEX") throw new Error(`Product discovery is not search-index backed: ${JSON.stringify(listing.discovery)}`);
   const detail = dataOf(await request(commerceUrl, `/nodics/product/v0/customer/products/${encodeURIComponent(productCode)}?storeCode=${encodeURIComponent(storeCode)}&locale=${encodeURIComponent(locale)}`, { headers }));
   if (detail?.product?.productCode !== productCode) throw new Error(`Product detail returned unexpected response: ${JSON.stringify(detail)}`);
+  const serializedListing = JSON.stringify(listing);
+  const serializedDetail = JSON.stringify(detail);
+  for (const forbidden of ["priceRowCode", "warehouseCode", "supplierCost", "internalOnly"]) {
+    if (serializedListing.includes(forbidden) || serializedDetail.includes(forbidden)) {
+      throw new Error(`Customer Product discovery/PDP leaked backend-only field ${forbidden}`);
+    }
+  }
   await request(commerceUrl, "/nodics/fulfillmentCore/v0/customer/shipping/methods", { headers });
   await request(commerceUrl, "/nodics/fulfillmentCore/v0/customer/returns/methods", { headers });
   log("search-backed product discovery, PDP, shipping methods, and return methods are reachable");
 }
 
 async function exerciseCustomerCart(headers) {
-  if (!headers) return;
   const journeyId = randomUUID();
   const commonHeaders = { ...headers, "x-correlation-id": `agora-commerce-${journeyId}` };
+  const primaryProductCode = process.env.NODICS_STOREFRONT_PRODUCT_CODE || "agoraLinenWrapDress";
+  const primaryVariantCode = process.env.NODICS_STOREFRONT_VARIANT_CODE || "agoraLinenWrapDressNaturalS";
+  const secondaryProductCode = process.env.NODICS_STOREFRONT_SECONDARY_PRODUCT_CODE || "agoraLeatherTote";
+  const secondaryVariantCode = process.env.NODICS_STOREFRONT_SECONDARY_VARIANT_CODE || "agoraLeatherToteTanOne";
   const body = {
     cartCode: `storefront_cart_${journeyId}`,
     storeCode: process.env.NODICS_STOREFRONT_STORE_CODE || "agoraMainStore",
     channelCode: process.env.NODICS_STOREFRONT_CHANNEL_CODE || "web",
     locale: process.env.NODICS_STOREFRONT_LOCALE || "en",
-    jurisdiction: process.env.NODICS_STOREFRONT_JURISDICTION || "US",
+    jurisdiction: process.env.NODICS_STOREFRONT_JURISDICTION || "AE",
     currency: process.env.NODICS_STOREFRONT_CURRENCY || "USD",
   };
   const created = dataOf(await request(commerceUrl, "/nodics/cart/v0/customer/carts", {
@@ -218,25 +239,65 @@ async function exerciseCustomerCart(headers) {
   if (read?.cart?.code !== body.cartCode) {
     throw new Error(`Customer cart read returned unexpected response: ${JSON.stringify(read)}`);
   }
-  log(`customer cart create/read smoke passed for ${body.cartCode}`);
-  return { headers: commonHeaders, cartCode: body.cartCode, revision: String(read.cart.revision || created.cart.revision || "0") };
+  const added = dataOf(await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(body.cartCode)}/entries`, {
+    method: "POST",
+    headers: commonHeaders,
+    body: JSON.stringify({ productCode: primaryProductCode, variantCode: primaryVariantCode, quantity: "1" }),
+  }));
+  const primaryEntry = added?.entries?.find((entry) => entry.productCode === primaryProductCode);
+  if (!primaryEntry?.code) throw new Error(`Customer cart add primary item returned unexpected response: ${JSON.stringify(added)}`);
+  const secondaryAdded = dataOf(await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(body.cartCode)}/entries`, {
+    method: "POST",
+    headers: commonHeaders,
+    body: JSON.stringify({ productCode: secondaryProductCode, variantCode: secondaryVariantCode, quantity: "1" }),
+  }));
+  const secondaryEntry = secondaryAdded?.entries?.find((entry) => entry.productCode === secondaryProductCode);
+  if (!secondaryEntry?.code) throw new Error(`Customer cart add secondary item returned unexpected response: ${JSON.stringify(secondaryAdded)}`);
+  const updated = dataOf(await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(body.cartCode)}/entries/${encodeURIComponent(primaryEntry.code)}`, {
+    method: "PATCH",
+    headers: commonHeaders,
+    body: JSON.stringify({ quantity: "2", expectedRevision: String(secondaryAdded?.cart?.revision || added?.cart?.revision || read.cart.revision || "0") }),
+  }));
+  const removed = dataOf(await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(body.cartCode)}/entries/${encodeURIComponent(secondaryEntry.code)}`, {
+    method: "DELETE",
+    headers: commonHeaders,
+    body: JSON.stringify({ expectedRevision: String(updated?.cart?.revision || secondaryAdded?.cart?.revision || "0") }),
+  }));
+  const revision = String(removed?.cart?.revision || updated?.cart?.revision || "0");
+  const calculated = dataOf(await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(body.cartCode)}/calculations`, {
+    method: "POST",
+    headers: commonHeaders,
+    body: JSON.stringify({ expectedRevision: revision, calculationCode: `calc-${body.cartCode}` }),
+  }));
+  const serializedCart = JSON.stringify(calculated);
+  for (const forbidden of ["priceRowCode", "warehouseCode", "supplierCost", "internalOnly"]) {
+    if (serializedCart.includes(forbidden)) throw new Error(`Customer cart leaked backend-only field ${forbidden}`);
+  }
+  log(`customer cart add/update/remove/calculate smoke passed for ${body.cartCode}`);
+  return {
+    headers: commonHeaders,
+    cartCode: body.cartCode,
+    revision: String(calculated?.cart?.revision || revision),
+    calculationCode: `calc-${body.cartCode}`,
+    productCode: primaryProductCode,
+    variantCode: primaryVariantCode,
+  };
 }
 
-async function exerciseCustomerCheckout(cartSmoke) {
-  if (!cartSmoke) return;
-  const productCode = process.env.NODICS_STOREFRONT_PRODUCT_CODE || "agoraLinenWrapDress";
-  const variantCode = process.env.NODICS_STOREFRONT_VARIANT_CODE || "agoraLinenWrapDressNaturalS";
-  const added = dataOf(await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(cartSmoke.cartCode)}/entries`, {
-    method: "POST",
-    headers: cartSmoke.headers,
-    body: JSON.stringify({ productCode, variantCode, quantity: "1" }),
-  }));
-  const revision = String(added?.cart?.revision || cartSmoke.revision || "0");
-  await request(commerceUrl, `/nodics/cart/v0/customer/carts/${encodeURIComponent(cartSmoke.cartCode)}/calculations`, {
-    method: "POST",
-    headers: cartSmoke.headers,
-    body: JSON.stringify({ expectedRevision: revision, calculationCode: `calc-${cartSmoke.cartCode}` }),
-  });
+async function expectReadRejected(headers, path, label) {
+  try {
+    await request(commerceUrl, path, { headers });
+  } catch (error) {
+    if (String(error.message || error).match(/HTTP (403|404)/)) {
+      log(`${label} correctly rejected for non-owner`);
+      return;
+    }
+    throw error;
+  }
+  throw new Error(`${label} unexpectedly allowed non-owner access`);
+}
+
+async function exerciseCustomerCheckout(cartSmoke, customer) {
   const orderCode = `storefront_order_${randomUUID()}`;
   const placed = dataOf(await request(commerceUrl, "/nodics/checkoutCore/v0/customer/checkouts/place", {
     method: "POST",
@@ -244,10 +305,10 @@ async function exerciseCustomerCheckout(cartSmoke) {
     body: JSON.stringify({
       cartCode: cartSmoke.cartCode,
       orderCode,
-      expectedCartRevision: revision,
-      calculationCode: `calc-${cartSmoke.cartCode}`,
-      providerToken: "tok_storefront_4242",
-      customer: { email: process.env.NODICS_STOREFRONT_CUSTOMER_LOGIN_ID || "storefront.customer@example.com", firstName: "Storefront", lastName: "Customer" },
+      expectedCartRevision: cartSmoke.revision,
+      calculationCode: cartSmoke.calculationCode,
+      providerToken: "tok_test_storefront_4242",
+      customer: { email: customer.credentials.loginId, firstName: "Storefront", lastName: "Customer" },
       shippingAddress: { line1: "549 Oak St", city: "Crystal Lake", region: "IL", postalCode: "60014", country: "US" },
       shippingMethod: "STANDARD",
       paymentMethod: "CARD",
@@ -265,7 +326,7 @@ async function exerciseCustomerCheckout(cartSmoke) {
     requestType: "CANCELLATION",
     reasonCode: "CUSTOMER_CHANGED_MIND",
     policyVersion: "1",
-    evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [productCode], refundMethod: "ORIGINAL_PAYMENT" },
+    evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [cartSmoke.productCode], refundMethod: "ORIGINAL_PAYMENT" },
   };
   await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle/preview`, {
     method: "POST",
@@ -288,13 +349,51 @@ async function exerciseCustomerCheckout(cartSmoke) {
       requestType: "RETURN",
       reasonCode: "DAMAGED_ITEM",
       policyVersion: "1",
-      evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [productCode], returnMethod: "DROP_OFF", refundMethod: "ORIGINAL_PAYMENT" },
+      evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [cartSmoke.productCode], returnMethod: "DROP_OFF", refundMethod: "ORIGINAL_PAYMENT" },
     }),
   }));
   if (returnPreview?.eligible === false || !returnPreview?.rmaCode && !Array.isArray(returnPreview?.returnMethods)) {
     throw new Error(`Customer return preview returned unexpected response: ${JSON.stringify(returnPreview)}`);
   }
-  log(`customer checkout/order/lifecycle smoke passed for ${placedOrderCode}`);
+  const returnLifecycle = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle`, {
+    method: "POST",
+    headers: { ...cartSmoke.headers, "idempotency-key": `${placedOrderCode}:return` },
+    body: JSON.stringify({
+      code: `${placedOrderCode}:return`,
+      requestType: "RETURN",
+      reasonCode: "DAMAGED_ITEM",
+      policyVersion: "1",
+      evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [cartSmoke.productCode], returnMethod: "DROP_OFF", refundMethod: "ORIGINAL_PAYMENT" },
+    }),
+  }));
+  if (returnLifecycle?.status !== "SUBMITTED") {
+    throw new Error(`Customer return lifecycle create returned unexpected response: ${JSON.stringify(returnLifecycle)}`);
+  }
+  const refundPayload = {
+    code: `${placedOrderCode}:refund`,
+    requestType: "REFUND",
+    reasonCode: "REFUND_STATUS_REQUESTED",
+    policyVersion: "1",
+    evidence: { source: "agora-commerce-acceptance", quantity: "1", productCodes: [cartSmoke.productCode], refundMethod: "ORIGINAL_PAYMENT" },
+  };
+  const refundPreview = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle/preview`, {
+    method: "POST",
+    headers: cartSmoke.headers,
+    body: JSON.stringify(refundPayload),
+  }));
+  if (refundPreview?.eligible === false || !refundPreview?.refundPreview && !Array.isArray(refundPreview?.refundMethods)) {
+    throw new Error(`Customer refund preview returned unexpected response: ${JSON.stringify(refundPreview)}`);
+  }
+  const refundLifecycle = dataOf(await request(commerceUrl, `/nodics/order/v0/customer/orders/${encodeURIComponent(placedOrderCode)}/lifecycle`, {
+    method: "POST",
+    headers: { ...cartSmoke.headers, "idempotency-key": `${placedOrderCode}:refund` },
+    body: JSON.stringify(refundPayload),
+  }));
+  if (refundLifecycle?.status !== "SUBMITTED") {
+    throw new Error(`Customer refund lifecycle create returned unexpected response: ${JSON.stringify(refundLifecycle)}`);
+  }
+  log(`customer checkout/order/cancellation/return/refund smoke passed for ${placedOrderCode}`);
+  return { orderCode: placedOrderCode, cartCode: cartSmoke.cartCode };
 }
 
 async function cleanup() {
@@ -308,10 +407,16 @@ async function run() {
     const employeeHeaders = await authenticateEmployee();
     await validateCommerceContract(employeeHeaders);
     await exerciseProductDiscovery(employeeHeaders);
-    await ensureCustomerIfConfigured(employeeHeaders);
-    const customerHeaders = await authenticateCustomerIfConfigured();
-    const cartSmoke = await exerciseCustomerCart(customerHeaders);
-    await exerciseCustomerCheckout(cartSmoke);
+    const primaryCredentials = storefrontCustomerCredentials("PRIMARY");
+    await ensureStorefrontCustomer(employeeHeaders, primaryCredentials, "primary");
+    const primaryCustomer = await authenticateCustomer(primaryCredentials, "primary");
+    const cartSmoke = await exerciseCustomerCart(primaryCustomer.headers);
+    const checkoutSmoke = await exerciseCustomerCheckout(cartSmoke, primaryCustomer);
+    const secondaryCredentials = storefrontCustomerCredentials("SECONDARY");
+    await ensureStorefrontCustomer(employeeHeaders, secondaryCredentials, "secondary");
+    const secondaryCustomer = await authenticateCustomer(secondaryCredentials, "secondary");
+    await expectReadRejected(secondaryCustomer.headers, `/nodics/order/v0/customer/orders/${encodeURIComponent(checkoutSmoke.orderCode)}`, "customer order read");
+    await expectReadRejected(secondaryCustomer.headers, `/nodics/cart/v0/customer/carts/${encodeURIComponent(checkoutSmoke.cartCode)}`, "customer cart read");
     log("Agora Commerce acceptance passed");
   } finally {
     await cleanup();

@@ -21,18 +21,23 @@ const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const scriptPath = path.join(projectRoot, "scripts/agora-commerce-publication-acceptance.mjs");
 const packagePath = path.join(projectRoot, "package.json");
 
-test("Agora Commerce publication acceptance covers operator publication and customer discovery", () => {
+test("Agora Commerce publication acceptance covers operator publication operational restore and customer discovery", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
   assert.equal(pkg.scripts["acceptance:agora-commerce-publication"], "node scripts/agora-commerce-publication-acceptance.mjs");
   assert.match(source, /"\/nodics\/product\/v0\/operator\/products\/publication\/search"/);
   assert.match(source, /"\/nodics\/product\/v0\/internal\/products\/publication\/search\/restore"/);
+  assert.match(source, /"\/nodics\/pricing\/v0\/internal\/pricing\/publication\/operational\/restore"/);
+  assert.match(source, /"\/nodics\/inventory\/v0\/internal\/inventory\/publication\/operational\/restore"/);
+  assert.match(source, /"\/nodics\/tax\/v0\/internal\/tax\/publication\/operational\/restore"/);
   assert.match(source, /"\/nodics\/product\/v0\/customer\/products\/discovery"/);
   assert.match(source, /"\/nodics\/product\/v0\/customer\/products\/\{productCode\}"/);
   assert.match(source, /catalogVersion.*\|\| "agoraStaged"/);
   assert.match(source, /storeCode.*\|\| "agoraMainStore"/);
   assert.match(source, /includeProjectionSnapshots: true/);
+  assert.match(source, /restoreOperationalOnline/);
+  assert.match(source, /agoraTaxPolicyData/);
   assert.match(source, /CommerceOnline/);
 });
 

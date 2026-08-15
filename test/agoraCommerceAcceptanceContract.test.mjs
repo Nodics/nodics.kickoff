@@ -21,7 +21,7 @@ const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const scriptPath = path.join(projectRoot, "scripts/agora-commerce-acceptance.mjs");
 const packagePath = path.join(projectRoot, "package.json");
 
-test("Agora Commerce acceptance covers backend route surface and authenticated customer journey when credentials exist", () => {
+test("Agora Commerce acceptance covers backend route surface and secured generated customer journey", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
@@ -38,14 +38,26 @@ test("Agora Commerce acceptance covers backend route surface and authenticated c
     "\"/nodics/order/v0/customer/orders/{orderCode}/lifecycle/preview\"",
     "\"/nodics/order/v0/customer/orders/{orderCode}/lifecycle\"",
   ].forEach((route) => assert.match(source, new RegExp(route.replace(/[{}]/g, "\\$&"))));
-  assert.match(source, /NODICS_STOREFRONT_CUSTOMER_LOGIN_ID/);
+  assert.match(source, /storefrontCustomerCredentials/);
+  assert.match(source, /NODICS_STOREFRONT_CUSTOMER/);
+  assert.match(source, /NODICS_STOREFRONT_SECONDARY_CUSTOMER/);
   assert.match(source, /NODICS_STOREFRONT_CUSTOMER_REGISTER/);
+  assert.match(source, /storefront\.customer\.\$\{scope\.toLowerCase\(\)\}/);
+  assert.match(source, /ensureStorefrontCustomer/);
   assert.match(source, /exerciseProductDiscovery/);
   assert.match(source, /SEARCH_INDEX/);
+  assert.match(source, /priceRowCode/);
+  assert.match(source, /warehouseCode/);
   assert.match(source, /NODICS_STOREFRONT_PRODUCT_CODE/);
+  assert.match(source, /NODICS_STOREFRONT_JURISDICTION \|\| "AE"/);
   assert.doesNotMatch(source, /AGORA_CUSTOMER_LOGIN_ID|AGORA_PRODUCT_CODE|AGORA_STORE_CODE/);
-  assert.match(source, /tok_storefront_4242/);
+  assert.match(source, /method: "PATCH"/);
+  assert.match(source, /customer cart add\/update\/remove\/calculate smoke passed/);
+  assert.match(source, /tok_test_storefront_4242/);
   assert.match(source, /exerciseCustomerCheckout/);
   assert.match(source, /requestType: "RETURN"/);
-  assert.match(source, /customer checkout\/order\/lifecycle smoke passed/);
+  assert.match(source, /requestType: "REFUND"/);
+  assert.match(source, /expectReadRejected/);
+  assert.match(source, /correctly rejected for non-owner/);
+  assert.match(source, /customer checkout\/order\/cancellation\/return\/refund smoke passed/);
 });
