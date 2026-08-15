@@ -29,10 +29,13 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
    - emergency deactivation evidence has backend coverage.
 
 3. Customer account self-service
-   - profile summary and edit handoff through Profile;
-   - address-book list/create/update handoff through Profile;
-   - order history and lifecycle request visibility through Commerce;
-   - operator-only overrides remaining in Axis/backoffice.
+   - profile summary and edit handoff through Profile is represented by the
+     account center resolver contract;
+   - address-book list/create/update handoff through Profile is represented by
+     the account center resolver contract;
+   - order history and lifecycle request visibility through Commerce is
+     customer-visible and qualified;
+   - operator-only overrides remain in Axis/backoffice.
 
 4. Reverse lifecycle depth
    - cancellation before fulfillment release is represented through Inventory
@@ -101,5 +104,4 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
 Remaining items after this closure batch are not normal local implementation
 blockers: licensed/replacement production media intake, real payment/carrier/POS
 provider certification, and deeper post-V1 business UX such as visual Promotion
-Builder composition, analytics, account self-service, and secondary commerce
-scenarios.
+Builder composition, promotion analytics, and secondary commerce scenarios.

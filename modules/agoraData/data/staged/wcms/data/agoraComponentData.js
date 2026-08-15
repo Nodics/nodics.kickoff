@@ -350,8 +350,10 @@ module.exports = {
       heading: 'Production release gates',
       gates: [
         { code: 'MEDIA_RIGHTS', owner: 'nMedia + agoraData' },
-        { code: 'PROMOTION_BUILDER_DEPTH', owner: 'Promotion + Axis' },
-        { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process' }
+        { code: 'PROMOTION_BUILDER_DEPTH', owner: 'Promotion + Axis', status: 'LOCAL_FIRST_SLICE_COMPLETE' },
+        { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process', status: 'LOCAL_QUALIFIED' },
+        { code: 'ACCOUNT_SELF_SERVICE', owner: 'Profile + Order + Agora', status: 'LOCAL_QUALIFIED' },
+        { code: 'POS_LOCAL_REFERENCE', owner: 'Inventory + Store', status: 'LOCAL_QUALIFIED' }
       ],
       parkedExternalGates: [
         {
@@ -361,10 +363,10 @@ module.exports = {
         }
       ],
       nonProviderImplementationBacklog: [
-        'Promotion visual rule composer, coupon allocation, budget mutation ledger and approval checklist',
-        'Media rights, checksum, target-usage approval, activation revision and emergency deactivation',
-        'Customer profile, address-book and order self-service handoff depth',
-        'Cancellation, return, refund, exchange, replacement and appeal automation runbooks',
+        'Promotion visual rule composer and analytics remain post-V1 UX enhancements; coupon allocation, budget mutation ledger and approval checklist have first-slice coverage',
+        'Media rights-cleared asset intake remains an external release gate; checksum, target-usage approval, activation revision and emergency deactivation have backend coverage',
+        'Customer profile, address-book and order self-service handoff has local customer-visible coverage',
+        'Cancellation, return, refund, exchange, replacement and appeal automation runbooks have local and Docker acceptance coverage',
         'Source-owned test-folder structure stabilization'
       ]
     }

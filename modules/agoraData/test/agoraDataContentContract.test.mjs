@@ -390,10 +390,16 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
     'Operator-only overrides'
   ]);
   assert.equal(accountCenter.properties.operationGroups.find((group) => group.title === 'Operator-only overrides').status, 'BACKOFFICE_ONLY');
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'PROMOTION_BUILDER_DEPTH' && gate.status === 'LOCAL_FIRST_SLICE_COMPLETE'));
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'REVERSE_LIFECYCLE_AUTOMATION' && gate.status === 'LOCAL_QUALIFIED'));
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'ACCOUNT_SELF_SERVICE' && gate.status === 'LOCAL_QUALIFIED'));
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'POS_LOCAL_REFERENCE' && gate.status === 'LOCAL_QUALIFIED'));
   assert.deepEqual(productionGateSummary.properties.gates.map((gate) => gate.code), [
     'MEDIA_RIGHTS',
     'PROMOTION_BUILDER_DEPTH',
-    'REVERSE_LIFECYCLE_AUTOMATION'
+    'REVERSE_LIFECYCLE_AUTOMATION',
+    'ACCOUNT_SELF_SERVICE',
+    'POS_LOCAL_REFERENCE'
   ]);
   assert.deepEqual(productionGateSummary.properties.parkedExternalGates.map((gate) => gate.code), ['LIVE_PROVIDERS']);
   assert.match(productionGateSummary.properties.parkedExternalGates[0].reason, /Parked from this thread/);
