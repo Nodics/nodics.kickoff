@@ -24,8 +24,12 @@ module.exports = {
     evidence: {
       source: 'NODICS_SAMPLE_DATA',
       rightsStatus: 'REPLACEMENT_REQUIRED',
+      approvalStatus: 'PENDING_ASSET_INTAKE',
       targetType: 'CONTENT_BANNER',
-      approvedReferenceSiteAsset: false
+      approvedReferenceSiteAsset: false,
+      checksumRequired: true,
+      reviewerRequired: true,
+      productionUseAllowed: false
     }
   },
   record1: {
@@ -41,8 +45,12 @@ module.exports = {
     evidence: {
       source: 'NODICS_SAMPLE_DATA',
       rightsStatus: 'REPLACEMENT_REQUIRED',
+      approvalStatus: 'PENDING_ASSET_INTAKE',
       targetType: 'PRODUCT_PRIMARY_IMAGE',
-      approvedReferenceSiteAsset: false
+      approvedReferenceSiteAsset: false,
+      checksumRequired: true,
+      reviewerRequired: true,
+      productionUseAllowed: false
     }
   },
   record2: {
@@ -58,8 +66,12 @@ module.exports = {
     evidence: {
       source: 'NODICS_SAMPLE_DATA',
       rightsStatus: 'REPLACEMENT_REQUIRED',
+      approvalStatus: 'PENDING_ASSET_INTAKE',
       targetType: 'PRODUCT_PRIMARY_IMAGE',
-      approvedReferenceSiteAsset: false
+      approvedReferenceSiteAsset: false,
+      checksumRequired: true,
+      reviewerRequired: true,
+      productionUseAllowed: false
     }
   }
 };

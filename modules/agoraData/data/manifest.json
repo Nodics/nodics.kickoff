@@ -79,7 +79,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/media/data/agoraMediaReferenceData.js": "59701ada18e3f7b7110aa42c59ffef96011f54e1787d0f9f972de7fa7d7e02c9",
+        "staged/media/data/agoraMediaReferenceData.js": "683c7e897748d679beeb03878e20a1ac0d01cb887245044a9efd1e7d787b4a59",
         "staged/media/headers/agoraMediaReferenceHeader.js": "1edbf8c0c56a5c72a8ea105bc2e3df1c87a5969e9efe6dedf05cd38ed0b13039"
       }
     },

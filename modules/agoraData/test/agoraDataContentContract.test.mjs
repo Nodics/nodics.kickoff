@@ -139,7 +139,11 @@ test('Media reference seed maps product and content targets without approving re
   for (const record of references) {
     assert.equal(record.status, 'INACTIVE');
     assert.equal(record.evidence.rightsStatus, 'REPLACEMENT_REQUIRED');
+    assert.equal(record.evidence.approvalStatus, 'PENDING_ASSET_INTAKE');
     assert.equal(record.evidence.approvedReferenceSiteAsset, false);
+    assert.equal(record.evidence.checksumRequired, true);
+    assert.equal(record.evidence.reviewerRequired, true);
+    assert.equal(record.evidence.productionUseAllowed, false);
     assert.match(record.mediaCode, /^agora-owned-/);
     assert.doesNotMatch(JSON.stringify(record), /themesflat|modave|REFERENCE_BOOTSTRAP|https?:\/\//i);
   }
