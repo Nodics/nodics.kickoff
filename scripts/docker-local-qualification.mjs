@@ -67,6 +67,8 @@ await check('redis-sentinel-topology', () => dockerCommand(['exec', 'nodics-kick
   'result="$(redis-cli -p 26379 sentinel master nodics)"; printf "%s" "$result" | grep -q "flags" && printf "%s" "$result" | grep -A1 "num-slaves" | grep -q "1"']));
 await check('mongodb-authenticated-replica', () => dockerCommand(['exec', 'nodics-kickoff-docker-local-mongodb-1', 'sh', '-c',
   'mongosh --quiet -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --eval "if (db.adminCommand({ping:1}).ok !== 1 || rs.status().ok !== 1) quit(2)"']));
+await check('elasticsearch-health', () => dockerCommand(['exec', 'nodics-kickoff-docker-local-elasticsearch-1', 'sh', '-c',
+  'curl -fs http://127.0.0.1:9200/_cluster/health >/dev/null']));
 await check('container-hardening', () => {
   const names = ['platform', 'wcms-staged', 'wcms-online', 'process', 'engagement', 'commerce', 'axis', 'nexus'];
   for (const name of names) {

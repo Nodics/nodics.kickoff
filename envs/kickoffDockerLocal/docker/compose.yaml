@@ -101,6 +101,24 @@ services:
       retries: 20
     deploy: { resources: { limits: { memory: 128m, cpus: "0.25" } } }
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.5
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    networks: [data]
+    volumes: ["elasticsearch-data:/usr/share/elasticsearch/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://127.0.0.1:9200/_cluster/health >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    deploy: { resources: { limits: { memory: 1024m, cpus: "1.00" } } }
+
   platform:
     <<: *backend
     command: ["src/start-platform-server.js"]
@@ -115,7 +133,7 @@ services:
     environment: { ENV: kickoffDockerLocal, SERVER: wcmsOnlineServer, NODICS_DATABASE_NAME: kickoffDockerLocalWcmsOnline }
     ports: ["5314:4314"]
     volumes: ["media-online:/var/lib/nodics/media-online"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, elasticsearch: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/wcmsOnlineServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4314/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
@@ -161,7 +179,7 @@ services:
     command: ["src/start-commerce-staged-server.js"]
     environment: { ENV: kickoffDockerLocal, SERVER: commerceStagedServer, NODICS_DATABASE_NAME: kickoffDockerLocalCommerceStaged }
     ports: ["5352:4352"]
-    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, commerce: { condition: service_healthy } }
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, elasticsearch: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, commerce: { condition: service_healthy } }
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/commerceStagedServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4352/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
@@ -202,5 +220,6 @@ networks:
 volumes:
   mongodb-data: { name: nodics-kickoff-docker-local-mongodb }
   redis-primary-data: { name: nodics-kickoff-docker-local-redis }
+  elasticsearch-data: { name: nodics-kickoff-docker-local-elasticsearch }
   media-staged: { name: nodics-kickoff-docker-local-media-staged }
   media-online: { name: nodics-kickoff-docker-local-media-online }

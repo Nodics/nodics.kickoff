@@ -94,6 +94,20 @@ module.exports = {
     active: true
   },
   record6: {
+    code: 'agoraNavAccount',
+    site: 'agoraStorefrontSite',
+    parent: 'agoraMainNavigation',
+    name: 'Account',
+    title: 'Account',
+    nodeType: 'ROUTE',
+    targetRoute: 'agoraAccountProfileRoute',
+    position: 60,
+    status: 'ACTIVE',
+    locale: 'en',
+    channel: 'web',
+    active: true
+  },
+  record7: {
     code: 'agoraFooterNavigation',
     site: 'agoraStorefrontSite',
     name: 'Agora Footer Navigation',
@@ -105,7 +119,7 @@ module.exports = {
     channel: 'web',
     active: true
   },
-  record7: {
+  record8: {
     code: 'agoraFooterReturns',
     site: 'agoraStorefrontSite',
     parent: 'agoraFooterNavigation',

@@ -29,7 +29,7 @@ servers.forEach(server => {
   assert.equal(metadata.nodics.kind, 'server');
   assert(fs.existsSync(path.join(environment, server, 'config', 'properties.js')));
 });
-['platform', 'wcms-staged', 'wcms-online', 'process', 'engagement', 'commerce', 'commerce-staged', 'axis', 'nexus', 'mongodb', 'redis-primary', 'redis-replica', 'redis-sentinel'].forEach(service => {
+['platform', 'wcms-staged', 'wcms-online', 'process', 'engagement', 'commerce', 'commerce-staged', 'axis', 'nexus', 'mongodb', 'redis-primary', 'redis-replica', 'redis-sentinel', 'elasticsearch'].forEach(service => {
   assert.match(compose, new RegExp(`^  ${service}:`, 'm'));
 });
 assert(!compose.includes('kickoffLocalWcms'));
@@ -41,6 +41,8 @@ assert.match(compose, /no-new-privileges:true/);
 assert.match(compose, /5312:4312/);
 assert.match(compose, /5314:4314/);
 assert.match(compose, /5352:4352/);
+assert.match(compose, /docker\.elastic\.co\/elasticsearch\/elasticsearch/);
+assert.match(compose, /elasticsearch-data/);
 assert.match(runtimeProperties, /sentinel:\s*\{/);
 assert.match(runtimeProperties, /host: 'redis-sentinel'/);
 assert.match(runtimeProperties, /password: process\.env\.REDIS_PASSWORD/);

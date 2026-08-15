@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Agora storefront discovery WCMS source",
       "owningDomain": "agora.wcms",
       "lifecycle": "PUBLISHABLE",
@@ -21,12 +21,12 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/agoraCatalogData.js": "f9281abc2fc8476e89ecdfc3da54a0c521001a9dc8fed68bdbd64d12e2b904b0",
-        "staged/wcms/data/agoraComponentData.js": "efd2391d59db7adff347c1900eaba030d12f4acdb43ddadf497c07ca0416ece8",
+        "staged/wcms/data/agoraComponentData.js": "914aeadd53ee69d50d1ac56cf1e3643968a5d97d27f5b8aea0394278ee0c18be",
         "staged/wcms/data/agoraComponentTypeGroupData.js": "799ba7aeb50bb5337c59998d04d2e398f50cf8e24f886fcb6ffb06017de7044e",
-        "staged/wcms/data/agoraNavigationData.js": "61a091d68e2546db232401acf9a4e7170d7f8c703e8166244b511ff08b29ad4f",
-        "staged/wcms/data/agoraPageData.js": "db28c1633d685a586c8b8a41b570bd9b93c05b156dff2c860ffac5f2faa1f4d6",
+        "staged/wcms/data/agoraNavigationData.js": "5d311668d62cca7a587b858ba11564f0042eab026be1a4fb7228c79293560323",
+        "staged/wcms/data/agoraPageData.js": "8c4a5a85c1b397e521665f50028793cb2b089fccf35a1fe420282132eb015b2f",
         "staged/wcms/data/agoraRendererData.js": "d68a47c6328b6e0783cc10495882e58fc93fb2e17fb4b2ea289d5c79b04fbbee",
-        "staged/wcms/data/agoraRouteData.js": "4e9900de2647ac54e2ae4a9184655c76955149999fa35803d2c5eb1b4a555ac4",
+        "staged/wcms/data/agoraRouteData.js": "c98f0cfe592a5b1e229de3d9865663093463b2ff0e5ece1ba8438232899a9f6f",
         "staged/wcms/data/agoraSiteData.js": "695ea44370c79fdeb4a6a6e9bfabcb9bab979e8d327755244ddee1350530499b",
         "staged/wcms/data/agoraSlotData.js": "a63d9e7fc84f0d913068ed2a758801547e87bf1c29b4bd7578e18740bbbcd7d5",
         "staged/wcms/data/agoraTemplateData.js": "2d3a25784884111fb950cb576535883bb7960dbffc4c619c46c61d6ec7aed761",
@@ -44,7 +44,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -93,7 +94,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -116,7 +118,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -139,7 +142,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -161,7 +165,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -209,7 +214,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -231,7 +237,8 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",

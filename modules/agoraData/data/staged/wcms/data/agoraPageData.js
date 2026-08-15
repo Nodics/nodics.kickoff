@@ -26,6 +26,7 @@ module.exports = {
       { target: 'agoraHomeProductRail', slot: 'main', index: 30, active: true },
       { target: 'agoraServicePromiseStrip', slot: 'main', index: 40, active: true },
       { target: 'agoraDiscoveryReadinessNote', slot: 'main', index: 50, active: true },
+      { target: 'agoraProductionGateSummary', slot: 'main', index: 60, active: true },
       { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
     ]
   },
@@ -129,6 +130,22 @@ module.exports = {
       { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
       { target: 'agoraOrderHistory', slot: 'main', index: 20, active: true },
       { target: 'agoraOrderLifecyclePanel', slot: 'main', index: 30, active: true },
+      { target: 'agoraAccountCenter', slot: 'main', index: 40, active: true },
+      { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
+    ]
+  },
+  record8: {
+    code: 'agoraAccountProfilePage',
+    name: 'Nodics Agora Account Profile',
+    active: true,
+    cmsSite: ['agoraStorefrontSite'],
+    typeCode: 'agoraOrderHistoryPageType',
+    template: 'agoraStorefrontPageTemplate',
+    renderer: 'agora.page.account-profile',
+    cmsComponents: [
+      { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
+      { target: 'agoraAccountCenter', slot: 'main', index: 20, active: true },
+      { target: 'agoraOrderHistory', slot: 'main', index: 30, active: true },
       { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
     ]
   }

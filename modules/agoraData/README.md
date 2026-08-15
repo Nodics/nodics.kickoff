@@ -32,13 +32,13 @@ Current records:
   commerce-search ranking inputs where the first storefront slice needs them.
 
 Reviews/ratings are consumed through `nodics.engagement` public/customer APIs
-and are not authored as Commerce data in this module. Wishlist/compare is a
-storefront-local V1 interaction until a backend customer-list/preference module
-is approved. Exchange, replacement, appeal, and reconciliation-required handling
-are represented in the customer journey and backend contracts, while real
-carrier/payment-provider certification and licensed production media remain
-release-gate work. This module must not seed executable behavior for those
-capabilities.
+and are not authored as Commerce data in this module. Wishlist/compare are
+customer-list interactions when a customer session exists, with frontend-local
+fallback for anonymous preview. Exchange, replacement, appeal, and
+reconciliation-required handling are represented in the customer journey and
+backend contracts, while real carrier/payment-provider certification and
+licensed production media remain release-gate work. This module must not seed
+executable behavior for those capabilities.
 
 Live qualification follows the enterprise storefront data flow:
 

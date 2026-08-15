@@ -6,6 +6,7 @@ import { setTimeout as delay } from "node:timers/promises";
 const projectRoot = new URL("..", import.meta.url).pathname;
 const platformUrl = process.env.NODICS_PLATFORM_URL || "http://127.0.0.1:4300";
 const commerceUrl = process.env.NODICS_COMMERCE_URL || "http://127.0.0.1:4350";
+const axisOrigin = process.env.AXIS_ORIGIN || "http://127.0.0.1:3100";
 const managed = [];
 
 function log(message) {
@@ -74,6 +75,15 @@ async function ensureRuntime(label, port, script, baseUrl) {
   await waitReady(baseUrl, label);
 }
 
+function portOf(baseUrl, fallback) {
+  try {
+    const url = new URL(baseUrl);
+    return Number(url.port || (url.protocol === "https:" ? 443 : 80));
+  } catch {
+    return fallback;
+  }
+}
+
 async function authenticateEmployee() {
   const suppliedToken = process.env.AXIS_AUTH_TOKEN || process.env.NODICS_AUTH_TOKEN;
   if (suppliedToken) return { Authorization: `Bearer ${suppliedToken}` };
@@ -81,7 +91,7 @@ async function authenticateEmployee() {
     loginId: process.env.AXIS_LOGIN_ID || "admin",
     password: process.env.AXIS_PASSWORD || "adminPassword",
   };
-  const headers = { Origin: "http://127.0.0.1:3100", "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default" };
+  const headers = { Origin: axisOrigin, "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default" };
   let lastError;
   for (const path of ["/nodics/profile/v0/employee/browser/authenticate", "/nodics/profile/v0/employee/authenticate"]) {
     try {
@@ -402,8 +412,8 @@ async function cleanup() {
 
 async function run() {
   try {
-    await ensureRuntime("Platform", 4300, "start:platform", platformUrl);
-    await ensureRuntime("Commerce", 4350, "start:commerce", commerceUrl);
+    await ensureRuntime("Platform", portOf(platformUrl, 4300), "start:platform", platformUrl);
+    await ensureRuntime("Commerce", portOf(commerceUrl, 4350), "start:commerce", commerceUrl);
     const employeeHeaders = await authenticateEmployee();
     await validateCommerceContract(employeeHeaders);
     await exerciseProductDiscovery(employeeHeaders);

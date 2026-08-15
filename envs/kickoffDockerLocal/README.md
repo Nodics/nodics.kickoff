@@ -2,7 +2,7 @@
 
 `kickoffDockerLocal` is an isolated local production-simulation environment. It does not extend, import, or share databases, ports, generated secrets, media volumes, or runtime configuration with `kickoffLocal`.
 
-It composes Platform, WCMS Staged, WCMS Online, Process, Engagement, and Commerce backend containers plus Axis and Nexus static application containers. MongoDB runs as an authenticated replica set. Redis provides password-protected distributed authentication state with a replica and Sentinel observation. Axis uses operator-facing host ports; Nexus is configured only for Online delivery.
+It composes Platform, WCMS Staged, WCMS Online, Process, Engagement, and Commerce backend containers plus Axis and Nexus static application containers. MongoDB runs as an authenticated replica set. Redis provides password-protected distributed authentication state with a replica and Sentinel observation. Elasticsearch is internal to the data network for Commerce/Discovery search qualification. Axis uses operator-facing host ports; Nexus is configured only for Online delivery.
 
 ## Operations
 
@@ -79,5 +79,6 @@ Independent penetration testing and assistive-technology accessibility review re
 | Process | 5330 |
 | Engagement | 5340 |
 | Commerce | 5350 |
+| Commerce Staged | 5352 |
 
 Native Local ports remain unchanged and are never started by Docker Local acceptance.

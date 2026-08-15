@@ -106,5 +106,17 @@ module.exports = {
     deliveryState: 'ONLINE',
     accessMode: 'CUSTOMER',
     active: true
+  },
+  record8: {
+    code: 'agoraAccountProfileRoute',
+    path: '/account/profile',
+    page: 'agoraAccountProfilePage',
+    site: 'agoraStorefrontSite',
+    locale: 'en',
+    channel: 'web',
+    routeType: 'PAGE',
+    deliveryState: 'ONLINE',
+    accessMode: 'CUSTOMER',
+    active: true
   }
 };

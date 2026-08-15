@@ -19,6 +19,7 @@ import test from "node:test";
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const scriptPath = path.join(projectRoot, "scripts/agora-commerce-acceptance.mjs");
+const dockerScriptPath = path.join(projectRoot, "scripts/agora-commerce-docker-acceptance.mjs");
 const liveQualificationPath = path.join(projectRoot, "scripts/agora-commerce-live-qualification.mjs");
 const packagePath = path.join(projectRoot, "package.json");
 
@@ -27,6 +28,9 @@ test("Agora Commerce acceptance covers backend route surface and secured generat
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
   assert.equal(pkg.scripts["acceptance:agora-commerce"], "node scripts/agora-commerce-acceptance.mjs");
+  assert.match(source, /AXIS_ORIGIN/);
+  assert.match(source, /portOf\(platformUrl, 4300\)/);
+  assert.match(source, /portOf\(commerceUrl, 4350\)/);
   [
     "\"/nodics/product/v0/customer/products/discovery\"",
     "\"/nodics/product/v0/customer/products/{productCode}\"",
@@ -61,6 +65,19 @@ test("Agora Commerce acceptance covers backend route surface and secured generat
   assert.match(source, /expectReadRejected/);
   assert.match(source, /correctly rejected for non-owner/);
   assert.match(source, /customer checkout\/order\/cancellation\/return\/refund smoke passed/);
+});
+
+test("Agora Commerce Docker acceptance targets Docker Local host ports without shell-sourcing secrets", () => {
+  const source = fs.readFileSync(dockerScriptPath, "utf8");
+  const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+
+  assert.equal(pkg.scripts["acceptance:agora-commerce:docker"], "node scripts/agora-commerce-docker-acceptance.mjs");
+  assert.match(source, /kickoffDockerLocal/);
+  assert.match(source, /NODICS_PLATFORM_URL.*5300/s);
+  assert.match(source, /NODICS_COMMERCE_URL.*5350/s);
+  assert.match(source, /AXIS_ORIGIN.*4100/s);
+  assert.match(source, /BOOTSTRAP_ADMIN_PASSWORD/);
+  assert.doesNotMatch(source, /set -a|source |\\. env/);
 });
 
 test("Agora Commerce live qualification sequences topology data publication and customer journey acceptance", () => {

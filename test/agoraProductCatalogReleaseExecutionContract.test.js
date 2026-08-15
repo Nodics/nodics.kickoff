@@ -111,7 +111,7 @@ test('Agora Product catalog release follows Commerce Staged nImport execution co
   assert.equal(release.sourceRoot, 'staged');
   assert.equal(release.lifecycle, 'PUBLISHABLE');
   assert.equal(release.destinationRole, 'COMMERCE_STAGED');
-  assert.deepEqual(release.environmentScope, ['LOCAL']);
+  assert.deepEqual(release.environmentScope, ['LOCAL', 'LOCAL_PRODUCTION_SIMULATION']);
   assert.equal(release.declaredFiles.length, 7);
   assert(release.declaredFiles.every((file) => file.startsWith('staged/product/')));
   assert.equal(dataReleaseService.validateDestination(release), true);

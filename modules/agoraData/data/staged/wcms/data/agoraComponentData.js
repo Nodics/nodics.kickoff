@@ -202,7 +202,7 @@ module.exports = {
       resolverKey: 'commerce.order.customer.detail',
       showCompletedCheckoutSteps: true,
       showShippingPromise: true,
-      lifecycleActions: ['CANCELLATION', 'RETURN', 'REFUND']
+      lifecycleActions: ['CANCELLATION', 'RETURN', 'REFUND', 'EXCHANGE', 'REPLACEMENT', 'APPEAL']
     }
   },
   record14: {
@@ -225,7 +225,7 @@ module.exports = {
     active: true,
     properties: {
       resolverKey: 'commerce.order.lifecycle.customer',
-      requestTypes: ['CANCELLATION', 'RETURN', 'REFUND'],
+      requestTypes: ['CANCELLATION', 'RETURN', 'REFUND', 'EXCHANGE', 'REPLACEMENT', 'APPEAL'],
       reasonSelectionRequired: true,
       itemQuantitySelectionRequired: true,
       returnMethods: ['PICKUP', 'DROP_OFF', 'STORE_RETURN'],
@@ -233,7 +233,48 @@ module.exports = {
       showRma: true,
       showRefundPreview: true,
       showReconciliationRequired: true,
-      appealSupportedByPolicy: true
+      replacementSelectionSupported: true,
+      appealSupportedByPolicy: true,
+      automationGates: [
+        'Replacement stock reservation',
+        'Exchange shipment creation',
+        'Inspection and disposition integration',
+        'Appeal SLA workflow',
+        'Delayed-refund reconciliation automation'
+      ]
+    }
+  },
+  record16: {
+    code: 'agoraAccountCenter',
+    typeCode: 'agoraRichTextType',
+    renderer: 'agora.accountCenter',
+    accessMode: 'CUSTOMER',
+    active: true,
+    properties: {
+      heading: 'Account center',
+      resolverKeys: ['profile.customer.self', 'profile.customer.addressBook', 'commerce.order.customer.history'],
+      capabilities: [
+        'Customer profile and session summary',
+        'Address book handoff to Profile APIs',
+        'Order history and lifecycle self-service',
+        'Wishlist and compare synchronization'
+      ]
+    }
+  },
+  record17: {
+    code: 'agoraProductionGateSummary',
+    typeCode: 'agoraRichTextType',
+    renderer: 'agora.productionGateSummary',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      heading: 'Production release gates',
+      gates: [
+        { code: 'MEDIA_RIGHTS', owner: 'nMedia + agoraData' },
+        { code: 'LIVE_PROVIDERS', owner: 'Commerce integration owners' },
+        { code: 'PROMOTION_BUILDER_DEPTH', owner: 'Promotion + Axis' },
+        { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process' }
+      ]
     }
   }
 };

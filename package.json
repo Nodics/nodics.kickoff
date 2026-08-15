@@ -69,6 +69,7 @@
     "acceptance:local:fresh": "node scripts/local-bootstrap-acceptance.mjs --drop-local-db",
     "acceptance:functional": "node scripts/functional-journey-acceptance.mjs",
     "acceptance:agora-commerce": "node scripts/agora-commerce-acceptance.mjs",
+    "acceptance:agora-commerce:docker": "node scripts/agora-commerce-docker-acceptance.mjs",
     "acceptance:agora-commerce-data": "node scripts/agora-commerce-data-acceptance.mjs",
     "acceptance:agora-commerce-publication": "node scripts/agora-commerce-publication-acceptance.mjs",
     "acceptance:agora-commerce:ci": "npm run test:agora-commerce && npm run acceptance:agora-commerce-data && npm run acceptance:agora-commerce-publication && npm run acceptance:agora-commerce",

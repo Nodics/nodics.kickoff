@@ -85,7 +85,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
   assert.equal(productSection.sourceRoot, 'staged');
   assert.equal(productSection.lifecycle, 'PUBLISHABLE');
   assert.equal(productSection.destinationRole, 'COMMERCE_STAGED');
-  assert.deepEqual(productSection.environmentScope, ['LOCAL']);
+  assert.deepEqual(productSection.environmentScope, ['LOCAL', 'LOCAL_PRODUCTION_SIMULATION']);
   assert.equal(productSection.sensitivity, 'PUBLIC');
   assert.equal(productSection.versioningPolicy, 'IMMUTABLE');
   assert.equal(productSection.publicationPolicy, 'REQUIRED');
@@ -108,7 +108,7 @@ test('agoraData manifest is contract v2 and declares WCMS plus Commerce Staged r
     assert.equal(section.sourceRoot, 'staged');
     assert.equal(section.lifecycle, 'PUBLISHABLE');
     assert.equal(section.destinationRole, 'COMMERCE_STAGED');
-    assert.deepEqual(section.environmentScope, ['LOCAL']);
+    assert.deepEqual(section.environmentScope, ['LOCAL', 'LOCAL_PRODUCTION_SIMULATION']);
     assert.equal(section.sensitivity, 'PUBLIC');
     assert.equal(section.versioningPolicy, 'IMMUTABLE');
     assert.equal(section.publicationPolicy, 'REQUIRED');
@@ -316,7 +316,8 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
     'agoraCartPage',
     'agoraCheckoutPage',
     'agoraOrderConfirmationPage',
-    'agoraOrderHistoryPage'
+    'agoraOrderHistoryPage',
+    'agoraAccountProfilePage'
   ];
   const requiredRoutes = [
     '/',
@@ -326,13 +327,16 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
     '/cart',
     '/checkout',
     '/order/confirmation',
-    '/account/orders'
+    '/account/orders',
+    '/account/profile'
   ];
   const lifecyclePanel = componentByCode.get('agoraOrderLifecyclePanel');
   const checkoutFlow = componentByCode.get('agoraCheckoutFlow');
   const productListing = componentByCode.get('agoraCategoryListing');
   const productDetail = componentByCode.get('agoraProductDetail');
   const cartSummary = componentByCode.get('agoraCartSummary');
+  const accountCenter = componentByCode.get('agoraAccountCenter');
+  const productionGateSummary = componentByCode.get('agoraProductionGateSummary');
 
   for (const pageType of requiredPageTypes) {
     assert.equal(typeCodeSet.has(pageType), true, `${pageType} should be declared`);
@@ -355,12 +359,22 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
   assert.equal(productDetail.properties.supportsWishlist, true);
   assert.equal(productDetail.properties.supportsCompare, true);
   assert.equal(cartSummary.properties.promotionEstimate, 'DISPLAY_ONLY_UNTIL_BACKEND_REDEMPTION_API');
-  assert.deepEqual(lifecyclePanel.properties.requestTypes, ['CANCELLATION', 'RETURN', 'REFUND']);
+  assert.deepEqual(lifecyclePanel.properties.requestTypes, ['CANCELLATION', 'RETURN', 'REFUND', 'EXCHANGE', 'REPLACEMENT', 'APPEAL']);
   assert.deepEqual(lifecyclePanel.properties.returnMethods, ['PICKUP', 'DROP_OFF', 'STORE_RETURN']);
   assert.equal(lifecyclePanel.properties.showRefundPreview, true);
   assert.equal(lifecyclePanel.properties.showReconciliationRequired, true);
+  assert.equal(lifecyclePanel.properties.replacementSelectionSupported, true);
+  assert(lifecyclePanel.properties.automationGates.includes('Delayed-refund reconciliation automation'));
+  assert.deepEqual(accountCenter.properties.resolverKeys, ['profile.customer.self', 'profile.customer.addressBook', 'commerce.order.customer.history']);
+  assert.deepEqual(productionGateSummary.properties.gates.map((gate) => gate.code), [
+    'MEDIA_RIGHTS',
+    'LIVE_PROVIDERS',
+    'PROMOTION_BUILDER_DEPTH',
+    'REVERSE_LIFECYCLE_AUTOMATION'
+  ]);
   assert(navigations.some((node) => node.targetRoute === 'agoraCartRoute'));
   assert(navigations.some((node) => node.targetRoute === 'agoraOrderHistoryRoute'));
+  assert(navigations.some((node) => node.targetRoute === 'agoraAccountProfileRoute'));
 });
 
 test('Product seed uses only Product-owned source schemas and expected first-slice counts', async () => {

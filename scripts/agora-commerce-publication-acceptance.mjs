@@ -6,6 +6,7 @@ const projectRoot = new URL("..", import.meta.url).pathname;
 const platformUrl = process.env.NODICS_PLATFORM_URL || "http://127.0.0.1:4300";
 const commerceStagedUrl = process.env.NODICS_COMMERCE_STAGED_URL || "http://127.0.0.1:4352";
 const commerceOnlineUrl = process.env.NODICS_COMMERCE_ONLINE_URL || process.env.NODICS_COMMERCE_URL || "http://127.0.0.1:4350";
+const axisOrigin = process.env.AXIS_ORIGIN || "http://127.0.0.1:3100";
 const managed = [];
 
 function log(message) {
@@ -75,6 +76,15 @@ async function ensureRuntime(label, port, script, baseUrl) {
   await waitReady(baseUrl, label);
 }
 
+function portOf(baseUrl, fallback) {
+  try {
+    const url = new URL(baseUrl);
+    return Number(url.port || (url.protocol === "https:" ? 443 : 80));
+  } catch {
+    return fallback;
+  }
+}
+
 async function authenticateEmployee() {
   const suppliedToken = process.env.AXIS_AUTH_TOKEN || process.env.NODICS_AUTH_TOKEN;
   if (suppliedToken) return { Authorization: `Bearer ${suppliedToken}` };
@@ -83,7 +93,7 @@ async function authenticateEmployee() {
     password: process.env.AXIS_PASSWORD || "adminPassword",
   };
   const headers = {
-    Origin: "http://127.0.0.1:3100",
+    Origin: axisOrigin,
     "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default",
   };
   let lastError;
@@ -235,9 +245,9 @@ async function cleanup() {
 
 async function run() {
   try {
-    await ensureRuntime("Platform", 4300, "start:platform", platformUrl);
-    await ensureRuntime("CommerceStaged", 4352, "start:commerce:staged", commerceStagedUrl);
-    await ensureRuntime("CommerceOnline", 4350, "start:commerce", commerceOnlineUrl);
+    await ensureRuntime("Platform", portOf(platformUrl, 4300), "start:platform", platformUrl);
+    await ensureRuntime("CommerceStaged", portOf(commerceStagedUrl, 4352), "start:commerce:staged", commerceStagedUrl);
+    await ensureRuntime("CommerceOnline", portOf(commerceOnlineUrl, 4350), "start:commerce", commerceOnlineUrl);
     const employeeHeaders = await authenticateEmployee();
     await validatePublicationContract(employeeHeaders);
     const publication = await publishSearch(employeeHeaders);
