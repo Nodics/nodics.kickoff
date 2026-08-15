@@ -1,0 +1,36 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
+/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
+'use strict';
+/** @module kickoffLocal/commerceStagedServer/config/properties @description Defines isolated local Commerce Staged coordinates and data-release enforcement for governed Product catalog imports. @layer environment-server-config @owner nodics.kickoff */
+module.exports = {
+    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'agoraData', 'kickoffLocal', 'commerceStagedServer'] },
+    runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
+    apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
+        commerceManagement: { enabled: true } } },
+    search: {
+        product: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } }
+    },
+    data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
+        allowedDestinationRoles: ['COMMERCE_STAGED'] } },
+    database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerceStaged' } } } },
+    stripeProvider: { enabled: false, maturity: 'NOT_APPLICABLE_FOR_STAGED_CATALOG', sandboxOnly: true, liveQualified: false },
+    servers: {
+        default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4352, httpsHost: '127.0.0.1', httpsPort: 4353 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4352, httpsHost: 'localhost', httpsPort: 4353 } },
+        profile: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        backoffice: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        commerce: { endpoint: { httpHost: '127.0.0.1', httpPort: 4350, httpsHost: '127.0.0.1', httpsPort: 4351 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4350, httpsHost: 'localhost', httpsPort: 4351 } }
+    }
+};

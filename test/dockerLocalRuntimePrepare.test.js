@@ -23,7 +23,8 @@ const scenarios = [
     ['wcmsOnlineServer', ['nodics.wcms'], 'kickoffDockerLocalWcmsOnline', 'WCMS_ONLINE'],
     ['processServer', ['nodics.process', 'nodics.cron', 'nodics.wcms'], 'kickoffDockerLocalProcess', 'PROCESS'],
     ['engagementServer', ['nodics.communication', 'nodics.engagement'], 'kickoffDockerLocalEngagement', 'ENGAGEMENT'],
-    ['commerceServer', ['nodics.process', 'nodics.commerce'], 'kickoffDockerLocalCommerce', 'COMMERCE']
+    ['commerceServer', ['nodics.process', 'nodics.discovery', 'nodics.commerce'], 'kickoffDockerLocalCommerce', 'COMMERCE'],
+    ['commerceStagedServer', ['nodics.process', 'nodics.discovery', 'nodics.commerce'], 'kickoffDockerLocalCommerceStaged', 'COMMERCE_STAGED']
 ];
 
 async function main() {
@@ -39,6 +40,17 @@ async function main() {
         assert.equal(CONFIG.get('environment').qualificationClass, 'LOCAL_PRODUCTION_SIMULATION');
         assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, databaseName);
         assert.equal(CONFIG.get('runtimeRole').code, role);
+        if (server === 'commerceStagedServer') {
+            assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
+            assert.equal(NODICS.isModuleActive('agoraData'), true);
+        }
+        if (server === 'commerceServer') {
+            assert.equal(NODICS.isModuleActive('agoraData'), false);
+        }
+        if (server === 'commerceServer' || server === 'commerceStagedServer') {
+            assert.equal(NODICS.isModuleActive('nodics.discovery'), true);
+            assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+        }
         assert(CONFIG.get('database').default.mongodb.master.URI.includes('mongodb'));
         assert(NODICS.isModuleActive('kickoffDockerLocal'));
         assert(!NODICS.isModuleActive('kickoffLocal'));

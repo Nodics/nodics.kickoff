@@ -156,6 +156,15 @@ services:
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/commerceServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4350/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
+  commerce-staged:
+    <<: *backend
+    command: ["src/start-commerce-staged-server.js"]
+    environment: { ENV: kickoffDockerLocal, SERVER: commerceStagedServer, NODICS_DATABASE_NAME: kickoffDockerLocalCommerceStaged }
+    ports: ["5352:4352"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, commerce: { condition: service_healthy } }
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/commerceStagedServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4352/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
   axis:
     image: nodics/axis:docker-local
     build: { context: "${NODICS_WORKSPACE_ROOT}", dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile, args: { FRONTEND_PROJECT: nodics.axis } }

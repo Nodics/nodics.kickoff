@@ -33,7 +33,7 @@ module.exports = {
     ] },
     activeModules: {
         groups: [],
-        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'partnerSiteData',
+        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'partnerSiteData', 'agoraData',
             'kickoffLocal', 'wcmsStagedServer']
     },
     publishEnabled: true,

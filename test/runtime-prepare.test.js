@@ -19,11 +19,14 @@ const packageRoot = packageName => path.dirname(require.resolve(packageName + '/
 
 const scenarios = Object.freeze([
     Object.freeze({
-        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.commerce']),
+        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
-            'nodics.process', 'store', 'product', 'pricing', 'tax', 'promotion',
-            'inventory', 'baseCommerce', 'checkoutCore', 'cart', 'order',
+            'nodics.process', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
+            'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
+            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'store',
+            'product', 'pricing', 'tax', 'promotion', 'inventory',
+            'commerceSearchCore', 'commerceSearch', 'baseCommerce', 'checkoutCore', 'cart', 'order',
             'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
             'cashOnDeliveryPayment', 'bankTransferPayment', 'paymentMethods',
             'paymentProviderCore', 'stripeProvider', 'paypalProvider',
@@ -32,8 +35,46 @@ const scenarios = Object.freeze([
             'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal',
             'commerceServer'
         ]),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'commerceCustomer']),
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerce');
+            assert.equal(CONFIG.get('runtimeRole').code, 'COMMERCE');
+            assert.equal(CONFIG.get('search').product.options.enabled, true);
+            assert.equal(CONFIG.get('search').product.options.engine, 'elastic');
+            assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.equal(NODICS.isModuleActive('agoraData'), false);
+        }
+    }),
+    Object.freeze({
+        server: 'commerceStagedServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce']),
+        expectedModules: Object.freeze([
+            'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
+            'nodics.process', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
+            'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
+            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'store',
+            'product', 'pricing', 'tax', 'promotion', 'inventory',
+            'commerceSearchCore', 'commerceSearch', 'baseCommerce', 'checkoutCore', 'cart', 'order',
+            'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
+            'cashOnDeliveryPayment', 'bankTransferPayment', 'paymentMethods',
+            'paymentProviderCore', 'stripeProvider', 'paypalProvider',
+            'cyberSourceProvider', 'visaProvider', 'paymentProviders', 'payment',
+            'fulfillmentCore', 'fulfillment', 'nodics.commerce', 'nodics.kickoff',
+            'kickoffCore', 'kickoffApi', 'kickoffInt', 'agoraData', 'kickoffLocal',
+            'commerceStagedServer'
+        ]),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'commerceManagement']),
+        verify: function () {
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerceStaged');
+            assert.equal(CONFIG.get('runtimeRole').code, 'COMMERCE_STAGED');
+            assert.equal(CONFIG.get('runtimeRole').publication, 'STAGED');
+            assert.equal(CONFIG.get('search').product.options.enabled, true);
+            assert.equal(CONFIG.get('search').product.options.engine, 'elastic');
+            assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
+            assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
+            assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);
+            assert.equal(NODICS.isModuleActive('agoraData'), true);
+            assert.equal(NODICS.isModuleActive('commerceServer'), false);
         }
     }),
     Object.freeze({

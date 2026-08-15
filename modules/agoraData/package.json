@@ -1,0 +1,25 @@
+{
+  "name": "agoraData",
+  "version": "0.1.0",
+  "index": "3100.23",
+  "private": true,
+  "description": "Project-owned storefront content and sample commerce data for Nodics Agora.",
+  "main": "nodics.js",
+  "scripts": {
+    "check": "npm test",
+    "test": "node test/agoraDataContentContract.test.mjs"
+  },
+  "nodics": {
+    "kind": "content-pack",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["configuration", "data", "test", "documentation"],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
+    "displayName": "Agora Data"
+  }
+}
+

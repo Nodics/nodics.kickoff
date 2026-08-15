@@ -22,14 +22,14 @@ const compose = fs.readFileSync(path.join(environment, 'docker', 'compose.yaml')
 const runtimeProperties = fs.readFileSync(path.join(environment, 'config', 'runtime-properties.js'), 'utf8');
 const environmentProperties = fs.readFileSync(path.join(environment, 'config', 'properties.js'), 'utf8');
 const dockerLocalScript = fs.readFileSync(path.join(root, 'scripts', 'docker-local.mjs'), 'utf8');
-const servers = ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'processServer', 'engagementServer', 'commerceServer'];
+const servers = ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'processServer', 'engagementServer', 'commerceServer', 'commerceStagedServer'];
 assert.notEqual(environment, path.join(root, 'envs', 'kickoffLocal'));
 servers.forEach(server => {
   const metadata = JSON.parse(fs.readFileSync(path.join(environment, server, 'package.json'), 'utf8'));
   assert.equal(metadata.nodics.kind, 'server');
   assert(fs.existsSync(path.join(environment, server, 'config', 'properties.js')));
 });
-['platform', 'wcms-staged', 'wcms-online', 'process', 'engagement', 'commerce', 'axis', 'nexus', 'mongodb', 'redis-primary', 'redis-replica', 'redis-sentinel'].forEach(service => {
+['platform', 'wcms-staged', 'wcms-online', 'process', 'engagement', 'commerce', 'commerce-staged', 'axis', 'nexus', 'mongodb', 'redis-primary', 'redis-replica', 'redis-sentinel'].forEach(service => {
   assert.match(compose, new RegExp(`^  ${service}:`, 'm'));
 });
 assert(!compose.includes('kickoffLocalWcms'));
@@ -40,6 +40,7 @@ assert.match(compose, /read_only:\s*true/);
 assert.match(compose, /no-new-privileges:true/);
 assert.match(compose, /5312:4312/);
 assert.match(compose, /5314:4314/);
+assert.match(compose, /5352:4352/);
 assert.match(runtimeProperties, /sentinel:\s*\{/);
 assert.match(runtimeProperties, /host: 'redis-sentinel'/);
 assert.match(runtimeProperties, /password: process\.env\.REDIS_PASSWORD/);

@@ -14,6 +14,13 @@
 /** @module kickoffLocal/commerceServer/config/properties @description Defines isolated local Commerce coordinates. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
     activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
+    runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' },
+    apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true }, commercePublicationIngestion: { enabled: true } } },
+    search: {
+        product: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } }
+    },
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerce' } } } },
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {

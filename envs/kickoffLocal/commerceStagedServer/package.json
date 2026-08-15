@@ -1,0 +1,17 @@
+{
+  "name": "commerceStagedServer",
+  "version": "0.0.1",
+  "index": "1001.18",
+  "private": true,
+  "main": "nodics.js",
+  "description": "Reference customer Commerce Staged server for governed Product catalog publication.",
+  "nodics": {
+    "kind": "server",
+    "extends": ["nodics.process", "nodics.discovery", "nodics.commerce"],
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": ["composition", "configuration"],
+    "runtime": { "router": false, "publish": false, "web": false },
+    "displayName": "Commerce Staged Server"
+  }
+}

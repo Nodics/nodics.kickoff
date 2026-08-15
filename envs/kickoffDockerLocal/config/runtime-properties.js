@@ -25,6 +25,12 @@ const publicationConnections = {
 const connections = { ...platformConnections, ...publicationConnections };
 const projectModules = ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt'];
 const database = name => ({ default: { mongodb: { master: { URI: process.env.NODICS_MONGODB_URI, databaseName: name } } } });
+const elasticConnection = () => ({ connection: { hosts: [process.env.NODICS_ELASTICSEARCH_URL || 'http://elasticsearch:9200'] } });
+const productSearch = () => ({
+    product: { options: { enabled: true, fallback: false, engine: 'elastic' }, elastic: elasticConnection() },
+    commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' }, elastic: elasticConnection() },
+    discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' }, elastic: elasticConnection() }
+});
 const dataReleases = (roles, contributions = []) => ({ lifecycleMetadataRequired: true, destinationEnforced: true,
     environmentClass: 'LOCAL_PRODUCTION_SIMULATION', allowedDestinationRoles: roles, contributions });
 const distributedAuthCache = {
@@ -84,13 +90,14 @@ module.exports = function runtimeProperties(server) {
             backofficeRegistry: { clientEndpoints: {
                 platformServer: 'http://localhost:5300/', wcmsStagedServer: 'http://localhost:5312/',
                 wcmsOnlineServer: 'http://localhost:5314/', processServer: 'http://localhost:5330/',
-                engagementServer: 'http://localhost:5340/', commerceServer: 'http://localhost:5350/'
+                engagementServer: 'http://localhost:5340/', commerceServer: 'http://localhost:5350/',
+                commerceStagedServer: 'http://localhost:5352/'
             } },
             servers: { default: endpoint('platform', 4300), ...publicationConnections }
         },
         wcmsStagedServer: {
             httpHardening: { cors: { allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100'], deniedOrigins: ['http://localhost:4200', 'http://127.0.0.1:4200'] } },
-            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusData', 'partnerSiteData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusData', 'partnerSiteData', 'agoraData', 'kickoffDockerLocal', server] },
             publishEnabled: true, runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
             apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: true }, mediaManagement: { enabled: true } } },
             data: { dataReleases: dataReleases(['WCMS_STAGED'], [{ moduleName: 'axis', sections: ['axisBaseline'] }]) },
@@ -147,8 +154,21 @@ module.exports = function runtimeProperties(server) {
         commerceServer: {
             activeModules: { groups: [], modules: [...projectModules, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalCommerce'),
+            apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true } } },
+            search: productSearch(),
             stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
             servers: { default: endpoint('commerce', 4350), ...connections }
+        },
+        commerceStagedServer: {
+            activeModules: { groups: [], modules: [...projectModules, 'agoraData', 'kickoffDockerLocal', server] },
+            runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
+            data: { dataReleases: dataReleases(['COMMERCE_STAGED']) },
+            apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
+                commerceManagement: { enabled: true } } },
+            database: database('kickoffDockerLocalCommerceStaged'),
+            search: productSearch(),
+            stripeProvider: { enabled: false, maturity: 'NOT_APPLICABLE_FOR_STAGED_CATALOG', sandboxOnly: true, liveQualified: false },
+            servers: { default: endpoint('commerce-staged', 4352), ...connections, commerce: endpoint('commerce', 4350) }
         }
     };
     if (!definitions[server]) throw new Error('Unsupported kickoffDockerLocal server: ' + server);

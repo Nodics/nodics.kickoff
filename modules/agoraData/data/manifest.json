@@ -1,0 +1,149 @@
+{
+  "contractVersion": 2,
+  "module": "agoraData",
+  "sections": {
+    "agoraStorefrontSite": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora storefront discovery WCMS source",
+      "owningDomain": "agora.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": ["ALL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcms/data/agoraCatalogData.js": "f9281abc2fc8476e89ecdfc3da54a0c521001a9dc8fed68bdbd64d12e2b904b0",
+        "staged/wcms/data/agoraComponentData.js": "39ae9c2fc37bacd268b1c4884b3fbcf1279de3fb6b3dcf3673ea874569a71217",
+        "staged/wcms/data/agoraComponentTypeGroupData.js": "83ceac2213c7f5028c555c8c0b0903dbd5da77bea9f789935523e94b1f656176",
+        "staged/wcms/data/agoraNavigationData.js": "98428e1c1820b321963fdb24c3e5c1a2de54f22d8988805d0daa6fc73e61d81e",
+        "staged/wcms/data/agoraPageData.js": "0766f90b4cc7d9a3cd41a5e98aabb66a110e9a4db71c91cee381c78a30a62049",
+        "staged/wcms/data/agoraRendererData.js": "56cf37cd3aad43b642d7763fd52d3499bb9d568b9f66c1734d54e6e9f6c980af",
+        "staged/wcms/data/agoraRouteData.js": "4864baa76b85e2634c646c2f5247f9e721402b77f37e44ca84f242dab3a3e047",
+        "staged/wcms/data/agoraSiteData.js": "695ea44370c79fdeb4a6a6e9bfabcb9bab979e8d327755244ddee1350530499b",
+        "staged/wcms/data/agoraSlotData.js": "a63d9e7fc84f0d913068ed2a758801547e87bf1c29b4bd7578e18740bbbcd7d5",
+        "staged/wcms/data/agoraTemplateData.js": "2d3a25784884111fb950cb576535883bb7960dbffc4c619c46c61d6ec7aed761",
+        "staged/wcms/data/agoraTypeCodeData.js": "1baf1320d6cad0b450b267024c69bca8d38acadba5947ede61f9bc0b87a9544d",
+        "staged/wcms/headers/agoraStorefrontContentHeader.js": "a6e2ba2081e6975f557f3062b1b3aaec2f50533946f16fbe2762268a5f239efa"
+      }
+    },
+    "agoraProductCatalogSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora discovery Product catalog source",
+      "owningDomain": "agora.product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": ["LOCAL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/product/data/agoraCategoryData.js": "d69c4384b1beb24828738f1181b100fe03cd6bee56296f089c51423696598dff",
+        "staged/product/data/agoraCategoryLocalizationData.js": "bbc0de326bd84de81358a833725aa4a9f6c98210962e31a6280eed8b21e9331e",
+        "staged/product/data/agoraProductData.js": "c871ef2c06b49b8669d506c1ad61d19a528b77aa4284a797ef8cc37056651e80",
+        "staged/product/data/agoraProductLocalizationData.js": "a9d6b5408a7cf07bf9c87e5049ea7eade50983aa8eeb4e70bb96add350bac800",
+        "staged/product/data/agoraProductVariantData.js": "7df4f65e40f7f50e56f50f7cc90c7c8ee43fc15325329b31128f9d699d2bd44a",
+        "staged/product/data/agoraProductVariantLocalizationData.js": "4cfcfe9293ea66f40a6435e80e692673197079c71a6c097a490c26592339ecea",
+        "staged/product/headers/agoraProductCatalogHeader.js": "6e98df86002301a95a9b333feb3513c8bc47735c682638901d592fef71ebf73c"
+      }
+    },
+    "agoraPricingSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora discovery Pricing source",
+      "owningDomain": "agora.pricing",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": ["LOCAL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/pricing/data/agoraPriceBookData.js": "5734e1defbcdd47212a794fc835c1c2074aaef5e9b9f150dd29bbd8550890b80",
+        "staged/pricing/data/agoraPriceRowData.js": "982ef67eddcdc83b7071166699b5de1aad911a65ea04ba93109dfe2b916ba7a4",
+        "staged/pricing/headers/agoraPricingHeader.js": "a64b461b4ed16975cf8c879a818874d014cc97df4caf767537024cb9d16bd711"
+      }
+    },
+    "agoraInventorySource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora discovery Inventory source",
+      "owningDomain": "agora.inventory",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": ["LOCAL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/inventory/data/agoraInventoryBalanceData.js": "4a05b0763917a440ff2cf07c56b2da3325ca53337f342b37b6ff45401f00aaf7",
+        "staged/inventory/data/agoraWarehouseData.js": "6100c582e96230623f7a7570cefe03efacad30b9435e77448829dc0b8ba2cbe2",
+        "staged/inventory/headers/agoraInventoryHeader.js": "d7f18111ac5bf08373c1c3d10f2fba3717ed3fe3bd854c576d8aaff3115801a5"
+      }
+    },
+    "agoraCommerceSearchSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora discovery Commerce Search source",
+      "owningDomain": "agora.commerceSearch",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": ["LOCAL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/commerceSearch/data/agoraCommerceSearchRuleData.js": "63513b24422813a0eb286cfa468fdf2e97af4c39a978428f8ad50da34f4a37bf",
+        "staged/commerceSearch/headers/agoraCommerceSearchHeader.js": "25522fbd8ea9f62b3f20dbe612b394fe2d666f20868e50b90199cb6532ca4254"
+      }
+    },
+    "agoraDiscoveryConfigurationSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora generic Discovery configuration source",
+      "owningDomain": "agora.discovery",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": ["LOCAL"],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/discovery/data/agoraDiscoveryFacetProfileData.js": "f3cf8839717f30aab2f8baa8f16e3ddacbcca868a571b5dfe0b90968dea48741",
+        "staged/discovery/data/agoraDiscoveryFieldMappingData.js": "7f1c806c01710beb4c2f1aa35602a44fb0f188b64d84b7ca2511400022faee34",
+        "staged/discovery/data/agoraDiscoveryIndexConfigurationData.js": "fe3f4a2931e747c2ad1989549640cd639c5a00c1e5974d45fb60edbeb6fbfb78",
+        "staged/discovery/data/agoraDiscoveryPublicationPolicyData.js": "1c9c4f3bf9e86deffaa0621a9039c2e5c644733dbf1bc109d0b4662d86d2bbd6",
+        "staged/discovery/data/agoraDiscoveryQueryProfileData.js": "72efd0c8537fcf3d463e6547f5a0e40f0c0c6a81aa69e4c15f5e9a6afa1fcc5c",
+        "staged/discovery/data/agoraDiscoveryRankingProfileData.js": "064d2d960df7218f1dfb37b469518621bbbed85d3f1c4acbff86034825bd7f37",
+        "staged/discovery/data/agoraDiscoverySourceMixConfigurationData.js": "80e88447d0544851286ba93d6142cd4fe16073e92e2bcb136a04ceb08ab4ff87",
+        "staged/discovery/headers/agoraDiscoveryHeader.js": "84544790316f477ac3d36eb0ac7574a235c7881f4fd73812f879be87c65b3c36"
+      }
+    }
+  }
+}

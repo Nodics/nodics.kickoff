@@ -18,7 +18,7 @@ const packageRoot = packageName => path.dirname(require.resolve(packageName + '/
 foundation.start(Object.freeze({
     NODICS_HOME: packageRoot('nodics.foundation'),
     CUSTOM_HOME: path.resolve(__dirname, '..'),
-    MODULE_ROOTS: Object.freeze([packageRoot('nodics.foundation'), packageRoot('nodics.process'), packageRoot('nodics.commerce'), path.resolve(__dirname, '..')]),
+    MODULE_ROOTS: Object.freeze([packageRoot('nodics.foundation'), packageRoot('nodics.process'), packageRoot('nodics.discovery'), packageRoot('nodics.commerce'), path.resolve(__dirname, '..')]),
     defaultEnvironment: 'kickoffLocal',
     defaultServer: 'commerceServer'
 }));
