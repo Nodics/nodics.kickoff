@@ -104,6 +104,9 @@ Media, Process, or Promotion authority into `agoraData` or `nodics.agora`.
   requests, exchange/appeal previews, and non-owner rejection.
 
 Remaining items after this closure batch are not normal local implementation
-blockers: licensed/replacement production media intake, real payment/carrier/POS
-provider certification, and deeper post-V1 business UX such as visual Promotion
-Builder composition, promotion analytics, and secondary commerce scenarios.
+blockers: licensed/replacement production media intake and real
+payment/carrier/POS provider certification. Promotion Builder, account
+self-service, reverse lifecycle runtime qualification and test-folder
+stabilization now have local contract coverage; deeper post-V1 business UX can
+continue as enhancement work without blocking the current Agora end-to-end
+baseline.

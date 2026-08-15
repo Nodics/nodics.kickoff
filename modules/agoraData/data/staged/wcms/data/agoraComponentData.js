@@ -349,10 +349,11 @@ module.exports = {
     properties: {
       heading: 'Production release gates',
       gates: [
-        { code: 'MEDIA_RIGHTS', owner: 'nMedia + agoraData' },
+        { code: 'MEDIA_RIGHTS', owner: 'nMedia + agoraData', status: 'RELEASE_GATE' },
         { code: 'PROMOTION_BUILDER_DEPTH', owner: 'Promotion + Axis', status: 'LOCAL_END_TO_END_COMPLETE' },
-        { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process', status: 'LOCAL_QUALIFIED' },
-        { code: 'ACCOUNT_SELF_SERVICE', owner: 'Profile + Order + Agora', status: 'LOCAL_QUALIFIED' },
+        { code: 'REVERSE_LIFECYCLE_AUTOMATION', owner: 'Order + Fulfillment + Payment + Process', status: 'LOCAL_RUNTIME_QUALIFIED' },
+        { code: 'ACCOUNT_SELF_SERVICE', owner: 'Profile + Order + Agora', status: 'LOCAL_HARDENED' },
+        { code: 'TEST_FOLDER_STRUCTURE', owner: 'Agora + Commerce + Axis + Kickoff', status: 'LOCAL_STABILIZED' },
         { code: 'POS_LOCAL_REFERENCE', owner: 'Inventory + Store', status: 'LOCAL_QUALIFIED' }
       ],
       parkedExternalGates: [
@@ -365,9 +366,9 @@ module.exports = {
       nonProviderImplementationBacklog: [
         'Promotion Builder has local end-to-end draft lifecycle, coupon allocation, budget ledger, analytics and approval-checklist coverage; live provider certification is separate',
         'Media rights-cleared asset intake remains an external release gate; checksum, target-usage approval, activation revision and emergency deactivation have backend coverage',
-        'Customer profile, address-book and order self-service handoff has local customer-visible coverage',
-        'Cancellation, return, refund, exchange, replacement and appeal automation runbooks have local and Docker acceptance coverage',
-        'Source-owned test-folder structure stabilization'
+        'Customer profile, address-book and order self-service handoff is locally hardened with operator-only override separation',
+        'Cancellation, return, refund, exchange, replacement and appeal automation runbooks have local and Docker runtime qualification coverage',
+        'Source-owned test-folder structure is locally stabilized across Agora, Commerce, Axis and Kickoff contracts'
       ]
     }
   }

@@ -21,7 +21,7 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/agoraCatalogData.js": "f9281abc2fc8476e89ecdfc3da54a0c521001a9dc8fed68bdbd64d12e2b904b0",
-        "staged/wcms/data/agoraComponentData.js": "f99585ad7f67ce76b21dccb219a8b14867d1d14f416f1fecf37752ac810d1bc2",
+        "staged/wcms/data/agoraComponentData.js": "9a2f4b9c973486f7ed328c03be61ee77aca23065e9efdd0eb077fc94d7f4bd43",
         "staged/wcms/data/agoraComponentTypeGroupData.js": "799ba7aeb50bb5337c59998d04d2e398f50cf8e24f886fcb6ffb06017de7044e",
         "staged/wcms/data/agoraNavigationData.js": "5d311668d62cca7a587b858ba11564f0042eab026be1a4fb7228c79293560323",
         "staged/wcms/data/agoraPageData.js": "8c4a5a85c1b397e521665f50028793cb2b089fccf35a1fe420282132eb015b2f",

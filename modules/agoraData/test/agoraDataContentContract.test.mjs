@@ -390,20 +390,23 @@ test('WCMS seed covers the implemented Agora V1 customer journey without owning 
     'Operator-only overrides'
   ]);
   assert.equal(accountCenter.properties.operationGroups.find((group) => group.title === 'Operator-only overrides').status, 'BACKOFFICE_ONLY');
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'MEDIA_RIGHTS' && gate.status === 'RELEASE_GATE'));
   assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'PROMOTION_BUILDER_DEPTH' && gate.status === 'LOCAL_END_TO_END_COMPLETE'));
-  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'REVERSE_LIFECYCLE_AUTOMATION' && gate.status === 'LOCAL_QUALIFIED'));
-  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'ACCOUNT_SELF_SERVICE' && gate.status === 'LOCAL_QUALIFIED'));
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'REVERSE_LIFECYCLE_AUTOMATION' && gate.status === 'LOCAL_RUNTIME_QUALIFIED'));
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'ACCOUNT_SELF_SERVICE' && gate.status === 'LOCAL_HARDENED'));
+  assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'TEST_FOLDER_STRUCTURE' && gate.status === 'LOCAL_STABILIZED'));
   assert(productionGateSummary.properties.gates.some((gate) => gate.code === 'POS_LOCAL_REFERENCE' && gate.status === 'LOCAL_QUALIFIED'));
   assert.deepEqual(productionGateSummary.properties.gates.map((gate) => gate.code), [
     'MEDIA_RIGHTS',
     'PROMOTION_BUILDER_DEPTH',
     'REVERSE_LIFECYCLE_AUTOMATION',
     'ACCOUNT_SELF_SERVICE',
+    'TEST_FOLDER_STRUCTURE',
     'POS_LOCAL_REFERENCE'
   ]);
   assert.deepEqual(productionGateSummary.properties.parkedExternalGates.map((gate) => gate.code), ['LIVE_PROVIDERS']);
   assert.match(productionGateSummary.properties.parkedExternalGates[0].reason, /Parked from this thread/);
-  assert(productionGateSummary.properties.nonProviderImplementationBacklog.includes('Source-owned test-folder structure stabilization'));
+  assert(productionGateSummary.properties.nonProviderImplementationBacklog.includes('Source-owned test-folder structure is locally stabilized across Agora, Commerce, Axis and Kickoff contracts'));
   assert(navigations.some((node) => node.targetRoute === 'agoraCartRoute'));
   assert(navigations.some((node) => node.targetRoute === 'agoraOrderHistoryRoute'));
   assert(navigations.some((node) => node.targetRoute === 'agoraAccountProfileRoute'));
