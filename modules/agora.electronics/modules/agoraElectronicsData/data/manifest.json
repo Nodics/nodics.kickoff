@@ -31,7 +31,8 @@
         "staged/electronics/data/agoraElectronicsSpecificationData.js": "5e768643527829ae51fde9d4ac980351c6c8870210c1fc450ec87b94d6ecf3c1",
         "staged/electronics/data/agoraElectronicsWarehouseData.js": "c5b0bf7a3c574693ad9c1f4eddeed3f66a4df154f0c53e314d58841e3a687694",
         "staged/electronics/headers/agoraElectronicsCatalogHeader.js": "06ce97fafc207ccaa37382062aa1502192ca949dcb71898027807387dbb71a2c"
-      }
+      },
+      "displayName": "Agora Electronics Commerce Catalog"
     },
     "agoraElectronicsContentCatalog": {
       "kind": "DATA_RELEASE",
@@ -59,7 +60,8 @@
         "staged/electronics/data/agoraElectronicsSiteData.js": "5668d88f2e0a8f1a3aba60cb7b71ac5a4eb91eec6fb72627c74111b85341cd03",
         "staged/electronics/data/agoraElectronicsTypeCodeData.js": "66dda621777370a0d076c55de4cd65d5357cba3476d0799d569b32316ac71ce4",
         "staged/electronics/headers/agoraElectronicsContentHeader.js": "c98e2f2fa8be535a40d3fc4f2f48b1431e31f6c1486614e822e5f26f8fbe559a"
-      }
+      },
+      "displayName": "Agora Electronics Content Catalog"
     }
   }
 }

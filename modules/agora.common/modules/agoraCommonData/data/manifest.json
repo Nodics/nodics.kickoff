@@ -32,7 +32,8 @@
         "staged/wcms/data/agoraTemplateData.js": "46a3407345b74deb89d981298acbb80c1a1588d5dcb34243fab4fc048902c8e2",
         "staged/wcms/data/agoraTypeCodeData.js": "9c5c04f372e6c1264d3b118b9b15e07b6591ac8ea499a817c0d70164df573b06",
         "staged/wcms/headers/agoraStorefrontContentHeader.js": "6120ea050b8a40959f8a7788b99ce6b5df5de090c0271d62866c551f032cc538"
-      }
+      },
+      "displayName": "Agora Storefront Site"
     },
     "agoraProductCatalogSource": {
       "kind": "DATA_RELEASE",
@@ -60,7 +61,8 @@
         "staged/product/data/agoraProductVariantData.js": "b262e39a0fc1cb3119638233e874ad45699033f6c9461b9e0aceec8b463c362a",
         "staged/product/data/agoraProductVariantLocalizationData.js": "58f90e23361161cf26a66aea7532117ec7431d31f1b9661b9ebc0093819f2d3f",
         "staged/product/headers/agoraProductCatalogHeader.js": "4d04702b521ad3da8b2ecd20bc9857ff83e52956c8513ca16cfbd91a65b97653"
-      }
+      },
+      "displayName": "Agora Product Catalog Source"
     },
     "agoraMediaReferenceSource": {
       "kind": "DATA_RELEASE",
@@ -82,7 +84,8 @@
       "files": {
         "staged/media/data/agoraMediaReferenceData.js": "3f2d3567981e7a5ec23f7a823cb561e6788d5dac6dc0d57493d860de80b3364a",
         "staged/media/headers/agoraMediaReferenceHeader.js": "e8770118646f6d9867aaba9ad41af1166191e05a1f30df79eba894e4cbd8f16b"
-      }
+      },
+      "displayName": "Agora Media Reference Source"
     },
     "agoraPricingSource": {
       "kind": "DATA_RELEASE",
@@ -106,7 +109,8 @@
         "staged/pricing/data/agoraPriceBookData.js": "3e4aaaf0c83a535ed6bb7358ce33679c1b9ef47e57f997cacd7162685256b676",
         "staged/pricing/data/agoraPriceRowData.js": "eac58164b40303ec6f2b9681f44a0e5f3f94202b87aa3f9a89478b3f574ccf81",
         "staged/pricing/headers/agoraPricingHeader.js": "9d0de204c5057ed9c9bad91f3e25f5902ad22b9b83d61c8e1e3fa5b222640272"
-      }
+      },
+      "displayName": "Agora Pricing Source"
     },
     "agoraInventorySource": {
       "kind": "DATA_RELEASE",
@@ -130,7 +134,8 @@
         "staged/inventory/data/agoraInventoryBalanceData.js": "d4ac785b009df4a122ce519e19a97f285beef93f67c1849be2346314c84ea9b0",
         "staged/inventory/data/agoraWarehouseData.js": "0942eabe79fd303e60849c37a83c202cc7f203875908ae86b5feb1dea8b9e7aa",
         "staged/inventory/headers/agoraInventoryHeader.js": "1b6583ab9236b497e7c2ac13be25353de2c9df392ab25631f4c2a06253b74f38"
-      }
+      },
+      "displayName": "Agora Inventory Source"
     },
     "agoraTaxSource": {
       "kind": "DATA_RELEASE",
@@ -153,7 +158,8 @@
       "files": {
         "staged/tax/data/agoraTaxPolicyData.js": "06d6bfa79b27fa582a15a1dcb9fa2a30f7f60df3a4e4f1d9712a99ad5f925be0",
         "staged/tax/headers/agoraTaxHeader.js": "ecd60e3b8100d7118acec8aa8df8c7bdded253db134537de8d0a0dae86fd1ca7"
-      }
+      },
+      "displayName": "Agora Tax Source"
     },
     "agoraPromotionSource": {
       "kind": "DATA_RELEASE",
@@ -176,7 +182,8 @@
       "files": {
         "staged/promotion/data/agoraPromotionData.js": "de4c906757ae1649008ae6d65f5520795ddf3157b4d8cfed394c008c5ba97a8e",
         "staged/promotion/headers/agoraPromotionHeader.js": "c8a7c15c3b3001e744280711cf6c2578fbedd03957e5c85b0974222c2b2f000a"
-      }
+      },
+      "displayName": "Agora Promotion Source"
     },
     "agoraCustomerReviewSource": {
       "kind": "DATA_RELEASE",
@@ -202,7 +209,8 @@
         "staged/engagement/data/agoraCustomerReviewModerationData.js": "d5dd1d29a33458d81f4e0bd578356a6a022c62707d0536056e0d5343b0f36c0a",
         "staged/engagement/data/agoraCustomerReviewProjectionData.js": "829f2768ba80d8424f21c96df5bbbb7367f6f9b1f0462c86b0790d4804337e53",
         "staged/engagement/headers/agoraCustomerReviewHeader.js": "3b05c678ad090fb7952a1b0991fcc91d804567eafcdda03181bacf3c851c8ad3"
-      }
+      },
+      "displayName": "Agora Customer Review Source"
     },
     "agoraCommerceSearchSource": {
       "kind": "DATA_RELEASE",
@@ -225,7 +233,8 @@
       "files": {
         "staged/commerceSearch/data/agoraCommerceSearchRuleData.js": "b1264889de9f5988c2aa6d5aa5125864435cb25e8ca9dc3e45e38a2e0501c500",
         "staged/commerceSearch/headers/agoraCommerceSearchHeader.js": "240005977cd3f02112576ca3ab669781c46ec14fe00176113fd500152ff53d8d"
-      }
+      },
+      "displayName": "Agora Commerce Search Source"
     },
     "agoraDiscoveryConfigurationSource": {
       "kind": "DATA_RELEASE",
@@ -254,7 +263,8 @@
         "staged/discovery/data/agoraDiscoveryRankingProfileData.js": "98876e85df58f7aef212100cde3b8dfce1eb6416c2ee15cd69a1ef6c2d2f284b",
         "staged/discovery/data/agoraDiscoverySourceMixConfigurationData.js": "4673cdbff1544946600dcb317536855fdc21b9123d35f5d6ace2224ec8391eda",
         "staged/discovery/headers/agoraDiscoveryHeader.js": "dcdd3680bba2ee406ec112fa3cb7f69e789d9e11e14230ecc9ea7d223f4bfaa5"
-      }
+      },
+      "displayName": "Agora Discovery Configuration Source"
     }
   }
 }

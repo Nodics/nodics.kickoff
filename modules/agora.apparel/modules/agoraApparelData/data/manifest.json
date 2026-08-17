@@ -31,7 +31,8 @@
         "staged/apparel/data/agoraApparelStyleData.js": "8755b0fa277e403d531f76e1c4159b21c8fbcb5f3e3b3093afc14964f726d1df",
         "staged/apparel/data/agoraApparelWarehouseData.js": "0a8df70da070c5d35f979a190a31a2079ef7f2846c139a460bee7e3b788871f4",
         "staged/apparel/headers/agoraApparelCatalogHeader.js": "429ff8687493d4e0723a4615d0579ba6e4c15c20ca2760698c7b006300d39a9a"
-      }
+      },
+      "displayName": "Agora Apparel Commerce Catalog"
     },
     "agoraApparelContentCatalog": {
       "kind": "DATA_RELEASE",
@@ -59,7 +60,8 @@
         "staged/apparel/data/agoraApparelSiteData.js": "a1ef6ff09b5f684f2ee624cda4ab17985fcc779d9c947a0de67a4ec4f22a46c7",
         "staged/apparel/data/agoraApparelTypeCodeData.js": "1d22f8ce0432b22b777fba861f2433e929cbded23c8313fc3bcf753d09817c5f",
         "staged/apparel/headers/agoraApparelContentHeader.js": "95307de757aff3ff2f669057fa790b1aaf6da811feaae196c1ee0684d2d4d62d"
-      }
+      },
+      "displayName": "Agora Apparel Content Catalog"
     }
   }
 }
