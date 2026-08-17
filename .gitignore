@@ -6,3 +6,10 @@ envs/**/generated/
 .DS_Store
 .env
 .nodics/
+
+# Generated process outputs. Keep these reproducible from framework/project source definitions.
+**/llm/generated/
+**/generated/
+**/src/controller/gen/
+**/src/facade/gen/
+**/src/service/gen/
