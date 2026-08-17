@@ -13,3 +13,13 @@ envs/**/generated/
 **/src/controller/gen/
 **/src/facade/gen/
 **/src/service/gen/
+
+# Environment/server runtime outputs. These may contain logs, uploaded media,
+# import/export work files, process state, cache files, and local runtime data.
+envs/**/temp/
+envs/**/logs/
+envs/**/runtime/
+envs/**/state/
+envs/**/*.log
+envs/**/*.tmp
+envs/**/*.pid
