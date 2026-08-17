@@ -20,19 +20,22 @@
  */
 module.exports = {
     /**
-     * Initializes the local Process server layer.
+     * Initializes this Kickoff lifecycle boundary.
      *
-     * @returns {Promise<boolean>} Resolves when initialization is complete.
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
      */
-    init: function () {
+    init: function (options) {
         return Promise.resolve(true);
     },
+
     /**
-     * Finalizes the local Process server layer after module loading.
+     * Runs post-initialization for this Kickoff lifecycle boundary.
      *
-     * @returns {Promise<boolean>} Resolves when post-initialization is complete.
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific post-start behavior is required.
      */
-    postInit: function () {
+    postInit: function (options) {
         return Promise.resolve(true);
     }
 };

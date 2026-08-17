@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /**
  * @module nodics.kickoff/modules/config/properties
  * @description Shared Nodics Kickoff project-module configuration defaults.

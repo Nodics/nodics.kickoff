@@ -11,17 +11,18 @@
 
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { backendRuntimes, frontendRuntimes, isOwnedSupervisor, preflight, selectRuntimes } from '../scripts/local-topology.mjs';
+import { backendRuntimes, frontendRuntimes, isOwnedSupervisor, preflight, selectRuntimes } from '../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectTopologyService.mjs';
 
 assert.deepEqual(backendRuntimes.map(runtime => runtime.port), [4300, 4314, 4330, 4312, 4340, 4350]);
 assert.equal(new Set(backendRuntimes.map(runtime => runtime.port)).size, backendRuntimes.length);
 assert.equal(selectRuntimes(false).length, 6);
-assert.equal(selectRuntimes(true).length, 8);
-assert.deepEqual(frontendRuntimes.map(runtime => runtime.port), [3100, 3200]);
-assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: '/wrong' }, () => 'node scripts/local-topology.mjs start'), false);
-assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: process.cwd() }, () => 'node scripts/local-topology.mjs start'), true);
+assert.equal(selectRuntimes(true).length, 9);
+assert.deepEqual(frontendRuntimes.map(runtime => runtime.port), [3100, 3200, 3300]);
+assert.equal(frontendRuntimes.find(runtime => runtime.code === 'agora')?.args.includes('3300'), true);
+assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: '/wrong' }, () => 'node defaultProjectTopologyService.mjs start'), false);
+assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: process.cwd() }, () => 'node defaultProjectTopologyService.mjs start'), true);
 assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: process.cwd() }, () => 'node unrelated.js'), false);
-const supervisorSource = fs.readFileSync(new URL('../scripts/local-topology.mjs', import.meta.url), 'utf8');
+const supervisorSource = fs.readFileSync(new URL('../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectTopologyService.mjs', import.meta.url), 'utf8');
 assert.match(supervisorSource, /stopping the remaining topology/);
 assert.match(supervisorSource, /Refusing to start because required ports are busy/);
 const preflightResult = await preflight(false);

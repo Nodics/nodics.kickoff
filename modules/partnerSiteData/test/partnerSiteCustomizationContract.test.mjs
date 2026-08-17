@@ -22,7 +22,7 @@ const manifest = JSON.parse(readFileSync(resolve(root, 'data/manifest.json'), 'u
 const properties = require(resolve(root, 'config/properties.js'));
 const packageData = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 const release = manifest.sections.partnerNexusCustomization;
-const nexusRoot = resolve(root, '..', 'nexusData');
+const nexusRoot = resolve(root, '..', 'nexusWebData');
 const nexusManifest = JSON.parse(readFileSync(resolve(nexusRoot, 'data/manifest.json'), 'utf8'));
 const nexusPackage = JSON.parse(readFileSync(resolve(nexusRoot, 'package.json'), 'utf8'));
 

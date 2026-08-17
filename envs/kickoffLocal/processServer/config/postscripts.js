@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /**
  * @module kickoffLocal/processServer/config/postscripts
  * @description Reserved post-start script contribution for the local Kickoff Process server.

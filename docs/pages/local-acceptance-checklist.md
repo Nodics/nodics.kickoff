@@ -125,7 +125,7 @@ The command stops the servers it started after the acceptance gates complete.
 To keep the API-qualified stack running, use:
 
 ```bash
-node scripts/local-bootstrap-acceptance.mjs --leave-started
+npm run acceptance:local -- --leave-started
 ```
 
 The command does not inspect or mutate a database directly, kill unrelated

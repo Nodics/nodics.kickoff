@@ -8,9 +8,12 @@
     root LICENSE file or a separate written agreement with Nodics.
 
  */
+
+'use strict';
+
 /** @module kickoffLocal/engagementServer/config/properties @description Enables the contact experience and local coordinates only for the reference Engagement server. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own feature, database, provider, and endpoint configuration. */
 module.exports = {
-    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'agoraData', 'kickoffLocal', 'engagementServer'] },
+    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'agoraCommonData', 'kickoffLocal', 'engagementServer'] },
     runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['ENGAGEMENT'] } },

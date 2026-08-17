@@ -23,7 +23,7 @@ The principal owners are:
 
 ## Configure and start locally
 
-Install the workspace dependencies and use Kickoff scripts rather than constructing an undocumented module graph. Run `npm run start:platform` first, then the Commerce and Engagement start scripts in separate terminals. Readiness must pass before invoking a journey. Do not place provider credentials in source, sample data, browser storage, or documentation. Environment-specific secret references belong in secured layered configuration.
+Install the workspace dependencies and use Kickoff project commands rather than constructing an undocumented module graph. Run `npm run start:platform` first, then the Commerce and Engagement start commands in separate terminals. The command aliases execute framework-owned runtime startup tooling using facts from `nodics.project.json`. Readiness must pass before invoking a journey. Do not place provider credentials in source, sample data, browser storage, or documentation. Environment-specific secret references belong in secured layered configuration.
 
 Run `npm run acceptance:functional` from `nodics.kickoff` for the automated effective-server proof. The runner reuses healthy local servers or starts only what it needs, authenticates through Platform, uses unique correlation and idempotency values, and stops only processes that it started. It does not edit MongoDB directly.
 

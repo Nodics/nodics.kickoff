@@ -11,15 +11,17 @@
       "owningDomain": "partner.nexus.wcms",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
-      "environmentScope": ["ALL"],
+      "environmentScope": [
+        "ALL"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/wcms/data/partnerNexusPageData.js": "b24968b15a6b2e796d4025a619dc9440344a0b7e75abefe08a455634229466cd",
-        "staged/wcms/headers/partnerNexusPageHeader.js": "27e06587be776605867a1f8fa66868bf4f6de655e921246d3dd933f8e0e900fb"
+        "staged/wcms/data/partnerNexusPageData.js": "b0598a2e0a0355937a66f076cb8ef7c437b5904470d689f061a38897a050853e",
+        "staged/wcms/headers/partnerNexusPageHeader.js": "e2a4842aeaf066bd725637e912faf688a7cf58240333c7d3ca371145d8475df5"
       }
     }
   }

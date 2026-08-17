@@ -11,7 +11,31 @@
 
 'use strict';
 
+/**
+ * @module envs/nodics
+ * @description Defines Kickoff project-owned module lifecycle hooks for this boundary.
+ * @layer module
+ * @owner nodics.js
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
 module.exports = {
-    init: function () { return Promise.resolve(true); },
-    postInit: function () { return Promise.resolve(true); }
+    /**
+     * Initializes this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
+     */
+    init: function (options) {
+        return Promise.resolve(true);
+    },
+
+    /**
+     * Runs post-initialization for this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific post-start behavior is required.
+     */
+    postInit: function (options) {
+        return Promise.resolve(true);
+    }
 };

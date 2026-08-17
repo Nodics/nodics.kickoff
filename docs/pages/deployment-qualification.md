@@ -39,7 +39,7 @@ Fresh acceptance drops only the documented Kickoff local databases. Because it
 mutates local data, it is never included by default:
 
 ```bash
-node scripts/deployment-qualification.mjs --execute-local --include-fresh
+npm run qualification:deployment:local -- --include-fresh
 ```
 
 Never use this flag against a shared development, qualification,
@@ -114,10 +114,12 @@ If the framework, Axis, or Kickoff checkout lives elsewhere, provide
 
 ## Customization boundary
 
-This runner belongs to the reference customer project because it coordinates a
-specific multi-repository deployment journey. A real customer project should
-copy the pattern into its own project tooling, change only its repository
-coordinates and qualification gates, and retain the safety properties:
+The runner implementation belongs to framework tooling. The project owns only
+the qualification facts exposed through `nodics.project.json`: repository
+coordinates, environment identity, local gate choices, and evidence policy. A
+generated customer project should reuse the framework runner through project
+commands and change only its manifest facts while retaining the safety
+properties:
 
 - dry plan by default;
 - destructive checks explicitly opted in;
@@ -126,9 +128,10 @@ coordinates and qualification gates, and retain the safety properties:
 - no automatic production approval;
 - named owners and measurable completion criteria.
 
-Do not move customer workloads, credentials, environments, acceptance targets,
-or risk decisions into `nodics.ai`. Framework modules own reusable contracts;
-the customer deployment owns its qualification and release decision.
+Do not move customer workloads, credentials, acceptance data, or risk decisions
+into `nodics.ai`. Framework modules own reusable contracts and orchestration;
+the customer project owns its environments, qualification targets, and release
+decision.
 
 ## Common mistakes
 

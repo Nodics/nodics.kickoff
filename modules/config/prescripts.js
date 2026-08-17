@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /**
  * @module nodics.kickoff/modules/config/prescripts
  * @description Shared Nodics Kickoff project-module pre-start script declarations.

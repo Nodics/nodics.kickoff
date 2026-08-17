@@ -11,4 +11,12 @@
 
 'use strict';
 
+/**
+ * @module envs/config/properties
+ * @description Defines Kickoff project-owned layered configuration for this boundary.
+ * @layer config
+ * @owner properties.js
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {};

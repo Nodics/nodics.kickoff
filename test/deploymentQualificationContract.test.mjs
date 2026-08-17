@@ -16,9 +16,9 @@ import {
   executeLocalPlan,
   resolveSourceCommits,
   sanitizeStep,
-} from '../scripts/deployment-qualification.mjs';
+} from '../.nodics/framework/nodics.foundation/modules/nTooling/src/service/project/defaultProjectDeploymentQualificationService.mjs';
 
-const workspace = { framework: '/framework', kickoff: '/project', axis: '/axis', nexus: '/nexus' };
+const workspace = { framework: '/framework', kickoff: '/project', axis: '/axis', nexus: '/nexus', agora: '/agora' };
 const plan = createQualificationPlan({ workspace });
 assert.deepStrictEqual(plan.local.map((step) => step.id), [
   'publishing-capacity-baseline',
@@ -28,6 +28,7 @@ assert.deepStrictEqual(plan.local.map((step) => step.id), [
   'project-retained-acceptance',
   'axis-verification',
   'nexus-verification',
+  'agora-verification',
   'redis-cache-live',
   'redis-backoffice-registry-live',
 ]);

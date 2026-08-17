@@ -11,9 +11,10 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
+const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
 /** @module kickoffLocal/commerceServer/config/properties @description Defines isolated local Commerce coordinates. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
     runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true }, commercePublicationIngestion: { enabled: true } } },
     search: {

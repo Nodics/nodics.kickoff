@@ -137,7 +137,7 @@ assert.strictEqual(
     'legacy documentation source must not remain under the generated data tree'
 );
 assert(
-    fs.existsSync(path.join(root, 'modules/nexusData/docs/README.md')),
+    fs.existsSync(path.join(root, 'modules/nexus.web/modules/nexusWebData/docs/README.md')),
     'Nexus application documentation must have a module-owned docs boundary'
 );
 

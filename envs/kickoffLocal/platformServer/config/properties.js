@@ -11,15 +11,24 @@
 
 'use strict';
 
+/**
+ * @module envs/kickoffLocal/platformServer/config/properties
+ * @description Defines Kickoff project-owned layered configuration for this boundary.
+ * @layer config
+ * @owner platformServer
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
-        'http://localhost:3200', 'http://127.0.0.1:3200'] } },
+        'http://localhost:3200', 'http://127.0.0.1:3200',
+        'http://localhost:3300', 'http://127.0.0.1:3300'] } },
     backofficeApplicationInitialization: {
         profiles: {
             nexus: {
                 code: 'nexus',
                 type: 'WEBSITE_BUNDLE',
-                owner: 'nexusData',
+                owner: 'nexusWebData',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexus',
@@ -28,7 +37,7 @@ module.exports = {
             nexusupdate: {
                 code: 'nexusupdate',
                 type: 'WEBSITE_BUNDLE_UPDATE',
-                owner: 'nexusData',
+                owner: 'nexusWebData',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusupdate',

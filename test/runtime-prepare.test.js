@@ -19,7 +19,7 @@ const packageRoot = packageName => path.dirname(require.resolve(packageName + '/
 
 const scenarios = Object.freeze([
     Object.freeze({
-        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce']),
+        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
             'nodics.process', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
@@ -31,7 +31,9 @@ const scenarios = Object.freeze([
             'cashOnDeliveryPayment', 'bankTransferPayment', 'paymentMethods',
             'paymentProviderCore', 'stripeProvider', 'paypalProvider',
             'cyberSourceProvider', 'visaProvider', 'paymentProviders', 'payment',
-            'fulfillmentCore', 'fulfillment', 'nodics.commerce', 'nodics.kickoff',
+            'fulfillmentCore', 'fulfillment', 'nodics.commerce',
+            'apparelProduct', 'apparel', 'electronicsProduct', 'electronics',
+            'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'multiDomainCommerce', 'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal',
             'commerceServer'
         ]),
@@ -42,11 +44,11 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(CONFIG.get('search').product.options.engine, 'elastic');
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
-            assert.equal(NODICS.isModuleActive('agoraData'), false);
+            assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
         }
     }),
     Object.freeze({
-        server: 'commerceStagedServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce']),
+        server: 'commerceStagedServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
             'nodics.process', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
@@ -58,8 +60,11 @@ const scenarios = Object.freeze([
             'cashOnDeliveryPayment', 'bankTransferPayment', 'paymentMethods',
             'paymentProviderCore', 'stripeProvider', 'paypalProvider',
             'cyberSourceProvider', 'visaProvider', 'paymentProviders', 'payment',
-            'fulfillmentCore', 'fulfillment', 'nodics.commerce', 'nodics.kickoff',
-            'kickoffCore', 'kickoffApi', 'kickoffInt', 'agoraData', 'kickoffLocal',
+            'fulfillmentCore', 'fulfillment', 'nodics.commerce',
+            'apparelProduct', 'apparel', 'electronicsProduct', 'electronics',
+            'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'multiDomainCommerce', 'nodics.kickoff',
+            'kickoffCore', 'kickoffApi', 'kickoffInt',
+            'agoraApparelData', 'agoraElectronicsData', 'agoraTelcoData', 'kickoffLocal',
             'commerceStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'commerceManagement']),
@@ -73,13 +78,17 @@ const scenarios = Object.freeze([
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);
-            assert.equal(NODICS.isModuleActive('agoraData'), true);
+            assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
+            const selected = require('../config/agora-domain-composition').resolve().domains;
+            assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
+            assert.equal(NODICS.isModuleActive('electronicsProduct'), selected.includes('electronics') || selected.includes('telco'));
+            assert.equal(NODICS.isModuleActive('telcoCatalog'), selected.includes('telco'));
             assert.equal(NODICS.isModuleActive('commerceServer'), false);
         }
     }),
     Object.freeze({
         server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
-        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'kickoffLocal', 'engagementServer']),
+        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'kickoffLocal', 'engagementServer']),
         verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
@@ -107,7 +116,7 @@ const scenarios = Object.freeze([
         frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
-            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData',
+            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),
@@ -138,7 +147,7 @@ const scenarios = Object.freeze([
             assert.equal(NODICS.isModuleActive('vDatabase'), false);
             assert.equal(NODICS.isModuleActive('vMongodb'), false);
             assert.equal(NODICS.isModuleActive('vService'), false);
-            assert.equal(NODICS.isModuleActive('nexusData'), false);
+            assert.equal(NODICS.isModuleActive('nexusWebData'), false);
         }
     }),
     Object.freeze({
@@ -188,9 +197,31 @@ async function prepareScenario(scenario) {
         defaultServer: scenario.server
     }));
 
-    scenario.expectedModules.forEach(moduleName => {
+    const selectedDomains = require('../config/agora-domain-composition').resolve().domains;
+    const capabilityDomains = new Set(selectedDomains);
+    if (capabilityDomains.has('telco')) capabilityDomains.add('electronics');
+    const optionalFamilies = {
+        apparel: ['apparelProduct', 'apparel'],
+        electronics: ['electronicsProduct', 'electronics'],
+        telco: ['telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco']
+    };
+    const disabledModules = Object.entries(optionalFamilies).filter(([domain]) => !capabilityDomains.has(domain)).flatMap(([, modules]) => modules);
+    ['apparel', 'electronics', 'telco'].filter(domain => !selectedDomains.includes(domain)).forEach(domain => {
+        disabledModules.push({ apparel: 'agoraApparelData', electronics: 'agoraElectronicsData', telco: 'agoraTelcoData' }[domain]);
+    });
+    if (selectedDomains.length < 2) disabledModules.push('multiDomainCommerce');
+    scenario.expectedModules.filter(moduleName => !disabledModules.includes(moduleName)).forEach(moduleName => {
         assert.equal(NODICS.isModuleActive(moduleName), true, `${moduleName} should be active`);
     });
+    disabledModules.forEach(moduleName => assert.equal(NODICS.isModuleActive(moduleName), false, `${moduleName} should be disabled`));
+    if (scenario.server === 'commerceServer' || scenario.server === 'commerceStagedServer') {
+        const contributors = CONFIG.get('product').publication.searchEnrichment.domains.contributors;
+        assert.deepEqual(
+            Object.keys(contributors).sort(),
+            [...capabilityDomains].sort(),
+            `${scenario.server} should expose exactly the selected domain search contributors`
+        );
+    }
     ['kickoffModules', 'kickoff.environments', 'nSetup', 'nTooling'].forEach(moduleName => {
         assert.equal(NODICS.getRawModule(moduleName), undefined, `${moduleName} must remain outside runtime discovery`);
         assert.equal(NODICS.isModuleActive(moduleName), false, `${moduleName} must remain outside runtime activation`);

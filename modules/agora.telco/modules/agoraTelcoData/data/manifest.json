@@ -1,0 +1,66 @@
+{
+  "contractVersion": 2,
+  "module": "agoraTelcoData",
+  "sections": {
+    "agoraTelcoCommerceCatalog": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora Telco commerce catalog",
+      "owningDomain": "agora.telco",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/telco/data/agoraTelcoAllowanceData.js": "145dde5914d7195207def2e3f5d3ca7853150d5d0336f11de4c6596a35bf22d7",
+        "staged/telco/data/agoraTelcoInventoryBalanceData.js": "b449ff9774d5eff2cbea726b731b79228a47fff9286190645673a0c62daf7493",
+        "staged/telco/data/agoraTelcoPlanData.js": "49a64f93106b33f3ddf1f042ec0bc5b77ebe60192841abdd55389bf565c1b0e5",
+        "staged/telco/data/agoraTelcoPriceBookData.js": "78056180726ad57922d7bf55cdc12c85641da24830c7924172278137f69e0ef9",
+        "staged/telco/data/agoraTelcoPriceRowData.js": "3b58446c022c52f2207707388cae994dd82b26112074c284fdf4116eb0197057",
+        "staged/telco/data/agoraTelcoProductData.js": "0e54d1c3d31d921a11d7cef650d9129338bd65aa7f56f86d6408497c9b0ace8b",
+        "staged/telco/data/agoraTelcoProductLocalizationData.js": "ac6d0699cffac6a6a9753ecc871b6d13cb724c646537093cc458f82e3a744c19",
+        "staged/telco/data/agoraTelcoProductVariantData.js": "c37437856208b7275c2d23fc21429fd4b1fd2a6ab0ebb1f7d719a53579555e26",
+        "staged/telco/data/agoraTelcoProductVariantLocalizationData.js": "f45ec83eda3b88959a5440d306bd726f03d82d7f1a53d3aaa6d63dc1ac546af0",
+        "staged/telco/data/agoraTelcoWarehouseData.js": "8627f65a24033356786968ace50ff29044d22454142ee37a70636cde5581ae9b",
+        "staged/telco/headers/agoraTelcoCatalogHeader.js": "c089df169fd8f6d5827836c0ad3e93da9b059722102dbcd117b70809b21fb5d4"
+      }
+    },
+    "agoraTelcoContentCatalog": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Agora Telco content and renderer catalog",
+      "owningDomain": "agora.telco.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/telco/data/agoraTelcoContentCatalogData.js": "c719c0ba58055822376fce0df83fa4624ee16d2dbaf7295aff4d607263062cc4",
+        "staged/telco/data/agoraTelcoPageData.js": "d47d320f3c19377a4bb0d9438c616bf09fe0f9a7ca795cc312459db21d1bb32e",
+        "staged/telco/data/agoraTelcoRendererData.js": "ecc59e8d2d06c794b0d7d495fc4ffe323981835ff6c91b0aeabc8e99023acd67",
+        "staged/telco/data/agoraTelcoRouteData.js": "2feb6e6c3ef8eea9f7b17c1d2922f83552b96b8f8c15088d0a839fe7d01b9e00",
+        "staged/telco/data/agoraTelcoSiteData.js": "28a69b49d38d2249eb5a71d7ded1d73ae611ebe1b594dc8046d8a2dbb2b49fef",
+        "staged/telco/data/agoraTelcoTypeCodeData.js": "83ca5b724d876a524b1c4fbd7122262a943d08570208a95236d74a395854180d",
+        "staged/telco/headers/agoraTelcoContentHeader.js": "5c78f9d350b45619832b8ceff8f717ef89397e878b3ecfb524a3a47500e7a34a"
+      }
+    }
+  }
+}

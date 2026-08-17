@@ -15,12 +15,12 @@ const test = require('node:test');
  * @module kickoff/test/agoraProductSearchPublicationContract
  * @description Verifies Agora Product seed data satisfies Product bilingual publication and nSearch projection boundaries.
  * @layer test
- * @owner agoraData
+ * @owner agoraCommonData
  */
 
 const projectRoot = path.resolve(__dirname, '..');
 const productRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/product');
-const agoraProductRoot = path.join(projectRoot, 'modules/agoraData/data/staged/product/data');
+const agoraProductRoot = path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/product/data');
 
 const productProperties = require(path.join(productRoot, 'config/properties'));
 const pricingRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/pricing');
@@ -44,9 +44,9 @@ const categories = require(path.join(agoraProductRoot, 'agoraCategoryData'));
 const categoryLocalizations = require(path.join(agoraProductRoot, 'agoraCategoryLocalizationData'));
 const variants = require(path.join(agoraProductRoot, 'agoraProductVariantData'));
 const variantLocalizations = require(path.join(agoraProductRoot, 'agoraProductVariantLocalizationData'));
-const priceBooks = require(path.join(projectRoot, 'modules/agoraData/data/staged/pricing/data/agoraPriceBookData'));
-const priceRows = require(path.join(projectRoot, 'modules/agoraData/data/staged/pricing/data/agoraPriceRowData'));
-const inventoryBalances = require(path.join(projectRoot, 'modules/agoraData/data/staged/inventory/data/agoraInventoryBalanceData'));
+const priceBooks = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/pricing/data/agoraPriceBookData'));
+const priceRows = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/pricing/data/agoraPriceRowData'));
+const inventoryBalances = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/inventory/data/agoraInventoryBalanceData'));
 
 let persisted;
 let indexed;

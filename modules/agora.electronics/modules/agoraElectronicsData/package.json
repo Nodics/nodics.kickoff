@@ -1,0 +1,22 @@
+{
+    "name": "agoraElectronicsData",
+    "index": "3100.51",
+    "description": "Agora Electronics product and content catalogs.",
+    "main": "nodics.js",
+    "version": "0.0.1",
+    "private": true,
+    "license": "SEE LICENSE IN LICENSE",
+    "nodics": {
+        "kind": "content-pack",
+        "displayName": "Agora Electronics Data",
+        "runtimeModule": true,
+        "loadableByNodicsModuleLoader": true,
+        "owns": ["configuration", "data", "test", "documentation"],
+        "runtime": {
+            "router": false,
+            "publish": false,
+            "web": false
+        }
+    },
+    "scripts": {}
+}

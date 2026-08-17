@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /**
  * @module nodics.kickoff/modules/kickoffCore/config/properties
  * @description Nodics Kickoff core project-module configuration defaults.

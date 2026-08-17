@@ -1,0 +1,110 @@
+{
+  "contractVersion": 2,
+  "module": "nexusWebData",
+  "sections": {
+    "nexusCorporateSite": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Nexus corporate Site and page composition source",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcms/data/corporate/nexusCatalogData.js": "1618a3e2ff922e9f4e9a70d4d4a35f1d8b71afbc27be40e3d3e2f52ce5750004",
+        "staged/wcms/data/corporate/nexusComponentData.js": "6cad8cabca40d1c3358105659a0ab88fee6d55bd05d157c55fd621f8b542816f",
+        "staged/wcms/data/corporate/nexusComponentTypeGroupData.js": "5d7a40055cac11ed71cd8d5de678f1a425301d9ac5011dfb781b11cf4a8d9368",
+        "staged/wcms/data/corporate/nexusNavigationData.js": "84a728184cb8beb75d94c06fe0646f77326fdea0303b0ef19e7bdb71cd195909",
+        "staged/wcms/data/corporate/nexusPageData.js": "b0c9580de1d118541ff50093f870abab93a400f7e982db160bb120af58d68539",
+        "staged/wcms/data/corporate/nexusRendererData.js": "b0926052c9de6b0e37c3b0ffcf5b180497fb91c6ee000cee5f8cbe1427fa2fb4",
+        "staged/wcms/data/corporate/nexusRouteData.js": "66f4be81f21b2a3e515716ec6d06e5f5bb6b526cebba5964d91b02ada85374a2",
+        "staged/wcms/data/corporate/nexusSiteData.js": "a5dec411a3a015d411eb8baddc1d19397da7b59053c0073389e7306691cdf070",
+        "staged/wcms/data/corporate/nexusSlotData.js": "0b1cc8a1418885157d1ac366df9aa21c22906d191e11cd40717b58e13a3fbafb",
+        "staged/wcms/data/corporate/nexusTemplateData.js": "07c5ad22e09facd414982f98b42b4e8b43325b36e88947de7fb3dcbeacbd184e",
+        "staged/wcms/data/corporate/nexusTypeCodeData.js": "472c3ebcad8301085a2619aeb6e7be3dc1817eef1dcd196d08a9a2d4de56aab0",
+        "staged/wcms/headers/nexusCorporateContentHeader.js": "e0acc96f6dc7814ac307fe7654cafcf4995e55f18eb2c0324391b6a811fa23d2"
+      }
+    },
+    "nexusCorporateSiteUpdate": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "1.0.1",
+      "description": "Nexus corporate Site immutable v1.0.1 component delta",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusPageUpdateData.js": "ee97ce9a3f18bdd40f4a93e56369643318e27d503771214d411458f60d617afa",
+        "staged/wcmsUpdate/headers/nexusCorporatePageUpdateHeader.js": "68d26a3c5d833729bcfc8df79ecd569f7114bfd27a228172bd1053842ca019b0"
+      }
+    },
+    "nexusEditorialSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "1.0.0",
+      "description": "Local Nexus Editorial authoring source without Online projections",
+      "owningDomain": "nexus.editorial",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/editorial/data/nexusEditorialArticleData.js": "d7ba1e9fe1a1c227b16c529bf51726dfd26d4612d047d482ab26d0eff047c909",
+        "staged/editorial/data/nexusEditorialArticleLocalizationData.js": "42ed4e86bc818374f1a83faa0f828f29b3266a525d8d002785d561d2c77e9563",
+        "staged/editorial/data/nexusEditorialArticleTaxonomyData.js": "293d5edcd991137c71f119551e12b3099bed606ff6ce848320da07d4368911d4",
+        "staged/editorial/data/nexusEditorialAuthorData.js": "b0ea35765769ac6bc5d5529b9652389763188cacc09abc6a11c17e4c0f4f2862",
+        "staged/editorial/data/nexusEditorialTaxonomyTermData.js": "9c40bfd8627fc8af93d18a09e9981316c392af19066aeca711a711831b690e33",
+        "staged/editorial/headers/nexusEditorialSampleDataHeader.js": "9a09784ea83793d9ff2870c85cf7742eb946b56fc441c9ac71ff75542d8a8e91"
+      }
+    },
+    "nexusEngagementOperational": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "operational",
+      "version": "1.0.0",
+      "description": "Local versioned Engagement form definitions and sanitized testimonial projections",
+      "owningDomain": "nexus.engagement",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "ENGAGEMENT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "operational/engagement/data/nexusContactFormDefinitionData.js": "e2d61e720c71f0f1d365be7a33247f84322e9c924d6de20b90fc7b5848b47b25",
+        "operational/engagement/data/nexusContactFormVersionData.js": "2dffeeba001d361efde981d4631cacbcf0ed830a17f4e9c6b63bd9ce366c9947",
+        "operational/engagement/data/nexusTestimonialProjectionData.js": "4ee84be89328ae7cbaa78fdd75538a1181d81297556aa1a0de6bf4d56b89d8ea",
+        "operational/engagement/headers/nexusExperienceConfigurationHeader.js": "b0151eb48cada4ba834fbdf5054a0c6023758a32e98727c9cf471dfad43d1dea"
+      }
+    }
+  }
+}

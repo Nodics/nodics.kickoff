@@ -8,4 +8,15 @@
     root LICENSE file or a separate written agreement with Nodics.
 
  */
+
+'use strict';
+
+/**
+ * @module envs/kickoffLocal/engagementServer/config/postscripts
+ * @description Defines Kickoff project-owned post-start lifecycle hooks for this boundary.
+ * @layer config
+ * @owner engagementServer
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {};

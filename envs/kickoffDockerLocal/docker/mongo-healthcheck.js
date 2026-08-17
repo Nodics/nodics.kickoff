@@ -9,5 +9,15 @@
 
  */
 
+'use strict';
+
+/**
+ * @module envs/kickoffDockerLocal/docker/mongo-healthcheck
+ * @description Defines Kickoff project-owned JavaScript configuration for this boundary.
+ * @layer module
+ * @owner docker
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 const result = db.adminCommand({ ping: 1 });
 if (!result.ok) quit(1);

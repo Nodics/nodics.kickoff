@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /** @module kickoffLocal/processServer/data/init/data/editorial/defaultEditorialProcessDefinitionVersionData @description Deploys immutable reference Editorial workflow versions into Process. @layer project-data @owner nodics.kickoff */
 const definitions = require('./defaultEditorialProcessDefinitionData');
 module.exports = {

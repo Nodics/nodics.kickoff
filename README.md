@@ -84,6 +84,21 @@ generated framework-link directory, not a registry-style packed dependency.
 Use `npm ci` for deterministic clean installs; rerun `configure:framework`
 first whenever the framework checkout moves.
 
+Customers and partner developers should run Nodics lifecycle checks from their
+project repository. Kickoff exposes project-local aliases such as
+`npm run nodics:clean`, `npm run nodics:build`, and
+`npm run release:check`, but those aliases delegate to the framework-owned
+`nTooling` bridge under `.nodics/framework`. Do not copy framework clean, build,
+release, security-boundary, or framework publication-qualification
+implementation into customer projects.
+
+Project orchestration is declared in `nodics.project.json`. `package.json`
+aliases should stay thin and call `nodics-project.js project:run <command>`
+rather than hardcoding project script paths. This keeps generated projects
+upgrade-safe: project facts, data packs, and acceptance choices stay in the
+project, while framework execution, validation, lifecycle, and upgrade behavior
+can evolve in `nodics.ai`.
+
 For a complete zero-state local verification, use the Kickoff documentation
 page "Local acceptance checklist" after importing the Kickoff documentation
 content pack into WCMS.

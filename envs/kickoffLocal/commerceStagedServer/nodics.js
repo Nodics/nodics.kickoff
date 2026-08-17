@@ -9,7 +9,27 @@
 
  */
 
-/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
+
 /** @module kickoffLocal/commerceStagedServer @description Declares the governed local Commerce Staged runtime for Product catalog imports and publication evidence. @layer environment-server @owner nodics.kickoff */
-module.exports = { init: function () { return Promise.resolve(true); }, postInit: function () { return Promise.resolve(true); } };
+module.exports = {
+    /**
+     * Initializes this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
+     */
+    init: function (options) {
+        return Promise.resolve(true);
+    },
+
+    /**
+     * Runs post-initialization for this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific post-start behavior is required.
+     */
+    postInit: function (options) {
+        return Promise.resolve(true);
+    }
+};

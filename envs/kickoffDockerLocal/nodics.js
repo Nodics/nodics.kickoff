@@ -13,8 +13,23 @@
 
 /** @module kickoffDockerLocal @description Declares the isolated Docker Local production-simulation environment. */
 module.exports = {
-    /** Initializes the environment contribution without owning infrastructure lifecycle. */
-    init: function () { return Promise.resolve(true); },
-    /** Completes environment contribution initialization. */
-    postInit: function () { return Promise.resolve(true); }
+    /**
+     * Initializes this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
+     */
+    init: function (options) {
+        return Promise.resolve(true);
+    },
+
+    /**
+     * Runs post-initialization for this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific post-start behavior is required.
+     */
+    postInit: function (options) {
+        return Promise.resolve(true);
+    }
 };

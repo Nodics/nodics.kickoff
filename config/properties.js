@@ -11,6 +11,14 @@
 
 'use strict';
 
+/**
+ * @module config/properties
+ * @description Defines Kickoff project-owned layered configuration for this boundary.
+ * @layer module
+ * @owner kickoff
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = Object.freeze({
     project: Object.freeze({ code: 'nodics.kickoff' }),
     data: Object.freeze({

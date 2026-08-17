@@ -14,18 +14,22 @@ import test from "node:test";
  * @module kickoff/test/agoraCommercePublicationAcceptanceContract
  * @description Guards the live Agora Commerce Product search publication acceptance harness.
  * @layer test
- * @owner agoraData
+ * @owner agoraCommonData
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
-const scriptPath = path.join(projectRoot, "scripts/agora-commerce-publication-acceptance.mjs");
+const scriptPath = path.join(projectRoot, "..", "nodics.ai", "nodics.foundation", "modules", "nTooling", "src", "service", "project", "defaultProjectAgoraCommercePublicationAcceptanceService.mjs");
 const packagePath = path.join(projectRoot, "package.json");
+const projectContractPath = path.join(projectRoot, "nodics.project.json");
 
 test("Agora Commerce publication acceptance covers operator publication operational restore and customer discovery", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+  const projectContract = JSON.parse(fs.readFileSync(projectContractPath, "utf8"));
 
-  assert.equal(pkg.scripts["acceptance:agora-commerce-publication"], "node scripts/agora-commerce-publication-acceptance.mjs");
+  assert.match(pkg.scripts["acceptance:agora-commerce-publication"], /nodics-project\.js project:run acceptance:agora-commerce-publication/);
+  assert.equal(projectContract.tooling.commands["acceptance:agora-commerce-publication"].command, "project:agora-commerce-publication-acceptance");
+  assert.equal(projectContract.tooling.commands["acceptance:agora-commerce-publication"].home, "project");
   assert.match(source, /"\/nodics\/product\/v0\/operator\/products\/publication\/search"/);
   assert.match(source, /"\/nodics\/product\/v0\/internal\/products\/publication\/search\/restore"/);
   assert.match(source, /"\/nodics\/pricing\/v0\/internal\/pricing\/publication\/operational\/restore"/);

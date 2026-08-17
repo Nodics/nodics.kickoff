@@ -36,9 +36,13 @@ Kickoff intentionally has no standalone Cron server. Scheduled automation is
 available only through `processServer`, preventing accidental duplicate
 scheduler processes while Cron retains ownership of its job lifecycle.
 
-Axis is a separate frontend application. It connects to Platform for employee
-authentication and BackOffice bootstrap, then uses the registered module
-contracts to reach the authorized backend surfaces.
+Axis, Nexus, and Agora are separate frontend applications grouped locally by
+the optional `nodics.exp` workspace. `nodics.exp` owns frontend discovery and
+tooling only; each application still owns its own source, release, tests, and
+runtime behavior. Axis connects to Platform for employee authentication and
+BackOffice bootstrap. Nexus consumes WCMS Online and Engagement public delivery
+contracts. Agora consumes Platform, WCMS Online, Engagement, and Commerce
+customer contracts.
 
 ## Start locally
 
@@ -50,18 +54,42 @@ npm run start:wcms
 npm run start:process
 ```
 
-Axis normally runs from the `nodics.axis` repository:
+The governed supervisor starts all three frontends with the six backends:
 
 ```bash
-npm run dev
+npm run topology:start:all
 ```
+
+In the preferred local checkout, frontend applications live under
+`../nodics.exp/`:
+
+```text
+nodicsRoot/
+├── nodics.ai/
+├── nodics.kickoff/
+└── nodics.exp/
+    ├── nodics.axis/
+    ├── nodics.nexus/
+    └── nodics.agora/
+```
+
+If a developer keeps the frontend apps somewhere else, set the explicit root
+environment variables used by the relevant script, for example
+`NODICS_AXIS_ROOT` for Axis smoke and `NODICS_QUALIFICATION_AXIS_ROOT`,
+`NODICS_QUALIFICATION_NEXUS_ROOT`, and `NODICS_QUALIFICATION_AGORA_ROOT` for
+deployment qualification evidence.
 
 The default local ports are:
 
 - Axis: `http://localhost:3100`
+- Nexus: `http://localhost:3200`
+- Agora: `http://localhost:3300`
 - Platform: `http://localhost:4300`
-- WCMS: `http://localhost:4310`
+- WCMS Staged: `http://localhost:4312`
+- WCMS Online: `http://localhost:4314`
 - Process and Automation: `http://localhost:4330`
+- Engagement: `http://localhost:4340`
+- Commerce: `http://localhost:4350`
 
 ## Before starting
 
@@ -103,9 +131,8 @@ Use separate terminals so logs stay readable:
 3. Start Process and Automation when process/workflow or scheduled behavior is
    needed. It proves `nodics.process` and `nodics.cron` can share one runtime
    environment while keeping separate functional ownership.
-4. Start Axis after backend servers are reachable. Axis reads its public
-   configuration, connects to Platform, authenticates the employee, and
-   discovers registered module endpoints from BackOffice.
+4. Start Axis, Nexus, and Agora after backend servers are reachable. Each
+   frontend uses only its governed backend contracts and configured CORS origin.
 
 ## Login and first checks
 
@@ -177,8 +204,10 @@ its own endpoint registry.
 
 ## Verification
 
-Verify local runtime topology by starting each server from the customer
-project, not from framework internals. Platform should expose login,
+The final pre-Builder gate must use a fresh Local database and qualify all nine
+runtimes together: Platform, WCMS Staged, WCMS Online, Process, Engagement,
+Commerce, Axis, Nexus, and Agora. Verify the topology from the customer project,
+not from framework internals. Platform should expose login,
 BackOffice bootstrap, registry, and API discovery. WCMS should expose content,
 documentation, media, and import/export delivery. Process and Automation should
 report Process and optional Cron runtime availability from the composed server.

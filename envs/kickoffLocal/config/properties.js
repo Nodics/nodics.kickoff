@@ -11,6 +11,14 @@
 
 'use strict';
 
+/**
+ * @module envs/kickoffLocal/config/properties
+ * @description Defines Kickoff project-owned layered configuration for this boundary.
+ * @layer config
+ * @owner config
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {
     environment: { code: 'kickoffLocal' },
     log: {
@@ -27,7 +35,9 @@ module.exports = {
                 'http://127.0.0.1:3100',
                 'http://172.20.10.2:3100',
                 'http://localhost:3200',
-                'http://127.0.0.1:3200'
+                'http://127.0.0.1:3200',
+                'http://localhost:3300',
+                'http://127.0.0.1:3300'
             ],
             allowedMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
             allowedHeaders: [
@@ -39,6 +49,8 @@ module.exports = {
                 'X-Correlation-Id',
                 'X-Nodics-Client-Contract-Version',
                 'X-Enterprise-Code',
+                'X-Tenant-Code',
+                'Tenant',
                 'X-Nodics-Enterprise',
                 'X-Nodics-Tenant'
             ],

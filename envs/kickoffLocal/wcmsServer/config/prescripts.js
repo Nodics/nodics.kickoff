@@ -11,4 +11,12 @@
 
 'use strict';
 
+/**
+ * @module envs/kickoffLocal/wcmsServer/config/prescripts
+ * @description Defines Kickoff project-owned pre-start lifecycle hooks for this boundary.
+ * @layer config
+ * @owner wcmsServer
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {};

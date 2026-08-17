@@ -9,5 +9,7 @@
 
  */
 
+'use strict';
+
 /** @module kickoffLocal/processServer/data/init/headers/editorial/defaultEditorialProcessDefinitionVersionDataHeader @description Imports immutable Editorial versions through Process. @layer project-data @owner nodics.kickoff */
 module.exports = { flowSchema: { defaultEditorialProcessDefinitionVersionData: { options: { enabled: true, schemaName: 'processDefinitionVersion', operation: 'saveAll', dataFilePrefix: 'defaultEditorialProcessDefinitionVersionData', userGroups: ['adminGroup'] }, query: { code: '$code' } } } };

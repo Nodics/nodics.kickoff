@@ -23,7 +23,7 @@ const staged = read('nodics.kickoff/envs/kickoffLocal/wcmsStagedServer/config/pr
 const online = read('nodics.kickoff/envs/kickoffLocal/wcmsOnlineServer/config/properties.js');
 const process = read('nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js');
 const dockerLocal = read('nodics.kickoff/envs/kickoffDockerLocal/config/runtime-properties.js');
-const guidedAcceptance = read('nodics.kickoff/scripts/guided-initialization-acceptance.mjs');
+const guidedAcceptance = read('nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectGuidedInitializationAcceptanceService.mjs');
 
 for (const permission of ['publish.operations.view', 'publish.operations.reconcile', 'publish.operations.recover']) {
   assert(publishRoutes.includes(permission), `Missing frozen nPublish permission ${permission}`);
@@ -63,7 +63,7 @@ for (const documentation of [
 }
 
 for (const manifestPath of [
-  'nodics.kickoff/modules/nexusData/data/manifest.json',
+  'nodics.kickoff/modules/nexus.web/modules/nexusWebData/data/manifest.json',
   'nodics.kickoff/modules/partnerSiteData/data/manifest.json',
 ]) {
   const manifest = JSON.parse(read(manifestPath));

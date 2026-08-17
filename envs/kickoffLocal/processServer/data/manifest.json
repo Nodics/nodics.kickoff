@@ -10,17 +10,19 @@
       "owningDomain": "editorial",
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "PROCESS",
-      "environmentScope": ["LOCAL"],
+      "environmentScope": [
+        "LOCAL"
+      ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "NONE",
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "init/data/editorial/defaultEditorialProcessDefinitionData.js": "11ca2acb21768111560befa3870a1594d18085b4af379eb80c6b4dc94bff9e39",
-        "init/data/editorial/defaultEditorialProcessDefinitionVersionData.js": "1010c3f7c671f69a5db7a0bf141c722b6a6cb3066a501b13ffe74b37c892c2f8",
-        "init/headers/editorial/defaultEditorialProcessDefinitionDataHeader.js": "eb8e9ee50fd98c8e534c4e6a97d1c5e5120ecd6133c04602e529b7efcb92b43f",
-        "init/headers/editorial/defaultEditorialProcessDefinitionVersionDataHeader.js": "fd67b35c8861c828ae31664552790bc429623f2d54d69a47ead01ea0d682b4fe"
+        "init/data/editorial/defaultEditorialProcessDefinitionData.js": "47b02539ef16123b65507ddf4a745015345c6947b499ec10cb86650185b15a50",
+        "init/data/editorial/defaultEditorialProcessDefinitionVersionData.js": "ff2959632a1cafd07b41c46cf69416fb0906cf31b38c38b973cbec630f468341",
+        "init/headers/editorial/defaultEditorialProcessDefinitionDataHeader.js": "80ee053c182cc5fa201116cc8fd6dfb3ecaf7dce9c92414dd5eb3819525cfc21",
+        "init/headers/editorial/defaultEditorialProcessDefinitionVersionDataHeader.js": "207a4f13403605ce0052dc4357820f06eb5e0e7bb61540ea4958c4ea97ef2b24"
       }
     }
   }

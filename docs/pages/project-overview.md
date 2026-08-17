@@ -13,7 +13,7 @@ the Platform `axis` backend module; browser renderers belong in `nodics.axis`.
 Kickoff-wide documentation source belongs in this repository under `docs/` and
 is generated into this repository's governed content pack. Documentation for a
 specific installed application belongs under that application's data module,
-for example `modules/nexusData/docs/` or `modules/agoraData/docs/`.
+for example `modules/nexus.web/modules/nexusWebData/docs/` or `modules/agora.common/modules/agoraCommonData/docs/`.
 
 ## Why Kickoff exists
 
@@ -56,12 +56,13 @@ whole framework.
 ## Beginner mental model
 
 Think of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample
-production line, and `nodics.axis` as the control room screen. The factory
-equipment provides standard capabilities such as Core, Platform, WCMS, Media,
-Cron, and Process. The sample production line decides which equipment to
-connect for a local demonstration. The control room screen connects to the
-running backend and shows only the capabilities that the backend says are
-available and authorized.
+production line, `nodics.exp` as the frontend workspace shelf, and Axis, Nexus,
+and Agora as separate customer-facing screens. The factory equipment provides
+standard capabilities such as Core, Platform, WCMS, Media, Cron, Process,
+Commerce, and Engagement. The sample production line decides which equipment to
+connect for a local demonstration. The screens connect to the running backend
+and show only the capabilities that the backend says are available and
+authorized.
 
 Kickoff is not the product every customer must ship. It is the smallest
 complete example of how a customer product can be structured.
@@ -73,21 +74,27 @@ flowchart LR
   Servers --> Platform["Platform: login and BackOffice"]
   Servers --> WCMS["WCMS: content and docs"]
   Servers --> Automation["Process server: workflows and scheduled capability"]
-  Axis["Control room<br/>nodics.axis"] --> Platform
+  Servers --> Commerce["Commerce and Engagement"]
+  UiWorkspace["Frontend workspace<br/>nodics.exp"] --> Axis["BackOffice<br/>nodics.axis"]
+  UiWorkspace --> Nexus["Corporate site<br/>nodics.nexus"]
+  UiWorkspace --> Agora["Commerce storefront<br/>nodics.agora"]
+  Axis --> Platform
   Axis --> WCMS
   Axis --> Automation
+  Nexus --> WCMS
+  Agora --> Commerce
 ```
 
 The metaphor is useful because it prevents a common mistake. You do not move
-factory equipment into the control room, and you do not hardcode control-room
-screens into the production line. Each part has a job.
+factory equipment into a frontend application, and you do not hardcode screens
+into the production line. Each part has a job.
 
 ## What Kickoff demonstrates
 
 - how a customer project depends on Nodics framework packages;
 - how environment and server modules load after standard functional modules;
-- how Platform, WCMS, and Process/Cron can run as separate ownership domains
-  while sharing a local automation server;
+- how Platform, WCMS Staged, WCMS Online, Process/Cron, Engagement, and
+  Commerce can run as separate ownership domains while serving three frontends;
 - how project modules can customize runtime behavior without renaming the
   standard functional module identity;
 - how customer-owned documentation can appear in Axis beside Framework,
@@ -100,9 +107,8 @@ The important Kickoff locations are:
 - `package.json` describes the project package and local scripts;
 - `.env` describes developer-specific framework checkout location and local
   overrides;
-- `src/sync-framework-dependencies.js` prepares local framework package links;
-- `src/start-platform-server.js`, `src/start-wcms-server.js`, and
-  `src/start-process-server.js` start the core local runtime servers;
+- `nodics.project.json` declares framework-owned project commands, runtime
+  startup facts, topology facts, and acceptance facts;
 - `config/` contains project-level defaults;
 - `envs/kickoffLocal/` contains local environment and server composition;
 - `modules/` contains project-owned modules and customization examples;
@@ -218,11 +224,12 @@ Nodics Kickoff documentation from backend-owned sources.
 
 Verify Kickoff as a reference customer project by proving that it can run the
 framework without becoming framework source. The local proof is to configure
-the framework root, install dependencies, start Platform, WCMS, and Process
-when needed, start Axis, log in, import required data releases, and open the
-Kickoff documentation product. The project should contribute its own docs and
-sample behavior while framework docs still come from `nodics.docs` and Axis
-product docs still come from the Platform Axis backend module.
+the framework root, install dependencies, start the six backend runtimes plus
+Axis, Nexus, and Agora, log in, import required data releases, open the Kickoff
+documentation product, and verify Agora's multi-domain storefront. The project
+should contribute its own docs and sample behavior while framework docs still
+come from `nodics.docs` and Axis product docs still come from the Platform Axis
+backend module.
 
 For repository verification, run the Kickoff documentation contract test,
 runtime prepare tests, and local acceptance script when project behavior,

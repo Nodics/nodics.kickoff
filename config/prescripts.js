@@ -11,4 +11,12 @@
 
 'use strict';
 
+/**
+ * @module config/prescripts
+ * @description Defines Kickoff project-owned pre-start lifecycle hooks for this boundary.
+ * @layer module
+ * @owner kickoff
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = Object.freeze({});

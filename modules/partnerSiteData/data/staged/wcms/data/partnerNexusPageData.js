@@ -1,11 +1,23 @@
 /*
- *  Copyright (c) 2026 Nodics All rights reserved.
- *
- *  This source code is licensed under the license found in the
- *  LICENSE file in the root directory of this source tree.
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
  */
 
 'use strict';
+
+/**
+ * @module modules/partnerSiteData/data/staged/wcms/data/partnerNexusPageData
+ * @description Defines Kickoff project-owned data records for this module data pack.
+ * @layer data
+ * @owner partnerSiteData
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
 
 /** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner partnerSiteData */
 

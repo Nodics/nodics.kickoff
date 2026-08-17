@@ -11,4 +11,12 @@
 
 'use strict';
 
+/**
+ * @module envs/config/postscripts
+ * @description Defines Kickoff project-owned post-start lifecycle hooks for this boundary.
+ * @layer config
+ * @owner postscripts.js
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {};

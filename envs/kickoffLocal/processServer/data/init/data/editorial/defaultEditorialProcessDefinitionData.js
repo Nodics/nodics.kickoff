@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /** @module kickoffLocal/processServer/data/init/data/editorial/defaultEditorialProcessDefinitionData @description Deploys the reference Editorial workflows into the Process-owned runtime. @layer project-data @owner nodics.kickoff */
 const approvalGraph = {
     nodes: [

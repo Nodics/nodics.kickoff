@@ -11,6 +11,7 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
+const agoraDomains = require('../../../config/agora-domain-composition').resolve();
 
 /** @module kickoffDockerLocal/config/runtimeProperties @description Builds explicit server deltas without reading kickoffLocal configuration. */
 
@@ -76,9 +77,9 @@ module.exports = function runtimeProperties(server) {
             profileBrowserSession: { enabled: true, refreshCookieName: 'nodics_axis_refresh', csrfCookieName: 'nodics_axis_csrf',
                 cookiePath: '/nodics/profile/v0/employee/browser', csrfCookiePath: '/', sameSite: 'Lax', secure: false, maximumAgeSeconds: 86400 },
             backofficeApplicationInitialization: { profiles: {
-                nexus: { code: 'nexus', type: 'WEBSITE_BUNDLE', owner: 'nexusData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexus',
+                nexus: { code: 'nexus', type: 'WEBSITE_BUNDLE', owner: 'nexusWebData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexus',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                nexusupdate: { code: 'nexusupdate', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexusData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusupdate',
+                nexusupdate: { code: 'nexusupdate', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexusWebData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusupdate',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 frameworkdocs: { code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs', applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
@@ -97,7 +98,7 @@ module.exports = function runtimeProperties(server) {
         },
         wcmsStagedServer: {
             httpHardening: { cors: { allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100'], deniedOrigins: ['http://localhost:4200', 'http://127.0.0.1:4200'] } },
-            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusData', 'partnerSiteData', 'agoraData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusWebData', 'partnerSiteData', 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             publishEnabled: true, runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
             apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: true }, mediaManagement: { enabled: true } } },
             data: { dataReleases: dataReleases(['WCMS_STAGED'], [{ moduleName: 'axis', sections: ['axisBaseline'] }]) },
@@ -105,8 +106,8 @@ module.exports = function runtimeProperties(server) {
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-staged' } } } },
             cms: { publication: { enabled: true, runtimeRole: 'STAGED', baselines: {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-                nexus: { releaseCode: 'nexusData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                nexusupdate: { releaseCode: 'nexusData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
                 axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.4.1', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
                 kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.8.1', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
@@ -145,14 +146,14 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('process', 4330), ...connections }
         },
         engagementServer: {
-            activeModules: { groups: [], modules: [...projectModules, 'nexusData', 'agoraData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: [...projectModules, 'nexusWebData', 'agoraCommonData', 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' }, data: { dataReleases: dataReleases(['ENGAGEMENT']) },
             engagement: { capabilities: { contactSubmission: true, testimonial: true, customerReview: true, customerFeedback: true } },
             customerFeedback: { enabled: true }, database: database('kickoffDockerLocalEngagement'),
             servers: { default: endpoint('engagement', 4340), ...connections }
         },
         commerceServer: {
-            activeModules: { groups: [], modules: [...projectModules, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalCommerce'),
             apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true } } },
             search: productSearch(),
@@ -160,7 +161,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('commerce', 4350), ...connections }
         },
         commerceStagedServer: {
-            activeModules: { groups: [], modules: [...projectModules, 'agoraData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
             data: { dataReleases: dataReleases(['COMMERCE_STAGED']) },
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },

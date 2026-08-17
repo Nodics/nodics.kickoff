@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /**
  * @module kickoffLocal/processServer/config/prescripts
  * @description Reserved pre-start script contribution for the local Kickoff Process server.

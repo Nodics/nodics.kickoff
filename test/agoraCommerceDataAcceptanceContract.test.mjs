@@ -14,19 +14,45 @@ import test from "node:test";
  * @module kickoff/test/agoraCommerceDataAcceptanceContract
  * @description Guards the live Agora Commerce data acceptance harness as preflight-first and install-gated.
  * @layer test
- * @owner agoraData
+ * @owner agoraCommonData
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
-const scriptPath = path.join(projectRoot, "scripts/agora-commerce-data-acceptance.mjs");
+const scriptPath = path.join(
+  projectRoot,
+  "..",
+  "nodics.ai",
+  "nodics.foundation",
+  "modules",
+  "nTooling",
+  "src",
+  "service",
+  "project",
+  "defaultProjectAgoraCommerceDataAcceptanceService.mjs",
+);
 const packagePath = path.join(projectRoot, "package.json");
+const projectContractPath = path.join(projectRoot, "nodics.project.json");
 
 test("Agora Commerce data acceptance remains preflight-first with explicit install gating", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+  const projectContract = JSON.parse(fs.readFileSync(projectContractPath, "utf8"));
 
-  assert.equal(pkg.scripts["start:commerce:staged"], "node src/start-commerce-staged-server.js");
-  assert.equal(pkg.scripts["acceptance:agora-commerce-data"], "node scripts/agora-commerce-data-acceptance.mjs");
+  assert.match(
+    pkg.scripts["start:commerce:staged"],
+    /nodics-project\.js project:run start:commerce:staged/,
+  );
+  assert.equal(projectContract.tooling.commands["start:commerce:staged"].command, "project:runtime-start");
+  assert.deepEqual(projectContract.tooling.commands["start:commerce:staged"].args, ["commerceStaged"]);
+  assert.match(
+    pkg.scripts["acceptance:agora-commerce-data"],
+    /nodics-project\.js project:run acceptance:agora-commerce-data/,
+  );
+  assert.equal(
+    projectContract.tooling.commands["acceptance:agora-commerce-data"].command,
+    "project:agora-commerce-data-acceptance",
+  );
+  assert.equal(projectContract.tooling.commands["acceptance:agora-commerce-data"].home, "project");
   assert.match(source, /NODICS_COMMERCE_STAGED_URL \|\| "http:\/\/127\.0\.0\.1:4352"/);
   assert.match(source, /"\/nodics\/import\/v0\/sample"/);
   assert.match(source, /"\/nodics\/import\/v0\/sample\/validate"/);
@@ -38,15 +64,10 @@ test("Agora Commerce data acceptance remains preflight-first with explicit insta
   assert.match(source, /install already current/);
 });
 
-test("Agora Commerce data acceptance requires the full staged release family", () => {
+test("Agora Commerce data acceptance derives the selected domain release family", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
-
-  [
-    "agoraData:agoraCommerceSearchSource",
-    "agoraData:agoraDiscoveryConfigurationSource",
-    "agoraData:agoraInventorySource",
-    "agoraData:agoraPricingSource",
-    "agoraData:agoraProductCatalogSource",
-    "agoraData:agoraTaxSource",
-  ].forEach((releaseCode) => assert.match(source, new RegExp(releaseCode)));
+  assert.match(source, /agora-domain-composition/);
+  assert.match(source, /composition\.projectPacks\.flatMap/);
+  assert.match(source, /section\.destinationRole === "COMMERCE_STAGED"/);
+  assert.doesNotMatch(source, /agoraCommonData:agoraProductCatalogSource/);
 });

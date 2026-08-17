@@ -10,6 +10,7 @@
  */
 
 'use strict';
+const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
 
 /** @module wcmsStagedServer/config/properties @description Defines Local WCMS Staged role, coordinates, persistence, and Online target connection. */
 module.exports = {
@@ -33,7 +34,7 @@ module.exports = {
     ] },
     activeModules: {
         groups: [],
-        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusData', 'partnerSiteData', 'agoraData',
+        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'partnerSiteData', 'agoraCommonData', ...agoraDomains.projectPacks,
             'kickoffLocal', 'wcmsStagedServer']
     },
     publishEnabled: true,
@@ -55,9 +56,9 @@ module.exports = {
         runtimeRole: 'STAGED',
         baselines: { axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0',
             rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-        nexus: { releaseCode: 'nexusData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core',
+        nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core',
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-        nexusupdate: { releaseCode: 'nexusData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core',
+        nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core',
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1',
             rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },

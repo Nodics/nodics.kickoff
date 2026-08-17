@@ -1,0 +1,768 @@
+{
+  "contractVersion": 1,
+  "projectCode": "nodics.kickoff",
+  "displayName": "Nodics Kickoff",
+  "projectType": "reference",
+  "framework": {
+    "root": ".nodics/framework",
+    "minimumContractVersion": 1,
+    "upgradePolicy": "framework-owned-tooling-project-owned-facts"
+  },
+  "applications": {
+    "backends": [
+      "platform",
+      "wcmsStaged",
+      "wcmsOnline",
+      "process",
+      "engagement",
+      "commerce"
+    ],
+    "frontends": [
+      "axis",
+      "nexus",
+      "agora"
+    ]
+  },
+  "domains": [
+    "common",
+    "apparel",
+    "electronics",
+    "telco"
+  ],
+  "dataPacks": [
+    "nexusWebData",
+    "agoraCommonData",
+    "agoraApparelData",
+    "agoraElectronicsData",
+    "agoraTelcoData"
+  ],
+  "runtime": {
+    "servers": {
+      "platform": {
+        "environment": "kickoffLocal",
+        "server": "platformServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.localization",
+          "nodics.platform",
+          "{project}"
+        ]
+      },
+      "wcms": {
+        "retired": true,
+        "retiredMessage": [
+          "The combined Local WCMS runtime is retired.",
+          "Use `npm run start:wcms:staged` for authoring and publication source operations,",
+          "or `npm run start:wcms:online` for delivery and publication target operations.",
+          "The legacy configuration and database are retained temporarily as rollback evidence; they are not runtime authorities."
+        ]
+      },
+      "wcmsStaged": {
+        "environment": "kickoffLocal",
+        "server": "wcmsStagedServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.wcms",
+          "nodics.platform",
+          "{project}"
+        ]
+      },
+      "wcmsOnline": {
+        "environment": "kickoffLocal",
+        "server": "wcmsOnlineServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.wcms",
+          "{project}"
+        ]
+      },
+      "process": {
+        "environment": "kickoffLocal",
+        "server": "processServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.process",
+          "nodics.cron",
+          "nodics.wcms",
+          "{project}"
+        ]
+      },
+      "engagement": {
+        "environment": "kickoffLocal",
+        "server": "engagementServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.communication",
+          "nodics.engagement",
+          "{project}"
+        ]
+      },
+      "commerce": {
+        "environment": "kickoffLocal",
+        "server": "commerceServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.process",
+          "nodics.discovery",
+          "nodics.commerce",
+          "nodics.accelerators",
+          "{project}"
+        ]
+      },
+      "commerceStaged": {
+        "environment": "kickoffLocal",
+        "server": "commerceStagedServer",
+        "moduleRoots": [
+          "nodics.foundation",
+          "nodics.process",
+          "nodics.discovery",
+          "nodics.commerce",
+          "nodics.accelerators",
+          "{project}"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "functionalJourney": {
+      "reason": "Kickoff functional acceptance",
+      "runtimes": {
+        "platform": {
+          "label": "Platform",
+          "port": 4300,
+          "script": "start:platform"
+        },
+        "commerce": {
+          "label": "Commerce",
+          "port": 4350,
+          "script": "start:commerce"
+        },
+        "engagement": {
+          "label": "Engagement",
+          "port": 4340,
+          "script": "start:engagement"
+        }
+      }
+    },
+    "capabilityRegistry": {
+      "foundationModule": "nodics.foundation",
+      "retiredModule": "nodics.core",
+      "functionalModule": "nodics.process",
+      "observedServer": "kickoffLocal:processServer:default",
+      "optionalModule": "nodics.cron",
+      "optionalObservedServers": [
+        "kickoffLocal:processServer:default"
+      ]
+    },
+    "guidedInitialization": {
+      "profileCode": "localWcmsFoundation",
+      "publicationProfiles": [
+        "nexus",
+        "nexusupdate",
+        "partnernexus"
+      ],
+      "deliveryProbe": {
+        "site": "nexusCorporateSite",
+        "path": "/",
+        "locale": "en",
+        "channel": "web"
+      }
+    }
+  },
+  "topology": {
+    "environment": "kickoffLocal",
+    "stateDirectory": "envs/kickoffLocal/generated/local-topology",
+    "groups": {
+      "backends": [
+        {
+          "code": "platform",
+          "label": "Platform",
+          "script": "start:platform",
+          "port": 4300
+        },
+        {
+          "code": "wcmsOnline",
+          "label": "WCMS Online",
+          "script": "start:wcms:online",
+          "port": 4314
+        },
+        {
+          "code": "process",
+          "label": "Process and Automation",
+          "script": "start:process",
+          "port": 4330
+        },
+        {
+          "code": "wcmsStaged",
+          "label": "WCMS Staged",
+          "script": "start:wcms:staged",
+          "port": 4312
+        },
+        {
+          "code": "engagement",
+          "label": "Engagement",
+          "script": "start:engagement",
+          "port": 4340
+        },
+        {
+          "code": "commerce",
+          "label": "Commerce",
+          "script": "start:commerce",
+          "port": 4350
+        }
+      ],
+      "frontends": [
+        {
+          "code": "axis",
+          "label": "Axis",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.axis",
+          "port": 3100,
+          "readyPath": "/"
+        },
+        {
+          "code": "nexus",
+          "label": "Nexus",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.nexus",
+          "port": 3200,
+          "readyPath": "/"
+        },
+        {
+          "code": "agora",
+          "label": "Agora",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "3300"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.agora",
+          "port": 3300,
+          "readyPath": "/"
+        }
+      ]
+    }
+  },
+  "containerEnvironments": {
+    "dockerLocal": {
+      "environment": "kickoffDockerLocal",
+      "qualificationClass": "LOCAL_PRODUCTION_SIMULATION",
+      "composeProjectName": "nodics-kickoff-docker-local",
+      "composeFile": "envs/kickoffDockerLocal/docker/compose.yaml",
+      "generatedDirectory": "envs/kickoffDockerLocal/generated",
+      "environmentFile": "docker.env",
+      "replicaSet": "nodicsDockerLocal",
+      "mongodbHost": "mongodb",
+      "redisPrimaryHost": "redis-primary",
+      "bootstrapAdminPassword": "NodicsLocal@2026",
+      "hostPorts": [
+        4100,
+        4200,
+        5300,
+        5312,
+        5314,
+        5330,
+        5340,
+        5350
+      ],
+      "nativeIsolationPorts": [
+        3100,
+        3200,
+        4300,
+        4312,
+        4314,
+        4330,
+        4340,
+        4350
+      ],
+      "resilience": {
+        "backupDirectory": "envs/kickoffDockerLocal/generated/backups",
+        "restoreConfirmationToken": "--confirm-replace-docker-local-data",
+        "containers": {
+          "mongodb": "nodics-kickoff-docker-local-mongodb-1",
+          "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1"
+        },
+        "volumes": {
+          "redis": "nodics-kickoff-docker-local-redis",
+          "mediaStaged": "nodics-kickoff-docker-local-media-staged",
+          "mediaOnline": "nodics-kickoff-docker-local-media-online"
+        }
+      },
+      "acceptance": {
+        "platformCommand": "acceptance:local",
+        "commerceCommand": "acceptance:agora-commerce",
+        "urls": {
+          "axis": "http://127.0.0.1:4100",
+          "nexus": "http://127.0.0.1:4200",
+          "platform": "http://127.0.0.1:5300",
+          "wcmsStaged": "http://127.0.0.1:5312",
+          "wcmsOnline": "http://127.0.0.1:5314",
+          "process": "http://127.0.0.1:5330",
+          "engagement": "http://127.0.0.1:5340",
+          "commerce": "http://127.0.0.1:5350"
+        }
+      },
+      "qualification": {
+        "environmentContract": "test/dockerLocalEnvironmentContract.test.mjs",
+        "runtimePrepare": "test/dockerLocalRuntimePrepare.test.js",
+        "runtimePorts": [
+          5300,
+          5312,
+          5314,
+          5330,
+          5340,
+          5350
+        ],
+        "frontendUrls": [
+          "http://127.0.0.1:4100/",
+          "http://127.0.0.1:4200/"
+        ],
+        "readLoadPorts": [
+          5314,
+          5300
+        ],
+        "readLoadRequests": 50,
+        "containerPrefix": "nodics-kickoff-docker-local-",
+        "containers": {
+          "mongodb": "nodics-kickoff-docker-local-mongodb-1",
+          "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",
+          "redisSentinel": "nodics-kickoff-docker-local-redis-sentinel-1",
+          "elasticsearch": "nodics-kickoff-docker-local-elasticsearch-1"
+        },
+        "hardenedContainers": [
+          "platform",
+          "wcms-staged",
+          "wcms-online",
+          "process",
+          "engagement",
+          "commerce",
+          "axis",
+          "nexus"
+        ],
+        "networkSeparation": {
+          "publicContainer": "nodics-kickoff-docker-local-nexus-1",
+          "applicationContainer": "nodics-kickoff-docker-local-wcms-staged-1"
+        }
+      },
+      "soak": {
+        "durationSeconds": 1800,
+        "publicationIntervalSeconds": 300,
+        "concurrency": 12,
+        "requestIntervalMs": 1000,
+        "readinessPorts": [
+          5300,
+          5312,
+          5314,
+          5330,
+          5340,
+          5350
+        ],
+        "acceptanceCommand": "docker-local:acceptance"
+      },
+      "resilienceQualification": {
+        "acceptanceCommand": "docker-local:acceptance",
+        "restoreConfirmationToken": "--confirm-replace-docker-local-data",
+        "readyPorts": [
+          5300,
+          5312,
+          5314,
+          5330,
+          5340,
+          5350
+        ],
+        "readLoad": {
+          "total": 1000,
+          "concurrency": 40,
+          "ports": [
+            5314,
+            5300
+          ]
+        },
+        "containers": {
+          "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",
+          "redisSentinel": "nodics-kickoff-docker-local-redis-sentinel-1",
+          "redisReplica": "nodics-kickoff-docker-local-redis-replica-1"
+        }
+      }
+    }
+  },
+  "tooling": {
+    "scriptOwnership": {
+      "policy": "Project commands declare project facts and may delegate to framework-owned tooling. Reusable lifecycle, startup, topology, qualification, upgrade, and acceptance engines must remain in nodics.ai.",
+      "projectOwned": [],
+      "forbiddenProjectOwnedPatterns": [
+        "local-security-boundary-qualification",
+        "publishing-capacity-baseline",
+        "local-sustained-publishing-qualification",
+        "docker-local-publishing-interruption-contracts"
+      ],
+      "forbiddenProjectDirectories": [
+        "src",
+        "scripts"
+      ]
+    },
+    "commands": {
+      "configure:framework": {
+        "type": "frameworkCommand",
+        "command": "project:configure-framework",
+        "home": "project"
+      },
+      "start:platform": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "platform"
+        ]
+      },
+      "start:commerce": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "commerce"
+        ]
+      },
+      "start:commerce:staged": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "commerceStaged"
+        ]
+      },
+      "start:engagement": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "engagement"
+        ]
+      },
+      "start:process": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "process"
+        ]
+      },
+      "start:wcms": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "wcms"
+        ]
+      },
+      "start:wcms:staged": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "wcmsStaged"
+        ]
+      },
+      "start:wcms:online": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "wcmsOnline"
+        ]
+      },
+      "docs:generate": {
+        "type": "frameworkCommand",
+        "command": "project:documentation-content",
+        "home": "project"
+      },
+      "docs:check": {
+        "type": "frameworkCommand",
+        "command": "project:documentation-content",
+        "home": "project",
+        "args": [
+          "--check"
+        ]
+      },
+      "domains:manifests": {
+        "type": "frameworkCommand",
+        "command": "project:data-manifests",
+        "home": "project"
+      },
+      "topology:start": {
+        "type": "frameworkCommand",
+        "command": "project:topology",
+        "home": "project",
+        "args": [
+          "start"
+        ]
+      },
+      "topology:start:all": {
+        "type": "frameworkCommand",
+        "command": "project:topology",
+        "home": "project",
+        "args": [
+          "start",
+          "--include-frontends"
+        ]
+      },
+      "topology:preflight": {
+        "type": "frameworkCommand",
+        "command": "project:topology",
+        "home": "project",
+        "args": [
+          "preflight",
+          "--include-frontends"
+        ]
+      },
+      "topology:status": {
+        "type": "frameworkCommand",
+        "command": "project:topology",
+        "home": "project",
+        "args": [
+          "status",
+          "--include-frontends"
+        ]
+      },
+      "topology:stop": {
+        "type": "frameworkCommand",
+        "command": "project:topology",
+        "home": "project",
+        "args": [
+          "stop"
+        ]
+      },
+      "docker-local:preflight": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "preflight"
+        ]
+      },
+      "docker-local:build": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "build"
+        ]
+      },
+      "docker-local:start": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "start"
+        ]
+      },
+      "docker-local:status": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "status"
+        ]
+      },
+      "docker-local:logs": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "logs"
+        ]
+      },
+      "docker-local:stop": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "stop"
+        ]
+      },
+      "docker-local:reset": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "reset",
+          "--confirm-destroy-docker-local-data"
+        ]
+      },
+      "docker-local:acceptance": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "acceptance"
+        ]
+      },
+      "docker-local:qualify": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "qualification"
+        ]
+      },
+      "docker-local:backup": {
+        "type": "frameworkCommand",
+        "command": "project:container-resilience",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "backup"
+        ]
+      },
+      "docker-local:verify": {
+        "type": "frameworkCommand",
+        "command": "project:container-resilience",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "verify"
+        ]
+      },
+      "docker-local:restore": {
+        "type": "frameworkCommand",
+        "command": "project:container-resilience",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "restore"
+        ]
+      },
+      "docker-local:resilience": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "resilience-qualification"
+        ]
+      },
+      "docker-local:soak": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "soak"
+        ]
+      },
+      "acceptance:local": {
+        "type": "frameworkCommand",
+        "command": "project:local-bootstrap-acceptance",
+        "home": "project"
+      },
+      "acceptance:local:fresh": {
+        "type": "frameworkCommand",
+        "command": "project:local-bootstrap-acceptance",
+        "home": "project",
+        "args": [
+          "--drop-local-db"
+        ]
+      },
+      "acceptance:functional": {
+        "type": "frameworkCommand",
+        "command": "project:functional-journey-acceptance",
+        "home": "project"
+      },
+      "acceptance:agora-commerce": {
+        "type": "frameworkCommand",
+        "command": "project:agora-commerce-acceptance",
+        "home": "project"
+      },
+      "acceptance:agora-commerce:docker": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "commerce-acceptance"
+        ]
+      },
+      "acceptance:agora-commerce-data": {
+        "type": "frameworkCommand",
+        "command": "project:agora-commerce-data-acceptance",
+        "home": "project"
+      },
+      "acceptance:agora-commerce-publication": {
+        "type": "frameworkCommand",
+        "command": "project:agora-commerce-publication-acceptance",
+        "home": "project"
+      },
+      "qualification:agora-commerce:live": {
+        "type": "frameworkCommand",
+        "command": "project:agora-commerce-live-qualification",
+        "home": "project"
+      },
+      "acceptance:editorial-live": {
+        "type": "frameworkCommand",
+        "command": "project:editorial-live-journey-acceptance",
+        "home": "project"
+      },
+      "acceptance:capability-registry": {
+        "type": "frameworkCommand",
+        "command": "project:capability-registry-acceptance",
+        "home": "project"
+      },
+      "acceptance:guided-initialization": {
+        "type": "frameworkCommand",
+        "command": "project:guided-initialization-acceptance",
+        "home": "project"
+      },
+      "qualification:deployment": {
+        "type": "frameworkCommand",
+        "command": "project:deployment-qualification",
+        "home": "project"
+      },
+      "qualification:deployment:local": {
+        "type": "frameworkCommand",
+        "command": "project:deployment-qualification",
+        "home": "project",
+        "args": [
+          "--execute-local"
+        ]
+      },
+      "qualification:security-boundary": {
+        "type": "frameworkCommand",
+        "command": "qualification:security-boundary"
+      },
+      "qualification:publishing-capacity": {
+        "type": "frameworkCommand",
+        "command": "qualification:publishing-capacity"
+      },
+      "qualification:publishing-soak": {
+        "type": "frameworkCommand",
+        "command": "qualification:publishing-soak"
+      },
+      "qualification:publishing-interruption-contracts": {
+        "type": "frameworkCommand",
+        "command": "qualification:publishing-interruption-contracts"
+      }
+    }
+  }
+}

@@ -18,18 +18,65 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const environment = path.join(root, 'envs', 'kickoffDockerLocal');
-const compose = fs.readFileSync(path.join(environment, 'docker', 'compose.yaml'), 'utf8');
-const runtimeProperties = fs.readFileSync(path.join(environment, 'config', 'runtime-properties.js'), 'utf8');
-const environmentProperties = fs.readFileSync(path.join(environment, 'config', 'properties.js'), 'utf8');
-const dockerLocalScript = fs.readFileSync(path.join(root, 'scripts', 'docker-local.mjs'), 'utf8');
-const servers = ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'processServer', 'engagementServer', 'commerceServer', 'commerceStagedServer'];
+const compose = fs.readFileSync(
+  path.join(environment, 'docker', 'compose.yaml'),
+  'utf8',
+);
+const runtimeProperties = fs.readFileSync(
+  path.join(environment, 'config', 'runtime-properties.js'),
+  'utf8',
+);
+const environmentProperties = fs.readFileSync(
+  path.join(environment, 'config', 'properties.js'),
+  'utf8',
+);
+const containerEnvironmentService = fs.readFileSync(
+  path.join(
+    root,
+    '..',
+    'nodics.ai',
+    'nodics.foundation',
+    'modules',
+    'nTooling',
+    'src',
+    'service',
+    'project',
+    'defaultProjectContainerEnvironmentService.mjs',
+  ),
+  'utf8',
+);
+const projectContract = JSON.parse(fs.readFileSync(path.join(root, 'nodics.project.json'), 'utf8'));
+const servers = [
+  'platformServer',
+  'wcmsStagedServer',
+  'wcmsOnlineServer',
+  'processServer',
+  'engagementServer',
+  'commerceServer',
+  'commerceStagedServer',
+];
 assert.notEqual(environment, path.join(root, 'envs', 'kickoffLocal'));
 servers.forEach(server => {
   const metadata = JSON.parse(fs.readFileSync(path.join(environment, server, 'package.json'), 'utf8'));
   assert.equal(metadata.nodics.kind, 'server');
   assert(fs.existsSync(path.join(environment, server, 'config', 'properties.js')));
 });
-['platform', 'wcms-staged', 'wcms-online', 'process', 'engagement', 'commerce', 'commerce-staged', 'axis', 'nexus', 'mongodb', 'redis-primary', 'redis-replica', 'redis-sentinel', 'elasticsearch'].forEach(service => {
+[
+  'platform',
+  'wcms-staged',
+  'wcms-online',
+  'process',
+  'engagement',
+  'commerce',
+  'commerce-staged',
+  'axis',
+  'nexus',
+  'mongodb',
+  'redis-primary',
+  'redis-replica',
+  'redis-sentinel',
+  'elasticsearch',
+].forEach(service => {
   assert.match(compose, new RegExp(`^  ${service}:`, 'm'));
 });
 assert(!compose.includes('kickoffLocalWcms'));
@@ -41,6 +88,18 @@ assert.match(compose, /no-new-privileges:true/);
 assert.match(compose, /5312:4312/);
 assert.match(compose, /5314:4314/);
 assert.match(compose, /5352:4352/);
+assert.doesNotMatch(compose, /src\/start-[^"'\s]+\.js/);
+for (const command of [
+  'start:platform',
+  'start:wcms:online',
+  'start:process',
+  'start:wcms:staged',
+  'start:engagement',
+  'start:commerce',
+  'start:commerce:staged',
+]) {
+  assert.match(compose, new RegExp(`nodics-project\\.js\", \"project:run\", \"${command.replace(/:/g, ':')}\"`));
+}
 assert.match(compose, /docker\.elastic\.co\/elasticsearch\/elasticsearch/);
 assert.match(compose, /elasticsearch-data/);
 assert.match(runtimeProperties, /sentinel:\s*\{/);
@@ -50,5 +109,12 @@ assert.match(runtimeProperties, /clientEndpoints:\s*\{/);
 assert.match(runtimeProperties, /platformServer: 'http:\/\/localhost:5300\/'/);
 assert.match(environmentProperties, /'Cross-Origin-Resource-Policy': 'cross-origin'/);
 assert.match(environmentProperties, /allowedOrigins: \['http:\/\/localhost:4100', 'http:\/\/127\.0\.0\.1:4100'/);
-assert.match(dockerLocalScript, /BOOTSTRAP_ADMIN_PASSWORD: process\.env\.NODICS_DOCKER_ADMIN_PASSWORD \|\| 'NodicsLocal@2026'/);
+assert.equal(projectContract.containerEnvironments.dockerLocal.bootstrapAdminPassword, 'NodicsLocal@2026');
+assert.equal(projectContract.tooling.commands['docker-local:preflight'].command, 'project:container');
+assert.equal(projectContract.tooling.commands['docker-local:preflight'].home, 'project');
+assert.deepEqual(projectContract.tooling.commands['docker-local:preflight'].args, ['dockerLocal', 'preflight']);
+assert.match(
+  containerEnvironmentService,
+  /BOOTSTRAP_ADMIN_PASSWORD: process\.env\.NODICS_DOCKER_ADMIN_PASSWORD \|\| profile\.bootstrapAdminPassword/,
+);
 console.log('kickoffDockerLocal environment contract validated');

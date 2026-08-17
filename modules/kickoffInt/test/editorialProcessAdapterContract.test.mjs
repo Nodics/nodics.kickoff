@@ -19,7 +19,7 @@ test('Kickoff Editorial Process adapter keeps WCMS as the domain authority', () 
   global.CONFIG = {
     get(name) {
       if (name === 'editorialProcessAdapter') {
-        return { wcmsBaseUrl: 'http://127.0.0.1:4310/' };
+        return { wcmsBaseUrl: 'http://127.0.0.1:4312/' };
       }
       return {};
     },
@@ -34,7 +34,7 @@ test('Kickoff Editorial Process adapter keeps WCMS as the domain authority', () 
       },
     },
   };
-  assert.equal(adapter.wcmsBaseUrl(), 'http://127.0.0.1:4310');
+  assert.equal(adapter.wcmsBaseUrl(), 'http://127.0.0.1:4312');
   assert.deepEqual(adapter.delegatedHeaders(request), {
     Accept: 'application/json',
     'Content-Type': 'application/json',

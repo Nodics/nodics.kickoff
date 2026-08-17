@@ -9,6 +9,8 @@
 
  */
 
+'use strict';
+
 /**
  * @module kickoffLocal/processServer/config/properties
  * @description Defines only local Process server coordinates for the Kickoff reference environment.

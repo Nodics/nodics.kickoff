@@ -14,7 +14,8 @@
 /** @module wcmsOnlineServer/config/properties @description Defines the non-versioned Local WCMS Online target and delivery boundary. */
 module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
-        'http://localhost:3200', 'http://127.0.0.1:3200'] } },
+        'http://localhost:3200', 'http://127.0.0.1:3200',
+        'http://localhost:3300', 'http://127.0.0.1:3300'] } },
     localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], serviceNames: [
         'DefaultCmsComponentDetailService', 'DefaultCmsComponentLocalizationService', 'DefaultCmsComponentMediaService',
         'DefaultCmsNavigationNodeService', 'DefaultCmsPageRouteService', 'DefaultCmsRestrictionService',

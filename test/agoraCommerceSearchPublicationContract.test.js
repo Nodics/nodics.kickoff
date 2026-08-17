@@ -15,7 +15,7 @@ const test = require('node:test');
  * @module kickoff/test/agoraCommerceSearchPublicationContract
  * @description Verifies Agora Commerce Search sample rules publish and reorder Product discovery cards.
  * @layer test
- * @owner agoraData
+ * @owner agoraCommonData
  */
 
 const projectRoot = path.resolve(__dirname, '..');
@@ -24,7 +24,7 @@ const properties = require(path.join(commerceSearchRoot, 'config/properties'));
 const publication = require(path.join(commerceSearchRoot, 'src/service/defaultCommerceSearchPublicationService'));
 const builder = require(path.join(commerceSearchRoot, 'src/service/defaultCommerceSearchProjectionBuilderService'));
 const ranking = require(path.join(commerceSearchRoot, 'src/service/defaultCommerceSearchRankingService'));
-const rules = require(path.join(projectRoot, 'modules/agoraData/data/staged/commerceSearch/data/agoraCommerceSearchRuleData'));
+const rules = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/commerceSearch/data/agoraCommerceSearchRuleData'));
 
 let persisted;
 let indexed;

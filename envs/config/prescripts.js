@@ -11,4 +11,12 @@
 
 'use strict';
 
+/**
+ * @module envs/config/prescripts
+ * @description Defines Kickoff project-owned pre-start lifecycle hooks for this boundary.
+ * @layer config
+ * @owner prescripts.js
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {};

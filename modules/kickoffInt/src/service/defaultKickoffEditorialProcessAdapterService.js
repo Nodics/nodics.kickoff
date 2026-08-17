@@ -26,7 +26,7 @@ module.exports = {
      */
     wcmsBaseUrl: function () {
         let configured = (CONFIG.get('editorialProcessAdapter') || {}).wcmsBaseUrl;
-        return String(configured || 'http://127.0.0.1:4310').replace(/\/+$/, '');
+        return String(configured || 'http://127.0.0.1:4312').replace(/\/+$/, '');
     },
 
     /**

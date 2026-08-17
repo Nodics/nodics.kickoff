@@ -11,9 +11,10 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
+const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
 /** @module kickoffLocal/commerceStagedServer/config/properties @description Defines isolated local Commerce Staged coordinates and data-release enforcement for governed Product catalog imports. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'agoraData', 'kickoffLocal', 'commerceStagedServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
     runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
         commerceManagement: { enabled: true } } },

@@ -19,8 +19,23 @@
  * @override A real partner project may replace this reference module with its own later-indexed bundle.
  */
 module.exports = {
-    /** @returns {Promise<boolean>} Resolves when the data-only module is initialized. */
-    init: function () { return Promise.resolve(true); },
-    /** @returns {Promise<boolean>} Resolves after the data-only module is initialized. */
-    postInit: function () { return Promise.resolve(true); }
+    /**
+     * Initializes this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
+     */
+    init: function (options) {
+        return Promise.resolve(true);
+    },
+
+    /**
+     * Runs post-initialization for this Kickoff lifecycle boundary.
+     *
+     * @param {Object} options Optional lifecycle context.
+     * @returns {Promise<boolean>} Resolves true when no boundary-specific post-start behavior is required.
+     */
+    postInit: function (options) {
+        return Promise.resolve(true);
+    }
 };

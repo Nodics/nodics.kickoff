@@ -11,6 +11,14 @@
 
 'use strict';
 
+/**
+ * @module envs/kickoffLocal/wcmsServer/config/properties
+ * @description Defines Kickoff project-owned layered configuration for this boundary.
+ * @layer config
+ * @owner wcmsServer
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = {
     activeModules: {
         groups: [],
@@ -19,7 +27,7 @@ module.exports = {
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
-            'nexusData',
+            'nexusWebData',
             'kickoffLocal',
             'wcmsServer'
         ]

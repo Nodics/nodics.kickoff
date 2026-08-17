@@ -11,4 +11,12 @@
 
 'use strict';
 
+/**
+ * @module envs/kickoffLocal/platformServer/config/postscripts
+ * @description Defines Kickoff project-owned post-start lifecycle hooks for this boundary.
+ * @layer config
+ * @owner platformServer
+ * @override Customer projects may extend or replace this artifact in their own project layer.
+ */
+
 module.exports = Object.freeze({});
