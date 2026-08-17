@@ -41,5 +41,8 @@ for (const relativePath of manifests) {
   }
 }
 
-assert.strictEqual(sections, 2, 'Kickoff executable lifecycle inventory drifted');
+const processServerManifest = JSON.parse(readFileSync(resolve(root, 'envs/kickoffLocal/processServer/data/manifest.json'), 'utf8'));
+assert.deepStrictEqual(processServerManifest.sections, {},
+  'Process definitions must be installed through framework destination contributions, not Kickoff generic processServer imports');
+assert.strictEqual(sections, 1, 'Kickoff executable lifecycle inventory drifted');
 console.log('Kickoff data lifecycle classification contract validated');

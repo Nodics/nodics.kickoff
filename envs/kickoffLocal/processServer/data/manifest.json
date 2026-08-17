@@ -1,29 +1,5 @@
 {
   "contractVersion": 2,
   "module": "processServer",
-  "sections": {
-    "init": {
-      "kind": "DATA_RELEASE",
-      "dataType": "init",
-      "version": "1.0.1",
-      "description": "Kickoff Process-runtime deployment of Editorial workflow definitions",
-      "owningDomain": "editorial",
-      "lifecycle": "OPERATIONAL_VERSIONED",
-      "destinationRole": "PROCESS",
-      "environmentScope": [
-        "LOCAL"
-      ],
-      "sensitivity": "INTERNAL",
-      "versioningPolicy": "IMMUTABLE",
-      "publicationPolicy": "NONE",
-      "initialPublicationPolicy": "NONE",
-      "removalPolicy": "RETAIN",
-      "files": {
-        "init/data/editorial/defaultEditorialProcessDefinitionData.js": "47b02539ef16123b65507ddf4a745015345c6947b499ec10cb86650185b15a50",
-        "init/data/editorial/defaultEditorialProcessDefinitionVersionData.js": "ff2959632a1cafd07b41c46cf69416fb0906cf31b38c38b973cbec630f468341",
-        "init/headers/editorial/defaultEditorialProcessDefinitionDataHeader.js": "80ee053c182cc5fa201116cc8fd6dfb3ecaf7dce9c92414dd5eb3819525cfc21",
-        "init/headers/editorial/defaultEditorialProcessDefinitionVersionDataHeader.js": "207a4f13403605ce0052dc4357820f06eb5e0e7bb61540ea4958c4ea97ef2b24"
-      }
-    }
-  }
+  "sections": {}
 }
