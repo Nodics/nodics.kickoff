@@ -72,7 +72,7 @@ const productionSimulationSecurity = {
 module.exports = function runtimeProperties(server) {
     const definitions = {
         platformServer: {
-            activeModules: { groups: [], modules: [...projectModules, 'axis', 'partnerSiteData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: [...projectModules, 'axis', 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'PLATFORM', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalPlatform'),
             profileBrowserSession: { enabled: true, refreshCookieName: 'nodics_axis_refresh', csrfCookieName: 'nodics_axis_csrf',
                 cookiePath: '/nodics/profile/v0/employee/browser', csrfCookiePath: '/', sameSite: 'Lax', secure: false, maximumAgeSeconds: 86400 },
@@ -98,7 +98,7 @@ module.exports = function runtimeProperties(server) {
         },
         wcmsStagedServer: {
             httpHardening: { cors: { allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100'], deniedOrigins: ['http://localhost:4200', 'http://127.0.0.1:4200'] } },
-            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusWebData', 'partnerSiteData', 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusWebData', 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             publishEnabled: true, runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
             apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: true }, mediaManagement: { enabled: true } } },
             data: { dataReleases: dataReleases(['WCMS_STAGED'], [{ moduleName: 'axis', sections: ['axisBaseline'] }]) },

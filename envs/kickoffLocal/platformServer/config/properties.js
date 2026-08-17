@@ -90,7 +90,6 @@ module.exports = {
             'kickoffApi',
             'kickoffInt',
             'axis',
-            'partnerSiteData',
             'kickoffLocal',
             'platformServer'
         ]
