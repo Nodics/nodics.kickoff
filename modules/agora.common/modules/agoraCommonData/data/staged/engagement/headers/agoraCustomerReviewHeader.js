@@ -19,7 +19,7 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-/** @lifecycle PUBLISHABLE @destination ENGAGEMENT @owner agoraCommonData */
+/** @lifecycle OPERATIONAL_VERSIONED @destination ENGAGEMENT @owner agoraCommonData */
 
 /** @description Import header for synthetic Agora customer-review sample evidence. */
 const entry = (schemaName, dataFilePrefix) => ({

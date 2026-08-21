@@ -32,8 +32,7 @@
         "staged/telco/data/agoraTelcoProductVariantLocalizationData.js": "f45ec83eda3b88959a5440d306bd726f03d82d7f1a53d3aaa6d63dc1ac546af0",
         "staged/telco/data/agoraTelcoWarehouseData.js": "8627f65a24033356786968ace50ff29044d22454142ee37a70636cde5581ae9b",
         "staged/telco/headers/agoraTelcoCatalogHeader.js": "c089df169fd8f6d5827836c0ad3e93da9b059722102dbcd117b70809b21fb5d4"
-      },
-      "displayName": "Agora Telco Commerce Catalog"
+      }
     },
     "agoraTelcoContentCatalog": {
       "kind": "DATA_RELEASE",
@@ -61,8 +60,7 @@
         "staged/telco/data/agoraTelcoSiteData.js": "28a69b49d38d2249eb5a71d7ded1d73ae611ebe1b594dc8046d8a2dbb2b49fef",
         "staged/telco/data/agoraTelcoTypeCodeData.js": "83ca5b724d876a524b1c4fbd7122262a943d08570208a95236d74a395854180d",
         "staged/telco/headers/agoraTelcoContentHeader.js": "5c78f9d350b45619832b8ceff8f717ef89397e878b3ecfb524a3a47500e7a34a"
-      },
-      "displayName": "Agora Telco Content Catalog"
+      }
     }
   }
 }

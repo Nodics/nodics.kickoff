@@ -19,12 +19,13 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-/** @lifecycle PUBLISHABLE @destination ENGAGEMENT @owner agoraCommonData */
+/** @lifecycle OPERATIONAL_VERSIONED @destination ENGAGEMENT @owner agoraCommonData */
 
 /** @description Aggregate review score for Agora PDP public-review journey validation. */
 module.exports = {
   record0: {
     code: 'agoraReviewAggregateLinenWrapDress',
+    active: true,
     tenant: 'default',
     targetType: 'PRODUCT',
     targetCode: 'agoraLinenWrapDress',

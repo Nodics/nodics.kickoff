@@ -22,13 +22,13 @@ const manifest = JSON.parse(readFileSync(resolve(root, 'data/manifest.json'), 'u
 const properties = require(resolve(root, 'config/properties.js'));
 const packageData = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 const release = manifest.sections.partnerNexusCustomization;
-const nexusRoot = resolve(root, '..', 'nexusWebData');
+const nexusRoot = resolve(root, '..', 'nexus.web', 'modules', 'nexusWebData');
 const nexusManifest = JSON.parse(readFileSync(resolve(nexusRoot, 'data/manifest.json'), 'utf8'));
 const nexusPackage = JSON.parse(readFileSync(resolve(nexusRoot, 'package.json'), 'utf8'));
 
-assert.equal(packageData.index, '3100.22');
+assert.equal(packageData.index, '3100.72');
 assert(Number(packageData.index) > Number(nexusPackage.index), 'partner module must load after the original Nexus authority');
-assert.equal(release.version, '1.0.2');
+assert.equal(release.version, '1.0.5');
 assert.equal(release.destinationRole, 'WCMS_STAGED');
 assert.equal(release.lifecycle, 'PUBLISHABLE');
 assert.equal(release.initialPublicationPolicy, 'ADMIN_INITIATED');
@@ -45,7 +45,7 @@ for (const [path, expected] of Object.entries(release.files)) {
 
 const page = require(resolve(root, 'data/staged/wcms/data/partnerNexusPageData.js'));
 assert.equal(page.record0.code, 'nexusHomePage');
-assert.equal(page.record0.versionId, 2);
-assert.match(page.record0.name, /partner-site-1\.0\.2/);
+assert.equal(page.record0.versionId, 5);
+assert.match(page.record0.name, /partner-site-1\.0\.5/);
 
 console.log('Partner website customization contract passed.');

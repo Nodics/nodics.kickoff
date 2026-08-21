@@ -19,12 +19,13 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-/** @lifecycle PUBLISHABLE @destination ENGAGEMENT @owner agoraCommonData */
+/** @lifecycle OPERATIONAL_VERSIONED @destination ENGAGEMENT @owner agoraCommonData */
 
 /** @description Synthetic Agora customer reviews for PDP/public-review journey validation. */
 module.exports = {
   record0: {
     code: 'agoraReviewLinenWrapDress01',
+    active: true,
     tenant: 'default',
     ownerId: 'agoraSyntheticCustomer01',
     targetType: 'PRODUCT',

@@ -20,6 +20,6 @@
  */
 
 module.exports = {
-    record0: { code: 'agoraApparelLinenDress', tenant: 'default', name: 'Linen Wrap Dress', status: 'ACTIVE', catalogVersion: 'agoraApparelStaged', revision: 1, active: true },
-    record1: { code: 'agoraApparelOxfordShirt', tenant: 'default', name: 'Oxford Shirt', status: 'ACTIVE', catalogVersion: 'agoraApparelStaged', revision: 1, active: true }
+    record0: { code: 'agoraApparelLinenDress', tenant: 'default', name: 'V-neck Cotton T-shirt', status: 'ACTIVE', catalogVersion: 'agoraApparelStaged', revision: 1, active: true },
+    record1: { code: 'agoraApparelOxfordShirt', tenant: 'default', name: 'Buttoned Cotton Shirt', status: 'ACTIVE', catalogVersion: 'agoraApparelStaged', revision: 1, active: true }
 };

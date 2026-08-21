@@ -159,6 +159,8 @@
       "publicationProfiles": [
         "nexus",
         "nexusupdate",
+        "nexusecosystemrepair",
+        "agora",
         "partnernexus"
       ],
       "deliveryProbe": {
@@ -717,6 +719,11 @@
       "qualification:agora-commerce:live": {
         "type": "frameworkCommand",
         "command": "project:agora-commerce-live-qualification",
+        "home": "project"
+      },
+      "acceptance:agora-cms-media-seed": {
+        "type": "frameworkCommand",
+        "command": "project:agora-cms-media-seed",
         "home": "project"
       },
       "acceptance:editorial-live": {

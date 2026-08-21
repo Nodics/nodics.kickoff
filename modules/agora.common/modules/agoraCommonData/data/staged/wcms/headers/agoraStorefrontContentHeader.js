@@ -58,6 +58,10 @@ module.exports = {
       options: { enabled: true, schemaName: 'cmsComponent', operation: 'saveAll', dataFilePrefix: 'agoraComponentData' },
       query: { code: '$code' }
     },
+    agoraComponentMediaData: {
+      options: { enabled: true, schemaName: 'cmsComponentMedia', operation: 'saveAll', dataFilePrefix: 'agoraComponentMediaData' },
+      query: { componentMediaCode: '$componentMediaCode' }
+    },
     agoraPageData: {
       options: { enabled: true, schemaName: 'cmsPage', operation: 'saveAll', dataFilePrefix: 'agoraPageData' },
       query: { code: '$code' }

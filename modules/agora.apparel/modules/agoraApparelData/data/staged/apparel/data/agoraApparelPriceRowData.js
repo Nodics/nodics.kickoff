@@ -19,4 +19,22 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-module.exports = {"record0":{"code":"agoraApparelLinenDressPrice","tenant":"default","priceBookCode":"agoraApparelRetailAed","productCode":"agoraApparelLinenDress","unitAmount":"475.00","currency":"AED","minQuantity":"1","validFrom":"2026-01-01T00:00:00.000Z","revision":1,"active":true},"record1":{"code":"agoraApparelOxfordShirtPrice","tenant":"default","priceBookCode":"agoraApparelRetailAed","productCode":"agoraApparelOxfordShirt","unitAmount":"325.00","currency":"AED","minQuantity":"1","validFrom":"2026-01-01T00:00:00.000Z","revision":1,"active":true}};
+const row = function (code, productCode, unitAmount) {
+    return {
+        code,
+        tenant: 'default',
+        priceBookCode: 'agoraApparelRetailAed',
+        productCode,
+        unitAmount,
+        currency: 'AED',
+        minQuantity: '1',
+        validFrom: '2026-01-01T00:00:00.000Z',
+        revision: 1,
+        active: true
+    };
+};
+
+module.exports = {
+    record0: row('agoraApparelLinenDressPrice', 'agoraApparelLinenDress', '59.99'),
+    record1: row('agoraApparelOxfordShirtPrice', 'agoraApparelOxfordShirt', '89.99')
+};

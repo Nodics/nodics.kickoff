@@ -19,12 +19,13 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-/** @lifecycle PUBLISHABLE @destination ENGAGEMENT @owner agoraCommonData */
+/** @lifecycle OPERATIONAL_VERSIONED @destination ENGAGEMENT @owner agoraCommonData */
 
 /** @description Synthetic authenticity evidence; no external review provider or copied source content. */
 module.exports = {
   record0: {
     code: 'agoraReviewLinenWrapDress01Auth',
+    active: true,
     tenant: 'default',
     reviewCode: 'agoraReviewLinenWrapDress01',
     interactionType: 'PURCHASE',

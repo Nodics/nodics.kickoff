@@ -64,7 +64,8 @@ const scenarios = Object.freeze([
             'apparelProduct', 'apparel', 'electronicsProduct', 'electronics',
             'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'multiDomainCommerce', 'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt',
-            'agoraApparelData', 'agoraElectronicsData', 'agoraTelcoData', 'kickoffLocal',
+            'agora.common', 'agoraCommonData', 'agora.apparel', 'agoraApparelData',
+            'agora.electronics', 'agoraElectronicsData', 'agora.telco', 'agoraTelcoData', 'kickoffLocal',
             'commerceStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'commerceManagement']),
@@ -78,7 +79,7 @@ const scenarios = Object.freeze([
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);
-            assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
+            assert.equal(NODICS.isModuleActive('agoraCommonData'), true);
             const selected = require('../config/agora-domain-composition').resolve().domains;
             assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
             assert.equal(NODICS.isModuleActive('electronicsProduct'), selected.includes('electronics') || selected.includes('telco'));
@@ -106,17 +107,22 @@ const scenarios = Object.freeze([
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
+            'partnerSiteData',
             'kickoffLocal',
             'platformServer'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport'])
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport']),
+        verify: function () {
+            assert.equal(CONFIG.get('runtimeRole').code, 'PLATFORM');
+            assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['PLATFORM']);
+        }
     }),
     Object.freeze({
         server: 'wcmsStagedServer',
         frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
-            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData',
+            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'partnerSiteData',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),

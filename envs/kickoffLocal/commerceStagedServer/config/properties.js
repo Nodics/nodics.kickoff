@@ -14,7 +14,7 @@
 const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
 /** @module kickoffLocal/commerceStagedServer/config/properties @description Defines isolated local Commerce Staged coordinates and data-release enforcement for governed Product catalog imports. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
     runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
         commerceManagement: { enabled: true } } },
@@ -22,6 +22,13 @@ module.exports = {
         product: { options: { enabled: true, fallback: false, engine: 'elastic' } },
         commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },
         discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } }
+    },
+    product: {
+        publication: {
+            searchEnrichment: {
+                domains: { enabled: true, contributors: agoraDomains.productSearchContributors, missingBehavior: 'error' }
+            }
+        }
     },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['COMMERCE_STAGED'] } },

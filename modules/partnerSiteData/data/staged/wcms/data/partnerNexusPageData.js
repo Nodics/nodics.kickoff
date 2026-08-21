@@ -25,8 +25,8 @@
 module.exports = {
     record0: {
         code: 'nexusHomePage',
-        versionId: 2,
-        name: 'Nodics Nexus Home [partner-site-1.0.2]',
+        versionId: 5,
+        name: 'Nodics Nexus Home [partner-site-1.0.5]',
         active: true
     }
 };

@@ -45,5 +45,13 @@ module.exports = {
   record19: { code: 'agoraOrderLifecycleType', renderer: 'agora.orderLifecycle', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
   record20: { code: 'agoraServicePromiseType', renderer: 'agora.servicePromiseStrip', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
   record21: { code: 'agoraBreadcrumbType', renderer: 'agora.breadcrumb', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
-  record22: { code: 'agoraRichTextType', renderer: 'agora.richText', contractVersion: 1, channels: ['web'], deprecated: false, active: true }
+  record22: { code: 'agoraRichTextType', renderer: 'agora.richText', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record23: { code: 'agoraHeroCarouselType', renderer: 'agora.heroCarousel', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record24: { code: 'agoraServiceTickerType', renderer: 'agora.serviceTicker', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record25: { code: 'agoraCollectionGridType', renderer: 'agora.collectionGrid', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record26: { code: 'agoraPromoGridType', renderer: 'agora.promoGrid', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record27: { code: 'agoraServicePromiseGridType', renderer: 'agora.servicePromiseGrid', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record28: { code: 'agoraTestimonialGridType', renderer: 'agora.testimonialGrid', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record29: { code: 'agoraMediaGalleryType', renderer: 'agora.mediaGallery', contractVersion: 1, channels: ['web'], deprecated: false, active: true },
+  record30: { code: 'agoraSpecialOfferSplitType', renderer: 'agora.specialOfferSplit', contractVersion: 1, channels: ['web'], deprecated: false, active: true }
 };

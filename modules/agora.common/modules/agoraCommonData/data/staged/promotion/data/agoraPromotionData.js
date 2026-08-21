@@ -28,6 +28,7 @@ module.exports = {
     tenant: 'default',
     name: 'Agora Welcome 10',
     status: 'ACTIVE',
+    active: true,
     priority: 100,
     conditions: {
       minimumSubtotal: '100.00',
@@ -39,8 +40,8 @@ module.exports = {
       message: 'Save USD 10 when your cart reaches USD 100.',
       exclusionGroup: 'cartSubtotalDiscount'
     },
-    validFrom: '2026-01-01T00:00:00.000Z',
-    validTo: '2027-01-01T00:00:00.000Z',
+    validFrom: new Date('2026-01-01T00:00:00.000Z'),
+    validTo: new Date('2027-01-01T00:00:00.000Z'),
     revision: 0
   },
   record1: {
@@ -48,10 +49,11 @@ module.exports = {
     tenant: 'default',
     name: 'Agora Bags Bundle 15',
     status: 'ACTIVE',
+    active: true,
     priority: 80,
     conditions: {
       minimumSubtotal: '150.00',
-      productCodes: ['agoraLeatherTote', 'agoraCanvasCrossbody']
+      productCodes: ['agoraLeatherTote', 'agoraCanvasBelt']
     },
     actions: {
       discountAmount: '15.00',
@@ -59,8 +61,8 @@ module.exports = {
       message: 'Save USD 15 on eligible bag edits.',
       exclusionGroup: 'cartSubtotalDiscount'
     },
-    validFrom: '2026-01-01T00:00:00.000Z',
-    validTo: '2027-01-01T00:00:00.000Z',
+    validFrom: new Date('2026-01-01T00:00:00.000Z'),
+    validTo: new Date('2027-01-01T00:00:00.000Z'),
     revision: 0
   }
 };

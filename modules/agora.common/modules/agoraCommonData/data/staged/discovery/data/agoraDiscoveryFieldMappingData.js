@@ -45,7 +45,7 @@ module.exports = {
       'payload.productCode',
       'payload.name',
       'payload.summary',
-      'payload.image',
+      'payload.media',
       'payload.price',
       'payload.availability'
     ],

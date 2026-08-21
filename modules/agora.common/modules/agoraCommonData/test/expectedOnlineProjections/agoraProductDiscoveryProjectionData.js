@@ -57,25 +57,25 @@ module.exports = {
       productCode: 'agoraLinenWrapDress',
       slug: 'linen-wrap-dress',
       name: 'Linen Wrap Dress',
-      summary: 'Linen Wrap Dress for the Nodics Agora reference storefront discovery journey.',
-      categoryCodes: ['agoraNewArrivals', 'agoraWomen', 'agoraWomenDresses'],
-      variantCodes: ['agoraLinenWrapDressNaturalS', 'agoraLinenWrapDressNaturalM'],
-      localizedAttributes: { colorFamily: 'natural', material: 'linen', audience: 'women' },
-      price: { currency: 'USD', unitAmount: '129.00' },
+      summary: 'Linen blend linen wrap dress designed for modern everyday styling.',
+      categoryCodes: ['agoraWomen', 'agoraWomenDresses'],
+      variantCodes: ['agoraLinenWrapDressIvoryS', 'agoraLinenWrapDressIvoryM', 'agoraLinenWrapDressIvoryL', 'agoraLinenWrapDressIvoryXL', 'agoraLinenWrapDressBlackS', 'agoraLinenWrapDressBlackM', 'agoraLinenWrapDressBlackL', 'agoraLinenWrapDressBlackXL'],
+      localizedAttributes: { brand: 'Nodics Studio', collection: 'Apparel', colorFamily: 'neutral', material: 'Linen blend', audience: 'women', colorOptions: [{ code: 'ivory', label: 'Ivory', family: 'neutral', hex: '#f4efe4' }, { code: 'black', label: 'Black', family: 'black', hex: '#211f1a' }], sizeOptions: ['S', 'M', 'L', 'XL'] },
+      price: { currency: 'USD', unitAmount: '129' },
       availability: { available: true, status: 'IN_STOCK' },
-      seo: { title: 'Linen Wrap Dress | Nodics Agora', description: 'Linen Wrap Dress reference product' }
+      seo: { title: 'Linen Wrap Dress', description: 'Linen Wrap Dress from Nodics Studio', keywords: ['Linen Wrap Dress', 'Nodics Studio', 'Linen blend', 'women'] }
     },
     {
       productCode: 'agoraOxfordShirt',
       slug: 'oxford-shirt',
       name: 'Oxford Shirt',
-      summary: 'Oxford Shirt for the Nodics Agora reference storefront discovery journey.',
-      categoryCodes: ['agoraNewArrivals', 'agoraMen', 'agoraMenShirts'],
-      variantCodes: ['agoraOxfordShirtBlueM', 'agoraOxfordShirtBlueL'],
-      localizedAttributes: { colorFamily: 'blue', material: 'cotton', audience: 'men' },
-      price: { currency: 'USD', unitAmount: '89.00' },
+      summary: 'Oxford cotton oxford shirt designed for modern everyday styling.',
+      categoryCodes: ['agoraMen', 'agoraMenShirts'],
+      variantCodes: ['agoraOxfordShirtIvoryS', 'agoraOxfordShirtIvoryM', 'agoraOxfordShirtIvoryL', 'agoraOxfordShirtIvoryXL', 'agoraOxfordShirtBlackS', 'agoraOxfordShirtBlackM', 'agoraOxfordShirtBlackL', 'agoraOxfordShirtBlackXL'],
+      localizedAttributes: { brand: 'Nodics Menswear', collection: 'Apparel', colorFamily: 'neutral', material: 'Oxford cotton', audience: 'men', colorOptions: [{ code: 'ivory', label: 'Ivory', family: 'neutral', hex: '#f4efe4' }, { code: 'black', label: 'Black', family: 'black', hex: '#211f1a' }], sizeOptions: ['S', 'M', 'L', 'XL'] },
+      price: { currency: 'USD', unitAmount: '89' },
       availability: { available: true, status: 'IN_STOCK' },
-      seo: { title: 'Oxford Shirt | Nodics Agora', description: 'Oxford Shirt reference product' }
+      seo: { title: 'Oxford Shirt', description: 'Oxford Shirt from Nodics Menswear', keywords: ['Oxford Shirt', 'Nodics Menswear', 'Oxford cotton', 'men'] }
     }
   ]
 };

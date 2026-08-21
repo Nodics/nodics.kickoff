@@ -34,7 +34,7 @@ module.exports = {
     ] },
     activeModules: {
         groups: [],
-        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'agoraCommonData', ...agoraDomains.projectPacks,
+        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'partnerSiteData', 'agoraCommonData', ...agoraDomains.projectPacks,
             'kickoffLocal', 'wcmsStagedServer']
     },
     publishEnabled: true,
@@ -60,6 +60,10 @@ module.exports = {
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core',
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+        nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '1.0.2',
+            dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+        agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '1.0.9', dataType: 'core',
+            rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
         frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1',
             rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
         axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.4.1',

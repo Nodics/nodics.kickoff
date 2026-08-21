@@ -45,5 +45,13 @@ module.exports = {
   record19: { code: 'agoraOrderLifecycleType', kind: 'COMPONENT', contractVersion: 1, active: true },
   record20: { code: 'agoraServicePromiseType', kind: 'COMPONENT', contractVersion: 1, active: true },
   record21: { code: 'agoraBreadcrumbType', kind: 'COMPONENT', contractVersion: 1, active: true },
-  record22: { code: 'agoraRichTextType', kind: 'COMPONENT', contractVersion: 1, active: true }
+  record22: { code: 'agoraRichTextType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record23: { code: 'agoraHeroCarouselType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record24: { code: 'agoraServiceTickerType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record25: { code: 'agoraCollectionGridType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record26: { code: 'agoraPromoGridType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record27: { code: 'agoraServicePromiseGridType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record28: { code: 'agoraTestimonialGridType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record29: { code: 'agoraMediaGalleryType', kind: 'COMPONENT', contractVersion: 1, active: true },
+  record30: { code: 'agoraSpecialOfferSplitType', kind: 'COMPONENT', contractVersion: 1, active: true }
 };

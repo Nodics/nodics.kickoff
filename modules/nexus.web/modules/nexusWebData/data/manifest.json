@@ -22,7 +22,7 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/corporate/nexusCatalogData.js": "1618a3e2ff922e9f4e9a70d4d4a35f1d8b71afbc27be40e3d3e2f52ce5750004",
-        "staged/wcms/data/corporate/nexusComponentData.js": "6cad8cabca40d1c3358105659a0ab88fee6d55bd05d157c55fd621f8b542816f",
+        "staged/wcms/data/corporate/nexusComponentData.js": "14fd6751963fb7790ad6fe222aff772831bfb8fee0076ba0b33aaec163b316f7",
         "staged/wcms/data/corporate/nexusComponentTypeGroupData.js": "5d7a40055cac11ed71cd8d5de678f1a425301d9ac5011dfb781b11cf4a8d9368",
         "staged/wcms/data/corporate/nexusNavigationData.js": "84a728184cb8beb75d94c06fe0646f77326fdea0303b0ef19e7bdb71cd195909",
         "staged/wcms/data/corporate/nexusPageData.js": "b0c9580de1d118541ff50093f870abab93a400f7e982db160bb120af58d68539",
@@ -56,6 +56,29 @@
       "files": {
         "staged/wcmsUpdate/data/corporate/nexusPageUpdateData.js": "ee97ce9a3f18bdd40f4a93e56369643318e27d503771214d411458f60d617afa",
         "staged/wcmsUpdate/headers/nexusCorporatePageUpdateHeader.js": "68d26a3c5d833729bcfc8df79ecd569f7114bfd27a228172bd1053842ca019b0"
+      }
+    },
+    "nexusCorporateEcosystemComponentRepair": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "1.0.2",
+      "displayName": "Nexus Ecosystem Component Repair",
+      "description": "Nexus corporate Site immutable v1.0.2 ecosystem component graph repair",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusEcosystemComponentRepairData.js": "d3dccab7145f1a65d395e7aaffc2a0d584bd9696c2ce85fbd29581068d800d2d",
+        "staged/wcmsUpdate/headers/nexusEcosystemComponentRepairHeader.js": "23250f5674f1732ce8ef74f7c8243fa5106308fd5523018b626a73ae7a8c9f94"
       }
     },
     "nexusEditorialSource": {

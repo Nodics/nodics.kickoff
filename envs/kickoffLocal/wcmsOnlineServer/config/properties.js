@@ -42,12 +42,14 @@ module.exports = {
         URI: 'mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal',
         databaseName: 'kickoffLocalWcmsOnline'
     } } } },
-    cms: { publication: { enabled: true, runtimeRole: 'ONLINE', targetTransportProvider: null } },
+    cms: { publication: { enabled: true, runtimeRole: 'ONLINE', targetTransportProvider: null },
+        delivery: { mediaDeliveryBaseUrl: 'http://127.0.0.1:4314/nodics/media/v0/content' } },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: [] } },
     apiExposure: { categories: {
         schemaWorkbench: { enabled: false }, schemaMaintenance: { enabled: false },
-        dataImport: { enabled: false }, dataExport: { enabled: false }, mediaManagement: { enabled: false }
+        dataImport: { enabled: false }, dataExport: { enabled: false }, mediaManagement: { enabled: false },
+        mediaDelivery: { enabled: true }
     } },
     servers: {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4314, httpsHost: '127.0.0.1', httpsPort: 4315 },

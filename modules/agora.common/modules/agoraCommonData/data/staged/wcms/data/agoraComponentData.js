@@ -229,7 +229,181 @@ module.exports = {
       showLifecycleRecords: true
     }
   },
-  record15: {
+  record30: {
+    code: 'agoraHomeHeroExperience',
+    typeCode: 'agoraHeroCarouselType',
+    renderer: 'agora.heroCarousel',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      slides: [
+        { mediaCode: 'agora-owned-home-hero-summer-edit', eyebrow: 'Summer 2026 Collection', title: 'Fresh styles for an elevated look.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraWomen' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
+        { mediaCode: 'agora-owned-home-hero-signature-style', eyebrow: 'Find Your Signature Style', title: 'Curated layers, edited for everyday elegance.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
+        { mediaCode: 'agora-owned-home-hero-layered-edit', eyebrow: 'Mix & Match Layers', title: 'Versatile pieces for every occasion.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraWomen' } }
+      ]
+    }
+  },
+  record31: {
+    code: 'agoraHomeServiceTicker',
+    typeCode: 'agoraServiceTickerType',
+    renderer: 'agora.serviceTicker',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      messages: [
+        { label: 'Free shipping', text: 'on qualifying orders' },
+        { label: 'Easy returns', text: 'within 14 days' },
+        { label: 'Secure checkout', text: 'with provider token payments' }
+      ]
+    }
+  },
+  record32: {
+    code: 'agoraHomeCollectionGrid',
+    typeCode: 'agoraCollectionGridType',
+    renderer: 'agora.collectionGrid',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Explore Collections',
+      heading: 'Shop by collection',
+      actionLabel: 'View All Collection',
+      items: [
+        { collectionCode: 'agoraNewArrivals', label: 'New in', summary: 'Fresh styles just in', mediaCode: 'agora-owned-collection-new-in' },
+        { collectionCode: 'agoraSale', label: 'Sale', summary: 'Capsule offers and edits', mediaCode: 'agora-owned-collection-promotion' },
+        { collectionCode: 'agoraWomen', label: 'Clothing', summary: 'Elegant everyday wardrobe', mediaCode: 'agora-owned-collection-clothing' },
+        { collectionCode: 'agoraWomenDresses', label: 'Dresses', summary: 'Soft neutrals and refined shapes', mediaCode: 'agora-owned-collection-dresses' },
+        { collectionCode: 'agoraWomenBags', label: 'Bags', summary: 'Structured and natural textures', mediaCode: 'agora-owned-collection-bags' },
+        { collectionCode: 'agoraWomenAccessories', label: 'Accessories', summary: 'Details that complete the look', mediaCode: 'agora-owned-collection-accessories' }
+      ]
+    }
+  },
+  record33: {
+    code: 'agoraTopPicksProductRail',
+    typeCode: 'agoraProductRailType',
+    renderer: 'agora.productRail',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Today’s Top Picks',
+      heading: 'Fresh styles just in',
+      resolverKey: 'commerce.product.discovery',
+      queryIntent: 'FEATURED',
+      productCodes: ['agoraLinenWrapDress', 'agoraSatinMidiDress', 'agoraRibbedKnitTop', 'agoraCottonPoplinShirtWomen', 'agoraStretchStrapTop', 'agoraRamiePocketShirt', 'agoraRattanHandleBag', 'agoraStripedKnitDress'],
+      pageSize: 8
+    }
+  },
+  record34: {
+    code: 'agoraEditorialPromoGrid',
+    typeCode: 'agoraPromoGridType',
+    renderer: 'agora.promoGrid',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      items: [
+        { title: 'Capsule Collection', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-capsule', variant: 'copy-left', action: { label: 'Shop Collection', collectionCode: 'agoraWomen' } },
+        { title: 'Texture edit', summary: 'Shop the look', mediaCode: 'agora-owned-promo-texture-edit', variant: 'visual', action: { label: 'Shop Collection', collectionCode: 'agoraSale' } },
+        { title: 'Crossbody Bag', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-crossbody', variant: 'copy-right', action: { label: 'Shop Collection', collectionCode: 'agoraWomenBags' } }
+      ]
+    }
+  },
+  record35: {
+    code: 'agoraSpecialOfferSplit',
+    typeCode: 'agoraSpecialOfferSplitType',
+    renderer: 'agora.specialOfferSplit',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Limited edit',
+      heading: 'Special Offer This Week Only',
+      summary: 'Reserved for special occasions',
+      leftMediaCode: 'agora-owned-promo-texture-edit',
+      rightMediaCode: 'agora-owned-collection-new-in',
+      action: { label: 'Explore Collection', collectionCode: 'agoraSale' }
+    }
+  },
+  record36: {
+    code: 'agoraBestSellingProductRail',
+    typeCode: 'agoraProductRailType',
+    renderer: 'agora.productRail',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Best Selling',
+      heading: 'Browse our top trending',
+      resolverKey: 'commerce.product.discovery',
+      queryIntent: 'BEST_SELLING',
+      productCodes: ['agoraSilkScarf', 'agoraLinenCampShirt', 'agoraTailoredChino', 'agoraRelaxedTrouser', 'agoraCanvasBelt', 'agoraWoolCap', 'agoraOxfordShirt', 'agoraLeatherTote'],
+      pageSize: 8
+    }
+  },
+  record37: {
+    code: 'agoraCustomerServicePromiseGrid',
+    typeCode: 'agoraServicePromiseGridType',
+    renderer: 'agora.servicePromiseGrid',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      items: [
+        { label: 'Shipping', text: 'Delivery choices are calculated by Commerce.' },
+        { label: 'Returns', text: 'Return eligibility is shown before submission.' },
+        { label: 'Secure payments', text: 'Checkout uses safe payment provider tokens.' },
+        { label: 'Order help', text: 'Customers can track order lifecycle requests.' }
+      ]
+    }
+  },
+  record38: {
+    code: 'agoraCustomerTestimonials',
+    typeCode: 'agoraTestimonialGridType',
+    renderer: 'agora.testimonialGrid',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Customer Say!',
+      heading: 'People adore the edit',
+      summary: 'Our customers love the quality, service and carefully selected seasonal pieces.',
+      items: [
+        { mediaCode: 'agora-owned-testimonial-sybil', avatarMediaCode: 'agora-owned-avatar-sybil', name: 'Sybil Sharp', quote: 'Fantastic shop. Great selection, fair prices, friendly staff, and excellent product quality.', product: 'Contrasting sheepskin sweatshirt' },
+        { mediaCode: 'agora-owned-testimonial-mark', avatarMediaCode: 'agora-owned-avatar-mark', name: 'Mark G.', quote: 'High-quality products and excellent customer service. I always find exactly what I need.', product: 'Contrasting sheepskin sweatshirt' }
+      ]
+    }
+  },
+  record39: {
+    code: 'agoraSocialGallery',
+    typeCode: 'agoraMediaGalleryType',
+    renderer: 'agora.mediaGallery',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Shop Instagram',
+      heading: 'Elevate your wardrobe with fresh finds today',
+      items: [
+        { mediaCode: 'agora-owned-gallery-1' },
+        { mediaCode: 'agora-owned-gallery-2' },
+        { mediaCode: 'agora-owned-gallery-3' },
+        { mediaCode: 'agora-owned-gallery-4' },
+        { mediaCode: 'agora-owned-gallery-5' }
+      ]
+    }
+  },
+  record43: {
+    code: 'agoraGlobalFooterExperience',
+    typeCode: 'agoraFooterType',
+    renderer: 'agora.footer',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      summary: 'Nodics Agora brings fashion commerce into the Nodics experience layer with secure checkout, catalog discovery, and customer self-service.',
+      contactEmail: 'nodics.framework@gmail.com',
+      groups: [
+        { title: 'Commerce', links: ['New in', 'Women', 'Clothing', 'Bags & Accessories'] },
+        { title: 'Customer Care', links: ['Shipping', 'Returns', 'Order support', 'Wishlist'] },
+        { title: 'Nodics', links: ['Nexus', 'Axis', 'Documentation', 'Contact'] }
+      ],
+      newsletter: { title: 'Newsletter', text: 'Sign up for curated releases and get 10% off your first purchase.', placeholder: 'Enter your e-mail...', buttonLabel: 'Subscribe' },
+      legalLinks: ['Privacy', 'Terms', 'Cookies']
+    }
+  },
+  record40: {
     code: 'agoraOrderLifecyclePanel',
     typeCode: 'agoraOrderLifecycleType',
     renderer: 'agora.orderLifecycle',
@@ -309,7 +483,7 @@ module.exports = {
       ]
     }
   },
-  record16: {
+  record41: {
     code: 'agoraAccountCenter',
     typeCode: 'agoraRichTextType',
     renderer: 'agora.accountCenter',
@@ -352,7 +526,7 @@ module.exports = {
       ]
     }
   },
-  record17: {
+  record42: {
     code: 'agoraProductionGateSummary',
     typeCode: 'agoraRichTextType',
     renderer: 'agora.productionGateSummary',

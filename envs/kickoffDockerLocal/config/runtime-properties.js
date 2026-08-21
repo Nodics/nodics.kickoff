@@ -81,6 +81,10 @@ module.exports = function runtimeProperties(server) {
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 nexusupdate: { code: 'nexusupdate', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexusWebData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusupdate',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
+                nexusecosystemrepair: { code: 'nexusecosystemrepair', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexusWebData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusecosystemrepair',
+                    target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
+                agora: { code: 'agora', type: 'STOREFRONT_BUNDLE', owner: 'agoraCommonData', applicationCode: 'agora', siteCode: 'agoraStorefrontSite', baselineCode: 'agora',
+                    target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 frameworkdocs: { code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs', applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 axisdocs: { code: 'axisdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'axis', applicationCode: 'axis', siteCode: 'axisDocumentationSite', baselineCode: 'axisdocs', contentPackCode: 'axisDocumentation',
@@ -108,6 +112,8 @@ module.exports = function runtimeProperties(server) {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
                 nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '1.0.2', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '1.0.9', dataType: 'core', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
                 frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
                 axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.4.1', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
                 kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.8.1', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
@@ -122,9 +128,11 @@ module.exports = function runtimeProperties(server) {
             publishEnabled: false, runtimeRole: { code: 'WCMS_ONLINE', publication: 'ONLINE' },
             data: { dataReleases: dataReleases([]) }, database: database('kickoffDockerLocalWcmsOnline'),
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-online' } } } },
-            cms: { publication: { enabled: true, runtimeRole: 'ONLINE', targetTransportProvider: null } },
+            cms: { publication: { enabled: true, runtimeRole: 'ONLINE', targetTransportProvider: null },
+                delivery: { mediaDeliveryBaseUrl: 'http://localhost:5314/nodics/media/v0/content' } },
             apiExposure: { categories: { schemaWorkbench: { enabled: false }, schemaMaintenance: { enabled: false },
-                dataImport: { enabled: false }, dataExport: { enabled: false }, mediaManagement: { enabled: false } } },
+                dataImport: { enabled: false }, dataExport: { enabled: false }, mediaManagement: { enabled: false },
+                mediaDelivery: { enabled: true } } },
             servers: { default: endpoint('wcms-online', 4314), ...connections }
         },
         processServer: {
@@ -157,17 +165,23 @@ module.exports = function runtimeProperties(server) {
             runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalCommerce'),
             apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true } } },
             search: productSearch(),
+            product: { publication: { searchEnrichment: { domains: {
+                enabled: true, contributors: agoraDomains.productSearchContributors, missingBehavior: 'error'
+            } } }, discovery: { mediaDeliveryBaseUrl: 'http://localhost:5314/nodics/media/v0/content' } },
             stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
             servers: { default: endpoint('commerce', 4350), ...connections }
         },
         commerceStagedServer: {
-            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
             data: { dataReleases: dataReleases(['COMMERCE_STAGED']) },
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
                 commerceManagement: { enabled: true } } },
             database: database('kickoffDockerLocalCommerceStaged'),
             search: productSearch(),
+            product: { publication: { searchEnrichment: { domains: {
+                enabled: true, contributors: agoraDomains.productSearchContributors, missingBehavior: 'error'
+            } } } },
             stripeProvider: { enabled: false, maturity: 'NOT_APPLICABLE_FOR_STAGED_CATALOG', sandboxOnly: true, liveQualified: false },
             servers: { default: endpoint('commerce-staged', 4352), ...connections, commerce: endpoint('commerce', 4350) }
         }

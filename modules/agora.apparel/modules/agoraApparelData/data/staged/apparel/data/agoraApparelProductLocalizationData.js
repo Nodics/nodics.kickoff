@@ -19,4 +19,27 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-module.exports = {"record0":{"code":"agoraApparelLinenDress-en","tenant":"default","productCode":"agoraApparelLinenDress","locale":"en","name":"Linen Wrap Dress","description":"Linen Wrap Dress for Agora apparel.","slug":"linen-wrap-dress","seo":{"title":"Linen Wrap Dress"},"attributes":{"domain":"apparel"},"classificationValues":{"domain":"apparel"},"status":"READY","revision":1,"active":true},"record1":{"code":"agoraApparelLinenDress-ar","tenant":"default","productCode":"agoraApparelLinenDress","locale":"ar","name":"فستان كتان","description":"فستان كتان","slug":"linen-wrap-dress","seo":{"title":"فستان كتان"},"attributes":{"domain":"apparel"},"classificationValues":{"domain":"apparel"},"status":"READY","revision":1,"active":true},"record2":{"code":"agoraApparelOxfordShirt-en","tenant":"default","productCode":"agoraApparelOxfordShirt","locale":"en","name":"Oxford Shirt","description":"Oxford Shirt for Agora apparel.","slug":"oxford-shirt","seo":{"title":"Oxford Shirt"},"attributes":{"domain":"apparel"},"classificationValues":{"domain":"apparel"},"status":"READY","revision":1,"active":true},"record3":{"code":"agoraApparelOxfordShirt-ar","tenant":"default","productCode":"agoraApparelOxfordShirt","locale":"ar","name":"قميص أكسفورد","description":"قميص أكسفورد","slug":"oxford-shirt","seo":{"title":"قميص أكسفورد"},"attributes":{"domain":"apparel"},"classificationValues":{"domain":"apparel"},"status":"READY","revision":1,"active":true}};
+const product = function (code, productCode, locale, name, description, slug, attributes) {
+    return {
+        code,
+        tenant: 'default',
+        productCode,
+        locale,
+        name,
+        description,
+        slug,
+        seo: { title: name },
+        attributes,
+        classificationValues: { domain: 'apparel', ...attributes },
+        status: 'READY',
+        revision: 1,
+        active: true
+    };
+};
+
+module.exports = {
+    record0: product('agoraApparelLinenDress-en', 'agoraApparelLinenDress', 'en', 'V-neck Cotton T-shirt', 'Soft cotton everyday essential for the Agora fashion storefront experience.', 'v-neck-cotton-t-shirt', { colorFamily: 'white', material: 'cotton', audience: 'women' }),
+    record1: product('agoraApparelLinenDress-ar', 'agoraApparelLinenDress', 'ar', 'تي شيرت قطني بياقة V', 'قطعة قطنية ناعمة للاستخدام اليومي ضمن تجربة متجر أجورا.', 'v-neck-cotton-t-shirt', { colorFamily: 'white', material: 'cotton', audience: 'women' }),
+    record2: product('agoraApparelOxfordShirt-en', 'agoraApparelOxfordShirt', 'en', 'Buttoned Cotton Shirt', 'A crisp buttoned cotton shirt for polished everyday styling.', 'buttoned-cotton-shirt', { colorFamily: 'blue', material: 'cotton', audience: 'men' }),
+    record3: product('agoraApparelOxfordShirt-ar', 'agoraApparelOxfordShirt', 'ar', 'قميص قطني بأزرار', 'قميص قطني أنيق بأزرار لإطلالة يومية مرتبة.', 'buttoned-cotton-shirt', { colorFamily: 'blue', material: 'cotton', audience: 'men' })
+};

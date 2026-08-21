@@ -26,6 +26,24 @@ const agoraDomainComposition = {
         telco: Object.freeze({ group: 'telco', pack: 'agoraTelcoData' })
     }),
 
+    enrichmentContributors: Object.freeze({
+        apparel: Object.freeze({ serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true }),
+        electronics: Object.freeze({ serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }),
+        telco: Object.freeze({ serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true })
+    }),
+
+    /**
+     * Resolves domain contributors that extend Commerce Product projection.
+     *
+     * @param {Array<string>} domains Selected customer domains.
+     * @returns {Object} Product search enrichment contributors.
+     */
+    contributors: function (domains) {
+        const selected = new Set(domains || []);
+        if (selected.has('telco')) selected.add('electronics');
+        return Object.freeze(Object.fromEntries([...selected].sort().map(domain => [domain, this.enrichmentContributors[domain]]).filter(([, contributor]) => contributor)));
+    },
+
     /**
      * Resolves the selected Agora domain composition.
      *
@@ -42,7 +60,8 @@ const agoraDomainComposition = {
             domains: Object.freeze(domains),
             frameworkGroups: Object.freeze(domains.map(domain => supported[domain].group)),
             sharedModules: Object.freeze(domains.length > 1 ? ['multiDomainCommerce'] : []),
-            projectPacks: Object.freeze(domains.map(domain => supported[domain].pack))
+            projectPacks: Object.freeze(domains.map(domain => supported[domain].pack)),
+            productSearchContributors: this.contributors(domains)
         });
     }
 };

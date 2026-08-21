@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "1.0.3",
+      "version": "1.0.9",
       "description": "Agora storefront discovery WCMS source",
       "owningDomain": "agora.wcms",
       "lifecycle": "PUBLISHABLE",
@@ -21,17 +21,18 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/agoraCatalogData.js": "f5046bc33b7bcac529c7c41561a95a4b8f7b270feaf1fc235e3b94e7dce7357c",
-        "staged/wcms/data/agoraComponentData.js": "a627f6b7a0ed02839c5c62af8569d8be98a1953b495edd03fb7641d534f481fc",
+        "staged/wcms/data/agoraComponentData.js": "4c0bc8ce0f4ac61373e67c85b6fec912a9d6c82585e5361e814eabc65e98d2ea",
         "staged/wcms/data/agoraComponentTypeGroupData.js": "2a6ed1f30e02658bd4ec48e4621b7f1282a7add8f9d64055a9795dede11872cf",
         "staged/wcms/data/agoraNavigationData.js": "54c0c5300a0ec447d32f4f462ec96e2f54afa4f4b6707119a0e8bb85cba9d56c",
-        "staged/wcms/data/agoraPageData.js": "e1affd354821753306a41a54d7e2411d60f8776ae08d52d992af754d7c36120c",
-        "staged/wcms/data/agoraRendererData.js": "a2919ac45703f736f84edfc7fef99ea34710079581c3d5d3fdb95ec6d0d91442",
+        "staged/wcms/data/agoraPageData.js": "8d1025a68344b657f2f3e14042fc29d70a7ac376784fe27af2ec0d053db7b1ba",
+        "staged/wcms/data/agoraRendererData.js": "229ff6926033a6461c8f59273c7b5b13903e7a469be4daec4de13821c106cff6",
         "staged/wcms/data/agoraRouteData.js": "18d183ed6d38e21e4ad589b334b8d1aaf96c1dda30149834470f6e610641bf3c",
         "staged/wcms/data/agoraSiteData.js": "5b744a77fc3b4bafac4016c10c5b371e15fea4946c553f079abd191e3e21db3d",
         "staged/wcms/data/agoraSlotData.js": "e8f22b7e685a8d47d5516f1febdfff863ec998077a33d4233a9b258a38fcc0a0",
         "staged/wcms/data/agoraTemplateData.js": "46a3407345b74deb89d981298acbb80c1a1588d5dcb34243fab4fc048902c8e2",
-        "staged/wcms/data/agoraTypeCodeData.js": "9c5c04f372e6c1264d3b118b9b15e07b6591ac8ea499a817c0d70164df573b06",
-        "staged/wcms/headers/agoraStorefrontContentHeader.js": "6120ea050b8a40959f8a7788b99ce6b5df5de090c0271d62866c551f032cc538"
+        "staged/wcms/data/agoraTypeCodeData.js": "bf648eb877150ff3630a4ddc7ac1201acd101a4cae60211d7aeb950fca34ef3f",
+        "staged/wcms/headers/agoraStorefrontContentHeader.js": "7d12fdc53b431f07e2e82bdf028b3257322b57b9be51e1de91dcaf8a73e97e0c",
+        "staged/wcms/data/agoraComponentMediaData.js": "d40450b67e2aa1ddf856484236d40f25d5d0462f75f97d83c01263b469dfd86f"
       },
       "displayName": "Agora Storefront Site"
     },
@@ -39,7 +40,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "description": "Agora discovery Product catalog source",
       "owningDomain": "agora.product",
       "lifecycle": "PUBLISHABLE",
@@ -54,12 +55,12 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/product/data/agoraCategoryData.js": "0da0eb3ced00858bc7a9bd842f7607d9cde4debf25bb8abe6da6efe89bc22665",
-        "staged/product/data/agoraCategoryLocalizationData.js": "4fc74e394b6d3c86e2475537c3b31c0be050fa6cd6f95bc63f266eac5b481824",
-        "staged/product/data/agoraProductData.js": "5ace8afc3e070c45fa6639e90f5e762b55efebfc70758c7070222c8a4169101c",
-        "staged/product/data/agoraProductLocalizationData.js": "c0e45034074f24de4c6af9c3601536ab023c3caf76ff7f9c1ac063853edf3abf",
-        "staged/product/data/agoraProductVariantData.js": "b262e39a0fc1cb3119638233e874ad45699033f6c9461b9e0aceec8b463c362a",
-        "staged/product/data/agoraProductVariantLocalizationData.js": "58f90e23361161cf26a66aea7532117ec7431d31f1b9661b9ebc0093819f2d3f",
+        "staged/product/data/agoraCategoryData.js": "fe25399e4663017b720cc584688a9da2bc68b10401dd174b3e683002c9edbd0b",
+        "staged/product/data/agoraCategoryLocalizationData.js": "a8c4c7d09f7fb7d069d329f21e8379ee3792c1444302dab2e84ad4078faf65b2",
+        "staged/product/data/agoraProductData.js": "59890e5d69c9b22ee78f425cb9408c0fd291b560c4817e1d09e4143f1042ca89",
+        "staged/product/data/agoraProductLocalizationData.js": "c9a4c4462dc2936861a38b3fb8a88cfb6deab52b54664fd0d6ce562ec7183ea9",
+        "staged/product/data/agoraProductVariantData.js": "44090ea7be6ac597f7f498410ea09d2a3ad7f187e1cf67b4f65d96b7746f0d52",
+        "staged/product/data/agoraProductVariantLocalizationData.js": "9ecef52d310fbff136f1cef8b15b88fc60c78aa4ce8445f17ced39e9bc52ec19",
         "staged/product/headers/agoraProductCatalogHeader.js": "4d04702b521ad3da8b2ecd20bc9857ff83e52956c8513ca16cfbd91a65b97653"
       },
       "displayName": "Agora Product Catalog Source"
@@ -82,7 +83,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/media/data/agoraMediaReferenceData.js": "3f2d3567981e7a5ec23f7a823cb561e6788d5dac6dc0d57493d860de80b3364a",
+        "staged/media/data/agoraMediaReferenceData.js": "3ebc782123adc1d8407ce5e1a1b3bf00e44d687bb25d994f7932c4c014ee69ca",
         "staged/media/headers/agoraMediaReferenceHeader.js": "e8770118646f6d9867aaba9ad41af1166191e05a1f30df79eba894e4cbd8f16b"
       },
       "displayName": "Agora Media Reference Source"
@@ -91,7 +92,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "1.0.3",
       "description": "Agora discovery Pricing source",
       "owningDomain": "agora.pricing",
       "lifecycle": "PUBLISHABLE",
@@ -106,8 +107,8 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/pricing/data/agoraPriceBookData.js": "3e4aaaf0c83a535ed6bb7358ce33679c1b9ef47e57f997cacd7162685256b676",
-        "staged/pricing/data/agoraPriceRowData.js": "eac58164b40303ec6f2b9681f44a0e5f3f94202b87aa3f9a89478b3f574ccf81",
+        "staged/pricing/data/agoraPriceBookData.js": "f31d6091bcaf4ca26426b0259be273e6319f6b7ee7cc248e916d7922a4b7f2d9",
+        "staged/pricing/data/agoraPriceRowData.js": "167156e87b24215388d6ad4a87be58517ce0ef87b91bbb7e050cb09d1a570874",
         "staged/pricing/headers/agoraPricingHeader.js": "9d0de204c5057ed9c9bad91f3e25f5902ad22b9b83d61c8e1e3fa5b222640272"
       },
       "displayName": "Agora Pricing Source"
@@ -116,7 +117,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.1",
+      "version": "1.0.4",
       "description": "Agora discovery Inventory source",
       "owningDomain": "agora.inventory",
       "lifecycle": "PUBLISHABLE",
@@ -131,7 +132,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/inventory/data/agoraInventoryBalanceData.js": "d4ac785b009df4a122ce519e19a97f285beef93f67c1849be2346314c84ea9b0",
+        "staged/inventory/data/agoraInventoryBalanceData.js": "2813f1fc467c234c5a453c4bc8000bf4ec77bb59e3450d8cef82f5deca13bee1",
         "staged/inventory/data/agoraWarehouseData.js": "0942eabe79fd303e60849c37a83c202cc7f203875908ae86b5feb1dea8b9e7aa",
         "staged/inventory/headers/agoraInventoryHeader.js": "1b6583ab9236b497e7c2ac13be25353de2c9df392ab25631f4c2a06253b74f38"
       },
@@ -141,7 +142,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Agora checkout Tax source",
       "owningDomain": "agora.tax",
       "lifecycle": "PUBLISHABLE",
@@ -165,7 +166,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "description": "Agora checkout Promotion source",
       "owningDomain": "agora.promotion",
       "lifecycle": "PUBLISHABLE",
@@ -180,7 +181,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/promotion/data/agoraPromotionData.js": "de4c906757ae1649008ae6d65f5520795ddf3157b4d8cfed394c008c5ba97a8e",
+        "staged/promotion/data/agoraPromotionData.js": "968ac866cf56fd4467126056fda1ef627ff7eac2602bb40d45ef89fe68aa266e",
         "staged/promotion/headers/agoraPromotionHeader.js": "c8a7c15c3b3001e744280711cf6c2578fbedd03957e5c85b0974222c2b2f000a"
       },
       "displayName": "Agora Promotion Source"
@@ -192,23 +193,23 @@
       "version": "1.0.0",
       "description": "Agora customer review and moderation source",
       "owningDomain": "agora.engagement.customerReview",
-      "lifecycle": "PUBLISHABLE",
+      "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "ENGAGEMENT",
       "environmentScope": [
         "LOCAL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
-      "publicationPolicy": "REQUIRED",
-      "initialPublicationPolicy": "ADMIN_INITIATED",
-      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
       "files": {
-        "staged/engagement/data/agoraCustomerReviewAggregateData.js": "381d87f0b145ba9fea31ceb370d114f212cfc98c9bbe0f92b71d91c1a5e5ac30",
-        "staged/engagement/data/agoraCustomerReviewAuthenticityEvidenceData.js": "2b9b35efe0c2a659e4760ceb4c7da9ae4b69cc8b1aec72f9f032a95caf77ae2e",
-        "staged/engagement/data/agoraCustomerReviewData.js": "b86cf400c27868c80d6212558b42ccec1bcc7df67e46d49dd07922a90281454f",
-        "staged/engagement/data/agoraCustomerReviewModerationData.js": "d5dd1d29a33458d81f4e0bd578356a6a022c62707d0536056e0d5343b0f36c0a",
-        "staged/engagement/data/agoraCustomerReviewProjectionData.js": "829f2768ba80d8424f21c96df5bbbb7367f6f9b1f0462c86b0790d4804337e53",
-        "staged/engagement/headers/agoraCustomerReviewHeader.js": "3b05c678ad090fb7952a1b0991fcc91d804567eafcdda03181bacf3c851c8ad3"
+        "staged/engagement/data/agoraCustomerReviewAggregateData.js": "aec379732c2ab70e7c14c6853ac7757bdf75ec7cce37df53c648c84e285ad58c",
+        "staged/engagement/data/agoraCustomerReviewAuthenticityEvidenceData.js": "52e6de513ad60b117c6d0610b3bbd9bd2bd2a4d33d4130ce5071c3c0cfc357bc",
+        "staged/engagement/data/agoraCustomerReviewData.js": "45f8f8cbac4b973edd40ca001c2b0571b5c1664fde54ec0f938e7faa642b9f95",
+        "staged/engagement/data/agoraCustomerReviewModerationData.js": "d71aaa0039289833b779d395cce80f82e2a9b0c731ce3ef9c017c2895f23db98",
+        "staged/engagement/data/agoraCustomerReviewProjectionData.js": "584b40f7930ca08edf38001cc4a9d79f20966a7c819e091167c47aae8bd7906c",
+        "staged/engagement/headers/agoraCustomerReviewHeader.js": "5e2f163672392b42bdbf4a9feb3c85630780ab91c8905dfe44648e9f8d25c0be"
       },
       "displayName": "Agora Customer Review Source"
     },
@@ -216,7 +217,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Agora discovery Commerce Search source",
       "owningDomain": "agora.commerceSearch",
       "lifecycle": "PUBLISHABLE",
@@ -231,7 +232,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/commerceSearch/data/agoraCommerceSearchRuleData.js": "b1264889de9f5988c2aa6d5aa5125864435cb25e8ca9dc3e45e38a2e0501c500",
+        "staged/commerceSearch/data/agoraCommerceSearchRuleData.js": "f25fe2de0cd57be772c9b0140248d0eb47f3c363390105ad04970ea8892295c4",
         "staged/commerceSearch/headers/agoraCommerceSearchHeader.js": "240005977cd3f02112576ca3ab669781c46ec14fe00176113fd500152ff53d8d"
       },
       "displayName": "Agora Commerce Search Source"
@@ -256,7 +257,7 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/discovery/data/agoraDiscoveryFacetProfileData.js": "b2ac414ed2f822cdef713f2bf18effe47526e733ceef9a4c32f62a15750bc6ff",
-        "staged/discovery/data/agoraDiscoveryFieldMappingData.js": "3691677eb8f2596955810aa203784e966c6c605b897bd85e4d948dd44c4809a2",
+        "staged/discovery/data/agoraDiscoveryFieldMappingData.js": "ad557db0e0af3057a6bd361a70730071d4a3b00ef9c0dacf02c0fd3b92c98fe7",
         "staged/discovery/data/agoraDiscoveryIndexConfigurationData.js": "198cf18c1f6b280c610dcac449cab663251ce2724f3863104005bccb0216e98f",
         "staged/discovery/data/agoraDiscoveryPublicationPolicyData.js": "dfb66fc8ba2bc4697c2040c84ac6bb802efad765647c508ea482b102c0fe6789",
         "staged/discovery/data/agoraDiscoveryQueryProfileData.js": "98a3b36dbe9f54cb913a292c44a1057fdbd577bf3c31bdcd54332242143856d3",

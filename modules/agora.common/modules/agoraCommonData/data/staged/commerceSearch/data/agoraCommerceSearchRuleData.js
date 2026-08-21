@@ -32,7 +32,7 @@ module.exports = {
     scopeType: 'CATEGORY',
     categoryCode: 'agoraWomen',
     status: 'APPROVED',
-    validFrom: '2026-01-01T00:00:00.000Z',
+    validFrom: new Date('2026-01-01T00:00:00.000Z'),
     actions: [
       { actionType: 'PIN', productCode: 'agoraLinenWrapDress', position: 1, priority: 100 },
       { actionType: 'BOOST', productCode: 'agoraSatinMidiDress', priority: 90 },

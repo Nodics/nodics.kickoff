@@ -43,6 +43,24 @@ module.exports = {
                 baselineCode: 'nexusupdate',
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
+            nexusecosystemrepair: {
+                code: 'nexusecosystemrepair',
+                type: 'WEBSITE_BUNDLE_UPDATE',
+                owner: 'nexusWebData',
+                applicationCode: 'nexus',
+                siteCode: 'nexusCorporateSite',
+                baselineCode: 'nexusecosystemrepair',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            agora: {
+                code: 'agora',
+                type: 'STOREFRONT_BUNDLE',
+                owner: 'agoraCommonData',
+                applicationCode: 'agora',
+                siteCode: 'agoraStorefrontSite',
+                baselineCode: 'agora',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
             frameworkdocs: {
                 code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs',
                 applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
@@ -89,11 +107,15 @@ module.exports = {
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
+            'partnerSiteData',
             'axis',
             'kickoffLocal',
             'platformServer'
         ]
     },
+    runtimeRole: { code: 'PLATFORM', publication: 'OPERATIONAL' },
+    data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
+        allowedDestinationRoles: ['PLATFORM'] } },
     profileBrowserSession: {
         enabled: true,
         refreshCookieName: 'nodics_axis_refresh',

@@ -1303,7 +1303,7 @@ module.exports = {
       "linkLabel": "Start a partnership conversation"
     }
   },
-  "record60": {
+  "record87": {
     "code": "nexusEcosystemRoles",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",
@@ -1337,7 +1337,7 @@ module.exports = {
       ]
     }
   },
-  "record61": {
+  "record88": {
     "code": "nexusEcosystemContribution",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",
@@ -1371,7 +1371,7 @@ module.exports = {
       ]
     }
   },
-  "record62": {
+  "record89": {
     "code": "nexusEcosystemJourney",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",

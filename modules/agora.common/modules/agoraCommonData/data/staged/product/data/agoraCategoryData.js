@@ -29,7 +29,9 @@ module.exports = {
   record3: { code: 'agoraWomenDresses', tenant: 'default', name: 'Women Dresses', parentCode: 'agoraWomen', status: 'ACTIVE', revision: 1, active: true },
   record4: { code: 'agoraWomenTops', tenant: 'default', name: 'Women Tops', parentCode: 'agoraWomen', status: 'ACTIVE', revision: 1, active: true },
   record5: { code: 'agoraWomenAccessories', tenant: 'default', name: 'Women Accessories', parentCode: 'agoraWomen', status: 'ACTIVE', revision: 1, active: true },
-  record6: { code: 'agoraMenShirts', tenant: 'default', name: 'Men Shirts', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
-  record7: { code: 'agoraMenTrousers', tenant: 'default', name: 'Men Trousers', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
-  record8: { code: 'agoraMenAccessories', tenant: 'default', name: 'Men Accessories', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true }
+  record6: { code: 'agoraWomenBags', tenant: 'default', name: 'Women Bags', parentCode: 'agoraWomenAccessories', status: 'ACTIVE', revision: 1, active: true },
+  record7: { code: 'agoraSale', tenant: 'default', name: 'Sale', status: 'ACTIVE', revision: 1, active: true },
+  record8: { code: 'agoraMenShirts', tenant: 'default', name: 'Men Shirts', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
+  record9: { code: 'agoraMenTrousers', tenant: 'default', name: 'Men Trousers', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
+  record10: { code: 'agoraMenAccessories', tenant: 'default', name: 'Men Accessories', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true }
 };

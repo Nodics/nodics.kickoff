@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "1.0.2",
+      "version": "1.0.5",
       "description": "Later-loaded partner-owned Nexus website customization",
       "owningDomain": "partner.nexus.wcms",
       "lifecycle": "PUBLISHABLE",
@@ -20,7 +20,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "staged/wcms/data/partnerNexusPageData.js": "b0598a2e0a0355937a66f076cb8ef7c437b5904470d689f061a38897a050853e",
+        "staged/wcms/data/partnerNexusPageData.js": "007668688ef802baeafe9e377d9feb539830b4b0265a3ba48b2c656a8bda23a8",
         "staged/wcms/headers/partnerNexusPageHeader.js": "e2a4842aeaf066bd725637e912faf688a7cf58240333c7d3ca371145d8475df5"
       }
     }

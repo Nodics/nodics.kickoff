@@ -22,6 +22,16 @@ module.exports = {
         commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },
         discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } }
     },
+    product: {
+        publication: {
+            searchEnrichment: {
+                domains: { enabled: true, contributors: agoraDomains.productSearchContributors, missingBehavior: 'error' }
+            }
+        },
+        discovery: {
+            mediaDeliveryBaseUrl: 'http://127.0.0.1:4314/nodics/media/v0/content'
+        }
+    },
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerce' } } } },
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {

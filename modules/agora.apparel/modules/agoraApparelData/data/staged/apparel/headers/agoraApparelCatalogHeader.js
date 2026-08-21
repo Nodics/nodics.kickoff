@@ -24,5 +24,5 @@ module.exports = {
     product: { products: entry('product', 'agoraApparelProductData'), localizations: entry('productLocalization', 'agoraApparelProductLocalizationData'), variants: entry('productVariant', 'agoraApparelProductVariantData'), variantLocalizations: entry('productVariantLocalization', 'agoraApparelProductVariantLocalizationData') },
     pricing: { books: entry('priceBook', 'agoraApparelPriceBookData'), rows: entry('priceRow', 'agoraApparelPriceRowData') },
     inventory: { warehouses: entry('warehouse', 'agoraApparelWarehouseData'), balances: entry('inventoryBalance', 'agoraApparelInventoryBalanceData') },
-    apparelProduct: { styles: entry('apparelStyle', 'agoraApparelStyleData') }
+    apparelProduct: { styles: entry('apparelStyle', 'agoraApparelStyleData'), variantProfiles: entry('apparelVariantProfile', 'agoraApparelVariantProfileData') }
 };

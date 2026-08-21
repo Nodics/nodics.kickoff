@@ -19,12 +19,13 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-/** @lifecycle PUBLISHABLE @destination ENGAGEMENT @owner agoraCommonData */
+/** @lifecycle OPERATIONAL_VERSIONED @destination ENGAGEMENT @owner agoraCommonData */
 
 /** @description Customer-safe public review projection for PDP rendering. */
 module.exports = {
   record0: {
     code: 'agoraReviewLinenWrapDress01Projection',
+    active: true,
     tenant: 'default',
     reviewCode: 'agoraReviewLinenWrapDress01',
     reviewVersion: 1,

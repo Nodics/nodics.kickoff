@@ -33,13 +33,17 @@ module.exports = {
     renderer: 'agora.page.home',
     cmsComponents: [
       { target: 'agoraGlobalHeader', slot: 'main', index: 0, active: true },
-      { target: 'agoraHomeHero', slot: 'main', index: 10, active: true },
-      { target: 'agoraHomeCategoryRail', slot: 'main', index: 20, active: true },
-      { target: 'agoraHomeProductRail', slot: 'main', index: 30, active: true },
-      { target: 'agoraServicePromiseStrip', slot: 'main', index: 40, active: true },
-      { target: 'agoraDiscoveryReadinessNote', slot: 'main', index: 50, active: true },
-      { target: 'agoraProductionGateSummary', slot: 'main', index: 60, active: true },
-      { target: 'agoraGlobalFooter', slot: 'main', index: 90, active: true }
+      { target: 'agoraHomeHeroExperience', slot: 'main', index: 10, active: true },
+      { target: 'agoraHomeServiceTicker', slot: 'main', index: 15, active: true },
+      { target: 'agoraHomeCollectionGrid', slot: 'main', index: 20, active: true },
+      { target: 'agoraTopPicksProductRail', slot: 'main', index: 30, active: true },
+      { target: 'agoraEditorialPromoGrid', slot: 'main', index: 40, active: true },
+      { target: 'agoraSpecialOfferSplit', slot: 'main', index: 45, active: true },
+      { target: 'agoraBestSellingProductRail', slot: 'main', index: 50, active: true },
+      { target: 'agoraCustomerServicePromiseGrid', slot: 'main', index: 60, active: true },
+      { target: 'agoraCustomerTestimonials', slot: 'main', index: 70, active: true },
+      { target: 'agoraSocialGallery', slot: 'main', index: 80, active: true },
+      { target: 'agoraGlobalFooterExperience', slot: 'main', index: 90, active: true }
     ]
   },
   record1: {
