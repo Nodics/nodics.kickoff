@@ -75,7 +75,7 @@ module.exports = {
       resolverKey: 'commerce.category.navigation',
       fallbackItems: [
         { label: 'New arrivals', href: '/c/new-arrivals' },
-        { label: 'Women', href: '/c/women' },
+        { label: 'Computing', href: '/c/computing' },
         { label: 'Men', href: '/c/men' }
       ]
     }
@@ -237,9 +237,9 @@ module.exports = {
     active: true,
     properties: {
       slides: [
-        { mediaCode: 'agora-owned-home-hero-summer-edit', eyebrow: 'Connected 2026 Edit', title: 'Smart devices for connected work and life.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraWomen' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
+        { mediaCode: 'agora-owned-home-hero-summer-edit', eyebrow: 'Connected 2026 Edit', title: 'Smart devices for connected work and life.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
         { mediaCode: 'agora-owned-home-hero-signature-style', eyebrow: 'Find Your Signature Setup', title: 'Curated layers, edited for everyday elegance.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
-        { mediaCode: 'agora-owned-home-hero-layered-edit', eyebrow: 'Build Your Smart Ecosystem', title: 'Versatile pieces for every occasion.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraWomen' } }
+        { mediaCode: 'agora-owned-home-hero-layered-edit', eyebrow: 'Build Your Smart Ecosystem', title: 'Connected devices that work beautifully together.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' } }
       ]
     }
   },
@@ -270,10 +270,10 @@ module.exports = {
       items: [
         { collectionCode: 'agoraNewArrivals', label: 'New devices', summary: 'Latest devices just in', mediaCode: 'agora-owned-collection-new-in' },
         { collectionCode: 'agoraSale', label: 'Sale', summary: 'Capsule offers and edits', mediaCode: 'agora-owned-collection-promotion' },
-        { collectionCode: 'agoraWomen', label: 'Computing', summary: 'Laptops, tablets and work essentials', mediaCode: 'agora-owned-collection-clothing' },
-        { collectionCode: 'agoraWomenSmartphones', label: 'Smartphones', summary: '5G phones and connected devices', mediaCode: 'agora-owned-collection-dresses' },
-        { collectionCode: 'agoraWomenAccessories', label: 'Accessories', summary: 'Chargers, audio and protection', mediaCode: 'agora-owned-collection-bags' },
-        { collectionCode: 'agoraWomenAccessories', label: 'Accessories', summary: 'Details that complete the look', mediaCode: 'agora-owned-collection-accessories' }
+        { collectionCode: 'agoraElectronicsComputing', label: 'Computing', summary: 'Laptops, tablets and work essentials', mediaCode: 'agora-owned-collection-clothing' },
+        { collectionCode: 'agoraElectronicsSmartphones', label: 'Smartphones', summary: '5G phones and connected devices', mediaCode: 'agora-owned-collection-dresses' },
+        { collectionCode: 'agoraElectronicsAccessories', label: 'Audio & accessories', summary: 'Chargers, audio and protection', mediaCode: 'agora-owned-collection-bags' },
+        { collectionCode: 'agoraElectronicsSmartHome', label: 'Smart home', summary: 'Connected essentials for every room', mediaCode: 'agora-owned-collection-accessories' }
       ]
     }
   },
@@ -288,8 +288,8 @@ module.exports = {
       heading: 'Latest devices just in',
       resolverKey: 'commerce.product.discovery',
       queryIntent: 'FEATURED',
-      productCodes: ['agoraLinenWrapDress', 'agoraSatinMidiDress', 'agoraRibbedKnitTop', 'agoraCottonPoplinShirtWomen', 'agoraStretchStrapTop', 'agoraRamiePocketShirt', 'agoraRattanHandleBag', 'agoraStripedKnitDress'],
-      pageSize: 8
+      productCodes: ['agoraElectronicsNovaPhone', 'agoraElectronicsAirLaptop'],
+      pageSize: 2
     }
   },
   record34: {
@@ -300,9 +300,9 @@ module.exports = {
     active: true,
     properties: {
       items: [
-        { title: 'Capsule Collection', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-capsule', variant: 'copy-left', action: { label: 'Shop Collection', collectionCode: 'agoraWomen' } },
+        { title: 'Connected Workspace', summary: 'Launch-week bundles', mediaCode: 'agora-owned-promo-capsule', variant: 'copy-left', action: { label: 'Shop Collection', collectionCode: 'agoraElectronicsComputing' } },
         { title: 'Texture edit', summary: 'Shop the look', mediaCode: 'agora-owned-promo-texture-edit', variant: 'visual', action: { label: 'Shop Collection', collectionCode: 'agoraSale' } },
-        { title: 'Wireless Audio Bundle', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-crossbody', variant: 'copy-right', action: { label: 'Shop Collection', collectionCode: 'agoraWomenAccessories' } }
+        { title: 'Wireless Audio Bundle', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-crossbody', variant: 'copy-right', action: { label: 'Shop Collection', collectionCode: 'agoraElectronicsAccessories' } }
       ]
     }
   },
@@ -395,7 +395,7 @@ module.exports = {
       summary: 'Nodics Agora brings electronics commerce into the Nodics experience layer with secure checkout, catalog discovery, and customer self-service.',
       contactEmail: 'nodics.framework@gmail.com',
       groups: [
-        { title: 'Commerce', links: ['New devices', 'Women', 'Computing', 'Accessories & Accessories'] },
+        { title: 'Commerce', links: ['New devices', 'Computing', 'Smartphones', 'Audio & Accessories'] },
         { title: 'Customer Care', links: ['Shipping', 'Returns', 'Order support', 'Wishlist'] },
         { title: 'Nodics', links: ['Nexus', 'Axis', 'Documentation', 'Contact'] }
       ],

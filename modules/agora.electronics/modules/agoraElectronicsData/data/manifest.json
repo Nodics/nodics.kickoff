@@ -28,6 +28,12 @@
         "staged/electronics/data/agoraElectronicsProductLocalizationData.js": "0d6bd1e96e8ae993dfe97190ab4eb5dad8b6c7ab015e239ca1ec8c163f377c21",
         "staged/electronics/data/agoraElectronicsProductVariantData.js": "704a0e5ba26c1198914e44360ec9010fec34b96b8e9fcb1343e122315220e9ee",
         "staged/electronics/data/agoraElectronicsProductVariantLocalizationData.js": "61321b13d6945f3abfd182862c07968970b1f36c71b8172ce6b9689457053441",
+        "staged/electronics/data/agoraElectronicsSharedComponentData.js": "525490a4260d25d556ead948ad766a51f0a4d1103b1b659844e59e3a8a19ba1a",
+        "staged/electronics/data/agoraElectronicsSharedComponentMediaData.js": "4401b832eec3fecb83785cec8f88f939a5dbfceb52ad133ed9070f9aad21f625",
+        "staged/electronics/data/agoraElectronicsSharedComponentTypeGroupData.js": "2a6ed1f30e02658bd4ec48e4621b7f1282a7add8f9d64055a9795dede11872cf",
+        "staged/electronics/data/agoraElectronicsSharedMediaReferenceData.js": "3ebc782123adc1d8407ce5e1a1b3bf00e44d687bb25d994f7932c4c014ee69ca",
+        "staged/electronics/data/agoraElectronicsSharedSlotData.js": "e8f22b7e685a8d47d5516f1febdfff863ec998077a33d4233a9b258a38fcc0a0",
+        "staged/electronics/data/agoraElectronicsSharedTemplateData.js": "3ab2a83732951b58c0e2cd132734c3545af6c6162f59af02f8b8706d79700842",
         "staged/electronics/data/agoraElectronicsSpecificationData.js": "5e768643527829ae51fde9d4ac980351c6c8870210c1fc450ec87b94d6ecf3c1",
         "staged/electronics/data/agoraElectronicsWarehouseData.js": "c5b0bf7a3c574693ad9c1f4eddeed3f66a4df154f0c53e314d58841e3a687694",
         "staged/electronics/headers/agoraElectronicsCatalogHeader.js": "06ce97fafc207ccaa37382062aa1502192ca949dcb71898027807387dbb71a2c"
@@ -56,17 +62,11 @@
         "staged/electronics/data/agoraElectronicsPageData.js": "1823e0d3981a6e6ecfd4f4bac0e4091ff89136c904e9426f91009212c643954d",
         "staged/electronics/data/agoraElectronicsRendererData.js": "3b7dc1095f44599da98fd2ead7130d5618fb118d460f7375a6ca19d661aa8c1d",
         "staged/electronics/data/agoraElectronicsRouteData.js": "a971130e070411fb279bf9ca513c7e5660434dbf5915c5eae8ec8412fa6cf2ff",
+        "staged/electronics/data/agoraElectronicsSharedRendererData.js": "e31a692d8f57b46e4e0e66f98dec3753d218f591b8f70f4e0bf37dfeb81ebbe5",
+        "staged/electronics/data/agoraElectronicsSharedTypeCodeData.js": "25d5f045d599d7416c438086007d8a92328921e7d8f60e1d2f072de91b0104df",
         "staged/electronics/data/agoraElectronicsSiteData.js": "5668d88f2e0a8f1a3aba60cb7b71ac5a4eb91eec6fb72627c74111b85341cd03",
         "staged/electronics/data/agoraElectronicsTypeCodeData.js": "e8ec7930cc1eaf79f002378878baea8a1e3c643682f62a2cbd0995f53a336d12",
-        "staged/electronics/headers/agoraElectronicsContentHeader.js": "5136aa6b159fdaa5959fe57ac765c7a1fd9aca4a1e925425d0781c5787a83d31",
-        "staged/electronics/data/agoraElectronicsSharedTypeCodeData.js": "25d5f045d599d7416c438086007d8a92328921e7d8f60e1d2f072de91b0104df",
-        "staged/electronics/data/agoraElectronicsSharedRendererData.js": "e31a692d8f57b46e4e0e66f98dec3753d218f591b8f70f4e0bf37dfeb81ebbe5",
-        "staged/electronics/data/agoraElectronicsSharedComponentTypeGroupData.js": "2a6ed1f30e02658bd4ec48e4621b7f1282a7add8f9d64055a9795dede11872cf",
-        "staged/electronics/data/agoraElectronicsSharedSlotData.js": "e8f22b7e685a8d47d5516f1febdfff863ec998077a33d4233a9b258a38fcc0a0",
-        "staged/electronics/data/agoraElectronicsSharedTemplateData.js": "3ab2a83732951b58c0e2cd132734c3545af6c6162f59af02f8b8706d79700842",
-        "staged/electronics/data/agoraElectronicsSharedComponentData.js": "32280385f459a3a2568de12992c5f0a52d6b7d3aff9948d6275fb7224d0057b3",
-        "staged/electronics/data/agoraElectronicsSharedComponentMediaData.js": "4401b832eec3fecb83785cec8f88f939a5dbfceb52ad133ed9070f9aad21f625",
-        "staged/electronics/data/agoraElectronicsSharedMediaReferenceData.js": "3ebc782123adc1d8407ce5e1a1b3bf00e44d687bb25d994f7932c4c014ee69ca"
+        "staged/electronics/headers/agoraElectronicsContentHeader.js": "5136aa6b159fdaa5959fe57ac765c7a1fd9aca4a1e925425d0781c5787a83d31"
       }
     }
   }

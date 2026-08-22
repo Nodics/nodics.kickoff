@@ -75,7 +75,7 @@ module.exports = {
       resolverKey: 'commerce.category.navigation',
       fallbackItems: [
         { label: 'New arrivals', href: '/c/new-arrivals' },
-        { label: 'Women', href: '/c/women' },
+        { label: 'Postpaid', href: '/c/postpaid' },
         { label: 'Men', href: '/c/men' }
       ]
     }
@@ -237,9 +237,9 @@ module.exports = {
     active: true,
     properties: {
       slides: [
-        { mediaCode: 'agora-owned-home-hero-summer-edit', eyebrow: 'Connected Plans 2026', title: 'Flexible plans for always-on customers.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraWomen' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
-        { mediaCode: 'agora-owned-home-hero-signature-style', eyebrow: 'Find Your Perfect Plan', title: 'Curated layers, edited for everyday elegance.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
-        { mediaCode: 'agora-owned-home-hero-layered-edit', eyebrow: 'Bundle Data, Voice & Devices', title: 'Versatile pieces for every occasion.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraWomen' } }
+        { mediaCode: 'agora-owned-home-hero-summer-edit', eyebrow: 'Connected Plans 2026', title: 'Flexible plans for always-on customers.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraTelcoPostpaid' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
+        { mediaCode: 'agora-owned-home-hero-signature-style', eyebrow: 'Find Your Perfect Plan', title: 'Curated plans for everyday connectivity.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
+        { mediaCode: 'agora-owned-home-hero-layered-edit', eyebrow: 'Bundle Data, Voice & Devices', title: 'Plans, devices and bundles for every connection.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraTelcoPostpaid' } }
       ]
     }
   },
@@ -270,10 +270,10 @@ module.exports = {
       items: [
         { collectionCode: 'agoraNewArrivals', label: 'New plans', summary: 'Latest plans just in', mediaCode: 'agora-owned-collection-new-in' },
         { collectionCode: 'agoraSale', label: 'Sale', summary: 'Capsule offers and edits', mediaCode: 'agora-owned-collection-promotion' },
-        { collectionCode: 'agoraWomen', label: 'Postpaid', summary: 'Unlimited and family connectivity', mediaCode: 'agora-owned-collection-clothing' },
-        { collectionCode: 'agoraWomenPrepaid', label: 'Prepaid', summary: 'Flexible prepaid bundles', mediaCode: 'agora-owned-collection-dresses' },
-        { collectionCode: 'agoraWomenDevices', label: 'Devices', summary: 'Phones, routers and accessories', mediaCode: 'agora-owned-collection-bags' },
-        { collectionCode: 'agoraWomenAccessories', label: 'Accessories', summary: 'Details that complete the look', mediaCode: 'agora-owned-collection-accessories' }
+        { collectionCode: 'agoraTelcoPostpaid', label: 'Postpaid', summary: 'Unlimited and family connectivity', mediaCode: 'agora-owned-collection-clothing' },
+        { collectionCode: 'agoraTelcoPrepaid', label: 'Prepaid', summary: 'Flexible prepaid bundles', mediaCode: 'agora-owned-collection-dresses' },
+        { collectionCode: 'agoraTelcoDevices', label: 'Devices', summary: 'Phones, routers and accessories', mediaCode: 'agora-owned-collection-bags' },
+        { collectionCode: 'agoraTelcoAccessories', label: 'Accessories', summary: 'Details that complete the look', mediaCode: 'agora-owned-collection-accessories' }
       ]
     }
   },
@@ -288,8 +288,8 @@ module.exports = {
       heading: 'Latest plans just in',
       resolverKey: 'commerce.product.discovery',
       queryIntent: 'FEATURED',
-      productCodes: ['agoraLinenWrapDress', 'agoraSatinMidiDress', 'agoraRibbedKnitTop', 'agoraCottonPoplinShirtWomen', 'agoraStretchStrapTop', 'agoraRamiePocketShirt', 'agoraRattanHandleBag', 'agoraStripedKnitDress'],
-      pageSize: 8
+      productCodes: ['agoraTelcoUnlimitedPostpaid', 'agoraTelcoFlexiPrepaid'],
+      pageSize: 2
     }
   },
   record34: {
@@ -300,9 +300,9 @@ module.exports = {
     active: true,
     properties: {
       items: [
-        { title: 'Capsule Collection', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-capsule', variant: 'copy-left', action: { label: 'Shop Collection', collectionCode: 'agoraWomen' } },
+        { title: 'Plan Bundles', summary: 'Activation-week offers', mediaCode: 'agora-owned-promo-capsule', variant: 'copy-left', action: { label: 'Shop Collection', collectionCode: 'agoraTelcoPostpaid' } },
         { title: 'Texture edit', summary: 'Shop the look', mediaCode: 'agora-owned-promo-texture-edit', variant: 'visual', action: { label: 'Shop Collection', collectionCode: 'agoraSale' } },
-        { title: '5G Router Bundle', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-crossbody', variant: 'copy-right', action: { label: 'Shop Collection', collectionCode: 'agoraWomenDevices' } }
+        { title: '5G Router Bundle', summary: 'Up to 40% off', mediaCode: 'agora-owned-promo-crossbody', variant: 'copy-right', action: { label: 'Shop Collection', collectionCode: 'agoraTelcoDevices' } }
       ]
     }
   },
@@ -395,7 +395,7 @@ module.exports = {
       summary: 'Nodics Agora brings telco commerce into the Nodics experience layer with secure checkout, catalog discovery, and customer self-service.',
       contactEmail: 'nodics.framework@gmail.com',
       groups: [
-        { title: 'Commerce', links: ['New plans', 'Women', 'Postpaid', 'Devices & Accessories'] },
+        { title: 'Commerce', links: ['New plans', 'Postpaid', 'Prepaid', 'Devices & Accessories'] },
         { title: 'Customer Care', links: ['Shipping', 'Returns', 'Order support', 'Wishlist'] },
         { title: 'Nodics', links: ['Nexus', 'Axis', 'Documentation', 'Contact'] }
       ],
