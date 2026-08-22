@@ -76,10 +76,10 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
 
 test('project composition selects each domain independently, together, or Commerce-only', () => {
   const composition = require('../config/agora-domain-composition');
-  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agoraApparelData'] });
-  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agoraElectronicsData'] });
-  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agoraTelcoData'] });
-  assert.deepEqual(composition.resolve('commerce'), { domains: [], frameworkGroups: [], sharedModules: [], projectPacks: [] });
+  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agoraApparelData'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agoraElectronicsData'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agoraTelcoData'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('commerce'), { domains: [], frameworkGroups: [], sharedModules: [], projectPacks: [], productSearchContributors: {} });
   assert.deepEqual(composition.resolve('all').domains, ['apparel', 'electronics', 'telco']);
   assert.deepEqual(composition.resolve('all').sharedModules, ['multiDomainCommerce']);
   assert.throws(() => composition.resolve('apparel,unknown'), /Unsupported NODICS_AGORA_DOMAINS/);

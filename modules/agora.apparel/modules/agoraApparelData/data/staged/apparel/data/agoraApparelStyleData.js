@@ -25,7 +25,7 @@ module.exports = Object.freeze({
   "record0": {
     "code": "agoraLinenWrapDressStyle",
     "tenant": "default",
-    "productCode": "agoraLinenWrapDress",
+    "productCode": "agoraApparelLinenDress",
     "brandCode": "nodics-studio",
     "collectionCodes": [
       "agoraWomen",
@@ -39,7 +39,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Linen blend"
+      {
+        "material": "Linen blend",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -52,7 +55,7 @@ module.exports = Object.freeze({
   "record1": {
     "code": "agoraSatinMidiDressStyle",
     "tenant": "default",
-    "productCode": "agoraSatinMidiDress",
+    "productCode": "agoraApparelOxfordShirt",
     "brandCode": "nodics-studio",
     "collectionCodes": [
       "agoraWomen",
@@ -66,7 +69,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Satin weave"
+      {
+        "material": "Satin weave",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -93,7 +99,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Ribbed cotton blend"
+      {
+        "material": "Ribbed cotton blend",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -120,7 +129,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton poplin"
+      {
+        "material": "Cotton poplin",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -147,7 +159,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Leather"
+      {
+        "material": "Leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -174,7 +189,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Silk twill"
+      {
+        "material": "Silk twill",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -201,7 +219,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Oxford cotton"
+      {
+        "material": "Oxford cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -228,7 +249,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Washed linen"
+      {
+        "material": "Washed linen",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -255,7 +279,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton twill"
+      {
+        "material": "Cotton twill",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -282,7 +309,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Soft twill"
+      {
+        "material": "Soft twill",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -309,7 +339,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Canvas"
+      {
+        "material": "Canvas",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -336,7 +369,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Wool blend"
+      {
+        "material": "Wool blend",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -363,7 +399,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Stretch jersey"
+      {
+        "material": "Stretch jersey",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -390,7 +429,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Ramie"
+      {
+        "material": "Ramie",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -417,7 +459,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Rattan"
+      {
+        "material": "Rattan",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -444,7 +489,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Knit viscose"
+      {
+        "material": "Knit viscose",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -471,7 +519,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton blend"
+      {
+        "material": "Cotton blend",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -498,7 +549,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton gabardine"
+      {
+        "material": "Cotton gabardine",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -525,7 +579,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton"
+      {
+        "material": "Cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -552,7 +609,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Ribbed cotton"
+      {
+        "material": "Ribbed cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -579,7 +639,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Pleated knit"
+      {
+        "material": "Pleated knit",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -606,7 +669,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Satin crepe"
+      {
+        "material": "Satin crepe",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -633,7 +699,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton knit"
+      {
+        "material": "Cotton knit",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -660,7 +729,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Leather"
+      {
+        "material": "Leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -687,7 +759,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Open knit cotton"
+      {
+        "material": "Open knit cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -714,7 +789,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Viscose blend"
+      {
+        "material": "Viscose blend",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -741,7 +819,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Linen"
+      {
+        "material": "Linen",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -768,7 +849,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Woven leather"
+      {
+        "material": "Woven leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -795,7 +879,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Leather"
+      {
+        "material": "Leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -822,7 +909,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Open weave knit"
+      {
+        "material": "Open weave knit",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -849,7 +939,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton viscose"
+      {
+        "material": "Cotton viscose",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -876,7 +969,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Acetate and metal"
+      {
+        "material": "Acetate and metal",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -903,7 +999,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Ribbed knit"
+      {
+        "material": "Ribbed knit",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -930,7 +1029,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Organic cotton"
+      {
+        "material": "Organic cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -957,7 +1059,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Pebbled leather"
+      {
+        "material": "Pebbled leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -984,7 +1089,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Polished metal"
+      {
+        "material": "Polished metal",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1011,7 +1119,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Stretch cotton"
+      {
+        "material": "Stretch cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1038,7 +1149,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Ramie"
+      {
+        "material": "Ramie",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1065,7 +1179,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Fine knit cotton"
+      {
+        "material": "Fine knit cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1092,7 +1209,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Canvas"
+      {
+        "material": "Canvas",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1119,7 +1239,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Viscose satin"
+      {
+        "material": "Viscose satin",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1146,7 +1269,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Knit cotton"
+      {
+        "material": "Knit cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1173,7 +1299,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Satin crepe"
+      {
+        "material": "Satin crepe",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1200,7 +1329,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton wool"
+      {
+        "material": "Cotton wool",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1227,7 +1359,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Leather"
+      {
+        "material": "Leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1254,7 +1389,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Wool blend"
+      {
+        "material": "Wool blend",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1281,7 +1419,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Linen"
+      {
+        "material": "Linen",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1308,7 +1449,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Denim cotton"
+      {
+        "material": "Denim cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1335,7 +1479,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton twill"
+      {
+        "material": "Cotton twill",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1362,7 +1509,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton twill"
+      {
+        "material": "Cotton twill",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1389,7 +1539,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Pique cotton"
+      {
+        "material": "Pique cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1416,7 +1569,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Washed cotton"
+      {
+        "material": "Washed cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1443,7 +1599,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton jersey"
+      {
+        "material": "Cotton jersey",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1470,7 +1629,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Ripstop cotton"
+      {
+        "material": "Ripstop cotton",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1497,7 +1659,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Leather"
+      {
+        "material": "Leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1524,7 +1689,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Acetate"
+      {
+        "material": "Acetate",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1551,7 +1719,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Leather"
+      {
+        "material": "Leather",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
@@ -1578,7 +1749,10 @@ module.exports = Object.freeze({
     "fitProfileCode": "regular",
     "sizeSystemCode": "ALPHA",
     "materialComposition": [
-      "Cotton knit"
+      {
+        "material": "Cotton knit",
+        "percentage": 100
+      }
     ],
     "careInstructions": [
       "Follow garment label care instructions",
