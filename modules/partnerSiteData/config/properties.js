@@ -28,6 +28,18 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'partnernexus',
+                presentation: {
+                    title: 'Partner Nexus Customization',
+                    kind: 'PROJECT',
+                    category: 'accelerator',
+                    order: 900,
+                    summary: 'Partner-owned Nexus customization package layered over the corporate site accelerator.',
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
+                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
+                },
+                dataPackages: [
+                    { code: 'partnerSiteData:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' }
+                ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             }
         }

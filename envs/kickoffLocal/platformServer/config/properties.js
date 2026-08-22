@@ -36,6 +36,19 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexus',
+                presentation: {
+                    title: 'Nexus Corporate',
+                    kind: 'PROJECT',
+                    category: 'accelerator',
+                    order: 100,
+                    summary: 'Corporate website accelerator published from WCMS Staged to Online.',
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
+                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
+                },
+                dataPackages: [
+                    { code: 'nexusWebData:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
+                    { code: 'nexusWebData:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
+                ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             nexusupdate: {
@@ -45,6 +58,7 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusupdate',
+                presentation: { visible: false },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             nexusecosystemrepair: {
@@ -54,6 +68,7 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusecosystemrepair',
+                presentation: { visible: false },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             nexusincremental: {
@@ -63,6 +78,7 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusincremental',
+                presentation: { visible: false },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             nexusprofessionalcopy: {
@@ -72,6 +88,7 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusprofessionalcopy',
+                presentation: { visible: false },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             agora: {
@@ -81,21 +98,61 @@ module.exports = {
                 applicationCode: 'agora',
                 siteCode: 'agoraStorefrontSite',
                 baselineCode: 'agora',
+                presentation: {
+                    title: 'Agora Storefront',
+                    kind: 'PROJECT',
+                    category: 'accelerator',
+                    order: 200,
+                    summary: 'Commerce storefront accelerator. Domain-specific bundles will become separate business-facing accelerators.',
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
+                },
+                dataPackages: [
+                    { code: 'agoraCommonData:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
+                    { code: 'agoraCommonData:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
+                ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             frameworkdocs: {
                 code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs',
                 applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
+                presentation: {
+                    title: 'Framework Documentation',
+                    kind: 'DOCUMENTATION',
+                    category: 'documentation',
+                    order: 300,
+                    summary: 'Framework documentation content pack and Online delivery profile.',
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
+                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
+                },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             axisdocs: {
                 code: 'axisdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'axis',
                 applicationCode: 'axis', siteCode: 'axisDocumentationSite', baselineCode: 'axisdocs', contentPackCode: 'axisDocumentation',
+                presentation: {
+                    title: 'Nodics Axis Documentation',
+                    kind: 'DOCUMENTATION',
+                    category: 'documentation',
+                    order: 400,
+                    summary: 'Axis product documentation content pack and Online delivery profile.',
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
+                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
+                },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             kickoffdocs: {
                 code: 'kickoffdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.kickoff',
                 applicationCode: 'axis', siteCode: 'kickoffDocumentationSite', baselineCode: 'kickoffdocs', contentPackCode: 'kickoffDocumentation',
+                presentation: {
+                    title: 'Nodics Kickoff Documentation',
+                    kind: 'DOCUMENTATION',
+                    category: 'documentation',
+                    order: 500,
+                    summary: 'Reference-project documentation content pack and Online delivery profile.',
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
+                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
+                },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             }
         }
