@@ -237,9 +237,9 @@ module.exports = {
     active: true,
     properties: {
       slides: [
-        { mediaCode: 'agora-owned-electronics-hero-connected-work', eyebrow: 'Connected 2026 Edit', title: 'Smart devices for connected work and life.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
-        { mediaCode: 'agora-owned-electronics-hero-device-stack', eyebrow: 'Find Your Signature Setup', title: 'Smart devices, approved for everyday momentum.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
-        { mediaCode: 'agora-owned-electronics-hero-smart-home', eyebrow: 'Build Your Smart Ecosystem', title: 'Connected devices that work beautifully together.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' } }
+        { mediaCode: 'agora-owned-electronics-hero-connected-work-v2', eyebrow: 'Connected 2026 Edit', title: 'Smart devices for connected work and life.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
+        { mediaCode: 'agora-owned-electronics-hero-device-stack-v2', eyebrow: 'Find Your Signature Setup', title: 'Smart devices, approved for everyday momentum.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
+        { mediaCode: 'agora-owned-electronics-hero-smart-home-v2', eyebrow: 'Build Your Smart Ecosystem', title: 'Connected devices that work beautifully together.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' } }
       ]
     }
   },

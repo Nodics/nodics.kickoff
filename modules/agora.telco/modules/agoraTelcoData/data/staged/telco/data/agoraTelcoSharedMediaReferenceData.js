@@ -3922,5 +3922,86 @@ module.exports = Object.freeze({
         "recovery note"
       ]
     }
+  }  ,
+  "record90": {
+    "code": "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-connected-plans-v2",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraTelcoHomeHeroExperience",
+    "mediaCode": "agora-owned-telco-hero-connected-plans-v2",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 90,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": ["original filename", "source system", "checksum", "intake run"],
+      "approvalChecklist": ["license type", "asset owner", "reviewer", "approval timestamp"],
+      "activationChecklist": ["target type", "target code", "usage scope", "activation revision"],
+      "rollbackChecklist": ["previous reference", "deactivation reason", "audit trail", "recovery note"]
+    }
+  }  ,
+  "record91": {
+    "code": "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-plan-finder-v2",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraTelcoHomeHeroExperience",
+    "mediaCode": "agora-owned-telco-hero-plan-finder-v2",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 91,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": ["original filename", "source system", "checksum", "intake run"],
+      "approvalChecklist": ["license type", "asset owner", "reviewer", "approval timestamp"],
+      "activationChecklist": ["target type", "target code", "usage scope", "activation revision"],
+      "rollbackChecklist": ["previous reference", "deactivation reason", "audit trail", "recovery note"]
+    }
+  }  ,
+  "record92": {
+    "code": "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-bundle-network-v2",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraTelcoHomeHeroExperience",
+    "mediaCode": "agora-owned-telco-hero-bundle-network-v2",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 92,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": ["original filename", "source system", "checksum", "intake run"],
+      "approvalChecklist": ["license type", "asset owner", "reviewer", "approval timestamp"],
+      "activationChecklist": ["target type", "target code", "usage scope", "activation revision"],
+      "rollbackChecklist": ["previous reference", "deactivation reason", "audit trail", "recovery note"]
+    }
   }
 });

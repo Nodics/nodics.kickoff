@@ -237,9 +237,9 @@ module.exports = {
     active: true,
     properties: {
       slides: [
-        { mediaCode: 'agora-owned-telco-hero-connected-plans', eyebrow: 'Connected Plans 2026', title: 'Flexible plans for always-on customers.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraTelcoPostpaid' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
-        { mediaCode: 'agora-owned-telco-hero-plan-finder', eyebrow: 'Find Your Perfect Plan', title: 'Curated plans for everyday connectivity.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
-        { mediaCode: 'agora-owned-telco-hero-bundle-network', eyebrow: 'Bundle Data, Voice & Devices', title: 'Plans, devices and bundles for every connection.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraTelcoPostpaid' } }
+        { mediaCode: 'agora-owned-telco-hero-connected-plans-v2', eyebrow: 'Connected Plans 2026', title: 'Flexible plans for always-on customers.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraTelcoPostpaid' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
+        { mediaCode: 'agora-owned-telco-hero-plan-finder-v2', eyebrow: 'Find Your Perfect Plan', title: 'Curated plans for everyday connectivity.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
+        { mediaCode: 'agora-owned-telco-hero-bundle-network-v2', eyebrow: 'Bundle Data, Voice & Devices', title: 'Plans, devices and bundles for every connection.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraTelcoPostpaid' } }
       ]
     }
   },
