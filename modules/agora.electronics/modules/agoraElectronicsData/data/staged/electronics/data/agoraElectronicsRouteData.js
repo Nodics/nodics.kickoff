@@ -19,4 +19,4 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-module.exports = { record0: { code: 'agoraElectronicsHomeRoute', path: '/electronics', page: 'agoraElectronicsHomePage', site: 'agoraElectronicsSite', locale: 'en', channel: 'web', routeType: 'PAGE', deliveryState: 'ONLINE', accessMode: 'PUBLIC', active: true } };
+module.exports = { record0: { code: 'agoraElectronicsHomeRoute', path: '/', page: 'agoraElectronicsHomePage', site: 'agoraElectronicsSite', locale: 'en', channel: 'web', routeType: 'PAGE', deliveryState: 'ONLINE', accessMode: 'PUBLIC', active: true } };
