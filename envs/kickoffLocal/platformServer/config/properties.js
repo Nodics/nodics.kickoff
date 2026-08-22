@@ -157,6 +157,28 @@ module.exports = {
             }
         }
     },
+    backofficeFunctionalModuleActivationData: {
+        modules: {
+            'nodics.wcms': {
+                dataPackages: [
+                    { code: 'wcms:runtime-defaults', classification: 'runtime-default', owner: 'nodics.wcms', required: true, trigger: 'ACTIVATION', targetModule: 'cms', targetServer: 'wcmsStaged', targetDatabase: 'kickoffLocalWcmsStaged', operation: 'IMPORT' },
+                    { code: 'wcms:sample-content', classification: 'sample', owner: 'nodics.wcms', required: false, trigger: 'USER', targetModule: 'cms', targetServer: 'wcmsStaged', targetDatabase: 'kickoffLocalWcmsStaged', operation: 'IMPORT_SAMPLE' }
+                ]
+            },
+            'nodics.commerce': {
+                dataPackages: [
+                    { code: 'commerce:core-reference', classification: 'core', owner: 'nodics.commerce', required: true, trigger: 'ACTIVATION', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffLocalCommerce', operation: 'IMPORT' },
+                    { code: 'commerce:sample-catalog', classification: 'sample', owner: 'nodics.commerce', required: false, trigger: 'USER', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffLocalCommerce', operation: 'IMPORT_SAMPLE' }
+                ]
+            },
+            'nodics.communication': {
+                dataPackages: [
+                    { code: 'communication:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'communication', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT' },
+                    { code: 'communication:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'communication', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT_SAMPLE' }
+                ]
+            }
+        }
+    },
     backofficeLocalReset: {
         enabled: true,
         environmentAllowlist: ['kickoffLocal'],

@@ -122,6 +122,20 @@ module.exports = function runtimeProperties(server) {
                         activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } }
             } },
+            backofficeFunctionalModuleActivationData: { modules: {
+                'nodics.wcms': { dataPackages: [
+                    { code: 'wcms:runtime-defaults', classification: 'runtime-default', owner: 'nodics.wcms', required: true, trigger: 'ACTIVATION', targetModule: 'cms', targetServer: 'wcmsStagedServer', targetDatabase: 'kickoffDockerLocalWcmsStaged', operation: 'IMPORT' },
+                    { code: 'wcms:sample-content', classification: 'sample', owner: 'nodics.wcms', required: false, trigger: 'USER', targetModule: 'cms', targetServer: 'wcmsStagedServer', targetDatabase: 'kickoffDockerLocalWcmsStaged', operation: 'IMPORT_SAMPLE' }
+                ] },
+                'nodics.commerce': { dataPackages: [
+                    { code: 'commerce:core-reference', classification: 'core', owner: 'nodics.commerce', required: true, trigger: 'ACTIVATION', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffDockerLocalCommerce', operation: 'IMPORT' },
+                    { code: 'commerce:sample-catalog', classification: 'sample', owner: 'nodics.commerce', required: false, trigger: 'USER', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffDockerLocalCommerce', operation: 'IMPORT_SAMPLE' }
+                ] },
+                'nodics.communication': { dataPackages: [
+                    { code: 'communication:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'communication', targetServer: 'platformServer', targetDatabase: 'kickoffDockerLocalPlatform', operation: 'IMPORT' },
+                    { code: 'communication:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'communication', targetServer: 'platformServer', targetDatabase: 'kickoffDockerLocalPlatform', operation: 'IMPORT_SAMPLE' }
+                ] }
+            } },
             backofficeRegistry: { clientEndpoints: {
                 platformServer: 'http://localhost:5300/', wcmsStagedServer: 'http://localhost:5312/',
                 wcmsOnlineServer: 'http://localhost:5314/', processServer: 'http://localhost:5330/',
