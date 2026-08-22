@@ -103,6 +103,36 @@ module.exports = function runtimeProperties(server) {
                         { code: 'agoraCommonData:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
                     ],
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
+                agoraapparel: { code: 'agoraapparel', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraApparelData', applicationCode: 'agora', siteCode: 'agoraApparelSite', baselineCode: 'agoraapparel',
+                    presentation: { title: 'Agora Apparel', kind: 'PROJECT', category: 'accelerator', order: 210,
+                        summary: 'Apparel storefront accelerator as a complete business-facing domain bundle.',
+                        requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                        activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
+                    dataPackages: [
+                        { code: 'agoraApparelData:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                        { code: 'agoraApparelData:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    ],
+                    target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
+                agoraelectronics: { code: 'agoraelectronics', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraElectronicsData', applicationCode: 'agora', siteCode: 'agoraElectronicsSite', baselineCode: 'agoraelectronics',
+                    presentation: { title: 'Agora Electronics', kind: 'PROJECT', category: 'accelerator', order: 220,
+                        summary: 'Electronics storefront accelerator as a complete business-facing domain bundle.',
+                        requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                        activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
+                    dataPackages: [
+                        { code: 'agoraElectronicsData:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                        { code: 'agoraElectronicsData:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    ],
+                    target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
+                agoratelco: { code: 'agoratelco', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraTelcoData', applicationCode: 'agora', siteCode: 'agoraTelcoSite', baselineCode: 'agoratelco',
+                    presentation: { title: 'Agora Telco', kind: 'PROJECT', category: 'accelerator', order: 230,
+                        summary: 'Telco storefront accelerator as a complete business-facing domain bundle.',
+                        requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                        activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
+                    dataPackages: [
+                        { code: 'agoraTelcoData:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                        { code: 'agoraTelcoData:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    ],
+                    target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 frameworkdocs: { code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs', applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
                     presentation: { title: 'Framework Documentation', kind: 'DOCUMENTATION', category: 'documentation', order: 300,
                         summary: 'Framework documentation content pack and Online delivery profile.',
@@ -158,6 +188,9 @@ module.exports = function runtimeProperties(server) {
                 nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
+                agoraapparel: { releaseCode: 'agoraApparelData:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
+                agoraelectronics: { releaseCode: 'agoraElectronicsData:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
+                agoratelco: { releaseCode: 'agoraTelcoData:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
                 frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
                 axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
                 kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
