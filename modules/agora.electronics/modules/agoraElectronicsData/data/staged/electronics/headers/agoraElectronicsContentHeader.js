@@ -13,10 +13,36 @@
 
 /**
  * @module modules/agora.electronics/modules/agoraElectronicsData/data/staged/electronics/headers/agoraElectronicsContentHeader
- * @description Defines Kickoff project-owned import header records for this data pack.
+ * @description Defines Kickoff project-owned import header records for this domain storefront content pack.
  * @layer data-header
  * @owner agoraElectronicsData
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-const entry = (schemaName, dataFilePrefix) => ({ options: { enabled: true, schemaName, operation: 'saveAll', dataFilePrefix }, query: { code: '$code' } }); module.exports = { catalog: { contentCatalog: entry('catalog', 'agoraElectronicsContentCatalogData') }, cms: { types: entry('cmsTypeCode', 'agoraElectronicsTypeCodeData'), renderers: entry('cmsTypeCode2Renderer', 'agoraElectronicsRendererData'), sites: entry('cmsSite', 'agoraElectronicsSiteData'), pages: entry('cmsPage', 'agoraElectronicsPageData'), routes: entry('cmsPageRoute', 'agoraElectronicsRouteData') } };
+const entry = (schemaName, dataFilePrefix, query = { code: '$code' }) => ({
+  options: { enabled: true, schemaName, operation: 'saveAll', dataFilePrefix },
+  query
+});
+
+module.exports = {
+  catalog: {
+    contentCatalog: entry('catalog', 'agoraElectronicsContentCatalogData')
+  },
+  media: {
+    sharedMediaReferences: entry('mediaReference', 'agoraElectronicsSharedMediaReferenceData', { code: '$code', tenant: '$tenant' })
+  },
+  cms: {
+    sharedTypes: entry('cmsTypeCode', 'agoraElectronicsSharedTypeCodeData'),
+    types: entry('cmsTypeCode', 'agoraElectronicsTypeCodeData'),
+    sharedRenderers: entry('cmsTypeCode2Renderer', 'agoraElectronicsSharedRendererData'),
+    renderers: entry('cmsTypeCode2Renderer', 'agoraElectronicsRendererData'),
+    sharedComponentGroups: entry('cmsComponentTypeGroup', 'agoraElectronicsSharedComponentTypeGroupData'),
+    sharedSlots: entry('cmsSlotDefinition', 'agoraElectronicsSharedSlotData'),
+    sharedTemplates: entry('cmsPageTemplate', 'agoraElectronicsSharedTemplateData'),
+    sites: entry('cmsSite', 'agoraElectronicsSiteData'),
+    sharedComponents: entry('cmsComponent', 'agoraElectronicsSharedComponentData'),
+    sharedComponentMedia: entry('cmsComponentMedia', 'agoraElectronicsSharedComponentMediaData', { componentMediaCode: '$componentMediaCode' }),
+    pages: entry('cmsPage', 'agoraElectronicsPageData'),
+    routes: entry('cmsPageRoute', 'agoraElectronicsRouteData')
+  }
+};

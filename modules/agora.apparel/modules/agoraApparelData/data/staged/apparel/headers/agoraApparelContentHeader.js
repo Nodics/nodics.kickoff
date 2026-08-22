@@ -13,11 +13,36 @@
 
 /**
  * @module modules/agora.apparel/modules/agoraApparelData/data/staged/apparel/headers/agoraApparelContentHeader
- * @description Defines Kickoff project-owned import header records for this data pack.
+ * @description Defines Kickoff project-owned import header records for this domain storefront content pack.
  * @layer data-header
  * @owner agoraApparelData
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-const entry = (schemaName, dataFilePrefix) => ({ options: { enabled: true, schemaName, operation: 'saveAll', dataFilePrefix }, query: { code: '$code' } });
-module.exports = { catalog: { contentCatalog: entry('catalog', 'agoraApparelContentCatalogData') }, cms: { types: entry('cmsTypeCode', 'agoraApparelTypeCodeData'), renderers: entry('cmsTypeCode2Renderer', 'agoraApparelRendererData'), sites: entry('cmsSite', 'agoraApparelSiteData'), pages: entry('cmsPage', 'agoraApparelPageData'), routes: entry('cmsPageRoute', 'agoraApparelRouteData') } };
+const entry = (schemaName, dataFilePrefix, query = { code: '$code' }) => ({
+  options: { enabled: true, schemaName, operation: 'saveAll', dataFilePrefix },
+  query
+});
+
+module.exports = {
+  catalog: {
+    contentCatalog: entry('catalog', 'agoraApparelContentCatalogData')
+  },
+  media: {
+    sharedMediaReferences: entry('mediaReference', 'agoraApparelSharedMediaReferenceData', { code: '$code', tenant: '$tenant' })
+  },
+  cms: {
+    sharedTypes: entry('cmsTypeCode', 'agoraApparelSharedTypeCodeData'),
+    types: entry('cmsTypeCode', 'agoraApparelTypeCodeData'),
+    sharedRenderers: entry('cmsTypeCode2Renderer', 'agoraApparelSharedRendererData'),
+    renderers: entry('cmsTypeCode2Renderer', 'agoraApparelRendererData'),
+    sharedComponentGroups: entry('cmsComponentTypeGroup', 'agoraApparelSharedComponentTypeGroupData'),
+    sharedSlots: entry('cmsSlotDefinition', 'agoraApparelSharedSlotData'),
+    sharedTemplates: entry('cmsPageTemplate', 'agoraApparelSharedTemplateData'),
+    sites: entry('cmsSite', 'agoraApparelSiteData'),
+    sharedComponents: entry('cmsComponent', 'agoraApparelSharedComponentData'),
+    sharedComponentMedia: entry('cmsComponentMedia', 'agoraApparelSharedComponentMediaData', { componentMediaCode: '$componentMediaCode' }),
+    pages: entry('cmsPage', 'agoraApparelPageData'),
+    routes: entry('cmsPageRoute', 'agoraApparelRouteData')
+  }
+};

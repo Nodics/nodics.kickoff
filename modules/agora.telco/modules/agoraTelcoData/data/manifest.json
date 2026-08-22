@@ -54,12 +54,20 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/telco/data/agoraTelcoContentCatalogData.js": "c719c0ba58055822376fce0df83fa4624ee16d2dbaf7295aff4d607263062cc4",
-        "staged/telco/data/agoraTelcoPageData.js": "d47d320f3c19377a4bb0d9438c616bf09fe0f9a7ca795cc312459db21d1bb32e",
+        "staged/telco/data/agoraTelcoPageData.js": "051b21deb883312301a7906a9071d27e36cdf7b0e22e295057c706c3211caf9b",
         "staged/telco/data/agoraTelcoRendererData.js": "0c00d940ed684ee97cc9cdbd800c1022035ebeea1a8211093e1482ea659fc9b0",
         "staged/telco/data/agoraTelcoRouteData.js": "6cf9f62c9dcd77cd68a96279b7c89f5756351bf766711556306bab7ab508e23c",
         "staged/telco/data/agoraTelcoSiteData.js": "28a69b49d38d2249eb5a71d7ded1d73ae611ebe1b594dc8046d8a2dbb2b49fef",
         "staged/telco/data/agoraTelcoTypeCodeData.js": "0b8593fe53abfa1919ee73de87f9a5089930e4df310df9a09f44f909a581f727",
-        "staged/telco/headers/agoraTelcoContentHeader.js": "5c78f9d350b45619832b8ceff8f717ef89397e878b3ecfb524a3a47500e7a34a"
+        "staged/telco/headers/agoraTelcoContentHeader.js": "7d715d54ad70284c2e57887aa41c09397d6204542b866140f40bb877e46bb7ce",
+        "staged/telco/data/agoraTelcoSharedTypeCodeData.js": "25d5f045d599d7416c438086007d8a92328921e7d8f60e1d2f072de91b0104df",
+        "staged/telco/data/agoraTelcoSharedRendererData.js": "e31a692d8f57b46e4e0e66f98dec3753d218f591b8f70f4e0bf37dfeb81ebbe5",
+        "staged/telco/data/agoraTelcoSharedComponentTypeGroupData.js": "2a6ed1f30e02658bd4ec48e4621b7f1282a7add8f9d64055a9795dede11872cf",
+        "staged/telco/data/agoraTelcoSharedSlotData.js": "e8f22b7e685a8d47d5516f1febdfff863ec998077a33d4233a9b258a38fcc0a0",
+        "staged/telco/data/agoraTelcoSharedTemplateData.js": "3ab2a83732951b58c0e2cd132734c3545af6c6162f59af02f8b8706d79700842",
+        "staged/telco/data/agoraTelcoSharedComponentData.js": "219c4ee1a3f654109e05b933c167c999ed86f7594c48ea6eb2e5d37c1032823d",
+        "staged/telco/data/agoraTelcoSharedComponentMediaData.js": "32c37c2725e5d9fdfb9cba9c23636167128a120e1124f89466b7171e6c0f17b9",
+        "staged/telco/data/agoraTelcoSharedMediaReferenceData.js": "3ebc782123adc1d8407ce5e1a1b3bf00e44d687bb25d994f7932c4c014ee69ca"
       }
     }
   }

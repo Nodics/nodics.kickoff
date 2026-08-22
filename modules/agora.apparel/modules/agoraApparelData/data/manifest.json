@@ -54,12 +54,20 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/apparel/data/agoraApparelContentCatalogData.js": "e6c1789768b394257a67bd62ae2cff71c5cdd9960f34aba0f9c2d0084bb0d299",
-        "staged/apparel/data/agoraApparelPageData.js": "e17ce463b875417792dff0672ee816d593d666038c96b1da7f346702442484ce",
+        "staged/apparel/data/agoraApparelPageData.js": "97c59cf333427103ced98b41f7f5443b1fdeb96f4f0ef0454a4186082b5b9dd9",
         "staged/apparel/data/agoraApparelRendererData.js": "bae0f6391181f7ab18426356f39bb10f19557110b2efae2705c298e03c28dcb1",
         "staged/apparel/data/agoraApparelRouteData.js": "0e4b15391ba3d99d20e0f9db32becbd8c82d34aa20a22590a80bfec6ba3f5fdd",
         "staged/apparel/data/agoraApparelSiteData.js": "a1ef6ff09b5f684f2ee624cda4ab17985fcc779d9c947a0de67a4ec4f22a46c7",
         "staged/apparel/data/agoraApparelTypeCodeData.js": "6a4878581443ab1270cafc49a7a608e263e00865ba13f9260fcd3d2a49c493b9",
-        "staged/apparel/headers/agoraApparelContentHeader.js": "95307de757aff3ff2f669057fa790b1aaf6da811feaae196c1ee0684d2d4d62d"
+        "staged/apparel/headers/agoraApparelContentHeader.js": "7ec681563ba0dba32f7a6ba137a2ff77a0bd9d5723cf55b093c595055e219355",
+        "staged/apparel/data/agoraApparelSharedTypeCodeData.js": "25d5f045d599d7416c438086007d8a92328921e7d8f60e1d2f072de91b0104df",
+        "staged/apparel/data/agoraApparelSharedRendererData.js": "e31a692d8f57b46e4e0e66f98dec3753d218f591b8f70f4e0bf37dfeb81ebbe5",
+        "staged/apparel/data/agoraApparelSharedComponentTypeGroupData.js": "2a6ed1f30e02658bd4ec48e4621b7f1282a7add8f9d64055a9795dede11872cf",
+        "staged/apparel/data/agoraApparelSharedSlotData.js": "e8f22b7e685a8d47d5516f1febdfff863ec998077a33d4233a9b258a38fcc0a0",
+        "staged/apparel/data/agoraApparelSharedTemplateData.js": "3ab2a83732951b58c0e2cd132734c3545af6c6162f59af02f8b8706d79700842",
+        "staged/apparel/data/agoraApparelSharedComponentData.js": "7b73f61e2343b7e7e95ede4d9875618ebcb474cb69244ee65ae304c768174e1c",
+        "staged/apparel/data/agoraApparelSharedComponentMediaData.js": "5be071c811eed44e403c0240a6888336a71dc61117b616ba33bac95ba3da2732",
+        "staged/apparel/data/agoraApparelSharedMediaReferenceData.js": "3ebc782123adc1d8407ce5e1a1b3bf00e44d687bb25d994f7932c4c014ee69ca"
       }
     }
   }
