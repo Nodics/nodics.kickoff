@@ -35,13 +35,13 @@ module.exports = {
                 owner: 'nexusWebData',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
-                baselineCode: 'nexus',
+                baselineCode: 'nexusprofessionalcopy',
                 presentation: {
                     title: 'Nexus Corporate',
                     kind: 'PROJECT',
                     category: 'accelerator',
                     order: 100,
-                    summary: 'Corporate website accelerator published from WCMS Staged to Online.',
+                    summary: 'Corporate website accelerator published from the latest qualified WCMS Staged baseline to Online.',
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
                 },

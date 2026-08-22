@@ -16,7 +16,8 @@ const agoraDomains = require('../../../../config/agora-domain-composition').reso
 module.exports = {
     activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
     runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' },
-    apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true }, commercePublicationIngestion: { enabled: true } } },
+    apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
+        commerceCustomer: { enabled: true }, commercePublicationIngestion: { enabled: true } } },
     search: {
         product: { options: { enabled: true, fallback: false, engine: 'elastic' } },
         commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },
@@ -41,6 +42,8 @@ module.exports = {
             defaultCurrency: 'USD'
         }
     },
+    data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
+        allowedDestinationRoles: ['COMMERCE'] } },
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerce' } } } },
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {
