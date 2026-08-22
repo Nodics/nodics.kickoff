@@ -1,12 +1,12 @@
 {
-  "contractVersion": 2,
+  "contractVersion": 0,
   "module": "agoraElectronicsData",
   "sections": {
     "agoraElectronicsCommerceCatalog": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "0.0.0",
       "description": "Agora Electronics commerce catalog",
       "owningDomain": "agora.electronics",
       "lifecycle": "PUBLISHABLE",
@@ -37,7 +37,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "0.0.0",
       "description": "Agora Electronics content and renderer catalog",
       "owningDomain": "agora.electronics.wcms",
       "lifecycle": "PUBLISHABLE",

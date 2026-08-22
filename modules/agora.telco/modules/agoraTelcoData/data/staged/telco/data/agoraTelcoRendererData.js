@@ -20,4 +20,4 @@
  */
 
 /** @description Logical Telco renderer keys. Executable React code belongs to nodics.agora. */
-module.exports = { record0: { code: 'agoraTelcoProductCardType', renderer: 'agora.telco.product-card', contractVersion: 1, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraTelcoHomePageType', renderer: 'agora.telco.page.home', contractVersion: 1, channels: ['web'], deprecated: false, active: true } };
+module.exports = { record0: { code: 'agoraTelcoProductCardType', renderer: 'agora.telco.product-card', contractVersion: 0, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraTelcoHomePageType', renderer: 'agora.telco.page.home', contractVersion: 0, channels: ['web'], deprecated: false, active: true } };

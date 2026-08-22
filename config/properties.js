@@ -56,8 +56,8 @@ module.exports = Object.freeze({
             displayName: 'Nodics Kickoff',
             category: 'project',
             icon: 'content',
-            contractVersion: 1,
-            minimumClientContractVersion: 1,
+            contractVersion: 0,
+            minimumClientContractVersion: 0,
             roles: Object.freeze(['UI_COMPOSITION_PROVIDER']),
             documentation: Object.freeze([
                 Object.freeze({

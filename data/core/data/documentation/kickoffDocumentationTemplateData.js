@@ -17,7 +17,7 @@ module.exports = {
     "code": "kickoffDocumentationArticleTemplate",
     "name": "Nodics Kickoff Documentation Article",
     "renderer": "documentation.template.article",
-    "contractVersion": 2,
+    "contractVersion": 0,
     "slots": [
       "kickoffDocumentationNavigationSlot",
       "kickoffDocumentationArticleSlot"

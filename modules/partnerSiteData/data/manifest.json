@@ -1,12 +1,12 @@
 {
-  "contractVersion": 2,
+  "contractVersion": 0,
   "module": "partnerSiteData",
   "sections": {
     "partnerNexusCustomization": {
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "1.0.5",
+      "version": "0.0.0",
       "description": "Later-loaded partner-owned Nexus website customization",
       "owningDomain": "partner.nexus.wcms",
       "lifecycle": "PUBLISHABLE",

@@ -26,7 +26,7 @@ module.exports = {
   "record0": {
     "code": "nexusCorporateHomePageType",
     "renderer": "nexus.page.home",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -35,7 +35,7 @@ module.exports = {
   "record1": {
     "code": "nexusCorporateStandardPageType",
     "renderer": "nexus.page.standard",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -44,7 +44,7 @@ module.exports = {
   "record2": {
     "code": "nexusPageHeroType",
     "renderer": "nexus.component.page-hero",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -53,7 +53,7 @@ module.exports = {
   "record3": {
     "code": "nexusBannerCarouselType",
     "renderer": "nexus.component.banner-carousel",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -62,7 +62,7 @@ module.exports = {
   "record4": {
     "code": "nexusBannerSlideType",
     "renderer": "nexus.component.banner-slide",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -71,7 +71,7 @@ module.exports = {
   "record5": {
     "code": "nexusContentSectionType",
     "renderer": "nexus.component.content",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -80,7 +80,7 @@ module.exports = {
   "record6": {
     "code": "nexusCardGridType",
     "renderer": "nexus.component.cards",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -89,7 +89,7 @@ module.exports = {
   "record7": {
     "code": "nexusTechnologyType",
     "renderer": "nexus.component.technology",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -98,7 +98,7 @@ module.exports = {
   "record8": {
     "code": "nexusGithubType",
     "renderer": "nexus.component.github",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -107,7 +107,7 @@ module.exports = {
   "record9": {
     "code": "nexusTestimonialsType",
     "renderer": "nexus.component.testimonials",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -116,7 +116,7 @@ module.exports = {
   "record10": {
     "code": "nexusNewsCarouselType",
     "renderer": "nexus.component.news-carousel",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -125,7 +125,7 @@ module.exports = {
   "record11": {
     "code": "nexusBlogCarouselType",
     "renderer": "nexus.component.blog-carousel",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -134,7 +134,7 @@ module.exports = {
   "record12": {
     "code": "nexusContactType",
     "renderer": "nexus.component.contact",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -143,7 +143,7 @@ module.exports = {
   "record13": {
     "code": "nexusEditorialListingType",
     "renderer": "nexus.editorial.listing",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -152,7 +152,7 @@ module.exports = {
   "record14": {
     "code": "nexusEditorialCardType",
     "renderer": "nexus.editorial.card",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -161,7 +161,7 @@ module.exports = {
   "record15": {
     "code": "nexusEditorialDetailType",
     "renderer": "nexus.editorial.detail",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -170,7 +170,7 @@ module.exports = {
   "record16": {
     "code": "nexusEditorialFeaturedType",
     "renderer": "nexus.editorial.featured",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -179,7 +179,7 @@ module.exports = {
   "record17": {
     "code": "nexusEditorialLatestType",
     "renderer": "nexus.editorial.latest",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -188,7 +188,7 @@ module.exports = {
   "record18": {
     "code": "nexusEditorialTaxonomyType",
     "renderer": "nexus.editorial.taxonomy",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -197,7 +197,7 @@ module.exports = {
   "record19": {
     "code": "nexusEditorialAuthorType",
     "renderer": "nexus.editorial.author",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -206,7 +206,7 @@ module.exports = {
   "record20": {
     "code": "nexusEditorialRelatedType",
     "renderer": "nexus.editorial.related",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],
@@ -215,7 +215,7 @@ module.exports = {
   "record21": {
     "code": "nexusEditorialSeriesType",
     "renderer": "nexus.editorial.series",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "channels": [
       "web"
     ],

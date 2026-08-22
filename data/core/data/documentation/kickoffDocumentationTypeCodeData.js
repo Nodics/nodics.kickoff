@@ -16,19 +16,19 @@ module.exports = {
   "record0": {
     "code": "kickoffDocumentationArticlePageType",
     "kind": "PAGE",
-    "contractVersion": 2,
+    "contractVersion": 0,
     "active": true
   },
   "record1": {
     "code": "kickoffDocumentationArticleComponentType",
     "kind": "COMPONENT",
-    "contractVersion": 2,
+    "contractVersion": 0,
     "active": true
   },
   "record2": {
     "code": "kickoffDocumentationNavigationComponentType",
     "kind": "COMPONENT",
-    "contractVersion": 2,
+    "contractVersion": 0,
     "active": true
   }
 };

@@ -20,4 +20,4 @@
  */
 
 /** @description Logical Electronics renderer keys. Executable React code belongs to nodics.agora. */
-module.exports = { record0: { code: 'agoraElectronicsProductCardType', renderer: 'agora.electronics.product-card', contractVersion: 1, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraElectronicsHomePageType', renderer: 'agora.electronics.page.home', contractVersion: 1, channels: ['web'], deprecated: false, active: true } };
+module.exports = { record0: { code: 'agoraElectronicsProductCardType', renderer: 'agora.electronics.product-card', contractVersion: 0, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraElectronicsHomePageType', renderer: 'agora.electronics.page.home', contractVersion: 0, channels: ['web'], deprecated: false, active: true } };

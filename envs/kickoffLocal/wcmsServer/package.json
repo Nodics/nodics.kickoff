@@ -1,6 +1,6 @@
 {
   "name": "wcmsServerRetired",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "index": "1001.12",
   "private": true,
   "main": "nodics.js",

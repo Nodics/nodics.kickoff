@@ -1,6 +1,6 @@
 {
   "name": "commerceStagedServer",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "index": "1001.18",
   "private": true,
   "main": "nodics.js",

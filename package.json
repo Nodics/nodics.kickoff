@@ -1,6 +1,6 @@
 {
   "name": "nodics.kickoff",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "index": "1000.00",
   "private": true,
   "description": "Reference customer project for running Nodics locally and demonstrating framework customization.",

@@ -153,14 +153,14 @@ module.exports = function runtimeProperties(server) {
             database: database('kickoffDockerLocalWcmsStaged'),
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-staged' } } } },
             cms: { publication: { enabled: true, runtimeRole: 'STAGED', baselines: {
-                axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-                nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '1.0.2', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '1.0.9', dataType: 'core', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
-                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
-                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.4.1', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
-                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.8.1', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
+                axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
+                nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
+                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
+                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
+                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
                 workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 target: { moduleName: 'cms', connectionName: 'cmsOnline', connectionType: 'abstract' } } },

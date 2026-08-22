@@ -27,7 +27,7 @@ module.exports = {
     code: 'agoraStorefrontPageTemplate',
     name: 'Nodics Agora Storefront Page',
     renderer: 'agora.template.storefront',
-    contractVersion: 1,
+    contractVersion: 0,
     slots: ['agoraMainSlot'],
     active: true
   }

@@ -1,7 +1,7 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.8.1",
-  "contractVersion": 1,
+  "version": "0.0.0",
+  "contractVersion": 0,
   "title": "Nodics Kickoff",
   "documents": [
     {

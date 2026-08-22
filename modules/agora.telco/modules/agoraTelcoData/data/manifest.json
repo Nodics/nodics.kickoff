@@ -1,12 +1,12 @@
 {
-  "contractVersion": 2,
+  "contractVersion": 0,
   "module": "agoraTelcoData",
   "sections": {
     "agoraTelcoCommerceCatalog": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "0.0.0",
       "description": "Agora Telco commerce catalog",
       "owningDomain": "agora.telco",
       "lifecycle": "PUBLISHABLE",
@@ -38,7 +38,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "0.0.0",
       "description": "Agora Telco content and renderer catalog",
       "owningDomain": "agora.telco.wcms",
       "lifecycle": "PUBLISHABLE",

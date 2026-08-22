@@ -1,12 +1,12 @@
 {
-  "contractVersion": 2,
+  "contractVersion": 0,
   "module": "nodics.kickoff",
   "sections": {
     "documentation": {
       "kind": "CONTENT_PACK",
       "contentPath": "core",
       "pack": "nodics.kickoff",
-      "version": "0.8.1",
+      "version": "0.0.0",
       "owningDomain": "kickoff.documentation",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",

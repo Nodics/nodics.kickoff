@@ -20,4 +20,4 @@
  */
 
 /** @description Logical Apparel renderer keys. Executable React code belongs to nodics.agora. */
-module.exports = { record0: { code: 'agoraApparelProductCardType', renderer: 'agora.apparel.product-card', contractVersion: 1, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraApparelHomePageType', renderer: 'agora.apparel.page.home', contractVersion: 1, channels: ['web'], deprecated: false, active: true } };
+module.exports = { record0: { code: 'agoraApparelProductCardType', renderer: 'agora.apparel.product-card', contractVersion: 0, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraApparelHomePageType', renderer: 'agora.apparel.page.home', contractVersion: 0, channels: ['web'], deprecated: false, active: true } };

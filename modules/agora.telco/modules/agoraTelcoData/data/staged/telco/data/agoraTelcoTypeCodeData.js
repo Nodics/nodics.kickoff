@@ -19,4 +19,4 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-module.exports = { record0: { code: 'agoraTelcoHomePageType', kind: 'PAGE', contractVersion: 1, active: true }, record1: { code: 'agoraTelcoProductCardType', kind: 'COMPONENT', contractVersion: 1, active: true } };
+module.exports = { record0: { code: 'agoraTelcoHomePageType', kind: 'PAGE', contractVersion: 0, active: true }, record1: { code: 'agoraTelcoProductCardType', kind: 'COMPONENT', contractVersion: 0, active: true } };

@@ -1,12 +1,12 @@
 {
-  "contractVersion": 2,
+  "contractVersion": 0,
   "module": "agoraApparelData",
   "sections": {
     "agoraApparelCommerceCatalog": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.2",
+      "version": "0.0.0",
       "description": "Agora Apparel commerce catalog",
       "owningDomain": "agora.apparel",
       "lifecycle": "PUBLISHABLE",
@@ -38,7 +38,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.0",
+      "version": "0.0.0",
       "description": "Agora Apparel content and renderer catalog",
       "owningDomain": "agora.apparel.wcms",
       "lifecycle": "PUBLISHABLE",

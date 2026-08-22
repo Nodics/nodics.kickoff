@@ -1,6 +1,6 @@
 {
   "name": "processServer",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "index": "1001.14",
   "private": true,
   "main": "nodics.js",

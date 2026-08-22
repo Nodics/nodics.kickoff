@@ -27,7 +27,7 @@ module.exports = {
     "code": "nexusCorporatePageTemplate",
     "name": "Nodics Nexus Corporate Page",
     "renderer": "nexus.template.corporate",
-    "contractVersion": 1,
+    "contractVersion": 0,
     "slots": [
       "nexusCorporateMainSlot"
     ],
