@@ -3781,5 +3781,146 @@ module.exports = Object.freeze({
         "recovery note"
       ]
     }
+  }  ,
+  "record80": {
+    "code": "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-connected-plans",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraTelcoHomeHeroExperience",
+    "mediaCode": "agora-owned-telco-hero-connected-plans",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 80,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": [
+        "original filename",
+        "source system",
+        "checksum",
+        "intake run"
+      ],
+      "approvalChecklist": [
+        "license type",
+        "asset owner",
+        "reviewer",
+        "approval timestamp"
+      ],
+      "activationChecklist": [
+        "target type",
+        "target code",
+        "usage scope",
+        "activation revision"
+      ],
+      "rollbackChecklist": [
+        "previous reference",
+        "deactivation reason",
+        "audit trail",
+        "recovery note"
+      ]
+    }
+  }  ,
+  "record81": {
+    "code": "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-plan-finder",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraTelcoHomeHeroExperience",
+    "mediaCode": "agora-owned-telco-hero-plan-finder",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 81,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": [
+        "original filename",
+        "source system",
+        "checksum",
+        "intake run"
+      ],
+      "approvalChecklist": [
+        "license type",
+        "asset owner",
+        "reviewer",
+        "approval timestamp"
+      ],
+      "activationChecklist": [
+        "target type",
+        "target code",
+        "usage scope",
+        "activation revision"
+      ],
+      "rollbackChecklist": [
+        "previous reference",
+        "deactivation reason",
+        "audit trail",
+        "recovery note"
+      ]
+    }
+  }  ,
+  "record82": {
+    "code": "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-bundle-network",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraTelcoHomeHeroExperience",
+    "mediaCode": "agora-owned-telco-hero-bundle-network",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 82,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": [
+        "original filename",
+        "source system",
+        "checksum",
+        "intake run"
+      ],
+      "approvalChecklist": [
+        "license type",
+        "asset owner",
+        "reviewer",
+        "approval timestamp"
+      ],
+      "activationChecklist": [
+        "target type",
+        "target code",
+        "usage scope",
+        "activation revision"
+      ],
+      "rollbackChecklist": [
+        "previous reference",
+        "deactivation reason",
+        "audit trail",
+        "recovery note"
+      ]
+    }
   }
 });

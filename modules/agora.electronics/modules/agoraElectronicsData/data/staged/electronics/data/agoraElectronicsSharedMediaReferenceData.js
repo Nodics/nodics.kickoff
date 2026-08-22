@@ -3781,5 +3781,146 @@ module.exports = Object.freeze({
         "recovery note"
       ]
     }
+  }  ,
+  "record80": {
+    "code": "agoraElectronicsHomeHeroExperience-agora-owned-electronics-hero-connected-work",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraElectronicsHomeHeroExperience",
+    "mediaCode": "agora-owned-electronics-hero-connected-work",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 80,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": [
+        "original filename",
+        "source system",
+        "checksum",
+        "intake run"
+      ],
+      "approvalChecklist": [
+        "license type",
+        "asset owner",
+        "reviewer",
+        "approval timestamp"
+      ],
+      "activationChecklist": [
+        "target type",
+        "target code",
+        "usage scope",
+        "activation revision"
+      ],
+      "rollbackChecklist": [
+        "previous reference",
+        "deactivation reason",
+        "audit trail",
+        "recovery note"
+      ]
+    }
+  }  ,
+  "record81": {
+    "code": "agoraElectronicsHomeHeroExperience-agora-owned-electronics-hero-device-stack",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraElectronicsHomeHeroExperience",
+    "mediaCode": "agora-owned-electronics-hero-device-stack",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 81,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": [
+        "original filename",
+        "source system",
+        "checksum",
+        "intake run"
+      ],
+      "approvalChecklist": [
+        "license type",
+        "asset owner",
+        "reviewer",
+        "approval timestamp"
+      ],
+      "activationChecklist": [
+        "target type",
+        "target code",
+        "usage scope",
+        "activation revision"
+      ],
+      "rollbackChecklist": [
+        "previous reference",
+        "deactivation reason",
+        "audit trail",
+        "recovery note"
+      ]
+    }
+  }  ,
+  "record82": {
+    "code": "agoraElectronicsHomeHeroExperience-agora-owned-electronics-hero-smart-home",
+    "tenant": "default",
+    "ownerModule": "cms",
+    "ownerSchema": "cmsComponent",
+    "ownerCode": "agoraElectronicsHomeHeroExperience",
+    "mediaCode": "agora-owned-electronics-hero-smart-home",
+    "relationType": "COMPONENT_MEDIA",
+    "position": 82,
+    "status": "INACTIVE",
+    "revision": 1,
+    "active": true,
+    "evidence": {
+      "source": "NODICS_SAMPLE_DATA",
+      "rightsStatus": "REPLACEMENT_REQUIRED",
+      "approvalStatus": "PENDING_ASSET_INTAKE",
+      "targetType": "STOREFRONT_MEDIA",
+      "approvedReferenceSiteAsset": false,
+      "checksumRequired": true,
+      "reviewerRequired": true,
+      "productionUseAllowed": false,
+      "requiredProof": [
+        "original filename",
+        "source system",
+        "checksum",
+        "intake run"
+      ],
+      "approvalChecklist": [
+        "license type",
+        "asset owner",
+        "reviewer",
+        "approval timestamp"
+      ],
+      "activationChecklist": [
+        "target type",
+        "target code",
+        "usage scope",
+        "activation revision"
+      ],
+      "rollbackChecklist": [
+        "previous reference",
+        "deactivation reason",
+        "audit trail",
+        "recovery note"
+      ]
+    }
   }
 });

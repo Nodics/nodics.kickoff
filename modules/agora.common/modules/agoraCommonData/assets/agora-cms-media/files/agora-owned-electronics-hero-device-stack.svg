@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1600" role="img" aria-label="Electronics device stack hero">
+  <defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9f0dc"/><stop offset="1" stop-color="#eef3f4"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c100"/><stop offset="1" stop-color="#1c1f27"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="40" stdDeviation="42" flood-opacity="0.2"/></filter></defs>
+  <rect width="1400" height="1600" fill="url(#a)"/>
+  <path d="M140 260h1120v1080H140z" fill="#fff" opacity="0.42"/>
+  <g filter="url(#s)">
+    <rect x="380" y="330" width="610" height="850" rx="64" fill="#1c1f27"/>
+    <rect x="430" y="390" width="510" height="670" rx="36" fill="#f8fbfd"/>
+    <circle cx="685" cy="1108" r="28" fill="#f6c100"/>
+    <rect x="515" y="500" width="340" height="44" rx="22" fill="#1c1f27" opacity="0.75"/>
+    <rect x="515" y="586" width="250" height="28" rx="14" fill="#1c1f27" opacity="0.35"/>
+    <rect x="515" y="650" width="340" height="220" rx="34" fill="url(#b)" opacity="0.84"/>
+  </g>
+  <g filter="url(#s)">
+    <rect x="180" y="870" width="430" height="250" rx="36" fill="#ffffff"/>
+    <rect x="225" y="930" width="260" height="34" rx="17" fill="#1c1f27" opacity="0.62"/>
+    <rect x="225" y="1000" width="310" height="26" rx="13" fill="#f6c100"/>
+  </g>
+</svg>

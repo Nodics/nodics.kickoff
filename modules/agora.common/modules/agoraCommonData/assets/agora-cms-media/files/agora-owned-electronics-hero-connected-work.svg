@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1600" role="img" aria-label="Connected electronics workspace hero">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#dfe7ec"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d2228"/><stop offset="1" stop-color="#48515b"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c100"/><stop offset="1" stop-color="#b88a00"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="34" stdDeviation="44" flood-color="#1c1f27" flood-opacity="0.18"/></filter>
+  </defs>
+  <rect width="1400" height="1600" fill="url(#bg)"/>
+  <circle cx="1040" cy="300" r="260" fill="#f6c100" opacity="0.18"/>
+  <circle cx="320" cy="1240" r="420" fill="#1c1f27" opacity="0.06"/>
+  <g filter="url(#shadow)">
+    <rect x="290" y="310" width="820" height="520" rx="46" fill="url(#screen)"/>
+    <rect x="338" y="368" width="724" height="410" rx="28" fill="#f8fbfd"/>
+    <path d="M405 470h260v38H405zm0 80h420v28H405zm0 58h330v28H405z" fill="#1c1f27" opacity="0.72"/>
+    <path d="M820 462h150v150H820z" fill="url(#gold)" opacity="0.9"/>
+    <path d="M820 650h150v42H820z" fill="#1c1f27" opacity="0.28"/>
+    <rect x="610" y="830" width="180" height="150" rx="20" fill="#2d333a"/>
+    <rect x="450" y="970" width="500" height="54" rx="27" fill="#1c1f27"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="860" y="690" width="260" height="500" rx="48" fill="#11161b"/>
+    <rect x="890" y="745" width="200" height="350" rx="24" fill="#f7f2e6"/>
+    <circle cx="990" cy="1136" r="20" fill="#f6c100"/>
+  </g>
+  <path d="M250 1250c170-120 340-120 510 0s340 120 510 0" fill="none" stroke="#f6c100" stroke-width="18" stroke-linecap="round" opacity="0.72"/>
+</svg>
