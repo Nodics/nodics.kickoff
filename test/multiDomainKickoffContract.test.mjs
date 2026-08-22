@@ -56,9 +56,15 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
   for (const definition of definitions) {
     const packRoot = path.join(root, 'modules', definition.group, 'modules', definition.pack);
     const manifest = require(path.join(packRoot, 'data', 'manifest.json'));
-    assert.equal(manifest.contractVersion, 2); assert.equal(manifest.module, definition.pack);
+    assert.equal(manifest.contractVersion, 0); assert.equal(manifest.module, definition.pack);
     const sections = Object.values(manifest.sections);
     assert.deepEqual(new Set(sections.map(section => section.destinationRole)), new Set(['COMMERCE_STAGED', 'WCMS_STAGED']));
+    const wcmsSection = sections.find(section => section.destinationRole === 'WCMS_STAGED');
+    const commerceSection = sections.find(section => section.destinationRole === 'COMMERCE_STAGED');
+    assert(Object.keys(wcmsSection.files).some(relative => /SharedComponentData/.test(relative)),
+      `${definition.pack} shared CMS component records must publish through the WCMS release`);
+    assert(!Object.keys(commerceSection.files).some(relative => /SharedComponentData/.test(relative)),
+      `${definition.pack} Commerce release must not own shared CMS component records`);
     for (const section of sections) for (const [relative, expected] of Object.entries(section.files)) {
       assert.equal(digest(path.join(packRoot, 'data', relative)), expected, `${definition.pack}:${relative}`);
     }

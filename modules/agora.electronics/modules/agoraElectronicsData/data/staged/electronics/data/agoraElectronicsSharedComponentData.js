@@ -238,7 +238,7 @@ module.exports = {
     properties: {
       slides: [
         { mediaCode: 'agora-owned-home-hero-summer-edit', eyebrow: 'Connected 2026 Edit', title: 'Smart devices for connected work and life.', primaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' }, secondaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' } },
-        { mediaCode: 'agora-owned-home-hero-signature-style', eyebrow: 'Find Your Signature Setup', title: 'Curated layers, edited for everyday elegance.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
+        { mediaCode: 'agora-owned-home-hero-signature-style', eyebrow: 'Find Your Signature Setup', title: 'Smart devices, connected for everyday momentum.', primaryAction: { label: 'Shop Sale', collectionCode: 'agoraSale' }, secondaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' } },
         { mediaCode: 'agora-owned-home-hero-layered-edit', eyebrow: 'Build Your Smart Ecosystem', title: 'Connected devices that work beautifully together.', primaryAction: { label: 'Shop New', collectionCode: 'agoraNewArrivals' }, secondaryAction: { label: 'Explore Collection', collectionCode: 'agoraElectronicsComputing' } }
       ]
     }
@@ -332,7 +332,7 @@ module.exports = {
       heading: 'Browse our top trending',
       resolverKey: 'commerce.product.discovery',
       queryIntent: 'BEST_SELLING',
-      productCodes: ['agoraSilkScarf', 'agoraLinenCampShirt', 'agoraTailoredChino', 'agoraRelaxedTrouser', 'agoraCanvasBelt', 'agoraWoolCap', 'agoraOxfordShirt', 'agoraLeatherTote'],
+      productCodes: ['agoraElectronicsNovaPhone', 'agoraElectronicsAirLaptop'],
       pageSize: 8
     }
   },

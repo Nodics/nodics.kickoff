@@ -332,7 +332,7 @@ module.exports = {
       heading: 'Browse our top trending',
       resolverKey: 'commerce.product.discovery',
       queryIntent: 'BEST_SELLING',
-      productCodes: ['agoraSilkScarf', 'agoraLinenCampShirt', 'agoraTailoredChino', 'agoraRelaxedTrouser', 'agoraCanvasBelt', 'agoraWoolCap', 'agoraOxfordShirt', 'agoraLeatherTote'],
+      productCodes: ['agoraTelcoUnlimitedPostpaid', 'agoraTelcoFlexiPrepaid'],
       pageSize: 8
     }
   },
