@@ -55,10 +55,10 @@
       "files": {
         "staged/apparel/data/agoraApparelContentCatalogData.js": "e6c1789768b394257a67bd62ae2cff71c5cdd9960f34aba0f9c2d0084bb0d299",
         "staged/apparel/data/agoraApparelPageData.js": "e17ce463b875417792dff0672ee816d593d666038c96b1da7f346702442484ce",
-        "staged/apparel/data/agoraApparelRendererData.js": "183de035ba4566f479171eeced12c3331c23045a907d13ea7f619c2ebb7bca88",
+        "staged/apparel/data/agoraApparelRendererData.js": "bae0f6391181f7ab18426356f39bb10f19557110b2efae2705c298e03c28dcb1",
         "staged/apparel/data/agoraApparelRouteData.js": "6386d5f87da0ade8208f9de1ef3a4afd4a142d24ce4e5aaf3be74bb10391747e",
         "staged/apparel/data/agoraApparelSiteData.js": "a1ef6ff09b5f684f2ee624cda4ab17985fcc779d9c947a0de67a4ec4f22a46c7",
-        "staged/apparel/data/agoraApparelTypeCodeData.js": "1d22f8ce0432b22b777fba861f2433e929cbded23c8313fc3bcf753d09817c5f",
+        "staged/apparel/data/agoraApparelTypeCodeData.js": "6a4878581443ab1270cafc49a7a608e263e00865ba13f9260fcd3d2a49c493b9",
         "staged/apparel/headers/agoraApparelContentHeader.js": "95307de757aff3ff2f669057fa790b1aaf6da811feaae196c1ee0684d2d4d62d"
       }
     }
