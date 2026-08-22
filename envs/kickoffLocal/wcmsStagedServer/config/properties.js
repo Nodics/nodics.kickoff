@@ -62,6 +62,10 @@ module.exports = {
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '1.0.2',
             dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+        nexusincremental: { releaseCode: 'nexusWebData:nexusCorporateIncrementalProof', releaseVersion: '1.0.3',
+            dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+        nexusprofessionalcopy: { releaseCode: 'nexusWebData:nexusCorporateProfessionalCopyUpdate', releaseVersion: '1.0.4',
+            dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '1.0.9', dataType: 'core',
             rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
         frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1',
@@ -75,7 +79,9 @@ module.exports = {
         targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
         target: { moduleName: 'cms', connectionName: 'cmsOnline', connectionType: 'abstract' }
     } },
-    editorial: { workflow: { processBaseUrl: 'http://127.0.0.1:4330' } },
+    editorial: { workflow: { processBaseUrl: 'http://127.0.0.1:4330' },
+        publication: { runtimeRole: 'STAGED', targetTransportProvider: 'DefaultEditorialPublicationModuleTransportService',
+            target: { moduleName: 'editorial', connectionName: 'cmsOnline', connectionType: 'abstract' } } },
     servers: {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4312, httpsHost: '127.0.0.1', httpsPort: 4313 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4312, httpsHost: 'localhost', httpsPort: 4313 } },

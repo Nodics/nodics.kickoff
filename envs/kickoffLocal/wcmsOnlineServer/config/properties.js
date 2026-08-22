@@ -44,6 +44,7 @@ module.exports = {
     } } } },
     cms: { publication: { enabled: true, runtimeRole: 'ONLINE', targetTransportProvider: null },
         delivery: { mediaDeliveryBaseUrl: 'http://127.0.0.1:4314/nodics/media/v0/content' } },
+    editorial: { publication: { runtimeRole: 'ONLINE', targetTransportProvider: null } },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: [] } },
     apiExposure: { categories: {

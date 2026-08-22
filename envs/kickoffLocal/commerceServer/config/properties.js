@@ -32,6 +32,15 @@ module.exports = {
             mediaDeliveryBaseUrl: 'http://127.0.0.1:4314/nodics/media/v0/content'
         }
     },
+    cart: {
+        customerApi: {
+            defaultStoreCode: 'agoraMainStore',
+            defaultChannelCode: 'web',
+            defaultLocale: 'en',
+            defaultJurisdiction: 'AE',
+            defaultCurrency: 'USD'
+        }
+    },
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerce' } } } },
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {

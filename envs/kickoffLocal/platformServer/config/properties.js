@@ -23,6 +23,10 @@ module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
         'http://localhost:3200', 'http://127.0.0.1:3200',
         'http://localhost:3300', 'http://127.0.0.1:3300'] } },
+    apiExposure: { categories: { dataExport: { enabled: true } } },
+    backofficeRegistration: {
+        connectionName: 'default'
+    },
     backofficeApplicationInitialization: {
         profiles: {
             nexus: {
@@ -50,6 +54,24 @@ module.exports = {
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusecosystemrepair',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            nexusincremental: {
+                code: 'nexusincremental',
+                type: 'WEBSITE_BUNDLE_UPDATE',
+                owner: 'nexusWebData',
+                applicationCode: 'nexus',
+                siteCode: 'nexusCorporateSite',
+                baselineCode: 'nexusincremental',
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+            },
+            nexusprofessionalcopy: {
+                code: 'nexusprofessionalcopy',
+                type: 'WEBSITE_BUNDLE_UPDATE',
+                owner: 'nexusWebData',
+                applicationCode: 'nexus',
+                siteCode: 'nexusCorporateSite',
+                baselineCode: 'nexusprofessionalcopy',
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             agora: {

@@ -40,7 +40,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "description": "Agora discovery Product catalog source",
       "owningDomain": "agora.product",
       "lifecycle": "PUBLISHABLE",
@@ -58,7 +58,7 @@
         "staged/product/data/agoraCategoryData.js": "fe25399e4663017b720cc584688a9da2bc68b10401dd174b3e683002c9edbd0b",
         "staged/product/data/agoraCategoryLocalizationData.js": "a8c4c7d09f7fb7d069d329f21e8379ee3792c1444302dab2e84ad4078faf65b2",
         "staged/product/data/agoraProductData.js": "59890e5d69c9b22ee78f425cb9408c0fd291b560c4817e1d09e4143f1042ca89",
-        "staged/product/data/agoraProductLocalizationData.js": "c9a4c4462dc2936861a38b3fb8a88cfb6deab52b54664fd0d6ce562ec7183ea9",
+        "staged/product/data/agoraProductLocalizationData.js": "cecb509d5a525a2792b1da703fbefcbc1303f5c6c8c98b1e15255142e8b26f18",
         "staged/product/data/agoraProductVariantData.js": "44090ea7be6ac597f7f498410ea09d2a3ad7f187e1cf67b4f65d96b7746f0d52",
         "staged/product/data/agoraProductVariantLocalizationData.js": "9ecef52d310fbff136f1cef8b15b88fc60c78aa4ce8445f17ced39e9bc52ec19",
         "staged/product/headers/agoraProductCatalogHeader.js": "4d04702b521ad3da8b2ecd20bc9857ff83e52956c8513ca16cfbd91a65b97653"
@@ -117,7 +117,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "staged",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "description": "Agora discovery Inventory source",
       "owningDomain": "agora.inventory",
       "lifecycle": "PUBLISHABLE",
@@ -132,9 +132,10 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
+        "staged/inventory/data/agoraStoreData.js": "6519158368ca2b952686c579e72c604d116343a9080370d8a771c772681f68d1",
         "staged/inventory/data/agoraInventoryBalanceData.js": "2813f1fc467c234c5a453c4bc8000bf4ec77bb59e3450d8cef82f5deca13bee1",
         "staged/inventory/data/agoraWarehouseData.js": "0942eabe79fd303e60849c37a83c202cc7f203875908ae86b5feb1dea8b9e7aa",
-        "staged/inventory/headers/agoraInventoryHeader.js": "1b6583ab9236b497e7c2ac13be25353de2c9df392ab25631f4c2a06253b74f38"
+        "staged/inventory/headers/agoraInventoryHeader.js": "83cce99a9818ccd89ea07f68e8492fd9f1eb0ff44c8d1a9b98b0a96fe7f974e2"
       },
       "displayName": "Agora Inventory Source"
     },

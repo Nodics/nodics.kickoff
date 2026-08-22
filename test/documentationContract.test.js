@@ -94,6 +94,7 @@ assert.strictEqual(navigationItem.parentModuleName, 'backoffice');
 assert.strictEqual(navigationItem.label, 'Nodics Kickoff');
 assert.strictEqual(navigationItem.route, '/docs/nodics-kickoff');
 assert.strictEqual(navigationItem.group.id, 'documentation');
+assert.strictEqual(navigationItem.group.order, 1600);
 assert.strictEqual(navigationItem.featureState, 'ACTIVE');
 
 const importOrder = Object.keys(contentPackHeader.cms);

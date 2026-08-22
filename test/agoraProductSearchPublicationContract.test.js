@@ -140,8 +140,9 @@ test('Agora Product seed publishes customer-safe English and Arabic Product sear
     assert.deepEqual(result.projections.map((item) => item.locale).sort(), ['ar', 'en']);
   }
 
-  assert.equal(persisted.length, 24);
-  assert.equal(indexed.length, 24);
+  const expectedProjectionCount = values(products).length * localizationPolicy.policy().requiredLocales.length;
+  assert.equal(persisted.length, expectedProjectionCount);
+  assert.equal(indexed.length, expectedProjectionCount);
   assert(indexed.every((item) => item.moduleName === 'product'));
   assert(indexed.every((item) => item.indexName === 'productLocalized'));
   assert.deepEqual(new Set(indexed.map((item) => item.searchOptions.analyzer)), new Set(['arabic', 'standard']));
@@ -164,4 +165,6 @@ test('Product index remains provider-neutral and partitioned for customer discov
   assert.equal(definition.tenantPropertyName, 'tenant');
   assert.deepEqual(definition.partitionProperties, ['tenant', 'storeCode', 'locale']);
   assert.equal(definition.properties.payload.type, 'object');
+  assert.equal(definition.properties.payload.dynamic, false);
+  assert.equal(definition.properties.payload.properties.categoryCodes.type, 'keyword');
 });

@@ -57,7 +57,7 @@ module.exports = {
       productCode: 'agoraLinenWrapDress',
       slug: 'linen-wrap-dress',
       name: 'Linen Wrap Dress',
-      summary: 'Linen blend linen wrap dress designed for modern everyday styling.',
+      summary: 'A softly structured linen-blend wrap dress with an adjustable waist, airy drape, and polished day-to-evening finish.',
       categoryCodes: ['agoraWomen', 'agoraWomenDresses'],
       variantCodes: ['agoraLinenWrapDressIvoryS', 'agoraLinenWrapDressIvoryM', 'agoraLinenWrapDressIvoryL', 'agoraLinenWrapDressIvoryXL', 'agoraLinenWrapDressBlackS', 'agoraLinenWrapDressBlackM', 'agoraLinenWrapDressBlackL', 'agoraLinenWrapDressBlackXL'],
       localizedAttributes: { brand: 'Nodics Studio', collection: 'Apparel', colorFamily: 'neutral', material: 'Linen blend', audience: 'women', colorOptions: [{ code: 'ivory', label: 'Ivory', family: 'neutral', hex: '#f4efe4' }, { code: 'black', label: 'Black', family: 'black', hex: '#211f1a' }], sizeOptions: ['S', 'M', 'L', 'XL'] },

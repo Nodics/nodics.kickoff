@@ -123,7 +123,7 @@ test('Agora Product catalog release follows Commerce Staged nImport execution co
   const releaseRequest = {
     dataType: 'sample',
     releaseCodes: ['agoraCommonData:agoraProductCatalogSource'],
-    expectedReleases: { 'agoraCommonData:agoraProductCatalogSource': '1.0.1' }
+    expectedReleases: { 'agoraCommonData:agoraProductCatalogSource': release.version }
   };
   const preflight = await dataReleaseService.preflight({ tenant: 'default', releaseRequest });
 

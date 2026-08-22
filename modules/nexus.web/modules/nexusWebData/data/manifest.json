@@ -81,6 +81,52 @@
         "staged/wcmsUpdate/headers/nexusEcosystemComponentRepairHeader.js": "23250f5674f1732ce8ef74f7c8243fa5106308fd5523018b626a73ae7a8c9f94"
       }
     },
+    "nexusCorporateIncrementalProof": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "1.0.3",
+      "displayName": "Nexus Corporate Incremental Proof",
+      "description": "Nexus corporate Site immutable v1.0.3 incremental text proof",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusIncrementalProofData.js": "b7390de681110802122c462e42a47017c73ba2ec0b5bb93153d7d79811061567",
+        "staged/wcmsUpdate/headers/nexusIncrementalProofHeader.js": "9ab69320a3791262aee5a1012c4876eb65e738c2e517f8b8e2f28eb741f4a62e"
+      }
+    },
+    "nexusCorporateProfessionalCopyUpdate": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "1.0.4",
+      "displayName": "Nexus Corporate Professional Copy Update",
+      "description": "Nexus corporate Site immutable v1.0.4 professional hero copy update",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusProfessionalCopyUpdateData.js": "79134b8f1a27b11a4a9df695ea247d9cb2bcc1ac9140b8f99ac6bec51c63fc0a",
+        "staged/wcmsUpdate/headers/nexusProfessionalCopyUpdateHeader.js": "e5ae3668cb9cfda3d149d8446eb5864c7fabc3911f3bd90e6690efaa928e402f"
+      }
+    },
     "nexusEditorialSource": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",

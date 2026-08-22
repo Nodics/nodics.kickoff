@@ -29,6 +29,7 @@ const entry = (schemaName, dataFilePrefix) => ({
 
 module.exports = {
   inventory: {
+    agoraStoreData: entry('store', 'agoraStoreData'),
     agoraWarehouseData: entry('warehouse', 'agoraWarehouseData'),
     agoraInventoryBalanceData: entry('inventoryBalance', 'agoraInventoryBalanceData')
   }

@@ -95,7 +95,7 @@ module.exports = Object.freeze({
                     route: '/docs/nodics-kickoff',
                     icon: 'content',
                     order: 140,
-                    group: Object.freeze({ id: 'documentation', label: 'Documentation', order: 650 }),
+                    group: Object.freeze({ id: 'documentation', label: 'Documentation', order: 1600 }),
                     perspectives: Object.freeze(['operations']),
                     contexts: Object.freeze(['environment', 'tenant', 'enterprise']),
                     featureState: 'ACTIVE'

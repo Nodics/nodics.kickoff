@@ -38,6 +38,17 @@ module.exports = {
   "record2": {
     "code": "nexusPageHeroType",
     "kind": "COMPONENT",
+    "propertySchema": {
+      "title": {
+        "localized": true,
+        "requiredLocales": [
+          "en"
+        ]
+      },
+      "body": {
+        "localized": true
+      }
+    },
     "contractVersion": 1,
     "active": true
   },
