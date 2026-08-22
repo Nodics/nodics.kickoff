@@ -56,8 +56,6 @@ module.exports = {
         runtimeRole: 'STAGED',
         baselines: { axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '1.0.0',
             rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-        nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '1.0.0', dataType: 'core',
-            rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '1.0.1', dataType: 'core',
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '1.0.2',
