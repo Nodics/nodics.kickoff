@@ -178,6 +178,29 @@
         "operational/engagement/data/nexusTestimonialProjectionData.js": "4ee84be89328ae7cbaa78fdd75538a1181d81297556aa1a0de6bf4d56b89d8ea",
         "operational/engagement/headers/nexusExperienceConfigurationHeader.js": "b0151eb48cada4ba834fbdf5054a0c6023758a32e98727c9cf471dfad43d1dea"
       }
+    },
+    "nexusCorporateMediaReferences": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Corporate Media References",
+      "description": "Nexus corporate media reference records for backend-owned CMS and Editorial media delivery",
+      "owningDomain": "nexus.media",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/media/data/nexusMediaReferenceData.js": "07df7d441efae4ca0e98d8c8b04cc4634303e3063274c8ef8a5c70cebaf91157",
+        "staged/media/headers/nexusMediaReferenceHeader.js": "9dcba4f87ed0397d5b36e9ea16bb2883459cc70c2f9211728e8b336e7f216e27"
+      }
     }
   }
 }

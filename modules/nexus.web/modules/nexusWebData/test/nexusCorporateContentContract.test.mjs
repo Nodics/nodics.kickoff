@@ -73,6 +73,18 @@ const editorialOnlineArticles = require(
     "test/expectedOnlineProjections/nexusEditorialOnlineArticleData.js",
   ),
 );
+const testimonials = require(
+  resolve(
+    moduleRoot,
+    "data/operational/engagement/data/nexusTestimonialProjectionData.js",
+  ),
+);
+const mediaReferences = require(
+  resolve(moduleRoot, "data/staged/media/data/nexusMediaReferenceData.js"),
+);
+const mediaAssetManifest = require(
+  resolve(moduleRoot, "assets/nexus-cms-media/assetManifest.js"),
+);
 const componentValues = Object.values(components);
 const pageValues = Object.values(pages);
 const rendererValues = Object.values(renderers);
@@ -84,6 +96,7 @@ const editorialArticleLocalizationValues = Object.values(
 );
 const editorialArticleTaxonomyValues = Object.values(editorialArticleTaxonomies);
 const editorialOnlineArticleValues = Object.values(editorialOnlineArticles);
+const mediaReferenceValues = Object.values(mediaReferences);
 const site = Object.values(sites)[0];
 const catalog = Object.values(catalogs)[0];
 const homePage = pageValues.find((page) => page.code === "nexusHomePage");
@@ -603,9 +616,53 @@ editorialArticleValues.forEach((article) => {
     `Editorial authoring article ${article.code} must expose a featured media code for Axis and Nexus previews`,
   );
 });
+const collectMediaCodes = (value, mediaCodes = new Set()) => {
+  if (Array.isArray(value)) {
+    value.forEach((item) => collectMediaCodes(item, mediaCodes));
+    return mediaCodes;
+  }
+  if (!value || typeof value !== "object") return mediaCodes;
+  Object.entries(value).forEach(([key, child]) => {
+    if (
+      ["referenceImageCode", "avatarReferenceImageCode", "featuredMediaCode"].includes(
+        key,
+      ) &&
+      typeof child === "string" &&
+      child
+    ) {
+      mediaCodes.add(child);
+    }
+    collectMediaCodes(child, mediaCodes);
+  });
+  return mediaCodes;
+};
+const referencedMediaCodes = collectMediaCodes({
+  components,
+  editorialArticles,
+  testimonials,
+});
+const assetMediaCodes = new Set(
+  mediaAssetManifest.map((asset) => asset.mediaCode),
+);
+const referenceMediaCodes = new Set(
+  mediaReferenceValues.map((reference) => reference.mediaCode),
+);
+referencedMediaCodes.forEach((mediaCode) => {
+  assert.equal(
+    assetMediaCodes.has(mediaCode),
+    true,
+    `${mediaCode} must have a Nexus backend media asset manifest entry`,
+  );
+  assert.equal(
+    referenceMediaCodes.has(mediaCode),
+    true,
+    `${mediaCode} must have a Nexus media reference record`,
+  );
+});
 const corporateRelease = manifest.sections.nexusCorporateSite;
 const editorialRelease = manifest.sections.nexusEditorialSource;
 const engagementRelease = manifest.sections.nexusEngagementOperational;
+const mediaRelease = manifest.sections.nexusCorporateMediaReferences;
 assert.equal(corporateRelease.lifecycle, "PUBLISHABLE");
 assert.equal(corporateRelease.destinationRole, "WCMS_STAGED");
 assert.equal(corporateRelease.sourceRoot, "staged");
@@ -616,6 +673,9 @@ assert.equal(engagementRelease.lifecycle, "OPERATIONAL_VERSIONED");
 assert.equal(engagementRelease.destinationRole, "ENGAGEMENT");
 assert.equal(engagementRelease.sourceRoot, "operational");
 assert.equal(engagementRelease.publicationPolicy, "NONE");
+assert.equal(mediaRelease.lifecycle, "PUBLISHABLE");
+assert.equal(mediaRelease.destinationRole, "WCMS_STAGED");
+assert.equal(mediaRelease.sourceRoot, "staged");
 
 for (const release of Object.values(manifest.sections)) {
   for (const [relativePath, expectedHash] of Object.entries(release.files)) {
