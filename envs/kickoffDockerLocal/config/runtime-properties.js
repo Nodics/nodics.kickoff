@@ -158,7 +158,7 @@ module.exports = function runtimeProperties(server) {
                     { code: 'wcms:sample-content', classification: 'sample', owner: 'nodics.wcms', required: false, trigger: 'USER', targetModule: 'cms', targetServer: 'wcmsStagedServer', targetDatabase: 'kickoffDockerLocalWcmsStaged', operation: 'IMPORT_SAMPLE' }
                 ] },
                 'nodics.commerce': { dataPackages: [
-                    { code: 'commerce:core-reference', classification: 'core', owner: 'nodics.commerce', required: true, trigger: 'ACTIVATION', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffDockerLocalCommerce', operation: 'IMPORT' },
+                    { code: 'baseCommerce:core-reference', classification: 'core', owner: 'nodics.commerce', required: true, trigger: 'ACTIVATION', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffDockerLocalCommerce', operation: 'IMPORT' },
                     { code: 'commerce:sample-catalog', classification: 'sample', owner: 'nodics.commerce', required: false, trigger: 'USER', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffDockerLocalCommerce', operation: 'IMPORT_SAMPLE' }
                 ] },
                 'nodics.communication': { dataPackages: [
@@ -240,7 +240,9 @@ module.exports = function runtimeProperties(server) {
         commerceServer: {
             activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalCommerce'),
-            apiExposure: { categories: { serviceRegistry: { enabled: true }, commerceCustomer: { enabled: true } } },
+            apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
+                commerceCustomer: { enabled: true } } },
+            data: { dataReleases: dataReleases(['COMMERCE']) },
             search: productSearch(),
             product: { publication: { searchEnrichment: { domains: {
                 enabled: true, contributors: agoraDomains.productSearchContributors, missingBehavior: 'error'

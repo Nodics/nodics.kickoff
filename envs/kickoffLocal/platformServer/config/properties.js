@@ -233,7 +233,7 @@ module.exports = {
             },
             'nodics.commerce': {
                 dataPackages: [
-                    { code: 'commerce:core-reference', classification: 'core', owner: 'nodics.commerce', required: true, trigger: 'ACTIVATION', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffLocalCommerce', operation: 'IMPORT' },
+                    { code: 'baseCommerce:core-reference', classification: 'core', owner: 'nodics.commerce', required: true, trigger: 'ACTIVATION', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffLocalCommerce', operation: 'IMPORT' },
                     { code: 'commerce:sample-catalog', classification: 'sample', owner: 'nodics.commerce', required: false, trigger: 'USER', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffLocalCommerce', operation: 'IMPORT_SAMPLE' }
                 ]
             },
