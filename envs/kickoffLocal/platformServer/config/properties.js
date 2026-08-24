@@ -249,10 +249,14 @@ module.exports = {
         enabled: true,
         environmentAllowlist: ['kickoffLocal'],
         providers: [
-            { code: 'wcmsStaged', moduleName: 'system', connectionName: 'wcmsStaged' },
-            { code: 'wcmsOnline', moduleName: 'system', connectionName: 'wcmsOnline' },
-            { code: 'process', moduleName: 'system', connectionName: 'process' },
-            { code: 'platform', moduleName: 'system', connectionName: 'default' }
+            { code: 'wcmsStaged', moduleName: 'system', connectionName: 'wcmsStaged',
+                targetAuthority: { server: 'wcmsStagedServer', runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' } } },
+            { code: 'wcmsOnline', moduleName: 'system', connectionName: 'wcmsOnline',
+                targetAuthority: { server: 'wcmsOnlineServer', runtimeRole: { code: 'WCMS_ONLINE', publication: 'ONLINE' } } },
+            { code: 'process', moduleName: 'system', connectionName: 'process',
+                targetAuthority: { server: 'processServer', runtimeRole: { code: 'PROCESS', publication: 'OPERATIONAL' } } },
+            { code: 'platform', moduleName: 'system', connectionName: 'default',
+                targetAuthority: { server: 'platformServer', runtimeRole: { code: 'PLATFORM', publication: 'OPERATIONAL' } } }
         ]
     },
     localResetProvider: {

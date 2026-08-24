@@ -49,7 +49,7 @@ module.exports = {
             baselines: {
                 partnernexus: {
                     releaseCode: 'partnerSiteData:partnerNexusCustomization',
-                    releaseVersion: '0.0.0',
+                    releaseVersion: '1.0.5',
                     dataType: 'core',
                     rootType: 'site',
                     rootCode: 'nexusCorporateSite',

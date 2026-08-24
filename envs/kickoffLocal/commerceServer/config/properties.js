@@ -12,6 +12,7 @@
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
 const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
+const commerceSearchRuntimeModules = ['search', 'elastic'];
 const commerceAuthorityModules = [
     'apparelProduct', 'cart', 'checkoutCore', 'commerceSearchCore', 'customerList',
     'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryRanking', 'discoverySource',
@@ -20,7 +21,7 @@ const commerceAuthorityModules = [
 ];
 /** @module kickoffLocal/commerceServer/config/properties @description Defines isolated local Commerce coordinates. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
     runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(commerceAuthorityModules.map(moduleName => [moduleName, 'commerce.operational'])) },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },

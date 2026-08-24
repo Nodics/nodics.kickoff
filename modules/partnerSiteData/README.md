@@ -6,7 +6,7 @@ Axis, Nexus, or the original `nexusWebData` release.
 
 The module contributes three things under its own authority:
 
-- immutable Staged release `partnerSiteData:partnerNexusCustomization` `1.0.2`;
+- immutable Staged release `partnerSiteData:partnerNexusCustomization` `1.0.5`;
 - CMS baseline `partnernexus`;
 - Platform application profile `partnernexus`.
 

@@ -721,6 +721,11 @@
         "command": "project:agora-cms-media-seed",
         "home": "project"
       },
+      "acceptance:nexus-cms-media-seed": {
+        "type": "frameworkCommand",
+        "command": "project:nexus-cms-media-seed",
+        "home": "project"
+      },
       "acceptance:editorial-live": {
         "type": "frameworkCommand",
         "command": "project:editorial-live-journey-acceptance",

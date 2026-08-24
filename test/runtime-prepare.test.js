@@ -23,7 +23,7 @@ const scenarios = Object.freeze([
         expectedModules: Object.freeze([
             'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
             'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
-            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'store',
+            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'search', 'elastic', 'store',
             'product', 'pricing', 'tax', 'promotion', 'inventory',
             'commerceSearchCore', 'commerceSearch', 'baseCommerce', 'checkoutCore', 'cart', 'order',
             'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
@@ -43,6 +43,8 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(CONFIG.get('search').product.options.engine, 'elastic');
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.equal(NODICS.isModuleActive('search'), true);
+            assert.equal(NODICS.isModuleActive('elastic'), true);
             assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
             assert.equal(NODICS.isModuleActive('workflow'), false);
         }
@@ -52,7 +54,7 @@ const scenarios = Object.freeze([
         expectedModules: Object.freeze([
             'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
             'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
-            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'store',
+            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'search', 'elastic', 'store',
             'product', 'pricing', 'tax', 'promotion', 'inventory',
             'commerceSearchCore', 'commerceSearch', 'baseCommerce', 'checkoutCore', 'cart', 'order',
             'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
@@ -75,6 +77,8 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(CONFIG.get('search').product.options.engine, 'elastic');
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.equal(NODICS.isModuleActive('search'), true);
+            assert.equal(NODICS.isModuleActive('elastic'), true);
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);

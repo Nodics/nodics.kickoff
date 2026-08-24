@@ -18,6 +18,13 @@ import { createHash } from "node:crypto";
 
 const moduleRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
+const projectRoot = resolve(moduleRoot, "../../../..");
+const projectPackage = JSON.parse(
+  await readFile(resolve(projectRoot, "package.json"), "utf8"),
+);
+const projectContract = JSON.parse(
+  await readFile(resolve(projectRoot, "nodics.project.json"), "utf8"),
+);
 const manifest = JSON.parse(
   await readFile(resolve(moduleRoot, "data/manifest.json")),
 );
@@ -676,6 +683,14 @@ assert.equal(engagementRelease.publicationPolicy, "NONE");
 assert.equal(mediaRelease.lifecycle, "PUBLISHABLE");
 assert.equal(mediaRelease.destinationRole, "WCMS_STAGED");
 assert.equal(mediaRelease.sourceRoot, "staged");
+assert.match(
+  projectPackage.scripts["acceptance:nexus-cms-media-seed"],
+  /nodics-project\.js project:run acceptance:nexus-cms-media-seed/,
+);
+assert.equal(
+  projectContract.tooling.commands["acceptance:nexus-cms-media-seed"].command,
+  "project:nexus-cms-media-seed",
+);
 
 for (const release of Object.values(manifest.sections)) {
   for (const [relativePath, expectedHash] of Object.entries(release.files)) {

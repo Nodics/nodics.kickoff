@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "0.0.0",
+      "version": "1.0.5",
       "description": "Later-loaded partner-owned Nexus website customization",
       "owningDomain": "partner.nexus.wcms",
       "lifecycle": "PUBLISHABLE",
