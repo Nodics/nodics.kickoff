@@ -1,7 +1,31 @@
 {
-  "contractVersion": 0,
+  "contractVersion": 2,
   "module": "agoraCommonData",
   "sections": {
+    "agoraMediaReferenceSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "description": "Agora product and content Media target references required before storefront component-media imports.",
+      "owningDomain": "agora.media",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/media/data/agoraMediaReferenceData.js": "5d5f644fea993d7f2bb6c6ad0156e8b9be75d58a8e05e73da77463391c3f1ef0",
+        "staged/media/headers/agoraMediaReferenceHeader.js": "e8770118646f6d9867aaba9ad41af1166191e05a1f30df79eba894e4cbd8f16b"
+      },
+      "displayName": "Agora Media Reference Source"
+    },
     "agoraStorefrontSite": {
       "kind": "DATA_RELEASE",
       "dataType": "core",
@@ -64,29 +88,6 @@
         "staged/product/headers/agoraProductCatalogHeader.js": "4d04702b521ad3da8b2ecd20bc9857ff83e52956c8513ca16cfbd91a65b97653"
       },
       "displayName": "Agora Product Catalog Source"
-    },
-    "agoraMediaReferenceSource": {
-      "kind": "DATA_RELEASE",
-      "dataType": "sample",
-      "sourceRoot": "staged",
-      "version": "0.0.0",
-      "description": "Agora product and content Media target reference source",
-      "owningDomain": "agora.media",
-      "lifecycle": "PUBLISHABLE",
-      "destinationRole": "WCMS_STAGED",
-      "environmentScope": [
-        "LOCAL"
-      ],
-      "sensitivity": "PUBLIC",
-      "versioningPolicy": "IMMUTABLE",
-      "publicationPolicy": "REQUIRED",
-      "initialPublicationPolicy": "ADMIN_INITIATED",
-      "removalPolicy": "UNPUBLISH_OR_RETIRE",
-      "files": {
-        "staged/media/data/agoraMediaReferenceData.js": "3ebc782123adc1d8407ce5e1a1b3bf00e44d687bb25d994f7932c4c014ee69ca",
-        "staged/media/headers/agoraMediaReferenceHeader.js": "e8770118646f6d9867aaba9ad41af1166191e05a1f30df79eba894e4cbd8f16b"
-      },
-      "displayName": "Agora Media Reference Source"
     },
     "agoraPricingSource": {
       "kind": "DATA_RELEASE",

@@ -82,9 +82,9 @@ test('agoraCommonData manifest is contract v2 and declares WCMS plus Commerce St
   assert.equal(manifest.contractVersion, 2);
   assert.equal(manifest.module, 'agoraCommonData');
   assert.deepEqual(Object.keys(manifest.sections), [
+    'agoraMediaReferenceSource',
     'agoraStorefrontSite',
     'agoraProductCatalogSource',
-    'agoraMediaReferenceSource',
     'agoraPricingSource',
     'agoraInventorySource',
     'agoraTaxSource',
@@ -116,11 +116,11 @@ test('agoraCommonData manifest is contract v2 and declares WCMS plus Commerce St
   assert.equal(productSection.initialPublicationPolicy, 'ADMIN_INITIATED');
   assert.equal(productSection.removalPolicy, 'UNPUBLISH_OR_RETIRE');
   assert.equal(mediaSection.kind, 'DATA_RELEASE');
-  assert.equal(mediaSection.dataType, 'sample');
+  assert.equal(mediaSection.dataType, 'core');
   assert.equal(mediaSection.sourceRoot, 'staged');
   assert.equal(mediaSection.lifecycle, 'PUBLISHABLE');
   assert.equal(mediaSection.destinationRole, 'WCMS_STAGED');
-  assert.deepEqual(mediaSection.environmentScope, ['LOCAL']);
+  assert.deepEqual(mediaSection.environmentScope, ['LOCAL', 'LOCAL_PRODUCTION_SIMULATION']);
   assert.equal(mediaSection.sensitivity, 'PUBLIC');
   assert.equal(mediaSection.versioningPolicy, 'IMMUTABLE');
   assert.equal(mediaSection.publicationPolicy, 'REQUIRED');
@@ -161,7 +161,7 @@ test('Media reference seed maps product and content targets without approving re
   assert(references.some((record) => record.ownerModule === 'cms' && record.ownerCode === 'agoraHomeHero'));
   assert(references.some((record) => record.ownerModule === 'product' && record.ownerCode === 'agoraLinenWrapDress'));
   for (const record of references) {
-    assert.equal(record.status, 'INACTIVE');
+    assert.equal(record.status, 'ACTIVE');
     assert.equal(record.evidence.rightsStatus, 'REPLACEMENT_REQUIRED');
     assert.equal(record.evidence.approvalStatus, 'PENDING_ASSET_INTAKE');
     assert.equal(record.evidence.approvedReferenceSiteAsset, false);

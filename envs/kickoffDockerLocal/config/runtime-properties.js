@@ -162,8 +162,8 @@ module.exports = function runtimeProperties(server) {
                     { code: 'commerce:sample-catalog', classification: 'sample', owner: 'nodics.commerce', required: false, trigger: 'USER', targetModule: 'commerce', targetServer: 'commerceServer', targetDatabase: 'kickoffDockerLocalCommerce', operation: 'IMPORT_SAMPLE' }
                 ] },
                 'nodics.communication': { dataPackages: [
-                    { code: 'communication:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'communication', targetServer: 'platformServer', targetDatabase: 'kickoffDockerLocalPlatform', operation: 'IMPORT' },
-                    { code: 'communication:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'communication', targetServer: 'platformServer', targetDatabase: 'kickoffDockerLocalPlatform', operation: 'IMPORT_SAMPLE' }
+                    { code: 'commsCore:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffDockerLocalEngagement', operation: 'IMPORT' },
+                    { code: 'commsCore:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffDockerLocalEngagement', operation: 'IMPORT_SAMPLE' }
                 ] }
             } },
             backofficeRegistry: { clientEndpoints: {
@@ -191,7 +191,7 @@ module.exports = function runtimeProperties(server) {
                 agoraapparel: { releaseCode: 'agoraApparelData:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
                 agoraelectronics: { releaseCode: 'agoraElectronicsData:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
                 agoratelco: { releaseCode: 'agoraTelcoData:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
-                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
+                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
                 axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
                 kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',

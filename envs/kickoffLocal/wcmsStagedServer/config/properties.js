@@ -74,7 +74,7 @@ module.exports = {
             rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
         agoratelco: { releaseCode: 'agoraTelcoData:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample',
             rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
-        frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.0.0',
+        frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1',
             rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
         axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.0',
             rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },

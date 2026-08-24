@@ -31,7 +31,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-hero-primary",
     "relationType": "COMPONENT_MEDIA",
     "position": 1,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -78,7 +78,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-home-hero-summer-edit",
     "relationType": "COMPONENT_MEDIA",
     "position": 2,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -125,7 +125,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-home-hero-signature-style",
     "relationType": "COMPONENT_MEDIA",
     "position": 3,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -172,7 +172,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-home-hero-layered-edit",
     "relationType": "COMPONENT_MEDIA",
     "position": 4,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -219,7 +219,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-collection-new-in",
     "relationType": "COMPONENT_MEDIA",
     "position": 5,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -266,7 +266,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-collection-promotion",
     "relationType": "COMPONENT_MEDIA",
     "position": 6,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -313,7 +313,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-collection-clothing",
     "relationType": "COMPONENT_MEDIA",
     "position": 7,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -360,7 +360,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-collection-dresses",
     "relationType": "COMPONENT_MEDIA",
     "position": 8,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -407,7 +407,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-collection-bags",
     "relationType": "COMPONENT_MEDIA",
     "position": 9,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -454,7 +454,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-collection-accessories",
     "relationType": "COMPONENT_MEDIA",
     "position": 10,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -501,7 +501,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-promo-capsule",
     "relationType": "COMPONENT_MEDIA",
     "position": 11,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -548,7 +548,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-promo-texture-edit",
     "relationType": "COMPONENT_MEDIA",
     "position": 12,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -595,7 +595,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-promo-crossbody",
     "relationType": "COMPONENT_MEDIA",
     "position": 13,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -642,7 +642,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-testimonial-sybil",
     "relationType": "COMPONENT_MEDIA",
     "position": 14,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -689,7 +689,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-avatar-sybil",
     "relationType": "COMPONENT_MEDIA",
     "position": 15,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -736,7 +736,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-testimonial-mark",
     "relationType": "COMPONENT_MEDIA",
     "position": 16,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -783,7 +783,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-avatar-mark",
     "relationType": "COMPONENT_MEDIA",
     "position": 17,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -830,7 +830,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-gallery-1",
     "relationType": "COMPONENT_MEDIA",
     "position": 18,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -877,7 +877,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-gallery-2",
     "relationType": "COMPONENT_MEDIA",
     "position": 19,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -924,7 +924,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-gallery-3",
     "relationType": "COMPONENT_MEDIA",
     "position": 20,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -971,7 +971,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-gallery-4",
     "relationType": "COMPONENT_MEDIA",
     "position": 21,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1018,7 +1018,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-gallery-5",
     "relationType": "COMPONENT_MEDIA",
     "position": 22,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1065,7 +1065,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-linen-wrap-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 1,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1112,7 +1112,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-satin-midi-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 2,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1159,7 +1159,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-ribbed-knit-top-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 3,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1206,7 +1206,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-cotton-poplin-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 4,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1253,7 +1253,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-soft-leather-tote-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 5,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1300,7 +1300,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-printed-silk-scarf-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 6,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1347,7 +1347,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-oxford-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 7,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1394,7 +1394,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-linen-camp-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 8,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1441,7 +1441,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-tailored-chino-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 9,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1488,7 +1488,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-relaxed-trouser-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 10,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1535,7 +1535,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-canvas-utility-belt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 11,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1582,7 +1582,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-fine-wool-cap-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 12,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1629,7 +1629,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-stretch-strap-top-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 13,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1676,7 +1676,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-ramie-shirt-with-pockets-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 14,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1723,7 +1723,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-rattan-bag-with-handle-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 15,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1770,7 +1770,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-striped-knit-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 16,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1817,7 +1817,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-belt-wrap-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 17,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1864,7 +1864,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-double-button-trench-coat-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 18,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1911,7 +1911,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-buttoned-cotton-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 19,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -1958,7 +1958,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-layered-tank-top-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 20,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2005,7 +2005,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-pleated-knit-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 21,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2052,7 +2052,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-minimal-slip-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 22,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2099,7 +2099,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-collar-knit-cardigan-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 23,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2146,7 +2146,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-soft-shoulder-bag-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 24,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2193,7 +2193,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-summer-knit-vest-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 25,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2240,7 +2240,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-tailored-sleeveless-top-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 26,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2287,7 +2287,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-wide-leg-linen-pant-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 27,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2334,7 +2334,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-textured-crossbody-bag-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 28,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2381,7 +2381,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-minimal-ballet-flat-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 29,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2428,7 +2428,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-open-weave-cardigan-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 30,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2475,7 +2475,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-refined-short-sleeve-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 31,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2522,7 +2522,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-gold-frame-sunglasses-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 32,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2569,7 +2569,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-soft-ribbed-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 33,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2616,7 +2616,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-relaxed-cotton-tee-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 34,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2663,7 +2663,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-compact-crossbody-bag-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 35,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2710,7 +2710,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-sculpted-hoop-earrings-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 36,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2757,7 +2757,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-everyday-column-dress-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 37,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2804,7 +2804,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-sheer-ramie-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 38,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2851,7 +2851,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-fine-knit-polo-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 39,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2898,7 +2898,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-natural-canvas-tote-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 40,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2945,7 +2945,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-luxe-wrap-top-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 41,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -2992,7 +2992,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-pearl-trim-cardigan-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 42,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3039,7 +3039,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-bias-cut-midi-skirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 43,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3086,7 +3086,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-textured-knit-pullover-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 44,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3133,7 +3133,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-polished-mini-bag-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 45,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3180,7 +3180,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-clean-line-blazer-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 46,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3227,7 +3227,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-soft-linen-short-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 47,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3274,7 +3274,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-classic-denim-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 48,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3321,7 +3321,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-overshirt-jacket-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 49,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3368,7 +3368,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-slim-cotton-trouser-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 50,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3415,7 +3415,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-relaxed-polo-shirt-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 51,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3462,7 +3462,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-washed-chore-jacket-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 52,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3509,7 +3509,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-everyday-crew-neck-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 53,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3556,7 +3556,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-utility-cargo-trouser-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 54,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3603,7 +3603,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-leather-card-holder-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 55,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3650,7 +3650,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-signature-sunglasses-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 56,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3697,7 +3697,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-neutral-shoulder-bag-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 57,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
@@ -3744,7 +3744,7 @@ module.exports = Object.freeze({
     "mediaCode": "agora-owned-product-modern-knit-set-primary",
     "relationType": "PRIMARY_IMAGE",
     "position": 58,
-    "status": "INACTIVE",
+    "status": "ACTIVE",
     "revision": 1,
     "active": true,
     "evidence": {
