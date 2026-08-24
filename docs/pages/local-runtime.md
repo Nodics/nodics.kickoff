@@ -28,13 +28,14 @@ The current local topology uses separate runtime servers:
   Kickoff project modules. WCMS owns CMS sites, catalogs, pages, components,
   routes, and documentation content-pack import.
 - `processServer` starts the combined Business Process & Automation runtime.
-  It loads Core, Cron, Process, cron jobs, workflow modules, and Kickoff
-  project modules. Process owns process/workflow definitions; Cron still owns
-  job definitions, triggers, scheduler state, and execution lifecycle.
+  It loads Core, Process, cronjob, workflow modules, and Kickoff project
+  modules. The `workflow` module owns process/workflow definitions; the
+  `cronjob` module owns job definitions, triggers, scheduler state, and
+  execution lifecycle.
 
-Kickoff intentionally has no standalone Cron server. Scheduled automation is
+Kickoff intentionally has no standalone cronjob server. Scheduled automation is
 available only through `processServer`, preventing accidental duplicate
-scheduler processes while Cron retains ownership of its job lifecycle.
+scheduler processes while cronjob retains ownership of its job lifecycle.
 
 Axis, Nexus, and Agora are separate frontend applications grouped locally by
 the optional `nodics.exp` workspace. `nodics.exp` owns frontend discovery and
@@ -129,8 +130,8 @@ Use separate terminals so logs stay readable:
 2. Start WCMS second. It owns documentation sites, catalogs, pages, components,
    routes, media metadata, and content delivery.
 3. Start Process and Automation when process/workflow or scheduled behavior is
-   needed. It proves `nodics.process` and `nodics.cron` can share one runtime
-   environment while keeping separate functional ownership.
+   needed. It proves `workflow` and `cronjob` can share one runtime environment
+   under `nodics.process` while keeping separate module ownership.
 4. Start Axis, Nexus, and Agora after backend servers are reachable. Each
    frontend uses only its governed backend contracts and configured CORS origin.
 
@@ -148,8 +149,8 @@ After login:
 
 - open the System and Integrations area and check the module registry;
 - confirm Core, Platform, and WCMS are active and not treated as optional;
-- if Process and Automation is running, confirm Process and Cron appear from
-  the composed runtime and Cron can move through the optional lifecycle;
+- if Process and Automation is running, confirm Process appears from the
+  composed runtime and exposes both `workflow` and `cronjob` capabilities;
 - open Documentation and verify Framework, Swaggers, Nodics Axis, and Nodics
   Kickoff are shown as separate documentation products;
 - import or update documentation packs only through the authorized Axis action.
@@ -210,7 +211,8 @@ Commerce, Axis, Nexus, and Agora. Verify the topology from the customer project,
 not from framework internals. Platform should expose login,
 BackOffice bootstrap, registry, and API discovery. WCMS should expose content,
 documentation, media, and import/export delivery. Process and Automation should
-report Process and optional Cron runtime availability from the composed server.
+report Process runtime availability with workflow and cronjob technical modules
+from the composed server.
 Axis should connect through Platform and WCMS instead of local hardcoded module
 state.
 

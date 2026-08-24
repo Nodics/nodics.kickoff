@@ -15,11 +15,11 @@ The acceptance run proves five things:
 
 | Area | What must be true |
 | --- | --- |
-| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Cron from the configured framework root. |
-| Runtime topology | Platform, WCMS, and the composed Process/Cron automation runtime can start from the Kickoff local environment. |
+| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Process from the configured framework root. |
+| Runtime topology | Platform, WCMS, and the composed Process and Automation runtime can start from the Kickoff local environment. |
 | Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |
 | Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |
-| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Cron is observable as an optional runtime module. |
+| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Process is observable as an optional runtime module with workflow and cronjob technical modules. |
 
 If any one of these fails, do not continue adding new functional modules. Fix
 the contract break first, otherwise every later module will inherit a shaky
@@ -110,10 +110,10 @@ flowchart TD
   Start["Developer runs npm run acceptance:local"] --> Platform["Start or reuse Platform on 4300"]
   Platform --> Staged["Start or reuse WCMS Staged on 4312"]
   Staged --> Online["Start or reuse WCMS Online on 4314"]
-  Online --> Process["Start or reuse Process/Cron on 4330"]
+  Online --> Process["Start or reuse Process and Automation on 4330"]
   Process --> Axis["Start or reuse Axis on 3100"]
   Axis --> Auth["Authenticate default/admin"]
-  Auth --> Registry["Verify Core, Platform, WCMS, Cron observation"]
+  Auth --> Registry["Verify Core, Platform, WCMS, Process observation"]
   Registry --> Docs["Import documentation packs through WCMS"]
   Docs --> Routes["Verify Axis routes"]
   Routes --> Designer["Verify Content Designer catalog-first route"]
@@ -273,7 +273,7 @@ Expected state:
 | `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |
 | `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |
 | `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |
-| `nodics.cron` | Optional, observed when Process and Automation or standalone Cron is running | Proves optional runtime modules can join the lifecycle. |
+| `nodics.process` | Optional, observed when Process and Automation or standalone Cron is running | Proves optional runtime modules can join the lifecycle. |
 
 Core, Platform, and WCMS are mandatory for this local Axis-backed acceptance
 topology. They should not appear as removable optional modules. Cron may be
@@ -399,7 +399,7 @@ Open:
 Expected behavior:
 
 - If Process and Automation is running, Axis can observe both `nodics.process`
-  and `nodics.cron` from the same runtime.
+  and `nodics.process` from the same runtime.
 - If Cron is not registered, it appears as available to register.
 - Register moves it into the registered list without requiring a page refresh.
 - Activate changes lifecycle state without freezing buttons.
@@ -449,7 +449,7 @@ PASS BackOffice public bootstrap
 PASS authenticated login for admin
 PASS module registry reachable
 PASS required modules registered: nodics.foundation, nodics.platform, nodics.wcms
-PASS optional runtime modules observed: nodics.cron
+PASS optional runtime modules observed: nodics.process
 PASS documentation pack nodicsDocumentation is CURRENT
 PASS documentation pack axisDocumentation is CURRENT
 PASS documentation pack kickoffDocumentation is CURRENT
@@ -467,7 +467,7 @@ PASS cron lifecycle deregister returns module to available
 | Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |
 | Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |
 | Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |
-| Cron does not appear | Process and Automation server or standalone Cron server is not running, or the runtime has not reported its functional module observation. |
+| Process does not appear | Process and Automation server is not running, or the runtime has not reported its functional module observation. |
 | Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |
 | Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |
 

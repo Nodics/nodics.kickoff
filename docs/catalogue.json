@@ -15,7 +15,7 @@
     {
       "id": "kickoff.local-runtime",
       "title": "Local runtime topology",
-      "summary": "Start and reason about the local Platform, WCMS, and Cron servers that make the reference project usable.",
+      "summary": "Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
       "content": "docs/pages/local-runtime.md"

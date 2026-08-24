@@ -44,10 +44,10 @@ framework:
 
 | Question | Kickoff answer |
 | --- | --- |
-| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Process/Cron, and Axis wiring. |
+| Can I run it locally without designing my full product first? | Yes. Kickoff provides ready local Platform, WCMS, Process and Automation, and Axis wiring. |
 | Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |
 | Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |
-| Can optional modules be added later? | Yes. Cron demonstrates observed optional runtime capability and registry lifecycle. |
+| Can optional modules be added later? | Yes. Process demonstrates observed optional runtime capability and registry lifecycle while exposing workflow and cronjob capabilities. |
 | Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |
 
 This makes Kickoff more than a sample app. It is the adoption proof for the
@@ -58,8 +58,8 @@ whole framework.
 Think of `nodics.ai` as the factory equipment, `nodics.kickoff` as the sample
 production line, `nodics.exp` as the frontend workspace shelf, and Axis, Nexus,
 and Agora as separate customer-facing screens. The factory equipment provides
-standard capabilities such as Core, Platform, WCMS, Media, Cron, Process,
-Commerce, and Engagement. The sample production line decides which equipment to
+standard capabilities such as Core, Platform, WCMS, Media, Process, Commerce,
+and Engagement. The sample production line decides which equipment to
 connect for a local demonstration. The screens connect to the running backend
 and show only the capabilities that the backend says are available and
 authorized.
@@ -93,7 +93,7 @@ into the production line. Each part has a job.
 
 - how a customer project depends on Nodics framework packages;
 - how environment and server modules load after standard functional modules;
-- how Platform, WCMS Staged, WCMS Online, Process/Cron, Engagement, and
+- how Platform, WCMS Staged, WCMS Online, Process and Automation, Engagement, and
   Commerce can run as separate ownership domains while serving three frontends;
 - how project modules can customize runtime behavior without renaming the
   standard functional module identity;
@@ -138,7 +138,7 @@ flowchart LR
   FrameworkRoot["Framework checkout<br/>nodics.ai"] --> Core["nodics.foundation"]
   FrameworkRoot --> Platform["nodics.platform"]
   FrameworkRoot --> WCMS["nodics.wcms"]
-  FrameworkRoot --> Cron["nodics.cron"]
+  FrameworkRoot --> Cron["nodics.process"]
   Core --> Project["nodics.kickoff<br/>reference customer project"]
   Platform --> Project
   WCMS --> Project
@@ -183,7 +183,7 @@ A new developer can think of Kickoff as a training project:
 2. It shows where local environment/server configuration lives.
 3. It shows how to point at a framework checkout that may live anywhere on the
    machine.
-4. It starts Platform, WCMS, and the composed Process/Cron automation runtime
+4. It starts Platform, WCMS, and the composed Process and Automation runtime
    without asking the developer to create a production topology first.
 5. It ships project-owned documentation so Axis can show framework docs,
    Axis docs, and customer-project docs side by side.
@@ -203,7 +203,7 @@ Documentation dashboard can discover it.
 
 - Do not put framework documentation in Kickoff unless the page is explaining
   how Kickoff consumes the framework.
-- Do not copy `nodics.foundation`, `nodics.platform`, `nodics.wcms`, or `nodics.cron`
+- Do not copy `nodics.foundation`, `nodics.platform`, `nodics.wcms`, or `nodics.process`
   source into this repository.
 - Do not move Axis renderers or browser code into Kickoff.
 - Do not assume a customer project will always sit beside `nodics.ai`; use the

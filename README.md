@@ -22,9 +22,9 @@ nodics.kickoff/
 
 `platformServer extends nodics.platform`, which makes `nodics.foundation`
 functionally available through Platform. `wcmsServer extends nodics.wcms`, and
-`processServer extends nodics.process` while including `nodics.cron` in the
-same Business Process & Automation runtime. There is no standalone Cron server
-in Kickoff. `commerceServer extends nodics.commerce`
+`processServer extends nodics.process`, which loads the sibling `workflow` and
+`cronjob` modules in the same Business Process & Automation runtime. There is
+no standalone cronjob server in Kickoff. `commerceServer extends nodics.commerce`
 and composes Process for the full local Commerce lifecycle. `engagementServer`
 extends `nodics.engagement`, includes `nodics.communication`, and enables the
 reference contact experience while Process remains a separate runtime
@@ -140,9 +140,10 @@ verifies the resulting publication lineage and Nexus Online delivery.
 
 `acceptance:capability-registry` is non-destructive to business data and expects
 Platform plus the consolidated Process server to be running. It verifies that
-Process and Cron are observed through `processServer`, temporarily exercises
-Process registration and Axis activation, proves disabled Cron remains hidden,
-and restores the original functional-module lifecycle state.
+Process is observed through `processServer` with both `workflow` and `cronjob`
+technical modules, temporarily exercises Process registration and Axis
+activation, proves the capabilities enter Axis only after activation, and
+restores the original functional-module lifecycle state.
 
 After local acceptance, use the project-owned deployment qualification pack:
 
