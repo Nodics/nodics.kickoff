@@ -12,4 +12,4 @@
 'use strict';
 
 /** @module kickoffLocal/processServer/data/init/headers/editorial/defaultEditorialProcessDefinitionDataHeader @description Imports Editorial definitions through the Process schema authority. @layer project-data @owner nodics.kickoff */
-module.exports = { flowSchema: { defaultEditorialProcessDefinitionData: { options: { enabled: true, schemaName: 'processDefinition', operation: 'saveAll', dataFilePrefix: 'defaultEditorialProcessDefinitionData', userGroups: ['adminGroup'] }, query: { code: '$code' } } } };
+module.exports = { workflow: { defaultEditorialProcessDefinitionData: { options: { enabled: true, schemaName: 'processDefinition', operation: 'saveAll', dataFilePrefix: 'defaultEditorialProcessDefinitionData', userGroups: ['adminGroup'] }, query: { code: '$code' } } } };

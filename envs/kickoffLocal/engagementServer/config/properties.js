@@ -15,11 +15,20 @@
 module.exports = {
     activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'agoraCommonData', 'kickoffLocal', 'engagementServer'] },
     runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' },
+    runtimeAuthorityContexts: { modules: { publish: 'engagement.operational' } },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['ENGAGEMENT'] } },
     engagement: { capabilities: { contactSubmission: true, testimonial: true, customerReview: true, customerFeedback: true } },
     customerFeedback: { enabled: true },
-    database: { default: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } } },
+    database: {
+        default: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } },
+        commsSchema: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } },
+        contactSubmission: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } },
+        customerFeedback: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } },
+        customerReview: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } },
+        engagementCore: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } },
+        testimonial: { mongodb: { master: { databaseName: 'kickoffLocalEngagement' } } }
+    },
     servers: {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4340, httpsHost: '127.0.0.1', httpsPort: 4341 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4340, httpsHost: 'localhost', httpsPort: 4341 } },
         profile: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },

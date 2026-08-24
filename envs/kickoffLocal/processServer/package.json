@@ -7,8 +7,7 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.process",
-      "nodics.cron"
+      "nodics.process"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

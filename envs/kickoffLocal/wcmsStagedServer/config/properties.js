@@ -11,6 +11,7 @@
 
 'use strict';
 const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
+const wcmsAuthorityModules = ['cms', 'editorial', 'media', 'publish'];
 
 /** @module wcmsStagedServer/config/properties @description Defines Local WCMS Staged role, coordinates, persistence, and Online target connection. */
 module.exports = {
@@ -39,6 +40,7 @@ module.exports = {
     },
     publishEnabled: true,
     runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
+    runtimeAuthorityContexts: { modules: Object.fromEntries(wcmsAuthorityModules.map(moduleName => [moduleName, 'wcms.staged'])) },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['WCMS_STAGED'],
         initializationProfiles: { localWcmsFoundation: { enabled: true,

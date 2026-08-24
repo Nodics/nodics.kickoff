@@ -19,10 +19,9 @@ const packageRoot = packageName => path.dirname(require.resolve(packageName + '/
 
 const scenarios = Object.freeze([
     Object.freeze({
-        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
+        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
         expectedModules: Object.freeze([
-            'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
-            'nodics.process', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
+            'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
             'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
             'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'store',
             'product', 'pricing', 'tax', 'promotion', 'inventory',
@@ -45,13 +44,13 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('search').product.options.engine, 'elastic');
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
             assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
+            assert.equal(NODICS.isModuleActive('workflow'), false);
         }
     }),
     Object.freeze({
-        server: 'commerceStagedServer', frameworkModules: Object.freeze(['nodics.process', 'nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
+        server: 'commerceStagedServer', frameworkModules: Object.freeze(['nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
         expectedModules: Object.freeze([
-            'nodics.foundation', 'flowSchema', 'flowCore', 'flowApi', 'workflow',
-            'nodics.process', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
+            'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
             'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
             'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'store',
             'product', 'pricing', 'tax', 'promotion', 'inventory',
@@ -85,6 +84,7 @@ const scenarios = Object.freeze([
             assert.equal(NODICS.isModuleActive('electronicsProduct'), selected.includes('electronics') || selected.includes('telco'));
             assert.equal(NODICS.isModuleActive('telcoCatalog'), selected.includes('telco'));
             assert.equal(NODICS.isModuleActive('commerceServer'), false);
+            assert.equal(NODICS.isModuleActive('workflow'), false);
         }
     }),
     Object.freeze({
@@ -158,15 +158,11 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'processServer',
-        frameworkModules: Object.freeze(['nodics.process', 'nodics.cron', 'nodics.wcms']),
+        frameworkModules: Object.freeze(['nodics.process', 'nodics.wcms']),
         expectedModules: Object.freeze([
             'nodics.foundation',
-            'flowSchema',
-            'flowCore',
-            'flowApi',
             'workflow',
             'nodics.process',
-            'nodics.cron',
             'cronjob',
             'nodics.kickoff',
             'kickoffCore',

@@ -10,6 +10,7 @@
  */
 
 'use strict';
+const wcmsAuthorityModules = ['cms', 'editorial', 'media', 'publish'];
 
 /** @module wcmsOnlineServer/config/properties @description Defines the non-versioned Local WCMS Online target and delivery boundary. */
 module.exports = {
@@ -38,6 +39,7 @@ module.exports = {
     },
     publishEnabled: false,
     runtimeRole: { code: 'WCMS_ONLINE', publication: 'ONLINE' },
+    runtimeAuthorityContexts: { modules: Object.fromEntries(wcmsAuthorityModules.map(moduleName => [moduleName, 'wcms.online'])) },
     database: { default: { mongodb: { master: {
         URI: 'mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal',
         databaseName: 'kickoffLocalWcmsOnline'

@@ -25,7 +25,6 @@
     "nodics.foundation": "file:.nodics/framework/nodics.foundation",
     "nodics.commerce": "file:.nodics/framework/nodics.commerce",
     "nodics.communication": "file:.nodics/framework/nodics.communication",
-    "nodics.cron": "file:.nodics/framework/nodics.cron",
     "nodics.discovery": "file:.nodics/framework/nodics.discovery",
     "nodics.engagement": "file:.nodics/framework/nodics.engagement",
     "nodics.localization": "file:.nodics/framework/nodics.localization",

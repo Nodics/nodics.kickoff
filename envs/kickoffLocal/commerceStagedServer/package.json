@@ -7,7 +7,7 @@
   "description": "Reference customer Commerce Staged server for governed Product catalog publication.",
   "nodics": {
     "kind": "server",
-    "extends": ["nodics.process", "nodics.discovery", "nodics.commerce"],
+    "extends": ["nodics.discovery", "nodics.commerce"],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
     "owns": ["composition", "configuration"],

@@ -281,6 +281,12 @@ module.exports = {
         ]
     },
     runtimeRole: { code: 'PLATFORM', publication: 'OPERATIONAL' },
+    database: {
+        default: { mongodb: { master: { databaseName: 'kickoffLocalPlatform' } } },
+        backoffice: { mongodb: { master: { databaseName: 'kickoffLocalPlatform' } } },
+        localizationCore: { mongodb: { master: { databaseName: 'kickoffLocalPlatform' } } },
+        profile: { mongodb: { master: { databaseName: 'kickoffLocalPlatform' } } }
+    },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['PLATFORM'] } },
     profileBrowserSession: {

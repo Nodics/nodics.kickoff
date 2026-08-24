@@ -66,6 +66,13 @@ module.exports = {
                     databaseName: 'kickoffLocalCron'
                 }
             }
+        },
+        workflow: {
+            mongodb: {
+                master: {
+                    databaseName: 'kickoffLocalProcess'
+                }
+            }
         }
     },
     process: {

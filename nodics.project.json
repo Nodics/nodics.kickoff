@@ -82,7 +82,6 @@
         "moduleRoots": [
           "nodics.foundation",
           "nodics.process",
-          "nodics.cron",
           "nodics.wcms",
           "{project}"
         ]
@@ -148,11 +147,7 @@
       "foundationModule": "nodics.foundation",
       "retiredModule": "nodics.core",
       "functionalModule": "nodics.process",
-      "observedServer": "kickoffLocal:processServer:default",
-      "optionalModule": "nodics.cron",
-      "optionalObservedServers": [
-        "kickoffLocal:processServer:default"
-      ]
+      "observedServer": "kickoffLocal:processServer:default"
     },
     "guidedInitialization": {
       "profileCode": "localWcmsFoundation",

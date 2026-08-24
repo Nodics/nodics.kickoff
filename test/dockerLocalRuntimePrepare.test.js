@@ -21,7 +21,7 @@ const scenarios = [
     ['platformServer', ['nodics.platform', 'nodics.localization'], 'kickoffDockerLocalPlatform', 'PLATFORM'],
     ['wcmsStagedServer', ['nodics.wcms', 'nodics.platform'], 'kickoffDockerLocalWcmsStaged', 'WCMS_STAGED'],
     ['wcmsOnlineServer', ['nodics.wcms'], 'kickoffDockerLocalWcmsOnline', 'WCMS_ONLINE'],
-    ['processServer', ['nodics.process', 'nodics.cron', 'nodics.wcms'], 'kickoffDockerLocalProcess', 'PROCESS'],
+    ['processServer', ['nodics.process', 'nodics.process', 'nodics.wcms'], 'kickoffDockerLocalProcess', 'PROCESS'],
     ['engagementServer', ['nodics.communication', 'nodics.engagement'], 'kickoffDockerLocalEngagement', 'ENGAGEMENT'],
     ['commerceServer', ['nodics.process', 'nodics.discovery', 'nodics.commerce'], 'kickoffDockerLocalCommerce', 'COMMERCE'],
     ['commerceStagedServer', ['nodics.process', 'nodics.discovery', 'nodics.commerce'], 'kickoffDockerLocalCommerceStaged', 'COMMERCE_STAGED']
