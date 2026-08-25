@@ -11,10 +11,21 @@
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
-    "owns": ["composition", "configuration"],
-    "runtime": { "router": false, "publish": false, "web": false },
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
     "displayName": "WCMS Server (Retired)",
     "retired": true,
-    "replacementServers": ["wcmsStagedServer", "wcmsOnlineServer"]
-  }
+    "replacementServers": [
+      "wcmsStagedServer",
+      "wcmsOnlineServer"
+    ]
+  },
+  "description": "WCMS Server (Retired) runtime composition and configuration boundary for this Nodics project."
 }

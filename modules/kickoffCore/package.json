@@ -22,12 +22,6 @@
         "loadableByNodicsModuleLoader": true,
         "owns": [
             "configuration",
-            "schema",
-            "router",
-            "service",
-            "pipeline",
-            "utility",
-            "test",
             "llm"
         ],
         "runtime": {

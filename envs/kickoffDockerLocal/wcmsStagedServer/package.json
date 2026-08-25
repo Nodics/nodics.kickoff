@@ -1,1 +1,26 @@
-{"name":"wcmsStagedServer","version":"0.0.0","index":"1001.22","private":true,"main":"nodics.js","nodics":{"kind":"server","extends":["nodics.wcms"],"runtimeModule":true,"loadableByNodicsModuleLoader":true,"owns":["composition","configuration"],"runtime":{"router":false,"publish":false,"web":false},"displayName":"Docker Local WCMS Staged Server"}}
+{
+  "name": "wcmsStagedServer",
+  "version": "0.0.0",
+  "index": "1001.22",
+  "private": true,
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "server",
+    "extends": [
+      "nodics.wcms"
+    ],
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
+    "displayName": "Docker Local WCMS Staged Server"
+  },
+  "description": "Docker Local WCMS Staged Server runtime composition and configuration boundary for this Nodics project."
+}

@@ -6,11 +6,21 @@
   "main": "nodics.js",
   "nodics": {
     "kind": "server",
-    "extends": ["nodics.wcms"],
+    "extends": [
+      "nodics.wcms"
+    ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
-    "owns": ["composition", "configuration"],
-    "runtime": { "router": false, "publish": false, "web": false },
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
     "displayName": "WCMS Online Server"
-  }
+  },
+  "description": "WCMS Online Server runtime composition and configuration boundary for this Nodics project."
 }

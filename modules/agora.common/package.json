@@ -21,7 +21,9 @@
             "publish": false,
             "web": false
         },
-        "extends": ["nodics.commerce"]
+        "extends": [
+            "nodics.commerce"
+        ]
     },
     "scripts": {}
 }

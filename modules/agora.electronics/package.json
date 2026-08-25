@@ -21,7 +21,9 @@
             "publish": false,
             "web": false
         },
-        "extends": ["electronics"]
+        "extends": [
+            "electronics"
+        ]
     },
     "scripts": {}
 }

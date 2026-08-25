@@ -8,8 +8,17 @@
     "kind": "group",
     "runtimeModule": false,
     "loadableByNodicsModuleLoader": false,
-    "owns": ["composition", "configuration"],
-    "runtime": { "router": false, "publish": false, "web": false },
+    "owns": [
+      "composition",
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
     "displayName": "Kickoff Environments"
-  }
+  },
+  "description": "Environment composition boundary for this Nodics project."
 }

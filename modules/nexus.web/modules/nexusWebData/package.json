@@ -13,8 +13,18 @@
     "kind": "content-pack",
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
-    "owns": ["configuration", "data", "test", "documentation"],
-    "runtime": { "router": false, "publish": false, "web": false },
+    "owns": [
+      "configuration",
+      "data",
+      "test",
+      "documentation",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
     "displayName": "Nexus Web Data"
   }
 }

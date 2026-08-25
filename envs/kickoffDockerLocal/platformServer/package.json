@@ -1,1 +1,27 @@
-{"name":"platformServer","version":"0.0.0","index":"1001.21","private":true,"main":"nodics.js","nodics":{"kind":"server","extends":["nodics.platform","nodics.localization"],"runtimeModule":true,"loadableByNodicsModuleLoader":true,"owns":["composition","configuration"],"runtime":{"router":false,"publish":false,"web":false},"displayName":"Docker Local Platform Server"}}
+{
+  "name": "platformServer",
+  "version": "0.0.0",
+  "index": "1001.21",
+  "private": true,
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "server",
+    "extends": [
+      "nodics.platform",
+      "nodics.localization"
+    ],
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
+    "displayName": "Docker Local Platform Server"
+  },
+  "description": "Docker Local Platform Server runtime composition and configuration boundary for this Nodics project."
+}

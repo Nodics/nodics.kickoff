@@ -13,7 +13,14 @@
     "kind": "content-pack",
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
-    "owns": ["configuration", "data", "assets", "test", "documentation"],
+    "owns": [
+      "configuration",
+      "data",
+      "test",
+      "documentation",
+      "assets",
+      "llm"
+    ],
     "runtime": {
       "router": false,
       "publish": false,

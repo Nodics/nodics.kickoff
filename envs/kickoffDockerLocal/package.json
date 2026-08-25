@@ -8,8 +8,17 @@
     "kind": "group",
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
-    "owns": ["composition", "configuration"],
-    "runtime": { "router": false, "publish": false, "web": false },
+    "owns": [
+      "composition",
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
     "displayName": "Kickoff Docker Local"
-  }
+  },
+  "description": "Kickoff Docker Local runtime composition and configuration boundary for this Nodics project."
 }

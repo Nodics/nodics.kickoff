@@ -11,7 +11,13 @@
         "displayName": "Agora Telco Data",
         "runtimeModule": true,
         "loadableByNodicsModuleLoader": true,
-        "owns": ["configuration", "data", "test", "documentation"],
+        "owns": [
+            "configuration",
+            "data",
+            "test",
+            "documentation",
+            "llm"
+        ],
         "runtime": {
             "router": false,
             "publish": false,

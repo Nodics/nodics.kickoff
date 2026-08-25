@@ -12,8 +12,16 @@
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
-    "owns": ["composition", "configuration"],
-    "runtime": { "router": false, "publish": false, "web": false },
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
     "displayName": "Platform Server"
-  }
+  },
+  "description": "Platform Server runtime composition and configuration boundary for this Nodics project."
 }

@@ -11,7 +11,11 @@
     "loadableByNodicsModuleLoader": true,
     "owns": [
       "composition",
-      "configuration"
+      "configuration",
+      "data",
+      "test",
+      "documentation",
+      "llm"
     ],
     "runtime": {
       "router": false,
@@ -75,10 +79,10 @@
     "acceptance:agora-commerce-data": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:agora-commerce-data",
     "acceptance:agora-commerce-publication": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:agora-commerce-publication",
     "acceptance:agora-commerce:ci": "npm run test:agora-commerce && npm run acceptance:agora-commerce-data && npm run acceptance:agora-commerce-publication && npm run acceptance:agora-commerce",
-  "qualification:agora-commerce:live": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run qualification:agora-commerce:live",
-  "acceptance:agora-cms-media-seed": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:agora-cms-media-seed",
-  "acceptance:nexus-cms-media-seed": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:nexus-cms-media-seed",
-  "acceptance:editorial-live": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:editorial-live",
+    "qualification:agora-commerce:live": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run qualification:agora-commerce:live",
+    "acceptance:agora-cms-media-seed": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:agora-cms-media-seed",
+    "acceptance:nexus-cms-media-seed": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:nexus-cms-media-seed",
+    "acceptance:editorial-live": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:editorial-live",
     "acceptance:capability-registry": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:capability-registry",
     "acceptance:guided-initialization": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run acceptance:guided-initialization",
     "qualification:deployment": "node .nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js project:run qualification:deployment",
