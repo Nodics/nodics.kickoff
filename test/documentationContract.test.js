@@ -142,4 +142,19 @@ assert(
     'Nexus application documentation must have a module-owned docs boundary'
 );
 
+[
+    'AGENTS.md',
+    'README.md',
+    'modules/AGENTS.md'
+].forEach(relativePath => {
+    const content = fs.readFileSync(path.join(root, relativePath), 'utf8');
+    [
+        'AI tool',
+        'repository',
+        'AGENTS.md'
+    ].forEach(clause => {
+        assert(content.includes(clause), relativePath + ' must preserve AI tool entry guidance: ' + clause);
+    });
+});
+
 console.log('Kickoff documentation contract validated');

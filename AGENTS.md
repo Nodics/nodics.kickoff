@@ -42,6 +42,29 @@ data/
   repository at `llm/contracts/modularization-phase0-contract.md` before
   changing Nodics Kickoff dependency resolution, module skeletons, or runtime scripts.
 
+## AI tool GitHub entry path
+
+A user may start this reference/customer-project journey directly from an AI
+coding tool such as Codex, Claude Code, GitHub Copilot, or another
+repository-aware assistant by providing the GitHub repository URL. In that path
+the user does not need to download or run `nodics.installer` first.
+
+When started from a repository URL, the AI tool must:
+
+1. read this root `AGENTS.md` before project files;
+2. read root `README.md` for the human setup and project overview;
+3. descend through `modules/AGENTS.md`, `envs/AGENTS.md`, and the nearest
+   module/environment `AGENTS.md` before making changes;
+4. distinguish reference-project source changes from generated customer-local
+   workspace changes;
+5. use `nodics.installer` only when the user asks to create, repair, or operate
+   a local customer workspace;
+6. never commit generated customer-local output into this source repository.
+
+For local setup requests, guide the user to the installer command or invoke the
+installer after confirming the target workspace. For template, runtime,
+environment, data-pack, or acceptance work, continue from this AGENTS hierarchy.
+
 ## AI operating role
 
 Before changing this project, an AI tool must act as all of these roles

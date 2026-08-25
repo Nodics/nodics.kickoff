@@ -61,6 +61,13 @@ npm run topology:status
 npm run topology:stop
 ```
 
+If the journey starts from an AI coding tool such as Codex, Claude Code, GitHub
+Copilot, or another repository-aware assistant, the user can provide the
+Kickoff GitHub repository URL directly. The AI tool must read root `AGENTS.md`,
+then the nearest `modules/` or `envs/` `AGENTS.md`, before changing source,
+data, topology, or documentation. Use `nodics.installer` only when the user
+wants to create, repair, or operate a separate local customer workspace.
+
 `topology:start` supervises all six direct-Node `kickoffLocal` backend
 runtimes from one terminal. Use `topology:start:all` to include sibling Axis
 and Nexus development servers. The supervisor refuses unknown busy ports and

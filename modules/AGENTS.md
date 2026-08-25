@@ -3,6 +3,8 @@
 ## Inheritance
 
 - Follow the Nodics Kickoff project contract: `../AGENTS.md`.
+- AI tools that enter this directory directly must first recover the repository
+  root `AGENTS.md`, then return here before editing a child module.
 
 ## Module Work Rules
 
