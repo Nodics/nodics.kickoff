@@ -77,7 +77,7 @@ flowchart LR
   Servers --> Commerce["Commerce and Engagement"]
   UiWorkspace["Frontend workspace<br/>nodics.exp"] --> Axis["BackOffice<br/>nodics.axis"]
   UiWorkspace --> Nexus["Corporate site<br/>nodics.nexus"]
-  UiWorkspace --> Agora["Commerce storefront<br/>nodics.agora"]
+  UiWorkspace --> Agora["Commerce storefront<br/>nodics.agora.apparel"]
   Axis --> Platform
   Axis --> WCMS
   Axis --> Automation

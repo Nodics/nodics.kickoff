@@ -71,7 +71,7 @@ nodicsRoot/
 └── nodics.exp/
     ├── nodics.axis/
     ├── nodics.nexus/
-    └── nodics.agora/
+    └── nodics.agora.apparel/
 ```
 
 If a developer keeps the frontend apps somewhere else, set the explicit root
