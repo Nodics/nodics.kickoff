@@ -13,7 +13,7 @@
 
 /** @module kickoffLocal/engagementServer/config/properties @description Enables the contact experience and local coordinates only for the reference Engagement server. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own feature, database, provider, and endpoint configuration. */
 module.exports = {
-    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'agoraCommonData', 'kickoffLocal', 'engagementServer'] },
+    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'kickoffLocal', 'engagementServer'] },
     runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: { publish: 'engagement.operational' } },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',

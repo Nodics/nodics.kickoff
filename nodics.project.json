@@ -24,17 +24,15 @@
     ]
   },
   "domains": [
-    "common",
     "apparel",
     "electronics",
     "telco"
   ],
   "dataPacks": [
     "nexusWebData",
-    "agoraCommonData",
-    "agoraApparelData",
-    "agoraElectronicsData",
-    "agoraTelcoData"
+    "agoraApparel",
+    "agoraElectronics",
+    "agoraTelco"
   ],
   "runtime": {
     "servers": {
@@ -235,7 +233,7 @@
         },
         {
           "code": "agora",
-          "label": "Agora",
+          "label": "Agora Apparel",
           "command": "npm",
           "args": [
             "run",
@@ -246,7 +244,7 @@
             "--port",
             "3300"
           ],
-          "cwd": "{workspaceRoot}/nodics.exp/nodics.agora",
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.agora.apparel",
           "port": 3300,
           "readyPath": "/"
         }

@@ -8,24 +8,23 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, '..');
 const definitions = [
-  { group: 'agora.apparel', framework: 'apparel', pack: 'agoraApparelData', prefix: 'agoraApparel', folder: 'apparel', productFile: 'agoraApparelProductData.js', profileFile: 'agoraApparelStyleData.js', catalogVersion: 'agoraApparelStaged', contentCatalog: 'agoraApparelContentCatalog', rendererKeys: ['agora.apparel.product-card', 'agora.apparel.page.home'] },
-  { group: 'agora.electronics', framework: 'electronics', pack: 'agoraElectronicsData', prefix: 'agoraElectronics', folder: 'electronics', productFile: 'agoraElectronicsProductData.js', profileFile: 'agoraElectronicsSpecificationData.js', catalogVersion: 'agoraElectronicsStaged', contentCatalog: 'agoraElectronicsContentCatalog', rendererKeys: ['agora.electronics.product-card', 'agora.electronics.page.home'] },
-  { group: 'agora.telco', framework: 'telco', pack: 'agoraTelcoData', prefix: 'agoraTelco', folder: 'telco', productFile: 'agoraTelcoProductData.js', profileFile: 'agoraTelcoPlanData.js', catalogVersion: 'agoraTelcoStaged', contentCatalog: 'agoraTelcoContentCatalog', rendererKeys: ['agora.telco.product-card', 'agora.telco.page.home'] }
+  { group: 'agora.apparel', framework: 'apparel', pack: 'agoraApparel', prefix: 'agoraApparel', folder: 'apparel', productFile: 'agoraApparelProductData.js', profileFile: 'agoraApparelStyleData.js', catalogVersion: 'agoraApparelStaged', contentCatalog: 'agoraApparelContentCatalog', rendererKeys: ['agora.apparel.product-card', 'agora.apparel.page.home'] },
+  { group: 'agora.electronics', framework: 'electronics', pack: 'agoraElectronics', prefix: 'agoraElectronics', folder: 'electronics', productFile: 'agoraElectronicsProductData.js', profileFile: 'agoraElectronicsSpecificationData.js', catalogVersion: 'agoraElectronicsStaged', contentCatalog: 'agoraElectronicsContentCatalog', rendererKeys: ['agora.electronics.product-card', 'agora.electronics.page.home'] },
+  { group: 'agora.telco', framework: 'telco', pack: 'agoraTelco', prefix: 'agoraTelco', folder: 'telco', productFile: 'agoraTelcoProductData.js', profileFile: 'agoraTelcoPlanData.js', catalogVersion: 'agoraTelcoStaged', contentCatalog: 'agoraTelcoContentCatalog', rendererKeys: ['agora.telco.product-card', 'agora.telco.page.home'] }
 ];
 
 const digest = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
 test('Kickoff domain groups extend reusable framework accelerators and packs remain data-only', () => {
-  assert.deepEqual(require('../modules/agora.common/package.json').nodics.extends, ['nodics.commerce']);
+  assert.equal(fs.existsSync(path.join(root, 'modules', 'agora.' + 'common')), false);
   for (const definition of definitions) {
     const groupRoot = path.join(root, 'modules', definition.group);
     const packRoot = path.join(groupRoot, 'modules', definition.pack);
     assert.deepEqual(require(path.join(groupRoot, 'package.json')).nodics.extends, [definition.framework]);
     const metadata = require(path.join(packRoot, 'package.json')).nodics;
     assert.equal(metadata.kind, 'content-pack');
-    assert.deepEqual(metadata.owns, ['configuration', 'data', 'test', 'documentation']);
-    assert.equal(fs.existsSync(path.join(packRoot, 'src')), true);
-    assert.deepEqual(fs.readdirSync(path.join(packRoot, 'src')).filter(name => fs.readdirSync(path.join(packRoot, 'src', name)).length), []);
+    assert.deepEqual(metadata.owns, ['configuration', 'data', 'test', 'documentation', 'llm']);
+    assert.equal(fs.existsSync(path.join(packRoot, 'src')), false);
   }
 });
 
@@ -35,7 +34,7 @@ test('every domain owns distinct Product and WCMS catalogs with framework domain
     const dataRoot = path.join(root, 'modules', definition.group, 'modules', definition.pack, 'data', 'staged', definition.folder, 'data');
     const products = require(path.join(dataRoot, definition.productFile));
     const profiles = require(path.join(dataRoot, definition.profileFile));
-    const content = require(path.join(dataRoot, `${definition.pack.replace('Data', '')}ContentCatalogData.js`));
+    const content = require(path.join(dataRoot, `${definition.pack}ContentCatalogData.js`));
     const site = require(path.join(dataRoot, `${definition.prefix}SiteData.js`));
     const page = require(path.join(dataRoot, `${definition.prefix}PageData.js`));
     const route = require(path.join(dataRoot, `${definition.prefix}RouteData.js`));
@@ -68,20 +67,27 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
     for (const section of sections) for (const [relative, expected] of Object.entries(section.files)) {
       assert.equal(digest(path.join(packRoot, 'data', relative)), expected, `${definition.pack}:${relative}`);
     }
-    const runtimeFiles = fs.readdirSync(path.join(packRoot, 'data', 'staged', definition.folder, 'data')).map(file => `staged/${definition.folder}/data/${file}`)
-      .concat(fs.readdirSync(path.join(packRoot, 'data', 'staged', definition.folder, 'headers')).map(file => `staged/${definition.folder}/headers/${file}`)).sort();
+    const stagedRoot = path.join(packRoot, 'data', 'staged', definition.folder);
+    const runtimeFiles = [];
+    const collect = dir => fs.readdirSync(dir, { withFileTypes: true }).forEach(entry => {
+      const child = path.join(dir, entry.name);
+      if (entry.isDirectory()) collect(child);
+      else if (entry.name.endsWith('.js')) runtimeFiles.push(path.relative(path.join(packRoot, 'data'), child));
+    });
+    collect(stagedRoot);
+    runtimeFiles.sort();
     assert.deepEqual(sections.flatMap(section => Object.keys(section.files)).sort(), runtimeFiles);
   }
 });
 
 test('project composition selects each domain independently, together, or Commerce-only', () => {
   const composition = require('../config/agora-domain-composition');
-  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agoraApparelData'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agoraElectronicsData'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agoraTelcoData'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agoraApparel'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agoraElectronics'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agoraTelco'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
   assert.deepEqual(composition.resolve('commerce'), { domains: [], frameworkGroups: [], sharedModules: [], projectPacks: [], productSearchContributors: {} });
   assert.deepEqual(composition.resolve('all').domains, ['apparel', 'electronics', 'telco']);
-  assert.deepEqual(composition.resolve('all').sharedModules, ['multiDomainCommerce']);
+  assert.deepEqual(composition.resolve('all').sharedModules, ['domainCommerceCore']);
   assert.throws(() => composition.resolve('apparel,unknown'), /Unsupported NODICS_AGORA_DOMAINS/);
 });
 

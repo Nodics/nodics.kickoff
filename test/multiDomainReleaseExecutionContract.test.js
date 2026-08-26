@@ -1,7 +1,7 @@
 'use strict';
 const assert = require('node:assert/strict'); const path = require('node:path'); const test = require('node:test');
 const projectRoot = path.resolve(__dirname, '..'); const servicePath = path.resolve(projectRoot, '../nodics.ai/nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService.js');
-const modules = ['agoraApparelData', 'agoraElectronicsData', 'agoraTelcoData'];
+const modules = ['agoraApparel', 'agoraElectronics', 'agoraTelco'];
 const roots = Object.fromEntries(modules.map(name => [name, path.join(projectRoot, 'modules', `agora.${name.replace(/^agora|Data$/g, '').toLowerCase()}`, 'modules', name)]));
 let installations; let imports; let destination;
 function setup(role) {

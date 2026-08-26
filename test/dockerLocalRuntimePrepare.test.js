@@ -42,10 +42,10 @@ async function main() {
         assert.equal(CONFIG.get('runtimeRole').code, role);
         if (server === 'commerceStagedServer') {
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
-            assert.equal(NODICS.isModuleActive('agoraCommonData'), true);
+            assert.equal(NODICS.isModuleActive('agoraApparel'), true);
         }
         if (server === 'commerceServer') {
-            assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
+            assert.equal(NODICS.isModuleActive('agoraApparel'), false);
         }
         if (server === 'commerceServer' || server === 'commerceStagedServer') {
             assert.equal(NODICS.isModuleActive('nodics.discovery'), true);

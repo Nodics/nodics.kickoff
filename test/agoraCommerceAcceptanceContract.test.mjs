@@ -14,7 +14,7 @@ import test from "node:test";
  * @module kickoff/test/agoraCommerceAcceptanceContract
  * @description Guards the Agora Commerce customer journey acceptance harness.
  * @layer test
- * @owner agoraCommonData
+ * @owner agoraApparel
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);

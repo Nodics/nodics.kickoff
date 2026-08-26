@@ -28,14 +28,14 @@
       "pages": 7,
       "components": 8,
       "routes": 7,
-      "releaseChecksum": "3875f0e2e2f9faef7b3aa51379c0a1acc0acb1d32134fcd91eab269f72fb7ae9",
+      "releaseChecksum": "2c0d9f7d921167da66e34bd3acbd3488ed3d8c7cd9c553416ccc7fd55b340b0c",
       "generatedHashes": {
         "core/data/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
         "core/data/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
         "core/data/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
         "core/data/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
         "core/data/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
-        "core/data/documentation/kickoffDocumentationComponentData.js": "3c34a31181ef08b8de5860cdec3ea09482af9a5eba697c9db82ac6fdacd03e6e",
+        "core/data/documentation/kickoffDocumentationComponentData.js": "81530af504b8cd59ceca6feb50af2ec53af1d4cfaae7e6aadc7c0da5badf03c7",
         "core/data/documentation/kickoffDocumentationPageData.js": "036af1cf25825eaa555c3b6dc401ca6ba176ebaa7685e7dbb3b6c9b8a689c991",
         "core/data/documentation/kickoffDocumentationRouteData.js": "f9ed1c6dae30e31037308262ec4ef092cb2651910b10387d4b2a501a0c4eb446",
         "core/headers/kickoffDocumentationContentPackHeader.js": "9d1e6603aaa2f4fb2e9f96e550c5da3f361d617869fadf1ee9d907d2ec973c9f"

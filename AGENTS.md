@@ -29,7 +29,7 @@ data/
 - Use Kickoff `docs/` for project-wide setup, runtime composition, onboarding,
   customization, qualification and operations. Application-specific
   documentation belongs under the owning application data module, for example
-  `modules/nexus.web/modules/nexusWebData/docs/` or `modules/agora.common/modules/agoraCommonData/docs/`; its generated records
+  `modules/nexus.web/modules/nexusWebData/docs/` or `modules/agora.apparel/modules/agoraApparel/docs/``; its generated records
   belong in that module's lifecycle-qualified `data/` release. Keep `README.md`
   files concise.
 - Project, environment, and server contributions load after product modules by

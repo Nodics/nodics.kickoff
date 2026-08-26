@@ -1,14 +1,14 @@
 'use strict';
 const assert = require('node:assert/strict'); const path = require('node:path'); const test = require('node:test');
 const root = path.resolve(__dirname, '..'); const framework = path.resolve(root, '../nodics.ai');
-const load = value => require(value); const dataRoot = (domain, title) => path.join(root, 'modules', `agora.${domain}`, 'modules', `agora${title}Data`, 'data', 'staged', domain, 'data');
+const load = value => require(value); const dataRoot = (domain, title) => path.join(root, 'modules', `agora.${domain}`, 'modules', `agora${title}`, 'data', 'staged', domain, 'data');
 const apparelRoot = dataRoot('apparel', 'Apparel'); const electronicsRoot = dataRoot('electronics', 'Electronics'); const telcoRoot = dataRoot('telco', 'Telco');
 const apparelValidation = load(path.join(framework, 'nodics.accelerators/modules/apparel/modules/apparelProduct/src/service/defaultApparelProductValidationService'));
 const electronicsValidation = load(path.join(framework, 'nodics.accelerators/modules/electronics/modules/electronicsProduct/src/service/defaultElectronicsProductValidationService'));
 const telcoValidation = load(path.join(framework, 'nodics.accelerators/modules/telco/modules/telcoCatalog/src/service/defaultTelcoCatalogValidationService'));
 const subscription = load(path.join(framework, 'nodics.accelerators/modules/telco/modules/telcoSubscription/src/service/defaultTelcoSubscriptionService'));
 const provisioning = load(path.join(framework, 'nodics.accelerators/modules/telco/modules/telcoProvisioning/src/service/defaultTelcoProvisioningService'));
-const mixedPolicy = load(path.join(framework, 'nodics.accelerators/modules/multiDomainCommerce/src/service/defaultMultiDomainCommercePolicyService'));
+const mixedPolicy = load(path.join(framework, 'nodics.accelerators/modules/domainCommerceCore/src/service/defaultDomainCommerceCorePolicyService'));
 const reverseLifecycle = load(path.join(framework, 'nodics.commerce/modules/checkout/modules/order/src/service/defaultOrderLifecycleService'));
 global.CONFIG = { get: key => key === 'apparelProduct' ? { sizeSystems: ['ALPHA', 'EU', 'UK', 'US', 'AGE', 'ONE_SIZE'], compositionTotal: 100 } : undefined };
 const values = object => Object.values(object);

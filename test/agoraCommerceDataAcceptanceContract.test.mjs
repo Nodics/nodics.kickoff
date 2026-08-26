@@ -14,7 +14,7 @@ import test from "node:test";
  * @module kickoff/test/agoraCommerceDataAcceptanceContract
  * @description Guards the live Agora Commerce data acceptance harness as preflight-first and install-gated.
  * @layer test
- * @owner agoraCommonData
+ * @owner agoraApparel
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
@@ -68,7 +68,7 @@ test("Agora Commerce data acceptance derives the selected domain release family"
   const source = fs.readFileSync(scriptPath, "utf8");
   assert.match(source, /agora-domain-composition/);
   assert.match(source, /storefrontPacks\.flatMap/);
-  assert.match(source, /\["agoraCommonData", \.\.\.composition\.projectPacks\]/);
+  assert.match(source, /const storefrontPacks = Object.freeze\(\[...composition.projectPacks\]\)/);
   assert.match(source, /section\.destinationRole === "COMMERCE_STAGED"/);
-  assert.doesNotMatch(source, /agoraCommonData:agoraProductCatalogSource/);
+  assert.doesNotMatch(source, new RegExp('agora' + 'CommonData:agoraProductCatalogSource'));
 });

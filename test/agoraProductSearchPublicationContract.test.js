@@ -15,12 +15,12 @@ const test = require('node:test');
  * @module kickoff/test/agoraProductSearchPublicationContract
  * @description Verifies Agora Product seed data satisfies Product bilingual publication and nSearch projection boundaries.
  * @layer test
- * @owner agoraCommonData
+ * @owner agoraApparel
  */
 
 const projectRoot = path.resolve(__dirname, '..');
 const productRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/product');
-const agoraProductRoot = path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/product/data');
+const agoraProductRoot = path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data');
 
 const productProperties = require(path.join(productRoot, 'config/properties'));
 const pricingRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/pricing');
@@ -38,15 +38,15 @@ const priceSelection = require(path.join(pricingRoot, 'src/service/defaultPriceS
 const exactAmount = require(path.join(pricingRoot, 'src/service/defaultExactAmountService'));
 const customerAvailabilitySummary = require(path.join(inventoryRoot, 'src/service/defaultCustomerAvailabilitySummaryService'));
 const inventorySourcing = require(path.join(inventoryRoot, 'src/service/defaultInventorySourcingService'));
-const products = require(path.join(agoraProductRoot, 'agoraProductData'));
-const productLocalizations = require(path.join(agoraProductRoot, 'agoraProductLocalizationData'));
-const categories = require(path.join(agoraProductRoot, 'agoraCategoryData'));
-const categoryLocalizations = require(path.join(agoraProductRoot, 'agoraCategoryLocalizationData'));
-const variants = require(path.join(agoraProductRoot, 'agoraProductVariantData'));
-const variantLocalizations = require(path.join(agoraProductRoot, 'agoraProductVariantLocalizationData'));
-const priceBooks = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/pricing/data/agoraPriceBookData'));
-const priceRows = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/pricing/data/agoraPriceRowData'));
-const inventoryBalances = require(path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData/data/staged/inventory/data/agoraInventoryBalanceData'));
+const products = require(path.join(agoraProductRoot, 'agoraApparelProductData'));
+const productLocalizations = require(path.join(agoraProductRoot, 'agoraApparelProductLocalizationData'));
+const categories = require(path.join(agoraProductRoot, 'agoraApparelCategoryData'));
+const categoryLocalizations = require(path.join(agoraProductRoot, 'agoraApparelCategoryLocalizationData'));
+const variants = require(path.join(agoraProductRoot, 'agoraApparelProductVariantData'));
+const variantLocalizations = require(path.join(agoraProductRoot, 'agoraApparelProductVariantLocalizationData'));
+const priceBooks = require(path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data/agoraApparelPriceBookData'));
+const priceRows = require(path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data/agoraApparelPriceRowData'));
+const inventoryBalances = require(path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data/agoraApparelInventoryBalanceData'));
 
 let persisted;
 let indexed;
@@ -131,6 +131,7 @@ test('Agora Product seed publishes customer-safe English and Arabic Product sear
       product,
       localizations,
       storeCode: 'agoraMainStore',
+      currency: 'AED',
       categoryCodes,
       variantCodes,
       variants: productVariants
@@ -150,7 +151,7 @@ test('Agora Product seed publishes customer-safe English and Arabic Product sear
   assert(indexed.every((item) => item.model.storeCode === 'agoraMainStore'));
   assert(indexed.every((item) => item.model.payload.inventory === undefined));
   assert(indexed.every((item) => item.model.payload.sku === undefined));
-  assert(indexed.every((item) => item.model.payload.price && item.model.payload.price.currency === 'USD'));
+  assert(indexed.every((item) => item.model.payload.price && item.model.payload.price.currency === 'AED'));
   assert(indexed.every((item) => item.model.payload.price.priceRowCode === undefined));
   assert(indexed.every((item) => item.model.payload.availability && item.model.payload.availability.status === 'IN_STOCK'));
   assert(indexed.every((item) => item.model.payload.availability.warehouseCode === undefined));

@@ -32,7 +32,7 @@ const scenarios = Object.freeze([
             'cyberSourceProvider', 'visaProvider', 'paymentProviders', 'payment',
             'fulfillmentCore', 'fulfillment', 'nodics.commerce',
             'apparelProduct', 'apparel', 'electronicsProduct', 'electronics',
-            'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'multiDomainCommerce', 'nodics.kickoff',
+            'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'domainCommerceCore', 'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal',
             'commerceServer'
         ]),
@@ -45,7 +45,7 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
             assert.equal(NODICS.isModuleActive('search'), true);
             assert.equal(NODICS.isModuleActive('elastic'), true);
-            assert.equal(NODICS.isModuleActive('agoraCommonData'), false);
+            assert.equal(NODICS.isModuleActive('agoraApparel'), false);
             assert.equal(NODICS.isModuleActive('workflow'), false);
         }
     }),
@@ -63,10 +63,10 @@ const scenarios = Object.freeze([
             'cyberSourceProvider', 'visaProvider', 'paymentProviders', 'payment',
             'fulfillmentCore', 'fulfillment', 'nodics.commerce',
             'apparelProduct', 'apparel', 'electronicsProduct', 'electronics',
-            'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'multiDomainCommerce', 'nodics.kickoff',
+            'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'domainCommerceCore', 'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt',
-            'agora.common', 'agoraCommonData', 'agora.apparel', 'agoraApparelData',
-            'agora.electronics', 'agoraElectronicsData', 'agora.telco', 'agoraTelcoData', 'kickoffLocal',
+            'agora.apparel', 'agoraApparel',
+            'agora.electronics', 'agoraElectronics', 'agora.telco', 'agoraTelco', 'kickoffLocal',
             'commerceStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'commerceManagement']),
@@ -82,7 +82,7 @@ const scenarios = Object.freeze([
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);
-            assert.equal(NODICS.isModuleActive('agoraCommonData'), true);
+            assert.equal(NODICS.isModuleActive('agoraApparel'), true);
             const selected = require('../config/agora-domain-composition').resolve().domains;
             assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
             assert.equal(NODICS.isModuleActive('electronicsProduct'), selected.includes('electronics') || selected.includes('telco'));
@@ -213,9 +213,9 @@ async function prepareScenario(scenario) {
     };
     const disabledModules = Object.entries(optionalFamilies).filter(([domain]) => !capabilityDomains.has(domain)).flatMap(([, modules]) => modules);
     ['apparel', 'electronics', 'telco'].filter(domain => !selectedDomains.includes(domain)).forEach(domain => {
-        disabledModules.push({ apparel: 'agoraApparelData', electronics: 'agoraElectronicsData', telco: 'agoraTelcoData' }[domain]);
+        disabledModules.push({ apparel: 'agoraApparel', electronics: 'agoraElectronics', telco: 'agoraTelco' }[domain]);
     });
-    if (selectedDomains.length < 2) disabledModules.push('multiDomainCommerce');
+    if (selectedDomains.length < 2) disabledModules.push('domainCommerceCore');
     scenario.expectedModules.filter(moduleName => !disabledModules.includes(moduleName)).forEach(moduleName => {
         assert.equal(NODICS.isModuleActive(moduleName), true, `${moduleName} should be active`);
     });

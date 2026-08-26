@@ -14,7 +14,7 @@ import test from "node:test";
  * @module kickoff/test/agoraCommercePublicationAcceptanceContract
  * @description Guards the live Agora Commerce Product search publication acceptance harness.
  * @layer test
- * @owner agoraCommonData
+ * @owner agoraApparel
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
@@ -41,7 +41,7 @@ test("Agora Commerce publication acceptance covers operator publication operatio
   assert.match(source, /storeCode.*\|\| "agoraMainStore"/);
   assert.match(source, /includeProjectionSnapshots: true/);
   assert.match(source, /restoreOperationalOnline/);
-  assert.match(source, /agoraTaxPolicyData/);
+  assert.match(source, /domainDataRecords\("TaxPolicyData\.js"\)/);
   assert.match(source, /CommerceOnline/);
 });
 

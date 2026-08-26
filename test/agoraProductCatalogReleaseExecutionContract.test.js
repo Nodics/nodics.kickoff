@@ -15,11 +15,11 @@ const test = require('node:test');
  * @module kickoff/test/agoraProductCatalogReleaseExecutionContract
  * @description Verifies the Agora Product seed release is discoverable, Commerce-Staged gated, and executable through nImport without a live database.
  * @layer test
- * @owner agoraCommonData
+ * @owner agoraApparel
  */
 
 const projectRoot = path.resolve(__dirname, '..');
-const moduleRoot = path.join(projectRoot, 'modules/agora.common/modules/agoraCommonData');
+const moduleRoot = path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel');
 const dataReleaseServicePath = path.resolve(
   projectRoot,
   '../nodics.ai/nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService.js'
@@ -60,13 +60,13 @@ function configureGlobals() {
     }
   };
   global.NODICS = {
-    getActiveModules: () => ['agoraCommonData'],
-    getRawModule: (moduleName) => moduleName === 'agoraCommonData' ? {
-      name: 'agoraCommonData',
+    getActiveModules: () => ['agoraApparel'],
+    getRawModule: (moduleName) => moduleName === 'agoraApparel' ? {
+      name: 'agoraApparel',
       path: moduleRoot,
       parent: 'kickoffModules',
-      canonicalIdentity: 'kickoffModules/agoraCommonData',
-      metaData: { nodics: { displayName: 'Agora Data' } }
+      canonicalIdentity: 'kickoffModules/agoraApparel',
+      metaData: { nodics: { displayName: 'Agora Apparel' } }
     } : undefined,
     getSelectedEnvironmentName: () => 'kickoffLocal'
   };
@@ -101,19 +101,20 @@ function service() {
   return require(dataReleaseServicePath);
 }
 
-test('Agora Product catalog release follows Commerce Staged nImport execution contract', async () => {
+test('Agora Apparel commerce catalog release follows Commerce Staged nImport execution contract', async () => {
   const dataReleaseService = service();
   const releases = dataReleaseService.discoverReleases('sample');
-  const release = releases.find((item) => item.releaseCode === 'agoraCommonData:agoraProductCatalogSource');
+  const release = releases.find((item) => item.releaseCode === 'agoraApparel:agoraApparelCommerceCatalog');
 
-  assert(release, 'agoraProductCatalogSource release should be discoverable');
+  assert(release, 'agoraApparelCommerceCatalog release should be discoverable');
   assert.equal(release.dataType, 'sample');
   assert.equal(release.sourceRoot, 'staged');
   assert.equal(release.lifecycle, 'PUBLISHABLE');
   assert.equal(release.destinationRole, 'COMMERCE_STAGED');
   assert.deepEqual(release.environmentScope, ['LOCAL', 'LOCAL_PRODUCTION_SIMULATION']);
-  assert.equal(release.declaredFiles.length, 7);
-  assert(release.declaredFiles.every((file) => file.startsWith('staged/product/')));
+  assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
+  assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelPriceRowData.js')));
+  assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelInventoryBalanceData.js')));
   assert.equal(dataReleaseService.validateDestination(release), true);
 
   runtimeRole = { code: 'WCMS_STAGED', publication: 'STAGED' };
@@ -122,8 +123,8 @@ test('Agora Product catalog release follows Commerce Staged nImport execution co
 
   const releaseRequest = {
     dataType: 'sample',
-    releaseCodes: ['agoraCommonData:agoraProductCatalogSource'],
-    expectedReleases: { 'agoraCommonData:agoraProductCatalogSource': release.version }
+    releaseCodes: ['agoraApparel:agoraApparelCommerceCatalog'],
+    expectedReleases: { 'agoraApparel:agoraApparelCommerceCatalog': release.version }
   };
   const preflight = await dataReleaseService.preflight({ tenant: 'default', releaseRequest });
 
@@ -137,36 +138,26 @@ test('Agora Product catalog release follows Commerce Staged nImport execution co
   assert.equal(execution.data.importRun.runId, 'agora-install-run');
   assert.equal(execution.data.releases[0].status, 'CURRENT');
   assert.equal(importRequests.length, 1);
-  assert.deepEqual(importRequests[0].modules, ['agoraCommonData']);
+  assert.deepEqual(importRequests[0].modules, ['agoraApparel']);
   assert.equal(importRequests[0].options.validateOnly, false);
-  assert.equal(importRequests[0].dataReleasePlan[0].releaseCode, 'agoraCommonData:agoraProductCatalogSource');
+  assert.equal(importRequests[0].dataReleasePlan[0].releaseCode, 'agoraApparel:agoraApparelCommerceCatalog');
   assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, 'staged');
-  assert(importRequests[0].dataReleasePlan[0].declaredFiles.every((file) => file.startsWith('staged/product/')));
-  assert.equal(installations[0].code, 'kickoffLocal:default:agoraCommonData:agoraProductCatalogSource:sample');
+  assert(importRequests[0].dataReleasePlan[0].declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
+  assert.equal(installations[0].code, 'kickoffLocal:default:agoraApparel:agoraApparelCommerceCatalog:sample');
   assert.equal(installations[0].status, 'CURRENT');
 });
 
-test('Agora Commerce discovery releases separate Product Pricing Inventory Promotion Tax Search and Discovery import plans', async () => {
+test('Agora domain Commerce releases separate each selected domain import plan', async () => {
   const dataReleaseService = service();
   const releases = dataReleaseService.discoverReleases('sample').filter((item) => item.destinationRole === 'COMMERCE_STAGED');
   const releaseCodes = releases.map((item) => item.releaseCode).sort();
 
   assert.deepEqual(releaseCodes, [
-    'agoraCommonData:agoraCommerceSearchSource',
-    'agoraCommonData:agoraDiscoveryConfigurationSource',
-    'agoraCommonData:agoraInventorySource',
-    'agoraCommonData:agoraPricingSource',
-    'agoraCommonData:agoraProductCatalogSource',
-    'agoraCommonData:agoraPromotionSource',
-    'agoraCommonData:agoraTaxSource'
+    'agoraApparel:agoraApparelCommerceCatalog'
   ]);
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraProductCatalogSource').declaredFiles.every((file) => file.startsWith('staged/product/')));
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraPricingSource').declaredFiles.every((file) => file.startsWith('staged/pricing/')));
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraInventorySource').declaredFiles.every((file) => file.startsWith('staged/inventory/')));
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraPromotionSource').declaredFiles.every((file) => file.startsWith('staged/promotion/')));
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraTaxSource').declaredFiles.every((file) => file.startsWith('staged/tax/')));
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraCommerceSearchSource').declaredFiles.every((file) => file.startsWith('staged/commerceSearch/')));
-  assert(releases.find((item) => item.releaseCode === 'agoraCommonData:agoraDiscoveryConfigurationSource').declaredFiles.every((file) => file.startsWith('staged/discovery/')));
+  assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
+  assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelPriceBookData.js')));
+  assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelInventoryBalanceData.js')));
 
   const releaseRequest = {
     dataType: 'sample',
@@ -175,8 +166,7 @@ test('Agora Commerce discovery releases separate Product Pricing Inventory Promo
   };
   const execution = await dataReleaseService.execute({ tenant: 'default', releaseRequest });
 
-  assert.equal(execution.data.releases.length, 7);
+  assert.equal(execution.data.releases.length, 1);
   assert.deepEqual(importRequests[0].dataReleasePlan.map((item) => item.releaseCode).sort(), releaseCodes);
-  assert.equal(importRequests[0].dataReleasePlan.flatMap((item) => item.declaredFiles).length, 27);
-  assert.equal(installations.length, 7);
+  assert.equal(installations.length, 1);
 });

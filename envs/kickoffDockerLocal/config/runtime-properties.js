@@ -93,44 +93,48 @@ module.exports = function runtimeProperties(server) {
                 nexusecosystemrepair: { code: 'nexusecosystemrepair', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexusWebData', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusecosystemrepair',
                     presentation: { visible: false },
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                agora: { code: 'agora', type: 'STOREFRONT_BUNDLE', owner: 'agoraCommonData', applicationCode: 'agora', siteCode: 'agoraStorefrontSite', baselineCode: 'agora',
+                agora: { code: 'agora', type: 'STOREFRONT_BUNDLE', owner: 'domainCommerceCore', applicationCode: 'agora', siteCode: 'agoraStorefrontSite', baselineCode: 'agora',
                     presentation: { title: 'Agora Storefront', kind: 'PROJECT', category: 'accelerator', order: 200,
                         summary: 'Commerce storefront accelerator. Domain-specific bundles will become separate business-facing accelerators.',
                         requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
                         activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' } },
                     dataPackages: [
-                        { code: 'agoraCommonData:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
-                        { code: 'agoraCommonData:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
+                        { code: 'agoraApparel:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'ACTIVATION' },
+                        { code: 'agoraApparel:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'ACTIVATION' },
+                        { code: 'agoraElectronics:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: false, trigger: 'USER' },
+                        { code: 'agoraElectronics:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: false, trigger: 'USER' },
+                        { code: 'agoraTelco:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: false, trigger: 'USER' },
+                        { code: 'agoraTelco:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: false, trigger: 'USER' }
                     ],
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                agoraapparel: { code: 'agoraapparel', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraApparelData', applicationCode: 'agora', siteCode: 'agoraApparelSite', baselineCode: 'agoraapparel',
+                agoraapparel: { code: 'agoraapparel', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraApparel', applicationCode: 'agora', siteCode: 'agoraApparelSite', baselineCode: 'agoraapparel',
                     presentation: { title: 'Agora Apparel', kind: 'PROJECT', category: 'accelerator', order: 210,
                         summary: 'Apparel storefront accelerator as a complete business-facing domain bundle.',
                         requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
                         activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
                     dataPackages: [
-                        { code: 'agoraApparelData:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                        { code: 'agoraApparelData:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                        { code: 'agoraApparel:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                        { code: 'agoraApparel:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
                     ],
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                agoraelectronics: { code: 'agoraelectronics', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraElectronicsData', applicationCode: 'agora', siteCode: 'agoraElectronicsSite', baselineCode: 'agoraelectronics',
+                agoraelectronics: { code: 'agoraelectronics', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraElectronics', applicationCode: 'agora', siteCode: 'agoraElectronicsSite', baselineCode: 'agoraelectronics',
                     presentation: { title: 'Agora Electronics', kind: 'PROJECT', category: 'accelerator', order: 220,
                         summary: 'Electronics storefront accelerator as a complete business-facing domain bundle.',
                         requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
                         activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
                     dataPackages: [
-                        { code: 'agoraElectronicsData:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                        { code: 'agoraElectronicsData:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                        { code: 'agoraElectronics:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                        { code: 'agoraElectronics:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
                     ],
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
-                agoratelco: { code: 'agoratelco', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraTelcoData', applicationCode: 'agora', siteCode: 'agoraTelcoSite', baselineCode: 'agoratelco',
+                agoratelco: { code: 'agoratelco', type: 'STOREFRONT_DOMAIN_BUNDLE', owner: 'agoraTelco', applicationCode: 'agora', siteCode: 'agoraTelcoSite', baselineCode: 'agoratelco',
                     presentation: { title: 'Agora Telco', kind: 'PROJECT', category: 'accelerator', order: 230,
                         summary: 'Telco storefront accelerator as a complete business-facing domain bundle.',
                         requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
                         activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' } },
                     dataPackages: [
-                        { code: 'agoraTelcoData:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                        { code: 'agoraTelcoData:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                        { code: 'agoraTelco:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                        { code: 'agoraTelco:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
                     ],
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 frameworkdocs: { code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs', applicationCode: 'axis', siteCode: 'nodicsDocumentationSite', baselineCode: 'frameworkdocs', contentPackCode: 'nodicsDocumentation',
@@ -176,7 +180,7 @@ module.exports = function runtimeProperties(server) {
         },
         wcmsStagedServer: {
             httpHardening: { cors: { allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100'], deniedOrigins: ['http://localhost:4200', 'http://127.0.0.1:4200'] } },
-            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusWebData', 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: ['cmsStaged', ...projectModules, 'nexusWebData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             publishEnabled: true, runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
             apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: true }, mediaManagement: { enabled: true } } },
             data: { dataReleases: dataReleases(['WCMS_STAGED'], [{ moduleName: 'axis', sections: ['axisBaseline'] }]) },
@@ -187,10 +191,10 @@ module.exports = function runtimeProperties(server) {
                 nexus: { releaseCode: 'nexusWebData:nexusCorporateSite', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusupdate: { releaseCode: 'nexusWebData:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusecosystemrepair: { releaseCode: 'nexusWebData:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                agora: { releaseCode: 'agoraCommonData:agoraStorefrontSite', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
-                agoraapparel: { releaseCode: 'agoraApparelData:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
-                agoraelectronics: { releaseCode: 'agoraElectronicsData:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
-                agoratelco: { releaseCode: 'agoraTelcoData:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
+                agora: { releaseCode: 'agoraApparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
+                agoraapparel: { releaseCode: 'agoraApparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
+                agoraelectronics: { releaseCode: 'agoraElectronics:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
+                agoratelco: { releaseCode: 'agoraTelco:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
                 frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.1', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
                 axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
                 kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
@@ -231,7 +235,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('process', 4330), ...connections }
         },
         engagementServer: {
-            activeModules: { groups: [], modules: [...projectModules, 'nexusWebData', 'agoraCommonData', 'kickoffDockerLocal', server] },
+            activeModules: { groups: [], modules: [...projectModules, 'nexusWebData', 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' }, data: { dataReleases: dataReleases(['ENGAGEMENT']) },
             engagement: { capabilities: { contactSubmission: true, testimonial: true, customerReview: true, customerFeedback: true } },
             customerFeedback: { enabled: true }, database: database('kickoffDockerLocalEngagement'),
@@ -251,7 +255,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('commerce', 4350), ...connections }
         },
         commerceStagedServer: {
-            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, 'agoraCommonData', ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
             data: { dataReleases: dataReleases(['COMMERCE_STAGED']) },
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },

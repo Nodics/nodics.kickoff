@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Premium device stack</title><desc id="desc">Layered tablets, phones, audio accessories, and smart watch product stack.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fef9ea"/><stop offset="1" stop-color="#d8d5ca"/></linearGradient><linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#ffe57a"/><stop offset="1" stop-color="#c09a08"/></linearGradient><linearGradient id="ink" x1="0" x2="1"><stop offset="0" stop-color="#2f323a"/><stop offset="1" stop-color="#11131a"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#111" flood-opacity="0.22"/></filter></defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <path d="M0 780 C310 660 540 695 780 760 C1030 830 1280 820 1600 680 V1100 H0Z" fill="#1a1d24" opacity="0.92"/>
+  <g filter="url(#shadow)">
+    <rect x="430" y="145" width="570" height="740" rx="54" fill="url(#ink)" transform="rotate(-8 715 515)"/>
+    <rect x="475" y="205" width="480" height="590" rx="42" fill="#faf9f2" transform="rotate(-8 715 515)"/>
+    <rect x="690" y="270" width="455" height="620" rx="48" fill="#ffffff" transform="rotate(8 920 580)"/>
+    <rect x="735" y="325" width="365" height="470" rx="34" fill="#f1f3f1" transform="rotate(8 920 580)"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="270" y="420" width="245" height="455" rx="45" fill="#22242c"/>
+    <rect x="298" y="468" width="188" height="320" rx="28" fill="#fffdf5"/>
+    <circle cx="392" cy="824" r="23" fill="url(#gold)"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="1035" y="600" width="260" height="160" rx="80" fill="#fff"/>
+    <circle cx="1112" cy="680" r="42" fill="url(#gold)"/><circle cx="1220" cy="680" r="42" fill="#262934"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="1170" cy="350" r="92" fill="#22242c"/><circle cx="1170" cy="350" r="66" fill="#f9f7ec"/><path d="M1170 305 V350 L1205 372" stroke="#c39a00" stroke-width="11" stroke-linecap="round" fill="none"/>
+  </g>
+  <g fill="none" stroke="#d5a900" stroke-width="5" opacity="0.5"><path d="M240 335 C520 135 960 95 1320 290"/><path d="M330 950 C650 830 970 830 1300 950"/></g>
+  <text x="95" y="150" font-family="Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="8" fill="#202229">SIGNATURE SETUP</text>
+  <text x="95" y="198" font-family="Arial, sans-serif" font-size="24" fill="#454744">Laptops, phones, wearables, and audio curated together.</text>
+</svg>

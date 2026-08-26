@@ -13,7 +13,7 @@ the Platform `axis` backend module; browser renderers belong in `nodics.axis`.
 Kickoff-wide documentation source belongs in this repository under `docs/` and
 is generated into this repository's governed content pack. Documentation for a
 specific installed application belongs under that application's data module,
-for example `modules/nexus.web/modules/nexusWebData/docs/` or `modules/agora.common/modules/agoraCommonData/docs/`.
+for example `modules/nexus.web/modules/nexusWebData/docs/` or `modules/agora.apparel/modules/agoraApparel/docs/``.
 
 ## Why Kickoff exists
 

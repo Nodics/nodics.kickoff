@@ -21,9 +21,9 @@
  */
 const agoraDomainComposition = {
     supported: Object.freeze({
-        apparel: Object.freeze({ group: 'apparel', pack: 'agoraApparelData' }),
-        electronics: Object.freeze({ group: 'electronics', pack: 'agoraElectronicsData' }),
-        telco: Object.freeze({ group: 'telco', pack: 'agoraTelcoData' })
+        apparel: Object.freeze({ group: 'apparel', pack: 'agoraApparel' }),
+        electronics: Object.freeze({ group: 'electronics', pack: 'agoraElectronics' }),
+        telco: Object.freeze({ group: 'telco', pack: 'agoraTelco' })
     }),
 
     enrichmentContributors: Object.freeze({
@@ -59,7 +59,7 @@ const agoraDomainComposition = {
         return Object.freeze({
             domains: Object.freeze(domains),
             frameworkGroups: Object.freeze(domains.map(domain => supported[domain].group)),
-            sharedModules: Object.freeze(domains.length > 1 ? ['multiDomainCommerce'] : []),
+            sharedModules: Object.freeze(domains.length > 1 ? ['domainCommerceCore'] : []),
             projectPacks: Object.freeze(domains.map(domain => supported[domain].pack)),
             productSearchContributors: this.contributors(domains)
         });
