@@ -5,6 +5,11 @@ locally and a release that accountable owners may approve for production. The
 Kickoff runner coordinates evidence from the framework, reference project,
 Axis, and local Redis, but it deliberately cannot approve production by itself.
 
+For beginners, the safest way to read this page is as an evidence map. Kickoff
+can prove that the local reference stack behaves consistently, but business
+approval still needs named owners for production topology, security, providers,
+accessibility, performance, recovery, and data governance.
+
 ## Start here
 
 From `nodics.kickoff`, print the plan without running anything:

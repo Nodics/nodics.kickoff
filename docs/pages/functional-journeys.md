@@ -2,6 +2,13 @@
 
 This page is the beginner and operator route through the Nodics reference journeys. It explains what can be demonstrated locally, which module owns each decision, what Axis displays, and how to recover safely. Kickoff composes the reference environment; it does not become the authority for Commerce, Engagement, Payment, Communication, Process, Profile, Media, or WCMS records.
 
+| Journey area | Business outcome | Kickoff proves | Owning authority |
+| --- | --- | --- | --- |
+| Commerce discovery | A customer can browse published products and product detail | Online projections, search-backed delivery, and customer-safe APIs are reachable | Commerce, Discovery, WCMS Online, and Media |
+| Cart and checkout | A customer can move from intent to order placement | Authenticated customer flow, cart sync, calculation, and order confirmation behave together | Profile, Cart, Checkout, Pricing, Tax, Inventory, Payment, and Fulfillment |
+| Order reversal | A customer or operator can request cancellation, return, or refund safely | Eligibility, reason options, history, and non-owner rejection remain visible and governed | Order, Payment, Fulfillment, Inventory, and Process |
+| Engagement | Customer contact, review, testimonial, and feedback evidence is actionable | Intake, operator queue, lifecycle action, withdrawal, and public projection paths are testable | Engagement, Communication, Process, Profile, and WCMS |
+
 ## Understand the product journey
 
 A customer-facing journey is not complete when an HTTP request merely returns success. The full path is customer intent, validated intake, durable business state, an eligible operator action, visibility or fulfillment, and a safe withdrawal or reversal. Every step carries a tenant and correlation identity. Repeated commands use an idempotency key, and state-changing operator commands use an expected revision so two operators cannot silently overwrite each other.

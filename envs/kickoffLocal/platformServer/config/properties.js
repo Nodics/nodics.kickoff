@@ -32,7 +32,7 @@ module.exports = {
             nexus: {
                 code: 'nexus',
                 type: 'WEBSITE_BUNDLE',
-                owner: 'nexusWebData',
+                owner: 'nexus.web',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusprofessionalcopy',
@@ -46,15 +46,15 @@ module.exports = {
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'nexusWebData:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
-                    { code: 'nexusWebData:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
+                    { code: 'nexus.web:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
+                    { code: 'nexus.web:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
                 ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             nexusupdate: {
                 code: 'nexusupdate',
                 type: 'WEBSITE_BUNDLE_UPDATE',
-                owner: 'nexusWebData',
+                owner: 'nexus.web',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusupdate',
@@ -64,7 +64,7 @@ module.exports = {
             nexusecosystemrepair: {
                 code: 'nexusecosystemrepair',
                 type: 'WEBSITE_BUNDLE_UPDATE',
-                owner: 'nexusWebData',
+                owner: 'nexus.web',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusecosystemrepair',
@@ -74,7 +74,7 @@ module.exports = {
             nexusincremental: {
                 code: 'nexusincremental',
                 type: 'WEBSITE_BUNDLE_UPDATE',
-                owner: 'nexusWebData',
+                owner: 'nexus.web',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusincremental',
@@ -84,43 +84,17 @@ module.exports = {
             nexusprofessionalcopy: {
                 code: 'nexusprofessionalcopy',
                 type: 'WEBSITE_BUNDLE_UPDATE',
-                owner: 'nexusWebData',
+                owner: 'nexus.web',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusprofessionalcopy',
                 presentation: { visible: false },
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
-            agora: {
-                code: 'agora',
-                type: 'STOREFRONT_BUNDLE',
-                owner: 'domainCommerceCore',
-                applicationCode: 'agora',
-                siteCode: 'agoraStorefrontSite',
-                baselineCode: 'agora',
-                presentation: {
-                    title: 'Agora Storefront',
-                    kind: 'PROJECT',
-                    category: 'accelerator',
-                    order: 200,
-                    summary: 'Commerce storefront accelerator. Domain-specific bundles will become separate business-facing accelerators.',
-                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
-                    activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
-                },
-                dataPackages: [
-                    { code: 'agoraApparel:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'ACTIVATION' },
-                    { code: 'agoraApparel:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'ACTIVATION' },
-                    { code: 'agoraElectronics:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: false, trigger: 'USER' },
-                    { code: 'agoraElectronics:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: false, trigger: 'USER' },
-                    { code: 'agoraTelco:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: false, trigger: 'USER' },
-                    { code: 'agoraTelco:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: false, trigger: 'USER' }
-                ],
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
-            },
             agoraapparel: {
                 code: 'agoraapparel',
                 type: 'STOREFRONT_DOMAIN_BUNDLE',
-                owner: 'agoraApparel',
+                owner: 'agora.apparel',
                 applicationCode: 'agora',
                 siteCode: 'agoraApparelSite',
                 baselineCode: 'agoraapparel',
@@ -134,15 +108,15 @@ module.exports = {
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'agoraApparel:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                    { code: 'agoraApparel:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    { code: 'agora.apparel:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                    { code: 'agora.apparel:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
                 ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             agoraelectronics: {
                 code: 'agoraelectronics',
                 type: 'STOREFRONT_DOMAIN_BUNDLE',
-                owner: 'agoraElectronics',
+                owner: 'agora.electronics',
                 applicationCode: 'agora',
                 siteCode: 'agoraElectronicsSite',
                 baselineCode: 'agoraelectronics',
@@ -156,15 +130,15 @@ module.exports = {
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'agoraElectronics:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                    { code: 'agoraElectronics:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    { code: 'agora.electronics:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                    { code: 'agora.electronics:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
                 ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
             agoratelco: {
                 code: 'agoratelco',
                 type: 'STOREFRONT_DOMAIN_BUNDLE',
-                owner: 'agoraTelco',
+                owner: 'agora.telco',
                 applicationCode: 'agora',
                 siteCode: 'agoraTelcoSite',
                 baselineCode: 'agoratelco',
@@ -178,8 +152,8 @@ module.exports = {
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'agoraTelco:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                    { code: 'agoraTelco:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    { code: 'agora.telco:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
+                    { code: 'agora.telco:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
                 ],
                 target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
             },
@@ -264,7 +238,7 @@ module.exports = {
         ]
     },
     localResetProvider: {
-        enabled: true, environmentAllowlist: ['kickoffLocal'],
+        enabled: true, environmentAllowlist: ['kickoffLocal'], allowMissingModelServices: true,
         serviceNames: ['DefaultAddressService', 'DefaultBackofficeAxisPolicyService', 'DefaultBackofficeContractActivationService',
             'DefaultBackofficeContractSnapshotService', 'DefaultBackofficeFunctionalModuleRegistrationService', 'DefaultCatalogService',
             'DefaultConfigurationService', 'DefaultContactService', 'DefaultCustomerService', 'DefaultDataInstallationService',

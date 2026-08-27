@@ -1,3 +1,3 @@
-# nexus.web examples
+# Nexus Web Data Examples
 
-Generated documentation entry for nexus.web.
+Use this folder for durable examples showing the smallest supported customization or extension path for Nexus Web Data. Do not place temporary plans here.

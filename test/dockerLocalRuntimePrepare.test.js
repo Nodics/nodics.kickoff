@@ -13,10 +13,31 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
-const packageRoot = packageName => path.dirname(require.resolve(packageName + '/package.json'));
+
+function readEnvFile(filePath) {
+    if (!fs.existsSync(filePath)) return {};
+    return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return env;
+        const separatorIndex = trimmed.indexOf('=');
+        if (separatorIndex < 0) return env;
+        const key = trimmed.slice(0, separatorIndex).trim();
+        let value = trimmed.slice(separatorIndex + 1).trim();
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+            value = value.slice(1, -1);
+        }
+        env[key] = value;
+        return env;
+    }, {});
+}
+
+const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
+const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
+const packageRoot = packageName => path.join(frameworkRoot, packageName);
 const scenarios = [
     ['platformServer', ['nodics.platform', 'nodics.localization'], 'kickoffDockerLocalPlatform', 'PLATFORM'],
     ['wcmsStagedServer', ['nodics.wcms', 'nodics.platform'], 'kickoffDockerLocalWcmsStaged', 'WCMS_STAGED'],
@@ -42,10 +63,10 @@ async function main() {
         assert.equal(CONFIG.get('runtimeRole').code, role);
         if (server === 'commerceStagedServer') {
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
-            assert.equal(NODICS.isModuleActive('agoraApparel'), true);
+            assert.equal(NODICS.isModuleActive('agora.apparel'), true);
         }
         if (server === 'commerceServer') {
-            assert.equal(NODICS.isModuleActive('agoraApparel'), false);
+            assert.equal(NODICS.isModuleActive('agora.apparel'), false);
         }
         if (server === 'commerceServer' || server === 'commerceStagedServer') {
             assert.equal(NODICS.isModuleActive('nodics.discovery'), true);

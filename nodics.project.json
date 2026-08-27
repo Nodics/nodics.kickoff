@@ -4,7 +4,7 @@
   "displayName": "Nodics Kickoff",
   "projectType": "reference",
   "framework": {
-    "root": ".nodics/framework",
+    "rootProperty": "NODICS_FRAMEWORK_ROOT",
     "minimumContractVersion": 1,
     "upgradePolicy": "framework-owned-tooling-project-owned-facts"
   },
@@ -29,10 +29,10 @@
     "telco"
   ],
   "dataPacks": [
-    "nexusWebData",
-    "agoraApparel",
-    "agoraElectronics",
-    "agoraTelco"
+    "nexus.web",
+    "agora.apparel",
+    "agora.electronics",
+    "agora.telco"
   ],
   "runtime": {
     "servers": {
@@ -153,7 +153,9 @@
         "nexus",
         "nexusupdate",
         "nexusecosystemrepair",
-        "agora",
+        "agoraapparel",
+        "agoraelectronics",
+        "agoratelco",
         "partnernexus"
       ],
       "deliveryProbe": {
@@ -397,7 +399,9 @@
   "tooling": {
     "scriptOwnership": {
       "policy": "Project commands declare project facts and may delegate to framework-owned tooling. Reusable lifecycle, startup, topology, qualification, upgrade, and acceptance engines must remain in nodics.ai.",
-      "projectOwned": [],
+      "projectOwned": [
+        "scripts/nodics-project.js"
+      ],
       "forbiddenProjectOwnedPatterns": [
         "local-security-boundary-qualification",
         "publishing-capacity-baseline",
@@ -405,16 +409,10 @@
         "docker-local-publishing-interruption-contracts"
       ],
       "forbiddenProjectDirectories": [
-        "src",
-        "scripts"
+        "src"
       ]
     },
     "commands": {
-      "configure:framework": {
-        "type": "frameworkCommand",
-        "command": "project:configure-framework",
-        "home": "project"
-      },
       "start:platform": {
         "type": "frameworkCommand",
         "command": "project:runtime-start",
@@ -738,6 +736,16 @@
         "type": "frameworkCommand",
         "command": "project:guided-initialization-acceptance",
         "home": "project"
+      },
+      "acceptance:documentation:fresh-browser": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "acceptance",
+          "--expect-documentation-not-installed"
+        ]
       },
       "qualification:deployment": {
         "type": "frameworkCommand",

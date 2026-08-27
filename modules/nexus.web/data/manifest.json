@@ -1,0 +1,206 @@
+{
+  "contractVersion": 2,
+  "module": "nexus.web",
+  "sections": {
+    "nexusCorporateSite": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Corporate Site",
+      "description": "Nexus corporate Site and page composition source",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcms/data/corporate/nexusCatalogData.js": "dcf43d94e4c697b8feab537323be2f0d724fa8bf2fed3d4bbf2845ce1c2ea043",
+        "staged/wcms/data/corporate/nexusComponentData.js": "6108081de161a313931bd3489064f47d28f3a60c9dafe2de0a15d73694e51874",
+        "staged/wcms/data/corporate/nexusComponentTypeGroupData.js": "97297910ce733dc9cf1f96ca00e87966acb5a883406c4ad5fce9e7caa2f98e35",
+        "staged/wcms/data/corporate/nexusNavigationData.js": "d74ea7eb03c506d061e5b99064eda5bb63e7b612f07e03d3a0c3d9b7503a0aa6",
+        "staged/wcms/data/corporate/nexusPageData.js": "4e9f6424f41f9c27b83fa1cfa1ef2aba87c05dc9b163cf4553f2380d6599e2d9",
+        "staged/wcms/data/corporate/nexusRendererData.js": "008bfce9f2f5a46ebd503ce2b2aed0d0784d5a6df62f51aa8814cf263c83b4c0",
+        "staged/wcms/data/corporate/nexusRouteData.js": "8d0f7f5e0d0cd664f2a3f653596a608eabb872d2f244c86e38ee92eb8a150af8",
+        "staged/wcms/data/corporate/nexusSiteData.js": "b81659b5e98b106b0ef9f3af56759f564942b148f6d164e55111e5462a3ccf44",
+        "staged/wcms/data/corporate/nexusSlotData.js": "95f6204852b750c8f6956b576b8afde9750c941fe7ce9f510428869494df5996",
+        "staged/wcms/data/corporate/nexusTemplateData.js": "e881816a2cf4e012a408a68fc2a1fab99c29bffa815f1682d3b6b235ff9830ee",
+        "staged/wcms/data/corporate/nexusTypeCodeData.js": "1df7aec9e163891f515a7a74c08ad20109fb46ca50a1938707adea83b8b0ad14",
+        "staged/wcms/headers/nexusCorporateContentHeader.js": "07c5bc1910b0461488fad98a32234c14b0ab6acfc0d5d75d30acfd70d1a52f53"
+      }
+    },
+    "nexusCorporateSiteUpdate": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Corporate Site Update",
+      "description": "Nexus corporate Site immutable v1.0.1 component delta",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusPageUpdateData.js": "686eda907224a222d2f174506a610e81cbd1d8594bbf557476fa3d0a2a3509e9",
+        "staged/wcmsUpdate/headers/nexusCorporatePageUpdateHeader.js": "d230718d527ea31ea88e8c2691f66a44c4ecee62e9ee415eb281dd5a4ce64ced"
+      }
+    },
+    "nexusCorporateEcosystemComponentRepair": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Ecosystem Component Repair",
+      "description": "Nexus corporate Site immutable v1.0.2 ecosystem component graph repair",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusEcosystemComponentRepairData.js": "bcaf45ccea3c7f7547b40890b2877c0667402052cd4042f315e8f6651f42b413",
+        "staged/wcmsUpdate/headers/nexusEcosystemComponentRepairHeader.js": "ba5c6290b762698b337a1965d01a08d200834fee0d1d0e512c51540019ed7734"
+      }
+    },
+    "nexusCorporateIncrementalProof": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Corporate Incremental Proof",
+      "description": "Nexus corporate Site immutable v1.0.3 incremental text proof",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusIncrementalProofData.js": "b62425cc45f996902fb99738054df4ed9269cf4308d2040d333f708810276437",
+        "staged/wcmsUpdate/headers/nexusIncrementalProofHeader.js": "469675f943b8e8ef4d3c8a0bc8f9183164326a5d373ab688282ca243aaee18fa"
+      }
+    },
+    "nexusCorporateProfessionalCopyUpdate": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Corporate Professional Copy Update",
+      "description": "Nexus corporate Site immutable v1.0.4 professional hero copy update",
+      "owningDomain": "nexus.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/wcmsUpdate/data/corporate/nexusProfessionalCopyUpdateData.js": "f3c5945e4fc285706eb99d48c464ba9c967c769d65aa921d7ba4e2ae1910de39",
+        "staged/wcmsUpdate/headers/nexusProfessionalCopyUpdateHeader.js": "4a099635f5863731d77cb3372102b108d2ed49d3a0fe3950edbf0d9c731e24f1"
+      }
+    },
+    "nexusEditorialSource": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Editorial Source",
+      "description": "Local Nexus Editorial authoring source without Online projections",
+      "owningDomain": "nexus.editorial",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/editorial/data/nexusEditorialArticleData.js": "0cf21155ae140a4fd43eaf53acf9ac9f8581b10788ac77121d17d53155c99adc",
+        "staged/editorial/data/nexusEditorialArticleLocalizationData.js": "f3abf2589c44a13b2c0fc7d79eec0509474087d86e1d95fffe51014bfc33de00",
+        "staged/editorial/data/nexusEditorialArticleTaxonomyData.js": "83b6e9d047af88dca8e5895a8bc36d25c35c9e53eedb67adf82559d878841946",
+        "staged/editorial/data/nexusEditorialAuthorData.js": "e2f59428f523ff62c2cc82b14eaa974d3321448c49ef5d2ade3ffbcc7e447dca",
+        "staged/editorial/data/nexusEditorialTaxonomyTermData.js": "772cf2701a3b8c3eb54f1b627ba66613bfbf22282c65b0982c13592a66a95d9a",
+        "staged/editorial/headers/nexusEditorialSampleDataHeader.js": "3e8ba3d08666fd4c0b5c719fcb71d2662ada8cbbf52c85156b3308772be08ce7"
+      }
+    },
+    "nexusEngagementOperational": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "operational",
+      "version": "0.0.0",
+      "displayName": "Nexus Engagement Operational Data",
+      "description": "Local versioned Engagement form definitions and sanitized testimonial projections",
+      "owningDomain": "nexus.engagement",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "ENGAGEMENT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "operational/engagement/data/nexusContactFormDefinitionData.js": "41ad4bbc40aea33dc5080ae6a38287b18727201816893cf91ba052fc334efd06",
+        "operational/engagement/data/nexusContactFormVersionData.js": "078affebe3ea19ce7ef2e6018489fb7811e4226fd1b2faf4ee16cb0aff797bca",
+        "operational/engagement/data/nexusTestimonialProjectionData.js": "92e835c724f0bdc1f13e8bf8dfd06bcb2be318010d564dbf378e6124019578d6",
+        "operational/engagement/headers/nexusExperienceConfigurationHeader.js": "0a4da1a2252ae63cfb3ffa20c066a3c629d28480849db8f62adcb91465dd4da7"
+      }
+    },
+    "nexusCorporateMediaReferences": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "displayName": "Nexus Corporate Media References",
+      "description": "Nexus corporate media reference records for backend-owned CMS and Editorial media delivery",
+      "owningDomain": "nexus.media",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/media/data/nexusMediaReferenceData.js": "8a83769cd639b83a46f762b7b3d796eeda9c07dee4f7118cacc7a28e910b10d0",
+        "staged/media/headers/nexusMediaReferenceHeader.js": "5aae4d89dc307bab269e5c1fe3997c8efeff3ba44f1b92e1cbc4cf4d36920de2"
+      }
+    }
+  }
+}

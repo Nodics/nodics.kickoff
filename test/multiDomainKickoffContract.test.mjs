@@ -8,9 +8,9 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, '..');
 const definitions = [
-  { group: 'agora.apparel', framework: 'apparel', pack: 'agoraApparel', prefix: 'agoraApparel', folder: 'apparel', productFile: 'agoraApparelProductData.js', profileFile: 'agoraApparelStyleData.js', catalogVersion: 'agoraApparelStaged', contentCatalog: 'agoraApparelContentCatalog', rendererKeys: ['agora.apparel.product-card', 'agora.apparel.page.home'] },
-  { group: 'agora.electronics', framework: 'electronics', pack: 'agoraElectronics', prefix: 'agoraElectronics', folder: 'electronics', productFile: 'agoraElectronicsProductData.js', profileFile: 'agoraElectronicsSpecificationData.js', catalogVersion: 'agoraElectronicsStaged', contentCatalog: 'agoraElectronicsContentCatalog', rendererKeys: ['agora.electronics.product-card', 'agora.electronics.page.home'] },
-  { group: 'agora.telco', framework: 'telco', pack: 'agoraTelco', prefix: 'agoraTelco', folder: 'telco', productFile: 'agoraTelcoProductData.js', profileFile: 'agoraTelcoPlanData.js', catalogVersion: 'agoraTelcoStaged', contentCatalog: 'agoraTelcoContentCatalog', rendererKeys: ['agora.telco.product-card', 'agora.telco.page.home'] }
+  { group: 'agora.apparel', framework: 'apparel', pack: 'agora.apparel', prefix: 'agoraApparel', folder: 'apparel', productFile: 'agoraApparelProductData.js', profileFile: 'agoraApparelStyleData.js', catalogVersion: 'agoraApparelStaged', contentCatalog: 'agoraApparelContentCatalog', rendererKeys: ['agora.apparel.product-card', 'agora.apparel.page.home'] },
+  { group: 'agora.electronics', framework: 'electronics', pack: 'agora.electronics', prefix: 'agoraElectronics', folder: 'electronics', productFile: 'agoraElectronicsProductData.js', profileFile: 'agoraElectronicsSpecificationData.js', catalogVersion: 'agoraElectronicsStaged', contentCatalog: 'agoraElectronicsContentCatalog', rendererKeys: ['agora.electronics.product-card', 'agora.electronics.page.home'] },
+  { group: 'agora.telco', framework: 'telco', pack: 'agora.telco', prefix: 'agoraTelco', folder: 'telco', productFile: 'agoraTelcoProductData.js', profileFile: 'agoraTelcoPlanData.js', catalogVersion: 'agoraTelcoStaged', contentCatalog: 'agoraTelcoContentCatalog', rendererKeys: ['agora.telco.product-card', 'agora.telco.page.home'] }
 ];
 
 const digest = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -19,22 +19,21 @@ test('Kickoff domain groups extend reusable framework accelerators and packs rem
   assert.equal(fs.existsSync(path.join(root, 'modules', 'agora.' + 'common')), false);
   for (const definition of definitions) {
     const groupRoot = path.join(root, 'modules', definition.group);
-    const packRoot = path.join(groupRoot, 'modules', definition.pack);
     assert.deepEqual(require(path.join(groupRoot, 'package.json')).nodics.extends, [definition.framework]);
-    const metadata = require(path.join(packRoot, 'package.json')).nodics;
+    const metadata = require(path.join(groupRoot, 'package.json')).nodics;
     assert.equal(metadata.kind, 'content-pack');
-    assert.deepEqual(metadata.owns, ['configuration', 'data', 'test', 'documentation', 'llm']);
-    assert.equal(fs.existsSync(path.join(packRoot, 'src')), false);
+    assert.deepEqual(metadata.owns, ['composition', 'configuration', 'data', 'test', 'documentation', 'llm']);
+    assert.equal(fs.existsSync(path.join(groupRoot, 'src')), false);
   }
 });
 
 test('every domain owns distinct Product and WCMS catalogs with framework domain records', () => {
   const versions = new Set(); const contentCatalogs = new Set();
   for (const definition of definitions) {
-    const dataRoot = path.join(root, 'modules', definition.group, 'modules', definition.pack, 'data', 'staged', definition.folder, 'data');
+    const dataRoot = path.join(root, 'modules', definition.group, 'data', 'staged', definition.folder, 'data');
     const products = require(path.join(dataRoot, definition.productFile));
     const profiles = require(path.join(dataRoot, definition.profileFile));
-    const content = require(path.join(dataRoot, `${definition.pack}ContentCatalogData.js`));
+    const content = require(path.join(dataRoot, `${definition.prefix}ContentCatalogData.js`));
     const site = require(path.join(dataRoot, `${definition.prefix}SiteData.js`));
     const page = require(path.join(dataRoot, `${definition.prefix}PageData.js`));
     const route = require(path.join(dataRoot, `${definition.prefix}RouteData.js`));
@@ -53,7 +52,7 @@ test('every domain owns distinct Product and WCMS catalogs with framework domain
 
 test('domain manifests isolate Commerce and WCMS releases and verify every immutable hash', () => {
   for (const definition of definitions) {
-    const packRoot = path.join(root, 'modules', definition.group, 'modules', definition.pack);
+    const packRoot = path.join(root, 'modules', definition.group);
     const manifest = require(path.join(packRoot, 'data', 'manifest.json'));
     assert.equal(manifest.contractVersion, 0); assert.equal(manifest.module, definition.pack);
     const sections = Object.values(manifest.sections);
@@ -82,9 +81,9 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
 
 test('project composition selects each domain independently, together, or Commerce-only', () => {
   const composition = require('../config/agora-domain-composition');
-  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agoraApparel'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agoraElectronics'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agoraTelco'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agora.apparel'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agora.electronics'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agora.telco'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
   assert.deepEqual(composition.resolve('commerce'), { domains: [], frameworkGroups: [], sharedModules: [], projectPacks: [], productSearchContributors: {} });
   assert.deepEqual(composition.resolve('all').domains, ['apparel', 'electronics', 'telco']);
   assert.deepEqual(composition.resolve('all').sharedModules, ['domainCommerceCore']);

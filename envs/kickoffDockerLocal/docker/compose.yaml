@@ -121,7 +121,7 @@ services:
 
   platform:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:platform"]
+    command: ["scripts/nodics-project.js", "project:run", "start:platform"]
     environment: { ENV: kickoffDockerLocal, SERVER: platformServer, NODICS_DATABASE_NAME: kickoffDockerLocalPlatform }
     ports: ["5300:4300"]
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/platformServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
@@ -129,7 +129,7 @@ services:
 
   wcms-online:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:wcms:online"]
+    command: ["scripts/nodics-project.js", "project:run", "start:wcms:online"]
     environment: { ENV: kickoffDockerLocal, SERVER: wcmsOnlineServer, NODICS_DATABASE_NAME: kickoffDockerLocalWcmsOnline }
     ports: ["5314:4314"]
     volumes: ["media-online:/var/lib/nodics/media-online"]
@@ -139,7 +139,7 @@ services:
 
   process:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:process"]
+    command: ["scripts/nodics-project.js", "project:run", "start:process"]
     environment: { ENV: kickoffDockerLocal, SERVER: processServer, NODICS_DATABASE_NAME: kickoffDockerLocalProcess }
     ports: ["5330:4330"]
     depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
@@ -148,7 +148,7 @@ services:
 
   wcms-staged:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:wcms:staged"]
+    command: ["scripts/nodics-project.js", "project:run", "start:wcms:staged"]
     environment: { ENV: kickoffDockerLocal, SERVER: wcmsStagedServer, NODICS_DATABASE_NAME: kickoffDockerLocalWcmsStaged }
     ports: ["5312:4312"]
     volumes: ["media-staged:/var/lib/nodics/media-staged"]
@@ -158,7 +158,7 @@ services:
 
   engagement:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:engagement"]
+    command: ["scripts/nodics-project.js", "project:run", "start:engagement"]
     environment: { ENV: kickoffDockerLocal, SERVER: engagementServer, NODICS_DATABASE_NAME: kickoffDockerLocalEngagement }
     ports: ["5340:4340"]
     depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
@@ -167,7 +167,7 @@ services:
 
   commerce:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:commerce"]
+    command: ["scripts/nodics-project.js", "project:run", "start:commerce"]
     environment: { ENV: kickoffDockerLocal, SERVER: commerceServer, NODICS_DATABASE_NAME: kickoffDockerLocalCommerce }
     ports: ["5350:4350"]
     depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
@@ -176,7 +176,7 @@ services:
 
   commerce-staged:
     <<: *backend
-    command: [".nodics/framework/nodics.foundation/modules/nTooling/bin/nodics-project.js", "project:run", "start:commerce:staged"]
+    command: ["scripts/nodics-project.js", "project:run", "start:commerce:staged"]
     environment: { ENV: kickoffDockerLocal, SERVER: commerceStagedServer, NODICS_DATABASE_NAME: kickoffDockerLocalCommerceStaged }
     ports: ["5352:4352"]
     depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, elasticsearch: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy }, commerce: { condition: service_healthy } }

@@ -9,6 +9,13 @@ The checklist is intentionally explicit. A new developer should be able to
 follow it without already knowing Nodics module loading, BackOffice bootstrap,
 WCMS content packs, or functional-module registration.
 
+From a business perspective, this checklist proves that a new team can start
+the reference project, import governed data, open Axis, inspect documentation,
+and see public/customer-facing surfaces without first designing a production
+topology. It gives decision makers a visible adoption proof and gives
+developers/operators the command evidence needed to repeat or diagnose the
+same setup.
+
 ## What this checklist proves
 
 The acceptance run proves five things:
@@ -68,7 +75,6 @@ Run this from `nodics.kickoff`:
 
 ```bash
 cp .env.example .env
-npm run configure:framework
 npm install
 ```
 

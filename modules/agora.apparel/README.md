@@ -1,6 +1,6 @@
 # agora.apparel
 
-Agora Apparel customer composition boundary.
+Agora Apparel product and content catalogs.
 
 Use this README to understand what this module is for, which capability or composition boundary it owns, how it fits its parent hierarchy, and where developers or AI tools should continue reading.
 

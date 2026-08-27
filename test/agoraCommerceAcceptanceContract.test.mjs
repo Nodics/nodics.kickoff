@@ -14,7 +14,7 @@ import test from "node:test";
  * @module kickoff/test/agoraCommerceAcceptanceContract
  * @description Guards the Agora Commerce customer journey acceptance harness.
  * @layer test
- * @owner agoraApparel
+ * @owner agora.apparel
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
@@ -114,5 +114,6 @@ test("Agora Commerce live qualification sequences topology data publication and 
     '"acceptance:agora-commerce-publication"',
     '"acceptance:agora-commerce"',
   ].forEach((script) => assert.match(source, new RegExp(script)));
+  assert.match(source, /NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE: "true"/);
   assert.match(source, /PASS/);
 });

@@ -15,6 +15,13 @@ or verify content through direct database CRUD. Database credentials and
 connectivity are evaluated by runtime readiness; the topology preflight does
 not open its own database connection.
 
+| Publishing area | Business question answered | Correct Kickoff action | Authority that decides |
+| --- | --- | --- | --- |
+| Import and upgrade | Which release is installed and can it be trusted? | Run retained or fresh acceptance through project commands | nImport validates immutable release identity and checksums |
+| Staged review | What content or data is ready for approval? | Inspect Staged state through Axis and governed APIs | WCMS Staged and owning modules hold authoring state |
+| Approval and activation | What is allowed to become visible Online? | Use workflow-backed publication actions | nPublish and Process coordinate approval and Online activation |
+| Recovery | How do we retry or roll back a failed local release? | Use documented retry, rollback, backup, and restore commands | Runtime services preserve lifecycle, audit, and integrity evidence |
+
 ## Preflight, start, inspect, and stop
 
 Run from `nodics.kickoff`:

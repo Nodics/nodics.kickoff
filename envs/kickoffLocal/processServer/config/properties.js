@@ -22,7 +22,7 @@ module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100'],
         deniedOrigins: ['http://localhost:3200', 'http://127.0.0.1:3200'] } },
     apiExposure: { categories: { dataImport: { enabled: true }, dataExport: { enabled: false } } },
-    localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], serviceNames: [
+    localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], allowMissingModelServices: true, serviceNames: [
         'DefaultProcessAuditEventService', 'DefaultProcessTaskService', 'DefaultProcessIncidentService', 'DefaultProcessInstanceService',
         'DefaultProcessTriggerService', 'DefaultProcessDefinitionVersionService', 'DefaultProcessDefinitionService',
         'DefaultCronJobLogService', 'DefaultCronJobService', 'DefaultCatalogService', 'DefaultConfigurationService',

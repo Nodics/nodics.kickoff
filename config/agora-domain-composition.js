@@ -21,9 +21,9 @@
  */
 const agoraDomainComposition = {
     supported: Object.freeze({
-        apparel: Object.freeze({ group: 'apparel', pack: 'agoraApparel' }),
-        electronics: Object.freeze({ group: 'electronics', pack: 'agoraElectronics' }),
-        telco: Object.freeze({ group: 'telco', pack: 'agoraTelco' })
+        apparel: Object.freeze({ group: 'apparel', pack: 'agora.apparel' }),
+        electronics: Object.freeze({ group: 'electronics', pack: 'agora.electronics' }),
+        telco: Object.freeze({ group: 'telco', pack: 'agora.telco' })
     }),
 
     enrichmentContributors: Object.freeze({

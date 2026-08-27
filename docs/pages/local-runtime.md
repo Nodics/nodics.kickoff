@@ -17,6 +17,14 @@ give a beginner a reliable local loop: configure framework location, install
 dependencies, start servers, log in, import/update data, and observe the
 runtime from Axis.
 
+| Runtime part | Business purpose | Developer/operator responsibility |
+| --- | --- | --- |
+| Platform | Employee login, BackOffice bootstrap, module registry, and API discovery | Start first, verify Profile and BackOffice are reachable, and keep tokens out of logs |
+| WCMS Staged and Online | Governed content, media, documentation, and public delivery | Keep Staged authoring separate from Online delivery and import content packs through governance |
+| Process and Automation | Workflow, cronjob, scheduled capability, and recovery evidence | Start when process or scheduled behavior is being tested and avoid duplicate scheduler authority |
+| Axis | Employee control plane for setup, import, documentation, and operations | Point to the correct Platform URL and verify only authorized capabilities appear |
+| Nexus and Agora accelerators | Public/customer-facing proof of Online delivery | Consume Online and customer-safe APIs only, never Staged or internal operations |
+
 ## Servers
 
 The current local topology uses separate runtime servers:
@@ -110,16 +118,15 @@ The path may be absolute or relative to the Kickoff project root. This avoids a
 hard dependency on a fixed workspace layout. One developer may keep framework
 code beside Kickoff; another may keep it in a different projects directory.
 
-Then prepare local file dependencies:
+Then install project dependencies:
 
 ```bash
-npm run configure:framework
 npm install
 ```
 
-`configure:framework` updates the project-local dependency links so npm can
-install framework packages from the configured checkout. It does not make
-Kickoff the owner of those modules.
+Kickoff does not copy or symlink framework modules into `.nodics/`. Project
+scripts call `scripts/nodics-project.js`, which reads `.env`, locates
+`nodics.ai`, and delegates lifecycle/startup work to framework-owned tooling.
 
 ## Start sequence
 
@@ -176,10 +183,10 @@ pack may not be imported. If an optional module appears only after refresh,
 check the module registry API response after each lifecycle operation before
 assuming the frontend state is wrong.
 
-If npm cannot install framework packages, check `NODICS_FRAMEWORK_ROOT`, rerun
-`npm run configure:framework`, and confirm the configured directory contains
-`nodics.foundation`, `nodics.platform`, `nodics.wcms`, and any optional framework
-modules used by the local server.
+If Nodics scripts cannot locate framework packages, check `NODICS_FRAMEWORK_ROOT`
+and confirm the configured directory contains `nodics.foundation`,
+`nodics.platform`, `nodics.wcms`, and any optional framework modules used by the
+local server.
 
 ## Production note
 

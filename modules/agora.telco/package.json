@@ -1,29 +1,32 @@
 {
-    "name": "agora.telco",
-    "index": "3100.60",
-    "description": "Agora Telco customer composition boundary.",
-    "main": "nodics.js",
-    "version": "0.0.0",
-    "private": true,
-    "license": "SEE LICENSE IN LICENSE",
-    "nodics": {
-        "kind": "group",
-        "displayName": "Agora.Telco",
-        "runtimeModule": true,
-        "loadableByNodicsModuleLoader": true,
-        "owns": [
-            "composition",
-            "configuration",
-            "llm"
-        ],
-        "runtime": {
-            "router": false,
-            "publish": false,
-            "web": false
-        },
-        "extends": [
-            "telco"
-        ]
+  "name": "agora.telco",
+  "index": "3100.60",
+  "description": "Agora Telco product and content catalogs.",
+  "main": "nodics.js",
+  "version": "0.0.0",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "nodics": {
+    "kind": "content-pack",
+    "displayName": "Agora Telco",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "composition",
+      "configuration",
+      "data",
+      "test",
+      "documentation",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
     },
-    "scripts": {}
+    "extends": [
+      "telco"
+    ]
+  },
+  "scripts": {}
 }

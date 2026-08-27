@@ -2,7 +2,7 @@
 
 This reference customer module proves that a partner can add a later-loaded,
 independently versioned website customization without editing Nodics Framework,
-Axis, Nexus, or the original `nexusWebData` release.
+Axis, Nexus, or the original `nexus.web` release.
 
 The module contributes three things under its own authority:
 

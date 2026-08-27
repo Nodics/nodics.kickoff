@@ -17,9 +17,19 @@ module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
         'http://localhost:3200', 'http://127.0.0.1:3200',
         'http://localhost:3300', 'http://127.0.0.1:3300'] } },
-    localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], serviceNames: [
+    localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], allowMissingModelServices: true,
+        requiredServiceNames: [
+            'DefaultCmsDocumentationAccessPolicyService', 'DefaultCmsDocumentationDashboardService',
+            'DefaultCmsDocumentationNavigationService', 'DefaultCmsDocumentationNodeService', 'DefaultCmsDocumentationPageService',
+            'DefaultCmsDocumentationProductService', 'DefaultCmsDocumentationPublicationStateService',
+            'DefaultCmsDocumentationSearchMetadataService'
+        ], serviceNames: [
         'DefaultCmsComponentDetailService', 'DefaultCmsComponentLocalizationService', 'DefaultCmsComponentMediaService',
         'DefaultCmsNavigationNodeService', 'DefaultCmsPageRouteService', 'DefaultCmsRestrictionService',
+        'DefaultCmsDocumentationAccessPolicyService', 'DefaultCmsDocumentationDashboardService',
+        'DefaultCmsDocumentationNavigationService', 'DefaultCmsDocumentationNodeService', 'DefaultCmsDocumentationPageService',
+        'DefaultCmsDocumentationProductService', 'DefaultCmsDocumentationPublicationStateService',
+        'DefaultCmsDocumentationSearchMetadataService',
         'DefaultCmsPublicationDeploymentReceiptService', 'DefaultCmsPublicationEventOutboxService', 'DefaultCmsOnlinePublicationPointerService',
         'DefaultCmsPublicationManifestService', 'DefaultPublicationAuditService', 'DefaultPublicationRequestService',
         'DefaultEditorialArticleLocalizationService', 'DefaultEditorialArticleTaxonomyService', 'DefaultEditorialCorrectionService',
@@ -28,7 +38,7 @@ module.exports = {
         'DefaultCmsComponentService', 'DefaultCmsComponentTypeGroupService', 'DefaultCmsMigrationAuditService', 'DefaultCmsPageService',
         'DefaultCmsPageTemplateService', 'DefaultCmsRestrictionTypeService', 'DefaultCmsSiteService', 'DefaultCmsSlotDefinitionService',
         'DefaultCmsTypeCode2RendererService', 'DefaultCmsTypeCodeService', 'DefaultEditorialArticleService', 'DefaultEditorialAuthorService',
-        'DefaultEditorialContentTypeService', 'DefaultEditorialSeriesService', 'DefaultEditorialTaxonomyTermService', 'DefaultCatalogService',
+        'DefaultEditorialContentTypeService', 'DefaultEditorialSeriesService', 'DefaultEditorialTaxonomyTermService',
         'DefaultConfigurationService', 'DefaultDataInstallationService', 'DefaultEmsFailedMessagesService', 'DefaultEventListenerService',
         'DefaultImportDefinitionService', 'DefaultImportRunService', 'DefaultIndexService', 'DefaultIndexerLogService', 'DefaultIndexerService',
         'DefaultInterceptorService', 'DefaultSearchService', 'DefaultTokenService', 'DefaultValidatorService', 'DefaultWorkflow2SchemaService'

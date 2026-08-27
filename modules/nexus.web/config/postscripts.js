@@ -12,12 +12,10 @@
 'use strict';
 
 /**
- * @module nexus.web/config/postscripts
- * @description Defines generated config/postscripts startup extension declarations for nexus.web.
+ * @module modules/nexus.web/postscripts
+ * @description Reserved Nexus Web Data postscripts contribution point.
  * @layer config
- * @owner generated
- * @override Later active modules may override these declarations through configuration layering.
+ * @owner nexus.web
+ * @override Later project, environment, server, or node layers may add postscripts entries for this boundary.
  */
-module.exports = {
-
-};
+module.exports = {};

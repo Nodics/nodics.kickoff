@@ -29,6 +29,13 @@ npm run docker-local:start
 npm run docker-local:acceptance -- --expect-documentation-not-installed
 ```
 
+The same documentation-specific fresh-browser gate is also exposed as a named
+project command for certification runs:
+
+```bash
+npm run acceptance:documentation:fresh-browser
+```
+
 The strict gate requires every documentation pack to begin as `NOT_INSTALLED`,
 rejects unauthenticated/public installation, imports through the secured Staged
 API, proves that Online delivery remains absent before approval, and then

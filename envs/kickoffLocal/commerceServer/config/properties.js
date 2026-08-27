@@ -47,7 +47,7 @@ module.exports = {
             defaultChannelCode: 'web',
             defaultLocale: 'en',
             defaultJurisdiction: 'AE',
-            defaultCurrency: 'USD'
+            defaultCurrency: 'AED'
         }
     },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',

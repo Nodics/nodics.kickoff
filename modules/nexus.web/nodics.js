@@ -12,11 +12,11 @@
 'use strict';
 
 /**
- * @module nexus.web
- * @description Generated Nodics lifecycle entrypoint for nexus.web.
+ * @module nexus.web/nodics
+ * @description Registers the project-owned Nexus content-pack module.
  * @layer module
- * @owner generated
- * @override Later active modules may override lifecycle behavior without modifying this generated boundary.
+ * @owner nexus.web
+ * @override Customer projects replace or extend records through their own later-loaded data module.
  */
 module.exports = {
     /**

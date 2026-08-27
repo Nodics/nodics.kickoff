@@ -15,11 +15,11 @@ const test = require('node:test');
  * @module kickoff/test/agoraProductCatalogReleaseExecutionContract
  * @description Verifies the Agora Product seed release is discoverable, Commerce-Staged gated, and executable through nImport without a live database.
  * @layer test
- * @owner agoraApparel
+ * @owner agora.apparel
  */
 
 const projectRoot = path.resolve(__dirname, '..');
-const moduleRoot = path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel');
+const moduleRoot = path.join(projectRoot, 'modules/agora.apparel');
 const dataReleaseServicePath = path.resolve(
   projectRoot,
   '../nodics.ai/nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService.js'
@@ -60,12 +60,12 @@ function configureGlobals() {
     }
   };
   global.NODICS = {
-    getActiveModules: () => ['agoraApparel'],
-    getRawModule: (moduleName) => moduleName === 'agoraApparel' ? {
-      name: 'agoraApparel',
+    getActiveModules: () => ['agora.apparel'],
+    getRawModule: (moduleName) => moduleName === 'agora.apparel' ? {
+      name: 'agora.apparel',
       path: moduleRoot,
       parent: 'kickoffModules',
-      canonicalIdentity: 'kickoffModules/agoraApparel',
+      canonicalIdentity: 'kickoffModules/agora.apparel',
       metaData: { nodics: { displayName: 'Agora Apparel' } }
     } : undefined,
     getSelectedEnvironmentName: () => 'kickoffLocal'
@@ -104,7 +104,7 @@ function service() {
 test('Agora Apparel commerce catalog release follows Commerce Staged nImport execution contract', async () => {
   const dataReleaseService = service();
   const releases = dataReleaseService.discoverReleases('sample');
-  const release = releases.find((item) => item.releaseCode === 'agoraApparel:agoraApparelCommerceCatalog');
+  const release = releases.find((item) => item.releaseCode === 'agora.apparel:agoraApparelCommerceCatalog');
 
   assert(release, 'agoraApparelCommerceCatalog release should be discoverable');
   assert.equal(release.dataType, 'sample');
@@ -123,8 +123,8 @@ test('Agora Apparel commerce catalog release follows Commerce Staged nImport exe
 
   const releaseRequest = {
     dataType: 'sample',
-    releaseCodes: ['agoraApparel:agoraApparelCommerceCatalog'],
-    expectedReleases: { 'agoraApparel:agoraApparelCommerceCatalog': release.version }
+    releaseCodes: ['agora.apparel:agoraApparelCommerceCatalog'],
+    expectedReleases: { 'agora.apparel:agoraApparelCommerceCatalog': release.version }
   };
   const preflight = await dataReleaseService.preflight({ tenant: 'default', releaseRequest });
 
@@ -138,12 +138,12 @@ test('Agora Apparel commerce catalog release follows Commerce Staged nImport exe
   assert.equal(execution.data.importRun.runId, 'agora-install-run');
   assert.equal(execution.data.releases[0].status, 'CURRENT');
   assert.equal(importRequests.length, 1);
-  assert.deepEqual(importRequests[0].modules, ['agoraApparel']);
+  assert.deepEqual(importRequests[0].modules, ['agora.apparel']);
   assert.equal(importRequests[0].options.validateOnly, false);
-  assert.equal(importRequests[0].dataReleasePlan[0].releaseCode, 'agoraApparel:agoraApparelCommerceCatalog');
+  assert.equal(importRequests[0].dataReleasePlan[0].releaseCode, 'agora.apparel:agoraApparelCommerceCatalog');
   assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, 'staged');
   assert(importRequests[0].dataReleasePlan[0].declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
-  assert.equal(installations[0].code, 'kickoffLocal:default:agoraApparel:agoraApparelCommerceCatalog:sample');
+  assert.equal(installations[0].code, 'kickoffLocal:default:agora.apparel:agoraApparelCommerceCatalog:sample');
   assert.equal(installations[0].status, 'CURRENT');
 });
 
@@ -153,7 +153,7 @@ test('Agora domain Commerce releases separate each selected domain import plan',
   const releaseCodes = releases.map((item) => item.releaseCode).sort();
 
   assert.deepEqual(releaseCodes, [
-    'agoraApparel:agoraApparelCommerceCatalog'
+    'agora.apparel:agoraApparelCommerceCatalog'
   ]);
   assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
   assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelPriceBookData.js')));

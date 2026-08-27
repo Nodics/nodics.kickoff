@@ -14,7 +14,7 @@ import test from "node:test";
  * @module kickoff/test/agoraCommerceDataAcceptanceContract
  * @description Guards the live Agora Commerce data acceptance harness as preflight-first and install-gated.
  * @layer test
- * @owner agoraApparel
+ * @owner agora.apparel
  */
 
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);

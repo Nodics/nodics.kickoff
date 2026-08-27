@@ -15,12 +15,12 @@ const test = require('node:test');
  * @module kickoff/test/agoraProductSearchPublicationContract
  * @description Verifies Agora Product seed data satisfies Product bilingual publication and nSearch projection boundaries.
  * @layer test
- * @owner agoraApparel
+ * @owner agora.apparel
  */
 
 const projectRoot = path.resolve(__dirname, '..');
 const productRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/product');
-const agoraProductRoot = path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data');
+const agoraProductRoot = path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data');
 
 const productProperties = require(path.join(productRoot, 'config/properties'));
 const pricingRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/pricing');
@@ -44,9 +44,9 @@ const categories = require(path.join(agoraProductRoot, 'agoraApparelCategoryData
 const categoryLocalizations = require(path.join(agoraProductRoot, 'agoraApparelCategoryLocalizationData'));
 const variants = require(path.join(agoraProductRoot, 'agoraApparelProductVariantData'));
 const variantLocalizations = require(path.join(agoraProductRoot, 'agoraApparelProductVariantLocalizationData'));
-const priceBooks = require(path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data/agoraApparelPriceBookData'));
-const priceRows = require(path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data/agoraApparelPriceRowData'));
-const inventoryBalances = require(path.join(projectRoot, 'modules/agora.apparel/modules/agoraApparel/data/staged/apparel/data/agoraApparelInventoryBalanceData'));
+const priceBooks = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data/agoraApparelPriceBookData'));
+const priceRows = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data/agoraApparelPriceRowData'));
+const inventoryBalances = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data/agoraApparelInventoryBalanceData'));
 
 let persisted;
 let indexed;

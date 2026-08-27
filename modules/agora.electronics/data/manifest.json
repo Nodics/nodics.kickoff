@@ -1,0 +1,73 @@
+{
+  "contractVersion": 0,
+  "module": "agora.electronics",
+  "sections": {
+    "agoraElectronicsCommerceCatalog": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "0.0.1",
+      "description": "Agora Electronics commerce catalog",
+      "owningDomain": "agora.electronics",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/electronics/data/agoraElectronicsInventoryBalanceData.js": "9a7697d6001b434d587dbea127279dd141bafd75e7a483d824340fbaea40c51a",
+        "staged/electronics/data/agoraElectronicsPriceBookData.js": "6358216a75f19bd0150e4636e187e77579e864ce3e42fcb6dc38d41e4bd5f077",
+        "staged/electronics/data/agoraElectronicsPriceRowData.js": "73c13b5b0041bd9f565799aaaff3f4be718f467065a533e625fd3baf02c8999c",
+        "staged/electronics/data/agoraElectronicsProductData.js": "7d65408bbed528e0eef4009adb892265259eca378a6ca643f8d719b14197e80f",
+        "staged/electronics/data/agoraElectronicsProductLocalizationData.js": "da3b65379f0c4a9551a8d64e811abbb1d4e51d647557396c6c412a91218f179c",
+        "staged/electronics/data/agoraElectronicsProductVariantData.js": "97910a4c70ee797d566c38f4b1ca11f6859568e59b9c0cd0f00f7852d953368b",
+        "staged/electronics/data/agoraElectronicsProductVariantLocalizationData.js": "43456a7fe16f4ddef014d1f1715b1f75c8b6b20759b61c860b2ddf8437541440",
+        "staged/electronics/data/agoraElectronicsSpecificationData.js": "43c792626beddf466abd41024e47507b4e2fbf581860c3152ad922f48ba63d21",
+        "staged/electronics/data/agoraElectronicsWarehouseData.js": "f4f80cf4305abea303329c5249d31f877edb2b6521a4d40042354fd6a61eb2b9",
+        "staged/electronics/headers/agoraElectronicsCatalogHeader.js": "756acaee841810003df88504b586c7aed6465e8229c94e3ddb30a83d9118d89f"
+      }
+    },
+    "agoraElectronicsContentCatalog": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "staged",
+      "version": "0.0.0",
+      "description": "Agora Electronics content and renderer catalog",
+      "owningDomain": "agora.electronics.wcms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "staged/electronics/data/agoraElectronicsContentCatalogData.js": "d9d1b1777b1bcb2a58d83e41f2cdf286b4c2add26c7c27d53581e9d75a467381",
+        "staged/electronics/data/agoraElectronicsPageData.js": "873fb5e1d5ae61c52446842f6be8fd385b01e7cad5f72130ad3cc8e4d9b879df",
+        "staged/electronics/data/agoraElectronicsRendererData.js": "3b59c38e4e7d93886d783a4b879e133b9fb907cfdaf7a76cee2314607a43a9d9",
+        "staged/electronics/data/agoraElectronicsRouteData.js": "e66d671733e47ce068f1a621cb7d3200b9ef3f2bd16cafa8b742154dda236517",
+        "staged/electronics/data/agoraElectronicsSharedComponentData.js": "2de072a7c2b52b24f023bdffed5b3c5fb3fb12aebdb7e534d908b5134a130b9b",
+        "staged/electronics/data/agoraElectronicsSharedComponentMediaData.js": "4aa613b25862f4b670f633a97fc9a2a2f042ae3910e97a4951cdc55a2b6a2bd9",
+        "staged/electronics/data/agoraElectronicsSharedComponentTypeGroupData.js": "9592f769332db2091f4525a3f28b8f6c993849b243d8658880eb4cb301a65b62",
+        "staged/electronics/data/agoraElectronicsSharedMediaReferenceData.js": "f76f2dddbde9f0863a7d63ae39f06f5c22517cbc72b4c5573a7b9d8a60545796",
+        "staged/electronics/data/agoraElectronicsSharedRendererData.js": "5ec85a900f3d466b882f3f013af876cd1e80aada061eef02665c6ac3ab8071b4",
+        "staged/electronics/data/agoraElectronicsSharedSlotData.js": "2a645aaf42a24108bd32b0c816ab649cb139a1b6dd659f6b816f6c5ae986cc35",
+        "staged/electronics/data/agoraElectronicsSharedTemplateData.js": "9096af3b3d3720a450b30e2e5d55085d15f84b0909cfd8c5873e8873210554a9",
+        "staged/electronics/data/agoraElectronicsSharedTypeCodeData.js": "9db67822960c308644c6b90deb7d190d903ab4fa306185187c82a4285fa1a20e",
+        "staged/electronics/data/agoraElectronicsSiteData.js": "8e6cadd2033ee798123de8af708c81c67d7636237df09935176151a3a65d3fb9",
+        "staged/electronics/data/agoraElectronicsTypeCodeData.js": "a36e3ca694eb673a3e02cc8f753d64b1921a379d2c4a4feda22797bf7f77de8c",
+        "staged/electronics/headers/agoraElectronicsContentHeader.js": "390e227a3559c4fcea3579117ab2a61573e3cdb40ad86fdef420777c0652a10e"
+      }
+    }
+  }
+}

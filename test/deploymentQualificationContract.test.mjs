@@ -10,13 +10,41 @@
  */
 
 import assert from 'node:assert';
-import {
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
+function readEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return {};
+  return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) return env;
+    const separatorIndex = trimmed.indexOf('=');
+    if (separatorIndex < 0) return env;
+    const key = trimmed.slice(0, separatorIndex).trim();
+    let value = trimmed.slice(separatorIndex + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    env[key] = value;
+    return env;
+  }, {});
+}
+
+const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
+const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
+const qualificationService = await import(pathToFileURL(path.join(
+  frameworkRoot,
+  'nodics.foundation/modules/nTooling/src/service/project/defaultProjectDeploymentQualificationService.mjs'
+)).href);
+const {
   createQualificationPlan,
   createReport,
   executeLocalPlan,
   resolveSourceCommits,
   sanitizeStep,
-} from '../.nodics/framework/nodics.foundation/modules/nTooling/src/service/project/defaultProjectDeploymentQualificationService.mjs';
+} = qualificationService;
 
 const workspace = { framework: '/framework', kickoff: '/project', axis: '/axis', nexus: '/nexus', agora: '/agora' };
 const plan = createQualificationPlan({ workspace });

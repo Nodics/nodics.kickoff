@@ -1,29 +1,34 @@
 {
-    "name": "nexus.web",
-    "index": "3100.70",
-    "description": "Nodics Nexus corporate website customer composition boundary.",
-    "main": "nodics.js",
-    "version": "0.0.0",
-    "private": true,
-    "license": "SEE LICENSE IN LICENSE",
-    "nodics": {
-        "kind": "group",
-        "displayName": "Nexus.Web",
-        "runtimeModule": true,
-        "loadableByNodicsModuleLoader": true,
-        "owns": [
-            "composition",
-            "configuration",
-            "llm"
-        ],
-        "runtime": {
-            "router": false,
-            "publish": false,
-            "web": false
-        },
-        "extends": [
-            "nodics.wcms"
-        ]
+  "name": "nexus.web",
+  "version": "0.0.0",
+  "index": "3100.70",
+  "private": true,
+  "description": "Project-owned corporate content data for Nodics Nexus.",
+  "main": "nodics.js",
+  "scripts": {
+    "check": "npm test",
+    "test": "node test/nexusCorporateContentContract.test.mjs"
+  },
+  "nodics": {
+    "kind": "content-pack",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "composition",
+      "configuration",
+      "data",
+      "test",
+      "documentation",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
     },
-    "scripts": {}
+    "displayName": "Nexus Web",
+    "extends": [
+      "nodics.wcms"
+    ]
+  }
 }

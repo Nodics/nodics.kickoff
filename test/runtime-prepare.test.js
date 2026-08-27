@@ -12,10 +12,31 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
-const packageRoot = packageName => path.dirname(require.resolve(packageName + '/package.json'));
+
+function readEnvFile(filePath) {
+    if (!fs.existsSync(filePath)) return {};
+    return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return env;
+        const separatorIndex = trimmed.indexOf('=');
+        if (separatorIndex < 0) return env;
+        const key = trimmed.slice(0, separatorIndex).trim();
+        let value = trimmed.slice(separatorIndex + 1).trim();
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+            value = value.slice(1, -1);
+        }
+        env[key] = value;
+        return env;
+    }, {});
+}
+
+const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
+const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
+const packageRoot = packageName => path.join(frameworkRoot, packageName);
 
 const scenarios = Object.freeze([
     Object.freeze({
@@ -45,7 +66,7 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
             assert.equal(NODICS.isModuleActive('search'), true);
             assert.equal(NODICS.isModuleActive('elastic'), true);
-            assert.equal(NODICS.isModuleActive('agoraApparel'), false);
+            assert.equal(NODICS.isModuleActive('agora.apparel'), false);
             assert.equal(NODICS.isModuleActive('workflow'), false);
         }
     }),
@@ -65,8 +86,8 @@ const scenarios = Object.freeze([
             'apparelProduct', 'apparel', 'electronicsProduct', 'electronics',
             'telcoCatalog', 'telcoSubscription', 'telcoProvisioning', 'telco', 'domainCommerceCore', 'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt',
-            'agora.apparel', 'agoraApparel',
-            'agora.electronics', 'agoraElectronics', 'agora.telco', 'agoraTelco', 'kickoffLocal',
+            'agora.apparel', 'agora.apparel',
+            'agora.electronics', 'agora.electronics', 'agora.telco', 'agora.telco', 'kickoffLocal',
             'commerceStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'commerceManagement']),
@@ -82,7 +103,7 @@ const scenarios = Object.freeze([
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['COMMERCE_STAGED']);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);
-            assert.equal(NODICS.isModuleActive('agoraApparel'), true);
+            assert.equal(NODICS.isModuleActive('agora.apparel'), true);
             const selected = require('../config/agora-domain-composition').resolve().domains;
             assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
             assert.equal(NODICS.isModuleActive('electronicsProduct'), selected.includes('electronics') || selected.includes('telco'));
@@ -93,7 +114,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
-        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'kickoffLocal', 'engagementServer']),
+        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'kickoffLocal', 'engagementServer']),
         verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
@@ -126,7 +147,7 @@ const scenarios = Object.freeze([
         frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
-            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexusWebData', 'partnerSiteData',
+            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'partnerSiteData',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),
@@ -157,7 +178,7 @@ const scenarios = Object.freeze([
             assert.equal(NODICS.isModuleActive('vDatabase'), false);
             assert.equal(NODICS.isModuleActive('vMongodb'), false);
             assert.equal(NODICS.isModuleActive('vService'), false);
-            assert.equal(NODICS.isModuleActive('nexusWebData'), false);
+            assert.equal(NODICS.isModuleActive('nexus.web'), false);
         }
     }),
     Object.freeze({
@@ -213,7 +234,7 @@ async function prepareScenario(scenario) {
     };
     const disabledModules = Object.entries(optionalFamilies).filter(([domain]) => !capabilityDomains.has(domain)).flatMap(([, modules]) => modules);
     ['apparel', 'electronics', 'telco'].filter(domain => !selectedDomains.includes(domain)).forEach(domain => {
-        disabledModules.push({ apparel: 'agoraApparel', electronics: 'agoraElectronics', telco: 'agoraTelco' }[domain]);
+        disabledModules.push({ apparel: 'agora.apparel', electronics: 'agora.electronics', telco: 'agora.telco' }[domain]);
     });
     if (selectedDomains.length < 2) disabledModules.push('domainCommerceCore');
     scenario.expectedModules.filter(moduleName => !disabledModules.includes(moduleName)).forEach(moduleName => {

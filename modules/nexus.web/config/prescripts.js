@@ -12,12 +12,10 @@
 'use strict';
 
 /**
- * @module nexus.web/config/prescripts
- * @description Defines generated config/prescripts startup extension declarations for nexus.web.
+ * @module modules/nexus.web/prescripts
+ * @description Reserved Nexus Web Data prescripts contribution point.
  * @layer config
- * @owner generated
- * @override Later active modules may override these declarations through configuration layering.
+ * @owner nexus.web
+ * @override Later project, environment, server, or node layers may add prescripts entries for this boundary.
  */
-module.exports = {
-
-};
+module.exports = {};

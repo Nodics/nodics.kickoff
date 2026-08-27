@@ -50,7 +50,6 @@ Run:
 
 ```text
 cp .env.example .env
-npm run configure:framework
 npm ci
 npm test
 npm run start:platform
@@ -85,17 +84,17 @@ qualify deterministic publication interruption/reconciliation contracts and a
 30-minute mixed-read/publication soak while preserving explicit
 external-evidence limitations.
 
-The committed `.npmrc` keeps npm local `file:` dependencies as symbolic links
-(`install-links=false`). This is required because `.nodics/framework/` is a
-generated framework-link directory, not a registry-style packed dependency.
-Use `npm ci` for deterministic clean installs; rerun `configure:framework`
-first whenever the framework checkout moves.
+Kickoff does not install framework modules through project-local symlinks.
+`NODICS_FRAMEWORK_ROOT` in `.env` points to the available `nodics.ai` checkout,
+and the project bootstrap script delegates lifecycle commands to that framework
+tooling directly. Use `npm ci` for deterministic project installs; update
+`.env` when the framework checkout moves.
 
 Customers and partner developers should run Nodics lifecycle checks from their
 project repository. Kickoff exposes project-local aliases such as
 `npm run nodics:clean`, `npm run nodics:build`, and
 `npm run release:check`, but those aliases delegate to the framework-owned
-`nTooling` bridge under `.nodics/framework`. Do not copy framework clean, build,
+`nTooling` bridge resolved from `NODICS_FRAMEWORK_ROOT`. Do not copy framework clean, build,
 release, security-boundary, or framework publication-qualification
 implementation into customer projects.
 
@@ -172,11 +171,11 @@ journey. The bounded fresh-database variant requires the explicit
 
 Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
 located at the default sample location. The value may be absolute or relative
-to this Nodics Kickoff project root. `npm run configure:framework` creates generated
-links under `.nodics/framework/`, and the committed `package.json` installs
-from those stable local links.
+to this Nodics Kickoff project root. Project scripts use `scripts/nodics-project.js`
+to delegate into that framework checkout without creating framework links under
+`.nodics/`.
 
-Do not commit `.nodics/`; it is machine-local generated setup.
+Do not commit `.nodics/`; it is machine-local generated scratch/setup state.
 
 Framework integration work must stabilize dependency resolution, module skeletons, formatting,
 and runtime-scoped clean/build behavior before more broad code movement.

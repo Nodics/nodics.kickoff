@@ -1,6 +1,6 @@
 # agora.telco
 
-Agora Telco customer composition boundary.
+Agora Telco product and content catalogs.
 
 Use this README to understand what this module is for, which capability or composition boundary it owns, how it fits its parent hierarchy, and where developers or AI tools should continue reading.
 

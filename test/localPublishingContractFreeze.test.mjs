@@ -63,7 +63,7 @@ for (const documentation of [
 }
 
 for (const manifestPath of [
-  'nodics.kickoff/modules/nexus.web/modules/nexusWebData/data/manifest.json',
+  'nodics.kickoff/modules/nexus.web/data/manifest.json',
   'nodics.kickoff/modules/partnerSiteData/data/manifest.json',
 ]) {
   const manifest = JSON.parse(read(manifestPath));

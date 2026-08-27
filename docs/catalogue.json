@@ -1,8 +1,110 @@
 {
   "pack": "nodics.kickoff",
   "version": "0.0.0",
-  "contractVersion": 0,
+  "contractVersion": 1,
   "title": "Nodics Kickoff",
+  "navigationSections": [
+    {
+      "code": "discover-kickoff",
+      "title": "Discover Kickoff",
+      "order": 10,
+      "summary": "Project identity, ownership boundaries, and the business reason Kickoff exists as a reference customer workspace.",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE"
+    },
+    {
+      "code": "run-kickoff-locally",
+      "title": "Run Kickoff Locally",
+      "order": 20,
+      "summary": "Local runtime topology, start sequence, acceptance checks, and developer/operator verification for the reference stack.",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE"
+    },
+    {
+      "code": "publish-and-qualify",
+      "title": "Publish and Qualify",
+      "order": 30,
+      "summary": "Local publishing operations, deployment qualification evidence, recovery rules, and production-boundary discipline.",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE"
+    },
+    {
+      "code": "customize-customer-projects",
+      "title": "Customize Customer Projects",
+      "order": 40,
+      "summary": "Project-layer customization examples, configuration-first decisions, documentation placement, and rollback-safe extension guidance.",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE"
+    },
+    {
+      "code": "functional-journeys",
+      "title": "Functional Journeys",
+      "order": 50,
+      "summary": "Commerce, Engagement, provider, privacy, reversal, and operator journeys demonstrated by the reference customer project.",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE"
+    }
+  ],
   "documents": [
     {
       "id": "kickoff.overview",
@@ -10,7 +112,77 @@
       "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "nodics.kickoff",
-      "content": "docs/pages/project-overview.md"
+      "content": "docs/pages/project-overview.md",
+      "slug": "nodics-kickoff",
+      "parentId": "nodics-kickoff",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Discover Kickoff",
+        "Kickoff project overview"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Discover Kickoff",
+      "navigationSectionCode": "discover-kickoff",
+      "navigationGroup": "Project Identity and Ownership",
+      "navigationGroupCode": "project-identity-and-ownership",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 10,
+      "documentType": "overview",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/project-overview.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.local-runtime",
+        "kickoff.customization",
+        "kickoff.functional-journeys"
+      ],
+      "sourceEvidence": [
+        "README.md",
+        "docs/pages/project-overview.md",
+        "package.json"
+      ],
+      "searchKeywords": [
+        "kickoff",
+        "reference project",
+        "customer project",
+        "documentation"
+      ],
+      "topicKeywords": [
+        "ownership",
+        "project boundary",
+        "local adoption"
+      ],
+      "visualRequirements": [
+        "architecture-diagram",
+        "table",
+        "code-example"
+      ]
     },
     {
       "id": "kickoff.local-runtime",
@@ -18,7 +190,78 @@
       "summary": "Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "docs/pages/local-runtime.md"
+      "content": "docs/pages/local-runtime.md",
+      "slug": "kickoff-local-runtime",
+      "parentId": "run-kickoff-locally",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Run Kickoff Locally",
+        "Local runtime topology"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Run Kickoff Locally",
+      "navigationSectionCode": "run-kickoff-locally",
+      "navigationGroup": "Runtime Topology",
+      "navigationGroupCode": "runtime-topology",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 10,
+      "documentType": "operations",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/local-runtime.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.overview",
+        "kickoff.local-acceptance",
+        "kickoff.deployment-qualification"
+      ],
+      "sourceEvidence": [
+        "docs/pages/local-runtime.md",
+        "nodics.project.json",
+        "package.json"
+      ],
+      "searchKeywords": [
+        "local runtime",
+        "topology",
+        "start",
+        "servers"
+      ],
+      "topicKeywords": [
+        "platform",
+        "wcms",
+        "process",
+        "axis",
+        "nexus",
+        "agora"
+      ],
+      "visualRequirements": [
+        "troubleshooting-matrix",
+        "command-example"
+      ]
     },
     {
       "id": "kickoff.local-acceptance",
@@ -26,7 +269,79 @@
       "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "docs/pages/local-acceptance-checklist.md"
+      "content": "docs/pages/local-acceptance-checklist.md",
+      "slug": "kickoff-local-acceptance",
+      "parentId": "run-kickoff-locally",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Run Kickoff Locally",
+        "Local acceptance checklist"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Run Kickoff Locally",
+      "navigationSectionCode": "run-kickoff-locally",
+      "navigationGroup": "Acceptance and Verification",
+      "navigationGroupCode": "acceptance-and-verification",
+      "navigationGroupOrder": 20,
+      "navigationOrder": 20,
+      "documentType": "operations",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/local-acceptance-checklist.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.local-runtime",
+        "kickoff.local-publishing-operations",
+        "kickoff.functional-journeys"
+      ],
+      "sourceEvidence": [
+        "docs/pages/local-acceptance-checklist.md",
+        "package.json",
+        "nodics.project.json"
+      ],
+      "searchKeywords": [
+        "acceptance",
+        "fresh local",
+        "verification",
+        "checklist"
+      ],
+      "topicKeywords": [
+        "import",
+        "module lifecycle",
+        "documentation",
+        "media",
+        "cron"
+      ],
+      "visualRequirements": [
+        "diagram",
+        "troubleshooting-matrix",
+        "command-example"
+      ]
     },
     {
       "id": "kickoff.local-publishing-operations",
@@ -34,7 +349,76 @@
       "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "docs/pages/local-publishing-operations.md"
+      "content": "docs/pages/local-publishing-operations.md",
+      "slug": "kickoff-local-publishing-operations",
+      "parentId": "publish-and-qualify",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Publish and Qualify",
+        "Local publishing operations"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Publish and Qualify",
+      "navigationSectionCode": "publish-and-qualify",
+      "navigationGroup": "Publishing Operations",
+      "navigationGroupCode": "publishing-operations",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 10,
+      "documentType": "operations",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/local-publishing-operations.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.local-acceptance",
+        "kickoff.deployment-qualification"
+      ],
+      "sourceEvidence": [
+        "docs/pages/local-publishing-operations.md",
+        "package.json",
+        "nodics.project.json"
+      ],
+      "searchKeywords": [
+        "publishing",
+        "staged",
+        "online",
+        "recovery"
+      ],
+      "topicKeywords": [
+        "nPublish",
+        "WCMS",
+        "Process",
+        "rollback"
+      ],
+      "visualRequirements": [
+        "troubleshooting-matrix",
+        "code-example"
+      ]
     },
     {
       "id": "kickoff.deployment-qualification",
@@ -42,7 +426,76 @@
       "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "docs/pages/deployment-qualification.md"
+      "content": "docs/pages/deployment-qualification.md",
+      "slug": "kickoff-deployment-qualification",
+      "parentId": "publish-and-qualify",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Publish and Qualify",
+        "Deployment qualification"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Publish and Qualify",
+      "navigationSectionCode": "publish-and-qualify",
+      "navigationGroup": "Deployment Qualification",
+      "navigationGroupCode": "deployment-qualification",
+      "navigationGroupOrder": 20,
+      "navigationOrder": 20,
+      "documentType": "operations",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/deployment-qualification.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.local-runtime",
+        "kickoff.local-publishing-operations"
+      ],
+      "sourceEvidence": [
+        "docs/pages/deployment-qualification.md",
+        "package.json",
+        "nodics.project.json"
+      ],
+      "searchKeywords": [
+        "deployment",
+        "qualification",
+        "evidence",
+        "production"
+      ],
+      "topicKeywords": [
+        "security",
+        "resilience",
+        "load",
+        "provider"
+      ],
+      "visualRequirements": [
+        "diagram",
+        "troubleshooting-matrix",
+        "command-example"
+      ]
     },
     {
       "id": "kickoff.customization",
@@ -50,7 +503,78 @@
       "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "modules",
-      "content": "docs/pages/customization-guide.md"
+      "content": "docs/pages/customization-guide.md",
+      "slug": "kickoff-customization",
+      "parentId": "customize-customer-projects",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Customize Customer Projects",
+        "Customer customization guide"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Customize Customer Projects",
+      "navigationSectionCode": "customize-customer-projects",
+      "navigationGroup": "Project Customization",
+      "navigationGroupCode": "project-customization",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 10,
+      "documentType": "customization",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/customization-guide.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.overview",
+        "kickoff.local-runtime",
+        "kickoff.local-acceptance"
+      ],
+      "sourceEvidence": [
+        "docs/pages/customization-guide.md",
+        "modules/AGENTS.md",
+        "package.json"
+      ],
+      "searchKeywords": [
+        "customization",
+        "project module",
+        "overlay",
+        "configuration"
+      ],
+      "topicKeywords": [
+        "extension",
+        "rollback",
+        "generated docs",
+        "customer layer"
+      ],
+      "visualRequirements": [
+        "diagram",
+        "comparison-table",
+        "code-example"
+      ]
     },
     {
       "id": "kickoff.functional-journeys",
@@ -58,7 +582,77 @@
       "summary": "Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
-      "content": "docs/pages/functional-journeys.md"
+      "content": "docs/pages/functional-journeys.md",
+      "slug": "kickoff-functional-journeys",
+      "parentId": "functional-journeys",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Functional Journeys",
+        "Commerce and Engagement functional journeys"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Functional Journeys",
+      "navigationSectionCode": "functional-journeys",
+      "navigationGroup": "Commerce and Engagement Journeys",
+      "navigationGroupCode": "commerce-and-engagement-journeys",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 10,
+      "documentType": "how-to",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/functional-journeys.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.overview",
+        "kickoff.local-acceptance",
+        "kickoff.customization"
+      ],
+      "sourceEvidence": [
+        "docs/pages/functional-journeys.md",
+        "package.json",
+        "nodics.project.json"
+      ],
+      "searchKeywords": [
+        "commerce",
+        "engagement",
+        "customer journey",
+        "provider"
+      ],
+      "topicKeywords": [
+        "checkout",
+        "orders",
+        "reviews",
+        "contact",
+        "privacy"
+      ],
+      "visualRequirements": [
+        "table"
+      ]
     }
   ]
 }
