@@ -4,10 +4,10 @@
 
 This runbook operates the `kickoffLocal` Staged-to-Online publishing lifecycle.
 It is Local evidence only: it does not approve Development, QA, PreProd, Prod,
-physical datastore switching, or Agora. WCMS Staged owns authoring and release
-freeze, `nPublish` owns lifecycle transitions, Process owns approval workflow
-state, WCMS Online owns deployed visibility, and Axis is the employee control
-plane. Nexus consumes Online only.
+physical datastore switching, or a production storefront launch. WCMS Staged
+owns authoring and release freeze, `nPublish` owns lifecycle transitions,
+Process owns approval workflow state, WCMS Online owns deployed visibility,
+and Axis is the employee control plane. Nexus and Agora consume Online only.
 
 Operators and automation must use Nodics APIs, generated services, and the
 project commands below. They must never repair, seed, version, publish, restore,
@@ -18,6 +18,7 @@ not open its own database connection.
 | Publishing area | Business question answered | Correct Kickoff action | Authority that decides |
 | --- | --- | --- | --- |
 | Import and upgrade | Which release is installed and can it be trusted? | Run retained or fresh acceptance through project commands | nImport validates immutable release identity and checksums |
+| Capability gating | Is the target application allowed to become usable? | Register and activate required functional capabilities before initializing the application pack | BackOffice Module Registry and the owning module decide capability readiness |
 | Staged review | What content or data is ready for approval? | Inspect Staged state through Axis and governed APIs | WCMS Staged and owning modules hold authoring state |
 | Approval and activation | What is allowed to become visible Online? | Use workflow-backed publication actions | nPublish and Process coordinate approval and Online activation |
 | Recovery | How do we retry or roll back a failed local release? | Use documented retry, rollback, backup, and restore commands | Runtime services preserve lifecycle, audit, and integrity evidence |

@@ -35,6 +35,18 @@ module.exports = {
     "renderer": "nexus.page.home",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "code": "nexusHomePage2NexusHomeHero",
         "target": "nexusHomeBannerCarousel",
         "slot": "main",
@@ -120,6 +132,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusAboutHero",
         "slot": "main",
         "index": 0,
@@ -161,6 +185,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusFeaturesHero",
         "slot": "main",
@@ -216,6 +252,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusProductsHero",
         "slot": "main",
         "index": 0,
@@ -257,6 +305,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusSupportHero",
         "slot": "main",
@@ -306,6 +366,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusInvestorsHero",
         "slot": "main",
         "index": 0,
@@ -329,6 +401,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusDonateHero",
         "slot": "main",
@@ -354,6 +438,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusPlatformHero",
         "slot": "main",
         "index": 0,
@@ -377,6 +473,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusDevelopersHero",
         "slot": "main",
@@ -420,6 +528,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusEcosystemHero",
         "slot": "main",
         "index": 0,
@@ -462,6 +582,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusContactHero",
         "slot": "main",
         "index": 0,
@@ -485,6 +617,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusPrivacyHero",
         "slot": "main",
@@ -510,6 +654,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusTermsHero",
         "slot": "main",
         "index": 0,
@@ -533,6 +689,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusCookiesHero",
         "slot": "main",
@@ -558,6 +726,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusEditorialListingHero",
         "slot": "main",
         "index": 0,
@@ -581,6 +761,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusEditorialDetailHero",
         "slot": "main",
@@ -606,6 +798,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusNewsListingHero",
         "slot": "main",
         "index": 0,
@@ -629,6 +833,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusNewsPublicExperienceHero",
         "slot": "main",
@@ -654,6 +870,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusNewsAxisBusinessJourneyHero",
         "slot": "main",
         "index": 0,
@@ -677,6 +905,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusNewsEngagementPublicApiHero",
         "slot": "main",
@@ -702,6 +942,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusNewsEditorialReleaseFlowHero",
         "slot": "main",
         "index": 0,
@@ -725,6 +977,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusBlogListingHero",
         "slot": "main",
@@ -750,6 +1014,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusBlogEngagementFrameworkHero",
         "slot": "main",
         "index": 0,
@@ -773,6 +1049,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusBlogEditorialPublicationHero",
         "slot": "main",
@@ -798,6 +1086,18 @@ module.exports = {
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
       {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
+      {
         "target": "nexusBlogRuntimeDiscoveryHero",
         "slot": "main",
         "index": 0,
@@ -821,6 +1121,18 @@ module.exports = {
     "typeCode": "nexusCorporateStandardPageType",
     "template": "nexusCorporatePageTemplate",
     "cmsComponents": [
+      {
+        "target": "nexusCorporateSiteHeader",
+        "slot": "shell",
+        "index": 0,
+        "active": true
+      },
+      {
+        "target": "nexusCorporateSiteFooter",
+        "slot": "shell",
+        "index": 1,
+        "active": true
+      },
       {
         "target": "nexusBlogAxisBusinessOperationsHero",
         "slot": "main",

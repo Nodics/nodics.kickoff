@@ -66,7 +66,8 @@ assert.match(bootstrapAcceptance, /documentation rollback to prior Online versio
 assert.match(bootstrapAcceptance, /x-nodics-client-contract-version/);
 assert.match(backendDockerfile, /rm -rf \/workspace\/nodics\.kickoff\/envs\/kickoffDockerLocal\/generated/);
 assert.match(dockerLocalRuntimeProperties, /const distributedCacheModules = \['redisCache'\]/);
-assert.match(dockerLocalRuntimeProperties, /const projectModules = \[[^\]]*'partnerSiteData'[^\]]*\]/);
+assert.match(dockerLocalRuntimeProperties, /activeModules: \{ groups: \[\], modules: \['cmsStaged'[\s\S]*'nexus\.web'/);
+assert.doesNotMatch(dockerLocalRuntimeProperties, /partnerSiteData/);
 assert.match(dockerLocalRuntimeProperties, /cache:[\s\S]*kickoffCore: distributedAuthCache/);
 assert.match(dockerLocalRuntimeProperties, /channels: \{ auth: \{ enabled: true, engine: 'redis', fallback: false \} \}/);
 assert.match(qualification, /redis-sentinel-promotion-observed/);

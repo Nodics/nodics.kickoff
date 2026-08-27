@@ -165,5 +165,17 @@ module.exports = {
     "kind": "COMPONENT",
     "contractVersion": 0,
     "active": true
+  },
+  "record22": {
+    "code": "nexusCorporateSiteHeaderType",
+    "kind": "COMPONENT",
+    "contractVersion": 0,
+    "active": true
+  },
+  "record23": {
+    "code": "nexusCorporateSiteFooterType",
+    "kind": "COMPONENT",
+    "contractVersion": 0,
+    "active": true
   }
 };

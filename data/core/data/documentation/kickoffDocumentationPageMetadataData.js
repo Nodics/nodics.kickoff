@@ -70,33 +70,38 @@ module.exports = {
         "level": 2
       },
       {
+        "text": "First successful setup journey",
+        "anchor": "kickoffOverview-9-first-successful-setup-journey",
+        "level": 2
+      },
+      {
         "text": "Documentation boundary",
-        "anchor": "kickoffOverview-9-documentation-boundary",
+        "anchor": "kickoffOverview-10-documentation-boundary",
         "level": 2
       },
       {
         "text": "Common mistakes",
-        "anchor": "kickoffOverview-10-common-mistakes",
+        "anchor": "kickoffOverview-11-common-mistakes",
         "level": 2
       },
       {
         "text": "How to know Kickoff is working",
-        "anchor": "kickoffOverview-11-how-to-know-kickoff-is-working",
+        "anchor": "kickoffOverview-12-how-to-know-kickoff-is-working",
         "level": 2
       },
       {
         "text": "Verification",
-        "anchor": "kickoffOverview-12-verification",
+        "anchor": "kickoffOverview-13-verification",
         "level": 2
       },
       {
         "text": "What to read next",
-        "anchor": "kickoffOverview-13-what-to-read-next",
+        "anchor": "kickoffOverview-14-what-to-read-next",
         "level": 2
       },
       {
         "text": "Continue",
-        "anchor": "kickoffOverview-14-continue",
+        "anchor": "kickoffOverview-15-continue",
         "level": 2
       }
     ],
@@ -106,9 +111,15 @@ module.exports = {
       },
       {
         "language": "mermaid"
+      },
+      {
+        "language": "mermaid"
       }
     ],
     "visualAssets": [
+      {
+        "kind": "table"
+      },
       {
         "kind": "table"
       }
@@ -125,8 +136,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/project-overview.md",
-    "sourceChecksum": "803cdd331ab85302a0f478ee3a22068539ddb3fedfb9da08bb0f26d233a61c4f",
-    "sourceWordCount": 1690,
+    "sourceChecksum": "387ff723ea5242dde5b05ca3a330a56e9b25b5f4853f55afee3ca2e859d9a924",
+    "sourceWordCount": 2071,
     "audience": [
       "business-user",
       "administrator",
@@ -199,38 +210,46 @@ module.exports = {
         "level": 2
       },
       {
+        "text": "Fresh environment setup order",
+        "anchor": "kickoffLocalRuntime-7-fresh-environment-setup-order",
+        "level": 2
+      },
+      {
         "text": "Documentation import",
-        "anchor": "kickoffLocalRuntime-7-documentation-import",
+        "anchor": "kickoffLocalRuntime-8-documentation-import",
         "level": 2
       },
       {
         "text": "Troubleshooting",
-        "anchor": "kickoffLocalRuntime-8-troubleshooting",
+        "anchor": "kickoffLocalRuntime-9-troubleshooting",
         "level": 2
       },
       {
         "text": "Production note",
-        "anchor": "kickoffLocalRuntime-9-production-note",
+        "anchor": "kickoffLocalRuntime-10-production-note",
         "level": 2
       },
       {
         "text": "Common mistakes",
-        "anchor": "kickoffLocalRuntime-10-common-mistakes",
+        "anchor": "kickoffLocalRuntime-11-common-mistakes",
         "level": 2
       },
       {
         "text": "Verification",
-        "anchor": "kickoffLocalRuntime-11-verification",
+        "anchor": "kickoffLocalRuntime-12-verification",
         "level": 2
       },
       {
         "text": "Continue",
-        "anchor": "kickoffLocalRuntime-12-continue",
+        "anchor": "kickoffLocalRuntime-13-continue",
         "level": 2
       }
     ],
     "diagrams": [],
     "visualAssets": [
+      {
+        "kind": "table"
+      },
       {
         "kind": "table"
       }
@@ -246,8 +265,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-runtime.md",
-    "sourceChecksum": "48d2544599f82989bb332b1d99b229ae19825d3d4716829a97bccf5a9d9d5473",
-    "sourceWordCount": 1341,
+    "sourceChecksum": "a01771d3fa9f3068139eccca3bfd6718d9bf0e4a3e6957bd083289e36c6b90b6",
+    "sourceWordCount": 1606,
     "audience": [
       "business-user",
       "administrator",
@@ -310,88 +329,98 @@ module.exports = {
         "level": 2
       },
       {
+        "text": "Fresh-schema user journey",
+        "anchor": "kickoffLocalAcceptance-5-fresh-schema-user-journey",
+        "level": 2
+      },
+      {
         "text": "Automated acceptance path",
-        "anchor": "kickoffLocalAcceptance-5-automated-acceptance-path",
+        "anchor": "kickoffLocalAcceptance-6-automated-acceptance-path",
         "level": 2
       },
       {
         "text": "What the automated command proves",
-        "anchor": "kickoffLocalAcceptance-6-what-the-automated-command-proves",
+        "anchor": "kickoffLocalAcceptance-7-what-the-automated-command-proves",
         "level": 3
       },
       {
         "text": "Start and stop the complete Local topology",
-        "anchor": "kickoffLocalAcceptance-7-start-and-stop-the-complete-local-topology",
+        "anchor": "kickoffLocalAcceptance-8-start-and-stop-the-complete-local-topology",
         "level": 2
       },
       {
         "text": "Start individual backend servers",
-        "anchor": "kickoffLocalAcceptance-8-start-individual-backend-servers",
+        "anchor": "kickoffLocalAcceptance-9-start-individual-backend-servers",
         "level": 2
       },
       {
         "text": "Start Axis",
-        "anchor": "kickoffLocalAcceptance-9-start-axis",
+        "anchor": "kickoffLocalAcceptance-10-start-axis",
         "level": 2
       },
       {
         "text": "Login",
-        "anchor": "kickoffLocalAcceptance-10-login",
+        "anchor": "kickoffLocalAcceptance-11-login",
         "level": 2
       },
       {
         "text": "Import initialization data",
-        "anchor": "kickoffLocalAcceptance-11-import-initialization-data",
+        "anchor": "kickoffLocalAcceptance-12-import-initialization-data",
         "level": 2
       },
       {
         "text": "Verify module registry",
-        "anchor": "kickoffLocalAcceptance-12-verify-module-registry",
+        "anchor": "kickoffLocalAcceptance-13-verify-module-registry",
         "level": 2
       },
       {
         "text": "Verify documentation",
-        "anchor": "kickoffLocalAcceptance-13-verify-documentation",
+        "anchor": "kickoffLocalAcceptance-14-verify-documentation",
+        "level": 2
+      },
+      {
+        "text": "Verify application setup and Online delivery",
+        "anchor": "kickoffLocalAcceptance-15-verify-application-setup-and-online-delivery",
         "level": 2
       },
       {
         "text": "Verify content and media",
-        "anchor": "kickoffLocalAcceptance-14-verify-content-and-media",
+        "anchor": "kickoffLocalAcceptance-16-verify-content-and-media",
         "level": 2
       },
       {
         "text": "Verify Page Designer authoring model",
-        "anchor": "kickoffLocalAcceptance-15-verify-page-designer-authoring-model",
+        "anchor": "kickoffLocalAcceptance-17-verify-page-designer-authoring-model",
         "level": 3
       },
       {
         "text": "Verify Cron",
-        "anchor": "kickoffLocalAcceptance-16-verify-cron",
+        "anchor": "kickoffLocalAcceptance-18-verify-cron",
         "level": 2
       },
       {
         "text": "Command-line smoke test",
-        "anchor": "kickoffLocalAcceptance-17-command-line-smoke-test",
+        "anchor": "kickoffLocalAcceptance-19-command-line-smoke-test",
         "level": 2
       },
       {
         "text": "Troubleshooting quick map",
-        "anchor": "kickoffLocalAcceptance-18-troubleshooting-quick-map",
+        "anchor": "kickoffLocalAcceptance-20-troubleshooting-quick-map",
         "level": 2
       },
       {
         "text": "Acceptance sign-off",
-        "anchor": "kickoffLocalAcceptance-19-acceptance-sign-off",
+        "anchor": "kickoffLocalAcceptance-21-acceptance-sign-off",
         "level": 2
       },
       {
         "text": "Common mistakes",
-        "anchor": "kickoffLocalAcceptance-20-common-mistakes",
+        "anchor": "kickoffLocalAcceptance-22-common-mistakes",
         "level": 2
       },
       {
         "text": "Verification",
-        "anchor": "kickoffLocalAcceptance-21-verification",
+        "anchor": "kickoffLocalAcceptance-23-verification",
         "level": 2
       }
     ],
@@ -404,6 +433,9 @@ module.exports = {
       }
     ],
     "visualAssets": [
+      {
+        "kind": "table"
+      },
       {
         "kind": "table"
       },
@@ -435,8 +467,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-acceptance-checklist.md",
-    "sourceChecksum": "cee6ef60085cf30c450098602d57a87d09d87d1acd45713b8a180367d9f28c89",
-    "sourceWordCount": 2442,
+    "sourceChecksum": "472aac81eb3d7039d44f656131d423b7834679fb1c85d6ff9456fd9edfe974e9",
+    "sourceWordCount": 3143,
     "audience": [
       "business-user",
       "administrator",
@@ -545,8 +577,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-publishing-operations.md",
-    "sourceChecksum": "0d4d250a5140d709983bbca50015a9446e538258b288b689bee6d7dad7dc999f",
-    "sourceWordCount": 1431,
+    "sourceChecksum": "b5f033ac7d2e6c84f91e34f5bd12e9aac824c0a52d590e65a69bbb72abac4959",
+    "sourceWordCount": 1467,
     "audience": [
       "business-user",
       "administrator",

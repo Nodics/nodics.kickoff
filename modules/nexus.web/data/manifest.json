@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "staged",
-      "version": "0.0.0",
+      "version": "0.0.7",
       "displayName": "Nexus Corporate Site",
       "description": "Nexus corporate Site and page composition source",
       "owningDomain": "nexus.wcms",
@@ -22,17 +22,18 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "staged/wcms/data/corporate/nexusCatalogData.js": "dcf43d94e4c697b8feab537323be2f0d724fa8bf2fed3d4bbf2845ce1c2ea043",
-        "staged/wcms/data/corporate/nexusComponentData.js": "6108081de161a313931bd3489064f47d28f3a60c9dafe2de0a15d73694e51874",
+        "staged/wcms/data/corporate/nexusComponentData.js": "c10de46a5269b3593ffe66a1ff805c4600831a3d73c4ee69091e7e3ef76df848",
+        "staged/wcms/data/corporate/nexusComponentMediaData.js": "ef2c03f521b4ebe0bacba4dacee84568aa87d1e67289394a84d32373e89c2b2c",
         "staged/wcms/data/corporate/nexusComponentTypeGroupData.js": "97297910ce733dc9cf1f96ca00e87966acb5a883406c4ad5fce9e7caa2f98e35",
         "staged/wcms/data/corporate/nexusNavigationData.js": "d74ea7eb03c506d061e5b99064eda5bb63e7b612f07e03d3a0c3d9b7503a0aa6",
-        "staged/wcms/data/corporate/nexusPageData.js": "4e9f6424f41f9c27b83fa1cfa1ef2aba87c05dc9b163cf4553f2380d6599e2d9",
-        "staged/wcms/data/corporate/nexusRendererData.js": "008bfce9f2f5a46ebd503ce2b2aed0d0784d5a6df62f51aa8814cf263c83b4c0",
+        "staged/wcms/data/corporate/nexusPageData.js": "f91924973aaf89a29c68718bd5d53e3669198b2ddc80ae76061c9bff4a11a25d",
+        "staged/wcms/data/corporate/nexusRendererData.js": "c2309af7437a5b42fb7727d34f27fd2c7bc22011f9540dc91b499b72487edfd7",
         "staged/wcms/data/corporate/nexusRouteData.js": "8d0f7f5e0d0cd664f2a3f653596a608eabb872d2f244c86e38ee92eb8a150af8",
         "staged/wcms/data/corporate/nexusSiteData.js": "b81659b5e98b106b0ef9f3af56759f564942b148f6d164e55111e5462a3ccf44",
         "staged/wcms/data/corporate/nexusSlotData.js": "95f6204852b750c8f6956b576b8afde9750c941fe7ce9f510428869494df5996",
         "staged/wcms/data/corporate/nexusTemplateData.js": "e881816a2cf4e012a408a68fc2a1fab99c29bffa815f1682d3b6b235ff9830ee",
-        "staged/wcms/data/corporate/nexusTypeCodeData.js": "1df7aec9e163891f515a7a74c08ad20109fb46ca50a1938707adea83b8b0ad14",
-        "staged/wcms/headers/nexusCorporateContentHeader.js": "07c5bc1910b0461488fad98a32234c14b0ab6acfc0d5d75d30acfd70d1a52f53"
+        "staged/wcms/data/corporate/nexusTypeCodeData.js": "53709a4f9e28a7fa016908d4f5d52541a4b177dbf573410f777dd52274d4d2a9",
+        "staged/wcms/headers/nexusCorporateContentHeader.js": "7ddf64472ddbc654f5e19687191fe2b3d8d20d3bbea2f3eca29abc6104c1431e"
       }
     },
     "nexusCorporateSiteUpdate": {

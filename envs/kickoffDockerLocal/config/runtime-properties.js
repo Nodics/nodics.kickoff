@@ -24,7 +24,7 @@ const publicationConnections = {
     process: endpoint('process', 4330)
 };
 const connections = { ...platformConnections, ...publicationConnections };
-const projectModules = ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'partnerSiteData'];
+const projectModules = ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt'];
 const distributedCacheModules = ['redisCache'];
 const database = name => ({ default: { mongodb: { master: { URI: process.env.NODICS_MONGODB_URI, databaseName: name } } } });
 const elasticConnection = () => ({ connection: { hosts: [process.env.NODICS_ELASTICSEARCH_URL || 'http://elasticsearch:9200'] } });
@@ -196,9 +196,9 @@ module.exports = function runtimeProperties(server) {
                 agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
                 agoraelectronics: { releaseCode: 'agora.electronics:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
                 agoratelco: { releaseCode: 'agora.telco:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
-                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.2', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
-                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
-                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
+                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.7', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
+                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.1', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
+                kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.1', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
                 workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 target: { moduleName: 'cms', connectionName: 'cmsOnline', connectionType: 'abstract' } } },

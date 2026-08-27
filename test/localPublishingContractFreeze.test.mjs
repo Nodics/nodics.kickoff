@@ -64,7 +64,6 @@ for (const documentation of [
 
 for (const manifestPath of [
   'nodics.kickoff/modules/nexus.web/data/manifest.json',
-  'nodics.kickoff/modules/partnerSiteData/data/manifest.json',
 ]) {
   const manifest = JSON.parse(read(manifestPath));
   assert(manifest.contractVersion === 2, `${manifestPath} must retain contract v2`);

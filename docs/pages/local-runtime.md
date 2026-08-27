@@ -156,11 +156,34 @@ After login:
 
 - open the System and Integrations area and check the module registry;
 - confirm Core, Platform, and WCMS are active and not treated as optional;
+- register and activate required business capabilities before initializing a
+  customer-facing application: Agora requires Commerce and Discovery; Nexus
+  requires its public content and engagement capabilities when those features
+  are enabled;
 - if Process and Automation is running, confirm Process appears from the
   composed runtime and exposes both `workflow` and `cronjob` capabilities;
 - open Documentation and verify Framework, Swaggers, Nodics Axis, and Nodics
   Kickoff are shown as separate documentation products;
 - import or update documentation packs only through the authorized Axis action.
+
+## Fresh environment setup order
+
+A fresh local schema is ready only after four governed lanes are complete.
+Do not treat a successful import button as proof that a storefront is ready;
+the setup page must also show required capabilities, publication state, and
+Online readiness.
+
+| Order | Axis workspace | What must happen | User-visible result |
+| ---: | --- | --- | --- |
+| 1 | Empty-database Axis setup | Initialize the managed Axis baseline, BackOffice workspace, CMS baseline, admin access, and required core data. | Axis leaves recovery mode and exposes authorized navigation. |
+| 2 | Module Registry | Register and activate functional capabilities needed by the target application. Agora requires Commerce and Discovery; Nexus requires its public content and engagement capabilities when enabled. | Setup and Accelerators no longer shows a capability-blocked state for that application. |
+| 3 | Setup and Accelerators | Initialize Nexus or Agora application packs. A complete pack imports CMS content, routes, navigation, media metadata, media artifacts, commerce data, search/discovery data, and operational data owned by that application. | The application row shows initialized Staged data and the next publishing action. |
+| 4 | Publishing and approval | Request approval, review evidence, approve or reject, and publish the approved release to Online. | Nexus and Agora can render Online content; otherwise they show the maintenance page. |
+
+Documentation packs are independent from accelerator setup. Framework, Axis,
+and Kickoff documentation can be imported, reviewed, and published in parallel
+with application setup. Swagger/OpenAPI is generated from active runtime
+contracts and should not be hidden behind documentation content-pack approval.
 
 ## Documentation import
 

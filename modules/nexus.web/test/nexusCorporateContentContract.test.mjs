@@ -89,6 +89,9 @@ const testimonials = require(
 const mediaReferences = require(
   resolve(moduleRoot, "data/staged/media/data/nexusMediaReferenceData.js"),
 );
+const componentMedia = require(
+  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusComponentMediaData.js"),
+);
 const mediaAssetManifest = require(
   resolve(moduleRoot, "data/assets/nexus-cms-media/assetManifest.js"),
 );
@@ -104,6 +107,7 @@ const editorialArticleLocalizationValues = Object.values(
 const editorialArticleTaxonomyValues = Object.values(editorialArticleTaxonomies);
 const editorialOnlineArticleValues = Object.values(editorialOnlineArticles);
 const mediaReferenceValues = Object.values(mediaReferences);
+const componentMediaValues = Object.values(componentMedia);
 const site = Object.values(sites)[0];
 const catalog = Object.values(catalogs)[0];
 const homePage = pageValues.find((page) => page.code === "nexusHomePage");
@@ -134,6 +138,13 @@ const blogDetailPages = [
 const componentByCode = new Map(
   componentValues.map((component) => [component.code, component]),
 );
+const orderedComponentTargets = (page, slot) =>
+  page.cmsComponents
+    .filter((association) =>
+      slot ? association.slot === slot : association.slot !== "shell",
+    )
+    .toSorted((first, second) => first.index - second.index)
+    .map((association) => association.target);
 
 async function sha256(relativePath) {
   return createHash("sha256")
@@ -176,13 +187,17 @@ assert(
   "All seeded Blog detail pages must exist in the importable CMS page payload",
 );
 assert.equal(
-  homePage.cmsComponents.length,
+  orderedComponentTargets(homePage).length,
   12,
   "Homepage must contain the twelve approved content sections",
 );
-const homepageComponentCodes = homePage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const homepageShellComponentCodes = orderedComponentTargets(homePage, "shell");
+assert.deepEqual(
+  homepageShellComponentCodes,
+  ["nexusCorporateSiteHeader", "nexusCorporateSiteFooter"],
+  "Homepage must include the backend-managed shared header and footer shell components",
+);
+const homepageComponentCodes = orderedComponentTargets(homePage);
 assert(
   !homepageComponentCodes.includes("nexusHomePlatform"),
   "Platform Overview must remain excluded from the homepage composition",
@@ -244,9 +259,7 @@ assert.equal(
   "/blogs",
   "Homepage Blogs section CTA must open the Blogs listing page",
 );
-const aboutComponentCodes = aboutPage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const aboutComponentCodes = orderedComponentTargets(aboutPage);
 assert.deepEqual(
   aboutComponentCodes.slice(0, 5),
   [
@@ -263,9 +276,7 @@ assert.equal(
   "about-mvp-scale",
   "About MVP-to-scale section must expose a stable managed component anchor",
 );
-const featuresComponentCodes = featuresPage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const featuresComponentCodes = orderedComponentTargets(featuresPage);
 assert.deepEqual(
   featuresComponentCodes.slice(0, 7),
   [
@@ -284,9 +295,7 @@ assert.equal(
   12,
   "Features page capability catalogue must expose the approved twelve capability cards",
 );
-const productsComponentCodes = productsPage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const productsComponentCodes = orderedComponentTargets(productsPage);
 assert.deepEqual(
   productsComponentCodes.slice(0, 5),
   [
@@ -308,9 +317,7 @@ assert.equal(
   3,
   "Products suite must expose the approved product direction cards",
 );
-const supportComponentCodes = supportPage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const supportComponentCodes = orderedComponentTargets(supportPage);
 assert.deepEqual(
   supportComponentCodes.slice(0, 6),
   [
@@ -333,9 +340,7 @@ assert.equal(
   4,
   "Support response model must expose the approved four priority levels",
 );
-const newsComponentCodes = newsPage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const newsComponentCodes = orderedComponentTargets(newsPage);
 assert.deepEqual(
   newsComponentCodes.slice(0, 2),
   ["nexusNewsListingHero", "nexusNewsListing"],
@@ -368,9 +373,7 @@ componentByCode
     );
   });
 newsDetailPages.forEach((page) => {
-  const detailComponentCodes = page.cmsComponents
-    .sort((first, second) => first.index - second.index)
-    .map((association) => association.target);
+  const detailComponentCodes = orderedComponentTargets(page);
   assert.equal(
     detailComponentCodes.length,
     2,
@@ -392,9 +395,7 @@ newsDetailPages.forEach((page) => {
     `${page.code} must provide structured article sections`,
   );
 });
-const blogComponentCodes = blogPage.cmsComponents
-  .sort((first, second) => first.index - second.index)
-  .map((association) => association.target);
+const blogComponentCodes = orderedComponentTargets(blogPage);
 assert.deepEqual(
   blogComponentCodes.slice(0, 2),
   ["nexusBlogListingHero", "nexusBlogListing"],
@@ -529,9 +530,7 @@ editorialOnlineArticleValues.forEach((onlineArticle) => {
   );
 });
 blogDetailPages.forEach((page) => {
-  const detailComponentCodes = page.cmsComponents
-    .sort((first, second) => first.index - second.index)
-    .map((association) => association.target);
+  const detailComponentCodes = orderedComponentTargets(page);
   assert.equal(
     detailComponentCodes.length,
     2,
@@ -582,8 +581,7 @@ homepageComponentCodes.forEach((componentCode) => {
 pageValues
   .filter((page) => page.typeCode === "nexusCorporateStandardPageType")
   .forEach((page) => {
-    const heroComponentCode = page.cmsComponents
-      .sort((first, second) => first.index - second.index)[0]?.target;
+    const heroComponentCode = orderedComponentTargets(page)[0];
     const heroComponent = componentByCode.get(heroComponentCode);
     assert(
       heroComponent,
@@ -654,6 +652,9 @@ const assetMediaCodes = new Set(
 const referenceMediaCodes = new Set(
   mediaReferenceValues.map((reference) => reference.mediaCode),
 );
+const componentMediaCodes = new Set(
+  componentMediaValues.map((reference) => reference.mediaCode),
+);
 referencedMediaCodes.forEach((mediaCode) => {
   assert.equal(
     assetMediaCodes.has(mediaCode),
@@ -664,6 +665,22 @@ referencedMediaCodes.forEach((mediaCode) => {
     referenceMediaCodes.has(mediaCode),
     true,
     `${mediaCode} must have a Nexus media reference record`,
+  );
+  assert.equal(
+    componentMediaCodes.has(mediaCode),
+    true,
+    `${mediaCode} must have a Nexus CMS component media binding for Staged-to-Online transfer`,
+  );
+});
+componentMediaValues.forEach((reference) => {
+  assert(
+    componentByCode.has(reference.componentCode),
+    `${reference.componentMediaCode} must bind to a Nexus CMS component`,
+  );
+  assert.equal(
+    assetMediaCodes.has(reference.mediaCode),
+    true,
+    `${reference.componentMediaCode} must point to a backend media asset manifest entry`,
   );
 });
 const corporateRelease = manifest.sections.nexusCorporateSite;

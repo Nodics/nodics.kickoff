@@ -13,7 +13,7 @@ the Platform `axis` backend module; browser renderers belong in `nodics.axis`.
 Kickoff-wide documentation source belongs in this repository under `docs/` and
 is generated into this repository's governed content pack. Documentation for a
 specific installed application belongs under that application's data module,
-for example `modules/nexus.web/docs/` or `modules/agora.apparel/docs/``.
+for example `modules/nexus.web/docs/` or `modules/agora.apparel/docs/`.
 
 ## Why Kickoff exists
 
@@ -48,6 +48,7 @@ framework:
 | Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |
 | Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |
 | Can optional modules be added later? | Yes. Process demonstrates observed optional runtime capability and registry lifecycle while exposing workflow and cronjob capabilities. |
+| Can an accelerator be imported before its business capabilities are active? | No. The setup journey blocks it until required capabilities such as Commerce, Discovery, or Engagement are registered and active. |
 | Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |
 
 This makes Kickoff more than a sample app. It is the adoption proof for the
@@ -192,6 +193,40 @@ After the developer understands this reference shape, they can create a real
 customer project with the same rules but different business modules, branding,
 data, environments, and deployment choices.
 
+## First successful setup journey
+
+On a fresh schema, do not start by importing accelerator data in isolation.
+The user journey is intentionally ordered so Axis, module lifecycle, content
+packs, and Online delivery all agree.
+
+```mermaid
+flowchart LR
+  Axis["Initialize Axis baseline"]
+  Modules["Register required capabilities"]
+  Apps["Initialize Nexus and Agora packs"]
+  Publish["Approve and publish Online"]
+  Storefront["Open Nexus or Agora"]
+  Docs["Import documentation packs"]
+  Swagger["Open Swagger/OpenAPI"]
+
+  Axis --> Modules --> Apps --> Publish --> Storefront
+  Axis -. parallel .-> Docs
+  Axis -. generated .-> Swagger
+```
+
+| Step | What the user does in Axis | Why it comes here |
+| --- | --- | --- |
+| 1. Initialize Axis baseline | Complete the empty-database Axis setup so the managed BackOffice workspace, CMS baseline, and admin access are available. | Without Axis baseline, there is no reliable control plane for guided setup. |
+| 2. Register capabilities | Open Module Registry and register/activate the capabilities required by the target application. Agora requires Commerce and Discovery; Nexus requires its public content and engagement capabilities when those features are enabled. | A running server or visible import pack is not enough. The project must declare the capability as registered and active. |
+| 3. Initialize applications | Open Setup and Accelerators and initialize Nexus, Agora Apparel, Agora Electronics, or Agora Telco. | Application initialization imports the complete site preparation package: CMS pages, routes, navigation, media metadata, media artifacts, commerce catalog data, and operational data owned by the pack. |
+| 4. Publish Online | Review publishable Staged changes, approve through the governed task, and publish to Online. | Public applications consume Online only. Until Online has approved content, they show a customer-friendly maintenance state. |
+| 5. Verify in browser | Open Nexus and Agora storefronts and confirm the expected Online content, media, navigation, and business data appear. | Browser verification proves the same path a customer sees, not only backend import success. |
+
+Documentation packs follow the same Staged-to-Online governance, but they do
+not block application setup. They can be imported and approved in parallel.
+Swagger/OpenAPI is generated from the active runtime contracts and should stay
+available independently of CMS documentation publication.
+
 ## Documentation boundary
 
 Kickoff docs are imported through WCMS like any other governed CMS content
@@ -217,16 +252,19 @@ Documentation dashboard can discover it.
 Kickoff is healthy when Platform starts, WCMS starts, the module registry shows
 mandatory functional modules as active, optional modules can be registered
 through Axis, documentation content packs can be imported or updated through
-BackOffice/WCMS, and Axis can render Framework, Swaggers, Nodics Axis, and
-Nodics Kickoff documentation from backend-owned sources.
+BackOffice/WCMS, Setup and Accelerators blocks applications whose required
+business capabilities are not registered, and Axis can render Framework,
+Swaggers, Nodics Axis, and Nodics Kickoff documentation from backend-owned
+sources.
 
 ## Verification
 
 Verify Kickoff as a reference customer project by proving that it can run the
 framework without becoming framework source. The local proof is to configure
 the framework root, install dependencies, start the six backend runtimes plus
-Axis, Nexus, and Agora, log in, import required data releases, open the Kickoff
-documentation product, and verify Agora's multi-domain storefront. The project
+Axis, Nexus, and Agora, log in, initialize the Axis baseline, register required
+business capabilities, import required data releases, publish to Online, open
+the Kickoff documentation product, and verify Agora's multi-domain storefront. The project
 should contribute its own docs and sample behavior while framework docs still
 come from `nodics.docs` and Axis product docs still come from the Platform Axis
 backend module.

@@ -15,7 +15,8 @@
       "wcmsOnline",
       "process",
       "engagement",
-      "commerce"
+      "commerce",
+      "commerceStaged"
     ],
     "frontends": [
       "axis",
@@ -155,8 +156,7 @@
         "nexusecosystemrepair",
         "agoraapparel",
         "agoraelectronics",
-        "agoratelco",
-        "partnernexus"
+        "agoratelco"
       ],
       "deliveryProbe": {
         "site": "nexusCorporateSite",
@@ -200,6 +200,12 @@
           "label": "Engagement",
           "script": "start:engagement",
           "port": 4340
+        },
+        {
+          "code": "commerceStaged",
+          "label": "Commerce Staged",
+          "script": "start:commerce:staged",
+          "port": 4352
         },
         {
           "code": "commerce",

@@ -28,6 +28,8 @@ module.exports = {
         connectionName: 'default'
     },
     backofficeApplicationInitialization: {
+        projectCode: 'nodics.kickoff',
+        projectRoot: process.cwd(),
         profiles: {
             nexus: {
                 code: 'nexus',
@@ -35,21 +37,34 @@ module.exports = {
                 owner: 'nexus.web',
                 applicationCode: 'nexus',
                 siteCode: 'nexusCorporateSite',
-                baselineCode: 'nexusprofessionalcopy',
+                baselineCode: 'nexus',
                 presentation: {
                     title: 'Nexus Corporate',
                     kind: 'PROJECT',
                     category: 'accelerator',
                     order: 100,
                     summary: 'Corporate website accelerator published from the latest qualified WCMS Staged baseline to Online.',
-                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
+                    requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Engagement'],
+                    requiredFunctionalModules: [
+                        { code: 'nodics.communication', label: 'Engagement capability' }
+                    ],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'nexus.web:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
-                    { code: 'nexus.web:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
+                    { code: 'nexus.web:nexusCorporateSite', kind: 'Corporate site content', required: true, trigger: 'ACTIVATION',
+                        dataType: 'core', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                    { code: 'nexus.web:nexusCorporateMediaReferences', kind: 'Corporate media references', required: true, trigger: 'ACTIVATION',
+                        dataType: 'core', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                    { code: 'nexus.web:nexusEditorialSource', kind: 'News and blog source', required: true, trigger: 'ACTIVATION',
+                        dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                    { code: 'nexus.web:nexusCorporateMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Corporate media files', required: true,
+                        trigger: 'ACTIVATION', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
+                        manifestPath: 'modules/nexus.web/data/assets/nexus-cms-media/assetManifest.js',
+                        businessPurpose: 'NEXUS_CORPORATE_CONTENT' },
+                    { code: 'nexus.web:nexusEngagementOperational', kind: 'Contact and testimonial experience', required: true, trigger: 'ACTIVATION',
+                        dataType: 'sample', targetServer: 'engagementServer', targetRuntimeRole: 'ENGAGEMENT' }
                 ],
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             nexusupdate: {
                 code: 'nexusupdate',
@@ -59,7 +74,7 @@ module.exports = {
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusupdate',
                 presentation: { visible: false },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             nexusecosystemrepair: {
                 code: 'nexusecosystemrepair',
@@ -69,7 +84,7 @@ module.exports = {
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusecosystemrepair',
                 presentation: { visible: false },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             nexusincremental: {
                 code: 'nexusincremental',
@@ -79,7 +94,7 @@ module.exports = {
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusincremental',
                 presentation: { visible: false },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             nexusprofessionalcopy: {
                 code: 'nexusprofessionalcopy',
@@ -89,7 +104,7 @@ module.exports = {
                 siteCode: 'nexusCorporateSite',
                 baselineCode: 'nexusprofessionalcopy',
                 presentation: { visible: false },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             agoraapparel: {
                 code: 'agoraapparel',
@@ -105,13 +120,23 @@ module.exports = {
                     order: 210,
                     summary: 'Apparel storefront accelerator as a complete business-facing domain bundle.',
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                    requiredFunctionalModules: [
+                        { code: 'nodics.commerce', label: 'Commerce capability' },
+                        { code: 'nodics.discovery', label: 'Discovery capability' }
+                    ],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'agora.apparel:agoraApparelContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                    { code: 'agora.apparel:agoraApparelCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    { code: 'agora.apparel:agoraApparelContentCatalog', kind: 'Storefront content', required: true, trigger: 'USER',
+                        dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                    { code: 'agora.apparel:agoraApparelMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Storefront media files', required: true,
+                        trigger: 'USER', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
+                        manifestPath: 'modules/agora.apparel/data/assets/agora-cms-media/assetManifest.js',
+                        businessPurpose: 'AGORA_STOREFRONT_CONTENT' },
+                    { code: 'agora.apparel:agoraApparelCommerceCatalog', kind: 'Commerce catalog', required: true, trigger: 'USER',
+                        dataType: 'sample', targetServer: 'commerceStaged', targetRuntimeRole: 'COMMERCE_STAGED' }
                 ],
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             agoraelectronics: {
                 code: 'agoraelectronics',
@@ -127,13 +152,23 @@ module.exports = {
                     order: 220,
                     summary: 'Electronics storefront accelerator as a complete business-facing domain bundle.',
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                    requiredFunctionalModules: [
+                        { code: 'nodics.commerce', label: 'Commerce capability' },
+                        { code: 'nodics.discovery', label: 'Discovery capability' }
+                    ],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'agora.electronics:agoraElectronicsContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                    { code: 'agora.electronics:agoraElectronicsCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    { code: 'agora.electronics:agoraElectronicsContentCatalog', kind: 'Storefront content', required: true, trigger: 'USER',
+                        dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                    { code: 'agora.electronics:agoraElectronicsMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Storefront media files', required: true,
+                        trigger: 'USER', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
+                        manifestPath: 'modules/agora.electronics/data/assets/agora-cms-media/assetManifest.js',
+                        businessPurpose: 'AGORA_STOREFRONT_CONTENT' },
+                    { code: 'agora.electronics:agoraElectronicsCommerceCatalog', kind: 'Commerce catalog', required: true, trigger: 'USER',
+                        dataType: 'sample', targetServer: 'commerceStaged', targetRuntimeRole: 'COMMERCE_STAGED' }
                 ],
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             agoratelco: {
                 code: 'agoratelco',
@@ -149,13 +184,23 @@ module.exports = {
                     order: 230,
                     summary: 'Telco storefront accelerator as a complete business-facing domain bundle.',
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process', 'Commerce', 'Discovery'],
+                    requiredFunctionalModules: [
+                        { code: 'nodics.commerce', label: 'Commerce capability' },
+                        { code: 'nodics.discovery', label: 'Discovery capability' }
+                    ],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
                 dataPackages: [
-                    { code: 'agora.telco:agoraTelcoContentCatalog', kind: 'DOMAIN_CONTENT', required: true, trigger: 'USER' },
-                    { code: 'agora.telco:agoraTelcoCommerceCatalog', kind: 'DOMAIN_COMMERCE', required: true, trigger: 'USER' }
+                    { code: 'agora.telco:agoraTelcoContentCatalog', kind: 'Storefront content', required: true, trigger: 'USER',
+                        dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                    { code: 'agora.telco:agoraTelcoMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Storefront media files', required: true,
+                        trigger: 'USER', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
+                        manifestPath: 'modules/agora.telco/data/assets/agora-cms-media/assetManifest.js',
+                        businessPurpose: 'AGORA_STOREFRONT_CONTENT' },
+                    { code: 'agora.telco:agoraTelcoCommerceCatalog', kind: 'Commerce catalog', required: true, trigger: 'USER',
+                        dataType: 'sample', targetServer: 'commerceStaged', targetRuntimeRole: 'COMMERCE_STAGED' }
                 ],
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             frameworkdocs: {
                 code: 'frameworkdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.docs',
@@ -169,7 +214,7 @@ module.exports = {
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             axisdocs: {
                 code: 'axisdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'axis',
@@ -183,7 +228,7 @@ module.exports = {
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             },
             kickoffdocs: {
                 code: 'kickoffdocs', type: 'DOCUMENTATION_BUNDLE', owner: 'nodics.kickoff',
@@ -197,7 +242,7 @@ module.exports = {
                     requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
                     activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'USER', sampleDataTrigger: 'USER' }
                 },
-                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 }
+                target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 120000, maxAttempts: 1 }
             }
         }
     },
@@ -256,7 +301,6 @@ module.exports = {
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
-            'partnerSiteData',
             'axis',
             'kickoffLocal',
             'platformServer'
@@ -302,6 +346,10 @@ module.exports = {
         },
         wcmsOnline: { endpoint: { httpHost: '127.0.0.1', httpPort: 4314, httpsHost: '127.0.0.1', httpsPort: 4315 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4314, httpsHost: 'localhost', httpsPort: 4315 } },
+        commerceStaged: { endpoint: { httpHost: '127.0.0.1', httpPort: 4352, httpsHost: '127.0.0.1', httpsPort: 4353 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4352, httpsHost: 'localhost', httpsPort: 4353 } },
+        engagementServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4340, httpsHost: '127.0.0.1', httpsPort: 4341 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4340, httpsHost: 'localhost', httpsPort: 4341 } },
         process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4330, httpsHost: 'localhost', httpsPort: 4331 } }
     }

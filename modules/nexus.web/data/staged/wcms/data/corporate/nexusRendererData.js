@@ -220,5 +220,23 @@ module.exports = {
       "web"
     ],
     "active": true
+  },
+  "record22": {
+    "code": "nexusCorporateSiteHeaderType",
+    "renderer": "nexus.component.site-header",
+    "contractVersion": 0,
+    "channels": [
+      "web"
+    ],
+    "active": true
+  },
+  "record23": {
+    "code": "nexusCorporateSiteFooterType",
+    "renderer": "nexus.component.site-footer",
+    "contractVersion": 0,
+    "channels": [
+      "web"
+    ],
+    "active": true
   }
 };

@@ -40,7 +40,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -74,7 +74,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -108,7 +108,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -142,7 +142,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -178,7 +178,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -214,7 +214,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -250,7 +250,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -286,7 +286,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -322,7 +322,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -358,7 +358,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -394,7 +394,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -430,7 +430,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -466,7 +466,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -502,7 +502,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -538,7 +538,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -574,7 +574,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -610,7 +610,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -646,7 +646,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -682,7 +682,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -718,7 +718,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -754,7 +754,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -790,7 +790,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -826,7 +826,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -862,7 +862,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -896,7 +896,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -930,7 +930,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -964,7 +964,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -998,7 +998,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1032,7 +1032,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1066,7 +1066,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1100,7 +1100,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1134,7 +1134,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1168,7 +1168,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1202,7 +1202,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1236,7 +1236,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1270,7 +1270,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1304,7 +1304,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1340,7 +1340,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1376,7 +1376,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1412,7 +1412,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1448,7 +1448,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1484,7 +1484,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1520,7 +1520,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1556,7 +1556,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1590,7 +1590,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1624,7 +1624,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1658,7 +1658,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1692,7 +1692,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1726,7 +1726,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1760,7 +1760,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1794,7 +1794,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1828,7 +1828,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1862,7 +1862,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1896,7 +1896,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1930,7 +1930,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1964,7 +1964,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -1998,7 +1998,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2032,7 +2032,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2066,7 +2066,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2100,7 +2100,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2134,7 +2134,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2168,7 +2168,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2202,7 +2202,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2236,7 +2236,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2270,7 +2270,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2304,7 +2304,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2338,7 +2338,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2372,7 +2372,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2406,7 +2406,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2440,7 +2440,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2474,7 +2474,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2508,7 +2508,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2542,7 +2542,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2576,7 +2576,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2610,7 +2610,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2644,7 +2644,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2678,7 +2678,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2712,7 +2712,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2746,7 +2746,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2780,7 +2780,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2814,7 +2814,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2848,7 +2848,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2882,7 +2882,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2916,7 +2916,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2950,7 +2950,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",
@@ -2984,7 +2984,7 @@ module.exports = {
       "reviewPermission": "documentation.review",
       "approvePermission": "documentation.approve",
       "publishPermission": "documentation.publish",
-      "preventSelfDecision": true,
+      "permissionEnforced": true,
       "adminOverrideAudited": true
     },
     "actor": "nodics.kickoff.generator",

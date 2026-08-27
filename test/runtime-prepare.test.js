@@ -132,7 +132,6 @@ const scenarios = Object.freeze([
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
-            'partnerSiteData',
             'kickoffLocal',
             'platformServer'
         ]),
@@ -147,7 +146,7 @@ const scenarios = Object.freeze([
         frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
-            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'partnerSiteData',
+            'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
         expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),

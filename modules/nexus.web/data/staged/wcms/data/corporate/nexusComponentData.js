@@ -1303,7 +1303,7 @@ module.exports = {
       "linkLabel": "Start a partnership conversation"
     }
   },
-  "record87": {
+  "record90": {
     "code": "nexusEcosystemRoles",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",
@@ -1337,7 +1337,7 @@ module.exports = {
       ]
     }
   },
-  "record88": {
+  "record91": {
     "code": "nexusEcosystemContribution",
     "typeCode": "nexusCardGridType",
     "accessMode": "PUBLIC",
@@ -2884,6 +2884,84 @@ module.exports = {
       ],
       "href": "/docs?tab=api",
       "linkLabel": "Inspect API reference"
+    }
+  },
+  "record87": {
+    "code": "nexusCorporateSiteHeader",
+    "typeCode": "nexusCorporateSiteHeaderType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "brandLabel": "NODICS",
+      "brandSubtitle": "NEXUS",
+      "navigation": [
+        { "label": "Home", "href": "/", "id": "home" },
+        { "label": "About", "href": "/#aboutus", "id": "about" },
+        { "label": "Features", "href": "/#features", "id": "features" },
+        { "label": "Solutions", "href": "/#products", "id": "products" },
+        { "label": "Support", "href": "/#support", "id": "support" },
+        { "label": "Blogs", "href": "/blogs", "id": "blogs" },
+        { "label": "Docs", "href": "/docs", "id": "wiki" },
+        { "label": "Axis", "href": "{axisBaseUrl}", "id": "axis" }
+      ]
+    }
+  },
+  "record88": {
+    "code": "nexusCorporateSiteFooter",
+    "typeCode": "nexusCorporateSiteFooterType",
+    "accessMode": "PUBLIC",
+    "active": true,
+    "properties": {
+      "brandSummary": "Where enterprise capabilities, technology, and knowledge connect.",
+      "contactHeading": "Connect",
+      "contactEmail": "nodics.framework@gmail.com",
+      "socialLinks": [
+        { "name": "GitHub", "href": "https://github.com/Nodics" },
+        { "name": "LinkedIn", "href": "https://www.linkedin.com/company/nodics" }
+      ],
+      "groups": [
+        {
+          "title": "Platform",
+          "links": [
+            { "label": "Features", "href": "/#features" },
+            { "label": "Solutions", "href": "/#products" },
+            { "label": "Technology Stack", "href": "/#products" },
+            { "label": "Support", "href": "/#support" }
+          ]
+        },
+        {
+          "title": "Developers",
+          "links": [
+            { "label": "Docs", "href": "/docs" },
+            { "label": "API Reference", "href": "/docs?tab=api" },
+            { "label": "GitHub", "href": "https://github.com/Nodics" },
+            { "label": "Axis", "href": "{axisBaseUrl}" }
+          ]
+        },
+        {
+          "title": "Company",
+          "links": [
+            { "label": "About", "href": "/#aboutus" },
+            { "label": "Ecosystem", "href": "/#ecosystem" },
+            { "label": "Contact", "href": "/#contact" },
+            { "label": "Testimonials", "href": "/#testimonials" }
+          ]
+        },
+        {
+          "title": "Resources",
+          "links": [
+            { "label": "Blogs", "href": "/blogs" },
+            { "label": "News", "href": "/news" },
+            { "label": "Documentation Gateway", "href": "/docs" }
+          ]
+        }
+      ],
+      "legalText": "© 2026 Nodics. All rights reserved.",
+      "legalLinks": [
+        { "label": "Privacy", "href": "/privacy" },
+        { "label": "Terms", "href": "/terms" },
+        { "label": "Cookies", "href": "/cookies" }
+      ]
     }
   },
   "record86": {

@@ -1,9 +1,10 @@
 # Local Acceptance Checklist
 
 This checklist is the beginner-friendly path for proving a fresh Nodics local
-installation from zero database state. Use it when you have cloned the three
-working repositories, configured Kickoff, and want to confirm the backend
-framework, customer project, and Axis frontend are working together.
+installation from zero database state. Use it when you have cloned the
+framework, the Kickoff customer project, and the frontend workspace, configured
+Kickoff, and want to confirm the backend framework, customer project, Axis,
+Nexus, and Agora are working together.
 
 The checklist is intentionally explicit. A new developer should be able to
 follow it without already knowing Nodics module loading, BackOffice bootstrap,
@@ -18,7 +19,7 @@ same setup.
 
 ## What this checklist proves
 
-The acceptance run proves five things:
+The acceptance run proves six things:
 
 | Area | What must be true |
 | --- | --- |
@@ -27,6 +28,7 @@ The acceptance run proves five things:
 | Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |
 | Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |
 | Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Process is observable as an optional runtime module with workflow and cronjob technical modules. |
+| Application readiness | Nexus and Agora setup is blocked until the required business capabilities are registered, active, imported, approved, and visible through Online delivery. |
 
 If any one of these fails, do not continue adding new functional modules. Fix
 the contract break first, otherwise every later module will inherit a shaky
@@ -39,8 +41,11 @@ The local reference setup normally looks like this:
 ```text
 nodicsRoot/
   nodics.ai/
-  nodics.axis/
   nodics.kickoff/
+  nodics.exp/
+    nodics.axis/
+    nodics.nexus/
+    nodics.agora.apparel/
 ```
 
 This layout is only a convenience. Customer projects may live anywhere. The
@@ -64,12 +69,12 @@ available:
 
 1. Node.js 24 and npm.
 2. MongoDB running locally.
-3. The three repositories are cloned:
+3. The required repositories are cloned:
    - `nodics.ai`
-   - `nodics.axis`
    - `nodics.kickoff`
+   - `nodics.exp` with `nodics.axis`, `nodics.nexus`, and Agora applications
 4. `nodics.kickoff/.env` exists and points to the framework root.
-5. `nodics.axis/.env` points to the local Platform server.
+5. `nodics.exp/nodics.axis/.env` points to the local Platform server.
 
 Run this from `nodics.kickoff`:
 
@@ -78,7 +83,7 @@ cp .env.example .env
 npm install
 ```
 
-Run this from `nodics.axis`:
+Run this from `nodics.exp/nodics.axis`:
 
 ```bash
 cp .env.example .env
@@ -88,10 +93,35 @@ npm install
 ## Fresh schema reset
 
 No contributor, AI agent, test, migration, or acceptance script may read or
-mutate Nodics databases directly. A fresh-schema run is therefore blocked until
-Platform provides a secured, bounded Local reset API/service with authorization,
-audit, explicit runtime targets, and recovery evidence. Never substitute a
-database shell command.
+mutate Nodics databases directly. A fresh-schema run must use the governed
+Platform Local reset API/service with authorization, audit, explicit runtime
+targets, and recovery evidence. Never substitute a database shell command.
+
+Before running `acceptance:local:fresh`, stop any existing local topology owned
+by this checkout. The command refuses to reset while Platform, WCMS, Process,
+Engagement, Commerce, Axis, Nexus, or Agora are still listening from another
+process.
+
+## Fresh-schema user journey
+
+Use this order when the database is empty and the user wants Axis, Nexus,
+Agora, and documentation to work from a clean state.
+
+| Order | User action | Required evidence before moving on |
+| ---: | --- | --- |
+| 1 | Start the local topology from `nodics.kickoff`. | Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, Axis, Nexus, and Agora are reachable on their configured local ports. |
+| 2 | Open Axis and complete the empty-database Axis setup. | Axis baseline, BackOffice navigation, Profile admin access, and CMS baseline are initialized through governed APIs. |
+| 3 | Open Module Registry and register/activate required capabilities. | Core, Platform, and WCMS are mandatory and active. Agora setup requires Commerce and Discovery. Nexus setup requires its public content capability and any enabled engagement capability. |
+| 4 | Open Setup and Accelerators. | Rows clearly show whether each application is ready, blocked by missing capabilities, waiting for approval, published Online, or already current. |
+| 5 | Initialize Nexus or Agora packs only after required capabilities are ready. | The import includes CMS pages, routes, navigation, media records, physical media artifacts, commerce catalog data, search/discovery data, and operational data owned by the selected pack. |
+| 6 | Publish to Online through the same screen or approval queue. | Staged changes are reviewed, approved or rejected by an authorized user, then promoted to Online with audit evidence. |
+| 7 | Verify public applications in the browser. | Nexus and Agora render Online content. If Online content is absent, they show a customer-friendly maintenance page, not hardcoded demo content. |
+
+Documentation has a parallel lane. Framework, Axis, and Kickoff documentation
+packs can be imported and approved while application setup is in progress.
+Documentation publication controls documentation pages only. It must not hide
+Swagger/OpenAPI, because Swagger/OpenAPI is generated from active backend
+contracts rather than CMS documentation content.
 
 ## Automated acceptance path
 
@@ -106,8 +136,9 @@ npm run acceptance:local
 ```
 
 This checks the running or newly started split WCMS topology and imports
-missing releases only through Nodics APIs. `acceptance:local:fresh` deliberately
-fails closed until the governed reset capability exists.
+missing releases only through Nodics APIs. `acceptance:local:fresh` first
+performs the governed Platform Local reset and then proves the clean bootstrap
+path through the same APIs and browser-facing contracts.
 
 ### What the automated command proves
 
@@ -119,9 +150,13 @@ flowchart TD
   Online --> Process["Start or reuse Process and Automation on 4330"]
   Process --> Axis["Start or reuse Axis on 3100"]
   Axis --> Auth["Authenticate default/admin"]
-  Auth --> Registry["Verify Core, Platform, WCMS, Process observation"]
+  Auth --> Baseline["Verify Axis baseline"]
+  Baseline --> Registry["Verify mandatory and required functional capabilities"]
+  Registry --> Apps["Initialize application packs only when capability gates pass"]
   Registry --> Docs["Import documentation packs through WCMS"]
-  Docs --> Routes["Verify Axis routes"]
+  Docs --> Swagger["Verify Swagger/OpenAPI is independent from docs publication"]
+  Apps --> Publish["Verify Staged-to-Online publication path"]
+  Publish --> Routes["Verify Axis, Nexus, and Agora browser routes"]
   Routes --> Designer["Verify Content Designer catalog-first route"]
   Designer --> Lifecycle["Run Cron register, activate, deactivate, deregister"]
   Lifecycle --> Pass["Acceptance pass"]
@@ -152,7 +187,8 @@ Commerce in dependency-aware order. It waits for each low-disclosure readiness
 endpoint before starting the next runtime and writes generated logs and PID
 ownership beneath `envs/kickoffLocal/generated/local-topology`.
 
-To include the separate Axis and Nexus frontend repositories:
+To include Axis, Nexus, and Agora frontend applications from the local
+`nodics.exp` workspace:
 
 ```bash
 npm run topology:start:all
@@ -217,7 +253,7 @@ from the same checkout. Do not kill unrelated processes by guessing.
 
 ## Start Axis
 
-Open another terminal from `nodics.axis`:
+Open another terminal from `nodics.exp/nodics.axis`:
 
 ```bash
 npm run dev
@@ -279,11 +315,16 @@ Expected state:
 | `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |
 | `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |
 | `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |
-| `nodics.process` | Optional, observed when Process and Automation or standalone Cron is running | Proves optional runtime modules can join the lifecycle. |
+| Cron and scheduled automation | Technical capability under the Process runtime | Proves scheduled jobs can be discovered without creating a second scheduler authority. |
+| Commerce | Required before Agora application packs can become usable | Provides catalog, product, cart, order, price, stock, and checkout capability for storefronts. |
+| Discovery | Required before Agora application packs can become usable | Provides search/discovery readiness for product and content lookup. |
+| Engagement | Required before Nexus engagement features can become usable | Provides public engagement APIs for corporate-site interaction features. |
 
 Core, Platform, and WCMS are mandatory for this local Axis-backed acceptance
 topology. They should not appear as removable optional modules. Cron may be
 registered, activated, deactivated, and deregistered as an optional module.
+Agora and Nexus setup must remain blocked until their required functional
+capabilities are registered and active. A visible content pack is not enough.
 
 ## Verify documentation
 
@@ -310,7 +351,37 @@ The products are intentionally separated by ownership:
 | Swagger/OpenAPI | Platform BackOffice/OpenAPI contracts |
 
 Axis is only the renderer. It must not own backend-importable documentation
-content.
+content. Documentation packs can be imported, approved, and published in
+parallel with application setup. Swagger/OpenAPI should remain visible whenever
+the authenticated runtime exposes generated OpenAPI contracts, even if CMS
+documentation packs are not yet published.
+
+## Verify application setup and Online delivery
+
+Open:
+
+```text
+Setup and Accelerators
+```
+
+Expected behavior:
+
+- Axis shows each application as a compact row with clear status, required
+  capabilities, next action, refresh, and expandable detail.
+- A row is **blocked** when a required capability is not registered, inactive,
+  unavailable, or offline. The next action should point the user to Module
+  Registry instead of allowing a misleading import.
+- Agora Apparel, Agora Electronics, and Agora Telco require Commerce and
+  Discovery before their application packs can become usable.
+- Nexus requires the public content capability and any enabled engagement
+  capability before its public site pack can become usable.
+- Initializing an application pack must prepare the complete site, not only a
+  small metadata record: CMS content, routes, navigation, media records,
+  physical media artifacts, commerce catalog/search data where applicable, and
+  operational data owned by the pack.
+- Public frontends consume Online only. Before approval and publication they
+  show the maintenance page. They must not render hardcoded sample data from
+  the frontend repository.
 
 ## Verify content and media
 
@@ -404,8 +475,8 @@ Open:
 
 Expected behavior:
 
-- If Process and Automation is running, Axis can observe both `nodics.process`
-  and `nodics.process` from the same runtime.
+- If Process and Automation is running, Axis can observe the Process
+  functional module and the CronJob technical capability from the same runtime.
 - If Cron is not registered, it appears as available to register.
 - Register moves it into the registered list without requiring a page refresh.
 - Activate changes lifecycle state without freezing buttons.
@@ -429,7 +500,7 @@ query state after each lifecycle operation.
 ## Command-line smoke test
 
 After the servers and Axis are running, use the live smoke script from
-`nodics.axis`:
+`nodics.exp/nodics.axis`:
 
 ```bash
 AXIS_EXPECT_MODULES=1 npm run smoke:live
@@ -515,9 +586,9 @@ functional module.
 
 Run the API-only checklist repeatedly when confidence matters. The expected
 result is idempotent release qualification, mandatory module visibility,
-optional Cron lifecycle handling, and Axis rendering without manual database
-inspection or edits. Fresh-schema proof resumes only after the governed reset
-API/service is implemented.
+optional Cron lifecycle handling, fresh-schema reset through the governed
+Platform Local reset API, and Axis rendering without manual database inspection
+or edits.
 
 For project documentation changes, regenerate the Kickoff documentation pack,
 run the documentation contract test, start Platform and WCMS, import or update

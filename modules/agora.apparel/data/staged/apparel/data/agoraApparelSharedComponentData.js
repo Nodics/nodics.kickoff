@@ -30,11 +30,31 @@ module.exports = {
     accessMode: 'PUBLIC',
     active: true,
     properties: {
-      logoText: 'Nodics Agora',
+      logoText: 'NODICS',
+      subtitle: 'AGORA',
+      rootCollectionCode: 'agoraWomen',
       navigationCode: 'agoraMainNavigation',
+      searchPlaceholder: 'Search dresses, bags, shirts...',
       searchEnabled: true,
       cartPreviewEnabled: true,
-      accountPreviewEnabled: true
+      accountPreviewEnabled: true,
+      wishlistPreviewEnabled: true,
+      utilityLinks: [
+        { label: '+1 315-666-6688', path: 'tel:+13156666688' },
+        { label: 'support@nodics.com', path: 'mailto:support@nodics.com' },
+        { label: 'Our Store', collectionCode: 'agoraWomen' }
+      ],
+      preferences: [
+        { label: 'USD', path: '#currency' },
+        { label: 'English', path: '#language' }
+      ],
+      navigationItems: [
+        { label: 'Home', path: '/' },
+        { label: 'Shop', collectionCode: 'agoraWomen', dropdown: true },
+        { label: 'New in', collectionCode: 'agoraNewArrivals' },
+        { label: 'Clothing', collectionCode: 'agoraWomenTops', dropdown: true },
+        { label: 'Bags & Accessories', collectionCode: 'agoraWomenAccessories' }
+      ]
     }
   },
   record1: {
@@ -400,6 +420,8 @@ module.exports = {
         { title: 'Nodics', links: ['Nexus', 'Axis', 'Documentation', 'Contact'] }
       ],
       newsletter: { title: 'Newsletter', text: 'Sign up for curated releases and get 10% off your first purchase.', placeholder: 'Enter your e-mail...', buttonLabel: 'Subscribe' },
+      copyright: '© 2026 Nodics. All rights reserved.',
+      brandLabel: 'Nodics Agora',
       legalLinks: ['Privacy', 'Terms', 'Cookies']
     }
   },
