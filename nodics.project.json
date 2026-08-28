@@ -315,6 +315,7 @@
           "wcmsOnline": "http://127.0.0.1:5314",
           "process": "http://127.0.0.1:5330",
           "engagement": "http://127.0.0.1:5340",
+          "commerceStaged": "http://127.0.0.1:5352",
           "commerce": "http://127.0.0.1:5350"
         }
       },

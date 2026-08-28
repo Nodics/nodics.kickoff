@@ -45,6 +45,21 @@ const containerEnvironmentService = fs.readFileSync(
   ),
   'utf8',
 );
+const containerQualificationService = fs.readFileSync(
+  path.join(
+    root,
+    '..',
+    'nodics.ai',
+    'nodics.foundation',
+    'modules',
+    'nTooling',
+    'src',
+    'service',
+    'project',
+    'defaultProjectContainerQualificationService.mjs',
+  ),
+  'utf8',
+);
 const projectContract = JSON.parse(fs.readFileSync(path.join(root, 'nodics.project.json'), 'utf8'));
 const servers = [
   'platformServer',
@@ -113,8 +128,16 @@ assert.equal(projectContract.containerEnvironments.dockerLocal.bootstrapAdminPas
 assert.equal(projectContract.tooling.commands['docker-local:preflight'].command, 'project:container');
 assert.equal(projectContract.tooling.commands['docker-local:preflight'].home, 'project');
 assert.deepEqual(projectContract.tooling.commands['docker-local:preflight'].args, ['dockerLocal', 'preflight']);
+assert.equal(projectContract.containerEnvironments.dockerLocal.acceptance.urls.engagement, 'http://127.0.0.1:5340');
+assert.equal(projectContract.containerEnvironments.dockerLocal.acceptance.urls.commerceStaged, 'http://127.0.0.1:5352');
 assert.match(
   containerEnvironmentService,
   /BOOTSTRAP_ADMIN_PASSWORD: process\.env\.NODICS_DOCKER_ADMIN_PASSWORD \|\| profile\.bootstrapAdminPassword/,
 );
+assert.match(containerQualificationService, /NODICS_ENGAGEMENT_URL: urls\.engagement/);
+assert.match(containerQualificationService, /NODICS_COMMERCE_STAGED_URL: process\.env\.NODICS_COMMERCE_STAGED_URL \|\| urls\.commerceStaged/);
+assert.match(containerQualificationService, /NODICS_SERVICE_API_KEY: process\.env\.NODICS_SERVICE_API_KEY \|\| values\.BOOTSTRAP_SERVICE_API_KEY/);
+assert.match(containerQualificationService, /acceptance:agora-commerce-data/);
+assert.match(containerQualificationService, /NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE/);
+assert.match(containerQualificationService, /acceptance:agora-commerce-publication/);
 console.log('kickoffDockerLocal environment contract validated');
