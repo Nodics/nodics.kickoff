@@ -222,7 +222,9 @@ module.exports = function runtimeProperties(server) {
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
                 workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 target: { moduleName: 'cms', connectionName: 'cmsOnline', connectionType: 'abstract' } } },
-            editorial: { workflow: { processBaseUrl: 'http://process:4330' } },
+            editorial: { workflow: { processBaseUrl: 'http://process:4330' },
+                publication: { runtimeRole: 'STAGED', targetTransportProvider: 'DefaultEditorialPublicationModuleTransportService',
+                    target: { moduleName: 'editorial', connectionName: 'cmsOnline', connectionType: 'abstract' } } },
             servers: { default: endpoint('wcms-staged', 4312), ...connections }
         },
         wcmsOnlineServer: {
@@ -232,6 +234,7 @@ module.exports = function runtimeProperties(server) {
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-online' } } } },
             cms: { publication: { enabled: true, runtimeRole: 'ONLINE', targetTransportProvider: null },
                 delivery: { mediaDeliveryBaseUrl: 'http://localhost:5314/nodics/media/v0/content' } },
+            editorial: { publication: { runtimeRole: 'ONLINE', targetTransportProvider: null } },
             apiExposure: { categories: { schemaWorkbench: { enabled: false }, schemaMaintenance: { enabled: false },
                 dataImport: { enabled: false }, dataExport: { enabled: false }, mediaManagement: { enabled: false },
                 mediaDelivery: { enabled: true } } },
