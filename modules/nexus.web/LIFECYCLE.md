@@ -4,9 +4,10 @@ This matrix is an executable design constraint for the Local reference project.
 
 | Release | Physical source | Lifecycle | Import runtime | Online visibility |
 | --- | --- | --- | --- | --- |
-| `nexusCorporateSite` | `data/staged/wcms` | `PUBLISHABLE` | `wcmsStagedServer` | Atomic CMS Site publication through `nPublish` |
-| `nexusEditorialSource` | `data/staged/editorial` | `PUBLISHABLE` | `wcmsStagedServer` | Editorial publication through `nPublish` |
-| `nexusEngagementOperational` | `data/operational/engagement` | `OPERATIONAL_VERSIONED` | `engagementServer` | Engagement-owned public APIs expose eligible projections; no WCMS copy |
+| `nexusCorporateSite` | `data/sample-v001/content/{headers,records}/wcms` | `PUBLISHABLE` | `wcmsStagedServer` | Atomic CMS Site publication through `nPublish` |
+| `nexusEditorialSource` | `data/sample-v001/content/{headers,records}/editorial` | `PUBLISHABLE` | `wcmsStagedServer` | Editorial publication through `nPublish` |
+| `nexusEngagementOperational` | `data/sample-v001/content/{headers,records}/engagement` | `OPERATIONAL_VERSIONED` | `engagementServer` | Engagement-owned public APIs expose eligible projections; no WCMS copy |
+| `nexusCorporateMediaReferences` | `data/sample-v001/content/{headers,records}/media` plus `data/sample-v001/content/assets/nexus-cms-media` | `PUBLISHABLE` | `wcmsStagedServer` | Media references publish through `nPublish`; physical media is transferred by nMedia policy |
 | Expected Online projections | `test/expectedOnlineProjections` | `TEST_ONLY` | Never imported | Acceptance comparison only |
 
 Rules:

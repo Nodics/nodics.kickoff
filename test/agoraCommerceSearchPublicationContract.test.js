@@ -24,7 +24,7 @@ const properties = require(path.join(commerceSearchRoot, 'config/properties'));
 const publication = require(path.join(commerceSearchRoot, 'src/service/defaultCommerceSearchPublicationService'));
 const builder = require(path.join(commerceSearchRoot, 'src/service/defaultCommerceSearchProjectionBuilderService'));
 const ranking = require(path.join(commerceSearchRoot, 'src/service/defaultCommerceSearchRankingService'));
-const rules = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/commerceSearch/data/agoraApparelCommerceSearchRuleData'));
+const rules = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/commerceSearch/agoraApparelCommerceSearchRuleData'));
 
 let persisted;
 let indexed;

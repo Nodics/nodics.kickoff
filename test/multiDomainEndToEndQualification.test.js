@@ -1,8 +1,10 @@
 'use strict';
 const assert = require('node:assert/strict'); const path = require('node:path'); const test = require('node:test');
 const root = path.resolve(__dirname, '..'); const framework = path.resolve(root, '../nodics.ai');
-const load = value => require(value); const dataRoot = (domain) => path.join(root, 'modules', `agora.${domain}`, 'data', 'staged', domain, 'data');
-const apparelRoot = dataRoot('apparel'); const electronicsRoot = dataRoot('electronics'); const telcoRoot = dataRoot('telco');
+const load = value => require(value);
+const commerceRoot = (domain) => path.join(root, 'modules', `agora.${domain}`, 'data', 'sample-v001', 'commerce', 'records');
+const contentRoot = (domain) => path.join(root, 'modules', `agora.${domain}`, 'data', 'sample-v001', 'content', 'records');
+const apparelRoot = commerceRoot('apparel'); const electronicsRoot = commerceRoot('electronics'); const telcoRoot = commerceRoot('telco');
 const apparelValidation = load(path.join(framework, 'nodics.accelerators/modules/apparel/modules/apparelProduct/src/service/defaultApparelProductValidationService'));
 const electronicsValidation = load(path.join(framework, 'nodics.accelerators/modules/electronics/modules/electronicsProduct/src/service/defaultElectronicsProductValidationService'));
 const telcoValidation = load(path.join(framework, 'nodics.accelerators/modules/telco/modules/telcoCatalog/src/service/defaultTelcoCatalogValidationService'));
@@ -50,7 +52,7 @@ test('cancellation return and refund orchestration remains routed to existing Co
 });
 
 test('domain content is editable in Staged and preserves logical renderer identity for Online projection', () => {
-  for (const [domain, title] of [['apparel', 'Apparel'], ['electronics', 'Electronics'], ['telco', 'Telco']]) { const source = values(load(path.join(dataRoot(domain), `agora${title}PageData`)))[0]; const staged = { ...source, name: `${source.name} Updated`, publicationStatus: 'STAGED' }; const online = { ...staged, publicationStatus: 'ONLINE' }; assert.equal(online.renderer, `agora.${domain}.page.home`); assert.match(online.name, /Updated$/); }
+  for (const [domain, title] of [['apparel', 'Apparel'], ['electronics', 'Electronics'], ['telco', 'Telco']]) { const source = values(load(path.join(contentRoot(domain), `agora${title}PageData`)))[0]; const staged = { ...source, name: `${source.name} Updated`, publicationStatus: 'STAGED' }; const online = { ...staged, publicationStatus: 'ONLINE' }; assert.equal(online.renderer, `agora.${domain}.page.home`); assert.match(online.name, /Updated$/); }
 });
 
 test('provider partial failure records compensation evidence with completed owner checkpoints', async () => {

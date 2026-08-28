@@ -20,7 +20,7 @@ const test = require('node:test');
 
 const projectRoot = path.resolve(__dirname, '..');
 const productRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/product');
-const agoraProductRoot = path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data');
+const agoraProductRoot = path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records');
 
 const productProperties = require(path.join(productRoot, 'config/properties'));
 const pricingRoot = path.resolve(projectRoot, '../nodics.ai/nodics.commerce/modules/baseCommerce/modules/pricing');
@@ -44,9 +44,9 @@ const categories = require(path.join(agoraProductRoot, 'agoraApparelCategoryData
 const categoryLocalizations = require(path.join(agoraProductRoot, 'agoraApparelCategoryLocalizationData'));
 const variants = require(path.join(agoraProductRoot, 'agoraApparelProductVariantData'));
 const variantLocalizations = require(path.join(agoraProductRoot, 'agoraApparelProductVariantLocalizationData'));
-const priceBooks = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data/agoraApparelPriceBookData'));
-const priceRows = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data/agoraApparelPriceRowData'));
-const inventoryBalances = require(path.join(projectRoot, 'modules/agora.apparel/data/staged/apparel/data/agoraApparelInventoryBalanceData'));
+const priceBooks = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelPriceBookData'));
+const priceRows = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelPriceRowData'));
+const inventoryBalances = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelInventoryBalanceData'));
 
 let persisted;
 let indexed;

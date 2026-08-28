@@ -33,45 +33,45 @@ const documentationBoundary = await readFile(
   "utf8",
 );
 const components = require(
-  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusComponentData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusComponentData.js"),
 );
 const pages = require(
-  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusPageData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusPageData.js"),
 );
 const renderers = require(
-  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusRendererData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusRendererData.js"),
 );
 const sites = require(
-  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusSiteData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusSiteData.js"),
 );
 const catalogs = require(
-  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusCatalogData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusCatalogData.js"),
 );
 const editorialAuthors = require(
-  resolve(moduleRoot, "data/staged/editorial/data/nexusEditorialAuthorData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/editorial/nexusEditorialAuthorData.js"),
 );
 const editorialTaxonomyTerms = require(
   resolve(
     moduleRoot,
-    "data/staged/editorial/data/nexusEditorialTaxonomyTermData.js",
+    "data/sample-v001/content/records/editorial/nexusEditorialTaxonomyTermData.js",
   ),
 );
 const editorialArticles = require(
   resolve(
     moduleRoot,
-    "data/staged/editorial/data/nexusEditorialArticleData.js",
+    "data/sample-v001/content/records/editorial/nexusEditorialArticleData.js",
   ),
 );
 const editorialArticleLocalizations = require(
   resolve(
     moduleRoot,
-    "data/staged/editorial/data/nexusEditorialArticleLocalizationData.js",
+    "data/sample-v001/content/records/editorial/nexusEditorialArticleLocalizationData.js",
   ),
 );
 const editorialArticleTaxonomies = require(
   resolve(
     moduleRoot,
-    "data/staged/editorial/data/nexusEditorialArticleTaxonomyData.js",
+    "data/sample-v001/content/records/editorial/nexusEditorialArticleTaxonomyData.js",
   ),
 );
 const editorialOnlineArticles = require(
@@ -83,17 +83,17 @@ const editorialOnlineArticles = require(
 const testimonials = require(
   resolve(
     moduleRoot,
-    "data/operational/engagement/data/nexusTestimonialProjectionData.js",
+    "data/sample-v001/content/records/engagement/nexusTestimonialProjectionData.js",
   ),
 );
 const mediaReferences = require(
-  resolve(moduleRoot, "data/staged/media/data/nexusMediaReferenceData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/media/nexusMediaReferenceData.js"),
 );
 const componentMedia = require(
-  resolve(moduleRoot, "data/staged/wcms/data/corporate/nexusComponentMediaData.js"),
+  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusComponentMediaData.js"),
 );
 const mediaAssetManifest = require(
-  resolve(moduleRoot, "data/assets/nexus-cms-media/assetManifest.js"),
+  resolve(moduleRoot, "data/sample-v001/content/assets/nexus-cms-media/assetManifest.js"),
 );
 const componentValues = Object.values(components);
 const pageValues = Object.values(pages);
@@ -689,17 +689,17 @@ const engagementRelease = manifest.sections.nexusEngagementOperational;
 const mediaRelease = manifest.sections.nexusCorporateMediaReferences;
 assert.equal(corporateRelease.lifecycle, "PUBLISHABLE");
 assert.equal(corporateRelease.destinationRole, "WCMS_STAGED");
-assert.equal(corporateRelease.sourceRoot, "staged");
+assert.equal(corporateRelease.sourceRoot, "sample-v001");
 assert.equal(editorialRelease.lifecycle, "PUBLISHABLE");
 assert.equal(editorialRelease.destinationRole, "WCMS_STAGED");
-assert.equal(editorialRelease.sourceRoot, "staged");
+assert.equal(editorialRelease.sourceRoot, "sample-v001");
 assert.equal(engagementRelease.lifecycle, "OPERATIONAL_VERSIONED");
 assert.equal(engagementRelease.destinationRole, "ENGAGEMENT");
-assert.equal(engagementRelease.sourceRoot, "operational");
+assert.equal(engagementRelease.sourceRoot, "sample-v001");
 assert.equal(engagementRelease.publicationPolicy, "NONE");
 assert.equal(mediaRelease.lifecycle, "PUBLISHABLE");
 assert.equal(mediaRelease.destinationRole, "WCMS_STAGED");
-assert.equal(mediaRelease.sourceRoot, "staged");
+assert.equal(mediaRelease.sourceRoot, "sample-v001");
 assert.match(
   projectPackage.scripts["acceptance:nexus-cms-media-seed"],
   /nodics-project\.js project:run acceptance:nexus-cms-media-seed/,
@@ -719,16 +719,19 @@ for (const release of Object.values(manifest.sections)) {
   }
 }
 assert(
-  Object.keys(corporateRelease.files).every((path) => path.startsWith("staged/wcms/")),
-  "The corporate release must contain only WCMS Staged source files",
+  Object.keys(corporateRelease.files).every((path) => path.startsWith("sample-v001/content/headers/wcms/") ||
+    path.startsWith("sample-v001/content/records/wcms/")),
+  "The corporate release must contain only WCMS content files",
 );
 assert(
-  Object.keys(editorialRelease.files).every((path) => path.startsWith("staged/editorial/")),
-  "The Editorial release must contain only Staged authoring source files",
+  Object.keys(editorialRelease.files).every((path) => path.startsWith("sample-v001/content/headers/editorial/") ||
+    path.startsWith("sample-v001/content/records/editorial/")),
+  "The Editorial release must contain only content authoring files",
 );
 assert(
-  Object.keys(engagementRelease.files).every((path) => path.startsWith("operational/engagement/")),
-  "The Engagement release must contain only operational versioned files",
+  Object.keys(engagementRelease.files).every((path) => path.startsWith("sample-v001/content/headers/engagement/") ||
+    path.startsWith("sample-v001/content/records/engagement/")),
+  "The Engagement release must contain only engagement versioned files",
 );
 assert(
   !JSON.stringify(manifest).includes("nexusEditorialOnlineArticleData"),

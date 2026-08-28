@@ -29,7 +29,7 @@ module.exports = Object.freeze({
                     manifestPack: 'nodics.kickoff',
                     source: Object.freeze({
                         type: 'LOCAL_PROJECT',
-                        contentPath: 'data/core',
+                        contentPath: 'data/core-v001',
                         manifestPath: 'data/manifest.json',
                         manifestSection: 'documentation'
                     }),

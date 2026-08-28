@@ -114,7 +114,7 @@ The important Kickoff locations are:
 - `envs/kickoffLocal/` contains local environment and server composition;
 - `modules/` contains project-owned modules and customization examples;
 - `docs/` contains authored Kickoff-wide documentation;
-- `data/core/data/documentation/` and the documentation section in `data/manifest.json` are
+- `data/core-v001/records/documentation/` and the documentation section in `data/manifest.json` are
   generated content-pack outputs.
 
 Authored documentation is the source. Generated records are the importable CMS

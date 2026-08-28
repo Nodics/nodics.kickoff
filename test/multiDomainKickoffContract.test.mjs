@@ -30,14 +30,15 @@ test('Kickoff domain groups extend reusable framework accelerators and packs rem
 test('every domain owns distinct Product and WCMS catalogs with framework domain records', () => {
   const versions = new Set(); const contentCatalogs = new Set();
   for (const definition of definitions) {
-    const dataRoot = path.join(root, 'modules', definition.group, 'data', 'staged', definition.folder, 'data');
-    const products = require(path.join(dataRoot, definition.productFile));
-    const profiles = require(path.join(dataRoot, definition.profileFile));
-    const content = require(path.join(dataRoot, `${definition.prefix}ContentCatalogData.js`));
-    const site = require(path.join(dataRoot, `${definition.prefix}SiteData.js`));
-    const page = require(path.join(dataRoot, `${definition.prefix}PageData.js`));
-    const route = require(path.join(dataRoot, `${definition.prefix}RouteData.js`));
-    const renderers = require(path.join(dataRoot, `${definition.prefix}RendererData.js`));
+    const commerceRoot = path.join(root, 'modules', definition.group, 'data', 'sample-v001', 'commerce', 'records');
+    const contentRoot = path.join(root, 'modules', definition.group, 'data', 'sample-v001', 'content', 'records');
+    const products = require(path.join(commerceRoot, definition.productFile));
+    const profiles = require(path.join(commerceRoot, definition.profileFile));
+    const content = require(path.join(contentRoot, `${definition.prefix}ContentCatalogData.js`));
+    const site = require(path.join(contentRoot, `${definition.prefix}SiteData.js`));
+    const page = require(path.join(contentRoot, `${definition.prefix}PageData.js`));
+    const route = require(path.join(contentRoot, `${definition.prefix}RouteData.js`));
+    const renderers = require(path.join(contentRoot, `${definition.prefix}RendererData.js`));
     assert(Object.keys(products).length >= 2);
     assert(Object.keys(profiles).length >= 2);
     Object.values(products).forEach(product => assert.equal(product.catalogVersion, definition.catalogVersion));
@@ -54,7 +55,7 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
   for (const definition of definitions) {
     const packRoot = path.join(root, 'modules', definition.group);
     const manifest = require(path.join(packRoot, 'data', 'manifest.json'));
-    assert.equal(manifest.contractVersion, 0); assert.equal(manifest.module, definition.pack);
+    assert.equal(manifest.contractVersion, 2); assert.equal(manifest.module, definition.pack);
     const sections = Object.values(manifest.sections);
     assert.deepEqual(new Set(sections.map(section => section.destinationRole)), new Set(['COMMERCE_STAGED', 'WCMS_STAGED']));
     const wcmsSection = sections.find(section => section.destinationRole === 'WCMS_STAGED');
@@ -66,12 +67,12 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
     for (const section of sections) for (const [relative, expected] of Object.entries(section.files)) {
       assert.equal(digest(path.join(packRoot, 'data', relative)), expected, `${definition.pack}:${relative}`);
     }
-    const stagedRoot = path.join(packRoot, 'data', 'staged', definition.folder);
+    const stagedRoot = path.join(packRoot, 'data', 'sample-v001');
     const runtimeFiles = [];
     const collect = dir => fs.readdirSync(dir, { withFileTypes: true }).forEach(entry => {
       const child = path.join(dir, entry.name);
       if (entry.isDirectory()) collect(child);
-      else if (entry.name.endsWith('.js')) runtimeFiles.push(path.relative(path.join(packRoot, 'data'), child));
+      else runtimeFiles.push(path.relative(path.join(packRoot, 'data'), child));
     });
     collect(stagedRoot);
     runtimeFiles.sort();

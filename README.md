@@ -133,9 +133,9 @@ npm run acceptance:capability-registry
 ```
 
 `acceptance:local` verifies the current split Local stack through Nodics APIs
-without directly reading or changing a database. `acceptance:local:fresh` is a
-fail-closed placeholder until Platform owns a secured, bounded Local reset
-API/service; it must not use a database shell as an acceptance shortcut.
+without directly reading or changing a database. `acceptance:local:fresh` first
+uses the governed Platform Local reset API and then proves the clean bootstrap;
+it must not use a database shell as an acceptance shortcut.
 
 `acceptance:guided-initialization` exercises the developer-facing foundation
 profile through authenticated Nodics APIs. It resolves WCMS Staged and Online

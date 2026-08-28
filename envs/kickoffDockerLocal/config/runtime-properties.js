@@ -19,13 +19,20 @@ const endpoint = (host, port) => ({ endpoint: { httpHost: '0.0.0.0', httpPort: p
     abstractEndpoint: { httpHost: host, httpPort: port, httpsHost: host, httpsPort: port + 1 } });
 const platformConnections = { profile: endpoint('platform', 4300), backoffice: endpoint('platform', 4300) };
 const publicationConnections = {
-    wcmsStaged: endpoint('wcms-staged', 4312),
-    cmsStaged: endpoint('wcms-staged', 4312), wcmsOnline: endpoint('wcms-online', 4314), cmsOnline: endpoint('wcms-online', 4314),
-    process: endpoint('process', 4330)
+    wcmsStaged: endpoint('wcms-staged', 4312), wcmsStagedServer: endpoint('wcms-staged', 4312),
+    cmsStaged: endpoint('wcms-staged', 4312), wcmsOnline: endpoint('wcms-online', 4314),
+    wcmsOnlineServer: endpoint('wcms-online', 4314), cmsOnline: endpoint('wcms-online', 4314),
+    process: endpoint('process', 4330), processServer: endpoint('process', 4330)
 };
-const connections = { ...platformConnections, ...publicationConnections };
+const commerceConnections = {
+    commerce: endpoint('commerce', 4350), commerceServer: endpoint('commerce', 4350),
+    commerceStaged: endpoint('commerce-staged', 4352), commerceStagedServer: endpoint('commerce-staged', 4352)
+};
+const engagementConnections = { engagement: endpoint('engagement', 4340), engagementServer: endpoint('engagement', 4340) };
+const connections = { ...platformConnections, ...publicationConnections, ...commerceConnections, ...engagementConnections };
 const projectModules = ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt'];
 const distributedCacheModules = ['redisCache'];
+const commerceSearchRuntimeModules = ['search', 'elastic'];
 const database = name => ({ default: { mongodb: { master: { URI: process.env.NODICS_MONGODB_URI, databaseName: name } } } });
 const elasticConnection = () => ({ connection: { hosts: [process.env.NODICS_ELASTICSEARCH_URL || 'http://elasticsearch:9200'] } });
 const productSearch = () => ({
@@ -77,15 +84,25 @@ module.exports = function runtimeProperties(server) {
             runtimeRole: { code: 'PLATFORM', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalPlatform'),
             profileBrowserSession: { enabled: true, refreshCookieName: 'nodics_axis_refresh', csrfCookieName: 'nodics_axis_csrf',
                 cookiePath: '/nodics/profile/v0/employee/browser', csrfCookiePath: '/', sameSite: 'Lax', secure: false, maximumAgeSeconds: 86400 },
-            backofficeApplicationInitialization: { profiles: {
+            backofficeApplicationInitialization: { operatorOrigin: 'http://localhost:4100', profiles: {
                 nexus: { code: 'nexus', type: 'WEBSITE_BUNDLE', owner: 'nexus.web', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexus',
                     presentation: { title: 'Nexus Corporate', kind: 'PROJECT', category: 'accelerator', order: 100,
                         summary: 'Corporate website accelerator published from WCMS Staged to Online.',
                         requiredServers: ['Platform', 'WCMS Staged', 'WCMS Online', 'Process'],
                         activationPolicy: { approvalRequiredForOnline: true, requiredDataTrigger: 'ACTIVATION', sampleDataTrigger: 'USER' } },
                     dataPackages: [
-                        { code: 'nexus.web:init', kind: 'INITIAL_DATA', required: true, trigger: 'ACTIVATION' },
-                        { code: 'nexus.web:sample', kind: 'SAMPLE_DATA', required: false, trigger: 'USER' }
+                        { code: 'nexus.web:nexusCorporateSite', kind: 'Corporate site content', required: true, trigger: 'ACTIVATION',
+                            dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                        { code: 'nexus.web:nexusCorporateMediaReferences', kind: 'Corporate media references', required: true, trigger: 'ACTIVATION',
+                            dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                        { code: 'nexus.web:nexusEditorialSource', kind: 'News and blog source', required: true, trigger: 'ACTIVATION',
+                            dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                        { code: 'nexus.web:nexusCorporateMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Corporate media files', required: true,
+                            trigger: 'ACTIVATION', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
+                            manifestPath: 'modules/nexus.web/data/sample-v001/content/assets/nexus-cms-media/assetManifest.js',
+                            businessPurpose: 'NEXUS_CORPORATE_CONTENT' },
+                        { code: 'nexus.web:nexusEngagementOperational', kind: 'Contact and testimonial experience', required: true, trigger: 'ACTIVATION',
+                            dataType: 'sample', targetServer: 'engagementServer', targetRuntimeRole: 'ENGAGEMENT' }
                     ],
                     target: { moduleName: 'cms', connectionName: 'wcmsStaged', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },
                 nexusupdate: { code: 'nexusupdate', type: 'WEBSITE_BUNDLE_UPDATE', owner: 'nexus.web', applicationCode: 'nexus', siteCode: 'nexusCorporateSite', baselineCode: 'nexusupdate',
@@ -172,12 +189,15 @@ module.exports = function runtimeProperties(server) {
                 ] }
             } },
             backofficeRegistry: { clientEndpoints: {
-                platformServer: 'http://localhost:5300/', wcmsStagedServer: 'http://localhost:5312/',
-                wcmsOnlineServer: 'http://localhost:5314/', processServer: 'http://localhost:5330/',
-                engagementServer: 'http://localhost:5340/', commerceServer: 'http://localhost:5350/',
-                commerceStagedServer: 'http://localhost:5352/'
+                platform: 'http://localhost:5300/', platformServer: 'http://localhost:5300/',
+                wcmsStaged: 'http://localhost:5312/', wcmsStagedServer: 'http://localhost:5312/',
+                wcmsOnline: 'http://localhost:5314/', wcmsOnlineServer: 'http://localhost:5314/',
+                process: 'http://localhost:5330/', processServer: 'http://localhost:5330/',
+                engagement: 'http://localhost:5340/', engagementServer: 'http://localhost:5340/',
+                commerce: 'http://localhost:5350/', commerceServer: 'http://localhost:5350/',
+                commerceStaged: 'http://localhost:5352/', commerceStagedServer: 'http://localhost:5352/'
             } },
-            servers: { default: endpoint('platform', 4300), ...publicationConnections }
+            servers: { default: endpoint('platform', 4300), ...publicationConnections, ...commerceConnections, ...engagementConnections }
         },
         wcmsStagedServer: {
             httpHardening: { cors: { allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100'], deniedOrigins: ['http://localhost:4200', 'http://127.0.0.1:4200'] } },
@@ -189,9 +209,9 @@ module.exports = function runtimeProperties(server) {
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-staged' } } } },
             cms: { publication: { enabled: true, runtimeRole: 'STAGED', baselines: {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-                nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                nexusupdate: { releaseCode: 'nexus.web:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-                nexusecosystemrepair: { releaseCode: 'nexus.web:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'core', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.7', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexusupdate: { releaseCode: 'nexus.web:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexusecosystemrepair: { releaseCode: 'nexus.web:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 agora: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
                 agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
                 agoraelectronics: { releaseCode: 'agora.electronics:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
@@ -243,7 +263,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('engagement', 4340), ...connections }
         },
         commerceServer: {
-            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...agoraDomains.sharedModules, ...projectModules, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, ...projectModules, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalCommerce'),
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
                 commerceCustomer: { enabled: true } } },
@@ -256,7 +276,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('commerce', 4350), ...connections }
         },
         commerceStagedServer: {
-            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
             data: { dataReleases: dataReleases(['COMMERCE_STAGED']) },
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },

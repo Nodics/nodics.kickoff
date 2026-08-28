@@ -21,8 +21,8 @@
 
 /** @lifecycle TEST_ONLY @description Expected Online projection; runtime import is prohibited. */
 
-const components = require('../../data/staged/wcms/data/corporate/nexusComponentData');
-const authoringArticles = require('../../data/staged/editorial/data/nexusEditorialArticleData');
+const components = require('../../data/sample-v001/content/records/wcms/corporate/nexusComponentData');
+const authoringArticles = require('../../data/sample-v001/content/records/editorial/nexusEditorialArticleData');
 
 const publishedAt = new Date('2026-08-11T23:59:00.000Z');
 const created = new Date('2026-08-11T00:00:00.000Z');

@@ -4,7 +4,7 @@
   "sections": {
     "documentation": {
       "kind": "CONTENT_PACK",
-      "contentPath": "core",
+      "contentPath": "core-v001",
       "pack": "nodics.kickoff",
       "version": "0.0.1",
       "owningDomain": "kickoff.documentation",
@@ -28,25 +28,25 @@
       "pages": 7,
       "components": 8,
       "routes": 7,
-      "releaseChecksum": "1bd82d95da3eb6eb233f2b53c9abb43f8697490a595d7177fb9c8ca5480b899c",
+      "releaseChecksum": "fa4bfd25e6e242c3ccbc6f1adaad83fc94ef3242fa7a6685a264885617a47806",
       "generatedHashes": {
-        "core/data/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
-        "core/data/documentation/kickoffDocumentationProductData.js": "27c3692a1a421cfc008113138952a08a04db5aebcae0e1e5114aafaa3580b41f",
-        "core/data/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
-        "core/data/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
-        "core/data/documentation/kickoffDocumentationDashboardData.js": "f56b36e3bb5c2e191fe35392b371df59eca73ffcbd549d6286cbecdc58c4aaf3",
-        "core/data/documentation/kickoffDocumentationNodeData.js": "d6015ca23b31bd5fcc97d992742ac1e89ff87ce76c25114872b328e2de021253",
-        "core/data/documentation/kickoffDocumentationPageMetadataData.js": "b41b4ba4e508b4e328bd69146bc31589e41a1ac7e744bdeb113d1dfe31563d0e",
-        "core/data/documentation/kickoffDocumentationPublicationStateData.js": "cffce86954622b1324044f178c3d1b8b54953a119e9c4e9655b43f1321d421be",
-        "core/data/documentation/kickoffDocumentationSearchMetadataData.js": "2ced50c08e4715e45a3ddbf73b74c41e7c60969b2f791813f114cdb9ea6249b3",
-        "core/data/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
-        "core/data/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
-        "core/data/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
-        "core/data/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
-        "core/data/documentation/kickoffDocumentationComponentData.js": "448aaac9fc5d7f7a351bbfd2d9145f3c3f8079a1b8a750cfc79ec8b9ef1d67ad",
-        "core/data/documentation/kickoffDocumentationPageData.js": "036af1cf25825eaa555c3b6dc401ca6ba176ebaa7685e7dbb3b6c9b8a689c991",
-        "core/data/documentation/kickoffDocumentationRouteData.js": "f9ed1c6dae30e31037308262ec4ef092cb2651910b10387d4b2a501a0c4eb446",
-        "core/headers/kickoffDocumentationContentPackHeader.js": "18b7e655dfe80498f81438c2ec552cdc902a5fdc25ef47d312edc750e4ca5157"
+        "core-v001/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "core-v001/records/documentation/kickoffDocumentationProductData.js": "27c3692a1a421cfc008113138952a08a04db5aebcae0e1e5114aafaa3580b41f",
+        "core-v001/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+        "core-v001/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+        "core-v001/records/documentation/kickoffDocumentationDashboardData.js": "f56b36e3bb5c2e191fe35392b371df59eca73ffcbd549d6286cbecdc58c4aaf3",
+        "core-v001/records/documentation/kickoffDocumentationNodeData.js": "d6015ca23b31bd5fcc97d992742ac1e89ff87ce76c25114872b328e2de021253",
+        "core-v001/records/documentation/kickoffDocumentationPageMetadataData.js": "14caff979d0e1d4178da5586e6c4149dcac495240b382db5aea6315b2ea5ad3d",
+        "core-v001/records/documentation/kickoffDocumentationPublicationStateData.js": "cffce86954622b1324044f178c3d1b8b54953a119e9c4e9655b43f1321d421be",
+        "core-v001/records/documentation/kickoffDocumentationSearchMetadataData.js": "52306951d0c8f257b7d71f3c61474c660a48dd7474e4f7db3a7fa58946fb2e97",
+        "core-v001/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
+        "core-v001/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+        "core-v001/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "core-v001/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+        "core-v001/records/documentation/kickoffDocumentationComponentData.js": "8384129477084d18184c994677934d092cc2f441e1096e22ef9444d5380b3e99",
+        "core-v001/records/documentation/kickoffDocumentationPageData.js": "036af1cf25825eaa555c3b6dc401ca6ba176ebaa7685e7dbb3b6c9b8a689c991",
+        "core-v001/records/documentation/kickoffDocumentationRouteData.js": "f9ed1c6dae30e31037308262ec4ef092cb2651910b10387d4b2a501a0c4eb446",
+        "core-v001/headers/kickoffDocumentationContentPackHeader.js": "18b7e655dfe80498f81438c2ec552cdc902a5fdc25ef47d312edc750e4ca5157"
       }
     }
   }

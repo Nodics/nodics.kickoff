@@ -5,14 +5,21 @@ Nodics Nexus Site, content catalog, page composition, navigation, renderer
 keys, and public media policy. Reusable schemas and runtime behavior remain
 owned by Nodics Catalog, WCMS/CMS, Media, Localization, and Publishing.
 
-The physical layout makes the destination and lifecycle explicit:
+The physical layout keeps release source separate from runtime destination:
 
-- `data/staged/wcms` contains publishable CMS Site content imported only by
-  `wcmsStagedServer` and promoted to Online only through `nPublish`;
-- `data/staged/editorial` contains publishable Editorial authoring records for
-  the Staged runtime;
-- `data/operational/engagement` contains immutable-versioned Engagement data
-  imported only by `engagementServer`; it is not copied through WCMS;
+- `data/sample-v001/content/headers/wcms` and
+  `data/sample-v001/content/records/wcms` contain publishable CMS Site content
+  imported only by `wcmsStagedServer` and promoted to Online only through
+  `nPublish`;
+- `data/sample-v001/content/headers/editorial` and
+  `data/sample-v001/content/records/editorial` contain publishable Editorial
+  authoring records for the Staged runtime;
+- `data/sample-v001/content/headers/engagement` and
+  `data/sample-v001/content/records/engagement` contain immutable-versioned
+  Engagement data imported only by `engagementServer`; it is not copied through
+  WCMS;
+- `data/sample-v001/content/assets/nexus-cms-media` contains the release-owned
+  physical media files referenced by Nexus media records;
 - `test/expectedOnlineProjections` contains acceptance expectations and is
   never runtime-importable.
 

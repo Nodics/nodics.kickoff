@@ -165,7 +165,7 @@ docs/
 The generated files live under:
 
 ```text
-data/core/data/documentation/
+data/core-v001/records/documentation/
 data/manifest.json
 ```
 

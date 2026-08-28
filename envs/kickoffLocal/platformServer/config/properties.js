@@ -52,14 +52,14 @@ module.exports = {
                 },
                 dataPackages: [
                     { code: 'nexus.web:nexusCorporateSite', kind: 'Corporate site content', required: true, trigger: 'ACTIVATION',
-                        dataType: 'core', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                        dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
                     { code: 'nexus.web:nexusCorporateMediaReferences', kind: 'Corporate media references', required: true, trigger: 'ACTIVATION',
-                        dataType: 'core', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
+                        dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
                     { code: 'nexus.web:nexusEditorialSource', kind: 'News and blog source', required: true, trigger: 'ACTIVATION',
                         dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
                     { code: 'nexus.web:nexusCorporateMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Corporate media files', required: true,
                         trigger: 'ACTIVATION', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
-                        manifestPath: 'modules/nexus.web/data/assets/nexus-cms-media/assetManifest.js',
+                        manifestPath: 'modules/nexus.web/data/sample-v001/content/assets/nexus-cms-media/assetManifest.js',
                         businessPurpose: 'NEXUS_CORPORATE_CONTENT' },
                     { code: 'nexus.web:nexusEngagementOperational', kind: 'Contact and testimonial experience', required: true, trigger: 'ACTIVATION',
                         dataType: 'sample', targetServer: 'engagementServer', targetRuntimeRole: 'ENGAGEMENT' }
@@ -131,7 +131,7 @@ module.exports = {
                         dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
                     { code: 'agora.apparel:agoraApparelMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Storefront media files', required: true,
                         trigger: 'USER', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
-                        manifestPath: 'modules/agora.apparel/data/assets/agora-cms-media/assetManifest.js',
+                        manifestPath: 'modules/agora.apparel/data/sample-v001/content/assets/agora-cms-media/assetManifest.js',
                         businessPurpose: 'AGORA_STOREFRONT_CONTENT' },
                     { code: 'agora.apparel:agoraApparelCommerceCatalog', kind: 'Commerce catalog', required: true, trigger: 'USER',
                         dataType: 'sample', targetServer: 'commerceStaged', targetRuntimeRole: 'COMMERCE_STAGED' }
@@ -163,7 +163,7 @@ module.exports = {
                         dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
                     { code: 'agora.electronics:agoraElectronicsMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Storefront media files', required: true,
                         trigger: 'USER', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
-                        manifestPath: 'modules/agora.electronics/data/assets/agora-cms-media/assetManifest.js',
+                        manifestPath: 'modules/agora.electronics/data/sample-v001/content/assets/agora-cms-media/assetManifest.js',
                         businessPurpose: 'AGORA_STOREFRONT_CONTENT' },
                     { code: 'agora.electronics:agoraElectronicsCommerceCatalog', kind: 'Commerce catalog', required: true, trigger: 'USER',
                         dataType: 'sample', targetServer: 'commerceStaged', targetRuntimeRole: 'COMMERCE_STAGED' }
@@ -195,7 +195,7 @@ module.exports = {
                         dataType: 'sample', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED' },
                     { code: 'agora.telco:agoraTelcoMediaAssets', type: 'MEDIA_ASSET_MANIFEST', kind: 'Storefront media files', required: true,
                         trigger: 'USER', targetServer: 'wcmsStaged', targetRuntimeRole: 'WCMS_STAGED',
-                        manifestPath: 'modules/agora.telco/data/assets/agora-cms-media/assetManifest.js',
+                        manifestPath: 'modules/agora.telco/data/sample-v001/content/assets/agora-cms-media/assetManifest.js',
                         businessPurpose: 'AGORA_STOREFRONT_CONTENT' },
                     { code: 'agora.telco:agoraTelcoCommerceCatalog', kind: 'Commerce catalog', required: true, trigger: 'USER',
                         dataType: 'sample', targetServer: 'commerceStaged', targetRuntimeRole: 'COMMERCE_STAGED' }

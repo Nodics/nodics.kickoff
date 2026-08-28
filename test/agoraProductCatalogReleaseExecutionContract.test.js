@@ -108,7 +108,7 @@ test('Agora Apparel commerce catalog release follows Commerce Staged nImport exe
 
   assert(release, 'agoraApparelCommerceCatalog release should be discoverable');
   assert.equal(release.dataType, 'sample');
-  assert.equal(release.sourceRoot, 'staged');
+  assert.equal(release.sourceRoot, 'sample-v001');
   assert.equal(release.lifecycle, 'PUBLISHABLE');
   assert.equal(release.destinationRole, 'COMMERCE_STAGED');
   assert.deepEqual(release.environmentScope, ['LOCAL', 'LOCAL_PRODUCTION_SIMULATION']);
@@ -141,7 +141,7 @@ test('Agora Apparel commerce catalog release follows Commerce Staged nImport exe
   assert.deepEqual(importRequests[0].modules, ['agora.apparel']);
   assert.equal(importRequests[0].options.validateOnly, false);
   assert.equal(importRequests[0].dataReleasePlan[0].releaseCode, 'agora.apparel:agoraApparelCommerceCatalog');
-  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, 'staged');
+  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, 'sample-v001');
   assert(importRequests[0].dataReleasePlan[0].declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
   assert.equal(installations[0].code, 'kickoffLocal:default:agora.apparel:agoraApparelCommerceCatalog:sample');
   assert.equal(installations[0].status, 'CURRENT');

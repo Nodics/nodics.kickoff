@@ -18,18 +18,18 @@ const properties = require('../config/properties');
 const manifestEnvelope = require('../data/manifest.json');
 const manifest = manifestEnvelope.sections.documentation;
 const catalogue = require('../docs/catalogue.json');
-const siteRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationSiteData'));
-const pageRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPageData'));
-const routeRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationRouteData'));
-const productRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationProductData'));
-const navigationRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationNavigationData'));
-const nodeRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationNodeData'));
-const dashboardRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationDashboardData'));
-const pageMetadataRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPageMetadataData'));
-const accessPolicyRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationAccessPolicyData'));
-const publicationStateRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationPublicationStateData'));
-const searchMetadataRecords = Object.values(require('../data/core/data/documentation/kickoffDocumentationSearchMetadataData'));
-const contentPackHeader = require('../data/core/headers/kickoffDocumentationContentPackHeader');
+const siteRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationSiteData'));
+const pageRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationPageData'));
+const routeRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationRouteData'));
+const productRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationProductData'));
+const navigationRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationNavigationData'));
+const nodeRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationNodeData'));
+const dashboardRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationDashboardData'));
+const pageMetadataRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationPageMetadataData'));
+const accessPolicyRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationAccessPolicyData'));
+const publicationStateRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationPublicationStateData'));
+const searchMetadataRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationSearchMetadataData'));
+const contentPackHeader = require('../data/core-v001/headers/kickoffDocumentationContentPackHeader');
 
 const capability = properties.backofficeCapabilities['nodics.kickoff'];
 const contentPack = properties.data.contentPacks.packs.kickoffDocumentation;
@@ -82,7 +82,7 @@ assert.strictEqual(contentPack.enabled, true);
 assert.strictEqual(contentPack.manifestPack, 'nodics.kickoff');
 assert.deepStrictEqual(contentPack.source, {
     type: 'LOCAL_PROJECT',
-    contentPath: 'data/core',
+    contentPath: 'data/core-v001',
     manifestPath: 'data/manifest.json',
     manifestSection: 'documentation'
 });
@@ -220,7 +220,7 @@ catalogue.documents.forEach(document => {
     assertDocumentationDepth(document);
 });
 assert.strictEqual(
-    fs.existsSync(path.join(root, 'data/core/source/documentation')),
+    fs.existsSync(path.join(root, 'data/core-v001/source/documentation')),
     false,
     'legacy documentation source must not remain under the generated data tree'
 );
