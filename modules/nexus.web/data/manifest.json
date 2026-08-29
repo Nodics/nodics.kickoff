@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.7",
+      "version": "0.0.8",
       "displayName": "Nexus Corporate Site",
       "description": "Nexus corporate Site and page composition source",
       "owningDomain": "nexus.wcms",
@@ -21,15 +21,14 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "sample-v001/content/headers/wcms/nexusCorporateContentHeader.js": "a0b7d01bcca347ef60a09d8497d7a52645818775c511d1ba3a40168a7e13a47e",
+        "sample-v001/content/headers/wcms/nexusCorporateContentHeader.js": "018a10d95031b4aecff83f02a3d4230da7d6961c19df1f5d29a78000cf1ab5c1",
         "sample-v001/content/records/wcms/corporate/nexusCatalogData.js": "99682125076c6e0a417ff3f2e6c9756e2e1ea1198e88676e71bba6cfd2fa224a",
-        "sample-v001/content/records/wcms/corporate/nexusComponentData.js": "65780b82a1de77374cfe7b8209a567acaa09808654f29f4fa9fbf414ffec3d3f",
-        "sample-v001/content/records/wcms/corporate/nexusComponentMediaData.js": "f124c6e55e3de2efaf022f35211d2902562057b65d09a90507a65c815fba0d23",
+        "sample-v001/content/records/wcms/corporate/nexusComponentData.js": "90226a7a761c0839a46d49fa4459181d1fcf97ba5788d4d62eb84130b5bffcd7",
         "sample-v001/content/records/wcms/corporate/nexusComponentTypeGroupData.js": "aec7cc1be85478b325cc7c8b8435694156f06a84990628704bf2211c66d3058a",
         "sample-v001/content/records/wcms/corporate/nexusNavigationData.js": "5d73801c4cf6be1878c85c448f6921d6059f923783a19beece75ad6003e4ccef",
         "sample-v001/content/records/wcms/corporate/nexusPageData.js": "28e35e02748c299f6e65753e0c6f76913a8ec061b8adc2a498a9402bb97920af",
         "sample-v001/content/records/wcms/corporate/nexusRendererData.js": "f476eb2c211e85f34a8c255c3ac678fe8f0b2316a648b9758abc5338d85f25d2",
-        "sample-v001/content/records/wcms/corporate/nexusRouteData.js": "8e68aafaae49d74634fa6e79208753e5fbd16e7b23c5f0a1de38089146b53406",
+        "sample-v001/content/records/wcms/corporate/nexusRouteData.js": "43d8974528c8f110f4364e2ec70d82bfcbaf79da9b59cba2c69fc7b7ee98305e",
         "sample-v001/content/records/wcms/corporate/nexusSiteData.js": "3fcbf0df63a65b55bce2a87fa3fc28ed7c0db94262b342252987603e719d7a92",
         "sample-v001/content/records/wcms/corporate/nexusSlotData.js": "479cf5dc45e425c73043a05999428aaeffdc307898d4e08a4019c303d7946efc",
         "sample-v001/content/records/wcms/corporate/nexusTemplateData.js": "393e700914e78627cd4d7a0a66ca80bd70c6a957fad77e714a0253421035160c",
@@ -132,7 +131,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.0",
+      "version": "0.0.1",
       "displayName": "Nexus Editorial Source",
       "description": "Local Nexus Editorial authoring source without Online projections",
       "owningDomain": "nexus.editorial",
@@ -149,11 +148,11 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "sample-v001/content/headers/editorial/nexusEditorialSampleDataHeader.js": "21324874c0f8a7c75122e20b4243449ee9b659f3f0ce966af4121e01d254042e",
-        "sample-v001/content/records/editorial/nexusEditorialArticleData.js": "b256e9b027d79671f212e3917bf8f860add82bb0d7c16bdc571b030855c78899",
-        "sample-v001/content/records/editorial/nexusEditorialArticleLocalizationData.js": "8efd28e2b27e1b564217b3a47171440898b333ac71d8e46b10639f895a0afeef",
+        "sample-v001/content/records/editorial/nexusEditorialArticleData.js": "847ea2b83a258ed1f61cb531d9eaaf0568801592026d07e84a1e94b4b15d3ba3",
+        "sample-v001/content/records/editorial/nexusEditorialArticleLocalizationData.js": "7a57da0f213942fef2eebda2f2901b4b5aa101f59d6a44b667044f7879385e96",
         "sample-v001/content/records/editorial/nexusEditorialArticleTaxonomyData.js": "d3663de4d72d2236a129e11d450fa44fe1136057be499a87c62988599cee12a8",
         "sample-v001/content/records/editorial/nexusEditorialAuthorData.js": "9c8c7b59851fc248146d754af442cef7ba935245569dab0f78a09d0e145ceb18",
-        "sample-v001/content/records/editorial/nexusEditorialTaxonomyTermData.js": "f9917b91dfb1266fc9cfbcce8ef561cda526eac7a5bf85dbe11adbd60c7be26c"
+        "sample-v001/content/records/editorial/nexusEditorialTaxonomyTermData.js": "ae4da76968416126f5374ea38824e2ae0bda98bc16e6a2c89789b696fbfb697a"
       }
     },
     "nexusEngagementOperational": {
@@ -226,7 +225,9 @@
         "sample-v001/content/assets/nexus-cms-media/files/nodicsProductOperatingModel.png": "aed476d83bc9c2587495451f7ea7c3c3e86ec60df3d472300285356a7e07dd83",
         "sample-v001/content/assets/nexus-cms-media/files/nodicsSecureHero.png": "c24d18f224dc1b408278c347888779861476e720e55139367b7ff8701f9cccc5",
         "sample-v001/content/assets/nexus-cms-media/files/oxaviaHeroTwo.jpg": "730b287a38999e9048e9526c9363bd9135e51a21944885a9c2ec7c21f94a76c9",
-        "sample-v001/content/headers/media/nexusMediaReferenceHeader.js": "28a707c6a121f9b879896c709dd04baf663362b88060b3a80820312e2fda85f7",
+        "sample-v001/content/headers/media/nexusMediaReferenceHeader.js": "db5c6f1551dd4e5bb17702fdaddec94fb0e54a1eab8e58cbd3bcfd3323e046f9",
+        "sample-v001/content/records/media/nexusComponentMediaData.js": "b9320e163a744e5ac3d3dae47517ab534ee090b7cfab9f523fcd78a0d8e91e98",
+        "sample-v001/content/records/media/nexusMediaData.js": "aef7d5269771e2ae7595ed1a14055d88cb995443c931e888efad16b50461cb79",
         "sample-v001/content/records/media/nexusMediaReferenceData.js": "4a7077ff453dc0352f7100dd47506d76a2056362a517ba211e7e6e4c6818d49b"
       }
     }

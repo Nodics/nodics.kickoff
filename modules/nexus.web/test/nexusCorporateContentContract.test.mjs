@@ -10,6 +10,7 @@
  */
 
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -33,22 +34,40 @@ const documentationBoundary = await readFile(
   "utf8",
 );
 const components = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusComponentData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/wcms/corporate/nexusComponentData.js",
+  ),
 );
 const pages = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusPageData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/wcms/corporate/nexusPageData.js",
+  ),
 );
 const renderers = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusRendererData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/wcms/corporate/nexusRendererData.js",
+  ),
 );
 const sites = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusSiteData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/wcms/corporate/nexusSiteData.js",
+  ),
 );
 const catalogs = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusCatalogData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/wcms/corporate/nexusCatalogData.js",
+  ),
 );
 const editorialAuthors = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/editorial/nexusEditorialAuthorData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/editorial/nexusEditorialAuthorData.js",
+  ),
 );
 const editorialTaxonomyTerms = require(
   resolve(
@@ -87,13 +106,28 @@ const testimonials = require(
   ),
 );
 const mediaReferences = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/media/nexusMediaReferenceData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/media/nexusMediaReferenceData.js",
+  ),
+);
+const mediaRecords = require(
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/media/nexusMediaData.js",
+  ),
 );
 const componentMedia = require(
-  resolve(moduleRoot, "data/sample-v001/content/records/wcms/corporate/nexusComponentMediaData.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/media/nexusComponentMediaData.js",
+  ),
 );
 const mediaAssetManifest = require(
-  resolve(moduleRoot, "data/sample-v001/content/assets/nexus-cms-media/assetManifest.js"),
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/assets/nexus-cms-media/assetManifest.js",
+  ),
 );
 const componentValues = Object.values(components);
 const pageValues = Object.values(pages);
@@ -104,9 +138,12 @@ const editorialArticleValues = Object.values(editorialArticles);
 const editorialArticleLocalizationValues = Object.values(
   editorialArticleLocalizations,
 );
-const editorialArticleTaxonomyValues = Object.values(editorialArticleTaxonomies);
+const editorialArticleTaxonomyValues = Object.values(
+  editorialArticleTaxonomies,
+);
 const editorialOnlineArticleValues = Object.values(editorialOnlineArticles);
 const mediaReferenceValues = Object.values(mediaReferences);
+const mediaRecordValues = Object.values(mediaRecords);
 const componentMediaValues = Object.values(componentMedia);
 const site = Object.values(sites)[0];
 const catalog = Object.values(catalogs)[0];
@@ -128,13 +165,19 @@ const newsDetailPages = [
   "nexusNewsEngagementPublicApiPage",
   "nexusNewsEditorialReleaseFlowPage",
 ].map((code) => pageValues.find((page) => page.code === code));
-const blogPage = pageValues.find((page) => page.code === "nexusBlogListingPage");
+const blogPage = pageValues.find(
+  (page) => page.code === "nexusBlogListingPage",
+);
 const blogDetailPages = [
   "nexusBlogEngagementFrameworkPage",
   "nexusBlogEditorialPublicationPage",
   "nexusBlogRuntimeDiscoveryPage",
   "nexusBlogAxisBusinessOperationsPage",
 ].map((code) => pageValues.find((page) => page.code === code));
+const editorialDetailPageExpectations = [
+  ...newsDetailPages.map((page) => ({ page, contentTypeCode: "NEWS" })),
+  ...blogDetailPages.map((page) => ({ page, contentTypeCode: "BLOG" })),
+];
 const componentByCode = new Map(
   componentValues.map((component) => [component.code, component]),
 );
@@ -175,13 +218,22 @@ assert(
   productsPage,
   "Products page must exist in the importable CMS page payload",
 );
-assert(supportPage, "Support page must exist in the importable CMS page payload");
-assert(newsPage, "News listing page must exist in the importable CMS page payload");
+assert(
+  supportPage,
+  "Support page must exist in the importable CMS page payload",
+);
+assert(
+  newsPage,
+  "News listing page must exist in the importable CMS page payload",
+);
 assert(
   newsDetailPages.every(Boolean),
   "All seeded News detail pages must exist in the importable CMS page payload",
 );
-assert(blogPage, "Blog listing page must exist in the importable CMS page payload");
+assert(
+  blogPage,
+  "Blog listing page must exist in the importable CMS page payload",
+);
 assert(
   blogDetailPages.every(Boolean),
   "All seeded Blog detail pages must exist in the importable CMS page payload",
@@ -196,6 +248,20 @@ assert.deepEqual(
   homepageShellComponentCodes,
   ["nexusCorporateSiteHeader", "nexusCorporateSiteFooter"],
   "Homepage must include the backend-managed shared header and footer shell components",
+);
+const sharedHeader = componentByCode.get("nexusCorporateSiteHeader");
+const sharedFooter = componentByCode.get("nexusCorporateSiteFooter");
+assert.equal(
+  sharedHeader?.properties.navigation.find((item) => item.id === "blogs")?.href,
+  "/#blogs",
+  "Shared header Blogs menu link must scroll to the homepage Blogs section",
+);
+assert.equal(
+  sharedFooter?.properties.groups
+    .flatMap((group) => group.links)
+    .find((item) => item.label === "Blogs")?.href,
+  "/#blogs",
+  "Shared footer Blogs link must scroll to the homepage Blogs section",
 );
 const homepageComponentCodes = orderedComponentTargets(homePage);
 assert(
@@ -529,27 +595,40 @@ editorialOnlineArticleValues.forEach((onlineArticle) => {
     `${onlineArticle.code} must publish the authoring special flag`,
   );
 });
-blogDetailPages.forEach((page) => {
+editorialDetailPageExpectations.forEach(({ page, contentTypeCode }) => {
   const detailComponentCodes = orderedComponentTargets(page);
+  const detailComponent = componentByCode.get(detailComponentCodes[1]);
+  const detailProperties = detailComponent?.properties || {};
+  const detailBodyLength = [
+    detailProperties.bodyText || "",
+    ...(detailProperties.sections || []).map((section) => section.body || ""),
+  ].join("\n").length;
   assert.equal(
     detailComponentCodes.length,
     2,
     `${page.code} must expose one hero and one article detail component`,
   );
   assert.equal(
-    componentByCode.get(detailComponentCodes[1])?.typeCode,
+    detailComponent?.typeCode,
     "nexusEditorialDetailType",
     `${page.code} must use the shared Editorial detail renderer`,
   );
   assert.equal(
-    componentByCode.get(detailComponentCodes[1])?.properties.contentTypeCode,
-    "BLOG",
-    `${page.code} must remain scoped to BLOG content`,
+    detailProperties.contentTypeCode,
+    contentTypeCode,
+    `${page.code} must remain scoped to ${contentTypeCode} content`,
   );
   assert(
-    componentByCode.get(detailComponentCodes[1])?.properties.sections.length >=
-      3,
+    detailProperties.sections.length >= 3,
     `${page.code} must provide structured article sections`,
+  );
+  assert(
+    (detailProperties.bodyText || "").length >= 1800,
+    `${page.code} must provide long-form article body copy`,
+  );
+  assert(
+    detailBodyLength >= 3000,
+    `${page.code} must provide LinkedIn-style article depth across body and sections`,
   );
 });
 assert.deepEqual(
@@ -629,9 +708,11 @@ const collectMediaCodes = (value, mediaCodes = new Set()) => {
   if (!value || typeof value !== "object") return mediaCodes;
   Object.entries(value).forEach(([key, child]) => {
     if (
-      ["referenceImageCode", "avatarReferenceImageCode", "featuredMediaCode"].includes(
-        key,
-      ) &&
+      [
+        "referenceImageCode",
+        "avatarReferenceImageCode",
+        "featuredMediaCode",
+      ].includes(key) &&
       typeof child === "string" &&
       child
     ) {
@@ -652,6 +733,7 @@ const assetMediaCodes = new Set(
 const referenceMediaCodes = new Set(
   mediaReferenceValues.map((reference) => reference.mediaCode),
 );
+const mediaRecordCodes = new Set(mediaRecordValues.map((media) => media.code));
 const componentMediaCodes = new Set(
   componentMediaValues.map((reference) => reference.mediaCode),
 );
@@ -667,9 +749,25 @@ referencedMediaCodes.forEach((mediaCode) => {
     `${mediaCode} must have a Nexus media reference record`,
   );
   assert.equal(
+    mediaRecordCodes.has(mediaCode),
+    true,
+    `${mediaCode} must have a Nexus media object record`,
+  );
+  assert.equal(
     componentMediaCodes.has(mediaCode),
     true,
     `${mediaCode} must have a Nexus CMS component media binding for Staged-to-Online transfer`,
+  );
+});
+mediaRecordValues.forEach((media) => {
+  assert.match(
+    media.asset.sourceFile,
+    /^content\/assets\/nexus-cms-media\/files\/[A-Za-z0-9._-]+$/,
+  );
+  assert.equal(
+    existsSync(resolve(moduleRoot, "data/sample-v001", media.asset.sourceFile)),
+    true,
+    `${media.code} must point at a release-owned physical asset`,
   );
 });
 componentMediaValues.forEach((reference) => {
@@ -719,18 +817,27 @@ for (const release of Object.values(manifest.sections)) {
   }
 }
 assert(
-  Object.keys(corporateRelease.files).every((path) => path.startsWith("sample-v001/content/headers/wcms/") ||
-    path.startsWith("sample-v001/content/records/wcms/")),
+  Object.keys(corporateRelease.files).every(
+    (path) =>
+      path.startsWith("sample-v001/content/headers/wcms/") ||
+      path.startsWith("sample-v001/content/records/wcms/"),
+  ),
   "The corporate release must contain only WCMS content files",
 );
 assert(
-  Object.keys(editorialRelease.files).every((path) => path.startsWith("sample-v001/content/headers/editorial/") ||
-    path.startsWith("sample-v001/content/records/editorial/")),
+  Object.keys(editorialRelease.files).every(
+    (path) =>
+      path.startsWith("sample-v001/content/headers/editorial/") ||
+      path.startsWith("sample-v001/content/records/editorial/"),
+  ),
   "The Editorial release must contain only content authoring files",
 );
 assert(
-  Object.keys(engagementRelease.files).every((path) => path.startsWith("sample-v001/content/headers/engagement/") ||
-    path.startsWith("sample-v001/content/records/engagement/")),
+  Object.keys(engagementRelease.files).every(
+    (path) =>
+      path.startsWith("sample-v001/content/headers/engagement/") ||
+      path.startsWith("sample-v001/content/records/engagement/"),
+  ),
   "The Engagement release must contain only engagement versioned files",
 );
 assert(

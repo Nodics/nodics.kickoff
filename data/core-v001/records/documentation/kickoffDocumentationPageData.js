@@ -64,6 +64,31 @@ module.exports = {
     "active": true
   },
   "record2": {
+    "code": "kickoffDocsPagekickoffLocalSetupToLive",
+    "name": "Local setup to live runbook",
+    "cmsSite": [
+      "kickoffDocumentationSite"
+    ],
+    "typeCode": "kickoffDocumentationArticlePageType",
+    "template": "kickoffDocumentationArticleTemplate",
+    "renderer": "documentation.page.article",
+    "cmsComponents": [
+      {
+        "target": "kickoffDocumentationNavigation",
+        "slot": "navigation",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "kickoffDocsComponentkickoffLocalSetupToLive",
+        "slot": "article",
+        "index": 10,
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  "record3": {
     "code": "kickoffDocsPagekickoffLocalAcceptance",
     "name": "Local acceptance checklist",
     "cmsSite": [
@@ -88,7 +113,7 @@ module.exports = {
     ],
     "active": true
   },
-  "record3": {
+  "record4": {
     "code": "kickoffDocsPagekickoffLocalPublishingOperations",
     "name": "Local publishing operations",
     "cmsSite": [
@@ -113,7 +138,7 @@ module.exports = {
     ],
     "active": true
   },
-  "record4": {
+  "record5": {
     "code": "kickoffDocsPagekickoffDeploymentQualification",
     "name": "Deployment qualification",
     "cmsSite": [
@@ -138,7 +163,7 @@ module.exports = {
     ],
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "kickoffDocsPagekickoffCustomization",
     "name": "Customer customization guide",
     "cmsSite": [
@@ -163,7 +188,7 @@ module.exports = {
     ],
     "active": true
   },
-  "record6": {
+  "record7": {
     "code": "kickoffDocsPagekickoffFunctionalJourneys",
     "name": "Commerce and Engagement functional journeys",
     "cmsSite": [

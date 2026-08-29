@@ -205,7 +205,7 @@ module.exports = {
   },
   "record16": {
     "code": "nexusEditorialDetailRoute",
-    "path": "/blog/editorial-introduction",
+    "path": "/blog/nodics-framework-insights",
     "page": "nexusEditorialDetailPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -229,7 +229,7 @@ module.exports = {
   },
   "record18": {
     "code": "nexusNewsPublicExperienceRoute",
-    "path": "/news/nexus-public-experience-governed-by-wcms",
+    "path": "/news/ai-built-application-who-built-architecture",
     "page": "nexusNewsPublicExperiencePage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -241,7 +241,7 @@ module.exports = {
   },
   "record19": {
     "code": "nexusNewsAxisBusinessJourneyRoute",
-    "path": "/news/axis-business-journeys-align-with-runtime-capability",
+    "path": "/news/scalability-beyond-servers-users-domains-teams-time",
     "page": "nexusNewsAxisBusinessJourneyPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -253,7 +253,7 @@ module.exports = {
   },
   "record20": {
     "code": "nexusNewsEngagementPublicApiRoute",
-    "path": "/news/engagement-public-api-connects-nexus-contact-and-testimonials",
+    "path": "/news/ai-assisted-software-needs-enterprise-foundations",
     "page": "nexusNewsEngagementPublicApiPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -265,7 +265,7 @@ module.exports = {
   },
   "record21": {
     "code": "nexusNewsEditorialReleaseFlowRoute",
-    "path": "/news/editorial-release-flow-validates-news-and-blog-publishing",
+    "path": "/news/nexus-news-blogs-carry-nodics-framework-thinking",
     "page": "nexusNewsEditorialReleaseFlowPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -289,7 +289,7 @@ module.exports = {
   },
   "record23": {
     "code": "nexusBlogEngagementFrameworkRoute",
-    "path": "/blog/building-customer-engagement-as-an-enterprise-capability",
+    "path": "/blog/vibe-coding-on-top-of-enterprise-engineering",
     "page": "nexusBlogEngagementFrameworkPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -301,7 +301,7 @@ module.exports = {
   },
   "record24": {
     "code": "nexusBlogEditorialPublicationRoute",
-    "path": "/blog/editorial-publication-without-frontend-data-ownership",
+    "path": "/blog/scalability-is-not-only-about-servers",
     "page": "nexusBlogEditorialPublicationPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -313,7 +313,7 @@ module.exports = {
   },
   "record25": {
     "code": "nexusBlogRuntimeDiscoveryRoute",
-    "path": "/blog/why-runtime-discovery-beats-hardcoded-service-urls",
+    "path": "/blog/who-builds-architecture-after-ai-builds-application",
     "page": "nexusBlogRuntimeDiscoveryPage",
     "site": "nexusCorporateSite",
     "locale": "en",
@@ -325,7 +325,7 @@ module.exports = {
   },
   "record26": {
     "code": "nexusBlogAxisBusinessOperationsRoute",
-    "path": "/blog/designing-axis-for-clean-business-operations",
+    "path": "/blog/prototype-speed-to-governed-scale-in-nodics",
     "page": "nexusBlogAxisBusinessOperationsPage",
     "site": "nexusCorporateSite",
     "locale": "en",

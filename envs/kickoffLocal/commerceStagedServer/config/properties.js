@@ -39,7 +39,12 @@ module.exports = {
         }
     },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
-        allowedDestinationRoles: ['COMMERCE_STAGED'] } },
+        allowedDestinationRoles: ['COMMERCE_STAGED'],
+        initializationProfiles: { localCommerceStagedCatalogFoundation: { enabled: true,
+            label: 'Local Commerce Staged catalog foundation',
+            description: 'Install Staged Commerce sample catalog releases for Agora storefront validation, product search, categories, prices, and inventory previews.',
+            completionMessage: 'The Local Commerce Staged catalog foundation is ready. Review catalog content in Staged before publishing qualified storefront data.',
+            steps: [{ dataType: 'sample' }] } } } },
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerceStaged' } } } },
     stripeProvider: { enabled: false, maturity: 'NOT_APPLICABLE_FOR_STAGED_CATALOG', sandboxOnly: true, liveQualified: false },
     servers: {

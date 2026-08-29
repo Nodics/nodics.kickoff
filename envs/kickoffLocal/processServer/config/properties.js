@@ -48,6 +48,11 @@ module.exports = {
             destinationEnforced: true,
             environmentClass: 'LOCAL',
             allowedDestinationRoles: ['PROCESS'],
+            initializationProfiles: { localProcessWorkflowFoundation: { enabled: true,
+                label: 'Local Process and Workflow foundation',
+                description: 'Install required process definitions and workflow releases used by publication approvals and governed operator tasks.',
+                completionMessage: 'The Local Process and Workflow foundation is ready. Approval flows can be created for publishable data.',
+                steps: [{ dataType: 'init' }] } },
             contributions: [{ moduleName: 'cms', sections: ['cmsPublicationApproval'] }],
             installers: { PROCESS_DEFINITION: 'DefaultProcessDefinitionContributionService' }
         }

@@ -511,6 +511,42 @@ module.exports = {
     "active": true
   },
   "record14": {
+    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "targetType": "NODE",
+    "targetCode": "kickoffDocsNodeTopickickoffLocalSetupToLive",
+    "lifecycleState": "ONLINE",
+    "publicationCode": "kickoffDocumentation",
+    "workflowReference": "kickoffDocumentationReviewWorkflow",
+    "validationResult": {
+      "generated": true,
+      "sourceAuthority": "docs/catalogue.json",
+      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
+      "nexusVisibleOnlyWhenOnlineAndPublic": true
+    },
+    "checksum": "fadb2c106eb00275e2c51960f0d6252296fb6adb072bfac4a4d52dc8180a9b80",
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.navigation.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "NAVIGATION_CHANGE",
+      "DASHBOARD_CHANGE",
+      "ACCESS_POLICY_CHANGE"
+    ],
+    "decisionPolicy": {
+      "reviewPermission": "documentation.review",
+      "approvePermission": "documentation.approve",
+      "publishPermission": "documentation.publish",
+      "permissionEnforced": true,
+      "adminOverrideAudited": true
+    },
+    "actor": "nodics.kickoff.generator",
+    "author": "nodics.kickoff.generator",
+    "auditTrail": [],
+    "active": true
+  },
+  "record15": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification",
@@ -546,7 +582,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record15": {
+  "record16": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalacceptance",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeTopickickoffLocalAcceptance",
@@ -582,7 +618,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record16": {
+  "record17": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodegrppublishandqualifypublishingoperations",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeGrppublishAndQualifypublishingOperations",
@@ -618,7 +654,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record17": {
+  "record18": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalpublishingoperations",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeTopickickoffLocalPublishingOperations",
@@ -654,7 +690,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record18": {
+  "record19": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeGrppublishAndQualifydeploymentQualification",
@@ -690,7 +726,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record19": {
+  "record20": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickoffdeploymentqualification",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeTopickickoffDeploymentQualification",
@@ -726,7 +762,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record20": {
+  "record21": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization",
@@ -762,7 +798,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record21": {
+  "record22": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickoffcustomization",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeTopickickoffCustomization",
@@ -798,7 +834,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record22": {
+  "record23": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodegrpfunctionaljourneyscommerceandengagementjourneys",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys",
@@ -834,7 +870,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record23": {
+  "record24": {
     "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofffunctionaljourneys",
     "targetType": "NODE",
     "targetCode": "kickoffDocsNodeTopickickoffFunctionalJourneys",
@@ -870,7 +906,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record24": {
+  "record25": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardproduct",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardProduct",
@@ -904,7 +940,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record25": {
+  "record26": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecdiscoverkickoff",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecdiscoverKickoff",
@@ -938,7 +974,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record26": {
+  "record27": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecrunkickofflocally",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecrunKickoffLocally",
@@ -972,7 +1008,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record27": {
+  "record28": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecpublishandqualify",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecpublishAndQualify",
@@ -1006,7 +1042,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record28": {
+  "record29": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardseccustomizecustomerprojects",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSeccustomizeCustomerProjects",
@@ -1040,7 +1076,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record29": {
+  "record30": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecfunctionaljourneys",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecfunctionalJourneys",
@@ -1074,7 +1110,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record30": {
+  "record31": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrpdiscoverkickoffprojectidentityandownership",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrpdiscoverKickoffprojectIdentityAndOwnership",
@@ -1108,7 +1144,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record31": {
+  "record32": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrprunKickoffLocallyruntimeTopology",
@@ -1142,7 +1178,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record32": {
+  "record33": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrprunkickofflocallyacceptanceandverification",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrprunKickoffLocallyacceptanceAndVerification",
@@ -1176,7 +1212,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record33": {
+  "record34": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrppublishandqualifypublishingoperations",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrppublishAndQualifypublishingOperations",
@@ -1210,7 +1246,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record34": {
+  "record35": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrppublishandqualifydeploymentqualification",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrppublishAndQualifydeploymentQualification",
@@ -1244,7 +1280,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record35": {
+  "record36": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrpcustomizecustomerprojectsprojectcustomization",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrpcustomizeCustomerProjectsprojectCustomization",
@@ -1278,7 +1314,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record36": {
+  "record37": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrpfunctionaljourneyscommerceandengagementjourneys",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardGrpfunctionalJourneyscommerceAndEngagementJourneys",
@@ -1312,7 +1348,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record37": {
+  "record38": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickoffoverview",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffOverview",
@@ -1348,7 +1384,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record38": {
+  "record39": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalruntime",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalRuntime",
@@ -1384,7 +1420,43 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record39": {
+  "record40": {
+    "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalsetuptolive",
+    "targetType": "PAGE",
+    "targetCode": "kickoffDocsMetadatakickoffLocalSetupToLive",
+    "lifecycleState": "ONLINE",
+    "publicationCode": "kickoffDocumentation",
+    "workflowReference": "kickoffDocumentationReviewWorkflow",
+    "validationResult": {
+      "generated": true,
+      "sourceAuthority": "docs/catalogue.json",
+      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
+      "nexusVisibleOnlyWhenOnlineAndPublic": true
+    },
+    "checksum": "a93d262d2926828b1a27c5626e4d678dd1af9430c7db00856ea2ee36ab98dc9b",
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.draft.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "CONTENT_CHANGE",
+      "ACCESS_POLICY_CHANGE",
+      "SOURCE_EVIDENCE_CHANGE"
+    ],
+    "decisionPolicy": {
+      "reviewPermission": "documentation.review",
+      "approvePermission": "documentation.approve",
+      "publishPermission": "documentation.publish",
+      "permissionEnforced": true,
+      "adminOverrideAudited": true
+    },
+    "actor": "nodics.kickoff.generator",
+    "author": "nodics.kickoff.generator",
+    "auditTrail": [],
+    "active": true
+  },
+  "record41": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalacceptance",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalAcceptance",
@@ -1420,7 +1492,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record40": {
+  "record42": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalpublishingoperations",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalPublishingOperations",
@@ -1456,7 +1528,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record41": {
+  "record43": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickoffdeploymentqualification",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffDeploymentQualification",
@@ -1492,7 +1564,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record42": {
+  "record44": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickoffcustomization",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffCustomization",
@@ -1528,7 +1600,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record43": {
+  "record45": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofffunctionaljourneys",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffFunctionalJourneys",
@@ -1564,7 +1636,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record44": {
+  "record46": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchproductkickoffdocumentationproduct",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchproductkickoffdocumentationproduct",
@@ -1598,7 +1670,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record45": {
+  "record47": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnavigationkickoffdocumentationnavigationtree",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnavigationkickoffdocumentationnavigationtree",
@@ -1632,7 +1704,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record46": {
+  "record48": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnoderoot",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnoderoot",
@@ -1666,7 +1738,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record47": {
+  "record49": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecdiscoverkickoff",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecdiscoverkickoff",
@@ -1700,7 +1772,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record48": {
+  "record50": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecrunkickofflocally",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecrunkickofflocally",
@@ -1734,7 +1806,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record49": {
+  "record51": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecpublishandqualify",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecpublishandqualify",
@@ -1768,7 +1840,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record50": {
+  "record52": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodeseccustomizecustomerprojects",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodeseccustomizecustomerprojects",
@@ -1802,7 +1874,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record51": {
+  "record53": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecfunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecfunctionaljourneys",
@@ -1836,7 +1908,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record52": {
+  "record54": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrpdiscoverkickoffprojectidentityandownership",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrpdiscoverkickoffprojectidentityandownership",
@@ -1870,7 +1942,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record53": {
+  "record55": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickoffoverview",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickoffoverview",
@@ -1904,7 +1976,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record54": {
+  "record56": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrprunkickofflocallyruntimetopology",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyruntimetopology",
@@ -1938,7 +2010,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record55": {
+  "record57": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalruntime",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalruntime",
@@ -1972,7 +2044,41 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record56": {
+  "record58": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "targetType": "SEARCH_METADATA",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "lifecycleState": "ONLINE",
+    "publicationCode": "kickoffDocumentation",
+    "workflowReference": "kickoffDocumentationReviewWorkflow",
+    "validationResult": {
+      "generated": true,
+      "sourceAuthority": "docs/catalogue.json",
+      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
+      "nexusVisibleOnlyWhenOnlineAndPublic": true
+    },
+    "checksum": "95f6c20ad0826f2bfe2d2250b59b3d82ab6650c842f5b1c3a1475ac25c4fb821",
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.search.preview"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "SEARCH_METADATA_CHANGE"
+    ],
+    "decisionPolicy": {
+      "reviewPermission": "documentation.review",
+      "approvePermission": "documentation.approve",
+      "publishPermission": "documentation.publish",
+      "permissionEnforced": true,
+      "adminOverrideAudited": true
+    },
+    "actor": "nodics.kickoff.generator",
+    "author": "nodics.kickoff.generator",
+    "auditTrail": [],
+    "active": true
+  },
+  "record59": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
@@ -2006,7 +2112,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record57": {
+  "record60": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalacceptance",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalacceptance",
@@ -2040,7 +2146,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record58": {
+  "record61": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrppublishandqualifypublishingoperations",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifypublishingoperations",
@@ -2074,7 +2180,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record59": {
+  "record62": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalpublishingoperations",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalpublishingoperations",
@@ -2108,7 +2214,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record60": {
+  "record63": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
@@ -2142,7 +2248,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record61": {
+  "record64": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickoffdeploymentqualification",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickoffdeploymentqualification",
@@ -2176,7 +2282,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record62": {
+  "record65": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
@@ -2210,7 +2316,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record63": {
+  "record66": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickoffcustomization",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickoffcustomization",
@@ -2244,7 +2350,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record64": {
+  "record67": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrpfunctionaljourneyscomc7a2fabdc3cc77be",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrpfunctionaljourneyscommerceandengagementjourneys",
@@ -2278,7 +2384,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record65": {
+  "record68": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofffunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofffunctionaljourneys",
@@ -2312,7 +2418,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record66": {
+  "record69": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardproduct",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardproduct",
@@ -2346,7 +2452,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record67": {
+  "record70": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecdiscoverkickoff",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecdiscoverkickoff",
@@ -2380,7 +2486,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record68": {
+  "record71": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecrunkickofflocally",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecrunkickofflocally",
@@ -2414,7 +2520,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record69": {
+  "record72": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecpublishandqualify",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecpublishandqualify",
@@ -2448,7 +2554,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record70": {
+  "record73": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardseccustomizecustomerprojects",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardseccustomizecustomerprojects",
@@ -2482,7 +2588,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record71": {
+  "record74": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecfunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecfunctionaljourneys",
@@ -2516,7 +2622,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record72": {
+  "record75": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrpdiscoverkica81af585a6dc8f8e",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpdiscoverkickoffprojectidentityandownership",
@@ -2550,7 +2656,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record73": {
+  "record76": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
@@ -2584,7 +2690,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record74": {
+  "record77": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrprunkickoffl5c1f3b0664f41f95",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyacceptanceandverification",
@@ -2618,7 +2724,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record75": {
+  "record78": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrppublishandq3da30b28144e9743",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifypublishingoperations",
@@ -2652,7 +2758,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record76": {
+  "record79": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrppublishandq5a689fd3211348c5",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifydeploymentqualification",
@@ -2686,7 +2792,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record77": {
+  "record80": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrpcustomizecu633267de9f0525b4",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpcustomizecustomerprojectsprojectcustomization",
@@ -2720,7 +2826,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record78": {
+  "record81": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrpfunctionalje191c05004832c12",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpfunctionaljourneyscommerceandengagementjourneys",
@@ -2754,7 +2860,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record79": {
+  "record82": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickoffoverview",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickoffoverview",
@@ -2788,7 +2894,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record80": {
+  "record83": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalruntime",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalruntime",
@@ -2822,7 +2928,41 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record81": {
+  "record84": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalsetuptolive",
+    "targetType": "SEARCH_METADATA",
+    "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalsetuptolive",
+    "lifecycleState": "ONLINE",
+    "publicationCode": "kickoffDocumentation",
+    "workflowReference": "kickoffDocumentationReviewWorkflow",
+    "validationResult": {
+      "generated": true,
+      "sourceAuthority": "docs/catalogue.json",
+      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
+      "nexusVisibleOnlyWhenOnlineAndPublic": true
+    },
+    "checksum": "a19ba882881c515b6b9ae2f496ff9f1dde30826019a4951283d6f2bb525ea249",
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.search.preview"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "SEARCH_METADATA_CHANGE"
+    ],
+    "decisionPolicy": {
+      "reviewPermission": "documentation.review",
+      "approvePermission": "documentation.approve",
+      "publishPermission": "documentation.publish",
+      "permissionEnforced": true,
+      "adminOverrideAudited": true
+    },
+    "actor": "nodics.kickoff.generator",
+    "author": "nodics.kickoff.generator",
+    "auditTrail": [],
+    "active": true
+  },
+  "record85": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalacceptance",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalacceptance",
@@ -2856,7 +2996,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record82": {
+  "record86": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalpublishingoperations",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalpublishingoperations",
@@ -2890,7 +3030,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record83": {
+  "record87": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickoffdeploymentqualification",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickoffdeploymentqualification",
@@ -2924,7 +3064,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record84": {
+  "record88": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickoffcustomization",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickoffcustomization",
@@ -2958,7 +3098,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record85": {
+  "record89": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofffunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofffunctionaljourneys",

@@ -59,12 +59,12 @@ const nexusEditorialTaxonomyTermData = {
      */
     records: function () {
         return {
-    record0: this.topic('nexus-topic-platform', 'Platform', 'platform', 'Framework and public Nexus platform evolution.'),
-    record1: this.topic('nexus-topic-axis', 'Axis', 'axis', 'BackOffice operations and business-user governance.'),
-    record2: this.topic('nexus-topic-engagement', 'Engagement', 'engagement', 'Contact, testimonial, feedback, and customer engagement capability.'),
-    record3: this.topic('nexus-topic-editorial', 'Editorial', 'editorial', 'Authoring, localization, approval, and publication flows.'),
-    record4: this.topic('nexus-topic-runtime', 'Runtime', 'runtime', 'Runtime discovery, bootstrap, and service composition.'),
-    record5: this.topic('nexus-topic-operations', 'Operations', 'operations', 'Operational control, schema visibility, and delivery workflows.')
+    record0: this.topic('nexus-topic-platform', 'AI Foundation', 'ai-foundation', 'AI-assisted delivery on top of reusable enterprise foundations.'),
+    record1: this.topic('nexus-topic-axis', 'Architecture', 'architecture', 'Architecture, ownership, boundaries, and long-term application evolution.'),
+    record2: this.topic('nexus-topic-engagement', 'Application Growth', 'application-growth', 'How products move from prototype validation into serious customer-facing systems.'),
+    record3: this.topic('nexus-topic-editorial', 'Nexus Publishing', 'nexus-publishing', 'Authoring, localization, approval, and publication flows for Nexus content.'),
+    record4: this.topic('nexus-topic-runtime', 'Scalability', 'scalability', 'Scale across traffic, users, domains, integrations, teams, security, and time.'),
+    record5: this.topic('nexus-topic-operations', 'Governance', 'governance', 'Operational control, release evidence, schema visibility, and delivery workflows.')
         };
     }
 };

@@ -23,8 +23,8 @@
 
 const authoringArticles = require('./nexusEditorialArticleData');
 const components = require('../wcms/corporate/nexusComponentData');
-const created = new Date('2026-08-11T00:00:00.000Z');
-const updated = new Date('2026-08-11T00:00:00.000Z');
+const created = new Date('2026-08-18T00:00:00.000Z');
+const updated = new Date('2026-08-29T00:00:00.000Z');
 
 const detailsByTitle = new Map(Object.values(components)
     .filter((component) => component.typeCode === 'nexusEditorialDetailType' && component.properties && component.properties.title)

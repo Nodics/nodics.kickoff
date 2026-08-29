@@ -1,5 +1,29 @@
 {
-  "contractVersion": 0,
-  "module": "processServer",
-  "sections": {}
+    "contractVersion": 2,
+    "module": "processServer",
+    "sections": {
+        "init-v001": {
+            "kind": "DATA_RELEASE",
+            "dataType": "init",
+            "version": "0.0.0",
+            "displayName": "Business Process & Automation Server",
+            "description": "Kickoff local Process runtime initialization data for Editorial workflow definitions and immutable workflow versions.",
+            "owningDomain": "editorial",
+            "lifecycle": "OPERATIONAL_VERSIONED",
+            "destinationRole": "PROCESS",
+            "environmentScope": [
+                "ALL"
+            ],
+            "sensitivity": "INTERNAL",
+            "versioningPolicy": "IMMUTABLE",
+            "publicationPolicy": "NONE",
+            "initialPublicationPolicy": "NONE",
+            "removalPolicy": "RETAIN",
+            "installer": "PROCESS_DEFINITION",
+            "files": {
+                "init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js": "17a8035e71bf114b72406c555cf32bc5cb5fe052de2d844b6d25af04053c00f0"
+            },
+            "sourceRoot": "init-v001"
+        }
+    }
 }

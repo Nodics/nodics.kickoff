@@ -508,6 +508,50 @@ module.exports = {
     "active": true
   },
   "record12": {
+    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "product": "kickoffDocumentationProduct",
+    "targetType": "NODE",
+    "targetCode": "kickoffDocsNodeTopickickoffLocalSetupToLive",
+    "title": "Local setup to live runbook",
+    "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+    "searchText": "Local setup to live runbook Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification. local setup axis login guided setup live verification screenshots",
+    "keywords": [
+      "local setup",
+      "axis login",
+      "guided setup",
+      "live verification",
+      "screenshots"
+    ],
+    "facets": {
+      "nodeLevel": "TOPIC",
+      "nodeType": "PAGE",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ]
+    },
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.search.preview"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "SEARCH_METADATA_CHANGE"
+    ],
+    "locale": "en",
+    "channel": "web",
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "accessMode": "PUBLIC",
+    "lifecycleState": "ONLINE",
+    "indexState": "INDEX_READY",
+    "active": true
+  },
+  "record13": {
     "code": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -550,7 +594,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record13": {
+  "record14": {
     "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalacceptance",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -593,7 +637,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record14": {
+  "record15": {
     "code": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifypublishingoperations",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -636,7 +680,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record15": {
+  "record16": {
     "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalpublishingoperations",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -679,7 +723,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record16": {
+  "record17": {
     "code": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -722,7 +766,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record17": {
+  "record18": {
     "code": "kickoffDocsSearchnodekickoffdocsnodetopickickoffdeploymentqualification",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -765,7 +809,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record18": {
+  "record19": {
     "code": "kickoffDocsSearchnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -808,7 +852,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record19": {
+  "record20": {
     "code": "kickoffDocsSearchnodekickoffdocsnodetopickickoffcustomization",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -851,7 +895,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record20": {
+  "record21": {
     "code": "kickoffDocsSearchnodekickoffdocsnodegrpfunctionaljourneyscommerceandengagementjourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -894,7 +938,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record21": {
+  "record22": {
     "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofffunctionaljourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
@@ -937,7 +981,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record22": {
+  "record23": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardproduct",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -970,7 +1014,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record23": {
+  "record24": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecdiscoverkickoff",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1003,7 +1047,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record24": {
+  "record25": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecrunkickofflocally",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1036,7 +1080,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record25": {
+  "record26": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecpublishandqualify",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1069,7 +1113,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record26": {
+  "record27": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardseccustomizecustomerprojects",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1102,7 +1146,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record27": {
+  "record28": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecfunctionaljourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1135,7 +1179,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record28": {
+  "record29": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpdiscoverkickoffprojectidentityandownership",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1168,7 +1212,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record29": {
+  "record30": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1201,7 +1245,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record30": {
+  "record31": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyacceptanceandverification",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1234,7 +1278,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record31": {
+  "record32": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifypublishingoperations",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1267,7 +1311,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record32": {
+  "record33": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifydeploymentqualification",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1300,7 +1344,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record33": {
+  "record34": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpcustomizecustomerprojectsprojectcustomization",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1333,7 +1377,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record34": {
+  "record35": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpfunctionaljourneyscommerceandengagementjourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1366,7 +1410,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record35": {
+  "record36": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickoffoverview",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1413,7 +1457,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record36": {
+  "record37": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalruntime",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1463,7 +1507,58 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record37": {
+  "record38": {
+    "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalsetuptolive",
+    "product": "kickoffDocumentationProduct",
+    "targetType": "PAGE",
+    "targetCode": "kickoffDocsMetadatakickoffLocalSetupToLive",
+    "title": "Local setup to live runbook",
+    "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+    "searchText": "Local setup to live runbook Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification. # Local Setup to Live Runbook\n\nThis runbook is the new-user golden path for making the Nodics reference stack\nlive on a developer machine. It starts from a local checkout, opens Axis, signs\nin, follows the guided setup workspaces, publishes governed data to Online, and\nverifies Nexus and Agora in the browser.\n\nThe normal-path screenshots show the current local reference UI. The\nfirst-launch screenshots document the bundled recovery path from the current\nAxis component contract because this captured environment already had Axis\nbaseline data. Recapture those first-launch images from a clean schema during\nthe next fresh acceptance run.\n\nFor beginners, the safe mental model is: start the stack, sign in to Axis,\nfollow the highlighted backend-owned setup cards, approve publication, then\nopen the public applications. Business users should read the status and next\naction on each screen. Developers should use the file paths and commands when a\nstatus points to a configuration, release, or module problem. Operators should\nkeep the command output, screenshots, and browser checks as setup evidence.\n\n## What live means\n\nIn Nodics, live does not mean that a frontend server is running. A local setup\nis live when these conditions are true:\n\n| Area | Live condition |\n| --- | --- |\n| Backend topology | Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, Axis, Nexus, and Agora are reachable on their local ports. |\n| Axis control plane | The admin can sign in and the dashboard shows runtime, module, release, publishing, and application readiness. |\n| Module foundation | Required modules are registered and active through backend-owned registry contracts. |\n| Release data | Init, core, and sample releases are current or intentionally skipped by policy. |\n| Application packs | Nexus and Agora accelerator packs have prepared Staged content and any required Commerce data. |\n| Publication | Publishable content has moved from Staged to Online through approval and audit evidence. |\n| Public verification | Nexus and Agora render Online content, navigation, media, and business data from backend contracts. |\n\n## Repository layout\n\nUse the reference layout unless your project already documents another one:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.kickoff/\n  nodics.exp/\n    nodics.axis/\n    nodics.nexus/\n    nodics.agora.apparel/\n```\n\n`nodics.ai` is the framework checkout. `nodics.kickoff` is the reference\ncustomer project and owns the local runtime composition. `nodics.exp` groups\nfrontend applications. Axis is the employee BackOffice, Nexus is the corporate\nsite, and Agora is the commerce storefront.\n\n## Prepare the project\n\nRun the first setup from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm install\nnpm run nodics:project:validate\n```\n\nReview `nodics.kickoff/.env` and confirm the framework root:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nRun frontend setup from each frontend repository that will be opened:\n\n```bash\ncd ../nodics.exp/nodics.axis\ncp .env.example .env\nnpm install\n```\n\nRepeat dependency installation for Nexus and Agora when their local\nrepositories have not been installed yet.\n\n## Start the local stack\n\nFrom `nodics.kickoff`, start the full local stack:\n\n```bash\nnpm run topology:start:all\n```\n\nThis starts backend runtimes and frontends in dependency-aware order. Use this\ncommand when a new user wants to see the whole product work together.\n\nUse this command from another terminal to inspect status:\n\n```bash\nnpm run topology:status\n```\n\nThe expected local URLs are:\n\n| Surface | URL | Purpose |\n| --- | --- | --- |\n| Axis | `http://localhost:3100` | Employee setup and operations workspace. |\n| Nexus | `http://localhost:3200` | Public corporate site using Online content. |\n| Agora Apparel | `http://localhost:3300` | Public storefront using Online content and Commerce data. |\n| Platform | `http://localhost:4300` | Profile, BackOffice, registry, and bootstrap authority. |\n| WCMS Online | `http://localhost:4314` | Online public content runtime. |\n| Process | `http://localhost:4330` | Workflow, approval, and automation runtime. |\n| WCMS Staged | `http://localhost:4312` | Staged content authoring and import runtime. |\n| Engagement | `http://localhost:4340` | Contact, review, feedback, and communication runtime. |\n| Commerce | `http://localhost:4350` | Operational Commerce runtime. |\n| Commerce Staged | `http://localhost:4352` | Staged Commerce catalog and storefront preparation runtime. |\n\nStop only the topology owned by this checkout:\n\n```bash\nnpm run topology:stop\n```\n\n## First launch before Axis data exists\n\nOn a fresh schema, Axis may not show the managed CMS login immediately. This is\nexpected. Axis first falls back to a small bundled recovery login whose only\njob is to authenticate the bootstrap operator and move the managed Axis\nbaseline through the governed release flow.\n\n![Axis first-launch recovery login](../assets/images/local-setup/axis-first-launch-recovery-login.jpg \"Axis first-launch recovery login\")\n\nUse the local reference admin account:\n\n```text\nUsername: admin\nPassword: adminPassword\n```\n\nAfter login, if the Axis baseline is not Online yet, Axis opens the\ninitialization workspace instead of the normal dashboard.\n\n![Axis first-launch initialization](../assets/images/local-setup/axis-first-launch-initialize.jpg \"Axis first-launch initialization\")\n\nFollow this first-run path:\n\n1. Confirm the release chip points to the Axis baseline release.\n2. Click **Initialize and submit** to import the baseline into Staged and submit\n   the governed publication request.\n3. Click **Refresh status** until the workspace shows the approval-ready state.\n4. Open the publication details or Process approval task and review the release\n   checksum, entity counts, validation status, target site, catalog, workflow\n   reference, impact, and recovery guidance.\n5. Approve the publication so the managed Axis CMS baseline becomes Online.\n6. Refresh or reopen Axis and verify that the bundled recovery workspace has\n   retired.\n\nDo not skip this by writing Axis data directly to Online. The first launch\nstill follows the same Staged, Process approval, Online publication, and audit\nprinciples as other governed content.\n\n## Open Axis\n\nOpen Axis:\n\n```text\nhttp://localhost:3100\n```\n\nAfter the first-launch baseline is Online, or when the schema already has Axis\ndata, the first screen should be the managed employee login page.\n\n![Axis login](../assets/images/local-setup/axis-entry.jpg \"Axis login\")\n\nUse the local reference admin account:\n\n```text\nUsername: admin\nPassword: adminPassword\n```\n\nAfter login, Axis should land on the dashboard.\n\n![Axis dashboard](../assets/images/local-setup/axis-dashboard.jpg \"Axis dashboard\")\n\nUse the dashboard as the operator map:\n\n| Dashboard area | What to check |\n| --- | --- |\n| Next actions | Shows whether the next step is registry, data import, publication, or application verification. |\n| Application overview | Shows active modules, data readiness, Online-ready sources, routes, workbenches, and tenant. |\n| Release and publication cards | Show whether data is current, pending, blocked, or waiting for approval. |\n| Application cards | Show whether Nexus and Agora are Online-ready or still blocked. |\n\n## Register and activate modules\n\nOpen **System and Integrations -> Module Registry**, or navigate directly:\n\n```text\nhttp://localhost:3100/registry\n```\n\n![Module Registry](../assets/images/local-setup/module-registry.jpg \"Module Registry\")\n\nThe registry is not only a visual list. It is the backend-owned activation\nsurface for functional capabilities. A capability should be registered and\nactive before importing an application pack that depends on it.\n\nCheck these states:\n\n| Capability group | Expected local result |\n| --- | --- |\n| Core, Platform, WCMS | Registered and active. These are the foundation. |\n| Process and Automation | Active when workflow, approval, and cronjob behavior is needed. |\n| Commerce and Discovery | Active before Agora catalog and product search setup. |\n| Engagement | Active before contact, review, feedback, or communication journeys are verified. |\n\nIf an accelerator says setup is blocked, return to Module Registry and activate\nthe missing capability instead of forcing import data manually.\n\n## Install release data\n\nOpen **System and Integrations -> Import and Export Workspace**, or navigate\ndirectly:\n\n```text\nhttp://localhost:3100/operations/imports-exports\n```\n\n![Imports and exports](../assets/images/local-setup/imports-and-exports.jpg \"Imports and exports\")\n\nStart with **Guided setup**. Guided profiles are declared by backend runtimes\nunder `data.dataReleases.initializationProfiles`; Axis discovers and renders\nthem. Axis must not invent data authority or silently combine release lists.\n\nUse this order:\n\n| Guided profile | Why it matters |\n| --- | --- |\n| Local Platform foundation | Prepares login, profile, catalog, authorization, localization, and BackOffice data. |\n| Local WCMS foundation | Prepares Staged content runtime, CMS baseline, and publication preparation. |\n| Local Documentation foundation | Prepares WCMS prerequisites before documentation content packs are reviewed and published. |\n| Local Commerce foundation | Prepares operational Commerce services. |\n| Local Commerce Staged catalog foundation | Prepares Agora catalog, product, price, inventory, and search preview data. |\n| Local Process and Workflow foundation | Prepares approval and workflow definitions. |\n| Local Engagement foundation | Prepares communication and customer interaction data. |\n\nFor each profile:\n\n1. Read the label and description.\n2. Review the step list and release counts.\n3. Click **Validate plan**.\n4. If validation passes and releases are not current, click **Validate and initialize**.\n5. Refresh the workspace and confirm the profile becomes `CURRENT` or shows a\n   clear operator-friendly blocker.\n\nUse **Initialization data**, **Core data**, and **Sample data** only when an\nadministrator needs advanced release-level control.\n\n## Initialize applications\n\nOpen **Publishing -> Setup and Accelerators**, or navigate directly:\n\n```text\nhttp://localhost:3100/setup-accelerators\n```\n\n![Setup and Accelerators](../assets/images/local-setup/setup-accelerators.jpg \"Setup and Accelerators\")\n\nThis page prepares project accelerators such as Nexus and Agora. It should\nshow friendly status instead of raw technical exceptions.\n\n| Status | Meaning |\n| --- | --- |\n| Setup blocked | A required capability, content catalog, communication, or data foundation is missing. Fix the blocker first. |\n| Ready to initialize | Required capabilities are active and the pack can be prepared. |\n| Staged current | Staged data is installed at the expected version and checksum. |\n| Pending approval | Staged data is ready but not yet Online. |\n| Online ready | Online publication is available and public apps can render it. |\n\nInitialize Nexus and Agora only after their blockers are resolved. A complete\napplication pack may prepare CMS pages, routes, navigation, media records,\nphysical media artifacts, Commerce catalog data, search/discovery data, and\noperational data owned by that application.\n\n## Approve and publish\n\nOpen the approval queue:\n\n```text\nhttp://localhost:3100/process/tasks\n```\n\n![Process approval queue](../assets/images/local-setup/process-approval-queue.jpg \"Process approval queue\")\n\nReview the publication evidence before approving. Approval should explain what\nwill be visible Online, which source release is involved, and what rollback\nmeans if activation fails.\n\nOpen the Publishing dashboard:\n\n```text\nhttp://localhost:3100/publishing\n```\n\n![Publishing dashboard](../assets/images/local-setup/publishing.jpg \"Publishing dashboard\")\n\nPublishing is the only path from Staged content to Online content. Do not\nwrite directly into Online schema or Online media storage. If publication is\nblocked, fix the Staged data, approval task, workflow configuration, media\ndependency, or Online runtime readiness that the page reports.\n\n## Publish documentation\n\nOpen Documentation:\n\n```text\nhttp://localhost:3100/docs\n```\n\n![Documentation dashboard](../assets/images/local-setup/documentation-dashboard.jpg \"Documentation dashboard\")\n\nFramework, Axis, and Kickoff documentation are governed content packs. Import\nand approve them through Axis and Process. They should flow from Staged to\nOnline like other publishable content.\n\nOpen Swagger/OpenAPI:\n\n```text\nhttp://localhost:3100/docs/swaggers\n```\n\n![Swagger reference](../assets/images/local-setup/swagger-reference.jpg \"Swagger reference\")\n\nSwagger is different from documentation content packs. It is generated from\nlive runtime API contracts and should remain accessible when API sources are\navailable, even if documentation publication is still waiting for approval.\n\n## Verify Nexus\n\nOpen Nexus:\n\n```text\nhttp://localhost:3200\n```\n\n![Nexus Online](../assets/images/local-setup/nexus-online.jpg \"Nexus Online\")\n\nVerify:\n\n| Area | Evidence |\n| --- | --- |\n| Header and navigation | Links come from Online content and route contracts. |\n| Hero and content sections | Text, images, and components render from published content. |\n| Documentation links | Documentation routes open only when their packs are Online or intentionally available. |\n| No maintenance fallback | The app should not show setup or unpublished-content fallback after Online publication succeeds. |\n\n## Verify Agora Apparel\n\nOpen Agora:\n\n```text\nhttp://localhost:3300\n```\n\n![Agora Apparel Online](../assets/images/local-setup/agora-apparel-online.jpg \"Agora Apparel Online\")\n\nVerify:\n\n| Area | Evidence |\n| --- | --- |\n| Storefront home | Banner, category, and merchandising content render from Online/Staged-approved sources. |\n| Product catalog | Product, category, price, inventory, and image data are present. |\n| Search and discovery | Product search and filters return meaningful results. |\n| Media | Product and CMS images load through the media contract, not hardcoded frontend paths. |\n\n## Troubleshooting checkpoints\n\n| Symptom | Likely cause | Where to fix |\n| --- | --- | --- |\n| Axis login page does not open | Axis frontend is not running or `3100` is occupied. | Run `npm run topology:status`, then restart the owned topology. |\n| Bundled recovery login appears every time | The managed Axis baseline is not Online, publication was not approved, or the CMS route did not load. | Use the first-launch initialization workspace, then check Process approval and WCMS Online readiness. |\n| Initialize Axis stays approval pending | The baseline import finished, but the governed Process task has not been approved or published. | Open `/process/tasks`, review the task, approve it, then refresh Axis. |\n| Login fails for local admin | Platform/Profile is unavailable or seed data is missing. | Check Platform server logs and guided Platform foundation data. |\n| Dashboard shows few modules | Module Registry has not activated optional capabilities. | Open `/registry` and activate required capabilities. |\n| Guided setup shows only one profile after config changes | Servers are still running old runtime configuration. | Restart the local topology and reload Axis. |\n| Accelerator setup is blocked | A required capability, catalog, communication, or release dependency is missing. | Read the friendly blocker, then fix registry or release data. |\n| Approval queue is empty | The pack is not initialized, workflow data is missing, or the task is already processed. | Check Setup and Accelerators, Process foundation, and Publishing dashboard. |\n| Nexus or Agora shows fallback content | Staged data was not approved/published to Online. | Publish through Process and verify WCMS Online readiness. |\n| Images are broken | Physical media assets did not import or publish with media records. | Check media import evidence, asset manifest, and Online media publication. |\n\n## Screenshot maintenance rule\n\nScreenshots are part of the onboarding contract. When the first-launch\nrecovery login, Initialize Axis workspace, managed login page, dashboard,\nregistry, imports, setup, publishing, documentation, Nexus, or Agora journey\nchanges materially, update the matching image under:\n\n```text\ndocs/assets/images/local-setup/\n```\n\nThen regenerate and validate the Kickoff documentation content pack:\n\n```bash\nnpm run docs:generate\nnpm run docs:check\n```\n\nKeep screenshots focused on decision points. Do not add decorative images that\nhide the actual operator action, backend state, or public verification result.\n\n## Common mistakes\n\nAvoid these mistakes during a first local setup:\n\n- Opening Nexus or Agora first and assuming a running frontend means Online\n  data has been published.\n- Importing sample data before the required module capability is registered and\n  active.\n- Treating Axis as the data authority. Axis renders backend-owned profiles,\n  releases, approvals, and actions.\n- Restarting only the frontend after changing backend runtime profile\n  configuration.\n- Approving publication before reviewing the Staged source, version, media, and\n  target Online role.\n- Fixing broken images in the frontend instead of checking media import,\n  physical asset staging, media records, and Online media publication.\n- Hand-editing generated documentation records instead of changing the authored\n  markdown and regenerating the content pack.\n\n## Verification\n\nRun these commands after changing this guide, screenshots, catalogue metadata,\nor setup behavior:\n\n```bash\nnpm run docs:generate\nnpm run docs:check\nnpm run nodics:project:validate\n```\n\nWhen setup behavior changes, also run the guided initialization and local\nqualification contracts:\n\n```bash\nnpm run acceptance:guided-initialization\nnpm run test:qualification\n```\n\nBrowser verification should include the first-launch recovery login and\nInitialize Axis workspace on a fresh schema, then managed Axis login,\ndashboard, Module Registry, Imports and Exports, Setup and Accelerators,\nProcess approval queue, Publishing, Documentation, Swagger, Nexus, and Agora.\nCapture new screenshots when any of those screens changes materially.\n\n## Final proof\n\nA new user can call the local setup complete only after this evidence exists:\n\n1. `npm run topology:status` shows the owned local runtimes are reachable.\n2. On a fresh schema, bundled Axis recovery login opens and the Initialize Axis\n   workspace can submit the baseline.\n3. After baseline approval, managed Axis login works with the local admin.\n4. Dashboard, Module Registry, Imports and Exports, Setup and Accelerators,\n   Process tasks, Publishing, Documentation, and Swagger pages open.\n5. Required modules are active.\n6. Guided setup profiles are current or have a clear blocker.\n7. Application packs are Staged current or Online ready.\n8. Publication approvals have been processed.\n9. Nexus and Agora render public Online experiences in the browser.\n10. Media images load on public pages.\n11. Any remaining blocker has a friendly operator message and a developer owner.\n",
+    "keywords": [
+      "local setup",
+      "axis login",
+      "guided setup",
+      "live verification",
+      "screenshots",
+      "axis",
+      "module registry",
+      "data import",
+      "publishing",
+      "nexus",
+      "agora"
+    ],
+    "facets": {
+      "section": "run-kickoff-locally",
+      "group": "runtime-topology",
+      "documentType": "how-to",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ]
+    },
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.search.preview"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "SEARCH_METADATA_CHANGE"
+    ],
+    "locale": "en",
+    "channel": "web",
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "accessMode": "PUBLIC",
+    "lifecycleState": "ONLINE",
+    "indexState": "INDEX_READY",
+    "active": true
+  },
+  "record39": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalacceptance",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1512,7 +1607,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record38": {
+  "record40": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalpublishingoperations",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1560,7 +1655,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record39": {
+  "record41": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickoffdeploymentqualification",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1608,7 +1703,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record40": {
+  "record42": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickoffcustomization",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1656,7 +1751,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record41": {
+  "record43": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofffunctionaljourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",

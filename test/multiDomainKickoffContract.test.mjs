@@ -39,9 +39,20 @@ test('every domain owns distinct Product and WCMS catalogs with framework domain
     const page = require(path.join(contentRoot, `${definition.prefix}PageData.js`));
     const route = require(path.join(contentRoot, `${definition.prefix}RouteData.js`));
     const renderers = require(path.join(contentRoot, `${definition.prefix}RendererData.js`));
+    const media = require(path.join(contentRoot, `${definition.prefix}SharedMediaData.js`));
+    const mediaReferences = require(path.join(contentRoot, `${definition.prefix}SharedMediaReferenceData.js`));
+    const mediaAssetManifest = require(path.join(root, 'modules', definition.group, 'data', 'sample-v001', 'content', 'assets', 'agora-cms-media', 'assetManifest.js'));
+    const mediaCodes = new Set(mediaAssetManifest.map(asset => asset.mediaCode));
     assert(Object.keys(products).length >= 2);
     assert(Object.keys(profiles).length >= 2);
     Object.values(products).forEach(product => assert.equal(product.catalogVersion, definition.catalogVersion));
+    assert.equal(Object.keys(media).length, mediaAssetManifest.length);
+    Object.values(media).forEach(item => {
+      assert.equal(mediaCodes.has(item.code), true);
+      assert.match(item.asset.sourceFile, /^content\/assets\/agora-cms-media\/files\/[A-Za-z0-9._-]+$/);
+      assert.equal(fs.existsSync(path.join(root, 'modules', definition.group, 'data', 'sample-v001', item.asset.sourceFile)), true);
+    });
+    Object.values(mediaReferences).forEach(reference => assert.equal(mediaCodes.has(reference.mediaCode), true));
     versions.add(definition.catalogVersion); contentCatalogs.add(content.record0.code);
     assert.equal(site.record0.catalog, definition.contentCatalog);
     assert.equal(page.record0.cmsSite[0], site.record0.code);
@@ -62,6 +73,8 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
     const commerceSection = sections.find(section => section.destinationRole === 'COMMERCE_STAGED');
     assert(Object.keys(wcmsSection.files).some(relative => /SharedComponentData/.test(relative)),
       `${definition.pack} shared CMS component records must publish through the WCMS release`);
+    assert(Object.keys(wcmsSection.files).some(relative => /SharedMediaData/.test(relative)),
+      `${definition.pack} WCMS release must create media objects before component-media bindings`);
     assert(!Object.keys(commerceSection.files).some(relative => /SharedComponentData/.test(relative)),
       `${definition.pack} Commerce release must not own shared CMS component records`);
     for (const section of sections) for (const [relative, expected] of Object.entries(section.files)) {

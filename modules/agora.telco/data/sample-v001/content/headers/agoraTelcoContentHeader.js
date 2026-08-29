@@ -29,6 +29,7 @@ module.exports = {
     contentCatalog: entry('catalog', 'agoraTelcoContentCatalogData')
   },
   media: {
+    sharedMedia: entry('media', 'agoraTelcoSharedMediaData'),
     sharedMediaReferences: entry('mediaReference', 'agoraTelcoSharedMediaReferenceData', { code: '$code', tenant: '$tenant' })
   },
   cms: {

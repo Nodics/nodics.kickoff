@@ -293,6 +293,221 @@ module.exports = {
     "active": true
   },
   "record2": {
+    "code": "kickoffDocsMetadatakickoffLocalSetupToLive",
+    "product": "kickoffDocumentationProduct",
+    "documentId": "kickoff.local-setup-to-live",
+    "title": "Local setup to live runbook",
+    "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+    "businessSummary": "Local setup to live runbook explains customer-project purpose, supported operations, runtime impact, and implementation handoff.",
+    "technicalSummary": "Local setup to live runbook records owning module nodics.kickoff, technical module kickoffLocal, source path docs/pages/local-setup-to-live-runbook.md, validation, and troubleshooting evidence.",
+    "ownerFunctionalModule": "nodics.kickoff",
+    "technicalModule": "kickoffLocal",
+    "targetPage": "kickoffDocsPagekickoffLocalSetupToLive",
+    "targetRoute": "kickoffDocsRoutekickoffLocalSetupToLive",
+    "articleComponent": "kickoffDocsComponentkickoffLocalSetupToLive",
+    "template": "kickoffDocumentationArticleTemplate",
+    "searchMetadata": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalsetuptolive",
+    "headings": [
+      {
+        "text": "What live means",
+        "anchor": "kickoffLocalSetupToLive-1-what-live-means",
+        "level": 2
+      },
+      {
+        "text": "Repository layout",
+        "anchor": "kickoffLocalSetupToLive-2-repository-layout",
+        "level": 2
+      },
+      {
+        "text": "Prepare the project",
+        "anchor": "kickoffLocalSetupToLive-3-prepare-the-project",
+        "level": 2
+      },
+      {
+        "text": "Start the local stack",
+        "anchor": "kickoffLocalSetupToLive-4-start-the-local-stack",
+        "level": 2
+      },
+      {
+        "text": "First launch before Axis data exists",
+        "anchor": "kickoffLocalSetupToLive-5-first-launch-before-axis-data-exists",
+        "level": 2
+      },
+      {
+        "text": "Open Axis",
+        "anchor": "kickoffLocalSetupToLive-6-open-axis",
+        "level": 2
+      },
+      {
+        "text": "Register and activate modules",
+        "anchor": "kickoffLocalSetupToLive-7-register-and-activate-modules",
+        "level": 2
+      },
+      {
+        "text": "Install release data",
+        "anchor": "kickoffLocalSetupToLive-8-install-release-data",
+        "level": 2
+      },
+      {
+        "text": "Initialize applications",
+        "anchor": "kickoffLocalSetupToLive-9-initialize-applications",
+        "level": 2
+      },
+      {
+        "text": "Approve and publish",
+        "anchor": "kickoffLocalSetupToLive-10-approve-and-publish",
+        "level": 2
+      },
+      {
+        "text": "Publish documentation",
+        "anchor": "kickoffLocalSetupToLive-11-publish-documentation",
+        "level": 2
+      },
+      {
+        "text": "Verify Nexus",
+        "anchor": "kickoffLocalSetupToLive-12-verify-nexus",
+        "level": 2
+      },
+      {
+        "text": "Verify Agora Apparel",
+        "anchor": "kickoffLocalSetupToLive-13-verify-agora-apparel",
+        "level": 2
+      },
+      {
+        "text": "Troubleshooting checkpoints",
+        "anchor": "kickoffLocalSetupToLive-14-troubleshooting-checkpoints",
+        "level": 2
+      },
+      {
+        "text": "Screenshot maintenance rule",
+        "anchor": "kickoffLocalSetupToLive-15-screenshot-maintenance-rule",
+        "level": 2
+      },
+      {
+        "text": "Common mistakes",
+        "anchor": "kickoffLocalSetupToLive-16-common-mistakes",
+        "level": 2
+      },
+      {
+        "text": "Verification",
+        "anchor": "kickoffLocalSetupToLive-17-verification",
+        "level": 2
+      },
+      {
+        "text": "Final proof",
+        "anchor": "kickoffLocalSetupToLive-18-final-proof",
+        "level": 2
+      }
+    ],
+    "diagrams": [],
+    "visualAssets": [
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "image"
+      },
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "table"
+      }
+    ],
+    "visualRequirements": [
+      "screenshot",
+      "command-example",
+      "troubleshooting-matrix"
+    ],
+    "relatedPages": [
+      "kickoff.local-runtime",
+      "kickoff.local-acceptance",
+      "kickoff.local-publishing-operations"
+    ],
+    "sourceRepository": "nodics.kickoff",
+    "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
+    "sourceChecksum": "e1e951d3ab0474abe8fefa812ea8ba434990178107253871267d6ce39f1e8dd9",
+    "sourceWordCount": 2538,
+    "audience": [
+      "business-user",
+      "administrator",
+      "architect",
+      "developer",
+      "operator",
+      "qa",
+      "ai-tool"
+    ],
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.draft.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "CONTENT_CHANGE",
+      "ACCESS_POLICY_CHANGE",
+      "SOURCE_EVIDENCE_CHANGE"
+    ],
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "accessMode": "PUBLIC",
+    "lifecycleState": "ONLINE",
+    "maturityState": "IMPLEMENTED",
+    "active": true
+  },
+  "record3": {
     "code": "kickoffDocsMetadatakickoffLocalAcceptance",
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.local-acceptance",
@@ -494,7 +709,7 @@ module.exports = {
     "maturityState": "IMPLEMENTED",
     "active": true
   },
-  "record3": {
+  "record4": {
     "code": "kickoffDocsMetadatakickoffLocalPublishingOperations",
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.local-publishing-operations",
@@ -604,7 +819,7 @@ module.exports = {
     "maturityState": "IMPLEMENTED",
     "active": true
   },
-  "record4": {
+  "record5": {
     "code": "kickoffDocsMetadatakickoffDeploymentQualification",
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.deployment-qualification",
@@ -717,7 +932,7 @@ module.exports = {
     "maturityState": "IMPLEMENTED",
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "kickoffDocsMetadatakickoffCustomization",
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.customization",
@@ -889,7 +1104,7 @@ module.exports = {
     "maturityState": "IMPLEMENTED",
     "active": true
   },
-  "record6": {
+  "record7": {
     "code": "kickoffDocsMetadatakickoffFunctionalJourneys",
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.functional-journeys",

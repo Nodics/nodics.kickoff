@@ -265,6 +265,10 @@ module.exports = {
                     { code: 'commsCore:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffLocalEngagement', operation: 'IMPORT' },
                     { code: 'commsCore:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffLocalEngagement', operation: 'IMPORT_SAMPLE' }
                 ]
+            },
+            'nodics.accelerators': {
+                dependencies: ['nodics.commerce', 'nodics.discovery'],
+                dataPackages: []
             }
         }
     },
@@ -314,7 +318,12 @@ module.exports = {
         profile: { mongodb: { master: { databaseName: 'kickoffLocalPlatform' } } }
     },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
-        allowedDestinationRoles: ['PLATFORM'] } },
+        allowedDestinationRoles: ['PLATFORM'],
+        initializationProfiles: { localPlatformFoundation: { enabled: true,
+            label: 'Local Platform foundation',
+            description: 'Install required Platform initialization and core releases for local BackOffice identity, catalogue, profile, authorization, and localization services.',
+            completionMessage: 'The Local Platform foundation is ready. Operators can sign in, review module lifecycle, and manage governed platform data.',
+            steps: [{ dataType: 'init' }, { dataType: 'core' }] } } } },
     profileBrowserSession: {
         enabled: true,
         refreshCookieName: 'nodics_axis_refresh',

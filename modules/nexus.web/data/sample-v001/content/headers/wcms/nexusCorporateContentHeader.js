@@ -34,7 +34,6 @@ module.exports = {
         nexusSlotData: { options: { enabled: true, schemaName: 'cmsSlotDefinition', operation: 'saveAll', dataFilePrefix: 'nexusSlotData' }, query: { code: '$code' } },
         nexusTemplateData: { options: { enabled: true, schemaName: 'cmsPageTemplate', operation: 'saveAll', dataFilePrefix: 'nexusTemplateData' }, query: { code: '$code' } },
         nexusComponentData: { options: { enabled: true, schemaName: 'cmsComponent', operation: 'saveAll', dataFilePrefix: 'nexusComponentData' }, query: { code: '$code' } },
-        nexusComponentMediaData: { options: { enabled: true, schemaName: 'cmsComponentMedia', operation: 'saveAll', dataFilePrefix: 'nexusComponentMediaData' }, query: { componentMediaCode: '$componentMediaCode' } },
         nexusPageData: { options: { enabled: true, schemaName: 'cmsPage', operation: 'saveAll', dataFilePrefix: 'nexusPageData' }, query: { code: '$code' } },
         nexusRouteData: { options: { enabled: true, schemaName: 'cmsPageRoute', operation: 'saveAll', dataFilePrefix: 'nexusRouteData' }, query: { code: '$code' } },
         nexusNavigationData: { options: { enabled: true, schemaName: 'cmsNavigationNode', operation: 'saveAll', dataFilePrefix: 'nexusNavigationData' }, query: { code: '$code' } }

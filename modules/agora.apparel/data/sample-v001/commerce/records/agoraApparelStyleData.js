@@ -25,7 +25,7 @@ module.exports = Object.freeze({
   "record0": {
     "code": "agoraLinenWrapDressStyle",
     "tenant": "default",
-    "productCode": "agoraApparelLinenDress",
+    "productCode": "agoraLinenWrapDress",
     "brandCode": "nodics-studio",
     "collectionCodes": [
       "agoraWomen",
@@ -55,7 +55,7 @@ module.exports = Object.freeze({
   "record1": {
     "code": "agoraSatinMidiDressStyle",
     "tenant": "default",
-    "productCode": "agoraApparelOxfordShirt",
+    "productCode": "agoraSatinMidiDress",
     "brandCode": "nodics-studio",
     "collectionCodes": [
       "agoraWomen",

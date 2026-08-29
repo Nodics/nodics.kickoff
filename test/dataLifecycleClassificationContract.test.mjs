@@ -42,7 +42,14 @@ for (const relativePath of manifests) {
 }
 
 const processServerManifest = JSON.parse(readFileSync(resolve(root, 'envs/kickoffLocal/processServer/data/manifest.json'), 'utf8'));
-assert.deepStrictEqual(processServerManifest.sections, {},
-  'Process definitions must be installed through framework destination contributions, not Kickoff generic processServer imports');
-assert.strictEqual(sections, 1, 'Kickoff executable lifecycle inventory drifted');
+const processServerInit = processServerManifest.sections['init-v001'];
+assert(processServerInit, 'Process Server must declare its workflow initialization contribution');
+assert.strictEqual(processServerInit.installer, 'PROCESS_DEFINITION',
+  'Process definitions must be installed through the workflow contribution installer, not generic schema imports');
+assert.strictEqual(processServerInit.destinationRole, 'PROCESS');
+assert.strictEqual(processServerInit.owningDomain, 'editorial');
+assert.deepStrictEqual(Object.keys(processServerInit.files || {}), [
+  'init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js'
+]);
+assert.strictEqual(sections, 2, 'Kickoff executable lifecycle inventory drifted');
 console.log('Kickoff data lifecycle classification contract validated');

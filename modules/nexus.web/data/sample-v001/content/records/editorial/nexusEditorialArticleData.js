@@ -21,9 +21,9 @@
 
 /** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner nexus.web */
 
-const created = new Date('2026-08-11T00:00:00.000Z');
-const updated = new Date('2026-08-11T00:00:00.000Z');
-const publishFrom = new Date('2026-08-11T23:59:00.000Z');
+const created = new Date('2026-08-18T00:00:00.000Z');
+const updated = new Date('2026-08-29T00:00:00.000Z');
+const publishFrom = new Date('2026-08-29T00:00:00.000Z');
 
 const nexusEditorialArticleData = {
     /**
@@ -80,10 +80,10 @@ const nexusEditorialArticleData = {
         1,
         'nexus-news-public-experience',
         'NEWS',
-        'Nexus public experience now reads governed backend content.',
-        'nexus-public-experience-governed-by-wcms',
-        'News, blogs, testimonials, and contact forms are moving from static preview data to backend-owned delivery contracts.',
-        'nexus-topic-platform',
+        'Nodics publishes new article on architecture behind AI-built applications.',
+        'ai-built-application-who-built-architecture',
+        'The latest Nodics framework article explains why AI-built applications still need architecture, ownership, resilience, and governance when success arrives.',
+        'nexus-topic-axis',
         'nexusNewsPublicExperience',
         true
     ),
@@ -91,10 +91,10 @@ const nexusEditorialArticleData = {
         2,
         'nexus-news-axis-business-journey',
         'NEWS',
-        'Axis business journeys align with registered runtime capability.',
-        'axis-business-journeys-align-with-runtime-capability',
-        'BackOffice navigation and workspaces now present authorized backend capability rather than frontend-owned assumptions.',
-        'nexus-topic-axis',
+        'Scalability article reframes growth as users, domains, teams, and time.',
+        'scalability-beyond-servers-users-domains-teams-time',
+        'A new Nodics article argues that scalable software must grow across roles, permissions, business complexity, integrations, teams, security, and time.',
+        'nexus-topic-runtime',
         'nexusNewsAxisRuntime',
         false
     ),
@@ -102,10 +102,10 @@ const nexusEditorialArticleData = {
         3,
         'nexus-news-engagement-public-api',
         'NEWS',
-        'Engagement APIs now power Nexus contact and testimonial journeys.',
-        'engagement-public-api-connects-nexus-contact-and-testimonials',
-        'The reference site can load approved testimonial projections and submit contact requests through the registered Engagement runtime.',
-        'nexus-topic-engagement',
+        'Nodics thinking connects AI-assisted software with enterprise foundations.',
+        'ai-assisted-software-needs-enterprise-foundations',
+        'The first article in the series asks how AI-generated applications can graduate from fast prototypes into serious businesses.',
+        'nexus-topic-platform',
         'nexusNewsEngagementApi',
         false
     ),
@@ -113,9 +113,9 @@ const nexusEditorialArticleData = {
         4,
         'nexus-news-editorial-release-flow',
         'NEWS',
-        'Editorial release flow validates governed News and Blog publishing.',
-        'editorial-release-flow-validates-news-and-blog-publishing',
-        'Authoring, approval, nPublish activation, online projection, and Nexus delivery now have a repeatable acceptance path.',
+        'Nexus News and Blogs now carry Nodics framework thought leadership.',
+        'nexus-news-blogs-carry-nodics-framework-thinking',
+        'Sample editorial placeholders are being replaced with governed Nexus content based on public Nodics framework articles and production-ready themes.',
         'nexus-topic-editorial',
         'nexusNewsEditorialRelease',
         false
@@ -124,10 +124,10 @@ const nexusEditorialArticleData = {
         5,
         'nexus-blog-engagement-framework',
         'BLOG',
-        'Building customer engagement as an enterprise capability.',
-        'building-customer-engagement-as-an-enterprise-capability',
-        'Reviews, feedback, testimonials, and contact submissions need one governed process from intake to approval and visibility.',
-        'nexus-topic-engagement',
+        'Vibe coding on top of enterprise engineering.',
+        'vibe-coding-on-top-of-enterprise-engineering',
+        'AI-assisted development is making application creation faster, but successful software still needs security, tenancy, auditability, resilience, and integration foundations.',
+        'nexus-topic-platform',
         'nexusBlogCustomerEngagement',
         false
     ),
@@ -135,10 +135,10 @@ const nexusEditorialArticleData = {
         6,
         'nexus-blog-editorial-publication',
         'BLOG',
-        'Editorial publication without frontend data ownership.',
-        'editorial-publication-without-frontend-data-ownership',
-        'Nexus renderers stay executable and reusable while article truth is governed, localized, published, and delivered by WCMS.',
-        'nexus-topic-editorial',
+        'Scalability is not only about servers.',
+        'scalability-is-not-only-about-servers',
+        'Infrastructure is only one dimension of scale; enterprise applications also need to scale across people, domains, integrations, governance, and change.',
+        'nexus-topic-runtime',
         'nexusBlogEditorialPublication',
         true
     ),
@@ -146,10 +146,10 @@ const nexusEditorialArticleData = {
         7,
         'nexus-blog-runtime-discovery',
         'BLOG',
-        'Why runtime discovery beats hardcoded service URLs.',
-        'why-runtime-discovery-beats-hardcoded-service-urls',
-        'Customer projects stay portable when frontend experiences resolve backend ownership from the module registry and public bootstrap.',
-        'nexus-topic-runtime',
+        'Who builds the architecture after AI builds the application?',
+        'who-builds-architecture-after-ai-builds-application',
+        'AI can accelerate implementation, but architecture decides whether a growing product can stay available, governable, observable, and changeable.',
+        'nexus-topic-axis',
         'nexusBlogRuntimeDiscovery',
         false
     ),
@@ -157,9 +157,9 @@ const nexusEditorialArticleData = {
         8,
         'nexus-blog-axis-business-operations',
         'BLOG',
-        'Designing Axis for clean business operations.',
-        'designing-axis-for-clean-business-operations',
-        'A usable BackOffice should expose governed tasks clearly without duplicating module authority or overwhelming the operator.',
+        'From prototype speed to governed scale in Nodics.',
+        'prototype-speed-to-governed-scale-in-nodics',
+        'Nodics connects fast application delivery with reusable module boundaries, publication control, runtime evidence, and operational governance.',
         'nexus-topic-operations',
         'nexusBlogAxisOperations',
         false

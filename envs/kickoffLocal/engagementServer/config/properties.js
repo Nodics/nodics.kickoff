@@ -17,7 +17,12 @@ module.exports = {
     runtimeRole: { code: 'ENGAGEMENT', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: { publish: 'engagement.operational' } },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
-        allowedDestinationRoles: ['ENGAGEMENT'] } },
+        allowedDestinationRoles: ['ENGAGEMENT'],
+        initializationProfiles: { localEngagementFoundation: { enabled: true,
+            label: 'Local Engagement foundation',
+            description: 'Install Engagement core and sample communication releases for local contact, testimonial, review, feedback, and notification validation.',
+            completionMessage: 'The Local Engagement foundation is ready. Operators can validate engagement journeys with governed templates and runtime data.',
+            steps: [{ dataType: 'core' }, { dataType: 'sample' }] } } } },
     engagement: { capabilities: { contactSubmission: true, testimonial: true, customerReview: true, customerFeedback: true } },
     customerFeedback: { enabled: true },
     database: {

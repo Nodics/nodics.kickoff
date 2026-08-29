@@ -19,5 +19,5 @@ for (const role of ['COMMERCE_STAGED', 'WCMS_STAGED']) test(`all domain ${role} 
   const releaseRequest = { dataType: 'sample', releaseCodes: releases.map(item => item.releaseCode), expectedReleases: Object.fromEntries(releases.map(item => [item.releaseCode, item.version])) };
   const first = await service.execute({ tenant: 'default', releaseRequest });
   await assert.rejects(() => service.execute({ tenant: 'default', releaseRequest }), error => error.code === 'ERR_IMP_00003');
-  assert.equal(first.data.releases.length, 3); assert.equal(installations.length, 3); assert.equal(imports.length, 1);
+  assert.equal(first.data.releases.length, 3); assert.equal(installations.length, 3); assert.equal(imports.length, releases.length);
 });

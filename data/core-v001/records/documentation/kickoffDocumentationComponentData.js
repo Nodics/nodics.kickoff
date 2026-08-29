@@ -269,6 +269,80 @@ module.exports = {
           "searchText": "Local runtime topology Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable. # Local Runtime Topology\n\nKickoff provides a local reference topology so a developer can start Nodics and\nsee the major runtime surfaces without creating a new customer project first.\nThe local environment is `kickoffLocal`.\n\n## What this is\n\nThe local runtime topology is the smallest practical Nodics deployment on a\ndeveloper machine. It runs the framework as real backend servers, not as mocked\nscreens. That is important because Axis, BackOffice, module registration,\ncontent-pack import, API contracts, authentication, and WCMS routing all depend\non backend authority.\n\nThe goal is not to teach every production option on day one. The goal is to\ngive a beginner a reliable local loop: configure framework location, install\ndependencies, start servers, log in, import/update data, and observe the\nruntime from Axis.\n\n| Runtime part | Business purpose | Developer/operator responsibility |\n| --- | --- | --- |\n| Platform | Employee login, BackOffice bootstrap, module registry, and API discovery | Start first, verify Profile and BackOffice are reachable, and keep tokens out of logs |\n| WCMS Staged and Online | Governed content, media, documentation, and public delivery | Keep Staged authoring separate from Online delivery and import content packs through governance |\n| Process and Automation | Workflow, cronjob, scheduled capability, and recovery evidence | Start when process or scheduled behavior is being tested and avoid duplicate scheduler authority |\n| Axis | Employee control plane for setup, import, documentation, and operations | Point to the correct Platform URL and verify only authorized capabilities appear |\n| Nexus and Agora accelerators | Public/customer-facing proof of Online delivery | Consume Online and customer-safe APIs only, never Staged or internal operations |\n\n## Servers\n\nThe current local topology uses separate runtime servers:\n\n- `platformServer` starts the Platform runtime. It loads Core, Platform,\n  Profile, BackOffice, the Platform `axis` backend module, and Kickoff project\n  modules.\n- `wcmsServer` starts the WCMS runtime. It loads Core, WCMS, CMS, Media, and\n  Kickoff project modules. WCMS owns CMS sites, catalogs, pages, components,\n  routes, and documentation content-pack import.\n- `processServer` starts the combined Business Process & Automation runtime.\n  It loads Core, Process, cronjob, workflow modules, and Kickoff project\n  modules. The `workflow` module owns process/workflow definitions; the\n  `cronjob` module owns job definitions, triggers, scheduler state, and\n  execution lifecycle.\n\nKickoff intentionally has no standalone cronjob server. Scheduled automation is\navailable only through `processServer`, preventing accidental duplicate\nscheduler processes while cronjob retains ownership of its job lifecycle.\n\nAxis, Nexus, and Agora are separate frontend applications grouped locally by\nthe optional `nodics.exp` workspace. `nodics.exp` owns frontend discovery and\ntooling only; each application still owns its own source, release, tests, and\nruntime behavior. Axis connects to Platform for employee authentication and\nBackOffice bootstrap. Nexus consumes WCMS Online and Engagement public delivery\ncontracts. Agora consumes Platform, WCMS Online, Engagement, and Commerce\ncustomer contracts.\n\n## Start locally\n\nUse separate terminals from the Kickoff repository:\n\n```bash\nnpm run start:platform\nnpm run start:wcms\nnpm run start:process\n```\n\nThe governed supervisor starts all three frontends with the six backends:\n\n```bash\nnpm run topology:start:all\n```\n\nIn the preferred local checkout, frontend applications live under\n`../nodics.exp/`:\n\n```text\nnodicsRoot/\n├── nodics.ai/\n├── nodics.kickoff/\n└── nodics.exp/\n    ├── nodics.axis/\n    ├── nodics.nexus/\n    └── nodics.agora.apparel/\n```\n\nIf a developer keeps the frontend apps somewhere else, set the explicit root\nenvironment variables used by the relevant script, for example\n`NODICS_AXIS_ROOT` for Axis smoke and `NODICS_QUALIFICATION_AXIS_ROOT`,\n`NODICS_QUALIFICATION_NEXUS_ROOT`, and `NODICS_QUALIFICATION_AGORA_ROOT` for\ndeployment qualification evidence.\n\nThe default local ports are:\n\n- Axis: `http://localhost:3100`\n- Nexus: `http://localhost:3200`\n- Agora: `http://localhost:3300`\n- Platform: `http://localhost:4300`\n- WCMS Staged: `http://localhost:4312`\n- WCMS Online: `http://localhost:4314`\n- Process and Automation: `http://localhost:4330`\n- Engagement: `http://localhost:4340`\n- Commerce: `http://localhost:4350`\n\n## Before starting\n\nFrom `nodics.kickoff`, copy and review local environment configuration:\n\n```bash\ncp .env.example .env\n```\n\nSet the framework checkout location:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nThe path may be absolute or relative to the Kickoff project root. This avoids a\nhard dependency on a fixed workspace layout. One developer may keep framework\ncode beside Kickoff; another may keep it in a different projects directory.\n\nThen install project dependencies:\n\n```bash\nnpm install\n```\n\nKickoff does not copy or symlink framework modules into `.nodics/`. Project\nscripts call `scripts/nodics-project.js`, which reads `.env`, locates\n`nodics.ai`, and delegates lifecycle/startup work to framework-owned tooling.\n\n## Start sequence\n\nUse separate terminals so logs stay readable:\n\n1. Start Platform first. It owns Profile login, BackOffice bootstrap, module\n   registry, runtime catalogue projection, and OpenAPI contract discovery.\n2. Start WCMS second. It owns documentation sites, catalogs, pages, components,\n   routes, media metadata, and content delivery.\n3. Start Process and Automation when process/workflow or scheduled behavior is\n   needed. It proves `workflow` and `cronjob` can share one runtime environment\n   under `nodics.process` while keeping separate module ownership.\n4. Start Axis, Nexus, and Agora after backend servers are reachable. Each\n   frontend uses only its governed backend contracts and configured CORS origin.\n\n## Login and first checks\n\nOpen Axis at `http://localhost:3100`. For the local reference data, use:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nAfter login:\n\n- open the System and Integrations area and check the module registry;\n- confirm Core, Platform, and WCMS are active and not treated as optional;\n- register and activate required business capabilities before initializing a\n  customer-facing application: Agora requires Commerce and Discovery; Nexus\n  requires its public content and engagement capabilities when those features\n  are enabled;\n- if Process and Automation is running, confirm Process appears from the\n  composed runtime and exposes both `workflow` and `cronjob` capabilities;\n- open Documentation and verify Framework, Swaggers, Nodics Axis, and Nodics\n  Kickoff are shown as separate documentation products;\n- import or update documentation packs only through the authorized Axis action.\n\n## Fresh environment setup order\n\nA fresh local schema is ready only after four governed lanes are complete.\nDo not treat a successful import button as proof that a storefront is ready;\nthe setup page must also show required capabilities, publication state, and\nOnline readiness.\n\n| Order | Axis workspace | What must happen | User-visible result |\n| ---: | --- | --- | --- |\n| 1 | Empty-database Axis setup | Initialize the managed Axis baseline, BackOffice workspace, CMS baseline, admin access, and required core data. | Axis leaves recovery mode and exposes authorized navigation. |\n| 2 | Module Registry | Register and activate functional capabilities needed by the target application. Agora requires Commerce and Discovery; Nexus requires its public content and engagement capabilities when enabled. | Setup and Accelerators no longer shows a capability-blocked state for that application. |\n| 3 | Setup and Accelerators | Initialize Nexus or Agora application packs. A complete pack imports CMS content, routes, navigation, media metadata, media artifacts, commerce data, search/discovery data, and operational data owned by that application. | The application row shows initialized Staged data and the next publishing action. |\n| 4 | Publishing and approval | Request approval, review evidence, approve or reject, and publish the approved release to Online. | Nexus and Agora can render Online content; otherwise they show the maintenance page. |\n\nDocumentation packs are independent from accelerator setup. Framework, Axis,\nand Kickoff documentation can be imported, reviewed, and published in parallel\nwith application setup. Swagger/OpenAPI is generated from active runtime\ncontracts and should not be hidden behind documentation content-pack approval.\n\n## Documentation import\n\nProject documentation is generated into a Kickoff content pack and imported\nthrough WCMS. The pack code is `kickoffDocumentation`; the CMS Site is\n`kickoffDocumentationSite`; the default route is `/docs/nodics-kickoff`.\n\nIf the documentation page is unavailable in Axis, check that WCMS is running,\nthe content pack is generated, and the latest pack version has been imported.\nThe content-pack service rejects changed content with the same immutable\nversion, so update the catalogue version whenever generated hashes change.\n\n## Troubleshooting\n\nIf Axis shows a BackOffice registry recovery page, Platform is not reachable,\nthe Platform port is wrong, or Axis public configuration points at the wrong\nbase URL. If Axis logs in but documentation routes show CMS recovery, WCMS may\nnot be running, the documentation source may not be registered, or the content\npack may not be imported. If an optional module appears only after refresh,\ncheck the module registry API response after each lifecycle operation before\nassuming the frontend state is wrong.\n\nIf Nodics scripts cannot locate framework packages, check `NODICS_FRAMEWORK_ROOT`\nand confirm the configured directory contains `nodics.foundation`,\n`nodics.platform`, `nodics.wcms`, and any optional framework modules used by the\nlocal server.\n\n## Production note\n\nThe local topology teaches ownership, not final infrastructure. Production may\nrun modules in separate processes, hosts, containers, or release units. That\ndoes not change documentation ownership, module identity, API authority, or the\nrule that Axis discovers runtime capability from BackOffice instead of keeping\nits own endpoint registry.\n\n## Common mistakes\n\n- Starting only the frontend and assuming backend discovery should work.\n- Putting long inherited property blocks into a server config when the project\n  only needs a small override.\n- Assuming every framework module in the checkout is active for every server.\n  The configured runtime graph decides what loads.\n- Treating Cron as owned by Process just because the reference workspace can\n  run both in the same `processServer`.\n- Using local ports, database names, or project names as permanent framework\n  assumptions.\n- Forgetting that restart should preserve persisted registry and imported\n  content state.\n\n## Verification\n\nThe final pre-Builder gate must use a fresh Local database and qualify all nine\nruntimes together: Platform, WCMS Staged, WCMS Online, Process, Engagement,\nCommerce, Axis, Nexus, and Agora. Verify the topology from the customer project,\nnot from framework internals. Platform should expose login,\nBackOffice bootstrap, registry, and API discovery. WCMS should expose content,\ndocumentation, media, and import/export delivery. Process and Automation should\nreport Process runtime availability with workflow and cronjob technical modules\nfrom the composed server.\nAxis should connect through Platform and WCMS instead of local hardcoded module\nstate.\n\nFor a beginner-friendly proof, open Axis after the servers start and inspect\nDashboard, System and Integrations, Module Registry, Imports and Exports,\nContent and Experience, Media, Business Process & Automation, and\nDocumentation. The UI should explain the same topology that the server\nconfiguration declares.\n\n## Continue\n\n- [Kickoff project overview](project-overview.md)\n- [Customer customization guide](customization-guide.md)\n"
         },
         {
+          "code": "kickoff.local-setup-to-live",
+          "title": "Local setup to live runbook",
+          "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live",
+          "section": "run-kickoff-locally",
+          "sectionTitle": "Run Kickoff Locally",
+          "sectionOrder": 20,
+          "group": "runtime-topology",
+          "groupTitle": "Runtime Topology",
+          "groupOrder": 10,
+          "subgroup": null,
+          "subgroupTitle": null,
+          "order": 15,
+          "parentId": "run-kickoff-locally",
+          "hierarchyPath": [
+            "Nodics Kickoff",
+            "Run Kickoff Locally",
+            "Local setup to live runbook"
+          ],
+          "hierarchyDepth": 3,
+          "documentType": "how-to",
+          "audience": [
+            "business-user",
+            "administrator",
+            "architect",
+            "developer",
+            "operator",
+            "qa",
+            "ai-tool"
+          ],
+          "businessAudience": [
+            "business-user",
+            "administrator",
+            "operator"
+          ],
+          "technicalAudience": [
+            "architect",
+            "developer",
+            "qa",
+            "ai-tool"
+          ],
+          "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+          "visibility": "public",
+          "accessMode": "PUBLIC",
+          "publiclyAvailable": true,
+          "requiresAuthentication": false,
+          "allowedRoles": [],
+          "allowedGroups": [],
+          "allowedPermissions": [],
+          "lifecycleState": "ONLINE",
+          "maturityState": "operational",
+          "implementationState": "current",
+          "relatedPages": [
+            "kickoff.local-runtime",
+            "kickoff.local-acceptance",
+            "kickoff.local-publishing-operations"
+          ],
+          "searchKeywords": [
+            "local setup",
+            "axis login",
+            "guided setup",
+            "live verification",
+            "screenshots"
+          ],
+          "topicKeywords": [
+            "axis",
+            "module registry",
+            "data import",
+            "publishing",
+            "nexus",
+            "agora"
+          ],
+          "searchText": "Local setup to live runbook Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification. # Local Setup to Live Runbook\n\nThis runbook is the new-user golden path for making the Nodics reference stack\nlive on a developer machine. It starts from a local checkout, opens Axis, signs\nin, follows the guided setup workspaces, publishes governed data to Online, and\nverifies Nexus and Agora in the browser.\n\nThe normal-path screenshots show the current local reference UI. The\nfirst-launch screenshots document the bundled recovery path from the current\nAxis component contract because this captured environment already had Axis\nbaseline data. Recapture those first-launch images from a clean schema during\nthe next fresh acceptance run.\n\nFor beginners, the safe mental model is: start the stack, sign in to Axis,\nfollow the highlighted backend-owned setup cards, approve publication, then\nopen the public applications. Business users should read the status and next\naction on each screen. Developers should use the file paths and commands when a\nstatus points to a configuration, release, or module problem. Operators should\nkeep the command output, screenshots, and browser checks as setup evidence.\n\n## What live means\n\nIn Nodics, live does not mean that a frontend server is running. A local setup\nis live when these conditions are true:\n\n| Area | Live condition |\n| --- | --- |\n| Backend topology | Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, Axis, Nexus, and Agora are reachable on their local ports. |\n| Axis control plane | The admin can sign in and the dashboard shows runtime, module, release, publishing, and application readiness. |\n| Module foundation | Required modules are registered and active through backend-owned registry contracts. |\n| Release data | Init, core, and sample releases are current or intentionally skipped by policy. |\n| Application packs | Nexus and Agora accelerator packs have prepared Staged content and any required Commerce data. |\n| Publication | Publishable content has moved from Staged to Online through approval and audit evidence. |\n| Public verification | Nexus and Agora render Online content, navigation, media, and business data from backend contracts. |\n\n## Repository layout\n\nUse the reference layout unless your project already documents another one:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.kickoff/\n  nodics.exp/\n    nodics.axis/\n    nodics.nexus/\n    nodics.agora.apparel/\n```\n\n`nodics.ai` is the framework checkout. `nodics.kickoff` is the reference\ncustomer project and owns the local runtime composition. `nodics.exp` groups\nfrontend applications. Axis is the employee BackOffice, Nexus is the corporate\nsite, and Agora is the commerce storefront.\n\n## Prepare the project\n\nRun the first setup from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm install\nnpm run nodics:project:validate\n```\n\nReview `nodics.kickoff/.env` and confirm the framework root:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nRun frontend setup from each frontend repository that will be opened:\n\n```bash\ncd ../nodics.exp/nodics.axis\ncp .env.example .env\nnpm install\n```\n\nRepeat dependency installation for Nexus and Agora when their local\nrepositories have not been installed yet.\n\n## Start the local stack\n\nFrom `nodics.kickoff`, start the full local stack:\n\n```bash\nnpm run topology:start:all\n```\n\nThis starts backend runtimes and frontends in dependency-aware order. Use this\ncommand when a new user wants to see the whole product work together.\n\nUse this command from another terminal to inspect status:\n\n```bash\nnpm run topology:status\n```\n\nThe expected local URLs are:\n\n| Surface | URL | Purpose |\n| --- | --- | --- |\n| Axis | `http://localhost:3100` | Employee setup and operations workspace. |\n| Nexus | `http://localhost:3200` | Public corporate site using Online content. |\n| Agora Apparel | `http://localhost:3300` | Public storefront using Online content and Commerce data. |\n| Platform | `http://localhost:4300` | Profile, BackOffice, registry, and bootstrap authority. |\n| WCMS Online | `http://localhost:4314` | Online public content runtime. |\n| Process | `http://localhost:4330` | Workflow, approval, and automation runtime. |\n| WCMS Staged | `http://localhost:4312` | Staged content authoring and import runtime. |\n| Engagement | `http://localhost:4340` | Contact, review, feedback, and communication runtime. |\n| Commerce | `http://localhost:4350` | Operational Commerce runtime. |\n| Commerce Staged | `http://localhost:4352` | Staged Commerce catalog and storefront preparation runtime. |\n\nStop only the topology owned by this checkout:\n\n```bash\nnpm run topology:stop\n```\n\n## First launch before Axis data exists\n\nOn a fresh schema, Axis may not show the managed CMS login immediately. This is\nexpected. Axis first falls back to a small bundled recovery login whose only\njob is to authenticate the bootstrap operator and move the managed Axis\nbaseline through the governed release flow.\n\n![Axis first-launch recovery login](../assets/images/local-setup/axis-first-launch-recovery-login.jpg \"Axis first-launch recovery login\")\n\nUse the local reference admin account:\n\n```text\nUsername: admin\nPassword: adminPassword\n```\n\nAfter login, if the Axis baseline is not Online yet, Axis opens the\ninitialization workspace instead of the normal dashboard.\n\n![Axis first-launch initialization](../assets/images/local-setup/axis-first-launch-initialize.jpg \"Axis first-launch initialization\")\n\nFollow this first-run path:\n\n1. Confirm the release chip points to the Axis baseline release.\n2. Click **Initialize and submit** to import the baseline into Staged and submit\n   the governed publication request.\n3. Click **Refresh status** until the workspace shows the approval-ready state.\n4. Open the publication details or Process approval task and review the release\n   checksum, entity counts, validation status, target site, catalog, workflow\n   reference, impact, and recovery guidance.\n5. Approve the publication so the managed Axis CMS baseline becomes Online.\n6. Refresh or reopen Axis and verify that the bundled recovery workspace has\n   retired.\n\nDo not skip this by writing Axis data directly to Online. The first launch\nstill follows the same Staged, Process approval, Online publication, and audit\nprinciples as other governed content.\n\n## Open Axis\n\nOpen Axis:\n\n```text\nhttp://localhost:3100\n```\n\nAfter the first-launch baseline is Online, or when the schema already has Axis\ndata, the first screen should be the managed employee login page.\n\n![Axis login](../assets/images/local-setup/axis-entry.jpg \"Axis login\")\n\nUse the local reference admin account:\n\n```text\nUsername: admin\nPassword: adminPassword\n```\n\nAfter login, Axis should land on the dashboard.\n\n![Axis dashboard](../assets/images/local-setup/axis-dashboard.jpg \"Axis dashboard\")\n\nUse the dashboard as the operator map:\n\n| Dashboard area | What to check |\n| --- | --- |\n| Next actions | Shows whether the next step is registry, data import, publication, or application verification. |\n| Application overview | Shows active modules, data readiness, Online-ready sources, routes, workbenches, and tenant. |\n| Release and publication cards | Show whether data is current, pending, blocked, or waiting for approval. |\n| Application cards | Show whether Nexus and Agora are Online-ready or still blocked. |\n\n## Register and activate modules\n\nOpen **System and Integrations -> Module Registry**, or navigate directly:\n\n```text\nhttp://localhost:3100/registry\n```\n\n![Module Registry](../assets/images/local-setup/module-registry.jpg \"Module Registry\")\n\nThe registry is not only a visual list. It is the backend-owned activation\nsurface for functional capabilities. A capability should be registered and\nactive before importing an application pack that depends on it.\n\nCheck these states:\n\n| Capability group | Expected local result |\n| --- | --- |\n| Core, Platform, WCMS | Registered and active. These are the foundation. |\n| Process and Automation | Active when workflow, approval, and cronjob behavior is needed. |\n| Commerce and Discovery | Active before Agora catalog and product search setup. |\n| Engagement | Active before contact, review, feedback, or communication journeys are verified. |\n\nIf an accelerator says setup is blocked, return to Module Registry and activate\nthe missing capability instead of forcing import data manually.\n\n## Install release data\n\nOpen **System and Integrations -> Import and Export Workspace**, or navigate\ndirectly:\n\n```text\nhttp://localhost:3100/operations/imports-exports\n```\n\n![Imports and exports](../assets/images/local-setup/imports-and-exports.jpg \"Imports and exports\")\n\nStart with **Guided setup**. Guided profiles are declared by backend runtimes\nunder `data.dataReleases.initializationProfiles`; Axis discovers and renders\nthem. Axis must not invent data authority or silently combine release lists.\n\nUse this order:\n\n| Guided profile | Why it matters |\n| --- | --- |\n| Local Platform foundation | Prepares login, profile, catalog, authorization, localization, and BackOffice data. |\n| Local WCMS foundation | Prepares Staged content runtime, CMS baseline, and publication preparation. |\n| Local Documentation foundation | Prepares WCMS prerequisites before documentation content packs are reviewed and published. |\n| Local Commerce foundation | Prepares operational Commerce services. |\n| Local Commerce Staged catalog foundation | Prepares Agora catalog, product, price, inventory, and search preview data. |\n| Local Process and Workflow foundation | Prepares approval and workflow definitions. |\n| Local Engagement foundation | Prepares communication and customer interaction data. |\n\nFor each profile:\n\n1. Read the label and description.\n2. Review the step list and release counts.\n3. Click **Validate plan**.\n4. If validation passes and releases are not current, click **Validate and initialize**.\n5. Refresh the workspace and confirm the profile becomes `CURRENT` or shows a\n   clear operator-friendly blocker.\n\nUse **Initialization data**, **Core data**, and **Sample data** only when an\nadministrator needs advanced release-level control.\n\n## Initialize applications\n\nOpen **Publishing -> Setup and Accelerators**, or navigate directly:\n\n```text\nhttp://localhost:3100/setup-accelerators\n```\n\n![Setup and Accelerators](../assets/images/local-setup/setup-accelerators.jpg \"Setup and Accelerators\")\n\nThis page prepares project accelerators such as Nexus and Agora. It should\nshow friendly status instead of raw technical exceptions.\n\n| Status | Meaning |\n| --- | --- |\n| Setup blocked | A required capability, content catalog, communication, or data foundation is missing. Fix the blocker first. |\n| Ready to initialize | Required capabilities are active and the pack can be prepared. |\n| Staged current | Staged data is installed at the expected version and checksum. |\n| Pending approval | Staged data is ready but not yet Online. |\n| Online ready | Online publication is available and public apps can render it. |\n\nInitialize Nexus and Agora only after their blockers are resolved. A complete\napplication pack may prepare CMS pages, routes, navigation, media records,\nphysical media artifacts, Commerce catalog data, search/discovery data, and\noperational data owned by that application.\n\n## Approve and publish\n\nOpen the approval queue:\n\n```text\nhttp://localhost:3100/process/tasks\n```\n\n![Process approval queue](../assets/images/local-setup/process-approval-queue.jpg \"Process approval queue\")\n\nReview the publication evidence before approving. Approval should explain what\nwill be visible Online, which source release is involved, and what rollback\nmeans if activation fails.\n\nOpen the Publishing dashboard:\n\n```text\nhttp://localhost:3100/publishing\n```\n\n![Publishing dashboard](../assets/images/local-setup/publishing.jpg \"Publishing dashboard\")\n\nPublishing is the only path from Staged content to Online content. Do not\nwrite directly into Online schema or Online media storage. If publication is\nblocked, fix the Staged data, approval task, workflow configuration, media\ndependency, or Online runtime readiness that the page reports.\n\n## Publish documentation\n\nOpen Documentation:\n\n```text\nhttp://localhost:3100/docs\n```\n\n![Documentation dashboard](../assets/images/local-setup/documentation-dashboard.jpg \"Documentation dashboard\")\n\nFramework, Axis, and Kickoff documentation are governed content packs. Import\nand approve them through Axis and Process. They should flow from Staged to\nOnline like other publishable content.\n\nOpen Swagger/OpenAPI:\n\n```text\nhttp://localhost:3100/docs/swaggers\n```\n\n![Swagger reference](../assets/images/local-setup/swagger-reference.jpg \"Swagger reference\")\n\nSwagger is different from documentation content packs. It is generated from\nlive runtime API contracts and should remain accessible when API sources are\navailable, even if documentation publication is still waiting for approval.\n\n## Verify Nexus\n\nOpen Nexus:\n\n```text\nhttp://localhost:3200\n```\n\n![Nexus Online](../assets/images/local-setup/nexus-online.jpg \"Nexus Online\")\n\nVerify:\n\n| Area | Evidence |\n| --- | --- |\n| Header and navigation | Links come from Online content and route contracts. |\n| Hero and content sections | Text, images, and components render from published content. |\n| Documentation links | Documentation routes open only when their packs are Online or intentionally available. |\n| No maintenance fallback | The app should not show setup or unpublished-content fallback after Online publication succeeds. |\n\n## Verify Agora Apparel\n\nOpen Agora:\n\n```text\nhttp://localhost:3300\n```\n\n![Agora Apparel Online](../assets/images/local-setup/agora-apparel-online.jpg \"Agora Apparel Online\")\n\nVerify:\n\n| Area | Evidence |\n| --- | --- |\n| Storefront home | Banner, category, and merchandising content render from Online/Staged-approved sources. |\n| Product catalog | Product, category, price, inventory, and image data are present. |\n| Search and discovery | Product search and filters return meaningful results. |\n| Media | Product and CMS images load through the media contract, not hardcoded frontend paths. |\n\n## Troubleshooting checkpoints\n\n| Symptom | Likely cause | Where to fix |\n| --- | --- | --- |\n| Axis login page does not open | Axis frontend is not running or `3100` is occupied. | Run `npm run topology:status`, then restart the owned topology. |\n| Bundled recovery login appears every time | The managed Axis baseline is not Online, publication was not approved, or the CMS route did not load. | Use the first-launch initialization workspace, then check Process approval and WCMS Online readiness. |\n| Initialize Axis stays approval pending | The baseline import finished, but the governed Process task has not been approved or published. | Open `/process/tasks`, review the task, approve it, then refresh Axis. |\n| Login fails for local admin | Platform/Profile is unavailable or seed data is missing. | Check Platform server logs and guided Platform foundation data. |\n| Dashboard shows few modules | Module Registry has not activated optional capabilities. | Open `/registry` and activate required capabilities. |\n| Guided setup shows only one profile after config changes | Servers are still running old runtime configuration. | Restart the local topology and reload Axis. |\n| Accelerator setup is blocked | A required capability, catalog, communication, or release dependency is missing. | Read the friendly blocker, then fix registry or release data. |\n| Approval queue is empty | The pack is not initialized, workflow data is missing, or the task is already processed. | Check Setup and Accelerators, Process foundation, and Publishing dashboard. |\n| Nexus or Agora shows fallback content | Staged data was not approved/published to Online. | Publish through Process and verify WCMS Online readiness. |\n| Images are broken | Physical media assets did not import or publish with media records. | Check media import evidence, asset manifest, and Online media publication. |\n\n## Screenshot maintenance rule\n\nScreenshots are part of the onboarding contract. When the first-launch\nrecovery login, Initialize Axis workspace, managed login page, dashboard,\nregistry, imports, setup, publishing, documentation, Nexus, or Agora journey\nchanges materially, update the matching image under:\n\n```text\ndocs/assets/images/local-setup/\n```\n\nThen regenerate and validate the Kickoff documentation content pack:\n\n```bash\nnpm run docs:generate\nnpm run docs:check\n```\n\nKeep screenshots focused on decision points. Do not add decorative images that\nhide the actual operator action, backend state, or public verification result.\n\n## Common mistakes\n\nAvoid these mistakes during a first local setup:\n\n- Opening Nexus or Agora first and assuming a running frontend means Online\n  data has been published.\n- Importing sample data before the required module capability is registered and\n  active.\n- Treating Axis as the data authority. Axis renders backend-owned profiles,\n  releases, approvals, and actions.\n- Restarting only the frontend after changing backend runtime profile\n  configuration.\n- Approving publication before reviewing the Staged source, version, media, and\n  target Online role.\n- Fixing broken images in the frontend instead of checking media import,\n  physical asset staging, media records, and Online media publication.\n- Hand-editing generated documentation records instead of changing the authored\n  markdown and regenerating the content pack.\n\n## Verification\n\nRun these commands after changing this guide, screenshots, catalogue metadata,\nor setup behavior:\n\n```bash\nnpm run docs:generate\nnpm run docs:check\nnpm run nodics:project:validate\n```\n\nWhen setup behavior changes, also run the guided initialization and local\nqualification contracts:\n\n```bash\nnpm run acceptance:guided-initialization\nnpm run test:qualification\n```\n\nBrowser verification should include the first-launch recovery login and\nInitialize Axis workspace on a fresh schema, then managed Axis login,\ndashboard, Module Registry, Imports and Exports, Setup and Accelerators,\nProcess approval queue, Publishing, Documentation, Swagger, Nexus, and Agora.\nCapture new screenshots when any of those screens changes materially.\n\n## Final proof\n\nA new user can call the local setup complete only after this evidence exists:\n\n1. `npm run topology:status` shows the owned local runtimes are reachable.\n2. On a fresh schema, bundled Axis recovery login opens and the Initialize Axis\n   workspace can submit the baseline.\n3. After baseline approval, managed Axis login works with the local admin.\n4. Dashboard, Module Registry, Imports and Exports, Setup and Accelerators,\n   Process tasks, Publishing, Documentation, and Swagger pages open.\n5. Required modules are active.\n6. Guided setup profiles are current or have a clear blocker.\n7. Application packs are Staged current or Online ready.\n8. Publication approvals have been processed.\n9. Nexus and Agora render public Online experiences in the browser.\n10. Media images load on public pages.\n11. Any remaining blocker has a friendly operator message and a developer owner.\n"
+        },
+        {
           "code": "kickoff.local-acceptance",
           "title": "Local acceptance checklist",
           "route": "/docs/nodics-kickoff/kickoff-local-acceptance",
@@ -1660,8 +1734,8 @@ module.exports = {
         "route": "/docs/nodics-kickoff"
       },
       "next": {
-        "title": "Local acceptance checklist",
-        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+        "title": "Local setup to live runbook",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
       },
       "source": {
         "repository": "nodics.kickoff",
@@ -1675,6 +1749,1098 @@ module.exports = {
     "active": true
   },
   "record3": {
+    "code": "kickoffDocsComponentkickoffLocalSetupToLive",
+    "typeCode": "kickoffDocumentationArticleComponentType",
+    "renderer": "documentation.component.article",
+    "accessMode": "PUBLIC",
+    "properties": {
+      "code": "kickoff.local-setup-to-live",
+      "title": "Local setup to live runbook",
+      "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live",
+      "section": "run-kickoff-locally",
+      "sectionTitle": "Run Kickoff Locally",
+      "group": "runtime-topology",
+      "groupTitle": "Runtime Topology",
+      "parentId": "run-kickoff-locally",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Run Kickoff Locally",
+        "Local setup to live runbook"
+      ],
+      "hierarchyDepth": 3,
+      "documentType": "how-to",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "allowedGroups": [],
+      "allowedPermissions": [],
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.local-runtime",
+        "kickoff.local-acceptance",
+        "kickoff.local-publishing-operations"
+      ],
+      "visualRequirements": [
+        "screenshot",
+        "command-example",
+        "troubleshooting-matrix"
+      ],
+      "searchKeywords": [
+        "local setup",
+        "axis login",
+        "guided setup",
+        "live verification",
+        "screenshots"
+      ],
+      "topicKeywords": [
+        "axis",
+        "module registry",
+        "data import",
+        "publishing",
+        "nexus",
+        "agora"
+      ],
+      "headings": [
+        {
+          "text": "What live means",
+          "anchor": "kickoffLocalSetupToLive-1-what-live-means",
+          "level": 2
+        },
+        {
+          "text": "Repository layout",
+          "anchor": "kickoffLocalSetupToLive-2-repository-layout",
+          "level": 2
+        },
+        {
+          "text": "Prepare the project",
+          "anchor": "kickoffLocalSetupToLive-3-prepare-the-project",
+          "level": 2
+        },
+        {
+          "text": "Start the local stack",
+          "anchor": "kickoffLocalSetupToLive-4-start-the-local-stack",
+          "level": 2
+        },
+        {
+          "text": "First launch before Axis data exists",
+          "anchor": "kickoffLocalSetupToLive-5-first-launch-before-axis-data-exists",
+          "level": 2
+        },
+        {
+          "text": "Open Axis",
+          "anchor": "kickoffLocalSetupToLive-6-open-axis",
+          "level": 2
+        },
+        {
+          "text": "Register and activate modules",
+          "anchor": "kickoffLocalSetupToLive-7-register-and-activate-modules",
+          "level": 2
+        },
+        {
+          "text": "Install release data",
+          "anchor": "kickoffLocalSetupToLive-8-install-release-data",
+          "level": 2
+        },
+        {
+          "text": "Initialize applications",
+          "anchor": "kickoffLocalSetupToLive-9-initialize-applications",
+          "level": 2
+        },
+        {
+          "text": "Approve and publish",
+          "anchor": "kickoffLocalSetupToLive-10-approve-and-publish",
+          "level": 2
+        },
+        {
+          "text": "Publish documentation",
+          "anchor": "kickoffLocalSetupToLive-11-publish-documentation",
+          "level": 2
+        },
+        {
+          "text": "Verify Nexus",
+          "anchor": "kickoffLocalSetupToLive-12-verify-nexus",
+          "level": 2
+        },
+        {
+          "text": "Verify Agora Apparel",
+          "anchor": "kickoffLocalSetupToLive-13-verify-agora-apparel",
+          "level": 2
+        },
+        {
+          "text": "Troubleshooting checkpoints",
+          "anchor": "kickoffLocalSetupToLive-14-troubleshooting-checkpoints",
+          "level": 2
+        },
+        {
+          "text": "Screenshot maintenance rule",
+          "anchor": "kickoffLocalSetupToLive-15-screenshot-maintenance-rule",
+          "level": 2
+        },
+        {
+          "text": "Common mistakes",
+          "anchor": "kickoffLocalSetupToLive-16-common-mistakes",
+          "level": 2
+        },
+        {
+          "text": "Verification",
+          "anchor": "kickoffLocalSetupToLive-17-verification",
+          "level": 2
+        },
+        {
+          "text": "Final proof",
+          "anchor": "kickoffLocalSetupToLive-18-final-proof",
+          "level": 2
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "This runbook is the new-user golden path for making the Nodics reference stack live on a developer machine. It starts from a local checkout, opens Axis, signs in, follows the guided setup workspaces, publishes governed data to Online, and verifies Nexus and Agora in the browser."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The normal-path screenshots show the current local reference UI. The first-launch screenshots document the bundled recovery path from the current Axis component contract because this captured environment already had Axis baseline data. Recapture those first-launch images from a clean schema during the next fresh acceptance run."
+        },
+        {
+          "kind": "paragraph",
+          "text": "For beginners, the safe mental model is: start the stack, sign in to Axis, follow the highlighted backend-owned setup cards, approve publication, then open the public applications. Business users should read the status and next action on each screen. Developers should use the file paths and commands when a status points to a configuration, release, or module problem. Operators should keep the command output, screenshots, and browser checks as setup evidence."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "What live means",
+          "anchor": "kickoffLocalSetupToLive-1-what-live-means"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In Nodics, live does not mean that a frontend server is running. A local setup is live when these conditions are true:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Area",
+            "Live condition"
+          ],
+          "rows": [
+            [
+              "Backend topology",
+              "Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, Axis, Nexus, and Agora are reachable on their local ports."
+            ],
+            [
+              "Axis control plane",
+              "The admin can sign in and the dashboard shows runtime, module, release, publishing, and application readiness."
+            ],
+            [
+              "Module foundation",
+              "Required modules are registered and active through backend-owned registry contracts."
+            ],
+            [
+              "Release data",
+              "Init, core, and sample releases are current or intentionally skipped by policy."
+            ],
+            [
+              "Application packs",
+              "Nexus and Agora accelerator packs have prepared Staged content and any required Commerce data."
+            ],
+            [
+              "Publication",
+              "Publishable content has moved from Staged to Online through approval and audit evidence."
+            ],
+            [
+              "Public verification",
+              "Nexus and Agora render Online content, navigation, media, and business data from backend contracts."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Repository layout",
+          "anchor": "kickoffLocalSetupToLive-2-repository-layout"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use the reference layout unless your project already documents another one:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "nodicsRoot/\n  nodics.ai/\n  nodics.kickoff/\n  nodics.exp/\n    nodics.axis/\n    nodics.nexus/\n    nodics.agora.apparel/"
+        },
+        {
+          "kind": "paragraph",
+          "text": "`nodics.ai` is the framework checkout. `nodics.kickoff` is the reference customer project and owns the local runtime composition. `nodics.exp` groups frontend applications. Axis is the employee BackOffice, Nexus is the corporate site, and Agora is the commerce storefront."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Prepare the project",
+          "anchor": "kickoffLocalSetupToLive-3-prepare-the-project"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run the first setup from `nodics.kickoff`:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "cp .env.example .env\nnpm install\nnpm run nodics:project:validate"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Review `nodics.kickoff/.env` and confirm the framework root:"
+        },
+        {
+          "kind": "code",
+          "language": "dotenv",
+          "text": "NODICS_FRAMEWORK_ROOT=../nodics.ai"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run frontend setup from each frontend repository that will be opened:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "cd ../nodics.exp/nodics.axis\ncp .env.example .env\nnpm install"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Repeat dependency installation for Nexus and Agora when their local repositories have not been installed yet."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Start the local stack",
+          "anchor": "kickoffLocalSetupToLive-4-start-the-local-stack"
+        },
+        {
+          "kind": "paragraph",
+          "text": "From `nodics.kickoff`, start the full local stack:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run topology:start:all"
+        },
+        {
+          "kind": "paragraph",
+          "text": "This starts backend runtimes and frontends in dependency-aware order. Use this command when a new user wants to see the whole product work together."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use this command from another terminal to inspect status:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run topology:status"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The expected local URLs are:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Surface",
+            "URL",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Axis",
+              "`http://localhost:3100`",
+              "Employee setup and operations workspace."
+            ],
+            [
+              "Nexus",
+              "`http://localhost:3200`",
+              "Public corporate site using Online content."
+            ],
+            [
+              "Agora Apparel",
+              "`http://localhost:3300`",
+              "Public storefront using Online content and Commerce data."
+            ],
+            [
+              "Platform",
+              "`http://localhost:4300`",
+              "Profile, BackOffice, registry, and bootstrap authority."
+            ],
+            [
+              "WCMS Online",
+              "`http://localhost:4314`",
+              "Online public content runtime."
+            ],
+            [
+              "Process",
+              "`http://localhost:4330`",
+              "Workflow, approval, and automation runtime."
+            ],
+            [
+              "WCMS Staged",
+              "`http://localhost:4312`",
+              "Staged content authoring and import runtime."
+            ],
+            [
+              "Engagement",
+              "`http://localhost:4340`",
+              "Contact, review, feedback, and communication runtime."
+            ],
+            [
+              "Commerce",
+              "`http://localhost:4350`",
+              "Operational Commerce runtime."
+            ],
+            [
+              "Commerce Staged",
+              "`http://localhost:4352`",
+              "Staged Commerce catalog and storefront preparation runtime."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Stop only the topology owned by this checkout:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run topology:stop"
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "First launch before Axis data exists",
+          "anchor": "kickoffLocalSetupToLive-5-first-launch-before-axis-data-exists"
+        },
+        {
+          "kind": "paragraph",
+          "text": "On a fresh schema, Axis may not show the managed CMS login immediately. This is expected. Axis first falls back to a small bundled recovery login whose only job is to authenticate the bootstrap operator and move the managed Axis baseline through the governed release flow."
+        },
+        {
+          "kind": "image",
+          "alt": "Axis first-launch recovery login",
+          "source": "../assets/images/local-setup/axis-first-launch-recovery-login.jpg",
+          "title": "Axis first-launch recovery login"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use the local reference admin account:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "Username: admin\nPassword: adminPassword"
+        },
+        {
+          "kind": "paragraph",
+          "text": "After login, if the Axis baseline is not Online yet, Axis opens the initialization workspace instead of the normal dashboard."
+        },
+        {
+          "kind": "image",
+          "alt": "Axis first-launch initialization",
+          "source": "../assets/images/local-setup/axis-first-launch-initialize.jpg",
+          "title": "Axis first-launch initialization"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Follow this first-run path:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "Confirm the release chip points to the Axis baseline release.",
+            "Click **Initialize and submit** to import the baseline into Staged and submit the governed publication request.",
+            "Click **Refresh status** until the workspace shows the approval-ready state.",
+            "Open the publication details or Process approval task and review the release checksum, entity counts, validation status, target site, catalog, workflow reference, impact, and recovery guidance.",
+            "Approve the publication so the managed Axis CMS baseline becomes Online.",
+            "Refresh or reopen Axis and verify that the bundled recovery workspace has retired."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Do not skip this by writing Axis data directly to Online. The first launch still follows the same Staged, Process approval, Online publication, and audit principles as other governed content."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Open Axis",
+          "anchor": "kickoffLocalSetupToLive-6-open-axis"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open Axis:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100"
+        },
+        {
+          "kind": "paragraph",
+          "text": "After the first-launch baseline is Online, or when the schema already has Axis data, the first screen should be the managed employee login page."
+        },
+        {
+          "kind": "image",
+          "alt": "Axis login",
+          "source": "../assets/images/local-setup/axis-entry.jpg",
+          "title": "Axis login"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use the local reference admin account:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "Username: admin\nPassword: adminPassword"
+        },
+        {
+          "kind": "paragraph",
+          "text": "After login, Axis should land on the dashboard."
+        },
+        {
+          "kind": "image",
+          "alt": "Axis dashboard",
+          "source": "../assets/images/local-setup/axis-dashboard.jpg",
+          "title": "Axis dashboard"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use the dashboard as the operator map:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Dashboard area",
+            "What to check"
+          ],
+          "rows": [
+            [
+              "Next actions",
+              "Shows whether the next step is registry, data import, publication, or application verification."
+            ],
+            [
+              "Application overview",
+              "Shows active modules, data readiness, Online-ready sources, routes, workbenches, and tenant."
+            ],
+            [
+              "Release and publication cards",
+              "Show whether data is current, pending, blocked, or waiting for approval."
+            ],
+            [
+              "Application cards",
+              "Show whether Nexus and Agora are Online-ready or still blocked."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Register and activate modules",
+          "anchor": "kickoffLocalSetupToLive-7-register-and-activate-modules"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open **System and Integrations -> Module Registry**, or navigate directly:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/registry"
+        },
+        {
+          "kind": "image",
+          "alt": "Module Registry",
+          "source": "../assets/images/local-setup/module-registry.jpg",
+          "title": "Module Registry"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The registry is not only a visual list. It is the backend-owned activation surface for functional capabilities. A capability should be registered and active before importing an application pack that depends on it."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Check these states:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Capability group",
+            "Expected local result"
+          ],
+          "rows": [
+            [
+              "Core, Platform, WCMS",
+              "Registered and active. These are the foundation."
+            ],
+            [
+              "Process and Automation",
+              "Active when workflow, approval, and cronjob behavior is needed."
+            ],
+            [
+              "Commerce and Discovery",
+              "Active before Agora catalog and product search setup."
+            ],
+            [
+              "Engagement",
+              "Active before contact, review, feedback, or communication journeys are verified."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "If an accelerator says setup is blocked, return to Module Registry and activate the missing capability instead of forcing import data manually."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Install release data",
+          "anchor": "kickoffLocalSetupToLive-8-install-release-data"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open **System and Integrations -> Import and Export Workspace**, or navigate directly:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/operations/imports-exports"
+        },
+        {
+          "kind": "image",
+          "alt": "Imports and exports",
+          "source": "../assets/images/local-setup/imports-and-exports.jpg",
+          "title": "Imports and exports"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Start with **Guided setup**. Guided profiles are declared by backend runtimes under `data.dataReleases.initializationProfiles`; Axis discovers and renders them. Axis must not invent data authority or silently combine release lists."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use this order:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Guided profile",
+            "Why it matters"
+          ],
+          "rows": [
+            [
+              "Local Platform foundation",
+              "Prepares login, profile, catalog, authorization, localization, and BackOffice data."
+            ],
+            [
+              "Local WCMS foundation",
+              "Prepares Staged content runtime, CMS baseline, and publication preparation."
+            ],
+            [
+              "Local Documentation foundation",
+              "Prepares WCMS prerequisites before documentation content packs are reviewed and published."
+            ],
+            [
+              "Local Commerce foundation",
+              "Prepares operational Commerce services."
+            ],
+            [
+              "Local Commerce Staged catalog foundation",
+              "Prepares Agora catalog, product, price, inventory, and search preview data."
+            ],
+            [
+              "Local Process and Workflow foundation",
+              "Prepares approval and workflow definitions."
+            ],
+            [
+              "Local Engagement foundation",
+              "Prepares communication and customer interaction data."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "For each profile:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "Read the label and description.",
+            "Review the step list and release counts.",
+            "Click **Validate plan**.",
+            "If validation passes and releases are not current, click **Validate and initialize**.",
+            "Refresh the workspace and confirm the profile becomes `CURRENT` or shows a clear operator-friendly blocker."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Use **Initialization data**, **Core data**, and **Sample data** only when an administrator needs advanced release-level control."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Initialize applications",
+          "anchor": "kickoffLocalSetupToLive-9-initialize-applications"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open **Publishing -> Setup and Accelerators**, or navigate directly:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/setup-accelerators"
+        },
+        {
+          "kind": "image",
+          "alt": "Setup and Accelerators",
+          "source": "../assets/images/local-setup/setup-accelerators.jpg",
+          "title": "Setup and Accelerators"
+        },
+        {
+          "kind": "paragraph",
+          "text": "This page prepares project accelerators such as Nexus and Agora. It should show friendly status instead of raw technical exceptions."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Status",
+            "Meaning"
+          ],
+          "rows": [
+            [
+              "Setup blocked",
+              "A required capability, content catalog, communication, or data foundation is missing. Fix the blocker first."
+            ],
+            [
+              "Ready to initialize",
+              "Required capabilities are active and the pack can be prepared."
+            ],
+            [
+              "Staged current",
+              "Staged data is installed at the expected version and checksum."
+            ],
+            [
+              "Pending approval",
+              "Staged data is ready but not yet Online."
+            ],
+            [
+              "Online ready",
+              "Online publication is available and public apps can render it."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Initialize Nexus and Agora only after their blockers are resolved. A complete application pack may prepare CMS pages, routes, navigation, media records, physical media artifacts, Commerce catalog data, search/discovery data, and operational data owned by that application."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Approve and publish",
+          "anchor": "kickoffLocalSetupToLive-10-approve-and-publish"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open the approval queue:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/process/tasks"
+        },
+        {
+          "kind": "image",
+          "alt": "Process approval queue",
+          "source": "../assets/images/local-setup/process-approval-queue.jpg",
+          "title": "Process approval queue"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Review the publication evidence before approving. Approval should explain what will be visible Online, which source release is involved, and what rollback means if activation fails."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open the Publishing dashboard:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/publishing"
+        },
+        {
+          "kind": "image",
+          "alt": "Publishing dashboard",
+          "source": "../assets/images/local-setup/publishing.jpg",
+          "title": "Publishing dashboard"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Publishing is the only path from Staged content to Online content. Do not write directly into Online schema or Online media storage. If publication is blocked, fix the Staged data, approval task, workflow configuration, media dependency, or Online runtime readiness that the page reports."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Publish documentation",
+          "anchor": "kickoffLocalSetupToLive-11-publish-documentation"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open Documentation:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/docs"
+        },
+        {
+          "kind": "image",
+          "alt": "Documentation dashboard",
+          "source": "../assets/images/local-setup/documentation-dashboard.jpg",
+          "title": "Documentation dashboard"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Framework, Axis, and Kickoff documentation are governed content packs. Import and approve them through Axis and Process. They should flow from Staged to Online like other publishable content."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open Swagger/OpenAPI:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3100/docs/swaggers"
+        },
+        {
+          "kind": "image",
+          "alt": "Swagger reference",
+          "source": "../assets/images/local-setup/swagger-reference.jpg",
+          "title": "Swagger reference"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Swagger is different from documentation content packs. It is generated from live runtime API contracts and should remain accessible when API sources are available, even if documentation publication is still waiting for approval."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verify Nexus",
+          "anchor": "kickoffLocalSetupToLive-12-verify-nexus"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open Nexus:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3200"
+        },
+        {
+          "kind": "image",
+          "alt": "Nexus Online",
+          "source": "../assets/images/local-setup/nexus-online.jpg",
+          "title": "Nexus Online"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Verify:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Area",
+            "Evidence"
+          ],
+          "rows": [
+            [
+              "Header and navigation",
+              "Links come from Online content and route contracts."
+            ],
+            [
+              "Hero and content sections",
+              "Text, images, and components render from published content."
+            ],
+            [
+              "Documentation links",
+              "Documentation routes open only when their packs are Online or intentionally available."
+            ],
+            [
+              "No maintenance fallback",
+              "The app should not show setup or unpublished-content fallback after Online publication succeeds."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verify Agora Apparel",
+          "anchor": "kickoffLocalSetupToLive-13-verify-agora-apparel"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Open Agora:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "http://localhost:3300"
+        },
+        {
+          "kind": "image",
+          "alt": "Agora Apparel Online",
+          "source": "../assets/images/local-setup/agora-apparel-online.jpg",
+          "title": "Agora Apparel Online"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Verify:"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Area",
+            "Evidence"
+          ],
+          "rows": [
+            [
+              "Storefront home",
+              "Banner, category, and merchandising content render from Online/Staged-approved sources."
+            ],
+            [
+              "Product catalog",
+              "Product, category, price, inventory, and image data are present."
+            ],
+            [
+              "Search and discovery",
+              "Product search and filters return meaningful results."
+            ],
+            [
+              "Media",
+              "Product and CMS images load through the media contract, not hardcoded frontend paths."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Troubleshooting checkpoints",
+          "anchor": "kickoffLocalSetupToLive-14-troubleshooting-checkpoints"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Symptom",
+            "Likely cause",
+            "Where to fix"
+          ],
+          "rows": [
+            [
+              "Axis login page does not open",
+              "Axis frontend is not running or `3100` is occupied.",
+              "Run `npm run topology:status`, then restart the owned topology."
+            ],
+            [
+              "Bundled recovery login appears every time",
+              "The managed Axis baseline is not Online, publication was not approved, or the CMS route did not load.",
+              "Use the first-launch initialization workspace, then check Process approval and WCMS Online readiness."
+            ],
+            [
+              "Initialize Axis stays approval pending",
+              "The baseline import finished, but the governed Process task has not been approved or published.",
+              "Open `/process/tasks`, review the task, approve it, then refresh Axis."
+            ],
+            [
+              "Login fails for local admin",
+              "Platform/Profile is unavailable or seed data is missing.",
+              "Check Platform server logs and guided Platform foundation data."
+            ],
+            [
+              "Dashboard shows few modules",
+              "Module Registry has not activated optional capabilities.",
+              "Open `/registry` and activate required capabilities."
+            ],
+            [
+              "Guided setup shows only one profile after config changes",
+              "Servers are still running old runtime configuration.",
+              "Restart the local topology and reload Axis."
+            ],
+            [
+              "Accelerator setup is blocked",
+              "A required capability, catalog, communication, or release dependency is missing.",
+              "Read the friendly blocker, then fix registry or release data."
+            ],
+            [
+              "Approval queue is empty",
+              "The pack is not initialized, workflow data is missing, or the task is already processed.",
+              "Check Setup and Accelerators, Process foundation, and Publishing dashboard."
+            ],
+            [
+              "Nexus or Agora shows fallback content",
+              "Staged data was not approved/published to Online.",
+              "Publish through Process and verify WCMS Online readiness."
+            ],
+            [
+              "Images are broken",
+              "Physical media assets did not import or publish with media records.",
+              "Check media import evidence, asset manifest, and Online media publication."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Screenshot maintenance rule",
+          "anchor": "kickoffLocalSetupToLive-15-screenshot-maintenance-rule"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Screenshots are part of the onboarding contract. When the first-launch recovery login, Initialize Axis workspace, managed login page, dashboard, registry, imports, setup, publishing, documentation, Nexus, or Agora journey changes materially, update the matching image under:"
+        },
+        {
+          "kind": "code",
+          "language": "text",
+          "text": "docs/assets/images/local-setup/"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Then regenerate and validate the Kickoff documentation content pack:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run docs:generate\nnpm run docs:check"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Keep screenshots focused on decision points. Do not add decorative images that hide the actual operator action, backend state, or public verification result."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Common mistakes",
+          "anchor": "kickoffLocalSetupToLive-16-common-mistakes"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Avoid these mistakes during a first local setup:"
+        },
+        {
+          "kind": "unordered-list",
+          "items": [
+            "Opening Nexus or Agora first and assuming a running frontend means Online data has been published.",
+            "Importing sample data before the required module capability is registered and active.",
+            "Treating Axis as the data authority. Axis renders backend-owned profiles, releases, approvals, and actions.",
+            "Restarting only the frontend after changing backend runtime profile configuration.",
+            "Approving publication before reviewing the Staged source, version, media, and target Online role.",
+            "Fixing broken images in the frontend instead of checking media import, physical asset staging, media records, and Online media publication.",
+            "Hand-editing generated documentation records instead of changing the authored markdown and regenerating the content pack."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Verification",
+          "anchor": "kickoffLocalSetupToLive-17-verification"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run these commands after changing this guide, screenshots, catalogue metadata, or setup behavior:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run docs:generate\nnpm run docs:check\nnpm run nodics:project:validate"
+        },
+        {
+          "kind": "paragraph",
+          "text": "When setup behavior changes, also run the guided initialization and local qualification contracts:"
+        },
+        {
+          "kind": "code",
+          "language": "bash",
+          "text": "npm run acceptance:guided-initialization\nnpm run test:qualification"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Browser verification should include the first-launch recovery login and Initialize Axis workspace on a fresh schema, then managed Axis login, dashboard, Module Registry, Imports and Exports, Setup and Accelerators, Process approval queue, Publishing, Documentation, Swagger, Nexus, and Agora. Capture new screenshots when any of those screens changes materially."
+        },
+        {
+          "kind": "heading",
+          "level": 2,
+          "text": "Final proof",
+          "anchor": "kickoffLocalSetupToLive-18-final-proof"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A new user can call the local setup complete only after this evidence exists:"
+        },
+        {
+          "kind": "ordered-list",
+          "items": [
+            "`npm run topology:status` shows the owned local runtimes are reachable.",
+            "On a fresh schema, bundled Axis recovery login opens and the Initialize Axis workspace can submit the baseline.",
+            "After baseline approval, managed Axis login works with the local admin.",
+            "Dashboard, Module Registry, Imports and Exports, Setup and Accelerators, Process tasks, Publishing, Documentation, and Swagger pages open.",
+            "Required modules are active.",
+            "Guided setup profiles are current or have a clear blocker.",
+            "Application packs are Staged current or Online ready.",
+            "Publication approvals have been processed.",
+            "Nexus and Agora render public Online experiences in the browser.",
+            "Media images load on public pages.",
+            "Any remaining blocker has a friendly operator message and a developer owner."
+          ]
+        }
+      ],
+      "searchText": "Local setup to live runbook Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification. # Local Setup to Live Runbook\n\nThis runbook is the new-user golden path for making the Nodics reference stack\nlive on a developer machine. It starts from a local checkout, opens Axis, signs\nin, follows the guided setup workspaces, publishes governed data to Online, and\nverifies Nexus and Agora in the browser.\n\nThe normal-path screenshots show the current local reference UI. The\nfirst-launch screenshots document the bundled recovery path from the current\nAxis component contract because this captured environment already had Axis\nbaseline data. Recapture those first-launch images from a clean schema during\nthe next fresh acceptance run.\n\nFor beginners, the safe mental model is: start the stack, sign in to Axis,\nfollow the highlighted backend-owned setup cards, approve publication, then\nopen the public applications. Business users should read the status and next\naction on each screen. Developers should use the file paths and commands when a\nstatus points to a configuration, release, or module problem. Operators should\nkeep the command output, screenshots, and browser checks as setup evidence.\n\n## What live means\n\nIn Nodics, live does not mean that a frontend server is running. A local setup\nis live when these conditions are true:\n\n| Area | Live condition |\n| --- | --- |\n| Backend topology | Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, Axis, Nexus, and Agora are reachable on their local ports. |\n| Axis control plane | The admin can sign in and the dashboard shows runtime, module, release, publishing, and application readiness. |\n| Module foundation | Required modules are registered and active through backend-owned registry contracts. |\n| Release data | Init, core, and sample releases are current or intentionally skipped by policy. |\n| Application packs | Nexus and Agora accelerator packs have prepared Staged content and any required Commerce data. |\n| Publication | Publishable content has moved from Staged to Online through approval and audit evidence. |\n| Public verification | Nexus and Agora render Online content, navigation, media, and business data from backend contracts. |\n\n## Repository layout\n\nUse the reference layout unless your project already documents another one:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.kickoff/\n  nodics.exp/\n    nodics.axis/\n    nodics.nexus/\n    nodics.agora.apparel/\n```\n\n`nodics.ai` is the framework checkout. `nodics.kickoff` is the reference\ncustomer project and owns the local runtime composition. `nodics.exp` groups\nfrontend applications. Axis is the employee BackOffice, Nexus is the corporate\nsite, and Agora is the commerce storefront.\n\n## Prepare the project\n\nRun the first setup from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm install\nnpm run nodics:project:validate\n```\n\nReview `nodics.kickoff/.env` and confirm the framework root:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nRun frontend setup from each frontend repository that will be opened:\n\n```bash\ncd ../nodics.exp/nodics.axis\ncp .env.example .env\nnpm install\n```\n\nRepeat dependency installation for Nexus and Agora when their local\nrepositories have not been installed yet.\n\n## Start the local stack\n\nFrom `nodics.kickoff`, start the full local stack:\n\n```bash\nnpm run topology:start:all\n```\n\nThis starts backend runtimes and frontends in dependency-aware order. Use this\ncommand when a new user wants to see the whole product work together.\n\nUse this command from another terminal to inspect status:\n\n```bash\nnpm run topology:status\n```\n\nThe expected local URLs are:\n\n| Surface | URL | Purpose |\n| --- | --- | --- |\n| Axis | `http://localhost:3100` | Employee setup and operations workspace. |\n| Nexus | `http://localhost:3200` | Public corporate site using Online content. |\n| Agora Apparel | `http://localhost:3300` | Public storefront using Online content and Commerce data. |\n| Platform | `http://localhost:4300` | Profile, BackOffice, registry, and bootstrap authority. |\n| WCMS Online | `http://localhost:4314` | Online public content runtime. |\n| Process | `http://localhost:4330` | Workflow, approval, and automation runtime. |\n| WCMS Staged | `http://localhost:4312` | Staged content authoring and import runtime. |\n| Engagement | `http://localhost:4340` | Contact, review, feedback, and communication runtime. |\n| Commerce | `http://localhost:4350` | Operational Commerce runtime. |\n| Commerce Staged | `http://localhost:4352` | Staged Commerce catalog and storefront preparation runtime. |\n\nStop only the topology owned by this checkout:\n\n```bash\nnpm run topology:stop\n```\n\n## First launch before Axis data exists\n\nOn a fresh schema, Axis may not show the managed CMS login immediately. This is\nexpected. Axis first falls back to a small bundled recovery login whose only\njob is to authenticate the bootstrap operator and move the managed Axis\nbaseline through the governed release flow.\n\n![Axis first-launch recovery login](../assets/images/local-setup/axis-first-launch-recovery-login.jpg \"Axis first-launch recovery login\")\n\nUse the local reference admin account:\n\n```text\nUsername: admin\nPassword: adminPassword\n```\n\nAfter login, if the Axis baseline is not Online yet, Axis opens the\ninitialization workspace instead of the normal dashboard.\n\n![Axis first-launch initialization](../assets/images/local-setup/axis-first-launch-initialize.jpg \"Axis first-launch initialization\")\n\nFollow this first-run path:\n\n1. Confirm the release chip points to the Axis baseline release.\n2. Click **Initialize and submit** to import the baseline into Staged and submit\n   the governed publication request.\n3. Click **Refresh status** until the workspace shows the approval-ready state.\n4. Open the publication details or Process approval task and review the release\n   checksum, entity counts, validation status, target site, catalog, workflow\n   reference, impact, and recovery guidance.\n5. Approve the publication so the managed Axis CMS baseline becomes Online.\n6. Refresh or reopen Axis and verify that the bundled recovery workspace has\n   retired.\n\nDo not skip this by writing Axis data directly to Online. The first launch\nstill follows the same Staged, Process approval, Online publication, and audit\nprinciples as other governed content.\n\n## Open Axis\n\nOpen Axis:\n\n```text\nhttp://localhost:3100\n```\n\nAfter the first-launch baseline is Online, or when the schema already has Axis\ndata, the first screen should be the managed employee login page.\n\n![Axis login](../assets/images/local-setup/axis-entry.jpg \"Axis login\")\n\nUse the local reference admin account:\n\n```text\nUsername: admin\nPassword: adminPassword\n```\n\nAfter login, Axis should land on the dashboard.\n\n![Axis dashboard](../assets/images/local-setup/axis-dashboard.jpg \"Axis dashboard\")\n\nUse the dashboard as the operator map:\n\n| Dashboard area | What to check |\n| --- | --- |\n| Next actions | Shows whether the next step is registry, data import, publication, or application verification. |\n| Application overview | Shows active modules, data readiness, Online-ready sources, routes, workbenches, and tenant. |\n| Release and publication cards | Show whether data is current, pending, blocked, or waiting for approval. |\n| Application cards | Show whether Nexus and Agora are Online-ready or still blocked. |\n\n## Register and activate modules\n\nOpen **System and Integrations -> Module Registry**, or navigate directly:\n\n```text\nhttp://localhost:3100/registry\n```\n\n![Module Registry](../assets/images/local-setup/module-registry.jpg \"Module Registry\")\n\nThe registry is not only a visual list. It is the backend-owned activation\nsurface for functional capabilities. A capability should be registered and\nactive before importing an application pack that depends on it.\n\nCheck these states:\n\n| Capability group | Expected local result |\n| --- | --- |\n| Core, Platform, WCMS | Registered and active. These are the foundation. |\n| Process and Automation | Active when workflow, approval, and cronjob behavior is needed. |\n| Commerce and Discovery | Active before Agora catalog and product search setup. |\n| Engagement | Active before contact, review, feedback, or communication journeys are verified. |\n\nIf an accelerator says setup is blocked, return to Module Registry and activate\nthe missing capability instead of forcing import data manually.\n\n## Install release data\n\nOpen **System and Integrations -> Import and Export Workspace**, or navigate\ndirectly:\n\n```text\nhttp://localhost:3100/operations/imports-exports\n```\n\n![Imports and exports](../assets/images/local-setup/imports-and-exports.jpg \"Imports and exports\")\n\nStart with **Guided setup**. Guided profiles are declared by backend runtimes\nunder `data.dataReleases.initializationProfiles`; Axis discovers and renders\nthem. Axis must not invent data authority or silently combine release lists.\n\nUse this order:\n\n| Guided profile | Why it matters |\n| --- | --- |\n| Local Platform foundation | Prepares login, profile, catalog, authorization, localization, and BackOffice data. |\n| Local WCMS foundation | Prepares Staged content runtime, CMS baseline, and publication preparation. |\n| Local Documentation foundation | Prepares WCMS prerequisites before documentation content packs are reviewed and published. |\n| Local Commerce foundation | Prepares operational Commerce services. |\n| Local Commerce Staged catalog foundation | Prepares Agora catalog, product, price, inventory, and search preview data. |\n| Local Process and Workflow foundation | Prepares approval and workflow definitions. |\n| Local Engagement foundation | Prepares communication and customer interaction data. |\n\nFor each profile:\n\n1. Read the label and description.\n2. Review the step list and release counts.\n3. Click **Validate plan**.\n4. If validation passes and releases are not current, click **Validate and initialize**.\n5. Refresh the workspace and confirm the profile becomes `CURRENT` or shows a\n   clear operator-friendly blocker.\n\nUse **Initialization data**, **Core data**, and **Sample data** only when an\nadministrator needs advanced release-level control.\n\n## Initialize applications\n\nOpen **Publishing -> Setup and Accelerators**, or navigate directly:\n\n```text\nhttp://localhost:3100/setup-accelerators\n```\n\n![Setup and Accelerators](../assets/images/local-setup/setup-accelerators.jpg \"Setup and Accelerators\")\n\nThis page prepares project accelerators such as Nexus and Agora. It should\nshow friendly status instead of raw technical exceptions.\n\n| Status | Meaning |\n| --- | --- |\n| Setup blocked | A required capability, content catalog, communication, or data foundation is missing. Fix the blocker first. |\n| Ready to initialize | Required capabilities are active and the pack can be prepared. |\n| Staged current | Staged data is installed at the expected version and checksum. |\n| Pending approval | Staged data is ready but not yet Online. |\n| Online ready | Online publication is available and public apps can render it. |\n\nInitialize Nexus and Agora only after their blockers are resolved. A complete\napplication pack may prepare CMS pages, routes, navigation, media records,\nphysical media artifacts, Commerce catalog data, search/discovery data, and\noperational data owned by that application.\n\n## Approve and publish\n\nOpen the approval queue:\n\n```text\nhttp://localhost:3100/process/tasks\n```\n\n![Process approval queue](../assets/images/local-setup/process-approval-queue.jpg \"Process approval queue\")\n\nReview the publication evidence before approving. Approval should explain what\nwill be visible Online, which source release is involved, and what rollback\nmeans if activation fails.\n\nOpen the Publishing dashboard:\n\n```text\nhttp://localhost:3100/publishing\n```\n\n![Publishing dashboard](../assets/images/local-setup/publishing.jpg \"Publishing dashboard\")\n\nPublishing is the only path from Staged content to Online content. Do not\nwrite directly into Online schema or Online media storage. If publication is\nblocked, fix the Staged data, approval task, workflow configuration, media\ndependency, or Online runtime readiness that the page reports.\n\n## Publish documentation\n\nOpen Documentation:\n\n```text\nhttp://localhost:3100/docs\n```\n\n![Documentation dashboard](../assets/images/local-setup/documentation-dashboard.jpg \"Documentation dashboard\")\n\nFramework, Axis, and Kickoff documentation are governed content packs. Import\nand approve them through Axis and Process. They should flow from Staged to\nOnline like other publishable content.\n\nOpen Swagger/OpenAPI:\n\n```text\nhttp://localhost:3100/docs/swaggers\n```\n\n![Swagger reference](../assets/images/local-setup/swagger-reference.jpg \"Swagger reference\")\n\nSwagger is different from documentation content packs. It is generated from\nlive runtime API contracts and should remain accessible when API sources are\navailable, even if documentation publication is still waiting for approval.\n\n## Verify Nexus\n\nOpen Nexus:\n\n```text\nhttp://localhost:3200\n```\n\n![Nexus Online](../assets/images/local-setup/nexus-online.jpg \"Nexus Online\")\n\nVerify:\n\n| Area | Evidence |\n| --- | --- |\n| Header and navigation | Links come from Online content and route contracts. |\n| Hero and content sections | Text, images, and components render from published content. |\n| Documentation links | Documentation routes open only when their packs are Online or intentionally available. |\n| No maintenance fallback | The app should not show setup or unpublished-content fallback after Online publication succeeds. |\n\n## Verify Agora Apparel\n\nOpen Agora:\n\n```text\nhttp://localhost:3300\n```\n\n![Agora Apparel Online](../assets/images/local-setup/agora-apparel-online.jpg \"Agora Apparel Online\")\n\nVerify:\n\n| Area | Evidence |\n| --- | --- |\n| Storefront home | Banner, category, and merchandising content render from Online/Staged-approved sources. |\n| Product catalog | Product, category, price, inventory, and image data are present. |\n| Search and discovery | Product search and filters return meaningful results. |\n| Media | Product and CMS images load through the media contract, not hardcoded frontend paths. |\n\n## Troubleshooting checkpoints\n\n| Symptom | Likely cause | Where to fix |\n| --- | --- | --- |\n| Axis login page does not open | Axis frontend is not running or `3100` is occupied. | Run `npm run topology:status`, then restart the owned topology. |\n| Bundled recovery login appears every time | The managed Axis baseline is not Online, publication was not approved, or the CMS route did not load. | Use the first-launch initialization workspace, then check Process approval and WCMS Online readiness. |\n| Initialize Axis stays approval pending | The baseline import finished, but the governed Process task has not been approved or published. | Open `/process/tasks`, review the task, approve it, then refresh Axis. |\n| Login fails for local admin | Platform/Profile is unavailable or seed data is missing. | Check Platform server logs and guided Platform foundation data. |\n| Dashboard shows few modules | Module Registry has not activated optional capabilities. | Open `/registry` and activate required capabilities. |\n| Guided setup shows only one profile after config changes | Servers are still running old runtime configuration. | Restart the local topology and reload Axis. |\n| Accelerator setup is blocked | A required capability, catalog, communication, or release dependency is missing. | Read the friendly blocker, then fix registry or release data. |\n| Approval queue is empty | The pack is not initialized, workflow data is missing, or the task is already processed. | Check Setup and Accelerators, Process foundation, and Publishing dashboard. |\n| Nexus or Agora shows fallback content | Staged data was not approved/published to Online. | Publish through Process and verify WCMS Online readiness. |\n| Images are broken | Physical media assets did not import or publish with media records. | Check media import evidence, asset manifest, and Online media publication. |\n\n## Screenshot maintenance rule\n\nScreenshots are part of the onboarding contract. When the first-launch\nrecovery login, Initialize Axis workspace, managed login page, dashboard,\nregistry, imports, setup, publishing, documentation, Nexus, or Agora journey\nchanges materially, update the matching image under:\n\n```text\ndocs/assets/images/local-setup/\n```\n\nThen regenerate and validate the Kickoff documentation content pack:\n\n```bash\nnpm run docs:generate\nnpm run docs:check\n```\n\nKeep screenshots focused on decision points. Do not add decorative images that\nhide the actual operator action, backend state, or public verification result.\n\n## Common mistakes\n\nAvoid these mistakes during a first local setup:\n\n- Opening Nexus or Agora first and assuming a running frontend means Online\n  data has been published.\n- Importing sample data before the required module capability is registered and\n  active.\n- Treating Axis as the data authority. Axis renders backend-owned profiles,\n  releases, approvals, and actions.\n- Restarting only the frontend after changing backend runtime profile\n  configuration.\n- Approving publication before reviewing the Staged source, version, media, and\n  target Online role.\n- Fixing broken images in the frontend instead of checking media import,\n  physical asset staging, media records, and Online media publication.\n- Hand-editing generated documentation records instead of changing the authored\n  markdown and regenerating the content pack.\n\n## Verification\n\nRun these commands after changing this guide, screenshots, catalogue metadata,\nor setup behavior:\n\n```bash\nnpm run docs:generate\nnpm run docs:check\nnpm run nodics:project:validate\n```\n\nWhen setup behavior changes, also run the guided initialization and local\nqualification contracts:\n\n```bash\nnpm run acceptance:guided-initialization\nnpm run test:qualification\n```\n\nBrowser verification should include the first-launch recovery login and\nInitialize Axis workspace on a fresh schema, then managed Axis login,\ndashboard, Module Registry, Imports and Exports, Setup and Accelerators,\nProcess approval queue, Publishing, Documentation, Swagger, Nexus, and Agora.\nCapture new screenshots when any of those screens changes materially.\n\n## Final proof\n\nA new user can call the local setup complete only after this evidence exists:\n\n1. `npm run topology:status` shows the owned local runtimes are reachable.\n2. On a fresh schema, bundled Axis recovery login opens and the Initialize Axis\n   workspace can submit the baseline.\n3. After baseline approval, managed Axis login works with the local admin.\n4. Dashboard, Module Registry, Imports and Exports, Setup and Accelerators,\n   Process tasks, Publishing, Documentation, and Swagger pages open.\n5. Required modules are active.\n6. Guided setup profiles are current or have a clear blocker.\n7. Application packs are Staged current or Online ready.\n8. Publication approvals have been processed.\n9. Nexus and Agora render public Online experiences in the browser.\n10. Media images load on public pages.\n11. Any remaining blocker has a friendly operator message and a developer owner.\n",
+      "previous": {
+        "title": "Local runtime topology",
+        "route": "/docs/nodics-kickoff/kickoff-local-runtime"
+      },
+      "next": {
+        "title": "Local acceptance checklist",
+        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+      },
+      "source": {
+        "repository": "nodics.kickoff",
+        "functionalModule": "nodics.kickoff",
+        "technicalModule": "kickoffLocal",
+        "path": "docs/pages/local-setup-to-live-runbook.md",
+        "wordCount": 2538,
+        "checksum": "e1e951d3ab0474abe8fefa812ea8ba434990178107253871267d6ce39f1e8dd9"
+      }
+    },
+    "active": true
+  },
+  "record4": {
     "code": "kickoffDocsComponentkickoffLocalAcceptance",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -2776,8 +3942,8 @@ module.exports = {
       ],
       "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. # Local Acceptance Checklist\n\nThis checklist is the beginner-friendly path for proving a fresh Nodics local\ninstallation from zero database state. Use it when you have cloned the\nframework, the Kickoff customer project, and the frontend workspace, configured\nKickoff, and want to confirm the backend framework, customer project, Axis,\nNexus, and Agora are working together.\n\nThe checklist is intentionally explicit. A new developer should be able to\nfollow it without already knowing Nodics module loading, BackOffice bootstrap,\nWCMS content packs, or functional-module registration.\n\nFrom a business perspective, this checklist proves that a new team can start\nthe reference project, import governed data, open Axis, inspect documentation,\nand see public/customer-facing surfaces without first designing a production\ntopology. It gives decision makers a visible adoption proof and gives\ndevelopers/operators the command evidence needed to repeat or diagnose the\nsame setup.\n\n## What this checklist proves\n\nThe acceptance run proves six things:\n\n| Area | What must be true |\n| --- | --- |\n| Framework checkout | Kickoff can resolve Core, Platform, WCMS, and Process from the configured framework root. |\n| Runtime topology | Platform, WCMS, and the composed Process and Automation runtime can start from the Kickoff local environment. |\n| Bootstrap data | Mandatory initialization data can be imported from module-owned releases. |\n| Axis access | Axis can connect to Platform, authenticate the local admin, and discover BackOffice bootstrap data. |\n| Module lifecycle | Core, Platform, and WCMS are mandatory/registered; Process is observable as an optional runtime module with workflow and cronjob technical modules. |\n| Application readiness | Nexus and Agora setup is blocked until the required business capabilities are registered, active, imported, approved, and visible through Online delivery. |\n\nIf any one of these fails, do not continue adding new functional modules. Fix\nthe contract break first, otherwise every later module will inherit a shaky\nlocal foundation.\n\n## Repository layout used by the reference run\n\nThe local reference setup normally looks like this:\n\n```text\nnodicsRoot/\n  nodics.ai/\n  nodics.kickoff/\n  nodics.exp/\n    nodics.axis/\n    nodics.nexus/\n    nodics.agora.apparel/\n```\n\nThis layout is only a convenience. Customer projects may live anywhere. The\nimportant contract is that `nodics.kickoff/.env` tells Kickoff where the\nframework checkout lives.\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=../nodics.ai\n```\n\nUse an absolute path if your repositories are not parallel:\n\n```dotenv\nNODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai\n```\n\n## Mandatory prerequisites\n\nBefore running the checklist, confirm these local services and tools are\navailable:\n\n1. Node.js 24 and npm.\n2. MongoDB running locally.\n3. The required repositories are cloned:\n   - `nodics.ai`\n   - `nodics.kickoff`\n   - `nodics.exp` with `nodics.axis`, `nodics.nexus`, and Agora applications\n4. `nodics.kickoff/.env` exists and points to the framework root.\n5. `nodics.exp/nodics.axis/.env` points to the local Platform server.\n\nRun this from `nodics.kickoff`:\n\n```bash\ncp .env.example .env\nnpm install\n```\n\nRun this from `nodics.exp/nodics.axis`:\n\n```bash\ncp .env.example .env\nnpm install\n```\n\n## Fresh schema reset\n\nNo contributor, AI agent, test, migration, or acceptance script may read or\nmutate Nodics databases directly. A fresh-schema run must use the governed\nPlatform Local reset API/service with authorization, audit, explicit runtime\ntargets, and recovery evidence. Never substitute a database shell command.\n\nBefore running `acceptance:local:fresh`, stop any existing local topology owned\nby this checkout. The command refuses to reset while Platform, WCMS, Process,\nEngagement, Commerce, Axis, Nexus, or Agora are still listening from another\nprocess.\n\n## Fresh-schema user journey\n\nUse this order when the database is empty and the user wants Axis, Nexus,\nAgora, and documentation to work from a clean state.\n\n| Order | User action | Required evidence before moving on |\n| ---: | --- | --- |\n| 1 | Start the local topology from `nodics.kickoff`. | Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, Axis, Nexus, and Agora are reachable on their configured local ports. |\n| 2 | Open Axis and complete the empty-database Axis setup. | Axis baseline, BackOffice navigation, Profile admin access, and CMS baseline are initialized through governed APIs. |\n| 3 | Open Module Registry and register/activate required capabilities. | Core, Platform, and WCMS are mandatory and active. Agora setup requires Commerce and Discovery. Nexus setup requires its public content capability and any enabled engagement capability. |\n| 4 | Open Setup and Accelerators. | Rows clearly show whether each application is ready, blocked by missing capabilities, waiting for approval, published Online, or already current. |\n| 5 | Initialize Nexus or Agora packs only after required capabilities are ready. | The import includes CMS pages, routes, navigation, media records, physical media artifacts, commerce catalog data, search/discovery data, and operational data owned by the selected pack. |\n| 6 | Publish to Online through the same screen or approval queue. | Staged changes are reviewed, approved or rejected by an authorized user, then promoted to Online with audit evidence. |\n| 7 | Verify public applications in the browser. | Nexus and Agora render Online content. If Online content is absent, they show a customer-friendly maintenance page, not hardcoded demo content. |\n\nDocumentation has a parallel lane. Framework, Axis, and Kickoff documentation\npacks can be imported and approved while application setup is in progress.\nDocumentation publication controls documentation pages only. It must not hide\nSwagger/OpenAPI, because Swagger/OpenAPI is generated from active backend\ncontracts rather than CMS documentation content.\n\n## Automated acceptance path\n\nMost maintainers should use the automated path first. It proves the same\ncontracts as the manual checklist and reduces human mistakes during repeated\nbootstrap tests.\n\nUse the non-destructive API-only form:\n\n```bash\nnpm run acceptance:local\n```\n\nThis checks the running or newly started split WCMS topology and imports\nmissing releases only through Nodics APIs. `acceptance:local:fresh` first\nperforms the governed Platform Local reset and then proves the clean bootstrap\npath through the same APIs and browser-facing contracts.\n\n### What the automated command proves\n\n```mermaid\nflowchart TD\n  Start[\"Developer runs npm run acceptance:local\"] --> Platform[\"Start or reuse Platform on 4300\"]\n  Platform --> Staged[\"Start or reuse WCMS Staged on 4312\"]\n  Staged --> Online[\"Start or reuse WCMS Online on 4314\"]\n  Online --> Process[\"Start or reuse Process and Automation on 4330\"]\n  Process --> Axis[\"Start or reuse Axis on 3100\"]\n  Axis --> Auth[\"Authenticate default/admin\"]\n  Auth --> Baseline[\"Verify Axis baseline\"]\n  Baseline --> Registry[\"Verify mandatory and required functional capabilities\"]\n  Registry --> Apps[\"Initialize application packs only when capability gates pass\"]\n  Registry --> Docs[\"Import documentation packs through WCMS\"]\n  Docs --> Swagger[\"Verify Swagger/OpenAPI is independent from docs publication\"]\n  Apps --> Publish[\"Verify Staged-to-Online publication path\"]\n  Publish --> Routes[\"Verify Axis, Nexus, and Agora browser routes\"]\n  Routes --> Designer[\"Verify Content Designer catalog-first route\"]\n  Designer --> Lifecycle[\"Run Cron register, activate, deactivate, deregister\"]\n  Lifecycle --> Pass[\"Acceptance pass\"]\n```\n\nThe command stops the servers it started after the acceptance gates complete.\nTo keep the API-qualified stack running, use:\n\n```bash\nnpm run acceptance:local -- --leave-started\n```\n\nThe command does not inspect or mutate a database directly, kill unrelated\nprocesses, or create another importer. It uses the existing Profile login, BackOffice registry,\nWCMS content-pack API, and Axis smoke test. This matters because acceptance\nmust prove the same path a real developer or operator uses.\n\n## Start and stop the complete Local topology\n\nThe normal direct-Node workflow is supervised from one terminal:\n\n```bash\nnpm run topology:start\n```\n\nThis starts Platform, WCMS Online, Process, WCMS Staged, Engagement, and\nCommerce in dependency-aware order. It waits for each low-disclosure readiness\nendpoint before starting the next runtime and writes generated logs and PID\nownership beneath `envs/kickoffLocal/generated/local-topology`.\n\nTo include Axis, Nexus, and Agora frontend applications from the local\n`nodics.exp` workspace:\n\n```bash\nnpm run topology:start:all\n```\n\nFrom another terminal, inspect readiness and ownership:\n\n```bash\nnpm run topology:status\n```\n\nStop only the topology owned by this checkout:\n\n```bash\nnpm run topology:stop\n```\n\nThe stop command validates the recorded supervisor PID and command before\nsending a signal. A busy port without matching ownership is reported as\n`EXTERNAL_OR_UNKNOWN` and is never killed. Ctrl+C in the supervisor terminal\nperforms the same bounded reverse-order graceful shutdown.\n\n## Start individual backend servers\n\nFor focused debugging, open separate terminals from `nodics.kickoff`.\n\nTerminal 1:\n\n```bash\nnpm run start:platform\n```\n\nTerminal 2:\n\n```bash\nnpm run start:wcms:staged\n```\n\nTerminal 3:\n\n```bash\nnpm run start:wcms:online\n```\n\nTerminal 4:\n\n```bash\nnpm run start:process\n```\n\nExpected local ports:\n\n| Runtime | Port | Why it matters |\n| --- | ---: | --- |\n| Platform | 4300 | Profile login, BackOffice bootstrap, module registry, OpenAPI discovery. |\n| WCMS Staged | 4312 | Versioned CMS authoring, imports, validation, and publication source. |\n| WCMS Online | 4314 | Published CMS delivery and authenticated publication target only. |\n| Process and Automation | 4330 | Process/workflow APIs plus optional Cron observation and registry lifecycle testing. |\n\nIf a port is already in use, confirm whether it is an earlier Nodics server\nfrom the same checkout. Do not kill unrelated processes by guessing.\n\n## Start Axis\n\nOpen another terminal from `nodics.exp/nodics.axis`:\n\n```bash\nnpm run dev\n```\n\nAxis should be available at:\n\n```text\nhttp://localhost:3100\n```\n\n## Login\n\nOpen Axis and use the local reference credentials:\n\n```text\nEnterprise: default\nLogin ID: admin\nPassword: adminPassword\n```\n\nSuccessful login proves:\n\n1. Axis can load public bootstrap from Platform.\n2. Profile can authenticate the local admin.\n3. Axis can retrieve authenticated BackOffice bootstrap data.\n4. Axis receives authorized navigation and runtime module projections.\n\n## Import initialization data\n\nIn Axis, open the import/initialization workspace and install the available\ninitialization releases.\n\nYou should see releases owned by active modules only. The system must not ask\nAxis to invent import data. Axis presents the operation; the owning backend\nmodule and nImport execute the import.\n\nExpected outcome:\n\n- mandatory Profile/bootstrap identity data is available;\n- core framework data required by Platform and WCMS is present;\n- documentation content packs can be imported or updated;\n- repeated import attempts with unchanged immutable releases do not corrupt\n  existing data.\n\n## Verify module registry\n\nOpen:\n\n```text\nSystem and Integrations → Module Registry\n```\n\nExpected state:\n\n| Functional module | Expected state | Why |\n| --- | --- | --- |\n| `nodics.foundation` | Registered and active | Required by every runtime. |\n| `nodics.platform` | Registered and active | Required for Profile, BackOffice, and Axis bootstrap. |\n| `nodics.wcms` | Registered and active | Required for CMS, documentation, and media/content management. |\n| `nodics.process` | Optional, observed when Process and Automation is running | Proves process/workflow capability can join the lifecycle. |\n| Cron and scheduled automation | Technical capability under the Process runtime | Proves scheduled jobs can be discovered without creating a second scheduler authority. |\n| Commerce | Required before Agora application packs can become usable | Provides catalog, product, cart, order, price, stock, and checkout capability for storefronts. |\n| Discovery | Required before Agora application packs can become usable | Provides search/discovery readiness for product and content lookup. |\n| Engagement | Required before Nexus engagement features can become usable | Provides public engagement APIs for corporate-site interaction features. |\n\nCore, Platform, and WCMS are mandatory for this local Axis-backed acceptance\ntopology. They should not appear as removable optional modules. Cron may be\nregistered, activated, deactivated, and deregistered as an optional module.\nAgora and Nexus setup must remain blocked until their required functional\ncapabilities are registered and active. A visible content pack is not enough.\n\n## Verify documentation\n\nOpen:\n\n```text\nDocumentation\n```\n\nExpected documentation products:\n\n- Framework\n- Swaggers\n- Nodics Axis\n- Nodics Kickoff\n\nThe products are intentionally separated by ownership:\n\n| Documentation product | Owning repository/module |\n| --- | --- |\n| Framework | `nodics.ai/nodics.docs` |\n| Nodics Axis | `nodics.ai/nodics.platform/modules/axis` |\n| Nodics Kickoff | `nodics.kickoff` |\n| Swagger/OpenAPI | Platform BackOffice/OpenAPI contracts |\n\nAxis is only the renderer. It must not own backend-importable documentation\ncontent. Documentation packs can be imported, approved, and published in\nparallel with application setup. Swagger/OpenAPI should remain visible whenever\nthe authenticated runtime exposes generated OpenAPI contracts, even if CMS\ndocumentation packs are not yet published.\n\n## Verify application setup and Online delivery\n\nOpen:\n\n```text\nSetup and Accelerators\n```\n\nExpected behavior:\n\n- Axis shows each application as a compact row with clear status, required\n  capabilities, next action, refresh, and expandable detail.\n- A row is **blocked** when a required capability is not registered, inactive,\n  unavailable, or offline. The next action should point the user to Module\n  Registry instead of allowing a misleading import.\n- Agora Apparel, Agora Electronics, and Agora Telco require Commerce and\n  Discovery before their application packs can become usable.\n- Nexus requires the public content capability and any enabled engagement\n  capability before its public site pack can become usable.\n- Initializing an application pack must prepare the complete site, not only a\n  small metadata record: CMS content, routes, navigation, media records,\n  physical media artifacts, commerce catalog/search data where applicable, and\n  operational data owned by the pack.\n- Public frontends consume Online only. Before approval and publication they\n  show the maintenance page. They must not render hardcoded sample data from\n  the frontend repository.\n\n## Verify content and media\n\nOpen these Axis routes:\n\n```text\n/content\n/content/designer\n/media\n/media/items\n/media/folders\n```\n\nExpected behavior:\n\n- `/content` shows the content dashboard and WCMS-owned summary sections.\n- `/content/designer` shows the governed Page Designer foundation. It should\n  explain the catalog-first sequence and support dynamic template slots rather\n  than assuming a fixed header/main/footer page shape.\n- `/media` shows media management, media records, and media-by-source sections.\n- `/media/items` and `/media/folders` open focused media workspaces instead of\n  falling into CMS recovery.\n- Any unavailable backend schema is reported as a backend/schema discovery\n  issue, not as a frontend-owned data model.\n\n### Verify Page Designer authoring model\n\nOpen:\n\n```text\nContent and Experience → Web Content Management System → Page Designer\n```\n\nThe Designer is not expected to look exactly like the final website in a\nbrowser. It is the authoring and structure view. A beginner should understand\nthis chain:\n\n```mermaid\nflowchart TD\n  Catalog[\"Content Catalog\"]\n  Site[\"Site\"]\n  Template[\"Page Template\"]\n  Page[\"Page\"]\n  Slots[\"Template Slots: any number\"]\n  Sections[\"Page Sections\"]\n  Components[\"Component Instances\"]\n  Media[\"Governed Media\"]\n  Route[\"Page Route\"]\n  Nav[\"Navigation Node\"]\n\n  Catalog --> Site\n  Catalog --> Template\n  Site --> Page\n  Template --> Page\n  Page --> Slots\n  Slots --> Sections\n  Sections --> Components\n  Components --> Media\n  Page --> Route\n  Route --> Nav\n```\n\nThis acceptance step proves only that the reference local stack can consume the\nWCMS-owned authoring model. The contract itself belongs to WCMS. If the\nDesigner metadata is wrong, fix the owning WCMS contract and tests first; do\nnot move catalog, site, template, slot, page, component, or media authority\ninto the reference project or into the Axis frontend.\n\nExpected Designer evidence:\n\n| Area | Expected behavior |\n| --- | --- |\n| Catalog-first sequence | The UI starts from content catalog, then site, template, page, slots, sections, components, media, route, and navigation. |\n| Dynamic slots | Slot names come from template data; the UI must not assume only three slots. |\n| Backend authority | Save/validate actions call WCMS/CMS authoring APIs, not browser-local persistence. |\n| Media governance | Media association points to nMedia records or sets; it never asks for a filesystem path. |\n| Publish readiness | Designer can validate readiness, but publishing remains CMS/nPublish authority. |\n\nIf Designer loads but cannot validate or save, inspect the WCMS server first:\n`cmsAuthoring` API exposure must be enabled, the user must have\n`cms.backoffice.manage`, the selected Site must belong to the selected Content\nCatalog, and the selected Template must expose the slots being edited.\n\n## Verify Cron\n\nOpen:\n\n```text\n/cron\n```\n\nExpected behavior:\n\n- If Process and Automation is running, Axis can observe the Process\n  functional module and the CronJob technical capability from the same runtime.\n- If Cron is not registered, it appears as available to register.\n- Register moves it into the registered list without requiring a page refresh.\n- Activate changes lifecycle state without freezing buttons.\n- Deactivate and deregister return it to the correct next state.\n\nThe automated acceptance runner performs the full optional Cron lifecycle:\n\n```text\navailable → register → registered/inactive → activate → registered/active\nregistered/active → deactivate → registered/inactive → deregister → available\n```\n\nCron is optional for the project, so the final accepted state after the\nautomated lifecycle test is **available** rather than permanently registered.\nThat proves both the runtime observation path and the governed removal path.\n\nIf an action succeeds but the UI does not update, inspect the module registry\nAPI response immediately after the action. The frontend should refresh local\nquery state after each lifecycle operation.\n\n## Command-line smoke test\n\nAfter the servers and Axis are running, use the live smoke script from\n`nodics.exp/nodics.axis`:\n\n```bash\nAXIS_EXPECT_MODULES=1 npm run smoke:live\nAXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 npm run smoke:live\nAXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live\n```\n\nExpected result:\n\n```text\nPASS Axis route /\nPASS Axis route /content\nPASS Axis route /content/designer\nPASS Axis route /media\nPASS Axis route /media/items\nPASS Axis route /media/folders\nPASS Axis route /cron\nPASS Axis route /system-integrations\nPASS Axis route /registry\nPASS Axis route /operations/imports-exports\nPASS Axis route /docs/swaggers\nPASS BackOffice public bootstrap\nPASS authenticated login for admin\nPASS module registry reachable\nPASS required modules registered: nodics.foundation, nodics.platform, nodics.wcms\nPASS optional runtime modules observed: nodics.process\nPASS documentation pack nodicsDocumentation is CURRENT\nPASS documentation pack axisDocumentation is CURRENT\nPASS documentation pack kickoffDocumentation is CURRENT\nPASS cron lifecycle register\nPASS cron lifecycle activate\nPASS cron lifecycle deactivate\nPASS cron lifecycle deregister returns module to available\n```\n\n## Troubleshooting quick map\n\n| Symptom | Most likely boundary |\n| --- | --- |\n| Axis recovery says BackOffice registry unavailable | Platform server is not reachable or Axis points at the wrong Platform URL. |\n| Login fails | Profile data was not imported, credentials changed, or Platform is using a different database. |\n| Documentation route shows CMS recovery | WCMS is down, documentation pack is not imported, or the documentation source is not registered. |\n| Import page says API category is disabled | API exposure defaults belong in owning modules; check whether the runtime disabled the category at server level. |\n| Process does not appear | Process and Automation server is not running, or the runtime has not reported its functional module observation. |\n| Module action succeeds only after refresh | Axis query invalidation or backend response envelope needs review. |\n| Media schema discovery unavailable | WCMS/media runtime is not exposing the expected schema workbench contract. |\n\n## Acceptance sign-off\n\nThe local acceptance run is complete when:\n\n1. Platform, WCMS, Process and Automation, and Axis are running.\n2. Required releases were qualified through Nodics import/publication APIs.\n3. Admin login works.\n4. Module registry shows mandatory modules and optional Cron correctly.\n5. Documentation products are visible.\n6. Content and media routes render the expected workspaces.\n7. The Page Designer route shows the catalog-first model and does not invent a\n   fixed slot shape or frontend-owned content persistence.\n8. `npm run acceptance:local` passes, or the manual equivalent plus\n   `AXIS_EXPECT_MODULES=1 AXIS_EXPECT_DOCUMENTATION=1 AXIS_CRON_LIFECYCLE=1 npm run smoke:live`\n   passes.\n9. No repo in the three-repo set has uncommitted acceptance changes.\n\nWhen all nine are true, the modularized foundation is ready for the next\nfunctional module.\n\n## Common mistakes\n\n- Treating a running Node process as proof that the customer project is ready.\n- Skipping content-pack import and then wondering why Axis documentation or\n  WCMS pages are unavailable.\n- Reading, dropping, or modifying a database directly during a test instead of\n  using an authorized Nodics API/service.\n- Accepting a module lifecycle flow that requires a browser refresh after\n  register, activate, deactivate, or deregister.\n- Ignoring an `INVALID RELEASE` message because the release still appears in\n  the list.\n- Verifying only Platform while forgetting WCMS, documentation, media, Process,\n  Cron, and Axis routes.\n\n## Verification\n\nRun the API-only checklist repeatedly when confidence matters. The expected\nresult is idempotent release qualification, mandatory module visibility,\noptional Cron lifecycle handling, fresh-schema reset through the governed\nPlatform Local reset API, and Axis rendering without manual database inspection\nor edits.\n\nFor project documentation changes, regenerate the Kickoff documentation pack,\nrun the documentation contract test, start Platform and WCMS, import or update\nthe Kickoff docs release, and open `/docs/nodics-kickoff` in Axis. If the page\nonly works because it was hardcoded in the frontend, the acceptance result is\nnot valid.\n",
       "previous": {
-        "title": "Local runtime topology",
-        "route": "/docs/nodics-kickoff/kickoff-local-runtime"
+        "title": "Local setup to live runbook",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
       },
       "next": {
         "title": "Local publishing operations",
@@ -2794,7 +3960,7 @@ module.exports = {
     },
     "active": true
   },
-  "record4": {
+  "record5": {
     "code": "kickoffDocsComponentkickoffLocalPublishingOperations",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -3149,7 +4315,7 @@ module.exports = {
     },
     "active": true
   },
-  "record5": {
+  "record6": {
     "code": "kickoffDocsComponentkickoffDeploymentQualification",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -3565,7 +4731,7 @@ module.exports = {
     },
     "active": true
   },
-  "record6": {
+  "record7": {
     "code": "kickoffDocsComponentkickoffCustomization",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",
@@ -4230,7 +5396,7 @@ module.exports = {
     },
     "active": true
   },
-  "record7": {
+  "record8": {
     "code": "kickoffDocsComponentkickoffFunctionalJourneys",
     "typeCode": "kickoffDocumentationArticleComponentType",
     "renderer": "documentation.component.article",

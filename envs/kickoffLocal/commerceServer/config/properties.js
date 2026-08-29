@@ -51,7 +51,12 @@ module.exports = {
         }
     },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
-        allowedDestinationRoles: ['COMMERCE'] } },
+        allowedDestinationRoles: ['COMMERCE'],
+        initializationProfiles: { localCommerceFoundation: { enabled: true,
+            label: 'Local Commerce foundation',
+            description: 'Install required operational Commerce core releases for product, cart, pricing, inventory, tax, checkout, fulfillment, payment, and discovery services.',
+            completionMessage: 'The Local Commerce foundation is ready. Commerce runtime can accept governed catalogue and storefront data.',
+            steps: [{ dataType: 'core' }] } } } },
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerce' } } } },
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {

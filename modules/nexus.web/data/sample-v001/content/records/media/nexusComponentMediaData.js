@@ -12,7 +12,7 @@
 'use strict';
 
 /**
- * @module modules/nexus.web/data/sample-v001/content/records/wcms/corporate/nexusComponentMediaData
+ * @module modules/nexus.web/data/sample-v001/content/records/media/nexusComponentMediaData
  * @description Declares Nexus CMS component media bindings so Staged-to-Online publication carries referenced visual assets.
  * @layer data
  * @owner nexus.web
@@ -21,7 +21,7 @@
 
 /** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner nexus.web */
 
-const components = require('./nexusComponentData');
+const components = require('../wcms/corporate/nexusComponentData');
 
 const mediaFields = new Set(['referenceImageCode', 'avatarReferenceImageCode', 'featuredMediaCode']);
 

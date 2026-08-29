@@ -264,6 +264,89 @@
       ]
     },
     {
+      "id": "kickoff.local-setup-to-live",
+      "title": "Local setup to live runbook",
+      "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "kickoffLocal",
+      "content": "docs/pages/local-setup-to-live-runbook.md",
+      "slug": "kickoff-local-setup-to-live",
+      "parentId": "run-kickoff-locally",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Run Kickoff Locally",
+        "Local setup to live runbook"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Run Kickoff Locally",
+      "navigationSectionCode": "run-kickoff-locally",
+      "navigationGroup": "Runtime Topology",
+      "navigationGroupCode": "runtime-topology",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 15,
+      "documentType": "how-to",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.local-runtime",
+        "kickoff.local-acceptance",
+        "kickoff.local-publishing-operations"
+      ],
+      "sourceEvidence": [
+        "docs/pages/local-setup-to-live-runbook.md",
+        "docs/assets/images/local-setup/",
+        "package.json",
+        "nodics.project.json"
+      ],
+      "searchKeywords": [
+        "local setup",
+        "axis login",
+        "guided setup",
+        "live verification",
+        "screenshots"
+      ],
+      "topicKeywords": [
+        "axis",
+        "module registry",
+        "data import",
+        "publishing",
+        "nexus",
+        "agora"
+      ],
+      "visualRequirements": [
+        "screenshot",
+        "command-example",
+        "troubleshooting-matrix"
+      ]
+    },
+    {
       "id": "kickoff.local-acceptance",
       "title": "Local acceptance checklist",
       "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",

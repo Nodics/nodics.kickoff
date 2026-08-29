@@ -186,7 +186,8 @@ module.exports = function runtimeProperties(server) {
                 'nodics.communication': { dataPackages: [
                     { code: 'commsCore:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffDockerLocalEngagement', operation: 'IMPORT' },
                     { code: 'commsCore:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffDockerLocalEngagement', operation: 'IMPORT_SAMPLE' }
-                ] }
+                ] },
+                'nodics.accelerators': { dependencies: ['nodics.commerce', 'nodics.discovery'], dataPackages: [] }
             } },
             backofficeRegistry: { clientEndpoints: {
                 platform: 'http://localhost:5300/', platformServer: 'http://localhost:5300/',
@@ -209,7 +210,7 @@ module.exports = function runtimeProperties(server) {
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-staged' } } } },
             cms: { publication: { enabled: true, runtimeRole: 'STAGED', baselines: {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-                nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.7', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.8', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusupdate: { releaseCode: 'nexus.web:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusecosystemrepair: { releaseCode: 'nexus.web:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 agora: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },

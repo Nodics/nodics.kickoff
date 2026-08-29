@@ -28,6 +28,13 @@ const entry = (schemaName, dataFilePrefix) => ({
 
 module.exports = {
   media: {
+    nexusMediaData: entry('media', 'nexusMediaData'),
     nexusMediaReferenceData: entry('mediaReference', 'nexusMediaReferenceData')
+  },
+  cms: {
+    nexusComponentMediaData: {
+      options: { enabled: true, schemaName: 'cmsComponentMedia', operation: 'saveAll', dataFilePrefix: 'nexusComponentMediaData' },
+      query: { componentMediaCode: '$componentMediaCode' }
+    }
   }
 };

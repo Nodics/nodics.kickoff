@@ -85,7 +85,7 @@
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
     "test:agora-commerce": "node --test test/agoraCommerceDataAcceptanceContract.test.mjs test/agoraCommercePublicationAcceptanceContract.test.mjs test/agoraCommerceAcceptanceContract.test.mjs test/agoraProductCatalogReleaseExecutionContract.test.js test/agoraProductSearchPublicationContract.test.js test/agoraCommerceSearchPublicationContract.test.js",
     "test:multi-domain": "node --test test/multiDomainKickoffContract.test.mjs test/multiDomainReleaseExecutionContract.test.js test/multiDomainEndToEndQualification.test.js",
-    "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/localPublishingContractFreeze.test.mjs && node test/localTopologyLifecycle.test.mjs && node test/dockerLocalEnvironmentContract.test.mjs && node test/dockerLocalResilienceContract.test.mjs",
+    "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/guidedInitializationProfilesContract.test.js && node test/localPublishingContractFreeze.test.mjs && node test/localTopologyLifecycle.test.mjs && node test/dockerLocalEnvironmentContract.test.mjs && node test/dockerLocalResilienceContract.test.mjs",
     "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:qualification && npm run prepare:runtime",
     "nodics:clean": "node scripts/nodics-project.js clean",
     "nodics:build": "node scripts/nodics-project.js build",

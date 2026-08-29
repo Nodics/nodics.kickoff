@@ -66,6 +66,11 @@ module.exports = {
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
       },
       {
+        "label": "Local setup to live runbook",
+        "targetPage": "kickoff.local-setup-to-live",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
+      },
+      {
         "label": "Local acceptance checklist",
         "targetPage": "kickoff.local-acceptance",
         "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
@@ -79,16 +84,11 @@ module.exports = {
         "label": "Deployment qualification",
         "targetPage": "kickoff.deployment-qualification",
         "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
-      },
-      {
-        "label": "Customer customization guide",
-        "targetPage": "kickoff.customization",
-        "route": "/docs/nodics-kickoff/kickoff-customization"
       }
     ],
     "statusSummary": {
       "sections": 5,
-      "pages": 7,
+      "pages": 8,
       "lifecycleState": "ONLINE"
     },
     "product": "kickoffDocumentationProduct",
@@ -179,13 +179,18 @@ module.exports = {
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
       },
       {
+        "label": "Local setup to live runbook",
+        "targetPage": "kickoff.local-setup-to-live",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
+      },
+      {
         "label": "Local acceptance checklist",
         "targetPage": "kickoff.local-acceptance",
         "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
       }
     ],
     "statusSummary": {
-      "pages": 2,
+      "pages": 3,
       "groups": 2
     },
     "accessMode": "PUBLIC",
@@ -400,6 +405,12 @@ module.exports = {
         "title": "Local runtime topology",
         "summary": "Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable.",
         "order": 10
+      },
+      {
+        "code": "kickoff.local-setup-to-live",
+        "title": "Local setup to live runbook",
+        "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+        "order": 15
       }
     ],
     "journeyLinks": [
@@ -407,10 +418,15 @@ module.exports = {
         "label": "Local runtime topology",
         "targetPage": "kickoff.local-runtime",
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
+      },
+      {
+        "label": "Local setup to live runbook",
+        "targetPage": "kickoff.local-setup-to-live",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
       }
     ],
     "statusSummary": {
-      "pages": 1
+      "pages": 2
     },
     "accessMode": "PUBLIC",
     "lifecycleState": "ONLINE",

@@ -7,8 +7,8 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.discovery",
-      "nodics.commerce"
+      "nodics.commerce",
+      "nodics.discovery"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

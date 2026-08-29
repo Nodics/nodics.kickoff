@@ -60,7 +60,7 @@ module.exports = {
     "childJourneyLinks": [],
     "childStatusSummary": {
       "childCount": 5,
-      "pages": 7
+      "pages": 8
     },
     "nodeOrder": 10,
     "expandable": true,
@@ -188,6 +188,7 @@ module.exports = {
       "dashboard": "kickoffDocsDashboardSecrunKickoffLocally",
       "pages": [
         "kickoff.local-runtime",
+        "kickoff.local-setup-to-live",
         "kickoff.local-acceptance"
       ]
     },
@@ -211,6 +212,11 @@ module.exports = {
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
       },
       {
+        "label": "Local setup to live runbook",
+        "targetPage": "kickoff.local-setup-to-live",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
+      },
+      {
         "label": "Local acceptance checklist",
         "targetPage": "kickoff.local-acceptance",
         "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
@@ -218,7 +224,7 @@ module.exports = {
     ],
     "childStatusSummary": {
       "childCount": 2,
-      "pages": 2
+      "pages": 3
     },
     "nodeOrder": 20,
     "expandable": true,
@@ -642,7 +648,8 @@ module.exports = {
     "nodeContentArea": {
       "dashboard": "kickoffDocsDashboardGrprunKickoffLocallyruntimeTopology",
       "pages": [
-        "kickoff.local-runtime"
+        "kickoff.local-runtime",
+        "kickoff.local-setup-to-live"
       ]
     },
     "nodeDashboard": "kickoffDocsDashboardGrprunKickoffLocallyruntimeTopology",
@@ -652,6 +659,12 @@ module.exports = {
         "title": "Local runtime topology",
         "summary": "Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable.",
         "order": 10
+      },
+      {
+        "code": "kickoff.local-setup-to-live",
+        "title": "Local setup to live runbook",
+        "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+        "order": 15
       }
     ],
     "childJourneyLinks": [
@@ -659,10 +672,15 @@ module.exports = {
         "label": "Local runtime topology",
         "targetPage": "kickoff.local-runtime",
         "route": "/docs/nodics-kickoff/kickoff-local-runtime"
+      },
+      {
+        "label": "Local setup to live runbook",
+        "targetPage": "kickoff.local-setup-to-live",
+        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
       }
     ],
     "childStatusSummary": {
-      "childCount": 1
+      "childCount": 2
     },
     "nodeOrder": 10,
     "expandable": true,
@@ -772,6 +790,73 @@ module.exports = {
     "active": true
   },
   "record10": {
+    "code": "kickoffDocsNodeTopickickoffLocalSetupToLive",
+    "product": "kickoffDocumentationProduct",
+    "navigation": "kickoffDocumentationNavigationTree",
+    "parentNode": "kickoffDocsNodeGrprunKickoffLocallyruntimeTopology",
+    "nodeLevel": "TOPIC",
+    "nodeType": "PAGE",
+    "nodeTitle": "Local setup to live runbook",
+    "nodeSummary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+    "nodeContentArea": {
+      "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live",
+      "documentType": "how-to"
+    },
+    "childSummaryCards": [],
+    "childJourneyLinks": [],
+    "childStatusSummary": {
+      "childCount": 0
+    },
+    "targetDocumentationPage": "kickoffDocsMetadatakickoffLocalSetupToLive",
+    "targetPage": "kickoffDocsPagekickoffLocalSetupToLive",
+    "targetRoute": "kickoffDocsRoutekickoffLocalSetupToLive",
+    "nodeOrder": 15,
+    "expandable": false,
+    "expandedByDefault": false,
+    "nodeIcon": "file-text",
+    "nodeAudience": [
+      "business-user",
+      "administrator",
+      "architect",
+      "developer",
+      "operator",
+      "qa",
+      "ai-tool"
+    ],
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "accessMode": "PUBLIC",
+    "allowedRoles": [],
+    "allowedGroups": [],
+    "allowedPermissions": [],
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.navigation.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "NAVIGATION_CHANGE",
+      "DASHBOARD_CHANGE",
+      "ACCESS_POLICY_CHANGE"
+    ],
+    "lifecycleState": "ONLINE",
+    "maturityState": "IMPLEMENTED",
+    "searchKeywords": [
+      "local setup",
+      "axis login",
+      "guided setup",
+      "live verification",
+      "screenshots"
+    ],
+    "relatedNodes": [
+      "kickoffDocsNodeTopickickoffLocalRuntime",
+      "kickoffDocsNodeTopickickoffLocalAcceptance",
+      "kickoffDocsNodeTopickickoffLocalPublishingOperations"
+    ],
+    "locale": "en",
+    "channel": "web",
+    "active": true
+  },
+  "record11": {
     "code": "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -846,7 +931,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record11": {
+  "record12": {
     "code": "kickoffDocsNodeTopickickoffLocalAcceptance",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -912,7 +997,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record12": {
+  "record13": {
     "code": "kickoffDocsNodeGrppublishAndQualifypublishingOperations",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -987,7 +1072,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record13": {
+  "record14": {
     "code": "kickoffDocsNodeTopickickoffLocalPublishingOperations",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -1052,7 +1137,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record14": {
+  "record15": {
     "code": "kickoffDocsNodeGrppublishAndQualifydeploymentQualification",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -1127,7 +1212,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record15": {
+  "record16": {
     "code": "kickoffDocsNodeTopickickoffDeploymentQualification",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -1192,7 +1277,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record16": {
+  "record17": {
     "code": "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -1267,7 +1352,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record17": {
+  "record18": {
     "code": "kickoffDocsNodeTopickickoffCustomization",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -1333,7 +1418,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record18": {
+  "record19": {
     "code": "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",
@@ -1408,7 +1493,7 @@ module.exports = {
     "channel": "web",
     "active": true
   },
-  "record19": {
+  "record20": {
     "code": "kickoffDocsNodeTopickickoffFunctionalJourneys",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",

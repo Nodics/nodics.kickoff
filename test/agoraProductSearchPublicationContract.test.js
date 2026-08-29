@@ -131,7 +131,7 @@ test('Agora Product seed publishes customer-safe English and Arabic Product sear
       product,
       localizations,
       storeCode: 'agoraMainStore',
-      currency: 'AED',
+      currency: 'USD',
       categoryCodes,
       variantCodes,
       variants: productVariants
@@ -151,7 +151,7 @@ test('Agora Product seed publishes customer-safe English and Arabic Product sear
   assert(indexed.every((item) => item.model.storeCode === 'agoraMainStore'));
   assert(indexed.every((item) => item.model.payload.inventory === undefined));
   assert(indexed.every((item) => item.model.payload.sku === undefined));
-  assert(indexed.every((item) => item.model.payload.price && item.model.payload.price.currency === 'AED'));
+  assert(indexed.every((item) => item.model.payload.price && item.model.payload.price.currency === 'USD'));
   assert(indexed.every((item) => item.model.payload.price.priceRowCode === undefined));
   assert(indexed.every((item) => item.model.payload.availability && item.model.payload.availability.status === 'IN_STOCK'));
   assert(indexed.every((item) => item.model.payload.availability.warehouseCode === undefined));
