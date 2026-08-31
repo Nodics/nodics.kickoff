@@ -363,10 +363,10 @@ module.exports = {
     active: true,
     properties: {
       kicker: "GitHub and open source",
-      heading: "One workspace. Four clear project responsibilities.",
-      body: "Explore the framework, reference runtime, administrative experience, and public storefront together. Each repository owns a distinct layer while participating in one end-to-end Nodics developer journey.",
+      heading: "Start from the Nodics GitHub organization.",
+      body: "Nodics is growing across framework modules, platform services, experience applications, accelerators, documentation, and setup tooling. The organization page is the stable entry point: use it to discover the right repository for the layer you want to inspect, run, extend, or contribute to.",
       organizationHref: "https://github.com/Nodics",
-      organizationLabel: "Explore the Nodics organization",
+      organizationLabel: "Open github.com/Nodics",
       developerKicker: "AI-enabled developer experience",
       developerHeading:
         "Run the reference solution, then build with an informed AI collaborator.",
@@ -377,34 +377,40 @@ module.exports = {
       referenceImageCode: "nodicsDeveloperExperience",
       imageAlt:
         "Enterprise software engineer working with a connected modular application architecture",
+      repositoryIntro:
+        "Start with the installer when you want a working local setup. The remaining cards describe repository families, not a complete repository list, while the organization page stays the stable path for discovering new Nodics sources.",
       repositories: [
         {
-          name: "nodics.ai",
-          role: "Framework",
+          name: "nodics.installer",
+          role: "Local setup entry point",
           description:
-            "Enterprise framework, modular contracts, reusable capabilities, and governed runtime foundations.",
-          href: "https://github.com/Nodics/nodics.ai",
+            "Bootstrap repository for initializing a local Nodics workspace, preparing the runtime shape, and helping evaluators move from GitHub discovery to a working system.",
+          href: "https://github.com/Nodics/nodics.installer",
+          linkLabel: "Start local setup",
         },
         {
-          name: "nodics.kickoff",
-          role: "Reference runtime",
+          name: "Framework and platform sources",
+          role: "Core source family",
           description:
-            "Runnable project composition, environment configuration, and reference data for local evaluation.",
-          href: "https://github.com/Nodics/nodics.kickoff",
+            "Framework modules, runtime contracts, publication, content, commerce, communication, engagement, and platform capabilities stay in their owning source boundaries.",
+          href: "https://github.com/orgs/Nodics/repositories",
+          linkLabel: "Find source repositories",
         },
         {
-          name: "nodics.axis",
-          role: "Administration",
+          name: "Experience applications",
+          role: "Frontend family",
           description:
-            "BackOffice experience for discovering and operating the capabilities exposed by the runtime.",
-          href: "https://github.com/Nodics/nodics.axis",
+            "Axis, Nexus, storefronts, and future public experiences can evolve as independent applications while consuming governed backend contracts.",
+          href: "https://github.com/orgs/Nodics/repositories",
+          linkLabel: "Explore applications",
         },
         {
-          name: "nodics.nexus",
-          role: "Public experience",
+          name: "Reference projects and tooling",
+          role: "Adoption path",
           description:
-            "Corporate and reference storefront frontend built from backend-managed content components.",
-          href: "https://github.com/Nodics/nodics.nexus",
+            "Kickoff projects, installers, data packs, documentation packs, and accelerator repositories help evaluators move from discovery to a working local system.",
+          href: "https://github.com/orgs/Nodics/repositories",
+          linkLabel: "View source catalog",
         },
       ],
     },

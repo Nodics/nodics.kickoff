@@ -29,7 +29,8 @@ module.exports = Object.freeze({
     "brandCode": "nodics-studio",
     "collectionCodes": [
       "agoraWomen",
-      "agoraWomenDresses"
+      "agoraWomenDresses",
+      "agoraSale"
     ],
     "seasonCode": "summer-2026",
     "genderAudience": [
@@ -59,7 +60,8 @@ module.exports = Object.freeze({
     "brandCode": "nodics-studio",
     "collectionCodes": [
       "agoraWomen",
-      "agoraWomenDresses"
+      "agoraWomenDresses",
+      "agoraSale"
     ],
     "seasonCode": "summer-2026",
     "genderAudience": [
@@ -89,7 +91,8 @@ module.exports = Object.freeze({
     "brandCode": "nodics-atelier",
     "collectionCodes": [
       "agoraWomen",
-      "agoraWomenTops"
+      "agoraWomenTops",
+      "agoraSale"
     ],
     "seasonCode": "summer-2026",
     "genderAudience": [
@@ -119,7 +122,8 @@ module.exports = Object.freeze({
     "brandCode": "nodics-atelier",
     "collectionCodes": [
       "agoraWomen",
-      "agoraWomenTops"
+      "agoraWomenTops",
+      "agoraSale"
     ],
     "seasonCode": "summer-2026",
     "genderAudience": [
@@ -149,7 +153,8 @@ module.exports = Object.freeze({
     "brandCode": "nodics-goods",
     "collectionCodes": [
       "agoraWomen",
-      "agoraWomenBags"
+      "agoraWomenBags",
+      "agoraSale"
     ],
     "seasonCode": "summer-2026",
     "genderAudience": [
@@ -179,7 +184,8 @@ module.exports = Object.freeze({
     "brandCode": "nodics-goods",
     "collectionCodes": [
       "agoraWomen",
-      "agoraWomenAccessories"
+      "agoraWomenAccessories",
+      "agoraSale"
     ],
     "seasonCode": "summer-2026",
     "genderAudience": [

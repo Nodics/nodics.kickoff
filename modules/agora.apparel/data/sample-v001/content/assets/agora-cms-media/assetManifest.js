@@ -51,6 +51,7 @@ module.exports = Object.freeze([
   cmsAsset('agora-owned-home-hero-summer-edit', 'agora-owned-home-hero-summer-edit.jpg', 'Agora white dress summer hero', 'agoraHomeHeroExperience'),
   cmsAsset('agora-owned-home-hero-signature-style', 'agora-owned-home-hero-signature-style.jpg', 'Agora wrapped dress signature hero', 'agoraHomeHeroExperience'),
   cmsAsset('agora-owned-home-hero-layered-edit', 'agora-owned-home-hero-layered-edit.jpg', 'Agora white dress layered hero', 'agoraHomeHeroExperience'),
+  cmsAsset('agora-owned-product-listing-wide-hero', 'agora-owned-product-listing-wide-hero.jpg', 'Agora product listing wide editorial hero', 'agoraApparelProductListingExperience'),
   cmsAsset('agora-owned-collection-new-in', 'agora-owned-collection-new-in.jpg', 'Agora new in collection tile', 'agoraHomeCollectionGrid'),
   cmsAsset('agora-owned-collection-promotion', 'agora-owned-collection-promotion.jpg', 'Agora promotion collection tile', 'agoraHomeCollectionGrid'),
   cmsAsset('agora-owned-collection-clothing', 'agora-owned-collection-clothing.jpg', 'Agora clothing collection tile', 'agoraHomeCollectionGrid'),

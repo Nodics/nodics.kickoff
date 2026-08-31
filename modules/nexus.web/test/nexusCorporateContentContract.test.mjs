@@ -272,6 +272,40 @@ assert(
   !homepageComponentCodes.includes("nexusHomeDevelopers"),
   "Developer Experience must remain consolidated into GitHub on the homepage",
 );
+const githubComponent = componentByCode.get("nexusHomeGithub");
+assert.equal(
+  githubComponent?.properties.organizationHref,
+  "https://github.com/Nodics",
+  "Homepage GitHub section must use the Nodics organization as the stable entry point",
+);
+assert.match(
+  githubComponent?.properties.heading ?? "",
+  /Nodics GitHub organization/,
+  "Homepage GitHub heading must not present four repositories as the complete source surface",
+);
+assert.match(
+  githubComponent?.properties.repositoryIntro ?? "",
+  /Start with the installer/,
+  "Homepage GitHub repository cards must be framed as families, not an exhaustive repo list",
+);
+assert.equal(
+  githubComponent?.properties.repositories?.[0]?.name,
+  "nodics.installer",
+  "Homepage GitHub first card must point evaluators to the local setup installer",
+);
+assert.equal(
+  githubComponent?.properties.repositories?.[0]?.href,
+  "https://github.com/Nodics/nodics.installer",
+  "Homepage GitHub installer card must link directly to the installer repository",
+);
+assert(
+  githubComponent?.properties.repositories.every(
+    (repository) =>
+      typeof repository.linkLabel === "string" &&
+      !/view repository/i.test(repository.linkLabel),
+  ),
+  "Homepage GitHub cards must use organization or catalogue CTAs instead of fixed repository-only labels",
+);
 const carousel = componentByCode.get("nexusHomeBannerCarousel");
 assert(carousel, "Homepage banner carousel must exist");
 assert.equal(carousel.typeCode, "nexusBannerCarouselType");

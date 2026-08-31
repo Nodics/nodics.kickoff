@@ -210,15 +210,15 @@ module.exports = function runtimeProperties(server) {
             media: { storage: { providers: { local: { basePath: '/var/lib/nodics/media-staged' } } } },
             cms: { publication: { enabled: true, runtimeRole: 'STAGED', baselines: {
                 axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '0.0.0', rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
-                nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.8', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
+                nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.10', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusupdate: { releaseCode: 'nexus.web:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusecosystemrepair: { releaseCode: 'nexus.web:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 agora: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
                 agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
                 agoraelectronics: { releaseCode: 'agora.electronics:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
                 agoratelco: { releaseCode: 'agora.telco:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
-                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.7', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
-                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.1', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
+                frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.8', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
+                axisdocs: { contentPackCode: 'axisDocumentation', releaseVersion: '0.0.2', rootType: 'site', rootCode: 'axisDocumentationSite', sourceVersion: '0' },
                 kickoffdocs: { contentPackCode: 'kickoffDocumentation', releaseVersion: '0.0.1', rootType: 'site', rootCode: 'kickoffDocumentationSite', sourceVersion: '0' }
             }, targetTransportProvider: 'DefaultCmsPublicationModuleTransportService',
                 workflow: { target: { moduleName: 'process', connectionName: 'process', connectionType: 'abstract', timeoutMs: 10000, maxAttempts: 2 } },

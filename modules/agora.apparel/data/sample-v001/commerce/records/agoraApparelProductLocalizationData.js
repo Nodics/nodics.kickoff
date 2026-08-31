@@ -53,7 +53,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenDresses"
+        "agoraWomenDresses",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -89,7 +90,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenDresses"
+        "agoraWomenDresses",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -125,7 +127,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenDresses"
+        "agoraWomenDresses",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -161,7 +164,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenDresses"
+        "agoraWomenDresses",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -197,7 +201,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenTops"
+        "agoraWomenTops",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -233,7 +238,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenTops"
+        "agoraWomenTops",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -269,7 +275,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenTops"
+        "agoraWomenTops",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -305,7 +312,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenTops"
+        "agoraWomenTops",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -341,7 +349,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenBags"
+        "agoraWomenBags",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -377,7 +386,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenBags"
+        "agoraWomenBags",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -413,7 +423,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenAccessories"
+        "agoraWomenAccessories",
+        "agoraSale"
       ],
       "domain": "apparel"
     }
@@ -449,7 +460,8 @@ module.exports = Object.freeze({
     "classificationValues": {
       "categoryCodes": [
         "agoraWomen",
-        "agoraWomenAccessories"
+        "agoraWomenAccessories",
+        "agoraSale"
       ],
       "domain": "apparel"
     }

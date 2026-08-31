@@ -39,6 +39,43 @@ module.exports = {
       cartPreviewEnabled: true,
       accountPreviewEnabled: true,
       wishlistPreviewEnabled: true,
+      storefrontLabels: {
+        quickAdd: 'Quick Add',
+        quickView: 'Quick view',
+        addToCart: 'Add to cart',
+        buyNow: 'Buy it now',
+        wishlist: 'Wishlist',
+        wishlisted: 'Wishlisted',
+        addToWishlist: 'Add to wishlist',
+        removeFromWishlist: 'Remove from wishlist',
+        compare: 'Compare',
+        comparing: 'Comparing',
+        removeFromCompare: 'Remove from compare',
+        colors: 'Colors',
+        size: 'Size',
+        quantity: 'Quantity',
+        availableColors: 'Available colors',
+        availableSizes: 'Available sizes',
+        backToListing: 'Back to listing',
+        closeQuickView: 'Close',
+        color: 'Color',
+        description: 'Description',
+        selectColorPrefix: 'Select',
+        closeQuickAdd: 'Close quick add',
+        decreaseQuantity: 'Decrease quantity',
+        increaseQuantity: 'Increase quantity',
+        viewDetailsPrefix: 'View details for',
+        quickViewTitle: 'Quick View',
+        recommendationsEyebrow: 'Curated recommendations',
+        recommendationsHeading: 'Related pieces',
+        recommendationsSummary: 'Recommendations are resolved from Commerce product relationships.',
+        reviews: 'Reviews',
+        shippingReturns: 'Shipping & returns',
+        shippingReturnsText: 'Free shipping threshold and 14-day returns are resolved from backend policy.',
+        viewFullDetails: 'View full details',
+        featuredProductsAriaLabel: 'Featured products',
+        bestSellingProductsAriaLabel: 'Best selling products'
+      },
       utilityLinks: [
         { label: '+1 315-666-6688', path: 'tel:+13156666688' },
         { label: 'support@nodics.com', path: 'mailto:support@nodics.com' },
@@ -50,10 +87,382 @@ module.exports = {
       ],
       navigationItems: [
         { label: 'Home', path: '/' },
-        { label: 'Shop', collectionCode: 'agoraWomen', dropdown: true },
+        { label: 'Shop', path: '/shop', dropdown: true },
         { label: 'New in', collectionCode: 'agoraNewArrivals' },
         { label: 'Clothing', collectionCode: 'agoraWomenTops', dropdown: true },
         { label: 'Bags & Accessories', collectionCode: 'agoraWomenAccessories' }
+      ],
+      megaMenus: [
+        {
+          code: 'home',
+          label: 'Home',
+          path: '/',
+          eyebrow: 'Agora storefront',
+          summary: 'Return to the curated fashion commerce homepage with campaign rails, collections, service promises, and customer stories.',
+          groups: [
+            {
+              title: 'Start here',
+              summary: 'Common shopping paths for first-time visitors.',
+              links: [
+                { label: 'Homepage', path: '/', summary: 'Campaign-led discovery' },
+                { label: 'Shop all products', path: '/shop', summary: 'Search-backed product listing' },
+                { label: 'Collections', path: '/collections', summary: 'Curated edit index' }
+              ]
+            },
+            {
+              title: 'Customer journeys',
+              links: [
+                { label: 'New arrivals', collectionCode: 'agoraNewArrivals', summary: 'Newest products and capsule drops', badge: 'New' },
+                { label: 'Sale edits', collectionCode: 'agoraPromotion', summary: 'Promoted offers and markdowns' },
+                { label: 'Order support', path: '/orders', summary: 'Customer self-service support' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'This week in Agora',
+              summary: 'Fresh minimal layers and neutral wardrobe updates.',
+              mediaCode: 'agora-owned-home-hero-summer-edit',
+              action: { label: 'Shop new arrivals', collectionCode: 'agoraNewArrivals' },
+              badge: 'Editorial'
+            },
+            {
+              title: 'Explore curated paths',
+              summary: 'Browse categories, brands, and seasonal collections.',
+              mediaCode: 'agora-owned-collection-clothing',
+              action: { label: 'View collections', path: '/collections' },
+              badge: 'CMS'
+            }
+          ],
+          promoStripe: [
+            { label: 'Free shipping threshold', path: '/shop', eyebrow: 'Service', text: 'Resolved from commerce policy', badge: 'Live' },
+            { label: 'Secure checkout', path: '/checkout', eyebrow: 'Trust', text: 'Payment journey backed by Nodics', badge: 'Ready' },
+            { label: 'Easy returns', path: '/orders', eyebrow: 'Care', text: 'Lifecycle service journey', badge: '14 days' }
+          ]
+        },
+        {
+          code: 'shop',
+          label: 'Shop',
+          path: '/shop',
+          eyebrow: 'Product discovery',
+          summary: 'Browse the full apparel catalogue, then refine by category, brand, collection, color, size, availability, and sale status.',
+          groups: [
+            {
+              title: 'Shop by category',
+              summary: 'Category paths open the same live listing with different search parameters.',
+              links: [
+                { label: 'Women', path: '/shop?category=agoraWomen', summary: 'Trending and timeless staples' },
+                { label: 'Men', path: '/shop?category=agoraMen', summary: 'Classic fits and easy layers' },
+                { label: 'Clothing', path: '/shop?category=agoraWomenTops', summary: 'Tops, shirts, dresses and tailoring' },
+                { label: 'Bags', path: '/shop?category=agoraWomenBags', summary: 'Structured and natural textures' },
+                { label: 'Accessories', path: '/shop?category=agoraAccessories', summary: 'Finishing details and seasonal pieces' }
+              ]
+            },
+            {
+              title: 'Popular filters',
+              links: [
+                { label: 'New arrivals', collectionCode: 'agoraNewArrivals', summary: 'Latest indexed products', badge: 'New' },
+                { label: 'Best sellers', collectionCode: 'agoraBestSelling', summary: 'High-interest product edits' },
+                { label: 'Sale products', collectionCode: 'agoraPromotion', summary: 'Offers and markdowns', badge: 'Offer' },
+                { label: 'Neutral wardrobe', path: '/shop?collection=agoraWomen', summary: 'Soft palettes and everyday layers' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Projected products',
+              summary: 'Campaign carousel products selected by business users.',
+              mediaCode: 'agora-owned-product-listing-wide-hero',
+              action: { label: 'Shop all', path: '/shop' },
+              badge: 'Featured'
+            },
+            {
+              title: 'Capsule offers',
+              summary: 'Create promotional product paths without frontend edits.',
+              mediaCode: 'agora-owned-promo-capsule',
+              action: { label: 'Shop sale', collectionCode: 'agoraPromotion' },
+              badge: 'Sale'
+            }
+          ],
+          promoStripe: [
+            { label: '10 products per page', path: '/shop', eyebrow: 'Listing', text: 'Pagination is configured from listing CMS data', badge: 'PLP' },
+            { label: 'Compare products', path: '/shop', eyebrow: 'Tools', text: 'Card actions support compare and wishlist', badge: 'UX' },
+            { label: 'Quick add', path: '/shop', eyebrow: 'Conversion', text: 'Variant-aware quick shopping flow', badge: 'Fast' }
+          ]
+        },
+        {
+          code: 'new-in',
+          label: 'New in',
+          collectionCode: 'agoraNewArrivals',
+          eyebrow: 'Fresh arrivals',
+          summary: 'New pieces for the current apparel drop, resolved through the Commerce product index.',
+          groups: [
+            {
+              title: 'Fresh edits',
+              links: [
+                { label: 'All new arrivals', collectionCode: 'agoraNewArrivals', summary: 'Newest products in one listing', badge: 'New' },
+                { label: 'New clothing', path: '/shop?category=agoraWomenTops&collection=agoraNewArrivals', summary: 'Fresh tops, shirts and dresses' },
+                { label: 'New bags', path: '/shop?category=agoraWomenBags&collection=agoraNewArrivals', summary: 'New structured carry pieces' }
+              ]
+            },
+            {
+              title: 'Seasonal direction',
+              links: [
+                { label: 'Summer neutrals', collectionCode: 'agoraWomen', summary: 'Light tones and breathable shapes' },
+                { label: 'Layered essentials', collectionCode: 'agoraWomenTops', summary: 'Tanks, tees and overshirts' },
+                { label: 'Modern occasion', path: '/shop?category=agoraDresses', summary: 'Dresses and refined styling' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Fresh styles just in',
+              summary: 'The newest apparel products for the storefront.',
+              mediaCode: 'agora-owned-collection-new-in',
+              action: { label: 'Shop new in', collectionCode: 'agoraNewArrivals' },
+              badge: 'New'
+            },
+            {
+              title: 'Light layers',
+              summary: 'Easy capsule pieces for everyday wardrobes.',
+              mediaCode: 'agora-owned-gallery-2',
+              action: { label: 'Shop clothing', collectionCode: 'agoraWomenTops' }
+            }
+          ],
+          promoStripe: [
+            { label: 'Arrival spotlight', collectionCode: 'agoraNewArrivals', eyebrow: 'Drop', text: 'Business users can reorder this tile any time', badge: 'CMS' },
+            { label: 'Top picks', collectionCode: 'agoraWomen', eyebrow: 'Editorial', text: 'Use curated product rails to project priority items' },
+            { label: 'Back in stock', path: '/shop?availability=available', eyebrow: 'Inventory', text: 'Availability stays Commerce-owned' }
+          ]
+        },
+        {
+          code: 'clothing',
+          label: 'Clothing',
+          collectionCode: 'agoraWomenTops',
+          eyebrow: 'Wardrobe categories',
+          summary: 'Clothing paths combine category intent with live product data, variants, images, pricing, and stock.',
+          groups: [
+            {
+              title: 'Women clothing',
+              links: [
+                { label: 'Tops & blouses', collectionCode: 'agoraWomenTops', summary: 'Tanks, tees, shirts and knit layers' },
+                { label: 'Dresses', collectionCode: 'agoraDresses', summary: 'Soft shapes and polished details' },
+                { label: 'Outerwear', path: '/shop?category=agoraOuterwear', summary: 'Trenches, blazers and lightweight layers' },
+                { label: 'Pants & skirts', path: '/shop?category=agoraBottoms', summary: 'Tailored and relaxed bottoms' }
+              ]
+            },
+            {
+              title: 'Men clothing',
+              links: [
+                { label: 'Men shirts', path: '/shop?category=agoraMenShirts', summary: 'Oxford, linen and poplin shirting' },
+                { label: 'Men trousers', path: '/shop?category=agoraMenTrousers', summary: 'Chinos and relaxed trousers' },
+                { label: 'Layering pieces', path: '/shop?category=agoraMenLayers', summary: 'Comfortable everyday fits' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Elegant everyday wardrobe',
+              summary: 'Clothing edits surfaced from category and collection metadata.',
+              mediaCode: 'agora-owned-collection-clothing',
+              action: { label: 'Shop clothing', collectionCode: 'agoraWomenTops' },
+              badge: 'Category'
+            },
+            {
+              title: 'Dresses edit',
+              summary: 'Refined shapes ready for promoted merchandising.',
+              mediaCode: 'agora-owned-collection-dresses',
+              action: { label: 'Shop dresses', collectionCode: 'agoraDresses' }
+            }
+          ],
+          promoStripe: [
+            { label: 'Soft tailoring', collectionCode: 'agoraWomenTops', eyebrow: 'Edit', text: 'Product cards stay variant aware' },
+            { label: 'Dresses under spotlight', collectionCode: 'agoraDresses', eyebrow: 'Campaign', text: 'Link directly to a collection result set' },
+            { label: 'Neutral layers', path: '/shop?collection=agoraWomen', eyebrow: 'Trend', text: 'Business-defined editorial grouping' }
+          ]
+        },
+        {
+          code: 'bags-accessories',
+          label: 'Bags & Accessories',
+          collectionCode: 'agoraWomenAccessories',
+          eyebrow: 'Finishing pieces',
+          summary: 'Structured bags, natural textures, shoes, sunglasses, scarves, and accessories.',
+          groups: [
+            {
+              title: 'Bags',
+              links: [
+                { label: 'All bags', collectionCode: 'agoraWomenBags', summary: 'Totes, shoulder bags and crossbody styles' },
+                { label: 'Shoulder bags', path: '/shop?category=agoraWomenBags&collection=agoraShoulderBags', summary: 'Clean everyday carry' },
+                { label: 'Crossbody bags', path: '/shop?category=agoraWomenBags&collection=agoraCrossbodyBags', summary: 'Compact and textured' }
+              ]
+            },
+            {
+              title: 'Accessories',
+              links: [
+                { label: 'All accessories', collectionCode: 'agoraWomenAccessories', summary: 'Sunglasses, scarves, hats and belts' },
+                { label: 'Shoes', collectionCode: 'agoraShoes', summary: 'Minimal flats and refined footwear' },
+                { label: 'Sunglasses', path: '/shop?category=agoraSunglasses', summary: 'Gold-frame and statement shapes' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Structured textures',
+              summary: 'Bags and accessories that complete the look.',
+              mediaCode: 'agora-owned-collection-bags',
+              action: { label: 'Shop bags', collectionCode: 'agoraWomenBags' },
+              badge: 'Edit'
+            },
+            {
+              title: 'Accessory details',
+              summary: 'Finish the outfit with business-curated product paths.',
+              mediaCode: 'agora-owned-collection-accessories',
+              action: { label: 'Shop accessories', collectionCode: 'agoraWomenAccessories' }
+            }
+          ],
+          promoStripe: [
+            { label: 'Natural texture edit', collectionCode: 'agoraWomenBags', eyebrow: 'Bags', text: 'Highlight editorial images in the menu' },
+            { label: 'Accessories under 100', collectionCode: 'agoraWomenAccessories', eyebrow: 'Value', text: 'Controlled by CMS configuration' },
+            { label: 'New finishing pieces', path: '/shop?category=agoraAccessories&collection=agoraNewArrivals', eyebrow: 'New', text: 'Search query driven path' }
+          ]
+        },
+        {
+          code: 'collections',
+          label: 'Collections',
+          path: '/collections',
+          eyebrow: 'Curated paths',
+          summary: 'A business-managed index of category, brand-inspired, and seasonal collection entry points.',
+          groups: [
+            {
+              title: 'Collection index',
+              links: [
+                { label: 'All collections', path: '/collections', summary: 'Browse every curated path' },
+                { label: 'New in', collectionCode: 'agoraNewArrivals', summary: 'Fresh styles just in' },
+                { label: 'Sale', collectionCode: 'agoraPromotion', summary: 'Capsule offers and edits', badge: 'Offer' },
+                { label: 'Dresses', collectionCode: 'agoraDresses', summary: 'Soft neutrals and refined shapes' }
+              ]
+            },
+            {
+              title: 'Merchandising',
+              links: [
+                { label: 'Business projected products', path: '/shop', summary: 'Feature carousel on listing pages' },
+                { label: 'Campaign rails', path: '/', summary: 'Homepage product and editorial rails' },
+                { label: 'Service promises', path: '/', summary: 'Trust content managed in CMS' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Collections you might like',
+              summary: 'Curated navigation with live Commerce product resolution.',
+              mediaCode: 'agora-owned-home-hero-layered-edit',
+              action: { label: 'View collections', path: '/collections' },
+              badge: 'Curated'
+            },
+            {
+              title: 'Promotion collection',
+              summary: 'Seasonal commercial moments with product-listing links.',
+              mediaCode: 'agora-owned-collection-promotion',
+              action: { label: 'Shop sale', collectionCode: 'agoraPromotion' }
+            }
+          ],
+          promoStripe: [
+            { label: 'Category path', path: '/shop?category=agoraWomenTops', eyebrow: 'Search', text: 'CMS page plus indexed products' },
+            { label: 'Brand path', path: '/shop?brand=agoraAtelier', eyebrow: 'Search', text: 'Brand query landing page ready' },
+            { label: 'Collection path', path: '/shop?collection=agoraWomen', eyebrow: 'Search', text: 'Collection query landing page ready' }
+          ]
+        },
+        {
+          code: 'brands',
+          label: 'Brands',
+          path: '/shop?brand=agoraAtelier',
+          eyebrow: 'Brand stories',
+          summary: 'Brand navigation lets business users promote labels or brand-inspired edits while the product grid remains search-driven.',
+          groups: [
+            {
+              title: 'Featured brands',
+              links: [
+                { label: 'Agora Atelier', path: '/shop?brand=agoraAtelier', summary: 'Minimal tailoring and refined neutrals', badge: 'Featured' },
+                { label: 'Nodics Studio', path: '/shop?brand=nodicsStudio', summary: 'Everyday apparel essentials' },
+                { label: 'Commerce Edit', path: '/shop?brand=commerceEdit', summary: 'Accessories and seasonal pieces' }
+              ]
+            },
+            {
+              title: 'Brand-led edits',
+              links: [
+                { label: 'Premium neutrals', path: '/shop?brand=agoraAtelier&collection=agoraWomen', summary: 'Editorial brand mood' },
+                { label: 'Modern workwear', path: '/shop?brand=nodicsStudio&category=agoraWomenTops', summary: 'Polished everyday layers' },
+                { label: 'Accessory labels', path: '/shop?brand=commerceEdit&category=agoraAccessories', summary: 'Finishing details' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Brand spotlight',
+              summary: 'Use CMS to project brand stories in the header.',
+              mediaCode: 'agora-owned-gallery-3',
+              action: { label: 'Shop Agora Atelier', path: '/shop?brand=agoraAtelier' },
+              badge: 'Brand'
+            },
+            {
+              title: 'Editorial stripe',
+              summary: 'Pair brand links with richer imagery and campaign badges.',
+              mediaCode: 'agora-owned-promo-texture-edit',
+              action: { label: 'Shop brand edits', path: '/shop?brand=nodicsStudio' }
+            }
+          ],
+          promoStripe: [
+            { label: 'Brand query pages', path: '/shop?brand=agoraAtelier', eyebrow: 'Search', text: 'No separate frontend route required' },
+            { label: 'Curated images', path: '/collections', eyebrow: 'CMS', text: 'Media and labels stay business controlled' },
+            { label: 'Campaign-ready', path: '/shop?brand=commerceEdit', eyebrow: 'Launch', text: 'Reorder menu panels without code' }
+          ]
+        },
+        {
+          code: 'sale',
+          label: 'Sale',
+          collectionCode: 'agoraPromotion',
+          badge: '20% off',
+          eyebrow: 'Limited offers',
+          summary: 'Promotion-led entry points for sale products, campaign edits, and business-selected merchandise.',
+          groups: [
+            {
+              title: 'Sale paths',
+              links: [
+                { label: 'All sale', collectionCode: 'agoraPromotion', summary: 'All active promoted products', badge: 'Sale' },
+                { label: 'Sale clothing', path: '/shop?category=agoraWomenTops&collection=agoraPromotion', summary: 'Tops, dresses and layers' },
+                { label: 'Sale bags', path: '/shop?category=agoraWomenBags&collection=agoraPromotion', summary: 'Structured carry edits' }
+              ]
+            },
+            {
+              title: 'Conversion moments',
+              links: [
+                { label: 'Quick add products', path: '/shop', summary: 'Variant selection directly from cards' },
+                { label: 'Best selling sale', collectionCode: 'agoraBestSelling', summary: 'High-interest products' },
+                { label: 'Last-chance accessories', collectionCode: 'agoraWomenAccessories', summary: 'Finishing pieces with offer messaging' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Special offer edit',
+              summary: 'Promotional product paths with rich visual support.',
+              mediaCode: 'agora-owned-promo-texture-edit',
+              action: { label: 'Shop sale', collectionCode: 'agoraPromotion' },
+              badge: 'Offer'
+            },
+            {
+              title: 'Capsule markdowns',
+              summary: 'Business can update offer labels and images any time.',
+              mediaCode: 'agora-owned-promo-crossbody',
+              action: { label: 'Explore offers', collectionCode: 'agoraPromotion' }
+            }
+          ],
+          promoStripe: [
+            { label: 'Promotion ready', collectionCode: 'agoraPromotion', eyebrow: 'Offer', text: 'Sale path opens product listing results', badge: 'Live' },
+            { label: 'Fast purchase', path: '/shop', eyebrow: 'Quick add', text: 'Variant-aware quick shopping' },
+            { label: 'Wishlist sale', path: '/shop', eyebrow: 'Retention', text: 'Wishlist and compare actions stay available' }
+          ]
+        }
       ]
     }
   },
@@ -132,7 +541,7 @@ module.exports = {
     properties: {
       resolverKey: 'commerce.product.discovery',
       listingMode: 'CATEGORY',
-      pageSize: 12,
+      pageSize: 10,
       allowedFacets: ['category', 'color', 'size', 'availability'],
       allowedSorts: ['relevance', 'newest', 'nameAsc'],
       cardActions: ['QUICK_VIEW', 'ADD_TO_CART', 'WISHLIST', 'COMPARE']
@@ -147,7 +556,7 @@ module.exports = {
     properties: {
       resolverKey: 'commerce.product.discovery',
       listingMode: 'SEARCH',
-      pageSize: 12,
+      pageSize: 10,
       allowedFacets: ['category', 'color', 'size', 'availability'],
       allowedSorts: ['relevance', 'newest', 'nameAsc'],
       cardActions: ['QUICK_VIEW', 'ADD_TO_CART', 'WISHLIST', 'COMPARE']
@@ -288,12 +697,12 @@ module.exports = {
       heading: 'Shop by collection',
       actionLabel: 'View All Collection',
       items: [
-        { collectionCode: 'agoraNewArrivals', label: 'New in', summary: 'Fresh styles just in', mediaCode: 'agora-owned-collection-new-in' },
-        { collectionCode: 'agoraSale', label: 'Sale', summary: 'Capsule offers and edits', mediaCode: 'agora-owned-collection-promotion' },
-        { collectionCode: 'agoraWomen', label: 'Clothing', summary: 'Elegant everyday wardrobe', mediaCode: 'agora-owned-collection-clothing' },
-        { collectionCode: 'agoraWomenDresses', label: 'Dresses', summary: 'Soft neutrals and refined shapes', mediaCode: 'agora-owned-collection-dresses' },
-        { collectionCode: 'agoraWomenBags', label: 'Bags', summary: 'Structured and natural textures', mediaCode: 'agora-owned-collection-bags' },
-        { collectionCode: 'agoraWomenAccessories', label: 'Accessories', summary: 'Details that complete the look', mediaCode: 'agora-owned-collection-accessories' }
+        { collectionCode: 'agoraNewArrivals', label: 'New in', itemCount: '6 items', path: '/shop?collection=agoraNewArrivals', summary: 'Fresh styles just in', mediaCode: 'agora-owned-collection-new-in' },
+        { collectionCode: 'agoraSale', label: 'Sale', itemCount: '6 items', path: '/shop?collection=agoraSale', summary: 'Capsule offers and edits', mediaCode: 'agora-owned-collection-promotion' },
+        { collectionCode: 'agoraWomen', label: 'Clothing', itemCount: '44 items', path: '/shop?category=agoraWomen', summary: 'Elegant everyday wardrobe', mediaCode: 'agora-owned-collection-clothing' },
+        { collectionCode: 'agoraWomenDresses', label: 'Dresses', itemCount: '9 items', path: '/shop?category=agoraWomenDresses', summary: 'Soft neutrals and refined shapes', mediaCode: 'agora-owned-collection-dresses' },
+        { collectionCode: 'agoraWomenBags', label: 'Bags', itemCount: '8 items', path: '/shop?category=agoraWomenBags', summary: 'Structured and natural textures', mediaCode: 'agora-owned-collection-bags' },
+        { collectionCode: 'agoraWomenAccessories', label: 'Accessories', itemCount: '5 items', path: '/shop?category=agoraWomenAccessories', summary: 'Details that complete the look', mediaCode: 'agora-owned-collection-accessories' }
       ]
     }
   },
@@ -578,6 +987,126 @@ module.exports = {
         'Cancellation, return, refund, exchange, replacement and appeal automation runbooks have local and Docker runtime qualification coverage',
         'Source-owned test-folder structure is locally stabilized across Agora, Commerce, Axis and Kickoff contracts'
       ]
+    }
+  },
+  record44: {
+    code: 'agoraApparelCollectionIndexExperience',
+    typeCode: 'agoraCollectionIndexType',
+    renderer: 'agora.collectionIndex',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Curated Apparel Edits',
+      heading: 'Collections you might like',
+      summary: 'Choose a category, brand-inspired edit, or seasonal collection. Each tile opens a live Commerce listing with backend-driven products, media, pricing, variants, and availability.',
+      primaryAction: { label: 'Shop all products', path: '/shop' },
+      secondaryAction: { label: 'Start from featured edit', collectionCode: 'agoraWomen' },
+      heroMediaCode: 'agora-owned-home-hero-layered-edit',
+      highlights: [
+        {
+          label: 'For shoppers',
+          title: 'Start with intent',
+          text: 'Browse by newness, clothing, dresses, bags, or accessory edits before refining the product listing.'
+        },
+        {
+          label: 'For business',
+          title: 'Merchandise every path',
+          text: 'Collection labels, counts, summaries, actions, and imagery are content-managed and ready for seasonal campaigns.'
+        },
+        {
+          label: 'For commerce',
+          title: 'Open live listings',
+          text: 'Each tile lands on a search-backed listing with filters, sorting, variants, pricing, media, and availability.'
+        }
+      ],
+      footerNote: 'Collections are not static landing pages: every edit resolves into indexed Commerce products, so business teams can curate the journey while product data remains live.'
+    }
+  },
+  record45: {
+    code: 'agoraApparelProductListingExperience',
+    typeCode: 'agoraProductListingType',
+    renderer: 'agora.productListing',
+    accessMode: 'PUBLIC',
+    active: true,
+    properties: {
+      eyebrow: 'Shop the edit',
+      heading: 'Apparel selected for now',
+      summary: 'Editorial apparel discovery with live products, refinements, sorting, and a business-curated feature carousel.',
+      heroMediaCode: 'agora-owned-product-listing-wide-hero',
+      primaryAction: { label: 'Shop new arrivals', collectionCode: 'agoraNewArrivals' },
+      secondaryAction: { label: 'Explore collections', path: '/collections' },
+      resolverKey: 'commerce.product.discovery',
+      listingMode: 'SEARCH',
+      pageSize: 10,
+      resultLabel: 'products',
+      loadMoreLabel: 'Load 10 more products',
+      completeStatusLabel: 'All matching products are visible',
+      projectedProducts: {
+        eyebrow: 'Featured by Agora',
+        heading: 'Pieces to project this week',
+        summary: 'A business-curated carousel for campaign products, new arrivals, and premium edits before customers enter the full listing grid.',
+        ariaLabel: 'Business projected products',
+        direction: 'forward',
+        pageSize: 8,
+        productCodes: [
+          'agoraDoubleButtonTrench',
+          'agoraRamiePocketShirt',
+          'agoraStretchStrapTop',
+          'agoraBeltWrapDress',
+          'agoraSoftShoulderBag',
+          'agoraCleanLineBlazer',
+          'agoraFineKnitPolo',
+          'agoraNeutralShoulderBag'
+        ]
+      },
+      toolbar: {
+        ariaLabel: 'Product listing controls',
+        filterLabel: 'Filters',
+        saleOnlyLabel: 'Shop sale items only',
+        sortLabel: 'Sort By:',
+        sortAriaLabel: 'Sort products',
+        layoutAriaLabel: 'Product layout',
+        activeFiltersAriaLabel: 'Active filters',
+        clearAllLabel: 'Clear all',
+        defaultLayout: 'grid-4',
+        layoutOptions: [
+          { code: 'list', label: 'List view' },
+          { code: 'grid-2', label: 'Two products per row' },
+          { code: 'grid-3', label: 'Three products per row' },
+          { code: 'grid-4', label: 'Four products per row' },
+          { code: 'grid-5', label: 'Five products per row' }
+        ],
+        sortOptions: [
+          { code: 'recommended', label: 'Best selling' },
+          { code: 'name-asc', label: 'Name A-Z' },
+          { code: 'price-asc', label: 'Price low to high' },
+          { code: 'price-desc', label: 'Price high to low' }
+        ]
+      },
+      filterDrawer: {
+        ariaLabel: 'Product filters',
+        title: 'Filters',
+        closeLabel: 'Close filters',
+        resetLabel: 'Reset filters',
+        applyLabel: 'Apply filters',
+        priceLabel: 'Price',
+        minPriceLabel: 'Min',
+        maxPriceLabel: 'Max',
+        minPricePlaceholder: '0',
+        maxPricePlaceholder: '250',
+        groups: [
+          { code: 'categories', label: 'Product Categories' },
+          { code: 'price', label: 'Price' },
+          { code: 'sizes', label: 'Size' },
+          { code: 'colors', label: 'Color' },
+          { code: 'brands', label: 'Brand' },
+          { code: 'collections', label: 'Collection' },
+          { code: 'availability', label: 'Availability' }
+        ]
+      },
+      allowedFacets: ['category', 'brand', 'collection', 'color', 'size', 'availability'],
+      allowedSorts: ['recommended', 'name-asc', 'price-asc', 'price-desc'],
+      cardActions: ['QUICK_ADD', 'QUICK_VIEW', 'ADD_TO_CART', 'WISHLIST', 'COMPARE']
     }
   }
 };

@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.8",
+      "version": "0.0.10",
       "displayName": "Nexus Corporate Site",
       "description": "Nexus corporate Site and page composition source",
       "owningDomain": "nexus.wcms",
@@ -23,7 +23,7 @@
       "files": {
         "sample-v001/content/headers/wcms/nexusCorporateContentHeader.js": "018a10d95031b4aecff83f02a3d4230da7d6961c19df1f5d29a78000cf1ab5c1",
         "sample-v001/content/records/wcms/corporate/nexusCatalogData.js": "99682125076c6e0a417ff3f2e6c9756e2e1ea1198e88676e71bba6cfd2fa224a",
-        "sample-v001/content/records/wcms/corporate/nexusComponentData.js": "90226a7a761c0839a46d49fa4459181d1fcf97ba5788d4d62eb84130b5bffcd7",
+        "sample-v001/content/records/wcms/corporate/nexusComponentData.js": "ffc9c6d973979a6ab586419113081d1084b32f02d9ed5481ffbf228af707e46a",
         "sample-v001/content/records/wcms/corporate/nexusComponentTypeGroupData.js": "aec7cc1be85478b325cc7c8b8435694156f06a84990628704bf2211c66d3058a",
         "sample-v001/content/records/wcms/corporate/nexusNavigationData.js": "5d73801c4cf6be1878c85c448f6921d6059f923783a19beece75ad6003e4ccef",
         "sample-v001/content/records/wcms/corporate/nexusPageData.js": "28e35e02748c299f6e65753e0c6f76913a8ec061b8adc2a498a9402bb97920af",

@@ -42,6 +42,8 @@ const entries = [
   media('agoraApparelHomeHeroExperience', 'agora-owned-home-hero-summer-edit', 'background', 'hero-slide', 10, 'Summer collection editorial hero'),
   media('agoraApparelHomeHeroExperience', 'agora-owned-home-hero-signature-style', 'background', 'hero-slide', 20, 'Signature style editorial hero'),
   media('agoraApparelHomeHeroExperience', 'agora-owned-home-hero-layered-edit', 'background', 'hero-slide', 30, 'Layered styling editorial hero'),
+  media('agoraApparelProductListingExperience', 'agora-owned-product-listing-wide-hero', 'background', 'listing-hero', 10, 'Apparel product listing wide editorial hero'),
+  media('agoraApparelCollectionIndexExperience', 'agora-owned-home-hero-layered-edit', 'background', 'collection-index-hero', 10, 'Layered styling collection index hero'),
   media('agoraApparelHomeCollectionGrid', 'agora-owned-collection-new-in', 'thumbnail', 'collection-tile', 10, 'New arrivals collection'),
   media('agoraApparelHomeCollectionGrid', 'agora-owned-collection-promotion', 'thumbnail', 'collection-tile', 20, 'Promotion collection'),
   media('agoraApparelHomeCollectionGrid', 'agora-owned-collection-clothing', 'thumbnail', 'collection-tile', 30, 'Clothing collection'),
