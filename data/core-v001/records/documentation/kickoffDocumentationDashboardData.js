@@ -117,248 +117,6 @@ module.exports = {
     },
     "cards": [
       {
-        "code": "project-identity-and-ownership",
-        "title": "Project Identity and Ownership",
-        "summary": "Open Project Identity and Ownership topics and implementation guidance.",
-        "order": 10
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Kickoff project overview",
-        "targetPage": "kickoff.overview",
-        "route": "/docs/nodics-kickoff"
-      }
-    ],
-    "statusSummary": {
-      "pages": 1,
-      "groups": 1
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record2": {
-    "code": "kickoffDocsDashboardSecrunKickoffLocally",
-    "ownerType": "SECTION",
-    "ownerCode": "kickoffDocsNodeSecrunKickoffLocally",
-    "title": "Run Kickoff Locally",
-    "summary": "Local runtime topology, start sequence, acceptance checks, and developer/operator verification for the reference stack.",
-    "contentArea": {
-      "businessPurpose": "Local runtime topology, start sequence, acceptance checks, and developer/operator verification for the reference stack.",
-      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
-    },
-    "cards": [
-      {
-        "code": "runtime-topology",
-        "title": "Runtime Topology",
-        "summary": "Open Runtime Topology topics and implementation guidance.",
-        "order": 10
-      },
-      {
-        "code": "acceptance-and-verification",
-        "title": "Acceptance and Verification",
-        "summary": "Open Acceptance and Verification topics and implementation guidance.",
-        "order": 20
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Local runtime topology",
-        "targetPage": "kickoff.local-runtime",
-        "route": "/docs/nodics-kickoff/kickoff-local-runtime"
-      },
-      {
-        "label": "Local setup to live runbook",
-        "targetPage": "kickoff.local-setup-to-live",
-        "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
-      },
-      {
-        "label": "Local acceptance checklist",
-        "targetPage": "kickoff.local-acceptance",
-        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
-      }
-    ],
-    "statusSummary": {
-      "pages": 3,
-      "groups": 2
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record3": {
-    "code": "kickoffDocsDashboardSecpublishAndQualify",
-    "ownerType": "SECTION",
-    "ownerCode": "kickoffDocsNodeSecpublishAndQualify",
-    "title": "Publish and Qualify",
-    "summary": "Local publishing operations, deployment qualification evidence, recovery rules, and production-boundary discipline.",
-    "contentArea": {
-      "businessPurpose": "Local publishing operations, deployment qualification evidence, recovery rules, and production-boundary discipline.",
-      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
-    },
-    "cards": [
-      {
-        "code": "publishing-operations",
-        "title": "Publishing Operations",
-        "summary": "Open Publishing Operations topics and implementation guidance.",
-        "order": 10
-      },
-      {
-        "code": "deployment-qualification",
-        "title": "Deployment Qualification",
-        "summary": "Open Deployment Qualification topics and implementation guidance.",
-        "order": 20
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Local publishing operations",
-        "targetPage": "kickoff.local-publishing-operations",
-        "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations"
-      },
-      {
-        "label": "Deployment qualification",
-        "targetPage": "kickoff.deployment-qualification",
-        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
-      }
-    ],
-    "statusSummary": {
-      "pages": 2,
-      "groups": 2
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record4": {
-    "code": "kickoffDocsDashboardSeccustomizeCustomerProjects",
-    "ownerType": "SECTION",
-    "ownerCode": "kickoffDocsNodeSeccustomizeCustomerProjects",
-    "title": "Customize Customer Projects",
-    "summary": "Project-layer customization examples, configuration-first decisions, documentation placement, and rollback-safe extension guidance.",
-    "contentArea": {
-      "businessPurpose": "Project-layer customization examples, configuration-first decisions, documentation placement, and rollback-safe extension guidance.",
-      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
-    },
-    "cards": [
-      {
-        "code": "project-customization",
-        "title": "Project Customization",
-        "summary": "Open Project Customization topics and implementation guidance.",
-        "order": 10
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Customer customization guide",
-        "targetPage": "kickoff.customization",
-        "route": "/docs/nodics-kickoff/kickoff-customization"
-      }
-    ],
-    "statusSummary": {
-      "pages": 1,
-      "groups": 1
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record5": {
-    "code": "kickoffDocsDashboardSecfunctionalJourneys",
-    "ownerType": "SECTION",
-    "ownerCode": "kickoffDocsNodeSecfunctionalJourneys",
-    "title": "Functional Journeys",
-    "summary": "Commerce, Engagement, provider, privacy, reversal, and operator journeys demonstrated by the reference customer project.",
-    "contentArea": {
-      "businessPurpose": "Commerce, Engagement, provider, privacy, reversal, and operator journeys demonstrated by the reference customer project.",
-      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
-    },
-    "cards": [
-      {
-        "code": "commerce-and-engagement-journeys",
-        "title": "Commerce and Engagement Journeys",
-        "summary": "Open Commerce and Engagement Journeys topics and implementation guidance.",
-        "order": 10
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Commerce and Engagement functional journeys",
-        "targetPage": "kickoff.functional-journeys",
-        "route": "/docs/nodics-kickoff/kickoff-functional-journeys"
-      }
-    ],
-    "statusSummary": {
-      "pages": 1,
-      "groups": 1
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record6": {
-    "code": "kickoffDocsDashboardGrpdiscoverKickoffprojectIdentityAndOwnership",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrpdiscoverKickoffprojectIdentityAndOwnership",
-    "title": "Project Identity and Ownership",
-    "summary": "Detailed landing content for Project Identity and Ownership, including business purpose, customization behavior, and validation evidence.",
-    "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
-    },
-    "cards": [
-      {
         "code": "kickoff.overview",
         "title": "Kickoff project overview",
         "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
@@ -389,15 +147,15 @@ module.exports = {
     ],
     "active": true
   },
-  "record7": {
-    "code": "kickoffDocsDashboardGrprunKickoffLocallyruntimeTopology",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrprunKickoffLocallyruntimeTopology",
-    "title": "Runtime Topology",
-    "summary": "Detailed landing content for Runtime Topology, including business purpose, customization behavior, and validation evidence.",
+  "record2": {
+    "code": "kickoffDocsDashboardSecrunKickoffLocally",
+    "ownerType": "SECTION",
+    "ownerCode": "kickoffDocsNodeSecrunKickoffLocally",
+    "title": "Run Kickoff Locally",
+    "summary": "Local runtime topology, start sequence, acceptance checks, and developer/operator verification for the reference stack.",
     "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
+      "businessPurpose": "Local runtime topology, start sequence, acceptance checks, and developer/operator verification for the reference stack.",
+      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
     },
     "cards": [
       {
@@ -411,6 +169,12 @@ module.exports = {
         "title": "Local setup to live runbook",
         "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
         "order": 15
+      },
+      {
+        "code": "kickoff.local-acceptance",
+        "title": "Local acceptance checklist",
+        "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+        "order": 20
       }
     ],
     "journeyLinks": [
@@ -423,6 +187,64 @@ module.exports = {
         "label": "Local setup to live runbook",
         "targetPage": "kickoff.local-setup-to-live",
         "route": "/docs/nodics-kickoff/kickoff-local-setup-to-live"
+      },
+      {
+        "label": "Local acceptance checklist",
+        "targetPage": "kickoff.local-acceptance",
+        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
+      }
+    ],
+    "statusSummary": {
+      "pages": 3
+    },
+    "accessMode": "PUBLIC",
+    "lifecycleState": "ONLINE",
+    "product": "kickoffDocumentationProduct",
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.dashboard.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "DASHBOARD_CHANGE"
+    ],
+    "active": true
+  },
+  "record3": {
+    "code": "kickoffDocsDashboardSecpublishAndQualify",
+    "ownerType": "SECTION",
+    "ownerCode": "kickoffDocsNodeSecpublishAndQualify",
+    "title": "Publish and Qualify",
+    "summary": "Local publishing operations, deployment qualification evidence, recovery rules, and production-boundary discipline.",
+    "contentArea": {
+      "businessPurpose": "Local publishing operations, deployment qualification evidence, recovery rules, and production-boundary discipline.",
+      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
+    },
+    "cards": [
+      {
+        "code": "kickoff.local-publishing-operations",
+        "title": "Local publishing operations",
+        "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
+        "order": 10
+      },
+      {
+        "code": "kickoff.deployment-qualification",
+        "title": "Deployment qualification",
+        "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
+        "order": 20
+      }
+    ],
+    "journeyLinks": [
+      {
+        "label": "Local publishing operations",
+        "targetPage": "kickoff.local-publishing-operations",
+        "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations"
+      },
+      {
+        "label": "Deployment qualification",
+        "targetPage": "kickoff.deployment-qualification",
+        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
       }
     ],
     "statusSummary": {
@@ -442,141 +264,15 @@ module.exports = {
     ],
     "active": true
   },
-  "record8": {
-    "code": "kickoffDocsDashboardGrprunKickoffLocallyacceptanceAndVerification",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification",
-    "title": "Acceptance and Verification",
-    "summary": "Detailed landing content for Acceptance and Verification, including business purpose, customization behavior, and validation evidence.",
+  "record4": {
+    "code": "kickoffDocsDashboardSeccustomizeCustomerProjects",
+    "ownerType": "SECTION",
+    "ownerCode": "kickoffDocsNodeSeccustomizeCustomerProjects",
+    "title": "Customize Customer Projects",
+    "summary": "Project-layer customization examples, configuration-first decisions, documentation placement, and rollback-safe extension guidance.",
     "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
-    },
-    "cards": [
-      {
-        "code": "kickoff.local-acceptance",
-        "title": "Local acceptance checklist",
-        "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
-        "order": 20
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Local acceptance checklist",
-        "targetPage": "kickoff.local-acceptance",
-        "route": "/docs/nodics-kickoff/kickoff-local-acceptance"
-      }
-    ],
-    "statusSummary": {
-      "pages": 1
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record9": {
-    "code": "kickoffDocsDashboardGrppublishAndQualifypublishingOperations",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrppublishAndQualifypublishingOperations",
-    "title": "Publishing Operations",
-    "summary": "Detailed landing content for Publishing Operations, including business purpose, customization behavior, and validation evidence.",
-    "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
-    },
-    "cards": [
-      {
-        "code": "kickoff.local-publishing-operations",
-        "title": "Local publishing operations",
-        "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
-        "order": 10
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Local publishing operations",
-        "targetPage": "kickoff.local-publishing-operations",
-        "route": "/docs/nodics-kickoff/kickoff-local-publishing-operations"
-      }
-    ],
-    "statusSummary": {
-      "pages": 1
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record10": {
-    "code": "kickoffDocsDashboardGrppublishAndQualifydeploymentQualification",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrppublishAndQualifydeploymentQualification",
-    "title": "Deployment Qualification",
-    "summary": "Detailed landing content for Deployment Qualification, including business purpose, customization behavior, and validation evidence.",
-    "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
-    },
-    "cards": [
-      {
-        "code": "kickoff.deployment-qualification",
-        "title": "Deployment qualification",
-        "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
-        "order": 20
-      }
-    ],
-    "journeyLinks": [
-      {
-        "label": "Deployment qualification",
-        "targetPage": "kickoff.deployment-qualification",
-        "route": "/docs/nodics-kickoff/kickoff-deployment-qualification"
-      }
-    ],
-    "statusSummary": {
-      "pages": 1
-    },
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "product": "kickoffDocumentationProduct",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "active": true
-  },
-  "record11": {
-    "code": "kickoffDocsDashboardGrpcustomizeCustomerProjectsprojectCustomization",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization",
-    "title": "Project Customization",
-    "summary": "Detailed landing content for Project Customization, including business purpose, customization behavior, and validation evidence.",
-    "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
+      "businessPurpose": "Project-layer customization examples, configuration-first decisions, documentation placement, and rollback-safe extension guidance.",
+      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
     },
     "cards": [
       {
@@ -610,15 +306,15 @@ module.exports = {
     ],
     "active": true
   },
-  "record12": {
-    "code": "kickoffDocsDashboardGrpfunctionalJourneyscommerceAndEngagementJourneys",
-    "ownerType": "GROUP",
-    "ownerCode": "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys",
-    "title": "Commerce and Engagement Journeys",
-    "summary": "Detailed landing content for Commerce and Engagement Journeys, including business purpose, customization behavior, and validation evidence.",
+  "record5": {
+    "code": "kickoffDocsDashboardSecfunctionalJourneys",
+    "ownerType": "SECTION",
+    "ownerCode": "kickoffDocsNodeSecfunctionalJourneys",
+    "title": "Functional Journeys",
+    "summary": "Commerce, Engagement, provider, privacy, reversal, and operator journeys demonstrated by the reference customer project.",
     "contentArea": {
-      "businessPurpose": "Group customer-project documentation by the journey users recognize.",
-      "technicalPurpose": "Keep project documentation navigation backend-owned and publication-governed."
+      "businessPurpose": "Commerce, Engagement, provider, privacy, reversal, and operator journeys demonstrated by the reference customer project.",
+      "technicalPurpose": "Project documentation section managed as backend content-catalog data with publication lifecycle and access metadata."
     },
     "cards": [
       {

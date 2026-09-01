@@ -162,14 +162,26 @@ catalogue.documents.forEach(document => {
     );
     assert.strictEqual(metadata.sourceRepository, 'nodics.kickoff');
     assert.strictEqual(metadata.accessMode, document.accessMode);
-    const topicNode = nodeRecords.find(node =>
-        node.nodeLevel === 'TOPIC' &&
+    const pageLinkNode = nodeRecords.find(node =>
+        node.nodeLevel === 'PAGE_LINK' &&
         node.targetDocumentationPage === metadata.code &&
         node.targetPage === metadata.targetPage &&
         node.targetRoute === metadata.targetRoute
     );
-    assert(topicNode, document.id + ' must generate a topic node linked to CMS page and route');
+    assert(pageLinkNode, document.id + ' must generate a page-link node linked to CMS page and route');
+    assert(
+        nodeRecords.some(node =>
+            node.nodeLevel === 'SECTION' &&
+            node.code === pageLinkNode.parentNode
+        ),
+        document.id + ' page-link node must sit directly under a documentation section'
+    );
 });
+
+assert(
+    nodeRecords.every(node => !['GROUP', 'SUBGROUP', 'TOPIC'].includes(node.nodeLevel)),
+    'Kickoff documentation navigation must stay at two visible levels: section and page link'
+);
 
 dashboardRecords.forEach(dashboard => {
     assert(dashboard.summary, dashboard.code + ' must expose a hierarchy dashboard summary');

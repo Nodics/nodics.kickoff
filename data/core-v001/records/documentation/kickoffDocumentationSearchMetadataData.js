@@ -336,13 +336,13 @@ module.exports = {
     "active": true
   },
   "record8": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrpdiscoverkickoffprojectidentityandownership",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickoffoverview",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrpdiscoverKickoffprojectIdentityAndOwnership",
-    "title": "Project Identity and Ownership",
-    "summary": "Business-friendly group for Project Identity and Ownership topics.",
-    "searchText": "Project Identity and Ownership Business-friendly group for Project Identity and Ownership topics. kickoff reference project customer project documentation",
+    "targetCode": "kickoffDocsNodePagekickoffOverview",
+    "title": "Kickoff project overview",
+    "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
+    "searchText": "Kickoff project overview Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs. kickoff reference project customer project documentation",
     "keywords": [
       "kickoff",
       "reference project",
@@ -350,8 +350,8 @@ module.exports = {
       "documentation"
     ],
     "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
+      "nodeLevel": "PAGE_LINK",
+      "nodeType": "PAGE",
       "audience": [
         "business-user",
         "administrator",
@@ -379,21 +379,21 @@ module.exports = {
     "active": true
   },
   "record9": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickoffoverview",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalruntime",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffOverview",
-    "title": "Kickoff project overview",
-    "summary": "Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs.",
-    "searchText": "Kickoff project overview Understand what Nodics Kickoff owns, how it demonstrates the framework, and where project-owned documentation belongs. kickoff reference project customer project documentation",
+    "targetCode": "kickoffDocsNodePagekickoffLocalRuntime",
+    "title": "Local runtime topology",
+    "summary": "Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable.",
+    "searchText": "Local runtime topology Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable. local runtime topology start servers",
     "keywords": [
-      "kickoff",
-      "reference project",
-      "customer project",
-      "documentation"
+      "local runtime",
+      "topology",
+      "start",
+      "servers"
     ],
     "facets": {
-      "nodeLevel": "TOPIC",
+      "nodeLevel": "PAGE_LINK",
       "nodeType": "PAGE",
       "audience": [
         "business-user",
@@ -422,22 +422,23 @@ module.exports = {
     "active": true
   },
   "record10": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyruntimetopology",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalsetuptolive",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrprunKickoffLocallyruntimeTopology",
-    "title": "Runtime Topology",
-    "summary": "Business-friendly group for Runtime Topology topics.",
-    "searchText": "Runtime Topology Business-friendly group for Runtime Topology topics. local runtime topology start servers",
+    "targetCode": "kickoffDocsNodePagekickoffLocalSetupToLive",
+    "title": "Local setup to live runbook",
+    "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
+    "searchText": "Local setup to live runbook Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification. local setup axis login guided setup live verification screenshots",
     "keywords": [
-      "local runtime",
-      "topology",
-      "start",
-      "servers"
+      "local setup",
+      "axis login",
+      "guided setup",
+      "live verification",
+      "screenshots"
     ],
     "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
+      "nodeLevel": "PAGE_LINK",
+      "nodeType": "PAGE",
       "audience": [
         "business-user",
         "administrator",
@@ -465,21 +466,21 @@ module.exports = {
     "active": true
   },
   "record11": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalruntime",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalacceptance",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalRuntime",
-    "title": "Local runtime topology",
-    "summary": "Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable.",
-    "searchText": "Local runtime topology Start and reason about the local Platform, WCMS, and Process servers that make the reference project usable. local runtime topology start servers",
+    "targetCode": "kickoffDocsNodePagekickoffLocalAcceptance",
+    "title": "Local acceptance checklist",
+    "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+    "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. acceptance fresh local verification checklist",
     "keywords": [
-      "local runtime",
-      "topology",
-      "start",
-      "servers"
+      "acceptance",
+      "fresh local",
+      "verification",
+      "checklist"
     ],
     "facets": {
-      "nodeLevel": "TOPIC",
+      "nodeLevel": "PAGE_LINK",
       "nodeType": "PAGE",
       "audience": [
         "business-user",
@@ -508,22 +509,21 @@ module.exports = {
     "active": true
   },
   "record12": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalpublishingoperations",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalSetupToLive",
-    "title": "Local setup to live runbook",
-    "summary": "Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification.",
-    "searchText": "Local setup to live runbook Follow the screenshot-guided path from local startup to Axis login, guided setup, publication, and live Nexus and Agora verification. local setup axis login guided setup live verification screenshots",
+    "targetCode": "kickoffDocsNodePagekickoffLocalPublishingOperations",
+    "title": "Local publishing operations",
+    "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
+    "searchText": "Local publishing operations Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access. publishing staged online recovery",
     "keywords": [
-      "local setup",
-      "axis login",
-      "guided setup",
-      "live verification",
-      "screenshots"
+      "publishing",
+      "staged",
+      "online",
+      "recovery"
     ],
     "facets": {
-      "nodeLevel": "TOPIC",
+      "nodeLevel": "PAGE_LINK",
       "nodeType": "PAGE",
       "audience": [
         "business-user",
@@ -552,22 +552,22 @@ module.exports = {
     "active": true
   },
   "record13": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickoffdeploymentqualification",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification",
-    "title": "Acceptance and Verification",
-    "summary": "Business-friendly group for Acceptance and Verification topics.",
-    "searchText": "Acceptance and Verification Business-friendly group for Acceptance and Verification topics. acceptance fresh local verification checklist",
+    "targetCode": "kickoffDocsNodePagekickoffDeploymentQualification",
+    "title": "Deployment qualification",
+    "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
+    "searchText": "Deployment qualification Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off. deployment qualification evidence production",
     "keywords": [
-      "acceptance",
-      "fresh local",
-      "verification",
-      "checklist"
+      "deployment",
+      "qualification",
+      "evidence",
+      "production"
     ],
     "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
+      "nodeLevel": "PAGE_LINK",
+      "nodeType": "PAGE",
       "audience": [
         "business-user",
         "administrator",
@@ -595,21 +595,21 @@ module.exports = {
     "active": true
   },
   "record14": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalacceptance",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickoffcustomization",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalAcceptance",
-    "title": "Local acceptance checklist",
-    "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
-    "searchText": "Local acceptance checklist Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior. acceptance fresh local verification checklist",
+    "targetCode": "kickoffDocsNodePagekickoffCustomization",
+    "title": "Customer customization guide",
+    "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
+    "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. customization project module overlay configuration",
     "keywords": [
-      "acceptance",
-      "fresh local",
-      "verification",
-      "checklist"
+      "customization",
+      "project module",
+      "overlay",
+      "configuration"
     ],
     "facets": {
-      "nodeLevel": "TOPIC",
+      "nodeLevel": "PAGE_LINK",
       "nodeType": "PAGE",
       "audience": [
         "business-user",
@@ -638,22 +638,22 @@ module.exports = {
     "active": true
   },
   "record15": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifypublishingoperations",
+    "code": "kickoffDocsSearchnodekickoffdocsnodepagekickofffunctionaljourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrppublishAndQualifypublishingOperations",
-    "title": "Publishing Operations",
-    "summary": "Business-friendly group for Publishing Operations topics.",
-    "searchText": "Publishing Operations Business-friendly group for Publishing Operations topics. publishing staged online recovery",
+    "targetCode": "kickoffDocsNodePagekickoffFunctionalJourneys",
+    "title": "Commerce and Engagement functional journeys",
+    "summary": "Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence.",
+    "searchText": "Commerce and Engagement functional journeys Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence. commerce engagement customer journey provider",
     "keywords": [
-      "publishing",
-      "staged",
-      "online",
-      "recovery"
+      "commerce",
+      "engagement",
+      "customer journey",
+      "provider"
     ],
     "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
+      "nodeLevel": "PAGE_LINK",
+      "nodeType": "PAGE",
       "audience": [
         "business-user",
         "administrator",
@@ -681,307 +681,6 @@ module.exports = {
     "active": true
   },
   "record16": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalpublishingoperations",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalPublishingOperations",
-    "title": "Local publishing operations",
-    "summary": "Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access.",
-    "searchText": "Local publishing operations Operate, diagnose, recover, upgrade, retain, and qualify the Local Staged-to-Online publishing lifecycle without direct database access. publishing staged online recovery",
-    "keywords": [
-      "publishing",
-      "staged",
-      "online",
-      "recovery"
-    ],
-    "facets": {
-      "nodeLevel": "TOPIC",
-      "nodeType": "PAGE",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record17": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrppublishAndQualifydeploymentQualification",
-    "title": "Deployment Qualification",
-    "summary": "Business-friendly group for Deployment Qualification topics.",
-    "searchText": "Deployment Qualification Business-friendly group for Deployment Qualification topics. deployment qualification evidence production",
-    "keywords": [
-      "deployment",
-      "qualification",
-      "evidence",
-      "production"
-    ],
-    "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record18": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickoffdeploymentqualification",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffDeploymentQualification",
-    "title": "Deployment qualification",
-    "summary": "Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off.",
-    "searchText": "Deployment qualification Run the governed local evidence pack and coordinate production-only load, resilience, security, provider, recovery, and accessibility sign-off. deployment qualification evidence production",
-    "keywords": [
-      "deployment",
-      "qualification",
-      "evidence",
-      "production"
-    ],
-    "facets": {
-      "nodeLevel": "TOPIC",
-      "nodeType": "PAGE",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record19": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization",
-    "title": "Project Customization",
-    "summary": "Business-friendly group for Project Customization topics.",
-    "searchText": "Project Customization Business-friendly group for Project Customization topics. customization project module overlay configuration",
-    "keywords": [
-      "customization",
-      "project module",
-      "overlay",
-      "configuration"
-    ],
-    "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record20": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickoffcustomization",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffCustomization",
-    "title": "Customer customization guide",
-    "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
-    "searchText": "Customer customization guide Use Kickoff as a safe example for project modules, environment configuration, and customer overlays. customization project module overlay configuration",
-    "keywords": [
-      "customization",
-      "project module",
-      "overlay",
-      "configuration"
-    ],
-    "facets": {
-      "nodeLevel": "TOPIC",
-      "nodeType": "PAGE",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record21": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodegrpfunctionaljourneyscommerceandengagementjourneys",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys",
-    "title": "Commerce and Engagement Journeys",
-    "summary": "Business-friendly group for Commerce and Engagement Journeys topics.",
-    "searchText": "Commerce and Engagement Journeys Business-friendly group for Commerce and Engagement Journeys topics. commerce engagement customer journey provider",
-    "keywords": [
-      "commerce",
-      "engagement",
-      "customer journey",
-      "provider"
-    ],
-    "facets": {
-      "nodeLevel": "GROUP",
-      "nodeType": "CONTAINER",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record22": {
-    "code": "kickoffDocsSearchnodekickoffdocsnodetopickickofffunctionaljourneys",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffFunctionalJourneys",
-    "title": "Commerce and Engagement functional journeys",
-    "summary": "Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence.",
-    "searchText": "Commerce and Engagement functional journeys Follow the local customer, operator, visibility, reversal, recovery, privacy, and provider-sandbox journeys with clear ownership and verification evidence. commerce engagement customer journey provider",
-    "keywords": [
-      "commerce",
-      "engagement",
-      "customer journey",
-      "provider"
-    ],
-    "facets": {
-      "nodeLevel": "TOPIC",
-      "nodeType": "PAGE",
-      "audience": [
-        "business-user",
-        "administrator",
-        "architect",
-        "developer",
-        "operator",
-        "qa",
-        "ai-tool"
-      ]
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record23": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardproduct",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1014,7 +713,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record24": {
+  "record17": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecdiscoverkickoff",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1047,7 +746,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record25": {
+  "record18": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecrunkickofflocally",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1080,7 +779,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record26": {
+  "record19": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecpublishandqualify",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1113,7 +812,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record27": {
+  "record20": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardseccustomizecustomerprojects",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1146,7 +845,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record28": {
+  "record21": {
     "code": "kickoffDocsSearchdashboardkickoffdocsdashboardsecfunctionaljourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "DASHBOARD",
@@ -1179,238 +878,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record29": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpdiscoverkickoffprojectidentityandownership",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrpdiscoverKickoffprojectIdentityAndOwnership",
-    "title": "Project Identity and Ownership",
-    "summary": "Detailed landing content for Project Identity and Ownership, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Project Identity and Ownership Detailed landing content for Project Identity and Ownership, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrpdiscoverKickoffprojectIdentityAndOwnership",
-      "Project Identity and Ownership"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrpdiscoverKickoffprojectIdentityAndOwnership"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record30": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrprunKickoffLocallyruntimeTopology",
-    "title": "Runtime Topology",
-    "summary": "Detailed landing content for Runtime Topology, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Runtime Topology Detailed landing content for Runtime Topology, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrprunKickoffLocallyruntimeTopology",
-      "Runtime Topology"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrprunKickoffLocallyruntimeTopology"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record31": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyacceptanceandverification",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrprunKickoffLocallyacceptanceAndVerification",
-    "title": "Acceptance and Verification",
-    "summary": "Detailed landing content for Acceptance and Verification, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Acceptance and Verification Detailed landing content for Acceptance and Verification, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification",
-      "Acceptance and Verification"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record32": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifypublishingoperations",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrppublishAndQualifypublishingOperations",
-    "title": "Publishing Operations",
-    "summary": "Detailed landing content for Publishing Operations, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Publishing Operations Detailed landing content for Publishing Operations, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrppublishAndQualifypublishingOperations",
-      "Publishing Operations"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrppublishAndQualifypublishingOperations"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record33": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifydeploymentqualification",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrppublishAndQualifydeploymentQualification",
-    "title": "Deployment Qualification",
-    "summary": "Detailed landing content for Deployment Qualification, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Deployment Qualification Detailed landing content for Deployment Qualification, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrppublishAndQualifydeploymentQualification",
-      "Deployment Qualification"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrppublishAndQualifydeploymentQualification"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record34": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpcustomizecustomerprojectsprojectcustomization",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrpcustomizeCustomerProjectsprojectCustomization",
-    "title": "Project Customization",
-    "summary": "Detailed landing content for Project Customization, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Project Customization Detailed landing content for Project Customization, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization",
-      "Project Customization"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record35": {
-    "code": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpfunctionaljourneyscommerceandengagementjourneys",
-    "product": "kickoffDocumentationProduct",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrpfunctionalJourneyscommerceAndEngagementJourneys",
-    "title": "Commerce and Engagement Journeys",
-    "summary": "Detailed landing content for Commerce and Engagement Journeys, including business purpose, customization behavior, and validation evidence.",
-    "searchText": "Commerce and Engagement Journeys Detailed landing content for Commerce and Engagement Journeys, including business purpose, customization behavior, and validation evidence.",
-    "keywords": [
-      "GROUP",
-      "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys",
-      "Commerce and Engagement Journeys"
-    ],
-    "facets": {
-      "ownerType": "GROUP",
-      "ownerCode": "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys"
-    },
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "locale": "en",
-    "channel": "web",
-    "accessPolicy": "kickoffDocsAccessPublic",
-    "accessMode": "PUBLIC",
-    "lifecycleState": "ONLINE",
-    "indexState": "INDEX_READY",
-    "active": true
-  },
-  "record36": {
+  "record22": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickoffoverview",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1429,7 +897,7 @@ module.exports = {
     ],
     "facets": {
       "section": "discover-kickoff",
-      "group": "project-identity-and-ownership",
+      "group": "discover-kickoff",
       "documentType": "overview",
       "audience": [
         "business-user",
@@ -1457,7 +925,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record37": {
+  "record23": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalruntime",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1479,7 +947,7 @@ module.exports = {
     ],
     "facets": {
       "section": "run-kickoff-locally",
-      "group": "runtime-topology",
+      "group": "run-kickoff-locally",
       "documentType": "operations",
       "audience": [
         "business-user",
@@ -1507,7 +975,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record38": {
+  "record24": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalsetuptolive",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1530,7 +998,7 @@ module.exports = {
     ],
     "facets": {
       "section": "run-kickoff-locally",
-      "group": "runtime-topology",
+      "group": "run-kickoff-locally",
       "documentType": "how-to",
       "audience": [
         "business-user",
@@ -1558,7 +1026,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record39": {
+  "record25": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalacceptance",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1579,7 +1047,7 @@ module.exports = {
     ],
     "facets": {
       "section": "run-kickoff-locally",
-      "group": "acceptance-and-verification",
+      "group": "run-kickoff-locally",
       "documentType": "operations",
       "audience": [
         "business-user",
@@ -1607,7 +1075,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record40": {
+  "record26": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalpublishingoperations",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1627,7 +1095,7 @@ module.exports = {
     ],
     "facets": {
       "section": "publish-and-qualify",
-      "group": "publishing-operations",
+      "group": "publish-and-qualify",
       "documentType": "operations",
       "audience": [
         "business-user",
@@ -1655,7 +1123,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record41": {
+  "record27": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickoffdeploymentqualification",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1675,7 +1143,7 @@ module.exports = {
     ],
     "facets": {
       "section": "publish-and-qualify",
-      "group": "deployment-qualification",
+      "group": "publish-and-qualify",
       "documentType": "operations",
       "audience": [
         "business-user",
@@ -1703,7 +1171,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record42": {
+  "record28": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickoffcustomization",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1723,7 +1191,7 @@ module.exports = {
     ],
     "facets": {
       "section": "customize-customer-projects",
-      "group": "project-customization",
+      "group": "customize-customer-projects",
       "documentType": "customization",
       "audience": [
         "business-user",
@@ -1751,7 +1219,7 @@ module.exports = {
     "indexState": "INDEX_READY",
     "active": true
   },
-  "record43": {
+  "record29": {
     "code": "kickoffDocsSearchpagekickoffdocsmetadatakickofffunctionaljourneys",
     "product": "kickoffDocumentationProduct",
     "targetType": "PAGE",
@@ -1772,7 +1240,7 @@ module.exports = {
     ],
     "facets": {
       "section": "functional-journeys",
-      "group": "commerce-and-engagement-journeys",
+      "group": "functional-journeys",
       "documentType": "how-to",
       "audience": [
         "business-user",

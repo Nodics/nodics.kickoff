@@ -367,9 +367,9 @@ module.exports = {
     "active": true
   },
   "record10": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrpdiscoverkickoffprojectidentityandownership",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickoffoverview",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrpdiscoverKickoffprojectIdentityAndOwnership",
+    "targetCode": "kickoffDocsNodePagekickoffOverview",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -379,7 +379,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "e07b857f65cdf8404ba0ec9a0fcf8f83484eeea8ec3378dca9939f9aa75ece00",
+    "checksum": "fc05a79ca07a9350ef282eabf8c93c22ed77f67dcff17e4a8effa10255a6b9ab",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -403,9 +403,9 @@ module.exports = {
     "active": true
   },
   "record11": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickoffoverview",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickofflocalruntime",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffOverview",
+    "targetCode": "kickoffDocsNodePagekickoffLocalRuntime",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -415,7 +415,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "08b01ed89bb381c7a0cf840e9f01c2261d9e8482857c403eea939b56b36d384c",
+    "checksum": "42c1eb9271a5b587bfd4a86d63d699ab3edf8a13b4dc2a1b9ab2cfa51f9a8e59",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -439,9 +439,9 @@ module.exports = {
     "active": true
   },
   "record12": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrprunkickofflocallyruntimetopology",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickofflocalsetuptolive",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrprunKickoffLocallyruntimeTopology",
+    "targetCode": "kickoffDocsNodePagekickoffLocalSetupToLive",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -451,7 +451,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "6bdedcca66800df6190ac5b7ae5e0c8b741204a1fed655b02bdeb25702fb29de",
+    "checksum": "1f9a5ec3bb88dee8c79688bf3e2cada89c25e724ab3857e76f1414ba5859cc5a",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -475,9 +475,9 @@ module.exports = {
     "active": true
   },
   "record13": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalruntime",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickofflocalacceptance",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalRuntime",
+    "targetCode": "kickoffDocsNodePagekickoffLocalAcceptance",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -487,7 +487,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "1eea4af6e36c859ed8e143b85ed98b7698af32a7327c63d881c0a8df9e50a767",
+    "checksum": "327020a63f40aa3493dc2d2e46c17cddd782af8fca53fc77f1ea0b5d216bef23",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -511,9 +511,9 @@ module.exports = {
     "active": true
   },
   "record14": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickofflocalpublishingoperations",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalSetupToLive",
+    "targetCode": "kickoffDocsNodePagekickoffLocalPublishingOperations",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -523,7 +523,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "fadb2c106eb00275e2c51960f0d6252296fb6adb072bfac4a4d52dc8180a9b80",
+    "checksum": "747118f3316b89c2d3a03c188f0d6e4bfc1fe210740f91ecb9bb8415bd7fc13e",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -547,9 +547,9 @@ module.exports = {
     "active": true
   },
   "record15": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickoffdeploymentqualification",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrprunKickoffLocallyacceptanceAndVerification",
+    "targetCode": "kickoffDocsNodePagekickoffDeploymentQualification",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -559,7 +559,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "5a03205ba993023c9238d56269b3df8e936ee4bf67643ccd3062883074938c26",
+    "checksum": "c92ff8ebb6690bc6736f95668dfc3868197bd2ff937f209447afa2bf056907de",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -583,9 +583,9 @@ module.exports = {
     "active": true
   },
   "record16": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalacceptance",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickoffcustomization",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalAcceptance",
+    "targetCode": "kickoffDocsNodePagekickoffCustomization",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -595,7 +595,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "58a3a4930c29c26ca7cbe6c63b5129702c873723a5b098ea1a389028a089ed5e",
+    "checksum": "fddabcb2fa2450f0f0bd30e548dbced2b542eefe3f80ad5668b2ecdabe9fca9e",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -619,9 +619,9 @@ module.exports = {
     "active": true
   },
   "record17": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrppublishandqualifypublishingoperations",
+    "code": "kickoffDocsPublicationnodekickoffdocsnodepagekickofffunctionaljourneys",
     "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrppublishAndQualifypublishingOperations",
+    "targetCode": "kickoffDocsNodePagekickoffFunctionalJourneys",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -631,7 +631,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "6cc7968da6518006b1d9743b4fdfa4f4b89c24d71310679e29f594547319c2f6",
+    "checksum": "d16b6010c73e2e683be47faf6715ebc47838c7a20ce1a0764ac75c58ed45f5d0",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.navigation.update"
@@ -655,258 +655,6 @@ module.exports = {
     "active": true
   },
   "record18": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofflocalpublishingoperations",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffLocalPublishingOperations",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "d74162f7710fbdb2bac4b720c857a52a5de2e2d24660967dfef11f03700430e3",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record19": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrppublishAndQualifydeploymentQualification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "175f244944421b00ad9bb4d8b78cda75eeabe086bb984bdc839fc3c9a0de788c",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record20": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickoffdeploymentqualification",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffDeploymentQualification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "8894781785d4722c698a6a4065c877763966fe800a3ff87708e6701dd26e4152",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record21": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrpcustomizeCustomerProjectsprojectCustomization",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "004a7e41995bddd91d1601329ba919a247c922956a7f88fb7172bc22c3fb53de",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record22": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickoffcustomization",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffCustomization",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "995e41b00f88c3b0c6da510eace48838a6b7743c24560a9ffc936507029042fd",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record23": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodegrpfunctionaljourneyscommerceandengagementjourneys",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeGrpfunctionalJourneyscommerceAndEngagementJourneys",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "4d44a0f3b53d06a48d722399aa8e707ebfe3c1084e04c1cb62bb8cc8326e2fa5",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record24": {
-    "code": "kickoffDocsPublicationnodekickoffdocsnodetopickickofffunctionaljourneys",
-    "targetType": "NODE",
-    "targetCode": "kickoffDocsNodeTopickickoffFunctionalJourneys",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "5b93fe893ef39a60b9ecd297e67e694fde2001842a3b61caf0c657fc6b0cb567",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.navigation.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "NAVIGATION_CHANGE",
-      "DASHBOARD_CHANGE",
-      "ACCESS_POLICY_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record25": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardproduct",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardProduct",
@@ -940,7 +688,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record26": {
+  "record19": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecdiscoverkickoff",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecdiscoverKickoff",
@@ -974,7 +722,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record27": {
+  "record20": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecrunkickofflocally",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecrunKickoffLocally",
@@ -1008,7 +756,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record28": {
+  "record21": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecpublishandqualify",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecpublishAndQualify",
@@ -1042,7 +790,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record29": {
+  "record22": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardseccustomizecustomerprojects",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSeccustomizeCustomerProjects",
@@ -1076,7 +824,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record30": {
+  "record23": {
     "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardsecfunctionaljourneys",
     "targetType": "DASHBOARD",
     "targetCode": "kickoffDocsDashboardSecfunctionalJourneys",
@@ -1110,245 +858,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record31": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrpdiscoverkickoffprojectidentityandownership",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrpdiscoverKickoffprojectIdentityAndOwnership",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "b8e95d0c6d588aa5729eead85af7f4c2af628b4788a580c8e6a43f46036c0d59",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record32": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrprunKickoffLocallyruntimeTopology",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "e80fe4552bfa2786ea03cb55ef2beef16481d39e6ca899ca851528f55601a206",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record33": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrprunkickofflocallyacceptanceandverification",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrprunKickoffLocallyacceptanceAndVerification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "0c429c59ab06d502fe9a787a8bf7c5ec65fef936d12ce9945ae14826bb8d8b5e",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record34": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrppublishandqualifypublishingoperations",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrppublishAndQualifypublishingOperations",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "f57c1121373064c14a07402d339fdff9be92dea4d276191c65c6fd0d7bc04259",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record35": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrppublishandqualifydeploymentqualification",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrppublishAndQualifydeploymentQualification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "11ce03b5b8ca5bea699222ce1d7c24a9974645ccb75ecfdfa7e932a202178cb9",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record36": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrpcustomizecustomerprojectsprojectcustomization",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrpcustomizeCustomerProjectsprojectCustomization",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "57f0306f9081af5402f5f0ba233ea1e4ba5306844caa7d4d6326c828d1509940",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record37": {
-    "code": "kickoffDocsPublicationdashboardkickoffdocsdashboardgrpfunctionaljourneyscommerceandengagementjourneys",
-    "targetType": "DASHBOARD",
-    "targetCode": "kickoffDocsDashboardGrpfunctionalJourneyscommerceAndEngagementJourneys",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "220c9fe504e18815984579da3dae843b408ebf42324fa34cdd777e58b345b0d1",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.dashboard.update"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "DASHBOARD_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record38": {
+  "record24": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickoffoverview",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffOverview",
@@ -1384,7 +894,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record39": {
+  "record25": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalruntime",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalRuntime",
@@ -1420,7 +930,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record40": {
+  "record26": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalsetuptolive",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalSetupToLive",
@@ -1456,7 +966,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record41": {
+  "record27": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalacceptance",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalAcceptance",
@@ -1492,7 +1002,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record42": {
+  "record28": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofflocalpublishingoperations",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffLocalPublishingOperations",
@@ -1528,7 +1038,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record43": {
+  "record29": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickoffdeploymentqualification",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffDeploymentQualification",
@@ -1564,7 +1074,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record44": {
+  "record30": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickoffcustomization",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffCustomization",
@@ -1600,7 +1110,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record45": {
+  "record31": {
     "code": "kickoffDocsPublicationpagekickoffdocsmetadatakickofffunctionaljourneys",
     "targetType": "PAGE",
     "targetCode": "kickoffDocsMetadatakickoffFunctionalJourneys",
@@ -1636,7 +1146,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record46": {
+  "record32": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchproductkickoffdocumentationproduct",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchproductkickoffdocumentationproduct",
@@ -1670,7 +1180,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record47": {
+  "record33": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnavigationkickoffdocumentationnavigationtree",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnavigationkickoffdocumentationnavigationtree",
@@ -1704,7 +1214,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record48": {
+  "record34": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnoderoot",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnoderoot",
@@ -1738,7 +1248,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record49": {
+  "record35": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecdiscoverkickoff",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecdiscoverkickoff",
@@ -1772,7 +1282,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record50": {
+  "record36": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecrunkickofflocally",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecrunkickofflocally",
@@ -1806,7 +1316,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record51": {
+  "record37": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecpublishandqualify",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecpublishandqualify",
@@ -1840,7 +1350,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record52": {
+  "record38": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodeseccustomizecustomerprojects",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodeseccustomizecustomerprojects",
@@ -1874,7 +1384,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record53": {
+  "record39": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodesecfunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchnodekickoffdocsnodesecfunctionaljourneys",
@@ -1908,10 +1418,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record54": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrpdiscoverkickoffprojectidentityandownership",
+  "record40": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickoffoverview",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrpdiscoverkickoffprojectidentityandownership",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickoffoverview",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -1921,7 +1431,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "4cf5a6fba69107cb62eeb0d57a915976497b563d46f1535634b2ef1b8f30bcad",
+    "checksum": "e1a98883a58670d67f3ba959da90d5030cb4a4a765a0dbb0d9dd311ad8592d75",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1942,10 +1452,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record55": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickoffoverview",
+  "record41": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickofflocalruntime",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickoffoverview",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalruntime",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -1955,7 +1465,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "aee2c059c39ad06cf28f3d3b86bf1bea6e28aae23657291177adef2308c5680e",
+    "checksum": "5ccebfb07586794193214f5a9319a0fe5d836ae0c15b63e289cf5f85deca275a",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1976,10 +1486,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record56": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrprunkickofflocallyruntimetopology",
+  "record42": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickofflocalsetuptolive",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyruntimetopology",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalsetuptolive",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -1989,7 +1499,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "6812e4e0c6fff7bcee0850766ea3816e72f725056f930e542cd285b8abdb6fc9",
+    "checksum": "ecbd76ce5d719152339926dedf3f74fe871e0fa7a8dae606780e1d867aeff3ec",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2010,10 +1520,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record57": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalruntime",
+  "record43": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickofflocalacceptance",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalruntime",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalacceptance",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -2023,7 +1533,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "2c90a404ca27fcb80fcb2dafa50818ec0cce102e2028e6e647bfbc029be3c6b2",
+    "checksum": "10bc52d5aa89bf2509700ba12656c3cc6334c2dbe5b47bdc1425580aa1b4f7e2",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2044,10 +1554,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record58": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalsetuptolive",
+  "record44": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickofflocalpublishingoperations",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalsetuptolive",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickofflocalpublishingoperations",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -2057,7 +1567,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "95f6c20ad0826f2bfe2d2250b59b3d82ab6650c842f5b1c3a1475ac25c4fb821",
+    "checksum": "7ab5e17b82f0fa997c7a3e3bebfc4a76cc47ffcc5a57f0a49d766ca34bf76ecc",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2078,10 +1588,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record59": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
+  "record45": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickoffdeploymentqualification",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrprunkickofflocallyacceptanceandverification",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickoffdeploymentqualification",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -2091,7 +1601,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "2d48fdb90c2a8925dd09c3dc67f13463c90ac74afce353c8946220f7c53a9aa5",
+    "checksum": "95c89b5c84eb94ff849ec052c98de916f11a1beb87f4e0bfc2fbf05bb2aa8492",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2112,10 +1622,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record60": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalacceptance",
+  "record46": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickoffcustomization",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalacceptance",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickoffcustomization",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -2125,7 +1635,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "cec18410889b7bb6a2ddde252e5e9b02d1079b57ed2f243928c6164e0a6765d9",
+    "checksum": "38b89e24a0dd86ffa6570a5e288f0813e240baf37b063ffb800251bbcbd56052",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2146,10 +1656,10 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record61": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrppublishandqualifypublishingoperations",
+  "record47": {
+    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodepagekickofffunctionaljourneys",
     "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifypublishingoperations",
+    "targetCode": "kickoffDocsSearchnodekickoffdocsnodepagekickofffunctionaljourneys",
     "lifecycleState": "ONLINE",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
@@ -2159,7 +1669,7 @@ module.exports = {
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "nexusVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "fffb9d962dfc3b366abf7621733fcc953b881eefdb9a7ffa334d45ac58e2dbab",
+    "checksum": "ddb143334d0daad092221eddb02cf63e5e1db246b8576781b7a6c62efdb8bc16",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2180,245 +1690,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record62": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofflocalpublishingoperations",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofflocalpublishingoperations",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "81ca4d0ca76d210bf271d70fff15a8b20186e78618a5ef0f847c6e7427c424b9",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record63": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrppublishandqualifydeploymentqualification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "275b11b8900974bf53b4c339ad0aa885cff5b84b80f413ef18739bcbb2d174ce",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record64": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickoffdeploymentqualification",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickoffdeploymentqualification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "77507fbf98c521cbbd967c138201dc014c481876ff7d268d30e913fccc0caf88",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record65": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrpcustomizecustomerprojectsprojectcustomization",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "8ba13db8128dbeecd443fad2791288a04d9c8b14ca8b24582c2eacb3490bf649",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record66": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickoffcustomization",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickoffcustomization",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "600b8a5957393ef45941fdeef715c100647bd5806f7c8d89cf2b270b37c6dac1",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record67": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodegrpfunctionaljourneyscomc7a2fabdc3cc77be",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodegrpfunctionaljourneyscommerceandengagementjourneys",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "ca73bd3b2118cb3c7284ef1c2ef53c233e04ff92fd2e60b17a509eb1bd2276cb",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record68": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchnodekickoffdocsnodetopickickofffunctionaljourneys",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchnodekickoffdocsnodetopickickofffunctionaljourneys",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "89c86f158fee18e188c8bda656f5c0b741ca82c59d7da0458f6d7c7cc49e0539",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record69": {
+  "record48": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardproduct",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardproduct",
@@ -2452,7 +1724,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record70": {
+  "record49": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecdiscoverkickoff",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecdiscoverkickoff",
@@ -2486,7 +1758,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record71": {
+  "record50": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecrunkickofflocally",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecrunkickofflocally",
@@ -2520,7 +1792,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record72": {
+  "record51": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecpublishandqualify",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecpublishandqualify",
@@ -2554,7 +1826,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record73": {
+  "record52": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardseccustomizecustomerprojects",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardseccustomizecustomerprojects",
@@ -2588,7 +1860,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record74": {
+  "record53": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardsecfunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardsecfunctionaljourneys",
@@ -2622,245 +1894,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record75": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrpdiscoverkica81af585a6dc8f8e",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpdiscoverkickoffprojectidentityandownership",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "00c4816c37e1ec4c9435f9dc6ed20b34bbc672f69482e341f49e0516d4d4c4c8",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record76": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyruntimetopology",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "cbf3ccc4f7eadf219c384327927181f3e6fc39bde763b4ea0a6e714c370499ed",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record77": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrprunkickoffl5c1f3b0664f41f95",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrprunkickofflocallyacceptanceandverification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "c82992e9a8ec77c4f2c12e95f9321d7ddbaca420f8cfc387cbb5b4dc52abe891",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record78": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrppublishandq3da30b28144e9743",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifypublishingoperations",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "f830c9c02020e7cdd1042dbb7bf1522dddd760acb278899a09845b16090d3c53",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record79": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrppublishandq5a689fd3211348c5",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrppublishandqualifydeploymentqualification",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "d6f2a5f8fc4c03d0205a53a700f221f5f291cae9be0a79f009ff6f371edd30c4",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record80": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrpcustomizecu633267de9f0525b4",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpcustomizecustomerprojectsprojectcustomization",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "67c200a0742cc8738973b899de7c5dfc48f4cdc7126775a1a7bf4de3596a4b66",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record81": {
-    "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchdashboardkickoffdocsdashboardgrpfunctionalje191c05004832c12",
-    "targetType": "SEARCH_METADATA",
-    "targetCode": "kickoffDocsSearchdashboardkickoffdocsdashboardgrpfunctionaljourneyscommerceandengagementjourneys",
-    "lifecycleState": "ONLINE",
-    "publicationCode": "kickoffDocumentation",
-    "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "validationResult": {
-      "generated": true,
-      "sourceAuthority": "docs/catalogue.json",
-      "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
-      "nexusVisibleOnlyWhenOnlineAndPublic": true
-    },
-    "checksum": "443958b9a28076477704b9066477e10e7f2b19d01d31f9a82b11834509952ead",
-    "managedInAxis": true,
-    "axisAuthoringPermissions": [
-      "documentation.search.preview"
-    ],
-    "workflowRequired": true,
-    "workflowTriggers": [
-      "SEARCH_METADATA_CHANGE"
-    ],
-    "decisionPolicy": {
-      "reviewPermission": "documentation.review",
-      "approvePermission": "documentation.approve",
-      "publishPermission": "documentation.publish",
-      "permissionEnforced": true,
-      "adminOverrideAudited": true
-    },
-    "actor": "nodics.kickoff.generator",
-    "author": "nodics.kickoff.generator",
-    "auditTrail": [],
-    "active": true
-  },
-  "record82": {
+  "record54": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickoffoverview",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickoffoverview",
@@ -2894,7 +1928,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record83": {
+  "record55": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalruntime",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalruntime",
@@ -2928,7 +1962,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record84": {
+  "record56": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalsetuptolive",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalsetuptolive",
@@ -2962,7 +1996,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record85": {
+  "record57": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalacceptance",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalacceptance",
@@ -2996,7 +2030,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record86": {
+  "record58": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofflocalpublishingoperations",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalpublishingoperations",
@@ -3030,7 +2064,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record87": {
+  "record59": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickoffdeploymentqualification",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickoffdeploymentqualification",
@@ -3064,7 +2098,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record88": {
+  "record60": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickoffcustomization",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickoffcustomization",
@@ -3098,7 +2132,7 @@ module.exports = {
     "auditTrail": [],
     "active": true
   },
-  "record89": {
+  "record61": {
     "code": "kickoffDocsPublicationsearchmetadatakickoffdocssearchpagekickoffdocsmetadatakickofffunctionaljourneys",
     "targetType": "SEARCH_METADATA",
     "targetCode": "kickoffDocsSearchpagekickoffdocsmetadatakickofffunctionaljourneys",
