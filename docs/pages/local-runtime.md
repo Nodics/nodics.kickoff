@@ -22,6 +22,7 @@ runtime from Axis.
 | Platform | Employee login, BackOffice bootstrap, module registry, and API discovery | Start first, verify Profile and BackOffice are reachable, and keep tokens out of logs |
 | WCMS Staged and Online | Governed content, media, documentation, and public delivery | Keep Staged authoring separate from Online delivery and import content packs through governance |
 | Process and Automation | Workflow, cronjob, scheduled capability, and recovery evidence | Start when process or scheduled behavior is being tested and avoid duplicate scheduler authority |
+| Waste Management | Generic waste submission, collection acceptance, verification, receipt, impact, and accelerator/project presets | Keep Waste separate from Loyalty and Location, and load project overlays after scenario accelerator data |
 | Axis | Employee control plane for setup, import, documentation, and operations | Point to the correct Platform URL and verify only authorized capabilities appear |
 | Nexus and Agora accelerators | Public/customer-facing proof of Online delivery | Consume Online and customer-safe APIs only, never Staged or internal operations |
 
@@ -32,14 +33,20 @@ The current local topology uses separate runtime servers:
 - `platformServer` starts the Platform runtime. It loads Core, Platform,
   Profile, BackOffice, the Platform `axis` backend module, and Kickoff project
   modules.
-- `wcmsServer` starts the WCMS runtime. It loads Core, WCMS, CMS, Media, and
-  Kickoff project modules. WCMS owns CMS sites, catalogs, pages, components,
-  routes, and documentation content-pack import.
+- `wcmsStagedServer` starts the WCMS Staged runtime. It loads Core, WCMS, CMS,
+  Media, and Kickoff content-pack modules for authoring, import, review, and
+  publication-source behavior.
+- `wcmsOnlineServer` starts the WCMS Online runtime. It loads the approved
+  delivery boundary for public CMS, media, Nexus, and Agora consumption.
 - `processServer` starts the combined Business Process & Automation runtime.
   It loads Core, Process, cronjob, workflow modules, and Kickoff project
   modules. The `workflow` module owns process/workflow definitions; the
   `cronjob` module owns job definitions, triggers, scheduler state, and
   execution lifecycle.
+- `wasteServer` starts the isolated Waste Management runtime. It loads
+  `nodics.waste`, the Waste accelerator umbrella, `eWaste`, and the
+  project-owned `kickoffWaste` overlay while keeping Loyalty, Location, vendor,
+  recycler, and logistics integrations in their owning layers.
 
 Kickoff intentionally has no standalone cronjob server. Scheduled automation is
 available only through `processServer`, preventing accidental duplicate
@@ -59,11 +66,12 @@ Use separate terminals from the Kickoff repository:
 
 ```bash
 npm run start:platform
-npm run start:wcms
+npm run start:wcms:staged
+npm run start:wcms:online
 npm run start:process
 ```
 
-The governed supervisor starts all three frontends with the six backends:
+The governed supervisor starts all three frontends with the nine backends:
 
 ```bash
 npm run topology:start:all
@@ -99,6 +107,7 @@ The default local ports are:
 - Process and Automation: `http://localhost:4330`
 - Engagement: `http://localhost:4340`
 - Commerce: `http://localhost:4350`
+- Waste Management: `http://localhost:4370`
 
 ## Before starting
 
@@ -139,7 +148,11 @@ Use separate terminals so logs stay readable:
 3. Start Process and Automation when process/workflow or scheduled behavior is
    needed. It proves `workflow` and `cronjob` can share one runtime environment
    under `nodics.process` while keeping separate module ownership.
-4. Start Axis, Nexus, and Agora after backend servers are reachable. Each
+4. Start Waste Management when waste submission, acceptance, receipt, impact,
+   or Waste accelerator data is being tested. Its local initialization profile
+   installs `eWaste:core-reference` followed by
+   `kickoffWaste:project-reference`.
+5. Start Axis, Nexus, and Agora after backend servers are reachable. Each
    frontend uses only its governed backend contracts and configured CORS origin.
 
 ## Login and first checks
@@ -235,10 +248,24 @@ its own endpoint registry.
 
 ## Verification
 
+Use these focused checks when changing Waste composition:
+
+```bash
+npm run test:waste-overlay
+npm run test:waste-runtime
+npm run acceptance:waste-management
+```
+
+`test:waste-overlay` proves the project-owned `kickoffWaste` data overlay
+contract. `test:waste-runtime` proves the server composition, initialization
+profile, and active modules. `acceptance:waste-management` installs the
+schema-driven accelerator and project releases, validates persisted records,
+and runs the generic acceptance, submission, lifecycle, and impact journey.
+
 The final pre-Builder gate must use a fresh Local database and qualify all nine
 runtimes together: Platform, WCMS Staged, WCMS Online, Process, Engagement,
-Commerce, Axis, Nexus, and Agora. Verify the topology from the customer project,
-not from framework internals. Platform should expose login,
+Commerce, Waste Management, Axis, Nexus, and Agora. Verify the topology from
+the customer project, not from framework internals. Platform should expose login,
 BackOffice bootstrap, registry, and API discovery. WCMS should expose content,
 documentation, media, and import/export delivery. Process and Automation should
 report Process runtime availability with workflow and cronjob technical modules

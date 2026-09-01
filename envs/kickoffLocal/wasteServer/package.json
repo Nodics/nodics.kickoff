@@ -1,0 +1,30 @@
+{
+  "name": "wasteServer",
+  "version": "0.0.0",
+  "index": "1001.29",
+  "private": true,
+  "main": "nodics.js",
+  "description": "Reference customer Waste Management server runtime composition and configuration boundary for this Nodics project.",
+  "nodics": {
+    "kind": "server",
+    "extends": [
+      "nodics.waste"
+    ],
+    "runtimeModuleRoots": [
+      "nodics.waste",
+      "nodics.accelerators/modules/waste"
+    ],
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
+    "displayName": "Waste Server"
+  }
+}

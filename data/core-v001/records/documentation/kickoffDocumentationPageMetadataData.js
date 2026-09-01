@@ -136,8 +136,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/project-overview.md",
-    "sourceChecksum": "386495b83e6b3be9464c7e960f5cea879b663b7fff4360afb74069f7c8c6f058",
-    "sourceWordCount": 2109,
+    "sourceChecksum": "86de4cf69989d4569b612744f6b2744314c573c4d5aee3c70d450cf602add8d4",
+    "sourceWordCount": 2161,
     "audience": [
       "business-user",
       "administrator",
@@ -265,8 +265,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-runtime.md",
-    "sourceChecksum": "a01771d3fa9f3068139eccca3bfd6718d9bf0e4a3e6957bd083289e36c6b90b6",
-    "sourceWordCount": 1606,
+    "sourceChecksum": "628544abef5bd2e15d529bf52913b744045e39dd807af45003e12ff026fb97ba",
+    "sourceWordCount": 1789,
     "audience": [
       "business-user",
       "administrator",
@@ -905,8 +905,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/deployment-qualification.md",
-    "sourceChecksum": "2e0216157ea65126dab70fe2a38fe4ea5614f0f554e78595f284b27c5f08bf57",
-    "sourceWordCount": 1169,
+    "sourceChecksum": "f61abc2f37c7088f4ee0babfb5cc62968a543e6f23f2c153c07457c54689c0fa",
+    "sourceWordCount": 1187,
     "audience": [
       "business-user",
       "administrator",
@@ -999,53 +999,58 @@ module.exports = {
         "level": 3
       },
       {
+        "text": "Waste Management customization",
+        "anchor": "kickoffCustomization-11-waste-management-customization",
+        "level": 3
+      },
+      {
         "text": "What not to customize in Kickoff",
-        "anchor": "kickoffCustomization-11-what-not-to-customize-in-kickoff",
+        "anchor": "kickoffCustomization-12-what-not-to-customize-in-kickoff",
         "level": 2
       },
       {
         "text": "Extension example",
-        "anchor": "kickoffCustomization-12-extension-example",
+        "anchor": "kickoffCustomization-13-extension-example",
         "level": 2
       },
       {
         "text": "Documentation rule",
-        "anchor": "kickoffCustomization-13-documentation-rule",
+        "anchor": "kickoffCustomization-14-documentation-rule",
         "level": 2
       },
       {
         "text": "Step-by-step: add a small project module",
-        "anchor": "kickoffCustomization-14-step-by-step-add-a-small-project-module",
+        "anchor": "kickoffCustomization-15-step-by-step-add-a-small-project-module",
         "level": 2
       },
       {
         "text": "Example: adding a project service",
-        "anchor": "kickoffCustomization-15-example-adding-a-project-service",
+        "anchor": "kickoffCustomization-16-example-adding-a-project-service",
         "level": 3
       },
       {
         "text": "Step-by-step: add project documentation",
-        "anchor": "kickoffCustomization-16-step-by-step-add-project-documentation",
+        "anchor": "kickoffCustomization-17-step-by-step-add-project-documentation",
         "level": 2
       },
       {
         "text": "DevOps and rollback notes",
-        "anchor": "kickoffCustomization-17-devops-and-rollback-notes",
+        "anchor": "kickoffCustomization-18-devops-and-rollback-notes",
         "level": 2
       },
       {
         "text": "Common mistakes",
-        "anchor": "kickoffCustomization-18-common-mistakes",
+        "anchor": "kickoffCustomization-19-common-mistakes",
         "level": 2
       },
       {
         "text": "Verification",
-        "anchor": "kickoffCustomization-19-verification",
+        "anchor": "kickoffCustomization-20-verification",
         "level": 2
       },
       {
         "text": "Continue",
-        "anchor": "kickoffCustomization-20-continue",
+        "anchor": "kickoffCustomization-21-continue",
         "level": 2
       }
     ],
@@ -1077,8 +1082,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/customization-guide.md",
-    "sourceChecksum": "139ace75d0b5c12699643371792aaf9de33a91c7226e0ad9e185997b8247b332",
-    "sourceWordCount": 1974,
+    "sourceChecksum": "f82ccf1cbc7306d2d54906e04039097e130a09997990f38bc1e76bc10625ae80",
+    "sourceWordCount": 2158,
     "audience": [
       "business-user",
       "administrator",

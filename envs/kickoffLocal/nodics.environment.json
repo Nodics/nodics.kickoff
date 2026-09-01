@@ -85,6 +85,12 @@
           "port": 4360
         },
         {
+          "code": "waste",
+          "label": "Waste",
+          "script": "start:waste",
+          "port": 4370
+        },
+        {
           "code": "commerceStaged",
           "label": "Commerce Staged",
           "script": "start:commerce:staged",
@@ -165,7 +171,39 @@
           "label": "Loyalty",
           "port": 4360,
           "script": "start:loyalty"
+        },
+        "waste": {
+          "label": "Waste",
+          "port": 4370,
+          "script": "start:waste"
         }
+      }
+    },
+    "wasteManagement": {
+      "environment": "kickoffLocal",
+      "server": "wasteServer",
+      "profileCode": "localWasteFoundation",
+      "runtime": {
+        "label": "Waste",
+        "port": 4370,
+        "script": "start:waste"
+      }
+    },
+    "wasteBackofficeDiscovery": {
+      "functionalModule": "nodics.waste",
+      "providerModule": "wasteCore",
+      "capabilityId": "waste-management",
+      "groupId": "sustainability-operations",
+      "observedServer": "kickoffLocal:wasteServer:default",
+      "platform": {
+        "label": "Platform",
+        "port": 4300,
+        "script": "start:platform"
+      },
+      "waste": {
+        "label": "Waste",
+        "port": 4370,
+        "script": "start:waste"
       }
     },
     "capabilityRegistry": {

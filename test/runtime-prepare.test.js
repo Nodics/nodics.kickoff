@@ -113,6 +113,45 @@ const scenarios = Object.freeze([
         }
     }),
     Object.freeze({
+        server: 'wasteServer',
+        frameworkModules: Object.freeze(['nodics.waste', 'nodics.accelerators/modules/waste']),
+        expectedModules: Object.freeze([
+            'nodics.foundation',
+            'nodics.waste',
+            'wasteCore',
+            'wasteMaterial',
+            'wasteCollection',
+            'wasteSubmission',
+            'wasteVerification',
+            'wasteReceipt',
+            'wasteImpact',
+            'wasteMovement',
+            'wasteCompliance',
+            'wasteApi',
+            'nodics.kickoff',
+            'kickoffCore',
+            'kickoffApi',
+            'kickoffInt',
+            'kickoffLocal',
+            'wasteServer',
+            'waste',
+            'eWaste',
+            'kickoffWaste'
+        ]),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'wasteInternal']),
+        verify: function () {
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
+            assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
+            assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['WASTE']);
+            assert.equal(CONFIG.get('waste').accelerator.umbrella, 'waste');
+            assert.deepEqual(CONFIG.get('waste').accelerator.scenarioAccelerators, ['eWaste']);
+            assert.equal(CONFIG.get('waste').projectOverlay.module, 'kickoffWaste');
+            assert.equal(NODICS.getRawModule('nodics.accelerators'), undefined);
+            assert.equal(NODICS.isModuleActive('loyaltyCore'), false);
+            assert.equal(NODICS.isModuleActive('promotion'), false);
+        }
+    }),
+    Object.freeze({
         server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
         expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'kickoffLocal', 'engagementServer']),
         verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }

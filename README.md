@@ -14,25 +14,33 @@ nodics.kickoff/
   envs/
     kickoffLocal/
       platformServer/
-      wcmsServer/
+      wcmsStagedServer/
+      wcmsOnlineServer/
       processServer/
       commerceServer/
       engagementServer/
       loyaltyServer/
+      wasteServer/
 ```
 
 `platformServer extends nodics.platform`, which makes `nodics.foundation`
-functionally available through Platform. `wcmsServer extends nodics.wcms`, and
-`processServer extends nodics.process`, which loads the sibling `workflow` and
-`cronjob` modules in the same Business Process & Automation runtime. There is
-no standalone cronjob server in Kickoff. `commerceServer extends nodics.commerce`
-and composes Process for the full local Commerce lifecycle. `engagementServer`
+functionally available through Platform. `wcmsStagedServer` and
+`wcmsOnlineServer` extend `nodics.wcms` as separate authoring/publication-source
+and delivery runtimes. `processServer extends nodics.process`, which loads the
+sibling `workflow` and `cronjob` modules in the same Business Process &
+Automation runtime. There is no standalone cronjob server in Kickoff.
+`commerceServer extends nodics.commerce` and composes Process for the full local
+Commerce lifecycle. `engagementServer`
 extends `nodics.engagement`, includes `nodics.communication`, and enables the
 reference contact experience while Process remains a separate runtime
 dependency. `loyaltyServer extends nodics.loyalty` and isolates wallet,
 reward-type, reward-balance, ledger, earning, reservation, and redemption
-operations from Commerce payment-provider journeys. Effective runtime loading
-and service merging remain controlled by module indexes.
+operations from Commerce payment-provider journeys. `wasteServer extends
+nodics.waste`, adds the Waste accelerator runtime root, and isolates generic
+Waste Management operations, eWaste presets, and project overlays from Loyalty
+and Location.
+Effective runtime loading and service merging remain controlled by module
+indexes.
 
 Kickoff may default to the sample layout where it sits parallel to
 `nodics.ai`, the Nodics framework repository root. Customer projects may use
@@ -59,6 +67,10 @@ npm run start:platform
 npm run start:commerce
 npm run start:engagement
 npm run start:loyalty
+npm run start:waste
+npm run test:waste-overlay
+npm run test:waste-runtime
+npm run acceptance:waste-management
 npm run topology:start
 npm run topology:status
 npm run topology:stop
@@ -71,10 +83,17 @@ then the nearest `modules/` or `envs/` `AGENTS.md`, before changing source,
 data, topology, or documentation. Use `nodics.installer` only when the user
 wants to create, repair, or operate a separate local customer workspace.
 
-`topology:start` supervises all seven direct-Node `kickoffLocal` backend
+`topology:start` supervises all nine direct-Node `kickoffLocal` backend
 runtimes from one terminal. Use `topology:start:all` to include sibling Axis
 and Nexus development servers. The supervisor refuses unknown busy ports and
 stops only processes whose generated PID ownership belongs to this checkout.
+
+Waste Management is proven as a separate local runtime at
+`http://localhost:4370`. It loads `nodics.waste`, the Waste accelerator
+umbrella, `eWaste`, and the project-owned `kickoffWaste` overlay. The local
+Waste foundation installs `eWaste:core-reference` and then
+`kickoffWaste:project-reference`, preserving the standard framework ->
+accelerator -> project customization flow.
 
 For an independently configured containerized production simulation, use
 `envs/kickoffDockerLocal`. It has separate ports, generated secrets,

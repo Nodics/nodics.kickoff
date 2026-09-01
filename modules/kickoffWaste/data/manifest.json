@@ -1,0 +1,32 @@
+{
+  "contractVersion": 2,
+  "module": "kickoffWaste",
+  "sections": {
+    "project-reference": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "version": "0.0.0",
+      "displayName": "Kickoff Waste Project Overlay",
+      "description": "Kickoff-owned Waste overlay extending and overriding eWaste presets through nodics.waste schemas.",
+      "owningDomain": "waste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "WASTE",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "core-v001/records/waste/kickoffWasteAcceptanceRuleData.js": "f1353e597e1bf79387a5242897501104970cbd261709044926b158d91a54daf4",
+        "core-v001/records/waste/kickoffWasteCategoryData.js": "9661057788eb66166aeb07ba6fbb6f541cbc2763f3b5f812518d6f7d8355b0cf",
+        "core-v001/records/waste/kickoffWasteCollectionPresetData.js": "2aaf28e665b16a7f31d2280b6f5c437688688a4a1c6848d8243c3ef1b2c9a23c",
+        "core-v001/records/waste/kickoffWasteImpactProfileData.js": "cec976c796d594dac562af308b77d3a0f054db18f7275a27b13840fb4ee696e2",
+        "core-v001/headers/waste/kickoffWasteOverlayHeader.js": "c17fe09c0ca90bc8657326e94d9f2f58ad166e254e56ada9354b79f7249e7252"
+      },
+      "sourceRoot": "core-v001"
+    }
+  }
+}

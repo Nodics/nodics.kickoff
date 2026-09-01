@@ -48,6 +48,12 @@ const requiredProfiles = {
     profiles: {
       localLoyaltyFoundation: ['core']
     }
+  },
+  wasteServer: {
+    role: 'WASTE',
+    profiles: {
+      localWasteFoundation: ['core']
+    }
   }
 };
 
@@ -102,5 +108,17 @@ const loyaltyRuntime = loadRuntime('loyaltyServer');
 assert.equal(loyaltyRuntime.servers.commerce.endpoint.httpPort, 4350, 'loyaltyServer must know the Commerce runtime endpoint');
 assert.equal(loyaltyRuntime.loyalty.capabilities.ledger, true, 'loyaltyServer must enable ledger capability');
 assert.equal(loyaltyRuntime.loyalty.capabilities.reservation, true, 'loyaltyServer must enable reservation capability');
+
+const wasteRuntime = loadRuntime('wasteServer');
+const kickoffWasteProperties = require(path.join(projectRoot, 'modules', 'kickoffWaste', 'config', 'properties.js'));
+assert.equal(wasteRuntime.servers.default.endpoint.httpPort, 4370, 'wasteServer must own the Waste runtime endpoint');
+assert.equal(wasteRuntime.waste.accelerator.umbrella, 'waste', 'wasteServer must compose the Waste accelerator umbrella');
+assert.deepEqual(wasteRuntime.waste.accelerator.scenarioAccelerators, ['eWaste'], 'wasteServer must compose the initial eWaste scenario accelerator');
+assert.deepEqual(
+  wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation.steps[0].releaseCodes,
+  ['eWaste:core-reference', 'kickoffWaste:project-reference'],
+  'wasteServer must install accelerator data and the Kickoff project overlay explicitly'
+);
+assert.equal(kickoffWasteProperties.waste.projectOverlay.releaseCode, 'kickoffWaste:project-reference');
 
 console.log('Kickoff guided initialization profile contract validated');

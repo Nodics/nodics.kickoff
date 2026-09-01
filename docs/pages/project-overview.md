@@ -48,6 +48,7 @@ framework:
 | Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |
 | Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |
 | Can optional modules be added later? | Yes. Process demonstrates observed optional runtime capability and registry lifecycle while exposing workflow and cronjob capabilities. |
+| Can accelerators be customized without changing framework code? | Yes. Waste Management loads `nodics.waste`, `eWaste`, and the `kickoffWaste` project overlay as separate layers. |
 | Can an accelerator be imported before its business capabilities are active? | No. The setup journey blocks it until required capabilities such as Commerce, Discovery, or Engagement are registered and active. |
 | Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |
 
@@ -96,6 +97,8 @@ into the production line. Each part has a job.
 - how environment and server modules load after standard functional modules;
 - how Platform, WCMS Staged, WCMS Online, Process and Automation, Engagement, and
   Commerce can run as separate ownership domains while serving three frontends;
+- how Waste Management runs as a separate backend with framework, accelerator,
+  scenario, and project overlay layers;
 - how project modules can customize runtime behavior without renaming the
   standard functional module identity;
 - how customer-owned documentation can appear in Axis beside Framework,
@@ -151,7 +154,7 @@ flowchart LR
   Platform --> Project
   WCMS --> Project
   Cron --> Project
-  Project --> Servers["kickoffLocal servers<br/>platformServer, wcmsServer, processServer"]
+  Project --> Servers["kickoffLocal servers<br/>platformServer, wcmsStagedServer, wcmsOnlineServer, processServer"]
   Servers --> Axis["nodics.axis<br/>frontend renderer"]
 ```
 

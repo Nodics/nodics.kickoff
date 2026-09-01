@@ -81,6 +81,7 @@ Use these examples when deciding where code or data belongs:
 | Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |
 | Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |
 | Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |
+| Add project Waste categories or presets | `modules/kickoffWaste/data` | Waste values are schema-driven project overlay data, not framework source edits. |
 
 ## Configuration-first examples
 
@@ -89,7 +90,7 @@ the correct configuration owner before writing code.
 
 | Example change | Better first move | Why |
 | --- | --- | --- |
-| Local WCMS port must change | Server config under `envs/.../wcmsServer/config` | Port is topology, not shared framework behavior. |
+| Local WCMS port must change | Server config under `envs/.../wcmsStagedServer/config` or `envs/.../wcmsOnlineServer/config` | Port is topology, not shared framework behavior. |
 | A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |
 | A framework checkout path differs | `.env` with `NODICS_FRAMEWORK_ROOT` | Workspace layout is deployment- and developer-specific. |
 | Project identity is needed | `package.json.name` | Do not duplicate it in `nodics.project.json` or `config/properties.js`. |
@@ -174,6 +175,30 @@ data/manifest.json
 Edit the source, bump the catalogue version, regenerate, test, import, and
 verify in Axis. Never hand-edit the generated CMS records to make a page look
 right.
+
+### Waste Management customization
+
+Waste Management follows the same layered customization model as other Nodics
+capabilities:
+
+```text
+nodics.waste
+  -> waste accelerator umbrella
+    -> eWaste scenario accelerator
+      -> kickoffWaste project overlay
+```
+
+Use `modules/kickoffWaste` for Kickoff-owned Waste data. It can add or override
+family, category, material, evidence policy, collection preset, acceptance rule,
+impact metric, and impact profile records through a manifest-backed data
+release. The local Waste server installs `eWaste:core-reference` first and
+`kickoffWaste:project-reference` second, so project values can extend the
+accelerator without changing framework or accelerator code.
+
+Do not put reward formulas, coupon codes, map-provider secrets, vendor
+contracts, recycler adapters, logistics adapters, or tenant-scoped rows in
+Waste reference data. Loyalty, Location, Commerce, provider integrations, and
+project journey modules own those concerns.
 
 ## What not to customize in Kickoff
 
