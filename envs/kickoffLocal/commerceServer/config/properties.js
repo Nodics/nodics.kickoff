@@ -63,8 +63,8 @@ module.exports = {
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4350, httpsHost: '127.0.0.1', httpsPort: 4351 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4350, httpsHost: 'localhost', httpsPort: 4351 } },
-        profile: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
-        backoffice: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        profile: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        backoffice: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
         loyalty: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } },
         loyaltyServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },

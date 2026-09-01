@@ -74,8 +74,8 @@ module.exports = {
     },
     servers: {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4370, httpsHost: '127.0.0.1', httpsPort: 4371 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4370, httpsHost: 'localhost', httpsPort: 4371 } },
-        profile: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
-        backoffice: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        profile: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        backoffice: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
         process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 } }
     }
 };
