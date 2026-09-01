@@ -90,6 +90,7 @@ module.exports = {
         { label: 'Shop', path: '/shop', dropdown: true },
         { label: 'New in', collectionCode: 'agoraNewArrivals' },
         { label: 'Clothing', collectionCode: 'agoraWomenTops', dropdown: true },
+        { label: 'Digital Coupons', collectionCode: 'agoraDigitalCoupons', dropdown: true },
         { label: 'Bags & Accessories', collectionCode: 'agoraWomenAccessories' }
       ],
       megaMenus: [
@@ -233,6 +234,54 @@ module.exports = {
             { label: 'Arrival spotlight', collectionCode: 'agoraNewArrivals', eyebrow: 'Drop', text: 'Business users can reorder this tile any time', badge: 'CMS' },
             { label: 'Top picks', collectionCode: 'agoraWomen', eyebrow: 'Editorial', text: 'Use curated product rails to project priority items' },
             { label: 'Back in stock', path: '/shop?availability=available', eyebrow: 'Inventory', text: 'Availability stays Commerce-owned' }
+          ]
+        },
+        {
+          code: 'digital-coupons',
+          label: 'Digital Coupons',
+          collectionCode: 'agoraDigitalCoupons',
+          badge: 'Codes',
+          eyebrow: 'Coupon marketplace',
+          summary: 'Digital coupon products customers can buy, receive as owned coupon codes, reveal from their wallet, and apply to future orders.',
+          groups: [
+            {
+              title: 'Buy coupon codes',
+              summary: 'Each product sells one available coupon-code unit from the promotion-owned code pool.',
+              links: [
+                { label: 'Style Pass 5%', productCode: 'agoraStylePass5Coupon', summary: 'Future-use Agora Apparel discount code', badge: '5%' },
+                { label: 'Capsule Edit 10%', productCode: 'agoraCapsuleEdit10Coupon', summary: 'Higher-value campaign coupon code', badge: '10%' },
+                { label: 'Private Sale 20%', productCode: 'agoraPrivateSale20Coupon', summary: 'Limited coupon-code inventory', badge: '20%' }
+              ]
+            },
+            {
+              title: 'Manage owned codes',
+              links: [
+                { label: 'My coupon wallet', path: '/coupons', summary: 'Reveal purchased codes securely' },
+                { label: 'Use a coupon at checkout', path: '/checkout', summary: 'Apply an owned coupon code to another cart' },
+                { label: 'Browse coupon collection', collectionCode: 'agoraDigitalCoupons', summary: 'Search-indexed coupon products' }
+              ]
+            }
+          ],
+          featureTiles: [
+            {
+              title: 'Agora Style Pass 5%',
+              summary: 'Buy one code, then reveal it from the customer coupon wallet.',
+              mediaCode: 'agora-owned-product-coupon-style-pass',
+              action: { label: 'View 5% coupon', productCode: 'agoraStylePass5Coupon' },
+              badge: 'Digital'
+            },
+            {
+              title: 'Private Sale 20%',
+              summary: 'Limited pool coupon product for stock-allocation testing.',
+              mediaCode: 'agora-owned-product-coupon-private-sale',
+              action: { label: 'View 20% coupon', productCode: 'agoraPrivateSale20Coupon' },
+              badge: 'Limited'
+            }
+          ],
+          promoStripe: [
+            { label: 'Coupon products', collectionCode: 'agoraDigitalCoupons', eyebrow: 'Marketplace', text: 'Browse all digital coupon products', badge: 'Live' },
+            { label: 'Reveal owned codes', path: '/coupons', eyebrow: 'Wallet', text: 'Customer-owned secure reveal journey' },
+            { label: 'Apply at checkout', path: '/checkout', eyebrow: 'Claim', text: 'Claim and redeem during order placement' }
           ]
         },
         {

@@ -7,7 +7,8 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.process"
+      "nodics.process",
+      "nodics.wcms"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

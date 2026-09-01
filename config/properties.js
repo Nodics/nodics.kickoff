@@ -20,7 +20,6 @@
  */
 
 module.exports = Object.freeze({
-    project: Object.freeze({ code: 'nodics.kickoff' }),
     data: Object.freeze({
         contentPacks: Object.freeze({
             packs: Object.freeze({

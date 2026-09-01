@@ -1,0 +1,26 @@
+{
+  "name": "loyaltyServer",
+  "version": "0.0.0",
+  "index": "1001.19",
+  "private": true,
+  "main": "nodics.js",
+  "nodics": {
+    "kind": "server",
+    "extends": [
+      "nodics.loyalty"
+    ],
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "configuration",
+      "llm"
+    ],
+    "runtime": {
+      "router": false,
+      "publish": false,
+      "web": false
+    },
+    "displayName": "Loyalty Server"
+  },
+  "description": "Reference customer Loyalty server runtime composition and configuration boundary for this Nodics project."
+}

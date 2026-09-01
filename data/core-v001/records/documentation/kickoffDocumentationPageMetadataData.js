@@ -136,8 +136,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/project-overview.md",
-    "sourceChecksum": "4901c52b19aed4db1ef3f03a1d90604e57a4a7d35300d088c37e3e7d546b8f20",
-    "sourceWordCount": 2071,
+    "sourceChecksum": "386495b83e6b3be9464c7e960f5cea879b663b7fff4360afb74069f7c8c6f058",
+    "sourceWordCount": 2109,
     "audience": [
       "business-user",
       "administrator",
@@ -905,8 +905,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/deployment-qualification.md",
-    "sourceChecksum": "60ba819afda6aae58f5a6b7c27bc0338cb01ac69e2a0b47cc89225776696553e",
-    "sourceWordCount": 1133,
+    "sourceChecksum": "2e0216157ea65126dab70fe2a38fe4ea5614f0f554e78595f284b27c5f08bf57",
+    "sourceWordCount": 1169,
     "audience": [
       "business-user",
       "administrator",
@@ -1187,8 +1187,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/functional-journeys.md",
-    "sourceChecksum": "313eaaedd4011bc5725fc6ba9c50b748376f9817bc328a4bf2d9b91912e48c55",
-    "sourceWordCount": 1501,
+    "sourceChecksum": "b836ca89d948b684578b9110ccaf98bc8f6385926ef7dd5ba9d2e252a56abbb5",
+    "sourceWordCount": 1510,
     "audience": [
       "business-user",
       "administrator",

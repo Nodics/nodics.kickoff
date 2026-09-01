@@ -11,6 +11,8 @@
 
 'use strict';
 
+const environmentProfile = require('../nodics.environment.json');
+
 /**
  * @module envs/kickoffLocal/config/properties
  * @description Defines Kickoff project-owned layered configuration for this boundary.
@@ -19,8 +21,33 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
+function resolveAgoraDomainComposition(compositionConfig, value = process.env.NODICS_AGORA_DOMAINS || compositionConfig.selection || 'all') {
+    const supported = Object.fromEntries((compositionConfig.domains || []).map(domain => [domain.code, domain]));
+    const requested = value === 'all' ? (compositionConfig.domains || []).map(domain => domain.code) :
+        value === 'commerce' || value === 'none' ? [] :
+            value.split(',').map(item => item.trim()).filter(Boolean);
+    const domains = [...new Set(requested)];
+    const unknown = domains.filter(domain => !supported[domain]);
+    if (unknown.length) throw new Error(`Unsupported NODICS_AGORA_DOMAINS: ${unknown.join(',')}`);
+    const contributorDomains = new Set(domains);
+    domains.forEach(domain => (supported[domain].impliedProductSearchContributorDomains || []).forEach(item => contributorDomains.add(item)));
+    return Object.freeze({
+        domains: Object.freeze(domains),
+        frameworkGroups: Object.freeze(domains.map(domain => supported[domain].frameworkGroup).filter(Boolean)),
+        sharedModules: Object.freeze((compositionConfig.sharedModules || [])
+            .filter(rule => domains.length >= Number(rule.minSelectedDomains || 0))
+            .map(rule => rule.module)
+            .filter(Boolean)),
+        projectPacks: Object.freeze(domains.map(domain => supported[domain].projectPack).filter(Boolean)),
+        productSearchContributors: Object.freeze(Object.fromEntries([...contributorDomains].sort()
+            .map(domain => [domain, supported[domain]?.productSearchContributor])
+            .filter(([, contributor]) => contributor)))
+    });
+}
+
 module.exports = {
     environment: { code: 'kickoffLocal' },
+    agoraDomains: resolveAgoraDomainComposition(environmentProfile.composition.agora),
     log: {
         level: 'info'
     },
@@ -37,7 +64,9 @@ module.exports = {
                 'http://localhost:3200',
                 'http://127.0.0.1:3200',
                 'http://localhost:3300',
-                'http://127.0.0.1:3300'
+                'http://127.0.0.1:3300',
+                'http://localhost:5173',
+                'http://127.0.0.1:5173'
             ],
             allowedMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
             allowedHeaders: [

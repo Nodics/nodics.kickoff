@@ -4,6 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { createRequire } from 'node:module';
+import {
+  readProjectEnvironmentComposition,
+  resolveDomainComposition,
+} from '../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs';
 
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, '..');
@@ -14,6 +18,25 @@ const definitions = [
 ];
 
 const digest = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+
+test('project configuration stays minimal while metadata, domains, and data packs remain with their owners', () => {
+  const projectContractPath = path.join(root, 'nodics.project.json');
+  const projectPackage = require(path.join(root, 'package.json'));
+  const composition = readProjectEnvironmentComposition(root, 'kickoffLocal');
+  const dataPackModules = [
+    require(path.join(root, 'modules', 'nexus.web', 'data', 'manifest.json')).module,
+    ...definitions.map(definition => require(path.join(root, 'modules', definition.group, 'data', 'manifest.json')).module)
+  ];
+
+  assert.equal(fs.existsSync(path.join(root, 'config', 'agora-domain-composition.js')), false);
+  assert.equal(fs.existsSync(projectContractPath), false);
+  assert.equal(projectPackage.name, 'nodics.kickoff');
+  assert.equal(require(path.join(root, 'config', 'properties.js')).project, undefined);
+  assert.equal(projectPackage.nodics.displayName, 'Nodics Kickoff');
+  assert.equal(projectPackage.nodics.projectType, 'reference');
+  assert.deepEqual(composition.domains, ['apparel', 'electronics', 'telco']);
+  assert.deepEqual(dataPackModules, ['nexus.web', 'agora.apparel', 'agora.electronics', 'agora.telco']);
+});
 
 test('Kickoff domain groups extend reusable framework accelerators and packs remain data-only', () => {
   assert.equal(fs.existsSync(path.join(root, 'modules', 'agora.' + 'common')), false);
@@ -93,15 +116,16 @@ test('domain manifests isolate Commerce and WCMS releases and verify every immut
   }
 });
 
-test('project composition selects each domain independently, together, or Commerce-only', () => {
-  const composition = require('../config/agora-domain-composition');
-  assert.deepEqual(composition.resolve('apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agora.apparel'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agora.electronics'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agora.telco'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
-  assert.deepEqual(composition.resolve('commerce'), { domains: [], frameworkGroups: [], sharedModules: [], projectPacks: [], productSearchContributors: {} });
-  assert.deepEqual(composition.resolve('all').domains, ['apparel', 'electronics', 'telco']);
-  assert.deepEqual(composition.resolve('all').sharedModules, ['domainCommerceCore']);
-  assert.throws(() => composition.resolve('apparel,unknown'), /Unsupported NODICS_AGORA_DOMAINS/);
+test('environment composition selects each domain independently, together, or Commerce-only', () => {
+  const profile = require(path.join(root, 'envs', 'kickoffLocal', 'nodics.environment.json'));
+  const composition = profile.composition.agora;
+  assert.deepEqual(resolveDomainComposition(composition, 'apparel'), { domains: ['apparel'], frameworkGroups: ['apparel'], sharedModules: [], projectPacks: ['agora.apparel'], productSearchContributors: { apparel: { serviceName: 'DefaultApparelProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(resolveDomainComposition(composition, 'electronics'), { domains: ['electronics'], frameworkGroups: ['electronics'], sharedModules: [], projectPacks: ['agora.electronics'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(resolveDomainComposition(composition, 'telco'), { domains: ['telco'], frameworkGroups: ['telco'], sharedModules: [], projectPacks: ['agora.telco'], productSearchContributors: { electronics: { serviceName: 'DefaultElectronicsProductSearchEnrichmentService', required: true }, telco: { serviceName: 'DefaultTelcoProductSearchEnrichmentService', required: true } } });
+  assert.deepEqual(resolveDomainComposition(composition, 'commerce'), { domains: [], frameworkGroups: [], sharedModules: [], projectPacks: [], productSearchContributors: {} });
+  assert.deepEqual(resolveDomainComposition(composition, 'all').domains, ['apparel', 'electronics', 'telco']);
+  assert.deepEqual(resolveDomainComposition(composition, 'all').sharedModules, ['domainCommerceCore']);
+  assert.throws(() => resolveDomainComposition(composition, 'apparel,unknown'), /Unsupported domain composition selection/);
 });
 
 test('local and Docker staged runtimes consume the selected domain packs', () => {
@@ -112,10 +136,10 @@ test('local and Docker staged runtimes consume the selected domain packs', () =>
   assert.equal((docker.match(/agoraDomains\.projectPacks/g) || []).length, 2);
 });
 
-test('Commerce runtime startup facts discover the accelerator package used by configured groups', () => {
-  const projectContract = JSON.parse(fs.readFileSync(path.join(root, 'nodics.project.json'), 'utf8'));
+test('Commerce server packages declare the accelerator package used by configured groups', () => {
   for (const serverCode of ['commerce', 'commerceStaged']) {
-    assert(projectContract.runtime.servers[serverCode].moduleRoots.includes('nodics.accelerators'),
+    const serverPackage = require(path.join(root, 'envs', 'kickoffLocal', `${serverCode}Server`, 'package.json'));
+    assert(serverPackage.nodics.extends.includes('nodics.accelerators'),
       `${serverCode} must discover nodics.accelerators`);
   }
 });

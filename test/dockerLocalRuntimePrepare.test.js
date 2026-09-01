@@ -44,8 +44,8 @@ const scenarios = [
     ['wcmsOnlineServer', ['nodics.wcms'], 'kickoffDockerLocalWcmsOnline', 'WCMS_ONLINE'],
     ['processServer', ['nodics.process', 'nodics.wcms'], 'kickoffDockerLocalProcess', 'PROCESS'],
     ['engagementServer', ['nodics.communication', 'nodics.engagement'], 'kickoffDockerLocalEngagement', 'ENGAGEMENT'],
-    ['commerceServer', ['nodics.process', 'nodics.discovery', 'nodics.commerce', 'nodics.accelerators'], 'kickoffDockerLocalCommerce', 'COMMERCE'],
-    ['commerceStagedServer', ['nodics.process', 'nodics.discovery', 'nodics.commerce', 'nodics.accelerators'], 'kickoffDockerLocalCommerceStaged', 'COMMERCE_STAGED']
+    ['commerceServer', ['nodics.discovery', 'nodics.commerce', 'nodics.accelerators'], 'kickoffDockerLocalCommerce', 'COMMERCE'],
+    ['commerceStagedServer', ['nodics.discovery', 'nodics.commerce', 'nodics.accelerators'], 'kickoffDockerLocalCommerceStaged', 'COMMERCE_STAGED']
 ];
 
 async function main() {

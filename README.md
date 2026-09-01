@@ -18,6 +18,7 @@ nodics.kickoff/
       processServer/
       commerceServer/
       engagementServer/
+      loyaltyServer/
 ```
 
 `platformServer extends nodics.platform`, which makes `nodics.foundation`
@@ -28,8 +29,10 @@ no standalone cronjob server in Kickoff. `commerceServer extends nodics.commerce
 and composes Process for the full local Commerce lifecycle. `engagementServer`
 extends `nodics.engagement`, includes `nodics.communication`, and enables the
 reference contact experience while Process remains a separate runtime
-dependency. Effective runtime loading and service
-merging remain controlled by module indexes.
+dependency. `loyaltyServer extends nodics.loyalty` and isolates wallet,
+reward-type, reward-balance, ledger, earning, reservation, and redemption
+operations from Commerce payment-provider journeys. Effective runtime loading
+and service merging remain controlled by module indexes.
 
 Kickoff may default to the sample layout where it sits parallel to
 `nodics.ai`, the Nodics framework repository root. Customer projects may use
@@ -55,6 +58,7 @@ npm test
 npm run start:platform
 npm run start:commerce
 npm run start:engagement
+npm run start:loyalty
 npm run topology:start
 npm run topology:status
 npm run topology:stop
@@ -67,7 +71,7 @@ then the nearest `modules/` or `envs/` `AGENTS.md`, before changing source,
 data, topology, or documentation. Use `nodics.installer` only when the user
 wants to create, repair, or operate a separate local customer workspace.
 
-`topology:start` supervises all six direct-Node `kickoffLocal` backend
+`topology:start` supervises all seven direct-Node `kickoffLocal` backend
 runtimes from one terminal. Use `topology:start:all` to include sibling Axis
 and Nexus development servers. The supervisor refuses unknown busy ports and
 stops only processes whose generated PID ownership belongs to this checkout.
@@ -98,10 +102,18 @@ project repository. Kickoff exposes project-local aliases such as
 release, security-boundary, or framework publication-qualification
 implementation into customer projects.
 
-Project orchestration is declared in `nodics.project.json`. `package.json`
-aliases should stay thin and call `nodics-project.js project:run <command>`
-rather than hardcoding project script paths. This keeps generated projects
-upgrade-safe: project facts, data packs, and acceptance choices stay in the
+The canonical project identity is `package.json.name`. `nodics.project.json` is
+optional and reserved for project-owned command or acceptance overrides; it must
+not declare `projectCode` or `contractVersion`. Human-readable project metadata lives in
+`package.json.nodics`; environment domain selections, topology, acceptance, and
+qualification profiles are owned by the selected environment, for example
+`envs/kickoffLocal/nodics.environment.json` and
+`envs/kickoffDockerLocal/nodics.environment.json`. Data packs are declared by
+each module's `data/manifest.json`. Runtime startup facts are discovered from
+the selected environment server packages under
+`envs/<environment>/*Server`. `package.json` aliases should stay thin and call
+`nodics-project.js project:run <command>` rather than hardcoding project script
+paths. This keeps generated projects upgrade-safe: project facts stay in the
 project, while framework execution, validation, lifecycle, and upgrade behavior
 can evolve in `nodics.ai`.
 
@@ -182,7 +194,11 @@ and runtime-scoped clean/build behavior before more broad code movement.
 
 Kickoff configuration follows the framework classification contract:
 
-- project identity belongs in `config/`;
+- project identity belongs only in `package.json.name`;
+- `nodics.project.json` should not exist unless the project has real
+  project-owned tooling or acceptance overrides;
+- root `config/properties.js` must not redeclare project identity, descriptor
+  versions, environment topology, or domain composition that belongs elsewhere;
 - local shared environment defaults belong in `envs/kickoffLocal/config/`;
 - server topology, ports, server database names, and active module lists belong
   under each server config;

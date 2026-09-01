@@ -42,6 +42,12 @@ const requiredProfiles = {
     profiles: {
       localEngagementFoundation: ['core', 'sample']
     }
+  },
+  loyaltyServer: {
+    role: 'LOYALTY',
+    profiles: {
+      localLoyaltyFoundation: ['core']
+    }
   }
 };
 
@@ -83,5 +89,18 @@ for (const [server, expectation] of Object.entries(requiredProfiles)) {
     });
   }
 }
+
+const commerceRuntime = loadRuntime('commerceServer');
+assert.equal(commerceRuntime.servers.loyalty.endpoint.httpPort, 4360, 'commerceServer must know the Loyalty runtime endpoint');
+assert.equal(commerceRuntime.servers.loyaltyServer.abstractEndpoint.httpHost, 'localhost', 'commerceServer must expose abstract Loyalty routing');
+
+const platformRuntime = loadRuntime('platformServer');
+assert.equal(platformRuntime.servers.loyalty.endpoint.httpPort, 4360, 'platformServer must publish the Loyalty runtime endpoint');
+assert.equal(platformRuntime.servers.loyaltyServer.abstractEndpoint.httpPort, 4360, 'platformServer must publish abstract Loyalty routing');
+
+const loyaltyRuntime = loadRuntime('loyaltyServer');
+assert.equal(loyaltyRuntime.servers.commerce.endpoint.httpPort, 4350, 'loyaltyServer must know the Commerce runtime endpoint');
+assert.equal(loyaltyRuntime.loyalty.capabilities.ledger, true, 'loyaltyServer must enable ledger capability');
+assert.equal(loyaltyRuntime.loyalty.capabilities.reservation, true, 'loyaltyServer must enable reservation capability');
 
 console.log('Kickoff guided initialization profile contract validated');

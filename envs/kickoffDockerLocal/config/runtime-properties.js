@@ -11,10 +11,35 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
-const agoraDomains = require('../../../config/agora-domain-composition').resolve();
+const environmentProfile = require('../nodics.environment.json');
 
 /** @module kickoffDockerLocal/config/runtimeProperties @description Builds explicit server deltas without reading kickoffLocal configuration. */
 
+function resolveAgoraDomainComposition(compositionConfig, value = process.env.NODICS_AGORA_DOMAINS || compositionConfig.selection || 'all') {
+    const supported = Object.fromEntries((compositionConfig.domains || []).map(domain => [domain.code, domain]));
+    const requested = value === 'all' ? (compositionConfig.domains || []).map(domain => domain.code) :
+        value === 'commerce' || value === 'none' ? [] :
+            value.split(',').map(item => item.trim()).filter(Boolean);
+    const domains = [...new Set(requested)];
+    const unknown = domains.filter(domain => !supported[domain]);
+    if (unknown.length) throw new Error(`Unsupported NODICS_AGORA_DOMAINS: ${unknown.join(',')}`);
+    const contributorDomains = new Set(domains);
+    domains.forEach(domain => (supported[domain].impliedProductSearchContributorDomains || []).forEach(item => contributorDomains.add(item)));
+    return Object.freeze({
+        domains: Object.freeze(domains),
+        frameworkGroups: Object.freeze(domains.map(domain => supported[domain].frameworkGroup).filter(Boolean)),
+        sharedModules: Object.freeze((compositionConfig.sharedModules || [])
+            .filter(rule => domains.length >= Number(rule.minSelectedDomains || 0))
+            .map(rule => rule.module)
+            .filter(Boolean)),
+        projectPacks: Object.freeze(domains.map(domain => supported[domain].projectPack).filter(Boolean)),
+        productSearchContributors: Object.freeze(Object.fromEntries([...contributorDomains].sort()
+            .map(domain => [domain, supported[domain]?.productSearchContributor])
+            .filter(([, contributor]) => contributor)))
+    });
+}
+
+const agoraDomains = resolveAgoraDomainComposition(environmentProfile.composition.agora);
 const endpoint = (host, port) => ({ endpoint: { httpHost: '0.0.0.0', httpPort: port, httpsHost: '0.0.0.0', httpsPort: port + 1 },
     abstractEndpoint: { httpHost: host, httpPort: port, httpsHost: host, httpsPort: port + 1 } });
 const platformConnections = { profile: endpoint('platform', 4300), backoffice: endpoint('platform', 4300) };
@@ -29,10 +54,12 @@ const commerceConnections = {
     commerceStaged: endpoint('commerce-staged', 4352), commerceStagedServer: endpoint('commerce-staged', 4352)
 };
 const engagementConnections = { engagement: endpoint('engagement', 4340), engagementServer: endpoint('engagement', 4340) };
-const connections = { ...platformConnections, ...publicationConnections, ...commerceConnections, ...engagementConnections };
+const loyaltyConnections = { loyalty: endpoint('loyalty', 4360), loyaltyServer: endpoint('loyalty', 4360) };
+const connections = { ...platformConnections, ...publicationConnections, ...commerceConnections, ...engagementConnections, ...loyaltyConnections };
 const projectModules = ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt'];
 const distributedCacheModules = ['redisCache'];
-const commerceSearchRuntimeModules = ['search', 'elastic'];
+const commerceSearchRuntimeModules = ['search', 'elastic', 'commerceSearchCore', 'commerceSearch'];
+const digitalCommerceRuntimeModules = ['digitalCommerce'];
 const database = name => ({ default: { mongodb: { master: { URI: process.env.NODICS_MONGODB_URI, databaseName: name } } } });
 const elasticConnection = () => ({ connection: { hosts: [process.env.NODICS_ELASTICSEARCH_URL || 'http://elasticsearch:9200'] } });
 const productSearch = () => ({
@@ -195,10 +222,11 @@ module.exports = function runtimeProperties(server) {
                 wcmsOnline: 'http://localhost:5314/', wcmsOnlineServer: 'http://localhost:5314/',
                 process: 'http://localhost:5330/', processServer: 'http://localhost:5330/',
                 engagement: 'http://localhost:5340/', engagementServer: 'http://localhost:5340/',
+                loyalty: 'http://localhost:5360/', loyaltyServer: 'http://localhost:5360/',
                 commerce: 'http://localhost:5350/', commerceServer: 'http://localhost:5350/',
                 commerceStaged: 'http://localhost:5352/', commerceStagedServer: 'http://localhost:5352/'
             } },
-            servers: { default: endpoint('platform', 4300), ...publicationConnections, ...commerceConnections, ...engagementConnections }
+            servers: { default: endpoint('platform', 4300), ...connections }
         },
         wcmsStagedServer: {
             httpHardening: { cors: { allowedOrigins: ['http://localhost:4100', 'http://127.0.0.1:4100'], deniedOrigins: ['http://localhost:4200', 'http://127.0.0.1:4200'] } },
@@ -214,7 +242,7 @@ module.exports = function runtimeProperties(server) {
                 nexusupdate: { releaseCode: 'nexus.web:nexusCorporateSiteUpdate', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 nexusecosystemrepair: { releaseCode: 'nexus.web:nexusCorporateEcosystemComponentRepair', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
                 agora: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraStorefrontSite', sourceVersion: '0' },
-                agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
+                agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.5', dataType: 'sample', rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
                 agoraelectronics: { releaseCode: 'agora.electronics:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },
                 agoratelco: { releaseCode: 'agora.telco:agoraTelcoContentCatalog', releaseVersion: '0.0.0', dataType: 'sample', rootType: 'site', rootCode: 'agoraTelcoSite', sourceVersion: '0' },
                 frameworkdocs: { contentPackCode: 'nodicsDocumentation', releaseVersion: '0.16.8', rootType: 'site', rootCode: 'nodicsDocumentationSite', sourceVersion: '0' },
@@ -266,8 +294,17 @@ module.exports = function runtimeProperties(server) {
             customerFeedback: { enabled: true }, database: database('kickoffDockerLocalEngagement'),
             servers: { default: endpoint('engagement', 4340), ...connections }
         },
+        loyaltyServer: {
+            activeModules: { groups: [], modules: [...distributedCacheModules, ...projectModules, 'kickoffDockerLocal', server] },
+            runtimeRole: { code: 'LOYALTY', publication: 'OPERATIONAL' }, data: { dataReleases: dataReleases(['LOYALTY']) },
+            apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true }, loyaltyInternal: { enabled: true } } },
+            loyalty: { capabilities: { wallet: true, rewardType: true, walletReward: true, ledger: true,
+                earning: true, reservation: true, redemption: true, spendPolicy: true } },
+            database: database('kickoffDockerLocalLoyalty'),
+            servers: { default: endpoint('loyalty', 4360), ...connections }
+        },
         commerceServer: {
-            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, ...projectModules, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, ...projectModules, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' }, database: database('kickoffDockerLocalCommerce'),
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
                 commerceCustomer: { enabled: true } } },
@@ -280,7 +317,7 @@ module.exports = function runtimeProperties(server) {
             servers: { default: endpoint('commerce', 4350), ...connections }
         },
         commerceStagedServer: {
-            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
+            activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...distributedCacheModules, ...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, ...projectModules, ...agoraDomains.projectPacks, 'kickoffDockerLocal', server] },
             runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
             data: { dataReleases: dataReleases(['COMMERCE_STAGED']) },
             apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },

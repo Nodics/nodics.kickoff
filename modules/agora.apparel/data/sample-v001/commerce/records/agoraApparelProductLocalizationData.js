@@ -21,7 +21,47 @@
 
 /** @lifecycle PUBLISHABLE @destination COMMERCE_STAGED @owner agora.apparel */
 
-module.exports = Object.freeze({
+const withProductGallery = function (records) {
+  const values = Object.values(records);
+  const primaryImages = values.map(record => record.media && record.media.primaryImage).filter(Boolean);
+  const nextDistinctPrimary = function (record) {
+    const currentCode = record.media && record.media.primaryImage && record.media.primaryImage.mediaCode;
+    return primaryImages.find(item => item.mediaCode && item.mediaCode !== currentCode);
+  };
+  return Object.fromEntries(Object.entries(records).map(([key, record]) => {
+    const primaryImage = record.media && record.media.primaryImage;
+    if (!primaryImage) return [key, record];
+    const secondarySource = nextDistinctPrimary(record);
+    const secondaryImage = secondarySource ? {
+      ...secondarySource,
+      altText: `${record.name} alternate product view`,
+      businessPurpose: 'AGORA_PRODUCT_HOVER_IMAGE',
+      name: `${record.name} hover image`,
+      ownerReference: record.productCode,
+      role: 'secondary'
+    } : undefined;
+    const gallery = [primaryImage, secondaryImage]
+      .filter(Boolean)
+      .map((item, index) => ({
+        ...item,
+        altText: index === 0 ? item.altText : `${record.name} alternate product view`,
+        businessPurpose: index === 0 ? item.businessPurpose : 'AGORA_PRODUCT_HOVER_IMAGE',
+        name: index === 0 ? item.name : `${record.name} hover image`,
+        ownerReference: record.productCode,
+        role: index === 0 ? 'primary' : 'secondary'
+      }));
+    return [key, {
+      ...record,
+      media: {
+        ...record.media,
+        secondaryImage,
+        gallery
+      }
+    }];
+  }));
+};
+
+const records = {
   "record0": {
     "code": "agoraLinenWrapDress-en",
     "tenant": "default",
@@ -4209,5 +4249,265 @@ module.exports = Object.freeze({
       ],
       "domain": "apparel"
     }
+  },
+  "record116": {
+    "code": "agoraStylePass5Coupon-en",
+    "tenant": "default",
+    "productCode": "agoraStylePass5Coupon",
+    "locale": "en",
+    "name": "Agora Style Pass 5 Percent Coupon",
+    "description": "A digital coupon product for buying one future-use 5 percent Agora Apparel discount code during end-to-end commerce testing.",
+    "slug": "agora-style-pass-5-percent-coupon",
+    "status": "READY",
+    "revision": 1,
+    "active": true,
+    "attributes": {
+      "colorFamily": "gold",
+      "material": "Digital coupon code",
+      "audience": "all",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "couponBenefit": "5 percent discount"
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-collection-promotion",
+        "altText": "Agora Style Pass 5 Percent Coupon",
+        "name": "Agora Style Pass 5 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraStylePass5Coupon"
+      }
+    },
+    "classificationValues": {
+      "categoryCodes": [
+        "agoraSale",
+        "agoraDigitalCoupons"
+      ],
+      "domain": "apparel",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    }
+  },
+  "record117": {
+    "code": "agoraStylePass5Coupon-ar",
+    "tenant": "default",
+    "productCode": "agoraStylePass5Coupon",
+    "locale": "ar",
+    "name": "Agora Style Pass 5 Percent Coupon",
+    "description": "منتج قسيمة رقمية لشراء رمز خصم 5 بالمئة من أجورا أباريل لاختبار رحلة التجارة الشاملة.",
+    "slug": "agora-style-pass-5-percent-coupon",
+    "status": "READY",
+    "revision": 1,
+    "active": true,
+    "attributes": {
+      "colorFamily": "gold",
+      "material": "Digital coupon code",
+      "audience": "all",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "couponBenefit": "5 percent discount"
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-collection-promotion",
+        "altText": "Agora Style Pass 5 Percent Coupon",
+        "name": "Agora Style Pass 5 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraStylePass5Coupon"
+      }
+    },
+    "classificationValues": {
+      "categoryCodes": [
+        "agoraSale",
+        "agoraDigitalCoupons"
+      ],
+      "domain": "apparel",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    }
+  },
+  "record118": {
+    "code": "agoraCapsuleEdit10Coupon-en",
+    "tenant": "default",
+    "productCode": "agoraCapsuleEdit10Coupon",
+    "locale": "en",
+    "name": "Agora Capsule Edit 10 Percent Coupon",
+    "description": "A digital coupon product for buying one future-use 10 percent Agora Apparel discount code during end-to-end commerce testing.",
+    "slug": "agora-capsule-edit-10-percent-coupon",
+    "status": "READY",
+    "revision": 1,
+    "active": true,
+    "attributes": {
+      "colorFamily": "black",
+      "material": "Digital coupon code",
+      "audience": "all",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "couponBenefit": "10 percent discount"
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-promo-capsule",
+        "altText": "Agora Capsule Edit 10 Percent Coupon",
+        "name": "Agora Capsule Edit 10 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraCapsuleEdit10Coupon"
+      }
+    },
+    "classificationValues": {
+      "categoryCodes": [
+        "agoraSale",
+        "agoraDigitalCoupons"
+      ],
+      "domain": "apparel",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    }
+  },
+  "record119": {
+    "code": "agoraCapsuleEdit10Coupon-ar",
+    "tenant": "default",
+    "productCode": "agoraCapsuleEdit10Coupon",
+    "locale": "ar",
+    "name": "Agora Capsule Edit 10 Percent Coupon",
+    "description": "منتج قسيمة رقمية لشراء رمز خصم 10 بالمئة من أجورا أباريل لاختبار رحلة التجارة الشاملة.",
+    "slug": "agora-capsule-edit-10-percent-coupon",
+    "status": "READY",
+    "revision": 1,
+    "active": true,
+    "attributes": {
+      "colorFamily": "black",
+      "material": "Digital coupon code",
+      "audience": "all",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "couponBenefit": "10 percent discount"
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-promo-capsule",
+        "altText": "Agora Capsule Edit 10 Percent Coupon",
+        "name": "Agora Capsule Edit 10 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraCapsuleEdit10Coupon"
+      }
+    },
+    "classificationValues": {
+      "categoryCodes": [
+        "agoraSale",
+        "agoraDigitalCoupons"
+      ],
+      "domain": "apparel",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    }
+  },
+  "record120": {
+    "code": "agoraPrivateSale20Coupon-en",
+    "tenant": "default",
+    "productCode": "agoraPrivateSale20Coupon",
+    "locale": "en",
+    "name": "Agora Private Sale 20 Percent Coupon",
+    "description": "A limited digital coupon product for buying one future-use 20 percent Agora Apparel discount code during end-to-end commerce testing.",
+    "slug": "agora-private-sale-20-percent-coupon",
+    "status": "READY",
+    "revision": 1,
+    "active": true,
+    "attributes": {
+      "colorFamily": "red",
+      "material": "Digital coupon code",
+      "audience": "all",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "couponBenefit": "20 percent discount"
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-promo-texture-edit",
+        "altText": "Agora Private Sale 20 Percent Coupon",
+        "name": "Agora Private Sale 20 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraPrivateSale20Coupon"
+      }
+    },
+    "classificationValues": {
+      "categoryCodes": [
+        "agoraSale",
+        "agoraDigitalCoupons"
+      ],
+      "domain": "apparel",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    }
+  },
+  "record121": {
+    "code": "agoraPrivateSale20Coupon-ar",
+    "tenant": "default",
+    "productCode": "agoraPrivateSale20Coupon",
+    "locale": "ar",
+    "name": "Agora Private Sale 20 Percent Coupon",
+    "description": "منتج قسيمة رقمية محدود لشراء رمز خصم 20 بالمئة من أجورا أباريل لاختبار رحلة التجارة الشاملة.",
+    "slug": "agora-private-sale-20-percent-coupon",
+    "status": "READY",
+    "revision": 1,
+    "active": true,
+    "attributes": {
+      "colorFamily": "red",
+      "material": "Digital coupon code",
+      "audience": "all",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "couponBenefit": "20 percent discount"
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-promo-texture-edit",
+        "altText": "Agora Private Sale 20 Percent Coupon",
+        "name": "Agora Private Sale 20 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraPrivateSale20Coupon"
+      }
+    },
+    "classificationValues": {
+      "categoryCodes": [
+        "agoraSale",
+        "agoraDigitalCoupons"
+      ],
+      "domain": "apparel",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    }
   }
-});
+};
+
+module.exports = Object.freeze(withProductGallery(records));

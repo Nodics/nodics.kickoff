@@ -45,5 +45,8 @@ module.exports = {
     sharedComponentMedia: entry('cmsComponentMedia', 'agoraApparelSharedComponentMediaData', { componentMediaCode: '$componentMediaCode' }),
     pages: entry('cmsPage', 'agoraApparelPageData'),
     routes: entry('cmsPageRoute', 'agoraApparelRouteData')
+  },
+  wcmsExperience: {
+    experiencePlacements: entry('cmsExperiencePlacement', 'agoraApparelExperiencePlacementData')
   }
 };

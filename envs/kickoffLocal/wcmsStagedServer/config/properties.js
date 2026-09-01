@@ -10,8 +10,13 @@
  */
 
 'use strict';
-const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
-const wcmsAuthorityModules = ['cms', 'editorial', 'media', 'publish'];
+const { agoraDomains } = require('../../config/properties');
+const wcmsSearchRuntimeModules = ['search', 'elastic'];
+const wcmsAuthorityModules = [
+    'cms', 'editorial', 'media', 'publish', 'wcmsExperience',
+    'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryPublication',
+    'discoveryQuery', 'discoveryRanking', 'discoveryRuntime', 'discoverySource'
+];
 
 /** @module wcmsStagedServer/config/properties @description Defines Local WCMS Staged role, coordinates, persistence, and Online target connection. */
 module.exports = {
@@ -45,12 +50,16 @@ module.exports = {
     ] },
     activeModules: {
         groups: [],
-        modules: ['cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', ...agoraDomains.projectPacks,
+        modules: [...wcmsSearchRuntimeModules, ...wcmsAuthorityModules, 'cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', ...agoraDomains.projectPacks,
             'kickoffLocal', 'wcmsStagedServer']
     },
     publishEnabled: true,
     runtimeRole: { code: 'WCMS_STAGED', publication: 'STAGED' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(wcmsAuthorityModules.map(moduleName => [moduleName, 'wcms.staged'])) },
+    search: {
+        discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        wcmsExperience: { options: { enabled: true, fallback: false, engine: 'elastic' } }
+    },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['WCMS_STAGED'],
         initializationProfiles: { localWcmsFoundation: { enabled: true,
@@ -83,7 +92,7 @@ module.exports = {
             dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
         nexusprofessionalcopy: { releaseCode: 'nexus.web:nexusCorporateProfessionalCopyUpdate', releaseVersion: '0.0.0',
             dataType: 'sample', rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },
-        agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.2', dataType: 'sample',
+        agoraapparel: { releaseCode: 'agora.apparel:agoraApparelContentCatalog', releaseVersion: '0.0.5', dataType: 'sample',
             rootType: 'site', rootCode: 'agoraApparelSite', sourceVersion: '0' },
         agoraelectronics: { releaseCode: 'agora.electronics:agoraElectronicsContentCatalog', releaseVersion: '0.0.0', dataType: 'sample',
             rootType: 'site', rootCode: 'agoraElectronicsSite', sourceVersion: '0' },

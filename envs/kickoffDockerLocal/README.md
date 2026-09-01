@@ -2,7 +2,7 @@
 
 `kickoffDockerLocal` is an isolated local production-simulation environment. It does not extend, import, or share databases, ports, generated secrets, media volumes, or runtime configuration with `kickoffLocal`.
 
-It composes Platform, WCMS Staged, WCMS Online, Process, Engagement, and Commerce backend containers plus Axis and Nexus static application containers. MongoDB runs as an authenticated replica set. Redis provides password-protected distributed authentication state with a replica and Sentinel observation. Elasticsearch is internal to the data network for Commerce/Discovery search qualification. Axis uses operator-facing host ports; Nexus is configured only for Online delivery.
+It composes Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, and Loyalty backend containers plus Axis and Nexus static application containers. MongoDB runs as an authenticated replica set. Redis provides password-protected distributed authentication state with a replica and Sentinel observation. Elasticsearch is internal to the data network for Commerce/Discovery search qualification. Axis uses operator-facing host ports; Nexus is configured only for Online delivery.
 
 ## Operations
 
@@ -72,7 +72,7 @@ The runtime keeps the direct `REDIS_URL` compatibility path but enables the fram
 
 `docker-local:publishing-interruption-contracts` executes the framework's manifest idempotency, response-loss retry, outbox after-commit delivery, duplicate suppression, lease recovery, startup reconciliation, workflow decision callback, and Process lifecycle contracts. These are deterministic interruption/reconciliation contracts; they do not claim that a live container was killed at an exact publication instruction boundary.
 
-`docker-local:soak` runs for 30 minutes by default with concurrent readiness traffic across all six backends and a complete governed publication acceptance every five minutes. Its default synthetic rate is 120 requests per minute per runtime, leaving explicit capacity below the 600-per-minute framework guardrail for Docker health probes and publication traffic. Set `NODICS_DOCKER_SOAK_SECONDS` only when deliberately running a shorter diagnostic; shortened runs are not the standard qualification.
+`docker-local:soak` runs for 30 minutes by default with concurrent readiness traffic across all seven backends and a complete governed publication acceptance every five minutes. Its default synthetic rate is 120 requests per minute per runtime, leaving explicit capacity below the 600-per-minute framework guardrail for Docker health probes and publication traffic. Set `NODICS_DOCKER_SOAK_SECONDS` only when deliberately running a shorter diagnostic; shortened runs are not the standard qualification.
 
 Independent penetration testing and assistive-technology accessibility review remain external evidence. Docker Local verifies local production-simulation contracts and must not be described as production-certified.
 
@@ -87,5 +87,6 @@ Independent penetration testing and assistive-technology accessibility review re
 | Engagement | 5340 |
 | Commerce | 5350 |
 | Commerce Staged | 5352 |
+| Loyalty | 5360 |
 
 Native Local ports remain unchanged and are never started by Docker Local acceptance.

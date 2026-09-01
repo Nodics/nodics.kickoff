@@ -14869,5 +14869,119 @@ module.exports = Object.freeze({
     "status": "READY",
     "revision": 1,
     "active": true
+  },
+  "record928": {
+    "code": "agoraStylePass5CouponDigital-en",
+    "tenant": "default",
+    "variantCode": "agoraStylePass5CouponDigital",
+    "productCode": "agoraStylePass5Coupon",
+    "locale": "en",
+    "attributes": {
+      "colorCode": "digital-gold",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "gold",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    },
+    "status": "READY",
+    "revision": 1,
+    "active": true
+  },
+  "record929": {
+    "code": "agoraStylePass5CouponDigital-ar",
+    "tenant": "default",
+    "variantCode": "agoraStylePass5CouponDigital",
+    "productCode": "agoraStylePass5Coupon",
+    "locale": "ar",
+    "attributes": {
+      "colorCode": "digital-gold",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "gold",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    },
+    "status": "READY",
+    "revision": 1,
+    "active": true
+  },
+  "record930": {
+    "code": "agoraCapsuleEdit10CouponDigital-en",
+    "tenant": "default",
+    "variantCode": "agoraCapsuleEdit10CouponDigital",
+    "productCode": "agoraCapsuleEdit10Coupon",
+    "locale": "en",
+    "attributes": {
+      "colorCode": "digital-black",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "black",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    },
+    "status": "READY",
+    "revision": 1,
+    "active": true
+  },
+  "record931": {
+    "code": "agoraCapsuleEdit10CouponDigital-ar",
+    "tenant": "default",
+    "variantCode": "agoraCapsuleEdit10CouponDigital",
+    "productCode": "agoraCapsuleEdit10Coupon",
+    "locale": "ar",
+    "attributes": {
+      "colorCode": "digital-black",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "black",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    },
+    "status": "READY",
+    "revision": 1,
+    "active": true
+  },
+  "record932": {
+    "code": "agoraPrivateSale20CouponDigital-en",
+    "tenant": "default",
+    "variantCode": "agoraPrivateSale20CouponDigital",
+    "productCode": "agoraPrivateSale20Coupon",
+    "locale": "en",
+    "attributes": {
+      "colorCode": "digital-red",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "red",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    },
+    "status": "READY",
+    "revision": 1,
+    "active": true
+  },
+  "record933": {
+    "code": "agoraPrivateSale20CouponDigital-ar",
+    "tenant": "default",
+    "variantCode": "agoraPrivateSale20CouponDigital",
+    "productCode": "agoraPrivateSale20Coupon",
+    "locale": "ar",
+    "attributes": {
+      "colorCode": "digital-red",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "red",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL"
+    },
+    "status": "READY",
+    "revision": 1,
+    "active": true
   }
 });

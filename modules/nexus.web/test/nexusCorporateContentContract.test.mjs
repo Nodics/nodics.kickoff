@@ -26,6 +26,13 @@ const projectPackage = JSON.parse(
 const projectContract = JSON.parse(
   await readFile(resolve(projectRoot, "nodics.project.json"), "utf8"),
 );
+const projectCommandService = require(
+  resolve(
+    projectRoot,
+    "../nodics.ai/nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService",
+  ),
+);
+const projectCommands = projectCommandService.defaultCommands();
 const manifest = JSON.parse(
   await readFile(resolve(moduleRoot, "data/manifest.json")),
 );
@@ -836,8 +843,9 @@ assert.match(
   projectPackage.scripts["acceptance:nexus-cms-media-seed"],
   /nodics-project\.js project:run acceptance:nexus-cms-media-seed/,
 );
+assert.equal(projectContract.tooling, undefined);
 assert.equal(
-  projectContract.tooling.commands["acceptance:nexus-cms-media-seed"].command,
+  projectCommands["acceptance:nexus-cms-media-seed"].command,
   "project:nexus-cms-media-seed",
 );
 

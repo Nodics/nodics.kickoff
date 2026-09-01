@@ -22,13 +22,14 @@
 module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
         'http://localhost:3200', 'http://127.0.0.1:3200',
-        'http://localhost:3300', 'http://127.0.0.1:3300'] } },
+        'http://localhost:3300', 'http://127.0.0.1:3300',
+        'http://localhost:5173', 'http://127.0.0.1:5173'] } },
     apiExposure: { categories: { dataExport: { enabled: true } } },
     backofficeRegistration: {
         connectionName: 'default'
     },
     backofficeApplicationInitialization: {
-        projectCode: 'nodics.kickoff',
+        projectCode: process.env.NODICS_PROJECT_CODE || require('../../../../package.json').name,
         projectRoot: process.cwd(),
         profiles: {
             nexus: {
@@ -359,6 +360,10 @@ module.exports = {
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4352, httpsHost: 'localhost', httpsPort: 4353 } },
         engagementServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4340, httpsHost: '127.0.0.1', httpsPort: 4341 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4340, httpsHost: 'localhost', httpsPort: 4341 } },
+        loyalty: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } },
+        loyaltyServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } },
         process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4330, httpsHost: 'localhost', httpsPort: 4331 } }
     }

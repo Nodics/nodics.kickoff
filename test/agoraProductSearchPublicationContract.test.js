@@ -47,6 +47,9 @@ const variantLocalizations = require(path.join(agoraProductRoot, 'agoraApparelPr
 const priceBooks = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelPriceBookData'));
 const priceRows = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelPriceRowData'));
 const inventoryBalances = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelInventoryBalanceData'));
+const promotions = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelPromotionData'));
+const couponBatches = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelCouponBatchData'));
+const coupons = require(path.join(projectRoot, 'modules/agora.apparel/data/sample-v001/commerce/records/agoraApparelCouponData'));
 
 let persisted;
 let indexed;
@@ -117,6 +120,39 @@ test('Agora Product seed satisfies the current Product required-locale policy', 
     const result = localizationPolicy.completeness(request, byOwner(variantLocalizations, 'variantCode', variant.code), 'variant');
     assert.equal(result.complete, true);
     assert.deepEqual(result.requiredLocales.sort(), ['ar', 'en']);
+  }
+});
+
+test('Agora Apparel seed includes coupon products for digital commerce end-to-end testing', () => {
+  const couponProducts = values(products).filter((product) => product.digitalDeliveryType === 'COUPON_CODE');
+
+  assert.deepEqual(couponProducts.map((product) => product.code).sort(), [
+    'agoraCapsuleEdit10Coupon',
+    'agoraPrivateSale20Coupon',
+    'agoraStylePass5Coupon'
+  ]);
+
+  for (const product of couponProducts) {
+    const localizations = byOwner(productLocalizations, 'productCode', product.code);
+    const productVariants = byOwner(variants, 'productCode', product.code);
+    const productPriceRows = byOwner(priceRows, 'productCode', product.code);
+    const binding = product.digitalCommerce;
+    const batchCoupons = values(coupons).filter((coupon) => coupon.batchCode === binding.couponBatchCode);
+
+    assert.equal(product.productType, 'DIGITAL');
+    assert.equal(product.fulfillmentStrategy, 'DIGITAL_COMMERCE');
+    assert.equal(binding.inventoryStrategy, 'COUPON_CODE_POOL');
+    assert.equal(binding.providerModule, 'promotion');
+    assert.equal(localizations.length, 2);
+    assert(localizations.every((item) => item.classificationValues.categoryCodes.includes('agoraDigitalCoupons')));
+    assert.equal(productVariants.length, 1);
+    assert.equal(productVariants[0].attributes.digitalDeliveryType, 'COUPON_CODE');
+    assert.equal(productPriceRows.length, 1);
+    assert.equal(values(promotions).some((promotion) => promotion.code === binding.promotionCode && promotion.conditions.couponRequired === true), true);
+    assert.equal(values(couponBatches).some((batch) => batch.code === binding.couponBatchCode && batch.promotionCode === binding.promotionCode), true);
+    assert.equal(batchCoupons.length, values(couponBatches).find((batch) => batch.code === binding.couponBatchCode).issuedCount);
+    assert(batchCoupons.every((coupon) => coupon.status === 'ACTIVE' && coupon.maxUses === 1 && coupon.usedCount === 0));
+    assert.equal(values(inventoryBalances).some((balance) => balance.sku === productVariants[0].sku && balance.inventoryStrategy === 'COUPON_CODE_POOL'), true);
   }
 });
 

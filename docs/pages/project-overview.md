@@ -108,8 +108,15 @@ The important Kickoff locations are:
 - `package.json` describes the project package and local scripts;
 - `.env` describes developer-specific framework checkout location and local
   overrides;
-- `nodics.project.json` declares framework-owned project commands, runtime
-  startup facts, topology facts, and acceptance facts;
+- `package.json.name` declares the canonical stable project identity;
+- `nodics.project.json`, when present, declares only project-owned command or
+  acceptance overrides;
+- `package.json.nodics` declares human-readable project metadata;
+- `envs/<environment>/nodics.environment.json` declares environment domain
+  selections, topology, acceptance, and qualification profile facts;
+- `modules/*/data/manifest.json` declares module-owned data packs;
+- `envs/<environment>/*Server/package.json` declares the framework packages
+  required to bootstrap each runtime;
 - `config/` contains project-level defaults;
 - `envs/kickoffLocal/` contains local environment and server composition;
 - `modules/` contains project-owned modules and customization examples;

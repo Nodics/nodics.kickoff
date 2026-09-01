@@ -10,13 +10,19 @@
  */
 
 'use strict';
-const wcmsAuthorityModules = ['cms', 'editorial', 'media', 'publish'];
+const wcmsSearchRuntimeModules = ['search', 'elastic'];
+const wcmsAuthorityModules = [
+    'cms', 'editorial', 'media', 'publish', 'wcmsExperience',
+    'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryPublication',
+    'discoveryQuery', 'discoveryRanking', 'discoveryRuntime', 'discoverySource'
+];
 
 /** @module wcmsOnlineServer/config/properties @description Defines the non-versioned Local WCMS Online target and delivery boundary. */
 module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
         'http://localhost:3200', 'http://127.0.0.1:3200',
-        'http://localhost:3300', 'http://127.0.0.1:3300'] } },
+        'http://localhost:3300', 'http://127.0.0.1:3300',
+        'http://localhost:5173', 'http://127.0.0.1:5173'] } },
     localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], allowMissingModelServices: true,
         requiredServiceNames: [
             'DefaultCmsDocumentationAccessPolicyService', 'DefaultCmsDocumentationDashboardService',
@@ -45,11 +51,15 @@ module.exports = {
     ] },
     activeModules: {
         groups: [],
-        modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'wcmsOnlineServer']
+        modules: [...wcmsSearchRuntimeModules, ...wcmsAuthorityModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'wcmsOnlineServer']
     },
     publishEnabled: false,
     runtimeRole: { code: 'WCMS_ONLINE', publication: 'ONLINE' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(wcmsAuthorityModules.map(moduleName => [moduleName, 'wcms.online'])) },
+    search: {
+        discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        wcmsExperience: { options: { enabled: true, fallback: false, engine: 'elastic' } }
+    },
     database: { default: { mongodb: { master: {
         URI: 'mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal',
         databaseName: 'kickoffLocalWcmsOnline'

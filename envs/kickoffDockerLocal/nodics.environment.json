@@ -1,0 +1,194 @@
+{
+  "contractVersion": 1,
+  "profileCode": "dockerLocal",
+  "environment": "kickoffDockerLocal",
+  "qualificationClass": "LOCAL_PRODUCTION_SIMULATION",
+  "composeProjectName": "nodics-kickoff-docker-local",
+  "composeFile": "envs/kickoffDockerLocal/docker/compose.yaml",
+  "generatedDirectory": "envs/kickoffDockerLocal/generated",
+  "environmentFile": "docker.env",
+  "composition": {
+    "agora": {
+      "selection": "all",
+      "domains": [
+        {
+          "code": "apparel",
+          "frameworkGroup": "apparel",
+          "projectPack": "agora.apparel",
+          "productSearchContributor": {
+            "serviceName": "DefaultApparelProductSearchEnrichmentService",
+            "required": true
+          }
+        },
+        {
+          "code": "electronics",
+          "frameworkGroup": "electronics",
+          "projectPack": "agora.electronics",
+          "productSearchContributor": {
+            "serviceName": "DefaultElectronicsProductSearchEnrichmentService",
+            "required": true
+          }
+        },
+        {
+          "code": "telco",
+          "frameworkGroup": "telco",
+          "projectPack": "agora.telco",
+          "impliedProductSearchContributorDomains": [
+            "electronics"
+          ],
+          "productSearchContributor": {
+            "serviceName": "DefaultTelcoProductSearchEnrichmentService",
+            "required": true
+          }
+        }
+      ],
+      "sharedModules": [
+        {
+          "module": "domainCommerceCore",
+          "minSelectedDomains": 2
+        }
+      ]
+    }
+  },
+  "replicaSet": "nodicsDockerLocal",
+  "mongodbHost": "mongodb",
+  "redisPrimaryHost": "redis-primary",
+  "bootstrapAdminPassword": "NodicsLocal@2026",
+  "hostPorts": [
+    4100,
+    4200,
+    5300,
+    5312,
+    5314,
+    5330,
+    5340,
+    5360,
+    5350
+  ],
+  "nativeIsolationPorts": [
+    3100,
+    3200,
+    4300,
+    4312,
+    4314,
+    4330,
+    4340,
+    4360,
+    4350
+  ],
+  "resilience": {
+    "backupDirectory": "envs/kickoffDockerLocal/generated/backups",
+    "restoreConfirmationToken": "--confirm-replace-docker-local-data",
+    "containers": {
+      "mongodb": "nodics-kickoff-docker-local-mongodb-1",
+      "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1"
+    },
+    "volumes": {
+      "redis": "nodics-kickoff-docker-local-redis",
+      "mediaStaged": "nodics-kickoff-docker-local-media-staged",
+      "mediaOnline": "nodics-kickoff-docker-local-media-online"
+    }
+  },
+  "acceptance": {
+    "platformCommand": "acceptance:local",
+    "commerceCommand": "acceptance:agora-commerce",
+    "urls": {
+      "axis": "http://127.0.0.1:4100",
+      "nexus": "http://127.0.0.1:4200",
+      "platform": "http://127.0.0.1:5300",
+      "wcmsStaged": "http://127.0.0.1:5312",
+      "wcmsOnline": "http://127.0.0.1:5314",
+      "process": "http://127.0.0.1:5330",
+      "engagement": "http://127.0.0.1:5340",
+      "loyalty": "http://127.0.0.1:5360",
+      "commerceStaged": "http://127.0.0.1:5352",
+      "commerce": "http://127.0.0.1:5350"
+    }
+  },
+  "qualification": {
+    "environmentContract": "test/dockerLocalEnvironmentContract.test.mjs",
+    "runtimePrepare": "test/dockerLocalRuntimePrepare.test.js",
+    "runtimePorts": [
+      5300,
+      5312,
+      5314,
+      5330,
+      5340,
+      5360,
+      5350
+    ],
+    "frontendUrls": [
+      "http://127.0.0.1:4100/",
+      "http://127.0.0.1:4200/"
+    ],
+    "readLoadPorts": [
+      5314,
+      5300
+    ],
+    "readLoadRequests": 50,
+    "containerPrefix": "nodics-kickoff-docker-local-",
+    "containers": {
+      "mongodb": "nodics-kickoff-docker-local-mongodb-1",
+      "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",
+      "redisSentinel": "nodics-kickoff-docker-local-redis-sentinel-1",
+      "elasticsearch": "nodics-kickoff-docker-local-elasticsearch-1"
+    },
+    "hardenedContainers": [
+      "platform",
+      "wcms-staged",
+      "wcms-online",
+      "process",
+      "engagement",
+      "loyalty",
+      "commerce",
+      "axis",
+      "nexus"
+    ],
+    "networkSeparation": {
+      "publicContainer": "nodics-kickoff-docker-local-nexus-1",
+      "applicationContainer": "nodics-kickoff-docker-local-wcms-staged-1"
+    }
+  },
+  "soak": {
+    "durationSeconds": 1800,
+    "publicationIntervalSeconds": 300,
+    "concurrency": 12,
+    "requestIntervalMs": 1000,
+    "readinessPorts": [
+      5300,
+      5312,
+      5314,
+      5330,
+      5340,
+      5360,
+      5350
+    ],
+    "acceptanceCommand": "docker-local:acceptance"
+  },
+  "resilienceQualification": {
+    "acceptanceCommand": "docker-local:acceptance",
+    "restoreConfirmationToken": "--confirm-replace-docker-local-data",
+    "readyPorts": [
+      5300,
+      5312,
+      5314,
+      5330,
+      5340,
+      5360,
+      5350
+    ],
+    "readLoad": {
+      "total": 1000,
+      "concurrency": 40,
+      "ports": [
+        5314,
+        5300
+      ]
+    },
+    "containers": {
+      "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",
+      "redisSentinel": "nodics-kickoff-docker-local-redis-sentinel-1",
+      "redisReplica": "nodics-kickoff-docker-local-redis-replica-1"
+    }
+  }
+}

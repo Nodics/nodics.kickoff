@@ -119,11 +119,17 @@ If the framework, Axis, or Kickoff checkout lives elsewhere, provide
 
 ## Customization boundary
 
-The runner implementation belongs to framework tooling. The project owns only
-the qualification facts exposed through `nodics.project.json`: repository
-coordinates, environment identity, local gate choices, and evidence policy. A
-generated customer project should reuse the framework runner through project
-commands and change only its manifest facts while retaining the safety
+The runner implementation belongs to framework tooling. The root
+`package.json.name` owns stable project identity. `nodics.project.json` is
+optional and reserved for project-owned command or acceptance overrides; it must
+not declare `projectCode` or `contractVersion`. Thin command aliases and human-readable project metadata
+live in `package.json`. Domain selections and qualification profile facts live
+beside the environment, for example
+`envs/kickoffDockerLocal/nodics.environment.json`. Data packs are owned by
+module data manifests. Runtime server startup facts stay with the selected
+environment server packages.
+A generated customer project should reuse the framework runner through project
+commands and change only its project-owned facts while retaining the safety
 properties:
 
 - dry plan by default;

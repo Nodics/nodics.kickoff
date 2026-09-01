@@ -115,6 +115,9 @@ test('Agora Apparel commerce catalog release follows Commerce Staged nImport exe
   assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
   assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelPriceRowData.js')));
   assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelInventoryBalanceData.js')));
+  assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelPromotionData.js')));
+  assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelCouponBatchData.js')));
+  assert(release.declaredFiles.some((file) => file.endsWith('agoraApparelCouponData.js')));
   assert.equal(dataReleaseService.validateDestination(release), true);
 
   runtimeRole = { code: 'WCMS_STAGED', publication: 'STAGED' };
@@ -158,6 +161,9 @@ test('Agora domain Commerce releases separate each selected domain import plan',
   assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelProductData.js')));
   assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelPriceBookData.js')));
   assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelInventoryBalanceData.js')));
+  assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelPromotionData.js')));
+  assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelCouponBatchData.js')));
+  assert(releases[0].declaredFiles.some((file) => file.endsWith('agoraApparelCouponData.js')));
 
   const releaseRequest = {
     dataType: 'sample',

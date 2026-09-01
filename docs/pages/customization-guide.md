@@ -92,6 +92,8 @@ the correct configuration owner before writing code.
 | Local WCMS port must change | Server config under `envs/.../wcmsServer/config` | Port is topology, not shared framework behavior. |
 | A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |
 | A framework checkout path differs | `.env` with `NODICS_FRAMEWORK_ROOT` | Workspace layout is deployment- and developer-specific. |
+| Project identity is needed | `package.json.name` | Do not duplicate it in `nodics.project.json` or `config/properties.js`. |
+| A local domain selection is needed | `envs/<environment>/nodics.environment.json` | Runtime composition belongs to the selected environment, not a root helper file. |
 | A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |
 | A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |
 | A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |

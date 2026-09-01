@@ -21,7 +21,47 @@
 
 /** @lifecycle PUBLISHABLE @destination COMMERCE_STAGED @owner agora.apparel */
 
-module.exports = Object.freeze({
+const withProductGallery = function (records) {
+  const values = Object.values(records);
+  const primaryImages = values.map(record => record.media && record.media.primaryImage).filter(Boolean);
+  const nextDistinctPrimary = function (record) {
+    const currentCode = record.media && record.media.primaryImage && record.media.primaryImage.mediaCode;
+    return primaryImages.find(item => item.mediaCode && item.mediaCode !== currentCode);
+  };
+  return Object.fromEntries(Object.entries(records).map(([key, record]) => {
+    const primaryImage = record.media && record.media.primaryImage;
+    if (!primaryImage) return [key, record];
+    const secondarySource = nextDistinctPrimary(record);
+    const secondaryImage = secondarySource ? {
+      ...secondarySource,
+      altText: `${record.name} alternate product view`,
+      businessPurpose: 'AGORA_PRODUCT_HOVER_IMAGE',
+      name: `${record.name} hover image`,
+      ownerReference: record.code,
+      role: 'secondary'
+    } : undefined;
+    const gallery = [primaryImage, secondaryImage]
+      .filter(Boolean)
+      .map((item, index) => ({
+        ...item,
+        altText: index === 0 ? item.altText : `${record.name} alternate product view`,
+        businessPurpose: index === 0 ? item.businessPurpose : 'AGORA_PRODUCT_HOVER_IMAGE',
+        name: index === 0 ? item.name : `${record.name} hover image`,
+        ownerReference: record.code,
+        role: index === 0 ? 'primary' : 'secondary'
+      }));
+    return [key, {
+      ...record,
+      media: {
+        ...record.media,
+        secondaryImage,
+        gallery
+      }
+    }];
+  }));
+};
+
+const records = {
   "record0": {
     "code": "agoraLinenWrapDress",
     "tenant": "default",
@@ -1239,5 +1279,109 @@ module.exports = Object.freeze({
         "ownerReference": "agoraModernKnitSet"
       }
     }
+  },
+  "record58": {
+    "code": "agoraStylePass5Coupon",
+    "tenant": "default",
+    "name": "Agora Style Pass 5 Percent Coupon",
+    "status": "ACTIVE",
+    "catalogVersion": "agoraApparelStaged",
+    "revision": 1,
+    "active": true,
+    "productType": "DIGITAL",
+    "fulfillmentStrategy": "DIGITAL_COMMERCE",
+    "digitalDeliveryType": "COUPON_CODE",
+    "digitalCommerce": {
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "providerModule": "promotion",
+      "promotionCode": "agoraStylePass5PercentRule",
+      "couponBatchCode": "agoraStylePass5Batch001",
+      "benefit": {
+        "discountType": "PERCENT",
+        "discountValue": "5"
+      }
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-collection-promotion",
+        "altText": "Agora Style Pass 5 Percent Coupon",
+        "name": "Agora Style Pass 5 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraStylePass5Coupon"
+      }
+    }
+  },
+  "record59": {
+    "code": "agoraCapsuleEdit10Coupon",
+    "tenant": "default",
+    "name": "Agora Capsule Edit 10 Percent Coupon",
+    "status": "ACTIVE",
+    "catalogVersion": "agoraApparelStaged",
+    "revision": 1,
+    "active": true,
+    "productType": "DIGITAL",
+    "fulfillmentStrategy": "DIGITAL_COMMERCE",
+    "digitalDeliveryType": "COUPON_CODE",
+    "digitalCommerce": {
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "providerModule": "promotion",
+      "promotionCode": "agoraCapsuleEdit10PercentRule",
+      "couponBatchCode": "agoraCapsuleEdit10Batch001",
+      "benefit": {
+        "discountType": "PERCENT",
+        "discountValue": "10"
+      }
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-promo-capsule",
+        "altText": "Agora Capsule Edit 10 Percent Coupon",
+        "name": "Agora Capsule Edit 10 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraCapsuleEdit10Coupon"
+      }
+    }
+  },
+  "record60": {
+    "code": "agoraPrivateSale20Coupon",
+    "tenant": "default",
+    "name": "Agora Private Sale 20 Percent Coupon",
+    "status": "ACTIVE",
+    "catalogVersion": "agoraApparelStaged",
+    "revision": 1,
+    "active": true,
+    "productType": "DIGITAL",
+    "fulfillmentStrategy": "DIGITAL_COMMERCE",
+    "digitalDeliveryType": "COUPON_CODE",
+    "digitalCommerce": {
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "providerModule": "promotion",
+      "promotionCode": "agoraPrivateSale20PercentRule",
+      "couponBatchCode": "agoraPrivateSale20Batch001",
+      "benefit": {
+        "discountType": "PERCENT",
+        "discountValue": "20"
+      }
+    },
+    "media": {
+      "primaryImage": {
+        "mediaCode": "agora-owned-promo-texture-edit",
+        "altText": "Agora Private Sale 20 Percent Coupon",
+        "name": "Agora Private Sale 20 Percent Coupon primary image",
+        "description": "Digital coupon product image for Agora coupon marketplace testing",
+        "formatCode": "original",
+        "businessPurpose": "AGORA_PRODUCT_PRIMARY_IMAGE",
+        "ownerType": "PRODUCT",
+        "ownerReference": "agoraPrivateSale20Coupon"
+      }
+    }
   }
-});
+};
+
+module.exports = Object.freeze(withProductGallery(records));

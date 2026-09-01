@@ -165,6 +165,15 @@ services:
     tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/engagementServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
     healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4340/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
 
+  loyalty:
+    <<: *backend
+    command: ["scripts/nodics-project.js", "project:run", "start:loyalty"]
+    environment: { ENV: kickoffDockerLocal, SERVER: loyaltyServer, NODICS_DATABASE_NAME: kickoffDockerLocalLoyalty }
+    ports: ["5360:4360"]
+    depends_on: { mongodb: { condition: service_healthy }, redis-primary: { condition: service_healthy }, redis-sentinel: { condition: service_healthy }, media-permissions: { condition: service_completed_successfully }, platform: { condition: service_healthy } }
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m", "/workspace/nodics.kickoff/envs/kickoffDockerLocal/loyaltyServer/temp:rw,noexec,nosuid,size=128m,uid=1000,gid=1000"]
+    healthcheck: { <<: *backend-health, test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4360/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"] }
+
   commerce:
     <<: *backend
     command: ["scripts/nodics-project.js", "project:run", "start:commerce"]

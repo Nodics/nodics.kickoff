@@ -717,5 +717,41 @@ module.exports = Object.freeze({
     "validFrom": "2026-01-01T00:00:00.000Z",
     "revision": 1,
     "active": true
+  },
+  "record58": {
+    "code": "agoraStylePass5CouponPrice",
+    "tenant": "default",
+    "priceBookCode": "agoraApparelRetailUsd",
+    "productCode": "agoraStylePass5Coupon",
+    "unitAmount": "5.00",
+    "currency": "USD",
+    "minQuantity": "1",
+    "validFrom": "2026-01-01T00:00:00.000Z",
+    "revision": 1,
+    "active": true
+  },
+  "record59": {
+    "code": "agoraCapsuleEdit10CouponPrice",
+    "tenant": "default",
+    "priceBookCode": "agoraApparelRetailUsd",
+    "productCode": "agoraCapsuleEdit10Coupon",
+    "unitAmount": "9.00",
+    "currency": "USD",
+    "minQuantity": "1",
+    "validFrom": "2026-01-01T00:00:00.000Z",
+    "revision": 1,
+    "active": true
+  },
+  "record60": {
+    "code": "agoraPrivateSale20CouponPrice",
+    "tenant": "default",
+    "priceBookCode": "agoraApparelRetailUsd",
+    "productCode": "agoraPrivateSale20Coupon",
+    "unitAmount": "15.00",
+    "currency": "USD",
+    "minQuantity": "1",
+    "validFrom": "2026-01-01T00:00:00.000Z",
+    "revision": 1,
+    "active": true
   }
 });

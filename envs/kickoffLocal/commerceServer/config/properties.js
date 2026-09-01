@@ -11,17 +11,19 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
-const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
-const commerceSearchRuntimeModules = ['search', 'elastic'];
+const { agoraDomains } = require('../../config/properties');
+const commerceSearchRuntimeModules = ['search', 'elastic', 'commerceSearchCore', 'commerceSearch'];
+const digitalCommerceRuntimeModules = ['digitalCommerce', 'digitalCore'];
 const commerceAuthorityModules = [
-    'apparelProduct', 'cart', 'checkoutCore', 'commerceSearchCore', 'customerList',
+    'apparelProduct', 'cart', 'checkoutCore', 'commerceSearchCore', 'shoppingList',
+    'digitalCore',
     'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryRanking', 'discoverySource',
     'electronicsProduct', 'fulfillmentCore', 'inventory', 'order', 'paymentCore', 'pricing',
     'product', 'promotion', 'store', 'tax', 'telcoCatalog', 'telcoProvisioning', 'telcoSubscription'
 ];
 /** @module kickoffLocal/commerceServer/config/properties @description Defines isolated local Commerce coordinates. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
     runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(commerceAuthorityModules.map(moduleName => [moduleName, 'commerce.operational'])) },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
@@ -62,6 +64,10 @@ module.exports = {
     servers: {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4350, httpsHost: '127.0.0.1', httpsPort: 4351 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4350, httpsHost: 'localhost', httpsPort: 4351 } },
         profile: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
-        backoffice: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } }
+        backoffice: { endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
+        loyalty: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } },
+        loyaltyServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } }
     }
 };

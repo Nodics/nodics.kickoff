@@ -104,7 +104,7 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('WCMS_STAGED'), false);
             assert.equal(CONFIG.get('data').dataReleases.allowedDestinationRoles.includes('COMMERCE'), false);
             assert.equal(NODICS.isModuleActive('agora.apparel'), true);
-            const selected = require('../config/agora-domain-composition').resolve().domains;
+            const selected = CONFIG.get('agoraDomains').domains;
             assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
             assert.equal(NODICS.isModuleActive('electronicsProduct'), selected.includes('electronics') || selected.includes('telco'));
             assert.equal(NODICS.isModuleActive('telcoCatalog'), selected.includes('telco'));
@@ -143,9 +143,11 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'wcmsStagedServer',
-        frameworkModules: Object.freeze(['nodics.wcms', 'nodics.platform']),
+        frameworkModules: Object.freeze(['nodics.wcms', 'nodics.discovery', 'nodics.platform']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
+            'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryPublication',
+            'discoveryQuery', 'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'discoverySource',
             'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
@@ -163,9 +165,12 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'wcmsOnlineServer',
-        frameworkModules: Object.freeze(['nodics.wcms']),
+        frameworkModules: Object.freeze(['nodics.wcms', 'nodics.discovery']),
         expectedModules: Object.freeze([
-            'nodics.foundation', 'nodics.wcms', 'media', 'cms', 'wcms', 'nodics.kickoff',
+            'nodics.foundation', 'nodics.wcms', 'media', 'cms', 'wcms',
+            'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryPublication',
+            'discoveryQuery', 'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'discoverySource',
+            'nodics.kickoff',
             'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'wcmsOnlineServer'
         ]),
         verify: function () {
@@ -223,7 +228,7 @@ async function prepareScenario(scenario) {
         defaultServer: scenario.server
     }));
 
-    const selectedDomains = require('../config/agora-domain-composition').resolve().domains;
+    const selectedDomains = CONFIG.get('agoraDomains').domains;
     const capabilityDomains = new Set(selectedDomains);
     if (capabilityDomains.has('telco')) capabilityDomains.add('electronics');
     const optionalFamilies = {

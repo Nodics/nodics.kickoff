@@ -33,5 +33,6 @@ module.exports = {
   record7: { code: 'agoraSale', tenant: 'default', name: 'Sale', status: 'ACTIVE', revision: 1, active: true },
   record8: { code: 'agoraMenShirts', tenant: 'default', name: 'Men Shirts', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
   record9: { code: 'agoraMenTrousers', tenant: 'default', name: 'Men Trousers', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
-  record10: { code: 'agoraMenAccessories', tenant: 'default', name: 'Men Accessories', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true }
+  record10: { code: 'agoraMenAccessories', tenant: 'default', name: 'Men Accessories', parentCode: 'agoraMen', status: 'ACTIVE', revision: 1, active: true },
+  record11: { code: 'agoraDigitalCoupons', tenant: 'default', name: 'Digital Coupons', parentCode: 'agoraSale', status: 'ACTIVE', revision: 1, active: true }
 };

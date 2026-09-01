@@ -11,17 +11,19 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 'use strict';
-const agoraDomains = require('../../../../config/agora-domain-composition').resolve();
-const commerceSearchRuntimeModules = ['search', 'elastic'];
+const { agoraDomains } = require('../../config/properties');
+const commerceSearchRuntimeModules = ['search', 'elastic', 'commerceSearchCore', 'commerceSearch'];
+const digitalCommerceRuntimeModules = ['digitalCommerce', 'digitalCore'];
 const commerceAuthorityModules = [
-    'apparelProduct', 'cart', 'checkoutCore', 'commerceSearchCore', 'customerList',
+    'apparelProduct', 'cart', 'checkoutCore', 'commerceSearchCore', 'shoppingList',
+    'digitalCore',
     'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryRanking', 'discoverySource',
     'electronicsProduct', 'fulfillmentCore', 'inventory', 'order', 'paymentCore', 'pricing',
     'product', 'promotion', 'store', 'tax', 'telcoCatalog', 'telcoProvisioning', 'telcoSubscription'
 ];
 /** @module kickoffLocal/commerceStagedServer/config/properties @description Defines isolated local Commerce Staged coordinates and data-release enforcement for governed Product catalog imports. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
     runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(commerceAuthorityModules.map(moduleName => [moduleName, 'commerce.staged'])) },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },

@@ -7445,5 +7445,68 @@ module.exports = Object.freeze({
     "status": "ACTIVE",
     "revision": 1,
     "active": true
+  },
+  "record464": {
+    "code": "agoraStylePass5CouponDigital",
+    "tenant": "default",
+    "productCode": "agoraStylePass5Coupon",
+    "sku": "AGORA-COUPON-STYLE-PASS-5-DIGITAL",
+    "attributes": {
+      "colorCode": "digital-gold",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "gold",
+      "swatchMediaCode": "agora-owned-collection-promotion",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "promotionCode": "agoraStylePass5PercentRule",
+      "couponBatchCode": "agoraStylePass5Batch001"
+    },
+    "status": "ACTIVE",
+    "revision": 1,
+    "active": true
+  },
+  "record465": {
+    "code": "agoraCapsuleEdit10CouponDigital",
+    "tenant": "default",
+    "productCode": "agoraCapsuleEdit10Coupon",
+    "sku": "AGORA-COUPON-CAPSULE-EDIT-10-DIGITAL",
+    "attributes": {
+      "colorCode": "digital-black",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "black",
+      "swatchMediaCode": "agora-owned-promo-capsule",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "promotionCode": "agoraCapsuleEdit10PercentRule",
+      "couponBatchCode": "agoraCapsuleEdit10Batch001"
+    },
+    "status": "ACTIVE",
+    "revision": 1,
+    "active": true
+  },
+  "record466": {
+    "code": "agoraPrivateSale20CouponDigital",
+    "tenant": "default",
+    "productCode": "agoraPrivateSale20Coupon",
+    "sku": "AGORA-COUPON-PRIVATE-SALE-20-DIGITAL",
+    "attributes": {
+      "colorCode": "digital-red",
+      "sizeCode": "DIGITAL",
+      "colourFamily": "red",
+      "swatchMediaCode": "agora-owned-promo-texture-edit",
+      "fitCode": "digital",
+      "productType": "DIGITAL",
+      "digitalDeliveryType": "COUPON_CODE",
+      "inventoryStrategy": "COUPON_CODE_POOL",
+      "promotionCode": "agoraPrivateSale20PercentRule",
+      "couponBatchCode": "agoraPrivateSale20Batch001"
+    },
+    "status": "ACTIVE",
+    "revision": 1,
+    "active": true
   }
 });

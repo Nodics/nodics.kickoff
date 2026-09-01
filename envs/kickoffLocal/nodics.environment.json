@@ -1,0 +1,195 @@
+{
+  "contractVersion": 1,
+  "environment": "kickoffLocal",
+  "composition": {
+    "agora": {
+      "selection": "all",
+      "domains": [
+        {
+          "code": "apparel",
+          "frameworkGroup": "apparel",
+          "projectPack": "agora.apparel",
+          "productSearchContributor": {
+            "serviceName": "DefaultApparelProductSearchEnrichmentService",
+            "required": true
+          }
+        },
+        {
+          "code": "electronics",
+          "frameworkGroup": "electronics",
+          "projectPack": "agora.electronics",
+          "productSearchContributor": {
+            "serviceName": "DefaultElectronicsProductSearchEnrichmentService",
+            "required": true
+          }
+        },
+        {
+          "code": "telco",
+          "frameworkGroup": "telco",
+          "projectPack": "agora.telco",
+          "impliedProductSearchContributorDomains": [
+            "electronics"
+          ],
+          "productSearchContributor": {
+            "serviceName": "DefaultTelcoProductSearchEnrichmentService",
+            "required": true
+          }
+        }
+      ],
+      "sharedModules": [
+        {
+          "module": "domainCommerceCore",
+          "minSelectedDomains": 2
+        }
+      ]
+    }
+  },
+  "topology": {
+    "stateDirectory": "envs/kickoffLocal/generated/local-topology",
+    "groups": {
+      "backends": [
+        {
+          "code": "platform",
+          "label": "Platform",
+          "script": "start:platform",
+          "port": 4300
+        },
+        {
+          "code": "wcmsOnline",
+          "label": "WCMS Online",
+          "script": "start:wcms:online",
+          "port": 4314
+        },
+        {
+          "code": "process",
+          "label": "Process and Automation",
+          "script": "start:process",
+          "port": 4330
+        },
+        {
+          "code": "wcmsStaged",
+          "label": "WCMS Staged",
+          "script": "start:wcms:staged",
+          "port": 4312
+        },
+        {
+          "code": "engagement",
+          "label": "Engagement",
+          "script": "start:engagement",
+          "port": 4340
+        },
+        {
+          "code": "loyalty",
+          "label": "Loyalty",
+          "script": "start:loyalty",
+          "port": 4360
+        },
+        {
+          "code": "commerceStaged",
+          "label": "Commerce Staged",
+          "script": "start:commerce:staged",
+          "port": 4352
+        },
+        {
+          "code": "commerce",
+          "label": "Commerce",
+          "script": "start:commerce",
+          "port": 4350
+        }
+      ],
+      "frontends": [
+        {
+          "code": "axis",
+          "label": "Axis",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.axis",
+          "port": 3100,
+          "readyPath": "/"
+        },
+        {
+          "code": "nexus",
+          "label": "Nexus",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.nexus",
+          "port": 3200,
+          "readyPath": "/"
+        },
+        {
+          "code": "agora",
+          "label": "Agora Apparel",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "3300"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.agora.apparel",
+          "port": 3300,
+          "readyPath": "/"
+        }
+      ]
+    }
+  },
+  "acceptance": {
+    "functionalJourney": {
+      "reason": "Kickoff functional acceptance",
+      "runtimes": {
+        "platform": {
+          "label": "Platform",
+          "port": 4300,
+          "script": "start:platform"
+        },
+        "commerce": {
+          "label": "Commerce",
+          "port": 4350,
+          "script": "start:commerce"
+        },
+        "engagement": {
+          "label": "Engagement",
+          "port": 4340,
+          "script": "start:engagement"
+        },
+        "loyalty": {
+          "label": "Loyalty",
+          "port": 4360,
+          "script": "start:loyalty"
+        }
+      }
+    },
+    "capabilityRegistry": {
+      "foundationModule": "nodics.foundation",
+      "retiredModule": "nodics.core",
+      "functionalModule": "nodics.process",
+      "observedServer": "kickoffLocal:processServer:default"
+    },
+    "guidedInitialization": {
+      "profileCode": "localWcmsFoundation",
+      "publicationProfiles": [
+        "nexus",
+        "nexusupdate",
+        "nexusecosystemrepair",
+        "agoraapparel",
+        "agoraelectronics",
+        "agoratelco"
+      ],
+      "deliveryProbe": {
+        "site": "nexusCorporateSite",
+        "path": "/",
+        "locale": "en",
+        "channel": "web"
+      }
+    }
+  }
+}
