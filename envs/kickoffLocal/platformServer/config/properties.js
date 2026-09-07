@@ -421,6 +421,8 @@ module.exports = {
                 targetAuthority: { server: 'wcmsOnlineServer', runtimeRole: { code: 'WCMS_ONLINE', publication: 'ONLINE' } } },
             { code: 'process', moduleName: 'system', connectionName: 'process',
                 targetAuthority: { server: 'processServer', runtimeRole: { code: 'PROCESS', publication: 'OPERATIONAL' } } },
+            { code: 'location', moduleName: 'system', connectionName: 'location',
+                targetAuthority: { server: 'locationServer', runtimeRole: { code: 'LOCATION', publication: 'OPERATIONAL' } } },
             { code: 'platform', moduleName: 'system', connectionName: 'default',
                 targetAuthority: { server: 'platformServer', runtimeRole: { code: 'PLATFORM', publication: 'OPERATIONAL' } } }
         ]
@@ -510,6 +512,10 @@ module.exports = {
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } },
         loyaltyServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4360, httpsHost: '127.0.0.1', httpsPort: 4361 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4360, httpsHost: 'localhost', httpsPort: 4361 } },
+        location: { endpoint: { httpHost: '127.0.0.1', httpPort: 4380, httpsHost: '127.0.0.1', httpsPort: 4381 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4380, httpsHost: 'localhost', httpsPort: 4381 } },
+        locationServer: { endpoint: { httpHost: '127.0.0.1', httpPort: 4380, httpsHost: '127.0.0.1', httpsPort: 4381 },
+            abstractEndpoint: { httpHost: 'localhost', httpPort: 4380, httpsHost: 'localhost', httpsPort: 4381 } },
         process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 },
             abstractEndpoint: { httpHost: 'localhost', httpPort: 4330, httpsHost: 'localhost', httpsPort: 4331 } }
     }

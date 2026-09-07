@@ -58,7 +58,7 @@ const requiredProfiles = {
   locationServer: {
     role: 'LOCATION',
     profiles: {
-      localLocationFoundation: ['core']
+      localLocationFoundation: ['init', 'core']
     }
   }
 };

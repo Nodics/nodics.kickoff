@@ -21,6 +21,19 @@ module.exports = {
     runtimeRole: { code: 'LOCATION', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: { locationCore: 'location.operational', locationType: 'location.operational', locationMap: 'location.operational', locationSearch: 'location.operational', locationDraft: 'location.operational', locationApproval: 'location.operational', locationProjection: 'location.operational' } },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, schemaWorkbench: { enabled: true }, dataImport: { enabled: true }, locationInternal: { enabled: true } } },
+    localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], allowMissingModelServices: true,
+        requiredServiceNames: ['DefaultLocationMapProviderConfigurationService'],
+        serviceNames: [
+            'DefaultLocationMapProviderService', 'DefaultLocationMapUsageService', 'DefaultLocationMapStylePresetService',
+            'DefaultLocationMapControlPresetService', 'DefaultLocationMapProviderConfigurationService', 'DefaultLocationMapLayerService',
+            'DefaultLocationService', 'DefaultLocationTypeService', 'DefaultLocationCategoryService', 'DefaultLocationCapabilityService',
+            'DefaultLocationSearchProjectionService', 'DefaultLocationDraftService', 'DefaultLocationApprovalService',
+            'DefaultLocationMarkerProjectionService', 'DefaultConfigurationService', 'DefaultDataInstallationService',
+            'DefaultEmsFailedMessagesService', 'DefaultEventListenerService', 'DefaultImportDefinitionService',
+            'DefaultImportRunService', 'DefaultIndexService', 'DefaultIndexerLogService', 'DefaultIndexerService',
+            'DefaultInterceptorService', 'DefaultSearchService', 'DefaultTokenService', 'DefaultValidatorService',
+            'DefaultWorkflow2SchemaService'
+        ] },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['LOCATION'],
         contributions: [{ moduleName: 'wasteCollection', sections: ['sample-locations'] }],
@@ -28,7 +41,7 @@ module.exports = {
             label: 'Local Location foundation',
             description: 'Install Location reference releases for type registry, semantic places, map layers, nearby search, drafts, approval, and marker projections.',
             completionMessage: 'The Local Location foundation is ready. Operators can validate reusable places, map views, search projections, and draft approval flows.',
-            steps: [{ dataType: 'core' }] } } } },
+            steps: [{ dataType: 'init' }, { dataType: 'core' }] } } } },
     location: {
         capabilities: {
             semanticPlace: true,

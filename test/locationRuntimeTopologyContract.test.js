@@ -7,6 +7,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const packageJson = require(path.join(projectRoot, 'package.json'));
 const environment = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'nodics.environment.json'));
 const runtime = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'locationServer', 'config', 'properties.js'));
+const platformRuntime = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'platformServer', 'config', 'properties.js'));
 const serverPackage = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'locationServer', 'package.json'));
 
 assert.match(packageJson.scripts['start:location'], /nodics-project\.js project:run start:location/);
@@ -19,6 +20,11 @@ const topologyRuntime = environment.topology.groups.backends.find(item => item.c
 assert(topologyRuntime, 'kickoffLocal topology must declare location runtime');
 assert.strictEqual(topologyRuntime.script, 'start:location');
 assert.strictEqual(topologyRuntime.port, 4380);
+const locationResetProvider = platformRuntime.backofficeLocalReset.providers.find(item => item.code === 'location');
+assert(locationResetProvider, 'Platform Local reset coordinator must include Location as an owner reset provider');
+assert.strictEqual(locationResetProvider.connectionName, 'location');
+assert.strictEqual(locationResetProvider.targetAuthority.server, 'locationServer');
+assert.strictEqual(locationResetProvider.targetAuthority.runtimeRole.code, 'LOCATION');
 
 assert.strictEqual(runtime.runtimeRole.code, 'LOCATION');
 assert.strictEqual(runtime.runtimeRole.publication, 'OPERATIONAL');
