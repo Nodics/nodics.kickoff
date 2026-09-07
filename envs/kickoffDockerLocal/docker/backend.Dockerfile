@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim
+FROM node:24.20.0-bookworm-slim
 
 LABEL org.opencontainers.image.title="Nodics Docker Local backend" \
       org.opencontainers.image.description="Shared immutable backend image for kickoffDockerLocal server composition"

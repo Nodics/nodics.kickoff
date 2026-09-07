@@ -43,7 +43,7 @@ services:
     volumes: ["media-staged:/var/lib/nodics/media-staged", "media-online:/var/lib/nodics/media-online"]
 
   mongodb:
-    image: mongo:8.0
+    image: mongo:8.0.29
     entrypoint: ["sh", "-c"]
     command: ["printf '%s' \"$${MONGO_REPLICA_KEY}\" > /tmp/mongo-keyfile && chmod 400 /tmp/mongo-keyfile && chown mongodb:mongodb /tmp/mongo-keyfile && exec /usr/local/bin/docker-entrypoint.sh mongod --replSet nodicsDockerLocal --bind_ip_all --keyFile /tmp/mongo-keyfile"]
     environment: { MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USERNAME}", MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}", MONGO_REPLICA_KEY: "${MONGO_REPLICA_KEY}" }
@@ -60,7 +60,7 @@ services:
     deploy: { resources: { limits: { memory: 1024m, cpus: "2.00" } } }
 
   redis-primary:
-    image: redis:8.2-alpine
+    image: redis:8.2.9-alpine3.22
     command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$${REDIS_PASSWORD}\""]
     environment: { REDIS_PASSWORD: "${REDIS_PASSWORD}" }
     restart: unless-stopped
@@ -75,7 +75,7 @@ services:
     deploy: { resources: { limits: { memory: 256m, cpus: "0.50" } } }
 
   redis-replica:
-    image: redis:8.2-alpine
+    image: redis:8.2.9-alpine3.22
     command: ["sh", "-c", "exec redis-server --replicaof redis-primary 6379 --masterauth \"$${REDIS_PASSWORD}\" --requirepass \"$${REDIS_PASSWORD}\""]
     environment: { REDIS_PASSWORD: "${REDIS_PASSWORD}" }
     restart: unless-stopped
@@ -85,7 +85,7 @@ services:
     deploy: { resources: { limits: { memory: 256m, cpus: "0.50" } } }
 
   redis-sentinel:
-    image: redis:8.2-alpine
+    image: redis:8.2.9-alpine3.22
     command: ["sh", "-c", "printf 'port 26379\nsentinel resolve-hostnames yes\nsentinel monitor nodics redis-primary 6379 1\nsentinel auth-pass nodics %s\nsentinel down-after-milliseconds nodics 5000\nsentinel failover-timeout nodics 15000\n' \"$${REDIS_PASSWORD}\" > /tmp/sentinel.conf && exec redis-sentinel /tmp/sentinel.conf"]
     environment: { REDIS_PASSWORD: "${REDIS_PASSWORD}" }
     restart: unless-stopped
@@ -102,7 +102,7 @@ services:
     deploy: { resources: { limits: { memory: 128m, cpus: "0.25" } } }
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.5
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.21
     environment:
       discovery.type: single-node
       xpack.security.enabled: "false"

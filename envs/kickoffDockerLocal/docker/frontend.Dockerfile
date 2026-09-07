@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim AS build
+FROM node:24.20.0-bookworm-slim AS build
 ARG FRONTEND_PROJECT
 WORKDIR /workspace/frontend
 COPY ${FRONTEND_PROJECT}/package.json ${FRONTEND_PROJECT}/package-lock.json ./
@@ -32,7 +32,7 @@ ENV AXIS_BACKOFFICE_BASE_URL=http://localhost:5300 \
     NEXUS_BUILD_SOURCEMAP=false
 RUN npm run build
 
-FROM nginx:1.29-alpine
+FROM nginx:1.29.8-alpine3.23
 COPY nodics.kickoff/envs/kickoffDockerLocal/docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /workspace/frontend/dist /usr/share/nginx/html
 RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/run
