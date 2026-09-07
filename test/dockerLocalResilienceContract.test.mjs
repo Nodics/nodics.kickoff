@@ -52,14 +52,13 @@ const backendDockerfile = fs.readFileSync(new URL('../envs/kickoffDockerLocal/do
 const dockerLocalRuntimeProperties = fs.readFileSync(new URL('../envs/kickoffDockerLocal/config/runtime-properties.js', import.meta.url), 'utf8');
 const dockerLocalProfile = JSON.parse(fs.readFileSync(new URL('../envs/kickoffDockerLocal/nodics.environment.json', import.meta.url), 'utf8'));
 const packageDefinition = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
-const projectContract = JSON.parse(fs.readFileSync(new URL('../nodics.project.json', import.meta.url), 'utf8'));
 const projectCommands = projectCommandService.defaultCommands();
 
 assert.match(lifecycle, /mongodump/);
 assert.match(lifecycle, /mongorestore/);
 assert.match(lifecycle, /sha256/);
-assert.equal(projectContract.containerEnvironments, undefined);
-assert.equal(projectContract.tooling, undefined);
+assert.equal(packageDefinition.name, 'nodics.kickoff');
+assert.equal(fs.existsSync(path.join(projectRoot, 'nodics.project.json')), false);
 assert.equal(dockerLocalProfile.resilience.restoreConfirmationToken, '--confirm-replace-docker-local-data');
 assert.equal(dockerLocalProfile.resilience.volumes.mediaStaged, 'nodics-kickoff-docker-local-media-staged');
 assert.equal(dockerLocalProfile.resilience.volumes.mediaOnline, 'nodics-kickoff-docker-local-media-online');

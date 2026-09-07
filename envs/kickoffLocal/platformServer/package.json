@@ -8,7 +8,17 @@
     "kind": "server",
     "extends": [
       "nodics.platform",
-      "nodics.localization"
+      "nodics.localization",
+      "nodics.discovery",
+      "nodics.copilot"
+    ],
+    "runtimeModuleRoots": [
+      "nodics.platform",
+      "nodics.localization",
+      "nodics.discovery",
+      "nodics.copilot",
+      "nodics.waste",
+      "nodics.loyalty"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

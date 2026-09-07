@@ -33,7 +33,7 @@ module.exports = {
     activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'wasteServer'].concat(wasteRuntimeModules) },
     runtimeRole: { code: 'WASTE', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: { waste: 'waste.operational' } },
-    apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true }, wasteInternal: { enabled: true } } },
+    apiExposure: { categories: { serviceRegistry: { enabled: true }, schemaWorkbench: { enabled: true }, dataImport: { enabled: true }, wasteInternal: { enabled: true } } },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['WASTE'],
         initializationProfiles: { localWasteFoundation: { enabled: true,
@@ -76,6 +76,7 @@ module.exports = {
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4370, httpsHost: '127.0.0.1', httpsPort: 4371 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4370, httpsHost: 'localhost', httpsPort: 4371 } },
         profile: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
         backoffice: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
-        process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 } }
+        process: { endpoint: { httpHost: '127.0.0.1', httpPort: 4330, httpsHost: '127.0.0.1', httpsPort: 4331 } },
+        location: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4380, httpsHost: '127.0.0.1', httpsPort: 4381 } }
     }
 };

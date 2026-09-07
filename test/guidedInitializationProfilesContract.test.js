@@ -54,6 +54,12 @@ const requiredProfiles = {
     profiles: {
       localWasteFoundation: ['core']
     }
+  },
+  locationServer: {
+    role: 'LOCATION',
+    profiles: {
+      localLocationFoundation: ['core']
+    }
   }
 };
 
@@ -101,8 +107,47 @@ assert.equal(commerceRuntime.servers.loyalty.endpoint.httpPort, 4360, 'commerceS
 assert.equal(commerceRuntime.servers.loyaltyServer.abstractEndpoint.httpHost, 'localhost', 'commerceServer must expose abstract Loyalty routing');
 
 const platformRuntime = loadRuntime('platformServer');
+const platformServerPackage = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'platformServer', 'package.json'));
+assert.deepEqual(
+  platformServerPackage.nodics.runtimeModuleRoots,
+  ['nodics.platform', 'nodics.localization', 'nodics.discovery', 'nodics.copilot', 'nodics.waste', 'nodics.loyalty'],
+  'platformServer must discover capability-owned Platform-targeted data contributions without activating optional runtime modules'
+);
 assert.equal(platformRuntime.servers.loyalty.endpoint.httpPort, 4360, 'platformServer must publish the Loyalty runtime endpoint');
 assert.equal(platformRuntime.servers.loyaltyServer.abstractEndpoint.httpPort, 4360, 'platformServer must publish abstract Loyalty routing');
+assert.deepEqual(
+  platformRuntime.data.dataReleases.contributions,
+  [
+    { moduleName: 'wasteCore', sections: ['core-reference'] },
+    { moduleName: 'wasteCollection', sections: ['sample-profile-addresses'] },
+    { moduleName: 'loyaltyCore', sections: ['core-enterprise-reference'] }
+  ],
+  'platformServer must expose capability-owned Profile and collection-centre address samples as Platform-targeted contributions'
+);
+assert.equal(platformRuntime.activeModules.modules.includes('wasteCollection'), false,
+  'platformServer must not activate Waste modules while discovering their data contributions');
+assert.equal(platformRuntime.activeModules.modules.includes('loyaltyCore'), false,
+  'platformServer must not activate Loyalty modules while discovering their data contributions');
+assert.deepEqual(
+  platformRuntime.backofficeFunctionalModuleActivationData.modules['nodics.loyalty'].dataPackages,
+  [
+    { code: 'loyaltyCore:core-enterprise-reference', classification: 'core', owner: 'nodics.loyalty', required: true, trigger: 'ACTIVATION', targetModule: 'profile', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT' }
+  ],
+  'Loyalty activation must import its Profile enterprise seed only when the capability is activated'
+);
+assert.deepEqual(
+  platformRuntime.backofficeFunctionalModuleActivationData.modules['nodics.waste'].dependencies,
+  ['nodics.location'],
+  'Waste activation must declare its Location dependency for collection-centre demos'
+);
+assert.deepEqual(
+  platformRuntime.backofficeFunctionalModuleActivationData.modules['nodics.waste'].dataPackages,
+  [
+    { code: 'wasteCore:core-reference', classification: 'core', owner: 'nodics.waste', required: true, trigger: 'ACTIVATION', targetModule: 'profile', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT' },
+    { code: 'wasteCollection:sample-profile-addresses', classification: 'sample', owner: 'nodics.waste', required: false, trigger: 'USER', targetModule: 'profile', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT_SAMPLE' }
+  ],
+  'Waste activation must import Waste-owned Profile enterprise data without activating Waste technical modules in Platform'
+);
 
 const loyaltyRuntime = loadRuntime('loyaltyServer');
 assert.equal(loyaltyRuntime.servers.commerce.endpoint.httpPort, 4350, 'loyaltyServer must know the Commerce runtime endpoint');
@@ -112,12 +157,24 @@ assert.equal(loyaltyRuntime.loyalty.capabilities.reservation, true, 'loyaltyServ
 const wasteRuntime = loadRuntime('wasteServer');
 const kickoffWasteProperties = require(path.join(projectRoot, 'modules', 'kickoffWaste', 'config', 'properties.js'));
 assert.equal(wasteRuntime.servers.default.endpoint.httpPort, 4370, 'wasteServer must own the Waste runtime endpoint');
+assert.equal(wasteRuntime.apiExposure.categories.schemaWorkbench.enabled, true, 'wasteServer must expose Schema Workbench for standalone BackOffice inspection');
 assert.equal(wasteRuntime.waste.accelerator.umbrella, 'waste', 'wasteServer must compose the Waste accelerator umbrella');
 assert.deepEqual(wasteRuntime.waste.accelerator.scenarioAccelerators, ['eWaste'], 'wasteServer must compose the initial eWaste scenario accelerator');
 assert.deepEqual(
   wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation.steps[0].releaseCodes,
   ['eWaste:core-reference', 'kickoffWaste:project-reference'],
   'wasteServer must install accelerator data and the Kickoff project overlay explicitly'
+);
+
+const locationRuntime = loadRuntime('locationServer');
+assert.equal(locationRuntime.servers.default.endpoint.httpPort, 4380, 'locationServer must own the Location runtime endpoint');
+assert.equal(locationRuntime.servers.profile.remoteOnly, true, 'locationServer must reach Profile remotely through topology');
+assert.equal(locationRuntime.apiExposure.categories.schemaWorkbench.enabled, true, 'locationServer must expose Schema Workbench for standalone BackOffice inspection');
+assert.equal(locationRuntime.location.capabilities.semanticPlace, true, 'locationServer must enable semantic place capability');
+assert.deepEqual(
+  locationRuntime.data.dataReleases.contributions,
+  [{ moduleName: 'wasteCollection', sections: ['sample-locations'] }],
+  'locationServer must expose Waste-owned collection-centre location samples as Location-targeted contributions'
 );
 assert.equal(kickoffWasteProperties.waste.projectOverlay.releaseCode, 'kickoffWaste:project-reference');
 

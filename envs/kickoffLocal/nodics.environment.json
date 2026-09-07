@@ -85,10 +85,23 @@
           "port": 4360
         },
         {
+          "code": "location",
+          "label": "Location",
+          "script": "start:location",
+          "port": 4380,
+          "dependsOn": [
+            "platform"
+          ]
+        },
+        {
           "code": "waste",
           "label": "Waste",
           "script": "start:waste",
-          "port": 4370
+          "port": 4370,
+          "dependsOn": [
+            "platform",
+            "location"
+          ]
         },
         {
           "code": "commerceStaged",

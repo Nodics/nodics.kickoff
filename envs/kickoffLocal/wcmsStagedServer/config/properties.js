@@ -72,7 +72,7 @@ module.exports = {
             description: 'Install the WCMS initialization releases required before documentation content packs can be reviewed and published.',
             completionMessage: 'The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.',
             steps: [{ dataType: 'init', releaseCodes: ['axis:axisBaseline', 'cms:init-v001', 'wcms:init-v001'] }] } },
-        contributions: [{ moduleName: 'axis', sections: ['axisBaseline'] }] } },
+        contributions: [{ moduleName: 'axis', sections: ['axisBaseline', 'core-v002'] }] } },
     database: { default: { mongodb: { master: {
         URI: 'mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal',
         databaseName: 'kickoffLocalWcmsStaged'
@@ -81,6 +81,8 @@ module.exports = {
         enabled: true,
         runtimeRole: 'STAGED',
         baselines: { axis: { releaseCode: 'axis:axisBaseline', releaseVersion: '0.0.0',
+            rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
+        axisassistant: { releaseCode: 'axis:core-v002', releaseVersion: '0.0.1', dataType: 'core',
             rootType: 'site', rootCode: 'axisCmsSite', sourceVersion: '0' },
         nexus: { releaseCode: 'nexus.web:nexusCorporateSite', releaseVersion: '0.0.10', dataType: 'sample',
             rootType: 'site', rootCode: 'nexusCorporateSite', sourceVersion: '0' },

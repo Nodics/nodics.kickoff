@@ -19,14 +19,140 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
+const path = require('node:path');
+const kickoffRoot = process.env.NODICS_COPILOT_KICKOFF_ROOT || path.resolve(__dirname, '../../../..');
+const workspaceRoot = path.dirname(kickoffRoot);
+const nodicsAiRoot = process.env.NODICS_COPILOT_NODICS_AI_ROOT || path.join(workspaceRoot, 'nodics.ai');
+const axisRoot = process.env.NODICS_COPILOT_AXIS_ROOT || path.join(workspaceRoot, 'nodics.exp', 'nodics.axis');
+const copilotKnowledgeEnabled = process.env.NODICS_COPILOT_KNOWLEDGE_ENABLED !== 'false';
+const nodicsAiVersion = process.env.NODICS_COPILOT_NODICS_AI_VERSION || 'kickoff-local-development';
+const kickoffVersion = process.env.NODICS_COPILOT_KICKOFF_VERSION || 'kickoff-local-development';
+const axisVersion = process.env.NODICS_COPILOT_AXIS_VERSION || 'kickoff-local-development';
+const sourceCodeEnabled = process.env.NODICS_COPILOT_SOURCE_CODE_ENABLED !== 'false';
+const frameworkSourceCodeEnabled = sourceCodeEnabled && process.env.NODICS_COPILOT_FRAMEWORK_SOURCE_CODE_ENABLED !== 'false';
+const axisSourceCodeEnabled = sourceCodeEnabled && process.env.NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED !== 'false';
+const kickoffSourceCodeEnabled = sourceCodeEnabled && process.env.NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED !== 'false';
+
 module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
         'http://localhost:3200', 'http://127.0.0.1:3200',
         'http://localhost:3300', 'http://127.0.0.1:3300',
         'http://localhost:5173', 'http://127.0.0.1:5173'] } },
-    apiExposure: { categories: { dataExport: { enabled: true } } },
+    apiExposure: { categories: { dataExport: { enabled: true }, copilotApi: { enabled: true } } },
+    copilot: {
+        core: { enabled: true, customerProject: 'kickoff', environment: 'kickoffLocal' },
+        api: { enabled: true },
+        conversation: { storage: 'GENERATED_SERVICE', allowVolatileLocalStorage: false },
+        workbench: {
+            target: {
+                productModule: 'product',
+                pricingModule: 'pricing',
+                connectionName: 'commerceStaged',
+                targetAuthority: { runtimeRole: 'COMMERCE_STAGED' }
+            }
+        },
+        knowledge: {
+            ingestion: {
+                enabled: copilotKnowledgeEnabled,
+                ingestOnStart: process.env.NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START !== 'false',
+                indexTenant: 'default'
+            },
+            retrieval: { enabled: copilotKnowledgeEnabled, mode: 'LEXICAL' },
+            repositoryRoots: {
+                'nodics.ai': nodicsAiRoot,
+                'nodics.kickoff': kickoffRoot,
+                'nodics.axis': axisRoot
+            },
+            sourceRegistry: { definitions: [
+                {
+                    code: 'nodics-framework-readme', repository: 'nodics.ai', project: 'nodics', module: 'nodics.ai',
+                    owner: 'nodics.ai', version: nodicsAiVersion || 'UNRESOLVED', sourceType: 'README', classification: 'INTERNAL',
+                    paths: ['README.md', '**/README.md'], allowedChannels: ['AXIS_EMPLOYEE'],
+                    requiredPermissions: ['copilot.knowledge.internal.read'], secretScanPolicy: 'REQUIRED',
+                    enabled: Boolean(copilotKnowledgeEnabled && nodicsAiRoot && nodicsAiVersion)
+                },
+                {
+                    code: 'nodics-framework-contracts', repository: 'nodics.ai', project: 'nodics', module: 'nodics.ai',
+                    owner: 'nodics.ai', version: nodicsAiVersion || 'UNRESOLVED', sourceType: 'AGENTS_CONTRACT', classification: 'RESTRICTED',
+                    paths: ['AGENTS.md', '**/AGENTS.md', '**/llm/contracts/*.md'], allowedChannels: ['AXIS_EMPLOYEE'],
+                    requiredPermissions: ['copilot.knowledge.restricted.read'], secretScanPolicy: 'REQUIRED',
+                    enabled: Boolean(copilotKnowledgeEnabled && nodicsAiRoot && nodicsAiVersion)
+                },
+                {
+                    code: 'nodics-axis-readme', repository: 'nodics.axis', project: 'nodics', module: 'nodics.axis',
+                    owner: 'nodics.axis', version: axisVersion || 'UNRESOLVED', sourceType: 'README', classification: 'INTERNAL',
+                    paths: ['README.md', '**/README.md'], allowedChannels: ['AXIS_EMPLOYEE'],
+                    requiredPermissions: ['copilot.knowledge.internal.read'], secretScanPolicy: 'REQUIRED',
+                    enabled: Boolean(copilotKnowledgeEnabled && axisRoot && axisVersion)
+                },
+                {
+                    code: 'nodics-axis-contracts', repository: 'nodics.axis', project: 'nodics', module: 'nodics.axis',
+                    owner: 'nodics.axis', version: axisVersion || 'UNRESOLVED', sourceType: 'AGENTS_CONTRACT', classification: 'RESTRICTED',
+                    paths: ['AGENTS.md', '**/AGENTS.md', '**/llm/contracts/*.md'], allowedChannels: ['AXIS_EMPLOYEE'],
+                    requiredPermissions: ['copilot.knowledge.restricted.read'], secretScanPolicy: 'REQUIRED',
+                    enabled: Boolean(copilotKnowledgeEnabled && axisRoot && axisVersion)
+                },
+                {
+                    code: 'kickoff-project-readme', repository: 'nodics.kickoff', project: 'kickoff', module: 'nodics.kickoff',
+                    owner: 'nodics.kickoff', version: kickoffVersion || 'UNRESOLVED', sourceType: 'CUSTOMER_PROJECT', classification: 'CUSTOMER',
+                    paths: ['README.md', '**/README.md', 'docs/**/*.md'], allowedChannels: ['AXIS_EMPLOYEE'], tenantScopes: ['default'],
+                    customerProjectScopes: ['kickoff'], requiredPermissions: ['copilot.knowledge.customer.read'],
+                    secretScanPolicy: 'REQUIRED', enabled: Boolean(copilotKnowledgeEnabled && kickoffRoot && kickoffVersion)
+                },
+                {
+                    code: 'kickoff-project-contracts', repository: 'nodics.kickoff', project: 'kickoff', module: 'nodics.kickoff',
+                    owner: 'nodics.kickoff', version: kickoffVersion || 'UNRESOLVED', sourceType: 'CUSTOMER_PROJECT', classification: 'CUSTOMER',
+                    paths: ['AGENTS.md', '**/AGENTS.md', '**/llm/contracts/*.md'], allowedChannels: ['AXIS_EMPLOYEE'], tenantScopes: ['default'],
+                    customerProjectScopes: ['kickoff'], requiredPermissions: ['copilot.knowledge.customer.read'],
+                    secretScanPolicy: 'REQUIRED', enabled: Boolean(copilotKnowledgeEnabled && kickoffRoot && kickoffVersion)
+                },
+                {
+                    code: 'nodics-copilot-source', repository: 'nodics.ai', project: 'nodics', module: 'nodics.copilot',
+                    owner: 'nodics.copilot', version: nodicsAiVersion || 'UNRESOLVED', sourceType: 'SOURCE_CODE', classification: 'RESTRICTED',
+                    paths: ['nodics.copilot/**/*.js'], excludedPaths: ['nodics.copilot/**/test', 'nodics.copilot/**/llm/generated'],
+                    allowedExtensions: ['.js'], limits: { maximumFiles: 400, maximumFileBytes: 524288, maximumSourceBytes: 8388608 },
+                    requiredPermissions: ['copilot.knowledge.restricted.read'], secretScanPolicy: 'REQUIRED',
+                    allowedChannels: ['AXIS_EMPLOYEE'], enabled: Boolean(copilotKnowledgeEnabled && frameworkSourceCodeEnabled && nodicsAiRoot && nodicsAiVersion)
+                },
+                {
+                    code: 'nodics-discovery-source', repository: 'nodics.ai', project: 'nodics', module: 'nodics.discovery',
+                    owner: 'nodics.discovery', version: nodicsAiVersion || 'UNRESOLVED', sourceType: 'SOURCE_CODE', classification: 'RESTRICTED',
+                    paths: ['nodics.discovery/**/*.js'], excludedPaths: ['nodics.discovery/**/test', 'nodics.discovery/**/llm/generated'],
+                    allowedExtensions: ['.js'], limits: { maximumFiles: 400, maximumFileBytes: 524288, maximumSourceBytes: 8388608 },
+                    requiredPermissions: ['copilot.knowledge.restricted.read'], secretScanPolicy: 'REQUIRED',
+                    allowedChannels: ['AXIS_EMPLOYEE'], enabled: Boolean(copilotKnowledgeEnabled && frameworkSourceCodeEnabled && nodicsAiRoot && nodicsAiVersion)
+                },
+                {
+                    code: 'nodics-axis-assistant-source', repository: 'nodics.axis', project: 'nodics', module: 'nodics.axis',
+                    owner: 'nodics.axis', version: axisVersion || 'UNRESOLVED', sourceType: 'SOURCE_CODE', classification: 'RESTRICTED',
+                    paths: ['src/assistant/**/*.ts', 'src/assistant/**/*.tsx', 'src/cms/renderers/components/assistant/**/*.tsx'],
+                    excludedPaths: ['src/**/__tests__', 'src/**/*.test.ts', 'src/**/*.test.tsx'], allowedExtensions: ['.ts', '.tsx'],
+                    limits: { maximumFiles: 200, maximumFileBytes: 524288, maximumSourceBytes: 4194304 },
+                    requiredPermissions: ['copilot.knowledge.restricted.read'], secretScanPolicy: 'REQUIRED',
+                    allowedChannels: ['AXIS_EMPLOYEE'], enabled: Boolean(copilotKnowledgeEnabled && axisSourceCodeEnabled && axisRoot && axisVersion)
+                },
+                {
+                    code: 'kickoff-copilot-composition-source', repository: 'nodics.kickoff', project: 'kickoff', module: 'platformServer',
+                    owner: 'nodics.kickoff', version: kickoffVersion || 'UNRESOLVED', sourceType: 'SOURCE_CODE', classification: 'RESTRICTED',
+                    paths: ['envs/kickoffLocal/platformServer/**/*.js'], excludedPaths: ['envs/kickoffLocal/platformServer/llm/generated'],
+                    allowedExtensions: ['.js'], limits: { maximumFiles: 100, maximumFileBytes: 524288, maximumSourceBytes: 2097152 },
+                    tenantScopes: ['default'], customerProjectScopes: ['kickoff'],
+                    requiredPermissions: ['copilot.knowledge.restricted.read'], secretScanPolicy: 'REQUIRED',
+                    allowedChannels: ['AXIS_EMPLOYEE'], enabled: Boolean(copilotKnowledgeEnabled && kickoffSourceCodeEnabled && kickoffRoot && kickoffVersion)
+                }
+            ] }
+        },
+        providers: {
+            enabled: true,
+            default: { adapter: 'ollama', profile: 'conversation' },
+            adapters: { ollama: { enabled: true, model: { name: 'qwen2.5-coder:7b' } } }
+        }
+    },
     backofficeRegistration: {
         connectionName: 'default'
+    },
+    search: {
+        discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } }
     },
     backofficeApplicationInitialization: {
         projectCode: process.env.NODICS_PROJECT_CODE || require('../../../../package.json').name,
@@ -267,6 +393,18 @@ module.exports = {
                     { code: 'commsCore:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffLocalEngagement', operation: 'IMPORT_SAMPLE' }
                 ]
             },
+            'nodics.loyalty': {
+                dataPackages: [
+                    { code: 'loyaltyCore:core-enterprise-reference', classification: 'core', owner: 'nodics.loyalty', required: true, trigger: 'ACTIVATION', targetModule: 'profile', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT' }
+                ]
+            },
+            'nodics.waste': {
+                dependencies: ['nodics.location'],
+                dataPackages: [
+                    { code: 'wasteCore:core-reference', classification: 'core', owner: 'nodics.waste', required: true, trigger: 'ACTIVATION', targetModule: 'profile', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT' },
+                    { code: 'wasteCollection:sample-profile-addresses', classification: 'sample', owner: 'nodics.waste', required: false, trigger: 'USER', targetModule: 'profile', targetServer: 'platformServer', targetDatabase: 'kickoffLocalPlatform', operation: 'IMPORT_SAMPLE' }
+                ]
+            },
             'nodics.accelerators': {
                 dependencies: ['nodics.commerce', 'nodics.discovery'],
                 dataPackages: []
@@ -300,13 +438,16 @@ module.exports = {
             'DefaultPasswordService', 'DefaultTokenService', 'DefaultEmployeeService']
     },
     activeModules: {
-        groups: [],
+        groups: ['nodics.discovery', 'nodics.copilot'],
         modules: [
+            'search',
+            'elastic',
             'nodics.kickoff',
             'kickoffCore',
             'kickoffApi',
             'kickoffInt',
             'axis',
+            'ollamaProvider',
             'kickoffLocal',
             'platformServer'
         ]
@@ -320,6 +461,11 @@ module.exports = {
     },
     data: { dataReleases: { lifecycleMetadataRequired: true, destinationEnforced: true, environmentClass: 'LOCAL',
         allowedDestinationRoles: ['PLATFORM'],
+        contributions: [
+            { moduleName: 'wasteCore', sections: ['core-reference'] },
+            { moduleName: 'wasteCollection', sections: ['sample-profile-addresses'] },
+            { moduleName: 'loyaltyCore', sections: ['core-enterprise-reference'] }
+        ],
         initializationProfiles: { localPlatformFoundation: { enabled: true,
             label: 'Local Platform foundation',
             description: 'Install required Platform initialization and core releases for local BackOffice identity, catalogue, profile, authorization, and localization services.',

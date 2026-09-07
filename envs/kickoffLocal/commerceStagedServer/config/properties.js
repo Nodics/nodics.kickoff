@@ -27,7 +27,7 @@ module.exports = {
     runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(commerceAuthorityModules.map(moduleName => [moduleName, 'commerce.staged'])) },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
-        commerceManagement: { enabled: true } } },
+        schemaWorkbench: { enabled: true }, commerceManagement: { enabled: true } } },
     search: {
         product: { options: { enabled: true, fallback: false, engine: 'elastic' } },
         commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },

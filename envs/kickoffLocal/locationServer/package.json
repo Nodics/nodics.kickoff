@@ -1,0 +1,33 @@
+{
+    "name": "locationServer",
+    "index": "1001.30",
+    "description": "Reference customer Location server runtime composition and configuration boundary for this Nodics project.",
+    "main": "nodics.js",
+    "version": "0.0.0",
+    "private": true,
+    "license": "SEE LICENSE IN LICENSE",
+    "nodics": {
+        "kind": "server",
+        "displayName": "Location Server",
+        "extends": [
+            "nodics.location"
+        ],
+        "runtimeModuleRoots": [
+            "nodics.location",
+            "nodics.waste"
+        ],
+        "runtimeModule": true,
+        "loadableByNodicsModuleLoader": true,
+        "owns": [
+            "composition",
+            "configuration",
+            "llm"
+        ],
+        "runtime": {
+            "router": false,
+            "publish": false,
+            "web": false
+        }
+    },
+    "scripts": {}
+}

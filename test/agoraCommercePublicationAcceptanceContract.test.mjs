@@ -23,16 +23,14 @@ const require = createRequire(import.meta.url);
 const projectCommandService = require("../../nodics.ai/nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService");
 const scriptPath = path.join(projectRoot, "..", "nodics.ai", "nodics.foundation", "modules", "nTooling", "src", "service", "project", "defaultProjectAgoraCommercePublicationAcceptanceService.mjs");
 const packagePath = path.join(projectRoot, "package.json");
-const projectContractPath = path.join(projectRoot, "nodics.project.json");
 
 test("Agora Commerce publication acceptance covers operator publication operational restore and customer discovery", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectContract = JSON.parse(fs.readFileSync(projectContractPath, "utf8"));
   const projectCommands = projectCommandService.defaultCommands();
 
   assert.match(pkg.scripts["acceptance:agora-commerce-publication"], /nodics-project\.js project:run acceptance:agora-commerce-publication/);
-  assert.equal(projectContract.tooling, undefined);
+  assert.equal(pkg.name, "nodics.kickoff");
   assert.equal(projectCommands["acceptance:agora-commerce-publication"].command, "project:agora-commerce-publication-acceptance");
   assert.equal(projectCommands["acceptance:agora-commerce-publication"].home, "project");
   assert.match(source, /"\/nodics\/product\/v0\/products\/publication\/search"/);

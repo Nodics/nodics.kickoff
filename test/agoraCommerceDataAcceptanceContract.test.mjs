@@ -34,19 +34,17 @@ const scriptPath = path.join(
   "defaultProjectAgoraCommerceDataAcceptanceService.mjs",
 );
 const packagePath = path.join(projectRoot, "package.json");
-const projectContractPath = path.join(projectRoot, "nodics.project.json");
 
 test("Agora Commerce data acceptance remains preflight-first with explicit install gating", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectContract = JSON.parse(fs.readFileSync(projectContractPath, "utf8"));
   const projectCommands = projectCommandService.defaultCommands();
 
   assert.match(
     pkg.scripts["start:commerce:staged"],
     /nodics-project\.js project:run start:commerce:staged/,
   );
-  assert.equal(projectContract.tooling, undefined);
+  assert.equal(pkg.name, "nodics.kickoff");
   assert.equal(projectCommands["start:commerce:staged"].command, "project:runtime-start");
   assert.deepEqual(projectCommands["start:commerce:staged"].args, ["commerceStaged"]);
   assert.match(

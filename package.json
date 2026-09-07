@@ -35,6 +35,7 @@
     "start:commerce": "node scripts/nodics-project.js project:run start:commerce",
     "start:commerce:staged": "node scripts/nodics-project.js project:run start:commerce:staged",
     "start:engagement": "node scripts/nodics-project.js project:run start:engagement",
+    "start:location": "node scripts/nodics-project.js project:run start:location",
     "start:loyalty": "node scripts/nodics-project.js project:run start:loyalty",
     "start:platform": "node scripts/nodics-project.js project:run start:platform",
     "start:process": "node scripts/nodics-project.js project:run start:process",

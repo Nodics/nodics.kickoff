@@ -90,7 +90,7 @@ const scenarios = Object.freeze([
             'agora.electronics', 'agora.electronics', 'agora.telco', 'agora.telco', 'kickoffLocal',
             'commerceStagedServer'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'commerceManagement']),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'schemaWorkbench', 'commerceManagement']),
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerceStaged');
             assert.equal(CONFIG.get('runtimeRole').code, 'COMMERCE_STAGED');
@@ -138,7 +138,7 @@ const scenarios = Object.freeze([
             'eWaste',
             'kickoffWaste'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'wasteInternal']),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaWorkbench', 'dataImport', 'wasteInternal']),
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
             assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
@@ -152,13 +152,46 @@ const scenarios = Object.freeze([
         }
     }),
     Object.freeze({
+        server: 'locationServer',
+        frameworkModules: Object.freeze(['nodics.location']),
+        expectedModules: Object.freeze([
+            'nodics.foundation',
+            'nodics.location',
+            'locationCore',
+            'locationType',
+            'locationMap',
+            'locationSearch',
+            'locationDraft',
+            'locationApproval',
+            'locationProjection',
+            'nodics.kickoff',
+            'kickoffCore',
+            'kickoffApi',
+            'kickoffInt',
+            'kickoffLocal',
+            'locationServer'
+        ]),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaWorkbench', 'dataImport', 'locationInternal']),
+        verify: function () {
+            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalLocation');
+            assert.equal(CONFIG.get('runtimeRole').code, 'LOCATION');
+            assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['LOCATION']);
+            assert.equal(CONFIG.get('location').capabilities.semanticPlace, true);
+            assert.equal(CONFIG.get('servers').profile.remoteOnly, true);
+            assert.equal(CONFIG.get('servers').default.endpoint.httpPort, 4380);
+            assert.equal(NODICS.isModuleActive('store'), false);
+            assert.equal(NODICS.isModuleActive('wasteCollection'), false);
+            assert.equal(NODICS.isModuleActive('workflow'), false);
+        }
+    }),
+    Object.freeze({
         server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
         expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'kickoffLocal', 'engagementServer']),
         verify: function () { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
         server: 'platformServer',
-        frameworkModules: Object.freeze(['nodics.platform', 'nodics.localization']),
+        frameworkModules: Object.freeze(['nodics.platform', 'nodics.localization', 'nodics.discovery', 'nodics.copilot']),
         expectedModules: Object.freeze([
             'nodics.foundation',
             'nodics.platform',
@@ -167,6 +200,33 @@ const scenarios = Object.freeze([
             'localizationCore',
             'localizationApi',
             'nodics.localization',
+            'discoveryConfig',
+            'discoverySource',
+            'discoveryMapping',
+            'discoveryProjection',
+            'discoveryPublication',
+            'discoveryQuery',
+            'discoveryRanking',
+            'discoveryRuntime',
+            'nodics.discovery',
+            'search',
+            'elastic',
+            'copilotCore',
+            'copilotProvider',
+            'mockProvider',
+            'ollamaProvider',
+            'openAiProvider',
+            'claudeProvider',
+            'geminiProvider',
+            'copilotProviders',
+            'copilotConversation',
+            'copilotCapability',
+            'copilotPolicy',
+            'copilotKnowledge',
+            'copilotWorkbench',
+            'copilotEvaluation',
+            'copilotApi',
+            'nodics.copilot',
             'nodics.kickoff',
             'kickoffCore',
             'kickoffApi',
@@ -174,10 +234,33 @@ const scenarios = Object.freeze([
             'kickoffLocal',
             'platformServer'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport']),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'copilotApi']),
         verify: function () {
             assert.equal(CONFIG.get('runtimeRole').code, 'PLATFORM');
             assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['PLATFORM']);
+            assert.equal(CONFIG.get('copilot').providers.default.adapter, 'ollama');
+            assert.equal(CONFIG.get('copilot').conversation.storage, 'GENERATED_SERVICE');
+            assert.equal(CONFIG.get('copilot').conversation.allowVolatileLocalStorage, false);
+            assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.equal(CONFIG.get('search').discoveryProjection.options.engine, 'elastic');
+            const knowledgeSources = CONFIG.get('copilot').knowledge.sourceRegistry.definitions;
+            assert.equal(knowledgeSources.some(source => source.sourceType === 'README'), true);
+            assert.equal(knowledgeSources.some(source => source.sourceType === 'AGENTS_CONTRACT'), true);
+            assert.equal(knowledgeSources.some(source => source.sourceType === 'CUSTOMER_PROJECT'), true);
+            const sourceCodePartitions = knowledgeSources.filter(source => source.sourceType === 'SOURCE_CODE');
+            assert.deepEqual(sourceCodePartitions.map(source => source.code), [
+                'nodics-copilot-source',
+                'nodics-discovery-source',
+                'nodics-axis-assistant-source',
+                'kickoff-copilot-composition-source'
+            ]);
+            assert.equal(sourceCodePartitions.every(source => source.enabled === true), true);
+            assert.equal(sourceCodePartitions.every(source => source.classification === 'RESTRICTED'), true);
+            assert.equal(sourceCodePartitions.every(source => source.allowedChannels.length === 1 && source.allowedChannels[0] === 'AXIS_EMPLOYEE'), true);
+            assert.equal(sourceCodePartitions.every(source => source.limits.maximumFiles <= 400), true);
+            assert.equal(NODICS.isModuleActive('discoveryRuntime'), true);
+            assert.equal(NODICS.isModuleActive('search'), true);
+            assert.equal(NODICS.isModuleActive('elastic'), true);
         }
     }),
     Object.freeze({
@@ -185,6 +268,7 @@ const scenarios = Object.freeze([
         frameworkModules: Object.freeze(['nodics.wcms', 'nodics.discovery', 'nodics.platform']),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
+            'profile', 'backoffice', 'axis', 'installer', 'nodics.platform',
             'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryPublication',
             'discoveryQuery', 'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'discoverySource',
             'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web',
@@ -198,8 +282,10 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWcmsStaged');
             assert.equal(CONFIG.get('servers').cmsOnline.abstractEndpoint.httpPort, 4314);
             assert.ok(NODICS.getRawModule('axis'), 'Axis baseline contribution owner should be discoverable');
-            assert.equal(NODICS.isModuleActive('axis'), false, 'Axis backend behavior must remain inactive');
-            assert.equal(NODICS.isModuleActive('nodics.platform'), false, 'Platform group must remain inactive');
+            assert.equal(NODICS.isModuleActive('axis'), true,
+                'Staged must activate the Platform-owned Axis baseline and publication services');
+            assert.equal(NODICS.isModuleActive('nodics.platform'), true,
+                'Staged must compose Platform explicitly when serving Axis baseline operations');
         }
     }),
     Object.freeze({
