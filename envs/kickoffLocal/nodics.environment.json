@@ -99,8 +99,7 @@
           "script": "start:waste",
           "port": 4370,
           "dependsOn": [
-            "platform",
-            "location"
+            "platform"
           ]
         },
         {
@@ -156,6 +155,60 @@
           ],
           "cwd": "{workspaceRoot}/nodics.exp/nodics.agora.apparel",
           "port": 3300,
+          "readyPath": "/"
+        },
+        {
+          "code": "agoraElectronics",
+          "label": "Agora Electronics",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "3400",
+            "--strictPort"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.agora.electronics",
+          "port": 3400,
+          "readyPath": "/"
+        },
+        {
+          "code": "agoraTelco",
+          "label": "Agora Telco",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "3500",
+            "--strictPort"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.agora.telco",
+          "port": 3500,
+          "readyPath": "/"
+        },
+        {
+          "code": "circa",
+          "label": "Circa eWaste",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "3600",
+            "--strictPort"
+          ],
+          "cwd": "{workspaceRoot}/nodics.exp/nodics.circa.eWaste",
+          "port": 3600,
           "readyPath": "/"
         }
       ]

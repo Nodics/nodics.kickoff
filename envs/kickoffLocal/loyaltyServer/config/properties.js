@@ -13,7 +13,7 @@
 
 /** @module kickoffLocal/loyaltyServer/config/properties @description Defines isolated local Loyalty coordinates and runtime configuration. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own database, provider, and endpoint configuration. */
 module.exports = {
-    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'loyaltyServer'] },
+    activeModules: { groups: [], modules: ['circa.ewaste', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'loyaltyServer'] },
     runtimeRole: { code: 'LOYALTY', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: { loyalty: 'loyalty.operational' } },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true }, loyaltyInternal: { enabled: true } } },

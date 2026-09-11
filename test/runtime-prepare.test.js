@@ -114,7 +114,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'wasteServer',
-        frameworkModules: Object.freeze(['nodics.waste', 'nodics.accelerators/modules/waste']),
+        frameworkModules: Object.freeze(require('../envs/kickoffLocal/wasteServer/package.json').nodics.runtimeModuleRoots),
         expectedModules: Object.freeze([
             'nodics.foundation',
             'nodics.waste',
@@ -136,7 +136,14 @@ const scenarios = Object.freeze([
             'wasteServer',
             'waste',
             'eWaste',
-            'kickoffWaste'
+            'kickoffWaste',
+            'circa.ewaste',
+            'copilotPolicy',
+            'copilotKnowledge',
+            'copilotConversation',
+            'copilotProvider',
+            'ollamaProvider',
+            'openAiProvider'
         ]),
         expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaWorkbench', 'dataImport', 'wasteInternal']),
         verify: function () {

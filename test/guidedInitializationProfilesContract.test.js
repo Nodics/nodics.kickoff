@@ -137,8 +137,8 @@ assert.deepEqual(
 );
 assert.deepEqual(
   platformRuntime.backofficeFunctionalModuleActivationData.modules['nodics.waste'].dependencies,
-  ['nodics.location'],
-  'Waste activation must declare its Location dependency for collection-centre demos'
+  undefined,
+  'Waste activation must preserve optional Location composition instead of forcing another functional module'
 );
 assert.deepEqual(
   platformRuntime.backofficeFunctionalModuleActivationData.modules['nodics.waste'].dataPackages,
@@ -162,8 +162,8 @@ assert.equal(wasteRuntime.waste.accelerator.umbrella, 'waste', 'wasteServer must
 assert.deepEqual(wasteRuntime.waste.accelerator.scenarioAccelerators, ['eWaste'], 'wasteServer must compose the initial eWaste scenario accelerator');
 assert.deepEqual(
   wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation.steps[0].releaseCodes,
-  ['eWaste:core-reference', 'kickoffWaste:project-reference'],
-  'wasteServer must install accelerator data and the Kickoff project overlay explicitly'
+  ['wasteMaterial:core-v001', 'eWaste:core-reference', 'kickoffWaste:project-reference'],
+  'wasteServer must install material reference data, accelerator data and the Kickoff project overlay explicitly'
 );
 
 const locationRuntime = loadRuntime('locationServer');

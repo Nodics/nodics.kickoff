@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="Sample headphones illustration">
+<rect width="560" height="360" rx="26" fill="#eaf5ef"/>
+<path d="M159 224v-43a121 121 0 0 1 242 0v43" fill="none" stroke="#374942" stroke-width="30"/><path d="M168 129a121 121 0 0 1 224 0" fill="none" stroke="#b9ddcb" stroke-width="15"/><rect x="130" y="172" width="70" height="116" rx="30" fill="#242629"/><rect x="360" y="172" width="70" height="116" rx="30" fill="#242629"/><rect x="180" y="187" width="25" height="86" rx="12" fill="#8ca999"/><rect x="355" y="187" width="25" height="86" rx="12" fill="#8ca999"/>
+<text x="280" y="345" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#52665b">SAMPLE ILLUSTRATION</text>
+</svg>

@@ -6,6 +6,10 @@ Business Process & Automation Server runtime composition and configuration bound
 
 This server boundary owns the areas declared in `package.json.nodics.owns`. It must not take ownership of framework source, unrelated customer-project modules, frontend application source, or generated customer-local output.
 
+The runtime inherits `nodics.process`. It discovers `nodics.wcms` only to consume
+the declared CMS publication-approval workflow data; CMS runtime modules remain
+inactive. `runtimeModuleRoots` declares availability separately from inheritance.
+
 ## Extension
 
 Change this package only when the requested behavior belongs to this boundary. Prefer layered configuration, data, environment, server, or module overrides before changing framework source.

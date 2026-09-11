@@ -5,6 +5,15 @@ Nodics runtime groups and local runtime topologies. It demonstrates how a
 customer can run Nodics locally, inspect the framework, and start
 customization.
 
+Implementation partners customize only their own backend and frontend projects.
+Nodics maintains framework capabilities and domain accelerators; reusable
+improvements go through the separate Nodics contribution/request and release
+channel. Follow `AGENTS.md` and the resolved framework's canonical
+`nodics.foundation/modules/nSetup/llm/contracts/customer-project-mode-contract.md`.
+For an e-waste project, use `circa.ewaste` as a reference to create your own
+application identity and consume `eWaste` and `nodics.waste` through supported
+contracts.
+
 ```text
 nodics.kickoff/
   modules/

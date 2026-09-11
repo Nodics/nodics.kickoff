@@ -60,6 +60,26 @@ BackOffice bootstrap. Nexus consumes WCMS Online and Engagement public delivery
 contracts. Agora consumes Platform, WCMS Online, Engagement, and Commerce
 customer contracts.
 
+## Optional capabilities and failures
+
+The reference configuration no longer makes Location a prerequisite for all
+Waste activation or startup, and it does not impose a Commerce/Discovery
+activation gate on the Accelerators umbrella. Concrete domain dependencies and
+required reference validation still apply. Activate only the business
+capabilities selected for the project through the existing Module Registry.
+
+Foundation, Platform and WCMS remain protected functional roots. Process and
+Localization are optional; existing registered/enabled state is preserved when
+upgrading their metadata. No reset or automatic deactivation is performed.
+
+After a successful supervised launch, a runtime exit leaves its peers running.
+Inspect `npm run topology:status` and the affected log. Its existing `start:*`
+command can restore it independently in an operator-owned terminal. Stop that
+independent process explicitly before restarting the full supervised topology.
+Startup errors still fail the requested launch. These behaviors use the existing
+environment profile, module metadata and framework supervisor, not another
+configuration layer.
+
 ## Start locally
 
 Use separate terminals from the Kickoff repository:
@@ -100,7 +120,10 @@ The default local ports are:
 
 - Axis: `http://localhost:3100`
 - Nexus: `http://localhost:3200`
-- Agora: `http://localhost:3300`
+- Agora Apparel: `http://localhost:3300`
+- Agora Electronics: `http://localhost:3400`
+- Agora Telco: `http://localhost:3500`
+- Circa eWaste: `http://localhost:3600`
 - Platform: `http://localhost:4300`
 - WCMS Staged: `http://localhost:4312`
 - WCMS Online: `http://localhost:4314`

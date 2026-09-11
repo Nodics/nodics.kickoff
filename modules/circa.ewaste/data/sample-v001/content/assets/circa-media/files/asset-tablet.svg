@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="Sample tablet illustration">
+<rect width="560" height="360" rx="26" fill="#eaf5ef"/>
+<rect x="140" y="55" width="280" height="248" rx="24" fill="#242629"/><rect x="158" y="73" width="244" height="204" rx="10" fill="#fff"/><path d="m180 245 65-96 55 45 57-65 25 116" fill="#b9ddcb"/><circle cx="280" cy="290" r="6" fill="#f5b700"/>
+<text x="280" y="345" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#52665b">SAMPLE ILLUSTRATION</text>
+</svg>

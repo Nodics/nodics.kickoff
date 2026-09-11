@@ -23,6 +23,11 @@ module.exports = {
             description: 'Install Engagement core and sample communication releases for local contact, testimonial, review, feedback, and notification validation.',
             completionMessage: 'The Local Engagement foundation is ready. Operators can validate engagement journeys with governed templates and runtime data.',
             steps: [{ dataType: 'core' }, { dataType: 'sample' }] } } } },
+    communication: {
+        trustedSourceModules:['eWaste'],
+        providers:{TELEGRAM:{code:'telegram',service:'DefaultTelegramCommunicationProviderService',credentialReferences:['CIRCA_TELEGRAM_BOT_TOKEN'],timeoutMilliseconds:10000}},
+        templates:{WASTE_REVIEW_OUTCOME_V1:{code:'WASTE_REVIEW_OUTCOME_V1',version:2,status:'ACTIVE',purpose:'WASTE_REVIEW_OUTCOME',sourceModules:['eWaste'],channels:['IN_APP','TELEGRAM'],declaredVariables:['submissionCode','status','comment','detailUrl'],subjectTemplate:'Recycling review outcome',bodyTemplate:'Submission {{submissionCode}}: {{status}}.\nReviewer comment: {{comment}}\nView complete item details: {{detailUrl}}'}}
+    },
     engagement: { capabilities: { contactSubmission: true, testimonial: true, customerReview: true, customerFeedback: true } },
     customerFeedback: { enabled: true },
     database: {

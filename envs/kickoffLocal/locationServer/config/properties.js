@@ -17,7 +17,7 @@
  * @override Customer deployments provide their own location server database, provider, and endpoint configuration.
  */
 module.exports = {
-    activeModules: { groups: [], modules: ['nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'locationServer', 'nodics.location', 'locationCore', 'locationType', 'locationMap', 'locationSearch', 'locationDraft', 'locationApproval', 'locationProjection'] },
+    activeModules: { groups: [], modules: ['circa.ewaste', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'locationServer', 'nodics.location', 'locationCore', 'locationType', 'locationMap', 'locationSearch', 'locationDraft', 'locationApproval', 'locationProjection'] },
     runtimeRole: { code: 'LOCATION', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: { locationCore: 'location.operational', locationType: 'location.operational', locationMap: 'location.operational', locationSearch: 'location.operational', locationDraft: 'location.operational', locationApproval: 'location.operational', locationProjection: 'location.operational' } },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, schemaWorkbench: { enabled: true }, dataImport: { enabled: true }, locationInternal: { enabled: true } } },

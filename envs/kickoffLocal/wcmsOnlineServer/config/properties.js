@@ -22,7 +22,9 @@ module.exports = {
     httpHardening: { cors: { allowedOrigins: ['http://localhost:3100', 'http://127.0.0.1:3100',
         'http://localhost:3200', 'http://127.0.0.1:3200',
         'http://localhost:3300', 'http://127.0.0.1:3300',
-        'http://localhost:5173', 'http://127.0.0.1:5173'] } },
+        'http://localhost:3400', 'http://127.0.0.1:3400',
+                'http://localhost:3500', 'http://127.0.0.1:3500',
+                'http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3600', 'http://127.0.0.1:3600'] } },
     localResetProvider: { enabled: true, environmentAllowlist: ['kickoffLocal'], allowMissingModelServices: true,
         requiredServiceNames: [
             'DefaultCmsDocumentationAccessPolicyService', 'DefaultCmsDocumentationDashboardService',

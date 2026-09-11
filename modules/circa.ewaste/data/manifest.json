@@ -1,0 +1,257 @@
+{
+  "contractVersion": 2,
+  "module": "circa.ewaste",
+  "sections": {
+    "profile": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.3",
+      "displayName": "Circa profile sample",
+      "description": "Explicit local Circa sample profile records",
+      "owningDomain": "profile",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/profile/headers/circaProfileSampleHeader.js": "b1ec91066eb2c67176343db820871680d2a88d9f61bd24e35b323294b160c028",
+        "sample-v001/profile/records/circaAddressData.js": "a463ec4753099496d5f38c87cf49dd8894d1782736df64a16126702095d12c67",
+        "sample-v001/profile/records/circaCustomerData.js": "1ea48756d5ecd88b073a913d9eff1654ec22b3292cea9cdb683dd9f8c7094b7a"
+      }
+    },
+    "location": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.2",
+      "displayName": "Circa location sample",
+      "description": "Explicit local Circa sample location records",
+      "owningDomain": "location",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "LOCATION",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/location/headers/circaLocationSampleHeader.js": "be1760d316160a66d92ef1ff842d64ce0588a734c1c16aeb01950e8b0ce7b479",
+        "sample-v001/location/records/circaLocationData.js": "171f290f2d635a70e0e7b0010de65dfb34147730d5d46619f8f7cfd6514e8a1e"
+      }
+    },
+    "waste": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.3",
+      "displayName": "Circa waste sample",
+      "description": "Explicit local Circa sample waste records",
+      "owningDomain": "waste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "WASTE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/waste/headers/circaWasteSampleHeader.js": "c890ffc9996e21d32a84b3239c71d5ffb507c1e1c1c18339809dd0483bd3fb90",
+        "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
+        "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
+        "sample-v001/waste/records/circaWasteCategoryData.js": "8bac1b71126192b180c9dba9b525b28c2c9eab8f2654259aa16339e1822542b7",
+        "sample-v001/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
+        "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
+        "sample-v001/waste/records/circaWasteImpactProfileData.js": "72d99ab6b4f425d35eb78143da27ab793cec85df1473c66c98d9d8400b7ef7bf",
+        "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
+        "sample-v001/waste/records/circaWasteItemTypeData.js": "5b138a9c542e1f8e3dbba957a22daba782e8c38ea0d54ad36a5a9f26652ceb83",
+        "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
+        "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
+      }
+    },
+    "loyalty": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.3",
+      "displayName": "Circa loyalty sample",
+      "description": "Explicit local Circa sample loyalty records",
+      "owningDomain": "loyalty",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "LOYALTY",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js": "1cff17d44117414452e2dee92b184fd795149d6ed63e2802fc36688d81688083",
+        "sample-v001/loyalty/records/circaLoyaltyProgramData.js": "32ed35ca5bafa8110437ade81eaf93cfd0a94afdbaa5ec17f0cd01651c3c3e1b",
+        "sample-v001/loyalty/records/circaLoyaltyRewardTypeData.js": "83cb8a664bcfdd2969494230fdf4b517e35f532363825a3740a52141d19e6c86",
+        "sample-v001/loyalty/records/circaLoyaltyWalletData.js": "2b7878a1180a24624938d63f8ee00d854a1ca245a53a26ae79babcad0e0e90ef",
+        "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js": "6919580ddf70756743e6e5777b79c7449d4fbf34c8dffa7ebaf50c1f6560b83f",
+        "sample-v001/loyalty/records/circaRewardLedgerEntryData.js": "6f96a5ac3be3a40cb48f0e6d568b7489b9943b1aa4126abbe6e012002707131d"
+      }
+    },
+    "content": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.8",
+      "displayName": "Circa published website",
+      "description": "Typed page composition and governed Media publication for Circa.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/content/assets/circa-media/assetManifest.js": "4cd605fa6afbf5e5d554ad2df11564542c0ace5f80ac5b471428d6236b27badc",
+        "sample-v001/content/assets/circa-media/files/asset-camera.svg": "aa4a84099062f0f59ec04447f0e3b3fdf9b1d7d8af5f38835d24fecf1fe67950",
+        "sample-v001/content/assets/circa-media/files/asset-headphones.svg": "eb2665a65570a84f8a6ab47829e8a18f3d8992ef17e67effba4f1776daebc0a7",
+        "sample-v001/content/assets/circa-media/files/asset-keyboard.svg": "ee37faf47fd76b3f5064f9eae95869b85ba48f501c4ecad8bf3b03292cf3232b",
+        "sample-v001/content/assets/circa-media/files/asset-laptop.svg": "2ce32d3fe6e114a38e1adbd2571f64ffa3387d68ba5fdb636b38ff8beabcf288",
+        "sample-v001/content/assets/circa-media/files/asset-monitor.svg": "0fc281401f769c2e0711eee95349e70e028804e7f00e224ae1e595c338257d78",
+        "sample-v001/content/assets/circa-media/files/asset-phone.svg": "77395f67bf0b81b1ca9efc64876fc4c2e73171c9426526b6d61dd1baec8bc2d8",
+        "sample-v001/content/assets/circa-media/files/asset-printer.svg": "f58c56d118d6e0311ac61d53a9796025b6674ec3db362bb99da551a2eea1d186",
+        "sample-v001/content/assets/circa-media/files/asset-router.svg": "edbad8dec465e610197fbb81be66080d2f1ad266fed8c97271038e3ec1b81eae",
+        "sample-v001/content/assets/circa-media/files/asset-speaker.svg": "c27cec9fb5191bfe94b1774449119f2e2ad2f5ff80c0245ab15d11b311b76fac",
+        "sample-v001/content/assets/circa-media/files/asset-tablet.svg": "4edb261de318d81bbfc8f1a4328567a9dd20526f18f8f2165449d1d0cb8571d4",
+        "sample-v001/content/assets/circa-media/files/circa-hero-circular-value.png": "3157a822a21252032f0e37f82f39e60fb337e8c1acd1f50b1c67411895f03156",
+        "sample-v001/content/assets/circa-media/files/circa-hero-community.png": "aa5824dd74cd1a8c37e2a17272278f4e41a7d7a1fe8097c9e2801aa8e077408c",
+        "sample-v001/content/assets/circa-media/files/circa-hero-second-life.png": "c8ac10173a23fc4febb8cd49be5a26a480faefd62da803571984362a6c6f2611",
+        "sample-v001/content/assets/circa-media/files/circa-hero.svg": "73a59d6ff1299837d16da7723adbba8fa5f2c3cb5079d86549634d7997707bde",
+        "sample-v001/content/assets/circa-media/files/circa-mark-light.svg": "075f17668ccf67646be6783d4d05df967eedebca355b3aec1386850f370443c3",
+        "sample-v001/content/assets/circa-media/files/circa-mark-monochrome.svg": "d519bcde74225a9f89f7e0bc6711d8fcd11409e29b829c13bc87795e709b7994",
+        "sample-v001/content/assets/circa-media/files/circa-mark.svg": "f68fac57c0e9596ce810df7bda8c33d16be6ea7af1ab253124c9ea16606eb9f5",
+        "sample-v001/content/assets/circa-media/files/coupon-market.svg": "fef0f6dd2f04fa4036312fcffb9a7170a7bc62d81127ae80e1e1ef69d068b96c",
+        "sample-v001/content/headers/circaContentHeader.js": "9029e2594cd57c399cc4ef1bb239c5a39ec6dea24c66279ced5564a6c8b7b831",
+        "sample-v001/content/headers/circaMediaHeader.js": "9a04d8045f1b7a8f7241f4114b9958cd13057a0ce3b3335b00f6ed7208329635",
+        "sample-v001/content/records/circaCmsComponentData.js": "05082afe7674c6babddf96abf01463f11098c40023c021709c027a5aeb2dad40",
+        "sample-v001/content/records/circaCmsGroupData.js": "698931d01f42db5171f7f2de0b86a0c33783904cae4e8474282eeee1ddb33fdf",
+        "sample-v001/content/records/circaCmsPageData.js": "7136eeb95b2d275d1d3c5110e23f89a5cad155851c6eff3553d6756d87ed7db1",
+        "sample-v001/content/records/circaCmsRendererData.js": "e0f1d0499d0cef1d58dca0918da3b8a486bfe65f90d3a516be9a96817ccec802",
+        "sample-v001/content/records/circaCmsRouteData.js": "35976a1b12fe4a9602495444d87793435252d1a60706ac8817095ef13a746e28",
+        "sample-v001/content/records/circaCmsSiteData.js": "db835dbd815f560681e183357c0c86d4aea2a8aca22c69f6532482f28c30b2f9",
+        "sample-v001/content/records/circaCmsSlotData.js": "e7ee43d69f6825e99f88d6ceee30d0aaaa9c1cdb13f6c1421f434e3e2c747d6d",
+        "sample-v001/content/records/circaCmsTemplateData.js": "b1b571fc759d4ebda412f86925bd002cf0318d9b24109c2414cda92b72b4115a",
+        "sample-v001/content/records/circaCmsTypeData.js": "aed4c67dc69c2be89afb0f4cd2ca0c2edf30fed52fe87a5f6952b7f3ea3360df",
+        "sample-v001/content/records/circaContentCatalogData.js": "adb30393fa7355f54ccf3f9dd2d90641d9d27e5d2539f68965b8adb2467db249",
+        "sample-v001/content/records/circaMediaData.js": "6f2d69ef9e4b191c24d53324eeb577a959f6992490d80277436cdb73757efde0"
+      }
+    },
+    "commerce": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.4",
+      "description": "Illustrative circular assets and coupon offers",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/commerce/headers/circaCommerceSampleHeader.js": "393eb31ec0b00b7b6e460687381423e1c7900046a58fdb510c279e5426c50104",
+        "sample-v001/commerce/records/circaCategoryData.js": "21c09d797ca855f218be5e32752c775c4d62b3b56ab2fa6cd4ce627fa019a1ab",
+        "sample-v001/commerce/records/circaCategoryLocalizationData.js": "299ba71e997a1c239dcaa3ba492fc282f76ae17bfe6afc56f440b19208c12a81",
+        "sample-v001/commerce/records/circaCouponBatchData.js": "2d3e26ac5cdc700e9cca50f24088adfcb56d09b4839708e521112ea652095289",
+        "sample-v001/commerce/records/circaCouponData.js": "56abef2c55bfa1a8f49b78cdffb8b1dc88d19b2fb36acdb1652ddcf55e44f870",
+        "sample-v001/commerce/records/circaInventoryBalanceData.js": "c0fc70b29c0fc10223b2f93dc09db91a3227ec6b347ef2e006880d1f8fde5a6f",
+        "sample-v001/commerce/records/circaPriceBookData.js": "5b1505a9c146407ca35c738fdf5c4b1701840d560cd67e8808f770f47272ede7",
+        "sample-v001/commerce/records/circaPriceRowData.js": "3a09b03d884897a939ea06c52482aab0544f7821f4c6dad7f1797a6fb8ffcdeb",
+        "sample-v001/commerce/records/circaProductData.js": "dcbd71290b4642ac064507abc3d320ed6c0e259c8d6f4d7c85b00c85fe6a8322",
+        "sample-v001/commerce/records/circaProductLocalizationData.js": "5cf905d4662fa557de41d553543f1956d6115a277b5054431da65e79a32f8a75",
+        "sample-v001/commerce/records/circaProductVariantData.js": "9940ca55d3388f9641222282e74ee1b418da35f6cf03fe082f5244795680533e",
+        "sample-v001/commerce/records/circaProductVariantLocalizationData.js": "03c3b434973cd8cbddce7e2e8c47f59af54a85501f22e4f0bb1118117f19ef5d",
+        "sample-v001/commerce/records/circaPromotionData.js": "8ceda04a287944bf8ca27d3bf5d6bb28c3bb2a0027123cb68cfcc44e5505aa41",
+        "sample-v001/commerce/records/circaStoreData.js": "82dadd03f034fb3247784630e453d4dc57cb851897810d7ec7d8e890d42d971f",
+        "sample-v001/commerce/records/circaTaxPolicyData.js": "5277980e0c81c416c01c7c6875c478ec216139d5c7c0e2b714595bddc7d35ee0",
+        "sample-v001/commerce/records/circaWarehouseData.js": "19a8978686b9edee909b65ea34a76e6f5bc2e6c65abc673ac765dc7f5f2e59b4"
+      },
+      "displayName": "Circa Commerce catalogue"
+    },
+    "operations": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.0",
+      "displayName": "Circa operational roles",
+      "description": "Local staff and scoped operational access without resetting customer transactions.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/operations/headers/circaOperationsHeader.js": "5f1e2b30b177d731fafef2f50b79db0d7aeafa845ee52ddc5a6f9670ffa489fa",
+        "sample-v001/operations/records/circaOperationalEmployeeData.js": "1bf0f9496782de2f397e7d0a0e6d8ffda6275c292ccb6f27595f67f7f584d7e2",
+        "sample-v001/operations/records/circaOperationalScopeData.js": "2b571a5a91e721bfb8896615cdab2f5e7eb39e2ee21c2753fec9a2b418c51ced"
+      }
+    },
+    "customer-workspace": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "core-v001",
+      "version": "0.0.2",
+      "displayName": "Circa customer item workspace",
+      "description": "WCMS banner, copy, listing and detail composition for customer items; no transactional sample records",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "core-v001/customer-workspace/headers/circaWorkspaceHeader.js": "579dcc1f28d367e44054afa46710f972cca70137f9acbb5fa882986312ecbfe3",
+        "core-v001/customer-workspace/records/circaWorkspaceComponentData.js": "83b7400fac3d256b8983aa9c9bfda3cd2fd3f36f75ed686c01e9a51b474a0f67",
+        "core-v001/customer-workspace/records/circaWorkspaceGroupData.js": "d0ba8a74cb0193aca46b87605705003e8344b7d4e52b79ad9c322e3b6af2ff79",
+        "core-v001/customer-workspace/records/circaWorkspacePageData.js": "a2e03c865e17e11e5be08c06f298d112667065e7e8a8806ff67ab1dfbe0c418a",
+        "core-v001/customer-workspace/records/circaWorkspaceRendererData.js": "adcc91bd1368e9d9a747d4ca7ffd8b3cd449f5be142f4a1fd8f9edf20a7f71d7",
+        "core-v001/customer-workspace/records/circaWorkspaceRouteData.js": "849f0a3c55c091c1677f3c236fad3b3f47920593bc2816ff4b600f70135ca4e2",
+        "core-v001/customer-workspace/records/circaWorkspaceSlotData.js": "4fadce1809765f938b0d2dd3c2426a9279f49a05c116e66cfda60b829f0bb572",
+        "core-v001/customer-workspace/records/circaWorkspaceTemplateData.js": "3c0409eb9dff1a3d13de65189f73738403e9a26fe9510362b19122bf993b3c78",
+        "core-v001/customer-workspace/records/circaWorkspaceTypeData.js": "e7174a214870c00723ac91f4a723840b158b2f613421c86fbd9d5a02f9d16a81"
+      }
+    }
+  }
+}

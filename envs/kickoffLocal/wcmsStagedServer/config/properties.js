@@ -50,7 +50,7 @@ module.exports = {
     ] },
     activeModules: {
         groups: [],
-        modules: [...wcmsSearchRuntimeModules, ...wcmsAuthorityModules, 'cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', ...agoraDomains.projectPacks,
+        modules: ['circa.ewaste', ...wcmsSearchRuntimeModules, ...wcmsAuthorityModules, 'cmsStaged', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', ...agoraDomains.projectPacks,
             'kickoffLocal', 'wcmsStagedServer']
     },
     publishEnabled: true,

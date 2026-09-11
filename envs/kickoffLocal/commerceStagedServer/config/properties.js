@@ -23,17 +23,19 @@ const commerceAuthorityModules = [
 ];
 /** @module kickoffLocal/commerceStagedServer/config/properties @description Defines isolated local Commerce Staged coordinates and data-release enforcement for governed Product catalog imports. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: ['circa.ewaste', ...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', ...agoraDomains.projectPacks, 'kickoffLocal', 'commerceStagedServer'] },
     runtimeRole: { code: 'COMMERCE_STAGED', publication: 'STAGED' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(commerceAuthorityModules.map(moduleName => [moduleName, 'commerce.staged'])) },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
         schemaWorkbench: { enabled: true }, commerceManagement: { enabled: true } } },
     search: {
-        product: { options: { enabled: true, fallback: false, engine: 'elastic' } },
+        product: {
+        options: { enabled: true, fallback: false, engine: 'elastic' } },
         commerceSearchCore: { options: { enabled: true, fallback: false, engine: 'elastic' } },
         discoveryProjection: { options: { enabled: true, fallback: false, engine: 'elastic' } }
     },
     product: {
+        marketplaceAuthoring:{enabled:true,catalogVersion:'circaStaged',locales:['en','ar']},
         publication: {
             searchEnrichment: {
                 domains: { enabled: true, contributors: agoraDomains.productSearchContributors, missingBehavior: 'error' }

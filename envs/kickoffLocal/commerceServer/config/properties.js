@@ -23,7 +23,7 @@ const commerceAuthorityModules = [
 ];
 /** @module kickoffLocal/commerceServer/config/properties @description Defines isolated local Commerce coordinates. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: [...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
+    activeModules: { groups: [...agoraDomains.frameworkGroups], modules: ['circa.ewaste', 'circa.ewaste', ...commerceSearchRuntimeModules, ...digitalCommerceRuntimeModules, ...agoraDomains.sharedModules, 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'kickoffLocal', 'commerceServer'] },
     runtimeRole: { code: 'COMMERCE', publication: 'OPERATIONAL' },
     runtimeAuthorityContexts: { modules: Object.fromEntries(commerceAuthorityModules.map(moduleName => [moduleName, 'commerce.operational'])) },
     apiExposure: { categories: { serviceRegistry: { enabled: true }, dataImport: { enabled: true },
@@ -62,6 +62,7 @@ module.exports = {
     database: { default: { mongodb: { master: { databaseName: 'kickoffLocalCommerce' } } } },
     stripeProvider: { enabled: true, maturity: 'OFFLINE_CONFORMANCE', sandboxOnly: true, liveQualified: false },
     servers: {
+        waste: {remoteOnly:true,endpoint:{httpHost:"127.0.0.1",httpPort:4370,httpsHost:"127.0.0.1",httpsPort:4371}},
         default: { endpoint: { httpHost: '127.0.0.1', httpPort: 4350, httpsHost: '127.0.0.1', httpsPort: 4351 }, abstractEndpoint: { httpHost: 'localhost', httpPort: 4350, httpsHost: 'localhost', httpsPort: 4351 } },
         profile: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },
         backoffice: { remoteOnly: true, endpoint: { httpHost: '127.0.0.1', httpPort: 4300, httpsHost: '127.0.0.1', httpsPort: 4301 } },

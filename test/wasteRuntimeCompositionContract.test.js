@@ -39,7 +39,7 @@ function readEnvFile(filePath) {
 const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
 const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const coreRoot = path.join(frameworkRoot, 'nodics.foundation');
-const wasteRoot = path.join(frameworkRoot, 'nodics.waste');
+const runtimeRoots = require('../envs/kickoffLocal/wasteServer/package.json').nodics.runtimeModuleRoots.map(relative => path.join(frameworkRoot, relative));
 const acceleratorRoot = path.join(frameworkRoot, 'nodics.accelerators/modules/waste');
 const config = require(path.join(coreRoot, 'modules/nConfig'));
 
@@ -76,7 +76,7 @@ async function main() {
     const options = Object.freeze({
         NODICS_HOME: coreRoot,
         CUSTOM_HOME: projectRoot,
-        MODULE_ROOTS: Object.freeze([coreRoot, wasteRoot, acceleratorRoot, projectRoot]),
+        MODULE_ROOTS: Object.freeze([coreRoot, ...runtimeRoots, projectRoot]),
         defaultEnvironment: 'kickoffLocal',
         defaultServer: 'wasteServer'
     });

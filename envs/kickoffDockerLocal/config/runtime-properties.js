@@ -213,8 +213,7 @@ module.exports = function runtimeProperties(server) {
                 'nodics.communication': { dataPackages: [
                     { code: 'commsCore:runtime-defaults', classification: 'runtime-default', owner: 'nodics.communication', required: true, trigger: 'ACTIVATION', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffDockerLocalEngagement', operation: 'IMPORT' },
                     { code: 'commsCore:sample-templates', classification: 'sample', owner: 'nodics.communication', required: false, trigger: 'USER', targetModule: 'commsCore', targetServer: 'engagementServer', targetDatabase: 'kickoffDockerLocalEngagement', operation: 'IMPORT_SAMPLE' }
-                ] },
-                'nodics.accelerators': { dependencies: ['nodics.commerce', 'nodics.discovery'], dataPackages: [] }
+                ] }
             } },
             backofficeRegistry: { clientEndpoints: {
                 platform: 'http://localhost:5300/', platformServer: 'http://localhost:5300/',

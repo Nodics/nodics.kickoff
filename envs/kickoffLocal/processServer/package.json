@@ -7,8 +7,7 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.process",
-      "nodics.wcms"
+      "nodics.process"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
@@ -22,7 +21,11 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Business Process & Automation Server"
+    "displayName": "Business Process & Automation Server",
+    "runtimeModuleRoots": [
+      "nodics.process",
+      "nodics.wcms"
+    ]
   },
   "description": "Business Process & Automation Server runtime composition and configuration boundary for this Nodics project."
 }

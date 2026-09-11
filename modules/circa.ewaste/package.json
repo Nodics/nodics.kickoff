@@ -1,0 +1,33 @@
+{
+  "name": "circa.ewaste",
+  "index": "3100.90",
+  "description": "Circa customer application composition, content, sample data and deployment policy over eWaste.",
+  "main": "nodics.js",
+  "version": "0.0.0",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "nodics": {
+    "kind": "capability",
+    "displayName": "Circa eWaste sample data",
+    "runtimeModule": true,
+    "loadableByNodicsModuleLoader": true,
+    "owns": [
+      "configuration",
+      "data",
+      "test",
+      "documentation",
+      "llm",
+      "service",
+      "router",
+      "controller"
+    ],
+    "runtime": {
+      "router": true,
+      "publish": false,
+      "web": false
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}

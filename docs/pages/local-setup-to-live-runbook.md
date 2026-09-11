@@ -103,6 +103,9 @@ The expected local URLs are:
 | Axis | `http://localhost:3100` | Employee setup and operations workspace. |
 | Nexus | `http://localhost:3200` | Public corporate site using Online content. |
 | Agora Apparel | `http://localhost:3300` | Public storefront using Online content and Commerce data. |
+| Agora Electronics | `http://localhost:3400` | Electronics storefront. |
+| Agora Telco | `http://localhost:3500` | Telco storefront. |
+| Circa eWaste | `http://localhost:3600` | Guided eWaste submission and customer account. |
 | Platform | `http://localhost:4300` | Profile, BackOffice, registry, and bootstrap authority. |
 | WCMS Online | `http://localhost:4314` | Online public content runtime. |
 | Process | `http://localhost:4330` | Workflow, approval, and automation runtime. |
@@ -357,6 +360,9 @@ Open Agora:
 
 ```text
 http://localhost:3300
+http://localhost:3400
+http://localhost:3500
+http://localhost:3600
 ```
 
 ![Agora Apparel Online](../assets/images/local-setup/agora-apparel-online.jpg "Agora Apparel Online")

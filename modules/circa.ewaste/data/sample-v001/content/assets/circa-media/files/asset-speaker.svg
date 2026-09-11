@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="Sample speaker illustration">
+<rect width="560" height="360" rx="26" fill="#eaf5ef"/>
+<rect x="154" y="64" width="252" height="244" rx="35" fill="#374942"/><circle cx="280" cy="126" r="31" fill="#182721"/><circle cx="280" cy="227" r="68" fill="#182721"/><circle cx="280" cy="227" r="44" fill="#8ca999"/><circle cx="280" cy="227" r="20" fill="#374942"/><circle cx="372" cy="92" r="6" fill="#f5b700"/>
+<text x="280" y="345" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#52665b">SAMPLE ILLUSTRATION</text>
+</svg>

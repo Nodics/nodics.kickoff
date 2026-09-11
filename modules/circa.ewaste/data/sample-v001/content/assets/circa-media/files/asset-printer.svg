@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="Sample printer illustration">
+<rect width="560" height="360" rx="26" fill="#eaf5ef"/>
+<rect x="170" y="42" width="220" height="123" rx="8" fill="#fff" stroke="#8ca999" stroke-width="5"/><rect x="110" y="129" width="340" height="144" rx="24" fill="#374942"/><rect x="146" y="199" width="268" height="40" rx="7" fill="#182721"/><path d="M174 217h212v103H174z" fill="#fff"/><path d="M196 246h168m-168 24h125" stroke="#b9ddcb" stroke-width="9"/><circle cx="416" cy="161" r="9" fill="#f5b700"/>
+<text x="280" y="345" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#52665b">SAMPLE ILLUSTRATION</text>
+</svg>

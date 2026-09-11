@@ -12,7 +12,14 @@
     ],
     "runtimeModuleRoots": [
       "nodics.waste",
-      "nodics.accelerators/modules/waste"
+      "nodics.accelerators/modules/waste",
+      "nodics.copilot/modules/copilotProviders/modules/copilotProvider",
+      "nodics.copilot/modules/copilotProviders/modules/ollamaProvider",
+      "nodics.copilot/modules/copilotProviders/modules/openAiProvider",
+      "nodics.copilot/modules/copilotPolicy",
+      "nodics.copilot/modules/copilotKnowledge",
+      "nodics.copilot/modules/copilotConversation",
+      "nodics.discovery"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

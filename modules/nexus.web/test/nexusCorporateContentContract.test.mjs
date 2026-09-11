@@ -23,9 +23,6 @@ const projectRoot = resolve(moduleRoot, "../..");
 const projectPackage = JSON.parse(
   await readFile(resolve(projectRoot, "package.json"), "utf8"),
 );
-const projectContract = JSON.parse(
-  await readFile(resolve(projectRoot, "nodics.project.json"), "utf8"),
-);
 const projectCommandService = require(
   resolve(
     projectRoot,
@@ -843,7 +840,7 @@ assert.match(
   projectPackage.scripts["acceptance:nexus-cms-media-seed"],
   /nodics-project\.js project:run acceptance:nexus-cms-media-seed/,
 );
-assert.equal(projectContract.tooling, undefined);
+assert.equal(existsSync(resolve(projectRoot, "nodics.project.json")), false, "Project identity and commands must not require the retired project descriptor");
 assert.equal(
   projectCommands["acceptance:nexus-cms-media-seed"].command,
   "project:nexus-cms-media-seed",

@@ -2,6 +2,14 @@
 
 - Nodics Kickoff is a customer/reference project, not a Nodics product module.
 - Do not copy framework source into this repository.
+- Partners write only to their own backend/frontend repositories. Treat Nodics
+  framework and accelerator source as immutable dependencies. Reusable changes
+  go through the separate Nodics contribution/request, review and release
+  channel; a partner application request does not authorize framework edits.
+- Follow the resolved framework's canonical
+  `nodics.foundation/modules/nSetup/llm/contracts/customer-project-mode-contract.md`.
+  Classify generic framework capability, domain accelerator and customer
+  application ownership before placing functionality, data or documentation.
 - Nodics Kickoff may default to the sample layout where it sits parallel to
   `nodics.ai`, but customer projects may live in any workspace layout.
 - Consume the Nodics framework through declared package dependencies and/or an
@@ -111,8 +119,9 @@ solve a customer-project problem by moving framework ownership into Kickoff.
 
 ## Coding and placement rules
 
-- Prefer properties, server/environment deltas, project module overlays, and
-  documented configuration seams before changing framework code.
+- Use properties, server/environment deltas, project module overlays and
+  documented extension seams for project customization. Missing framework or
+  accelerator capabilities require a separate proposal to the Nodics team.
 - Put constants and error/status values in the correct definition/configuration
   file; do not hide reusable statuses, API categories, lifecycle names, or
   registry states inside unrelated project properties.

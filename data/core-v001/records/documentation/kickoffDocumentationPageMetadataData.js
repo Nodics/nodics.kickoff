@@ -190,58 +190,63 @@ module.exports = {
         "level": 2
       },
       {
+        "text": "Optional capabilities and failures",
+        "anchor": "kickoffLocalRuntime-3-optional-capabilities-and-failures",
+        "level": 2
+      },
+      {
         "text": "Start locally",
-        "anchor": "kickoffLocalRuntime-3-start-locally",
+        "anchor": "kickoffLocalRuntime-4-start-locally",
         "level": 2
       },
       {
         "text": "Before starting",
-        "anchor": "kickoffLocalRuntime-4-before-starting",
+        "anchor": "kickoffLocalRuntime-5-before-starting",
         "level": 2
       },
       {
         "text": "Start sequence",
-        "anchor": "kickoffLocalRuntime-5-start-sequence",
+        "anchor": "kickoffLocalRuntime-6-start-sequence",
         "level": 2
       },
       {
         "text": "Login and first checks",
-        "anchor": "kickoffLocalRuntime-6-login-and-first-checks",
+        "anchor": "kickoffLocalRuntime-7-login-and-first-checks",
         "level": 2
       },
       {
         "text": "Fresh environment setup order",
-        "anchor": "kickoffLocalRuntime-7-fresh-environment-setup-order",
+        "anchor": "kickoffLocalRuntime-8-fresh-environment-setup-order",
         "level": 2
       },
       {
         "text": "Documentation import",
-        "anchor": "kickoffLocalRuntime-8-documentation-import",
+        "anchor": "kickoffLocalRuntime-9-documentation-import",
         "level": 2
       },
       {
         "text": "Troubleshooting",
-        "anchor": "kickoffLocalRuntime-9-troubleshooting",
+        "anchor": "kickoffLocalRuntime-10-troubleshooting",
         "level": 2
       },
       {
         "text": "Production note",
-        "anchor": "kickoffLocalRuntime-10-production-note",
+        "anchor": "kickoffLocalRuntime-11-production-note",
         "level": 2
       },
       {
         "text": "Common mistakes",
-        "anchor": "kickoffLocalRuntime-11-common-mistakes",
+        "anchor": "kickoffLocalRuntime-12-common-mistakes",
         "level": 2
       },
       {
         "text": "Verification",
-        "anchor": "kickoffLocalRuntime-12-verification",
+        "anchor": "kickoffLocalRuntime-13-verification",
         "level": 2
       },
       {
         "text": "Continue",
-        "anchor": "kickoffLocalRuntime-13-continue",
+        "anchor": "kickoffLocalRuntime-14-continue",
         "level": 2
       }
     ],
@@ -265,8 +270,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-runtime.md",
-    "sourceChecksum": "628544abef5bd2e15d529bf52913b744045e39dd807af45003e12ff026fb97ba",
-    "sourceWordCount": 1789,
+    "sourceChecksum": "902c67e10f51940b209a95c7672f082a4779ba06e03c32b1df0bf24521911a52",
+    "sourceWordCount": 1958,
     "audience": [
       "business-user",
       "administrator",
@@ -480,8 +485,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
-    "sourceChecksum": "e1e951d3ab0474abe8fefa812ea8ba434990178107253871267d6ce39f1e8dd9",
-    "sourceWordCount": 2538,
+    "sourceChecksum": "e7a360b05e785f37a5689fa686a803eb9725fd991e394d6cb7abbc82a0bc149a",
+    "sourceWordCount": 2572,
     "audience": [
       "business-user",
       "administrator",
