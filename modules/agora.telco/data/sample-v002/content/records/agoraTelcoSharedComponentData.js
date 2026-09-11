@@ -12,7 +12,7 @@
 "use strict";
 
 /**
- * @module modules/agora.telco/data/sample-v001/content/records/agoraTelcoSharedComponentData
+ * @module modules/agora.telco/data/sample-v002/content/records/agoraTelcoSharedComponentData
  * @description Defines Kickoff project-owned data records for this module data pack.
  * @layer data
  * @owner agora.telco
@@ -58,10 +58,17 @@ module.exports = {
       kicker: "Nodics Commerce",
       heading: "Governed storefront discovery powered by Nodics.",
       body: "Browse curated categories and product projections through customer-safe Commerce APIs.",
-      primaryAction: { label: "Browse new arrivals", href: "/c/new-arrivals" },
-      secondaryAction: { label: "Search products", href: "/search" },
-      mediaReferenceCode: "agoraHeroPlaceholder",
-      imageAlt: "Nodics Agora storefront hero placeholder",
+      primaryAction: {
+        label: "Browse new arrivals",
+        href: "/c/new-arrivals",
+      },
+      secondaryAction: {
+        label: "Search products",
+        href: "/search",
+      },
+      mediaReferenceCode:
+        "agoraTelcoHomeHeroExperience-agora-owned-telco-hero-connected-plans-v2",
+      imageAlt: "Connectivity plans and bundles",
     },
   },
   record3: {
@@ -74,9 +81,18 @@ module.exports = {
       heading: "Shop by category",
       resolverKey: "commerce.category.navigation",
       fallbackItems: [
-        { label: "New arrivals", href: "/c/new-arrivals" },
-        { label: "Postpaid", href: "/c/postpaid" },
-        { label: "Men", href: "/c/men" },
+        {
+          label: "New plans",
+          href: "/c/new-arrivals",
+        },
+        {
+          label: "Postpaid",
+          href: "/c/postpaid",
+        },
+        {
+          label: "Prepaid",
+          href: "/c/prepaid",
+        },
       ],
     },
   },
@@ -113,7 +129,7 @@ module.exports = {
       resolverKey: "commerce.product.discovery",
       listingMode: "CATEGORY",
       pageSize: 12,
-      allowedFacets: ["category", "color", "size", "availability"],
+      allowedFacets: ["category", "brand", "availability"],
       allowedSorts: ["relevance", "newest", "nameAsc"],
       cardActions: ["QUICK_VIEW", "ADD_TO_CART", "WISHLIST", "COMPARE"],
     },
@@ -128,7 +144,7 @@ module.exports = {
       resolverKey: "commerce.product.discovery",
       listingMode: "SEARCH",
       pageSize: 12,
-      allowedFacets: ["category", "color", "size", "availability"],
+      allowedFacets: ["category", "brand", "availability"],
       allowedSorts: ["relevance", "newest", "nameAsc"],
       cardActions: ["QUICK_VIEW", "ADD_TO_CART", "WISHLIST", "COMPARE"],
     },
@@ -266,13 +282,19 @@ module.exports = {
             label: "Explore Collection",
             collectionCode: "agoraTelcoPostpaid",
           },
-          secondaryAction: { label: "Shop Sale", collectionCode: "agoraSale" },
+          secondaryAction: {
+            label: "Shop Sale",
+            collectionCode: "agoraSale",
+          },
         },
         {
           mediaCode: "agora-owned-telco-hero-plan-finder-v2",
           eyebrow: "Find Your Perfect Plan",
           title: "Curated plans for everyday connectivity.",
-          primaryAction: { label: "Shop Sale", collectionCode: "agoraSale" },
+          primaryAction: {
+            label: "Shop Sale",
+            collectionCode: "agoraSale",
+          },
           secondaryAction: {
             label: "Shop New",
             collectionCode: "agoraNewArrivals",
@@ -302,9 +324,18 @@ module.exports = {
     active: true,
     properties: {
       messages: [
-        { label: "Free shipping", text: "on qualifying orders" },
-        { label: "Easy returns", text: "within 14 days" },
-        { label: "Secure checkout", text: "with provider token payments" },
+        {
+          label: "Free shipping",
+          text: "on qualifying orders",
+        },
+        {
+          label: "Easy returns",
+          text: "within 14 days",
+        },
+        {
+          label: "Secure checkout",
+          text: "with provider token payments",
+        },
       ],
     },
   },
@@ -328,7 +359,7 @@ module.exports = {
         {
           collectionCode: "agoraSale",
           label: "Sale",
-          summary: "Capsule offers and edits",
+          summary: "Offers on selected plans",
           mediaCode: "agora-owned-telco-flexi-prepaid-v1",
         },
         {
@@ -352,7 +383,7 @@ module.exports = {
         {
           collectionCode: "agoraTelcoAccessories",
           label: "Accessories",
-          summary: "Details that complete the look",
+          summary: "Accessories for your connected devices",
           mediaCode: "agora-owned-telco-unlimited-postpaid-v1",
         },
       ],
@@ -392,11 +423,14 @@ module.exports = {
           },
         },
         {
-          title: "Texture edit",
-          summary: "Shop the look",
+          title: "Plan offers",
+          summary: "Compare connectivity options",
           mediaCode: "agora-owned-telco-flexi-prepaid-v1",
           variant: "visual",
-          action: { label: "Shop Collection", collectionCode: "agoraSale" },
+          action: {
+            label: "Shop Collection",
+            collectionCode: "agoraSale",
+          },
         },
         {
           title: "5G Router Bundle",
@@ -423,7 +457,10 @@ module.exports = {
       summary: "Reserved for activation-week offers",
       leftMediaCode: "agora-owned-telco-flexi-prepaid-v1",
       rightMediaCode: "agora-owned-telco-unlimited-postpaid-v1",
-      action: { label: "Explore Collection", collectionCode: "agoraSale" },
+      action: {
+        label: "Explore Collection",
+        collectionCode: "agoraSale",
+      },
     },
   },
   record36: {
@@ -449,7 +486,10 @@ module.exports = {
     active: true,
     properties: {
       items: [
-        { label: "Shipping", text: "Choose your delivery option at checkout." },
+        {
+          label: "Shipping",
+          text: "Choose your delivery option at checkout.",
+        },
         {
           label: "Returns",
           text: "Return eligibility is shown before submission.",
@@ -479,7 +519,6 @@ module.exports = {
       items: [
         {
           mediaCode: "agora-owned-telco-unlimited-postpaid-v1",
-          avatarMediaCode: "agora-owned-avatar-sybil",
           name: "Sybil Sharp",
           quote:
             "Fantastic shop. Great selection, fair prices, friendly staff, and excellent product quality.",
@@ -487,7 +526,6 @@ module.exports = {
         },
         {
           mediaCode: "agora-owned-telco-flexi-prepaid-v1",
-          avatarMediaCode: "agora-owned-avatar-mark",
           name: "Mark G.",
           quote:
             "High-quality products and excellent customer service. I always find exactly what I need.",
@@ -506,11 +544,21 @@ module.exports = {
       eyebrow: "Shop Instagram",
       heading: "Choose reliable connectivity for every moment",
       items: [
-        { mediaCode: "agora-owned-telco-unlimited-postpaid-v1" },
-        { mediaCode: "agora-owned-telco-flexi-prepaid-v1" },
-        { mediaCode: "agora-owned-telco-unlimited-postpaid-v1" },
-        { mediaCode: "agora-owned-telco-flexi-prepaid-v1" },
-        { mediaCode: "agora-owned-telco-unlimited-postpaid-v1" },
+        {
+          mediaCode: "agora-owned-telco-unlimited-postpaid-v1",
+        },
+        {
+          mediaCode: "agora-owned-telco-flexi-prepaid-v1",
+        },
+        {
+          mediaCode: "agora-owned-telco-unlimited-postpaid-v1",
+        },
+        {
+          mediaCode: "agora-owned-telco-flexi-prepaid-v1",
+        },
+        {
+          mediaCode: "agora-owned-telco-unlimited-postpaid-v1",
+        },
       ],
     },
   },

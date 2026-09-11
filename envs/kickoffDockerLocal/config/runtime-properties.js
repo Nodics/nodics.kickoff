@@ -912,7 +912,7 @@ module.exports = function runtimeProperties(server) {
             },
             agoraapparel: {
               releaseCode: "agora.apparel:agoraApparelContentCatalog",
-              releaseVersion: "0.0.6",
+              releaseVersion: "0.0.7",
               dataType: "sample",
               rootType: "site",
               rootCode: "agoraApparelSite",
@@ -920,7 +920,7 @@ module.exports = function runtimeProperties(server) {
             },
             agoraelectronics: {
               releaseCode: "agora.electronics:agoraElectronicsContentCatalog",
-              releaseVersion: "0.0.1",
+              releaseVersion: "0.0.2",
               dataType: "sample",
               rootType: "site",
               rootCode: "agoraElectronicsSite",
@@ -928,7 +928,7 @@ module.exports = function runtimeProperties(server) {
             },
             agoratelco: {
               releaseCode: "agora.telco:agoraTelcoContentCatalog",
-              releaseVersion: "0.0.1",
+              releaseVersion: "0.0.2",
               dataType: "sample",
               rootType: "site",
               rootCode: "agoraTelcoSite",

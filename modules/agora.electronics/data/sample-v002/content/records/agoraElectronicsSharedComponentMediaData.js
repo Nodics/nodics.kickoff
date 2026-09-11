@@ -12,7 +12,7 @@
 "use strict";
 
 /**
- * @module modules/agora.electronics/data/sample-v001/content/records/agoraElectronicsSharedComponentMediaData
+ * @module modules/agora.electronics/data/sample-v002/content/records/agoraElectronicsSharedComponentMediaData
  * @description Defines CMS-owned Agora component media associations used by publication to transfer storefront media.
  * @layer data
  * @owner agora.electronics
@@ -48,27 +48,27 @@ const media = function (
 const entries = [
   media(
     "agoraElectronicsHomeHeroExperience",
-    "agora-owned-home-hero-summer-edit",
+    "agora-owned-electronics-hero-connected-work-v2",
     "background",
     "hero-slide",
     10,
-    "Summer collection editorial hero",
+    "Agora electronics connected workspace hero v2",
   ),
   media(
     "agoraElectronicsHomeHeroExperience",
-    "agora-owned-home-hero-signature-style",
+    "agora-owned-electronics-hero-device-stack-v2",
     "background",
     "hero-slide",
     20,
-    "Signature style editorial hero",
+    "Agora electronics device stack hero v2",
   ),
   media(
     "agoraElectronicsHomeHeroExperience",
-    "agora-owned-home-hero-layered-edit",
+    "agora-owned-electronics-hero-smart-home-v2",
     "background",
     "hero-slide",
     30,
-    "Layered styling editorial hero",
+    "Agora electronics smart home hero v2",
   ),
   media(
     "agoraElectronicsHomeCollectionGrid",
@@ -76,7 +76,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     10,
-    "New arrivals collection",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsHomeCollectionGrid",
@@ -84,7 +84,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     20,
-    "Promotion collection",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsHomeCollectionGrid",
@@ -92,7 +92,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     30,
-    "Computing collection",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsHomeCollectionGrid",
@@ -100,7 +100,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     40,
-    "Smartphones collection",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsHomeCollectionGrid",
@@ -108,7 +108,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     50,
-    "Accessories collection",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsHomeCollectionGrid",
@@ -116,7 +116,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     60,
-    "Accessories collection",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsEditorialPromoGrid",
@@ -124,7 +124,7 @@ const entries = [
     "background",
     "promo-tile",
     10,
-    "Capsule collection promotion",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsEditorialPromoGrid",
@@ -132,7 +132,7 @@ const entries = [
     "background",
     "promo-tile",
     20,
-    "Texture edit promotion",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsEditorialPromoGrid",
@@ -140,7 +140,7 @@ const entries = [
     "background",
     "promo-tile",
     30,
-    "Crossbody bag promotion",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsSpecialOfferSplit",
@@ -148,7 +148,7 @@ const entries = [
     "background",
     "offer-left",
     10,
-    "Special offer texture edit",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsSpecialOfferSplit",
@@ -156,7 +156,7 @@ const entries = [
     "background",
     "offer-right",
     20,
-    "Special offer collection visual",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsSocialGallery",
@@ -164,7 +164,7 @@ const entries = [
     "gallery",
     "social",
     10,
-    "Agora social gallery one",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsSocialGallery",
@@ -172,7 +172,7 @@ const entries = [
     "gallery",
     "social",
     20,
-    "Agora social gallery two",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsSocialGallery",
@@ -180,7 +180,7 @@ const entries = [
     "gallery",
     "social",
     30,
-    "Agora social gallery three",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsSocialGallery",
@@ -188,7 +188,7 @@ const entries = [
     "gallery",
     "social",
     40,
-    "Agora social gallery four",
+    "Air Pro Laptop",
   ),
   media(
     "agoraElectronicsSocialGallery",
@@ -196,7 +196,7 @@ const entries = [
     "gallery",
     "social",
     50,
-    "Agora social gallery five",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsCustomerTestimonials",
@@ -204,15 +204,7 @@ const entries = [
     "primary",
     "testimonial-card",
     10,
-    "Customer testimonial visual",
-  ),
-  media(
-    "agoraElectronicsCustomerTestimonials",
-    "agora-owned-avatar-sybil",
-    "thumbnail",
-    "testimonial-avatar",
-    20,
-    "Customer avatar",
+    "Nova 5G Smartphone",
   ),
   media(
     "agoraElectronicsCustomerTestimonials",
@@ -220,15 +212,7 @@ const entries = [
     "primary",
     "testimonial-card",
     30,
-    "Customer testimonial visual",
-  ),
-  media(
-    "agoraElectronicsCustomerTestimonials",
-    "agora-owned-avatar-mark",
-    "thumbnail",
-    "testimonial-avatar",
-    40,
-    "Customer avatar",
+    "Air Pro Laptop",
   ),
 ];
 

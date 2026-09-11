@@ -97,7 +97,7 @@
     "test:agora-commerce": "node --test test/agoraCommerceDataAcceptanceContract.test.mjs test/agoraCommercePublicationAcceptanceContract.test.mjs test/agoraCommerceAcceptanceContract.test.mjs test/agoraProductCatalogReleaseExecutionContract.test.js test/agoraProductSearchPublicationContract.test.js test/agoraCommerceSearchPublicationContract.test.js",
     "test:multi-domain": "node --test test/multiDomainKickoffContract.test.mjs test/multiDomainReleaseExecutionContract.test.js test/multiDomainEndToEndQualification.test.js",
     "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/guidedInitializationProfilesContract.test.js && node test/localPublishingContractFreeze.test.mjs && node test/localTopologyLifecycle.test.mjs && node test/dockerLocalEnvironmentContract.test.mjs && node test/dockerLocalResilienceContract.test.mjs",
-    "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:qualification && npm run prepare:runtime",
+    "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:data-ownership && npm run test:qualification && npm run prepare:runtime",
     "nodics:clean": "node scripts/nodics-project.js clean",
     "nodics:build": "node scripts/nodics-project.js build",
     "nodics:release-check": "node scripts/nodics-project.js release:check",
@@ -106,6 +106,7 @@
     "nodics:publishing-capacity": "node scripts/nodics-project.js qualification:publishing-capacity",
     "nodics:publishing-soak": "node scripts/nodics-project.js qualification:publishing-soak",
     "nodics:publishing-interruption-contracts": "node scripts/nodics-project.js qualification:publishing-interruption-contracts",
-    "release:check": "node scripts/nodics-project.js release:check"
+    "release:check": "node scripts/nodics-project.js release:check",
+    "test:data-ownership": "node --test test/agoraDataOwnershipContract.test.js"
   }
 }

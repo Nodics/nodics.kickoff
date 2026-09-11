@@ -39,7 +39,7 @@ module.exports = {
     channel: "web",
     publicationStatus: "STAGED",
     deliveryStatus: "ACTIVE",
-    release: "agora.apparel:agoraApparelContentCatalog:0.0.6",
+    release: "agora.apparel:agoraApparelContentCatalog:0.0.7",
     indexVersion: "agora-apparel-wcms-experience-v0001",
     properties: {
       eyebrow: "Shop the edit",
@@ -72,7 +72,7 @@ module.exports = {
     channel: "web",
     publicationStatus: "STAGED",
     deliveryStatus: "ACTIVE",
-    release: "agora.apparel:agoraApparelContentCatalog:0.0.6",
+    release: "agora.apparel:agoraApparelContentCatalog:0.0.7",
     indexVersion: "agora-apparel-wcms-experience-v0001",
     properties: {
       eyebrow: "New season edit",
@@ -105,7 +105,7 @@ module.exports = {
     channel: "web",
     publicationStatus: "STAGED",
     deliveryStatus: "ACTIVE",
-    release: "agora.apparel:agoraApparelContentCatalog:0.0.6",
+    release: "agora.apparel:agoraApparelContentCatalog:0.0.7",
     indexVersion: "agora-apparel-wcms-experience-v0001",
     properties: {
       eyebrow: "Category story",
@@ -141,7 +141,7 @@ module.exports = {
     channel: "web",
     publicationStatus: "STAGED",
     deliveryStatus: "ACTIVE",
-    release: "agora.apparel:agoraApparelContentCatalog:0.0.6",
+    release: "agora.apparel:agoraApparelContentCatalog:0.0.7",
     indexVersion: "agora-apparel-wcms-experience-v0001",
     properties: {
       eyebrow: "Curated apparel edits",
@@ -174,7 +174,7 @@ module.exports = {
     channel: "web",
     publicationStatus: "STAGED",
     deliveryStatus: "ACTIVE",
-    release: "agora.apparel:agoraApparelContentCatalog:0.0.6",
+    release: "agora.apparel:agoraApparelContentCatalog:0.0.7",
     indexVersion: "agora-apparel-wcms-experience-v0001",
     properties: {
       eyebrow: "Featured by Agora",

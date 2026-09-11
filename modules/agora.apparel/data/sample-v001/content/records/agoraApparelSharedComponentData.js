@@ -79,13 +79,28 @@ module.exports = {
         bestSellingProductsAriaLabel: "Best selling products",
       },
       utilityLinks: [
-        { label: "+1 315-666-6688", path: "tel:+13156666688" },
-        { label: "support@nodics.com", path: "mailto:support@nodics.com" },
-        { label: "Our Store", collectionCode: "agoraWomen" },
+        {
+          label: "+1 315-666-6688",
+          path: "tel:+13156666688",
+        },
+        {
+          label: "support@nodics.com",
+          path: "mailto:support@nodics.com",
+        },
+        {
+          label: "Our Store",
+          collectionCode: "agoraWomen",
+        },
       ],
       preferences: [
-        { label: "USD", path: "#currency" },
-        { label: "English", path: "#language" },
+        {
+          label: "USD",
+          path: "#currency",
+        },
+        {
+          label: "English",
+          path: "#language",
+        },
       ],
       navigationItems: [
         {
@@ -848,7 +863,10 @@ module.exports = {
       heading: "Collections you might like",
       summary:
         "Choose a category, brand-inspired edit, or seasonal collection. Each tile opens a live Commerce listing with backend-driven products, media, pricing, variants, and availability.",
-      primaryAction: { label: "Shop all products", path: "/shop" },
+      primaryAction: {
+        label: "Shop all products",
+        path: "/shop",
+      },
       secondaryAction: {
         label: "Start from featured edit",
         collectionCode: "agoraWomen",
@@ -891,7 +909,10 @@ module.exports = {
         label: "Shop new arrivals",
         collectionCode: "agoraNewArrivals",
       },
-      secondaryAction: { label: "Explore collections", path: "/collections" },
+      secondaryAction: {
+        label: "Explore collections",
+        path: "/collections",
+      },
       resolverKey: "commerce.product.discovery",
       listingMode: "SEARCH",
       pageSize: 10,
@@ -928,17 +949,44 @@ module.exports = {
         clearAllLabel: "Clear all",
         defaultLayout: "grid-4",
         layoutOptions: [
-          { code: "list", label: "List view" },
-          { code: "grid-2", label: "Two products per row" },
-          { code: "grid-3", label: "Three products per row" },
-          { code: "grid-4", label: "Four products per row" },
-          { code: "grid-5", label: "Five products per row" },
+          {
+            code: "list",
+            label: "List view",
+          },
+          {
+            code: "grid-2",
+            label: "Two products per row",
+          },
+          {
+            code: "grid-3",
+            label: "Three products per row",
+          },
+          {
+            code: "grid-4",
+            label: "Four products per row",
+          },
+          {
+            code: "grid-5",
+            label: "Five products per row",
+          },
         ],
         sortOptions: [
-          { code: "recommended", label: "Best selling" },
-          { code: "name-asc", label: "Name A-Z" },
-          { code: "price-asc", label: "Price low to high" },
-          { code: "price-desc", label: "Price high to low" },
+          {
+            code: "recommended",
+            label: "Best selling",
+          },
+          {
+            code: "name-asc",
+            label: "Name A-Z",
+          },
+          {
+            code: "price-asc",
+            label: "Price low to high",
+          },
+          {
+            code: "price-desc",
+            label: "Price high to low",
+          },
         ],
       },
       filterDrawer: {
@@ -953,13 +1001,34 @@ module.exports = {
         minPricePlaceholder: "0",
         maxPricePlaceholder: "250",
         groups: [
-          { code: "categories", label: "Product Categories" },
-          { code: "price", label: "Price" },
-          { code: "sizes", label: "Size" },
-          { code: "colors", label: "Color" },
-          { code: "brands", label: "Brand" },
-          { code: "collections", label: "Collection" },
-          { code: "availability", label: "Availability" },
+          {
+            code: "categories",
+            label: "Product Categories",
+          },
+          {
+            code: "price",
+            label: "Price",
+          },
+          {
+            code: "sizes",
+            label: "Size",
+          },
+          {
+            code: "colors",
+            label: "Color",
+          },
+          {
+            code: "brands",
+            label: "Brand",
+          },
+          {
+            code: "collections",
+            label: "Collection",
+          },
+          {
+            code: "availability",
+            label: "Availability",
+          },
         ],
       },
       allowedFacets: [
@@ -978,6 +1047,369 @@ module.exports = {
         "WISHLIST",
         "COMPARE",
       ],
+    },
+  },
+  record30: {
+    code: "agoraApparelHomeHeroExperience",
+    typeCode: "agoraHeroCarouselType",
+    renderer: "agora.heroCarousel",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      slides: [
+        {
+          mediaCode: "agora-owned-home-hero-summer-edit",
+          eyebrow: "Summer 2026 Collection",
+          title: "Fresh styles for an elevated look.",
+          primaryAction: {
+            label: "Explore Collection",
+            collectionCode: "agoraWomen",
+          },
+          secondaryAction: {
+            label: "Shop Sale",
+            collectionCode: "agoraSale",
+          },
+        },
+        {
+          mediaCode: "agora-owned-home-hero-signature-style",
+          eyebrow: "Find Your Signature Style",
+          title: "Curated layers, edited for everyday elegance.",
+          primaryAction: {
+            label: "Shop Sale",
+            collectionCode: "agoraSale",
+          },
+          secondaryAction: {
+            label: "Shop New",
+            collectionCode: "agoraNewArrivals",
+          },
+        },
+        {
+          mediaCode: "agora-owned-home-hero-layered-edit",
+          eyebrow: "Mix & Match Layers",
+          title: "Versatile pieces for every occasion.",
+          primaryAction: {
+            label: "Shop New",
+            collectionCode: "agoraNewArrivals",
+          },
+          secondaryAction: {
+            label: "Explore Collection",
+            collectionCode: "agoraWomen",
+          },
+        },
+      ],
+    },
+  },
+  record31: {
+    code: "agoraApparelHomeServiceTicker",
+    typeCode: "agoraServiceTickerType",
+    renderer: "agora.serviceTicker",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      messages: [
+        {
+          label: "Free shipping",
+          text: "on qualifying orders",
+        },
+        {
+          label: "Easy returns",
+          text: "within 14 days",
+        },
+        {
+          label: "Secure checkout",
+          text: "with provider token payments",
+        },
+      ],
+    },
+  },
+  record32: {
+    code: "agoraApparelHomeCollectionGrid",
+    typeCode: "agoraCollectionGridType",
+    renderer: "agora.collectionGrid",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      eyebrow: "Explore Collections",
+      heading: "Shop by collection",
+      actionLabel: "View All Collection",
+      items: [
+        {
+          collectionCode: "agoraNewArrivals",
+          label: "New in",
+          itemCount: "6 items",
+          path: "/shop?collection=agoraNewArrivals",
+          summary: "Fresh styles just in",
+          mediaCode: "agora-owned-collection-new-in",
+        },
+        {
+          collectionCode: "agoraSale",
+          label: "Sale",
+          itemCount: "6 items",
+          path: "/shop?collection=agoraSale",
+          summary: "Capsule offers and edits",
+          mediaCode: "agora-owned-collection-promotion",
+        },
+        {
+          collectionCode: "agoraWomen",
+          label: "Clothing",
+          itemCount: "44 items",
+          path: "/shop?category=agoraWomen",
+          summary: "Elegant everyday wardrobe",
+          mediaCode: "agora-owned-collection-clothing",
+        },
+        {
+          collectionCode: "agoraWomenDresses",
+          label: "Dresses",
+          itemCount: "9 items",
+          path: "/shop?category=agoraWomenDresses",
+          summary: "Soft neutrals and refined shapes",
+          mediaCode: "agora-owned-collection-dresses",
+        },
+        {
+          collectionCode: "agoraWomenBags",
+          label: "Bags",
+          itemCount: "8 items",
+          path: "/shop?category=agoraWomenBags",
+          summary: "Structured and natural textures",
+          mediaCode: "agora-owned-collection-bags",
+        },
+        {
+          collectionCode: "agoraWomenAccessories",
+          label: "Accessories",
+          itemCount: "5 items",
+          path: "/shop?category=agoraWomenAccessories",
+          summary: "Details that complete the look",
+          mediaCode: "agora-owned-collection-accessories",
+        },
+      ],
+    },
+  },
+  record33: {
+    code: "agoraApparelTopPicksProductRail",
+    typeCode: "agoraProductRailType",
+    renderer: "agora.productRail",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      eyebrow: "Today’s Top Picks",
+      heading: "Fresh styles just in",
+      resolverKey: "commerce.product.discovery",
+      queryIntent: "FEATURED",
+      productCodes: [
+        "agoraLinenWrapDress",
+        "agoraSatinMidiDress",
+        "agoraRibbedKnitTop",
+        "agoraCottonPoplinShirtWomen",
+        "agoraStretchStrapTop",
+        "agoraRamiePocketShirt",
+        "agoraRattanHandleBag",
+        "agoraStripedKnitDress",
+      ],
+      pageSize: 8,
+    },
+  },
+  record34: {
+    code: "agoraApparelEditorialPromoGrid",
+    typeCode: "agoraPromoGridType",
+    renderer: "agora.promoGrid",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      items: [
+        {
+          title: "Capsule Collection",
+          summary: "Up to 40% off",
+          mediaCode: "agora-owned-promo-capsule",
+          variant: "copy-left",
+          action: {
+            label: "Shop Collection",
+            collectionCode: "agoraWomen",
+          },
+        },
+        {
+          title: "Texture edit",
+          summary: "Shop the look",
+          mediaCode: "agora-owned-promo-texture-edit",
+          variant: "visual",
+          action: {
+            label: "Shop Collection",
+            collectionCode: "agoraSale",
+          },
+        },
+        {
+          title: "Crossbody Bag",
+          summary: "Up to 40% off",
+          mediaCode: "agora-owned-promo-crossbody",
+          variant: "copy-right",
+          action: {
+            label: "Shop Collection",
+            collectionCode: "agoraWomenBags",
+          },
+        },
+      ],
+    },
+  },
+  record35: {
+    code: "agoraApparelSpecialOfferSplit",
+    typeCode: "agoraApparelSpecialOfferSplitType",
+    renderer: "agora.specialOfferSplit",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      eyebrow: "Limited edit",
+      heading: "Special Offer This Week Only",
+      summary: "Reserved for special occasions",
+      leftMediaCode: "agora-owned-promo-texture-edit",
+      rightMediaCode: "agora-owned-collection-new-in",
+      action: {
+        label: "Explore Collection",
+        collectionCode: "agoraSale",
+      },
+    },
+  },
+  record36: {
+    code: "agoraApparelBestSellingProductRail",
+    typeCode: "agoraProductRailType",
+    renderer: "agora.productRail",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      eyebrow: "Best Selling",
+      heading: "Browse our top trending",
+      resolverKey: "commerce.product.discovery",
+      queryIntent: "BEST_SELLING",
+      productCodes: [
+        "agoraSilkScarf",
+        "agoraLinenCampShirt",
+        "agoraTailoredChino",
+        "agoraRelaxedTrouser",
+        "agoraCanvasBelt",
+        "agoraWoolCap",
+        "agoraOxfordShirt",
+        "agoraLeatherTote",
+      ],
+      pageSize: 8,
+    },
+  },
+  record37: {
+    code: "agoraApparelCustomerServicePromiseGrid",
+    typeCode: "agoraServicePromiseGridType",
+    renderer: "agora.servicePromiseGrid",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      items: [
+        {
+          label: "Shipping",
+          text: "Delivery choices are calculated by Commerce.",
+        },
+        {
+          label: "Returns",
+          text: "Return eligibility is shown before submission.",
+        },
+        {
+          label: "Secure payments",
+          text: "Checkout uses safe payment provider tokens.",
+        },
+        {
+          label: "Order help",
+          text: "Customers can track order lifecycle requests.",
+        },
+      ],
+    },
+  },
+  record38: {
+    code: "agoraApparelCustomerTestimonials",
+    typeCode: "agoraTestimonialGridType",
+    renderer: "agora.testimonialGrid",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      eyebrow: "Customer Say!",
+      heading: "People adore the edit",
+      summary:
+        "Our customers love the quality, service and carefully selected seasonal pieces.",
+      items: [
+        {
+          mediaCode: "agora-owned-testimonial-sybil",
+          avatarMediaCode: "agora-owned-avatar-sybil",
+          name: "Sybil Sharp",
+          quote:
+            "Fantastic shop. Great selection, fair prices, friendly staff, and excellent product quality.",
+          product: "Contrasting sheepskin sweatshirt",
+        },
+        {
+          mediaCode: "agora-owned-testimonial-mark",
+          avatarMediaCode: "agora-owned-avatar-mark",
+          name: "Mark G.",
+          quote:
+            "High-quality products and excellent customer service. I always find exactly what I need.",
+          product: "Contrasting sheepskin sweatshirt",
+        },
+      ],
+    },
+  },
+  record39: {
+    code: "agoraApparelSocialGallery",
+    typeCode: "agoraMediaGalleryType",
+    renderer: "agora.mediaGallery",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      eyebrow: "Shop Instagram",
+      heading: "Elevate your wardrobe with fresh finds today",
+      items: [
+        {
+          mediaCode: "agora-owned-gallery-1",
+        },
+        {
+          mediaCode: "agora-owned-gallery-2",
+        },
+        {
+          mediaCode: "agora-owned-gallery-3",
+        },
+        {
+          mediaCode: "agora-owned-gallery-4",
+        },
+        {
+          mediaCode: "agora-owned-gallery-5",
+        },
+      ],
+    },
+  },
+  record43: {
+    code: "agoraApparelGlobalFooterExperience",
+    typeCode: "agoraFooterType",
+    renderer: "agora.footer",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      summary:
+        "Nodics Agora brings fashion commerce into the Nodics experience layer with secure checkout, catalog discovery, and customer self-service.",
+      contactEmail: "nodics.framework@gmail.com",
+      groups: [
+        {
+          title: "Commerce",
+          links: ["New in", "Women", "Clothing", "Bags & Accessories"],
+        },
+        {
+          title: "Customer Care",
+          links: ["Shipping", "Returns", "Order support", "Wishlist"],
+        },
+        {
+          title: "Nodics",
+          links: ["Nexus", "Axis", "Documentation", "Contact"],
+        },
+      ],
+      newsletter: {
+        title: "Newsletter",
+        text: "Sign up for curated releases and get 10% off your first purchase.",
+        placeholder: "Enter your e-mail...",
+        buttonLabel: "Subscribe",
+      },
+      copyright: "© 2026 Nodics. All rights reserved.",
+      brandLabel: "Nodics Agora",
+      legalLinks: ["Privacy", "Terms", "Cookies"],
     },
   },
 };

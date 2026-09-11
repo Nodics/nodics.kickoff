@@ -9,3 +9,14 @@ For implementation rules, read this module `AGENTS.md` after the root-to-leaf an
 ## Storefront navigation
 
 The WCMS global header uses five primary paths: Home, Shop, New in, Collections, and Sale. Shop contains clothing, bags, and accessories; Collections contains brand discovery; Sale contains digital coupon products and the customer coupon wallet. Business users own labels, order, groups, media and destinations in `agoraApparelSharedComponentData.js`. The Apparel frontend controls responsive layout and menu interaction.
+
+## Sample data ownership
+
+The content pack contains Apparel media and merchandising, with shared
+commerce/rendering contracts retained. Active release roots and versions come
+from `data/manifest.json`. All retained content roots are checked for foreign
+assets, orphan files and missing page/media references by
+`npm run test:data-ownership` at the project root.
+
+See [data ownership](llm/contracts/data-ownership-contract.md) for cleanup,
+publication and previously imported runtime-record boundaries.

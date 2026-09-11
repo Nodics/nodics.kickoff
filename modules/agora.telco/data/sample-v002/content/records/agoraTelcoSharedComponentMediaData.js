@@ -12,7 +12,7 @@
 "use strict";
 
 /**
- * @module modules/agora.telco/data/sample-v001/content/records/agoraTelcoSharedComponentMediaData
+ * @module modules/agora.telco/data/sample-v002/content/records/agoraTelcoSharedComponentMediaData
  * @description Defines CMS-owned Agora component media associations used by publication to transfer storefront media.
  * @layer data
  * @owner agora.telco
@@ -48,27 +48,27 @@ const media = function (
 const entries = [
   media(
     "agoraTelcoHomeHeroExperience",
-    "agora-owned-home-hero-summer-edit",
+    "agora-owned-telco-hero-connected-plans-v2",
     "background",
     "hero-slide",
     10,
-    "Summer collection editorial hero",
+    "Agora telco connected plans hero v2",
   ),
   media(
     "agoraTelcoHomeHeroExperience",
-    "agora-owned-home-hero-signature-style",
+    "agora-owned-telco-hero-plan-finder-v2",
     "background",
     "hero-slide",
     20,
-    "Signature style editorial hero",
+    "Agora telco plan finder hero v2",
   ),
   media(
     "agoraTelcoHomeHeroExperience",
-    "agora-owned-home-hero-layered-edit",
+    "agora-owned-telco-hero-bundle-network-v2",
     "background",
     "hero-slide",
     30,
-    "Layered styling editorial hero",
+    "Agora telco bundle network hero v2",
   ),
   media(
     "agoraTelcoHomeCollectionGrid",
@@ -76,7 +76,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     10,
-    "New arrivals collection",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoHomeCollectionGrid",
@@ -84,7 +84,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     20,
-    "Promotion collection",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoHomeCollectionGrid",
@@ -92,7 +92,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     30,
-    "Postpaid collection",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoHomeCollectionGrid",
@@ -100,7 +100,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     40,
-    "Prepaid collection",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoHomeCollectionGrid",
@@ -108,7 +108,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     50,
-    "Devices collection",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoHomeCollectionGrid",
@@ -116,7 +116,7 @@ const entries = [
     "thumbnail",
     "collection-tile",
     60,
-    "Accessories collection",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoEditorialPromoGrid",
@@ -124,7 +124,7 @@ const entries = [
     "background",
     "promo-tile",
     10,
-    "Capsule collection promotion",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoEditorialPromoGrid",
@@ -132,7 +132,7 @@ const entries = [
     "background",
     "promo-tile",
     20,
-    "Texture edit promotion",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoEditorialPromoGrid",
@@ -140,7 +140,7 @@ const entries = [
     "background",
     "promo-tile",
     30,
-    "Crossbody bag promotion",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoSpecialOfferSplit",
@@ -148,7 +148,7 @@ const entries = [
     "background",
     "offer-left",
     10,
-    "Special offer texture edit",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoSpecialOfferSplit",
@@ -156,7 +156,7 @@ const entries = [
     "background",
     "offer-right",
     20,
-    "Special offer collection visual",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoSocialGallery",
@@ -164,7 +164,7 @@ const entries = [
     "gallery",
     "social",
     10,
-    "Agora social gallery one",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoSocialGallery",
@@ -172,7 +172,7 @@ const entries = [
     "gallery",
     "social",
     20,
-    "Agora social gallery two",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoSocialGallery",
@@ -180,7 +180,7 @@ const entries = [
     "gallery",
     "social",
     30,
-    "Agora social gallery three",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoSocialGallery",
@@ -188,7 +188,7 @@ const entries = [
     "gallery",
     "social",
     40,
-    "Agora social gallery four",
+    "Flexi Prepaid",
   ),
   media(
     "agoraTelcoSocialGallery",
@@ -196,7 +196,7 @@ const entries = [
     "gallery",
     "social",
     50,
-    "Agora social gallery five",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoCustomerTestimonials",
@@ -204,15 +204,7 @@ const entries = [
     "primary",
     "testimonial-card",
     10,
-    "Customer testimonial visual",
-  ),
-  media(
-    "agoraTelcoCustomerTestimonials",
-    "agora-owned-avatar-sybil",
-    "thumbnail",
-    "testimonial-avatar",
-    20,
-    "Customer avatar",
+    "Unlimited Postpaid",
   ),
   media(
     "agoraTelcoCustomerTestimonials",
@@ -220,15 +212,7 @@ const entries = [
     "primary",
     "testimonial-card",
     30,
-    "Customer testimonial visual",
-  ),
-  media(
-    "agoraTelcoCustomerTestimonials",
-    "agora-owned-avatar-mark",
-    "thumbnail",
-    "testimonial-avatar",
-    40,
-    "Customer avatar",
+    "Flexi Prepaid",
   ),
 ];
 
