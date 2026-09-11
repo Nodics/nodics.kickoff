@@ -32,7 +32,6 @@ actual Telegram end-to-end qualification.
 
 Location recovery distinguishes unavailable, expired, missing-accuracy and approximate readings. Desktop capture may fall back to browser geolocation; the backend still requires the configured accuracy and arrival radius. A failed check preserves saved evidence and cannot confirm arrival.
 
-
 The `customer-workspace` core release adds `/account/waste` WCMS composition for
 customer listing, Quick view and full item detail, with no transactional samples.
 It owns the banner, labels and detail section order. Customer initialization
@@ -50,3 +49,11 @@ live acceptance for read-only listing/detail checks and cancelled command previe
 Circa selects the eWaste WARM electronics adapter. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. No customer-facing illustrative/demo qualifiers are used. The sourced estimate preserves weight bounds, factor source/version, US reference geography and assumed landfill/recycling scenarios. Unknown coverage or weight produces an unavailable assessment, not a default factor. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.
 
 The [Shop and Coupons catalogue guide](docs/pages/catalogue.md) describes public product browsing, the supported Circa discovery extension, ownership boundaries and reference deployment limits.
+
+The Circa setup profile prepares its Location map foundation, Waste presets,
+local sample profiles/operator access, collection centres, reward programme,
+Commerce Staged catalogue and published website. These sample releases are
+limited to Local and Local Production Simulation. Commerce projection publication
+remains a separate governed operation; website publication does not activate a
+Commerce catalogue. Reinitializing sample operational data is for fresh local
+qualification environments, never a production-data refresh.

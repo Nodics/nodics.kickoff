@@ -21,7 +21,12 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Docker Local WCMS Staged Server"
+    "displayName": "Docker Local WCMS Staged Server",
+    "runtimeModuleRoots": [
+      "nodics.wcms",
+      "nodics.platform",
+      "nodics.discovery"
+    ]
   },
   "description": "Docker Local WCMS Staged Server runtime composition and configuration boundary for this Nodics project."
 }

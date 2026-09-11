@@ -40,8 +40,14 @@ ignored by Git. Archive it in the deployment system that owns the release.
 
 ## Fresh bootstrap is intentionally separate
 
-Fresh acceptance drops only the documented Kickoff local databases. Because it
-mutates local data, it is never included by default:
+Fresh native acceptance clears configured data through the Platform Local
+reset coordinator and its runtime-owner services. It does not drop MongoDB
+databases or their schema/index definitions directly. The Local composition
+covers Platform, WCMS Staged/Online, Process, Commerce Staged/Operational,
+Engagement, Loyalty, Location, and Waste, with Platform last. Retain the
+acknowledged receipt from all ten owners and restart the topology to clear
+in-process state before initialization. Because this mutates local data, it is
+never included by default:
 
 ```bash
 npm run qualification:deployment:local -- --include-fresh
@@ -53,13 +59,13 @@ environment and verify the configured database names first.
 
 ## What local evidence does and does not prove
 
-| Gate | Local proof | Still required before production |
-| --- | --- | --- |
-| Framework | Clean build, generated contracts, governance, dependency audit, and automated suites | Deployment-image and target-runtime confirmation |
-| Kickoff | Integrated runtime, documentation, lifecycle, and business-user smoke journey | Production topology and operational ownership |
-| Axis | Formatting, lint, type safety, automated tests, and production bundle | Supported browser/device and human assistive-technology matrix |
-| Redis | Real local cache and distributed-registry behavior | Managed TLS/authentication, topology, isolation, failover, and recovery |
-| Payments/providers | Mock and offline contract behavior | Real non-production credentials, callbacks, failure handling, and rollback |
+| Gate               | Local proof                                                                          | Still required before production                                           |
+| ------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Framework          | Clean build, generated contracts, governance, dependency audit, and automated suites | Deployment-image and target-runtime confirmation                           |
+| Kickoff            | Integrated runtime, documentation, lifecycle, and business-user smoke journey        | Production topology and operational ownership                              |
+| Axis               | Formatting, lint, type safety, automated tests, and production bundle                | Supported browser/device and human assistive-technology matrix             |
+| Redis              | Real local cache and distributed-registry behavior                                   | Managed TLS/authentication, topology, isolation, failover, and recovery    |
+| Payments/providers | Mock and offline contract behavior                                                   | Real non-production credentials, callbacks, failure handling, and rollback |
 
 Local success must never be translated into `productionApproved: true`. The
 report fixes this value to `false` and keeps every external evidence class at
@@ -69,17 +75,17 @@ report fixes this value to `false` and keeps every external evidence class at
 
 Named owners must attach evidence for all applicable rows:
 
-| Evidence | Accountable owner | Minimum completion evidence |
-| --- | --- | --- |
-| Peak load | Performance owner | Workload model, dataset, topology, p95/p99, throughput, error rate, saturation, queue age, projection lag, and integrity reconciliation |
-| Soak | Operations owner | Sustained duration, memory/CPU trends, retry growth, drift, storage/index growth, and post-run reconciliation |
-| Penetration | Security owner | Authenticated attack surface, tenant isolation, validation, replay, export, webhook, and privilege-escalation results with disposition |
-| Managed cache failover | Platform owner | TLS/authentication, topology, tenant isolation, node/provider loss, recovery time, and data-consistency results |
-| Backup and restore | Data owner | Backup identity, restore procedure, authoritative counts/hashes, projection rebuild, and reconciliation |
-| Regional residency | Infrastructure and privacy owners | Allowed-region routing, evacuation, deletion propagation, and cross-region leakage results |
-| RPO/RTO | Operations owner | Measured recovery point and recovery time compared with approved objectives |
-| External providers | Provider owners | Credential source, consent, callbacks, residency, observability, degraded behavior, rollback, and key rotation |
-| Accessibility | Product accessibility owner | Keyboard, screen reader, zoom/reflow, contrast, browser, and supported-device results |
+| Evidence               | Accountable owner                 | Minimum completion evidence                                                                                                             |
+| ---------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Peak load              | Performance owner                 | Workload model, dataset, topology, p95/p99, throughput, error rate, saturation, queue age, projection lag, and integrity reconciliation |
+| Soak                   | Operations owner                  | Sustained duration, memory/CPU trends, retry growth, drift, storage/index growth, and post-run reconciliation                           |
+| Penetration            | Security owner                    | Authenticated attack surface, tenant isolation, validation, replay, export, webhook, and privilege-escalation results with disposition  |
+| Managed cache failover | Platform owner                    | TLS/authentication, topology, tenant isolation, node/provider loss, recovery time, and data-consistency results                         |
+| Backup and restore     | Data owner                        | Backup identity, restore procedure, authoritative counts/hashes, projection rebuild, and reconciliation                                 |
+| Regional residency     | Infrastructure and privacy owners | Allowed-region routing, evacuation, deletion propagation, and cross-region leakage results                                              |
+| RPO/RTO                | Operations owner                  | Measured recovery point and recovery time compared with approved objectives                                                             |
+| External providers     | Provider owners                   | Credential source, consent, callbacks, residency, observability, degraded behavior, rollback, and key rotation                          |
+| Accessibility          | Product accessibility owner       | Keyboard, screen reader, zoom/reflow, contrast, browser, and supported-device results                                                   |
 
 ## Recommended execution order
 

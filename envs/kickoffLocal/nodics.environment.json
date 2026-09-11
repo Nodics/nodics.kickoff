@@ -12,6 +12,12 @@
           "productSearchContributor": {
             "serviceName": "DefaultApparelProductSearchEnrichmentService",
             "required": true
+          },
+          "publication": {
+            "storeCode": "agoraMainStore",
+            "catalogVersion": "agoraApparelStaged",
+            "releaseCode": "agoraApparelCommerceCatalog",
+            "recordPrefix": "agoraApparel"
           }
         },
         {
@@ -21,18 +27,28 @@
           "productSearchContributor": {
             "serviceName": "DefaultElectronicsProductSearchEnrichmentService",
             "required": true
+          },
+          "publication": {
+            "storeCode": "agoraElectronicsStore",
+            "catalogVersion": "agoraElectronicsStaged",
+            "releaseCode": "agoraElectronicsCommerceCatalog",
+            "recordPrefix": "agoraElectronics"
           }
         },
         {
           "code": "telco",
           "frameworkGroup": "telco",
           "projectPack": "agora.telco",
-          "impliedProductSearchContributorDomains": [
-            "electronics"
-          ],
+          "impliedProductSearchContributorDomains": ["electronics"],
           "productSearchContributor": {
             "serviceName": "DefaultTelcoProductSearchEnrichmentService",
             "required": true
+          },
+          "publication": {
+            "storeCode": "agoraTelcoStore",
+            "catalogVersion": "agoraTelcoStaged",
+            "releaseCode": "agoraTelcoCommerceCatalog",
+            "recordPrefix": "agoraTelco"
           }
         }
       ],
@@ -89,18 +105,14 @@
           "label": "Location",
           "script": "start:location",
           "port": 4380,
-          "dependsOn": [
-            "platform"
-          ]
+          "dependsOn": ["platform"]
         },
         {
           "code": "waste",
           "label": "Waste",
           "script": "start:waste",
           "port": 4370,
-          "dependsOn": [
-            "platform"
-          ]
+          "dependsOn": ["platform"]
         },
         {
           "code": "commerceStaged",
@@ -120,10 +132,7 @@
           "code": "axis",
           "label": "Axis",
           "command": "npm",
-          "args": [
-            "run",
-            "dev"
-          ],
+          "args": ["run", "dev"],
           "cwd": "{workspaceRoot}/nodics.exp/nodics.axis",
           "port": 3100,
           "readyPath": "/"
@@ -132,10 +141,7 @@
           "code": "nexus",
           "label": "Nexus",
           "command": "npm",
-          "args": [
-            "run",
-            "dev"
-          ],
+          "args": ["run", "dev"],
           "cwd": "{workspaceRoot}/nodics.exp/nodics.nexus",
           "port": 3200,
           "readyPath": "/"
@@ -144,15 +150,7 @@
           "code": "agora",
           "label": "Agora Apparel",
           "command": "npm",
-          "args": [
-            "run",
-            "dev",
-            "--",
-            "--host",
-            "127.0.0.1",
-            "--port",
-            "3300"
-          ],
+          "args": ["run", "dev", "--", "--host", "127.0.0.1", "--port", "3300"],
           "cwd": "{workspaceRoot}/nodics.exp/nodics.agora.apparel",
           "port": 3300,
           "readyPath": "/"

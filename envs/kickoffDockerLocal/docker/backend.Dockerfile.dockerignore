@@ -1,0 +1,15 @@
+**
+!nodics.ai/**
+!nodics.kickoff/**
+**/.git
+**/node_modules
+**/dist
+**/generated
+**/temp
+**/.nodics
+**/.env
+**/.env.*
+**/*.log
+**/coverage
+**/.DS_Store
+**/local-archive

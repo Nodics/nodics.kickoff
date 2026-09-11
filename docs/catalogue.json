@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "navigationSections": [
@@ -137,17 +137,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "business-user",
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["business-user", "administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/project-overview.md",
       "visibility": "public",
@@ -173,16 +164,8 @@
         "customer project",
         "documentation"
       ],
-      "topicKeywords": [
-        "ownership",
-        "project boundary",
-        "local adoption"
-      ],
-      "visualRequirements": [
-        "architecture-diagram",
-        "table",
-        "code-example"
-      ]
+      "topicKeywords": ["ownership", "project boundary", "local adoption"],
+      "visualRequirements": ["architecture-diagram", "table", "code-example"]
     },
     {
       "id": "kickoff.local-runtime",
@@ -215,16 +198,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-runtime.md",
       "visibility": "public",
@@ -244,12 +219,7 @@
         "nodics.project.json",
         "package.json"
       ],
-      "searchKeywords": [
-        "local runtime",
-        "topology",
-        "start",
-        "servers"
-      ],
+      "searchKeywords": ["local runtime", "topology", "start", "servers"],
       "topicKeywords": [
         "platform",
         "wcms",
@@ -258,10 +228,7 @@
         "nexus",
         "agora"
       ],
-      "visualRequirements": [
-        "troubleshooting-matrix",
-        "command-example"
-      ]
+      "visualRequirements": ["troubleshooting-matrix", "command-example"]
     },
     {
       "id": "kickoff.local-setup-to-live",
@@ -294,17 +261,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "business-user",
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["business-user", "administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
       "visibility": "public",
@@ -377,17 +335,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "business-user",
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["business-user", "administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-acceptance-checklist.md",
       "visibility": "public",
@@ -457,17 +406,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "business-user",
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["business-user", "administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-publishing-operations.md",
       "visibility": "public",
@@ -486,22 +426,9 @@
         "package.json",
         "nodics.project.json"
       ],
-      "searchKeywords": [
-        "publishing",
-        "staged",
-        "online",
-        "recovery"
-      ],
-      "topicKeywords": [
-        "nPublish",
-        "WCMS",
-        "Process",
-        "rollback"
-      ],
-      "visualRequirements": [
-        "troubleshooting-matrix",
-        "code-example"
-      ]
+      "searchKeywords": ["publishing", "staged", "online", "recovery"],
+      "topicKeywords": ["nPublish", "WCMS", "Process", "rollback"],
+      "visualRequirements": ["troubleshooting-matrix", "code-example"]
     },
     {
       "id": "kickoff.deployment-qualification",
@@ -534,16 +461,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/deployment-qualification.md",
       "visibility": "public",
@@ -568,12 +487,7 @@
         "evidence",
         "production"
       ],
-      "topicKeywords": [
-        "security",
-        "resilience",
-        "load",
-        "provider"
-      ],
+      "topicKeywords": ["security", "resilience", "load", "provider"],
       "visualRequirements": [
         "diagram",
         "troubleshooting-matrix",
@@ -611,10 +525,7 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "business-user",
-        "administrator"
-      ],
+      "businessAudience": ["business-user", "administrator"],
       "technicalAudience": [
         "architect",
         "developer",
@@ -653,11 +564,7 @@
         "generated docs",
         "customer layer"
       ],
-      "visualRequirements": [
-        "diagram",
-        "comparison-table",
-        "code-example"
-      ]
+      "visualRequirements": ["diagram", "comparison-table", "code-example"]
     },
     {
       "id": "kickoff.functional-journeys",
@@ -690,17 +597,8 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": [
-        "business-user",
-        "administrator",
-        "operator"
-      ],
-      "technicalAudience": [
-        "architect",
-        "developer",
-        "qa",
-        "ai-tool"
-      ],
+      "businessAudience": ["business-user", "administrator", "operator"],
+      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/functional-journeys.md",
       "visibility": "public",
@@ -726,16 +624,8 @@
         "customer journey",
         "provider"
       ],
-      "topicKeywords": [
-        "checkout",
-        "orders",
-        "reviews",
-        "contact",
-        "privacy"
-      ],
-      "visualRequirements": [
-        "table"
-      ]
+      "topicKeywords": ["checkout", "orders", "reviews", "contact", "privacy"],
+      "visualRequirements": ["table"]
     }
   ]
 }

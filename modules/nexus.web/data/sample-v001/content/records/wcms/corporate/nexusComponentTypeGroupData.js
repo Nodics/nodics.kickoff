@@ -9,7 +9,7 @@
 
  */
 
-'use strict';
+"use strict";
 
 /**
  * @module modules/nexus.web/data/sample-v001/content/records/wcms/corporate/nexusComponentTypeGroupData
@@ -23,11 +23,12 @@
 
 /** @description Nexus corporate authoring component group. */
 module.exports = {
-  "record0": {
-    "code": "nexusCorporateSectionGroup",
-    "name": "Nexus Corporate Sections",
-    "description": "Allowlisted corporate presentation components rendered by nodics.nexus.",
-    "componentTypeCodes": [
+  record0: {
+    code: "nexusCorporateSectionGroup",
+    name: "Nexus Corporate Sections",
+    description:
+      "Allowlisted corporate presentation components rendered by nodics.nexus.",
+    componentTypeCodes: [
       "nexusPageHeroType",
       "nexusBannerCarouselType",
       "nexusContentSectionType",
@@ -46,10 +47,12 @@ module.exports = {
       "nexusEditorialTaxonomyType",
       "nexusEditorialAuthorType",
       "nexusEditorialRelatedType",
-      "nexusEditorialSeriesType"
+      "nexusEditorialSeriesType",
+      "nexusProductPortfolioType",
+      "nexusProductStoryType",
     ],
-    "status": "ACTIVE",
-    "sortOrder": 10,
-    "active": true
-  }
+    status: "ACTIVE",
+    sortOrder: 10,
+    active: true,
+  },
 };

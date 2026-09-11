@@ -910,8 +910,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/deployment-qualification.md",
-    "sourceChecksum": "f61abc2f37c7088f4ee0babfb5cc62968a543e6f23f2c153c07457c54689c0fa",
-    "sourceWordCount": 1187,
+    "sourceChecksum": "e21e5ca4b74be65eba5cb184cfc1772e3c0d511693b1123f4bb1f2c5373b7fdb",
+    "sourceWordCount": 1244,
     "audience": [
       "business-user",
       "administrator",

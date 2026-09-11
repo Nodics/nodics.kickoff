@@ -9,6 +9,6 @@
 
  */
 
-'use strict';
+"use strict";
 /** @module kickoffDockerLocal/loyaltyServer/config/properties @description Applies isolated Loyalty container configuration. */
-module.exports = require('../../config/runtime-properties')('loyaltyServer');
+module.exports = require("../../config/runtime-properties")("loyaltyServer");

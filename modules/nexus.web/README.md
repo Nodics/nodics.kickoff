@@ -53,3 +53,15 @@ Axis, Schema Workbench, Page Designer, and governed data import/export
 operations. DevOps may use physical data packs for bootstrap, migration,
 environment promotion, or controlled sample data only. Executable renderer code
 never belongs in this data module.
+
+### Product portfolio
+
+The corporate CMS composes three levels: the homepage product section, `/products` comparison dashboard, and individual pages for Waste Management (showcased through Circa), Agora Apparel, Agora Electronics and Agora Telco. `/solutions` holds the Task Execution Engine and Data Engineering concepts separately.
+
+`nexusProductPortfolioType` and `nexusProductStoryType` are rendered by `nodics.nexus`; product copy, routes, gallery references and adoption boundaries remain in the WCMS authoring records. The thirteen `nexusProduct-*.png` assets are signed-out captures of running local reference applications (desktop 1440×960, mobile 390×844), with sample content. They illustrate the available experience and do not establish production payment, carrier, transport or partner readiness.
+
+The Solutions overview and `/solutions` detail page use `nexusSolutionsType`.
+WCMS owns their copy, conceptual flow labels, use cases, proposed scope, outcomes,
+and engagement stages. The Nexus frontend supplies the allowlisted visual
+renderer. These entries describe directions for discovery and do not represent
+qualified packaged applications or production deployments.

@@ -18,6 +18,12 @@
           "productSearchContributor": {
             "serviceName": "DefaultApparelProductSearchEnrichmentService",
             "required": true
+          },
+          "publication": {
+            "storeCode": "agoraMainStore",
+            "catalogVersion": "agoraApparelStaged",
+            "releaseCode": "agoraApparelCommerceCatalog",
+            "recordPrefix": "agoraApparel"
           }
         },
         {
@@ -27,18 +33,28 @@
           "productSearchContributor": {
             "serviceName": "DefaultElectronicsProductSearchEnrichmentService",
             "required": true
+          },
+          "publication": {
+            "storeCode": "agoraElectronicsStore",
+            "catalogVersion": "agoraElectronicsStaged",
+            "releaseCode": "agoraElectronicsCommerceCatalog",
+            "recordPrefix": "agoraElectronics"
           }
         },
         {
           "code": "telco",
           "frameworkGroup": "telco",
           "projectPack": "agora.telco",
-          "impliedProductSearchContributorDomains": [
-            "electronics"
-          ],
+          "impliedProductSearchContributorDomains": ["electronics"],
           "productSearchContributor": {
             "serviceName": "DefaultTelcoProductSearchEnrichmentService",
             "required": true
+          },
+          "publication": {
+            "storeCode": "agoraTelcoStore",
+            "catalogVersion": "agoraTelcoStaged",
+            "releaseCode": "agoraTelcoCommerceCatalog",
+            "recordPrefix": "agoraTelco"
           }
         }
       ],
@@ -55,26 +71,12 @@
   "redisPrimaryHost": "redis-primary",
   "bootstrapAdminPassword": "NodicsLocal@2026",
   "hostPorts": [
-    4100,
-    4200,
-    5300,
-    5312,
-    5314,
-    5330,
-    5340,
-    5360,
-    5350
+    4100, 4200, 6300, 6400, 6500, 6600, 5300, 5312, 5314, 5330, 5340, 5350,
+    5352, 5360, 5370, 5380
   ],
   "nativeIsolationPorts": [
-    3100,
-    3200,
-    4300,
-    4312,
-    4314,
-    4330,
-    4340,
-    4360,
-    4350
+    3100, 3200, 3300, 3400, 3500, 3600, 4300, 4312, 4314, 4330, 4340, 4350,
+    4352, 4360, 4370, 4380
   ],
   "resilience": {
     "backupDirectory": "envs/kickoffDockerLocal/generated/backups",
@@ -102,29 +104,31 @@
       "engagement": "http://127.0.0.1:5340",
       "loyalty": "http://127.0.0.1:5360",
       "commerceStaged": "http://127.0.0.1:5352",
-      "commerce": "http://127.0.0.1:5350"
+      "commerce": "http://127.0.0.1:5350",
+      "agora": "http://127.0.0.1:6300",
+      "agoraApparel": "http://127.0.0.1:6300",
+      "agoraElectronics": "http://127.0.0.1:6400",
+      "agoraTelco": "http://127.0.0.1:6500",
+      "circa": "http://127.0.0.1:6600",
+      "waste": "http://127.0.0.1:5370",
+      "location": "http://127.0.0.1:5380"
     }
   },
   "qualification": {
     "environmentContract": "test/dockerLocalEnvironmentContract.test.mjs",
     "runtimePrepare": "test/dockerLocalRuntimePrepare.test.js",
     "runtimePorts": [
-      5300,
-      5312,
-      5314,
-      5330,
-      5340,
-      5360,
-      5350
+      5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380
     ],
     "frontendUrls": [
       "http://127.0.0.1:4100/",
-      "http://127.0.0.1:4200/"
+      "http://127.0.0.1:4200/",
+      "http://127.0.0.1:6300/",
+      "http://127.0.0.1:6400/",
+      "http://127.0.0.1:6500/",
+      "http://127.0.0.1:6600/"
     ],
-    "readLoadPorts": [
-      5314,
-      5300
-    ],
+    "readLoadPorts": [5314, 5300],
     "readLoadRequests": 50,
     "containerPrefix": "nodics-kickoff-docker-local-",
     "containers": {
@@ -141,8 +145,15 @@
       "engagement",
       "loyalty",
       "commerce",
+      "commerce-staged",
+      "waste",
+      "location",
       "axis",
-      "nexus"
+      "nexus",
+      "agora-apparel",
+      "agora-electronics",
+      "agora-telco",
+      "circa"
     ],
     "networkSeparation": {
       "publicContainer": "nodics-kickoff-docker-local-nexus-1",
@@ -155,35 +166,18 @@
     "concurrency": 12,
     "requestIntervalMs": 1000,
     "readinessPorts": [
-      5300,
-      5312,
-      5314,
-      5330,
-      5340,
-      5360,
-      5350
+      5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380
     ],
     "acceptanceCommand": "docker-local:acceptance"
   },
   "resilienceQualification": {
     "acceptanceCommand": "docker-local:acceptance",
     "restoreConfirmationToken": "--confirm-replace-docker-local-data",
-    "readyPorts": [
-      5300,
-      5312,
-      5314,
-      5330,
-      5340,
-      5360,
-      5350
-    ],
+    "readyPorts": [5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380],
     "readLoad": {
       "total": 1000,
       "concurrency": 40,
-      "ports": [
-        5314,
-        5300
-      ]
+      "ports": [5314, 5300]
     },
     "containers": {
       "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",

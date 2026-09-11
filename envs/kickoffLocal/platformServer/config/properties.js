@@ -641,7 +641,7 @@ module.exports = {
             targetServer: "wcmsStaged",
             targetRuntimeRole: "WCMS_STAGED",
             manifestPath:
-              "modules/agora.electronics/data/sample-v001/content/assets/agora-cms-media/assetManifest.js",
+              "modules/agora.electronics/data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
             businessPurpose: "AGORA_STOREFRONT_CONTENT",
           },
           {
@@ -713,7 +713,7 @@ module.exports = {
             targetServer: "wcmsStaged",
             targetRuntimeRole: "WCMS_STAGED",
             manifestPath:
-              "modules/agora.telco/data/sample-v001/content/assets/agora-cms-media/assetManifest.js",
+              "modules/agora.telco/data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
             businessPurpose: "AGORA_STOREFRONT_CONTENT",
           },
           {
@@ -1005,6 +1005,66 @@ module.exports = {
         },
       },
       {
+        code: "commerce",
+        moduleName: "system",
+        connectionName: "commerce",
+        targetAuthority: {
+          server: "commerceServer",
+          runtimeRole: {
+            code: "COMMERCE",
+            publication: "OPERATIONAL",
+          },
+        },
+      },
+      {
+        code: "commerceStaged",
+        moduleName: "system",
+        connectionName: "commerceStaged",
+        targetAuthority: {
+          server: "commerceStagedServer",
+          runtimeRole: {
+            code: "COMMERCE_STAGED",
+            publication: "STAGED",
+          },
+        },
+      },
+      {
+        code: "engagement",
+        moduleName: "system",
+        connectionName: "engagement",
+        targetAuthority: {
+          server: "engagementServer",
+          runtimeRole: {
+            code: "ENGAGEMENT",
+            publication: "OPERATIONAL",
+          },
+        },
+      },
+      {
+        code: "loyalty",
+        moduleName: "system",
+        connectionName: "loyalty",
+        targetAuthority: {
+          server: "loyaltyServer",
+          runtimeRole: {
+            code: "LOYALTY",
+            publication: "OPERATIONAL",
+          },
+        },
+      },
+      {
+        code: "waste",
+        moduleName: "system",
+        connectionName: "waste",
+        targetAuthority: {
+          server: "wasteServer",
+          runtimeRole: {
+            code: "WASTE",
+            publication: "OPERATIONAL",
+          },
+        },
+      },
+      {
         code: "platform",
         moduleName: "system",
         connectionName: "default",
@@ -1280,3 +1340,15 @@ module.exports = {
     },
   },
 };
+
+// Governed application preparation may target Platform-owned sample releases.
+module.exports.servers.platform = module.exports.servers.default;
+module.exports.servers.platformServer = module.exports.servers.default;
+
+/** Explicit nSearch projections included in the governed Local reset. */
+module.exports.localResetProvider.searchIndexes = [
+  {
+    moduleName: "discoveryProjection",
+    indexName: "discoveryDocumentProjection",
+  },
+];

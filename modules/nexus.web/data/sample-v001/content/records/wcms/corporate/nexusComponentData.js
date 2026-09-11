@@ -1,27 +1,3 @@
-/*
-    Nodics - Enterprice Micro-Services Management Framework
-
-    Copyright (c) 2026 Nodics All rights reserved.
-
-    This software is governed by the Nodics Source-Available Commercial License.
-    You may use, copy, modify, deploy, or distribute it only as permitted by the
-    root LICENSE file or a separate written agreement with Nodics.
-
- */
-
-"use strict";
-
-/**
- * @module modules/nexus.web/data/sample-v001/content/records/wcms/corporate/nexusComponentData
- * @description Defines Kickoff project-owned data records for this module data pack.
- * @layer data
- * @owner nexus.web
- * @override Customer projects may extend or replace this artifact in their own project layer.
- */
-
-/** @lifecycle PUBLISHABLE @destination WCMS_STAGED @owner nexus.web */
-
-/** @description Nexus corporate CMS components. */
 module.exports = {
   record0: {
     code: "nexusHomeBannerCarousel",
@@ -223,28 +199,112 @@ module.exports = {
   },
   record6: {
     code: "nexusHomeProducts",
-    typeCode: "nexusCardGridType",
+    typeCode: "nexusProductPortfolioType",
     accessMode: "PUBLIC",
     active: true,
     properties: {
       anchor: "products",
-      kicker: "Nodics products",
-      heading: "Focused products built on the Nodics foundation.",
-      body: "Use productized capabilities where a reusable enterprise journey needs more than framework primitives, while retaining modular ownership and governed extension points.",
-      href: "/products",
-      linkLabel: "Explore Nodics products",
-      items: [
+      mode: "compact",
+      kicker: "Nodics product portfolio",
+      heading: "Products for the way your business works.",
+      body: "From circular participation to digital commerce, start with a focused product experience and shape it around your customers, brand and operations.",
+      products: [
         {
-          symbol: "TEE",
-          title: "Task Execution Engine",
-          text: "A reusable execution product for persisted scheduling, distributed task coordination, retries, operational visibility, and controlled execution across enterprise applications.",
+          title: "Waste Management",
+          edition: "Showcased through Circa",
+          category: "Waste & circularity",
+          summary:
+            "Designed for Telegram and WhatsApp, with no new mobile app to download. Connect customer conversations with guided submissions, operator review and circular rewards.",
+          audience:
+            "Collection operators, circular programmes and community partners.",
+          highlights: [
+            "Telegram & WhatsApp journeys",
+            "No new mobile app",
+            "Evidence, review & rewards",
+          ],
+          adoption: "Channel activation, collection rules and reward partners.",
+          href: "/products/waste-management",
+          referenceImageCode: "nexusProduct-waste-home",
+          imageAlt: "Waste Management reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-waste-mobile",
+            imageAlt: "Waste Management reference storefront on mobile",
+          },
         },
         {
-          symbol: "DEAP",
-          title: "Data Engineering & Analytics Platform",
-          text: "A governed data product direction for source onboarding, ingestion, transformation, quality, analysis, visualization, and publishing to approved destinations.",
+          title: "Agora Apparel",
+          edition: "Fashion commerce",
+          category: "Commerce",
+          summary:
+            "Turn collections and campaigns into a connected fashion shopping experience, from discovery to order history.",
+          audience:
+            "Fashion brands, apparel retailers and curated marketplaces.",
+          highlights: [
+            "Collections & campaigns",
+            "Product variants",
+            "Cart & checkout",
+          ],
+          adoption:
+            "Brand storytelling, product variants and fulfilment partners.",
+          href: "/products/agora-apparel",
+          referenceImageCode: "nexusProduct-apparel-home-v2",
+          imageAlt: "Agora Apparel reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-apparel-mobile-v2",
+            imageAlt: "Agora Apparel reference storefront on mobile",
+          },
+        },
+        {
+          title: "Agora Electronics",
+          edition: "Device commerce",
+          category: "Commerce",
+          summary:
+            "Make devices easier to discover and buy with a focused catalogue, product details and a connected checkout.",
+          audience:
+            "Device retailers, electronics brands and specialist resellers.",
+          highlights: [
+            "Device catalogue",
+            "Product details",
+            "Customer orders",
+          ],
+          adoption: "Product specifications, stock, warranty and delivery.",
+          href: "/products/agora-electronics",
+          referenceImageCode: "nexusProduct-electronics-home",
+          imageAlt: "Agora Electronics reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-electronics-mobile",
+            imageAlt: "Agora Electronics reference storefront on mobile",
+          },
+        },
+        {
+          title: "Agora Telco",
+          edition: "Plan & device commerce",
+          category: "Commerce",
+          summary:
+            "Present prepaid and postpaid offers through a branded storefront with a familiar commerce journey.",
+          audience:
+            "Telecom brands, service resellers and digital sales teams.",
+          highlights: [
+            "Prepaid & postpaid",
+            "Offer discovery",
+            "Commerce journey",
+          ],
+          adoption: "Offer rules, eligibility and carrier-system integration.",
+          href: "/products/agora-telco",
+          referenceImageCode: "nexusProduct-telco-home",
+          imageAlt: "Agora Telco reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-telco-mobile",
+            imageAlt: "Agora Telco reference storefront on mobile",
+          },
         },
       ],
+      href: "/products",
+      linkLabel: "Explore the full portfolio",
+      previewLabel: "Desktop and mobile · Actual reference application screens",
+      showcaseNote:
+        "One Nodics foundation. Distinct industry experiences. Configured for your business.",
+      contactLabel: "Discuss your use case",
     },
   },
   record7: {
@@ -706,12 +766,12 @@ module.exports = {
     accessMode: "PUBLIC",
     active: true,
     properties: {
-      kicker: "Nodics Products",
-      heading: "Products on the Nodics foundation.",
+      kicker: "Products by Nodics",
+      heading: "A product for the journey ahead.",
       breadcrumbLabel: "Products",
-      body: "Reusable products package repeatable enterprise needs while keeping ownership and governance explicit.",
-      referenceImageCode: "nodicsModularHero",
-      imageAlt: "Composable modules representing Nodics product directions",
+      body: "Discover four focused experiences. Compare what they do, see them in action and find the right starting point for your business.",
+      referenceImageCode: "nodicsProductOperatingModel",
+      imageAlt: "Nodics product operating model visual",
     },
   },
   record20: {
@@ -1086,7 +1146,7 @@ module.exports = {
     code: "nexusProductsContent",
     typeCode: "nexusCardGridType",
     accessMode: "PUBLIC",
-    active: true,
+    active: false,
     properties: {
       anchor: "product-overview",
       kicker: "Product philosophy",
@@ -1120,7 +1180,7 @@ module.exports = {
     code: "nexusProductsSuite",
     typeCode: "nexusCardGridType",
     accessMode: "PUBLIC",
-    active: true,
+    active: false,
     properties: {
       anchor: "product-suite",
       kicker: "Product suite",
@@ -1149,7 +1209,7 @@ module.exports = {
     code: "nexusProductsOperatingModel",
     typeCode: "nexusContentSectionType",
     accessMode: "PUBLIC",
-    active: true,
+    active: false,
     properties: {
       anchor: "product-operating-model",
       kicker: "Operating model",
@@ -1201,7 +1261,7 @@ module.exports = {
     code: "nexusProductsReadiness",
     typeCode: "nexusCardGridType",
     accessMode: "PUBLIC",
-    active: true,
+    active: false,
     properties: {
       anchor: "product-readiness",
       kicker: "Readiness path",
@@ -3035,14 +3095,46 @@ module.exports = {
       brandLabel: "NODICS",
       brandSubtitle: "NEXUS",
       navigation: [
-        { label: "Home", href: "/", id: "home" },
-        { label: "About", href: "/#aboutus", id: "about" },
-        { label: "Features", href: "/#features", id: "features" },
-        { label: "Solutions", href: "/#products", id: "products" },
-        { label: "Support", href: "/#support", id: "support" },
-        { label: "Blogs", href: "/#blogs", id: "blogs" },
-        { label: "Docs", href: "/docs", id: "wiki" },
-        { label: "Axis", href: "{axisBaseUrl}", id: "axis" },
+        {
+          label: "Home",
+          href: "/",
+          id: "home",
+        },
+        {
+          label: "About",
+          href: "/#aboutus",
+          id: "about",
+        },
+        {
+          label: "Products",
+          href: "/#products",
+          id: "products",
+        },
+        {
+          label: "Solutions",
+          href: "/#solutions",
+          id: "solutions",
+        },
+        {
+          label: "Support",
+          href: "/#support",
+          id: "support",
+        },
+        {
+          label: "Blogs",
+          href: "/#blogs",
+          id: "blogs",
+        },
+        {
+          label: "Docs",
+          href: "/docs",
+          id: "wiki",
+        },
+        {
+          label: "Axis",
+          href: "{axisBaseUrl}",
+          id: "axis",
+        },
       ],
     },
   },
@@ -3057,51 +3149,115 @@ module.exports = {
       contactHeading: "Connect",
       contactEmail: "nodics.framework@gmail.com",
       socialLinks: [
-        { name: "GitHub", href: "https://github.com/Nodics" },
-        { name: "LinkedIn", href: "https://www.linkedin.com/company/nodics" },
+        {
+          name: "GitHub",
+          href: "https://github.com/Nodics",
+        },
+        {
+          name: "LinkedIn",
+          href: "https://www.linkedin.com/company/nodics",
+        },
       ],
       groups: [
         {
           title: "Platform",
           links: [
-            { label: "Features", href: "/#features" },
-            { label: "Solutions", href: "/#products" },
-            { label: "Technology Stack", href: "/#products" },
-            { label: "Support", href: "/#support" },
+            {
+              label: "Features",
+              href: "/#features",
+            },
+            {
+              label: "Products",
+              href: "/#products",
+            },
+            {
+              label: "Solutions",
+              href: "/#solutions",
+            },
+            {
+              label: "Technology Stack",
+              href: "/#technology",
+            },
+            {
+              label: "Support",
+              href: "/#support",
+            },
           ],
         },
         {
           title: "Developers",
           links: [
-            { label: "Docs", href: "/docs" },
-            { label: "API Reference", href: "/docs?tab=api" },
-            { label: "GitHub", href: "https://github.com/Nodics" },
-            { label: "Axis", href: "{axisBaseUrl}" },
+            {
+              label: "Docs",
+              href: "/docs",
+            },
+            {
+              label: "API Reference",
+              href: "/docs?tab=api",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/Nodics",
+            },
+            {
+              label: "Axis",
+              href: "{axisBaseUrl}",
+            },
           ],
         },
         {
           title: "Company",
           links: [
-            { label: "About", href: "/#aboutus" },
-            { label: "Ecosystem", href: "/#ecosystem" },
-            { label: "Contact", href: "/#contact" },
-            { label: "Testimonials", href: "/#testimonials" },
+            {
+              label: "About",
+              href: "/#aboutus",
+            },
+            {
+              label: "Ecosystem",
+              href: "/#ecosystem",
+            },
+            {
+              label: "Contact",
+              href: "/#contact",
+            },
+            {
+              label: "Testimonials",
+              href: "/#testimonials",
+            },
           ],
         },
         {
           title: "Resources",
           links: [
-            { label: "Blogs", href: "/#blogs" },
-            { label: "News", href: "/news" },
-            { label: "Documentation Gateway", href: "/docs" },
+            {
+              label: "Blogs",
+              href: "/#blogs",
+            },
+            {
+              label: "News",
+              href: "/news",
+            },
+            {
+              label: "Documentation Gateway",
+              href: "/docs",
+            },
           ],
         },
       ],
       legalText: "© 2026 Nodics. All rights reserved.",
       legalLinks: [
-        { label: "Privacy", href: "/privacy" },
-        { label: "Terms", href: "/terms" },
-        { label: "Cookies", href: "/cookies" },
+        {
+          label: "Privacy",
+          href: "/privacy",
+        },
+        {
+          label: "Terms",
+          href: "/terms",
+        },
+        {
+          label: "Cookies",
+          href: "/cookies",
+        },
       ],
     },
   },
@@ -3134,6 +3290,1008 @@ module.exports = {
       ],
       href: "https://github.com/Nodics",
       linkLabel: "View repositories",
+    },
+  },
+  record92: {
+    code: "nexusProductsDashboard",
+    typeCode: "nexusProductPortfolioType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "product-overview",
+      mode: "dashboard",
+      kicker: "The product portfolio",
+      heading: "Explore the experience. Find your fit.",
+      body: "Each product brings a distinct business journey to life on the Nodics foundation. Start with the industry you serve, then explore the screens, capabilities and adoption path.",
+      products: [
+        {
+          title: "Waste Management",
+          edition: "Showcased through Circa",
+          category: "Waste & circularity",
+          summary:
+            "Designed for Telegram and WhatsApp, with no new mobile app to download. Connect customer conversations with guided submissions, operator review and circular rewards.",
+          audience:
+            "Collection operators, circular programmes and community partners.",
+          highlights: [
+            "Telegram & WhatsApp journeys",
+            "No new mobile app",
+            "Evidence, review & rewards",
+          ],
+          adoption: "Channel activation, collection rules and reward partners.",
+          href: "/products/waste-management",
+          referenceImageCode: "nexusProduct-waste-home",
+          imageAlt: "Waste Management reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-waste-mobile",
+            imageAlt: "Waste Management reference storefront on mobile",
+          },
+        },
+        {
+          title: "Agora Apparel",
+          edition: "Fashion commerce",
+          category: "Commerce",
+          summary:
+            "Turn collections and campaigns into a connected fashion shopping experience, from discovery to order history.",
+          audience:
+            "Fashion brands, apparel retailers and curated marketplaces.",
+          highlights: [
+            "Collections & campaigns",
+            "Product variants",
+            "Cart & checkout",
+          ],
+          adoption:
+            "Brand storytelling, product variants and fulfilment partners.",
+          href: "/products/agora-apparel",
+          referenceImageCode: "nexusProduct-apparel-home-v2",
+          imageAlt: "Agora Apparel reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-apparel-mobile-v2",
+            imageAlt: "Agora Apparel reference storefront on mobile",
+          },
+        },
+        {
+          title: "Agora Electronics",
+          edition: "Device commerce",
+          category: "Commerce",
+          summary:
+            "Make devices easier to discover and buy with a focused catalogue, product details and a connected checkout.",
+          audience:
+            "Device retailers, electronics brands and specialist resellers.",
+          highlights: [
+            "Device catalogue",
+            "Product details",
+            "Customer orders",
+          ],
+          adoption: "Product specifications, stock, warranty and delivery.",
+          href: "/products/agora-electronics",
+          referenceImageCode: "nexusProduct-electronics-home",
+          imageAlt: "Agora Electronics reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-electronics-mobile",
+            imageAlt: "Agora Electronics reference storefront on mobile",
+          },
+        },
+        {
+          title: "Agora Telco",
+          edition: "Plan & device commerce",
+          category: "Commerce",
+          summary:
+            "Present prepaid and postpaid offers through a branded storefront with a familiar commerce journey.",
+          audience:
+            "Telecom brands, service resellers and digital sales teams.",
+          highlights: [
+            "Prepaid & postpaid",
+            "Offer discovery",
+            "Commerce journey",
+          ],
+          adoption: "Offer rules, eligibility and carrier-system integration.",
+          href: "/products/agora-telco",
+          referenceImageCode: "nexusProduct-telco-home",
+          imageAlt: "Agora Telco reference storefront on desktop",
+          mobileScreen: {
+            referenceImageCode: "nexusProduct-telco-mobile",
+            imageAlt: "Agora Telco reference storefront on mobile",
+          },
+        },
+      ],
+      comparisonKicker: "Choose your starting point",
+      comparisonHeading: "Four products. Different business journeys.",
+      adoptionKicker: "From product to your business",
+      adoptionHeading: "Keep the foundation. Make the experience yours.",
+      adoptionBody:
+        "Start with a working reference experience, shape the brand and business rules, connect your operational partners, and validate the complete journey before launch.",
+      readinessNote:
+        "Screens show running reference applications with sample content. Production payments, fulfilment, partner services and industry integrations are agreed and validated during adoption.",
+    },
+  },
+  record93: {
+    code: "nexusProductWasteHero",
+    typeCode: "nexusPageHeroType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      kicker: "Showcased through Circa",
+      heading: "Waste Management",
+      breadcrumbLabel: "Waste Management",
+      body: "Designed for Telegram and WhatsApp, with no new mobile app to download. Connect customer conversations with guided submissions, operator review and circular rewards.",
+      referenceImageCode: "nexusProduct-waste-home",
+      imageAlt: "Waste Management reference storefront",
+      imageTreatment: "soft-focus",
+      breadcrumbParentHref: "/products",
+      breadcrumbParentLabel: "Products",
+    },
+  },
+  record94: {
+    code: "nexusProductWasteStory",
+    typeCode: "nexusProductStoryType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "waste-management",
+      kicker: "Familiar channels. Easier participation.",
+      heading: "Turn everyday conversations into circular action.",
+      body: "Meet customers in Telegram or WhatsApp and remove the need to download another app. The conversational journey is designed to guide people from intent and location through arrival checks, photo evidence and operator review, connecting the conversation with the wider Circa experience.",
+      audience:
+        "Collection operators, circular programmes and community partners.",
+      outcomes: [
+        {
+          title: "Start where your customers already are",
+          body: "Lower the barrier to participation by bringing the journey into familiar messaging channels. No new app to discover, download or learn.",
+        },
+        {
+          title: "Make the next step clear",
+          body: "Guide customers through one conversation, from what they want to submit to where they should go and what evidence they need to provide.",
+        },
+        {
+          title: "Connect participation with operations",
+          body: "Bring the customer conversation into a structured submission that your team can review, with eligible rewards and reuse opportunities completing the wider journey.",
+        },
+      ],
+      tourKicker: "A closer look",
+      tourHeading: "Explore the wider Circa experience.",
+      tourBody:
+        "See how collection, rewards and reuse come together in the supporting web experience. Conversational participation is designed to start in Telegram or WhatsApp.",
+      gallery: [
+        {
+          label: "Desktop storefront",
+          referenceImageCode: "nexusProduct-waste-home",
+          imageAlt: "Waste Management desktop home screen",
+          caption:
+            "A captured screen of the running Waste Management reference experience. Sample content is shown.",
+          format: "desktop",
+        },
+        {
+          label: "Circular marketplace",
+          referenceImageCode: "nexusProduct-waste-shop",
+          imageAlt: "Waste Management circular marketplace",
+          caption:
+            "The Circa marketplace presents verified assets and the points needed for the sample offers.",
+          format: "desktop",
+        },
+        {
+          label: "Mobile experience",
+          referenceImageCode: "nexusProduct-waste-mobile",
+          imageAlt: "Waste Management mobile storefront",
+          caption:
+            "The reference storefront at a mobile viewport. Branding and content can be adapted during adoption.",
+          format: "mobile",
+        },
+      ],
+      capabilitiesKicker: "What the product brings",
+      capabilitiesHeading: "A connected set of capabilities.",
+      capabilities: [
+        {
+          title: "Collection discovery",
+          body: "Find collection centres and use location to guide the arrival and submission journey.",
+        },
+        {
+          title: "Conversational submissions",
+          body: "Designed for Telegram and WhatsApp, connecting customer intent, location and photo evidence to the Waste submission process without a separate mobile app.",
+        },
+        {
+          title: "Review and approval",
+          body: "Give operators a structured submission to verify and approve before the customer journey advances.",
+        },
+        {
+          title: "Customer account",
+          body: "Bring submission history, wallet activity and participation status together in one account.",
+        },
+        {
+          title: "Points and coupons",
+          body: "Connect eligible activity with a points wallet and a configurable coupon experience.",
+        },
+        {
+          title: "Circular marketplace",
+          body: "Discover verified assets, fixed-price purchases and gifting journeys that support reuse.",
+        },
+      ],
+      workflowKicker: "The intended channel journey",
+      workflowHeading: "From a familiar conversation to a connected journey.",
+      workflow: [
+        {
+          title: "Start a conversation",
+          body: "Enter through the programme’s Telegram or WhatsApp channel and share what you want to submit.",
+        },
+        {
+          title: "Find the right collection point",
+          body: "Use location and programme rules to identify the next appropriate step.",
+        },
+        {
+          title: "Share evidence on arrival",
+          body: "Confirm arrival and provide the item details and photographs needed for review.",
+        },
+        {
+          title: "Follow the outcome",
+          body: "Track the submission decision and continue into eligible rewards and reuse opportunities.",
+        },
+      ],
+      adoptionKicker: "Make it yours",
+      adoptionHeading: "A clear path from reference to launch.",
+      adoptionBody:
+        "Review the experience with your team, agree the operational scope and tailor the product to the people you serve.",
+      adoption: [
+        {
+          title: "Current reference experience",
+          body: "The Circa web experience demonstrates collection discovery, evidence capture, review, customer accounts, wallet, coupons and the asset marketplace.",
+        },
+        {
+          title: "Configured for your programme",
+          body: "Choose your customer channels, collection locations, material eligibility, review rules, reward policies, brand and partner offers.",
+        },
+        {
+          title: "Connected before launch",
+          body: "Activate and qualify Telegram or WhatsApp delivery and customer identity linking for your programme. Agree physical receipt, custody and partner redemption operations, with transport integration where required.",
+        },
+      ],
+      faqKicker: "Before you begin",
+      faqHeading: "Questions worth answering.",
+      faq: [
+        {
+          question: "Do customers need to install a new mobile app?",
+          answer:
+            "The conversational journey is designed to run through Telegram or WhatsApp, using an app the customer already has. Each programme chooses and activates the channels it supports. The Circa web experience remains available for broader account and marketplace needs.",
+        },
+        {
+          question: "Does approval mean an item has been physically received?",
+          answer:
+            "No. Approval records a review decision. Physical receipt and custody need their own receiver, location, time and evidence. Transport orchestration is an optional integration.",
+        },
+        {
+          question:
+            "Are carbon figures certified or rewards universally redeemable?",
+          answer:
+            "Impact figures are estimates unless a separately validated methodology is agreed. Reward value, eligibility and redemption depend on the programme and connected partners.",
+        },
+      ],
+    },
+  },
+  record95: {
+    code: "nexusProductApparelHero",
+    typeCode: "nexusPageHeroType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      kicker: "Fashion commerce",
+      heading: "Agora Apparel",
+      breadcrumbLabel: "Agora Apparel",
+      body: "Turn collections and campaigns into a connected fashion shopping experience, from discovery to order history.",
+      referenceImageCode: "nexusProduct-apparel-home-v2",
+      imageAlt: "Agora Apparel reference storefront",
+      imageTreatment: "soft-focus",
+      breadcrumbParentHref: "/products",
+      breadcrumbParentLabel: "Products",
+    },
+  },
+  record96: {
+    code: "nexusProductApparelStory",
+    typeCode: "nexusProductStoryType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "agora-apparel",
+      kicker: "Fashion commerce",
+      heading:
+        "Let your collections lead. Keep the shopping journey connected.",
+      body: "Bring your brand story, seasonal edits and product range into the same storefront. Agora Apparel gives customers a familiar path to discover a collection, choose a variant and complete a sample order, with room to shape the experience around your business.",
+      audience: "Fashion brands, apparel retailers and curated marketplaces.",
+      outcomes: [
+        {
+          title: "Merchandise with a point of view",
+          body: "Give campaigns and curated collections a place alongside searchable product discovery.",
+        },
+        {
+          title: "Help shoppers choose",
+          body: "Present product images, variants and availability in a consistent browsing and detail experience.",
+        },
+        {
+          title: "Carry intent through to order",
+          body: "Connect product discovery with saved choices, the cart, checkout and customer order history.",
+        },
+      ],
+      tourKicker: "A closer look",
+      tourHeading: "See the experience.",
+      tourBody:
+        "See the running Agora Apparel storefront, a curated shop view and its mobile presentation. Screens use sample catalogue and campaign content.",
+      gallery: [
+        {
+          label: "Desktop storefront",
+          referenceImageCode: "nexusProduct-apparel-home-v2",
+          imageAlt: "Agora Apparel desktop home screen",
+          caption:
+            "A captured screen of the running Agora Apparel reference experience. Sample content is shown.",
+          format: "desktop",
+        },
+        {
+          label: "Shop & collections",
+          referenceImageCode: "nexusProduct-apparel-shop-v2",
+          imageAlt: "Agora Apparel shop & collections",
+          caption:
+            "A curated shop page brings editorial merchandising and product discovery into one experience.",
+          format: "desktop",
+        },
+        {
+          label: "Shop mega menu",
+          referenceImageCode: "nexusProduct-apparel-menu",
+          imageAlt:
+            "Agora Apparel Shop mega menu with clothing, bags and accessories beneath a five-link header",
+          caption:
+            "Five clear navigation paths keep the header compact, while grouped mega menus make clothing, accessories, brands and digital coupons easy to discover.",
+          format: "desktop",
+        },
+        {
+          label: "Mobile experience",
+          referenceImageCode: "nexusProduct-apparel-mobile-v2",
+          imageAlt: "Agora Apparel mobile storefront",
+          caption:
+            "The reference storefront at a mobile viewport. Branding and content can be adapted during adoption.",
+          format: "mobile",
+        },
+      ],
+      capabilitiesKicker: "What the product brings",
+      capabilitiesHeading: "A connected set of capabilities.",
+      capabilities: [
+        {
+          title: "Campaign-led storefront",
+          body: "Present seasonal stories, featured products and curated edits through managed storefront content.",
+        },
+        {
+          title: "Product discovery",
+          body: "Browse collections, search products and refine the range with filters and sorting.",
+        },
+        {
+          title: "Variant selection",
+          body: "Carry apparel choices such as size and colour through product details and the shopping journey.",
+        },
+        {
+          title: "Quick view and product details",
+          body: "Give shoppers a closer look without losing the context of the collection they are browsing.",
+        },
+        {
+          title: "Cart and checkout",
+          body: "Move selected products through a connected cart and sample checkout with order confirmation.",
+        },
+        {
+          title: "Customer continuity",
+          body: "Support account, wishlist and order-history experiences across repeat visits.",
+        },
+      ],
+      workflowKicker: "The business journey",
+      workflowHeading: "How the experience comes together.",
+      workflow: [
+        {
+          title: "Discover a collection",
+          body: "Enter through a campaign, collection or product search.",
+        },
+        {
+          title: "Choose your piece",
+          body: "Review the product and select the appropriate variant.",
+        },
+        {
+          title: "Build the order",
+          body: "Check the cart and complete the configured checkout journey.",
+        },
+        {
+          title: "Return with context",
+          body: "Use the customer account to revisit saved products and order history.",
+        },
+      ],
+      adoptionKicker: "Make it yours",
+      adoptionHeading: "A clear path from reference to launch.",
+      adoptionBody:
+        "Review the experience with your team, agree the operational scope and tailor the product to the people you serve.",
+      adoption: [
+        {
+          title: "Available in the reference product",
+          body: "Managed storefront content, apparel discovery, variants, wishlist, cart, sample checkout and order history.",
+        },
+        {
+          title: "Configured for your brand",
+          body: "Collections, product data, photography, sizing, campaign content, languages and commercial policies.",
+        },
+        {
+          title: "Connected before launch",
+          body: "Production payments, stock authority, tax, delivery, returns and customer service integrations.",
+        },
+      ],
+      faqKicker: "Before you begin",
+      faqHeading: "Questions worth answering.",
+      faq: [
+        {
+          question: "Can we use our own brand and collection structure?",
+          answer:
+            "Yes. The storefront is a starting point for your brand, merchandising and product catalogue. The adoption scope should define your content model, variants and operational requirements.",
+        },
+        {
+          question: "Does the sample checkout take real payments?",
+          answer:
+            "The reference journey uses a sample payment flow. A production payment provider and its operational handling must be connected and validated before trading.",
+        },
+        {
+          question: "Can we add our delivery and returns systems?",
+          answer:
+            "Yes, through a scoped integration. Delivery promises, fulfilment status and returns policy should reflect your actual operational systems.",
+        },
+      ],
+    },
+  },
+  record97: {
+    code: "nexusProductElectronicsHero",
+    typeCode: "nexusPageHeroType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      kicker: "Device commerce",
+      heading: "Agora Electronics",
+      breadcrumbLabel: "Agora Electronics",
+      body: "Make devices easier to discover and buy with a focused catalogue, product details and a connected checkout.",
+      referenceImageCode: "nexusProduct-electronics-home",
+      imageAlt: "Agora Electronics reference storefront",
+      imageTreatment: "soft-focus",
+      breadcrumbParentHref: "/products",
+      breadcrumbParentLabel: "Products",
+    },
+  },
+  record98: {
+    code: "nexusProductElectronicsStory",
+    typeCode: "nexusProductStoryType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "agora-electronics",
+      kicker: "Device commerce",
+      heading: "Help customers find the device that fits their day.",
+      body: "Create a focused shopping destination for phones, computers and connected devices. Agora Electronics combines category-led discovery with product information and a familiar buying journey, giving retailers a practical starting point for a branded device store.",
+      audience:
+        "Device retailers, electronics brands and specialist resellers.",
+      outcomes: [
+        {
+          title: "Organise a complex range",
+          body: "Give devices and categories a clear place in the storefront so customers can find a relevant starting point.",
+        },
+        {
+          title: "Bring product information closer",
+          body: "Present the details shoppers need to understand the devices they are considering.",
+        },
+        {
+          title: "Connect browsing and buying",
+          body: "Carry selected products into a shared cart, sample checkout and account experience.",
+        },
+      ],
+      tourKicker: "A closer look",
+      tourHeading: "See the experience.",
+      tourBody:
+        "Explore the running electronics storefront, its device listing and the mobile experience. Product records and prices shown are sample content.",
+      gallery: [
+        {
+          label: "Desktop storefront",
+          referenceImageCode: "nexusProduct-electronics-home",
+          imageAlt: "Agora Electronics desktop home screen",
+          caption:
+            "A captured screen of the running Agora Electronics reference experience. Sample content is shown.",
+          format: "desktop",
+        },
+        {
+          label: "Device catalogue",
+          referenceImageCode: "nexusProduct-electronics-shop",
+          imageAlt: "Agora Electronics device catalogue",
+          caption:
+            "The reference device catalogue shows search, category navigation, sorting and sample device offers.",
+          format: "desktop",
+        },
+        {
+          label: "Mobile experience",
+          referenceImageCode: "nexusProduct-electronics-mobile",
+          imageAlt: "Agora Electronics mobile storefront",
+          caption:
+            "The reference storefront at a mobile viewport. Branding and content can be adapted during adoption.",
+          format: "mobile",
+        },
+      ],
+      capabilitiesKicker: "What the product brings",
+      capabilitiesHeading: "A connected set of capabilities.",
+      capabilities: [
+        {
+          title: "Device storefront",
+          body: "Use focused campaign and category content to introduce the device range.",
+        },
+        {
+          title: "Search and sorting",
+          body: "Help customers find products and order the available range through familiar discovery controls.",
+        },
+        {
+          title: "Category navigation",
+          body: "Organise electronics such as computing and smartphones around shopper intent.",
+        },
+        {
+          title: "Product detail experience",
+          body: "Present imagery, descriptions and available product specifications in a consistent view.",
+        },
+        {
+          title: "Cart and sample checkout",
+          body: "Connect selected devices to the cart and order flow using the reference commerce journey.",
+        },
+        {
+          title: "Customer account",
+          body: "Support saved choices and order history through the shared account experience.",
+        },
+      ],
+      workflowKicker: "The business journey",
+      workflowHeading: "How the experience comes together.",
+      workflow: [
+        {
+          title: "Explore devices",
+          body: "Start with a category, campaign or product search.",
+        },
+        {
+          title: "Review the details",
+          body: "Open a product and inspect the available information.",
+        },
+        {
+          title: "Place the order",
+          body: "Review the cart and complete the configured checkout.",
+        },
+        {
+          title: "Follow the purchase",
+          body: "Return to the customer account and order history.",
+        },
+      ],
+      adoptionKicker: "Make it yours",
+      adoptionHeading: "A clear path from reference to launch.",
+      adoptionBody:
+        "Review the experience with your team, agree the operational scope and tailor the product to the people you serve.",
+      adoption: [
+        {
+          title: "Available in the reference product",
+          body: "Device storefront, catalogue browsing, product details, cart, sample checkout and customer account.",
+        },
+        {
+          title: "Configured for your range",
+          body: "Categories, specifications, brand content, prices, currencies, warranty information and commercial policies.",
+        },
+        {
+          title: "Connected before launch",
+          body: "Live stock, payments, delivery, warranty fulfilment and after-sales service integrations.",
+        },
+      ],
+      faqKicker: "Before you begin",
+      faqHeading: "Questions worth answering.",
+      faq: [
+        {
+          question: "Can the catalogue support our device specifications?",
+          answer:
+            "The product-information model and detail presentation can be shaped around your range. Confirm the required specification fields, variants and comparison needs during adoption.",
+        },
+        {
+          question: "Are payments and stock connected to a live retailer?",
+          answer:
+            "The reference uses sample catalogue and payment behaviour. Live stock and production payments require your chosen integrations and launch validation.",
+        },
+        {
+          question: "Are warranty and repairs included?",
+          answer:
+            "Warranty information can form part of your product content. Warranty fulfilment, repairs and after-sales workflows need to be scoped against your operational systems.",
+        },
+      ],
+    },
+  },
+  record99: {
+    code: "nexusProductTelcoHero",
+    typeCode: "nexusPageHeroType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      kicker: "Plan & device commerce",
+      heading: "Agora Telco",
+      breadcrumbLabel: "Agora Telco",
+      body: "Present prepaid and postpaid offers through a branded storefront with a familiar commerce journey.",
+      referenceImageCode: "nexusProduct-telco-home",
+      imageAlt: "Agora Telco reference storefront",
+      imageTreatment: "soft-focus",
+      breadcrumbParentHref: "/products",
+      breadcrumbParentLabel: "Products",
+    },
+  },
+  record100: {
+    code: "nexusProductTelcoStory",
+    typeCode: "nexusProductStoryType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "agora-telco",
+      kicker: "Plan & device commerce",
+      heading: "Give your connectivity offers a clear digital storefront.",
+      body: "Bring plan-led merchandising into a familiar commerce experience. Agora Telco is a storefront accelerator for presenting prepaid and postpaid offers, shaping discovery and connecting the customer to a configured sales journey.",
+      audience: "Telecom brands, service resellers and digital sales teams.",
+      outcomes: [
+        {
+          title: "Make offers approachable",
+          body: "Present plan categories and campaign content in a focused customer-facing storefront.",
+        },
+        {
+          title: "Create a consistent sales experience",
+          body: "Reuse familiar discovery, product detail and cart interactions across the offer range.",
+        },
+        {
+          title: "Start with a visible customer journey",
+          body: "Review the storefront with business teams before connecting the carrier operations required for launch.",
+        },
+      ],
+      tourKicker: "A closer look",
+      tourHeading: "See the experience.",
+      tourBody:
+        "See the running telecom storefront, sample prepaid and postpaid catalogue, and mobile presentation. Carrier activation is outside this reference tour.",
+      gallery: [
+        {
+          label: "Desktop storefront",
+          referenceImageCode: "nexusProduct-telco-home",
+          imageAlt: "Agora Telco desktop home screen",
+          caption:
+            "A captured screen of the running Agora Telco reference experience. Sample content is shown.",
+          format: "desktop",
+        },
+        {
+          label: "Plan catalogue",
+          referenceImageCode: "nexusProduct-telco-shop",
+          imageAlt: "Agora Telco plan catalogue",
+          caption:
+            "The sample catalogue presents prepaid and postpaid offers. Displayed prices do not represent a live carrier service.",
+          format: "desktop",
+        },
+        {
+          label: "Mobile experience",
+          referenceImageCode: "nexusProduct-telco-mobile",
+          imageAlt: "Agora Telco mobile storefront",
+          caption:
+            "The reference storefront at a mobile viewport. Branding and content can be adapted during adoption.",
+          format: "mobile",
+        },
+      ],
+      capabilitiesKicker: "What the product brings",
+      capabilitiesHeading: "A connected set of capabilities.",
+      capabilities: [
+        {
+          title: "Plan-led storefront",
+          body: "Introduce connectivity offers through managed campaigns and a dedicated storefront.",
+        },
+        {
+          title: "Prepaid and postpaid categories",
+          body: "Organise plan discovery around the categories shown in the reference catalogue.",
+        },
+        {
+          title: "Search and sorting",
+          body: "Provide familiar catalogue controls for navigating the available sample offers.",
+        },
+        {
+          title: "Offer detail presentation",
+          body: "Use the product detail experience to explain configured offer information.",
+        },
+        {
+          title: "Shared commerce journey",
+          body: "Use the Agora cart, account and sample checkout foundation as the starting point for a sales flow.",
+        },
+        {
+          title: "Brand and catalogue configuration",
+          body: "Shape navigation, campaign content and product records around a telecom brand or reseller.",
+        },
+      ],
+      workflowKicker: "The business journey",
+      workflowHeading: "How the experience comes together.",
+      workflow: [
+        {
+          title: "Discover an offer",
+          body: "Enter through a campaign or plan category.",
+        },
+        {
+          title: "Review plan information",
+          body: "Read the configured offer details and commercial terms.",
+        },
+        {
+          title: "Build a sales journey",
+          body: "Use the commerce flow as the basis for the selected offer.",
+        },
+        {
+          title: "Connect service operations",
+          body: "Add and validate eligibility, activation and billing integrations for your launch.",
+        },
+      ],
+      adoptionKicker: "Make it yours",
+      adoptionHeading: "A clear path from reference to launch.",
+      adoptionBody:
+        "Review the experience with your team, agree the operational scope and tailor the product to the people you serve.",
+      adoption: [
+        {
+          title: "Available in the reference product",
+          body: "A telecom storefront with sample prepaid and postpaid offers and the shared Agora commerce experience.",
+        },
+        {
+          title: "Configured for your business",
+          body: "Offer catalogue, commercial terms, brand, content and the intended acquisition journey.",
+        },
+        {
+          title: "Connected before launch",
+          body: "Identity checks, eligibility, SIM or eSIM activation, provisioning, number porting and recurring billing.",
+        },
+      ],
+      faqKicker: "Before you begin",
+      faqHeading: "Questions worth answering.",
+      faq: [
+        {
+          question:
+            "Is Agora Telco a carrier billing or provisioning platform?",
+          answer:
+            "No. It is a commerce storefront accelerator. Carrier billing, service provisioning, activation and number portability are separate integrations.",
+        },
+        {
+          question: "Can customers activate a SIM in the reference experience?",
+          answer:
+            "The reference catalogue does not prove a live activation journey. SIM and eSIM activation require carrier integration, identity and eligibility checks, and operational validation.",
+        },
+        {
+          question: "Can we extend the sales flow for our offers?",
+          answer:
+            "Yes. Adoption should define offer rules, required customer information and the carrier systems that complete the service journey.",
+        },
+      ],
+    },
+  },
+  record101: {
+    code: "nexusSolutionsHero",
+    typeCode: "nexusPageHeroType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      kicker: "Nodics solutions",
+      heading: "Built around what\nyour business needs.",
+      breadcrumbLabel: "Solutions",
+      body: "Connect work. Make sense of data. Shape a solution with the right foundations and a clear purpose.",
+      referenceImageCode: "nodicsModularHero",
+      imageAlt: "Composable enterprise capabilities",
+    },
+  },
+  record102: {
+    code: "nexusSolutionsContent",
+    typeCode: "nexusSolutionsType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "solution-directions",
+      mode: "detail",
+      kicker: "From challenge to possibility",
+      heading: "Where can we make a difference?",
+      body: "Start with the work you need to improve. We connect the business context, the right capabilities and a practical delivery plan.",
+      items: [
+        {
+          code: "task-execution",
+          category: "Orchestrate operations",
+          title: "Task Execution Engine",
+          headline: "Make complex work flow.",
+          summary:
+            "Connect scheduled tasks, dependencies and recovery into an operational flow your teams can understand and manage.",
+          visual: "operations",
+          flow: ["Trigger", "Coordinate", "Execute", "Review"],
+          centerLabel: "One coordinated flow",
+          tags: ["Scheduled work", "Recovery paths", "Operational visibility"],
+          href: "/solutions#task-execution",
+          linkLabel: "Explore task execution",
+          challenge:
+            "When business-critical work depends on disconnected jobs, teams spend time chasing failures and piecing together what happened.",
+          useCases: [
+            {
+              title: "Recurring operations",
+              text: "Scope scheduled business runs, reconciliation and routine processing across connected systems.",
+            },
+            {
+              title: "Cross-system handoffs",
+              text: "Define dependencies, ownership and completion signals for work spanning multiple applications.",
+            },
+            {
+              title: "Exception recovery",
+              text: "Agree retry rules, escalation paths and the evidence operators need to recover safely.",
+            },
+          ],
+          scope: [
+            "Triggers, schedules and task dependencies",
+            "Execution boundaries, access and integration contracts",
+            "Retries, timeouts and human intervention",
+            "Run history, alerts and operational ownership",
+          ],
+          outcome:
+            "A shared view of what should run, what happened and what needs attention.",
+          scopeLabel: "What we define together",
+          outcomeLabel: "The intended outcome",
+        },
+        {
+          code: "data-analytics",
+          category: "Connect data to decisions",
+          title: "Data Engineering & Analytics",
+          headline: "Give your data a direction.",
+          summary:
+            "Bring fragmented sources into a governed data journey, from ingestion and quality checks to insight that supports everyday decisions.",
+          visual: "data",
+          flow: ["Sources", "Refine", "Govern", "Insight"],
+          centerLabel: "Insight with context",
+          tags: ["Connected sources", "Data quality", "Business insight"],
+          href: "/solutions#data-analytics",
+          linkLabel: "Explore data & analytics",
+          challenge:
+            "When teams work from scattered reports and inconsistent definitions, even simple business questions become difficult to answer with confidence.",
+          useCases: [
+            {
+              title: "Operational reporting",
+              text: "Bring agreed business measures together across applications, teams and reporting cycles.",
+            },
+            {
+              title: "Data consolidation",
+              text: "Map fragmented source data into consistent structures with clear lineage and ownership.",
+            },
+            {
+              title: "Decision support",
+              text: "Define the views, refresh needs and quality thresholds that make insight useful to its audience.",
+            },
+          ],
+          scope: [
+            "Sources, destinations and refresh expectations",
+            "Transformations, definitions and quality checks",
+            "Access, lineage, retention and data ownership",
+            "Reporting audiences and acceptance measures",
+          ],
+          outcome:
+            "A traceable path from source information to business insight, with quality and ownership made explicit.",
+          scopeLabel: "What we define together",
+          outcomeLabel: "The intended outcome",
+        },
+      ],
+      workflowLabel: "A possible solution flow",
+      useCasesLabel: "Where this could help",
+      journeyKicker: "A clear path forward",
+      journeyHeading: "Start focused. Build with purpose.",
+      journeyBody:
+        "We establish scope and acceptance criteria together before moving into implementation.",
+      steps: [
+        {
+          title: "Discover",
+          text: "Understand the business problem, people, existing systems and desired outcomes.",
+        },
+        {
+          title: "Design",
+          text: "Agree the solution boundaries, integrations, governance and acceptance criteria.",
+        },
+        {
+          title: "Build & validate",
+          text: "Implement a focused scope and test it against the agreed business and operational needs.",
+        },
+        {
+          title: "Prepare to operate",
+          text: "Qualify deployment, ownership, monitoring and support before a production rollout.",
+        },
+      ],
+      ctaKicker: "Let’s shape your next move",
+      ctaHeading: "Bring the challenge.\nWe’ll work through it together.",
+      ctaBody:
+        "Tell us what your teams are trying to achieve, which systems are involved and where progress gets difficult.",
+      href: "/contact",
+      linkLabel: "Discuss your solution",
+      footnote:
+        "These are solution directions for project discovery. Capabilities, delivery scope and production readiness are agreed and validated for each engagement.",
+    },
+  },
+  record103: {
+    code: "nexusHomeSolutions",
+    typeCode: "nexusSolutionsType",
+    accessMode: "PUBLIC",
+    active: true,
+    properties: {
+      anchor: "solutions",
+      mode: "overview",
+      kicker: "Built around your business",
+      heading: "Your challenge.\nOur starting point.",
+      body: "Every organisation has work that could flow better and data that could do more. Explore two solution directions we can shape with your team.",
+      items: [
+        {
+          code: "task-execution",
+          category: "Orchestrate operations",
+          title: "Task Execution Engine",
+          headline: "Make complex work flow.",
+          summary:
+            "Connect scheduled tasks, dependencies and recovery into an operational flow your teams can understand and manage.",
+          visual: "operations",
+          flow: ["Trigger", "Coordinate", "Execute", "Review"],
+          centerLabel: "One coordinated flow",
+          tags: ["Scheduled work", "Recovery paths", "Operational visibility"],
+          href: "/solutions#task-execution",
+          linkLabel: "Explore task execution",
+          challenge:
+            "When business-critical work depends on disconnected jobs, teams spend time chasing failures and piecing together what happened.",
+          useCases: [
+            {
+              title: "Recurring operations",
+              text: "Scope scheduled business runs, reconciliation and routine processing across connected systems.",
+            },
+            {
+              title: "Cross-system handoffs",
+              text: "Define dependencies, ownership and completion signals for work spanning multiple applications.",
+            },
+            {
+              title: "Exception recovery",
+              text: "Agree retry rules, escalation paths and the evidence operators need to recover safely.",
+            },
+          ],
+          scope: [
+            "Triggers, schedules and task dependencies",
+            "Execution boundaries, access and integration contracts",
+            "Retries, timeouts and human intervention",
+            "Run history, alerts and operational ownership",
+          ],
+          outcome:
+            "A shared view of what should run, what happened and what needs attention.",
+          scopeLabel: "What we define together",
+          outcomeLabel: "The intended outcome",
+        },
+        {
+          code: "data-analytics",
+          category: "Connect data to decisions",
+          title: "Data Engineering & Analytics",
+          headline: "Give your data a direction.",
+          summary:
+            "Bring fragmented sources into a governed data journey, from ingestion and quality checks to insight that supports everyday decisions.",
+          visual: "data",
+          flow: ["Sources", "Refine", "Govern", "Insight"],
+          centerLabel: "Insight with context",
+          tags: ["Connected sources", "Data quality", "Business insight"],
+          href: "/solutions#data-analytics",
+          linkLabel: "Explore data & analytics",
+          challenge:
+            "When teams work from scattered reports and inconsistent definitions, even simple business questions become difficult to answer with confidence.",
+          useCases: [
+            {
+              title: "Operational reporting",
+              text: "Bring agreed business measures together across applications, teams and reporting cycles.",
+            },
+            {
+              title: "Data consolidation",
+              text: "Map fragmented source data into consistent structures with clear lineage and ownership.",
+            },
+            {
+              title: "Decision support",
+              text: "Define the views, refresh needs and quality thresholds that make insight useful to its audience.",
+            },
+          ],
+          scope: [
+            "Sources, destinations and refresh expectations",
+            "Transformations, definitions and quality checks",
+            "Access, lineage, retention and data ownership",
+            "Reporting audiences and acceptance measures",
+          ],
+          outcome:
+            "A traceable path from source information to business insight, with quality and ownership made explicit.",
+          scopeLabel: "What we define together",
+          outcomeLabel: "The intended outcome",
+        },
+      ],
+      href: "/solutions",
+      linkLabel: "Discover our approach",
+      footnote:
+        "Solution directions, shaped through discovery to match your systems, people and priorities.",
     },
   },
 };

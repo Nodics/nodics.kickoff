@@ -9,6 +9,8 @@
 
  */
 
-'use strict';
+"use strict";
 /** @module kickoffDockerLocal/commerceStagedServer/config/properties @description Applies isolated Commerce Staged container configuration. */
-module.exports = require('../../config/runtime-properties')('commerceStagedServer');
+module.exports = require("../../config/runtime-properties")(
+  "commerceStagedServer",
+);

@@ -20,7 +20,11 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Docker Local WCMS Online Server"
+    "displayName": "Docker Local WCMS Online Server",
+    "runtimeModuleRoots": [
+      "nodics.wcms",
+      "nodics.discovery"
+    ]
   },
   "description": "Docker Local WCMS Online Server runtime composition and configuration boundary for this Nodics project."
 }

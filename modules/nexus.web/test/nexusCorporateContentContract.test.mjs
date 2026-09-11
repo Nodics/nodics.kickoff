@@ -43,6 +43,12 @@ const components = require(
     "data/sample-v001/content/records/wcms/corporate/nexusComponentData.js",
   ),
 );
+const routes = require(
+  resolve(
+    moduleRoot,
+    "data/sample-v001/content/records/wcms/corporate/nexusRouteData.js",
+  ),
+);
 const pages = require(
   resolve(
     moduleRoot,
@@ -209,7 +215,7 @@ assert.equal(site.catalog, "nexusContentCatalog");
 assert.equal(catalog.code, "nexusContentCatalog");
 assert.equal(
   pageValues.length,
-  26,
+  31,
   "Corporate release must contain the approved corporate and Editorial reference routes",
 );
 assert(homePage, "Homepage must exist in the importable CMS page payload");
@@ -244,8 +250,8 @@ assert(
 );
 assert.equal(
   orderedComponentTargets(homePage).length,
-  12,
-  "Homepage must contain the twelve approved content sections",
+  13,
+  "Homepage must include the product and solution sections",
 );
 const homepageShellComponentCodes = orderedComponentTargets(homePage, "shell");
 assert.deepEqual(
@@ -344,9 +350,14 @@ assert(
   "Legacy Wiki pages must not enter Nexus content",
 );
 assert.deepEqual(
-  homepageComponentCodes.slice(3, 6),
-  ["nexusHomeProducts", "nexusHomeTechnology", "nexusHomeSupport"],
-  "Products and Technology must follow Features before Support",
+  homepageComponentCodes.slice(3, 7),
+  [
+    "nexusHomeProducts",
+    "nexusHomeSolutions",
+    "nexusHomeTechnology",
+    "nexusHomeSupport",
+  ],
+  "Products, Solutions and Technology must follow Features before Support",
 );
 assert.equal(
   componentByCode.get("nexusHomeProducts")?.properties.href,
@@ -401,25 +412,70 @@ assert.equal(
 );
 const productsComponentCodes = orderedComponentTargets(productsPage);
 assert.deepEqual(
-  productsComponentCodes.slice(0, 5),
-  [
-    "nexusProductsHero",
-    "nexusProductsContent",
-    "nexusProductsSuite",
-    "nexusProductsOperatingModel",
-    "nexusProductsReadiness",
-  ],
-  "Products page must explain philosophy, suite, operating model, and readiness path",
+  productsComponentCodes,
+  ["nexusProductsHero", "nexusProductsDashboard"],
+  "Products must open the managed comparison dashboard",
+);
+const portfolio = componentByCode.get("nexusProductsDashboard").properties
+  .products;
+assert.equal(
+  portfolio.length,
+  4,
+  "The portfolio contains four implemented reference experiences",
+);
+assert.deepEqual(
+  componentByCode.get("nexusHomeProducts").properties.products,
+  portfolio,
+  "Home and dashboard must expose the same product catalogue",
 );
 assert.equal(
-  componentByCode.get("nexusProductsContent")?.properties.anchor,
-  "product-overview",
-  "Products overview must expose a stable managed component anchor",
+  componentByCode.get("nexusHomeProducts").typeCode,
+  "nexusProductPortfolioType",
 );
-assert.equal(
-  componentByCode.get("nexusProductsSuite")?.properties.items.length,
-  3,
-  "Products suite must expose the approved product direction cards",
+for (const product of portfolio) {
+  assert(
+    typeof product.adoption === "string" && product.adoption.length > 20,
+    "Every comparison row needs concrete adoption guidance",
+  );
+  const route = Object.values(routes).find(
+    (entry) => entry.path === product.href,
+  );
+  assert(route, `${product.title} must have a public detail route`);
+  const page = pageValues.find((entry) => entry.code === route.page);
+  const targets = orderedComponentTargets(page);
+  assert.equal(targets.length, 2);
+  const story = componentByCode.get(targets[1]);
+  assert.equal(story.typeCode, "nexusProductStoryType");
+  assert.equal(
+    story.properties.gallery.length,
+    story.code === "nexusProductApparelStory" ? 4 : 3,
+  );
+  assert.equal(story.properties.capabilities.length, 6);
+  assert.equal(story.properties.workflow.length, 4);
+  assert.equal(story.properties.adoption.length, 3);
+  for (const screen of story.properties.gallery) {
+    assert(
+      existsSync(
+        resolve(
+          moduleRoot,
+          `data/sample-v001/content/assets/nexus-cms-media/files/${screen.referenceImageCode}.png`,
+        ),
+      ),
+      `${product.title} screen must exist`,
+    );
+  }
+}
+assert(
+  Object.values(routes).some((route) => route.path === "/solutions"),
+  "Conceptual solutions have their own route",
+);
+assert.match(
+  JSON.stringify(componentByCode.get("nexusProductTelcoStory").properties.faq),
+  /separate integrations/,
+);
+assert.match(
+  JSON.stringify(componentByCode.get("nexusProductWasteStory").properties.faq),
+  /Physical receipt and custody/,
 );
 const supportComponentCodes = orderedComponentTargets(supportPage);
 assert.deepEqual(
@@ -670,14 +726,28 @@ editorialDetailPageExpectations.forEach(({ page, contentTypeCode }) => {
   );
 });
 assert.deepEqual(
-  homepageComponentCodes.slice(6, 9),
+  homepageComponentCodes.slice(7, 10),
   ["nexusHomeTestimonials", "nexusHomeBlogs", "nexusHomeNews"],
   "Testimonials, Blogs, and News must follow Support as one editorial sequence",
 );
+const retiredProductComponents = new Set([
+  "nexusProductsContent",
+  "nexusProductsSuite",
+  "nexusProductsOperatingModel",
+  "nexusProductsReadiness",
+]);
+for (const code of retiredProductComponents) {
+  assert(
+    pageValues.every(
+      (page) => !page.cmsComponents.some((entry) => entry.target === code),
+    ),
+    `Retired product component ${code} cannot be associated with a live page`,
+  );
+}
 componentValues.forEach((component) => {
   assert.equal(
     component.active,
-    true,
+    !retiredProductComponents.has(component.code),
     `CMS component ${component.code} must default active for Axis visibility control`,
   );
   assert.notEqual(
@@ -840,7 +910,11 @@ assert.match(
   projectPackage.scripts["acceptance:nexus-cms-media-seed"],
   /nodics-project\.js project:run acceptance:nexus-cms-media-seed/,
 );
-assert.equal(existsSync(resolve(projectRoot, "nodics.project.json")), false, "Project identity and commands must not require the retired project descriptor");
+assert.equal(
+  existsSync(resolve(projectRoot, "nodics.project.json")),
+  false,
+  "Project identity and commands must not require the retired project descriptor",
+);
 assert.equal(
   projectCommands["acceptance:nexus-cms-media-seed"].command,
   "project:nexus-cms-media-seed",
@@ -885,3 +959,54 @@ assert(
 );
 
 console.log("Nexus corporate content contract passed.");
+
+for (const anchor of ["products", "solutions"]) {
+  assert.equal(
+    sharedHeader.properties.navigation.find((item) => item.id === anchor).href,
+    `/#${anchor}`,
+  );
+  assert(
+    homepageComponentCodes.some(
+      (code) => componentByCode.get(code).properties.anchor === anchor,
+    ),
+  );
+}
+assert.equal(
+  componentByCode.get("nexusHomeSolutions").properties.href,
+  "/solutions",
+);
+assert.equal(
+  componentByCode.get("nexusHomeProducts").properties.href,
+  "/products",
+);
+
+for (const code of ["nexusHomeSolutions", "nexusSolutionsContent"]) {
+  const solution = componentByCode.get(code);
+  assert.equal(solution.typeCode, "nexusSolutionsType");
+  for (const entry of solution.properties.items) {
+    assert(entry.useCases.length > 0 && entry.scope.length > 0);
+    assert.equal(entry.href, `/solutions#${entry.code}`);
+    assert.equal(entry.flow.length, 4);
+  }
+}
+assert.equal(
+  componentByCode.get("nexusSolutionsContent").properties.steps.length,
+  4,
+);
+assert(
+  !sharedHeader.properties.navigation.some((item) => item.id === "features"),
+);
+assert.equal(
+  sharedHeader.properties.navigation.find((item) => item.id === "about").href,
+  "/#aboutus",
+);
+assert(
+  !sharedHeader.properties.navigation.some((item) => item.children?.length),
+);
+
+assert(
+  homepageComponentCodes.some(
+    (code) => componentByCode.get(code).properties.anchor === "features",
+  ),
+);
+assert(Object.values(routes).some((route) => route.path === "/features"));

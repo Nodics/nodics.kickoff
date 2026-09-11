@@ -21,7 +21,15 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Docker Local Platform Server"
+    "displayName": "Docker Local Platform Server",
+    "runtimeModuleRoots": [
+      "nodics.platform",
+      "nodics.localization",
+      "nodics.discovery",
+      "nodics.copilot",
+      "nodics.waste",
+      "nodics.loyalty"
+    ]
   },
   "description": "Docker Local Platform Server runtime composition and configuration boundary for this Nodics project."
 }

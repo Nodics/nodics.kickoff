@@ -9,7 +9,7 @@
 
  */
 
-'use strict';
+"use strict";
 
 /**
  * @module envs/kickoffDockerLocal/processServer/prescripts
