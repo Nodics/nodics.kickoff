@@ -181,7 +181,7 @@ module.exports = {
         },
         nexus: {
           releaseCode: "nexus.web:nexusCorporateSite",
-          releaseVersion: "0.0.19",
+          releaseVersion: "0.0.20",
           dataType: "sample",
           rootType: "site",
           rootCode: "nexusCorporateSite",
@@ -245,7 +245,7 @@ module.exports = {
         },
         frameworkdocs: {
           contentPackCode: "nodicsDocumentation",
-          releaseVersion: "0.16.11",
+          releaseVersion: "0.16.12",
           rootType: "site",
           rootCode: "nodicsDocumentationSite",
           sourceVersion: "0",

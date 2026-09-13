@@ -5,3 +5,5 @@
 - This package owns only the responsibilities declared in `package.json.nodics.owns`.
 - Keep reusable framework behavior in Nodics framework modules and project-specific behavior in the correct Kickoff module, environment, server, data, or test boundary.
 - Keep `README.md` concise and module-level; detailed publishable documentation belongs in the owning documentation/content-pack source.
+
+- When a referenced content release changes, align explicit `cms.publication.baselines` versions with its manifest and run `test/localPublishingContractFreeze.test.mjs` for both Local and Docker Staged runtimes. Configuration pins remain explicit; this check does not publish content or rewrite an applied release.

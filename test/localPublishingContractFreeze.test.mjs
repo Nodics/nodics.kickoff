@@ -14,6 +14,7 @@ import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import configuration from "./helpers/configuration.js";
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -35,9 +36,12 @@ const online = read(
 const process = read(
   "nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js",
 ).replaceAll('"', "'");
-const dockerLocal = read(
-  "nodics.kickoff/envs/kickoffDockerLocal/platformServer/config/properties.js",
-).replace(/"([A-Za-z][A-Za-z0-9]*)":/g, "$1:").replaceAll('"', "'");
+const runtimeBaselines = Object.fromEntries(
+  ["kickoffLocal", "kickoffDockerLocal"].map((environment) => [
+    environment,
+    configuration.loadRuntime("wcmsStagedServer", environment).cms.publication.baselines,
+  ]),
+);
 const guidedAcceptance = read(
   "nodics.kickoff/scripts/acceptance/defaultProjectGuidedInitializationAcceptanceService.mjs",
 );
@@ -133,17 +137,23 @@ for (const documentation of [
 ]) {
   const manifest = JSON.parse(read(documentation.manifestPath));
   const releaseVersion = manifest.sections.documentation.version;
-  const descriptor = new RegExp(
-    `contentPackCode:\\s*'${documentation.packCode}'[^}]*releaseVersion:\\s*'${releaseVersion}'`,
-  );
-  assert(
-    descriptor.test(staged),
-    `kickoffLocal ${documentation.packCode} baseline must match its immutable manifest`,
-  );
-  assert(
-    descriptor.test(dockerLocal),
-    `kickoffDockerLocal ${documentation.packCode} baseline must match its immutable manifest`,
-  );
+  for (const [environment, baselines] of Object.entries(runtimeBaselines)) {
+    const baseline = Object.values(baselines).find(
+      (value) => value.contentPackCode === documentation.packCode,
+    );
+    assert.equal(
+      baseline?.releaseVersion,
+      releaseVersion,
+      `${environment} ${documentation.packCode} baseline must match its immutable manifest`,
+    );
+  }
+}
+
+const nexusManifest = JSON.parse(read("nodics.kickoff/modules/nexus.web/data/manifest.json"));
+const nexusRelease = nexusManifest.sections.nexusCorporateSite;
+assert(nexusRelease, "Nexus corporate release must be declared");
+for (const [environment, baselines] of Object.entries(runtimeBaselines)) {
+  assert.equal(baselines.nexus.releaseVersion, nexusRelease.version, `${environment} Nexus release pin must match its manifest`);
 }
 
 for (const manifestPath of [
