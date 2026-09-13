@@ -29,7 +29,9 @@ const projectCommandService = require(
     "../nodics.ai/nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService",
   ),
 );
-const projectCommands = projectCommandService.defaultCommands();
+const projectCommands = projectCommandService.resolveCommands(
+  projectCommandService.readManifest(projectRoot),
+);
 const manifest = JSON.parse(
   await readFile(resolve(moduleRoot, "data/manifest.json")),
 );
@@ -908,17 +910,19 @@ assert.equal(mediaRelease.destinationRole, "WCMS_STAGED");
 assert.equal(mediaRelease.sourceRoot, "sample-v001");
 assert.match(
   projectPackage.scripts["acceptance:nexus-cms-media-seed"],
-  /nodics-project\.js project:run acceptance:nexus-cms-media-seed/,
+  /^nodics project:run acceptance:nexus-cms-media-seed$/,
 );
 assert.equal(
   existsSync(resolve(projectRoot, "nodics.project.json")),
-  false,
-  "Project identity and commands must not require the retired project descriptor",
+  true,
+  "Customer acceptance commands belong to the existing project manifest",
 );
 assert.equal(
-  projectCommands["acceptance:nexus-cms-media-seed"].command,
-  "project:nexus-cms-media-seed",
+  projectCommands["acceptance:nexus-cms-media-seed"].script,
+  "scripts/acceptance/defaultProjectNexusCmsMediaSeedService.mjs",
 );
+
+assert.equal(projectCommands["acceptance:nexus-cms-media-seed"].type, "projectScript");
 
 for (const release of Object.values(manifest.sections)) {
   for (const [relativePath, expectedHash] of Object.entries(release.files)) {
