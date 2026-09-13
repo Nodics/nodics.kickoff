@@ -157,8 +157,13 @@ npm install
 ```
 
 Kickoff does not copy or symlink framework modules into `.nodics/`. Project
-scripts call `scripts/nodics-project.js`, which reads `.env`, locates
-`nodics.ai`, and delegates lifecycle/startup work to framework-owned tooling.
+scripts call `nodics`, installed from the declared `nodics.foundation` dependency.
+Its framework-owned entry point reads `.env` and delegates to the existing command
+registry and runtime resolver. The project no longer owns a JavaScript dispatcher.
+For example, `npm exec -- nodics start --env kickoffLocal --server platform`
+selects a server directly. `npm exec -- nodics build --env kickoffLocal --server platform`
+generates that server's shared artifacts. Add `--node <name>` to select a declared
+node without creating node-owned output. Clean/build require a selected server.
 
 ## Start sequence
 

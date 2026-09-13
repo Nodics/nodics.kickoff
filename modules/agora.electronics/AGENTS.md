@@ -17,3 +17,10 @@ Follow `llm/contracts/data-ownership-contract.md` before changing sample data.
 Resolve source roots from the release manifest and run the Kickoff
 `test:data-ownership` gate after changing assets, media, components or pages.
 Do not copy another Agora application's media into this pack to satisfy a binding.
+
+
+This module explicitly participates in Application Builder through
+`nodics.applicationBuilder.dataPack: true` in its package metadata. The owning
+customer project declares frontend, domain and preset choices. Preserve the
+module's existing import-manifest and content ownership rules; Builder metadata
+does not import, publish or validate this module's live data.

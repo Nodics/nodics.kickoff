@@ -25,14 +25,6 @@ const compose = fs.readFileSync(
   path.join(environment, "docker", "compose.yaml"),
   "utf8",
 );
-const runtimeProperties = fs.readFileSync(
-  path.join(environment, "config", "runtime-properties.js"),
-  "utf8",
-);
-const environmentProperties = fs.readFileSync(
-  path.join(environment, "config", "properties.js"),
-  "utf8",
-);
 const containerEnvironmentService = fs.readFileSync(
   path.join(
     root,
@@ -67,7 +59,7 @@ const projectContractPath = path.join(root, "nodics.project.json");
 const environmentProfile = JSON.parse(
   fs.readFileSync(path.join(environment, "nodics.environment.json"), "utf8"),
 );
-const projectCommands = projectCommandService.defaultCommands();
+const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(root));
 const servers = [
   "platformServer",
   "wcmsStagedServer",
@@ -131,14 +123,18 @@ for (const command of [
   assert.match(
     compose,
     new RegExp(
-      `nodics-project\\.js\", \"project:run\", \"${command.replace(/:/g, ":")}\"`,
+      `node_modules/\\.bin/nodics\", \"project:run\", \"${command.replace(/:/g, ":")}\"`,
     ),
   );
 }
 assert.match(compose, /docker\.elastic\.co\/elasticsearch\/elasticsearch/);
 assert.match(compose, /elasticsearch-data/);
-const loadRuntime = require("../envs/kickoffDockerLocal/config/runtime-properties");
-const dockerPlatform = loadRuntime("platformServer");
+const loadRuntime = server => require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
+const dockerPlatform = require("./helpers/configuration").merge(
+  {},
+  require("../modules/kickoffAdministration/config/properties"),
+  loadRuntime("platformServer"),
+);
 const dockerLoyalty = loadRuntime("loyaltyServer");
 const dockerEnvironment = require("../envs/kickoffDockerLocal/config/properties");
 assert.equal(
@@ -211,9 +207,7 @@ assert.equal(
   "Cart jurisdiction must match the governed reference tax policy",
 );
 for (const server of ["wasteServer", "locationServer"]) {
-  const properties = require(
-    `../envs/kickoffDockerLocal/${server}/config/properties`,
-  );
+  const properties = loadRuntime(server);
   assert.equal(properties.servers.profile.endpoint.httpHost, "platform");
   assert.equal(properties.servers.default.endpoint.httpHost, "0.0.0.0");
   assert.match(
@@ -240,7 +234,7 @@ assert(
     (item) => item.currency === "AED",
   ),
 );
-assert.equal(fs.existsSync(projectContractPath), false);
+assert.deepEqual(Object.keys(JSON.parse(fs.readFileSync(projectContractPath))), ["tooling"]);
 assert.equal(environmentProfile.profileCode, "dockerLocal");
 assert.equal(environmentProfile.environment, "kickoffDockerLocal");
 assert.equal(environmentProfile.bootstrapAdminPassword, "NodicsLocal@2026");
@@ -282,14 +276,15 @@ assert.match(
   containerQualificationService,
   /NODICS_SERVICE_API_KEY: process\.env\.NODICS_SERVICE_API_KEY \|\| values\.BOOTSTRAP_SERVICE_API_KEY/,
 );
-assert.match(containerQualificationService, /acceptance:agora-commerce-data/);
+assert.match(containerQualificationService, /selected\.acceptance\.commerceDataCommand/);
+assert.equal(environmentProfile.acceptance.commerceDataCommand, "acceptance:agora-commerce-data");
 assert.match(
   containerQualificationService,
   /NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE/,
 );
 assert.match(
   containerQualificationService,
-  /acceptance:agora-commerce-publication/,
+  /selected\.acceptance\.commercePublicationCommand/,
 );
 console.log("kickoffDockerLocal environment contract validated");
 

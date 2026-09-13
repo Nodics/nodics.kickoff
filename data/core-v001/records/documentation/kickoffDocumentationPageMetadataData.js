@@ -270,8 +270,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-runtime.md",
-    "sourceChecksum": "902c67e10f51940b209a95c7672f082a4779ba06e03c32b1df0bf24521911a52",
-    "sourceWordCount": 1958,
+    "sourceChecksum": "cba439c491ae0c17f262b497a89ddc3e63aa478c393cba596635515251164bf8",
+    "sourceWordCount": 2018,
     "audience": [
       "business-user",
       "administrator",
@@ -1057,6 +1057,11 @@ module.exports = {
         "text": "Continue",
         "anchor": "kickoffCustomization-21-continue",
         "level": 2
+      },
+      {
+        "text": "Keep configuration small",
+        "anchor": "kickoffCustomization-22-keep-configuration-small",
+        "level": 2
       }
     ],
     "diagrams": [
@@ -1083,12 +1088,13 @@ module.exports = {
     "relatedPages": [
       "kickoff.overview",
       "kickoff.local-runtime",
-      "kickoff.local-acceptance"
+      "kickoff.local-acceptance",
+      "kickoff.configuration-inheritance"
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/customization-guide.md",
-    "sourceChecksum": "f82ccf1cbc7306d2d54906e04039097e130a09997990f38bc1e76bc10625ae80",
-    "sourceWordCount": 2158,
+    "sourceChecksum": "b1bf9be9246840c327f2aeaf922f2e9476b0216120aad026b243537d65495efe",
+    "sourceWordCount": 2197,
     "audience": [
       "business-user",
       "administrator",
@@ -1115,6 +1121,129 @@ module.exports = {
     "active": true
   },
   "record7": {
+    "code": "kickoffDocsMetadatakickoffConfigurationInheritance",
+    "product": "kickoffDocumentationProduct",
+    "documentId": "kickoff.configuration-inheritance",
+    "title": "Keep Kickoff configuration small",
+    "summary": "Inherit framework defaults, share customer administration descriptors and keep deployment choices at their owners.",
+    "businessSummary": "Keep Kickoff configuration small explains customer-project purpose, supported operations, runtime impact, and implementation handoff.",
+    "technicalSummary": "Keep Kickoff configuration small records owning module nodics.kickoff, technical module modules, source path docs/pages/configuration-inheritance.md, validation, and troubleshooting evidence.",
+    "ownerFunctionalModule": "nodics.kickoff",
+    "technicalModule": "modules",
+    "targetPage": "kickoffDocsPagekickoffConfigurationInheritance",
+    "targetRoute": "kickoffDocsRoutekickoffConfigurationInheritance",
+    "articleComponent": "kickoffDocsComponentkickoffConfigurationInheritance",
+    "template": "kickoffDocumentationArticleTemplate",
+    "searchMetadata": "kickoffDocsSearchpagekickoffdocsmetadatakickoffconfigurationinheritance",
+    "headings": [
+      {
+        "text": "Business outcome",
+        "anchor": "kickoffConfigurationInheritance-1-business-outcome",
+        "level": 2
+      },
+      {
+        "text": "Understand the ownership before editing",
+        "anchor": "kickoffConfigurationInheritance-2-understand-the-ownership-before-editing",
+        "level": 2
+      },
+      {
+        "text": "Why the ordering matters",
+        "anchor": "kickoffConfigurationInheritance-3-why-the-ordering-matters",
+        "level": 2
+      },
+      {
+        "text": "Start with the smallest change",
+        "anchor": "kickoffConfigurationInheritance-4-start-with-the-smallest-change",
+        "level": 2
+      },
+      {
+        "text": "Customize and extend safely",
+        "anchor": "kickoffConfigurationInheritance-5-customize-and-extend-safely",
+        "level": 2
+      },
+      {
+        "text": "Preserve arrays and operational safeguards",
+        "anchor": "kickoffConfigurationInheritance-6-preserve-arrays-and-operational-safeguards",
+        "level": 2
+      },
+      {
+        "text": "Send store context explicitly",
+        "anchor": "kickoffConfigurationInheritance-7-send-store-context-explicitly",
+        "level": 2
+      },
+      {
+        "text": "Verification before operating",
+        "anchor": "kickoffConfigurationInheritance-8-verification-before-operating",
+        "level": 2
+      },
+      {
+        "text": "Common mistakes, troubleshooting and rollback",
+        "anchor": "kickoffConfigurationInheritance-9-common-mistakes-troubleshooting-and-rollback",
+        "level": 2
+      },
+      {
+        "text": "Commands and capability inventories",
+        "anchor": "kickoffConfigurationInheritance-10-commands-and-capability-inventories",
+        "level": 2
+      },
+      {
+        "text": "Declarative environment selection",
+        "anchor": "kickoffConfigurationInheritance-11-declarative-environment-selection",
+        "level": 2
+      }
+    ],
+    "diagrams": [
+      {
+        "language": "mermaid"
+      }
+    ],
+    "visualAssets": [
+      {
+        "kind": "table"
+      },
+      {
+        "kind": "table"
+      }
+    ],
+    "visualRequirements": [
+      "diagram",
+      "comparison-table",
+      "code-example"
+    ],
+    "relatedPages": [
+      "kickoff.customization",
+      "kickoff.local-runtime"
+    ],
+    "sourceRepository": "nodics.kickoff",
+    "sourcePath": "docs/pages/configuration-inheritance.md",
+    "sourceChecksum": "e51e19f06cb175c4fed7628886a954aa796031a6056cb9ed24f6f2c0756160fe",
+    "sourceWordCount": 1945,
+    "audience": [
+      "business-user",
+      "administrator",
+      "architect",
+      "developer",
+      "operator",
+      "qa",
+      "ai-tool"
+    ],
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.draft.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "CONTENT_CHANGE",
+      "ACCESS_POLICY_CHANGE",
+      "SOURCE_EVIDENCE_CHANGE"
+    ],
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "accessMode": "PUBLIC",
+    "lifecycleState": "ONLINE",
+    "maturityState": "IMPLEMENTED",
+    "active": true
+  },
+  "record8": {
     "code": "kickoffDocsMetadatakickoffFunctionalJourneys",
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.functional-journeys",

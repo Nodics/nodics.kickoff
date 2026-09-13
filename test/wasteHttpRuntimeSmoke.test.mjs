@@ -85,7 +85,7 @@ function startRuntime(command, label, logRoot) {
   fs.mkdirSync(runtimeLogDir, {recursive: true});
   const stdout = fs.openSync(path.join(runtimeLogDir, 'stdout.log'), 'w');
   const stderr = fs.openSync(path.join(runtimeLogDir, 'stderr.log'), 'w');
-  const child = spawn(process.execPath, ['scripts/nodics-project.js', 'project:run', command], {
+  const child = spawn(process.execPath, ['node_modules/.bin/nodics', 'project:run', command], {
     cwd: projectRoot,
     detached: true,
     stdio: ['ignore', stdout, stderr]

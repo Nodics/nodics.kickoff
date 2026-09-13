@@ -19,6 +19,24 @@
  * @override A deployment may replace the local provider coordinates without changing CMS content records.
  */
 module.exports = {
+    cms: {
+        designerAuthoring: {
+            draftDefaults: {
+                accessMode: 'PUBLIC',
+                catalogCode: 'nexusContentCatalog',
+                siteCode: 'nexusCorporateSite',
+                templateCode: 'nexusCorporatePageTemplate',
+                pageTypeCode: 'nexusCorporateStandardPageType',
+                pageRenderer: 'nexus.page.standard',
+                slots: ['main']
+            },
+            componentKinds: [
+                { label: 'Nexus hero', typeCode: 'nexusPageHeroType', renderer: 'nexus.hero' },
+                { label: 'Nexus content section', typeCode: 'nexusContentSectionType', renderer: 'nexus.contentSection' },
+                { label: 'Nexus card grid', typeCode: 'nexusCardGridType', renderer: 'nexus.cardGrid' }
+            ]
+        }
+    },
     media: {
         folders: {
             nexusContentAssets: {

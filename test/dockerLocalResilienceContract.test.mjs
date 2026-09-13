@@ -75,9 +75,7 @@ const frameworkQualification = frameworkFile(
   "nodics.foundation/modules/nTooling/src/service/quality/defaultFrameworkQualificationEvidenceService.js",
 );
 const acceptance = qualification;
-const bootstrapAcceptance = frameworkFile(
-  "nodics.foundation/modules/nTooling/src/service/project/defaultProjectLocalBootstrapAcceptanceService.mjs",
-);
+const bootstrapAcceptance = fs.readFileSync(path.join(projectRoot, "scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs"), "utf8");
 const backendDockerfile = fs.readFileSync(
   new URL(
     "../envs/kickoffDockerLocal/docker/backend.Dockerfile",
@@ -85,13 +83,7 @@ const backendDockerfile = fs.readFileSync(
   ),
   "utf8",
 );
-const dockerLocalRuntimeProperties = fs.readFileSync(
-  new URL(
-    "../envs/kickoffDockerLocal/config/runtime-properties.js",
-    import.meta.url,
-  ),
-  "utf8",
-);
+const dockerRuntime = server => require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
 const dockerLocalProfile = JSON.parse(
   fs.readFileSync(
     new URL(
@@ -104,7 +96,7 @@ const dockerLocalProfile = JSON.parse(
 const packageDefinition = JSON.parse(
   fs.readFileSync(new URL("../package.json", import.meta.url), "utf8"),
 );
-const projectCommands = projectCommandService.defaultCommands();
+const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
 
 assert.match(lifecycle, /mongodump/);
 assert.match(lifecycle, /mongorestore/);
@@ -112,7 +104,7 @@ assert.match(lifecycle, /sha256/);
 assert.equal(packageDefinition.name, "nodics.kickoff");
 assert.equal(
   fs.existsSync(path.join(projectRoot, "nodics.project.json")),
-  false,
+  true,
 );
 assert.equal(
   dockerLocalProfile.resilience.restoreConfirmationToken,
@@ -144,23 +136,14 @@ assert.match(
   backendDockerfile,
   /rm -rf \/workspace\/nodics\.kickoff\/envs\/kickoffDockerLocal\/generated/,
 );
-assert.match(
-  dockerLocalRuntimeProperties,
-  /const distributedCacheModules = \[["']redisCache["']\]/,
-);
-assert.match(
-  dockerLocalRuntimeProperties,
-  /activeModules:\s*\{\s*groups:\s*\[\],\s*modules:\s*\[\s*["']cmsStaged["'][\s\S]*["']nexus\.web["']/,
-);
-assert.doesNotMatch(dockerLocalRuntimeProperties, /partnerSiteData/);
-assert.match(
-  dockerLocalRuntimeProperties,
-  /cache:[\s\S]*kickoffCore: distributedAuthCache/,
-);
-assert.match(
-  dockerLocalRuntimeProperties,
-  /channels:\s*\{\s*auth:\s*\{\s*enabled: true,\s*engine: ["']redis["'],\s*fallback: false,?\s*\},?\s*\}/,
-);
+for (const name of ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'commerceServer']) {
+  const runtime = dockerRuntime(name);
+  assert(runtime.activeModules.modules.includes('redisCache'));
+  assert(!runtime.activeModules.modules.includes('partnerSiteData'));
+  assert.deepEqual(runtime.cache.kickoffCore.channels.auth, { enabled: true, engine: 'redis', fallback: false });
+}
+assert(dockerRuntime('wcmsStagedServer').activeModules.modules.includes('cmsStaged'));
+assert(dockerRuntime('wcmsStagedServer').activeModules.modules.includes('nexus.web'));
 assert.match(qualification, /redis-sentinel-promotion-observed/);
 assert.match(qualification, /CLIENT', 'PAUSE'/);
 assert.match(soak, /NODICS_DOCKER_SOAK_SECONDS/);
@@ -180,7 +163,7 @@ assert.match(
 assert.match(frameworkQualification, /directBusinessDatabaseCrud: false/);
 assert.match(
   packageDefinition.scripts["docker-local:backup"],
-  /nodics-project\.js project:run docker-local:backup/,
+  /nodics project:run docker-local:backup/,
 );
 assert.equal(
   projectCommands["docker-local:backup"].command,
@@ -201,7 +184,7 @@ assert.deepEqual(projectCommands["docker-local:restore"].args, [
 ]);
 assert.match(
   packageDefinition.scripts["docker-local:resilience"],
-  /nodics-project\.js project:run docker-local:resilience/,
+  /nodics project:run docker-local:resilience/,
 );
 assert.equal(
   projectCommands["docker-local:resilience"].command,
@@ -213,7 +196,7 @@ assert.deepEqual(projectCommands["docker-local:resilience"].args, [
 ]);
 assert.equal(
   packageDefinition.scripts["docker-local:publishing-interruption-contracts"],
-  "node scripts/nodics-project.js project:run qualification:publishing-interruption-contracts",
+  "nodics project:run qualification:publishing-interruption-contracts",
 );
 assert.equal(
   projectCommands["qualification:publishing-interruption-contracts"].type,
@@ -221,7 +204,7 @@ assert.equal(
 );
 assert.match(
   packageDefinition.scripts["docker-local:soak"],
-  /nodics-project\.js project:run docker-local:soak/,
+  /nodics project:run docker-local:soak/,
 );
 assert.equal(
   projectCommands["docker-local:soak"].command,
@@ -233,7 +216,7 @@ assert.deepEqual(projectCommands["docker-local:soak"].args, [
 ]);
 assert.equal(
   packageDefinition.scripts["acceptance:documentation:fresh-browser"],
-  "node scripts/nodics-project.js project:run acceptance:documentation:fresh-browser",
+  "nodics project:run acceptance:documentation:fresh-browser",
 );
 assert.equal(
   projectCommands["acceptance:documentation:fresh-browser"].command,

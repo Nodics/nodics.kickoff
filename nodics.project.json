@@ -1,0 +1,325 @@
+{
+  "tooling": {
+    "commands": {
+      "start:platform": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "platform"
+        ]
+      },
+      "start:commerce": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "commerce"
+        ]
+      },
+      "start:commerce:staged": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "commerceStaged"
+        ]
+      },
+      "start:engagement": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "engagement"
+        ]
+      },
+      "start:location": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "location"
+        ]
+      },
+      "start:loyalty": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "loyalty"
+        ]
+      },
+      "start:process": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "process"
+        ]
+      },
+      "start:waste": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "waste"
+        ]
+      },
+      "start:wcms:staged": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "wcmsStaged"
+        ]
+      },
+      "start:wcms:online": {
+        "type": "frameworkCommand",
+        "command": "project:runtime-start",
+        "home": "project",
+        "args": [
+          "wcmsOnline"
+        ]
+      },
+      "docker-local:preflight": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "preflight"
+        ]
+      },
+      "docker-local:build": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "build"
+        ]
+      },
+      "docker-local:start": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "start"
+        ]
+      },
+      "docker-local:status": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "status"
+        ]
+      },
+      "docker-local:logs": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "logs"
+        ]
+      },
+      "docker-local:stop": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "stop"
+        ]
+      },
+      "docker-local:reset": {
+        "type": "frameworkCommand",
+        "command": "project:container",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "reset",
+          "--confirm-destroy-docker-local-data"
+        ]
+      },
+      "docker-local:acceptance": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "acceptance"
+        ]
+      },
+      "docker-local:qualify": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "qualification"
+        ]
+      },
+      "docker-local:backup": {
+        "type": "frameworkCommand",
+        "command": "project:container-resilience",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "backup"
+        ]
+      },
+      "docker-local:verify": {
+        "type": "frameworkCommand",
+        "command": "project:container-resilience",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "verify"
+        ]
+      },
+      "docker-local:restore": {
+        "type": "frameworkCommand",
+        "command": "project:container-resilience",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "restore"
+        ]
+      },
+      "docker-local:resilience": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "resilience-qualification"
+        ]
+      },
+      "docker-local:soak": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "soak"
+        ]
+      },
+      "acceptance:local": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs"
+      },
+      "acceptance:local:fresh": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs",
+        "args": [
+          "--drop-local-db"
+        ]
+      },
+      "acceptance:functional": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectFunctionalJourneyAcceptanceService.mjs"
+      },
+      "acceptance:agora-commerce": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectAgoraCommerceAcceptanceService.mjs"
+      },
+      "acceptance:loyalty-reward-checkout": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectLoyaltyRewardCheckoutAcceptanceService.mjs"
+      },
+      "acceptance:waste-management": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs"
+      },
+      "acceptance:waste-backoffice-discovery": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs"
+      },
+      "acceptance:agora-commerce:docker": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "commerce-acceptance"
+        ]
+      },
+      "acceptance:agora-commerce-data": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectAgoraCommerceDataAcceptanceService.mjs"
+      },
+      "acceptance:agora-commerce-publication": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectAgoraCommercePublicationAcceptanceService.mjs"
+      },
+      "qualification:agora-commerce:live": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectAgoraCommerceLiveQualificationService.mjs"
+      },
+      "acceptance:agora-cms-media-seed": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectAgoraCmsMediaSeedService.mjs"
+      },
+      "acceptance:nexus-cms-media-seed": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectNexusCmsMediaSeedService.mjs"
+      },
+      "acceptance:editorial-live": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectEditorialLiveJourneyAcceptanceService.mjs"
+      },
+      "acceptance:capability-registry": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectCapabilityRegistryAcceptanceService.mjs"
+      },
+      "acceptance:guided-initialization": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectGuidedInitializationAcceptanceService.mjs"
+      },
+      "acceptance:documentation:fresh-browser": {
+        "type": "frameworkCommand",
+        "command": "project:container-qualification",
+        "home": "project",
+        "args": [
+          "dockerLocal",
+          "acceptance",
+          "--expect-documentation-not-installed"
+        ]
+      },
+      "qualification:deployment": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectDeploymentQualificationService.mjs"
+      },
+      "qualification:deployment:local": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectDeploymentQualificationService.mjs",
+        "args": [
+          "--execute-local"
+        ]
+      }
+    },
+    "scriptOwnership": {
+      "projectOwned": [
+        "scripts/acceptance/defaultProjectAgoraCmsMediaSeedService.mjs",
+        "scripts/acceptance/defaultProjectAgoraCommerceAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectAgoraCommerceDataAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectAgoraCommerceLiveQualificationService.mjs",
+        "scripts/acceptance/defaultProjectAgoraCommercePublicationAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectCapabilityRegistryAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectDeploymentQualificationService.mjs",
+        "scripts/acceptance/defaultProjectEditorialLiveJourneyAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectFunctionalJourneyAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectGuidedInitializationAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectLoyaltyRewardCheckoutAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectNexusCmsMediaSeedService.mjs",
+        "scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs",
+        "scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs"
+      ]
+    }
+  }
+}

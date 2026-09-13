@@ -11,7 +11,60 @@
 
 "use strict";
 
-const wasteRuntimeModules = [
+
+
+/** @module kickoffLocal/wasteServer/config/properties @description Defines isolated local Waste Management coordinates and runtime configuration. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own waste accelerator, database, and endpoint configuration. */
+module.exports = {
+  localResetProvider: {
+    enabled: true,
+    environmentAllowlist: ["kickoffLocal"],
+    allowMissingModelServices: true,
+    requiredServiceNames: [
+      "DefaultWasteSubmissionService",
+      "DefaultWasteAssetService",
+      "DefaultWasteImpactResultService",
+    ],
+    modules: {
+      "import": true,
+      "search": true,
+      "system": true,
+      "token": true,
+      "validator": true,
+      "wasteCollection": true,
+      "wasteCompliance": true,
+      "wasteCore": true,
+      "wasteImpact": true,
+      "wasteMaterial": true,
+      "wasteMovement": true,
+      "wasteReceipt": true,
+      "wasteSubmission": true,
+      "wasteVerification": true
+    },
+    serviceNames: [
+      "DefaultCatalogService",
+      "DefaultClassConfigurationService",
+      "DefaultConfigurationActivationLogService",
+      "DefaultConfigurationActivationRequestService",
+      "DefaultEmsFailedMessagesService",
+      "DefaultPipelineService",
+      "DefaultPublicationAuditService",
+      "DefaultPublicationRequestService",
+      "DefaultRouterConfigurationService",
+      "DefaultSchemaAccessPolicyService",
+      "DefaultSchemaConfigurationService",
+      "DefaultWorkflow2SchemaService"
+    ],
+  },
+  activeModules: {
+    groups: [],
+    modules: [
+  "circa.ewaste",
+  "nodics.kickoff",
+  "kickoffCore",
+  "kickoffApi",
+  "kickoffInt",
+  "kickoffLocal",
+  "wasteServer",
   "nodics.waste",
   "wasteCore",
   "wasteMaterial",
@@ -40,94 +93,8 @@ const wasteRuntimeModules = [
   "discoveryConfig",
   "copilotProvider",
   "ollamaProvider",
-  "openAiProvider",
-];
-
-/** @module kickoffLocal/wasteServer/config/properties @description Defines isolated local Waste Management coordinates and runtime configuration. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own waste accelerator, database, and endpoint configuration. */
-module.exports = {
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
-      "DefaultWasteSubmissionService",
-      "DefaultWasteAssetService",
-      "DefaultWasteImpactResultService",
-    ],
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultConfigurationService",
-      "DefaultDataInstallationService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultEventListenerService",
-      "DefaultImportDefinitionService",
-      "DefaultImportRunService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultInterceptorService",
-      "DefaultPipelineService",
-      "DefaultPublicationAuditService",
-      "DefaultPublicationRequestService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultSearchService",
-      "DefaultTokenService",
-      "DefaultValidatorService",
-      "DefaultWasteAssetCreationPolicyService",
-      "DefaultWasteAssetMarketplaceProjectionService",
-      "DefaultWasteAssetOwnershipEventService",
-      "DefaultWasteAssetService",
-      "DefaultWasteAssetTransferPolicyService",
-      "DefaultWasteAssetTypeService",
-      "DefaultWasteBatchService",
-      "DefaultWasteCarbonSettlementPolicyService",
-      "DefaultWasteCategoryService",
-      "DefaultWasteCollectionAcceptanceRuleService",
-      "DefaultWasteCollectionPointService",
-      "DefaultWasteCollectionPointTypeService",
-      "DefaultWasteCollectionPresetService",
-      "DefaultWasteComplianceEvidenceService",
-      "DefaultWasteComplianceProfileService",
-      "DefaultWasteConditionGradeService",
-      "DefaultWasteCouponRedemptionSettlementPolicyService",
-      "DefaultWasteEvidencePolicyService",
-      "DefaultWasteEvidenceService",
-      "DefaultWasteFamilyService",
-      "DefaultWasteImpactMetricService",
-      "DefaultWasteImpactProfileService",
-      "DefaultWasteImpactResultService",
-      "DefaultWasteImpactSelectionService",
-      "DefaultWasteItemTypeService",
-      "DefaultWasteLifecyclePolicyService",
-      "DefaultWasteMarketplaceEligibilityPolicyService",
-      "DefaultWasteMaterialTypeService",
-      "DefaultWasteMetadataSuggestionService",
-      "DefaultWasteMovementService",
-      "DefaultWasteReceiptPolicyService",
-      "DefaultWasteReceiptService",
-      "DefaultWasteRewardSettlementPolicyService",
-      "DefaultWasteSubmissionService",
-      "DefaultWasteVerificationPolicyService",
-      "DefaultWasteVerificationService",
-      "DefaultWorkflow2SchemaService",
-    ],
-  },
-  activeModules: {
-    groups: [],
-    modules: [
-      "circa.ewaste",
-      "nodics.kickoff",
-      "kickoffCore",
-      "kickoffApi",
-      "kickoffInt",
-      "kickoffLocal",
-      "wasteServer",
-    ].concat(wasteRuntimeModules),
+  "openAiProvider"
+],
   },
   runtimeRole: { code: "WASTE", publication: "OPERATIONAL" },
   runtimeAuthorityContexts: { modules: { waste: "waste.operational" } },
@@ -135,8 +102,7 @@ module.exports = {
     categories: {
       eWasteCustomer: { enabled: true },
       circaCustomer: { enabled: true },
-      serviceRegistry: { enabled: true },
-      schemaWorkbench: { enabled: true },
+
       dataImport: { enabled: true },
       wasteInternal: { enabled: true },
     },
@@ -201,18 +167,11 @@ module.exports = {
     },
   },
   copilot: {
-    conversation: {
-      storage: "GENERATED_SERVICE",
-      allowVolatileLocalStorage: false,
-    },
     knowledge: {
       ingestion: { enabled: true, indexTenant: "default" },
       retrieval: { enabled: true },
       repositoryRoots: {
-        "circa-help": require("node:path").resolve(
-          __dirname,
-          "../../../../modules/circa.ewaste/docs/customer-knowledge",
-        ),
+        "circa-help": {"$config":"path","base":"project","relative":"modules/circa.ewaste/docs/customer-knowledge"},
       },
       sourceRegistry: {
         definitions: [
@@ -228,7 +187,7 @@ module.exports = {
             classification: "CUSTOMER",
             paths: ["v1/journey.md"],
             allowedExtensions: [".md"],
-            allowedChannels: ["NEXUS_CUSTOMER"],
+            allowedChannels: ["CUSTOMER"],
             tenantScopes: ["default"],
             enterpriseScopes: ["default"],
             customerProjectScopes: ["circa.ewaste"],
@@ -249,15 +208,14 @@ module.exports = {
             mode: "SECRET_REFERENCE",
             secretRef: "env:OPENAI_EWASTE_API_KEY",
           },
-          model: { name: "gpt-5.6-luna", store: false },
+          model: { name: "gpt-5.6-luna" },
           generation: { reasoningEffort: "none" },
           connection: { timeoutMs: 60000 },
         },
         ollama: {
           enabled: true,
-          model: { name: "gemma3:4b", contextWindow: 4096 },
+          model: { name: "gemma3:4b" },
           generation: { numPredict: 1200 },
-          connection: { timeoutMs: 120000 },
         },
       },
       profiles: {

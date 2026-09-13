@@ -122,6 +122,7 @@ async function main() {
       defaultEnvironment: "kickoffDockerLocal",
       defaultServer: server,
     });
+    assert.equal(NODICS.isModuleActive("kickoffAdministration"), server === "platformServer", "Shared administration defaults must be scoped to Platform");
     assert.equal(NODICS.getSelectedEnvironmentName(), "kickoffDockerLocal");
     assert.equal(NODICS.getServerName(), server);
     assert.equal(
@@ -145,6 +146,9 @@ async function main() {
     }
     if (server === "commerceServer" || server === "commerceStagedServer") {
       assert.equal(NODICS.isModuleActive("nodics.discovery"), true);
+      for (const moduleName of ["store", "cart", "shoppingList"]) assert.equal(NODICS.isModuleActive(moduleName), true);
+      assert.equal(CONFIG.get("cart").customerApi.defaultStoreCode, undefined);
+      assert.equal(CONFIG.get("shoppingList").customerApi.defaultStoreCode, undefined);
       assert.equal(
         CONFIG.get("search").discoveryProjection.options.enabled,
         true,

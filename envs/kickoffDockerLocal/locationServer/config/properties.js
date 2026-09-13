@@ -9,17 +9,296 @@
 
  */
 
-/**
- * @module locationServer/config/properties
- * @description Defines isolated local Location coordinates and runtime configuration.
- * @layer environment-server-config
- * @owner nodics.kickoff
- * @override Customer deployments provide their own location server database, provider, and endpoint configuration.
- */
-const capabilities = {
-  activeModules: {
-    groups: [],
-    modules: [
+/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
+"use strict";
+
+/** @description Declares locationServer composition and isolated deployment overrides. @layer config @owner nodics.kickoff */
+module.exports = {
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "URI": {
+            "$config": "env",
+            "name": "NODICS_MONGODB_URI"
+          },
+          "databaseName": "kickoffDockerLocalLocation"
+        }
+      }
+    },
+    "locationCore": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "locationType": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "locationMap": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "locationSearch": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "locationDraft": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "locationApproval": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "locationProjection": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    }
+  },
+  "servers": {
+    "platform": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "platform"
+      ]
+    },
+    "platformServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "platformServer"
+      ]
+    },
+    "profile": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "profile"
+      ]
+    },
+    "backoffice": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "backoffice"
+      ]
+    },
+    "wcmsStaged": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsStaged"
+      ]
+    },
+    "wcmsStagedServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsStagedServer"
+      ]
+    },
+    "cmsStaged": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "cmsStaged"
+      ]
+    },
+    "wcmsOnline": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsOnline"
+      ]
+    },
+    "wcmsOnlineServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsOnlineServer"
+      ]
+    },
+    "cmsOnline": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "cmsOnline"
+      ]
+    },
+    "process": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "process"
+      ]
+    },
+    "processServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "processServer"
+      ]
+    },
+    "commerce": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerce"
+      ]
+    },
+    "commerceServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerceServer"
+      ]
+    },
+    "commerceStaged": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerceStaged"
+      ]
+    },
+    "commerceStagedServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerceStagedServer"
+      ]
+    },
+    "engagement": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "engagement"
+      ]
+    },
+    "engagementServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "engagementServer"
+      ]
+    },
+    "loyalty": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "loyalty"
+      ]
+    },
+    "loyaltyServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "loyaltyServer"
+      ]
+    },
+    "waste": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "waste"
+      ]
+    },
+    "wasteServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wasteServer"
+      ]
+    },
+    "wcms": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcms"
+      ]
+    },
+    "default": {
+      "endpoint": {
+        "httpHost": "0.0.0.0",
+        "httpPort": 4380,
+        "httpsHost": "0.0.0.0",
+        "httpsPort": 4381
+      },
+      "abstractEndpoint": {
+        "httpHost": "location",
+        "httpPort": 4380,
+        "httpsHost": "location",
+        "httpsPort": 4381
+      }
+    }
+  },
+  "search": {
+    "discoveryProjection": {
+      "options": {
+        "enabled": true,
+        "fallback": false,
+        "engine": "elastic"
+      },
+      "elastic": {
+        "connection": {
+          "hosts": [
+            {
+              "$config": "env",
+              "name": "NODICS_ELASTICSEARCH_URL",
+              "fallback": "http://elasticsearch:9200"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "activeModules": {
+    "groups": [],
+    "modules": [
       "circa.ewaste",
       "nodics.kickoff",
       "kickoffCore",
@@ -35,199 +314,114 @@ const capabilities = {
       "locationDraft",
       "locationApproval",
       "locationProjection",
+      "redisCache"
+    ]
+  },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "locationCore": "location.operational",
+      "locationType": "location.operational",
+      "locationMap": "location.operational",
+      "locationSearch": "location.operational",
+      "locationDraft": "location.operational",
+      "locationApproval": "location.operational",
+      "locationProjection": "location.operational"
+    }
+  },
+  "runtimeRole": {
+    "code": "LOCATION",
+    "publication": "OPERATIONAL"
+  },
+  "apiExposure": {
+    "categories": {
+      "serviceRegistry": {
+        "enabled": true
+      },
+      "schemaApi": {
+        "enabled": true
+      },
+      "dataImport": {
+        "enabled": true
+      },
+      "locationInternal": {
+        "enabled": true
+      }
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffDockerLocal"
     ],
-  },
-  runtimeRole: { code: "LOCATION", publication: "OPERATIONAL" },
-  runtimeAuthorityContexts: {
-    modules: {
-      locationCore: "location.operational",
-      locationType: "location.operational",
-      locationMap: "location.operational",
-      locationSearch: "location.operational",
-      locationDraft: "location.operational",
-      locationApproval: "location.operational",
-      locationProjection: "location.operational",
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
+      "DefaultLocationMapProviderConfigurationService"
+    ],
+    "modules": {
+      "import": true,
+      "locationCore": true,
+      "locationDraft": true,
+      "locationMap": true,
+      "locationProjection": true,
+      "locationSearch": true,
+      "locationType": true,
+      "system": true,
+      "token": true,
+      "validator": true
     },
-  },
-  apiExposure: {
-    categories: {
-      serviceRegistry: { enabled: true },
-      schemaWorkbench: { enabled: true },
-      dataImport: { enabled: true },
-      locationInternal: { enabled: true },
-    },
-  },
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffDockerLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: ["DefaultLocationMapProviderConfigurationService"],
-    serviceNames: [
-      "DefaultLocationMapProviderService",
-      "DefaultLocationMapUsageService",
-      "DefaultLocationMapStylePresetService",
-      "DefaultLocationMapControlPresetService",
-      "DefaultLocationMapProviderConfigurationService",
-      "DefaultLocationMapLayerService",
-      "DefaultLocationService",
-      "DefaultLocationTypeService",
-      "DefaultLocationCategoryService",
-      "DefaultLocationCapabilityService",
-      "DefaultLocationSearchProjectionService",
-      "DefaultLocationDraftService",
+    "serviceNames": [
       "DefaultLocationApprovalService",
-      "DefaultLocationMarkerProjectionService",
-      "DefaultConfigurationService",
-      "DefaultDataInstallationService",
       "DefaultEmsFailedMessagesService",
-      "DefaultEventListenerService",
-      "DefaultImportDefinitionService",
-      "DefaultImportRunService",
       "DefaultIndexService",
       "DefaultIndexerLogService",
       "DefaultIndexerService",
-      "DefaultInterceptorService",
       "DefaultSearchService",
-      "DefaultTokenService",
-      "DefaultValidatorService",
-      "DefaultWorkflow2SchemaService",
-    ],
+      "DefaultWorkflow2SchemaService"
+    ]
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL_PRODUCTION_SIMULATION",
-      allowedDestinationRoles: ["LOCATION"],
-      contributions: [
-        { moduleName: "wasteCollection", sections: ["sample-locations"] },
+  "data": {
+    "dataReleases": {
+      "lifecycleMetadataRequired": true,
+      "destinationEnforced": true,
+      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
+      "allowedDestinationRoles": [
+        "LOCATION"
       ],
-      initializationProfiles: {
-        localLocationFoundation: {
-          enabled: true,
-          label: "Local Location foundation",
-          description:
-            "Install Location reference releases for type registry, semantic places, map layers, nearby search, drafts, approval, and marker projections.",
-          completionMessage:
-            "The Local Location foundation is ready. Operators can validate reusable places, map views, search projections, and draft approval flows.",
-          steps: [{ dataType: "init" }, { dataType: "core" }],
-        },
-      },
-    },
+      "contributions": [
+        {
+          "moduleName": "wasteCollection",
+          "sections": [
+            "sample-locations"
+          ]
+        }
+      ],
+      "initializationProfiles": {
+        "localLocationFoundation": {
+          "enabled": true,
+          "label": "Local Location foundation",
+          "description": "Install Location reference releases for type registry, semantic places, map layers, nearby search, drafts, approval, and marker projections.",
+          "completionMessage": "The Local Location foundation is ready. Operators can validate reusable places, map views, search projections, and draft approval flows.",
+          "steps": [
+            {
+              "dataType": "init"
+            },
+            {
+              "dataType": "core"
+            }
+          ]
+        }
+      }
+    }
   },
-  location: {
-    capabilities: {
-      semanticPlace: true,
-      typeRegistry: true,
-      mapLayers: true,
-      nearbySearch: true,
-      draftCapture: true,
-      approval: true,
-      markerProjection: true,
-    },
-  },
-  database: {
-    default: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationCore: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationType: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationMap: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationSearch: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationDraft: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationApproval: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-    locationProjection: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalLocation" } },
-    },
-  },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4380,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4381,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4380,
-        httpsHost: "localhost",
-        httpsPort: 4381,
-      },
-    },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    process: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-    },
-    commerce: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4350,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4351,
-      },
-    },
-    waste: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4370,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4371,
-      },
-    },
-  },
-};
-
-const runtime = require("../../config/runtime-properties")("locationServer");
-module.exports = {
-  ...runtime,
-  ...capabilities,
-  activeModules: {
-    ...capabilities.activeModules,
-    modules: [
-      ...new Set([...capabilities.activeModules.modules, "redisCache"]),
-    ],
-  },
-  database: Object.fromEntries(
-    Object.keys(capabilities.database).map((name) => [
-      name,
-      runtime.database.default,
-    ]),
-  ),
-  servers: runtime.servers,
-  search: runtime.search,
+  "location": {
+    "capabilities": {
+      "semanticPlace": true,
+      "typeRegistry": true,
+      "mapLayers": true,
+      "nearbySearch": true,
+      "draftCapture": true,
+      "approval": true,
+      "markerProjection": true
+    }
+  }
 };

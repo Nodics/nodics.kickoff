@@ -26,7 +26,10 @@
     },
     "extends": [
       "telco"
-    ]
+    ],
+    "applicationBuilder": {
+      "dataPack": true
+    }
   },
   "scripts": {}
 }

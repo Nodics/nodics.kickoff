@@ -12,12 +12,14 @@
 'use strict';
 
 const assert = require('assert');
+const { merge } = require('./helpers/configuration');
+const administration = require('../modules/kickoffAdministration/config/properties');
 
 const localProperties = require('../envs/kickoffLocal/platformServer/config/properties');
-const dockerLocalProperties = require('../envs/kickoffDockerLocal/config/runtime-properties')('platformServer');
+const dockerLocalProperties = require('./helpers/configuration').loadRuntime('platformServer', 'kickoffDockerLocal');
 
 function communicationPackages(properties) {
-    return properties.backofficeFunctionalModuleActivationData.modules['nodics.communication'].dataPackages;
+    return merge({}, administration, properties).backofficeFunctionalModuleActivationData.modules['nodics.communication'].dataPackages;
 }
 
 [localProperties, dockerLocalProperties].forEach(properties => {

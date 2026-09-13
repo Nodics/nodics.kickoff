@@ -9,6 +9,7 @@
   "environmentFile": "docker.env",
   "composition": {
     "agora": {
+      "environmentVariable": "NODICS_AGORA_DOMAINS",
       "selection": "all",
       "domains": [
         {
@@ -45,7 +46,9 @@
           "code": "telco",
           "frameworkGroup": "telco",
           "projectPack": "agora.telco",
-          "impliedProductSearchContributorDomains": ["electronics"],
+          "impliedProductSearchContributorDomains": [
+            "electronics"
+          ],
           "productSearchContributor": {
             "serviceName": "DefaultTelcoProductSearchEnrichmentService",
             "required": true
@@ -63,6 +66,10 @@
           "module": "domainCommerceCore",
           "minSelectedDomains": 2
         }
+      ],
+      "emptySelections": [
+        "none",
+        "commerce"
       ]
     }
   },
@@ -71,12 +78,40 @@
   "redisPrimaryHost": "redis-primary",
   "bootstrapAdminPassword": "NodicsLocal@2026",
   "hostPorts": [
-    4100, 4200, 6300, 6400, 6500, 6600, 5300, 5312, 5314, 5330, 5340, 5350,
-    5352, 5360, 5370, 5380
+    4100,
+    4200,
+    6300,
+    6400,
+    6500,
+    6600,
+    5300,
+    5312,
+    5314,
+    5330,
+    5340,
+    5350,
+    5352,
+    5360,
+    5370,
+    5380
   ],
   "nativeIsolationPorts": [
-    3100, 3200, 3300, 3400, 3500, 3600, 4300, 4312, 4314, 4330, 4340, 4350,
-    4352, 4360, 4370, 4380
+    3100,
+    3200,
+    3300,
+    3400,
+    3500,
+    3600,
+    4300,
+    4312,
+    4314,
+    4330,
+    4340,
+    4350,
+    4352,
+    4360,
+    4370,
+    4380
   ],
   "resilience": {
     "backupDirectory": "envs/kickoffDockerLocal/generated/backups",
@@ -94,6 +129,12 @@
   "acceptance": {
     "platformCommand": "acceptance:local",
     "commerceCommand": "acceptance:agora-commerce",
+    "commerceDataCommand": "acceptance:agora-commerce-data",
+    "commercePublicationCommand": "acceptance:agora-commerce-publication",
+    "environmentUrls": {
+      "NEXUS_CMS_URL": "wcmsOnline",
+      "NEXUS_URL": "nexus"
+    },
     "urls": {
       "axis": "http://127.0.0.1:4100",
       "nexus": "http://127.0.0.1:4200",
@@ -118,7 +159,16 @@
     "environmentContract": "test/dockerLocalEnvironmentContract.test.mjs",
     "runtimePrepare": "test/dockerLocalRuntimePrepare.test.js",
     "runtimePorts": [
-      5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380
+      5300,
+      5312,
+      5314,
+      5330,
+      5340,
+      5350,
+      5352,
+      5360,
+      5370,
+      5380
     ],
     "frontendUrls": [
       "http://127.0.0.1:4100/",
@@ -128,7 +178,10 @@
       "http://127.0.0.1:6500/",
       "http://127.0.0.1:6600/"
     ],
-    "readLoadPorts": [5314, 5300],
+    "readLoadPorts": [
+      5314,
+      5300
+    ],
     "readLoadRequests": 50,
     "containerPrefix": "nodics-kickoff-docker-local-",
     "containers": {
@@ -166,18 +219,41 @@
     "concurrency": 12,
     "requestIntervalMs": 1000,
     "readinessPorts": [
-      5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380
+      5300,
+      5312,
+      5314,
+      5330,
+      5340,
+      5350,
+      5352,
+      5360,
+      5370,
+      5380
     ],
     "acceptanceCommand": "docker-local:acceptance"
   },
   "resilienceQualification": {
     "acceptanceCommand": "docker-local:acceptance",
     "restoreConfirmationToken": "--confirm-replace-docker-local-data",
-    "readyPorts": [5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380],
+    "readyPorts": [
+      5300,
+      5312,
+      5314,
+      5330,
+      5340,
+      5350,
+      5352,
+      5360,
+      5370,
+      5380
+    ],
     "readLoad": {
       "total": 1000,
       "concurrency": 40,
-      "ports": [5314, 5300]
+      "ports": [
+        5314,
+        5300
+      ]
     },
     "containers": {
       "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",

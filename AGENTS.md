@@ -133,3 +133,27 @@ solve a customer-project problem by moving framework ownership into Kickoff.
   documentation generation, setup, or acceptance.
 - Do not hand-edit generated documentation data to fix source documentation.
   Update the owning `docs/` source, then regenerate the content pack.
+
+## Minimal configuration
+
+Inherit framework defaults and declare only intentional customer/deployment
+differences. Apply the resolved framework's
+`nSetup/llm/contracts/customer-config-classification-contract.md`. Read
+[the project configuration guide](docs/pages/configuration-inheritance.md).
+Shared administration descriptors belong in `kickoffAdministration`, selected
+only by Platform and ordered before deployment overlays. Foundation nTooling
+owns reusable command behavior; customer selectors and policy remain here.
+
+Application-specific acceptance and media seeding live under `scripts/acceptance`
+and are declared through `nodics.project.json` tooling commands and script
+ownership. Framework nTooling retains the shared executor and metadata resolvers.
+Keep deployment aliases and application publication identifiers in this project;
+never promote the reference journeys into universal framework defaults.
+
+
+Application Builder reference choices are declared in this project's
+`package.json` under `nodics.applicationBuilder`. The selected data modules opt
+in through their own package metadata. Use an explicit frontend root, or select
+`--frontend-code` when using an experience workspace with multiple storefronts.
+These choices describe intended reference wiring; generated starter checks do
+not replace Local/Docker deployment acceptance.

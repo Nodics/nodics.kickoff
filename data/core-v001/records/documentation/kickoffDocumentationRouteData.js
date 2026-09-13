@@ -98,6 +98,18 @@ module.exports = {
     "active": true
   },
   "record7": {
+    "code": "kickoffDocsRoutekickoffConfigurationInheritance",
+    "site": "kickoffDocumentationSite",
+    "path": "/docs/nodics-kickoff/kickoff-configuration-inheritance",
+    "locale": "en",
+    "channel": "web",
+    "page": "kickoffDocsPagekickoffConfigurationInheritance",
+    "routeType": "PAGE",
+    "deliveryState": "ONLINE",
+    "accessMode": "PUBLIC",
+    "active": true
+  },
+  "record8": {
     "code": "kickoffDocsRoutekickoffFunctionalJourneys",
     "site": "kickoffDocumentationSite",
     "path": "/docs/nodics-kickoff/kickoff-functional-journeys",

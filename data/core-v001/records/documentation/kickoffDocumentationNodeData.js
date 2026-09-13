@@ -60,7 +60,7 @@ module.exports = {
     "childJourneyLinks": [],
     "childStatusSummary": {
       "childCount": 5,
-      "pages": 8
+      "pages": 9
     },
     "nodeOrder": 10,
     "expandable": true,
@@ -372,7 +372,8 @@ module.exports = {
     "nodeContentArea": {
       "dashboard": "kickoffDocsDashboardSeccustomizeCustomerProjects",
       "pages": [
-        "kickoff.customization"
+        "kickoff.customization",
+        "kickoff.configuration-inheritance"
       ]
     },
     "nodeDashboard": "kickoffDocsDashboardSeccustomizeCustomerProjects",
@@ -382,6 +383,12 @@ module.exports = {
         "title": "Customer customization guide",
         "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
         "order": 10
+      },
+      {
+        "code": "kickoff.configuration-inheritance",
+        "title": "Keep Kickoff configuration small",
+        "summary": "Inherit framework defaults, share customer administration descriptors and keep deployment choices at their owners.",
+        "order": 11
       }
     ],
     "childJourneyLinks": [
@@ -389,11 +396,16 @@ module.exports = {
         "label": "Customer customization guide",
         "targetPage": "kickoff.customization",
         "route": "/docs/nodics-kickoff/kickoff-customization"
+      },
+      {
+        "label": "Keep Kickoff configuration small",
+        "targetPage": "kickoff.configuration-inheritance",
+        "route": "/docs/nodics-kickoff/kickoff-configuration-inheritance"
       }
     ],
     "childStatusSummary": {
-      "childCount": 1,
-      "pages": 1
+      "childCount": 2,
+      "pages": 2
     },
     "nodeOrder": 40,
     "expandable": true,
@@ -963,13 +975,81 @@ module.exports = {
     "relatedNodes": [
       "kickoffDocsNodePagekickoffOverview",
       "kickoffDocsNodePagekickoffLocalRuntime",
-      "kickoffDocsNodePagekickoffLocalAcceptance"
+      "kickoffDocsNodePagekickoffLocalAcceptance",
+      "kickoffDocsNodePagekickoffConfigurationInheritance"
     ],
     "locale": "en",
     "channel": "web",
     "active": true
   },
   "record13": {
+    "code": "kickoffDocsNodePagekickoffConfigurationInheritance",
+    "product": "kickoffDocumentationProduct",
+    "navigation": "kickoffDocumentationNavigationTree",
+    "parentNode": "kickoffDocsNodeSeccustomizeCustomerProjects",
+    "nodeLevel": "PAGE_LINK",
+    "nodeType": "PAGE",
+    "nodeTitle": "Keep Kickoff configuration small",
+    "nodeSummary": "Inherit framework defaults, share customer administration descriptors and keep deployment choices at their owners.",
+    "nodeContentArea": {
+      "route": "/docs/nodics-kickoff/kickoff-configuration-inheritance",
+      "documentType": "customization"
+    },
+    "childSummaryCards": [],
+    "childJourneyLinks": [],
+    "childStatusSummary": {
+      "childCount": 0
+    },
+    "targetDocumentationPage": "kickoffDocsMetadatakickoffConfigurationInheritance",
+    "targetPage": "kickoffDocsPagekickoffConfigurationInheritance",
+    "targetRoute": "kickoffDocsRoutekickoffConfigurationInheritance",
+    "nodeOrder": 11,
+    "expandable": false,
+    "expandedByDefault": false,
+    "nodeIcon": "file-text",
+    "nodeAudience": [
+      "business-user",
+      "administrator",
+      "architect",
+      "developer",
+      "operator",
+      "qa",
+      "ai-tool"
+    ],
+    "accessPolicy": "kickoffDocsAccessPublic",
+    "accessMode": "PUBLIC",
+    "allowedRoles": [],
+    "allowedGroups": [],
+    "allowedPermissions": [],
+    "managedInAxis": true,
+    "axisAuthoringPermissions": [
+      "documentation.navigation.update"
+    ],
+    "workflowRequired": true,
+    "workflowTriggers": [
+      "NAVIGATION_CHANGE",
+      "DASHBOARD_CHANGE",
+      "ACCESS_POLICY_CHANGE"
+    ],
+    "lifecycleState": "ONLINE",
+    "maturityState": "IMPLEMENTED",
+    "searchKeywords": [
+      "configuration",
+      "inheritance",
+      "defaults",
+      "administration",
+      "environment",
+      "server"
+    ],
+    "relatedNodes": [
+      "kickoffDocsNodePagekickoffCustomization",
+      "kickoffDocsNodePagekickoffLocalRuntime"
+    ],
+    "locale": "en",
+    "channel": "web",
+    "active": true
+  },
+  "record14": {
     "code": "kickoffDocsNodePagekickoffFunctionalJourneys",
     "product": "kickoffDocumentationProduct",
     "navigation": "kickoffDocumentationNavigationTree",

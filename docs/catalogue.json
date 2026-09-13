@@ -137,8 +137,17 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["business-user", "administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/project-overview.md",
       "visibility": "public",
@@ -164,8 +173,16 @@
         "customer project",
         "documentation"
       ],
-      "topicKeywords": ["ownership", "project boundary", "local adoption"],
-      "visualRequirements": ["architecture-diagram", "table", "code-example"]
+      "topicKeywords": [
+        "ownership",
+        "project boundary",
+        "local adoption"
+      ],
+      "visualRequirements": [
+        "architecture-diagram",
+        "table",
+        "code-example"
+      ]
     },
     {
       "id": "kickoff.local-runtime",
@@ -198,8 +215,16 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-runtime.md",
       "visibility": "public",
@@ -219,7 +244,12 @@
         "nodics.project.json",
         "package.json"
       ],
-      "searchKeywords": ["local runtime", "topology", "start", "servers"],
+      "searchKeywords": [
+        "local runtime",
+        "topology",
+        "start",
+        "servers"
+      ],
       "topicKeywords": [
         "platform",
         "wcms",
@@ -228,7 +258,10 @@
         "nexus",
         "agora"
       ],
-      "visualRequirements": ["troubleshooting-matrix", "command-example"]
+      "visualRequirements": [
+        "troubleshooting-matrix",
+        "command-example"
+      ]
     },
     {
       "id": "kickoff.local-setup-to-live",
@@ -261,8 +294,17 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["business-user", "administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
       "visibility": "public",
@@ -335,8 +377,17 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["business-user", "administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-acceptance-checklist.md",
       "visibility": "public",
@@ -406,8 +457,17 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["business-user", "administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/local-publishing-operations.md",
       "visibility": "public",
@@ -426,9 +486,22 @@
         "package.json",
         "nodics.project.json"
       ],
-      "searchKeywords": ["publishing", "staged", "online", "recovery"],
-      "topicKeywords": ["nPublish", "WCMS", "Process", "rollback"],
-      "visualRequirements": ["troubleshooting-matrix", "code-example"]
+      "searchKeywords": [
+        "publishing",
+        "staged",
+        "online",
+        "recovery"
+      ],
+      "topicKeywords": [
+        "nPublish",
+        "WCMS",
+        "Process",
+        "rollback"
+      ],
+      "visualRequirements": [
+        "troubleshooting-matrix",
+        "code-example"
+      ]
     },
     {
       "id": "kickoff.deployment-qualification",
@@ -461,8 +534,16 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/deployment-qualification.md",
       "visibility": "public",
@@ -487,7 +568,12 @@
         "evidence",
         "production"
       ],
-      "topicKeywords": ["security", "resilience", "load", "provider"],
+      "topicKeywords": [
+        "security",
+        "resilience",
+        "load",
+        "provider"
+      ],
       "visualRequirements": [
         "diagram",
         "troubleshooting-matrix",
@@ -525,7 +611,10 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["business-user", "administrator"],
+      "businessAudience": [
+        "business-user",
+        "administrator"
+      ],
       "technicalAudience": [
         "architect",
         "developer",
@@ -545,7 +634,8 @@
       "relatedPages": [
         "kickoff.overview",
         "kickoff.local-runtime",
-        "kickoff.local-acceptance"
+        "kickoff.local-acceptance",
+        "kickoff.configuration-inheritance"
       ],
       "sourceEvidence": [
         "docs/pages/customization-guide.md",
@@ -564,7 +654,93 @@
         "generated docs",
         "customer layer"
       ],
-      "visualRequirements": ["diagram", "comparison-table", "code-example"]
+      "visualRequirements": [
+        "diagram",
+        "comparison-table",
+        "code-example"
+      ]
+    },
+    {
+      "id": "kickoff.configuration-inheritance",
+      "title": "Keep Kickoff configuration small",
+      "summary": "Inherit framework defaults, share customer administration descriptors and keep deployment choices at their owners.",
+      "functionalModule": "nodics.kickoff",
+      "technicalModule": "modules",
+      "content": "docs/pages/configuration-inheritance.md",
+      "slug": "kickoff-configuration-inheritance",
+      "parentId": "customize-customer-projects",
+      "hierarchyPath": [
+        "Nodics Kickoff",
+        "Customize Customer Projects",
+        "Keep Kickoff configuration small"
+      ],
+      "hierarchyDepth": 3,
+      "navigationSection": "Customize Customer Projects",
+      "navigationSectionCode": "customize-customer-projects",
+      "navigationGroup": "Project Customization",
+      "navigationGroupCode": "project-customization",
+      "navigationGroupOrder": 10,
+      "navigationOrder": 11,
+      "documentType": "customization",
+      "audience": [
+        "business-user",
+        "administrator",
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "businessAudience": [
+        "business-user",
+        "administrator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "operator",
+        "qa",
+        "ai-tool"
+      ],
+      "sourceOwner": "nodics.kickoff",
+      "sourcePath": "docs/pages/configuration-inheritance.md",
+      "visibility": "public",
+      "accessMode": "PUBLIC",
+      "publiclyAvailable": true,
+      "requiresAuthentication": false,
+      "lifecycleState": "ONLINE",
+      "maturityState": "operational",
+      "implementationState": "current",
+      "relatedPages": [
+        "kickoff.customization",
+        "kickoff.local-runtime"
+      ],
+      "sourceEvidence": [
+        "docs/pages/configuration-inheritance.md",
+        "modules/kickoffAdministration/config/properties.js",
+        "modules/kickoffAdministration/package.json",
+        "envs/kickoffLocal/platformServer/config/properties.js",
+        "envs/kickoffDockerLocal/platformServer/config/properties.js",
+        "test/configurationInheritanceContract.test.js"
+      ],
+      "searchKeywords": [
+        "configuration",
+        "inheritance",
+        "defaults",
+        "administration",
+        "environment",
+        "server"
+      ],
+      "topicKeywords": [
+        "ownership",
+        "minimal configuration",
+        "deployment overrides"
+      ],
+      "visualRequirements": [
+        "diagram",
+        "comparison-table",
+        "code-example"
+      ]
     },
     {
       "id": "kickoff.functional-journeys",
@@ -597,8 +773,17 @@
         "qa",
         "ai-tool"
       ],
-      "businessAudience": ["business-user", "administrator", "operator"],
-      "technicalAudience": ["architect", "developer", "qa", "ai-tool"],
+      "businessAudience": [
+        "business-user",
+        "administrator",
+        "operator"
+      ],
+      "technicalAudience": [
+        "architect",
+        "developer",
+        "qa",
+        "ai-tool"
+      ],
       "sourceOwner": "nodics.kickoff",
       "sourcePath": "docs/pages/functional-journeys.md",
       "visibility": "public",
@@ -624,8 +809,32 @@
         "customer journey",
         "provider"
       ],
-      "topicKeywords": ["checkout", "orders", "reviews", "contact", "privacy"],
-      "visualRequirements": ["table"]
+      "topicKeywords": [
+        "checkout",
+        "orders",
+        "reviews",
+        "contact",
+        "privacy"
+      ],
+      "visualRequirements": [
+        "table"
+      ]
     }
-  ]
+  ],
+  "publication": {
+    "recordPrefix": "kickoffDocumentation",
+    "codePrefix": "kickoffDocs",
+    "sectionCode": "nodics-kickoff",
+    "owningDomain": "kickoff.documentation",
+    "keyword": "kickoff",
+    "routeRoot": "/docs/nodics-kickoff",
+    "publicRootPath": "/docs/kickoff",
+    "label": "Nodics Kickoff",
+    "shortLabel": "Kickoff",
+    "channels": [
+      "axis",
+      "nexus",
+      "web"
+    ]
+  }
 }

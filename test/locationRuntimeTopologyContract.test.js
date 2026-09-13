@@ -10,7 +10,7 @@ const runtime = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'location
 const platformRuntime = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'platformServer', 'config', 'properties.js'));
 const serverPackage = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'locationServer', 'package.json'));
 
-assert.match(packageJson.scripts['start:location'], /nodics-project\.js project:run start:location/);
+assert.match(packageJson.scripts['start:location'], /nodics project:run start:location/);
 assert.strictEqual(serverPackage.name, 'locationServer');
 assert.deepStrictEqual(serverPackage.nodics.extends, ['nodics.location']);
 assert.deepStrictEqual(serverPackage.nodics.runtimeModuleRoots, ['nodics.location', 'nodics.waste']);
@@ -28,7 +28,8 @@ assert.strictEqual(locationResetProvider.targetAuthority.runtimeRole.code, 'LOCA
 
 assert.strictEqual(runtime.runtimeRole.code, 'LOCATION');
 assert.strictEqual(runtime.runtimeRole.publication, 'OPERATIONAL');
-assert.strictEqual(runtime.apiExposure.categories.schemaWorkbench.enabled, true);
+const routerDefaults = require(path.join(projectRoot, '../nodics.ai/nodics.foundation/modules/nRouter/config/properties.js'));
+assert.strictEqual((runtime.apiExposure.categories.schemaApi || routerDefaults.apiExposure.categories.schemaApi).enabled, true);
 assert.deepStrictEqual(runtime.data.dataReleases.allowedDestinationRoles, ['LOCATION']);
 assert.deepStrictEqual(runtime.data.dataReleases.contributions, [
     { moduleName: 'wasteCollection', sections: ['sample-locations'] }

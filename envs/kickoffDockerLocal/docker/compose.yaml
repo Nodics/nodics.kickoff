@@ -167,7 +167,7 @@ services:
 
   platform:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:platform"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:platform"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -194,7 +194,7 @@ services:
 
   wcms-online:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:wcms:online"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:wcms:online"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -231,7 +231,7 @@ services:
 
   process:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:process"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:process"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -266,7 +266,7 @@ services:
 
   wcms-staged:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:wcms:staged"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:wcms:staged"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -304,7 +304,7 @@ services:
 
   engagement:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:engagement"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:engagement"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -339,7 +339,7 @@ services:
 
   loyalty:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:loyalty"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:loyalty"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -374,7 +374,7 @@ services:
 
   commerce:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:commerce"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:commerce"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -410,7 +410,7 @@ services:
   commerce-staged:
     <<: *backend
     command:
-      ["scripts/nodics-project.js", "project:run", "start:commerce:staged"]
+      ["node_modules/.bin/nodics", "project:run", "start:commerce:staged"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -510,7 +510,7 @@ services:
 
   waste:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:waste"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:waste"]
     environment:
       {
         ENV: kickoffDockerLocal,
@@ -546,7 +546,7 @@ services:
 
   location:
     <<: *backend
-    command: ["scripts/nodics-project.js", "project:run", "start:location"]
+    command: ["node_modules/.bin/nodics", "project:run", "start:location"]
     environment:
       {
         ENV: kickoffDockerLocal,

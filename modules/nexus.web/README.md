@@ -65,3 +65,10 @@ WCMS owns their copy, conceptual flow labels, use cases, proposed scope, outcome
 and engagement stages. The Nexus frontend supplies the allowlisted visual
 renderer. These entries describe directions for discovery and do not represent
 qualified packaged applications or production deployments.
+
+
+This module explicitly participates in Application Builder through
+`nodics.applicationBuilder.dataPack: true` in its package metadata. The owning
+customer project declares frontend, domain and preset choices. Preserve the
+module's existing import-manifest and content ownership rules; Builder metadata
+does not import, publish or validate this module's live data.

@@ -12,36 +12,78 @@
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 "use strict";
 
-/** @module kickoffDockerLocal/config/properties @description Defines environment-wide Docker Local isolation and security policy. */
+/** @description Declares Docker environment policy and shared endpoint coordinates for nConfig layering. @layer config @owner nodics.kickoff */
 module.exports = {
-  environment: {
-    code: "kickoffDockerLocal",
-    qualificationClass: "LOCAL_PRODUCTION_SIMULATION",
+  "environment": {
+    "code": "kickoffDockerLocal",
+    "qualificationClass": "LOCAL_PRODUCTION_SIMULATION"
   },
-  log: { level: process.env.NODICS_LOG_LEVEL || "info" },
-  event: { remotePublishEnabled: false },
-  authSecurity: { apiKey: { pepper: process.env.AUTH_API_KEY_PEPPER } },
-  defaultAuthDetail: {
-    tenant: "default",
-    entCode: "default",
-    loginId: "apiAdmin",
-    apiKey: process.env.BOOTSTRAP_SERVICE_API_KEY,
+  "log": {
+    "level": {
+      "$config": "env",
+      "name": "NODICS_LOG_LEVEL",
+      "fallback": "info"
+    }
   },
-  bootstrapIdentity: {
-    source: "environment",
-    adminPassword: process.env.BOOTSTRAP_ADMIN_PASSWORD,
-    servicePassword: process.env.BOOTSTRAP_SERVICE_PASSWORD,
-    serviceApiKey: process.env.BOOTSTRAP_SERVICE_API_KEY,
+  "event": {
+    "remotePublishEnabled": false
   },
-  httpHardening: {
-    securityHeaders: {
-      headers: {
-        "Cross-Origin-Resource-Policy": "cross-origin",
-      },
+  "authSecurity": {
+    "jwt": {
+      "secret": {
+        "$config": "env",
+        "name": "AUTH_JWT_SECRET"
+      }
     },
-    cors: {
-      enabled: true,
-      allowedOrigins: [
+    "apiKey": {
+      "pepper": {
+        "$config": "env",
+        "name": "AUTH_API_KEY_PEPPER"
+      }
+    },
+    "securityStamp": {
+      "enabled": true,
+      "failClosed": true,
+      "allowMissingStamp": false,
+      "cacheModuleName": "kickoffCore"
+    },
+    "refreshToken": {
+      "requireDistributedCache": true
+    }
+  },
+  "defaultAuthDetail": {
+    "tenant": "default",
+    "entCode": "default",
+    "loginId": "apiAdmin",
+    "apiKey": {
+      "$config": "env",
+      "name": "BOOTSTRAP_SERVICE_API_KEY"
+    }
+  },
+  "bootstrapIdentity": {
+    "source": "environment",
+    "adminPassword": {
+      "$config": "env",
+      "name": "BOOTSTRAP_ADMIN_PASSWORD"
+    },
+    "servicePassword": {
+      "$config": "env",
+      "name": "BOOTSTRAP_SERVICE_PASSWORD"
+    },
+    "serviceApiKey": {
+      "$config": "env",
+      "name": "BOOTSTRAP_SERVICE_API_KEY"
+    }
+  },
+  "httpHardening": {
+    "securityHeaders": {
+      "headers": {
+        "Cross-Origin-Resource-Policy": "cross-origin"
+      }
+    },
+    "cors": {
+      "enabled": true,
+      "allowedOrigins": [
         "http://localhost:4100",
         "http://127.0.0.1:4100",
         "http://localhost:4200",
@@ -53,10 +95,17 @@ module.exports = {
         "http://localhost:6500",
         "http://127.0.0.1:6500",
         "http://localhost:6600",
-        "http://127.0.0.1:6600",
+        "http://127.0.0.1:6600"
       ],
-      allowedMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-      allowedHeaders: [
+      "allowedMethods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "allowedHeaders": [
         "Content-Type",
         "Authorization",
         "Idempotency-Key",
@@ -68,34 +117,481 @@ module.exports = {
         "X-Tenant-Code",
         "Tenant",
         "X-Nodics-Enterprise",
-        "X-Nodics-Tenant",
+        "X-Nodics-Tenant"
       ],
-      exposedHeaders: [
+      "exposedHeaders": [
         "Retry-After",
         "X-Request-Id",
         "X-Correlation-Id",
         "X-RateLimit-Limit",
         "X-RateLimit-Remaining",
         "X-RateLimit-Reset",
-        "ETag",
+        "ETag"
       ],
-      allowCredentials: true,
-      maxAge: 600,
-    },
+      "allowCredentials": true
+    }
   },
-  data: {
-    dataReleases: {
-      types: { sample: { enabled: true, operatorExecution: true } },
-    },
+  "data": {
+    "dataReleases": {
+      "types": {
+        "sample": {
+          "enabled": true,
+          "operatorExecution": true
+        }
+      }
+    }
   },
-  database: {
-    default: {
-      mongodb: {
-        master: {
-          URI: process.env.NODICS_MONGODB_URI,
-          databaseName: process.env.NODICS_DATABASE_NAME,
-        },
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "URI": {
+            "$config": "env",
+            "name": "NODICS_MONGODB_URI"
+          },
+          "databaseName": {
+            "$config": "env",
+            "name": "NODICS_DATABASE_NAME"
+          }
+        }
+      }
+    }
+  },
+  "agoraDomains": {
+    "$config": "composition",
+    "name": "agora"
+  },
+  "cache": {
+    "enabled": true,
+    "invalidation": {
+      "crossNode": true
+    },
+    "kickoffCore": {
+      "channels": {
+        "auth": {
+          "enabled": true,
+          "engine": "redis",
+          "fallback": false
+        }
       },
-    },
+      "engines": {
+        "redis": {
+          "enabled": true,
+          "distributed": true,
+          "atomicConsume": true,
+          "options": {
+            "url": {
+              "$config": "env",
+              "name": "REDIS_URL"
+            },
+            "host": null,
+            "port": null,
+            "database": 0,
+            "prefix": "kickoffCore",
+            "password": {
+              "$config": "env",
+              "name": "REDIS_PASSWORD"
+            },
+            "sentinel": {
+              "enabled": true,
+              "name": "nodics",
+              "password": {
+                "$config": "env",
+                "name": "REDIS_PASSWORD"
+              },
+              "endpoints": [
+                {
+                  "host": "redis-sentinel",
+                  "port": 26379
+                }
+              ],
+              "connectTimeout": 5000,
+              "commandTimeout": 3000,
+              "retryDelayMs": 250,
+              "maximumRetryDelayMs": 5000
+            }
+          }
+        }
+      }
+    }
   },
+  "configurationValues": {
+    "remoteEndpoints": {
+      "platform": {
+        "endpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "abstractEndpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "remoteOnly": true
+      },
+      "platformServer": {
+        "endpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "abstractEndpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "remoteOnly": true
+      },
+      "profile": {
+        "endpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "abstractEndpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "remoteOnly": true
+      },
+      "backoffice": {
+        "endpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "abstractEndpoint": {
+          "httpHost": "platform",
+          "httpPort": 4300,
+          "httpsHost": "platform",
+          "httpsPort": 4301
+        },
+        "remoteOnly": true
+      },
+      "wcmsStaged": {
+        "endpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "remoteOnly": true
+      },
+      "wcmsStagedServer": {
+        "endpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "remoteOnly": true
+      },
+      "cmsStaged": {
+        "endpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "remoteOnly": true
+      },
+      "wcmsOnline": {
+        "endpoint": {
+          "httpHost": "wcms-online",
+          "httpPort": 4314,
+          "httpsHost": "wcms-online",
+          "httpsPort": 4315
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-online",
+          "httpPort": 4314,
+          "httpsHost": "wcms-online",
+          "httpsPort": 4315
+        },
+        "remoteOnly": true
+      },
+      "wcmsOnlineServer": {
+        "endpoint": {
+          "httpHost": "wcms-online",
+          "httpPort": 4314,
+          "httpsHost": "wcms-online",
+          "httpsPort": 4315
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-online",
+          "httpPort": 4314,
+          "httpsHost": "wcms-online",
+          "httpsPort": 4315
+        },
+        "remoteOnly": true
+      },
+      "cmsOnline": {
+        "endpoint": {
+          "httpHost": "wcms-online",
+          "httpPort": 4314,
+          "httpsHost": "wcms-online",
+          "httpsPort": 4315
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-online",
+          "httpPort": 4314,
+          "httpsHost": "wcms-online",
+          "httpsPort": 4315
+        },
+        "remoteOnly": true
+      },
+      "process": {
+        "endpoint": {
+          "httpHost": "process",
+          "httpPort": 4330,
+          "httpsHost": "process",
+          "httpsPort": 4331
+        },
+        "abstractEndpoint": {
+          "httpHost": "process",
+          "httpPort": 4330,
+          "httpsHost": "process",
+          "httpsPort": 4331
+        },
+        "remoteOnly": true
+      },
+      "processServer": {
+        "endpoint": {
+          "httpHost": "process",
+          "httpPort": 4330,
+          "httpsHost": "process",
+          "httpsPort": 4331
+        },
+        "abstractEndpoint": {
+          "httpHost": "process",
+          "httpPort": 4330,
+          "httpsHost": "process",
+          "httpsPort": 4331
+        },
+        "remoteOnly": true
+      },
+      "commerceStaged": {
+        "endpoint": {
+          "httpHost": "commerce-staged",
+          "httpPort": 4352,
+          "httpsHost": "commerce-staged",
+          "httpsPort": 4353
+        },
+        "abstractEndpoint": {
+          "httpHost": "commerce-staged",
+          "httpPort": 4352,
+          "httpsHost": "commerce-staged",
+          "httpsPort": 4353
+        },
+        "remoteOnly": true
+      },
+      "commerceStagedServer": {
+        "endpoint": {
+          "httpHost": "commerce-staged",
+          "httpPort": 4352,
+          "httpsHost": "commerce-staged",
+          "httpsPort": 4353
+        },
+        "abstractEndpoint": {
+          "httpHost": "commerce-staged",
+          "httpPort": 4352,
+          "httpsHost": "commerce-staged",
+          "httpsPort": 4353
+        },
+        "remoteOnly": true
+      },
+      "engagement": {
+        "endpoint": {
+          "httpHost": "engagement",
+          "httpPort": 4340,
+          "httpsHost": "engagement",
+          "httpsPort": 4341
+        },
+        "abstractEndpoint": {
+          "httpHost": "engagement",
+          "httpPort": 4340,
+          "httpsHost": "engagement",
+          "httpsPort": 4341
+        },
+        "remoteOnly": true
+      },
+      "engagementServer": {
+        "endpoint": {
+          "httpHost": "engagement",
+          "httpPort": 4340,
+          "httpsHost": "engagement",
+          "httpsPort": 4341
+        },
+        "abstractEndpoint": {
+          "httpHost": "engagement",
+          "httpPort": 4340,
+          "httpsHost": "engagement",
+          "httpsPort": 4341
+        },
+        "remoteOnly": true
+      },
+      "loyalty": {
+        "endpoint": {
+          "httpHost": "loyalty",
+          "httpPort": 4360,
+          "httpsHost": "loyalty",
+          "httpsPort": 4361
+        },
+        "abstractEndpoint": {
+          "httpHost": "loyalty",
+          "httpPort": 4360,
+          "httpsHost": "loyalty",
+          "httpsPort": 4361
+        },
+        "remoteOnly": true
+      },
+      "loyaltyServer": {
+        "endpoint": {
+          "httpHost": "loyalty",
+          "httpPort": 4360,
+          "httpsHost": "loyalty",
+          "httpsPort": 4361
+        },
+        "abstractEndpoint": {
+          "httpHost": "loyalty",
+          "httpPort": 4360,
+          "httpsHost": "loyalty",
+          "httpsPort": 4361
+        },
+        "remoteOnly": true
+      },
+      "waste": {
+        "endpoint": {
+          "httpHost": "waste",
+          "httpPort": 4370,
+          "httpsHost": "waste",
+          "httpsPort": 4371
+        },
+        "abstractEndpoint": {
+          "httpHost": "waste",
+          "httpPort": 4370,
+          "httpsHost": "waste",
+          "httpsPort": 4371
+        },
+        "remoteOnly": true
+      },
+      "wasteServer": {
+        "endpoint": {
+          "httpHost": "waste",
+          "httpPort": 4370,
+          "httpsHost": "waste",
+          "httpsPort": 4371
+        },
+        "abstractEndpoint": {
+          "httpHost": "waste",
+          "httpPort": 4370,
+          "httpsHost": "waste",
+          "httpsPort": 4371
+        },
+        "remoteOnly": true
+      },
+      "location": {
+        "endpoint": {
+          "httpHost": "location",
+          "httpPort": 4380,
+          "httpsHost": "location",
+          "httpsPort": 4381
+        },
+        "abstractEndpoint": {
+          "httpHost": "location",
+          "httpPort": 4380,
+          "httpsHost": "location",
+          "httpsPort": 4381
+        },
+        "remoteOnly": true
+      },
+      "locationServer": {
+        "endpoint": {
+          "httpHost": "location",
+          "httpPort": 4380,
+          "httpsHost": "location",
+          "httpsPort": 4381
+        },
+        "abstractEndpoint": {
+          "httpHost": "location",
+          "httpPort": 4380,
+          "httpsHost": "location",
+          "httpsPort": 4381
+        },
+        "remoteOnly": true
+      },
+      "wcms": {
+        "endpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "abstractEndpoint": {
+          "httpHost": "wcms-staged",
+          "httpPort": 4312,
+          "httpsHost": "wcms-staged",
+          "httpsPort": 4313
+        },
+        "remoteOnly": true
+      },
+      "commerce": {
+        "endpoint": {
+          "httpHost": "commerce",
+          "httpPort": 4350,
+          "httpsHost": "commerce",
+          "httpsPort": 4351
+        },
+        "abstractEndpoint": {
+          "httpHost": "commerce",
+          "httpPort": 4350,
+          "httpsHost": "commerce",
+          "httpsPort": 4351
+        },
+        "remoteOnly": true
+      },
+      "commerceServer": {
+        "endpoint": {
+          "httpHost": "commerce",
+          "httpPort": 4350,
+          "httpsHost": "commerce",
+          "httpsPort": 4351
+        },
+        "abstractEndpoint": {
+          "httpHost": "commerce",
+          "httpPort": 4350,
+          "httpsHost": "commerce",
+          "httpsPort": 4351
+        },
+        "remoteOnly": true
+      }
+    }
+  }
 };

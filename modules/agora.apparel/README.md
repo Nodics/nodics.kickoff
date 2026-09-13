@@ -20,3 +20,10 @@ assets, orphan files and missing page/media references by
 
 See [data ownership](llm/contracts/data-ownership-contract.md) for cleanup,
 publication and previously imported runtime-record boundaries.
+
+
+This module explicitly participates in Application Builder through
+`nodics.applicationBuilder.dataPack: true` in its package metadata. The owning
+customer project declares frontend, domain and preset choices. Preserve the
+module's existing import-manifest and content ownership rules; Builder metadata
+does not import, publish or validate this module's live data.

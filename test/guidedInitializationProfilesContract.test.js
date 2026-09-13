@@ -66,7 +66,17 @@ const requiredProfiles = {
 const allowedDataTypes = new Set(['init', 'core', 'sample']);
 
 function loadRuntime(server) {
-  return require(path.join(projectRoot, 'envs', 'kickoffLocal', server, 'config', 'properties.js'));
+  const properties = require('./helpers/configuration').loadRuntime(server);
+  const { merge } = require('./helpers/configuration');
+  const inherited = properties.activeModules.modules.includes('kickoffAdministration')
+    ? require('../modules/kickoffAdministration/config/properties') : {};
+  const routerDefaults = require(path.join(require('./helpers/configuration').frameworkRoot, 'nodics.foundation/modules/nRouter/config/properties'));
+  const layered = merge({}, routerDefaults, inherited, properties);
+  return Object.assign({}, properties, {
+    apiExposure: layered.apiExposure,
+    backofficeApplicationInitialization: layered.backofficeApplicationInitialization,
+    backofficeFunctionalModuleActivationData: layered.backofficeFunctionalModuleActivationData
+  });
 }
 
 for (const [server, expectation] of Object.entries(requiredProfiles)) {
@@ -157,7 +167,7 @@ assert.equal(loyaltyRuntime.loyalty.capabilities.reservation, true, 'loyaltyServ
 const wasteRuntime = loadRuntime('wasteServer');
 const kickoffWasteProperties = require(path.join(projectRoot, 'modules', 'kickoffWaste', 'config', 'properties.js'));
 assert.equal(wasteRuntime.servers.default.endpoint.httpPort, 4370, 'wasteServer must own the Waste runtime endpoint');
-assert.equal(wasteRuntime.apiExposure.categories.schemaWorkbench.enabled, true, 'wasteServer must expose Schema Workbench for standalone BackOffice inspection');
+assert.equal(wasteRuntime.apiExposure.categories.schemaApi.enabled, true, 'wasteServer must expose Schema Workbench for standalone BackOffice inspection');
 assert.equal(wasteRuntime.waste.accelerator.umbrella, 'waste', 'wasteServer must compose the Waste accelerator umbrella');
 assert.deepEqual(wasteRuntime.waste.accelerator.scenarioAccelerators, ['eWaste'], 'wasteServer must compose the initial eWaste scenario accelerator');
 assert.deepEqual(
@@ -169,7 +179,7 @@ assert.deepEqual(
 const locationRuntime = loadRuntime('locationServer');
 assert.equal(locationRuntime.servers.default.endpoint.httpPort, 4380, 'locationServer must own the Location runtime endpoint');
 assert.equal(locationRuntime.servers.profile.remoteOnly, true, 'locationServer must reach Profile remotely through topology');
-assert.equal(locationRuntime.apiExposure.categories.schemaWorkbench.enabled, true, 'locationServer must expose Schema Workbench for standalone BackOffice inspection');
+assert.equal(locationRuntime.apiExposure.categories.schemaApi.enabled, true, 'locationServer must expose Schema Workbench for standalone BackOffice inspection');
 assert.equal(locationRuntime.location.capabilities.semanticPlace, true, 'locationServer must enable semantic place capability');
 assert.deepEqual(
   locationRuntime.data.dataReleases.contributions,

@@ -26,7 +26,10 @@
     },
     "extends": [
       "apparel"
-    ]
+    ],
+    "applicationBuilder": {
+      "dataPack": true
+    }
   },
   "scripts": {}
 }

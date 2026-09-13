@@ -9,117 +9,310 @@
 
  */
 
+/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 "use strict";
 
-const wasteRuntimeModules = [
-  "nodics.waste",
-  "wasteCore",
-  "wasteMaterial",
-  "wasteCollection",
-  "wasteSubmission",
-  "wasteVerification",
-  "wasteReceipt",
-  "wasteImpact",
-  "wasteMovement",
-  "wasteCompliance",
-  "wasteApi",
-  "waste",
-  "eWaste",
-  "kickoffWaste",
-  "wasteRecycling",
-  "search",
-  "elastic",
-  "copilotPolicy",
-  "copilotKnowledge",
-  "copilotConversation",
-  "discoverySource",
-  "discoveryMapping",
-  "discoveryProjection",
-  "discoveryRuntime",
-  "discoveryQuery",
-  "discoveryConfig",
-  "copilotProvider",
-  "ollamaProvider",
-  "openAiProvider",
-];
-
-/** @module kickoffDockerLocal/wasteServer/config/properties @description Defines isolated local Waste Management coordinates and runtime configuration. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own waste accelerator, database, and endpoint configuration. */
-const capabilities = {
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffDockerLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
-      "DefaultWasteSubmissionService",
-      "DefaultWasteAssetService",
-      "DefaultWasteImpactResultService",
-    ],
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultConfigurationService",
-      "DefaultDataInstallationService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultEventListenerService",
-      "DefaultImportDefinitionService",
-      "DefaultImportRunService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultInterceptorService",
-      "DefaultPipelineService",
-      "DefaultPublicationAuditService",
-      "DefaultPublicationRequestService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultSearchService",
-      "DefaultTokenService",
-      "DefaultValidatorService",
-      "DefaultWasteAssetCreationPolicyService",
-      "DefaultWasteAssetMarketplaceProjectionService",
-      "DefaultWasteAssetOwnershipEventService",
-      "DefaultWasteAssetService",
-      "DefaultWasteAssetTransferPolicyService",
-      "DefaultWasteAssetTypeService",
-      "DefaultWasteBatchService",
-      "DefaultWasteCarbonSettlementPolicyService",
-      "DefaultWasteCategoryService",
-      "DefaultWasteCollectionAcceptanceRuleService",
-      "DefaultWasteCollectionPointService",
-      "DefaultWasteCollectionPointTypeService",
-      "DefaultWasteCollectionPresetService",
-      "DefaultWasteComplianceEvidenceService",
-      "DefaultWasteComplianceProfileService",
-      "DefaultWasteConditionGradeService",
-      "DefaultWasteCouponRedemptionSettlementPolicyService",
-      "DefaultWasteEvidencePolicyService",
-      "DefaultWasteEvidenceService",
-      "DefaultWasteFamilyService",
-      "DefaultWasteImpactMetricService",
-      "DefaultWasteImpactProfileService",
-      "DefaultWasteImpactResultService",
-      "DefaultWasteImpactSelectionService",
-      "DefaultWasteItemTypeService",
-      "DefaultWasteLifecyclePolicyService",
-      "DefaultWasteMarketplaceEligibilityPolicyService",
-      "DefaultWasteMaterialTypeService",
-      "DefaultWasteMetadataSuggestionService",
-      "DefaultWasteMovementService",
-      "DefaultWasteReceiptPolicyService",
-      "DefaultWasteReceiptService",
-      "DefaultWasteRewardSettlementPolicyService",
-      "DefaultWasteSubmissionService",
-      "DefaultWasteVerificationPolicyService",
-      "DefaultWasteVerificationService",
-      "DefaultWorkflow2SchemaService",
-    ],
+/** @description Declares wasteServer composition and isolated deployment overrides. @layer config @owner nodics.kickoff */
+module.exports = {
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "URI": {
+            "$config": "env",
+            "name": "NODICS_MONGODB_URI"
+          },
+          "databaseName": "kickoffDockerLocalWaste"
+        }
+      }
+    },
+    "wasteCore": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteMaterial": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteCollection": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteSubmission": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteVerification": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteReceipt": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteImpact": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteMovement": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    },
+    "wasteCompliance": {
+      "$config": "ref",
+      "path": [
+        "database",
+        "default"
+      ]
+    }
   },
-  activeModules: {
-    groups: [],
-    modules: [
+  "servers": {
+    "platform": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "platform"
+      ]
+    },
+    "platformServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "platformServer"
+      ]
+    },
+    "profile": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "profile"
+      ]
+    },
+    "backoffice": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "backoffice"
+      ]
+    },
+    "wcmsStaged": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsStaged"
+      ]
+    },
+    "wcmsStagedServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsStagedServer"
+      ]
+    },
+    "cmsStaged": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "cmsStaged"
+      ]
+    },
+    "wcmsOnline": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsOnline"
+      ]
+    },
+    "wcmsOnlineServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcmsOnlineServer"
+      ]
+    },
+    "cmsOnline": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "cmsOnline"
+      ]
+    },
+    "process": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "process"
+      ]
+    },
+    "processServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "processServer"
+      ]
+    },
+    "commerce": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerce"
+      ]
+    },
+    "commerceServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerceServer"
+      ]
+    },
+    "commerceStaged": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerceStaged"
+      ]
+    },
+    "commerceStagedServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "commerceStagedServer"
+      ]
+    },
+    "engagement": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "engagement"
+      ]
+    },
+    "engagementServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "engagementServer"
+      ]
+    },
+    "loyalty": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "loyalty"
+      ]
+    },
+    "loyaltyServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "loyaltyServer"
+      ]
+    },
+    "location": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "location"
+      ]
+    },
+    "locationServer": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "locationServer"
+      ]
+    },
+    "wcms": {
+      "$config": "ref",
+      "path": [
+        "configurationValues",
+        "remoteEndpoints",
+        "wcms"
+      ]
+    },
+    "default": {
+      "endpoint": {
+        "httpHost": "0.0.0.0",
+        "httpPort": 4370,
+        "httpsHost": "0.0.0.0",
+        "httpsPort": 4371
+      },
+      "abstractEndpoint": {
+        "httpHost": "waste",
+        "httpPort": 4370,
+        "httpsHost": "waste",
+        "httpsPort": 4371
+      }
+    }
+  },
+  "search": {
+    "discoveryProjection": {
+      "options": {
+        "enabled": true,
+        "fallback": false,
+        "engine": "elastic"
+      },
+      "elastic": {
+        "connection": {
+          "hosts": [
+            {
+              "$config": "env",
+              "name": "NODICS_ELASTICSEARCH_URL",
+              "fallback": "http://elasticsearch:9200"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "activeModules": {
+    "groups": [],
+    "modules": [
       "circa.ewaste",
       "nodics.kickoff",
       "kickoffCore",
@@ -127,304 +320,295 @@ const capabilities = {
       "kickoffInt",
       "kickoffDockerLocal",
       "wasteServer",
-    ].concat(wasteRuntimeModules),
+      "nodics.waste",
+      "wasteCore",
+      "wasteMaterial",
+      "wasteCollection",
+      "wasteSubmission",
+      "wasteVerification",
+      "wasteReceipt",
+      "wasteImpact",
+      "wasteMovement",
+      "wasteCompliance",
+      "wasteApi",
+      "waste",
+      "eWaste",
+      "kickoffWaste",
+      "wasteRecycling",
+      "search",
+      "elastic",
+      "copilotPolicy",
+      "copilotKnowledge",
+      "copilotConversation",
+      "discoverySource",
+      "discoveryMapping",
+      "discoveryProjection",
+      "discoveryRuntime",
+      "discoveryQuery",
+      "discoveryConfig",
+      "copilotProvider",
+      "ollamaProvider",
+      "openAiProvider",
+      "redisCache"
+    ]
   },
-  runtimeRole: { code: "WASTE", publication: "OPERATIONAL" },
-  runtimeAuthorityContexts: { modules: { waste: "waste.operational" } },
-  apiExposure: {
-    categories: {
-      eWasteCustomer: { enabled: true },
-      circaCustomer: { enabled: true },
-      serviceRegistry: { enabled: true },
-      schemaWorkbench: { enabled: true },
-      dataImport: { enabled: true },
-      wasteInternal: { enabled: true },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "waste": "waste.operational"
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffDockerLocal"
+    ],
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
+      "DefaultWasteSubmissionService",
+      "DefaultWasteAssetService",
+      "DefaultWasteImpactResultService"
+    ],
+    "modules": {
+      "import": true,
+      "search": true,
+      "system": true,
+      "token": true,
+      "validator": true,
+      "wasteCollection": true,
+      "wasteCompliance": true,
+      "wasteCore": true,
+      "wasteImpact": true,
+      "wasteMaterial": true,
+      "wasteMovement": true,
+      "wasteReceipt": true,
+      "wasteSubmission": true,
+      "wasteVerification": true
     },
+    "serviceNames": [
+      "DefaultCatalogService",
+      "DefaultClassConfigurationService",
+      "DefaultConfigurationActivationLogService",
+      "DefaultConfigurationActivationRequestService",
+      "DefaultEmsFailedMessagesService",
+      "DefaultPipelineService",
+      "DefaultPublicationAuditService",
+      "DefaultPublicationRequestService",
+      "DefaultRouterConfigurationService",
+      "DefaultSchemaAccessPolicyService",
+      "DefaultSchemaConfigurationService",
+      "DefaultWorkflow2SchemaService"
+    ]
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL_PRODUCTION_SIMULATION",
-      allowedDestinationRoles: ["WASTE"],
-      initializationProfiles: {
-        localWasteFoundation: {
-          enabled: true,
-          label: "Local Waste foundation",
-          description:
-            "Install Waste Management reference releases for schema-driven family, category, material, collection, evidence, receipt, and impact presets.",
-          completionMessage:
-            "The Local Waste foundation is ready. Operators can validate collection eligibility, submissions, evidence, receipts, and impact calculations.",
-          steps: [
+  "runtimeRole": {
+    "code": "WASTE",
+    "publication": "OPERATIONAL"
+  },
+  "apiExposure": {
+    "categories": {
+      "eWasteCustomer": {
+        "enabled": true
+      },
+      "circaCustomer": {
+        "enabled": true
+      },
+      "serviceRegistry": {
+        "enabled": true
+      },
+      "schemaApi": {
+        "enabled": true
+      },
+      "dataImport": {
+        "enabled": true
+      },
+      "wasteInternal": {
+        "enabled": true
+      }
+    }
+  },
+  "data": {
+    "dataReleases": {
+      "lifecycleMetadataRequired": true,
+      "destinationEnforced": true,
+      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
+      "allowedDestinationRoles": [
+        "WASTE"
+      ],
+      "initializationProfiles": {
+        "localWasteFoundation": {
+          "enabled": true,
+          "label": "Local Waste foundation",
+          "description": "Install Waste Management reference releases for schema-driven family, category, material, collection, evidence, receipt, and impact presets.",
+          "completionMessage": "The Local Waste foundation is ready. Operators can validate collection eligibility, submissions, evidence, receipts, and impact calculations.",
+          "steps": [
             {
-              dataType: "core",
-              releaseCodes: [
+              "dataType": "core",
+              "releaseCodes": [
                 "wasteMaterial:core-v001",
                 "eWaste:core-reference",
-                "kickoffWaste:project-reference",
-              ],
-            },
-          ],
+                "kickoffWaste:project-reference"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "wasteSubmission": {
+    "metadataSuggestion": {
+      "enabled": true,
+      "adapter": "openai",
+      "profile": "eWastePhotoMetadata"
+    }
+  },
+  "eWaste": {
+    "outcomeCommunication": {
+      "detailLinks": {
+        "IN_APP": {
+          "url": "http://localhost:6600/mobile",
+          "parameter": "submission"
         },
+        "TELEGRAM": {
+          "url": "https://t.me/nodics_ewaste_circa_local_bot",
+          "parameter": "startapp"
+        }
+      }
+    },
+    "conversation": {
+      "project": "circa.ewaste",
+      "adapter": "ollama",
+      "profile": "customerGuidance"
+    }
+  },
+  "copilot": {
+    "conversation": {
+      "storage": "GENERATED_SERVICE",
+      "allowVolatileLocalStorage": false
+    },
+    "knowledge": {
+      "ingestion": {
+        "enabled": true,
+        "indexTenant": "default"
       },
-    },
-  },
-  wasteSubmission: {
-    metadataSuggestion: {
-      enabled: true,
-      adapter: "openai",
-      profile: "eWastePhotoMetadata",
-    },
-  },
-  eWaste: {
-    outcomeCommunication: {
-      detailLinks: {
-        IN_APP: {
-          url: "http://localhost:6600/mobile",
-          parameter: "submission",
-        },
-        TELEGRAM: {
-          url: "https://t.me/nodics_ewaste_circa_local_bot",
-          parameter: "startapp",
-        },
+      "retrieval": {
+        "enabled": true
       },
-    },
-    conversation: {
-      project: "circa.ewaste",
-      adapter: "ollama",
-      profile: "customerGuidance",
-    },
-  },
-  search: {
-    discoveryProjection: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
-  },
-  copilot: {
-    conversation: {
-      storage: "GENERATED_SERVICE",
-      allowVolatileLocalStorage: false,
-    },
-    knowledge: {
-      ingestion: { enabled: true, indexTenant: "default" },
-      retrieval: { enabled: true },
-      repositoryRoots: {
-        "circa-help": require("node:path").resolve(
-          __dirname,
-          "../../../../modules/circa.ewaste/docs/customer-knowledge",
-        ),
+      "repositoryRoots": {
+        "circa-help": "/Users/himkardwivedi/Apps/HimkarPrj/nodicsRoot/nodics.kickoff/modules/circa.ewaste/docs/customer-knowledge"
       },
-      sourceRegistry: {
-        definitions: [
+      "sourceRegistry": {
+        "definitions": [
           {
-            code: "circa-customer-guidance-v1",
-            repository: "circa-help",
-            project: "circa.ewaste",
-            module: "circa.ewaste",
-            owner: "circa.ewaste",
-            version:
-              "c8c3581bba2187d7a93f80ecf1d275fd4d400e411a18bda2795f3cdf954e3257",
-            sourceType: "CUSTOMER_PROJECT",
-            classification: "CUSTOMER",
-            paths: ["v1/journey.md"],
-            allowedExtensions: [".md"],
-            allowedChannels: ["NEXUS_CUSTOMER"],
-            tenantScopes: ["default"],
-            enterpriseScopes: ["default"],
-            customerProjectScopes: ["circa.ewaste"],
-            requiredPermissions: ["waste.submission.create"],
-            secretScanPolicy: "REQUIRED",
-            enabled: true,
+            "code": "circa-customer-guidance-v1",
+            "repository": "circa-help",
+            "project": "circa.ewaste",
+            "module": "circa.ewaste",
+            "owner": "circa.ewaste",
+            "version": "c8c3581bba2187d7a93f80ecf1d275fd4d400e411a18bda2795f3cdf954e3257",
+            "sourceType": "CUSTOMER_PROJECT",
+            "classification": "CUSTOMER",
+            "paths": [
+              "v1/journey.md"
+            ],
+            "allowedExtensions": [
+              ".md"
+            ],
+            "allowedChannels": [
+              "CUSTOMER"
+            ],
+            "tenantScopes": [
+              "default"
+            ],
+            "enterpriseScopes": [
+              "default"
+            ],
+            "customerProjectScopes": [
+              "circa.ewaste"
+            ],
+            "requiredPermissions": [
+              "waste.submission.create"
+            ],
+            "secretScanPolicy": "REQUIRED",
+            "enabled": true
+          }
+        ]
+      }
+    },
+    "providers": {
+      "enabled": true,
+      "default": {
+        "maximumRequestBytes": 8000000
+      },
+      "adapters": {
+        "openai": {
+          "enabled": true,
+          "credential": {
+            "mode": "SECRET_REFERENCE",
+            "secretRef": "env:OPENAI_EWASTE_API_KEY"
           },
-        ],
-      },
-    },
-    providers: {
-      enabled: true,
-      default: { maximumRequestBytes: 8000000 },
-      adapters: {
-        openai: {
-          enabled: true,
-          credential: {
-            mode: "SECRET_REFERENCE",
-            secretRef: "env:OPENAI_EWASTE_API_KEY",
+          "model": {
+            "name": "gpt-5.6-luna",
+            "store": false
           },
-          model: { name: "gpt-5.6-luna", store: false },
-          generation: { reasoningEffort: "none" },
-          connection: { timeoutMs: 60000 },
+          "generation": {
+            "reasoningEffort": "none"
+          },
+          "connection": {
+            "timeoutMs": 60000
+          }
         },
-        ollama: {
-          enabled: true,
-          model: { name: "gemma3:4b", contextWindow: 4096 },
-          generation: { numPredict: 1200 },
-          connection: { timeoutMs: 120000 },
+        "ollama": {
+          "enabled": true,
+          "model": {
+            "name": "gemma3:4b",
+            "contextWindow": 4096
+          },
+          "generation": {
+            "numPredict": 1200
+          },
+          "connection": {
+            "timeoutMs": 120000
+          }
+        }
+      },
+      "profiles": {
+        "eWastePhotoMetadata": {
+          "maximumOutputTokens": 2400,
+          "structuredOutput": true,
+          "imageDetail": "high"
         },
-      },
-      profiles: {
-        eWastePhotoMetadata: {
-          maximumOutputTokens: 2400,
-          structuredOutput: true,
-          imageDetail: "high",
+        "structuredTool": {
+          "maximumOutputTokens": 1200
         },
-        structuredTool: { maximumOutputTokens: 1200 },
-        customerGuidance: {
-          temperature: 0.1,
-          topP: 0.9,
-          maximumOutputTokens: 500,
-          structuredOutput: true,
-        },
-      },
-    },
+        "customerGuidance": {
+          "temperature": 0.1,
+          "topP": 0.9,
+          "maximumOutputTokens": 500,
+          "structuredOutput": true
+        }
+      }
+    }
   },
-  waste: {
-    accelerator: {
-      enabled: true,
-      umbrella: "waste",
-      scenarioAccelerators: ["eWaste"],
-      presetPackCodes: ["EWASTE_CORE_PRESETS"],
+  "waste": {
+    "accelerator": {
+      "enabled": true,
+      "umbrella": "waste",
+      "scenarioAccelerators": [
+        "eWaste"
+      ],
+      "presetPackCodes": [
+        "EWASTE_CORE_PRESETS"
+      ]
     },
-    capabilities: {
-      materialCatalogue: true,
-      collectionAcceptance: true,
-      submissionLifecycle: true,
-      evidencePolicy: true,
-      verification: true,
-      receipt: true,
-      impactCalculation: true,
-      movementTracking: true,
-      complianceEvidence: true,
-    },
-  },
-  database: {
-    default: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteCore: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteMaterial: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteCollection: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteSubmission: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteVerification: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteReceipt: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteImpact: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteMovement: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-    wasteCompliance: {
-      mongodb: { master: { databaseName: "kickoffDockerLocalWaste" } },
-    },
-  },
-  servers: {
-    engagement: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4340,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4341,
-      },
-    },
-    commerceStaged: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4352,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4353,
-      },
-    },
-    loyalty: {
-      remoteOnly: true,
-      endpoint: { httpHost: "127.0.0.1", httpPort: 4360 },
-    },
-    wcms: {
-      remoteOnly: true,
-      endpoint: { httpHost: "127.0.0.1", httpPort: 4312 },
-    },
-    commerce: {
-      remoteOnly: true,
-      endpoint: { httpHost: "127.0.0.1", httpPort: 4350 },
-    },
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4370,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4371,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4370,
-        httpsHost: "localhost",
-        httpsPort: 4371,
-      },
-    },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    process: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-    },
-    location: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4380,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4381,
-      },
-    },
-  },
-};
-
-const runtime = require("../../config/runtime-properties")("wasteServer");
-module.exports = {
-  ...runtime,
-  ...capabilities,
-  activeModules: {
-    ...capabilities.activeModules,
-    modules: [
-      ...new Set([...capabilities.activeModules.modules, "redisCache"]),
-    ],
-  },
-  database: Object.fromEntries(
-    Object.keys(capabilities.database).map((name) => [
-      name,
-      runtime.database.default,
-    ]),
-  ),
-  servers: runtime.servers,
-  search: runtime.search,
+    "capabilities": {
+      "materialCatalogue": true,
+      "collectionAcceptance": true,
+      "submissionLifecycle": true,
+      "evidencePolicy": true,
+      "verification": true,
+      "receipt": true,
+      "impactCalculation": true,
+      "movementTracking": true,
+      "complianceEvidence": true
+    }
+  }
 };

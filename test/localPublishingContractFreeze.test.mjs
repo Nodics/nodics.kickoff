@@ -36,10 +36,10 @@ const process = read(
   "nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js",
 ).replaceAll('"', "'");
 const dockerLocal = read(
-  "nodics.kickoff/envs/kickoffDockerLocal/config/runtime-properties.js",
-).replaceAll('"', "'");
+  "nodics.kickoff/envs/kickoffDockerLocal/platformServer/config/properties.js",
+).replace(/"([A-Za-z][A-Za-z0-9]*)":/g, "$1:").replaceAll('"', "'");
 const guidedAcceptance = read(
-  "nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectGuidedInitializationAcceptanceService.mjs",
+  "nodics.kickoff/scripts/acceptance/defaultProjectGuidedInitializationAcceptanceService.mjs",
 );
 
 for (const permission of [

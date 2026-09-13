@@ -47,13 +47,15 @@ const discoveryModules = [
 ];
 
 const loadPackage = server => require(path.join(projectRoot, 'envs/kickoffLocal', server, 'package.json'));
-const loadProperties = server => require(path.join(projectRoot, 'envs/kickoffLocal', server, 'config/properties'));
+const loadProperties = server => require('./helpers/configuration').loadRuntime(server);
 
 test('Local WCMS runtimes load WCMS Experience through WCMS plus Discovery module groups', () => {
     for (const definition of runtimeDefinitions) {
         const packageJson = loadPackage(definition.server);
         assert.equal(packageJson.nodics.kind, 'server');
-        assert.deepEqual(packageJson.nodics.extends, ['nodics.wcms', 'nodics.discovery']);
+        assert.deepEqual(packageJson.nodics.extends, definition.server === 'wcmsStagedServer'
+            ? ['nodics.wcms', 'nodics.discovery', 'nodics.platform']
+            : ['nodics.wcms', 'nodics.discovery']);
 
         const properties = loadProperties(definition.server);
         assert.equal(properties.runtimeRole.code, definition.role);

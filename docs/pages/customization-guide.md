@@ -333,3 +333,10 @@ not fork the framework, and how to remove or roll it back.
 
 - [Kickoff project overview](project-overview.md)
 - [Local runtime topology](local-runtime.md)
+
+## Keep configuration small
+
+Use [Keep Kickoff configuration small](configuration-inheritance.md) for the
+ownership map, shared administration module, minimal overrides, array behavior,
+store-default migration and preparation checks. Inherit capability defaults;
+keep deployment transports and operational gates at their environment/server.

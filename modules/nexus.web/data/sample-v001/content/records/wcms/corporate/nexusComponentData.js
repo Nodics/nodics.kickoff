@@ -406,9 +406,8 @@ module.exports = {
     active: true,
     properties: {
       kicker: "AI-enabled developer experience",
-      heading:
-        "Run the reference solution, then build with an informed AI collaborator.",
-      body: "Start the framework, Kickoff, Axis, and Nexus locally. Let AI inspect the working contracts and accelerate project-owned code, configuration, tests, and integrations without hiding architectural decisions.",
+      heading: "Build with AI. Keep ownership of your software.",
+      body: "Use AI while keeping the ability to understand, change and operate your application. Nodics defines what belongs where, how to extend it and what to verify, so developers can work manually or with AI through the same source files and contracts.",
       href: "/developers",
       linkLabel: "Developer journey",
       referenceImageCode: "nodicsDeveloperExperience",
@@ -428,10 +427,9 @@ module.exports = {
       organizationHref: "https://github.com/Nodics",
       organizationLabel: "Open github.com/Nodics",
       developerKicker: "AI-enabled developer experience",
-      developerHeading:
-        "Run the reference solution, then build with an informed AI collaborator.",
+      developerHeading: "Build with AI. Keep ownership of your software.",
       developerBody:
-        "Start the framework, Kickoff, Axis, and Nexus locally. Let AI inspect the working contracts and accelerate project-owned code, configuration, tests, and integrations without hiding architectural decisions.",
+        "Use AI while keeping the ability to understand, change and operate your application. Nodics defines what belongs where, how to extend it and what to verify, so developers can work manually or with AI through the same source files and contracts.",
       developerHref: "/developers",
       developerLinkLabel: "Developer journey",
       referenceImageCode: "nodicsDeveloperExperience",
@@ -1055,9 +1053,8 @@ module.exports = {
     properties: {
       anchor: "about-promise",
       kicker: "Our promise",
-      heading:
-        "A practical path from evaluation to a working enterprise application.",
-      body: "Nodics is built for the way real enterprise programs move: first prove the platform locally, then understand ownership, then adapt journeys, then operate and evolve with evidence.",
+      heading: "AI-assisted development with human ownership.",
+      body: "Nodics is designed to let a team use AI without surrendering its ability to understand, change and operate the software. Your engineering experience remains valuable: inspect the contracts, customize through supported layers and keep manual development a first-class way of working.",
       detailItems: [
         {
           eyebrow: "01",
@@ -1097,8 +1094,8 @@ module.exports = {
       referenceImageCode: "nodicsAboutVerticalOperations",
       imageAlt:
         "Enterprise operator reviewing a vertical Nodics journey from local setup to governed live operation",
-      href: "/docs",
-      linkLabel: "Explore the Nodics Wiki",
+      href: "/docs/framework",
+      linkLabel: "What is Nodics?",
     },
   },
   record36: {
@@ -3058,32 +3055,32 @@ module.exports = {
     properties: {
       anchor: "developer-ai-assisted",
       kicker: "AI-assisted delivery",
-      heading: "Use AI as a governed collaborator, not a hidden shortcut.",
-      body: "Nodics makes AI more useful because the repository boundaries, contracts, schemas, generated evidence, and runtime metadata are inspectable. AI can accelerate delivery while developers keep the architectural decisions visible.",
+      heading: "Know what to write, where it belongs and how it works.",
+      body: "Your experience with services, validation, deployment and support remains valuable when you adopt AI. Human developers and AI tools follow the same Nodics contracts, so a team can inspect, extend and maintain the application through its source and documentation, without depending on the original coding conversation.",
       items: [
         {
           symbol: "ASK",
-          title: "Resolve ambiguity first",
-          text: "Use AI to clarify business intent, identify missing decisions, and map requirements to the owning framework or project boundary.",
+          title: "Define what should change",
+          text: "Clarify the business outcome, inspect current contracts and reuse the capability that already owns the behavior.",
         },
         {
           symbol: "READ",
-          title: "Inspect before changing",
-          text: "Let AI read schemas, routes, module registration, content packs, tests, and documentation before proposing implementation changes.",
+          title: "Find where it belongs",
+          text: "Identify the owning repository, module, layer and source definition before writing code. Keep customer-specific changes in the supported project boundary.",
         },
         {
           symbol: "BUILD",
-          title: "Generate project-owned work",
-          text: "Create project data, renderer updates, integrations, tests, and documentation in the right repository instead of patching framework core.",
+          title: "Use the supported extension",
+          text: "Apply intentional configuration differences or a documented extension point. Keep generated artifacts tied to their source definitions and preserve security and domain validation.",
         },
         {
           symbol: "PROVE",
-          title: "Validate every change",
-          text: "Run focused checks, content-pack validation, frontend tests, builds, and live delivery verification before trusting the result.",
+          title: "Prove another engineer can maintain it",
+          text: "Review the change, test default and customized behavior, and document diagnostics and recovery. Manual development uses the same source files and contracts as AI-assisted work.",
         },
       ],
-      href: "/docs?tab=api",
-      linkLabel: "Inspect API reference",
+      href: "/docs/framework",
+      linkLabel: "Read what Nodics stands for",
     },
   },
   record87: {

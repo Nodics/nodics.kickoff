@@ -21,41 +21,30 @@ import test from "node:test";
 const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const require = createRequire(import.meta.url);
 const projectCommandService = require("../../nodics.ai/nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService");
-const scriptPath = path.join(
-  projectRoot,
-  "..",
-  "nodics.ai",
-  "nodics.foundation",
-  "modules",
-  "nTooling",
-  "src",
-  "service",
-  "project",
-  "defaultProjectAgoraCommerceDataAcceptanceService.mjs",
-);
+const scriptPath = path.join(projectRoot, 'scripts/acceptance', "defaultProjectAgoraCommerceDataAcceptanceService.mjs");
 const packagePath = path.join(projectRoot, "package.json");
 
 test("Agora Commerce data acceptance remains preflight-first with explicit install gating", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectCommands = projectCommandService.defaultCommands();
+  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
 
   assert.match(
     pkg.scripts["start:commerce:staged"],
-    /nodics-project\.js project:run start:commerce:staged/,
+    /nodics project:run start:commerce:staged/,
   );
   assert.equal(pkg.name, "nodics.kickoff");
   assert.equal(projectCommands["start:commerce:staged"].command, "project:runtime-start");
   assert.deepEqual(projectCommands["start:commerce:staged"].args, ["commerceStaged"]);
   assert.match(
     pkg.scripts["acceptance:agora-commerce-data"],
-    /nodics-project\.js project:run acceptance:agora-commerce-data/,
+    /nodics project:run acceptance:agora-commerce-data/,
   );
   assert.equal(
-    projectCommands["acceptance:agora-commerce-data"].command,
-    "project:agora-commerce-data-acceptance",
+    projectCommands["acceptance:agora-commerce-data"].script,
+    "scripts/acceptance/defaultProjectAgoraCommerceDataAcceptanceService.mjs",
   );
-  assert.equal(projectCommands["acceptance:agora-commerce-data"].home, "project");
+  assert.equal(projectCommands["acceptance:agora-commerce-data"].type, "projectScript");
   assert.match(source, /NODICS_COMMERCE_STAGED_URL \|\| "http:\/\/127\.0\.0\.1:4352"/);
   assert.match(source, /"\/nodics\/import\/v0\/sample"/);
   assert.match(source, /"\/nodics\/import\/v0\/sample\/validate"/);

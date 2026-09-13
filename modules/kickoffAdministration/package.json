@@ -1,0 +1,25 @@
+{
+    "name": "kickoffAdministration",
+    "index": "950.10",
+    "description": "Shared Kickoff administration profile defaults, selected by Platform before environment and server overlays.",
+    "main": "nodics.js",
+    "version": "0.0.0",
+    "private": true,
+    "license": "SEE LICENSE IN LICENSE",
+    "nodics": {
+        "kind": "capability",
+        "displayName": "Kickoff Administration",
+        "runtimeModule": true,
+        "loadableByNodicsModuleLoader": true,
+        "owns": [
+            "configuration",
+            "llm"
+        ],
+        "runtime": {
+            "router": false,
+            "publish": false,
+            "web": false
+        }
+    },
+    "scripts": {}
+}

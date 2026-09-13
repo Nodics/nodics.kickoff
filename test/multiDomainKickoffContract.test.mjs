@@ -75,7 +75,7 @@ test("project configuration stays minimal while metadata, domains, and data pack
     fs.existsSync(path.join(root, "config", "agora-domain-composition.js")),
     false,
   );
-  assert.equal(fs.existsSync(projectContractPath), false);
+  assert.deepEqual(Object.keys(JSON.parse(fs.readFileSync(projectContractPath))), ["tooling"]);
   assert.equal(projectPackage.name, "nodics.kickoff");
   assert.equal(
     require(path.join(root, "config", "properties.js")).project,
@@ -358,24 +358,15 @@ test("environment composition selects each domain independently, together, or Co
 });
 
 test("local and Docker staged runtimes consume the selected domain packs", () => {
-  const localCommerce = fs.readFileSync(
-    path.join(
-      root,
-      "envs/kickoffLocal/commerceStagedServer/config/properties.js",
-    ),
-    "utf8",
-  );
-  const localWcms = fs.readFileSync(
-    path.join(root, "envs/kickoffLocal/wcmsStagedServer/config/properties.js"),
-    "utf8",
-  );
-  const docker = fs.readFileSync(
-    path.join(root, "envs/kickoffDockerLocal/config/runtime-properties.js"),
-    "utf8",
-  );
-  assert.match(localCommerce, /agoraDomains\.projectPacks/);
-  assert.match(localWcms, /agoraDomains\.projectPacks/);
-  assert.equal((docker.match(/agoraDomains\.projectPacks/g) || []).length, 2);
+  const { loadRuntime } = require('./helpers/configuration');
+  for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
+    for (const server of ['commerceStagedServer', 'wcmsStagedServer']) {
+      const selected = loadRuntime(server, environment, { NODICS_AGORA_DOMAINS: 'telco,apparel' });
+      assert.deepEqual(selected.activeModules.modules.filter(code => typeof code === 'string' && code.startsWith('agora.')), ['agora.telco', 'agora.apparel']);
+      const empty = loadRuntime(server, environment, { NODICS_AGORA_DOMAINS: 'none' });
+      assert(!empty.activeModules.modules.some(code => typeof code === 'string' && code.startsWith('agora.')));
+    }
+  }
 });
 
 test("Commerce server packages declare the accelerator package used by configured groups", () => {

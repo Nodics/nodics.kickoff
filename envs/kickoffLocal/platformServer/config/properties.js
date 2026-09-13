@@ -19,38 +19,8 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 
-const path = require("node:path");
-const kickoffRoot =
-  process.env.NODICS_COPILOT_KICKOFF_ROOT ||
-  path.resolve(__dirname, "../../../..");
-const workspaceRoot = path.dirname(kickoffRoot);
-const nodicsAiRoot =
-  process.env.NODICS_COPILOT_NODICS_AI_ROOT ||
-  path.join(workspaceRoot, "nodics.ai");
-const axisRoot =
-  process.env.NODICS_COPILOT_AXIS_ROOT ||
-  path.join(workspaceRoot, "nodics.exp", "nodics.axis");
-const copilotKnowledgeEnabled =
-  process.env.NODICS_COPILOT_KNOWLEDGE_ENABLED !== "false";
-const nodicsAiVersion =
-  process.env.NODICS_COPILOT_NODICS_AI_VERSION || "kickoff-local-development";
-const kickoffVersion =
-  process.env.NODICS_COPILOT_KICKOFF_VERSION || "kickoff-local-development";
-const axisVersion =
-  process.env.NODICS_COPILOT_AXIS_VERSION || "kickoff-local-development";
-const sourceCodeEnabled =
-  process.env.NODICS_COPILOT_SOURCE_CODE_ENABLED !== "false";
-const frameworkSourceCodeEnabled =
-  sourceCodeEnabled &&
-  process.env.NODICS_COPILOT_FRAMEWORK_SOURCE_CODE_ENABLED !== "false";
-const axisSourceCodeEnabled =
-  sourceCodeEnabled &&
-  process.env.NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED !== "false";
-const kickoffSourceCodeEnabled =
-  sourceCodeEnabled &&
-  process.env.NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED !== "false";
-
 module.exports = {
+  configurationValues: {"knowledge":{"kickoffRoot":{"$config":"env","name":"NODICS_COPILOT_KICKOFF_ROOT","fallback":{"$config":"path","base":"project","relative":""}},"nodicsAiRoot":{"$config":"env","name":"NODICS_COPILOT_NODICS_AI_ROOT","fallback":{"$config":"path","base":{"$config":"ref","path":["configurationValues","knowledge","kickoffRoot"]},"relative":"../nodics.ai"}},"axisRoot":{"$config":"env","name":"NODICS_COPILOT_AXIS_ROOT","fallback":{"$config":"path","base":{"$config":"ref","path":["configurationValues","knowledge","kickoffRoot"]},"relative":"../nodics.exp/nodics.axis"}},"copilotKnowledgeEnabled":{"$config":"env","name":"NODICS_COPILOT_KNOWLEDGE_ENABLED","fallback":true,"type":"boolean"},"nodicsAiVersion":{"$config":"env","name":"NODICS_COPILOT_NODICS_AI_VERSION","fallback":"kickoff-local-development"},"kickoffVersion":{"$config":"env","name":"NODICS_COPILOT_KICKOFF_VERSION","fallback":"kickoff-local-development"},"axisVersion":{"$config":"env","name":"NODICS_COPILOT_AXIS_VERSION","fallback":"kickoff-local-development"},"sourceCodeEnabled":{"$config":"env","name":"NODICS_COPILOT_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"},"frameworkSourceCodeEnabled":{"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","sourceCodeEnabled"]},{"$config":"env","name":"NODICS_COPILOT_FRAMEWORK_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"}]},"axisSourceCodeEnabled":{"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","sourceCodeEnabled"]},{"$config":"env","name":"NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"}]},"kickoffSourceCodeEnabled":{"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","sourceCodeEnabled"]},{"$config":"env","name":"NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"}]}}},
   httpHardening: {
     cors: {
       allowedOrigins: [
@@ -84,10 +54,7 @@ module.exports = {
       environment: "kickoffLocal",
     },
     api: { enabled: true },
-    conversation: {
-      storage: "GENERATED_SERVICE",
-      allowVolatileLocalStorage: false,
-    },
+
     workbench: {
       target: {
         productModule: "product",
@@ -98,16 +65,16 @@ module.exports = {
     },
     knowledge: {
       ingestion: {
-        enabled: copilotKnowledgeEnabled,
+        enabled: {"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},
         ingestOnStart:
-          process.env.NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START !== "false",
+          {"$config":"env","name":"NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START","fallback":true,"type":"boolean"},
         indexTenant: "default",
       },
-      retrieval: { enabled: copilotKnowledgeEnabled, mode: "LEXICAL" },
+      retrieval: { enabled: {"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]} },
       repositoryRoots: {
-        "nodics.ai": nodicsAiRoot,
-        "nodics.kickoff": kickoffRoot,
-        "nodics.axis": axisRoot,
+        "nodics.ai": {"$config":"ref","path":["configurationValues","knowledge","nodicsAiRoot"]},
+        "nodics.kickoff": {"$config":"ref","path":["configurationValues","knowledge","kickoffRoot"]},
+        "nodics.axis": {"$config":"ref","path":["configurationValues","knowledge","axisRoot"]},
       },
       sourceRegistry: {
         definitions: [
@@ -117,16 +84,14 @@ module.exports = {
             project: "nodics",
             module: "nodics.ai",
             owner: "nodics.ai",
-            version: nodicsAiVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
             sourceType: "README",
             classification: "INTERNAL",
             paths: ["README.md", "**/README.md"],
-            allowedChannels: ["AXIS_EMPLOYEE"],
+            allowedChannels: ["EMPLOYEE"],
             requiredPermissions: ["copilot.knowledge.internal.read"],
             secretScanPolicy: "REQUIRED",
-            enabled: Boolean(
-              copilotKnowledgeEnabled && nodicsAiRoot && nodicsAiVersion,
-            ),
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
           },
           {
             code: "nodics-framework-contracts",
@@ -134,16 +99,14 @@ module.exports = {
             project: "nodics",
             module: "nodics.ai",
             owner: "nodics.ai",
-            version: nodicsAiVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
             sourceType: "AGENTS_CONTRACT",
             classification: "RESTRICTED",
             paths: ["AGENTS.md", "**/AGENTS.md", "**/llm/contracts/*.md"],
-            allowedChannels: ["AXIS_EMPLOYEE"],
+            allowedChannels: ["EMPLOYEE"],
             requiredPermissions: ["copilot.knowledge.restricted.read"],
             secretScanPolicy: "REQUIRED",
-            enabled: Boolean(
-              copilotKnowledgeEnabled && nodicsAiRoot && nodicsAiVersion,
-            ),
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
           },
           {
             code: "nodics-axis-readme",
@@ -151,16 +114,14 @@ module.exports = {
             project: "nodics",
             module: "nodics.axis",
             owner: "nodics.axis",
-            version: axisVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","axisVersion"]},
             sourceType: "README",
             classification: "INTERNAL",
             paths: ["README.md", "**/README.md"],
-            allowedChannels: ["AXIS_EMPLOYEE"],
+            allowedChannels: ["EMPLOYEE"],
             requiredPermissions: ["copilot.knowledge.internal.read"],
             secretScanPolicy: "REQUIRED",
-            enabled: Boolean(
-              copilotKnowledgeEnabled && axisRoot && axisVersion,
-            ),
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
           },
           {
             code: "nodics-axis-contracts",
@@ -168,16 +129,14 @@ module.exports = {
             project: "nodics",
             module: "nodics.axis",
             owner: "nodics.axis",
-            version: axisVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","axisVersion"]},
             sourceType: "AGENTS_CONTRACT",
             classification: "RESTRICTED",
             paths: ["AGENTS.md", "**/AGENTS.md", "**/llm/contracts/*.md"],
-            allowedChannels: ["AXIS_EMPLOYEE"],
+            allowedChannels: ["EMPLOYEE"],
             requiredPermissions: ["copilot.knowledge.restricted.read"],
             secretScanPolicy: "REQUIRED",
-            enabled: Boolean(
-              copilotKnowledgeEnabled && axisRoot && axisVersion,
-            ),
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
           },
           {
             code: "kickoff-project-readme",
@@ -185,18 +144,16 @@ module.exports = {
             project: "kickoff",
             module: "nodics.kickoff",
             owner: "nodics.kickoff",
-            version: kickoffVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","kickoffVersion"]},
             sourceType: "CUSTOMER_PROJECT",
             classification: "CUSTOMER",
             paths: ["README.md", "**/README.md", "docs/**/*.md"],
-            allowedChannels: ["AXIS_EMPLOYEE"],
+            allowedChannels: ["EMPLOYEE"],
             tenantScopes: ["default"],
             customerProjectScopes: ["kickoff"],
             requiredPermissions: ["copilot.knowledge.customer.read"],
             secretScanPolicy: "REQUIRED",
-            enabled: Boolean(
-              copilotKnowledgeEnabled && kickoffRoot && kickoffVersion,
-            ),
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
           },
           {
             code: "kickoff-project-contracts",
@@ -204,18 +161,16 @@ module.exports = {
             project: "kickoff",
             module: "nodics.kickoff",
             owner: "nodics.kickoff",
-            version: kickoffVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","kickoffVersion"]},
             sourceType: "CUSTOMER_PROJECT",
             classification: "CUSTOMER",
             paths: ["AGENTS.md", "**/AGENTS.md", "**/llm/contracts/*.md"],
-            allowedChannels: ["AXIS_EMPLOYEE"],
+            allowedChannels: ["EMPLOYEE"],
             tenantScopes: ["default"],
             customerProjectScopes: ["kickoff"],
             requiredPermissions: ["copilot.knowledge.customer.read"],
             secretScanPolicy: "REQUIRED",
-            enabled: Boolean(
-              copilotKnowledgeEnabled && kickoffRoot && kickoffVersion,
-            ),
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
           },
           {
             code: "nodics-copilot-source",
@@ -223,7 +178,7 @@ module.exports = {
             project: "nodics",
             module: "nodics.copilot",
             owner: "nodics.copilot",
-            version: nodicsAiVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
             sourceType: "SOURCE_CODE",
             classification: "RESTRICTED",
             paths: ["nodics.copilot/**/*.js"],
@@ -239,13 +194,8 @@ module.exports = {
             },
             requiredPermissions: ["copilot.knowledge.restricted.read"],
             secretScanPolicy: "REQUIRED",
-            allowedChannels: ["AXIS_EMPLOYEE"],
-            enabled: Boolean(
-              copilotKnowledgeEnabled &&
-              frameworkSourceCodeEnabled &&
-              nodicsAiRoot &&
-              nodicsAiVersion,
-            ),
+            allowedChannels: ["EMPLOYEE"],
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","frameworkSourceCodeEnabled"]}]},
           },
           {
             code: "nodics-discovery-source",
@@ -253,7 +203,7 @@ module.exports = {
             project: "nodics",
             module: "nodics.discovery",
             owner: "nodics.discovery",
-            version: nodicsAiVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
             sourceType: "SOURCE_CODE",
             classification: "RESTRICTED",
             paths: ["nodics.discovery/**/*.js"],
@@ -269,13 +219,8 @@ module.exports = {
             },
             requiredPermissions: ["copilot.knowledge.restricted.read"],
             secretScanPolicy: "REQUIRED",
-            allowedChannels: ["AXIS_EMPLOYEE"],
-            enabled: Boolean(
-              copilotKnowledgeEnabled &&
-              frameworkSourceCodeEnabled &&
-              nodicsAiRoot &&
-              nodicsAiVersion,
-            ),
+            allowedChannels: ["EMPLOYEE"],
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","frameworkSourceCodeEnabled"]}]},
           },
           {
             code: "nodics-axis-assistant-source",
@@ -283,7 +228,7 @@ module.exports = {
             project: "nodics",
             module: "nodics.axis",
             owner: "nodics.axis",
-            version: axisVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","axisVersion"]},
             sourceType: "SOURCE_CODE",
             classification: "RESTRICTED",
             paths: [
@@ -304,13 +249,8 @@ module.exports = {
             },
             requiredPermissions: ["copilot.knowledge.restricted.read"],
             secretScanPolicy: "REQUIRED",
-            allowedChannels: ["AXIS_EMPLOYEE"],
-            enabled: Boolean(
-              copilotKnowledgeEnabled &&
-              axisSourceCodeEnabled &&
-              axisRoot &&
-              axisVersion,
-            ),
+            allowedChannels: ["EMPLOYEE"],
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","axisSourceCodeEnabled"]}]},
           },
           {
             code: "kickoff-copilot-composition-source",
@@ -318,7 +258,7 @@ module.exports = {
             project: "kickoff",
             module: "platformServer",
             owner: "nodics.kickoff",
-            version: kickoffVersion || "UNRESOLVED",
+            version: {"$config":"ref","path":["configurationValues","knowledge","kickoffVersion"]},
             sourceType: "SOURCE_CODE",
             classification: "RESTRICTED",
             paths: ["envs/kickoffLocal/platformServer/**/*.js"],
@@ -333,20 +273,15 @@ module.exports = {
             customerProjectScopes: ["kickoff"],
             requiredPermissions: ["copilot.knowledge.restricted.read"],
             secretScanPolicy: "REQUIRED",
-            allowedChannels: ["AXIS_EMPLOYEE"],
-            enabled: Boolean(
-              copilotKnowledgeEnabled &&
-              kickoffSourceCodeEnabled &&
-              kickoffRoot &&
-              kickoffVersion,
-            ),
+            allowedChannels: ["EMPLOYEE"],
+            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","kickoffSourceCodeEnabled"]}]},
           },
         ],
       },
     },
     providers: {
       enabled: true,
-      default: { adapter: "ollama", profile: "conversation" },
+      default: { adapter: "ollama" },
       adapters: {
         ollama: { enabled: true, model: { name: "qwen2.5-coder:7b" } },
       },
@@ -361,23 +296,13 @@ module.exports = {
     },
   },
   backofficeApplicationInitialization: {
+    operatorOrigin: "http://localhost:3100",
     projectCode:
-      process.env.NODICS_PROJECT_CODE ||
-      require("../../../../package.json").name,
-    projectRoot: process.cwd(),
+      {"$config":"env","name":"NODICS_PROJECT_CODE","fallback":{"$config":"context","name":"projectCode"}},
+    projectRoot: {"$config":"path","base":"project","relative":""},
     profiles: {
       nexus: {
-        code: "nexus",
-        type: "WEBSITE_BUNDLE",
-        owner: "nexus.web",
-        applicationCode: "nexus",
-        siteCode: "nexusCorporateSite",
-        baselineCode: "nexus",
         presentation: {
-          title: "Nexus Corporate",
-          kind: "PROJECT",
-          category: "accelerator",
-          order: 100,
           summary:
             "Corporate website accelerator published from the latest qualified WCMS Staged baseline to Online.",
           requiredServers: [
@@ -390,62 +315,8 @@ module.exports = {
           requiredFunctionalModules: [
             { code: "nodics.communication", label: "Engagement capability" },
           ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "ACTIVATION",
-            sampleDataTrigger: "USER",
-          },
         },
-        dataPackages: [
-          {
-            code: "nexus.web:nexusCorporateSite",
-            kind: "Corporate site content",
-            required: true,
-            trigger: "ACTIVATION",
-            dataType: "sample",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-          },
-          {
-            code: "nexus.web:nexusCorporateMediaReferences",
-            kind: "Corporate media references",
-            required: true,
-            trigger: "ACTIVATION",
-            dataType: "sample",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-          },
-          {
-            code: "nexus.web:nexusEditorialSource",
-            kind: "News and blog source",
-            required: true,
-            trigger: "ACTIVATION",
-            dataType: "sample",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-          },
-          {
-            code: "nexus.web:nexusCorporateMediaAssets",
-            type: "MEDIA_ASSET_MANIFEST",
-            kind: "Corporate media files",
-            required: true,
-            trigger: "ACTIVATION",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-            manifestPath:
-              "modules/nexus.web/data/sample-v001/content/assets/nexus-cms-media/assetManifest.js",
-            businessPurpose: "NEXUS_CORPORATE_CONTENT",
-          },
-          {
-            code: "nexus.web:nexusEngagementOperational",
-            kind: "Contact and testimonial experience",
-            required: true,
-            trigger: "ACTIVATION",
-            dataType: "sample",
-            targetServer: "engagementServer",
-            targetRuntimeRole: "ENGAGEMENT",
-          },
-        ],
+
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -455,13 +326,6 @@ module.exports = {
         },
       },
       nexusupdate: {
-        code: "nexusupdate",
-        type: "WEBSITE_BUNDLE_UPDATE",
-        owner: "nexus.web",
-        applicationCode: "nexus",
-        siteCode: "nexusCorporateSite",
-        baselineCode: "nexusupdate",
-        presentation: { visible: false },
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -471,13 +335,6 @@ module.exports = {
         },
       },
       nexusecosystemrepair: {
-        code: "nexusecosystemrepair",
-        type: "WEBSITE_BUNDLE_UPDATE",
-        owner: "nexus.web",
-        applicationCode: "nexus",
-        siteCode: "nexusCorporateSite",
-        baselineCode: "nexusecosystemrepair",
-        presentation: { visible: false },
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -519,69 +376,6 @@ module.exports = {
         },
       },
       agoraapparel: {
-        code: "agoraapparel",
-        type: "STOREFRONT_DOMAIN_BUNDLE",
-        owner: "agora.apparel",
-        applicationCode: "agora",
-        siteCode: "agoraApparelSite",
-        baselineCode: "agoraapparel",
-        presentation: {
-          title: "Agora Apparel",
-          kind: "PROJECT",
-          category: "accelerator",
-          order: 210,
-          summary:
-            "Apparel storefront accelerator as a complete business-facing domain bundle.",
-          requiredServers: [
-            "Platform",
-            "WCMS Staged",
-            "WCMS Online",
-            "Process",
-            "Commerce",
-            "Discovery",
-          ],
-          requiredFunctionalModules: [
-            { code: "nodics.commerce", label: "Commerce capability" },
-            { code: "nodics.discovery", label: "Discovery capability" },
-          ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
-        },
-        dataPackages: [
-          {
-            code: "agora.apparel:agoraApparelContentCatalog",
-            kind: "Storefront content",
-            required: true,
-            trigger: "USER",
-            dataType: "sample",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-          },
-          {
-            code: "agora.apparel:agoraApparelMediaAssets",
-            type: "MEDIA_ASSET_MANIFEST",
-            kind: "Storefront media files",
-            required: true,
-            trigger: "USER",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-            manifestPath:
-              "modules/agora.apparel/data/sample-v001/content/assets/agora-cms-media/assetManifest.js",
-            businessPurpose: "AGORA_STOREFRONT_CONTENT",
-          },
-          {
-            code: "agora.apparel:agoraApparelCommerceCatalog",
-            kind: "Commerce catalog",
-            required: true,
-            trigger: "USER",
-            dataType: "sample",
-            targetServer: "commerceStaged",
-            targetRuntimeRole: "COMMERCE_STAGED",
-          },
-        ],
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -591,69 +385,6 @@ module.exports = {
         },
       },
       agoraelectronics: {
-        code: "agoraelectronics",
-        type: "STOREFRONT_DOMAIN_BUNDLE",
-        owner: "agora.electronics",
-        applicationCode: "agora",
-        siteCode: "agoraElectronicsSite",
-        baselineCode: "agoraelectronics",
-        presentation: {
-          title: "Agora Electronics",
-          kind: "PROJECT",
-          category: "accelerator",
-          order: 220,
-          summary:
-            "Electronics storefront accelerator as a complete business-facing domain bundle.",
-          requiredServers: [
-            "Platform",
-            "WCMS Staged",
-            "WCMS Online",
-            "Process",
-            "Commerce",
-            "Discovery",
-          ],
-          requiredFunctionalModules: [
-            { code: "nodics.commerce", label: "Commerce capability" },
-            { code: "nodics.discovery", label: "Discovery capability" },
-          ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
-        },
-        dataPackages: [
-          {
-            code: "agora.electronics:agoraElectronicsContentCatalog",
-            kind: "Storefront content",
-            required: true,
-            trigger: "USER",
-            dataType: "sample",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-          },
-          {
-            code: "agora.electronics:agoraElectronicsMediaAssets",
-            type: "MEDIA_ASSET_MANIFEST",
-            kind: "Storefront media files",
-            required: true,
-            trigger: "USER",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-            manifestPath:
-              "modules/agora.electronics/data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
-            businessPurpose: "AGORA_STOREFRONT_CONTENT",
-          },
-          {
-            code: "agora.electronics:agoraElectronicsCommerceCatalog",
-            kind: "Commerce catalog",
-            required: true,
-            trigger: "USER",
-            dataType: "sample",
-            targetServer: "commerceStaged",
-            targetRuntimeRole: "COMMERCE_STAGED",
-          },
-        ],
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -663,69 +394,6 @@ module.exports = {
         },
       },
       agoratelco: {
-        code: "agoratelco",
-        type: "STOREFRONT_DOMAIN_BUNDLE",
-        owner: "agora.telco",
-        applicationCode: "agora",
-        siteCode: "agoraTelcoSite",
-        baselineCode: "agoratelco",
-        presentation: {
-          title: "Agora Telco",
-          kind: "PROJECT",
-          category: "accelerator",
-          order: 230,
-          summary:
-            "Telco storefront accelerator as a complete business-facing domain bundle.",
-          requiredServers: [
-            "Platform",
-            "WCMS Staged",
-            "WCMS Online",
-            "Process",
-            "Commerce",
-            "Discovery",
-          ],
-          requiredFunctionalModules: [
-            { code: "nodics.commerce", label: "Commerce capability" },
-            { code: "nodics.discovery", label: "Discovery capability" },
-          ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
-        },
-        dataPackages: [
-          {
-            code: "agora.telco:agoraTelcoContentCatalog",
-            kind: "Storefront content",
-            required: true,
-            trigger: "USER",
-            dataType: "sample",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-          },
-          {
-            code: "agora.telco:agoraTelcoMediaAssets",
-            type: "MEDIA_ASSET_MANIFEST",
-            kind: "Storefront media files",
-            required: true,
-            trigger: "USER",
-            targetServer: "wcmsStaged",
-            targetRuntimeRole: "WCMS_STAGED",
-            manifestPath:
-              "modules/agora.telco/data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
-            businessPurpose: "AGORA_STOREFRONT_CONTENT",
-          },
-          {
-            code: "agora.telco:agoraTelcoCommerceCatalog",
-            kind: "Commerce catalog",
-            required: true,
-            trigger: "USER",
-            dataType: "sample",
-            targetServer: "commerceStaged",
-            targetRuntimeRole: "COMMERCE_STAGED",
-          },
-        ],
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -735,32 +403,6 @@ module.exports = {
         },
       },
       frameworkdocs: {
-        code: "frameworkdocs",
-        type: "DOCUMENTATION_BUNDLE",
-        owner: "nodics.docs",
-        applicationCode: "axis",
-        siteCode: "nodicsDocumentationSite",
-        baselineCode: "frameworkdocs",
-        contentPackCode: "nodicsDocumentation",
-        presentation: {
-          title: "Framework Documentation",
-          kind: "DOCUMENTATION",
-          category: "documentation",
-          order: 300,
-          summary:
-            "Framework documentation content pack and Online delivery profile.",
-          requiredServers: [
-            "Platform",
-            "WCMS Staged",
-            "WCMS Online",
-            "Process",
-          ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
-        },
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -770,32 +412,6 @@ module.exports = {
         },
       },
       axisdocs: {
-        code: "axisdocs",
-        type: "DOCUMENTATION_BUNDLE",
-        owner: "axis",
-        applicationCode: "axis",
-        siteCode: "axisDocumentationSite",
-        baselineCode: "axisdocs",
-        contentPackCode: "axisDocumentation",
-        presentation: {
-          title: "Nodics Axis Documentation",
-          kind: "DOCUMENTATION",
-          category: "documentation",
-          order: 400,
-          summary:
-            "Axis product documentation content pack and Online delivery profile.",
-          requiredServers: [
-            "Platform",
-            "WCMS Staged",
-            "WCMS Online",
-            "Process",
-          ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
-        },
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -805,32 +421,6 @@ module.exports = {
         },
       },
       kickoffdocs: {
-        code: "kickoffdocs",
-        type: "DOCUMENTATION_BUNDLE",
-        owner: "nodics.kickoff",
-        applicationCode: "axis",
-        siteCode: "kickoffDocumentationSite",
-        baselineCode: "kickoffdocs",
-        contentPackCode: "kickoffDocumentation",
-        presentation: {
-          title: "Nodics Kickoff Documentation",
-          kind: "DOCUMENTATION",
-          category: "documentation",
-          order: 500,
-          summary:
-            "Reference-project documentation content pack and Online delivery profile.",
-          requiredServers: [
-            "Platform",
-            "WCMS Staged",
-            "WCMS Online",
-            "Process",
-          ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
-        },
         target: {
           moduleName: "cms",
           connectionName: "wcmsStaged",
@@ -1079,47 +669,27 @@ module.exports = {
     enabled: true,
     environmentAllowlist: ["kickoffLocal"],
     allowMissingModelServices: true,
+    modules: {
+      "backoffice": true,
+      "import": true,
+      "localizationCore": true,
+      "profile": true,
+      "search": true,
+      "system": true,
+      "token": true,
+      "validator": true
+    },
     serviceNames: [
-      "DefaultAddressService",
-      "DefaultBackofficeAxisPolicyService",
-      "DefaultBackofficeContractActivationService",
-      "DefaultBackofficeContractSnapshotService",
-      "DefaultBackofficeFunctionalModuleRegistrationService",
       "DefaultCatalogService",
-      "DefaultConfigurationService",
-      "DefaultContactService",
-      "DefaultCustomerService",
-      "DefaultDataInstallationService",
       "DefaultEmsFailedMessagesService",
-      "DefaultEnterpriseService",
-      "DefaultEventListenerService",
-      "DefaultIdentityMigrationAuditService",
-      "DefaultImportDefinitionService",
-      "DefaultImportRunService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultInterceptorService",
-      "DefaultLocalizationKeyService",
-      "DefaultLocalizationOnlinePointerService",
-      "DefaultLocalizationReleaseService",
-      "DefaultLocalizationValueService",
-      "DefaultPrincipalScopeAssignmentService",
-      "DefaultSearchService",
-      "DefaultTenantService",
-      "DefaultUserStateService",
-      "DefaultValidatorService",
-      "DefaultWorkflow2SchemaService",
-      "DefaultUserGroupService",
-      "DefaultPasswordService",
-      "DefaultTokenService",
-      "DefaultEmployeeService",
+      "DefaultWorkflow2SchemaService"
     ],
   },
   activeModules: {
     groups: ["nodics.discovery", "nodics.copilot"],
     modules: [
       "circa.ewaste",
+      "kickoffAdministration",
       "search",
       "elastic",
       "nodics.kickoff",
@@ -1189,13 +759,9 @@ module.exports = {
   },
   profileBrowserSession: {
     enabled: true,
-    refreshCookieName: "nodics_axis_refresh",
-    csrfCookieName: "nodics_axis_csrf",
-    cookiePath: "/nodics/profile/v0/employee/browser",
-    csrfCookiePath: "/",
+
     sameSite: "Lax",
     secure: false,
-    maximumAgeSeconds: 86400,
   },
   servers: {
     default: {

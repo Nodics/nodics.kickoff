@@ -10,7 +10,6 @@
  */
 
 "use strict";
-const { agoraDomains } = require("../../config/properties");
 const wcmsSearchRuntimeModules = ["search", "elastic"];
 const wcmsAuthorityModules = [
   "cms",
@@ -50,67 +49,20 @@ module.exports = {
       "DefaultCmsDocumentationPublicationStateService",
       "DefaultCmsDocumentationSearchMetadataService",
     ],
+    modules: {
+      "cms": true,
+      "editorial": true,
+      "import": true,
+      "media": true,
+      "publish": true,
+      "search": true,
+      "system": true,
+      "token": true,
+      "validator": true
+    },
     serviceNames: [
-      "DefaultCmsComponentDetailService",
-      "DefaultCmsComponentLocalizationService",
-      "DefaultCmsComponentMediaService",
-      "DefaultCmsNavigationNodeService",
-      "DefaultCmsPageRouteService",
-      "DefaultCmsRestrictionService",
-      "DefaultCmsDocumentationAccessPolicyService",
-      "DefaultCmsDocumentationDashboardService",
-      "DefaultCmsDocumentationNavigationService",
-      "DefaultCmsDocumentationNodeService",
-      "DefaultCmsDocumentationPageService",
-      "DefaultCmsDocumentationProductService",
-      "DefaultCmsDocumentationPublicationStateService",
-      "DefaultCmsDocumentationSearchMetadataService",
-      "DefaultCmsPublicationDeploymentReceiptService",
-      "DefaultCmsPublicationEventOutboxService",
-      "DefaultCmsOnlinePublicationPointerService",
-      "DefaultCmsPublicationManifestService",
-      "DefaultPublicationAuditService",
-      "DefaultPublicationRequestService",
-      "DefaultEditorialArticleLocalizationService",
-      "DefaultEditorialArticleTaxonomyService",
-      "DefaultEditorialCorrectionService",
-      "DefaultEditorialOnlineArticleService",
-      "DefaultEditorialPublicationReceiptService",
-      "DefaultMediaReferenceService",
-      "DefaultMediaSetEntryService",
-      "DefaultMediaSetService",
-      "DefaultMediaService",
-      "DefaultMediaFolderService",
-      "DefaultMediaFormatService",
-      "DefaultCmsComponentService",
-      "DefaultCmsComponentTypeGroupService",
-      "DefaultCmsMigrationAuditService",
-      "DefaultCmsPageService",
-      "DefaultCmsPageTemplateService",
-      "DefaultCmsRestrictionTypeService",
-      "DefaultCmsSiteService",
-      "DefaultCmsSlotDefinitionService",
-      "DefaultCmsTypeCode2RendererService",
-      "DefaultCmsTypeCodeService",
-      "DefaultEditorialArticleService",
-      "DefaultEditorialAuthorService",
-      "DefaultEditorialContentTypeService",
-      "DefaultEditorialSeriesService",
-      "DefaultEditorialTaxonomyTermService",
-      "DefaultConfigurationService",
-      "DefaultDataInstallationService",
       "DefaultEmsFailedMessagesService",
-      "DefaultEventListenerService",
-      "DefaultImportDefinitionService",
-      "DefaultImportRunService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultInterceptorService",
-      "DefaultSearchService",
-      "DefaultTokenService",
-      "DefaultValidatorService",
-      "DefaultWorkflow2SchemaService",
+      "DefaultWorkflow2SchemaService"
     ],
   },
   activeModules: {
@@ -125,7 +77,7 @@ module.exports = {
       "kickoffApi",
       "kickoffInt",
       "nexus.web",
-      ...agoraDomains.projectPacks,
+      {"$config":"ref","path":["agoraDomains","projectPacks"],"spread":true},
       "kickoffLocal",
       "wcmsStagedServer",
     ],
@@ -133,9 +85,21 @@ module.exports = {
   publishEnabled: true,
   runtimeRole: { code: "WCMS_STAGED", publication: "STAGED" },
   runtimeAuthorityContexts: {
-    modules: Object.fromEntries(
-      wcmsAuthorityModules.map((moduleName) => [moduleName, "wcms.staged"]),
-    ),
+    modules: {
+  "cms": "wcms.staged",
+  "editorial": "wcms.staged",
+  "media": "wcms.staged",
+  "publish": "wcms.staged",
+  "wcmsExperience": "wcms.staged",
+  "discoveryConfig": "wcms.staged",
+  "discoveryMapping": "wcms.staged",
+  "discoveryProjection": "wcms.staged",
+  "discoveryPublication": "wcms.staged",
+  "discoveryQuery": "wcms.staged",
+  "discoveryRanking": "wcms.staged",
+  "discoveryRuntime": "wcms.staged",
+  "discoverySource": "wcms.staged"
+},
   },
   search: {
     discoveryProjection: {
@@ -314,14 +278,12 @@ module.exports = {
       target: {
         moduleName: "cms",
         connectionName: "cmsOnline",
-        connectionType: "abstract",
       },
     },
   },
   editorial: {
     workflow: { processBaseUrl: "http://127.0.0.1:4330" },
     publication: {
-      runtimeRole: "STAGED",
       targetTransportProvider:
         "DefaultEditorialPublicationModuleTransportService",
       target: {

@@ -22,20 +22,17 @@ const pkg = require(path.join(projectRoot, 'package.json'));
 const environment = require(path.join(projectRoot, 'envs/kickoffLocal/nodics.environment.json'));
 const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const commandService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService'));
-const toolingConfig = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/config/properties'));
-const command = toolingConfig.tooling.commands['project:waste-management-acceptance'];
-const backofficeDiscoveryCommand = toolingConfig.tooling.commands['project:waste-backoffice-discovery-acceptance'];
-
-assert.match(pkg.scripts['acceptance:waste-management'], /nodics-project\.js project:run acceptance:waste-management/);
-assert.match(pkg.scripts['acceptance:waste-backoffice-discovery'], /nodics-project\.js project:run acceptance:waste-backoffice-discovery/);
-assert.equal(commandService.defaultCommands()['acceptance:waste-management'].command, 'project:waste-management-acceptance');
-assert.equal(commandService.defaultCommands()['acceptance:waste-backoffice-discovery'].command, 'project:waste-backoffice-discovery-acceptance');
-assert.equal(command.script, 'src/service/project/defaultProjectWasteManagementAcceptanceService.mjs');
-assert.equal(backofficeDiscoveryCommand.script, 'src/service/project/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs');
-assert(fs.existsSync(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling', command.script)),
-    'Waste Management acceptance service must be framework-owned');
-assert(fs.existsSync(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling', backofficeDiscoveryCommand.script)),
-    'Waste BackOffice discovery acceptance service must be framework-owned');
+const commands = commandService.resolveCommands(commandService.readManifest(projectRoot));
+for (const [alias, file] of [
+    ['acceptance:waste-management', 'defaultProjectWasteManagementAcceptanceService.mjs'],
+    ['acceptance:waste-backoffice-discovery', 'defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs']
+]) {
+    assert(pkg.scripts[alias].includes('nodics project:run ' + alias));
+    assert.equal(commandService.defaultCommands()[alias], undefined);
+    assert.equal(commands[alias].type, 'projectScript');
+    assert.equal(commands[alias].script, 'scripts/acceptance/' + file);
+    assert(fs.existsSync(path.join(projectRoot, commands[alias].script)));
+}
 assert.deepEqual(environment.acceptance.wasteManagement, {
     environment: 'kickoffLocal',
     server: 'wasteServer',

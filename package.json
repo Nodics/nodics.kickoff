@@ -23,70 +23,506 @@
       "web": false
     },
     "displayName": "Nodics Kickoff",
-    "projectType": "reference"
+    "projectType": "reference",
+    "applicationBuilder": {
+      "presets": {
+        "commerce": {
+          "label": "Commerce storefront",
+          "selected": [
+            "nodics.commerce"
+          ],
+          "domains": [],
+          "excluded": [
+            "apparel",
+            "electronics",
+            "telco"
+          ],
+          "composition": "commerce",
+          "routes": [
+            "/",
+            "/products"
+          ],
+          "renderers": [
+            "commerce.product.card"
+          ],
+          "catalogs": [
+            "mainProductCatalog",
+            "mainContentCatalog"
+          ],
+          "packs": [],
+          "journeys": [
+            "commerce.discovery",
+            "commerce.checkout"
+          ],
+          "explanation": "Base Commerce storefront with shared product discovery and checkout foundations.",
+          "storefront": "AGORA",
+          "frontends": [
+            "AGORA",
+            "AXIS"
+          ],
+          "stores": [
+            "mainStore"
+          ],
+          "backendRuntimes": [
+            "PLATFORM",
+            "WCMS_STAGED",
+            "WCMS_ONLINE",
+            "PROCESS",
+            "COMMERCE"
+          ],
+          "corsOrigins": [
+            "http://127.0.0.1:3300"
+          ],
+          "packDomains": {
+            "nexus.web": "content"
+          },
+          "rendererByDomain": {},
+          "market": {
+            "country": "AE",
+            "locale": "en-AE",
+            "currency": "AED"
+          }
+        },
+        "apparel": {
+          "label": "Apparel commerce storefront",
+          "selected": [
+            "nodics.commerce",
+            "apparel"
+          ],
+          "domains": [
+            "APPAREL"
+          ],
+          "excluded": [
+            "electronics",
+            "telco"
+          ],
+          "composition": "apparel",
+          "routes": [
+            "/",
+            "/apparel"
+          ],
+          "renderers": [
+            "agora.apparel.product-card"
+          ],
+          "catalogs": [
+            "apparelProductCatalog",
+            "apparelContentCatalog"
+          ],
+          "packs": [
+            "agora.apparel"
+          ],
+          "journeys": [
+            "apparel.size-colour-checkout"
+          ],
+          "explanation": "Apparel storefront with size, colour, style, brand, and fit-oriented product behavior.",
+          "storefront": "AGORA",
+          "frontends": [
+            "AGORA",
+            "AXIS"
+          ],
+          "stores": [
+            "mainStore"
+          ],
+          "backendRuntimes": [
+            "PLATFORM",
+            "WCMS_STAGED",
+            "WCMS_ONLINE",
+            "PROCESS",
+            "COMMERCE"
+          ],
+          "corsOrigins": [
+            "http://127.0.0.1:3300"
+          ],
+          "packDomains": {
+            "agora.apparel": "apparel",
+            "nexus.web": "content"
+          },
+          "rendererByDomain": {
+            "apparel": "agora.apparel.product-card"
+          },
+          "market": {
+            "country": "AE",
+            "locale": "en-AE",
+            "currency": "AED"
+          }
+        },
+        "electronics": {
+          "label": "Electronics commerce storefront",
+          "selected": [
+            "nodics.commerce",
+            "electronics"
+          ],
+          "domains": [
+            "ELECTRONICS"
+          ],
+          "excluded": [
+            "apparel",
+            "telco"
+          ],
+          "composition": "electronics",
+          "routes": [
+            "/",
+            "/electronics"
+          ],
+          "renderers": [
+            "agora.electronics.product-card"
+          ],
+          "catalogs": [
+            "electronicsProductCatalog",
+            "electronicsContentCatalog"
+          ],
+          "packs": [
+            "agora.electronics"
+          ],
+          "journeys": [
+            "electronics.warranty-checkout"
+          ],
+          "explanation": "Electronics storefront with device specification, compatibility, and warranty behavior.",
+          "storefront": "AGORA",
+          "frontends": [
+            "AGORA",
+            "AXIS"
+          ],
+          "stores": [
+            "mainStore"
+          ],
+          "backendRuntimes": [
+            "PLATFORM",
+            "WCMS_STAGED",
+            "WCMS_ONLINE",
+            "PROCESS",
+            "COMMERCE"
+          ],
+          "corsOrigins": [
+            "http://127.0.0.1:3300"
+          ],
+          "packDomains": {
+            "agora.electronics": "electronics",
+            "nexus.web": "content"
+          },
+          "rendererByDomain": {
+            "electronics": "agora.electronics.product-card"
+          },
+          "market": {
+            "country": "AE",
+            "locale": "en-AE",
+            "currency": "AED"
+          }
+        },
+        "telco": {
+          "label": "Telco commerce storefront",
+          "selected": [
+            "nodics.commerce",
+            "telco"
+          ],
+          "domains": [
+            "TELCO"
+          ],
+          "excluded": [
+            "apparel"
+          ],
+          "composition": "telco",
+          "routes": [
+            "/",
+            "/telco"
+          ],
+          "renderers": [
+            "agora.telco.product-card"
+          ],
+          "catalogs": [
+            "telcoProductCatalog",
+            "telcoContentCatalog"
+          ],
+          "packs": [
+            "agora.telco"
+          ],
+          "journeys": [
+            "telco.device-plan-provisioning"
+          ],
+          "integrations": [
+            {
+              "code": "localProvisioning",
+              "kind": "PROVISIONING",
+              "certificationState": "LOCAL_ADAPTER",
+              "required": true
+            }
+          ],
+          "explanation": "Telco storefront with device behavior plus subscription-plan and provisioning behavior.",
+          "storefront": "AGORA",
+          "frontends": [
+            "AGORA",
+            "AXIS"
+          ],
+          "stores": [
+            "mainStore"
+          ],
+          "backendRuntimes": [
+            "PLATFORM",
+            "WCMS_STAGED",
+            "WCMS_ONLINE",
+            "PROCESS",
+            "COMMERCE"
+          ],
+          "corsOrigins": [
+            "http://127.0.0.1:3300"
+          ],
+          "packDomains": {
+            "agora.telco": "telco",
+            "nexus.web": "content"
+          },
+          "rendererByDomain": {
+            "telco": "agora.telco.product-card"
+          },
+          "market": {
+            "country": "AE",
+            "locale": "en-AE",
+            "currency": "AED"
+          }
+        },
+        "combined": {
+          "label": "Combined domain commerce storefront",
+          "selected": [
+            "nodics.commerce",
+            "apparel",
+            "electronics",
+            "telco"
+          ],
+          "domains": [
+            "APPAREL",
+            "ELECTRONICS",
+            "TELCO"
+          ],
+          "excluded": [],
+          "composition": "combined",
+          "routes": [
+            "/",
+            "/apparel",
+            "/electronics",
+            "/telco"
+          ],
+          "renderers": [
+            "agora.apparel.product-card",
+            "agora.electronics.product-card",
+            "agora.telco.product-card"
+          ],
+          "catalogs": [
+            "apparelCatalog",
+            "electronicsCatalog",
+            "telcoCatalog",
+            "contentCatalog"
+          ],
+          "packs": [
+            "agora.apparel",
+            "agora.electronics",
+            "agora.telco"
+          ],
+          "journeys": [
+            "apparel.size-colour-checkout",
+            "electronics.warranty-checkout",
+            "telco.device-plan-provisioning",
+            "commerce.mixed-cart"
+          ],
+          "integrations": [
+            {
+              "code": "localProvisioning",
+              "kind": "PROVISIONING",
+              "certificationState": "LOCAL_ADAPTER",
+              "required": true
+            }
+          ],
+          "explanation": "One storefront combining Apparel, Electronics, and Telco customer journeys.",
+          "storefront": "AGORA",
+          "frontends": [
+            "AGORA",
+            "AXIS"
+          ],
+          "stores": [
+            "mainStore"
+          ],
+          "backendRuntimes": [
+            "PLATFORM",
+            "WCMS_STAGED",
+            "WCMS_ONLINE",
+            "PROCESS",
+            "COMMERCE"
+          ],
+          "corsOrigins": [
+            "http://127.0.0.1:3300"
+          ],
+          "packDomains": {
+            "agora.apparel": "apparel",
+            "agora.electronics": "electronics",
+            "agora.telco": "telco",
+            "nexus.web": "content"
+          },
+          "rendererByDomain": {
+            "apparel": "agora.apparel.product-card",
+            "electronics": "agora.electronics.product-card",
+            "telco": "agora.telco.product-card"
+          },
+          "market": {
+            "country": "AE",
+            "locale": "en-AE",
+            "currency": "AED"
+          }
+        }
+      },
+      "compositions": [
+        {
+          "code": "commerce",
+          "domains": [],
+          "rendererKeys": [
+            "commerce.product.card"
+          ],
+          "frontend": "AGORA",
+          "dataPacks": []
+        },
+        {
+          "code": "apparel",
+          "domains": [
+            "apparel"
+          ],
+          "rendererKeys": [
+            "commerce.product.card",
+            "agora.apparel.product-card"
+          ],
+          "frontend": "AGORA",
+          "dataPacks": [
+            "agora.apparel"
+          ]
+        },
+        {
+          "code": "electronics",
+          "domains": [
+            "electronics"
+          ],
+          "rendererKeys": [
+            "commerce.product.card",
+            "agora.electronics.product-card"
+          ],
+          "frontend": "AGORA",
+          "dataPacks": [
+            "agora.electronics"
+          ]
+        },
+        {
+          "code": "telco",
+          "domains": [
+            "telco"
+          ],
+          "rendererKeys": [
+            "commerce.product.card",
+            "agora.electronics.product-card",
+            "agora.telco.product-card"
+          ],
+          "frontend": "AGORA",
+          "dataPacks": [
+            "agora.telco"
+          ]
+        },
+        {
+          "code": "combined",
+          "domains": [
+            "apparel",
+            "electronics",
+            "telco"
+          ],
+          "rendererKeys": [
+            "commerce.product.card",
+            "agora.apparel.product-card",
+            "agora.electronics.product-card",
+            "agora.telco.product-card"
+          ],
+          "frontend": "AGORA",
+          "dataPacks": [
+            "agora.apparel",
+            "agora.electronics",
+            "agora.telco"
+          ]
+        }
+      ],
+      "frontends": [
+        {
+          "code": "AGORA",
+          "role": "Reference commerce storefront"
+        },
+        {
+          "code": "AXIS",
+          "role": "BackOffice administration"
+        },
+        {
+          "code": "NEXUS",
+          "role": "Reference corporate website",
+          "dataPacks": [
+            "nexus.web"
+          ]
+        }
+      ],
+      "defaultPreset": "commerce"
+    }
   },
   "scripts": {
-    "configure:framework": "node scripts/nodics-project.js project:validate",
-    "docs:generate": "node scripts/nodics-project.js project:run docs:generate",
-    "docs:check": "node scripts/nodics-project.js project:run docs:check",
-    "domains:manifests": "node scripts/nodics-project.js project:run domains:manifests",
+    "configure:framework": "nodics project:validate",
+    "docs:generate": "nodics project:run docs:generate",
+    "docs:check": "nodics project:run docs:check",
+    "domains:manifests": "nodics project:run domains:manifests",
     "nexus:check": "npm run nexus:test",
     "nexus:test": "node modules/nexus.web/test/nexusCorporateContentContract.test.mjs",
-    "start:commerce": "node scripts/nodics-project.js project:run start:commerce",
-    "start:commerce:staged": "node scripts/nodics-project.js project:run start:commerce:staged",
-    "start:engagement": "node scripts/nodics-project.js project:run start:engagement",
-    "start:location": "node scripts/nodics-project.js project:run start:location",
-    "start:loyalty": "node scripts/nodics-project.js project:run start:loyalty",
-    "start:platform": "node scripts/nodics-project.js project:run start:platform",
-    "start:process": "node scripts/nodics-project.js project:run start:process",
-    "start:wcms": "node scripts/nodics-project.js project:run start:wcms",
-    "start:waste": "node scripts/nodics-project.js project:run start:waste",
-    "start:wcms:staged": "node scripts/nodics-project.js project:run start:wcms:staged",
-    "start:wcms:online": "node scripts/nodics-project.js project:run start:wcms:online",
-    "topology:start": "node scripts/nodics-project.js project:run topology:start",
-    "topology:start:all": "node scripts/nodics-project.js project:run topology:start:all",
-    "topology:preflight": "node scripts/nodics-project.js project:run topology:preflight",
-    "topology:status": "node scripts/nodics-project.js project:run topology:status",
-    "topology:stop": "node scripts/nodics-project.js project:run topology:stop",
-    "docker-local:preflight": "node scripts/nodics-project.js project:run docker-local:preflight",
-    "docker-local:build": "node scripts/nodics-project.js project:run docker-local:build",
-    "docker-local:start": "node scripts/nodics-project.js project:run docker-local:start",
-    "docker-local:status": "node scripts/nodics-project.js project:run docker-local:status",
-    "docker-local:logs": "node scripts/nodics-project.js project:run docker-local:logs",
-    "docker-local:stop": "node scripts/nodics-project.js project:run docker-local:stop",
-    "docker-local:reset": "node scripts/nodics-project.js project:run docker-local:reset",
-    "docker-local:acceptance": "node scripts/nodics-project.js project:run docker-local:acceptance",
-    "docker-local:qualify": "node scripts/nodics-project.js project:run docker-local:qualify",
-    "docker-local:backup": "node scripts/nodics-project.js project:run docker-local:backup",
-    "docker-local:verify": "node scripts/nodics-project.js project:run docker-local:verify",
-    "docker-local:restore": "node scripts/nodics-project.js project:run docker-local:restore",
-    "docker-local:resilience": "node scripts/nodics-project.js project:run docker-local:resilience",
-    "docker-local:publishing-interruption-contracts": "node scripts/nodics-project.js project:run qualification:publishing-interruption-contracts",
-    "docker-local:soak": "node scripts/nodics-project.js project:run docker-local:soak",
-    "acceptance:local": "node scripts/nodics-project.js project:run acceptance:local",
-    "acceptance:local:fresh": "node scripts/nodics-project.js project:run acceptance:local:fresh",
-    "acceptance:functional": "node scripts/nodics-project.js project:run acceptance:functional",
-    "acceptance:agora-commerce": "node scripts/nodics-project.js project:run acceptance:agora-commerce",
-    "acceptance:loyalty-reward-checkout": "node scripts/nodics-project.js project:run acceptance:loyalty-reward-checkout",
-    "acceptance:waste-management": "node scripts/nodics-project.js project:run acceptance:waste-management",
-    "acceptance:waste-backoffice-discovery": "node scripts/nodics-project.js project:run acceptance:waste-backoffice-discovery",
-    "acceptance:agora-commerce:docker": "node scripts/nodics-project.js project:run acceptance:agora-commerce:docker",
-    "acceptance:agora-commerce-data": "node scripts/nodics-project.js project:run acceptance:agora-commerce-data",
-    "acceptance:agora-commerce-publication": "node scripts/nodics-project.js project:run acceptance:agora-commerce-publication",
+    "start:commerce": "nodics project:run start:commerce",
+    "start:commerce:staged": "nodics project:run start:commerce:staged",
+    "start:engagement": "nodics project:run start:engagement",
+    "start:location": "nodics project:run start:location",
+    "start:loyalty": "nodics project:run start:loyalty",
+    "start:platform": "nodics project:run start:platform",
+    "start:process": "nodics project:run start:process",
+    "start:wcms": "nodics project:run start:wcms",
+    "start:waste": "nodics project:run start:waste",
+    "start:wcms:staged": "nodics project:run start:wcms:staged",
+    "start:wcms:online": "nodics project:run start:wcms:online",
+    "topology:start": "nodics project:run topology:start",
+    "topology:start:all": "nodics project:run topology:start:all",
+    "topology:preflight": "nodics project:run topology:preflight",
+    "topology:status": "nodics project:run topology:status",
+    "topology:stop": "nodics project:run topology:stop",
+    "docker-local:preflight": "nodics project:run docker-local:preflight",
+    "docker-local:build": "nodics project:run docker-local:build",
+    "docker-local:start": "nodics project:run docker-local:start",
+    "docker-local:status": "nodics project:run docker-local:status",
+    "docker-local:logs": "nodics project:run docker-local:logs",
+    "docker-local:stop": "nodics project:run docker-local:stop",
+    "docker-local:reset": "nodics project:run docker-local:reset",
+    "docker-local:acceptance": "nodics project:run docker-local:acceptance",
+    "docker-local:qualify": "nodics project:run docker-local:qualify",
+    "docker-local:backup": "nodics project:run docker-local:backup",
+    "docker-local:verify": "nodics project:run docker-local:verify",
+    "docker-local:restore": "nodics project:run docker-local:restore",
+    "docker-local:resilience": "nodics project:run docker-local:resilience",
+    "docker-local:publishing-interruption-contracts": "nodics project:run qualification:publishing-interruption-contracts",
+    "docker-local:soak": "nodics project:run docker-local:soak",
+    "acceptance:local": "nodics project:run acceptance:local",
+    "acceptance:local:fresh": "nodics project:run acceptance:local:fresh",
+    "acceptance:functional": "nodics project:run acceptance:functional",
+    "acceptance:agora-commerce": "nodics project:run acceptance:agora-commerce",
+    "acceptance:loyalty-reward-checkout": "nodics project:run acceptance:loyalty-reward-checkout",
+    "acceptance:waste-management": "nodics project:run acceptance:waste-management",
+    "acceptance:waste-backoffice-discovery": "nodics project:run acceptance:waste-backoffice-discovery",
+    "acceptance:agora-commerce:docker": "nodics project:run acceptance:agora-commerce:docker",
+    "acceptance:agora-commerce-data": "nodics project:run acceptance:agora-commerce-data",
+    "acceptance:agora-commerce-publication": "nodics project:run acceptance:agora-commerce-publication",
     "acceptance:agora-commerce:ci": "npm run test:agora-commerce && npm run acceptance:agora-commerce-data && npm run acceptance:agora-commerce-publication && npm run acceptance:agora-commerce",
-    "qualification:agora-commerce:live": "node scripts/nodics-project.js project:run qualification:agora-commerce:live",
-    "acceptance:agora-cms-media-seed": "node scripts/nodics-project.js project:run acceptance:agora-cms-media-seed",
-    "acceptance:nexus-cms-media-seed": "node scripts/nodics-project.js project:run acceptance:nexus-cms-media-seed",
-    "acceptance:editorial-live": "node scripts/nodics-project.js project:run acceptance:editorial-live",
-    "acceptance:capability-registry": "node scripts/nodics-project.js project:run acceptance:capability-registry",
-    "acceptance:guided-initialization": "node scripts/nodics-project.js project:run acceptance:guided-initialization",
-    "acceptance:documentation:fresh-browser": "node scripts/nodics-project.js project:run acceptance:documentation:fresh-browser",
-    "qualification:deployment": "node scripts/nodics-project.js project:run qualification:deployment",
-    "qualification:deployment:local": "node scripts/nodics-project.js project:run qualification:deployment:local",
-    "qualification:publishing-capacity": "node scripts/nodics-project.js project:run qualification:publishing-capacity",
-    "qualification:publishing-soak": "node scripts/nodics-project.js project:run qualification:publishing-soak",
-    "qualification:security-boundary": "node scripts/nodics-project.js project:run qualification:security-boundary",
-    "quality:ownership": "node scripts/nodics-project.js quality:ownership --home=.",
+    "qualification:agora-commerce:live": "nodics project:run qualification:agora-commerce:live",
+    "acceptance:agora-cms-media-seed": "nodics project:run acceptance:agora-cms-media-seed",
+    "acceptance:nexus-cms-media-seed": "nodics project:run acceptance:nexus-cms-media-seed",
+    "acceptance:editorial-live": "nodics project:run acceptance:editorial-live",
+    "acceptance:capability-registry": "nodics project:run acceptance:capability-registry",
+    "acceptance:guided-initialization": "nodics project:run acceptance:guided-initialization",
+    "acceptance:documentation:fresh-browser": "nodics project:run acceptance:documentation:fresh-browser",
+    "qualification:deployment": "nodics project:run qualification:deployment",
+    "qualification:deployment:local": "nodics project:run qualification:deployment:local",
+    "qualification:publishing-capacity": "nodics project:run qualification:publishing-capacity",
+    "qualification:publishing-soak": "nodics project:run qualification:publishing-soak",
+    "qualification:security-boundary": "nodics project:run qualification:security-boundary",
+    "quality:ownership": "nodics quality:ownership --home=.",
     "prepare:platform": "node test/runtime-prepare.test.js platformServer",
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:loyalty-runtime": "node test/loyaltyRuntimeCompositionContract.test.js",
@@ -98,15 +534,18 @@
     "test:multi-domain": "node --test test/multiDomainKickoffContract.test.mjs test/multiDomainReleaseExecutionContract.test.js test/multiDomainEndToEndQualification.test.js",
     "test:qualification": "node test/deploymentQualificationContract.test.mjs && node test/dataLifecycleClassificationContract.test.mjs && node test/guidedInitializationProfilesContract.test.js && node test/localPublishingContractFreeze.test.mjs && node test/localTopologyLifecycle.test.mjs && node test/dockerLocalEnvironmentContract.test.mjs && node test/dockerLocalResilienceContract.test.mjs",
     "test": "npm run quality:ownership && npm run test:documentation && npm run nexus:test && npm run test:data-ownership && npm run test:qualification && npm run prepare:runtime",
-    "nodics:clean": "node scripts/nodics-project.js clean",
-    "nodics:build": "node scripts/nodics-project.js build",
-    "nodics:release-check": "node scripts/nodics-project.js release:check",
-    "nodics:project:validate": "node scripts/nodics-project.js project:validate",
-    "nodics:security-boundary": "node scripts/nodics-project.js qualification:security-boundary",
-    "nodics:publishing-capacity": "node scripts/nodics-project.js qualification:publishing-capacity",
-    "nodics:publishing-soak": "node scripts/nodics-project.js qualification:publishing-soak",
-    "nodics:publishing-interruption-contracts": "node scripts/nodics-project.js qualification:publishing-interruption-contracts",
-    "release:check": "node scripts/nodics-project.js release:check",
+    "nodics:clean": "nodics clean",
+    "nodics:build": "nodics build",
+    "nodics:release-check": "nodics release:check",
+    "nodics:project:validate": "nodics project:validate",
+    "nodics:security-boundary": "nodics qualification:security-boundary",
+    "nodics:publishing-capacity": "nodics qualification:publishing-capacity",
+    "nodics:publishing-soak": "nodics qualification:publishing-soak",
+    "nodics:publishing-interruption-contracts": "nodics qualification:publishing-interruption-contracts",
+    "release:check": "nodics release:check",
     "test:data-ownership": "node --test test/agoraDataOwnershipContract.test.js"
+  },
+  "dependencies": {
+    "nodics.foundation": "file:../nodics.ai/nodics.foundation"
   }
 }

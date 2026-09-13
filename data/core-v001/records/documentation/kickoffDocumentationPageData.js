@@ -189,6 +189,31 @@ module.exports = {
     "active": true
   },
   "record7": {
+    "code": "kickoffDocsPagekickoffConfigurationInheritance",
+    "name": "Keep Kickoff configuration small",
+    "cmsSite": [
+      "kickoffDocumentationSite"
+    ],
+    "typeCode": "kickoffDocumentationArticlePageType",
+    "template": "kickoffDocumentationArticleTemplate",
+    "renderer": "documentation.page.article",
+    "cmsComponents": [
+      {
+        "target": "kickoffDocumentationNavigation",
+        "slot": "navigation",
+        "index": 5,
+        "active": true
+      },
+      {
+        "target": "kickoffDocsComponentkickoffConfigurationInheritance",
+        "slot": "article",
+        "index": 10,
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  "record8": {
     "code": "kickoffDocsPagekickoffFunctionalJourneys",
     "name": "Commerce and Engagement functional journeys",
     "cmsSite": [

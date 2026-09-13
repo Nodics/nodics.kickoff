@@ -22,21 +22,21 @@ const projectRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const require = createRequire(import.meta.url);
 const projectCommandService = require("../../nodics.ai/nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService");
 const frameworkProjectServiceRoot = path.join(projectRoot, "..", "nodics.ai", "nodics.foundation", "modules", "nTooling", "src", "service", "project");
-const scriptPath = path.join(frameworkProjectServiceRoot, "defaultProjectAgoraCommerceAcceptanceService.mjs");
+const scriptPath = path.join(projectRoot, 'scripts/acceptance', "defaultProjectAgoraCommerceAcceptanceService.mjs");
 const dockerScriptPath = path.join(projectRoot, "..", "nodics.ai", "nodics.foundation", "modules", "nTooling", "src", "service", "project", "defaultProjectContainerQualificationService.mjs");
-const liveQualificationPath = path.join(frameworkProjectServiceRoot, "defaultProjectAgoraCommerceLiveQualificationService.mjs");
+const liveQualificationPath = path.join(projectRoot, 'scripts/acceptance', "defaultProjectAgoraCommerceLiveQualificationService.mjs");
 const packagePath = path.join(projectRoot, "package.json");
 const dockerLocalProfilePath = path.join(projectRoot, "envs", "kickoffDockerLocal", "nodics.environment.json");
 
 test("Agora Commerce acceptance covers backend route surface and secured generated customer journey", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectCommands = projectCommandService.defaultCommands();
+  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
 
-  assert.match(pkg.scripts["acceptance:agora-commerce"], /nodics-project\.js project:run acceptance:agora-commerce/);
+  assert.match(pkg.scripts["acceptance:agora-commerce"], /nodics project:run acceptance:agora-commerce/);
   assert.equal(pkg.name, "nodics.kickoff");
-  assert.equal(projectCommands["acceptance:agora-commerce"].command, "project:agora-commerce-acceptance");
-  assert.equal(projectCommands["acceptance:agora-commerce"].home, "project");
+  assert.equal(projectCommands["acceptance:agora-commerce"].script, "scripts/acceptance/defaultProjectAgoraCommerceAcceptanceService.mjs");
+  assert.equal(projectCommands["acceptance:agora-commerce"].type, "projectScript");
   assert.match(source, /AXIS_ORIGIN/);
   assert.match(source, /portOf\(platformUrl, 4300\)/);
   assert.match(source, /portOf\(commerceUrl, 4350\)/);
@@ -90,12 +90,12 @@ test("Agora Commerce Docker acceptance targets Docker Local host ports without s
   const source = fs.readFileSync(dockerScriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
   const dockerLocalProfile = JSON.parse(fs.readFileSync(dockerLocalProfilePath, "utf8"));
-  const projectCommands = projectCommandService.defaultCommands();
+  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
 
-  assert.match(pkg.scripts["acceptance:agora-commerce:docker"], /nodics-project\.js project:run acceptance:agora-commerce:docker/);
+  assert.match(pkg.scripts["acceptance:agora-commerce:docker"], /nodics project:run acceptance:agora-commerce:docker/);
   assert.equal(projectCommands["acceptance:agora-commerce:docker"].command, "project:container-qualification");
   assert.deepEqual(projectCommands["acceptance:agora-commerce:docker"].args, ["dockerLocal", "commerce-acceptance"]);
-  assert.equal(fs.existsSync(path.join(projectRoot, "nodics.project.json")), false);
+  assert.equal(fs.existsSync(path.join(projectRoot, "nodics.project.json")), true);
   assert.equal(dockerLocalProfile.environment, "kickoffDockerLocal");
   assert.equal(dockerLocalProfile.acceptance.urls.platform, "http://127.0.0.1:5300");
   assert.equal(dockerLocalProfile.acceptance.urls.commerce, "http://127.0.0.1:5350");
@@ -107,12 +107,12 @@ test("Agora Commerce Docker acceptance targets Docker Local host ports without s
 test("Agora Commerce live qualification sequences topology data publication and customer journey acceptance", () => {
   const source = fs.readFileSync(liveQualificationPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectCommands = projectCommandService.defaultCommands();
+  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
 
-  assert.match(pkg.scripts["qualification:agora-commerce:live"], /nodics-project\.js project:run qualification:agora-commerce:live/);
+  assert.match(pkg.scripts["qualification:agora-commerce:live"], /nodics project:run qualification:agora-commerce:live/);
   assert.equal(pkg.name, "nodics.kickoff");
-  assert.equal(projectCommands["qualification:agora-commerce:live"].command, "project:agora-commerce-live-qualification");
-  assert.equal(projectCommands["qualification:agora-commerce:live"].home, "project");
+  assert.equal(projectCommands["qualification:agora-commerce:live"].script, "scripts/acceptance/defaultProjectAgoraCommerceLiveQualificationService.mjs");
+  assert.equal(projectCommands["qualification:agora-commerce:live"].type, "projectScript");
   assert.match(source, /data folder -> Staged schemas -> Online schemas -> search indexing -> Agora frontend/);
   [
     '"topology:preflight"',

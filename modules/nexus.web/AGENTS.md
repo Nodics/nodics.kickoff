@@ -29,3 +29,10 @@
 - Keep Nexus application documentation source under this module's `docs/`.
   Never place it in Kickoff-wide `docs/`, an untracked workspace planning
   directory, the Nexus frontend, or a framework documentation pack.
+
+
+This module explicitly participates in Application Builder through
+`nodics.applicationBuilder.dataPack: true` in its package metadata. The owning
+customer project declares frontend, domain and preset choices. Preserve the
+module's existing import-manifest and content ownership rules; Builder metadata
+does not import, publish or validate this module's live data.

@@ -90,7 +90,7 @@ const scenarios = Object.freeze([
             'agora.electronics', 'agora.electronics', 'agora.telco', 'agora.telco', 'kickoffLocal',
             'commerceStagedServer'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'schemaWorkbench', 'commerceManagement']),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'schemaApi', 'commerceManagement']),
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerceStaged');
             assert.equal(CONFIG.get('runtimeRole').code, 'COMMERCE_STAGED');
@@ -145,7 +145,7 @@ const scenarios = Object.freeze([
             'ollamaProvider',
             'openAiProvider'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaWorkbench', 'dataImport', 'wasteInternal']),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaApi', 'dataImport', 'wasteInternal']),
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
             assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
@@ -178,7 +178,7 @@ const scenarios = Object.freeze([
             'kickoffLocal',
             'locationServer'
         ]),
-        expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaWorkbench', 'dataImport', 'locationInternal']),
+        expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaApi', 'dataImport', 'locationInternal']),
         verify: function () {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalLocation');
             assert.equal(CONFIG.get('runtimeRole').code, 'LOCATION');
@@ -263,7 +263,7 @@ const scenarios = Object.freeze([
             ]);
             assert.equal(sourceCodePartitions.every(source => source.enabled === true), true);
             assert.equal(sourceCodePartitions.every(source => source.classification === 'RESTRICTED'), true);
-            assert.equal(sourceCodePartitions.every(source => source.allowedChannels.length === 1 && source.allowedChannels[0] === 'AXIS_EMPLOYEE'), true);
+            assert.equal(sourceCodePartitions.every(source => source.allowedChannels.length === 1 && source.allowedChannels[0] === 'EMPLOYEE'), true);
             assert.equal(sourceCodePartitions.every(source => source.limits.maximumFiles <= 400), true);
             assert.equal(NODICS.isModuleActive('discoveryRuntime'), true);
             assert.equal(NODICS.isModuleActive('search'), true);
@@ -281,7 +281,7 @@ const scenarios = Object.freeze([
             'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web',
             'kickoffLocal', 'wcmsStagedServer'
         ]),
-        expectedApiExposure: Object.freeze(['schemaWorkbench', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),
+        expectedApiExposure: Object.freeze(['schemaApi', 'schemaMaintenance', 'openApiContract', 'mediaManagement', 'dataImport', 'dataExport']),
         verify: function () {
             assert.equal(CONFIG.get('publishEnabled'), true);
             assert.equal(CONFIG.get('runtimeRole').code, 'WCMS_STAGED');
@@ -360,6 +360,8 @@ async function prepareScenario(scenario) {
         defaultServer: scenario.server
     }));
 
+    assert.equal(NODICS.isModuleActive('kickoffAdministration'), scenario.server === 'platformServer', 'Shared administration defaults must be scoped to Platform');
+
     const selectedDomains = CONFIG.get('agoraDomains').domains;
     const capabilityDomains = new Set(selectedDomains);
     if (capabilityDomains.has('telco')) capabilityDomains.add('electronics');
@@ -378,6 +380,9 @@ async function prepareScenario(scenario) {
     });
     disabledModules.forEach(moduleName => assert.equal(NODICS.isModuleActive(moduleName), false, `${moduleName} should be disabled`));
     if (scenario.server === 'commerceServer' || scenario.server === 'commerceStagedServer') {
+        for (const moduleName of ['store', 'cart', 'shoppingList']) assert.equal(NODICS.isModuleActive(moduleName), true);
+        assert.equal(CONFIG.get('cart').customerApi.defaultStoreCode, undefined);
+        assert.equal(CONFIG.get('shoppingList').customerApi.defaultStoreCode, undefined);
         const contributors = CONFIG.get('product').publication.searchEnrichment.domains.contributors;
         assert.deepEqual(
             Object.keys(contributors).sort(),

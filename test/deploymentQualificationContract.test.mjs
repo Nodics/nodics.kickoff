@@ -34,10 +34,7 @@ function readEnvFile(filePath) {
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
 const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
-const qualificationService = await import(pathToFileURL(path.join(
-  frameworkRoot,
-  'nodics.foundation/modules/nTooling/src/service/project/defaultProjectDeploymentQualificationService.mjs'
-)).href);
+const qualificationService = await import(pathToFileURL(path.join(projectRoot, 'scripts/acceptance', "defaultProjectDeploymentQualificationService.mjs")).href);
 const {
   createQualificationPlan,
   createReport,

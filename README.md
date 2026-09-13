@@ -140,7 +140,7 @@ qualification profiles are owned by the selected environment, for example
 each module's `data/manifest.json`. Runtime startup facts are discovered from
 the selected environment server packages under
 `envs/<environment>/*Server`. `package.json` aliases should stay thin and call
-`nodics-project.js project:run <command>` rather than hardcoding project script
+`nodics project:run <command>` rather than hardcoding project script
 paths. This keeps generated projects upgrade-safe: project facts stay in the
 project, while framework execution, validation, lifecycle, and upgrade behavior
 can evolve in `nodics.ai`.
@@ -211,9 +211,11 @@ journey. The bounded fresh-database variant requires the explicit
 
 Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
 located at the default sample location. The value may be absolute or relative
-to this Nodics Kickoff project root. Project scripts use `scripts/nodics-project.js`
-to delegate into that framework checkout without creating framework links under
-`.nodics/`.
+to this Nodics Kickoff project root. Project scripts use the `nodics` executable supplied by the declared
+`nodics.foundation` dependency. This reference project binds Foundation to its
+local framework checkout in `package.json`; update that dependency and its lockfile
+when moving the checkout. `.env` may select runtime framework coordinates without
+copying a JavaScript dispatcher into the project. No `.nodics/` links are required.
 
 Do not commit `.nodics/`; it is machine-local generated scratch/setup state.
 
@@ -238,3 +240,11 @@ Kickoff configuration follows the framework classification contract:
   runtime composition, or explicit enable/disable overrides;
 - generated `temp/` files are runtime state, not authored project
   configuration.
+
+
+Application Builder reference choices are declared in this project's
+`package.json` under `nodics.applicationBuilder`. The selected data modules opt
+in through their own package metadata. Use an explicit frontend root, or select
+`--frontend-code` when using an experience workspace with multiple storefronts.
+These choices describe intended reference wiring; generated starter checks do
+not replace Local/Docker deployment acceptance.

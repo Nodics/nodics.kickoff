@@ -88,7 +88,7 @@ module.exports = {
     ],
     "statusSummary": {
       "sections": 5,
-      "pages": 8,
+      "pages": 9,
       "lifecycleState": "ONLINE"
     },
     "product": "kickoffDocumentationProduct",
@@ -280,6 +280,12 @@ module.exports = {
         "title": "Customer customization guide",
         "summary": "Use Kickoff as a safe example for project modules, environment configuration, and customer overlays.",
         "order": 10
+      },
+      {
+        "code": "kickoff.configuration-inheritance",
+        "title": "Keep Kickoff configuration small",
+        "summary": "Inherit framework defaults, share customer administration descriptors and keep deployment choices at their owners.",
+        "order": 11
       }
     ],
     "journeyLinks": [
@@ -287,10 +293,15 @@ module.exports = {
         "label": "Customer customization guide",
         "targetPage": "kickoff.customization",
         "route": "/docs/nodics-kickoff/kickoff-customization"
+      },
+      {
+        "label": "Keep Kickoff configuration small",
+        "targetPage": "kickoff.configuration-inheritance",
+        "route": "/docs/nodics-kickoff/kickoff-configuration-inheritance"
       }
     ],
     "statusSummary": {
-      "pages": 1
+      "pages": 2
     },
     "accessMode": "PUBLIC",
     "lifecycleState": "ONLINE",
