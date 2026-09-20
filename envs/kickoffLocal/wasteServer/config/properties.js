@@ -96,6 +96,11 @@ module.exports = {
       "kickoffApi",
       "kickoffInt",
       "nodics.waste",
+      "nodics.rulesEngine",
+      "rulesCore",
+      "rulesDefinition",
+      "rulesEvaluation",
+      "rulesApi",
       "wasteCore",
       "wasteMaterial",
       "wasteCollection",
@@ -176,6 +181,16 @@ module.exports = {
       "enabled": true,
       "adapter": "openai",
       "profile": "eWastePhotoMetadata"
+    }
+  },
+  "rulesEngine": {
+    "approval": {
+      "processTarget": {
+        "connectionName": "process"
+      },
+      "actionAuthority": {
+        "connectionName": "process"
+      }
     }
   },
   "eWaste": {
@@ -338,7 +353,9 @@ module.exports = {
     "wasteReceipt": {},
     "wasteImpact": {},
     "wasteMovement": {},
-    "wasteCompliance": {}
+    "wasteCompliance": {},
+    "rulesDefinition": {},
+    "eWaste": {}
   },
   "servers": {
     "engagement": {
