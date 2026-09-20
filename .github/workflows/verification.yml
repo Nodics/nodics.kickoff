@@ -47,6 +47,9 @@ jobs:
       - name: Run project verification
         working-directory: nodics.kickoff
         run: npm test
+      - name: Prepare Waste runtime
+        working-directory: nodics.kickoff
+        run: npm run prepare:runtime -- wasteServer
       - name: Verify Waste runtime composition
         working-directory: nodics.kickoff
         run: npm run test:waste-runtime
