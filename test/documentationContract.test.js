@@ -31,10 +31,25 @@ const publicationStateRecords = Object.values(require('../data/core-v001/records
 const searchMetadataRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationSearchMetadataData'));
 const contentPackHeader = require('../data/core-v001/headers/kickoffDocumentationContentPackHeader');
 
-const capability = properties.backofficeCapabilities['nodics.kickoff'];
-const contentPack = properties.data.contentPacks.packs.kickoffDocumentation;
-const source = capability.documentation[0];
-const navigationItem = capability.navigation[0];
+const configuration = require('./helpers/configuration');
+const frameworkRoot = configuration.frameworkRoot;
+const importDefaults = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/config/properties'));
+const contentPackService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/contentPack/defaultContentPackService'));
+const effective = configuration.merge({}, importDefaults, properties);
+let contentPack, release;
+const previousConfig = global.CONFIG, previousNodics = global.NODICS;
+try {
+    global.CONFIG = { get: key => effective[key] };
+    global.NODICS = { getEnvironmentPath: () => root };
+    assert.equal(contentPackService.resolvePackContext('kickoffDocumentation').enabled, false);
+    effective.data.contentPacks.enabled = true; // Isolated authorized-runtime selection for read-only inspection.
+    const context = contentPackService.resolvePackContext('kickoffDocumentation');
+    contentPack = context.pack;
+    release = contentPackService.inspectRelease(context);
+} finally {
+    global.CONFIG = previousConfig;
+    global.NODICS = previousNodics;
+}
 
 function markdownWordCount(value) {
     return (value.match(/\b[\p{L}\p{N}][\p{L}\p{N}'’-]*\b/gu) || []).length;
@@ -79,31 +94,18 @@ assert.strictEqual(manifest.installationPolicy, 'OPTIONAL_AXIS_INITIATED');
 assert.deepStrictEqual(manifest.sites, ['kickoffDocumentationSite']);
 assert.strictEqual(manifest.pages, catalogue.documents.length);
 assert.strictEqual(contentPack.enabled, true);
-assert.strictEqual(contentPack.manifestPack, 'nodics.kickoff');
-assert.deepStrictEqual(contentPack.source, {
-    type: 'LOCAL_PROJECT',
-    contentPath: 'data/core-v001',
-    manifestPath: 'data/manifest.json',
-    manifestSection: 'documentation'
-});
-assert.strictEqual(contentPack.updatePolicy.sameVersionContentChange, 'REJECT');
-assert.strictEqual(capability.enabled, true);
-assert.deepStrictEqual(capability.roles, ['UI_COMPOSITION_PROVIDER']);
-assert.strictEqual(source.id, 'nodics-kickoff');
-assert.strictEqual(source.label, 'Nodics Kickoff');
-assert.strictEqual(source.route, '/docs/nodics-kickoff');
-assert.strictEqual(source.site, 'kickoffDocumentationSite');
-assert.strictEqual(source.catalog, 'documentationContentCatalog');
-assert.strictEqual(source.defaultPage, '/docs/nodics-kickoff');
-assert.strictEqual(source.packCode, 'kickoffDocumentation');
-assert.strictEqual(navigationItem.id, 'documentation-nodics-kickoff');
-assert.strictEqual(navigationItem.parentId, 'documentation');
-assert.strictEqual(navigationItem.parentModuleName, 'backoffice');
-assert.strictEqual(navigationItem.label, 'Nodics Kickoff');
-assert.strictEqual(navigationItem.route, '/docs/nodics-kickoff');
-assert.strictEqual(navigationItem.group.id, 'documentation');
-assert.strictEqual(navigationItem.group.order, 1600);
-assert.strictEqual(navigationItem.featureState, 'ACTIVE');
+assert.equal(release.available, true);
+assert.equal(release.manifest.pack, catalogue.pack);
+assert.equal(release.contentPath, path.join(root, 'data', manifest.contentPath));
+assert.equal(contentPack.source.type, 'LOCAL_PROJECT');
+assert.equal(contentPack.source.manifestPath, 'data/manifest.json');
+assert.equal(contentPack.source.manifestSection, 'documentation');
+assert.equal(contentPack.updatePolicy.sameVersionContentChange, 'REJECT');
+assert.equal(contentPack.presentation.title, 'Nodics Kickoff documentation');
+assert.equal(contentPack.presentation.retryAction, importDefaults.data.contentPacks.defaults.presentation.retryAction);
+assert.equal(properties.backofficeCapabilities, undefined, 'Retired capability configuration must not duplicate CMS-owned documentation');
+assert.equal(productRecords[0].ownerFunctionalModule, catalogue.pack);
+assert.equal(productRecords[0].site, manifest.sites[0]);
 
 const importOrder = Object.keys(contentPackHeader.cms);
 assert(
@@ -237,7 +239,7 @@ assert.strictEqual(
     'legacy documentation source must not remain under the generated data tree'
 );
 assert(
-    fs.existsSync(path.join(root, 'modules/nexus.web/docs/README.md')),
+    fs.existsSync(path.join(frameworkRoot, 'nodics.accelerators/modules/nexus/modules/nexus.web/docs/README.md')),
     'Nexus application documentation must have a module-owned docs boundary'
 );
 

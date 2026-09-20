@@ -11,6 +11,10 @@
 
 'use strict';
 
+// Isolated composition tests need valid signing inputs without deployment credentials.
+process.env.NODICS_JWT_SECRET = require('node:crypto').randomBytes(48).toString('hex');
+process.env.NODICS_API_KEY_PEPPER = require('node:crypto').randomBytes(48).toString('hex');
+
 const assert = require('node:assert/strict');
 const childProcess = require('node:child_process');
 const fs = require('node:fs');
@@ -119,7 +123,8 @@ async function prepareRuntime(environment, databaseName, httpPort) {
         expectedSchemas[moduleName].forEach(schemaName => {
             assert(rawSchema[schemaName], `${moduleName}.${schemaName} should be materialized for ${environment} loyaltyServer`);
             assert.equal(rawSchema[schemaName].service.enabled, true, `${moduleName}.${schemaName} should generate service capability`);
-            assert.equal(rawSchema[schemaName].router.enabled, false, `${moduleName}.${schemaName} should keep generated CRUD routers disabled`);
+            assert.equal(rawSchema[schemaName].router.enabled, true, `${moduleName}.${schemaName} should expose governed schema operations`);
+            assert.equal(rawSchema[schemaName].router.groups.schemaOperations, true, `${moduleName}.${schemaName} must retain schema operation governance`);
             assert.equal(rawSchema[schemaName].definition.tenant, undefined, `${moduleName}.${schemaName} must derive tenant from runtime context`);
             assert.equal(rawSchema[schemaName].definition.enterpriseCode, undefined, `${moduleName}.${schemaName} must not store enterpriseCode`);
         });

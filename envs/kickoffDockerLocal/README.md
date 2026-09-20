@@ -2,7 +2,7 @@
 
 `kickoffDockerLocal` is an isolated local production-simulation environment. It does not extend, import, or share databases, ports, generated secrets, media volumes, or runtime configuration with `kickoffLocal`.
 
-It composes Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, and Loyalty backend containers plus Axis and Nexus static application containers. MongoDB runs as an authenticated replica set. Redis provides password-protected distributed authentication state with a replica and Sentinel observation. Elasticsearch is internal to the data network for Commerce/Discovery search qualification. Axis uses operator-facing host ports; Nexus is configured only for Online delivery.
+It composes Platform, WCMS Staged, WCMS Online, Process, Engagement, Commerce, and Loyalty backend containers. Frontend Docker definitions live in each frontend application's `docker/` directory and are started independently. MongoDB runs as an authenticated replica set. Redis provides password-protected distributed authentication state with a replica and Sentinel observation. Elasticsearch is internal to the data network for Commerce/Discovery search qualification. API qualification requires no frontend server.
 
 ## Operations
 
@@ -66,7 +66,7 @@ Generated credentials live in the ignored `generated/docker.env` file with mode 
 npm run docker-local:restore -- <backup-id> --confirm-replace-docker-local-data
 ```
 
-`docker-local:resilience` performs the full destructive qualification: backup and checksum verification, isolated volume reset, restore, health recovery, API-level publishing/workflow acceptance, Staged/Online isolation, bounded load, Redis service interruption, Sentinel replica promotion, application reconnect, dependency audit, and the Axis bundled-login static accessibility contract. The measured evidence is emitted as JSON. The failure simulation pauses Redis command processing while preserving service discovery; deleting a container is not a valid Sentinel test because it also deletes the Docker DNS record.
+`docker-local:resilience` performs the full destructive qualification: backup and checksum verification, isolated volume reset, restore, health recovery, API-level publishing/workflow acceptance, Staged/Online isolation, bounded load, Redis service interruption, Sentinel replica promotion, application reconnect, dependency audit. The measured evidence is emitted as JSON. The failure simulation pauses Redis command processing while preserving service discovery; deleting a container is not a valid Sentinel test because it also deletes the Docker DNS record.
 
 The runtime keeps the direct `REDIS_URL` compatibility path but enables the framework Sentinel provider for Docker Local. The qualification must observe replica promotion and complete authenticated publishing acceptance through the reconnected applications before transparent failover is reported as passed.
 
@@ -78,8 +78,6 @@ Independent penetration testing and assistive-technology accessibility review re
 
 | Runtime | Host port |
 | --- | ---: |
-| Axis | 4100 |
-| Nexus | 4200 |
 | Platform | 5300 |
 | WCMS Staged | 5312 |
 | WCMS Online | 5314 |

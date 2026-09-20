@@ -15,131 +15,7 @@
 /** @description Declares Docker environment policy and shared endpoint coordinates for nConfig layering. @layer config @owner nodics.kickoff */
 module.exports = {
   "environment": {
-    "code": "kickoffDockerLocal",
-    "qualificationClass": "LOCAL_PRODUCTION_SIMULATION"
-  },
-  "log": {
-    "level": {
-      "$config": "env",
-      "name": "NODICS_LOG_LEVEL",
-      "fallback": "info"
-    }
-  },
-  "event": {
-    "remotePublishEnabled": false
-  },
-  "authSecurity": {
-    "jwt": {
-      "secret": {
-        "$config": "env",
-        "name": "AUTH_JWT_SECRET"
-      }
-    },
-    "apiKey": {
-      "pepper": {
-        "$config": "env",
-        "name": "AUTH_API_KEY_PEPPER"
-      }
-    },
-    "securityStamp": {
-      "enabled": true,
-      "failClosed": true,
-      "allowMissingStamp": false,
-      "cacheModuleName": "kickoffCore"
-    },
-    "refreshToken": {
-      "requireDistributedCache": true
-    }
-  },
-  "defaultAuthDetail": {
-    "tenant": "default",
-    "entCode": "default",
-    "loginId": "apiAdmin",
-    "apiKey": {
-      "$config": "env",
-      "name": "BOOTSTRAP_SERVICE_API_KEY"
-    }
-  },
-  "bootstrapIdentity": {
-    "source": "environment",
-    "adminPassword": {
-      "$config": "env",
-      "name": "BOOTSTRAP_ADMIN_PASSWORD"
-    },
-    "servicePassword": {
-      "$config": "env",
-      "name": "BOOTSTRAP_SERVICE_PASSWORD"
-    },
-    "serviceApiKey": {
-      "$config": "env",
-      "name": "BOOTSTRAP_SERVICE_API_KEY"
-    }
-  },
-  "httpHardening": {
-    "securityHeaders": {
-      "headers": {
-        "Cross-Origin-Resource-Policy": "cross-origin"
-      }
-    },
-    "cors": {
-      "enabled": true,
-      "allowedOrigins": [
-        "http://localhost:4100",
-        "http://127.0.0.1:4100",
-        "http://localhost:4200",
-        "http://127.0.0.1:4200",
-        "http://localhost:6300",
-        "http://127.0.0.1:6300",
-        "http://localhost:6400",
-        "http://127.0.0.1:6400",
-        "http://localhost:6500",
-        "http://127.0.0.1:6500",
-        "http://localhost:6600",
-        "http://127.0.0.1:6600"
-      ],
-      "allowedMethods": [
-        "GET",
-        "POST",
-        "PUT",
-        "PATCH",
-        "DELETE",
-        "OPTIONS"
-      ],
-      "allowedHeaders": [
-        "Content-Type",
-        "Authorization",
-        "Idempotency-Key",
-        "X-CSRF-Token",
-        "X-Request-Id",
-        "X-Correlation-Id",
-        "X-Nodics-Client-Contract-Version",
-        "X-Enterprise-Code",
-        "X-Tenant-Code",
-        "Tenant",
-        "X-Nodics-Enterprise",
-        "X-Nodics-Tenant"
-      ],
-      "exposedHeaders": [
-        "Retry-After",
-        "X-Request-Id",
-        "X-Correlation-Id",
-        "X-RateLimit-Limit",
-        "X-RateLimit-Remaining",
-        "X-RateLimit-Reset",
-        "ETag"
-      ],
-      "allowCredentials": true
-    }
-  },
-  "data": {
-    "dataReleases": {
-      "types": {
-        "sample": {
-          "enabled": true,
-          "operatorExecution": true
-        }
-      }
-    }
+    "class": "LOCAL_PRODUCTION_SIMULATION"
   },
   "database": {
     "default": {
@@ -157,28 +33,11 @@ module.exports = {
       }
     }
   },
-  "agoraDomains": {
-    "$config": "composition",
-    "name": "agora"
-  },
   "cache": {
-    "enabled": true,
-    "invalidation": {
-      "crossNode": true
-    },
-    "kickoffCore": {
-      "channels": {
-        "auth": {
-          "enabled": true,
-          "engine": "redis",
-          "fallback": false
-        }
-      },
+    "default": {
       "engines": {
         "redis": {
           "enabled": true,
-          "distributed": true,
-          "atomicConsume": true,
           "options": {
             "url": {
               "$config": "env",
@@ -186,8 +45,6 @@ module.exports = {
             },
             "host": null,
             "port": null,
-            "database": 0,
-            "prefix": "kickoffCore",
             "password": {
               "$config": "env",
               "name": "REDIS_PASSWORD"
@@ -206,391 +63,229 @@ module.exports = {
                 }
               ],
               "connectTimeout": 5000,
-              "commandTimeout": 3000,
-              "retryDelayMs": 250,
-              "maximumRetryDelayMs": 5000
+              "commandTimeout": 3000
             }
           }
         }
       }
     }
   },
-  "configurationValues": {
-    "remoteEndpoints": {
-      "platform": {
-        "endpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
-        },
-        "abstractEndpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
-        },
-        "remoteOnly": true
+  "tooling": {
+    "acceptance": {
+      "platformCommand": "acceptance:local",
+      "commerceCommand": "acceptance:agora-commerce",
+      "commerceDataCommand": "acceptance:agora-commerce-data",
+      "commercePublicationCommand": "acceptance:agora-commerce-publication",
+      "environmentUrls": {
+        "NEXUS_CMS_URL": "wcmsOnline"
       },
-      "platformServer": {
-        "endpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
+      "urls": {
+        "platform": "http://127.0.0.1:5300",
+        "wcmsStaged": "http://127.0.0.1:5312",
+        "wcmsOnline": "http://127.0.0.1:5314",
+        "process": "http://127.0.0.1:5330",
+        "engagement": "http://127.0.0.1:5340",
+        "loyalty": "http://127.0.0.1:5360",
+        "commerceStaged": "http://127.0.0.1:5352",
+        "commerce": "http://127.0.0.1:5350",
+        "waste": "http://127.0.0.1:5370",
+        "location": "http://127.0.0.1:5380"
+      }
+    },
+    "container": {
+      "composeProjectName": "nodics-kickoff-docker-local",
+      "composeFile": "envs/kickoffDockerLocal/docker/compose.yaml",
+      "generatedDirectory": "envs/kickoffDockerLocal/generated",
+      "environmentFile": "docker.env",
+      "replicaSet": "nodicsDockerLocal",
+      "mongodbHost": "mongodb",
+      "redisPrimaryHost": "redis-primary",
+      "hostPorts": [
+        5300,
+        5312,
+        5314,
+        5330,
+        5340,
+        5350,
+        5352,
+        5360,
+        5370,
+        5380
+      ],
+      "nativeIsolationPorts": [
+        4300,
+        4312,
+        4314,
+        4330,
+        4340,
+        4350,
+        4352,
+        4360,
+        4370,
+        4380
+      ],
+      "resilience": {
+        "backupDirectory": "envs/kickoffDockerLocal/generated/backups",
+        "restoreConfirmationToken": "--confirm-replace-docker-local-data",
+        "containers": {
+          "mongodb": "nodics-kickoff-docker-local-mongodb-1",
+          "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1"
         },
-        "abstractEndpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
-        },
-        "remoteOnly": true
+        "volumes": {
+          "redis": "nodics-kickoff-docker-local-redis",
+          "mediaStaged": "nodics-kickoff-docker-local-media-staged",
+          "mediaOnline": "nodics-kickoff-docker-local-media-online"
+        }
       },
-      "profile": {
-        "endpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
+      "qualification": {
+        "environmentContract": "test/dockerLocalEnvironmentContract.test.mjs",
+        "runtimePrepare": "test/dockerLocalRuntimePrepare.test.js",
+        "runtimePorts": [
+          5300,
+          5312,
+          5314,
+          5330,
+          5340,
+          5350,
+          5352,
+          5360,
+          5370,
+          5380
+        ],
+        "readLoadPorts": [
+          5314,
+          5300
+        ],
+        "readLoadRequests": 50,
+        "containerPrefix": "nodics-kickoff-docker-local-",
+        "containers": {
+          "mongodb": "nodics-kickoff-docker-local-mongodb-1",
+          "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",
+          "redisSentinel": "nodics-kickoff-docker-local-redis-sentinel-1",
+          "elasticsearch": "nodics-kickoff-docker-local-elasticsearch-1"
         },
-        "abstractEndpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
-        },
-        "remoteOnly": true
+        "hardenedContainers": [
+          "platform",
+          "wcms-staged",
+          "wcms-online",
+          "process",
+          "engagement",
+          "loyalty",
+          "commerce",
+          "commerce-staged",
+          "waste",
+          "location",
+          "axis",
+          "nexus",
+          "agora-apparel",
+          "agora-electronics",
+          "agora-telco",
+          "circa"
+        ],
+        "networkSeparation": {
+          "publicContainer": "nodics-kickoff-docker-local-nexus-1",
+          "applicationContainer": "nodics-kickoff-docker-local-wcms-staged-1"
+        }
       },
-      "backoffice": {
-        "endpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
-        },
-        "abstractEndpoint": {
-          "httpHost": "platform",
-          "httpPort": 4300,
-          "httpsHost": "platform",
-          "httpsPort": 4301
-        },
-        "remoteOnly": true
+      "soak": {
+        "durationSeconds": 1800,
+        "publicationIntervalSeconds": 300,
+        "concurrency": 12,
+        "requestIntervalMs": 1000,
+        "readinessPorts": [
+          5300,
+          5312,
+          5314,
+          5330,
+          5340,
+          5350,
+          5352,
+          5360,
+          5370,
+          5380
+        ],
+        "acceptanceCommand": "docker-local:acceptance"
       },
-      "wcmsStaged": {
-        "endpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
+      "resilienceQualification": {
+        "acceptanceCommand": "docker-local:acceptance",
+        "restoreConfirmationToken": "--confirm-replace-docker-local-data",
+        "readyPorts": [
+          5300,
+          5312,
+          5314,
+          5330,
+          5340,
+          5350,
+          5352,
+          5360,
+          5370,
+          5380
+        ],
+        "readLoad": {
+          "total": 1000,
+          "concurrency": 40,
+          "ports": [
+            5314,
+            5300
+          ]
         },
-        "abstractEndpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
-        },
-        "remoteOnly": true
+        "containers": {
+          "redisPrimary": "nodics-kickoff-docker-local-redis-primary-1",
+          "redisSentinel": "nodics-kickoff-docker-local-redis-sentinel-1",
+          "redisReplica": "nodics-kickoff-docker-local-redis-replica-1"
+        }
       },
-      "wcmsStagedServer": {
-        "endpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
+      "code": "dockerLocal"
+    }
+  },
+  "search": {
+    "default": {
+      "elastic": {
+        "connection": {
+          "hosts": [
+            {
+              "$config": "env",
+              "name": "NODICS_ELASTICSEARCH_URL",
+              "fallback": "http://elasticsearch:9200"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "log": {
+    "level": {
+      "$config": "env",
+      "name": "NODICS_LOG_LEVEL",
+      "fallback": "info"
+    }
+  },
+  "httpHardening": {
+    "securityHeaders": {
+      "headers": {
+        "Cross-Origin-Resource-Policy": "cross-origin"
+      }
+    },
+    "cors": {
+      "originEndpoints": {
+        "axis": {
+          "port": 4100
         },
-        "abstractEndpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
+        "nexus": {
+          "port": 4200
         },
-        "remoteOnly": true
-      },
-      "cmsStaged": {
-        "endpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
+        "agora": {
+          "port": 6300
         },
-        "abstractEndpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
+        "agoraElectronics": {
+          "port": 6400
         },
-        "remoteOnly": true
-      },
-      "wcmsOnline": {
-        "endpoint": {
-          "httpHost": "wcms-online",
-          "httpPort": 4314,
-          "httpsHost": "wcms-online",
-          "httpsPort": 4315
+        "agoraTelco": {
+          "port": 6500
         },
-        "abstractEndpoint": {
-          "httpHost": "wcms-online",
-          "httpPort": 4314,
-          "httpsHost": "wcms-online",
-          "httpsPort": 4315
-        },
-        "remoteOnly": true
-      },
-      "wcmsOnlineServer": {
-        "endpoint": {
-          "httpHost": "wcms-online",
-          "httpPort": 4314,
-          "httpsHost": "wcms-online",
-          "httpsPort": 4315
-        },
-        "abstractEndpoint": {
-          "httpHost": "wcms-online",
-          "httpPort": 4314,
-          "httpsHost": "wcms-online",
-          "httpsPort": 4315
-        },
-        "remoteOnly": true
-      },
-      "cmsOnline": {
-        "endpoint": {
-          "httpHost": "wcms-online",
-          "httpPort": 4314,
-          "httpsHost": "wcms-online",
-          "httpsPort": 4315
-        },
-        "abstractEndpoint": {
-          "httpHost": "wcms-online",
-          "httpPort": 4314,
-          "httpsHost": "wcms-online",
-          "httpsPort": 4315
-        },
-        "remoteOnly": true
-      },
-      "process": {
-        "endpoint": {
-          "httpHost": "process",
-          "httpPort": 4330,
-          "httpsHost": "process",
-          "httpsPort": 4331
-        },
-        "abstractEndpoint": {
-          "httpHost": "process",
-          "httpPort": 4330,
-          "httpsHost": "process",
-          "httpsPort": 4331
-        },
-        "remoteOnly": true
-      },
-      "processServer": {
-        "endpoint": {
-          "httpHost": "process",
-          "httpPort": 4330,
-          "httpsHost": "process",
-          "httpsPort": 4331
-        },
-        "abstractEndpoint": {
-          "httpHost": "process",
-          "httpPort": 4330,
-          "httpsHost": "process",
-          "httpsPort": 4331
-        },
-        "remoteOnly": true
-      },
-      "commerceStaged": {
-        "endpoint": {
-          "httpHost": "commerce-staged",
-          "httpPort": 4352,
-          "httpsHost": "commerce-staged",
-          "httpsPort": 4353
-        },
-        "abstractEndpoint": {
-          "httpHost": "commerce-staged",
-          "httpPort": 4352,
-          "httpsHost": "commerce-staged",
-          "httpsPort": 4353
-        },
-        "remoteOnly": true
-      },
-      "commerceStagedServer": {
-        "endpoint": {
-          "httpHost": "commerce-staged",
-          "httpPort": 4352,
-          "httpsHost": "commerce-staged",
-          "httpsPort": 4353
-        },
-        "abstractEndpoint": {
-          "httpHost": "commerce-staged",
-          "httpPort": 4352,
-          "httpsHost": "commerce-staged",
-          "httpsPort": 4353
-        },
-        "remoteOnly": true
-      },
-      "engagement": {
-        "endpoint": {
-          "httpHost": "engagement",
-          "httpPort": 4340,
-          "httpsHost": "engagement",
-          "httpsPort": 4341
-        },
-        "abstractEndpoint": {
-          "httpHost": "engagement",
-          "httpPort": 4340,
-          "httpsHost": "engagement",
-          "httpsPort": 4341
-        },
-        "remoteOnly": true
-      },
-      "engagementServer": {
-        "endpoint": {
-          "httpHost": "engagement",
-          "httpPort": 4340,
-          "httpsHost": "engagement",
-          "httpsPort": 4341
-        },
-        "abstractEndpoint": {
-          "httpHost": "engagement",
-          "httpPort": 4340,
-          "httpsHost": "engagement",
-          "httpsPort": 4341
-        },
-        "remoteOnly": true
-      },
-      "loyalty": {
-        "endpoint": {
-          "httpHost": "loyalty",
-          "httpPort": 4360,
-          "httpsHost": "loyalty",
-          "httpsPort": 4361
-        },
-        "abstractEndpoint": {
-          "httpHost": "loyalty",
-          "httpPort": 4360,
-          "httpsHost": "loyalty",
-          "httpsPort": 4361
-        },
-        "remoteOnly": true
-      },
-      "loyaltyServer": {
-        "endpoint": {
-          "httpHost": "loyalty",
-          "httpPort": 4360,
-          "httpsHost": "loyalty",
-          "httpsPort": 4361
-        },
-        "abstractEndpoint": {
-          "httpHost": "loyalty",
-          "httpPort": 4360,
-          "httpsHost": "loyalty",
-          "httpsPort": 4361
-        },
-        "remoteOnly": true
-      },
-      "waste": {
-        "endpoint": {
-          "httpHost": "waste",
-          "httpPort": 4370,
-          "httpsHost": "waste",
-          "httpsPort": 4371
-        },
-        "abstractEndpoint": {
-          "httpHost": "waste",
-          "httpPort": 4370,
-          "httpsHost": "waste",
-          "httpsPort": 4371
-        },
-        "remoteOnly": true
-      },
-      "wasteServer": {
-        "endpoint": {
-          "httpHost": "waste",
-          "httpPort": 4370,
-          "httpsHost": "waste",
-          "httpsPort": 4371
-        },
-        "abstractEndpoint": {
-          "httpHost": "waste",
-          "httpPort": 4370,
-          "httpsHost": "waste",
-          "httpsPort": 4371
-        },
-        "remoteOnly": true
-      },
-      "location": {
-        "endpoint": {
-          "httpHost": "location",
-          "httpPort": 4380,
-          "httpsHost": "location",
-          "httpsPort": 4381
-        },
-        "abstractEndpoint": {
-          "httpHost": "location",
-          "httpPort": 4380,
-          "httpsHost": "location",
-          "httpsPort": 4381
-        },
-        "remoteOnly": true
-      },
-      "locationServer": {
-        "endpoint": {
-          "httpHost": "location",
-          "httpPort": 4380,
-          "httpsHost": "location",
-          "httpsPort": 4381
-        },
-        "abstractEndpoint": {
-          "httpHost": "location",
-          "httpPort": 4380,
-          "httpsHost": "location",
-          "httpsPort": 4381
-        },
-        "remoteOnly": true
-      },
-      "wcms": {
-        "endpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
-        },
-        "abstractEndpoint": {
-          "httpHost": "wcms-staged",
-          "httpPort": 4312,
-          "httpsHost": "wcms-staged",
-          "httpsPort": 4313
-        },
-        "remoteOnly": true
-      },
-      "commerce": {
-        "endpoint": {
-          "httpHost": "commerce",
-          "httpPort": 4350,
-          "httpsHost": "commerce",
-          "httpsPort": 4351
-        },
-        "abstractEndpoint": {
-          "httpHost": "commerce",
-          "httpPort": 4350,
-          "httpsHost": "commerce",
-          "httpsPort": 4351
-        },
-        "remoteOnly": true
-      },
-      "commerceServer": {
-        "endpoint": {
-          "httpHost": "commerce",
-          "httpPort": 4350,
-          "httpsHost": "commerce",
-          "httpsPort": 4351
-        },
-        "abstractEndpoint": {
-          "httpHost": "commerce",
-          "httpPort": 4350,
-          "httpsHost": "commerce",
-          "httpsPort": 4351
-        },
-        "remoteOnly": true
+        "circa": {
+          "port": 6600
+        }
       }
     }
   }

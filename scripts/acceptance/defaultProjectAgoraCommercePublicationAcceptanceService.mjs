@@ -17,29 +17,26 @@ import { createRequire } from "node:module";
 import { setTimeout as delay } from "node:timers/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-const {
-  readProjectEnvironmentComposition,
-  readProjectEnvironmentProfile,
-} = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const require = createRequire(import.meta.url);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const platformUrl = process.env.NODICS_PLATFORM_URL || "http://127.0.0.1:4300";
-const commerceStagedUrl =
-  process.env.NODICS_COMMERCE_STAGED_URL || "http://127.0.0.1:4352";
-const commerceOnlineUrl =
-  process.env.NODICS_COMMERCE_ONLINE_URL ||
-  process.env.NODICS_COMMERCE_URL ||
-  "http://127.0.0.1:4350";
-const wcmsOnlineUrl =
-  process.env.NODICS_WCMS_ONLINE_URL || "http://127.0.0.1:4314";
-const axisOrigin = process.env.AXIS_ORIGIN || "http://127.0.0.1:3100";
-const managed = [];
-const environmentCode = process.env.NODICS_ENVIRONMENT || "";
-const environmentProfile = readProjectEnvironmentProfile(
+const environmentCode = process.env.NODICS_ENVIRONMENT || process.env.ENV || "";
+const environmentProfile = readProjectEnvironmentConfiguration(
   projectRoot,
   environmentCode,
 );
+const platformUrl = process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
+const commerceStagedUrl =
+  process.env.NODICS_COMMERCE_STAGED_URL || projectEndpointUrl(environmentProfile, 'commerceStagedServer');
+const commerceOnlineUrl =
+  process.env.NODICS_COMMERCE_ONLINE_URL ||
+  process.env.NODICS_COMMERCE_URL ||
+  projectEndpointUrl(environmentProfile, 'commerceServer');
+const wcmsOnlineUrl =
+  process.env.NODICS_WCMS_ONLINE_URL || projectEndpointUrl(environmentProfile, 'wcmsOnlineServer');
+const axisOrigin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
+const managed = [];
 const composition = readProjectEnvironmentComposition(
   projectRoot,
   environmentCode,

@@ -8,8 +8,7 @@
     "kind": "server",
     "extends": [
       "nodics.wcms",
-      "nodics.discovery",
-      "nodics.platform"
+      "nodics.discovery"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
@@ -22,7 +21,14 @@
       "publish": false,
       "web": false
     },
-    "displayName": "WCMS Staged Server"
+    "displayName": "WCMS Staged Server",
+    "runtimeModuleRoots": [
+      "nodics.wcms",
+      "nodics.discovery",
+      "nodics.platform",
+      "nodics.process",
+      "nodics.accelerators/modules/nexus"
+    ]
   },
   "description": "WCMS Staged Server runtime composition and configuration boundary for this Nodics project."
 }

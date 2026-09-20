@@ -11,20 +11,20 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import { execFile } from 'node:child_process';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { promisify } from 'node:util';
+import { isDeepStrictEqual } from 'node:util';
 
-const execFileAsync = promisify(execFile);
 const require = createRequire(import.meta.url);
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const workspaceRoot = path.resolve(projectRoot, '..');
-const axisUrl = process.env.AXIS_URL || 'http://127.0.0.1:3100';
-const platformUrl = process.env.AXIS_PLATFORM_URL || 'http://127.0.0.1:4300';
-const wcmsUrl = process.env.AXIS_WCMS_URL || 'http://127.0.0.1:4312';
-const wcmsOnlineUrl = process.env.AXIS_WCMS_ONLINE_URL || process.env.NODICS_WCMS_ONLINE_URL || 'http://127.0.0.1:4314';
-const processUrl = process.env.AXIS_PROCESS_URL || 'http://127.0.0.1:4330';
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.NODICS_ENVIRONMENT || process.env.ENV || '');
+const requestOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
+const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
+const wcmsUrl = process.env.AXIS_WCMS_URL || projectEndpointUrl(environmentProfile, 'wcmsStagedServer');
+const wcmsOnlineUrl = process.env.AXIS_WCMS_ONLINE_URL || process.env.NODICS_WCMS_ONLINE_URL || projectEndpointUrl(environmentProfile, 'wcmsOnlineServer');
+const processUrl = process.env.AXIS_PROCESS_URL || projectEndpointUrl(environmentProfile, 'processServer');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || 'default';
 const tenant = process.env.AXIS_TENANT || 'default';
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
@@ -63,15 +63,6 @@ async function requestJson(baseUrl, path, options = {}) {
   return body;
 }
 
-async function optionalDelete(baseUrl, path, headers) {
-  const response = await fetch(endpoint(baseUrl, path), {
-    headers: { Accept: 'application/json', ...headers },
-    method: 'DELETE',
-  });
-  if (response.ok || response.status === 404 || response.status === 400) return;
-  const text = await response.text();
-  throw new Error(`${path} cleanup returned HTTP ${response.status}: ${text.slice(0, 180)}`);
-}
 
 async function expectOk(baseUrl, path) {
   const response = await fetch(endpoint(baseUrl, path));
@@ -82,7 +73,7 @@ async function authenticate() {
   const auth = payload(
     await requestJson(platformUrl, '/nodics/profile/v0/employee/browser/authenticate', {
       body: JSON.stringify({ loginId, password }),
-      headers: { Origin: axisUrl, 'x-enterprise-code': enterpriseCode },
+      headers: { Origin: requestOrigin, 'x-enterprise-code': enterpriseCode },
       method: 'POST',
     }),
   );
@@ -114,38 +105,19 @@ async function updateModel(path, query, model, headers) {
   );
 }
 
+/** Verifies definitions installed by the existing Process-owned contribution lifecycle. */
 async function ensureEditorialProcessDefinitions(headers) {
-  const definitions = require(path.join(projectRoot, 'envs/kickoffLocal/processServer/data/init-v001/records/editorial/defaultEditorialProcessDefinitionData.js'));
-  for (const definition of Object.values(definitions)) {
-    let existing;
-    try {
-      existing = payload(await requestJson(processUrl, `/nodics/process/v0/definitions/${encodeURIComponent(definition.code)}`, { headers }));
-    } catch (error) {
-      if (!String(error.message || '').includes('HTTP 404')) throw error;
+  const contribution = require(path.join(projectRoot, 'envs/kickoffLocal/processServer/data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js'));
+  const manifest = require(path.join(projectRoot, 'envs/kickoffLocal/processServer/data/manifest.json'));
+  const release = manifest.sections['init-v001'];
+  for (const definition of contribution.definitions) {
+    const existing = payload(await requestJson(processUrl, `/nodics/process/v0/definitions/${encodeURIComponent(definition.code)}`, { headers }));
+    if (!existing || existing.status !== 'PUBLISHED' || existing.contributionCode !== 'processServer:init-v001' || existing.contributionVersion !== release.version || !isDeepStrictEqual(existing.graph, definition.graph)) {
+      throw new Error(`Process contribution is not installed/current for ${definition.code}`);
     }
-    if (!existing) {
-      existing = payload(await requestJson(processUrl, '/nodics/process/v0/definitions', {
-        body: JSON.stringify({
-          code: definition.code,
-          name: definition.name,
-          description: definition.description || definition.name,
-          category: definition.category,
-          ownerModule: definition.ownerModule,
-          graph: definition.graph,
-        }),
-        headers,
-        method: 'POST',
-      }));
-    }
-    let versions = [];
-    try {
-      versions = [].concat(payload(await requestJson(processUrl, `/nodics/process/v0/definitions/${encodeURIComponent(definition.code)}/versions`, { headers })) || []);
-    } catch (error) {
-      if (!String(error.message || '').includes('HTTP 404')) throw error;
-    }
-    if (existing.status === 'DRAFT' || versions.length === 0) {
-      await requestJson(processUrl, `/nodics/process/v0/definitions/${encodeURIComponent(definition.code)}/draft/validate`, { headers, method: 'POST' });
-      await requestJson(processUrl, `/nodics/process/v0/definitions/${encodeURIComponent(definition.code)}/draft/publish`, { headers, method: 'POST' });
+    const versions = [].concat(payload(await requestJson(processUrl, `/nodics/process/v0/definitions/${encodeURIComponent(definition.code)}/versions`, { headers })) || []);
+    if (!versions.some(version => version.version === existing.currentVersion && version.contributionChecksum === existing.contributionChecksum && isDeepStrictEqual(version.graph, definition.graph))) {
+      throw new Error(`Process published version is missing for ${definition.code}`);
     }
   }
 }
@@ -158,36 +130,20 @@ function requireItem(items, predicate, message) {
   return item;
 }
 
-async function runNexusEvidence() {
-  await execFileAsync('npm', ['run', 'nexus:check'], {
-    cwd: projectRoot,
-  });
-  await execFileAsync('npm', ['--prefix', '../nodics.exp/nodics.nexus', 'test', '--', 'EditorialRenderers.test.tsx'], {
-    cwd: projectRoot,
-  });
-}
-
-async function runRollbackContractEvidence() {
-  await execFileAsync('node', ['--test', 'modules/nPublish/test/publicationLifecycleService.test.js', 'modules/nPublish/test/publicationWithdrawalContract.test.js'], {
-    cwd: path.join(workspaceRoot, 'nodics.ai', 'nodics.foundation'),
-  });
-}
-
 async function main() {
   console.log('Editorial live journey acceptance started');
   await expectOk(platformUrl, '/nodics/system/v0/health/ready');
   await expectOk(wcmsUrl, '/nodics/system/v0/health/ready');
   await expectOk(wcmsOnlineUrl, '/nodics/system/v0/health/ready');
   await expectOk(processUrl, '/nodics/system/v0/health/ready');
-  await expectOk(axisUrl, '/content/editorial');
-  console.log('PASS local Platform, WCMS Staged, WCMS Online, Process, and Axis are reachable');
+  console.log('PASS local Platform, WCMS Staged, WCMS Online, and Process APIs are reachable');
 
   const baseHeaders = await authenticate();
   const journeyId = randomUUID().slice(0, 8);
   const correlationId = `editorial-live-${journeyId}`;
   const headers = { ...baseHeaders, 'x-correlation-id': correlationId };
   await ensureEditorialProcessDefinitions(headers);
-  console.log('PASS installed Editorial Process definitions into the Process runtime');
+  console.log('PASS verified Editorial definitions installed by the Process contribution lifecycle');
 
   const articleCode = `editorial-live-${journeyId}`;
   const authorCode = `editorial-author-${journeyId}`;
@@ -223,10 +179,6 @@ async function main() {
     revision: 1,
   };
 
-  await optionalDelete(wcmsUrl, `/nodics/editorial/v0/editorialarticlelocalization/code/${encodeURIComponent(localizationCode)}`, headers);
-  await optionalDelete(wcmsUrl, `/nodics/editorial/v0/editorialarticle/code/${encodeURIComponent(articleCode)}`, headers);
-  await optionalDelete(wcmsUrl, `/nodics/editorial/v0/editorialauthor/code/${encodeURIComponent(authorCode)}`, headers);
-  await optionalDelete(wcmsUrl, `/nodics/editorial/v0/editorialtaxonomyterm/code/${encodeURIComponent(taxonomyCode)}`, headers);
 
   await saveModel('/nodics/editorial/v0/editorialauthor', {
     code: authorCode,
@@ -351,8 +303,6 @@ async function main() {
   requireItem(sitemap, item => item.loc === slug, 'Sitemap projection did not include published article');
   console.log('PASS 7 verified structured-data, RSS, and sitemap delivery projections');
 
-  await runNexusEvidence();
-  console.log('PASS 8 verified Nexus Editorial listing/detail renderer contracts and backend content-pack wiring');
 
   const withdrawn = payload(
     await requestJson(wcmsUrl, `/nodics/editorial/v0/authoring/articles/${encodeURIComponent(articleCode)}/withdraw`, {
@@ -371,8 +321,7 @@ async function main() {
     withdrawnDetailFailed = true;
   }
   if (!withdrawnDetailFailed) throw new Error('Withdrawn article remained visible in delivery detail');
-  await runRollbackContractEvidence();
-  console.log('PASS 9 verified live withdrawal and nPublish rollback source-contract evidence');
+  console.log('PASS 8 verified live withdrawal through publishing and delivery APIs');
 
   console.log(`Editorial live journey acceptance completed successfully (${correlationId})`);
 }

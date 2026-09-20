@@ -29,13 +29,13 @@ const cmsRoutes = read(
 );
 const staged = read(
   "nodics.kickoff/envs/kickoffLocal/wcmsStagedServer/config/properties.js",
-).replaceAll('"', "'");
+).replace(/"([^"\n]+)":/g, "$1:").replaceAll('"', "'");
 const online = read(
   "nodics.kickoff/envs/kickoffLocal/wcmsOnlineServer/config/properties.js",
-).replaceAll('"', "'");
+).replace(/"([^"\n]+)":/g, "$1:").replaceAll('"', "'");
 const process = read(
   "nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js",
-).replaceAll('"', "'");
+).replace(/"([^"\n]+)":/g, "$1:").replaceAll('"', "'");
 const runtimeBaselines = Object.fromEntries(
   ["kickoffLocal", "kickoffDockerLocal"].map((environment) => [
     environment,
@@ -92,7 +92,7 @@ assert(
   "Online role/versioning contract drifted",
 );
 assert(
-  process.includes("runtimeRole: { code: 'PROCESS'"),
+  /runtimeRole:\s*\{\s*code:\s*'PROCESS'/.test(process),
   "Process runtime contract must remain independently composed",
 );
 assert.notStrictEqual(
@@ -149,7 +149,7 @@ for (const documentation of [
   }
 }
 
-const nexusManifest = JSON.parse(read("nodics.kickoff/modules/nexus.web/data/manifest.json"));
+const nexusManifest = JSON.parse(read("nodics.ai/nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json"));
 const nexusRelease = nexusManifest.sections.nexusCorporateSite;
 assert(nexusRelease, "Nexus corporate release must be declared");
 for (const [environment, baselines] of Object.entries(runtimeBaselines)) {
@@ -157,7 +157,7 @@ for (const [environment, baselines] of Object.entries(runtimeBaselines)) {
 }
 
 for (const manifestPath of [
-  "nodics.kickoff/modules/nexus.web/data/manifest.json",
+  "nodics.ai/nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json",
 ]) {
   const manifest = JSON.parse(read(manifestPath));
   assert(

@@ -56,10 +56,11 @@ const containerQualificationService = fs.readFileSync(
   "utf8",
 );
 const projectContractPath = path.join(root, "nodics.project.json");
-const environmentProfile = JSON.parse(
-  fs.readFileSync(path.join(environment, "nodics.environment.json"), "utf8"),
+const environmentProfile = require("./helpers/configuration").loadContainer();
+
+const projectCommands = projectCommandService.resolveCommands(
+  projectCommandService.readManifest(root),
 );
-const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(root));
 const servers = [
   "platformServer",
   "wcmsStagedServer",
@@ -89,8 +90,6 @@ servers.forEach((server) => {
   "loyalty",
   "commerce",
   "commerce-staged",
-  "axis",
-  "nexus",
   "mongodb",
   "redis-primary",
   "redis-replica",
@@ -129,7 +128,8 @@ for (const command of [
 }
 assert.match(compose, /docker\.elastic\.co\/elasticsearch\/elasticsearch/);
 assert.match(compose, /elasticsearch-data/);
-const loadRuntime = server => require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
+const loadRuntime = (server) =>
+  require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
 const dockerPlatform = require("./helpers/configuration").merge(
   {},
   require("../modules/kickoffAdministration/config/properties"),
@@ -138,7 +138,7 @@ const dockerPlatform = require("./helpers/configuration").merge(
 const dockerLoyalty = loadRuntime("loyaltyServer");
 const dockerEnvironment = require("../envs/kickoffDockerLocal/config/properties");
 assert.equal(
-  dockerPlatform.cache.kickoffCore.engines.redis.options.sentinel.endpoints[0]
+  dockerPlatform.cache.default.engines.redis.options.sentinel.endpoints[0]
     .host,
   "redis-sentinel",
 );
@@ -156,9 +156,7 @@ assert.equal(
 );
 assert.equal(
   dockerPlatform.profileBrowserSession.csrfCookieName,
-  JSON.parse(
-    fs.readFileSync(path.join(environment, "docker/axis-config.json"), "utf8"),
-  ).browserSessionCsrfCookieName,
+  "nodics_docker_axis_csrf",
 );
 assert.equal(dockerPlatform.profileCustomerBrowserSession.enabled, true);
 assert.equal(
@@ -185,9 +183,9 @@ assert.equal(
 );
 for (const port of [4100, 4200, 6300, 6400, 6500, 6600])
   assert(
-    dockerEnvironment.httpHardening.cors.allowedOrigins.includes(
-      `http://localhost:${port}`,
-    ),
+    require("./helpers/configuration")
+      .corsOrigins(loadRuntime("commerceServer"))
+      .allowedOrigins.includes(`http://localhost:${port}`),
   );
 for (const header of [
   "Content-Type",
@@ -196,7 +194,9 @@ for (const header of [
   "Tenant",
 ]) {
   assert(
-    dockerEnvironment.httpHardening.cors.allowedHeaders.includes(header),
+    require("./helpers/configuration")
+      .corsHeaders(loadRuntime("commerceServer"), "allowed")
+      .includes(header),
     `Agora customer authentication requires the ${header} request header`,
   );
 }
@@ -234,10 +234,13 @@ assert(
     (item) => item.currency === "AED",
   ),
 );
-assert.deepEqual(Object.keys(JSON.parse(fs.readFileSync(projectContractPath))), ["tooling"]);
-assert.equal(environmentProfile.profileCode, "dockerLocal");
+assert.deepEqual(
+  Object.keys(JSON.parse(fs.readFileSync(projectContractPath))),
+  ["tooling"],
+);
+assert.equal(environmentProfile.code, "dockerLocal");
 assert.equal(environmentProfile.environment, "kickoffDockerLocal");
-assert.equal(environmentProfile.bootstrapAdminPassword, "NodicsLocal@2026");
+assert.equal(environmentProfile.bootstrapAdminPassword, undefined);
 assert.equal(
   projectCommands["docker-local:preflight"].command,
   "project:container",
@@ -263,7 +266,7 @@ assert.match(
   containerEnvironmentService,
   /BOOTSTRAP_ADMIN_PASSWORD: process\.env\.NODICS_DOCKER_ADMIN_PASSWORD \|\| profile\.bootstrapAdminPassword/,
 );
-assert.match(containerEnvironmentService, /readContainerEnvironmentProfile/);
+assert.match(containerEnvironmentService, /readContainerEnvironmentConfiguration/);
 assert.match(
   containerQualificationService,
   /NODICS_ENGAGEMENT_URL: urls\.engagement/,
@@ -276,8 +279,14 @@ assert.match(
   containerQualificationService,
   /NODICS_SERVICE_API_KEY: process\.env\.NODICS_SERVICE_API_KEY \|\| values\.BOOTSTRAP_SERVICE_API_KEY/,
 );
-assert.match(containerQualificationService, /selected\.acceptance\.commerceDataCommand/);
-assert.equal(environmentProfile.acceptance.commerceDataCommand, "acceptance:agora-commerce-data");
+assert.match(
+  containerQualificationService,
+  /selected\.acceptance\.commerceDataCommand/,
+);
+assert.equal(
+  environmentProfile.acceptance.commerceDataCommand,
+  "acceptance:agora-commerce-data",
+);
 assert.match(
   containerQualificationService,
   /NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE/,
@@ -290,11 +299,14 @@ console.log("kickoffDockerLocal environment contract validated");
 
 for (const server of ["wcmsStagedServer", "wcmsOnlineServer"]) {
   for (const owner of ["discoveryProjection", "wcmsExperience"]) {
-    const engine = loadRuntime(server).search[owner];
+    const engine = require("./helpers/configuration").searchConfiguration(
+      loadRuntime(server),
+      owner,
+    );
     assert.equal(engine.options.enabled, true);
     assert.equal(engine.options.engine, "elastic");
     assert.equal(
-      engine.elastic.connection.hosts[0],
+      engine.connection.hosts[0],
       process.env.NODICS_ELASTICSEARCH_URL || "http://elasticsearch:9200",
     );
   }

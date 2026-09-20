@@ -17,55 +17,24 @@ module.exports = {
   "search": {
     "discoveryProjection": {
       "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
-        }
+        "enabled": true
       }
     },
     "wcmsExperience": {
       "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
-        }
+        "enabled": true
       }
     }
   },
   "httpHardening": {
     "cors": {
-      "allowedOrigins": [
-        "http://localhost:4100",
-        "http://127.0.0.1:4100"
-      ],
-      "deniedOrigins": [
-        "http://localhost:4200",
-        "http://127.0.0.1:4200"
-      ]
+      "originEndpointOverrides": {
+        "nexus": false
+      }
     }
   },
   "activeModules": {
-    "groups": [],
+    "groups": ["nexus"],
     "modules": [
       "cmsStaged",
       "redisCache",
@@ -81,8 +50,6 @@ module.exports = {
         "field": "projectPacks",
         "spread": true
       },
-      "kickoffDockerLocal",
-      "wcmsStagedServer",
       "search",
       "elastic",
       "cms",
@@ -112,161 +79,49 @@ module.exports = {
       },
       "dataExport": {
         "enabled": true
-      },
-      "mediaManagement": {
-        "enabled": true
       }
     }
   },
   "data": {
     "dataReleases": {
-      "lifecycleMetadataRequired": true,
-      "destinationEnforced": true,
-      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
-      "allowedDestinationRoles": [
-        "WCMS_STAGED"
-      ],
-      "contributions": [
-        {
-          "moduleName": "axis",
-          "sections": [
-            "axisBaseline"
-          ]
-        }
-      ]
+      "contributions": {
+        "$config": "replace",
+        "value": [
+          {
+            "moduleName": "axis",
+            "sections": [
+              "axisBaseline"
+            ]
+          }
+        ]
+      }
     }
   },
   "database": {
     "default": {
       "mongodb": {
         "master": {
-          "URI": {
-            "$config": "env",
-            "name": "NODICS_MONGODB_URI"
-          },
           "databaseName": "kickoffDockerLocalWcmsStaged"
         }
       }
     },
-    "circa.ewaste": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "search": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "elastic": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "cms": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "editorial": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "media": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "publish": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wcmsExperience": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryConfig": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryMapping": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryProjection": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryPublication": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryQuery": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryRanking": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryRuntime": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoverySource": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    }
+    "circa.ewaste": {},
+    "search": {},
+    "elastic": {},
+    "cms": {},
+    "editorial": {},
+    "media": {},
+    "publish": {},
+    "wcmsExperience": {},
+    "discoveryConfig": {},
+    "discoveryMapping": {},
+    "discoveryProjection": {},
+    "discoveryPublication": {},
+    "discoveryQuery": {},
+    "discoveryRanking": {},
+    "discoveryRuntime": {},
+    "discoverySource": {},
+    "cmsStaged": {}
   },
   "media": {
     "storage": {
@@ -283,43 +138,7 @@ module.exports = {
       "runtimeRole": "STAGED",
       "baselines": {
         "axis": {
-          "releaseCode": "axis:axisBaseline",
-          "releaseVersion": "0.0.0",
-          "rootType": "site",
-          "rootCode": "axisCmsSite",
-          "sourceVersion": "0"
-        },
-        "nexus": {
-          "releaseCode": "nexus.web:nexusCorporateSite",
-          "releaseVersion": "0.0.20",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "nexusCorporateSite",
-          "sourceVersion": "0"
-        },
-        "nexusupdate": {
-          "releaseCode": "nexus.web:nexusCorporateSiteUpdate",
-          "releaseVersion": "0.0.0",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "nexusCorporateSite",
-          "sourceVersion": "0"
-        },
-        "nexusecosystemrepair": {
-          "releaseCode": "nexus.web:nexusCorporateEcosystemComponentRepair",
-          "releaseVersion": "0.0.0",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "nexusCorporateSite",
-          "sourceVersion": "0"
-        },
-        "agora": {
-          "releaseCode": "agora.apparel:agoraApparelContentCatalog",
-          "releaseVersion": "0.0.0",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraStorefrontSite",
-          "sourceVersion": "0"
+          "releaseVersion": "0.0.0"
         },
         "agoraapparel": {
           "releaseCode": "agora.apparel:agoraApparelContentCatalog",
@@ -347,7 +166,7 @@ module.exports = {
         },
         "frameworkdocs": {
           "contentPackCode": "nodicsDocumentation",
-          "releaseVersion": "0.16.12",
+          "releaseVersion": "0.16.14",
           "rootType": "site",
           "rootCode": "nodicsDocumentationSite",
           "sourceVersion": "0"
@@ -361,7 +180,7 @@ module.exports = {
         },
         "kickoffdocs": {
           "contentPackCode": "kickoffDocumentation",
-          "releaseVersion": "0.0.2",
+          "releaseVersion": "0.0.3",
           "rootType": "site",
           "rootCode": "kickoffDocumentationSite",
           "sourceVersion": "0"
@@ -379,8 +198,7 @@ module.exports = {
       },
       "target": {
         "moduleName": "cms",
-        "connectionName": "cmsOnline",
-        "connectionType": "abstract"
+        "connectionName": "cmsOnline"
       }
     }
   },
@@ -389,7 +207,6 @@ module.exports = {
       "processBaseUrl": "http://process:4330"
     },
     "publication": {
-      "runtimeRole": "STAGED",
       "targetTransportProvider": "DefaultEditorialPublicationModuleTransportService",
       "target": {
         "moduleName": "editorial",
@@ -400,180 +217,180 @@ module.exports = {
   },
   "servers": {
     "platform": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platform"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "platformServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platformServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "profile": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "profile"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "backoffice": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "backoffice"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnlineServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnlineServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "process": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "process"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "processServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "processServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerce": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerce"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagement": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagement"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagementServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagementServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyalty": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyalty"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyaltyServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyaltyServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "waste": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "waste"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wasteServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wasteServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "location": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "location"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "locationServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "locationServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "default": {
       "endpoint": {
@@ -584,27 +401,34 @@ module.exports = {
       },
       "abstractEndpoint": {
         "httpHost": "wcms-staged",
-        "httpPort": 4312,
+        "httpPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpPort"
+        },
         "httpsHost": "wcms-staged",
-        "httpsPort": 4313
+        "httpsPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpsPort"
+        }
       }
     }
   },
   "runtimeAuthorityContexts": {
     "modules": {
-      "cms": "wcms.staged",
-      "editorial": "wcms.staged",
-      "media": "wcms.staged",
-      "publish": "wcms.staged",
-      "wcmsExperience": "wcms.staged",
-      "discoveryConfig": "wcms.staged",
-      "discoveryMapping": "wcms.staged",
-      "discoveryProjection": "wcms.staged",
-      "discoveryPublication": "wcms.staged",
-      "discoveryQuery": "wcms.staged",
-      "discoveryRanking": "wcms.staged",
-      "discoveryRuntime": "wcms.staged",
-      "discoverySource": "wcms.staged"
-    }
+      "cms": true,
+      "editorial": true,
+      "media": true,
+      "publish": true,
+      "wcmsExperience": true,
+      "discoveryConfig": true,
+      "discoveryMapping": true,
+      "discoveryProjection": true,
+      "discoveryPublication": true,
+      "discoveryQuery": true,
+      "discoveryRanking": true,
+      "discoveryRuntime": true,
+      "discoverySource": true
+    },
+    "default": "wcms.staged"
   }
 };

@@ -13,3 +13,13 @@ Change this package only when the requested behavior belongs to this boundary. P
 ## Verification
 
 After changes, run the nearest focused test or the Kickoff structure and documentation checks from the project root.
+
+## Telegram tunnel origin
+
+For a Local Circa Telegram tunnel, set `NODICS_LOCAL_TELEGRAM_ORIGIN` in
+the private project `.env` to the exact HTTPS origin, without a path or trailing
+slash. Restart the backend topology after changing it, loading that file with
+`node --env-file=.env ./node_modules/.bin/nodics project:run topology:start:all`
+after stopping the existing topology. An unset value adds no
+origin; the standard localhost origins remain inherited. Update this value when
+the temporary tunnel changes, and remove it when the tunnel is retired.

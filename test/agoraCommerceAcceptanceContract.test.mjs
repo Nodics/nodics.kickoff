@@ -26,7 +26,6 @@ const scriptPath = path.join(projectRoot, 'scripts/acceptance', "defaultProjectA
 const dockerScriptPath = path.join(projectRoot, "..", "nodics.ai", "nodics.foundation", "modules", "nTooling", "src", "service", "project", "defaultProjectContainerQualificationService.mjs");
 const liveQualificationPath = path.join(projectRoot, 'scripts/acceptance', "defaultProjectAgoraCommerceLiveQualificationService.mjs");
 const packagePath = path.join(projectRoot, "package.json");
-const dockerLocalProfilePath = path.join(projectRoot, "envs", "kickoffDockerLocal", "nodics.environment.json");
 
 test("Agora Commerce acceptance covers backend route surface and secured generated customer journey", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
@@ -89,7 +88,7 @@ test("Agora Commerce acceptance covers backend route surface and secured generat
 test("Agora Commerce Docker acceptance targets Docker Local host ports without shell-sourcing secrets", () => {
   const source = fs.readFileSync(dockerScriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const dockerLocalProfile = JSON.parse(fs.readFileSync(dockerLocalProfilePath, "utf8"));
+  const dockerLocalProfile = require("./helpers/configuration").loadContainer();
   const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
 
   assert.match(pkg.scripts["acceptance:agora-commerce:docker"], /nodics project:run acceptance:agora-commerce:docker/);
@@ -99,7 +98,7 @@ test("Agora Commerce Docker acceptance targets Docker Local host ports without s
   assert.equal(dockerLocalProfile.environment, "kickoffDockerLocal");
   assert.equal(dockerLocalProfile.acceptance.urls.platform, "http://127.0.0.1:5300");
   assert.equal(dockerLocalProfile.acceptance.urls.commerce, "http://127.0.0.1:5350");
-  assert.equal(dockerLocalProfile.acceptance.urls.axis, "http://127.0.0.1:4100");
+  assert.equal(dockerLocalProfile.acceptance.urls.axis, undefined);
   assert.match(source, /BOOTSTRAP_ADMIN_PASSWORD/);
   assert.doesNotMatch(source, /set -a|(?:^|\s)source\s+\S*docker\.env|\\. env/);
 });

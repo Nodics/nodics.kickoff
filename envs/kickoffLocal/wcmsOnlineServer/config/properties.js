@@ -29,31 +29,27 @@ const wcmsAuthorityModules = [
 
 /** @module wcmsOnlineServer/config/properties @description Defines the non-versioned Local WCMS Online target and delivery boundary. */
 module.exports = {
-  httpHardening: {
-    cors: {
-      allowedOrigins: [
-        "http://localhost:3100",
-        "http://127.0.0.1:3100",
-        "http://localhost:3200",
-        "http://127.0.0.1:3200",
-        "http://localhost:3300",
-        "http://127.0.0.1:3300",
-        "http://localhost:3400",
-        "http://127.0.0.1:3400",
-        "http://localhost:3500",
-        "http://127.0.0.1:3500",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3600",
-        "http://127.0.0.1:3600",
-      ],
-    },
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-wcms-online-1",
+    "remoteModules": [
+      "profile",
+      "backoffice"
+    ]
   },
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_WCMS_ONLINE_API_KEY",
+      "fallback": null
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
+    ],
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
       "DefaultCmsDocumentationAccessPolicyService",
       "DefaultCmsDocumentationDashboardService",
       "DefaultCmsDocumentationNavigationService",
@@ -61,9 +57,9 @@ module.exports = {
       "DefaultCmsDocumentationPageService",
       "DefaultCmsDocumentationProductService",
       "DefaultCmsDocumentationPublicationStateService",
-      "DefaultCmsDocumentationSearchMetadataService",
+      "DefaultCmsDocumentationSearchMetadataService"
     ],
-    modules: {
+    "modules": {
       "cms": true,
       "editorial": true,
       "import": true,
@@ -74,130 +70,161 @@ module.exports = {
       "token": true,
       "validator": true
     },
-    serviceNames: [
-      "DefaultEmsFailedMessagesService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultEmsFailedMessagesService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    },
+    "searchIndexes": [
+      {
+        "moduleName": "discoveryProjection",
+        "indexName": "discoveryDocumentProjection"
+      }
+    ]
   },
-  activeModules: {
-    groups: [],
-    modules: [
-      ...wcmsSearchRuntimeModules,
-      ...wcmsAuthorityModules,
+  "activeModules": {
+    "groups": [],
+    "modules": [
+      "redisCache",
+      "search",
+      "elastic",
+      "cms",
+      "editorial",
+      "media",
+      "publish",
+      "wcmsExperience",
+      "discoveryConfig",
+      "discoveryMapping",
+      "discoveryProjection",
+      "discoveryPublication",
+      "discoveryQuery",
+      "discoveryRanking",
+      "discoveryRuntime",
+      "discoverySource",
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
-      "kickoffInt",
-      "kickoffLocal",
-      "wcmsOnlineServer",
-    ],
+      "kickoffInt"
+    ]
   },
-  publishEnabled: false,
-  runtimeRole: { code: "WCMS_ONLINE", publication: "ONLINE" },
-  runtimeAuthorityContexts: {
-    modules: {
-  "cms": "wcms.online",
-  "editorial": "wcms.online",
-  "media": "wcms.online",
-  "publish": "wcms.online",
-  "wcmsExperience": "wcms.online",
-  "discoveryConfig": "wcms.online",
-  "discoveryMapping": "wcms.online",
-  "discoveryProjection": "wcms.online",
-  "discoveryPublication": "wcms.online",
-  "discoveryQuery": "wcms.online",
-  "discoveryRanking": "wcms.online",
-  "discoveryRuntime": "wcms.online",
-  "discoverySource": "wcms.online"
-},
+  "publishEnabled": false,
+  "runtimeRole": {
+    "code": "WCMS_ONLINE",
+    "publication": "ONLINE"
   },
-  search: {
-    discoveryProjection: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "cms": true,
+      "editorial": true,
+      "media": true,
+      "publish": true,
+      "wcmsExperience": true,
+      "discoveryConfig": true,
+      "discoveryMapping": true,
+      "discoveryProjection": true,
+      "discoveryPublication": true,
+      "discoveryQuery": true,
+      "discoveryRanking": true,
+      "discoveryRuntime": true,
+      "discoverySource": true
     },
-    wcmsExperience: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
+    "default": "wcms.online"
   },
-  database: {
-    default: {
-      mongodb: {
-        master: {
-          URI: "mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal",
-          databaseName: "kickoffLocalWcmsOnline",
-        },
+  "search": {
+    "discoveryProjection": {
+      "options": {
+        "enabled": true
+      }
+    },
+    "wcmsExperience": {
+      "options": {
+        "enabled": true
+      }
+    }
+  },
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "URI": "mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal",
+          "databaseName": "kickoffLocalWcmsOnline"
+        }
+      }
+    }
+  },
+  "cms": {
+    "publication": {
+      "enabled": true,
+      "runtimeRole": "ONLINE"
+    },
+    "delivery": {
+      "mediaDeliveryBaseUrl": "http://127.0.0.1:4314/nodics/media/v0/content"
+    }
+  },
+  "editorial": {
+    "publication": {
+      "runtimeRole": "ONLINE",
+      "targetTransportProvider": null
+    }
+  },
+  "data": {
+    "dataReleases": {
+      "allowedDestinationRoles": {
+        "$config": "replace",
+        "value": []
+      }
+    }
+  },
+  "apiExposure": {
+    "categories": {
+      "schemaApi": {
+        "enabled": false
       },
-    },
-  },
-  cms: {
-    publication: {
-      enabled: true,
-      runtimeRole: "ONLINE",
-    },
-    delivery: {
-      mediaDeliveryBaseUrl: "http://127.0.0.1:4314/nodics/media/v0/content",
-    },
-  },
-  editorial: {
-    publication: { runtimeRole: "ONLINE", targetTransportProvider: null },
-  },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: [],
-    },
-  },
-  apiExposure: {
-    categories: {
-      schemaApi: { enabled: false },
-      schemaMaintenance: { enabled: false },
-      dataImport: { enabled: false },
-      dataExport: { enabled: false },
-      mediaManagement: { enabled: false },
-    },
-  },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4314,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4315,
+      "schemaMaintenance": {
+        "enabled": false
       },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4314,
-        httpsHost: "localhost",
-        httpsPort: 4315,
+      "dataImport": {
+        "enabled": false
       },
-    },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
+      "dataExport": {
+        "enabled": false
       },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
+      "mediaManagement": {
+        "enabled": false
+      }
+    }
   },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4314,
+        "httpsPort": 4315
+      }
+    },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    }
+  },
+  "tooling": {
+    "runtime": {
+      "code": "wcmsOnline",
+      "script": "start:wcms:online",
+      "order": 1
+    }
+  }
 };
-
-/** Explicit nSearch projections included in the governed Local reset. */
-module.exports.localResetProvider.searchIndexes = [
-  {
-    moduleName: "discoveryProjection",
-    indexName: "discoveryDocumentProjection",
-  },
-];

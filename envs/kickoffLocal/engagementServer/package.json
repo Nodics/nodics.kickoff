@@ -21,7 +21,12 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Customer Engagement Server"
+    "displayName": "Customer Engagement Server",
+    "runtimeModuleRoots": [
+      "nodics.communication",
+      "nodics.engagement",
+      "nodics.accelerators/modules/nexus"
+    ]
   },
   "description": "Customer Engagement Server runtime composition and configuration boundary for this Nodics project."
 }

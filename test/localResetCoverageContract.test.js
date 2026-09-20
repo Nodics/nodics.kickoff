@@ -10,22 +10,20 @@ const assert = require("node:assert/strict");
 const path = require("node:path");
 const { test } = require("node:test");
 const root = path.resolve(__dirname, "../envs/kickoffLocal");
-const platform = require(
-  path.join(root, "platformServer/config/properties.js"),
-);
+const platform = require("./helpers/configuration").loadRuntime("platformServer");
 
 test("fresh Local reset includes every declared backend runtime and clears Platform last", () => {
-  const topology = require(path.join(root, "nodics.environment.json"));
+  const topology = require("./helpers/configuration").loadEnvironment();
   const providers = platform.backofficeLocalReset.providers;
   const servers = providers.map((provider) => provider.targetAuthority.server);
   assert.equal(new Set(servers).size, servers.length);
   assert.equal(servers.at(-1), "platformServer");
   assert.equal(providers.length, topology.topology.groups.backends.length);
   for (const runtime of topology.topology.groups.backends) {
-    const server = `${runtime.code}Server`;
+    const server = runtime.server;
     assert.ok(servers.includes(server), `${server} has no reset owner`);
-    const properties = require(path.join(root, server, "config/properties.js"));
-    const policy = properties.localResetProvider;
+    const properties = require("./helpers/configuration").loadRuntime(server);
+    const policy = require("./helpers/configuration").resetPolicy(properties);
     assert.equal(policy.enabled, true, server);
     assert.deepEqual(policy.environmentAllowlist, ["kickoffLocal"], server);
     assert.ok(

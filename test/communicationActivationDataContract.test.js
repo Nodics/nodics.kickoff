@@ -12,28 +12,22 @@
 'use strict';
 
 const assert = require('assert');
-const { merge } = require('./helpers/configuration');
-const administration = require('../modules/kickoffAdministration/config/properties');
-
-const localProperties = require('../envs/kickoffLocal/platformServer/config/properties');
-const dockerLocalProperties = require('./helpers/configuration').loadRuntime('platformServer', 'kickoffDockerLocal');
-
-function communicationPackages(properties) {
-    return merge({}, administration, properties).backofficeFunctionalModuleActivationData.modules['nodics.communication'].dataPackages;
-}
-
-[localProperties, dockerLocalProperties].forEach(properties => {
-    const packages = communicationPackages(properties);
-    assert.deepStrictEqual(packages.map(item => item.code), [
-        'commsCore:runtime-defaults',
-        'commsCore:sample-templates'
-    ]);
+const path = require('node:path');
+const { loadRuntime, frameworkRoot } = require('./helpers/configuration');
+const agent = require(path.join(frameworkRoot, 'nodics.foundation/modules/nService/src/service/module/defaultModuleRegistrationAgentService'));
+const catalogue = require(path.join(frameworkRoot, 'nodics.platform/modules/backoffice/src/service/registry/defaultFunctionalModuleCatalogueService'));
+for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
+    const properties = loadRuntime('platformServer', environment);
+    global.CONFIG = { get: key => properties[key] };
+    global.NODICS = { getServerName: () => 'engagementServer' };
+    const ownerPackages = agent.buildActivationDataPackages('commsCore', { path: path.join(frameworkRoot, 'nodics.communication/modules/commsCore') });
+    const packages = catalogue.getActivationDataPackages('nodics.communication', { activationDataPackages: ownerPackages });
+    assert.deepStrictEqual(packages.map(item => item.code).sort(), ['commsCore:runtime-defaults', 'commsCore:sample-templates']);
     assert(packages.every(item => item.targetModule === 'commsCore'));
     assert(packages.every(item => item.targetServer === 'engagementServer'));
-    assert.strictEqual(packages[0].required, true);
-    assert.strictEqual(packages[0].trigger, 'ACTIVATION');
-    assert.strictEqual(packages[1].required, false);
-    assert.strictEqual(packages[1].trigger, 'USER');
-});
+    assert.equal(packages.find(item => item.dataType === 'core').required, true);
+    assert.equal(packages.find(item => item.dataType === 'sample').trigger, 'USER');
+    assert.equal(properties.backofficeFunctionalModuleActivationData.modules['nodics.communication'], undefined);
+}
 
 console.log('Kickoff communication activation-data selectors validated');

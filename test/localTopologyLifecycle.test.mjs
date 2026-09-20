@@ -11,14 +11,12 @@
 
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { backendRuntimes, frontendRuntimes, isOwnedSupervisor, preflight, runtimeDependencyViolations, selectRuntimes } from '../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectTopologyService.mjs';
+import { backendRuntimes, isOwnedSupervisor, preflight, runtimeDependencyViolations, selectRuntimes } from '../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectTopologyService.mjs';
 
 assert.deepEqual(backendRuntimes.map(runtime => runtime.port), [4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350]);
 assert.equal(new Set(backendRuntimes.map(runtime => runtime.port)).size, backendRuntimes.length);
 assert.equal(selectRuntimes(false).length, 10);
-assert.equal(selectRuntimes(true).length, 16);
-assert.deepEqual(frontendRuntimes.map(runtime => runtime.port), [3100, 3200, 3300, 3400, 3500, 3600]);
-assert.equal(frontendRuntimes.find(runtime => runtime.code === 'agora')?.args.includes('3300'), true);
+assert.equal(selectRuntimes(true).length, 10);
 assert.deepEqual(backendRuntimes.find(runtime => runtime.code === 'location')?.dependsOn, ['platform']);
 assert.deepEqual(backendRuntimes.find(runtime => runtime.code === 'waste')?.dependsOn, ['platform']);
 assert.equal(backendRuntimes.find(runtime => runtime.code === 'platform')?.readyPath, '/nodics/system/v0/health/ready');

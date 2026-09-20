@@ -45,7 +45,7 @@ test("Agora Commerce data acceptance remains preflight-first with explicit insta
     "scripts/acceptance/defaultProjectAgoraCommerceDataAcceptanceService.mjs",
   );
   assert.equal(projectCommands["acceptance:agora-commerce-data"].type, "projectScript");
-  assert.match(source, /NODICS_COMMERCE_STAGED_URL \|\| "http:\/\/127\.0\.0\.1:4352"/);
+  assert.match(source, /NODICS_COMMERCE_STAGED_URL \|\| projectEndpointUrl\(environmentProfile, 'commerceStagedServer'\)/);
   assert.match(source, /"\/nodics\/import\/v0\/sample"/);
   assert.match(source, /"\/nodics\/import\/v0\/sample\/validate"/);
   assert.match(source, /"\/nodics\/import\/v0\/sample\/install"/);

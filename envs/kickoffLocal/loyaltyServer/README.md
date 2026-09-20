@@ -13,3 +13,10 @@ Change this package only when the requested behavior belongs to the local Loyalt
 ## Verification
 
 After changes, run the nearest focused test or the Kickoff structure and runtime preparation checks from the project root.
+
+This Local deployment declares a distinct runtime instance and an environment
+reference for its retained service proof. Profile must hold the corresponding
+service principal and approved deployment grant before startup. Missing proof
+fails closed; never replace it with the shared bootstrap or administrator key.
+After a full Local reset, an authenticated operator must reprovision the approved
+deployment grants through Profile before restarting this runtime.

@@ -24,7 +24,6 @@ module.exports = {
       ![
         "arrivalRadiusMetres",
         "maximumPositionAgeMs",
-        "maximumAccuracyMetres",
         "captureTimeoutMs",
       ].every((key) => Number.isFinite(policy[key]) && policy[key] > 0) ||
       !Number.isInteger(policy.nearestCentreCount) ||
@@ -69,20 +68,11 @@ module.exports = {
         "ERR_CIRCA_POSITION_STALE",
         "This location reading has expired. Check location again to continue.",
       );
-    if (!Number.isFinite(p.accuracy) || p.accuracy < 0)
-      this.store().fail(
-        "ERR_CIRCA_POSITION_ACCURACY_REQUIRED",
-        "This device did not provide location accuracy. Enable precise location, or continue in Telegram on your phone.",
-      );
-    if (p.accuracy > policy.maximumAccuracyMetres)
-      this.store().fail(
-        "ERR_CIRCA_POSITION_IMPRECISE",
-        "The location reading is too approximate to confirm arrival. Enable precise location and try again at the collection centre.",
-      );
     return {
       latitude: p.latitude,
       longitude: p.longitude,
-      accuracy: p.accuracy,
+      // Accuracy is optional observation metadata; arrival uses direct distance.
+      accuracy: Number.isFinite(p.accuracy) && p.accuracy >= 0 ? p.accuracy : null,
       capturedAt: p.capturedAt,
     };
   },
@@ -146,8 +136,7 @@ module.exports = {
       preparationArrival: { position, collectionPointCode: arrival.selectedCentre.code, checkedAt: this.now(), distanceMetres: arrival.selectedCentre.distanceMetres },
       preparationOrigin: request.authData?.circaOrigin || { channel: "WEB" },
     });
-    if (!["METADATA_SUGGESTED", "AWAITING_SUBMITTER_CONFIRMATION"].includes(prepared.submissionStatus)) return prepared;
-    return this.prepare({ ...request, code: prepared.code, expectedRevision: prepared.revision });
+    return prepared;
   },
   /** Persists a fresh observation and the selected nearby centre on the existing owner-authorized draft. */
   arrival: async function (request) {
@@ -167,7 +156,7 @@ module.exports = {
     if (choice && !selected)
       this.store().fail(
         "ERR_CIRCA_ARRIVAL_REQUIRED",
-        "Choose a collection centre within 100 metres of your current location.",
+        `Choose a collection centre within ${this.settings().arrivalRadiusMetres} metres of your current location.`,
       );
     const editable = [
       "DRAFT",
@@ -243,7 +232,7 @@ module.exports = {
     if (!centre || centre.distanceMetres > this.settings().arrivalRadiusMetres)
       this.store().fail(
         "ERR_CIRCA_ARRIVAL_REQUIRED",
-        "You need to be within 100 metres of an available collection centre.",
+        `You need to be within ${this.settings().arrivalRadiusMetres} metres of an available collection centre.`,
       );
     return centre;
   },
@@ -274,7 +263,7 @@ module.exports = {
       Object.assign({}, request, { expectedRevision: updated.revision }),
     );
   },
-  /** Validates essential facts and computes available estimates; optional impact failure does not invent a value. */
+  /** Validates essential facts and requires the domain assessment; provider failures remain retryable errors. */
   prepare: async function (request) {
     const draft = await this.domain().readDraft(request);
     this.store().revision(draft, request.expectedRevision);
@@ -282,23 +271,7 @@ module.exports = {
       request,
       draft,
     );
-    try {
-      return await this.domain().estimate(request);
-    } catch (error) {
-      if (
-        ![
-          "ERR_WASTE_IMPACT_PROFILE_INVALID",
-          "ERR_WASTE_IMPACT_PROVIDER_UNAVAILABLE",
-        ].includes(error.code)
-      )
-        throw error;
-      return this.store().update("wasteSubmission", request, draft, {
-        metadata: Object.assign({}, draft.metadata, {
-          estimate: null,
-          estimatePending: true,
-        }),
-      });
-    }
+    return this.domain().estimate(request);
   },
   /** Persists handoff context before confirmation so retry recovers the same receipt. */
   confirm: async function (request) {

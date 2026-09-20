@@ -14,20 +14,25 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-const { readProjectEnvironmentProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime, projectInitializationProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const manifestPath = path.join(projectRoot, 'nodics.project.json');
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
-const environmentProfile = readProjectEnvironmentProfile(projectRoot, process.env.ENV || '');
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
 const config = environmentProfile.acceptance?.guidedInitialization || manifest.acceptance?.guidedInitialization || {};
-const platformUrl = process.env.NODICS_PLATFORM_URL || 'http://127.0.0.1:4300';
-const processUrl = process.env.NODICS_PROCESS_URL || 'http://127.0.0.1:4330';
-const origin = process.env.AXIS_ORIGIN || 'http://localhost:3100';
+const platformUrl = process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, { role: 'PLATFORM' });
+const processUrl = process.env.NODICS_PROCESS_URL || projectEndpointUrl(environmentProfile, { role: 'PROCESS' });
+const origin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE_CODE || 'default';
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
 const password = process.env.AXIS_PASSWORD || 'adminPassword';
-const profileCode = process.env.NODICS_INITIALIZATION_PROFILE || config.profileCode || 'localWcmsFoundation';
+const profileCode = projectInitializationProfile(projectRuntime(environmentProfile, config.runtime), process.env.NODICS_INITIALIZATION_PROFILE || config.profileCode, config.profileTemplate);
+
+const publicationProfiles = config.publicationProfiles;
+assert(Array.isArray(publicationProfiles) && publicationProfiles.length > 0, 'Select application publication profiles for guided acceptance');
+const deliveryTarget = config.deliveryProbe;
+assert(deliveryTarget?.site && deliveryTarget.path && deliveryTarget.locale && deliveryTarget.channel, 'Select an application delivery probe for guided acceptance');
 
 async function request(url, options = {}) {
   const response = await fetch(url, options);
@@ -154,7 +159,6 @@ const onlineBody = await onlineResponse.json().catch(() => ({}));
 assert(onlineResponse.status === 403 && String(onlineBody.message || '').includes('dataImport'),
   'Online runtime must reject data-import administration');
 
-const publicationProfiles = config.publicationProfiles || ['nexus', 'nexusupdate'];
 const publicationEvidence = [];
 await importMandatoryProcessRelease(headers);
 for (const code of publicationProfiles) {
@@ -163,9 +167,8 @@ for (const code of publicationProfiles) {
     `${code} publication lineage does not contain Process approval`);
   publicationEvidence.push({ code, publication: status.publication.code, state: status.publication.state });
 }
-const deliveryTarget = config.deliveryProbe || { site: 'nexusCorporateSite', path: '/', locale: 'en', channel: 'web' };
 const delivery = await request(`${online.endpoint.replace('/nodics/import', '/nodics/cms')}/v0/delivery/pages/resolve?site=${encodeURIComponent(deliveryTarget.site)}&path=${encodeURIComponent(deliveryTarget.path)}&locale=${encodeURIComponent(deliveryTarget.locale)}&channel=${encodeURIComponent(deliveryTarget.channel)}`, { headers });
-assert(delivery.page, 'Nexus Online delivery is unavailable after governed publication');
+assert(delivery.page, 'Application Online delivery is unavailable after governed publication');
 
 console.log(JSON.stringify({
   profileCode, status: profile.status, destinationRole: profile.destinationRole,

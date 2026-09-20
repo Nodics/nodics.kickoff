@@ -84,7 +84,7 @@ repositories have not been installed yet.
 From `nodics.kickoff`, start the full local stack:
 
 ```bash
-npm run topology:start:all
+npm run topology:start
 ```
 
 This starts backend runtimes and frontends in dependency-aware order. Use this
@@ -473,3 +473,7 @@ A new user can call the local setup complete only after this evidence exists:
 9. Nexus and Agora render public Online experiences in the browser.
 10. Media images load on public pages.
 11. Any remaining blocker has a friendly operator message and a developer owner.
+
+Frontend startup and verification are independent. Run `npm run dev` and `npm test`
+inside each frontend application. Backend topology and API acceptance do not start
+frontend servers or wait for their health.

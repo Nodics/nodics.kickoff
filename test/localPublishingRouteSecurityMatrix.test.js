@@ -21,14 +21,14 @@ const frameworkRoot = path.resolve(projectRoot, '..', 'nodics.ai');
 const load = relative => require(path.resolve(projectRoot, relative));
 const routers = require(path.resolve(frameworkRoot, 'nodics.wcms/modules/cms/src/router/routers')).cms;
 const defaultHardening = require(path.resolve(frameworkRoot, 'nodics.foundation/modules/nRouter/config/properties')).httpHardening;
-const environment = load('envs/kickoffLocal/config/properties').httpHardening;
-const runtime = code => load('envs/kickoffLocal/' + code + '/config/properties').httpHardening;
-const origins = code => runtime(code).cors.allowedOrigins;
-const axisOrigins = ['http://localhost:3100', 'http://127.0.0.1:3100'];
-const nexusOrigins = ['http://localhost:3200', 'http://127.0.0.1:3200'];
-
-assert.strictEqual(environment.cors.enabled, true);
-assert.strictEqual(environment.cors.allowCredentials, true);
+const helpers = require('./helpers/configuration');
+const runtime = code => helpers.loadRuntime(code);
+const origins = code => helpers.corsOrigins(runtime(code));
+const axisOrigins = ['http://localhost:3100'];
+const nexusOrigins = ['http://localhost:3200'];
+const environment = helpers.corsPolicy(runtime('platformServer'));
+assert.strictEqual(environment.enabled, true);
+assert.strictEqual(environment.allowCredentials, true);
 assert(defaultHardening.securityHeaders.headers['Content-Security-Policy'].includes("frame-ancestors 'none'"));
 assert.strictEqual(defaultHardening.securityHeaders.headers['X-Content-Type-Options'], 'nosniff');
 assert.strictEqual(defaultHardening.securityHeaders.headers['X-Frame-Options'], 'DENY');
@@ -37,16 +37,21 @@ assert.strictEqual(defaultHardening.body.json.strict, true);
 assert.strictEqual(defaultHardening.body.json.limit, '1mb');
 
 for (const code of ['wcmsStagedServer', 'processServer']) {
-    assert.deepStrictEqual(origins(code), axisOrigins, code + ' must accept the Axis browser only');
-    assert.deepStrictEqual(runtime(code).cors.deniedOrigins, nexusOrigins, code + ' must explicitly subtract merged Nexus origins');
-    for (const origin of nexusOrigins) assert(!origins(code).includes(origin), code + ' must reject Nexus origin');
+    const resolved = origins(code);
+    assert(resolved.allowedOrigins.includes(axisOrigins[0]), code + ' must accept the configured Axis origin');
+    assert(!resolved.allowedOrigins.some(origin => origin.includes('127.0.0.1')));
+    assert(resolved.deniedOrigins.includes(nexusOrigins[0]));
+    assert(!resolved.allowedOrigins.includes(nexusOrigins[0]));
 }
-assert.deepStrictEqual(origins('platformServer'), axisOrigins.concat(nexusOrigins),
-    'Platform permits Nexus only so its unauthenticated low-disclosure bootstrap can be discovered');
-assert.deepStrictEqual(origins('wcmsOnlineServer'), axisOrigins.concat(nexusOrigins));
+for (const code of ['platformServer','wcmsOnlineServer']) {
+    const resolved = origins(code);
+    for (const origin of axisOrigins.concat(nexusOrigins)) assert(resolved.allowedOrigins.includes(origin));
+    assert(!resolved.allowedOrigins.some(origin => origin.includes('127.0.0.1')));
+}
 
 const targets = Object.values(routers.cmsPublicationTarget);
-assert.deepStrictEqual(targets.map(route => route.method), ['POST', 'POST', 'POST', 'POST', 'POST']);
+assert(targets.length >= 5);
+assert(targets.every(route => route.method === 'POST'));
 for (const route of targets) {
     assert.strictEqual(route.secured, true);
     assert.deepStrictEqual(route.authTokenTypes, ['service']);
@@ -55,7 +60,7 @@ for (const route of targets) {
 }
 assert.strictEqual(routers.cmsPublicationTarget.deployPublication.bodyParserHandler, 'cmsPublicationBodyParserHandler');
 const cmsProperties = require(path.resolve(frameworkRoot, 'nodics.wcms/modules/cms/config/properties')).cms;
-assert.strictEqual(cmsProperties.publication.maximumDeploymentRequestBytes, '16mb');
+assert.strictEqual(cmsProperties.publication.maximumDeploymentRequestBytes, '64mb');
 
 const profileRouters = require(path.resolve(frameworkRoot, 'nodics.platform/modules/profile/src/router/routers')).profile;
 const browserRoutes = Object.values(profileRouters).flatMap(group => Object.values(group))

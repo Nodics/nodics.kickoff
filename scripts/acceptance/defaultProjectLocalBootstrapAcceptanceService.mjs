@@ -19,20 +19,15 @@ import { promisify } from "node:util";
 const execFileAsync = promisify(execFile);
 const projectRoot = resolve(process.env.NODICS_PROJECT_ROOT || process.cwd());
 const workspaceRoot = resolve(projectRoot, "..");
-const defaultAxisRoot = existsSync(resolve(workspaceRoot, "nodics.axis")) ?
-  resolve(workspaceRoot, "nodics.axis") :
-  resolve(workspaceRoot, "nodics.exp", "nodics.axis");
-const axisRoot = resolve(
-  process.env.NODICS_AXIS_ROOT || defaultAxisRoot,
-);
-const platformUrl = process.env.AXIS_PLATFORM_URL || "http://127.0.0.1:4300";
-const wcmsUrl = process.env.AXIS_WCMS_URL || "http://127.0.0.1:4312";
-const wcmsOnlineUrl =
-  process.env.NEXUS_CMS_URL || "http://127.0.0.1:4314";
-const processUrl = process.env.AXIS_PROCESS_URL || "http://127.0.0.1:4330";
-const engagementUrl = process.env.NODICS_ENGAGEMENT_URL || "http://127.0.0.1:4340";
-const locationUrl = process.env.AXIS_LOCATION_URL || "http://127.0.0.1:4380";
-const axisUrl = process.env.AXIS_URL || "http://127.0.0.1:3100";
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || process.env.NODICS_ACCEPTANCE_RUNTIME || '');
+const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
+const wcmsUrl = process.env.AXIS_WCMS_URL || projectEndpointUrl(environmentProfile, 'wcmsStagedServer');
+const wcmsOnlineUrl = process.env.NEXUS_CMS_URL || projectEndpointUrl(environmentProfile, 'wcmsOnlineServer');
+const processUrl = process.env.AXIS_PROCESS_URL || projectEndpointUrl(environmentProfile, 'processServer');
+const engagementUrl = process.env.NODICS_ENGAGEMENT_URL || projectEndpointUrl(environmentProfile, 'engagementServer');
+const locationUrl = process.env.AXIS_LOCATION_URL || projectEndpointUrl(environmentProfile, 'locationServer');
+const operatorOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
 const password = process.env.AXIS_PASSWORD || "adminPassword";
@@ -42,7 +37,7 @@ const packageDescriptor = readProjectPackageDescriptor();
 const projectCode = process.env.AXIS_PROJECT || resolveProjectCode(projectDescriptor, packageDescriptor);
 const runtimeMode = process.env.NODICS_ACCEPTANCE_RUNTIME || "kickoffLocal";
 const managedStartupEnabled = runtimeMode === "kickoffLocal";
-const nexusUrl = process.env.NEXUS_URL || "http://127.0.0.1:3200";
+const publicOrigin = process.env.NODICS_ACCEPTANCE_PUBLIC_ORIGIN || projectCorsOrigin(environmentProfile, 'nexus');
 const urlPort = (value) => Number(new URL(value).port || (new URL(value).protocol === "https:" ? 443 : 80));
 const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
@@ -77,34 +72,6 @@ function defaultLocalBootstrapCapabilities() {
       },
     ],
     contentPacks: [],
-    axisSmoke: {
-      expectModules: true,
-      expectDocumentation: true,
-      cronLifecycle: true,
-      processLifecycle: true,
-      routes: [
-        "/",
-        "/docs",
-        "/docs/framework",
-        "/docs/nodics-axis",
-        "/docs/nodics-kickoff",
-        "/content",
-        "/content/designer",
-        "/media",
-        "/process",
-        "/process/definitions",
-        "/process/tasks",
-        "/process/triggers",
-        "/process/designer",
-        "/cron",
-        "/system-integrations",
-        "/registry",
-        "/operations/imports-exports",
-        "/docs/framework/process",
-        "/docs/framework/process/visual-designer",
-        "/docs/swaggers",
-      ],
-    },
   };
 }
 
@@ -170,24 +137,6 @@ function validateLocalBootstrapCapabilities(capabilities) {
   if (!Array.isArray(capabilities.contentPacks)) {
     errors.push("acceptance.localBootstrap.contentPacks must be an array.");
   }
-  if (!isObject(capabilities.axisSmoke)) {
-    errors.push("acceptance.localBootstrap.axisSmoke must be an object.");
-    return errors;
-  }
-  ["expectModules", "expectDocumentation", "cronLifecycle", "processLifecycle"].forEach((field) => {
-    if (typeof capabilities.axisSmoke[field] !== "boolean") {
-      errors.push(`acceptance.localBootstrap.axisSmoke.${field} must be true or false.`);
-    }
-  });
-  if (!Array.isArray(capabilities.axisSmoke.routes)) {
-    errors.push("acceptance.localBootstrap.axisSmoke.routes must be an array.");
-  } else {
-    capabilities.axisSmoke.routes.forEach((route, index) => {
-      if (typeof route !== "string" || !route.startsWith("/")) {
-        errors.push(`acceptance.localBootstrap.axisSmoke.routes[${index}] must start with /.`);
-      }
-    });
-  }
   return errors;
 }
 
@@ -206,26 +155,17 @@ function loadLocalBootstrapCapabilities() {
     assertValidLocalBootstrapCapabilities(configured);
   }
   const configuredCapabilities = configured || {};
-  const axisSmoke = {
-    ...fallback.axisSmoke,
-    ...(configuredCapabilities.axisSmoke || {}),
-  };
   return {
     documentationPacks: Array.isArray(configuredCapabilities.documentationPacks) ?
       configuredCapabilities.documentationPacks : fallback.documentationPacks,
     contentPacks: Array.isArray(configuredCapabilities.contentPacks) ?
       configuredCapabilities.contentPacks : fallback.contentPacks,
-    axisSmoke: {
-      ...axisSmoke,
-      routes: Array.isArray(axisSmoke.routes) ? axisSmoke.routes : fallback.axisSmoke.routes,
-    },
   };
 }
 
 const localBootstrapCapabilities = loadLocalBootstrapCapabilities();
 const documentationPacks = localBootstrapCapabilities.documentationPacks;
 const nexusPacks = localBootstrapCapabilities.contentPacks;
-const axisSmoke = localBootstrapCapabilities.axisSmoke;
 const contentPacks = [...documentationPacks, ...nexusPacks];
 const expectedCatalogs = Object.freeze([
   Object.freeze({
@@ -262,7 +202,6 @@ const localPorts = [
   { label: "Engagement", port: 4340 },
   { label: "Location", port: urlPort(locationUrl) },
   { label: "Commerce", port: 4350 },
-  { label: "Axis", port: urlPort(axisUrl) },
 ];
 const managedProcesses = [];
 
@@ -280,11 +219,6 @@ function stableId(value) {
 
 function isErrorLevelLog(text) {
   return /(?:^|\s)error\s*:/i.test(text) || /\[31merror/i.test(text);
-}
-
-function isExpectedAcceptanceBackendNoise(message) {
-  return message.includes("ERR_DBS_00004") &&
-    message.includes("Module schemas are not available");
 }
 
 async function requestJson(baseUrl, path, options = {}) {
@@ -369,8 +303,8 @@ async function expectHttpOk(baseUrl, path) {
 
 /** Proves the Local browser/runtime security matrix through HTTP without database access. */
 async function verifyLocalRouteSecurityMatrix() {
-  const nexusOrigin = new URL(nexusUrl).origin;
-  const axisOrigin = new URL(axisUrl).origin;
+  const nexusOrigin = new URL(publicOrigin).origin;
+  const axisOrigin = new URL(operatorOrigin).origin;
   const probe = (baseUrl, path, origin, options = {}) => fetch(endpoint(baseUrl, path), {
     redirect: "manual",
     ...options,
@@ -601,7 +535,7 @@ async function authenticate() {
     {
       method: "POST",
       body: JSON.stringify({ loginId, password }),
-      headers: { Origin: axisUrl },
+      headers: { Origin: operatorOrigin },
     },
   );
   if (!auth?.authToken) {
@@ -726,7 +660,7 @@ async function verifyDocumentationInitiallyNotInstalled(headers) {
     const publicInstall = await requestJsonResponse(
       wcmsUrl,
       `/nodics/system/v0/content-packs/${encodeURIComponent(pack.code)}/imports`,
-      { method: "POST", headers: { Origin: nexusUrl } },
+      { method: "POST", headers: { Origin: publicOrigin } },
     );
     if (![401, 403].includes(publicInstall.status)) {
       throw new Error(`${pack.code} public/Nexus installation request returned HTTP ${String(publicInstall.status)}`);
@@ -816,18 +750,24 @@ async function verifyLocationMapDefaults(headers) {
     "/nodics/locationMap/v0/location/maps/configurations/effective?surfaceCode=AXIS&usageCode=COLLECTION_CENTRE_MAP",
     { headers },
   );
+  const configured = effective.setupStatus === "ACTIVE" &&
+    effective.configured === true && String(effective.publicAccessToken || "").startsWith("pk.");
+  const fallbackReady = effective.setupStatus === "SETUP_REQUIRED" &&
+    effective.configured === false && effective.fallbackAllowed === true &&
+    effective.fallbackRenderer?.providerCode === "OSM" &&
+    effective.fallbackRenderer?.rendererType === "XYZ_TILE" &&
+    String(effective.fallbackRenderer?.tileUrlTemplate || "").startsWith("https://");
   if (
     effective.providerCode !== "MAPBOX" ||
-    effective.setupStatus !== "ACTIVE" ||
-    effective.configured !== true ||
+    (!configured && !fallbackReady) ||
     effective.fallbackProviderCode !== "OSM" ||
     effective.fallbackPolicy !== "ALLOW_BASIC_MAP" ||
-    !String(effective.styleUrl || "").includes("mapbox://styles/mapbox/streets-v12") ||
-    !String(effective.publicAccessToken || "").startsWith("pk.")
+    !String(effective.styleUrl || "").includes("mapbox://styles/mapbox/streets-v12")
   ) {
     throw new Error(`Location Map defaults are not effective for Axis collection centres: ${JSON.stringify(effective)}`);
   }
-  log("Location Map defaults resolve Mapbox active with OSM fallback for Axis collection centres");
+  log(configured ? "Location Map defaults resolve Mapbox active with OSM fallback" :
+    "Location Map defaults require a Mapbox key and expose the approved OSM fallback; external provider access is unqualified");
 }
 
 async function publishAxisBaseline(headers) {
@@ -1204,44 +1144,6 @@ async function verifyWcmsDesignerAuthoringAvailability(headers) {
 }
 
 
-async function runAxisSmoke() {
-  if (!existsSync(resolve(axisRoot, "package.json"))) {
-    throw new Error(`Axis repository not found at ${axisRoot}`);
-  }
-  const enabledGates = [
-    axisSmoke.expectDocumentation ? "documentation" : null,
-    axisSmoke.cronLifecycle ? "cron lifecycle" : null,
-    axisSmoke.processLifecycle ? "process lifecycle" : null,
-  ].filter(Boolean);
-  log(`running Axis smoke${enabledGates.length ? ` with ${enabledGates.join(", ")}` : ""}`);
-  await new Promise((resolvePromise, rejectPromise) => {
-    const child = spawn("npm", ["run", "smoke:live"], {
-      cwd: axisRoot,
-      env: {
-        ...process.env,
-        AXIS_EXPECT_MODULES: axisSmoke.expectModules ? "1" : "0",
-        AXIS_EXPECT_DOCUMENTATION: axisSmoke.expectDocumentation ? "1" : "0",
-        AXIS_CRON_LIFECYCLE: axisSmoke.cronLifecycle ? "1" : "0",
-        AXIS_PROCESS_LIFECYCLE: axisSmoke.processLifecycle ? "1" : "0",
-        AXIS_URL: axisUrl,
-        AXIS_PLATFORM_URL: platformUrl,
-        AXIS_PROCESS_URL: processUrl,
-        AXIS_WCMS_URL: wcmsUrl,
-        AXIS_ENTERPRISE: enterpriseCode,
-        AXIS_PROJECT: projectCode,
-        AXIS_LOGIN_ID: loginId,
-        AXIS_PASSWORD: password,
-      },
-      stdio: "inherit",
-    });
-    child.on("exit", (code) => {
-      if (code === 0) resolvePromise();
-      else
-        rejectPromise(new Error(`Axis smoke failed with code ${String(code)}`));
-    });
-  });
-}
-
 async function main() {
   log(`workspace ${workspaceRoot}`);
   log(`run ${stableId(String(Date.now()))}`);
@@ -1299,10 +1201,10 @@ async function main() {
   if (dropLocalDb) {
     const resetHeaders = await authenticate();
     await executeGovernedFreshReset(resetHeaders);
-    await ensureProcess("Platform", 4300, projectRoot, "start:platform", platformUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("WCMS Staged", 4312, projectRoot, "start:wcms:staged", wcmsUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("WCMS Online", 4314, projectRoot, "start:wcms:online", wcmsOnlineUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("Process and Automation", 4330, projectRoot, "start:process", processUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("Platform", urlPort(platformUrl), projectRoot, "start:platform", platformUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("WCMS Staged", urlPort(wcmsUrl), projectRoot, "start:wcms:staged", wcmsUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("WCMS Online", urlPort(wcmsOnlineUrl), projectRoot, "start:wcms:online", wcmsOnlineUrl, "/nodics/system/v0/health/ready");
+    await ensureProcess("Process and Automation", urlPort(processUrl), projectRoot, "start:process", processUrl, "/nodics/system/v0/health/ready");
     await ensureProcess("Engagement", urlPort(engagementUrl), projectRoot, "start:engagement", engagementUrl, "/nodics/system/v0/health/ready");
     await ensureProcess("Location", urlPort(locationUrl), projectRoot, "start:location", locationUrl, "/nodics/system/v0/health/ready");
     await verifyLocalRouteSecurityMatrix();
@@ -1312,15 +1214,6 @@ async function main() {
     "/nodics/backoffice/v0/bootstrap/public",
     "BackOffice public bootstrap",
   );
-  if (!managedStartupEnabled) {
-    await waitForHttp(axisUrl, "/", "Axis");
-  } else if (!(await portListening(urlPort(axisUrl)))) {
-    if (!existsSync(resolve(axisRoot, "package.json"))) {
-      throw new Error(`Axis repository not found at ${axisRoot}`);
-    }
-    startProcess("Axis", axisRoot, "npm", ["run", "dev"], urlPort(axisUrl));
-  }
-  await waitForHttp(axisUrl, "/", "Axis");
   const headers = await authenticate();
   await ensureInitializationProfileCurrent(headers, platformUrl, "localPlatformFoundation", "Platform foundation");
   await ensureInitializationProfileCurrent(headers, locationUrl, "localLocationFoundation", "Location foundation");
@@ -1352,14 +1245,8 @@ async function main() {
   await qualifyDocumentationReleaseRollback(headers);
   await verifyPublicationOperations(headers);
   await verifyWcmsDesignerAuthoringAvailability(headers);
-  for (const route of axisSmoke.routes) {
-    await expectHttpOk(axisUrl, route);
-    log(`Axis route ${route} returned HTTP 200`);
-  }
-  await runAxisSmoke();
   const noisy = managedProcesses.flatMap((entry) =>
     entry.errors
-      .filter((message) => !isExpectedAcceptanceBackendNoise(message))
       .map((message) => `${entry.label}: ${message}`),
   );
   if (noisy.length > 0) {

@@ -19,7 +19,7 @@ const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
 const pkg = require(path.join(projectRoot, 'package.json'));
-const environment = require(path.join(projectRoot, 'envs/kickoffLocal/nodics.environment.json'));
+const environment = require('./helpers/configuration').loadEnvironment();
 const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const commandService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService'));
 const commands = commandService.resolveCommands(commandService.readManifest(projectRoot));
@@ -33,32 +33,26 @@ for (const [alias, file] of [
     assert.equal(commands[alias].script, 'scripts/acceptance/' + file);
     assert(fs.existsSync(path.join(projectRoot, commands[alias].script)));
 }
-assert.deepEqual(environment.acceptance.wasteManagement, {
-    environment: 'kickoffLocal',
-    server: 'wasteServer',
-    profileCode: 'localWasteFoundation',
-    runtime: {
-        label: 'Waste',
-        port: 4370,
-        script: 'start:waste'
-    }
-});
-assert.deepEqual(environment.acceptance.wasteBackofficeDiscovery, {
-    functionalModule: 'nodics.waste',
-    providerModule: 'wasteCore',
-    capabilityId: 'waste-management',
-    groupId: 'sustainability-operations',
-    observedServer: 'kickoffLocal:wasteServer:default',
-    platform: {
-        label: 'Platform',
-        port: 4300,
-        script: 'start:platform'
-    },
-    waste: {
-        label: 'Waste',
-        port: 4370,
-        script: 'start:waste'
-    }
-});
+const { projectRuntime, projectInitializationProfile } = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
+assert.equal(require('../envs/kickoffLocal/config/properties').tooling, undefined);
+assert.deepEqual(environment.acceptance.wasteManagement.runtime, { role: 'WASTE' });
+const waste = projectRuntime(environment, environment.acceptance.wasteManagement.runtime);
+assert.equal(waste.server, 'wasteServer');
+assert.equal(waste.port, 4370);
+assert.equal(waste.script, 'start:waste');
+assert.equal(projectInitializationProfile(waste), 'localWasteFoundation');
+const discovery = environment.acceptance.wasteBackofficeDiscovery;
+assert.equal(discovery.functionalModule, 'nodics.waste');
+assert.equal(discovery.providerModule, 'wasteCore');
+assert.equal(discovery.capabilityId, 'waste-management');
+assert.equal(discovery.groupId, 'sustainability-operations');
+assert.equal(discovery.observedServer, undefined);
+assert.equal(projectRuntime(environment, discovery.platform).port, 4300);
+assert.equal(projectRuntime(environment, discovery.waste).server, waste.server);
+const docker = require('./helpers/configuration').loadEnvironment('kickoffDockerLocal');
+assert.equal(projectInitializationProfile(projectRuntime(docker, docker.acceptance.wasteManagement.runtime)), 'localWasteFoundation');
+assert.equal(docker.acceptance.guidedInitialization.deliveryProbe.site, 'nexusCorporateSite');
+assert.equal(environment.acceptance.guidedInitialization.profileCode, undefined);
+assert.equal(projectInitializationProfile(projectRuntime(environment, environment.acceptance.guidedInitialization.runtime), '', environment.acceptance.guidedInitialization.profileTemplate), 'localWcmsFoundation');
 
 console.log('Kickoff Waste Management acceptance command contract validated');

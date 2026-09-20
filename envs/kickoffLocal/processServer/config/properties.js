@@ -19,18 +19,43 @@
  * @override Customer projects may change local host/port/topology without copying framework Process defaults.
  */
 module.exports = {
-  httpHardening: {
-    cors: {
-      allowedOrigins: ["http://localhost:3100", "http://127.0.0.1:3100"],
-      deniedOrigins: ["http://localhost:3200", "http://127.0.0.1:3200"],
-    },
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-process-1",
+    "remoteModules": [
+      "profile",
+      "backoffice",
+      "editorial",
+      "cms"
+    ]
   },
-  apiExposure: { categories: { dataImport: { enabled: true } } },
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    modules: {
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_PROCESS_API_KEY",
+      "fallback": null
+    }
+  },
+  "httpHardening": {
+    "cors": {
+      "originEndpointOverrides": {
+        "nexus": false
+      }
+    }
+  },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
+    ],
+    "allowMissingModelServices": true,
+    "modules": {
       "cronjob": true,
       "import": true,
       "system": true,
@@ -38,180 +63,143 @@ module.exports = {
       "validator": true,
       "workflow": true
     },
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultSearchService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultIndexService",
+        "DefaultIndexerLogService",
+        "DefaultIndexerService",
+        "DefaultSearchService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    }
   },
-  activeModules: {
-    groups: [],
-    modules: [
+  "activeModules": {
+    "groups": [],
+    "modules": [
+      "redisCache",
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
-      "kickoffInt",
-      "kickoffLocal",
-      "processServer",
-    ],
+      "kickoffInt"
+    ]
   },
-  runtimeRole: { code: "PROCESS", publication: "OPERATIONAL" },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["PROCESS"],
-      initializationProfiles: {
-        localProcessWorkflowFoundation: {
-          enabled: true,
-          label: "Local Process and Workflow foundation",
-          description:
-            "Install required process definitions and workflow releases used by publication approvals and governed operator tasks.",
-          completionMessage:
-            "The Local Process and Workflow foundation is ready. Approval flows can be created for publishable data.",
-          steps: [{ dataType: "init" }],
-        },
-      },
-      contributions: [
-        { moduleName: "cms", sections: ["cmsPublicationApproval"] },
-      ],
-      installers: {
-        PROCESS_DEFINITION: "DefaultProcessDefinitionContributionService",
-      },
-    },
+  "runtimeRole": {
+    "code": "PROCESS",
+    "publication": "OPERATIONAL"
   },
-  database: {
-    default: {
-      mongodb: {
-        master: {
-          databaseName: "kickoffLocalProcess",
-        },
+  "data": {
+    "dataReleases": {
+      "initializationProfiles": {
+        "localProcessWorkflowFoundation": {
+          "enabled": true,
+          "label": "Local Process and Workflow foundation",
+          "description": "Install required process definitions and workflow releases used by publication approvals and governed operator tasks.",
+          "completionMessage": "The Local Process and Workflow foundation is ready. Approval flows can be created for publishable data.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "init"
+              }
+            ]
+          }
+        }
       },
-    },
-    cronjob: {
-      mongodb: {
-        master: {
-          databaseName: "kickoffLocalCron",
-        },
+      "contributions": {
+        "$config": "replace",
+        "value": [
+          {
+            "moduleName": "cms",
+            "sections": [
+              "cmsPublicationApproval"
+            ]
+          }
+        ]
       },
-    },
-    workflow: {
-      mongodb: {
-        master: {
-          databaseName: "kickoffLocalProcess",
-        },
-      },
-    },
+      "installers": {
+        "PROCESS_DEFINITION": "DefaultProcessDefinitionContributionService"
+      }
+    }
   },
-  process: {
-    publicationDecisionCallback: {
-      target: {
-        moduleName: "cms",
-        connectionName: "cmsStaged",
-        connectionType: "abstract",
-        timeoutMs: 10000,
-        maxAttempts: 2,
-      },
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalProcess"
+        }
+      }
     },
-    actionAdapters: {
-      allowedActions: [
-        {
-          moduleName: "nodics.process",
-          operation: "noop",
-          description:
-            "Safe no-op adapter for framework smoke tests and beginner demos",
-        },
-        {
-          moduleName: "editorial",
-          operation: "applyDecision",
-          service: "DefaultKickoffEditorialProcessAdapterService",
-          method: "applyDecision",
-          description:
-            "Delegates Editorial approval decisions from Process to the WCMS-owned Editorial API",
-        },
-        {
-          moduleName: "editorial",
-          operation: "publishApproved",
-          service: "DefaultKickoffEditorialProcessAdapterService",
-          method: "publishApproved",
-          description:
-            "Delegates approved Editorial publication from Process to the WCMS-owned Editorial API",
-        },
-        {
-          moduleName: "cms",
-          operation: "applyPublicationDecision",
-          service: "DefaultProcessPublicationDecisionCallbackService",
-          method: "applyPublicationDecision",
-          description:
-            "Returns the approved or rejected workflow decision to the WCMS Staged publication authority",
-        },
-      ],
+    "cronjob": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalCron"
+        }
+      }
     },
+    "workflow": {}
   },
-  editorialProcessAdapter: {
-    wcmsBaseUrl: "http://127.0.0.1:4312",
+  "process": {
+    "publicationDecisionCallback": {
+      "target": {
+        "connectionName": "cmsStaged"
+      }
+    },
+    "actionAdapters": {
+      "allowedActions": {
+        "$config": "replace",
+        "value": [
+          "nodics.process.noop",
+          "editorial.applyDecision",
+          "editorial.publishApproved",
+          "cms.applyPublicationDecision"
+        ]
+      }
+    },
+    "remoteActions": {
+      "targets": {
+        "editorial": {
+          "connectionName": "cmsStaged"
+        }
+      }
+    }
   },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4330,
-        httpsHost: "localhost",
-        httpsPort: 4331,
-      },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4330,
+        "httpsPort": 4331
+      }
     },
-    profile: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-      abstractEndpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    backoffice: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-      abstractEndpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    cmsStaged: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4312,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4313,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4312,
-        httpsHost: "localhost",
-        httpsPort: 4313,
-      },
-    },
+    "cmsStaged": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.endpoint"
+      }
+    }
   },
+  "tooling": {
+    "runtime": {
+      "code": "process",
+      "script": "start:process",
+      "order": 2
+    }
+  }
 };

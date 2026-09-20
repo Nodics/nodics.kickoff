@@ -15,23 +15,20 @@ import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { promisify } from "node:util";
-const { readProjectEnvironmentProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const execFileAsync = promisify(execFile);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const manifestPath = path.join(projectRoot, "nodics.project.json");
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
-const environmentProfile = readProjectEnvironmentProfile(projectRoot, process.env.ENV || "");
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || "");
 const config = environmentProfile.acceptance?.functionalJourney || manifest.acceptance?.functionalJourney || {};
+const runtimes = Object.fromEntries(Object.entries(config.runtimes || {}).map(([name, selection]) => [name, projectRuntime(environmentProfile, selection)]));
+if (!runtimes?.platform || !runtimes.commerce || !runtimes.engagement) throw new Error("Functional acceptance requires configured runtime selections");
 const enterprise = process.env.AXIS_ENTERPRISE || "default";
-const platformUrl = process.env.AXIS_PLATFORM_URL || "http://127.0.0.1:4300";
-const engagementUrl = process.env.NODICS_ENGAGEMENT_URL || "http://127.0.0.1:4340";
-const commerceUrl = process.env.NODICS_COMMERCE_URL || "http://127.0.0.1:4350";
-const runtimes = config.runtimes || {
-  platform: { label: "Platform", port: 4300, script: "start:platform" },
-  commerce: { label: "Commerce", port: 4350, script: "start:commerce" },
-  engagement: { label: "Engagement", port: 4340, script: "start:engagement" },
-};
+const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, runtimes.platform.server);
+const engagementUrl = process.env.NODICS_ENGAGEMENT_URL || projectEndpointUrl(environmentProfile, runtimes.engagement.server);
+const commerceUrl = process.env.NODICS_COMMERCE_URL || projectEndpointUrl(environmentProfile, runtimes.commerce.server);
 const managed = [];
 
 function log(message) {
@@ -88,11 +85,12 @@ async function waitReady(baseUrl, label) {
   throw new Error(`${label} did not become ready: ${lastError?.message || "timeout"}`);
 }
 
-async function ensureRuntime(label, port, script, baseUrl) {
+async function ensureRuntime(runtime, baseUrl) {
+  const { label, port, script } = runtime;
   if (!(await listening(port))) {
-    const child = spawn("npm", ["run", script], {
+    const child = spawn(runtime.command || "npm", runtime.args || ["run", script], {
       cwd: projectRoot,
-      env: process.env,
+      env: { ...process.env, ...runtime.env, ENV: environmentProfile.environment },
       stdio: ["ignore", "pipe", "pipe"],
     });
     child.stdout.on("data", (chunk) => process.stdout.write(`[${label}] ${chunk}`));
@@ -108,7 +106,7 @@ async function authenticate() {
     "/nodics/profile/v0/employee/browser/authenticate",
     {
       method: "POST",
-      headers: { Origin: "http://127.0.0.1:3100" },
+      headers: { Origin: projectCorsOrigin(environmentProfile, 'axis') },
       body: JSON.stringify({
         loginId: process.env.AXIS_LOGIN_ID || "admin",
         password: process.env.AXIS_PASSWORD || "adminPassword",
@@ -213,10 +211,10 @@ async function cleanup() {
 
 async function run() {
   try {
-    await ensureRuntime(runtimes.platform.label, runtimes.platform.port, runtimes.platform.script, platformUrl);
+    await ensureRuntime(runtimes.platform, platformUrl);
     await Promise.all([
-      ensureRuntime(runtimes.commerce.label, runtimes.commerce.port, runtimes.commerce.script, commerceUrl),
-      ensureRuntime(runtimes.engagement.label, runtimes.engagement.port, runtimes.engagement.script, engagementUrl),
+      ensureRuntime(runtimes.commerce, commerceUrl),
+      ensureRuntime(runtimes.engagement, engagementUrl),
     ]);
     const headers = await authenticate();
     await exerciseFeedback(headers);

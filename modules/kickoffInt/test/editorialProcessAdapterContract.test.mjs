@@ -9,37 +9,37 @@
 
  */
 
-import assert from 'node:assert/strict';
-import { test } from 'node:test';
-
-const service = await import('../src/service/defaultKickoffEditorialProcessAdapterService.js');
-const adapter = service.default || service;
-
-test('Kickoff Editorial Process adapter keeps WCMS as the domain authority', () => {
-  global.CONFIG = {
-    get(name) {
-      if (name === 'editorialProcessAdapter') {
-        return { wcmsBaseUrl: 'http://127.0.0.1:4312/' };
-      }
-      return {};
-    },
-  };
-  const request = {
-    tenant: 'default',
-    httpRequest: {
-      headers: {
-        authorization: 'Bearer token',
-        tenant: 'default',
-        'x-enterprise-code': 'default',
-      },
-    },
-  };
-  assert.equal(adapter.wcmsBaseUrl(), 'http://127.0.0.1:4312');
-  assert.deepEqual(adapter.delegatedHeaders(request), {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer token',
-    tenant: 'default',
-    'x-enterprise-code': 'default',
-  });
+/** Verifies the reference runtimes select the framework's remote Editorial protocol. */
+import assert from "node:assert/strict";
+import { test } from "node:test";
+import { createRequire } from "node:module";
+import fs from "node:fs";
+const require = createRequire(import.meta.url);
+test("Local and Docker Process select protocol names and deployment connections", () => {
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const config = require(
+      "../../../envs/" + environment + "/processServer/config/properties.js",
+    );
+    assert.deepEqual(config.process.actionAdapters.allowedActions.value, [
+      "nodics.process.noop",
+      "editorial.applyDecision",
+      "editorial.publishApproved",
+      "cms.applyPublicationDecision",
+    ]);
+    assert.equal(
+      config.process.remoteActions.targets.editorial.connectionName,
+      "cmsStaged",
+    );
+    assert.equal(config.editorialProcessAdapter, undefined);
+    assert.equal(config.activeModules.modules.includes("editorial"), false);
+  }
+  assert.equal(
+    fs.existsSync(
+      new URL(
+        "../src/service/defaultKickoffEditorialProcessAdapterService.js",
+        import.meta.url,
+      ),
+    ),
+    false,
+  );
 });

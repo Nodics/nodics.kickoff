@@ -258,18 +258,175 @@ Foundation initialization profiles continue selecting their declared Init/Core
 categories and destination roles. Release discovery and manifests determine each
 capability's records; application bundles and captions remain project choices.
 
-## Declarative environment selection
+## Declarative environment and runtime configuration
 
-Local and Docker server properties export data. nConfig resolves explicit
-`$config` bindings during the normal contribution sequence: the environment
-profile owns Agora domain selection; environment properties own shared values;
-server properties own runtime composition and isolated database names. Docker
-endpoint references reuse `configurationValues.remoteEndpoints`; database owners
-reference the server's default connection. Security settings are declared once
-in the Docker environment, with secret values supplied through environment
-bindings. No project runtime-properties builder remains.
+`package.json` identifies modules, environments, servers and nodes. Existing
+`config/properties.js` contributions supply their configuration. The retired
+`nodics.environment.json` is neither required nor loaded, and no replacement
+descriptor is introduced. nConfig owns binding and layering; nTooling projects
+startup, container and acceptance inputs from that same configuration.
 
-Use `test/helpers/configuration.js` only in tests to invoke the real nConfig
-loader without starting resources. Runtime startup continues to use nConfig
-directly. Directly requiring properties observes declarations, including bindings.
-Domain tests cover empty and reordered selections in both environments.
+Root `activeModules.compositions.agora` describes this project's optional Agora
+selection. Only selecting runtime contributions consume it. Independent cron or
+website projects do not need Agora. Runtime provider/module selections stay
+explicit; merely declaring an endpoint or connection never activates its owner.
+
+Each server declares its own `servers.default.endpoint` port. Peer aliases use
+`$config: runtime` to project that server's endpoint, retaining intentional
+`remoteOnly`, advertised-host and HTTP-only differences. Module identity and
+package versions come from existing metadata. Framework host defaults are inherited.
+A node may override a target endpoint field; a later tenant override changes the
+actual consumer endpoint. References preserve their contribution-time snapshot.
+Missing, unsafe or cyclic targets fail before runtime startup.
+
+Local startup order and dependencies remain in each server's `tooling.runtime`.
+Acceptance runtime descriptors are selected from declared roles and existing
+server metadata; ports and launch commands are not repeated in Local properties. Acceptance URL defaults use nTooling's `projectEndpointUrl` projection,
+including the configured Axis origin. Explicit published-URL environment inputs
+remain valid for proxy or container access. Local Redis inherits the framework
+host, port and `localRuntimeAuth` prefix; its Redis block declares only
+`enabled: true`. A different deployment namespace is an intentional later override.
+Frontend applications own their startup commands and development ports. Backend
+configuration declares only explicit CORS security policy for trusted origins. Container-specific inputs and real deployment differences remain
+under the existing environment's `tooling` property. Reusable acceptance defaults
+come from their framework capability owners; the Local tooling block is absent. This metadata never authorizes
+imports, grants runtime scope or proves deployed readiness.
+
+## Inherited provider and policy defaults
+
+Local Elasticsearch uses the framework provider's `http://localhost:9200` default.
+Kickoff Local declares no Elasticsearch address. Docker overrides it with the
+container service address because that deployment differs. Apply this rule to
+all provider settings: retain only actual environment differences, connection
+selection and isolated database/namespace choices.
+
+Framework defaults provide info logging, disabled remote event publication,
+disabled database fallback for search, standard CORS headers/credential behavior,
+and secured service-registry API exposure. Docker's logging environment input and
+cross-origin resource header are deliberate deployment differences. Search and
+cache providers still require explicit activation. Server database names and
+Process's separate Cron database remain project deployment choices.
+
+The canonical deployment classification is `environment.class`. nImport reads it
+for release scope and does not infer it from `kickoffLocal` or another runtime
+name. Sample releases are available for authorized manual execution by default;
+only Init runs automatically. Permissions, tenant/destination checks, release
+integrity and durable receipts remain mandatory. A deployment may explicitly
+restrict Sample execution without changing framework code.
+
+## Credentials, initialization and runtime authentication
+
+Auth policy comes from nAuth. Customer root `config/properties.js` may set
+`bootstrapIdentity.adminPassword`; environment, server and node properties may
+override it through nConfig. Kickoff declares its current administrator bootstrap
+value at this customer-project layer. The value must satisfy nAuth password
+strength and remain distinct from service credentials. This configures future
+initialization; changing it does not rotate an already persisted administrator
+password. Use Profile credential operations for an existing account.
+
+This administrator bootstrap value is the sole literal-credential exception.
+JWT secrets, peppers, service passwords/API keys and binding fallbacks still use
+deployment inputs. Do not publish credential-bearing customer files or enable
+blanket legacy-human/plaintext/missing-stamp compatibility exceptions.
+
+Supply deployment inputs through the framework's environment bindings or the
+existing layered external/secret-provider mechanism:
+
+| Input | Purpose |
+| --- | --- |
+| `NODICS_JWT_SECRET` | Stable deployment signing material |
+| `NODICS_API_KEY_PEPPER` | Stable API-key digest material |
+| `NODICS_BOOTSTRAP_ADMIN_PASSWORD` | Initial human administrator provisioning |
+| `NODICS_BOOTSTRAP_SERVICE_PASSWORD` | Initial service-principal provisioning |
+| `NODICS_BOOTSTRAP_SERVICE_API_KEY` | Initial service API-key provisioning |
+| `NODICS_RUNTIME_API_KEY` | Current retained runtime proof |
+
+All ten Local runtimes retain independent `NODICS_LOCAL_*_API_KEY` bindings and runtime instance identities.
+These are intentional deployment selections. Missing retained proof remains null;
+there is no fallback to a sample key or human administrator. Profile owns runtime
+scope grants, tenant/enterprise validation, token issuance, renewal and revocation.
+
+Profile's `profileInitialization.requiredEmployeeLogins` defaults to the human and
+service identities supplied by its Init release. Initialization checks no longer
+use the runtime authentication login. Missing identities are detected independently
+of current proof; existing Init receipts and mandatory identity reconciliation
+continue to govern repair. Configuration changes do not reset stored credentials.
+
+Each runtime explicitly selects the Redis provider. Each environment declares only
+connection differences, and the shared `auth.auth` channel inherits strict nAuth
+cache policy with no local fallback. Local inherits the framework prefix;
+Docker retains its existing Redis/Sentinel deployment inputs. Missing required
+credentials or cache capabilities fail through their existing owners.
+
+Docker maps its persisted generated credential variables to the framework input
+names. Fresh container setup generates random credentials once and retains them
+on subsequent runs. It no longer provides a universal administrator password.
+For an initialized deployment, bind its current signing secret and pepper before
+restart. Use Profile's governed migration/rotation process for legacy records,
+scopes/stamps or changed credentials; do not replay Init or restore revoked keys.
+
+## Browser origins and later overrides
+
+nRouter enables CORS by default for the standard Nodics localhost origins: Axis 3100, Nexus 3200, Agora Apparel 3300, Electronics 3400, Telco 3500 and Circa 3600. These shared API security defaults apply independently of Platform/accelerator activation and frontend health. Environments declare only different addresses or policy; server denials and explicit disablement remain supported. nRouter never reads a frontend launch catalogue. Exact origins, header policy and route authorization remain enforced.
+
+Server `originEndpointOverrides` retains deliberate frontend denials. Numeric
+loopback aliases and temporary IP addresses are not automatically added.
+A different environment supplies its actual host/protocol or replaces the endpoint
+collection through nConfig. Denials follow frontend identity when its address changes.
+Tests cover custom HTTPS, empty/replaced collections, forbidden origins and headers.
+
+## Application selections and optional features
+
+Customer knowledge sources retain their classification, scopes, permissions and
+explicit enablement. Repository roots use nConfig context/path bindings. Framework
+and project source versions inherit package metadata unless the operator supplies
+an intentional version override. There is no `configurationValues.knowledge` helper
+registry. Source selection is independent of source-ingestion authority.
+
+Keep explicit content-pack, reset, publication baseline, provider, data-release,
+store/catalogue, frontend and runtime identity selections. Their presence does not
+mean they are copied framework defaults. Content-pack paths and presentation
+mechanics inherit nImport; BackOffice resolves its standard target defaults.
+The project documentation pack retains its governed CMS import/publication path.
+Use `replace` for complete collection selection and `keyed` for identity changes;
+ordinary arrays retain positional compatibility. Shorter arrays do not delete
+inherited members without the explicit collection operation.
+
+## Enforcement and verification
+
+`project:validate` and the framework principle audit reject the retired descriptor,
+profile bindings, duplicate endpoint/authentication catalogues and literal auth
+secrets in authored properties, except the direct customer administrator bootstrap
+override. The canonical framework coding restrictions live
+in nSetup's customer configuration classification contract. The static audit never
+executes customer property files and never prints credential values.
+
+Tests use `test/helpers/configuration.js` to invoke the real nConfig and capability
+consumers without starting infrastructure. All active runtime preparations, source
+classification, later overrides and negative checks are part of closure evidence.
+Prepared configuration and isolated contracts do not prove a deployed database,
+Redis/Sentinel service, current grants, browser session or external AI provider.
+Perform deployment acceptance after the normal selected-server build/restart.
+
+MongoDB default names `masterLocal` and `testLocal` belong to the framework adapter.
+Kickoff Local declares no default database-name block. Server-specific names,
+including separate Staged/Online and Process/Cron databases, remain explicit
+isolation overrides. This source cleanup does not migrate or rename existing data.
+
+## Nexus accelerator migration
+
+The `nexus` accelerator now owns the former Nexus reference content pack at
+`nodics.accelerators/modules/nexus/modules/nexus.web` in the framework repository.
+Its public module identity remains `nexus.web`; release codes, versions and all
+data/media bytes are preserved. Kickoff no longer contains a duplicate content pack.
+
+Platform explicitly selects `nexusCore` for administration descriptors; WCMS Staged
+selects `nexus`, and Engagement selects the `nexus.web` operational release source.
+The structural parent appearing in a graph does not imply CMS activation: Platform
+and Engagement remain free of CMS services. `npm run nexus:test` dispatches the
+module-owned `nexus:check` command. Customer media-seeding journeys remain explicit.
+
+Common Nexus publication baselines and delivery defaults are accelerator-owned.
+The Local-only incremental/professional-copy proof selections remain Local deltas;
+Kickoff's combined Nexus/Agora acceptance profile list remains a project choice.
+No data was imported, uploaded or published by this source migration.

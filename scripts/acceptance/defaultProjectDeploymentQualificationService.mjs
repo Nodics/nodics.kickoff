@@ -27,13 +27,9 @@ const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 
 export function resolveWorkspace(environment = process.env) {
   const workspaceRoot = path.resolve(projectRoot, '..');
-  const expRoot = path.join(workspaceRoot, 'nodics.exp');
   return {
     kickoff: projectRoot,
     framework: path.resolve(environment.NODICS_QUALIFICATION_FRAMEWORK_ROOT || path.join(workspaceRoot, 'nodics.ai')),
-    axis: path.resolve(environment.NODICS_QUALIFICATION_AXIS_ROOT || path.join(expRoot, 'nodics.axis')),
-    nexus: path.resolve(environment.NODICS_QUALIFICATION_NEXUS_ROOT || path.join(expRoot, 'nodics.nexus')),
-    agora: path.resolve(environment.NODICS_QUALIFICATION_AGORA_ROOT || path.join(expRoot, 'nodics.agora.apparel')),
   };
 }
 
@@ -65,21 +61,6 @@ export function createQualificationPlan(options = {}) {
       id: 'project-retained-acceptance', owner: 'nodics.kickoff', cwd: workspace.kickoff,
       command: 'npm', args: ['run', 'acceptance:local'],
       proves: 'Integrated retained-data runtime, documentation, module lifecycle, Axis smoke, governed export/import, rejection, rollback, retirement, recovery, and reconciliation journey.',
-    },
-    {
-      id: 'axis-verification', owner: 'nodics.axis', cwd: workspace.axis,
-      command: 'npm', args: ['run', 'verify'],
-      proves: 'Formatting, lint, type safety, automated accessibility-oriented component contracts, tests, and production bundle.',
-    },
-    {
-      id: 'nexus-verification', owner: 'nodics.nexus', cwd: workspace.nexus,
-      command: 'npm', args: ['run', 'verify'],
-      proves: 'Public delivery client tests, type safety, lint, and production bundle remain compatible with Online-only delivery.',
-    },
-    {
-      id: 'agora-verification', owner: 'nodics.agora.apparel', cwd: workspace.agora,
-      command: 'npm', args: ['run', 'verify:multi-domain'],
-      proves: 'Storefront component composition, domain renderer mapping, Commerce client contracts, and multi-domain customer journey bundle remain compatible with Kickoff data.',
     },
     {
       id: 'redis-cache-live', owner: 'nodics.foundation/nCache', cwd: workspace.framework,

@@ -17,16 +17,28 @@
  * @override Customer deployments provide their own location server database, provider, and endpoint configuration.
  */
 module.exports = {
-  activeModules: {
-    groups: [],
-    modules: [
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-location-1",
+    "remoteModules": [
+      "profile",
+      "backoffice"
+    ]
+  },
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_LOCATION_API_KEY",
+      "fallback": null
+    }
+  },
+  "activeModules": {
+    "groups": [],
+    "modules": [
       "circa.ewaste",
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
-      "kickoffLocal",
-      "locationServer",
       "nodics.location",
       "locationCore",
       "locationType",
@@ -35,32 +47,42 @@ module.exports = {
       "locationDraft",
       "locationApproval",
       "locationProjection",
+      "redisCache"
+    ]
+  },
+  "runtimeRole": {
+    "code": "LOCATION",
+    "publication": "OPERATIONAL"
+  },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "locationCore": true,
+      "locationType": true,
+      "locationMap": true,
+      "locationSearch": true,
+      "locationDraft": true,
+      "locationApproval": true,
+      "locationProjection": true
+    },
+    "default": "location.operational"
+  },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
     ],
-  },
-  runtimeRole: { code: "LOCATION", publication: "OPERATIONAL" },
-  runtimeAuthorityContexts: {
-    modules: {
-      locationCore: "location.operational",
-      locationType: "location.operational",
-      locationMap: "location.operational",
-      locationSearch: "location.operational",
-      locationDraft: "location.operational",
-      locationApproval: "location.operational",
-      locationProjection: "location.operational",
-    },
-  },
-  apiExposure: {
-    categories: {
-      dataImport: { enabled: true },
-      locationInternal: { enabled: true },
-    },
-  },
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: ["DefaultLocationMapProviderConfigurationService"],
-    modules: {
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
+      "DefaultLocationMapProviderConfigurationService"
+    ],
+    "modules": {
       "import": true,
       "locationCore": true,
       "locationDraft": true,
@@ -72,129 +94,123 @@ module.exports = {
       "token": true,
       "validator": true
     },
-    serviceNames: [
-      "DefaultLocationApprovalService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultSearchService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultLocationApprovalService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultIndexService",
+        "DefaultIndexerLogService",
+        "DefaultIndexerService",
+        "DefaultSearchService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    }
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["LOCATION"],
-      contributions: [
-        { moduleName: "wasteCollection", sections: ["sample-locations"] },
+  "data": {
+    "dataReleases": {
+      "contributions": {
+        "$config": "replace",
+        "value": [
+          {
+            "moduleName": "wasteCollection",
+            "sections": [
+              "sample-locations"
+            ]
+          }
+        ]
+      },
+      "initializationProfiles": {
+        "localLocationFoundation": {
+          "enabled": true,
+          "label": "Local Location foundation",
+          "description": "Install Location reference releases for type registry, semantic places, map layers, nearby search, drafts, approval, and marker projections.",
+          "completionMessage": "The Local Location foundation is ready. Operators can validate reusable places, map views, search projections, and draft approval flows.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "init"
+              },
+              {
+                "dataType": "core"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "location": {},
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalLocation"
+        }
+      }
+    },
+    "locationCore": {},
+    "locationType": {},
+    "locationMap": {},
+    "locationSearch": {},
+    "locationDraft": {},
+    "locationApproval": {},
+    "locationProjection": {}
+  },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4380,
+        "httpsPort": 4381
+      }
+    },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "process": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "commerce": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "waste": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      }
+    }
+  },
+  "tooling": {
+    "runtime": {
+      "code": "location",
+      "script": "start:location",
+      "dependsOn": [
+        "platform"
       ],
-      initializationProfiles: {
-        localLocationFoundation: {
-          enabled: true,
-          label: "Local Location foundation",
-          description:
-            "Install Location reference releases for type registry, semantic places, map layers, nearby search, drafts, approval, and marker projections.",
-          completionMessage:
-            "The Local Location foundation is ready. Operators can validate reusable places, map views, search projections, and draft approval flows.",
-          steps: [{ dataType: "init" }, { dataType: "core" }],
-        },
-      },
-    },
-  },
-  location: {
-    capabilities: {
-      semanticPlace: true,
-      typeRegistry: true,
-      mapLayers: true,
-      nearbySearch: true,
-      draftCapture: true,
-      approval: true,
-      markerProjection: true,
-    },
-  },
-  database: {
-    default: { mongodb: { master: { databaseName: "kickoffLocalLocation" } } },
-    locationCore: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-    locationType: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-    locationMap: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-    locationSearch: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-    locationDraft: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-    locationApproval: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-    locationProjection: {
-      mongodb: { master: { databaseName: "kickoffLocalLocation" } },
-    },
-  },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4380,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4381,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4380,
-        httpsHost: "localhost",
-        httpsPort: 4381,
-      },
-    },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    process: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-    },
-    commerce: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4350,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4351,
-      },
-    },
-    waste: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4370,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4371,
-      },
-    },
-  },
+      "order": 6
+    }
+  }
 };

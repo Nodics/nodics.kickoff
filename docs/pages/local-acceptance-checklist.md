@@ -191,7 +191,7 @@ To include Axis, Nexus, and Agora frontend applications from the local
 `nodics.exp` workspace:
 
 ```bash
-npm run topology:start:all
+npm run topology:start
 ```
 
 From another terminal, inspect readiness and ownership:
@@ -595,3 +595,12 @@ run the documentation contract test, start Platform and WCMS, import or update
 the Kickoff docs release, and open `/docs/nodics-kickoff` in Axis. If the page
 only works because it was hardcoded in the frontend, the acceptance result is
 not valid.
+
+Frontend startup and verification are independent. Run `npm run dev` and `npm test`
+inside each frontend application. Backend topology and API acceptance do not start
+frontend servers or wait for their health.
+
+The API-only Local map check accepts either a configured Mapbox descriptor or its
+explicitly permitted OSM fallback descriptor when no deployment key is supplied.
+It rejects a missing/disallowed fallback and does not claim live external-provider
+acceptance. Browsers qualify actual tile rendering separately.

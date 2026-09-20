@@ -18,7 +18,8 @@
       "nodics.discovery",
       "nodics.copilot",
       "nodics.waste",
-      "nodics.loyalty"
+      "nodics.loyalty",
+      "nodics.accelerators/modules/nexus"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

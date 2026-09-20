@@ -21,7 +21,12 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Docker Local Engagement Server"
+    "displayName": "Docker Local Engagement Server",
+    "runtimeModuleRoots": [
+      "nodics.communication",
+      "nodics.engagement",
+      "nodics.accelerators/modules/nexus"
+    ]
   },
   "description": "Docker Local Engagement Server runtime composition and configuration boundary for this Nodics project."
 }

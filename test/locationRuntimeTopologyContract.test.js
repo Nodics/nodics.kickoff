@@ -5,9 +5,9 @@ const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
 const packageJson = require(path.join(projectRoot, 'package.json'));
-const environment = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'nodics.environment.json'));
-const runtime = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'locationServer', 'config', 'properties.js'));
-const platformRuntime = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'platformServer', 'config', 'properties.js'));
+const environment = require('./helpers/configuration').loadEnvironment();
+const runtime = require('./helpers/configuration').loadRuntime('locationServer');
+const platformRuntime = require('./helpers/configuration').loadRuntime('platformServer');
 const serverPackage = require(path.join(projectRoot, 'envs', 'kickoffLocal', 'locationServer', 'package.json'));
 
 assert.match(packageJson.scripts['start:location'], /nodics project:run start:location/);
@@ -16,11 +16,11 @@ assert.deepStrictEqual(serverPackage.nodics.extends, ['nodics.location']);
 assert.deepStrictEqual(serverPackage.nodics.runtimeModuleRoots, ['nodics.location', 'nodics.waste']);
 assert.deepStrictEqual(serverPackage.nodics.owns, ['composition', 'configuration', 'llm']);
 
-const topologyRuntime = environment.topology.groups.backends.find(item => item.code === 'location');
+const topologyRuntime = environment.topology.groups.backends.find(item => item.server === 'locationServer');
 assert(topologyRuntime, 'kickoffLocal topology must declare location runtime');
 assert.strictEqual(topologyRuntime.script, 'start:location');
 assert.strictEqual(topologyRuntime.port, 4380);
-const locationResetProvider = platformRuntime.backofficeLocalReset.providers.find(item => item.code === 'location');
+const locationResetProvider = platformRuntime.backofficeLocalReset.providers.find(item => item.targetAuthority.server === 'locationServer');
 assert(locationResetProvider, 'Platform Local reset coordinator must include Location as an owner reset provider');
 assert.strictEqual(locationResetProvider.connectionName, 'location');
 assert.strictEqual(locationResetProvider.targetAuthority.server, 'locationServer');
@@ -30,7 +30,7 @@ assert.strictEqual(runtime.runtimeRole.code, 'LOCATION');
 assert.strictEqual(runtime.runtimeRole.publication, 'OPERATIONAL');
 const routerDefaults = require(path.join(projectRoot, '../nodics.ai/nodics.foundation/modules/nRouter/config/properties.js'));
 assert.strictEqual((runtime.apiExposure.categories.schemaApi || routerDefaults.apiExposure.categories.schemaApi).enabled, true);
-assert.deepStrictEqual(runtime.data.dataReleases.allowedDestinationRoles, ['LOCATION']);
+assert.strictEqual(require('./helpers/configuration').validateDestination(runtime, 'LOCATION'), true);
 assert.deepStrictEqual(runtime.data.dataReleases.contributions, [
     { moduleName: 'wasteCollection', sections: ['sample-locations'] }
 ]);

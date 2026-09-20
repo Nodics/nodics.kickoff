@@ -17,15 +17,18 @@ import { createRequire } from "node:module";
 import crypto from "node:crypto";
 
 const require = createRequire(import.meta.url);
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+
 const projectRoot = path.resolve(process.env.NODICS_PROJECT_ROOT || process.cwd());
-const platformUrl = process.env.AXIS_PLATFORM_URL || process.env.NODICS_PLATFORM_URL || "http://127.0.0.1:4300";
-const wcmsStagedUrl = process.env.AXIS_WCMS_URL || process.env.NODICS_WCMS_STAGED_URL || "http://127.0.0.1:4312";
-const wcmsOnlineUrl = process.env.NODICS_WCMS_ONLINE_URL || "http://127.0.0.1:4314";
-const axisOrigin = process.env.AXIS_ORIGIN || process.env.AXIS_URL || "http://127.0.0.1:3100";
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.NODICS_ENVIRONMENT || process.env.ENV || '');
+const platformUrl = process.env.AXIS_PLATFORM_URL || process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
+const wcmsStagedUrl = process.env.AXIS_WCMS_URL || process.env.NODICS_WCMS_STAGED_URL || projectEndpointUrl(environmentProfile, 'wcmsStagedServer');
+const wcmsOnlineUrl = process.env.NODICS_WCMS_ONLINE_URL || projectEndpointUrl(environmentProfile, 'wcmsOnlineServer');
+const axisOrigin = process.env.AXIS_ORIGIN || process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || process.env.NODICS_ENTERPRISE_CODE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
 const password = process.env.AXIS_PASSWORD || "adminPassword";
-const assetRoot = path.join(projectRoot, "modules", "nexus.web", "data", "sample-v001", "content", "assets", "nexus-cms-media");
+const assetRoot = path.join(process.env.NODICS_FRAMEWORK_ROOT, "nodics.accelerators", "modules", "nexus", "modules", "nexus.web", "data", "sample-v001", "content", "assets", "nexus-cms-media");
 const assetManifestPath = path.join(assetRoot, "assetManifest.js");
 const assetFilesRoot = path.join(assetRoot, "files");
 

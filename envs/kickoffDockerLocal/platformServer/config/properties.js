@@ -24,9 +24,8 @@ module.exports = {
       "kickoffInt",
       "circa.ewaste",
       "kickoffAdministration",
+      "nexusCore",
       "axis",
-      "kickoffDockerLocal",
-      "platformServer",
       "search",
       "elastic",
       "ollamaProvider",
@@ -44,77 +43,19 @@ module.exports = {
     "default": {
       "mongodb": {
         "master": {
-          "URI": {
-            "$config": "env",
-            "name": "NODICS_MONGODB_URI"
-          },
           "databaseName": "kickoffDockerLocalPlatform"
         }
       }
     },
-    "circa.ewaste": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "search": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "elastic": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "axis": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "ollamaProvider": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "profile": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "backoffice": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "localizationCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "localizationApi": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    }
+    "circa.ewaste": {},
+    "search": {},
+    "elastic": {},
+    "axis": {},
+    "ollamaProvider": {},
+    "profile": {},
+    "backoffice": {},
+    "localizationCore": {},
+    "localizationApi": {}
   },
   "profileCustomerBrowserSession": {
     "enabled": true,
@@ -127,11 +68,8 @@ module.exports = {
     "enabled": true,
     "refreshCookieName": "nodics_docker_axis_refresh",
     "csrfCookieName": "nodics_docker_axis_csrf",
-    "cookiePath": "/nodics/profile/v0/employee/browser",
-    "csrfCookiePath": "/",
     "sameSite": "Lax",
-    "secure": false,
-    "maximumAgeSeconds": 86400
+    "secure": false
   },
   "backofficeApplicationInitialization": {
     "operatorOrigin": "http://localhost:4100",
@@ -145,209 +83,54 @@ module.exports = {
             "WCMS Online",
             "Process"
           ]
-        },
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
         }
       },
-      "nexusupdate": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "nexusecosystemrepair": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "agoraapparel": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "agoraelectronics": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "agoratelco": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "frameworkdocs": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "axisdocs": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      },
-      "kickoffdocs": {
-        "target": {
-          "moduleName": "cms",
-          "connectionName": "wcmsStaged",
-          "connectionType": "abstract",
-          "timeoutMs": 120000,
-          "maxAttempts": 1
-        }
-      }
+      "nexusupdate": {},
+      "nexusecosystemrepair": {},
+      "agoraapparel": {},
+      "agoraelectronics": {},
+      "agoratelco": {},
+      "frameworkdocs": {},
+      "axisdocs": {},
+      "kickoffdocs": {}
+    },
+    "target": {
+      "connectionName": "wcmsStaged"
     }
   },
   "backofficeFunctionalModuleActivationData": {
     "modules": {
-      "nodics.wcms": {
-        "dataPackages": [
-          {
-            "code": "wcms:runtime-defaults",
-            "classification": "runtime-default",
-            "owner": "nodics.wcms",
-            "required": true,
-            "trigger": "ACTIVATION",
-            "targetModule": "cms",
-            "targetServer": "wcmsStagedServer",
-            "targetDatabase": "kickoffDockerLocalWcmsStaged",
-            "operation": "IMPORT"
-          },
-          {
-            "code": "wcms:sample-content",
-            "classification": "sample",
-            "owner": "nodics.wcms",
-            "required": false,
-            "trigger": "USER",
-            "targetModule": "cms",
-            "targetServer": "wcmsStagedServer",
-            "targetDatabase": "kickoffDockerLocalWcmsStaged",
-            "operation": "IMPORT_SAMPLE"
-          }
-        ]
-      },
-      "nodics.commerce": {
-        "dataPackages": [
-          {
-            "code": "baseCommerce:core-reference",
-            "classification": "core",
-            "owner": "nodics.commerce",
-            "required": true,
-            "trigger": "ACTIVATION",
-            "targetModule": "commerce",
-            "targetServer": "commerceServer",
-            "targetDatabase": "kickoffDockerLocalCommerce",
-            "operation": "IMPORT"
-          },
-          {
-            "code": "commerce:sample-catalog",
-            "classification": "sample",
-            "owner": "nodics.commerce",
-            "required": false,
-            "trigger": "USER",
-            "targetModule": "commerce",
-            "targetServer": "commerceServer",
-            "targetDatabase": "kickoffDockerLocalCommerce",
-            "operation": "IMPORT_SAMPLE"
-          }
-        ]
-      },
-      "nodics.communication": {
-        "dataPackages": [
-          {
-            "code": "commsCore:runtime-defaults",
-            "classification": "runtime-default",
-            "owner": "nodics.communication",
-            "required": true,
-            "trigger": "ACTIVATION",
-            "targetModule": "commsCore",
-            "targetServer": "engagementServer",
-            "targetDatabase": "kickoffDockerLocalEngagement",
-            "operation": "IMPORT"
-          },
-          {
-            "code": "commsCore:sample-templates",
-            "classification": "sample",
-            "owner": "nodics.communication",
-            "required": false,
-            "trigger": "USER",
-            "targetModule": "commsCore",
-            "targetServer": "engagementServer",
-            "targetDatabase": "kickoffDockerLocalEngagement",
-            "operation": "IMPORT_SAMPLE"
-          }
-        ]
-      },
       "nodics.loyalty": {
-        "dataPackages": [
-          {
-            "code": "loyaltyCore:core-enterprise-reference",
-            "classification": "core",
-            "owner": "nodics.loyalty",
-            "required": true,
-            "trigger": "ACTIVATION",
-            "targetModule": "profile",
-            "targetServer": "platformServer",
-            "targetDatabase": "kickoffDockerLocalPlatform",
-            "operation": "IMPORT"
-          }
-        ]
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "loyaltyCore:core-enterprise-reference",
+              "targetModule": "profile",
+              "targetServer": "platformServer",
+              "targetDatabase": "kickoffDockerLocalPlatform"
+            }
+          ]
+        }
       },
       "nodics.waste": {
-        "dataPackages": [
-          {
-            "code": "wasteCore:core-reference",
-            "classification": "core",
-            "owner": "nodics.waste",
-            "required": true,
-            "trigger": "ACTIVATION",
-            "targetModule": "profile",
-            "targetServer": "platformServer",
-            "targetDatabase": "kickoffDockerLocalPlatform",
-            "operation": "IMPORT"
-          },
-          {
-            "code": "wasteCollection:sample-profile-addresses",
-            "classification": "sample",
-            "owner": "nodics.waste",
-            "required": false,
-            "trigger": "USER",
-            "targetModule": "profile",
-            "targetServer": "platformServer",
-            "targetDatabase": "kickoffDockerLocalPlatform",
-            "operation": "IMPORT_SAMPLE"
-          }
-        ]
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "wasteCore:core-reference",
+              "targetModule": "profile",
+              "targetServer": "platformServer",
+              "targetDatabase": "kickoffDockerLocalPlatform"
+            },
+            {
+              "code": "wasteCollection:sample-profile-addresses",
+              "targetModule": "profile",
+              "targetServer": "platformServer",
+              "targetDatabase": "kickoffDockerLocalPlatform"
+            }
+          ]
+        }
       }
     }
   },
@@ -377,172 +160,172 @@ module.exports = {
   },
   "servers": {
     "wcmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnlineServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnlineServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "process": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "process"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "processServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "processServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerce": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerce"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagement": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagement"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagementServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagementServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyalty": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyalty"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyaltyServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyaltyServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "waste": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "waste"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wasteServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wasteServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "location": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "location"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "locationServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "locationServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcms": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcms"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "default": {
       "endpoint": {
@@ -553,40 +336,50 @@ module.exports = {
       },
       "abstractEndpoint": {
         "httpHost": "platform",
-        "httpPort": 4300,
+        "httpPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpPort"
+        },
         "httpsHost": "platform",
-        "httpsPort": 4301
+        "httpsPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpsPort"
+        }
       }
     }
   },
   "data": {
     "dataReleases": {
-      "lifecycleMetadataRequired": true,
-      "destinationEnforced": true,
-      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
-      "allowedDestinationRoles": [
-        "PLATFORM"
-      ],
-      "contributions": [
-        {
-          "moduleName": "wasteCore",
-          "sections": [
-            "core-reference"
-          ]
-        },
-        {
-          "moduleName": "wasteCollection",
-          "sections": [
-            "sample-profile-addresses"
-          ]
-        },
-        {
-          "moduleName": "loyaltyCore",
-          "sections": [
-            "core-enterprise-reference"
-          ]
-        }
-      ]
+      "contributions": {
+        "$config": "replace",
+        "value": [
+          {
+            "moduleName": "wasteCore",
+            "sections": [
+              "core-reference"
+            ]
+          },
+          {
+            "moduleName": "wasteCollection",
+            "sections": [
+              "sample-profile-addresses"
+            ]
+          },
+          {
+            "moduleName": "loyaltyCore",
+            "sections": [
+              "core-enterprise-reference"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
     }
   }
 };

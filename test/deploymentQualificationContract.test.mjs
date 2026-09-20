@@ -51,9 +51,6 @@ assert.deepStrictEqual(plan.local.map((step) => step.id), [
   'automated-security-boundary',
   'framework-release',
   'project-retained-acceptance',
-  'axis-verification',
-  'nexus-verification',
-  'agora-verification',
   'redis-cache-live',
   'redis-backoffice-registry-live',
 ]);

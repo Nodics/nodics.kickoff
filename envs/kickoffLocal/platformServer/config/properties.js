@@ -20,656 +20,901 @@
  */
 
 module.exports = {
-  configurationValues: {"knowledge":{"kickoffRoot":{"$config":"env","name":"NODICS_COPILOT_KICKOFF_ROOT","fallback":{"$config":"path","base":"project","relative":""}},"nodicsAiRoot":{"$config":"env","name":"NODICS_COPILOT_NODICS_AI_ROOT","fallback":{"$config":"path","base":{"$config":"ref","path":["configurationValues","knowledge","kickoffRoot"]},"relative":"../nodics.ai"}},"axisRoot":{"$config":"env","name":"NODICS_COPILOT_AXIS_ROOT","fallback":{"$config":"path","base":{"$config":"ref","path":["configurationValues","knowledge","kickoffRoot"]},"relative":"../nodics.exp/nodics.axis"}},"copilotKnowledgeEnabled":{"$config":"env","name":"NODICS_COPILOT_KNOWLEDGE_ENABLED","fallback":true,"type":"boolean"},"nodicsAiVersion":{"$config":"env","name":"NODICS_COPILOT_NODICS_AI_VERSION","fallback":"kickoff-local-development"},"kickoffVersion":{"$config":"env","name":"NODICS_COPILOT_KICKOFF_VERSION","fallback":"kickoff-local-development"},"axisVersion":{"$config":"env","name":"NODICS_COPILOT_AXIS_VERSION","fallback":"kickoff-local-development"},"sourceCodeEnabled":{"$config":"env","name":"NODICS_COPILOT_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"},"frameworkSourceCodeEnabled":{"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","sourceCodeEnabled"]},{"$config":"env","name":"NODICS_COPILOT_FRAMEWORK_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"}]},"axisSourceCodeEnabled":{"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","sourceCodeEnabled"]},{"$config":"env","name":"NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"}]},"kickoffSourceCodeEnabled":{"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","sourceCodeEnabled"]},{"$config":"env","name":"NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED","fallback":true,"type":"boolean"}]}}},
-  httpHardening: {
-    cors: {
-      allowedOrigins: [
-        "http://localhost:3100",
-        "http://127.0.0.1:3100",
-        "http://localhost:3200",
-        "http://127.0.0.1:3200",
-        "http://localhost:3300",
-        "http://127.0.0.1:3300",
-        "http://localhost:3400",
-        "http://127.0.0.1:3400",
-        "http://localhost:3500",
-        "http://127.0.0.1:3500",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3600",
-        "http://127.0.0.1:3600",
-      ],
-    },
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-platform-1",
+    "remoteModules": [
+      "workflow",
+      "cms",
+      "editorial"
+    ]
   },
-  apiExposure: {
-    categories: {
-      dataExport: { enabled: true },
-      copilotApi: { enabled: true },
-    },
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_PLATFORM_API_KEY",
+      "fallback": null
+    }
   },
-  copilot: {
-    core: {
-      enabled: true,
-      customerProject: "kickoff",
-      environment: "kickoffLocal",
+  "apiExposure": {
+    "categories": {
+      "dataExport": {
+        "enabled": true
+      },
+      "dataImport": {
+        "enabled": true
+      }
+    }
+  },
+  "copilot": {
+    "core": {
+      "customerProject": "kickoff",
+      "environment": "kickoffLocal"
     },
-    api: { enabled: true },
-
-    workbench: {
-      target: {
-        productModule: "product",
-        pricingModule: "pricing",
-        connectionName: "commerceStaged",
-        targetAuthority: { runtimeRole: "COMMERCE_STAGED" },
-      },
+    "api": {
+      "enabled": true
     },
-    knowledge: {
-      ingestion: {
-        enabled: {"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},
-        ingestOnStart:
-          {"$config":"env","name":"NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START","fallback":true,"type":"boolean"},
-        indexTenant: "default",
+    "workbench": {
+      "target": {
+        "productModule": "product",
+        "pricingModule": "pricing",
+        "connectionName": "commerceStaged",
+        "targetAuthority": {
+          "runtimeRole": "COMMERCE_STAGED"
+        }
+      }
+    },
+    "knowledge": {
+      "ingestion": {
+        "enabled": {
+          "$config": "env",
+          "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+          "fallback": true,
+          "type": "boolean"
+        },
+        "ingestOnStart": {
+          "$config": "env",
+          "name": "NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START",
+          "fallback": true,
+          "type": "boolean"
+        },
+        "indexTenant": "default"
       },
-      retrieval: { enabled: {"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]} },
-      repositoryRoots: {
-        "nodics.ai": {"$config":"ref","path":["configurationValues","knowledge","nodicsAiRoot"]},
-        "nodics.kickoff": {"$config":"ref","path":["configurationValues","knowledge","kickoffRoot"]},
-        "nodics.axis": {"$config":"ref","path":["configurationValues","knowledge","axisRoot"]},
+      "retrieval": {
+        "enabled": {
+          "$config": "env",
+          "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+          "fallback": true,
+          "type": "boolean"
+        }
       },
-      sourceRegistry: {
-        definitions: [
-          {
-            code: "nodics-framework-readme",
-            repository: "nodics.ai",
-            project: "nodics",
-            module: "nodics.ai",
-            owner: "nodics.ai",
-            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
-            sourceType: "README",
-            classification: "INTERNAL",
-            paths: ["README.md", "**/README.md"],
-            allowedChannels: ["EMPLOYEE"],
-            requiredPermissions: ["copilot.knowledge.internal.read"],
-            secretScanPolicy: "REQUIRED",
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
-          },
-          {
-            code: "nodics-framework-contracts",
-            repository: "nodics.ai",
-            project: "nodics",
-            module: "nodics.ai",
-            owner: "nodics.ai",
-            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
-            sourceType: "AGENTS_CONTRACT",
-            classification: "RESTRICTED",
-            paths: ["AGENTS.md", "**/AGENTS.md", "**/llm/contracts/*.md"],
-            allowedChannels: ["EMPLOYEE"],
-            requiredPermissions: ["copilot.knowledge.restricted.read"],
-            secretScanPolicy: "REQUIRED",
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
-          },
-          {
-            code: "nodics-axis-readme",
-            repository: "nodics.axis",
-            project: "nodics",
-            module: "nodics.axis",
-            owner: "nodics.axis",
-            version: {"$config":"ref","path":["configurationValues","knowledge","axisVersion"]},
-            sourceType: "README",
-            classification: "INTERNAL",
-            paths: ["README.md", "**/README.md"],
-            allowedChannels: ["EMPLOYEE"],
-            requiredPermissions: ["copilot.knowledge.internal.read"],
-            secretScanPolicy: "REQUIRED",
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
-          },
-          {
-            code: "nodics-axis-contracts",
-            repository: "nodics.axis",
-            project: "nodics",
-            module: "nodics.axis",
-            owner: "nodics.axis",
-            version: {"$config":"ref","path":["configurationValues","knowledge","axisVersion"]},
-            sourceType: "AGENTS_CONTRACT",
-            classification: "RESTRICTED",
-            paths: ["AGENTS.md", "**/AGENTS.md", "**/llm/contracts/*.md"],
-            allowedChannels: ["EMPLOYEE"],
-            requiredPermissions: ["copilot.knowledge.restricted.read"],
-            secretScanPolicy: "REQUIRED",
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
-          },
-          {
-            code: "kickoff-project-readme",
-            repository: "nodics.kickoff",
-            project: "kickoff",
-            module: "nodics.kickoff",
-            owner: "nodics.kickoff",
-            version: {"$config":"ref","path":["configurationValues","knowledge","kickoffVersion"]},
-            sourceType: "CUSTOMER_PROJECT",
-            classification: "CUSTOMER",
-            paths: ["README.md", "**/README.md", "docs/**/*.md"],
-            allowedChannels: ["EMPLOYEE"],
-            tenantScopes: ["default"],
-            customerProjectScopes: ["kickoff"],
-            requiredPermissions: ["copilot.knowledge.customer.read"],
-            secretScanPolicy: "REQUIRED",
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
-          },
-          {
-            code: "kickoff-project-contracts",
-            repository: "nodics.kickoff",
-            project: "kickoff",
-            module: "nodics.kickoff",
-            owner: "nodics.kickoff",
-            version: {"$config":"ref","path":["configurationValues","knowledge","kickoffVersion"]},
-            sourceType: "CUSTOMER_PROJECT",
-            classification: "CUSTOMER",
-            paths: ["AGENTS.md", "**/AGENTS.md", "**/llm/contracts/*.md"],
-            allowedChannels: ["EMPLOYEE"],
-            tenantScopes: ["default"],
-            customerProjectScopes: ["kickoff"],
-            requiredPermissions: ["copilot.knowledge.customer.read"],
-            secretScanPolicy: "REQUIRED",
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]}]},
-          },
-          {
-            code: "nodics-copilot-source",
-            repository: "nodics.ai",
-            project: "nodics",
-            module: "nodics.copilot",
-            owner: "nodics.copilot",
-            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
-            sourceType: "SOURCE_CODE",
-            classification: "RESTRICTED",
-            paths: ["nodics.copilot/**/*.js"],
-            excludedPaths: [
-              "nodics.copilot/**/test",
-              "nodics.copilot/**/llm/generated",
-            ],
-            allowedExtensions: [".js"],
-            limits: {
-              maximumFiles: 400,
-              maximumFileBytes: 524288,
-              maximumSourceBytes: 8388608,
+      "repositoryRoots": {
+        "nodics.ai": {
+          "$config": "env",
+          "name": "NODICS_COPILOT_NODICS_AI_ROOT",
+          "fallback": {
+            "$config": "path",
+            "base": "framework",
+            "relative": ""
+          }
+        },
+        "nodics.kickoff": {
+          "$config": "env",
+          "name": "NODICS_COPILOT_KICKOFF_ROOT",
+          "fallback": {
+            "$config": "path",
+            "base": "project",
+            "relative": ""
+          }
+        },
+        "nodics.axis": {
+          "$config": "env",
+          "name": "NODICS_COPILOT_AXIS_ROOT",
+          "fallback": {
+            "$config": "path",
+            "base": {
+              "$config": "ref",
+              "path": [
+                "copilot",
+                "knowledge",
+                "repositoryRoots",
+                "nodics.kickoff"
+              ]
             },
-            requiredPermissions: ["copilot.knowledge.restricted.read"],
-            secretScanPolicy: "REQUIRED",
-            allowedChannels: ["EMPLOYEE"],
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","frameworkSourceCodeEnabled"]}]},
-          },
-          {
-            code: "nodics-discovery-source",
-            repository: "nodics.ai",
-            project: "nodics",
-            module: "nodics.discovery",
-            owner: "nodics.discovery",
-            version: {"$config":"ref","path":["configurationValues","knowledge","nodicsAiVersion"]},
-            sourceType: "SOURCE_CODE",
-            classification: "RESTRICTED",
-            paths: ["nodics.discovery/**/*.js"],
-            excludedPaths: [
-              "nodics.discovery/**/test",
-              "nodics.discovery/**/llm/generated",
-            ],
-            allowedExtensions: [".js"],
-            limits: {
-              maximumFiles: 400,
-              maximumFileBytes: 524288,
-              maximumSourceBytes: 8388608,
-            },
-            requiredPermissions: ["copilot.knowledge.restricted.read"],
-            secretScanPolicy: "REQUIRED",
-            allowedChannels: ["EMPLOYEE"],
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","frameworkSourceCodeEnabled"]}]},
-          },
-          {
-            code: "nodics-axis-assistant-source",
-            repository: "nodics.axis",
-            project: "nodics",
-            module: "nodics.axis",
-            owner: "nodics.axis",
-            version: {"$config":"ref","path":["configurationValues","knowledge","axisVersion"]},
-            sourceType: "SOURCE_CODE",
-            classification: "RESTRICTED",
-            paths: [
-              "src/assistant/**/*.ts",
-              "src/assistant/**/*.tsx",
-              "src/cms/renderers/components/assistant/**/*.tsx",
-            ],
-            excludedPaths: [
-              "src/**/__tests__",
-              "src/**/*.test.ts",
-              "src/**/*.test.tsx",
-            ],
-            allowedExtensions: [".ts", ".tsx"],
-            limits: {
-              maximumFiles: 200,
-              maximumFileBytes: 524288,
-              maximumSourceBytes: 4194304,
-            },
-            requiredPermissions: ["copilot.knowledge.restricted.read"],
-            secretScanPolicy: "REQUIRED",
-            allowedChannels: ["EMPLOYEE"],
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","axisSourceCodeEnabled"]}]},
-          },
-          {
-            code: "kickoff-copilot-composition-source",
-            repository: "nodics.kickoff",
-            project: "kickoff",
-            module: "platformServer",
-            owner: "nodics.kickoff",
-            version: {"$config":"ref","path":["configurationValues","knowledge","kickoffVersion"]},
-            sourceType: "SOURCE_CODE",
-            classification: "RESTRICTED",
-            paths: ["envs/kickoffLocal/platformServer/**/*.js"],
-            excludedPaths: ["envs/kickoffLocal/platformServer/llm/generated"],
-            allowedExtensions: [".js"],
-            limits: {
-              maximumFiles: 100,
-              maximumFileBytes: 524288,
-              maximumSourceBytes: 2097152,
-            },
-            tenantScopes: ["default"],
-            customerProjectScopes: ["kickoff"],
-            requiredPermissions: ["copilot.knowledge.restricted.read"],
-            secretScanPolicy: "REQUIRED",
-            allowedChannels: ["EMPLOYEE"],
-            enabled: {"$config":"all","values":[{"$config":"ref","path":["configurationValues","knowledge","copilotKnowledgeEnabled"]},{"$config":"ref","path":["configurationValues","knowledge","kickoffSourceCodeEnabled"]}]},
-          },
-        ],
+            "relative": "../nodics.exp/nodics.axis"
+          }
+        }
       },
+      "sourceRegistry": {
+        "definitions": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "nodics-framework-readme",
+              "repository": "nodics.ai",
+              "project": "nodics",
+              "module": "nodics.ai",
+              "owner": "nodics.ai",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_NODICS_AI_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "frameworkVersion"
+                }
+              },
+              "sourceType": "README",
+              "classification": "INTERNAL",
+              "paths": [
+                "README.md",
+                "**/README.md"
+              ],
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.internal.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "code": "nodics-framework-contracts",
+              "repository": "nodics.ai",
+              "project": "nodics",
+              "module": "nodics.ai",
+              "owner": "nodics.ai",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_NODICS_AI_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "frameworkVersion"
+                }
+              },
+              "sourceType": "AGENTS_CONTRACT",
+              "classification": "RESTRICTED",
+              "paths": [
+                "AGENTS.md",
+                "**/AGENTS.md",
+                "**/llm/contracts/*.md"
+              ],
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.restricted.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "code": "nodics-axis-readme",
+              "repository": "nodics.axis",
+              "project": "nodics",
+              "module": "nodics.axis",
+              "owner": "nodics.axis",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_AXIS_VERSION",
+                "fallback": "kickoff-local-development"
+              },
+              "sourceType": "README",
+              "classification": "INTERNAL",
+              "paths": [
+                "README.md",
+                "**/README.md"
+              ],
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.internal.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "code": "nodics-axis-contracts",
+              "repository": "nodics.axis",
+              "project": "nodics",
+              "module": "nodics.axis",
+              "owner": "nodics.axis",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_AXIS_VERSION",
+                "fallback": "kickoff-local-development"
+              },
+              "sourceType": "AGENTS_CONTRACT",
+              "classification": "RESTRICTED",
+              "paths": [
+                "AGENTS.md",
+                "**/AGENTS.md",
+                "**/llm/contracts/*.md"
+              ],
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.restricted.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "code": "kickoff-project-readme",
+              "repository": "nodics.kickoff",
+              "project": "kickoff",
+              "module": "nodics.kickoff",
+              "owner": "nodics.kickoff",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_KICKOFF_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "projectVersion"
+                }
+              },
+              "sourceType": "CUSTOMER_PROJECT",
+              "classification": "CUSTOMER",
+              "paths": [
+                "README.md",
+                "**/README.md",
+                "docs/**/*.md"
+              ],
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "tenantScopes": [
+                "default"
+              ],
+              "customerProjectScopes": [
+                "kickoff"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.customer.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "code": "kickoff-project-contracts",
+              "repository": "nodics.kickoff",
+              "project": "kickoff",
+              "module": "nodics.kickoff",
+              "owner": "nodics.kickoff",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_KICKOFF_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "projectVersion"
+                }
+              },
+              "sourceType": "CUSTOMER_PROJECT",
+              "classification": "CUSTOMER",
+              "paths": [
+                "AGENTS.md",
+                "**/AGENTS.md",
+                "**/llm/contracts/*.md"
+              ],
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "tenantScopes": [
+                "default"
+              ],
+              "customerProjectScopes": [
+                "kickoff"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.customer.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            {
+              "code": "nodics-copilot-source",
+              "repository": "nodics.ai",
+              "project": "nodics",
+              "module": "nodics.copilot",
+              "owner": "nodics.copilot",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_NODICS_AI_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "frameworkVersion"
+                }
+              },
+              "sourceType": "SOURCE_CODE",
+              "classification": "RESTRICTED",
+              "paths": [
+                "nodics.copilot/**/*.js"
+              ],
+              "excludedPaths": [
+                "nodics.copilot/**/test",
+                "nodics.copilot/**/llm/generated"
+              ],
+              "allowedExtensions": [
+                ".js"
+              ],
+              "limits": {
+                "maximumFiles": 400,
+                "maximumFileBytes": 524288,
+                "maximumSourceBytes": 8388608
+              },
+              "requiredPermissions": [
+                "copilot.knowledge.restricted.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  },
+                  {
+                    "$config": "all",
+                    "values": [
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      },
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_FRAMEWORK_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "code": "nodics-discovery-source",
+              "repository": "nodics.ai",
+              "project": "nodics",
+              "module": "nodics.discovery",
+              "owner": "nodics.discovery",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_NODICS_AI_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "frameworkVersion"
+                }
+              },
+              "sourceType": "SOURCE_CODE",
+              "classification": "RESTRICTED",
+              "paths": [
+                "nodics.discovery/**/*.js"
+              ],
+              "excludedPaths": [
+                "nodics.discovery/**/test",
+                "nodics.discovery/**/llm/generated"
+              ],
+              "allowedExtensions": [
+                ".js"
+              ],
+              "limits": {
+                "maximumFiles": 400,
+                "maximumFileBytes": 524288,
+                "maximumSourceBytes": 8388608
+              },
+              "requiredPermissions": [
+                "copilot.knowledge.restricted.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  },
+                  {
+                    "$config": "all",
+                    "values": [
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      },
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_FRAMEWORK_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "code": "nodics-axis-assistant-source",
+              "repository": "nodics.axis",
+              "project": "nodics",
+              "module": "nodics.axis",
+              "owner": "nodics.axis",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_AXIS_VERSION",
+                "fallback": "kickoff-local-development"
+              },
+              "sourceType": "SOURCE_CODE",
+              "classification": "RESTRICTED",
+              "paths": [
+                "src/assistant/**/*.ts",
+                "src/assistant/**/*.tsx",
+                "src/cms/renderers/components/assistant/**/*.tsx"
+              ],
+              "excludedPaths": [
+                "src/**/__tests__",
+                "src/**/*.test.ts",
+                "src/**/*.test.tsx"
+              ],
+              "allowedExtensions": [
+                ".ts",
+                ".tsx"
+              ],
+              "limits": {
+                "maximumFiles": 200,
+                "maximumFileBytes": 524288,
+                "maximumSourceBytes": 4194304
+              },
+              "requiredPermissions": [
+                "copilot.knowledge.restricted.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  },
+                  {
+                    "$config": "all",
+                    "values": [
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      },
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "code": "kickoff-copilot-composition-source",
+              "repository": "nodics.kickoff",
+              "project": "kickoff",
+              "module": "platformServer",
+              "owner": "nodics.kickoff",
+              "version": {
+                "$config": "env",
+                "name": "NODICS_COPILOT_KICKOFF_VERSION",
+                "fallback": {
+                  "$config": "context",
+                  "name": "projectVersion"
+                }
+              },
+              "sourceType": "SOURCE_CODE",
+              "classification": "RESTRICTED",
+              "paths": [
+                "envs/kickoffLocal/platformServer/**/*.js"
+              ],
+              "excludedPaths": [
+                "envs/kickoffLocal/platformServer/llm/generated"
+              ],
+              "allowedExtensions": [
+                ".js"
+              ],
+              "limits": {
+                "maximumFiles": 100,
+                "maximumFileBytes": 524288,
+                "maximumSourceBytes": 2097152
+              },
+              "tenantScopes": [
+                "default"
+              ],
+              "customerProjectScopes": [
+                "kickoff"
+              ],
+              "requiredPermissions": [
+                "copilot.knowledge.restricted.read"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "allowedChannels": [
+                "EMPLOYEE"
+              ],
+              "enabled": {
+                "$config": "all",
+                "values": [
+                  {
+                    "$config": "env",
+                    "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+                    "fallback": true,
+                    "type": "boolean"
+                  },
+                  {
+                    "$config": "all",
+                    "values": [
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      },
+                      {
+                        "$config": "env",
+                        "name": "NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED",
+                        "fallback": true,
+                        "type": "boolean"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
     },
-    providers: {
-      enabled: true,
-      default: { adapter: "ollama" },
-      adapters: {
-        ollama: { enabled: true, model: { name: "qwen2.5-coder:7b" } },
+    "providers": {
+      "enabled": true,
+      "default": {
+        "adapter": "ollama"
       },
+      "adapters": {
+        "ollama": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "backofficeRegistration": {
+    "connectionName": "default"
+  },
+  "search": {
+    "discoveryProjection": {
+      "options": {
+        "enabled": true
+      }
+    }
+  },
+  "backofficeApplicationInitialization": {
+    "operatorOrigin": "http://localhost:3100",
+    "projectCode": {
+      "$config": "env",
+      "name": "NODICS_PROJECT_CODE",
+      "fallback": {
+        "$config": "context",
+        "name": "projectCode"
+      }
     },
-  },
-  backofficeRegistration: {
-    connectionName: "default",
-  },
-  search: {
-    discoveryProjection: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
+    "projectRoot": {
+      "$config": "path",
+      "base": "project",
+      "relative": ""
     },
-  },
-  backofficeApplicationInitialization: {
-    operatorOrigin: "http://localhost:3100",
-    projectCode:
-      {"$config":"env","name":"NODICS_PROJECT_CODE","fallback":{"$config":"context","name":"projectCode"}},
-    projectRoot: {"$config":"path","base":"project","relative":""},
-    profiles: {
-      nexus: {
-        presentation: {
-          summary:
-            "Corporate website accelerator published from the latest qualified WCMS Staged baseline to Online.",
-          requiredServers: [
+    "profiles": {
+      "nexus": {
+        "presentation": {
+          "summary": "Corporate website accelerator published from the latest qualified WCMS Staged baseline to Online.",
+          "requiredServers": [
             "Platform",
             "WCMS Staged",
             "WCMS Online",
             "Process",
-            "Engagement",
+            "Engagement"
           ],
-          requiredFunctionalModules: [
-            { code: "nodics.communication", label: "Engagement capability" },
-          ],
-        },
-
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
+          "requiredFunctionalModules": [
+            {
+              "code": "nodics.communication",
+              "label": "Engagement capability"
+            }
+          ]
+        }
       },
-      nexusupdate: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
+      "nexusupdate": {},
+      "nexusecosystemrepair": {},
+      "nexusincremental": {
+        "code": "nexusincremental",
+        "type": "WEBSITE_BUNDLE_UPDATE",
+        "owner": "nexus.web",
+        "applicationCode": "nexus",
+        "siteCode": "nexusCorporateSite",
+        "baselineCode": "nexusincremental",
+        "presentation": {
+          "visible": false
+        }
       },
-      nexusecosystemrepair: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
+      "nexusprofessionalcopy": {
+        "code": "nexusprofessionalcopy",
+        "type": "WEBSITE_BUNDLE_UPDATE",
+        "owner": "nexus.web",
+        "applicationCode": "nexus",
+        "siteCode": "nexusCorporateSite",
+        "baselineCode": "nexusprofessionalcopy",
+        "presentation": {
+          "visible": false
+        }
       },
-      nexusincremental: {
-        code: "nexusincremental",
-        type: "WEBSITE_BUNDLE_UPDATE",
-        owner: "nexus.web",
-        applicationCode: "nexus",
-        siteCode: "nexusCorporateSite",
-        baselineCode: "nexusincremental",
-        presentation: { visible: false },
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      nexusprofessionalcopy: {
-        code: "nexusprofessionalcopy",
-        type: "WEBSITE_BUNDLE_UPDATE",
-        owner: "nexus.web",
-        applicationCode: "nexus",
-        siteCode: "nexusCorporateSite",
-        baselineCode: "nexusprofessionalcopy",
-        presentation: { visible: false },
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      agoraapparel: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      agoraelectronics: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      agoratelco: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      frameworkdocs: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      axisdocs: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
-      kickoffdocs: {
-        target: {
-          moduleName: "cms",
-          connectionName: "wcmsStaged",
-          connectionType: "abstract",
-          timeoutMs: 120000,
-          maxAttempts: 1,
-        },
-      },
+      "agoraapparel": {},
+      "agoraelectronics": {},
+      "agoratelco": {},
+      "frameworkdocs": {},
+      "axisdocs": {},
+      "kickoffdocs": {}
     },
+    "target": {
+      "connectionName": "wcmsStaged"
+    }
   },
-  backofficeFunctionalModuleActivationData: {
-    modules: {
-      "nodics.wcms": {
-        dataPackages: [
-          {
-            code: "wcms:runtime-defaults",
-            classification: "runtime-default",
-            owner: "nodics.wcms",
-            required: true,
-            trigger: "ACTIVATION",
-            targetModule: "cms",
-            targetServer: "wcmsStaged",
-            targetDatabase: "kickoffLocalWcmsStaged",
-            operation: "IMPORT",
-          },
-          {
-            code: "wcms:sample-content",
-            classification: "sample",
-            owner: "nodics.wcms",
-            required: false,
-            trigger: "USER",
-            targetModule: "cms",
-            targetServer: "wcmsStaged",
-            targetDatabase: "kickoffLocalWcmsStaged",
-            operation: "IMPORT_SAMPLE",
-          },
-        ],
-      },
+  "backofficeFunctionalModuleActivationData": {
+    "modules": {
       "nodics.commerce": {
-        dataPackages: [
-          {
-            code: "baseCommerce:core-reference",
-            classification: "core",
-            owner: "nodics.commerce",
-            required: true,
-            trigger: "ACTIVATION",
-            targetModule: "commerce",
-            targetServer: "commerceServer",
-            targetDatabase: "kickoffLocalCommerce",
-            operation: "IMPORT",
-          },
-          {
-            code: "commerce:sample-catalog",
-            classification: "sample",
-            owner: "nodics.commerce",
-            required: false,
-            trigger: "USER",
-            targetModule: "commerce",
-            targetServer: "commerceServer",
-            targetDatabase: "kickoffLocalCommerce",
-            operation: "IMPORT_SAMPLE",
-          },
-        ],
-      },
-      "nodics.communication": {
-        dataPackages: [
-          {
-            code: "commsCore:runtime-defaults",
-            classification: "runtime-default",
-            owner: "nodics.communication",
-            required: true,
-            trigger: "ACTIVATION",
-            targetModule: "commsCore",
-            targetServer: "engagementServer",
-            targetDatabase: "kickoffLocalEngagement",
-            operation: "IMPORT",
-          },
-          {
-            code: "commsCore:sample-templates",
-            classification: "sample",
-            owner: "nodics.communication",
-            required: false,
-            trigger: "USER",
-            targetModule: "commsCore",
-            targetServer: "engagementServer",
-            targetDatabase: "kickoffLocalEngagement",
-            operation: "IMPORT_SAMPLE",
-          },
-        ],
+        "dataPackages": {
+          "$config": "replace",
+          "value": [{
+            "code": "baseCommerce:core-reference",
+            "targetModule": "baseCommerce",
+            "targetServer": "commerceServer"
+          }]
+        }
       },
       "nodics.loyalty": {
-        dataPackages: [
-          {
-            code: "loyaltyCore:core-enterprise-reference",
-            classification: "core",
-            owner: "nodics.loyalty",
-            required: true,
-            trigger: "ACTIVATION",
-            targetModule: "profile",
-            targetServer: "platformServer",
-            targetDatabase: "kickoffLocalPlatform",
-            operation: "IMPORT",
-          },
-        ],
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "loyaltyCore:core-enterprise-reference",
+              "targetModule": "profile",
+              "targetServer": "platformServer",
+              "targetDatabase": "kickoffLocalPlatform"
+            }
+          ]
+        }
       },
       "nodics.waste": {
-        dataPackages: [
-          {
-            code: "wasteCore:core-reference",
-            classification: "core",
-            owner: "nodics.waste",
-            required: true,
-            trigger: "ACTIVATION",
-            targetModule: "profile",
-            targetServer: "platformServer",
-            targetDatabase: "kickoffLocalPlatform",
-            operation: "IMPORT",
-          },
-          {
-            code: "wasteCollection:sample-profile-addresses",
-            classification: "sample",
-            owner: "nodics.waste",
-            required: false,
-            trigger: "USER",
-            targetModule: "profile",
-            targetServer: "platformServer",
-            targetDatabase: "kickoffLocalPlatform",
-            operation: "IMPORT_SAMPLE",
-          },
-        ],
-      },
-    },
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "wasteCore:core-reference",
+              "targetModule": "profile",
+              "targetServer": "platformServer",
+              "targetDatabase": "kickoffLocalPlatform"
+            },
+            {
+              "code": "wasteCollection:sample-profile-addresses",
+              "targetModule": "profile",
+              "targetServer": "platformServer",
+              "targetDatabase": "kickoffLocalPlatform"
+            }
+          ]
+        }
+      }
+    }
   },
-  backofficeLocalReset: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    providers: [
-      {
-        code: "wcmsStaged",
-        moduleName: "system",
-        connectionName: "wcmsStaged",
-        targetAuthority: {
-          server: "wcmsStagedServer",
-          runtimeRole: { code: "WCMS_STAGED", publication: "STAGED" },
-        },
-      },
-      {
-        code: "wcmsOnline",
-        moduleName: "system",
-        connectionName: "wcmsOnline",
-        targetAuthority: {
-          server: "wcmsOnlineServer",
-          runtimeRole: { code: "WCMS_ONLINE", publication: "ONLINE" },
-        },
-      },
-      {
-        code: "process",
-        moduleName: "system",
-        connectionName: "process",
-        targetAuthority: {
-          server: "processServer",
-          runtimeRole: { code: "PROCESS", publication: "OPERATIONAL" },
-        },
-      },
-      {
-        code: "location",
-        moduleName: "system",
-        connectionName: "location",
-        targetAuthority: {
-          server: "locationServer",
-          runtimeRole: { code: "LOCATION", publication: "OPERATIONAL" },
-        },
-      },
-      {
-        code: "commerce",
-        moduleName: "system",
-        connectionName: "commerce",
-        targetAuthority: {
-          server: "commerceServer",
-          runtimeRole: {
-            code: "COMMERCE",
-            publication: "OPERATIONAL",
-          },
-        },
-      },
-      {
-        code: "commerceStaged",
-        moduleName: "system",
-        connectionName: "commerceStaged",
-        targetAuthority: {
-          server: "commerceStagedServer",
-          runtimeRole: {
-            code: "COMMERCE_STAGED",
-            publication: "STAGED",
-          },
-        },
-      },
-      {
-        code: "engagement",
-        moduleName: "system",
-        connectionName: "engagement",
-        targetAuthority: {
-          server: "engagementServer",
-          runtimeRole: {
-            code: "ENGAGEMENT",
-            publication: "OPERATIONAL",
-          },
-        },
-      },
-      {
-        code: "loyalty",
-        moduleName: "system",
-        connectionName: "loyalty",
-        targetAuthority: {
-          server: "loyaltyServer",
-          runtimeRole: {
-            code: "LOYALTY",
-            publication: "OPERATIONAL",
-          },
-        },
-      },
-      {
-        code: "waste",
-        moduleName: "system",
-        connectionName: "waste",
-        targetAuthority: {
-          server: "wasteServer",
-          runtimeRole: {
-            code: "WASTE",
-            publication: "OPERATIONAL",
-          },
-        },
-      },
-      {
-        code: "platform",
-        moduleName: "system",
-        connectionName: "default",
-        targetAuthority: {
-          server: "platformServer",
-          runtimeRole: { code: "PLATFORM", publication: "OPERATIONAL" },
-        },
-      },
+  "backofficeLocalReset": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
     ],
+    "providers": {
+      "$config": "replace",
+      "value": [
+        {
+          "code": "wcmsStaged",
+          "connectionName": "wcmsStaged",
+          "targetAuthority": {
+            "server": "wcmsStagedServer",
+            "runtimeRole": {
+              "code": "WCMS_STAGED",
+              "publication": "STAGED"
+            }
+          }
+        },
+        {
+          "code": "wcmsOnline",
+          "connectionName": "wcmsOnline",
+          "targetAuthority": {
+            "server": "wcmsOnlineServer",
+            "runtimeRole": {
+              "code": "WCMS_ONLINE",
+              "publication": "ONLINE"
+            }
+          }
+        },
+        {
+          "code": "process",
+          "connectionName": "process",
+          "targetAuthority": {
+            "server": "processServer",
+            "runtimeRole": {
+              "code": "PROCESS",
+              "publication": "OPERATIONAL"
+            }
+          }
+        },
+        {
+          "code": "location",
+          "connectionName": "location",
+          "targetAuthority": {
+            "server": "locationServer",
+            "runtimeRole": {
+              "code": "LOCATION",
+              "publication": "OPERATIONAL"
+            }
+          }
+        },
+        {
+          "code": "commerce",
+          "connectionName": "commerce",
+          "targetAuthority": {
+            "server": "commerceServer",
+            "runtimeRole": {
+              "code": "COMMERCE",
+              "publication": "OPERATIONAL"
+            }
+          }
+        },
+        {
+          "code": "commerceStaged",
+          "connectionName": "commerceStaged",
+          "targetAuthority": {
+            "server": "commerceStagedServer",
+            "runtimeRole": {
+              "code": "COMMERCE_STAGED",
+              "publication": "STAGED"
+            }
+          }
+        },
+        {
+          "code": "engagement",
+          "connectionName": "engagement",
+          "targetAuthority": {
+            "server": "engagementServer",
+            "runtimeRole": {
+              "code": "ENGAGEMENT",
+              "publication": "OPERATIONAL"
+            }
+          }
+        },
+        {
+          "code": "loyalty",
+          "connectionName": "loyalty",
+          "targetAuthority": {
+            "server": "loyaltyServer",
+            "runtimeRole": {
+              "code": "LOYALTY",
+              "publication": "OPERATIONAL"
+            }
+          }
+        },
+        {
+          "code": "waste",
+          "connectionName": "waste",
+          "targetAuthority": {
+            "server": "wasteServer",
+            "runtimeRole": {
+              "code": "WASTE",
+              "publication": "OPERATIONAL"
+            }
+          }
+        },
+        {
+          "code": "platform",
+          "connectionName": "default",
+          "targetAuthority": {
+            "server": "platformServer",
+            "runtimeRole": {
+              "code": "PLATFORM",
+              "publication": "OPERATIONAL"
+            }
+          }
+        }
+      ]
+    }
   },
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    modules: {
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
+    ],
+    "allowMissingModelServices": true,
+    "modules": {
       "backoffice": true,
       "import": true,
       "localizationCore": true,
@@ -679,17 +924,31 @@ module.exports = {
       "token": true,
       "validator": true
     },
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    },
+    "searchIndexes": [
+      {
+        "moduleName": "discoveryProjection",
+        "indexName": "discoveryDocumentProjection"
+      }
+    ]
   },
-  activeModules: {
-    groups: ["nodics.discovery", "nodics.copilot"],
-    modules: [
+  "activeModules": {
+    "groups": [
+      "nodics.discovery",
+      "nodics.copilot"
+    ],
+    "modules": [
+      "redisCache",
       "circa.ewaste",
       "kickoffAdministration",
+      "nexusCore",
       "search",
       "elastic",
       "nodics.kickoff",
@@ -697,224 +956,199 @@ module.exports = {
       "kickoffApi",
       "kickoffInt",
       "axis",
-      "ollamaProvider",
-      "kickoffLocal",
-      "platformServer",
-    ],
+      "ollamaProvider"
+    ]
   },
-  runtimeRole: { code: "PLATFORM", publication: "OPERATIONAL" },
-  database: {
-    default: { mongodb: { master: { databaseName: "kickoffLocalPlatform" } } },
-    backoffice: {
-      mongodb: { master: { databaseName: "kickoffLocalPlatform" } },
-    },
-    localizationCore: {
-      mongodb: { master: { databaseName: "kickoffLocalPlatform" } },
-    },
-    profile: { mongodb: { master: { databaseName: "kickoffLocalPlatform" } } },
+  "runtimeRole": {
+    "code": "PLATFORM",
+    "publication": "OPERATIONAL"
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["PLATFORM"],
-      contributions: [
-        { moduleName: "wasteCore", sections: ["core-reference"] },
-        {
-          moduleName: "wasteCollection",
-          sections: ["sample-profile-addresses"],
-        },
-        { moduleName: "loyaltyCore", sections: ["core-enterprise-reference"] },
-      ],
-      initializationProfiles: {
-        localPlatformFoundation: {
-          enabled: true,
-          label: "Local Platform foundation",
-          description:
-            "Install required Platform initialization and core releases for local BackOffice identity, catalogue, profile, authorization, and localization services.",
-          completionMessage:
-            "The Local Platform foundation is ready. Operators can sign in, review module lifecycle, and manage governed platform data.",
-          steps: [{ dataType: "init" }, { dataType: "core" }],
-        },
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalPlatform"
+        }
+      }
+    },
+    "backoffice": {},
+    "localizationCore": {},
+    "profile": {}
+  },
+  "data": {
+    "dataReleases": {
+      "contributions": {
+        "$config": "replace",
+        "value": [
+          {
+            "moduleName": "wasteCore",
+            "sections": [
+              "core-reference"
+            ]
+          },
+          {
+            "moduleName": "wasteCollection",
+            "sections": [
+              "sample-profile-addresses"
+            ]
+          },
+          {
+            "moduleName": "loyaltyCore",
+            "sections": [
+              "core-enterprise-reference"
+            ]
+          }
+        ]
       },
-    },
+      "initializationProfiles": {
+        "localPlatformFoundation": {
+          "enabled": true,
+          "label": "Local Platform foundation",
+          "description": "Install required Platform initialization and core releases for local BackOffice identity, catalogue, profile, authorization, and localization services.",
+          "completionMessage": "The Local Platform foundation is ready. Operators can sign in, review module lifecycle, and manage governed platform data.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "init"
+              },
+              {
+                "dataType": "core"
+              }
+            ]
+          }
+        }
+      }
+    }
   },
-  profileExternalIdentity: {
-    enabled: true,
-    applications: {
+  "profileExternalIdentity": {
+    "enabled": true,
+    // Local testing: accept signed launch proofs for 60 minutes.
+    "maximumAssertionAgeSeconds": 3600,
+    "applications": {
       "circa.ewaste": {
-        enabled: true,
-        provider: "TELEGRAM",
-        enterpriseCode: "default",
-        secretEnvironmentVariable: "CIRCA_TELEGRAM_BOT_TOKEN",
-        requireBrowserHandoff: true,
-      },
-    },
+        "enabled": true,
+        "provider": "TELEGRAM",
+        "enterpriseCode": "default",
+        "secretEnvironmentVariable": "CIRCA_TELEGRAM_BOT_TOKEN",
+        "requireBrowserHandoff": true
+      }
+    }
   },
-  profileCustomerBrowserSession: {
-    enabled: true,
-    secure: false,
-    sameSite: "Lax",
+  "profileCustomerBrowserSession": {
+    "enabled": true,
+    "allowInsecureLoopback": true,
+    "sameSite": "Lax"
   },
-  profileBrowserSession: {
-    enabled: true,
-
-    sameSite: "Lax",
-    secure: false,
+  "profileBrowserSession": {
+    "enabled": true,
+    "sameSite": "Lax",
+    "secure": false
   },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4300,
-        httpsHost: "localhost",
-        httpsPort: 4301,
-      },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4300,
+        "httpsPort": 4301
+      }
     },
-    wcmsStaged: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4312,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4313,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4312,
-        httpsHost: "localhost",
-        httpsPort: 4313,
-      },
+    "wcmsStaged": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    wcmsOnline: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4314,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4315,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4314,
-        httpsHost: "localhost",
-        httpsPort: 4315,
-      },
+    "wcmsOnline": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    commerceStaged: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4352,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4353,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4352,
-        httpsHost: "localhost",
-        httpsPort: 4353,
-      },
+    "commerceStaged": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    engagementServer: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4340,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4341,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4340,
-        httpsHost: "localhost",
-        httpsPort: 4341,
-      },
+    "engagementServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    loyalty: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4360,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4361,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4360,
-        httpsHost: "localhost",
-        httpsPort: 4361,
-      },
+    "loyalty": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    loyaltyServer: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4360,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4361,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4360,
-        httpsHost: "localhost",
-        httpsPort: 4361,
-      },
+    "loyaltyServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    location: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4380,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4381,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4380,
-        httpsHost: "localhost",
-        httpsPort: 4381,
-      },
+    "location": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    locationServer: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4380,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4381,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4380,
-        httpsHost: "localhost",
-        httpsPort: 4381,
-      },
+    "locationServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.endpoint"
+      }
     },
-    process: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4330,
-        httpsHost: "localhost",
-        httpsPort: 4331,
-      },
+    "waste": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      }
     },
+    "process": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "platform": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "platformServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "wasteServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      }
+    }
   },
+  "tooling": {
+    "runtime": {
+      "code": "platform",
+      "script": "start:platform",
+      "order": 0
+    }
+  }
 };
-
-// Governed application preparation may target Platform-owned sample releases.
-module.exports.servers.platform = module.exports.servers.default;
-module.exports.servers.platformServer = module.exports.servers.default;
-
-/** Explicit nSearch projections included in the governed Local reset. */
-module.exports.localResetProvider.searchIndexes = [
-  {
-    moduleName: "discoveryProjection",
-    indexName: "discoveryDocumentProjection",
-  },
-];

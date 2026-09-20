@@ -29,7 +29,7 @@ Run from `nodics.kickoff`:
 
 ```text
 npm run topology:preflight
-npm run topology:start:all
+npm run topology:start
 npm run topology:status
 npm run topology:stop
 ```
@@ -193,3 +193,7 @@ baseline. Finally run `git diff --check`, documentation generation in check mode
 credential-pattern scanning, and the zero-direct-database audit over the changed
 files. A beginner or partner developer should be able to follow this sequence
 without knowing a MongoDB collection name or using a database shell.
+
+Frontend startup and verification are independent. Run `npm run dev` and `npm test`
+inside each frontend application. Backend topology and API acceptance do not start
+frontend servers or wait for their health.

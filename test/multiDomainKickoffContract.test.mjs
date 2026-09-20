@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 import {
   readProjectEnvironmentComposition,
   resolveDomainComposition,
-} from "../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs";
+} from "../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs";
 
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, "..");
@@ -292,9 +292,7 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
 });
 
 test("environment composition selects each domain independently, together, or Commerce-only", () => {
-  const profile = require(
-    path.join(root, "envs", "kickoffLocal", "nodics.environment.json"),
-  );
+  const profile = require("./helpers/configuration").loadEnvironment();
   const composition = profile.composition.agora;
   assert.deepEqual(resolveDomainComposition(composition, "apparel"), {
     domains: ["apparel"],

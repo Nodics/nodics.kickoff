@@ -13,15 +13,15 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-const { readProjectEnvironmentProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const manifestPath = path.join(projectRoot, 'nodics.project.json');
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
-const environmentProfile = readProjectEnvironmentProfile(projectRoot, process.env.ENV || '');
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
 const config = environmentProfile.acceptance?.capabilityRegistry || manifest.acceptance?.capabilityRegistry || {};
-const platformUrl = process.env.AXIS_PLATFORM_URL || 'http://127.0.0.1:4300';
-const axisUrl = process.env.AXIS_URL || 'http://127.0.0.1:3100';
+const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, { role: 'PLATFORM' });
+const requestOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterprise = process.env.AXIS_ENTERPRISE || 'default';
 const project = process.env.AXIS_PROJECT || environmentProfile.projectCode;
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
@@ -29,7 +29,8 @@ const password = process.env.AXIS_PASSWORD || 'adminPassword';
 const functionalModule = config.functionalModule || 'nodics.process';
 const expectedFoundationModule = config.foundationModule || 'nodics.foundation';
 const retiredModule = config.retiredModule || 'nodics.core';
-const observedServer = config.observedServer || 'kickoffLocal:processServer:default';
+const observedRuntime = projectRuntime(environmentProfile, config.runtime);
+const observedServer = config.observedServer || [environmentProfile.environment, observedRuntime.server, 'default'].join(':');
 const unwrap = value => value?.result || value?.data || value;
 const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
 const restorableState = state => ({
@@ -83,7 +84,7 @@ async function main() {
   const authentication = await request('/nodics/profile/v0/employee/browser/authenticate', undefined, {
     method: 'POST',
     body: JSON.stringify({ loginId, password }),
-    headers: { Origin: axisUrl },
+    headers: { Origin: requestOrigin },
   });
   const token = authentication.authToken;
   assert(token, 'Employee authentication must return an access token');

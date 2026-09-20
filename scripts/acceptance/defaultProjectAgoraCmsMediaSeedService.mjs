@@ -14,13 +14,14 @@ import fs from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
-const { readProjectEnvironmentComposition } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const require = createRequire(import.meta.url);
 const projectRoot = path.resolve(process.env.NODICS_PROJECT_ROOT || process.cwd());
-const platformUrl = process.env.AXIS_PLATFORM_URL || process.env.NODICS_PLATFORM_URL || "http://127.0.0.1:4300";
-const wcmsStagedUrl = process.env.AXIS_WCMS_URL || process.env.NODICS_WCMS_STAGED_URL || "http://127.0.0.1:4312";
-const axisOrigin = process.env.AXIS_ORIGIN || process.env.AXIS_URL || "http://127.0.0.1:3100";
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.NODICS_ENVIRONMENT || process.env.ENV || '');
+const platformUrl = process.env.AXIS_PLATFORM_URL || process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
+const wcmsStagedUrl = process.env.AXIS_WCMS_URL || process.env.NODICS_WCMS_STAGED_URL || projectEndpointUrl(environmentProfile, 'wcmsStagedServer');
+const axisOrigin = process.env.AXIS_ORIGIN || process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || process.env.NODICS_ENTERPRISE_CODE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
 const password = process.env.AXIS_PASSWORD || "adminPassword";

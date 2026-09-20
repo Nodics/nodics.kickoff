@@ -92,9 +92,9 @@ then the nearest `modules/` or `envs/` `AGENTS.md`, before changing source,
 data, topology, or documentation. Use `nodics.installer` only when the user
 wants to create, repair, or operate a separate local customer workspace.
 
-`topology:start` supervises all nine direct-Node `kickoffLocal` backend
-runtimes from one terminal. Use `topology:start:all` to include sibling Axis
-and Nexus development servers. The supervisor refuses unknown busy ports and
+`topology:start` supervises the declared direct-Node `kickoffLocal` backend
+runtimes from one terminal. `topology:start:all` is a backend-only alias. Start
+each frontend independently with `npm run dev` in its application repository. The supervisor refuses unknown busy ports and
 stops only processes whose generated PID ownership belongs to this checkout.
 
 Waste Management is proven as a separate local runtime at

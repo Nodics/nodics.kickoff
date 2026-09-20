@@ -30,8 +30,15 @@ channel entry/origin composition to eWaste. Application binding belongs in the
 project's `eWaste.channelAuthentication` delta; Profile provider-secret bindings
 remain with the owning configured runtime.
 
-Arrival validation must preserve distinct unusable-coordinate, stale-reading, missing-accuracy and imprecise-reading failures. Desktop capture fallbacks never grant arrival or replace unknown accuracy with an invented value. Preserve saved drafts/evidence on rejected checks.
+Arrival validation uses fresh usable coordinates and direct distance within the configured inclusive centre radius, uniformly on Web and Telegram. Accuracy is optional observation metadata, never an arrival gate; preserve valid reported accuracy and represent missing/invalid accuracy as null. Preserve distinct unusable-coordinate and stale-reading failures, current centre eligibility checks, and saved drafts/evidence on rejected checks. Map selection and caller-provided arrival claims never grant arrival.
 
 Circa permits one employee with both review and approval grants to perform both on the same submission. Keep `requireDifferentApprover: false`; preserve role checks, Profile scope, prior verification and separate actor audit records.
 
-Circa selects the eWaste WARM electronics adapter. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. No customer-facing illustrative/demo qualifiers are used. The sourced estimate preserves weight bounds, factor source/version, US reference geography and assumed landfill/recycling scenarios. Unknown coverage or weight produces an unavailable assessment, not a default factor. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.
+Circa selects the eWaste OpenAI environmental assessment provider first, with the local WARM electronics adapter as configured fallback. The separate environmental call uses normalized item metadata and retrieved references; invalid or timed-out responses advance to fallback. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. Estimates preserve weight bounds, provider/model provenance, source references, geography and scenario assumptions. Missing defensible evidence remains unknown. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.
+
+Keep the canonical router and utility registry files even when empty. They are
+inherited extension points, not copied framework implementations. `package.json`
+`nodics.owns` must reflect actual source responsibilities, including `utility`.
+See `llm/examples/README.md` for customer extension and rejection examples.
+
+Impact assessment is mandatory in the eWaste journey. Circa returns the domain-prepared assessment and propagates provider/profile failures for retry; it must not convert them into an empty ready draft. Partial input-only coverage remains explicit and does not imply carbon calculation.

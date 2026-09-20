@@ -14,7 +14,7 @@ import { execFile, spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { promisify } from "node:util";
-const { readProjectEnvironmentProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 /**
  * @module kickoff/scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService
@@ -27,21 +27,22 @@ const execFileAsync = promisify(execFile);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const manifestPath = path.join(projectRoot, "nodics.project.json");
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
-const environmentProfile = readProjectEnvironmentProfile(projectRoot, process.env.ENV || "");
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || "");
 const config = environmentProfile.acceptance?.wasteBackofficeDiscovery ||
   manifest.acceptance?.wasteBackofficeDiscovery ||
   {};
+const platformRuntime = projectRuntime(environmentProfile, config.platform);
+const wasteRuntime = projectRuntime(environmentProfile, config.waste);
+const expectedObservedServer = config.observedServer || [environmentProfile.environment, wasteRuntime.server, "default"].join(":");
+if (!platformRuntime || !wasteRuntime) throw new Error("Waste discovery requires configured runtime selections");
 const enterprise = process.env.AXIS_ENTERPRISE || "default";
 const project = process.env.AXIS_PROJECT || environmentProfile.projectCode;
-const platformUrl = process.env.AXIS_PLATFORM_URL || "http://127.0.0.1:4300";
-const axisUrl = process.env.AXIS_URL || "http://127.0.0.1:3100";
+const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, platformRuntime.server);
+const requestOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const functionalModule = config.functionalModule || "nodics.waste";
 const providerModule = config.providerModule || "wasteCore";
 const expectedCapabilityId = config.capabilityId || "waste-management";
 const expectedGroupId = config.groupId || "sustainability-operations";
-const expectedObservedServer = config.observedServer || "kickoffLocal:wasteServer:default";
-const platformRuntime = config.platform || { label: "Platform", port: 4300, script: "start:platform" };
-const wasteRuntime = config.waste || { label: "Waste", port: 4370, script: "start:waste" };
 const managed = [];
 const expectedNavigationIds = config.navigationIds || [
   "waste-management",
@@ -133,9 +134,9 @@ async function waitReady(baseUrl, label) {
 
 async function ensureRuntime(runtime, baseUrl) {
   if (!(await listening(runtime.port))) {
-    const child = spawn("npm", ["run", runtime.script], {
+    const child = spawn(runtime.command || "npm", runtime.args || ["run", runtime.script], {
       cwd: projectRoot,
-      env: process.env,
+      env: { ...process.env, ...runtime.env, ENV: environmentProfile.environment },
       detached: true,
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -160,7 +161,7 @@ function stopManagedRuntime(child) {
 async function authenticate() {
   const result = await request(platformUrl, "/nodics/profile/v0/employee/browser/authenticate", {
     method: "POST",
-    headers: { Origin: axisUrl },
+    headers: { Origin: requestOrigin },
     body: JSON.stringify({
       loginId: process.env.AXIS_LOGIN_ID || "admin",
       password: process.env.AXIS_PASSWORD || "adminPassword",
@@ -383,7 +384,7 @@ async function restore(headers, state) {
 
 async function main() {
   await ensureRuntime(platformRuntime, platformUrl);
-  await ensureRuntime(wasteRuntime, process.env.NODICS_WASTE_URL || "http://127.0.0.1:4370");
+  await ensureRuntime(wasteRuntime, process.env.NODICS_WASTE_URL || projectEndpointUrl(environmentProfile, wasteRuntime.server));
   const headers = await ensureWasteViewPermission(await authenticate());
   const original = await waitForRegistration(headers);
   validateRegistration(original);

@@ -13,7 +13,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-const { readProjectEnvironmentProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentConfiguration, projectRuntime, projectInitializationProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 /**
  * @module kickoff/scripts/acceptance/defaultProjectWasteManagementAcceptanceService
@@ -26,10 +26,12 @@ const require = createRequire(import.meta.url);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const manifestPath = path.join(projectRoot, 'nodics.project.json');
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
-const environmentProfile = readProjectEnvironmentProfile(projectRoot, process.env.ENV || '');
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
 const acceptanceConfig = environmentProfile.acceptance?.wasteManagement || manifest.acceptance?.wasteManagement || {};
-const environmentName = process.env.ENV || acceptanceConfig.environment || environmentProfile.environment || 'kickoffLocal';
-const serverName = process.env.SERVER || acceptanceConfig.server || 'wasteServer';
+const environmentName = environmentProfile.environment;
+const runtime = projectRuntime(environmentProfile, process.env.SERVER || acceptanceConfig.server || acceptanceConfig.runtime);
+const serverName = runtime.server;
+const initializationProfile = projectInitializationProfile(runtime, process.env.NODICS_INITIALIZATION_PROFILE || acceptanceConfig.profileCode);
 const fixedNow = new Date('2026-09-01T12:00:00.000Z');
 
 function readEnvFile(filePath) {
@@ -158,7 +160,7 @@ function validateRuntime() {
     assert(NODICS.getSelectedEnvironmentName() === environmentName, 'Waste acceptance selected the wrong environment');
     assert(NODICS.getServerName() === serverName, 'Waste acceptance selected the wrong server');
     assert(CONFIG.get('runtimeRole').code === 'WASTE', 'Waste server must own WASTE runtime role');
-    assert(CONFIG.get('servers').default.endpoint.httpPort === 4370, 'Waste server must listen on the local Waste port');
+    assert(CONFIG.get('servers').default.endpoint.httpPort === runtime.port, 'Waste server must use its configured acceptance endpoint');
     assert(CONFIG.get('apiExposure').categories.wasteInternal.enabled === true, 'Waste internal API exposure must be enabled');
     const requiredModules = [
         'nodics.waste',
@@ -282,7 +284,7 @@ function releaseCodesFromProfile(profile, dataType) {
 }
 
 async function installInitialDataFromProfile() {
-    const profileCode = acceptanceConfig.profileCode || 'localWasteFoundation';
+    const profileCode = initializationProfile;
     const releaseService = SERVICE.DefaultDataReleaseService;
     assert(releaseService, 'DefaultDataReleaseService must be available for Waste initialization');
     const profileResponse = await releaseService.getInitializationProfile({ tenant: tenantCode(), profileCode });

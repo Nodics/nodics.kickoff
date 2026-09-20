@@ -23,8 +23,6 @@ module.exports = {
       "kickoffApi",
       "kickoffInt",
       "circa.ewaste",
-      "kickoffDockerLocal",
-      "loyaltyServer",
       "loyaltyCore",
       "loyaltyProgram",
       "loyaltyRewardType",
@@ -41,13 +39,10 @@ module.exports = {
   },
   "data": {
     "dataReleases": {
-      "lifecycleMetadataRequired": true,
-      "destinationEnforced": true,
-      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
-      "allowedDestinationRoles": [
-        "LOYALTY"
-      ],
-      "contributions": []
+      "contributions": {
+        "$config": "replace",
+        "value": []
+      }
     }
   },
   "apiExposure": {
@@ -57,284 +52,212 @@ module.exports = {
       },
       "dataImport": {
         "enabled": true
-      },
-      "loyaltyInternal": {
-        "enabled": true
       }
     }
   },
-  "loyalty": {
-    "capabilities": {
-      "wallet": true,
-      "rewardType": true,
-      "walletReward": true,
-      "ledger": true,
-      "earning": true,
-      "reservation": true,
-      "redemption": true,
-      "spendPolicy": true
-    }
-  },
+  "loyalty": {},
   "database": {
     "default": {
       "mongodb": {
         "master": {
-          "URI": {
-            "$config": "env",
-            "name": "NODICS_MONGODB_URI"
-          },
           "databaseName": "kickoffDockerLocalLoyalty"
         }
       }
     },
-    "circa.ewaste": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyProgram": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyRewardType": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyWallet": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyLedger": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyReservation": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyRedemption": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyApi": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    }
+    "circa.ewaste": {},
+    "loyaltyCore": {},
+    "loyaltyProgram": {},
+    "loyaltyRewardType": {},
+    "loyaltyWallet": {},
+    "loyaltyLedger": {},
+    "loyaltyReservation": {},
+    "loyaltyRedemption": {},
+    "loyaltyApi": {}
   },
   "servers": {
     "platform": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platform"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "platformServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platformServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "profile": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "profile"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "backoffice": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "backoffice"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnlineServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnlineServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "process": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "process"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "processServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "processServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerce": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerce"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagement": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagement"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagementServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagementServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "waste": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "waste"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wasteServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wasteServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "location": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "location"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "locationServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "locationServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcms": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcms"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "default": {
       "endpoint": {
@@ -345,9 +268,15 @@ module.exports = {
       },
       "abstractEndpoint": {
         "httpHost": "loyalty",
-        "httpPort": 4360,
+        "httpPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpPort"
+        },
         "httpsHost": "loyalty",
-        "httpsPort": 4361
+        "httpsPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpsPort"
+        }
       }
     }
   },

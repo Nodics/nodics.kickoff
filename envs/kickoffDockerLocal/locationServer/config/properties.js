@@ -18,248 +18,202 @@ module.exports = {
     "default": {
       "mongodb": {
         "master": {
-          "URI": {
-            "$config": "env",
-            "name": "NODICS_MONGODB_URI"
-          },
           "databaseName": "kickoffDockerLocalLocation"
         }
       }
     },
-    "locationCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "locationType": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "locationMap": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "locationSearch": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "locationDraft": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "locationApproval": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "locationProjection": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    }
+    "locationCore": {},
+    "locationType": {},
+    "locationMap": {},
+    "locationSearch": {},
+    "locationDraft": {},
+    "locationApproval": {},
+    "locationProjection": {}
   },
   "servers": {
     "platform": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platform"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "platformServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platformServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "profile": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "profile"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "backoffice": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "backoffice"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnlineServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnlineServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "process": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "process"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "processServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "processServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerce": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerce"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagement": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagement"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagementServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagementServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyalty": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyalty"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyaltyServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyaltyServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "waste": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "waste"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wasteServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wasteServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcms": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcms"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "default": {
       "endpoint": {
@@ -270,28 +224,14 @@ module.exports = {
       },
       "abstractEndpoint": {
         "httpHost": "location",
-        "httpPort": 4380,
+        "httpPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpPort"
+        },
         "httpsHost": "location",
-        "httpsPort": 4381
-      }
-    }
-  },
-  "search": {
-    "discoveryProjection": {
-      "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
+        "httpsPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpsPort"
         }
       }
     }
@@ -304,8 +244,6 @@ module.exports = {
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
-      "kickoffDockerLocal",
-      "locationServer",
       "nodics.location",
       "locationCore",
       "locationType",
@@ -319,14 +257,15 @@ module.exports = {
   },
   "runtimeAuthorityContexts": {
     "modules": {
-      "locationCore": "location.operational",
-      "locationType": "location.operational",
-      "locationMap": "location.operational",
-      "locationSearch": "location.operational",
-      "locationDraft": "location.operational",
-      "locationApproval": "location.operational",
-      "locationProjection": "location.operational"
-    }
+      "locationCore": true,
+      "locationType": true,
+      "locationMap": true,
+      "locationSearch": true,
+      "locationDraft": true,
+      "locationApproval": true,
+      "locationProjection": true
+    },
+    "default": "location.operational"
   },
   "runtimeRole": {
     "code": "LOCATION",
@@ -337,13 +276,7 @@ module.exports = {
       "serviceRegistry": {
         "enabled": true
       },
-      "schemaApi": {
-        "enabled": true
-      },
       "dataImport": {
-        "enabled": true
-      },
-      "locationInternal": {
         "enabled": true
       }
     }
@@ -369,59 +302,52 @@ module.exports = {
       "token": true,
       "validator": true
     },
-    "serviceNames": [
-      "DefaultLocationApprovalService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultSearchService",
-      "DefaultWorkflow2SchemaService"
-    ]
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultLocationApprovalService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultIndexService",
+        "DefaultIndexerLogService",
+        "DefaultIndexerService",
+        "DefaultSearchService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    }
   },
   "data": {
     "dataReleases": {
-      "lifecycleMetadataRequired": true,
-      "destinationEnforced": true,
-      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
-      "allowedDestinationRoles": [
-        "LOCATION"
-      ],
-      "contributions": [
-        {
-          "moduleName": "wasteCollection",
-          "sections": [
-            "sample-locations"
-          ]
-        }
-      ],
+      "contributions": {
+        "$config": "replace",
+        "value": [
+          {
+            "moduleName": "wasteCollection",
+            "sections": [
+              "sample-locations"
+            ]
+          }
+        ]
+      },
       "initializationProfiles": {
         "localLocationFoundation": {
           "enabled": true,
           "label": "Local Location foundation",
           "description": "Install Location reference releases for type registry, semantic places, map layers, nearby search, drafts, approval, and marker projections.",
           "completionMessage": "The Local Location foundation is ready. Operators can validate reusable places, map views, search projections, and draft approval flows.",
-          "steps": [
-            {
-              "dataType": "init"
-            },
-            {
-              "dataType": "core"
-            }
-          ]
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "init"
+              },
+              {
+                "dataType": "core"
+              }
+            ]
+          }
         }
       }
     }
   },
-  "location": {
-    "capabilities": {
-      "semanticPlace": true,
-      "typeRegistry": true,
-      "mapLayers": true,
-      "nearbySearch": true,
-      "draftCapture": true,
-      "approval": true,
-      "markerProjection": true
-    }
-  }
+  "location": {}
 };

@@ -94,7 +94,7 @@ npm run start:process
 The governed supervisor starts all three frontends with the nine backends:
 
 ```bash
-npm run topology:start:all
+npm run topology:start
 ```
 
 In the preferred local checkout, frontend applications live under
@@ -311,3 +311,12 @@ configuration declares.
 
 - [Kickoff project overview](project-overview.md)
 - [Customer customization guide](customization-guide.md)
+
+Frontend startup and verification are independent. Run `npm run dev` and `npm test`
+inside each frontend application. Backend topology and API acceptance do not start
+frontend servers or wait for their health.
+
+Process runtime identity explicitly includes CMS for the governed publication
+decision callback. Platform routes the operational Commerce reference activation
+release to Commerce, matching its COMMERCE destination; Staged remains the product
+authoring destination. These are Local deployment bindings, not new module defaults.

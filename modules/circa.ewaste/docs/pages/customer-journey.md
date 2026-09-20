@@ -1,6 +1,6 @@
 # Connected Circa local customer journey
 
-Updated: 2026-09-09
+Updated: 2026-09-11
 
 ## Scope and authority
 
@@ -62,6 +62,44 @@ Import is an initial environment operation. Do not reimport opening balances or
 ownership over an environment already used for transactions. Preserve that
 history, or use a separately provisioned clean local environment.
 
+### Restore the collection network after a local reset
+
+The Circa application initialization profile includes the existing Waste Collection
+sample network in addition to Circa's three application centres. The framework
+owns the checksummed source records under
+`nodics.waste/modules/wasteCollection/data/sample-v001/records/`; the project
+declares which releases its setup requires. Do not create a second copy in Circa
+or restore centres through direct database writes.
+
+The network includes **DU Telecom - Dubai International Academic City**, **DU HQ -
+Dubai Hills**, and **Al-Hawai Residence - Barsha Heights**, with their supplied
+coordinates and linked Profile addresses, Location records and Waste collection
+points. These records are version-controlled; a database flush removes their
+installed state, so the corresponding sample releases must be installed again.
+
+For a clean environment, use the Circa application initialization flow in Axis.
+For an existing local environment missing only the collection network, validate
+then install these releases in order using the authenticated destination APIs:
+
+| Order | Runtime | Release code |
+| --- | --- | --- |
+| 1 | Platform 4300 | `wasteCollection:sample-profile-addresses` |
+| 2 | Location 4380 | `wasteCollection:sample-locations` |
+| 3 | Waste 4370 | `wasteCollection:sample-collection-points` |
+
+Call `POST /nodics/import/v0/sample/validate`, then
+`POST /nodics/import/v0/sample/install`, using the release code for that runtime:
+
+```json
+{"releaseCodes":["wasteCollection:sample-profile-addresses"],"options":{"recursive":false}}
+```
+
+This restores the reference network without importing customer submissions,
+assets, wallets or opening ledgers. Verify all three releases report `CURRENT`
+in validation, and confirm the three named centres
+are present in Circa's experience response. Starting servers alone does not
+install sample data.
+
 ## Commerce publication
 
 Publish the `circaStaged` catalogue for `circaMainStore` with Product's governed
@@ -91,9 +129,10 @@ publication are separate from the working customer transactions.
    same password: `seller@circa.local` and `recipient@circa.local`.
 3. Open Submit Waste. Existing location permission triggers fresh capture without
    another sharing button. Otherwise use the host permission/recovery controls.
-   Within 100 metres, continue directly to the nearby centre and photo controls;
-   ambiguous nearby centres require one choice. Outside the radius, use the
-   nearest three centre cards/directions and recheck arrival when there.
+   Within the configured arrival radius, continue directly to the nearby centre
+   and photo controls; ambiguous nearby centres require one choice. Outside the
+   radius, use the nearest three centre cards/directions and recheck arrival when
+   there.
 4. Take a photo or upload JPEG, PNG or WebP (up to 5 MB). Media stores it privately;
    attachment and submission recheck fresh location on the backend. Analysis runs
    automatically and prepares the editable preview. Optional help preserves the
@@ -130,15 +169,21 @@ unlinked customers use the shared email/password sign-in or name/email/password
 registration form. Profile owns validation, canonical customer/link persistence
 and session issuance. Email OTP is removed.
 
-Circa project services apply 100-metre inclusive arrival, a maximum 60-second
-observation age, maximum 50-metre accuracy, and bounded 12-second device capture.
-Telegram Desktop may omit horizontal accuracy. The client tries a bounded browser
-location capture when native accuracy is missing or exceeds the backend policy,
-without retrying a denied native permission. If neither source provides a usable
-reading, unknown accuracy still fails closed. Distinct errors identify missing
-accuracy, approximate location and expired readings; retry preserves the draft and
-photo. Mobile retry stays visible in the bottom action bar. Values are intentional project settings under
-`circaEWaste.journey`; permission grant is distinct from position freshness.
+Circa project services apply direct distance to the reported coordinates: the
+configured inclusive arrival radius, maximum 60-second observation age, and
+bounded 12-second device capture. This policy applies uniformly to desktop,
+mobile Web and Telegram. Reported accuracy is optional metadata and does not
+accept or reject arrival. Valid accuracy is preserved; missing or invalid
+accuracy is stored as null.
+The map and submission use the same device adapter, but only the server authorizes
+arrival against current eligible centre coordinates. An approximate observation
+can qualify if its reported point is inside the radius, even if the device's true
+position is outside it. No accuracy value is fabricated.
+Invalid coordinates and expired/future readings remain rejected. Retry preserves
+the draft and photo. Mobile retry stays visible in the bottom action bar. Values
+are intentional project settings under `circaEWaste.journey`; permission grant is
+distinct from position freshness. Journey contract version 2 removes the required
+accuracy threshold and permits null observation accuracy.
 Location projections and available Waste Collection records supply the centres.
 The service uses current centre state again before evidence/submission. Browser
 coordinates are client observations, not tamper-proof proof of physical presence.
@@ -376,4 +421,4 @@ the existing HTTPS preview's Secure/HttpOnly cookies. Native Telegram client
 acceptance and a future WhatsApp adapter remain separate. No messages are sent by
 these authentication checks.
 
-Circa selects the eWaste WARM electronics adapter. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. No customer-facing illustrative/demo qualifiers are used. The sourced estimate preserves weight bounds, factor source/version, US reference geography and assumed landfill/recycling scenarios. Unknown coverage or weight produces an unavailable assessment, not a default factor. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.
+Circa selects the eWaste OpenAI environmental assessment provider first, with the local WARM electronics adapter as configured fallback. The separate environmental call uses normalized item metadata and retrieved references; invalid or timed-out responses advance to fallback. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. Estimates preserve weight bounds, provider/model provenance, source references, geography and scenario assumptions. Missing defensible evidence remains unknown. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.

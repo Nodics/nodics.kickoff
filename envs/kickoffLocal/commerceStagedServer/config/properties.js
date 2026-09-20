@@ -21,16 +21,42 @@ const digitalCommerceRuntimeModules = ["digitalCommerce", "digitalCore"];
 
 /** @module kickoffLocal/commerceStagedServer/config/properties @description Defines isolated local Commerce Staged coordinates and data-release enforcement for governed Product catalog imports. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
-      "DefaultProductService",
-      "DefaultProductPublicationService",
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-commerce-staged-1",
+    "remoteModules": [
+      "profile",
+      "backoffice",
+      "loyaltyCore",
+      "wasteCore",
+      "media"
+    ]
+  },
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_COMMERCE_STAGED_API_KEY",
+      "fallback": null
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
     ],
-    modules: {
-      "apparelProduct": true,
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
+      "DefaultProductService",
+      "DefaultProductPublicationService"
+    ],
+    "modules": {
+      "apparelProduct": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "apparel",
+        "value": true,
+        "otherwise": false
+      },
       "bidding": true,
       "cart": true,
       "checkoutCore": true,
@@ -41,7 +67,21 @@ module.exports = {
       "discoveryProjection": true,
       "discoveryRanking": true,
       "discoverySource": true,
-      "electronicsProduct": true,
+      "electronicsProduct": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "electronics",
+        "value": true,
+        "otherwise": {
+          "$config": "selected",
+          "name": "agora",
+          "field": "domains",
+          "includes": "telco",
+          "value": true,
+          "otherwise": false
+        }
+      },
       "fulfillmentCore": true,
       "import": true,
       "inventory": true,
@@ -55,197 +95,244 @@ module.exports = {
       "store": true,
       "system": true,
       "tax": true,
-      "telcoCatalog": true,
-      "telcoProvisioning": true,
-      "telcoSubscription": true,
+      "telcoCatalog": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "telco",
+        "value": true,
+        "otherwise": false
+      },
+      "telcoProvisioning": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "telco",
+        "value": true,
+        "otherwise": false
+      },
+      "telcoSubscription": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "telco",
+        "value": true,
+        "otherwise": false
+      },
       "token": true,
       "validator": true
     },
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultPipelineService",
-      "DefaultPublicationAuditService",
-      "DefaultPublicationRequestService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultClassConfigurationService",
+        "DefaultConfigurationActivationLogService",
+        "DefaultConfigurationActivationRequestService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultPipelineService",
+        "DefaultPublicationAuditService",
+        "DefaultPublicationRequestService",
+        "DefaultRouterConfigurationService",
+        "DefaultSchemaAccessPolicyService",
+        "DefaultSchemaConfigurationService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    },
+    "searchIndexes": [
+      {
+        "moduleName": "discoveryProjection",
+        "indexName": "discoveryDocumentProjection"
+      },
+      {
+        "moduleName": "product",
+        "indexName": "productLocalized"
+      },
+      {
+        "moduleName": "commerceSearchCore",
+        "indexName": "commerceSearchRuleProjection"
+      }
+    ]
   },
-  activeModules: {
-    groups: [{"$config":"ref","path":["agoraDomains","frameworkGroups"],"spread":true}],
-    modules: [
+  "activeModules": {
+    "groups": [
+      {
+        "$config": "composition",
+        "name": "agora",
+        "field": "frameworkGroups",
+        "spread": true
+      }
+    ],
+    "modules": [
       "circa.ewaste",
-      ...commerceSearchRuntimeModules,
-      ...digitalCommerceRuntimeModules,
-      {"$config":"ref","path":["agoraDomains","sharedModules"],"spread":true},
+      "search",
+      "elastic",
+      "commerceSearchCore",
+      "commerceSearch",
+      "digitalCommerce",
+      "digitalCore",
+      {
+        "$config": "composition",
+        "name": "agora",
+        "field": "sharedModules",
+        "spread": true
+      },
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
-      {"$config":"ref","path":["agoraDomains","projectPacks"],"spread":true},
-      "kickoffLocal",
-      "commerceStagedServer",
-    ],
-  },
-  runtimeRole: { code: "COMMERCE_STAGED", publication: "STAGED" },
-  runtimeAuthorityContexts: {
-    modules: {
-  "apparelProduct": "commerce.staged",
-  "cart": "commerce.staged",
-  "checkoutCore": "commerce.staged",
-  "commerceSearchCore": "commerce.staged",
-  "shoppingList": "commerce.staged",
-  "digitalCore": "commerce.staged",
-  "discoveryConfig": "commerce.staged",
-  "discoveryMapping": "commerce.staged",
-  "discoveryProjection": "commerce.staged",
-  "discoveryRanking": "commerce.staged",
-  "discoverySource": "commerce.staged",
-  "electronicsProduct": "commerce.staged",
-  "fulfillmentCore": "commerce.staged",
-  "inventory": "commerce.staged",
-  "order": "commerce.staged",
-  "paymentCore": "commerce.staged",
-  "pricing": "commerce.staged",
-  "product": "commerce.staged",
-  "promotion": "commerce.staged",
-  "store": "commerce.staged",
-  "tax": "commerce.staged",
-  "telcoCatalog": "commerce.staged",
-  "telcoProvisioning": "commerce.staged",
-  "telcoSubscription": "commerce.staged"
-},
-  },
-  apiExposure: {
-    categories: {
-      dataImport: { enabled: true },
-
-      commerceManagement: { enabled: true },
-    },
-  },
-  search: {
-    product: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
-    commerceSearchCore: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
-    discoveryProjection: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
-  },
-  product: {
-    marketplaceAuthoring: {
-      enabled: true,
-      catalogVersion: "circaStaged",
-      locales: ["en", "ar"],
-    },
-    publication: {
-      searchEnrichment: {
-        domains: {
-          contributors: {"$config":"ref","path":["agoraDomains","productSearchContributors"]},
-          missingBehavior: "error",
-        },
+      {
+        "$config": "composition",
+        "name": "agora",
+        "field": "projectPacks",
+        "spread": true
       },
-    },
+      "redisCache"
+    ]
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["COMMERCE_STAGED"],
-      initializationProfiles: {
-        localCommerceStagedCatalogFoundation: {
-          enabled: true,
-          label: "Local Commerce Staged catalog foundation",
-          description:
-            "Install Staged Commerce sample catalog releases for Agora storefront validation, product search, categories, prices, and inventory previews.",
-          completionMessage:
-            "The Local Commerce Staged catalog foundation is ready. Review catalog content in Staged before publishing qualified storefront data.",
-          steps: [{ dataType: "sample" }],
-        },
-      },
-    },
+  "runtimeRole": {
+    "code": "COMMERCE_STAGED",
+    "publication": "STAGED"
   },
-  database: {
-    default: {
-      mongodb: { master: { databaseName: "kickoffLocalCommerceStaged" } },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "apparelProduct": true,
+      "cart": true,
+      "checkoutCore": true,
+      "commerceSearchCore": true,
+      "shoppingList": true,
+      "digitalCore": true,
+      "discoveryConfig": true,
+      "discoveryMapping": true,
+      "discoveryProjection": true,
+      "discoveryRanking": true,
+      "discoverySource": true,
+      "electronicsProduct": true,
+      "fulfillmentCore": true,
+      "inventory": true,
+      "order": true,
+      "paymentCore": true,
+      "pricing": true,
+      "product": true,
+      "promotion": true,
+      "store": true,
+      "tax": true,
+      "telcoCatalog": true,
+      "telcoProvisioning": true,
+      "telcoSubscription": true
     },
+    "default": "commerce.staged"
   },
-  stripeProvider: {
-    enabled: false,
-    maturity: "NOT_APPLICABLE_FOR_STAGED_CATALOG",
-    sandboxOnly: true,
-    liveQualified: false,
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
   },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4352,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4353,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4352,
-        httpsHost: "localhost",
-        httpsPort: 4353,
-      },
+  "search": {
+    "product": {
+      "options": {
+        "enabled": true
+      }
     },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
+    "commerceSearchCore": {
+      "options": {
+        "enabled": true
+      }
     },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    commerce: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4350,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4351,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4350,
-        httpsHost: "localhost",
-        httpsPort: 4351,
-      },
-    },
+    "discoveryProjection": {
+      "options": {
+        "enabled": true
+      }
+    }
   },
+  "product": {
+    "marketplaceAuthoring": {
+      "enabled": true,
+      "catalogVersion": "circaStaged",
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    "publication": {
+      "searchEnrichment": {
+        "domains": {
+          "missingBehavior": "error"
+        }
+      }
+    }
+  },
+  "data": {
+    "dataReleases": {
+      "initializationProfiles": {
+        "localCommerceStagedCatalogFoundation": {
+          "enabled": true,
+          "label": "Local Commerce Staged catalog foundation",
+          "description": "Install Staged Commerce sample catalog releases for Agora storefront validation, product search, categories, prices, and inventory previews.",
+          "completionMessage": "The Local Commerce Staged catalog foundation is ready. Review catalog content in Staged before publishing qualified storefront data.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "sample"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalCommerceStaged"
+        }
+      }
+    }
+  },
+  "stripeProvider": {
+    "enabled": false,
+    "maturity": "NOT_APPLICABLE_FOR_STAGED_CATALOG"
+  },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4352,
+        "httpsPort": 4353
+      }
+    },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "commerce": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.endpoint"
+      }
+    }
+  },
+  "tooling": {
+    "runtime": {
+      "code": "commerceStaged",
+      "script": "start:commerce:staged",
+      "order": 8
+    }
+  }
 };
-
-/** Explicit nSearch projections included in the governed Local reset. */
-module.exports.localResetProvider.searchIndexes = [
-  {
-    moduleName: "discoveryProjection",
-    indexName: "discoveryDocumentProjection",
-  },
-  {
-    moduleName: "product",
-    indexName: "productLocalized",
-  },
-  {
-    moduleName: "commerceSearchCore",
-    indexName: "commerceSearchRuleProjection",
-  },
-];

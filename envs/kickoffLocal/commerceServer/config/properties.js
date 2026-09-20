@@ -21,18 +21,44 @@ const digitalCommerceRuntimeModules = ["digitalCommerce", "digitalCore"];
 
 /** @module kickoffLocal/commerceServer/config/properties @description Defines isolated local Commerce coordinates. @layer environment-server-config @owner nodics.kickoff */
 module.exports = {
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-commerce-1",
+    "remoteModules": [
+      "profile",
+      "backoffice",
+      "loyaltyCore",
+      "wasteCore",
+      "media"
+    ]
+  },
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_COMMERCE_API_KEY",
+      "fallback": null
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
+    ],
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
       "DefaultCommerceOrderService",
       "DefaultProductService",
       "DefaultPaymentTransactionService",
-      "DefaultCartService",
+      "DefaultCartService"
     ],
-    modules: {
-      "apparelProduct": true,
+    "modules": {
+      "apparelProduct": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "apparel",
+        "value": true,
+        "otherwise": false
+      },
       "bidding": true,
       "cart": true,
       "checkoutCore": true,
@@ -43,7 +69,21 @@ module.exports = {
       "discoveryProjection": true,
       "discoveryRanking": true,
       "discoverySource": true,
-      "electronicsProduct": true,
+      "electronicsProduct": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "electronics",
+        "value": true,
+        "otherwise": {
+          "$config": "selected",
+          "name": "agora",
+          "field": "domains",
+          "includes": "telco",
+          "value": true,
+          "otherwise": false
+        }
+      },
       "fulfillmentCore": true,
       "import": true,
       "inventory": true,
@@ -57,274 +97,332 @@ module.exports = {
       "store": true,
       "system": true,
       "tax": true,
-      "telcoCatalog": true,
-      "telcoProvisioning": true,
-      "telcoSubscription": true,
+      "telcoCatalog": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "telco",
+        "value": true,
+        "otherwise": false
+      },
+      "telcoProvisioning": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "telco",
+        "value": true,
+        "otherwise": false
+      },
+      "telcoSubscription": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "telco",
+        "value": true,
+        "otherwise": false
+      },
       "token": true,
       "validator": true
     },
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultCronJobLogService",
-      "DefaultCronJobService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultPipelineService",
-      "DefaultProcessAuditEventService",
-      "DefaultProcessDefinitionService",
-      "DefaultProcessDefinitionVersionService",
-      "DefaultProcessIncidentService",
-      "DefaultProcessInstanceService",
-      "DefaultProcessTaskService",
-      "DefaultProcessTriggerService",
-      "DefaultPublicationAuditService",
-      "DefaultPublicationRequestService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultClassConfigurationService",
+        "DefaultConfigurationActivationLogService",
+        "DefaultConfigurationActivationRequestService",
+        "DefaultCronJobLogService",
+        "DefaultCronJobService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultPipelineService",
+        "DefaultProcessAuditEventService",
+        "DefaultProcessDefinitionService",
+        "DefaultProcessDefinitionVersionService",
+        "DefaultProcessIncidentService",
+        "DefaultProcessInstanceService",
+        "DefaultProcessTaskService",
+        "DefaultProcessTriggerService",
+        "DefaultPublicationAuditService",
+        "DefaultPublicationRequestService",
+        "DefaultRouterConfigurationService",
+        "DefaultSchemaAccessPolicyService",
+        "DefaultSchemaConfigurationService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    },
+    "searchIndexes": [
+      {
+        "moduleName": "discoveryProjection",
+        "indexName": "discoveryDocumentProjection"
+      },
+      {
+        "moduleName": "product",
+        "indexName": "productLocalized"
+      },
+      {
+        "moduleName": "commerceSearchCore",
+        "indexName": "commerceSearchRuleProjection"
+      }
+    ]
   },
-  activeModules: {
-    groups: [{"$config":"ref","path":["agoraDomains","frameworkGroups"],"spread":true}],
-    modules: [
+  "activeModules": {
+    "groups": [
+      {
+        "$config": "composition",
+        "name": "agora",
+        "field": "frameworkGroups",
+        "spread": true
+      }
+    ],
+    "modules": [
       "circa.ewaste",
       "circa.ewaste",
-      ...commerceSearchRuntimeModules,
-      ...digitalCommerceRuntimeModules,
-      {"$config":"ref","path":["agoraDomains","sharedModules"],"spread":true},
+      "search",
+      "elastic",
+      "commerceSearchCore",
+      "commerceSearch",
+      "digitalCommerce",
+      "digitalCore",
+      {
+        "$config": "composition",
+        "name": "agora",
+        "field": "sharedModules",
+        "spread": true
+      },
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
-      "kickoffLocal",
-      "commerceServer",
-    ],
+      "redisCache"
+    ]
   },
-  runtimeRole: { code: "COMMERCE", publication: "OPERATIONAL" },
-  runtimeAuthorityContexts: {
-    modules: {
-  "apparelProduct": "commerce.operational",
-  "cart": "commerce.operational",
-  "checkoutCore": "commerce.operational",
-  "commerceSearchCore": "commerce.operational",
-  "shoppingList": "commerce.operational",
-  "digitalCore": "commerce.operational",
-  "discoveryConfig": "commerce.operational",
-  "discoveryMapping": "commerce.operational",
-  "discoveryProjection": "commerce.operational",
-  "discoveryRanking": "commerce.operational",
-  "discoverySource": "commerce.operational",
-  "electronicsProduct": "commerce.operational",
-  "fulfillmentCore": "commerce.operational",
-  "inventory": "commerce.operational",
-  "order": "commerce.operational",
-  "paymentCore": "commerce.operational",
-  "pricing": "commerce.operational",
-  "product": "commerce.operational",
-  "promotion": "commerce.operational",
-  "store": "commerce.operational",
-  "tax": "commerce.operational",
-  "telcoCatalog": "commerce.operational",
-  "telcoProvisioning": "commerce.operational",
-  "telcoSubscription": "commerce.operational"
-},
+  "runtimeRole": {
+    "code": "COMMERCE",
+    "publication": "OPERATIONAL"
   },
-  apiExposure: {
-    categories: {
-      dataImport: { enabled: true },
-      commerceCustomer: { enabled: true },
-      commercePublicationIngestion: { enabled: true },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "apparelProduct": true,
+      "cart": true,
+      "checkoutCore": true,
+      "commerceSearchCore": true,
+      "shoppingList": true,
+      "digitalCore": true,
+      "discoveryConfig": true,
+      "discoveryMapping": true,
+      "discoveryProjection": true,
+      "discoveryRanking": true,
+      "discoverySource": true,
+      "electronicsProduct": true,
+      "fulfillmentCore": true,
+      "inventory": true,
+      "order": true,
+      "paymentCore": true,
+      "pricing": true,
+      "product": true,
+      "promotion": true,
+      "store": true,
+      "tax": true,
+      "telcoCatalog": true,
+      "telcoProvisioning": true,
+      "telcoSubscription": true
     },
+    "default": "commerce.operational"
   },
-  search: {
-    product: { options: { enabled: true, fallback: false, engine: "elastic" } },
-    commerceSearchCore: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
-    discoveryProjection: {
-      options: { enabled: true, fallback: false, engine: "elastic" },
-    },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
   },
-  product: {
-    publication: {
-      searchEnrichment: {
-        domains: {
-          contributors: {"$config":"ref","path":["agoraDomains","productSearchContributors"]},
-          missingBehavior: "error",
-        },
-      },
+  "search": {
+    "product": {
+      "options": {
+        "enabled": true
+      }
     },
-    discovery: {
-      catalogue: {
-        enabled: true,
-
-        dimensions: {
-          collections: {
-            paths: ["collectionCodes", "localizedAttributes.collection"],
+    "commerceSearchCore": {
+      "options": {
+        "enabled": true
+      }
+    },
+    "discoveryProjection": {
+      "options": {
+        "enabled": true
+      }
+    }
+  },
+  "product": {
+    "publication": {
+      "searchEnrichment": {
+        "domains": {
+          "missingBehavior": "error"
+        }
+      }
+    },
+    "discovery": {
+      "catalogue": {
+        "enabled": true,
+        "dimensions": {
+          "collections": {
+            "paths": [
+              "collectionCodes",
+              "localizedAttributes.collection"
+            ]
           },
-          colors: {
-            paths: ["apparel.options.colourCode", "apparel.options.colorCode"],
+          "availability": {
+            "labels": {
+              "IN_STOCK": "Available",
+              "OUT_OF_STOCK": "Not available",
+              "PREORDER": "Pre-order"
+            }
+          }
+        },
+        "saleCollectionCodes": [
+          "agoraPromotion",
+          "agoraSale"
+        ]
+      },
+      "mediaDeliveryBaseUrl": "http://127.0.0.1:4314/nodics/media/v0/content"
+    }
+  },
+  "fulfillmentCore": {
+    "customerShipping": {
+      "methods": {
+        "$config": "replace",
+        "value": [
+          {
+            "code": "STANDARD",
+            "label": "Standard",
+            "price": "0.00",
+            "currency": "USD",
+            "promise": "3-5 business days",
+            "requiresAddress": true,
+            "returnEligible": true
           },
-          sizes: { paths: ["apparel.options.sizeCode"] },
-          availability: {
-            labels: {
-              IN_STOCK: "Available",
-              OUT_OF_STOCK: "Not available",
-              PREORDER: "Pre-order",
-            },
+          {
+            "code": "STANDARD_AED",
+            "label": "Standard",
+            "price": "0.00",
+            "currency": "AED",
+            "promise": "3-5 business days",
+            "requiresAddress": true,
+            "returnEligible": true
+          }
+        ]
+      },
+      "returnMethods": {
+        "$config": "replace",
+        "value": [
+          {
+            "code": "PICKUP",
+            "label": "Pickup from address",
+            "requiresAddress": true
           },
-        },
-        saleCollectionCodes: ["agoraPromotion", "agoraSale"],
-      },
-      mediaDeliveryBaseUrl: "http://127.0.0.1:4314/nodics/media/v0/content",
-    },
+          {
+            "code": "DROP_OFF",
+            "label": "Drop off",
+            "requiresAddress": false
+          },
+          {
+            "code": "STORE_RETURN",
+            "label": "Store return",
+            "requiresAddress": false
+          }
+        ]
+      }
+    }
   },
-  fulfillmentCore: {
-    customerShipping: {
-      methods: [
-        {
-          code: "STANDARD",
-          label: "Standard",
-          price: "0.00",
-          currency: "USD",
-          promise: "3-5 business days",
-          requiresAddress: true,
-          returnEligible: true,
-        },
-        {
-          code: "STANDARD_AED",
-          label: "Standard",
-          price: "0.00",
-          currency: "AED",
-          promise: "3-5 business days",
-          requiresAddress: true,
-          returnEligible: true,
-        },
-      ],
-    },
+  "cart": {
+    "customerApi": {
+      "defaultJurisdiction": "AE",
+      "defaultCurrency": "AED"
+    }
   },
-  cart: {
-    customerApi: {
-      defaultJurisdiction: "AE",
-      defaultCurrency: "AED",
-    },
+  "data": {
+    "dataReleases": {
+      "initializationProfiles": {
+        "localCommerceFoundation": {
+          "enabled": true,
+          "label": "Local Commerce foundation",
+          "description": "Install required operational Commerce core releases for product, cart, pricing, inventory, tax, checkout, fulfillment, payment, and discovery services.",
+          "completionMessage": "The Local Commerce foundation is ready. Commerce runtime can accept governed catalogue and storefront data.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "core"
+              }
+            ]
+          }
+        }
+      }
+    }
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["COMMERCE"],
-      initializationProfiles: {
-        localCommerceFoundation: {
-          enabled: true,
-          label: "Local Commerce foundation",
-          description:
-            "Install required operational Commerce core releases for product, cart, pricing, inventory, tax, checkout, fulfillment, payment, and discovery services.",
-          completionMessage:
-            "The Local Commerce foundation is ready. Commerce runtime can accept governed catalogue and storefront data.",
-          steps: [{ dataType: "core" }],
-        },
-      },
-    },
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalCommerce"
+        }
+      }
+    }
   },
-  database: {
-    default: { mongodb: { master: { databaseName: "kickoffLocalCommerce" } } },
+  "stripeProvider": {
+    "enabled": true
   },
-  stripeProvider: {
-    enabled: true,
-    maturity: "OFFLINE_CONFORMANCE",
-    sandboxOnly: true,
-    liveQualified: false,
+  "servers": {
+    "waste": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "default": {
+      "endpoint": {
+        "httpPort": 4350,
+        "httpsPort": 4351
+      }
+    },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "loyalty": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "loyaltyServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.endpoint"
+      }
+    }
   },
-  servers: {
-    waste: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4370,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4371,
-      },
-    },
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4350,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4351,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4350,
-        httpsHost: "localhost",
-        httpsPort: 4351,
-      },
-    },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    loyalty: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4360,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4361,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4360,
-        httpsHost: "localhost",
-        httpsPort: 4361,
-      },
-    },
-    loyaltyServer: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4360,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4361,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4360,
-        httpsHost: "localhost",
-        httpsPort: 4361,
-      },
-    },
-  },
+  "tooling": {
+    "runtime": {
+      "code": "commerce",
+      "script": "start:commerce",
+      "order": 9
+    }
+  }
 };
-
-/** Explicit nSearch projections included in the governed Local reset. */
-module.exports.localResetProvider.searchIndexes = [
-  {
-    moduleName: "discoveryProjection",
-    indexName: "discoveryDocumentProjection",
-  },
-  {
-    moduleName: "product",
-    indexName: "productLocalized",
-  },
-  {
-    moduleName: "commerceSearchCore",
-    indexName: "commerceSearchRuleProjection",
-  },
-];

@@ -36,6 +36,7 @@ function configureGlobals() {
 
   global.CONFIG = {
     get: (key) => {
+      if (key === "environment") return { class: "LOCAL" };
       if (key === "data") {
         return {
           dataReleases: {
@@ -45,7 +46,6 @@ function configureGlobals() {
             allowDowngrade: false,
             destinationEnforced: true,
             allowedDestinationRoles: ["COMMERCE_STAGED"],
-            environmentClass: "LOCAL",
             types: {
               init: { enabled: true, operatorExecution: true },
               core: { enabled: true, operatorExecution: true },

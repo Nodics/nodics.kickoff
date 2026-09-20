@@ -14,6 +14,12 @@ x-backend: &backend
   environment:
     ENV: kickoffDockerLocal
     NODE_ENV: production
+    NODICS_JWT_SECRET: ${AUTH_JWT_SECRET}
+    NODICS_API_KEY_PEPPER: ${AUTH_API_KEY_PEPPER}
+    NODICS_BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD}
+    NODICS_BOOTSTRAP_SERVICE_PASSWORD: ${BOOTSTRAP_SERVICE_PASSWORD}
+    NODICS_BOOTSTRAP_SERVICE_API_KEY: ${BOOTSTRAP_SERVICE_API_KEY}
+    NODICS_RUNTIME_API_KEY: ${BOOTSTRAP_SERVICE_API_KEY}
     REDIS_URL: redis://:${REDIS_PASSWORD}@redis-primary:6379
   networks: [operator, application, data]
   depends_on:
@@ -445,69 +451,6 @@ services:
           ],
       }
 
-  axis:
-    image: nodics/axis:docker-local
-    build:
-      {
-        context: "${NODICS_WORKSPACE_ROOT}",
-        dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile,
-        args: { FRONTEND_PROJECT: nodics.exp/nodics.axis },
-      }
-    restart: unless-stopped
-    read_only: true
-    security_opt: ["no-new-privileges:true"]
-    tmpfs:
-      [
-        "/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101",
-        "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101",
-      ]
-    networks: [public]
-    ports: ["4100:8080"]
-    volumes: ["./axis-config.json:/usr/share/nginx/html/axis-config.json:ro"]
-    depends_on:
-      {
-        platform: { condition: service_healthy },
-        wcms-staged: { condition: service_healthy },
-        wcms-online: { condition: service_healthy },
-      }
-    healthcheck:
-      {
-        test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"],
-        interval: 10s,
-        timeout: 3s,
-        retries: 10,
-      }
-    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
-
-  nexus:
-    image: nodics/nexus:docker-local
-    build:
-      {
-        context: "${NODICS_WORKSPACE_ROOT}",
-        dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile,
-        args: { FRONTEND_PROJECT: nodics.exp/nodics.nexus },
-      }
-    restart: unless-stopped
-    read_only: true
-    security_opt: ["no-new-privileges:true"]
-    tmpfs:
-      [
-        "/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101",
-        "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101",
-      ]
-    networks: [public]
-    ports: ["4200:8080"]
-    volumes: ["./nexus-config.json:/usr/share/nginx/html/nexus-config.json:ro"]
-    depends_on: { wcms-online: { condition: service_healthy } }
-    healthcheck:
-      {
-        test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"],
-        interval: 10s,
-        timeout: 3s,
-        retries: 10,
-      }
-    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
-
   waste:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:waste"]
@@ -579,166 +522,6 @@ services:
             "fetch('http://127.0.0.1:4380/nodics/system/v0/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
           ],
       }
-
-  agora-apparel:
-    image: nodics/agora-apparel:docker-local
-    build:
-      context: ${NODICS_WORKSPACE_ROOT}
-      dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile
-      args:
-        FRONTEND_PROJECT: nodics.exp/nodics.agora.apparel
-        NGINX_CONFIG: nginx-agora.conf
-        STOREFRONT_ORIGIN: http://localhost:6300
-        STOREFRONT_SITE: agoraApparelSite
-        STOREFRONT_STORE: agoraMainStore
-        STOREFRONT_DOMAIN: apparel
-        STOREFRONT_CURRENCY: USD
-    restart: unless-stopped
-    read_only: true
-    security_opt: ["no-new-privileges:true"]
-    tmpfs:
-      [
-        "/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101",
-        "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101",
-      ]
-    networks: [public, application]
-    ports: ["6300:8080"]
-    depends_on:
-      {
-        platform: { condition: service_healthy },
-        wcms-online: { condition: service_healthy },
-        commerce: { condition: service_healthy },
-        waste: { condition: service_healthy },
-        location: { condition: service_healthy },
-      }
-    healthcheck:
-      {
-        test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"],
-        interval: 10s,
-        timeout: 3s,
-        retries: 10,
-      }
-    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
-
-  agora-electronics:
-    image: nodics/agora-electronics:docker-local
-    build:
-      context: ${NODICS_WORKSPACE_ROOT}
-      dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile
-      args:
-        FRONTEND_PROJECT: nodics.exp/nodics.agora.electronics
-        NGINX_CONFIG: nginx-agora.conf
-        STOREFRONT_ORIGIN: http://localhost:6400
-        STOREFRONT_SITE: agoraElectronicsSite
-        STOREFRONT_STORE: agoraElectronicsStore
-        STOREFRONT_DOMAIN: electronics
-        STOREFRONT_CURRENCY: AED
-    restart: unless-stopped
-    read_only: true
-    security_opt: ["no-new-privileges:true"]
-    tmpfs:
-      [
-        "/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101",
-        "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101",
-      ]
-    networks: [public, application]
-    ports: ["6400:8080"]
-    depends_on:
-      {
-        platform: { condition: service_healthy },
-        wcms-online: { condition: service_healthy },
-        commerce: { condition: service_healthy },
-        waste: { condition: service_healthy },
-        location: { condition: service_healthy },
-      }
-    healthcheck:
-      {
-        test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"],
-        interval: 10s,
-        timeout: 3s,
-        retries: 10,
-      }
-    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
-
-  agora-telco:
-    image: nodics/agora-telco:docker-local
-    build:
-      context: ${NODICS_WORKSPACE_ROOT}
-      dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile
-      args:
-        FRONTEND_PROJECT: nodics.exp/nodics.agora.telco
-        NGINX_CONFIG: nginx-agora.conf
-        STOREFRONT_ORIGIN: http://localhost:6500
-        STOREFRONT_SITE: agoraTelcoSite
-        STOREFRONT_STORE: agoraTelcoStore
-        STOREFRONT_DOMAIN: telco
-        STOREFRONT_CURRENCY: AED
-    restart: unless-stopped
-    read_only: true
-    security_opt: ["no-new-privileges:true"]
-    tmpfs:
-      [
-        "/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101",
-        "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101",
-      ]
-    networks: [public, application]
-    ports: ["6500:8080"]
-    depends_on:
-      {
-        platform: { condition: service_healthy },
-        wcms-online: { condition: service_healthy },
-        commerce: { condition: service_healthy },
-        waste: { condition: service_healthy },
-        location: { condition: service_healthy },
-      }
-    healthcheck:
-      {
-        test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"],
-        interval: 10s,
-        timeout: 3s,
-        retries: 10,
-      }
-    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
-
-  circa:
-    image: nodics/circa:docker-local
-    build:
-      context: ${NODICS_WORKSPACE_ROOT}
-      dockerfile: nodics.kickoff/envs/kickoffDockerLocal/docker/frontend.Dockerfile
-      args:
-        FRONTEND_PROJECT: nodics.exp/nodics.circa.eWaste
-        NGINX_CONFIG: nginx-circa.conf
-        STOREFRONT_ORIGIN: http://localhost:6600
-        STOREFRONT_SITE: circaSite
-        STOREFRONT_STORE: circaMainStore
-        STOREFRONT_DOMAIN: circa
-        STOREFRONT_CURRENCY: POINTS
-    restart: unless-stopped
-    read_only: true
-    security_opt: ["no-new-privileges:true"]
-    tmpfs:
-      [
-        "/var/cache/nginx:rw,noexec,nosuid,size=32m,uid=101,gid=101",
-        "/var/run:rw,noexec,nosuid,size=8m,uid=101,gid=101",
-      ]
-    networks: [public, application]
-    ports: ["6600:8080"]
-    depends_on:
-      {
-        platform: { condition: service_healthy },
-        wcms-online: { condition: service_healthy },
-        commerce: { condition: service_healthy },
-        waste: { condition: service_healthy },
-        location: { condition: service_healthy },
-      }
-    healthcheck:
-      {
-        test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"],
-        interval: 10s,
-        timeout: 3s,
-        retries: 10,
-      }
-    deploy: { resources: { limits: { memory: 128m, cpus: "0.50" } } }
 
 networks:
   public: { name: nodics-kickoff-docker-local-public }

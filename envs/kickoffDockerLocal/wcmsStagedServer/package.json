@@ -25,7 +25,8 @@
     "runtimeModuleRoots": [
       "nodics.wcms",
       "nodics.platform",
-      "nodics.discovery"
+      "nodics.discovery",
+      "nodics.accelerators/modules/nexus"
     ]
   },
   "description": "Docker Local WCMS Staged Server runtime composition and configuration boundary for this Nodics project."

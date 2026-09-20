@@ -14,12 +14,13 @@ import { spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
-const { readProjectEnvironmentComposition } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentProfileService.mjs').href);
+const { readProjectEnvironmentComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const platformUrl = process.env.NODICS_PLATFORM_URL || "http://127.0.0.1:4300";
-const commerceStagedUrl = process.env.NODICS_COMMERCE_STAGED_URL || "http://127.0.0.1:4352";
-const axisOrigin = process.env.AXIS_ORIGIN || "http://127.0.0.1:3100";
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.NODICS_ENVIRONMENT || process.env.ENV || '');
+const platformUrl = process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
+const commerceStagedUrl = process.env.NODICS_COMMERCE_STAGED_URL || projectEndpointUrl(environmentProfile, 'commerceStagedServer');
+const axisOrigin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const executeInstall = process.env.NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE === "true";
 const managed = [];
 const require = createRequire(import.meta.url);

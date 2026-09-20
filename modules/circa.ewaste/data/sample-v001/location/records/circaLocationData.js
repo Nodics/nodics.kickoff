@@ -54,8 +54,8 @@ module.exports = {
         "categoryCode": "WASTE_COLLECTION",
         "typeCode": "COLLECTION_CENTRE",
         "status": "ACTIVE",
-        "latitude": 25.1067,
-        "longitude": 55.1713,
+        "latitude": 25.0470694,
+        "longitude": 55.243265,
         "addressRef": {
             "module": "profile",
             "schema": "address",

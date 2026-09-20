@@ -17,6 +17,26 @@ const config = require("../config/properties");
 const routes = require("../src/router/routers");
 const service = require("../src/service/defaultCircaEWasteExperienceService");
 const controller = require("../src/controller/defaultCircaEWasteExperienceController");
+test("Circa setup consumes the linked collection network releases in dependency order", () => {
+  const contribution = config.backofficeApplicationInitialization.profiles.circa.dataPackages;
+  assert.equal(contribution.$config, "replace");
+  const packages = contribution.value;
+  const expected = [
+    ["wasteCollection:sample-profile-addresses", "platformServer", "PLATFORM"],
+    ["wasteCollection:sample-locations", "locationServer", "LOCATION"],
+    ["wasteCollection:sample-collection-points", "wasteServer", "WASTE"],
+  ];
+  const positions = expected.map(([code, targetServer, targetRuntimeRole]) => {
+    const selected = packages.filter((entry) => entry.code === code);
+    assert.equal(selected.length, 1, `${code} must be included exactly once`);
+    assert.deepEqual(
+      { ...selected[0], kind: undefined },
+      { code, targetServer, targetRuntimeRole, dataType: "sample", required: true, trigger: "USER", kind: undefined },
+    );
+    return packages.indexOf(selected[0]);
+  });
+  assert(positions[0] < positions[1] && positions[1] < positions[2]);
+});
 test.afterEach(() => {
   delete global.SERVICE;
   delete global.CONFIG;

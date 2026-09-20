@@ -27,11 +27,7 @@ assert(
   !source.includes(['isReference', 'KickoffProject'].join('')),
   'local acceptance must not branch on a hard-coded project name'
 );
-assert(
-  source.includes('const defaultAxisRoot = existsSync(resolve(workspaceRoot, "nodics.axis"))') &&
-    source.includes('resolve(workspaceRoot, "nodics.exp", "nodics.axis")'),
-  'local acceptance must discover the flat customer Axis checkout before falling back to nodics.exp'
-);
+assert(!source.includes('axisRoot') && !source.includes('runAxisSmoke') && !source.includes('smoke:live'), 'API acceptance must not require a frontend checkout or UI tests');
 assert(
   source.includes('function loadLocalBootstrapCapabilities()') &&
     source.includes('descriptor?.acceptance?.localBootstrap'),
@@ -51,11 +47,7 @@ assert(
     source.includes('code: "kickoffDocumentation"'),
   'reference default capabilities must preserve the declared Kickoff documentation journey'
 );
-assert(
-  source.includes('AXIS_EXPECT_DOCUMENTATION: axisSmoke.expectDocumentation ? "1" : "0"') &&
-    source.includes('for (const route of axisSmoke.routes)'),
-  'Axis smoke flags and routes must come from declared capabilities'
-);
+
 assert(
   !source.includes('const profiles = [\n    { code: "frameworkdocs"') &&
     source.includes('profile.profileCode'),
@@ -67,7 +59,7 @@ assert(
   'fresh-schema acceptance must publish documentation packs now that CMS supports chunked site publication'
 );
 assert(
-  source.includes('const locationUrl = process.env.AXIS_LOCATION_URL || "http://127.0.0.1:4380";') &&
+  source.includes("projectEndpointUrl(environmentProfile, 'locationServer')") &&
     source.includes('"start:location"'),
   'fresh-schema acceptance must include the Location runtime when the local reset provider owns Location data'
 );
@@ -76,13 +68,7 @@ assert(
     !source.includes('result.providerCount !== 4'),
   'fresh-schema acceptance must verify the configured reset provider count instead of freezing a four-provider topology'
 );
-assert(
-  source.includes('function isExpectedAcceptanceBackendNoise(message)') &&
-    source.includes('message.includes("ERR_DBS_00004")') &&
-    source.includes('message.includes("Module schemas are not available")') &&
-    source.includes('.filter((message) => !isExpectedAcceptanceBackendNoise(message))'),
-  'fresh-schema acceptance may ignore only explicit Schema Workbench module-discovery misses from Axis smoke, not all backend errors'
-);
+assert(!source.includes('isExpectedAcceptanceBackendNoise'), 'API-only acceptance must not suppress errors for removed frontend smoke tests');
 assert(
   source.includes('await ensureInitializationProfileCurrent(headers, platformUrl, "localPlatformFoundation", "Platform foundation");') &&
     source.includes('await ensureInitializationProfileCurrent(headers, locationUrl, "localLocationFoundation", "Location foundation");') &&
@@ -93,3 +79,26 @@ assert(
 );
 
 console.log('local bootstrap acceptance project contract passed');
+
+// Exercise the actual API acceptance gate with supplied provider policy.
+(async () => {
+  const vm = require('node:vm');
+  const start = source.indexOf('async function verifyLocationMapDefaults(');
+  const end = source.indexOf('\nasync function publishAxisBaseline(', start);
+  const baseline = { providerCode: 'MAPBOX', styleUrl: 'mapbox://styles/mapbox/streets-v12',
+    fallbackProviderCode: 'OSM', fallbackPolicy: 'ALLOW_BASIC_MAP' };
+  let effective = { ...baseline, configured: true, setupStatus: 'ACTIVE', publicAccessToken: 'pk.contract-fixture' };
+  const gate = vm.runInNewContext('(' + source.slice(start, end).trim() + ')', {
+    requestJson: async () => effective, locationUrl: 'http://localhost:4380', log: () => {} });
+  await gate({});
+  effective = { ...baseline, configured: false, setupStatus: 'SETUP_REQUIRED', fallbackAllowed: true,
+    fallbackRenderer: { providerCode: 'OSM', rendererType: 'XYZ_TILE', tileUrlTemplate: 'https://tiles.example/{z}/{x}/{y}.png' } };
+  await gate({});
+  effective.fallbackAllowed = false;
+  await assert.rejects(gate({}), /not effective/);
+  effective.fallbackAllowed = true; effective.fallbackRenderer.tileUrlTemplate = 'http://untrusted.example';
+  await assert.rejects(gate({}), /not effective/);
+  delete effective.fallbackRenderer;
+  await assert.rejects(gate({}), /not effective/);
+  console.log('Local map acceptance preserves explicit provider and fallback policy');
+})().catch(error => { console.error(error); process.exitCode = 1; });

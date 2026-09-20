@@ -18,262 +18,204 @@ module.exports = {
     "default": {
       "mongodb": {
         "master": {
-          "URI": {
-            "$config": "env",
-            "name": "NODICS_MONGODB_URI"
-          },
           "databaseName": "kickoffDockerLocalWaste"
         }
       }
     },
-    "wasteCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteMaterial": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteCollection": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteSubmission": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteVerification": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteReceipt": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteImpact": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteMovement": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "wasteCompliance": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    }
+    "wasteCore": {},
+    "wasteMaterial": {},
+    "wasteCollection": {},
+    "wasteSubmission": {},
+    "wasteVerification": {},
+    "wasteReceipt": {},
+    "wasteImpact": {},
+    "wasteMovement": {},
+    "wasteCompliance": {}
   },
   "servers": {
     "platform": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platform"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "platformServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platformServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "profile": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "profile"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "backoffice": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "backoffice"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnlineServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnlineServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "process": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "process"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "processServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "processServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerce": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerce"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagement": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagement"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagementServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagementServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyalty": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyalty"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyaltyServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyaltyServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "location": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "location"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "locationServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "locationServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcms": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcms"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "default": {
       "endpoint": {
@@ -284,29 +226,22 @@ module.exports = {
       },
       "abstractEndpoint": {
         "httpHost": "waste",
-        "httpPort": 4370,
+        "httpPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpPort"
+        },
         "httpsHost": "waste",
-        "httpsPort": 4371
+        "httpsPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpsPort"
+        }
       }
     }
   },
   "search": {
     "discoveryProjection": {
       "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
-        }
+        "enabled": true
       }
     }
   },
@@ -318,8 +253,6 @@ module.exports = {
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
-      "kickoffDockerLocal",
-      "wasteServer",
       "nodics.waste",
       "wasteCore",
       "wasteMaterial",
@@ -384,20 +317,23 @@ module.exports = {
       "wasteSubmission": true,
       "wasteVerification": true
     },
-    "serviceNames": [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultPipelineService",
-      "DefaultPublicationAuditService",
-      "DefaultPublicationRequestService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultWorkflow2SchemaService"
-    ]
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultClassConfigurationService",
+        "DefaultConfigurationActivationLogService",
+        "DefaultConfigurationActivationRequestService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultPipelineService",
+        "DefaultPublicationAuditService",
+        "DefaultPublicationRequestService",
+        "DefaultRouterConfigurationService",
+        "DefaultSchemaAccessPolicyService",
+        "DefaultSchemaConfigurationService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    }
   },
   "runtimeRole": {
     "code": "WASTE",
@@ -405,50 +341,38 @@ module.exports = {
   },
   "apiExposure": {
     "categories": {
-      "eWasteCustomer": {
-        "enabled": true
-      },
       "circaCustomer": {
         "enabled": true
       },
       "serviceRegistry": {
         "enabled": true
       },
-      "schemaApi": {
-        "enabled": true
-      },
       "dataImport": {
-        "enabled": true
-      },
-      "wasteInternal": {
         "enabled": true
       }
     }
   },
   "data": {
     "dataReleases": {
-      "lifecycleMetadataRequired": true,
-      "destinationEnforced": true,
-      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
-      "allowedDestinationRoles": [
-        "WASTE"
-      ],
       "initializationProfiles": {
         "localWasteFoundation": {
           "enabled": true,
           "label": "Local Waste foundation",
           "description": "Install Waste Management reference releases for schema-driven family, category, material, collection, evidence, receipt, and impact presets.",
           "completionMessage": "The Local Waste foundation is ready. Operators can validate collection eligibility, submissions, evidence, receipts, and impact calculations.",
-          "steps": [
-            {
-              "dataType": "core",
-              "releaseCodes": [
-                "wasteMaterial:core-v001",
-                "eWaste:core-reference",
-                "kickoffWaste:project-reference"
-              ]
-            }
-          ]
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "core",
+                "releaseCodes": [
+                  "wasteMaterial:core-v001",
+                  "eWaste:core-reference",
+                  "kickoffWaste:project-reference"
+                ]
+              }
+            ]
+          }
         }
       }
     }
@@ -480,10 +404,7 @@ module.exports = {
     }
   },
   "copilot": {
-    "conversation": {
-      "storage": "GENERATED_SERVICE",
-      "allowVolatileLocalStorage": false
-    },
+    "conversation": {},
     "knowledge": {
       "ingestion": {
         "enabled": true,
@@ -493,44 +414,51 @@ module.exports = {
         "enabled": true
       },
       "repositoryRoots": {
-        "circa-help": "/Users/himkardwivedi/Apps/HimkarPrj/nodicsRoot/nodics.kickoff/modules/circa.ewaste/docs/customer-knowledge"
+        "circa-help": {
+          "$config": "path",
+          "base": "project",
+          "relative": "modules/circa.ewaste/docs/customer-knowledge"
+        }
       },
       "sourceRegistry": {
-        "definitions": [
-          {
-            "code": "circa-customer-guidance-v1",
-            "repository": "circa-help",
-            "project": "circa.ewaste",
-            "module": "circa.ewaste",
-            "owner": "circa.ewaste",
-            "version": "c8c3581bba2187d7a93f80ecf1d275fd4d400e411a18bda2795f3cdf954e3257",
-            "sourceType": "CUSTOMER_PROJECT",
-            "classification": "CUSTOMER",
-            "paths": [
-              "v1/journey.md"
-            ],
-            "allowedExtensions": [
-              ".md"
-            ],
-            "allowedChannels": [
-              "CUSTOMER"
-            ],
-            "tenantScopes": [
-              "default"
-            ],
-            "enterpriseScopes": [
-              "default"
-            ],
-            "customerProjectScopes": [
-              "circa.ewaste"
-            ],
-            "requiredPermissions": [
-              "waste.submission.create"
-            ],
-            "secretScanPolicy": "REQUIRED",
-            "enabled": true
-          }
-        ]
+        "definitions": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "circa-customer-guidance-v1",
+              "repository": "circa-help",
+              "project": "circa.ewaste",
+              "module": "circa.ewaste",
+              "owner": "circa.ewaste",
+              "version": "c8c3581bba2187d7a93f80ecf1d275fd4d400e411a18bda2795f3cdf954e3257",
+              "sourceType": "CUSTOMER_PROJECT",
+              "classification": "CUSTOMER",
+              "paths": [
+                "v1/journey.md"
+              ],
+              "allowedExtensions": [
+                ".md"
+              ],
+              "allowedChannels": [
+                "CUSTOMER"
+              ],
+              "tenantScopes": [
+                "default"
+              ],
+              "enterpriseScopes": [
+                "default"
+              ],
+              "customerProjectScopes": [
+                "circa.ewaste"
+              ],
+              "requiredPermissions": [
+                "waste.submission.create"
+              ],
+              "secretScanPolicy": "REQUIRED",
+              "enabled": true
+            }
+          ]
+        }
       }
     },
     "providers": {
@@ -542,12 +470,10 @@ module.exports = {
         "openai": {
           "enabled": true,
           "credential": {
-            "mode": "SECRET_REFERENCE",
             "secretRef": "env:OPENAI_EWASTE_API_KEY"
           },
           "model": {
-            "name": "gpt-5.6-luna",
-            "store": false
+            "name": "gpt-5.6-luna"
           },
           "generation": {
             "reasoningEffort": "none"
@@ -559,15 +485,12 @@ module.exports = {
         "ollama": {
           "enabled": true,
           "model": {
-            "name": "gemma3:4b",
-            "contextWindow": 4096
+            "name": "gemma3:4b"
           },
           "generation": {
             "numPredict": 1200
           },
-          "connection": {
-            "timeoutMs": 120000
-          }
+          "connection": {}
         }
       },
       "profiles": {
@@ -598,17 +521,6 @@ module.exports = {
       "presetPackCodes": [
         "EWASTE_CORE_PRESETS"
       ]
-    },
-    "capabilities": {
-      "materialCatalogue": true,
-      "collectionAcceptance": true,
-      "submissionLifecycle": true,
-      "evidencePolicy": true,
-      "verification": true,
-      "receipt": true,
-      "impactCalculation": true,
-      "movementTracking": true,
-      "complianceEvidence": true
     }
   }
 };

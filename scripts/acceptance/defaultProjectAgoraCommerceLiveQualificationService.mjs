@@ -12,14 +12,17 @@
 
 import { spawn } from "node:child_process";
 
+const { readProjectEnvironmentConfiguration, projectEndpointUrl } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.NODICS_ENVIRONMENT || process.env.ENV || '');
 const requiredRuntimeHealthUrls = Object.freeze([
-  "http://127.0.0.1:4300/nodics/system/v0/health/ready",
-  "http://127.0.0.1:4312/nodics/system/v0/health/ready",
-  "http://127.0.0.1:4314/nodics/system/v0/health/ready",
-  "http://127.0.0.1:4330/nodics/system/v0/health/ready",
-  "http://127.0.0.1:4340/nodics/system/v0/health/ready",
-  "http://127.0.0.1:4350/nodics/system/v0/health/ready",
+  projectEndpointUrl(environmentProfile, 'platformServer') + '/nodics/system/v0/health/ready',
+  projectEndpointUrl(environmentProfile, 'wcmsStagedServer') + '/nodics/system/v0/health/ready',
+  projectEndpointUrl(environmentProfile, 'wcmsOnlineServer') + '/nodics/system/v0/health/ready',
+  projectEndpointUrl(environmentProfile, 'processServer') + '/nodics/system/v0/health/ready',
+  projectEndpointUrl(environmentProfile, 'engagementServer') + '/nodics/system/v0/health/ready',
+  projectEndpointUrl(environmentProfile, 'commerceServer') + '/nodics/system/v0/health/ready',
 ]);
 
 function run(command, args, options = {}) {

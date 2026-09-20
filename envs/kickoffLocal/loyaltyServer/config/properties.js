@@ -13,186 +13,187 @@
 
 /** @module kickoffLocal/loyaltyServer/config/properties @description Defines isolated local Loyalty coordinates and runtime configuration. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own database, provider, and endpoint configuration. */
 module.exports = {
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
-      "DefaultLoyaltyWalletService",
-      "DefaultRewardLedgerEntryService",
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-loyalty-1",
+    "remoteModules": [
+      "profile",
+      "backoffice"
+    ]
+  },
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_LOYALTY_API_KEY",
+      "fallback": null
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
     ],
-    modules: {
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
+      "DefaultLoyaltyWalletService",
+      "DefaultRewardLedgerEntryService"
+    ],
+    "modules": {
       "import": true,
-      "publish": true,
-      "search": true,
       "system": true,
       "token": true,
-      "validator": true
+      "validator": true,
+      "loyaltyCore": true,
+      "loyaltyProgram": true,
+      "loyaltyRewardType": true,
+      "loyaltyWallet": true,
+      "loyaltyLedger": true,
+      "loyaltyRedemption": true,
+      "loyaltyReservation": true
     },
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultLoyaltyOperationPolicyService",
-      "DefaultLoyaltyProgramService",
-      "DefaultLoyaltyRewardTypeService",
-      "DefaultLoyaltyWalletRewardBalanceService",
-      "DefaultLoyaltyWalletService",
-      "DefaultPipelineService",
-      "DefaultRewardLedgerEntryService",
-      "DefaultRewardRedemptionService",
-      "DefaultRewardReservationService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultClassConfigurationService",
+        "DefaultConfigurationActivationLogService",
+        "DefaultConfigurationActivationRequestService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultPipelineService",
+        "DefaultRouterConfigurationService",
+        "DefaultSchemaAccessPolicyService",
+        "DefaultSchemaConfigurationService",
+        "DefaultWorkflow2SchemaService",
+        "DefaultPublicationAuditService",
+        "DefaultPublicationRequestService",
+        "DefaultIndexService",
+        "DefaultIndexerLogService",
+        "DefaultIndexerService",
+        "DefaultSearchService"
+      ]
+    }
   },
-  activeModules: {
-    groups: [],
-    modules: [
+  "activeModules": {
+    "groups": [],
+    "modules": [
       "circa.ewaste",
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
-      "kickoffLocal",
-      "loyaltyServer",
-    ],
+      "redisCache"
+    ]
   },
-  runtimeRole: { code: "LOYALTY", publication: "OPERATIONAL" },
-  runtimeAuthorityContexts: { modules: { loyalty: "loyalty.operational" } },
-  apiExposure: {
-    categories: {
-      serviceRegistry: { enabled: true },
-      dataImport: { enabled: true },
-      loyaltyInternal: { enabled: true },
-    },
+  "runtimeRole": {
+    "code": "LOYALTY",
+    "publication": "OPERATIONAL"
   },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["LOYALTY"],
-      initializationProfiles: {
-        localLoyaltyFoundation: {
-          enabled: true,
-          label: "Local Loyalty foundation",
-          description:
-            "Install Loyalty core releases for wallet, reward type, wallet reward, ledger, reservation, redemption, earning, and spend-policy validation.",
-          completionMessage:
-            "The Local Loyalty foundation is ready. Operators can validate wallets, reward balances, ledgers, reservations, and redemptions.",
-          steps: [{ dataType: "core" }],
-        },
-      },
-    },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "loyalty": "loyalty.operational"
+    }
   },
-  loyalty: {
-    capabilities: {
-      wallet: true,
-      rewardType: true,
-      walletReward: true,
-      ledger: true,
-      earning: true,
-      reservation: true,
-      redemption: true,
-      spendPolicy: true,
-    },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
   },
-  database: {
-    default: { mongodb: { master: { databaseName: "kickoffLocalLoyalty" } } },
-    loyaltyCore: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltyWallet: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltyRewardType: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltyLedger: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltyEarning: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltyReservation: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltyRedemption: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
-    loyaltySpendPolicy: {
-      mongodb: { master: { databaseName: "kickoffLocalLoyalty" } },
-    },
+  "data": {
+    "dataReleases": {
+      "initializationProfiles": {
+        "localLoyaltyFoundation": {
+          "enabled": true,
+          "label": "Local Loyalty foundation",
+          "description": "Install Loyalty core releases for wallet, reward type, wallet reward, ledger, reservation, redemption, earning, and spend-policy validation.",
+          "completionMessage": "The Local Loyalty foundation is ready. Operators can validate wallets, reward balances, ledgers, reservations, and redemptions.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "core"
+              }
+            ]
+          }
+        }
+      }
+    }
   },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4360,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4361,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4360,
-        httpsHost: "localhost",
-        httpsPort: 4361,
-      },
+  "loyalty": {},
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalLoyalty"
+        }
+      }
     },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    process: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-    },
-    engagement: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4340,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4341,
-      },
-    },
-    commerce: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4350,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4351,
-      },
-    },
-    commerceServer: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4350,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4351,
-      },
-    },
+    "loyaltyCore": {},
+    "loyaltyWallet": {},
+    "loyaltyRewardType": {},
+    "loyaltyLedger": {},
+    "loyaltyEarning": {},
+    "loyaltyReservation": {},
+    "loyaltyRedemption": {},
+    "loyaltySpendPolicy": {}
   },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4360,
+        "httpsPort": 4361
+      }
+    },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
+    },
+    "process": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "engagement": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "commerce": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "commerceServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.endpoint"
+      }
+    }
+  },
+  "tooling": {
+    "runtime": {
+      "code": "loyalty",
+      "script": "start:loyalty",
+      "order": 5
+    }
+  }
 };

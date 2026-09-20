@@ -11,6 +11,10 @@
 
 'use strict';
 
+// Isolated composition tests need valid signing inputs without deployment credentials.
+process.env.NODICS_JWT_SECRET = require('node:crypto').randomBytes(48).toString('hex');
+process.env.NODICS_API_KEY_PEPPER = require('node:crypto').randomBytes(48).toString('hex');
+
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -92,7 +96,7 @@ async function main() {
     assert.equal(CONFIG.get('runtimeRole').publication, 'OPERATIONAL');
     assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
     assert.equal(CONFIG.get('servers').default.endpoint.httpPort, 4370);
-    assert.deepEqual(CONFIG.get('data').dataReleases.allowedDestinationRoles, ['WASTE']);
+    assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WASTE'), true);
     assert.equal(CONFIG.get('apiExposure').categories.wasteInternal.enabled, true);
     assert.equal(CONFIG.get('waste').accelerator.umbrella, 'waste');
     assert.deepEqual(CONFIG.get('waste').accelerator.scenarioAccelerators, ['eWaste']);
@@ -130,7 +134,8 @@ async function main() {
         schemaNames.forEach(schemaName => {
             assert(rawSchema[schemaName], `${moduleName}.${schemaName} should be materialized for wasteServer`);
             assert.equal(rawSchema[schemaName].service.enabled, true, `${moduleName}.${schemaName} should generate service capability`);
-            assert.equal(rawSchema[schemaName].router.enabled, false, `${moduleName}.${schemaName} should keep generated CRUD routers disabled`);
+            assert.equal(rawSchema[schemaName].router.enabled, true, `${moduleName}.${schemaName} should expose governed schema operations`);
+            assert.equal(rawSchema[schemaName].router.groups.schemaOperations, true, `${moduleName}.${schemaName} must retain schema operation governance`);
             assert.equal(rawSchema[schemaName].definition.tenant, undefined, `${moduleName}.${schemaName} must derive tenant from runtime context`);
             assert.equal(rawSchema[schemaName].definition.enterpriseCode, undefined, `${moduleName}.${schemaName} must not store enterpriseCode`);
         });

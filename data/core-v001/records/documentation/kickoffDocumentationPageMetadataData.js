@@ -136,8 +136,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/project-overview.md",
-    "sourceChecksum": "86de4cf69989d4569b612744f6b2744314c573c4d5aee3c70d450cf602add8d4",
-    "sourceWordCount": 2161,
+    "sourceChecksum": "dab70cf50b3a22382a12a7fc64a81f787459449af9461357cbce6c9a5598e351",
+    "sourceWordCount": 2156,
     "audience": [
       "business-user",
       "administrator",
@@ -270,8 +270,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-runtime.md",
-    "sourceChecksum": "cba439c491ae0c17f262b497a89ddc3e63aa478c393cba596635515251164bf8",
-    "sourceWordCount": 2018,
+    "sourceChecksum": "2485fc6a7e56e1bc0cb503c434d1946ad1343fd92d70177a30e540040c118fd0",
+    "sourceWordCount": 2090,
     "audience": [
       "business-user",
       "administrator",
@@ -485,8 +485,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
-    "sourceChecksum": "e7a360b05e785f37a5689fa686a803eb9725fd991e394d6cb7abbc82a0bc149a",
-    "sourceWordCount": 2572,
+    "sourceChecksum": "3d393481fb5990fcd2b68767bd3286a24bc74c1014a1c52a98e31f31f83060ca",
+    "sourceWordCount": 2603,
     "audience": [
       "business-user",
       "administrator",
@@ -687,8 +687,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-acceptance-checklist.md",
-    "sourceChecksum": "472aac81eb3d7039d44f656131d423b7834679fb1c85d6ff9456fd9edfe974e9",
-    "sourceWordCount": 3143,
+    "sourceChecksum": "c27ed58c7a8081871a0daa34a72e52f868f51502b93a9a51ee0de7a0fc7df844",
+    "sourceWordCount": 3217,
     "audience": [
       "business-user",
       "administrator",
@@ -797,8 +797,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-publishing-operations.md",
-    "sourceChecksum": "b5f033ac7d2e6c84f91e34f5bd12e9aac824c0a52d590e65a69bbb72abac4959",
-    "sourceWordCount": 1467,
+    "sourceChecksum": "137b2ca3e1a4fa3af3ea9ffdf7914c4088b10b53df783a0067bd3879a8b2a558",
+    "sourceWordCount": 1498,
     "audience": [
       "business-user",
       "administrator",
@@ -1187,8 +1187,38 @@ module.exports = {
         "level": 2
       },
       {
-        "text": "Declarative environment selection",
-        "anchor": "kickoffConfigurationInheritance-11-declarative-environment-selection",
+        "text": "Declarative environment and runtime configuration",
+        "anchor": "kickoffConfigurationInheritance-11-declarative-environment-and-runtime-configuration",
+        "level": 2
+      },
+      {
+        "text": "Inherited provider and policy defaults",
+        "anchor": "kickoffConfigurationInheritance-12-inherited-provider-and-policy-defaults",
+        "level": 2
+      },
+      {
+        "text": "Credentials, initialization and runtime authentication",
+        "anchor": "kickoffConfigurationInheritance-13-credentials-initialization-and-runtime-authentication",
+        "level": 2
+      },
+      {
+        "text": "Browser origins and later overrides",
+        "anchor": "kickoffConfigurationInheritance-14-browser-origins-and-later-overrides",
+        "level": 2
+      },
+      {
+        "text": "Application selections and optional features",
+        "anchor": "kickoffConfigurationInheritance-15-application-selections-and-optional-features",
+        "level": 2
+      },
+      {
+        "text": "Enforcement and verification",
+        "anchor": "kickoffConfigurationInheritance-16-enforcement-and-verification",
+        "level": 2
+      },
+      {
+        "text": "Nexus accelerator migration",
+        "anchor": "kickoffConfigurationInheritance-17-nexus-accelerator-migration",
         "level": 2
       }
     ],
@@ -1198,6 +1228,9 @@ module.exports = {
       }
     ],
     "visualAssets": [
+      {
+        "kind": "table"
+      },
       {
         "kind": "table"
       },
@@ -1216,8 +1249,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/configuration-inheritance.md",
-    "sourceChecksum": "e51e19f06cb175c4fed7628886a954aa796031a6056cb9ed24f6f2c0756160fe",
-    "sourceWordCount": 1945,
+    "sourceChecksum": "734d5653619c03f8e3dde453ba01f302d1357c8e9e6853e2ae03e7c51448bad1",
+    "sourceWordCount": 3237,
     "audience": [
       "business-user",
       "administrator",

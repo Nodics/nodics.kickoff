@@ -12,7 +12,10 @@
       "owningDomain": "profile",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
       "publicationPolicy": "NONE",
@@ -34,7 +37,10 @@
       "owningDomain": "location",
       "lifecycle": "REFERENCE",
       "destinationRole": "LOCATION",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
       "publicationPolicy": "NONE",
@@ -55,7 +61,10 @@
       "owningDomain": "waste",
       "lifecycle": "REFERENCE",
       "destinationRole": "WASTE",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
       "publicationPolicy": "NONE",
@@ -85,7 +94,10 @@
       "owningDomain": "loyalty",
       "lifecycle": "REFERENCE",
       "destinationRole": "LOYALTY",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
       "publicationPolicy": "NONE",
@@ -110,7 +122,10 @@
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -160,7 +175,10 @@
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -196,7 +214,10 @@
       "owningDomain": "circa.ewaste",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "RESTRICTED",
       "versioningPolicy": "NONE",
       "publicationPolicy": "NONE",
@@ -218,7 +239,10 @@
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
-      "environmentScope": ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"],
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
       "publicationPolicy": "REQUIRED",
@@ -234,6 +258,78 @@
         "core-v001/customer-workspace/records/circaWorkspaceSlotData.js": "4fadce1809765f938b0d2dd3c2426a9279f49a05c116e66cfda60b829f0bb572",
         "core-v001/customer-workspace/records/circaWorkspaceTemplateData.js": "3c0409eb9dff1a3d13de65189f73738403e9a26fe9510362b19122bf993b3c78",
         "core-v001/customer-workspace/records/circaWorkspaceTypeData.js": "e7174a214870c00723ac91f4a723840b158b2f613421c86fbd9d5a02f9d16a81"
+      }
+    },
+    "sunmarke-profile": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.2",
+      "displayName": "Sunmarke School profile",
+      "description": "Adds only the Sunmarke School, JVT collection-centre reference record.",
+      "owningDomain": "profile",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/sunmarke-profile/records/sunmarkeAddressData.js": "a15392c3905b0d0936aa97146d7d7a4fa66c903ef9b67f0947ebf0fd47a7c13f",
+        "sample-v001/sunmarke-profile/headers/sunmarkeProfileHeader.js": "a46f6ca198c50ee7a780c9b330b4d6ab3b40c3224288013c2325209d81b079bf"
+      }
+    },
+    "sunmarke-location": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v003",
+      "version": "0.0.3",
+      "displayName": "Sunmarke School location",
+      "description": "Corrects Sunmarke School to its official Google Maps place pin, not the map viewport centre.",
+      "owningDomain": "location",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "LOCATION",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v003/sunmarke-location/records/sunmarkeLocationData.js": "22f9132738085373218e246a6fceb8c12c6426baf8d8ce1eb59fdc6b41e2bb21",
+        "sample-v003/sunmarke-location/headers/sunmarkeLocationHeader.js": "107369be01fd2d6ab23b901ac6f9cbae6144f7ba80586afbef9d9596dad06754"
+      }
+    },
+    "sunmarke-waste": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "displayName": "Sunmarke School waste",
+      "description": "Adds only the Sunmarke School, JVT collection-centre reference record.",
+      "owningDomain": "waste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "WASTE",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/sunmarke-waste/records/sunmarkeWasteCollectionPointData.js": "8aab8b4c9a89e5341e64f5fcf381ec2e63d261fbaf471e9dc80863bcaba19e9f",
+        "sample-v001/sunmarke-waste/headers/sunmarkeHeader.js": "77cfcbf881ebf4e56ebdbcf0608a34039a53a6a4b470c001cd95a6db5bee99ca"
       }
     }
   }

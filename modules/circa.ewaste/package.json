@@ -19,7 +19,8 @@
       "llm",
       "service",
       "router",
-      "controller"
+      "controller",
+      "utility"
     ],
     "runtime": {
       "router": true,

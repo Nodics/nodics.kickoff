@@ -19,10 +19,14 @@ module.exports = {
         "Enter a message of at most 1500 characters.",
       );
     let message;
-    if (/location|gps|permission|from home|nearest|arriv/i.test(text))
+    if (/location|gps|permission|from home|nearest|arriv/i.test(text)) {
+      const journey = (CONFIG.get("circaEWaste") || {}).journey || {};
+      const radius = Number.isFinite(journey.arrivalRadiusMetres)
+        ? journey.arrivalRadiusMetres
+        : 50;
       message =
-        "Fresh location checks whether you are within 100 metres of a collection centre. If you already granted access, we capture it automatically. You may browse the map without sharing location; submission requires an arrival check. If location is blocked, enable it in device or browser settings and retry. Your item details are unchanged.";
-    else if (
+        `Fresh location checks whether you are within ${radius} metres of a collection centre. If you already granted access, we capture it automatically. You may browse the map without sharing location; submission requires an arrival check. If location is blocked, enable it in device or browser settings and retry. Your item details are unchanged.`;
+    } else if (
       /swollen|smoking|leaking|burning|hot battery|damaged battery/i.test(text)
     )
       message =

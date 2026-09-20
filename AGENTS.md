@@ -37,7 +37,7 @@ data/
 - Use Kickoff `docs/` for project-wide setup, runtime composition, onboarding,
   customization, qualification and operations. Application-specific
   documentation belongs under the owning application data module, for example
-  `modules/nexus.web/docs/` or `modules/agora.apparel/docs/``; its generated records
+  `modules/agora.apparel/docs/``; its generated records
   belong in that module's lifecycle-qualified `data/` release. Keep `README.md`
   files concise.
 - Project, environment, and server contributions load after product modules by
@@ -157,3 +157,19 @@ in through their own package metadata. Use an explicit frontend root, or select
 `--frontend-code` when using an experience workspace with multiple storefronts.
 These choices describe intended reference wiring; generated starter checks do
 not replace Local/Docker deployment acceptance.
+
+Apply the framework configuration coding restrictions through the existing
+nSetup customer configuration classification contract. Do not add an environment
+descriptor or duplicate endpoint/authentication catalogue. The customer may
+explicitly configure `bootstrapIdentity.adminPassword`; all other literal auth
+secrets and binding fallbacks remain prohibited. nAuth validates password strength.
+Local provider defaults are inherited; only actual environment differences belong
+here. Project validation enforces the static restrictions before commands run.
+
+
+Backend startup, readiness and API acceptance must work without any frontend
+repository or running frontend server. Do not declare frontend launch commands,
+paths, lifecycle or UI tests in backend properties or backend acceptance runners.
+Frontend applications own their servers, outage/retry presentation, and frontend
+tests. Backend CORS and browser-session contracts are tested through APIs using
+explicit security policy; they do not confer frontend lifecycle ownership.

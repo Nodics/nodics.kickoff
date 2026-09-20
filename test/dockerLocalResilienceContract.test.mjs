@@ -84,15 +84,8 @@ const backendDockerfile = fs.readFileSync(
   "utf8",
 );
 const dockerRuntime = server => require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
-const dockerLocalProfile = JSON.parse(
-  fs.readFileSync(
-    new URL(
-      "../envs/kickoffDockerLocal/nodics.environment.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
+const dockerLocalProfile = require("./helpers/configuration").loadContainer();
+
 const packageDefinition = JSON.parse(
   fs.readFileSync(new URL("../package.json", import.meta.url), "utf8"),
 );
@@ -140,7 +133,9 @@ for (const name of ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'c
   const runtime = dockerRuntime(name);
   assert(runtime.activeModules.modules.includes('redisCache'));
   assert(!runtime.activeModules.modules.includes('partnerSiteData'));
-  assert.deepEqual(runtime.cache.kickoffCore.channels.auth, { enabled: true, engine: 'redis', fallback: false });
+  assert.equal(runtime.authSecurity.securityStamp.cacheModuleName, 'auth');
+  assert.equal(runtime.cache.auth.channels.auth.engine, 'redis');
+  assert.equal(runtime.cache.auth.channels.auth.fallback, false);
 }
 assert(dockerRuntime('wcmsStagedServer').activeModules.modules.includes('cmsStaged'));
 assert(dockerRuntime('wcmsStagedServer').activeModules.modules.includes('nexus.web'));

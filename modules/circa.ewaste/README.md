@@ -46,7 +46,7 @@ owner-scoped pagination, details and domain actions, while the canonical Waste
 item descriptor remains authoritative. See the frontend `customer-workspace`
 live acceptance for read-only listing/detail checks and cancelled command previews.
 
-Circa selects the eWaste WARM electronics adapter. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. No customer-facing illustrative/demo qualifiers are used. The sourced estimate preserves weight bounds, factor source/version, US reference geography and assumed landfill/recycling scenarios. Unknown coverage or weight produces an unavailable assessment, not a default factor. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.
+Circa selects the eWaste OpenAI environmental assessment provider first, with the local WARM electronics adapter as configured fallback. The separate environmental call uses normalized item metadata and retrieved references; invalid or timed-out responses advance to fallback. Customer labels are Potential CO₂e savings, Carbon equivalent (tCO₂e), and Carbon units for existing rewards. The latter are not issued credits. Estimates preserve weight bounds, provider/model provenance, source references, geography and scenario assumptions. Missing defensible evidence remains unknown. Rewards use original approval evidence; later reassessments and explicit acceptance do not revalue existing balances. Axis approved-submission detail exposes assessment history and review-before-accept actions; asset detail exposes read-only history.
 
 The [Shop and Coupons catalogue guide](docs/pages/catalogue.md) describes public product browsing, the supported Circa discovery extension, ownership boundaries and reference deployment limits.
 
@@ -57,3 +57,10 @@ limited to Local and Local Production Simulation. Commerce projection publicatio
 remains a separate governed operation; website publication does not activate a
 Commerce catalogue. Reinitializing sample operational data is for fresh local
 qualification environments, never a production-data refresh.
+
+Keep the canonical router and utility registry files even when empty. They are
+inherited extension points, not copied framework implementations. `package.json`
+`nodics.owns` must reflect actual source responsibilities, including `utility`.
+See `llm/examples/README.md` for customer extension and rejection examples.
+
+Impact assessment is mandatory in the eWaste journey. Circa returns the domain-prepared assessment and propagates provider/profile failures for retry; it must not convert them into an empty ready draft. Partial input-only coverage remains explicit and does not imply carbon calculation.

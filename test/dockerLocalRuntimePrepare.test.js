@@ -126,7 +126,7 @@ async function main() {
     assert.equal(NODICS.getSelectedEnvironmentName(), "kickoffDockerLocal");
     assert.equal(NODICS.getServerName(), server);
     assert.equal(
-      CONFIG.get("environment").qualificationClass,
+      CONFIG.get("environment").class,
       "LOCAL_PRODUCTION_SIMULATION",
     );
     assert.equal(
@@ -135,10 +135,7 @@ async function main() {
     );
     assert.equal(CONFIG.get("runtimeRole").code, role);
     if (server === "commerceStagedServer") {
-      assert.deepEqual(
-        CONFIG.get("data").dataReleases.allowedDestinationRoles,
-        ["COMMERCE_STAGED"],
-      );
+      assert.equal(require("./helpers/configuration").validateDestination(CONFIG.getProperties(), "COMMERCE_STAGED"), true);
       assert.equal(NODICS.isModuleActive("agora.apparel"), true);
     }
     if (server === "commerceServer") {

@@ -13,15 +13,31 @@
 
 /** @module kickoffLocal/engagementServer/config/properties @description Enables the contact experience and local coordinates only for the reference Engagement server. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own feature, database, provider, and endpoint configuration. */
 module.exports = {
-  localResetProvider: {
-    enabled: true,
-    environmentAllowlist: ["kickoffLocal"],
-    allowMissingModelServices: true,
-    requiredServiceNames: [
-      "DefaultContactRequestService",
-      "DefaultCommsIntentService",
+  "runtimeIdentity": {
+    "instanceCode": "kickoff-local-engagement-1",
+    "remoteModules": [
+      "profile",
+      "backoffice"
+    ]
+  },
+  "defaultAuthDetail": {
+    "apiKey": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_ENGAGEMENT_API_KEY",
+      "fallback": null
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
     ],
-    modules: {
+    "allowMissingModelServices": true,
+    "requiredServiceNames": [
+      "DefaultContactRequestService",
+      "DefaultCommsIntentService"
+    ],
+    "modules": {
       "commsSchema": true,
       "contactSubmission": true,
       "customerFeedback": true,
@@ -34,161 +50,184 @@ module.exports = {
       "token": true,
       "validator": true
     },
-    serviceNames: [
-      "DefaultCatalogService",
-      "DefaultClassConfigurationService",
-      "DefaultConfigurationActivationLogService",
-      "DefaultConfigurationActivationRequestService",
-      "DefaultCronJobLogService",
-      "DefaultCronJobService",
-      "DefaultEmsFailedMessagesService",
-      "DefaultIndexService",
-      "DefaultIndexerLogService",
-      "DefaultIndexerService",
-      "DefaultPipelineService",
-      "DefaultProcessAuditEventService",
-      "DefaultProcessDefinitionService",
-      "DefaultProcessDefinitionVersionService",
-      "DefaultProcessIncidentService",
-      "DefaultProcessInstanceService",
-      "DefaultProcessTaskService",
-      "DefaultProcessTriggerService",
-      "DefaultRouterConfigurationService",
-      "DefaultSchemaAccessPolicyService",
-      "DefaultSchemaConfigurationService",
-      "DefaultSearchService",
-      "DefaultWorkflow2SchemaService"
-    ],
+    "serviceNames": {
+      "$config": "replace",
+      "value": [
+        "DefaultCatalogService",
+        "DefaultClassConfigurationService",
+        "DefaultConfigurationActivationLogService",
+        "DefaultConfigurationActivationRequestService",
+        "DefaultCronJobLogService",
+        "DefaultCronJobService",
+        "DefaultEmsFailedMessagesService",
+        "DefaultIndexService",
+        "DefaultIndexerLogService",
+        "DefaultIndexerService",
+        "DefaultPipelineService",
+        "DefaultProcessAuditEventService",
+        "DefaultProcessDefinitionService",
+        "DefaultProcessDefinitionVersionService",
+        "DefaultProcessIncidentService",
+        "DefaultProcessInstanceService",
+        "DefaultProcessTaskService",
+        "DefaultProcessTriggerService",
+        "DefaultRouterConfigurationService",
+        "DefaultSchemaAccessPolicyService",
+        "DefaultSchemaConfigurationService",
+        "DefaultSearchService",
+        "DefaultWorkflow2SchemaService"
+      ]
+    }
   },
-  activeModules: {
-    groups: [],
-    modules: [
+  "activeModules": {
+    "groups": [],
+    "modules": [
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
       "kickoffInt",
       "nexus.web",
-      "kickoffLocal",
-      "engagementServer",
+      "redisCache"
+    ]
+  },
+  "runtimeRole": {
+    "code": "ENGAGEMENT",
+    "publication": "OPERATIONAL"
+  },
+  "runtimeAuthorityContexts": {
+    "modules": {
+      "publish": "engagement.operational"
+    }
+  },
+  "data": {
+    "dataReleases": {
+      "initializationProfiles": {
+        "localEngagementFoundation": {
+          "enabled": true,
+          "label": "Local Engagement foundation",
+          "description": "Install Engagement core and sample communication releases for local contact, testimonial, review, feedback, and notification validation.",
+          "completionMessage": "The Local Engagement foundation is ready. Operators can validate engagement journeys with governed templates and runtime data.",
+          "steps": {
+            "$config": "replace",
+            "value": [
+              {
+                "dataType": "core"
+              },
+              {
+                "dataType": "sample"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "communication": {
+    "trustedSourceModules": [
+      "eWaste"
     ],
+    "providers": {
+      "TELEGRAM": {
+        "code": "telegram",
+        "service": "DefaultTelegramCommunicationProviderService",
+        "credentialReferences": [
+          "CIRCA_TELEGRAM_BOT_TOKEN"
+        ],
+        "timeoutMilliseconds": 10000
+      }
+    },
+    "templates": {
+      "WASTE_REVIEW_OUTCOME_V1": {
+        "code": "WASTE_REVIEW_OUTCOME_V1",
+        "version": 2,
+        "status": "ACTIVE",
+        "purpose": "WASTE_REVIEW_OUTCOME",
+        "sourceModules": [
+          "eWaste"
+        ],
+        "channels": [
+          "IN_APP",
+          "TELEGRAM"
+        ],
+        "declaredVariables": [
+          "submissionCode",
+          "status",
+          "comment",
+          "detailUrl"
+        ],
+        "subjectTemplate": "Recycling review outcome",
+        "bodyTemplate": "Submission {{submissionCode}}: {{status}}.\nReviewer comment: {{comment}}\nView complete item details: {{detailUrl}}"
+      }
+    }
   },
-  runtimeRole: { code: "ENGAGEMENT", publication: "OPERATIONAL" },
-  runtimeAuthorityContexts: { modules: { publish: "engagement.operational" } },
-  data: {
-    dataReleases: {
-      lifecycleMetadataRequired: true,
-      destinationEnforced: true,
-      environmentClass: "LOCAL",
-      allowedDestinationRoles: ["ENGAGEMENT"],
-      initializationProfiles: {
-        localEngagementFoundation: {
-          enabled: true,
-          label: "Local Engagement foundation",
-          description:
-            "Install Engagement core and sample communication releases for local contact, testimonial, review, feedback, and notification validation.",
-          completionMessage:
-            "The Local Engagement foundation is ready. Operators can validate engagement journeys with governed templates and runtime data.",
-          steps: [{ dataType: "core" }, { dataType: "sample" }],
-        },
-      },
-    },
+  "engagement": {
+    "capabilities": {
+      "testimonial": true,
+      "customerReview": true,
+      "customerFeedback": true
+    }
   },
-  communication: {
-    trustedSourceModules: ["eWaste"],
-    providers: {
-      TELEGRAM: {
-        code: "telegram",
-        service: "DefaultTelegramCommunicationProviderService",
-        credentialReferences: ["CIRCA_TELEGRAM_BOT_TOKEN"],
-        timeoutMilliseconds: 10000,
-      },
-    },
-    templates: {
-      WASTE_REVIEW_OUTCOME_V1: {
-        code: "WASTE_REVIEW_OUTCOME_V1",
-        version: 2,
-        status: "ACTIVE",
-        purpose: "WASTE_REVIEW_OUTCOME",
-        sourceModules: ["eWaste"],
-        channels: ["IN_APP", "TELEGRAM"],
-        declaredVariables: ["submissionCode", "status", "comment", "detailUrl"],
-        subjectTemplate: "Recycling review outcome",
-        bodyTemplate:
-          "Submission {{submissionCode}}: {{status}}.\nReviewer comment: {{comment}}\nView complete item details: {{detailUrl}}",
-      },
-    },
+  "customerFeedback": {
+    "enabled": true
   },
-  engagement: {
-    capabilities: {
-      testimonial: true,
-      customerReview: true,
-      customerFeedback: true,
+  "database": {
+    "default": {
+      "mongodb": {
+        "master": {
+          "databaseName": "kickoffLocalEngagement"
+        }
+      }
     },
+    "commsSchema": {},
+    "contactSubmission": {},
+    "customerFeedback": {},
+    "customerReview": {},
+    "engagementCore": {},
+    "testimonial": {}
   },
-  customerFeedback: { enabled: true },
-  database: {
-    default: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
+  "servers": {
+    "default": {
+      "endpoint": {
+        "httpPort": 4340,
+        "httpsPort": 4341
+      }
     },
-    commsSchema: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
     },
-    contactSubmission: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      },
+      "remoteOnly": true
     },
-    customerFeedback: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
-    },
-    customerReview: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
-    },
-    engagementCore: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
-    },
-    testimonial: {
-      mongodb: { master: { databaseName: "kickoffLocalEngagement" } },
-    },
+    "process": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.endpoint"
+      }
+    }
   },
-  servers: {
-    default: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4340,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4341,
-      },
-      abstractEndpoint: {
-        httpHost: "localhost",
-        httpPort: 4340,
-        httpsHost: "localhost",
-        httpsPort: 4341,
-      },
-    },
-    profile: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    backoffice: {
-      remoteOnly: true,
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4300,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4301,
-      },
-    },
-    process: {
-      endpoint: {
-        httpHost: "127.0.0.1",
-        httpPort: 4330,
-        httpsHost: "127.0.0.1",
-        httpsPort: 4331,
-      },
-    },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
   },
+  "tooling": {
+    "runtime": {
+      "code": "engagement",
+      "script": "start:engagement",
+      "order": 4
+    }
+  }
 };

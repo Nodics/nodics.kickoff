@@ -48,8 +48,6 @@ module.exports = {
         "field": "projectPacks",
         "spread": true
       },
-      "kickoffDockerLocal",
-      "commerceStagedServer",
       "digitalCore",
       {
         "$config": "selected",
@@ -122,13 +120,10 @@ module.exports = {
   },
   "data": {
     "dataReleases": {
-      "lifecycleMetadataRequired": true,
-      "destinationEnforced": true,
-      "environmentClass": "LOCAL_PRODUCTION_SIMULATION",
-      "allowedDestinationRoles": [
-        "COMMERCE_STAGED"
-      ],
-      "contributions": []
+      "contributions": {
+        "$config": "replace",
+        "value": []
+      }
     }
   },
   "apiExposure": {
@@ -138,9 +133,6 @@ module.exports = {
       },
       "dataImport": {
         "enabled": true
-      },
-      "commerceManagement": {
-        "enabled": true
       }
     }
   },
@@ -148,391 +140,102 @@ module.exports = {
     "default": {
       "mongodb": {
         "master": {
-          "URI": {
-            "$config": "env",
-            "name": "NODICS_MONGODB_URI"
-          },
           "databaseName": "kickoffDockerLocalCommerceStaged"
         }
       }
     },
-    "circa.ewaste": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "search": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "elastic": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "commerceSearchCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "commerceSearch": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "digitalCommerce": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "digitalCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
+    "circa.ewaste": {},
+    "search": {},
+    "elastic": {},
+    "commerceSearchCore": {},
+    "commerceSearch": {},
+    "digitalCommerce": {},
+    "digitalCore": {},
     "domainCommerceCore": {
       "$config": "selected",
       "name": "agora",
       "field": "sharedModules",
       "includes": "domainCommerceCore",
-      "value": {
-        "$config": "ref",
-        "path": [
-          "database",
-          "default"
-        ]
-      }
+      "value": {}
     },
     "apparelProduct": {
       "$config": "selected",
       "name": "agora",
       "field": "domains",
       "includes": "apparel",
-      "value": {
-        "$config": "ref",
-        "path": [
-          "database",
-          "default"
-        ]
-      }
+      "value": {}
     },
-    "cart": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "checkoutCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "shoppingList": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryConfig": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryMapping": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryProjection": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoveryRanking": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "discoverySource": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
+    "cart": {},
+    "checkoutCore": {},
+    "shoppingList": {},
+    "discoveryConfig": {},
+    "discoveryMapping": {},
+    "discoveryProjection": {},
+    "discoveryRanking": {},
+    "discoverySource": {},
     "electronicsProduct": {
       "$config": "selected",
       "name": "agora",
       "field": "domains",
       "includes": "electronics",
-      "value": {
-        "$config": "ref",
-        "path": [
-          "database",
-          "default"
-        ]
-      }
+      "value": {}
     },
-    "fulfillmentCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "inventory": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "order": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "paymentCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "pricing": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "product": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "promotion": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "store": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "tax": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
+    "fulfillmentCore": {},
+    "inventory": {},
+    "order": {},
+    "paymentCore": {},
+    "pricing": {},
+    "product": {},
+    "promotion": {},
+    "store": {},
+    "tax": {},
     "telcoCatalog": {
       "$config": "selected",
       "name": "agora",
       "field": "domains",
       "includes": "telco",
-      "value": {
-        "$config": "ref",
-        "path": [
-          "database",
-          "default"
-        ]
-      }
+      "value": {}
     },
     "telcoProvisioning": {
       "$config": "selected",
       "name": "agora",
       "field": "domains",
       "includes": "telco",
-      "value": {
-        "$config": "ref",
-        "path": [
-          "database",
-          "default"
-        ]
-      }
+      "value": {}
     },
     "telcoSubscription": {
       "$config": "selected",
       "name": "agora",
       "field": "domains",
       "includes": "telco",
-      "value": {
-        "$config": "ref",
-        "path": [
-          "database",
-          "default"
-        ]
-      }
+      "value": {}
     },
-    "cardPayment": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "walletPayment": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyRewardPayment": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "cashOnDeliveryPayment": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "bankTransferPayment": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "paymentProviderCore": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "stripeProvider": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "paypalProvider": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "cyberSourceProvider": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "visaProvider": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    },
-    "loyaltyRewardProvider": {
-      "$config": "ref",
-      "path": [
-        "database",
-        "default"
-      ]
-    }
+    "cardPayment": {},
+    "walletPayment": {},
+    "loyaltyRewardPayment": {},
+    "cashOnDeliveryPayment": {},
+    "bankTransferPayment": {},
+    "paymentProviderCore": {},
+    "stripeProvider": {},
+    "paypalProvider": {},
+    "cyberSourceProvider": {},
+    "visaProvider": {},
+    "loyaltyRewardProvider": {}
   },
   "search": {
     "product": {
       "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
-        }
+        "enabled": true
       }
     },
     "commerceSearchCore": {
       "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
-        }
+        "enabled": true
       }
     },
     "discoveryProjection": {
       "options": {
-        "enabled": true,
-        "fallback": false,
-        "engine": "elastic"
-      },
-      "elastic": {
-        "connection": {
-          "hosts": [
-            {
-              "$config": "env",
-              "name": "NODICS_ELASTICSEARCH_URL",
-              "fallback": "http://elasticsearch:9200"
-            }
-          ]
-        }
+        "enabled": true
       }
     }
   },
@@ -540,12 +243,6 @@ module.exports = {
     "publication": {
       "searchEnrichment": {
         "domains": {
-          "enabled": true,
-          "contributors": {
-            "$config": "composition",
-            "name": "agora",
-            "field": "productSearchContributors"
-          },
           "missingBehavior": "error"
         }
       }
@@ -553,194 +250,192 @@ module.exports = {
   },
   "stripeProvider": {
     "enabled": false,
-    "maturity": "NOT_APPLICABLE_FOR_STAGED_CATALOG",
-    "sandboxOnly": true,
-    "liveQualified": false
+    "maturity": "NOT_APPLICABLE_FOR_STAGED_CATALOG"
   },
   "servers": {
     "platform": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platform"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "platformServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "platformServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "profile": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "profile"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "backoffice": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "backoffice"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsStagedServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsStagedServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsStaged": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsStaged"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcmsOnlineServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcmsOnlineServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "cmsOnline": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "cmsOnline"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "process": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "process"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "processServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "processServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerce": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerce"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "commerceServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "commerceServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagement": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagement"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "engagementServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "engagementServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyalty": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyalty"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "loyaltyServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "loyaltyServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "waste": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "waste"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wasteServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wasteServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "location": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "location"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "locationServer": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "locationServer"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "wcms": {
-      "$config": "ref",
-      "path": [
-        "configurationValues",
-        "remoteEndpoints",
-        "wcms"
-      ]
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.abstractEndpoint"
+      },
+      "remoteOnly": true
     },
     "default": {
       "endpoint": {
@@ -751,9 +446,15 @@ module.exports = {
       },
       "abstractEndpoint": {
         "httpHost": "commerce-staged",
-        "httpPort": 4352,
+        "httpPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpPort"
+        },
         "httpsHost": "commerce-staged",
-        "httpsPort": 4353
+        "httpsPort": {
+          "$config": "ref",
+          "path": "servers.default.endpoint.httpsPort"
+        }
       }
     }
   },
@@ -766,16 +467,16 @@ module.exports = {
         "includes": "apparel",
         "value": "commerce.staged"
       },
-      "cart": "commerce.staged",
-      "checkoutCore": "commerce.staged",
-      "commerceSearchCore": "commerce.staged",
-      "shoppingList": "commerce.staged",
-      "digitalCore": "commerce.staged",
-      "discoveryConfig": "commerce.staged",
-      "discoveryMapping": "commerce.staged",
-      "discoveryProjection": "commerce.staged",
-      "discoveryRanking": "commerce.staged",
-      "discoverySource": "commerce.staged",
+      "cart": true,
+      "checkoutCore": true,
+      "commerceSearchCore": true,
+      "shoppingList": true,
+      "digitalCore": true,
+      "discoveryConfig": true,
+      "discoveryMapping": true,
+      "discoveryProjection": true,
+      "discoveryRanking": true,
+      "discoverySource": true,
       "electronicsProduct": {
         "$config": "selected",
         "name": "agora",
@@ -783,15 +484,15 @@ module.exports = {
         "includes": "electronics",
         "value": "commerce.staged"
       },
-      "fulfillmentCore": "commerce.staged",
-      "inventory": "commerce.staged",
-      "order": "commerce.staged",
-      "paymentCore": "commerce.staged",
-      "pricing": "commerce.staged",
-      "product": "commerce.staged",
-      "promotion": "commerce.staged",
-      "store": "commerce.staged",
-      "tax": "commerce.staged",
+      "fulfillmentCore": true,
+      "inventory": true,
+      "order": true,
+      "paymentCore": true,
+      "pricing": true,
+      "product": true,
+      "promotion": true,
+      "store": true,
+      "tax": true,
       "telcoCatalog": {
         "$config": "selected",
         "name": "agora",
@@ -813,6 +514,7 @@ module.exports = {
         "includes": "telco",
         "value": "commerce.staged"
       }
-    }
+    },
+    "default": "commerce.staged"
   }
 };
