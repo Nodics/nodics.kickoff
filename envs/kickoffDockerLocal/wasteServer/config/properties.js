@@ -29,6 +29,7 @@ module.exports = {
     "wasteVerification": {},
     "wasteReceipt": {},
     "wasteImpact": {},
+    "wasteReward": {},
     "wasteMovement": {},
     "wasteCompliance": {},
     "rulesDefinition": {},
@@ -268,6 +269,7 @@ module.exports = {
       "wasteVerification",
       "wasteReceipt",
       "wasteImpact",
+      "wasteReward",
       "wasteMovement",
       "wasteCompliance",
       "wasteApi",
@@ -306,7 +308,8 @@ module.exports = {
     "requiredServiceNames": [
       "DefaultWasteSubmissionService",
       "DefaultWasteAssetService",
-      "DefaultWasteImpactResultService"
+      "DefaultWasteImpactResultService",
+      "DefaultWasteRewardAssessmentService"
     ],
     "modules": {
       "import": true,
@@ -318,6 +321,7 @@ module.exports = {
       "wasteCompliance": true,
       "wasteCore": true,
       "wasteImpact": true,
+      "wasteReward": true,
       "wasteMaterial": true,
       "wasteMovement": true,
       "wasteReceipt": true,
