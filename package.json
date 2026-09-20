@@ -504,6 +504,7 @@
     "acceptance:functional": "nodics project:run acceptance:functional",
     "acceptance:agora-commerce": "nodics project:run acceptance:agora-commerce",
     "acceptance:loyalty-reward-checkout": "nodics project:run acceptance:loyalty-reward-checkout",
+    "acceptance:runtime-grants": "nodics project:run acceptance:runtime-grants",
     "acceptance:waste-management": "nodics project:run acceptance:waste-management",
     "acceptance:waste-backoffice-discovery": "nodics project:run acceptance:waste-backoffice-discovery",
     "acceptance:agora-commerce:docker": "nodics project:run acceptance:agora-commerce:docker",

@@ -25,8 +25,10 @@ const commandService = require(path.join(frameworkRoot, 'nodics.foundation/modul
 const commands = commandService.resolveCommands(commandService.readManifest(projectRoot));
 const wasteAcceptanceSource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs'), 'utf8');
 const wasteDiscoverySource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs'), 'utf8');
+const runtimeGrantsSource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectRuntimeDeploymentGrantAcceptanceService.mjs'), 'utf8');
 for (const [alias, file] of [
     ['acceptance:waste-management', 'defaultProjectWasteManagementAcceptanceService.mjs'],
+    ['acceptance:runtime-grants', 'defaultProjectRuntimeDeploymentGrantAcceptanceService.mjs'],
     ['acceptance:waste-backoffice-discovery', 'defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs']
 ]) {
     assert(pkg.scripts[alias].includes('nodics project:run ' + alias));
@@ -41,6 +43,9 @@ assert.match(wasteDiscoverySource, /kickoff-local-waste-runtime-deployment/);
 assert.match(wasteDiscoverySource, /runtimeScope:\s*{[\s\S]*modules/);
 assert.match(wasteDiscoverySource, /enterpriseHeader:\s*false/);
 assert.match(wasteDiscoverySource, /NODICS_BOOTSTRAP_ADMIN_PASSWORD/);
+assert.match(runtimeGrantsSource, /configuredRuntimeServers/);
+assert.match(runtimeGrantsSource, /runtimeIdentity/);
+assert.match(runtimeGrantsSource, /rulesApi/);
 const { projectRuntime, projectInitializationProfile } = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
 assert.equal(require('../envs/kickoffLocal/config/properties').tooling, undefined);
 assert.deepEqual(environment.acceptance.wasteManagement.runtime, { role: 'WASTE' });
