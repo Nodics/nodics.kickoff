@@ -173,6 +173,11 @@ assert.equal(
     .discovery.catalogue.maximumCandidates,
   undefined,
 );
+const localProcessPackage = require("../envs/kickoffLocal/processServer/package.json");
+assert(
+  localProcessPackage.nodics.runtimeModuleRoots.includes("nodics.rulesEngine"),
+  "Process must be able to discover inactive rulesApi data-release contributions without activating Rules behavior",
+);
 console.log(
   "Kickoff shared defaults, activation scope and deployment overlays validated",
 );
