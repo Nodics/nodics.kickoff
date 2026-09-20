@@ -91,9 +91,10 @@ async function main() {
         defaultServer: 'wasteServer'
     });
 
-    await config.start(options);
-    await config.initUtilities(options);
-    await config.loadModules();
+    // Prepare the selected server from source so this contract is independent
+    // of execution order and exercises the same generated-build path used by
+    // clean-checkout runtime qualification.
+    await config.prepareStart(options);
     await config.initEntities();
 
     assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');
