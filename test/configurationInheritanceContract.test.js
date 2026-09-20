@@ -480,6 +480,10 @@ require('node:test')('Local publication callback and operational Commerce activa
   const processRuntime = loadRuntime('processServer');
   assert.ok(processRuntime.runtimeIdentity.remoteModules.includes('cms'));
   assert.ok(processRuntime.runtimeIdentity.remoteModules.includes('editorial'));
+  assert.ok(processRuntime.runtimeIdentity.remoteModules.includes('rulesApi'));
+  assert.ok(processRuntime.data.dataReleases.contributions.some(contribution =>
+    contribution.moduleName === 'rulesApi' &&
+    contribution.sections.includes('rulesPolicyApproval')));
   const platform = loadRuntime('platformServer');
   const pack = platform.backofficeFunctionalModuleActivationData.modules['nodics.commerce'].dataPackages.find(pack => pack.code === 'baseCommerce:core-reference');
   assert.equal(pack.targetServer, 'commerceServer');

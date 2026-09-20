@@ -39,6 +39,7 @@ assert.match(wasteAcceptanceSource, /runtimeModuleRoots/);
 assert.match(wasteDiscoverySource, /reconcileWasteRuntimeGrant/);
 assert.match(wasteDiscoverySource, /kickoff-local-waste-runtime-deployment/);
 assert.match(wasteDiscoverySource, /runtimeScope:\s*{[\s\S]*modules/);
+assert.match(wasteDiscoverySource, /enterpriseHeader:\s*false/);
 assert.match(wasteDiscoverySource, /NODICS_BOOTSTRAP_ADMIN_PASSWORD/);
 const { projectRuntime, projectInitializationProfile } = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
 assert.equal(require('../envs/kickoffLocal/config/properties').tooling, undefined);

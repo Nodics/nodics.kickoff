@@ -103,13 +103,16 @@ async function listening(port) {
 }
 
 async function request(baseUrl, route, options = {}) {
+  const includeEnterpriseHeader = options.enterpriseHeader !== false;
+  const requestOptions = { ...options };
+  delete requestOptions.enterpriseHeader;
   const response = await fetch(new URL(route, baseUrl), {
-    ...options,
+    ...requestOptions,
     headers: {
       Accept: "application/json",
-      "x-enterprise-code": enterprise,
-      ...(options.body ? { "content-type": "application/json" } : {}),
-      ...(options.headers || {}),
+      ...(includeEnterpriseHeader ? { "x-enterprise-code": enterprise } : {}),
+      ...(requestOptions.body ? { "content-type": "application/json" } : {}),
+      ...(requestOptions.headers || {}),
     },
   });
   const text = await response.text();
@@ -130,7 +133,7 @@ async function waitReady(baseUrl, label) {
   let lastError;
   while (Date.now() - startedAt < 90000) {
     try {
-      const health = await request(baseUrl, "/nodics/system/v0/health/ready");
+      const health = await request(baseUrl, "/nodics/system/v0/health/ready", { enterpriseHeader: false });
       if (health?.status === "UP") {
         log(`${label} ready`);
         return;
