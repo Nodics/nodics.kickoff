@@ -56,10 +56,16 @@ const expectedWasteModules = [
     'wasteVerification',
     'wasteReceipt',
     'wasteImpact',
+    'wasteReward',
     'wasteMovement',
     'wasteCompliance',
     'wasteApi',
     'waste',
+    'nodics.rulesEngine',
+    'rulesCore',
+    'rulesDefinition',
+    'rulesEvaluation',
+    'rulesApi',
     'eWaste',
     'kickoffWaste'
 ];

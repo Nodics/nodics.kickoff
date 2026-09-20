@@ -12,6 +12,7 @@
     ],
     "runtimeModuleRoots": [
       "nodics.waste",
+      "nodics.rulesEngine",
       "nodics.accelerators/modules/waste",
       "nodics.copilot/modules/copilotProviders/modules/copilotProvider",
       "nodics.copilot/modules/copilotProviders/modules/ollamaProvider",
