@@ -23,6 +23,8 @@ const environment = require('./helpers/configuration').loadEnvironment();
 const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const commandService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService'));
 const commands = commandService.resolveCommands(commandService.readManifest(projectRoot));
+const wasteAcceptanceSource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs'), 'utf8');
+const wasteDiscoverySource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs'), 'utf8');
 for (const [alias, file] of [
     ['acceptance:waste-management', 'defaultProjectWasteManagementAcceptanceService.mjs'],
     ['acceptance:waste-backoffice-discovery', 'defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs']
@@ -33,6 +35,11 @@ for (const [alias, file] of [
     assert.equal(commands[alias].script, 'scripts/acceptance/' + file);
     assert(fs.existsSync(path.join(projectRoot, commands[alias].script)));
 }
+assert.match(wasteAcceptanceSource, /runtimeModuleRoots/);
+assert.match(wasteDiscoverySource, /reconcileWasteRuntimeGrant/);
+assert.match(wasteDiscoverySource, /kickoff-local-waste-runtime-deployment/);
+assert.match(wasteDiscoverySource, /runtimeScope:\s*{[\s\S]*modules/);
+assert.match(wasteDiscoverySource, /NODICS_BOOTSTRAP_ADMIN_PASSWORD/);
 const { projectRuntime, projectInitializationProfile } = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
 assert.equal(require('../envs/kickoffLocal/config/properties').tooling, undefined);
 assert.deepEqual(environment.acceptance.wasteManagement.runtime, { role: 'WASTE' });
@@ -41,6 +48,10 @@ assert.equal(waste.server, 'wasteServer');
 assert.equal(waste.port, 4370);
 assert.equal(waste.script, 'start:waste');
 assert.equal(projectInitializationProfile(waste), 'localWasteFoundation');
+assert.equal(require('../envs/kickoffLocal/wasteServer/package.json').nodics.runtimeModuleRoots.includes('nodics.rulesEngine'), true);
+const wasteRuntimeProperties = require('../envs/kickoffLocal/wasteServer/config/properties');
+assert.equal(wasteRuntimeProperties.activeModules.modules.includes('nodics.rulesEngine'), true);
+assert.equal(wasteRuntimeProperties.activeModules.modules.includes('rulesEvaluation'), true);
 const discovery = environment.acceptance.wasteBackofficeDiscovery;
 assert.equal(discovery.functionalModule, 'nodics.waste');
 assert.equal(discovery.providerModule, 'wasteCore');

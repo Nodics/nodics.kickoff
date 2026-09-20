@@ -27,6 +27,8 @@ const execFileAsync = promisify(execFile);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const manifestPath = path.join(projectRoot, "nodics.project.json");
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
+const projectPropertiesModule = await import((await import("node:url")).pathToFileURL(path.join(projectRoot, "config", "properties.js")).href);
+const projectProperties = projectPropertiesModule.default || projectPropertiesModule;
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || "");
 const config = environmentProfile.acceptance?.wasteBackofficeDiscovery ||
   manifest.acceptance?.wasteBackofficeDiscovery ||
@@ -44,6 +46,15 @@ const providerModule = config.providerModule || "wasteCore";
 const expectedCapabilityId = config.capabilityId || "waste-management";
 const expectedGroupId = config.groupId || "sustainability-operations";
 const managed = [];
+const { pathToFileURL } = await import("node:url");
+const wasteServerPropertiesModule = await import(pathToFileURL(path.join(projectRoot, "envs", environmentProfile.environment, wasteRuntime.server, "config", "properties.js")).href);
+const wasteServerProperties = wasteServerPropertiesModule.default || wasteServerPropertiesModule;
+const expectedRuntimeModules = [
+  ...new Set([
+    ...[].concat(wasteServerProperties.activeModules?.modules || []),
+    ...[].concat(wasteServerProperties.runtimeIdentity?.remoteModules || []),
+  ]),
+];
 const expectedNavigationIds = config.navigationIds || [
   "waste-management",
   "waste-taxonomy",
@@ -164,7 +175,10 @@ async function authenticate() {
     headers: { Origin: requestOrigin },
     body: JSON.stringify({
       loginId: process.env.AXIS_LOGIN_ID || "admin",
-      password: process.env.AXIS_PASSWORD || "adminPassword",
+      password: process.env.AXIS_PASSWORD ||
+        process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD ||
+        projectProperties.bootstrapIdentity?.adminPassword ||
+        "adminPassword",
     }),
   });
   if (!result?.authToken) throw new Error("Platform authentication returned no token");
@@ -208,6 +222,53 @@ async function ensureWasteViewPermission(headers) {
     throw new Error("Governed identity migration did not grant waste.backoffice.view to the authenticated admin");
   }
   return refreshed;
+}
+
+async function reconcileWasteRuntimeGrant(headers) {
+  const runtimeIdentity = wasteServerProperties.runtimeIdentity || {};
+  if (!runtimeIdentity.instanceCode || expectedRuntimeModules.length === 0) {
+    throw new Error("Waste runtime identity and module declaration are required before grant reconciliation");
+  }
+  const grantCode = process.env.NODICS_LOCAL_WASTE_GRANT_CODE || "kickoff-local-waste-runtime-deployment";
+  const current = await request(platformUrl, `/nodics/profile/v0/principalscopeassignment/code/${encodeURIComponent(grantCode)}`, {
+    headers,
+  });
+  const grant = Array.isArray(current) ? current[0] : current;
+  if (!grant?.runtimeScope) throw new Error(`Waste runtime deployment grant ${grantCode} was not found`);
+  const modules = [...new Set([...[].concat(grant.runtimeScope.modules || []), ...expectedRuntimeModules])];
+  const permissions = [
+    ...new Set([
+      ...[].concat(grant.runtimeScope.permissions || []),
+      "auth.internal.token.read",
+      "profile.enterprise.search",
+    ]),
+  ];
+  const body = {
+    query: {
+      code: grantCode,
+    },
+    model: {
+      runtimeScope: {
+        ...grant.runtimeScope,
+        instanceCode: runtimeIdentity.instanceCode,
+        modules,
+        permissions,
+      },
+    },
+    options: {
+      returnModified: true,
+    },
+  };
+  const result = await request(platformUrl, "/nodics/profile/v0/principalscopeassignment", {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+  });
+  const modified = Array.isArray(result) ? result : [].concat(result?.modified || result?.result || result);
+  if (modified.length === 0 && result?.matchedCount === 0) {
+    throw new Error("Waste runtime deployment grant was not found for reconciliation");
+  }
+  log(`reconciled Waste runtime deployment grant ${grantCode} for ${modules.length} modules`);
 }
 
 async function detail(headers) {
@@ -384,6 +445,8 @@ async function restore(headers, state) {
 
 async function main() {
   await ensureRuntime(platformRuntime, platformUrl);
+  const operatorHeaders = await ensureWasteViewPermission(await authenticate());
+  await reconcileWasteRuntimeGrant(operatorHeaders);
   await ensureRuntime(wasteRuntime, process.env.NODICS_WASTE_URL || projectEndpointUrl(environmentProfile, wasteRuntime.server));
   const headers = await ensureWasteViewPermission(await authenticate());
   const original = await waitForRegistration(headers);
