@@ -25,7 +25,8 @@ module.exports = {
       "profile",
       "backoffice",
       "editorial",
-      "cms"
+      "cms",
+      "rulesApi"
     ]
   },
   "defaultAuthDetail": {
@@ -116,6 +117,12 @@ module.exports = {
             "sections": [
               "cmsPublicationApproval"
             ]
+          },
+          {
+            "moduleName": "rulesApi",
+            "sections": [
+              "rulesPolicyApproval"
+            ]
           }
         ]
       },
@@ -154,7 +161,8 @@ module.exports = {
           "nodics.process.noop",
           "editorial.applyDecision",
           "editorial.publishApproved",
-          "cms.applyPublicationDecision"
+          "cms.applyPublicationDecision",
+          "rulesApi.applyDecision"
         ]
       }
     },
@@ -162,6 +170,9 @@ module.exports = {
       "targets": {
         "editorial": {
           "connectionName": "cmsStaged"
+        },
+        "rulesApi": {
+          "connectionName": "rulesApi"
         }
       }
     }
@@ -187,6 +198,14 @@ module.exports = {
         "path": "servers.default.endpoint"
       }
     },
+    "rulesApi": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+
     "cmsStaged": {
       "endpoint": {
         "$config": "runtime",
