@@ -1,0 +1,55 @@
+name: Kickoff Verification
+
+on:
+  pull_request:
+    branches:
+      - development
+      - master
+
+jobs:
+  verify:
+    name: Verify reference runtime on Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 22.x
+          - 24.x
+    steps:
+      - name: Checkout Kickoff
+        uses: actions/checkout@v4
+        with:
+          path: nodics.kickoff
+      - name: Checkout matching Nodics framework branch
+        uses: actions/checkout@v4
+        with:
+          repository: Nodics/nodics.ai
+          ref: feature/rules-engine-reward-policy
+          path: nodics.ai
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: nodics.kickoff/package-lock.json
+      - name: Install framework dependencies
+        working-directory: nodics.ai
+        run: npm ci
+      - name: Install project dependencies
+        working-directory: nodics.kickoff
+        run: npm ci
+      - name: Run project verification
+        working-directory: nodics.kickoff
+        run: npm test
+      - name: Prepare Waste runtime
+        working-directory: nodics.kickoff
+        run: npm run prepare:runtime -- wasteServer
+      - name: Verify Waste runtime composition
+        working-directory: nodics.kickoff
+        run: npm run test:waste-runtime

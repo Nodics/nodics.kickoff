@@ -107,14 +107,16 @@ function toPlainRecord(record) {
 
 async function startWasteRuntime(frameworkRoot) {
     const coreRoot = path.join(frameworkRoot, 'nodics.foundation');
+    const runtimeModuleRoots =
+        require(path.join(projectRoot, 'envs', environmentName, serverName, 'package.json'))
+            .nodics?.runtimeModuleRoots || [];
     const config = require(path.join(coreRoot, 'modules/nConfig'));
     const options = Object.freeze({
         NODICS_HOME: coreRoot,
         CUSTOM_HOME: projectRoot,
         MODULE_ROOTS: Object.freeze([
             coreRoot,
-            path.join(frameworkRoot, 'nodics.waste'),
-            path.join(frameworkRoot, 'nodics.accelerators/modules/waste'),
+            ...runtimeModuleRoots.map(relative => path.join(frameworkRoot, relative)),
             projectRoot
         ]),
         defaultEnvironment: environmentName,

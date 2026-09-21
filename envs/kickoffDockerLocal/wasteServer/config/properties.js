@@ -29,8 +29,11 @@ module.exports = {
     "wasteVerification": {},
     "wasteReceipt": {},
     "wasteImpact": {},
+    "wasteReward": {},
     "wasteMovement": {},
-    "wasteCompliance": {}
+    "wasteCompliance": {},
+    "rulesDefinition": {},
+    "eWaste": {}
   },
   "servers": {
     "platform": {
@@ -254,6 +257,11 @@ module.exports = {
       "kickoffApi",
       "kickoffInt",
       "nodics.waste",
+      "nodics.rulesEngine",
+      "rulesCore",
+      "rulesDefinition",
+      "rulesEvaluation",
+      "rulesApi",
       "wasteCore",
       "wasteMaterial",
       "wasteCollection",
@@ -261,6 +269,7 @@ module.exports = {
       "wasteVerification",
       "wasteReceipt",
       "wasteImpact",
+      "wasteReward",
       "wasteMovement",
       "wasteCompliance",
       "wasteApi",
@@ -299,7 +308,8 @@ module.exports = {
     "requiredServiceNames": [
       "DefaultWasteSubmissionService",
       "DefaultWasteAssetService",
-      "DefaultWasteImpactResultService"
+      "DefaultWasteImpactResultService",
+      "DefaultWasteRewardAssessmentService"
     ],
     "modules": {
       "import": true,
@@ -311,6 +321,7 @@ module.exports = {
       "wasteCompliance": true,
       "wasteCore": true,
       "wasteImpact": true,
+      "wasteReward": true,
       "wasteMaterial": true,
       "wasteMovement": true,
       "wasteReceipt": true,
@@ -382,6 +393,16 @@ module.exports = {
       "enabled": true,
       "adapter": "openai",
       "profile": "eWastePhotoMetadata"
+    }
+  },
+  "rulesEngine": {
+    "approval": {
+      "processTarget": {
+        "connectionName": "process"
+      },
+      "actionAuthority": {
+        "connectionName": "process"
+      }
     }
   },
   "eWaste": {

@@ -56,10 +56,16 @@ const expectedWasteModules = [
     'wasteVerification',
     'wasteReceipt',
     'wasteImpact',
+    'wasteReward',
     'wasteMovement',
     'wasteCompliance',
     'wasteApi',
     'waste',
+    'nodics.rulesEngine',
+    'rulesCore',
+    'rulesDefinition',
+    'rulesEvaluation',
+    'rulesApi',
     'eWaste',
     'kickoffWaste'
 ];
@@ -85,9 +91,11 @@ async function main() {
         defaultServer: 'wasteServer'
     });
 
+    // Load the selected runtime from source so this contract remains independent
+    // of execution order and does not require pre-generated server artifacts.
     await config.start(options);
     await config.initUtilities(options);
-    await config.loadModules();
+    await config.loadModules(Array.from(NODICS.getIndexedModules().keys()));
     await config.initEntities();
 
     assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');

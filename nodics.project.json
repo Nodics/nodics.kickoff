@@ -235,6 +235,10 @@
         "type": "projectScript",
         "script": "scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs"
       },
+      "acceptance:runtime-grants": {
+        "type": "projectScript",
+        "script": "scripts/acceptance/defaultProjectRuntimeDeploymentGrantAcceptanceService.mjs"
+      },
       "acceptance:waste-backoffice-discovery": {
         "type": "projectScript",
         "script": "scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs"
@@ -317,6 +321,7 @@
         "scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs",
         "scripts/acceptance/defaultProjectLoyaltyRewardCheckoutAcceptanceService.mjs",
         "scripts/acceptance/defaultProjectNexusCmsMediaSeedService.mjs",
+        "scripts/acceptance/defaultProjectRuntimeDeploymentGrantAcceptanceService.mjs",
         "scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs",
         "scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs"
       ]

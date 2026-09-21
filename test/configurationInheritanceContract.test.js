@@ -173,6 +173,11 @@ assert.equal(
     .discovery.catalogue.maximumCandidates,
   undefined,
 );
+const localProcessPackage = require("../envs/kickoffLocal/processServer/package.json");
+assert(
+  localProcessPackage.nodics.runtimeModuleRoots.includes("nodics.rulesEngine"),
+  "Process must be able to discover inactive rulesApi data-release contributions without activating Rules behavior",
+);
 console.log(
   "Kickoff shared defaults, activation scope and deployment overlays validated",
 );
@@ -480,6 +485,10 @@ require('node:test')('Local publication callback and operational Commerce activa
   const processRuntime = loadRuntime('processServer');
   assert.ok(processRuntime.runtimeIdentity.remoteModules.includes('cms'));
   assert.ok(processRuntime.runtimeIdentity.remoteModules.includes('editorial'));
+  assert.ok(processRuntime.runtimeIdentity.remoteModules.includes('rulesApi'));
+  assert.ok(processRuntime.data.dataReleases.contributions.some(contribution =>
+    contribution.moduleName === 'rulesApi' &&
+    contribution.sections.includes('rulesPolicyApproval')));
   const platform = loadRuntime('platformServer');
   const pack = platform.backofficeFunctionalModuleActivationData.modules['nodics.commerce'].dataPackages.find(pack => pack.code === 'baseCommerce:core-reference');
   assert.equal(pack.targetServer, 'commerceServer');
