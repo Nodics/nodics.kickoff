@@ -32,7 +32,7 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_PROCESS_API_KEY",
+      "name": "NODICS_PROCESS_API_KEY",
       "fallback": null
     }
   },
@@ -43,19 +43,7 @@ module.exports = {
       }
     }
   },
-  "apiExposure": {
-    "categories": {
-      "dataImport": {
-        "enabled": true
-      }
-    }
-  },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "modules": {
       "cronjob": true,
       "import": true,
@@ -182,35 +170,6 @@ module.exports = {
       "endpoint": {
         "httpPort": 4330,
         "httpsPort": 4331
-      }
-    },
-    "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "rulesApi": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wasteServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-
-    "cmsStaged": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wcmsStagedServer",
-        "path": "servers.default.endpoint"
       }
     }
   },

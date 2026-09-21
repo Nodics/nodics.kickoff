@@ -23,16 +23,11 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_LOYALTY_API_KEY",
+      "name": "NODICS_LOYALTY_API_KEY",
       "fallback": null
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultLoyaltyWalletService",
       "DefaultRewardLedgerEntryService"
@@ -92,13 +87,6 @@ module.exports = {
       "loyalty": "loyalty.operational"
     }
   },
-  "apiExposure": {
-    "categories": {
-      "dataImport": {
-        "enabled": true
-      }
-    }
-  },
   "data": {
     "dataReleases": {
       "initializationProfiles": {
@@ -145,48 +133,10 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "process": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "processServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "engagement": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "engagementServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "commerce": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "commerceServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "commerceServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "commerceServer",
-        "path": "servers.default.endpoint"
-      }
     }
   },
   "tooling": {

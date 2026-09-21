@@ -11,10 +11,10 @@
 
 'use strict';
 
-/** @module kickoffWaste/data/core-v001/records/waste/kickoffWasteAcceptanceRuleData @description Kickoff project acceptance-rule extension for Waste. @layer data @owner kickoffWaste */
+/** @module circa.ewaste/data/core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData @description Circa acceptance-rule extension for Waste. @layer data @owner circa.ewaste */
 module.exports = {
     record0: {
-        code: 'KICKOFF_DROP_OFF_SMART_HOME',
+        code: 'CIRCA_DROP_OFF_SMART_HOME',
         collectionPointType: 'E_WASTE_DROP_OFF',
         categoryCode: 'SMART_HOME_DEVICE',
         decision: 'ACCEPT',

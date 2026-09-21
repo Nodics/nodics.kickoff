@@ -11,6 +11,7 @@ import {
 
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, "..");
+const frameworkRoot = path.resolve(root, process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai");
 const definitions = [
   {
     group: "agora.apparel",
@@ -57,11 +58,10 @@ const digest = (file) =>
   crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
 
 test("project configuration stays minimal while metadata, domains, and data packs remain with their owners", () => {
-  const projectContractPath = path.join(root, "nodics.project.json");
   const projectPackage = require(path.join(root, "package.json"));
   const composition = readProjectEnvironmentComposition(root, "kickoffLocal");
   const dataPackModules = [
-    require(path.join(root, "modules", "nexus.web", "data", "manifest.json"))
+    require(path.join(frameworkRoot, "nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json"))
       .module,
     ...definitions.map(
       (definition) =>
@@ -75,7 +75,7 @@ test("project configuration stays minimal while metadata, domains, and data pack
     fs.existsSync(path.join(root, "config", "agora-domain-composition.js")),
     false,
   );
-  assert.deepEqual(Object.keys(JSON.parse(fs.readFileSync(projectContractPath))), ["tooling"]);
+  assert.equal(fs.existsSync(path.join(root, "nodics.project.json")), false);
   assert.equal(projectPackage.name, "nodics.kickoff");
   assert.equal(
     require(path.join(root, "config", "properties.js")).project,

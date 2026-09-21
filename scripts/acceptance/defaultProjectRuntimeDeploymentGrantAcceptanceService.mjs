@@ -34,8 +34,6 @@ const requestOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(
 const enterprise = process.env.AXIS_ENTERPRISE || "default";
 const tenant = process.env.AXIS_TENANT || "default";
 const project = process.env.AXIS_PROJECT || environmentProfile.projectCode || "nodics.kickoff";
-const projectPropertiesModule = await import(pathToFileURL(path.join(projectRoot, "config", "properties.js")).href);
-const projectProperties = projectPropertiesModule.default || projectPropertiesModule;
 
 function log(message) {
   console.log(`[runtime-grants] ${message}`);
@@ -71,9 +69,7 @@ async function authenticate() {
     body: JSON.stringify({
       loginId: process.env.AXIS_LOGIN_ID || "admin",
       password: process.env.AXIS_PASSWORD ||
-        process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD ||
-        projectProperties.bootstrapIdentity?.adminPassword ||
-        "adminPassword",
+        process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD,
     }),
   });
   if (!result?.authToken) throw new Error("Platform authentication returned no token");

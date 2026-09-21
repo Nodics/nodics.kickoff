@@ -126,10 +126,10 @@ If the framework, Axis, or Kickoff checkout lives elsewhere, provide
 ## Customization boundary
 
 The runner implementation belongs to framework tooling. The root
-`package.json.name` owns stable project identity. `nodics.project.json` is
-optional and reserved for project-owned command or acceptance overrides; it must
-not declare `projectCode` or `contractVersion`. Thin command aliases and human-readable project metadata
-live in `package.json`. Domain selections and qualification profile facts live
+`package.json.name` owns stable project identity. Do not create
+`nodics.project.json`; tooling discovers command aliases from environment server
+metadata and conventional acceptance scripts. Thin command aliases and
+human-readable project metadata live in `package.json`. Domain selections and qualification profile facts live
 beside the environment, for example
 `envs/kickoffDockerLocal/nodics.environment.json`. Data packs are owned by
 module data manifests. Runtime server startup facts stay with the selected

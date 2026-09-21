@@ -207,8 +207,8 @@ module.exports = {
               targetRuntimeRole: "WASTE",
             },
             {
-              code: "kickoffWaste:project-reference",
-              kind: "Project collection policy",
+              code: "circa.ewaste:waste-policy",
+              kind: "Circa collection policy",
               required: true,
               trigger: "USER",
               dataType: "core",
@@ -337,6 +337,12 @@ module.exports = {
     },
   },
   waste: {
+    projectOverlay: {
+      enabled: true,
+      module: "circa.ewaste",
+      releaseCode: "circa.ewaste:waste-policy",
+      layerKind: "PROJECT",
+    },
     operations: {
       requireScopes: true,
       requireVerification: true,

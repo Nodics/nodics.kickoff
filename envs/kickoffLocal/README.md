@@ -16,10 +16,10 @@ After changes, run the nearest focused test or the Kickoff structure and documen
 
 ## Telegram tunnel origin
 
-For a Local Circa Telegram tunnel, set `NODICS_LOCAL_TELEGRAM_ORIGIN` in
-the private project `.env` to the exact HTTPS origin, without a path or trailing
-slash. Restart the backend topology after changing it, loading that file with
-`node --env-file=.env ./node_modules/.bin/nodics project:run topology:start:all`
-after stopping the existing topology. An unset value adds no
-origin; the standard localhost origins remain inherited. Update this value when
-the temporary tunnel changes, and remove it when the tunnel is retired.
+Local Circa browser development uses the declared localhost origin in this
+environment layer. A public Telegram tunnel URL is an operator/runtime override,
+not a project `.env` setting and not a Local-named property. Keep the key generic
+and environment-neutral, then supply the environment-specific value through the
+governed runtime configuration path before restarting the topology. If the
+runtime value is missing, Telegram-specific entry remains unavailable while the
+local browser origin stays usable.

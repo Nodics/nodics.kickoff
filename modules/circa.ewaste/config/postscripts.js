@@ -11,6 +11,6 @@
 
 'use strict';
 
-/** @module modules/kickoffWaste/nodics @description Registers the Kickoff project-owned Waste overlay lifecycle boundary. @layer module @owner kickoffWaste */
+/** @module modules/circa.ewaste/config/postscripts @description Reserved post-start hook registry for Circa eWaste. @layer config @owner circa.ewaste */
 /** @module circa.ewaste/config/postscripts @description Declares project lifecycle contributions. @layer config @owner circa.ewaste */
 module.exports = {};

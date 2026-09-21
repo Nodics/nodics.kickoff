@@ -32,16 +32,11 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_WASTE_API_KEY",
+      "name": "NODICS_WASTE_API_KEY",
       "fallback": null
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultWasteSubmissionService",
       "DefaultWasteAssetService",
@@ -116,7 +111,6 @@ module.exports = {
       "wasteApi",
       "waste",
       "eWaste",
-      "kickoffWaste",
       "wasteRecycling",
       "search",
       "elastic",
@@ -149,9 +143,6 @@ module.exports = {
       "circaCustomer": {
         "enabled": true
       },
-      "dataImport": {
-        "enabled": true
-      }
     }
   },
   "data": {
@@ -170,7 +161,7 @@ module.exports = {
                 "releaseCodes": [
                   "wasteMaterial:core-v001",
                   "eWaste:core-reference",
-                  "kickoffWaste:project-reference"
+                  "circa.ewaste:waste-policy"
                 ]
               }
             ]
@@ -363,19 +354,7 @@ module.exports = {
   },
   "servers": {
     "engagement": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "engagementServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "commerceStaged": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "commerceStagedServer",
-        "path": "servers.default.endpoint"
-      }
     },
     "loyalty": {
       "endpoint": {
@@ -417,34 +396,12 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
-    "process": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "processServer",
-        "path": "servers.default.endpoint"
-      }
-    },
     "location": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "locationServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     }
   },

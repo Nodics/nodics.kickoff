@@ -24,32 +24,13 @@ const { readProjectEnvironmentConfiguration, projectRuntime, projectInitializati
 
 const require = createRequire(import.meta.url);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const manifestPath = path.join(projectRoot, 'nodics.project.json');
-const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
-const acceptanceConfig = environmentProfile.acceptance?.wasteManagement || manifest.acceptance?.wasteManagement || {};
+const acceptanceConfig = environmentProfile.acceptance?.wasteManagement || {};
 const environmentName = environmentProfile.environment;
 const runtime = projectRuntime(environmentProfile, process.env.SERVER || acceptanceConfig.server || acceptanceConfig.runtime);
 const serverName = runtime.server;
 const initializationProfile = projectInitializationProfile(runtime, process.env.NODICS_INITIALIZATION_PROFILE || acceptanceConfig.profileCode);
 const fixedNow = new Date('2026-09-01T12:00:00.000Z');
-
-function readEnvFile(filePath) {
-    if (!fs.existsSync(filePath)) return {};
-    return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) return env;
-        const separatorIndex = trimmed.indexOf('=');
-        if (separatorIndex < 0) return env;
-        const key = trimmed.slice(0, separatorIndex).trim();
-        let value = trimmed.slice(separatorIndex + 1).trim();
-        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-            value = value.slice(1, -1);
-        }
-        env[key] = value;
-        return env;
-    }, {});
-}
 
 function assert(condition, message) {
     if (!condition) throw new Error(message);
@@ -60,8 +41,7 @@ function objectValues(moduleExports) {
 }
 
 function resolveFrameworkRoot() {
-    const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
-    const configuredRoot = localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai';
+    const configuredRoot = process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai';
     const frameworkRoot = path.resolve(projectRoot, configuredRoot);
     assert(fs.existsSync(path.join(frameworkRoot, 'nodics.foundation', 'package.json')), 'NODICS_FRAMEWORK_ROOT must point to nodics.ai');
     return frameworkRoot;
@@ -260,9 +240,9 @@ function validateProjectOverlayData() {
     }, {});
 
     assertCodes(recordsBySchemaName.wasteCategory || [], ['SMART_HOME_DEVICE'], 'Waste project category overlay data');
-    assertCodes(recordsBySchemaName.wasteCollectionPreset || [], ['KICKOFF_MALL_DROP_OFF'], 'Waste project collection preset overlay data');
-    assertCodes(recordsBySchemaName.wasteImpactProfile || [], ['KICKOFF_VERIFIED_DEVICE_RECOVERY'], 'Waste project impact profile overlay data');
-    assertCodes(recordsBySchemaName.wasteCollectionAcceptanceRule || [], ['KICKOFF_DROP_OFF_SMART_HOME'], 'Waste project acceptance rule overlay data');
+    assertCodes(recordsBySchemaName.wasteCollectionPreset || [], ['CIRCA_MALL_DROP_OFF'], 'Waste project collection preset overlay data');
+    assertCodes(recordsBySchemaName.wasteImpactProfile || [], ['CIRCA_VERIFIED_DEVICE_RECOVERY'], 'Waste project impact profile overlay data');
+    assertCodes(recordsBySchemaName.wasteCollectionAcceptanceRule || [], ['CIRCA_DROP_OFF_SMART_HOME'], 'Waste project acceptance rule overlay data');
     return {
         enabled: true,
         releaseCode: overlay.releaseCode,
@@ -359,17 +339,17 @@ async function loadPersistedInitialData(seedData) {
 }
 
 async function runJourney(data) {
-    const collectionPreset = data.collectionPresets.find(record => record.code === 'KICKOFF_MALL_DROP_OFF') ||
+    const collectionPreset = data.collectionPresets.find(record => record.code === 'CIRCA_MALL_DROP_OFF') ||
         data.collectionPresets.find(record => record.code === 'EWASTE_DROP_OFF_STANDARD');
     const impactProfile = data.impactProfiles.find(record => record.code === collectionPreset.impactProfileCode);
     const facts = {
         familyCode: 'ELECTRONICS',
-        categoryCode: collectionPreset.code === 'KICKOFF_MALL_DROP_OFF' ? 'SMART_HOME_DEVICE' : 'MOBILE_DEVICE',
-        itemTypeCode: collectionPreset.code === 'KICKOFF_MALL_DROP_OFF' ? 'UNKNOWN_ELECTRONIC_ITEM' : 'SMARTPHONE',
+        categoryCode: collectionPreset.code === 'CIRCA_MALL_DROP_OFF' ? 'SMART_HOME_DEVICE' : 'MOBILE_DEVICE',
+        itemTypeCode: collectionPreset.code === 'CIRCA_MALL_DROP_OFF' ? 'UNKNOWN_ELECTRONIC_ITEM' : 'SMARTPHONE',
         materialTypeCodes: ['CIRCUIT_BOARD', 'COPPER', 'PLASTIC_CASING'],
         conditionGrade: 'RECYCLABLE',
-        quantity: collectionPreset.code === 'KICKOFF_MALL_DROP_OFF' ? 2 : 1,
-        weight: collectionPreset.code === 'KICKOFF_MALL_DROP_OFF' ? '3.5' : '2.5'
+        quantity: collectionPreset.code === 'CIRCA_MALL_DROP_OFF' ? 2 : 1,
+        weight: collectionPreset.code === 'CIRCA_MALL_DROP_OFF' ? '3.5' : '2.5'
     };
     const collectionPoint = {
         code: 'KICKOFF_WASTE_CP_001',
@@ -445,7 +425,7 @@ async function runJourney(data) {
         }
     });
     assert(impact.data.profileCode === collectionPreset.impactProfileCode, 'Waste impact must use the selected preset profile');
-    const expectedMetricValues = collectionPreset.code === 'KICKOFF_MALL_DROP_OFF' ? ['3.5', '2.52'] : ['2.5', '2.5'];
+    const expectedMetricValues = collectionPreset.code === 'CIRCA_MALL_DROP_OFF' ? ['3.5', '2.52'] : ['2.5', '2.5'];
     assert(JSON.stringify(impact.data.metrics.map(metric => metric.value)) === JSON.stringify(expectedMetricValues),
         'Waste impact must calculate schema-driven metric values');
     assert(impact.data.rewardFormula === undefined, 'Waste impact result must not own reward formula');

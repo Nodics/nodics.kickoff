@@ -109,7 +109,7 @@ async function authenticateEmployee() {
   if (suppliedToken) return { Authorization: `Bearer ${suppliedToken}` };
   const credentials = {
     loginId: process.env.AXIS_LOGIN_ID || "admin",
-    password: process.env.AXIS_PASSWORD || "adminPassword",
+    password: process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD,
   };
   const headers = { Origin: axisOrigin, "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default" };
   let lastError;

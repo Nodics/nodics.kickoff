@@ -30,11 +30,10 @@ const locationUrl = process.env.AXIS_LOCATION_URL || projectEndpointUrl(environm
 const operatorOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
-const password = process.env.AXIS_PASSWORD || "adminPassword";
+const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
 const clientContractVersion = process.env.AXIS_CLIENT_CONTRACT_VERSION || "1";
-const projectDescriptor = readProjectDescriptor();
 const packageDescriptor = readProjectPackageDescriptor();
-const projectCode = process.env.AXIS_PROJECT || resolveProjectCode(projectDescriptor, packageDescriptor);
+const projectCode = process.env.AXIS_PROJECT || resolveProjectCode(packageDescriptor);
 const runtimeMode = process.env.NODICS_ACCEPTANCE_RUNTIME || "kickoffLocal";
 const managedStartupEnabled = runtimeMode === "kickoffLocal";
 const publicOrigin = process.env.NODICS_ACCEPTANCE_PUBLIC_ORIGIN || projectCorsOrigin(environmentProfile, 'nexus');
@@ -75,28 +74,16 @@ function defaultLocalBootstrapCapabilities() {
   };
 }
 
-function readProjectDescriptor() {
-  const descriptorPath = resolve(projectRoot, "nodics.project.json");
-  if (!existsSync(descriptorPath)) return {};
-  return JSON.parse(readFileSync(descriptorPath, "utf8"));
-}
-
 function readProjectPackageDescriptor() {
   const packagePath = resolve(projectRoot, "package.json");
   if (!existsSync(packagePath)) throw new Error(`Missing package.json in project root: ${projectRoot}`);
   return JSON.parse(readFileSync(packagePath, "utf8"));
 }
 
-function resolveProjectCode(descriptor, packageDescriptor) {
+function resolveProjectCode(packageDescriptor) {
   const packageName = packageDescriptor.name;
   if (!packageName || !/^[a-zA-Z][a-zA-Z0-9._-]*$/.test(packageName)) {
     throw new Error("package.json requires a stable Nodics project name");
-  }
-  if (Object.prototype.hasOwnProperty.call(descriptor, "contractVersion")) {
-    throw new Error("nodics.project.json must not declare contractVersion");
-  }
-  if (Object.prototype.hasOwnProperty.call(descriptor, "projectCode")) {
-    throw new Error("nodics.project.json must not declare projectCode; use package.json.name");
   }
   return packageName;
 }
@@ -143,23 +130,16 @@ function validateLocalBootstrapCapabilities(capabilities) {
 function assertValidLocalBootstrapCapabilities(capabilities) {
   const errors = validateLocalBootstrapCapabilities(capabilities);
   if (errors.length) {
-    throw new Error(`Invalid acceptance.localBootstrap in nodics.project.json:\n- ${errors.join("\n- ")}`);
+    throw new Error(`Invalid local bootstrap capabilities:\n- ${errors.join("\n- ")}`);
   }
 }
 
 function loadLocalBootstrapCapabilities() {
   const fallback = defaultLocalBootstrapCapabilities();
-  const descriptor = projectDescriptor;
-  const configured = descriptor?.acceptance?.localBootstrap;
-  if (configured !== undefined) {
-    assertValidLocalBootstrapCapabilities(configured);
-  }
-  const configuredCapabilities = configured || {};
+  assertValidLocalBootstrapCapabilities(fallback);
   return {
-    documentationPacks: Array.isArray(configuredCapabilities.documentationPacks) ?
-      configuredCapabilities.documentationPacks : fallback.documentationPacks,
-    contentPacks: Array.isArray(configuredCapabilities.contentPacks) ?
-      configuredCapabilities.contentPacks : fallback.contentPacks,
+    documentationPacks: fallback.documentationPacks,
+    contentPacks: fallback.contentPacks,
   };
 }
 

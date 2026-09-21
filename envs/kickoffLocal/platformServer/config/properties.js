@@ -31,7 +31,7 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_PLATFORM_API_KEY",
+      "name": "NODICS_PLATFORM_API_KEY",
       "fallback": null
     }
   },
@@ -40,9 +40,6 @@ module.exports = {
       "dataExport": {
         "enabled": true
       },
-      "dataImport": {
-        "enabled": true
-      }
     }
   },
   "copilot": {
@@ -909,11 +906,6 @@ module.exports = {
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "modules": {
       "backoffice": true,
       "import": true,
@@ -1030,7 +1022,7 @@ module.exports = {
         "enabled": true,
         "provider": "TELEGRAM",
         "enterpriseCode": "default",
-        "secretEnvironmentVariable": "CIRCA_TELEGRAM_BOT_TOKEN",
+        "credentialReference": "telegram.bot.local",
         "requireBrowserHandoff": true
       }
     }
@@ -1050,97 +1042,6 @@ module.exports = {
       "endpoint": {
         "httpPort": 4300,
         "httpsPort": 4301
-      }
-    },
-    "wcmsStaged": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wcmsStagedServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "wcmsOnline": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wcmsOnlineServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "commerceStaged": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "commerceStagedServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "engagementServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "engagementServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "loyalty": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "loyaltyServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "loyaltyServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "loyaltyServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "location": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "locationServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "locationServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "locationServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "waste": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wasteServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "process": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "processServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "platform": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "platformServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "wasteServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wasteServer",
-        "path": "servers.default.endpoint"
       }
     }
   },

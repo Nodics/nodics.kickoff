@@ -42,7 +42,7 @@ for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
   assert.equal(activeModuleNames(process).includes('nexus.web'), false);
 }
 const commandService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService'));
-const commands = commandService.resolveCommands(commandService.readManifest(projectRoot));
+const commands = commandService.resolveCommands(projectRoot);
 assert.equal(commands['acceptance:nexus-cms-media-seed'].type, 'projectScript');
 assert.equal(commands['acceptance:nexus-cms-media-seed'].script, 'scripts/acceptance/defaultProjectNexusCmsMediaSeedService.mjs');
 assert.equal(require('../package.json').scripts['nexus:test'], 'nodics nexus:check');

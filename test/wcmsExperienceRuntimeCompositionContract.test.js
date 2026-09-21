@@ -96,16 +96,16 @@ test('Staged WCMS keeps customer content packs local while Online remains delive
 test('All ten Local runtimes resolve distinct retained proof without sample fallback', () => {
     const helper = require('./helpers/configuration');
     const selections = [
-        ['platformServer', 'NODICS_LOCAL_PLATFORM_API_KEY'],
-        ['processServer', 'NODICS_LOCAL_PROCESS_API_KEY'],
-        ['wcmsStagedServer', 'NODICS_LOCAL_WCMS_STAGED_API_KEY'],
-        ['wcmsOnlineServer', 'NODICS_LOCAL_WCMS_ONLINE_API_KEY'],
-        ['commerceServer', 'NODICS_LOCAL_COMMERCE_API_KEY'],
-        ['commerceStagedServer', 'NODICS_LOCAL_COMMERCE_STAGED_API_KEY'],
-        ['engagementServer', 'NODICS_LOCAL_ENGAGEMENT_API_KEY'],
-        ['loyaltyServer', 'NODICS_LOCAL_LOYALTY_API_KEY'],
-        ['locationServer', 'NODICS_LOCAL_LOCATION_API_KEY'],
-        ['wasteServer', 'NODICS_LOCAL_WASTE_API_KEY']
+        ['platformServer', 'NODICS_PLATFORM_API_KEY'],
+        ['processServer', 'NODICS_PROCESS_API_KEY'],
+        ['wcmsStagedServer', 'NODICS_WCMS_STAGED_API_KEY'],
+        ['wcmsOnlineServer', 'NODICS_WCMS_ONLINE_API_KEY'],
+        ['commerceServer', 'NODICS_COMMERCE_API_KEY'],
+        ['commerceStagedServer', 'NODICS_COMMERCE_STAGED_API_KEY'],
+        ['engagementServer', 'NODICS_ENGAGEMENT_API_KEY'],
+        ['loyaltyServer', 'NODICS_LOYALTY_API_KEY'],
+        ['locationServer', 'NODICS_LOCATION_API_KEY'],
+        ['wasteServer', 'NODICS_WASTE_API_KEY']
     ];
     const instances = new Set();
     for (const [server, variable] of selections) {

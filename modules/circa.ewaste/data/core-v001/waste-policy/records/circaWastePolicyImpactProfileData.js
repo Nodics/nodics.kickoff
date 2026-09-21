@@ -11,10 +11,10 @@
 
 'use strict';
 
-/** @module kickoffWaste/data/core-v001/records/waste/kickoffWasteImpactProfileData @description Kickoff project impact-profile extension for Waste. @layer data @owner kickoffWaste */
+/** @module circa.ewaste/data/core-v001/waste-policy/records/circaWastePolicyImpactProfileData @description Circa impact-profile extension for Waste. @layer data @owner circa.ewaste */
 module.exports = {
     record0: {
-        code: 'KICKOFF_VERIFIED_DEVICE_RECOVERY',
+        code: 'CIRCA_VERIFIED_DEVICE_RECOVERY',
         name: { en: 'Kickoff Verified Device Recovery' },
         formulaType: 'WEIGHT_FACTOR',
         metricRules: [

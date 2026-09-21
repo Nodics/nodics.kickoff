@@ -39,16 +39,11 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_WCMS_ONLINE_API_KEY",
+      "name": "NODICS_WCMS_ONLINE_API_KEY",
       "fallback": null
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultCmsDocumentationAccessPolicyService",
       "DefaultCmsDocumentationDashboardService",
@@ -204,19 +199,9 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     }
   },

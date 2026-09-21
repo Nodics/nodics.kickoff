@@ -26,7 +26,7 @@ module.exports = {
   "httpHardening": {
     "cors": {
       "allowedOrigins": [
-        { "$config": "env", "name": "NODICS_LOCAL_TELEGRAM_ORIGIN" }
+        "http://localhost:3600"
       ]
     }
   },
@@ -36,6 +36,169 @@ module.exports = {
         "redis": {
           "enabled": true
         }
+      }
+    }
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffLocal"
+    ],
+    "allowMissingModelServices": true
+  },
+  "apiExposure": {
+    "categories": {
+      "dataImport": {
+        "enabled": true
+      }
+    }
+  },
+  "servers": {
+    "platform": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "platformServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "profile": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "backoffice": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "platformServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "process": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "processServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "rulesApi": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "cmsStaged": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "wcmsStaged": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsStagedServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "cmsOnline": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "wcmsOnline": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wcmsOnlineServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "commerce": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "commerceServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "commerceStaged": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "commerceStagedServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "engagement": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "engagementServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "engagementServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "loyalty": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "loyaltyServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "loyaltyServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "location": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "locationServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "locationServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "waste": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
+      }
+    },
+    "wasteServer": {
+      "endpoint": {
+        "$config": "runtime",
+        "name": "wasteServer",
+        "path": "servers.default.endpoint"
       }
     }
   }

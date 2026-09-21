@@ -24,7 +24,7 @@ const wcmsStagedUrl = process.env.AXIS_WCMS_URL || process.env.NODICS_WCMS_STAGE
 const axisOrigin = process.env.AXIS_ORIGIN || process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || process.env.NODICS_ENTERPRISE_CODE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
-const password = process.env.AXIS_PASSWORD || "adminPassword";
+const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
 const composition = readProjectEnvironmentComposition(projectRoot);
 const supportedPacks = Object.freeze(["agora.apparel", "agora.electronics", "agora.telco"]);
 

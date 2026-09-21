@@ -275,7 +275,6 @@ module.exports = {
       "wasteApi",
       "waste",
       "eWaste",
-      "kickoffWaste",
       "wasteRecycling",
       "search",
       "elastic",
@@ -379,7 +378,7 @@ module.exports = {
                 "releaseCodes": [
                   "wasteMaterial:core-v001",
                   "eWaste:core-reference",
-                  "kickoffWaste:project-reference"
+                  "circa.ewaste:waste-policy"
                 ]
               }
             ]

@@ -45,8 +45,8 @@ The current local topology uses separate runtime servers:
   execution lifecycle.
 - `wasteServer` starts the isolated Waste Management runtime. It loads
   `nodics.waste`, the Waste accelerator umbrella, `eWaste`, and the
-  project-owned `kickoffWaste` overlay while keeping Loyalty, Location, vendor,
-  recycler, and logistics integrations in their owning layers.
+  Circa application module while keeping Loyalty, Location, vendor, recycler,
+  and logistics integrations in their owning layers.
 
 Kickoff intentionally has no standalone cronjob server. Scheduled automation is
 available only through `processServer`, preventing accidental duplicate
@@ -134,21 +134,11 @@ The default local ports are:
 
 ## Before starting
 
-From `nodics.kickoff`, copy and review local environment configuration:
-
-```bash
-cp .env.example .env
-```
-
-Set the framework checkout location:
-
-```dotenv
-NODICS_FRAMEWORK_ROOT=../nodics.ai
-```
-
-The path may be absolute or relative to the Kickoff project root. This avoids a
-hard dependency on a fixed workspace layout. One developer may keep framework
-code beside Kickoff; another may keep it in a different projects directory.
+Review `config/properties.js` and the selected `envs/<environment>/config`
+layers before starting. Kickoff keeps local configuration in Nodics layered
+properties, not in project-owned `.env` files. Server startup should use the
+selected environment and fail only when a property required for safe boot is
+missing.
 
 Then install project dependencies:
 
@@ -158,8 +148,8 @@ npm install
 
 Kickoff does not copy or symlink framework modules into `.nodics/`. Project
 scripts call `nodics`, installed from the declared `nodics.foundation` dependency.
-Its framework-owned entry point reads `.env` and delegates to the existing command
-registry and runtime resolver. The project no longer owns a JavaScript dispatcher.
+Its framework-owned entry point delegates to the existing command registry and
+runtime resolver. The project no longer owns a JavaScript dispatcher.
 For example, `npm exec -- nodics start --env kickoffLocal --server platform`
 selects a server directly. `npm exec -- nodics build --env kickoffLocal --server platform`
 generates that server's shared artifacts. Add `--node <name>` to select a declared
@@ -179,7 +169,7 @@ Use separate terminals so logs stay readable:
 4. Start Waste Management when waste submission, acceptance, receipt, impact,
    or Waste accelerator data is being tested. Its local initialization profile
    installs `eWaste:core-reference` followed by
-   `kickoffWaste:project-reference`.
+   `circa.ewaste:waste-policy`.
 5. Start Axis, Nexus, and Agora after backend servers are reachable. Each
    frontend uses only its governed backend contracts and configured CORS origin.
 
@@ -190,7 +180,7 @@ Open Axis at `http://localhost:3100`. For the local reference data, use:
 ```text
 Enterprise: default
 Login ID: admin
-Password: adminPassword
+Password: configured bootstrap administrator password
 ```
 
 After login:
@@ -284,11 +274,12 @@ npm run test:waste-runtime
 npm run acceptance:waste-management
 ```
 
-`test:waste-overlay` proves the project-owned `kickoffWaste` data overlay
+`test:waste-overlay` proves the Circa-owned Waste policy data
 contract. `test:waste-runtime` proves the server composition, initialization
 profile, and active modules. `acceptance:waste-management` installs the
-schema-driven accelerator and project releases, validates persisted records,
-and runs the generic acceptance, submission, lifecycle, and impact journey.
+schema-driven accelerator and application policy releases, validates persisted
+records, and runs the generic acceptance, submission, lifecycle, and impact
+journey.
 
 The final pre-Builder gate must use a fresh Local database and qualify all nine
 runtimes together: Platform, WCMS Staged, WCMS Online, Process, Engagement,

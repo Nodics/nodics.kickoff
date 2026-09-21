@@ -18,42 +18,14 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-function readEnvFile(filePath) {
-  if (!fs.existsSync(filePath)) return {};
-  return fs
-    .readFileSync(filePath, "utf8")
-    .split(/\r?\n/u)
-    .reduce((env, line) => {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith("#")) return env;
-      const separatorIndex = trimmed.indexOf("=");
-      if (separatorIndex < 0) return env;
-      const key = trimmed.slice(0, separatorIndex).trim();
-      let value = trimmed.slice(separatorIndex + 1).trim();
-      if (
-        (value.startsWith('"') && value.endsWith('"')) ||
-        (value.startsWith("'") && value.endsWith("'"))
-      ) {
-        value = value.slice(1, -1);
-      }
-      env[key] = value;
-      return env;
-    }, {});
-}
-
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
 const require = createRequire(import.meta.url);
-const localEnv = Object.assign(
-  {},
-  readEnvFile(path.join(projectRoot, ".env")),
-  process.env,
-);
 const frameworkRoot = path.resolve(
   projectRoot,
-  localEnv.NODICS_FRAMEWORK_ROOT || "../nodics.ai",
+  process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai",
 );
 const frameworkFile = (relativePath) =>
   fs.readFileSync(path.join(frameworkRoot, relativePath), "utf8");
@@ -89,7 +61,7 @@ const dockerLocalProfile = require("./helpers/configuration").loadContainer();
 const packageDefinition = JSON.parse(
   fs.readFileSync(new URL("../package.json", import.meta.url), "utf8"),
 );
-const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
+const projectCommands = projectCommandService.resolveCommands(projectRoot);
 
 assert.match(lifecycle, /mongodump/);
 assert.match(lifecycle, /mongorestore/);
@@ -97,7 +69,7 @@ assert.match(lifecycle, /sha256/);
 assert.equal(packageDefinition.name, "nodics.kickoff");
 assert.equal(
   fs.existsSync(path.join(projectRoot, "nodics.project.json")),
-  true,
+  false,
 );
 assert.equal(
   dockerLocalProfile.resilience.restoreConfirmationToken,

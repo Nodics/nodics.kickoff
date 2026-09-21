@@ -11,21 +11,17 @@
  */
 
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import path from 'node:path';
 const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const manifestPath = path.join(projectRoot, 'nodics.project.json');
-const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
-const config = environmentProfile.acceptance?.capabilityRegistry || manifest.acceptance?.capabilityRegistry || {};
+const config = environmentProfile.acceptance?.capabilityRegistry || {};
 const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, { role: 'PLATFORM' });
 const requestOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterprise = process.env.AXIS_ENTERPRISE || 'default';
 const project = process.env.AXIS_PROJECT || environmentProfile.projectCode;
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
-const password = process.env.AXIS_PASSWORD || 'adminPassword';
+const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
 const functionalModule = config.functionalModule || 'nodics.process';
 const expectedFoundationModule = config.foundationModule || 'nodics.foundation';
 const retiredModule = config.retiredModule || 'nodics.core';

@@ -27,7 +27,7 @@ const packagePath = path.join(projectRoot, "package.json");
 test("Agora Commerce data acceptance remains preflight-first with explicit install gating", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
+  const projectCommands = projectCommandService.resolveCommands(projectRoot);
 
   assert.match(
     pkg.scripts["start:commerce:staged"],

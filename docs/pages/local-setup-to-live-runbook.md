@@ -57,22 +57,17 @@ site, and Agora is the commerce storefront.
 Run the first setup from `nodics.kickoff`:
 
 ```bash
-cp .env.example .env
 npm install
 npm run nodics:project:validate
 ```
 
-Review `nodics.kickoff/.env` and confirm the framework root:
-
-```dotenv
-NODICS_FRAMEWORK_ROOT=../nodics.ai
-```
+Review Kickoff package dependencies and layered configuration, then confirm
+they resolve the intended framework checkout and local runtime values.
 
 Run frontend setup from each frontend repository that will be opened:
 
 ```bash
 cd ../nodics.exp/nodics.axis
-cp .env.example .env
 npm install
 ```
 
@@ -133,7 +128,7 @@ Use the local reference admin account:
 
 ```text
 Username: admin
-Password: adminPassword
+Password: configured bootstrap administrator password
 ```
 
 After login, if the Axis baseline is not Online yet, Axis opens the
@@ -175,7 +170,7 @@ Use the local reference admin account:
 
 ```text
 Username: admin
-Password: adminPassword
+Password: configured bootstrap administrator password
 ```
 
 After login, Axis should land on the dashboard.

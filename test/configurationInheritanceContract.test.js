@@ -274,7 +274,7 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     assert.equal(properties.httpHardening?.cors?.deniedOrigins, undefined);
     if (environment === "kickoffLocal") {
       assert.deepEqual(declaration.httpHardening.cors.allowedOrigins, [
-        { $config: "env", name: "NODICS_LOCAL_TELEGRAM_ORIGIN" },
+        "http://localhost:3600",
       ]);
     } else {
       assert.equal(declaration.httpHardening?.cors?.allowedOrigins, undefined);

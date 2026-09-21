@@ -11,16 +11,16 @@
 
 'use strict';
 
-/** @module kickoffWaste/data/core-v001/records/waste/kickoffWasteCategoryData @description Kickoff project category extension and override for Waste. @layer data @owner kickoffWaste */
+/** @module circa.ewaste/data/core-v001/waste-policy/records/circaWastePolicyCategoryData @description Circa category extension and override for Waste. @layer data @owner circa.ewaste */
 module.exports = {
     record0: {
         code: 'MOBILE_DEVICE',
         familyCode: 'ELECTRONICS',
-        name: { en: 'Kickoff Mobile Device' },
+        name: { en: 'Circa Mobile Device' },
         itemTypeCodes: ['MOBILE_PHONE', 'SMARTPHONE', 'FEATURE_PHONE'],
         materialTypeCodes: ['LITHIUM_BATTERY', 'CIRCUIT_BOARD', 'PLASTIC_CASING', 'GLASS_SCREEN'],
         evidencePolicyCode: 'EWASTE_STANDARD_PHOTO',
-        impactProfileCode: 'KICKOFF_VERIFIED_DEVICE_RECOVERY',
+        impactProfileCode: 'CIRCA_VERIFIED_DEVICE_RECOVERY',
         hazardFlags: [],
         status: 'ACTIVE',
         revision: 2,
@@ -33,7 +33,7 @@ module.exports = {
         itemTypeCodes: ['UNKNOWN_ELECTRONIC_ITEM'],
         materialTypeCodes: ['CIRCUIT_BOARD', 'COPPER', 'PLASTIC_CASING'],
         evidencePolicyCode: 'EWASTE_STANDARD_PHOTO',
-        impactProfileCode: 'KICKOFF_VERIFIED_DEVICE_RECOVERY',
+        impactProfileCode: 'CIRCA_VERIFIED_DEVICE_RECOVERY',
         hazardFlags: [],
         status: 'ACTIVE',
         revision: 1,

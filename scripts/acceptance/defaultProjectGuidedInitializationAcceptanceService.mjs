@@ -12,21 +12,17 @@
 
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 
-import fs from 'node:fs';
-import path from 'node:path';
 const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime, projectInitializationProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const manifestPath = path.join(projectRoot, 'nodics.project.json');
-const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
-const config = environmentProfile.acceptance?.guidedInitialization || manifest.acceptance?.guidedInitialization || {};
+const config = environmentProfile.acceptance?.guidedInitialization || {};
 const platformUrl = process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, { role: 'PLATFORM' });
 const processUrl = process.env.NODICS_PROCESS_URL || projectEndpointUrl(environmentProfile, { role: 'PROCESS' });
 const origin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE_CODE || 'default';
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
-const password = process.env.AXIS_PASSWORD || 'adminPassword';
+const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
 const profileCode = projectInitializationProfile(projectRuntime(environmentProfile, config.runtime), process.env.NODICS_INITIALIZATION_PROFILE || config.profileCode, config.profileTemplate);
 
 const publicationProfiles = config.publicationProfiles;

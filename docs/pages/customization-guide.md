@@ -81,7 +81,7 @@ Use these examples when deciding where code or data belongs:
 | Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |
 | Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |
 | Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |
-| Add project Waste categories or presets | `modules/kickoffWaste/data` | Waste values are schema-driven project overlay data, not framework source edits. |
+| Add Circa Waste categories or presets | `modules/circa.ewaste/data/core-v001/waste-policy` | Waste values are schema-driven application policy data, not framework source edits. |
 
 ## Configuration-first examples
 
@@ -92,8 +92,8 @@ the correct configuration owner before writing code.
 | --- | --- | --- |
 | Local WCMS port must change | Server config under `envs/.../wcmsStagedServer/config` or `envs/.../wcmsOnlineServer/config` | Port is topology, not shared framework behavior. |
 | A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |
-| A framework checkout path differs | `.env` with `NODICS_FRAMEWORK_ROOT` | Workspace layout is deployment- and developer-specific. |
-| Project identity is needed | `package.json.name` | Do not duplicate it in `nodics.project.json` or `config/properties.js`. |
+| A framework checkout path differs | Update the declared framework package dependency and lockfile | Workspace layout is project setup, not runtime configuration. |
+| Project identity is needed | `package.json.name` | Do not duplicate it in root descriptors or `config/properties.js`. |
 | A local domain selection is needed | `envs/<environment>/nodics.environment.json` | Runtime composition belongs to the selected environment, not a root helper file. |
 | A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |
 | A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |
@@ -185,15 +185,16 @@ capabilities:
 nodics.waste
   -> waste accelerator umbrella
     -> eWaste scenario accelerator
-      -> kickoffWaste project overlay
+      -> circa.ewaste Waste policy
 ```
 
-Use `modules/kickoffWaste` for Kickoff-owned Waste data. It can add or override
-family, category, material, evidence policy, collection preset, acceptance rule,
-impact metric, and impact profile records through a manifest-backed data
-release. The local Waste server installs `eWaste:core-reference` first and
-`kickoffWaste:project-reference` second, so project values can extend the
-accelerator without changing framework or accelerator code.
+Use `modules/circa.ewaste/data/core-v001/waste-policy` for Circa-owned Waste
+policy data. It can add or override family, category, material, evidence policy,
+collection preset, acceptance rule, impact metric, and impact profile records
+through a manifest-backed data release. The local Waste server installs
+`eWaste:core-reference` first and `circa.ewaste:waste-policy` second, so Circa
+values can extend the accelerator without changing framework or accelerator
+code.
 
 Do not put reward formulas, coupon codes, map-provider secrets, vendor
 contracts, recycler adapters, logistics adapters, or tenant-scoped rows in

@@ -27,7 +27,7 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_LOCATION_API_KEY",
+      "name": "NODICS_LOCATION_API_KEY",
       "fallback": null
     }
   },
@@ -66,19 +66,7 @@ module.exports = {
     },
     "default": "location.operational"
   },
-  "apiExposure": {
-    "categories": {
-      "dataImport": {
-        "enabled": true
-      }
-    }
-  },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultLocationMapProviderConfigurationService"
     ],
@@ -166,41 +154,10 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "process": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "processServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "commerce": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "commerceServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "waste": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wasteServer",
-        "path": "servers.default.endpoint"
-      }
     }
   },
   "tooling": {

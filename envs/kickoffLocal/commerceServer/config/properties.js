@@ -34,16 +34,11 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_COMMERCE_API_KEY",
+      "name": "NODICS_COMMERCE_API_KEY",
       "fallback": null
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultCommerceOrderService",
       "DefaultProductService",
@@ -229,13 +224,6 @@ module.exports = {
     },
     "default": "commerce.operational"
   },
-  "apiExposure": {
-    "categories": {
-      "dataImport": {
-        "enabled": true
-      }
-    }
-  },
   "search": {
     "product": {
       "options": {
@@ -374,11 +362,6 @@ module.exports = {
   },
   "servers": {
     "waste": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wasteServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "default": {
@@ -388,34 +371,10 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "loyalty": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "loyaltyServer",
-        "path": "servers.default.endpoint"
-      }
-    },
-    "loyaltyServer": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "loyaltyServer",
-        "path": "servers.default.endpoint"
-      }
     }
   },
   "tooling": {

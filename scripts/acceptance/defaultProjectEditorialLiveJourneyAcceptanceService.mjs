@@ -28,7 +28,7 @@ const processUrl = process.env.AXIS_PROCESS_URL || projectEndpointUrl(environmen
 const enterpriseCode = process.env.AXIS_ENTERPRISE || 'default';
 const tenant = process.env.AXIS_TENANT || 'default';
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
-const password = process.env.AXIS_PASSWORD || 'adminPassword';
+const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
 
 function endpoint(baseUrl, path) {
   return new URL(path, baseUrl).toString();

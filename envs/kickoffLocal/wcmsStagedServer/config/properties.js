@@ -40,7 +40,7 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_WCMS_STAGED_API_KEY",
+      "name": "NODICS_WCMS_STAGED_API_KEY",
       "fallback": null
     }
   },
@@ -52,11 +52,6 @@ module.exports = {
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultCmsDocumentationAccessPolicyService",
       "DefaultCmsDocumentationDashboardService",
@@ -313,42 +308,15 @@ module.exports = {
         "httpsPort": 4313
       }
     },
-    "cmsOnline": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "wcmsOnlineServer",
-        "path": "servers.default.endpoint"
-      }
-    },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "process": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "processServer",
-        "path": "servers.default.endpoint"
-      }
     }
   },
   "apiExposure": {
     "categories": {
-      "dataImport": {
-        "enabled": true
-      },
       "dataExport": {
         "enabled": true
       }

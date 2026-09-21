@@ -55,12 +55,9 @@ const containerQualificationService = fs.readFileSync(
   ),
   "utf8",
 );
-const projectContractPath = path.join(root, "nodics.project.json");
 const environmentProfile = require("./helpers/configuration").loadContainer();
 
-const projectCommands = projectCommandService.resolveCommands(
-  projectCommandService.readManifest(root),
-);
+const projectCommands = projectCommandService.resolveCommands(root);
 const servers = [
   "platformServer",
   "wcmsStagedServer",
@@ -235,8 +232,8 @@ assert(
   ),
 );
 assert.deepEqual(
-  Object.keys(JSON.parse(fs.readFileSync(projectContractPath))),
-  ["tooling"],
+  fs.existsSync(path.join(root, "nodics.project.json")),
+  false,
 );
 assert.equal(environmentProfile.code, "dockerLocal");
 assert.equal(environmentProfile.environment, "kickoffDockerLocal");

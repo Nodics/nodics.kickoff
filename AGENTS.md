@@ -145,10 +145,12 @@ only by Platform and ordered before deployment overlays. Foundation nTooling
 owns reusable command behavior; customer selectors and policy remain here.
 
 Application-specific acceptance and media seeding live under `scripts/acceptance`
-and are declared through `nodics.project.json` tooling commands and script
-ownership. Framework nTooling retains the shared executor and metadata resolvers.
-Keep deployment aliases and application publication identifiers in this project;
-never promote the reference journeys into universal framework defaults.
+and are discovered by framework nTooling from conventional `*Service.mjs`
+script names. Do not add `nodics.project.json` or duplicate discovered command
+aliases in layered properties. Framework nTooling retains the shared executor
+and metadata resolvers. Keep deployment aliases and application publication
+identifiers in this project; never promote the reference journeys into universal
+framework defaults.
 
 
 Application Builder reference choices are declared in this project's
@@ -161,8 +163,9 @@ not replace Local/Docker deployment acceptance.
 Apply the framework configuration coding restrictions through the existing
 nSetup customer configuration classification contract. Do not add an environment
 descriptor or duplicate endpoint/authentication catalogue. The customer may
-explicitly configure `bootstrapIdentity.adminPassword`; all other literal auth
-secrets and binding fallbacks remain prohibited. nAuth validates password strength.
+override `bootstrapIdentity.adminPassword` only through governed configuration
+bindings or runtime credential authority; authored source must not carry live
+literal auth secrets or binding fallbacks. nAuth validates password strength.
 Local provider defaults are inherited; only actual environment differences belong
 here. Project validation enforces the static restrictions before commands run.
 

@@ -34,16 +34,11 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_COMMERCE_STAGED_API_KEY",
+      "name": "NODICS_COMMERCE_STAGED_API_KEY",
       "fallback": null
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultProductService",
       "DefaultProductPublicationService"
@@ -223,13 +218,6 @@ module.exports = {
     },
     "default": "commerce.staged"
   },
-  "apiExposure": {
-    "categories": {
-      "dataImport": {
-        "enabled": true
-      }
-    }
-  },
   "search": {
     "product": {
       "options": {
@@ -305,27 +293,10 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "commerce": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "commerceServer",
-        "path": "servers.default.endpoint"
-      }
     }
   },
   "tooling": {

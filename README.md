@@ -69,7 +69,6 @@ the containers themselves.
 Run:
 
 ```text
-cp .env.example .env
 npm ci
 npm test
 npm run start:platform
@@ -99,10 +98,10 @@ stops only processes whose generated PID ownership belongs to this checkout.
 
 Waste Management is proven as a separate local runtime at
 `http://localhost:4370`. It loads `nodics.waste`, the Waste accelerator
-umbrella, `eWaste`, and the project-owned `kickoffWaste` overlay. The local
-Waste foundation installs `eWaste:core-reference` and then
-`kickoffWaste:project-reference`, preserving the standard framework ->
-accelerator -> project customization flow.
+umbrella, `eWaste`, and the Circa application module. The local Waste
+foundation installs `eWaste:core-reference` and then
+`circa.ewaste:waste-policy`, preserving the standard framework -> accelerator
+-> application policy flow without a second project-only Waste module.
 
 For an independently configured containerized production simulation, use
 `envs/kickoffDockerLocal`. It has separate ports, generated secrets,
@@ -116,26 +115,28 @@ qualify deterministic publication interruption/reconciliation contracts and a
 30-minute mixed-read/publication soak while preserving explicit
 external-evidence limitations.
 
-Kickoff does not install framework modules through project-local symlinks.
-`NODICS_FRAMEWORK_ROOT` in `.env` points to the available `nodics.ai` checkout,
-and the project bootstrap script delegates lifecycle commands to that framework
-tooling directly. Use `npm ci` for deterministic project installs; update
-`.env` when the framework checkout moves.
+Kickoff does not install framework modules through project-local symlinks or
+project-owned `.env` files. Its package dependencies point at the available
+`nodics.ai` checkout, and the project bootstrap script delegates lifecycle
+commands to that framework tooling directly. Use `npm ci` for deterministic
+project installs; update package dependency coordinates and layered properties
+when the framework checkout moves.
 
 Customers and partner developers should run Nodics lifecycle checks from their
 project repository. Kickoff exposes project-local aliases such as
 `npm run nodics:clean`, `npm run nodics:build`, and
 `npm run release:check`, but those aliases delegate to the framework-owned
-`nTooling` bridge resolved from `NODICS_FRAMEWORK_ROOT`. Do not copy framework clean, build,
-release, security-boundary, or framework publication-qualification
+`nTooling` bridge resolved from the declared framework package dependency. Do
+not copy framework clean, build, release, security-boundary, or framework
+publication-qualification
 implementation into customer projects.
 
-The canonical project identity is `package.json.name`. `nodics.project.json` is
-optional and reserved for project-owned command or acceptance overrides; it must
-not declare `projectCode` or `contractVersion`. Human-readable project metadata lives in
-`package.json.nodics`; environment domain selections, topology, acceptance, and
-qualification profiles are owned by the selected environment, for example
-`envs/kickoffLocal/nodics.environment.json` and
+The canonical project identity is `package.json.name`. Do not create
+`nodics.project.json`; project command aliases are discovered from environment
+server metadata and conventional acceptance scripts. Human-readable project
+metadata lives in `package.json.nodics`; environment domain selections, topology,
+acceptance, and qualification profiles are owned by the selected environment, for example
+`envs/kickoffLocal/config/properties.js` and
 `envs/kickoffDockerLocal/nodics.environment.json`. Data packs are declared by
 each module's `data/manifest.json`. Runtime startup facts are discovered from
 the selected environment server packages under
@@ -209,13 +210,11 @@ documentation page “Deployment qualification” for the beginner and operator
 journey. The bounded fresh-database variant requires the explicit
 `--include-fresh` flag.
 
-Update `NODICS_FRAMEWORK_ROOT` in `.env` when the framework checkout is not
-located at the default sample location. The value may be absolute or relative
-to this Nodics Kickoff project root. Project scripts use the `nodics` executable supplied by the declared
-`nodics.foundation` dependency. This reference project binds Foundation to its
-local framework checkout in `package.json`; update that dependency and its lockfile
-when moving the checkout. `.env` may select runtime framework coordinates without
-copying a JavaScript dispatcher into the project. No `.nodics/` links are required.
+When the framework checkout is not located at the default sample location,
+update the declared framework package dependency and its lockfile. Project
+scripts use the `nodics` executable supplied by the declared
+`nodics.foundation` dependency. No `.env` configuration file and no `.nodics/`
+links are required for Kickoff runtime resolution.
 
 Do not commit `.nodics/`; it is machine-local generated scratch/setup state.
 
@@ -225,8 +224,8 @@ and runtime-scoped clean/build behavior before more broad code movement.
 Kickoff configuration follows the framework classification contract:
 
 - project identity belongs only in `package.json.name`;
-- `nodics.project.json` should not exist unless the project has real
-  project-owned tooling or acceptance overrides;
+- `nodics.project.json` must not exist; tooling discovers project commands from
+  package metadata, `envs/*` server metadata, and `scripts/acceptance`;
 - root `config/properties.js` must not redeclare project identity, descriptor
   versions, environment topology, or domain composition that belongs elsewhere;
 - local shared environment defaults belong in `envs/kickoffLocal/config/`;

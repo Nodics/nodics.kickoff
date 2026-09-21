@@ -84,6 +84,32 @@
         "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
       }
     },
+    "waste-policy": {
+      "kind": "DATA_RELEASE",
+      "dataType": "core",
+      "sourceRoot": "core-v001",
+      "version": "0.0.0",
+      "displayName": "Circa Waste Policy",
+      "description": "Circa-owned Waste policy records extending and overriding eWaste presets through nodics.waste schemas.",
+      "owningDomain": "waste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "WASTE",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "core-v001/waste-policy/headers/circaWastePolicyHeader.js": "31d74d8e8868190e5b644e7fa4b1b2812dbfbb79de95c944d7e8dbd5b02842d0",
+        "core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData.js": "818e806ff37c9f87f19ea7ae36aa49510ab50f76fa104d06676ec497d3dcf826",
+        "core-v001/waste-policy/records/circaWastePolicyCategoryData.js": "3b12605cd1734957efc2566505ef9fd93cff1c4867d0f9c723aa70905b65f8dc",
+        "core-v001/waste-policy/records/circaWastePolicyCollectionPresetData.js": "c5aa852b34e4f1b9afb97c3389702019b66af1cdfedd4d9b0c1ca4239e1b6ee2",
+        "core-v001/waste-policy/records/circaWastePolicyImpactProfileData.js": "0e649cb670b8bec75288569c7940f2e73c54c9ea6fef6b0a9b0318f5b220e857"
+      }
+    },
     "loyalty": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",

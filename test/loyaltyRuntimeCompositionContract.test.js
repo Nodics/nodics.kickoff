@@ -24,25 +24,7 @@ const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
 
-function readEnvFile(filePath) {
-    if (!fs.existsSync(filePath)) return {};
-    return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) return env;
-        const separatorIndex = trimmed.indexOf('=');
-        if (separatorIndex < 0) return env;
-        const key = trimmed.slice(0, separatorIndex).trim();
-        let value = trimmed.slice(separatorIndex + 1).trim();
-        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-            value = value.slice(1, -1);
-        }
-        env[key] = value;
-        return env;
-    }, {});
-}
-
-const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
-const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
+const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const coreRoot = path.join(frameworkRoot, 'nodics.foundation');
 const loyaltyRoot = path.join(frameworkRoot, 'nodics.loyalty');
 const config = require(path.join(coreRoot, 'modules/nConfig'));

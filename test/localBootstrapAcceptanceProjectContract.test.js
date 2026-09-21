@@ -11,10 +11,10 @@
 
 /**
  * @module kickoff/test/localBootstrapAcceptanceProjectContract
- * @description Proves local bootstrap acceptance reads project-declared capabilities instead of hard-coded project names.
+ * @description Proves local bootstrap acceptance uses project package identity and owned defaults instead of duplicate root descriptors.
  * @layer test
  * @owner nodics.kickoff
- * @override Customer-project acceptance may add customer documentation checks through nodics.project.json, but must not infer capabilities from a project code.
+ * @override Customer-project acceptance may add customer documentation checks through owned acceptance code or layered configuration, but must not infer capabilities from a project code.
  */
 const assert = require('assert');
 const fs = require('fs');
@@ -30,16 +30,16 @@ assert(
 assert(!source.includes('axisRoot') && !source.includes('runAxisSmoke') && !source.includes('smoke:live'), 'API acceptance must not require a frontend checkout or UI tests');
 assert(
   source.includes('function loadLocalBootstrapCapabilities()') &&
-    source.includes('descriptor?.acceptance?.localBootstrap'),
-  'local acceptance must load capability declarations from nodics.project.json'
+    !source.includes('descriptor?.acceptance?.localBootstrap'),
+  'local acceptance must not load capability declarations from nodics.project.json'
 );
 assert(
   source.includes('function assertValidLocalBootstrapCapabilities(capabilities)') &&
-    source.includes('Invalid acceptance.localBootstrap in nodics.project.json'),
-  'local acceptance must reject invalid capability declarations with a beginner-readable descriptor error'
+    source.includes('Invalid local bootstrap capabilities'),
+  'local acceptance must reject invalid capability declarations with a beginner-readable error'
 );
 assert(
-  source.includes('const projectCode = process.env.AXIS_PROJECT || resolveProjectCode(projectDescriptor, packageDescriptor);'),
+  source.includes('const projectCode = process.env.AXIS_PROJECT || resolveProjectCode(packageDescriptor);'),
   'local acceptance must derive the project code from package.json.name'
 );
 assert(

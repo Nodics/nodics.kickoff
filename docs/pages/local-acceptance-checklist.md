@@ -49,18 +49,9 @@ nodicsRoot/
 ```
 
 This layout is only a convenience. Customer projects may live anywhere. The
-important contract is that `nodics.kickoff/.env` tells Kickoff where the
-framework checkout lives.
-
-```dotenv
-NODICS_FRAMEWORK_ROOT=../nodics.ai
-```
-
-Use an absolute path if your repositories are not parallel:
-
-```dotenv
-NODICS_FRAMEWORK_ROOT=/Users/example/projects/framework/nodics.ai
-```
+important contract is that the project dependency graph and layered
+configuration identify the framework checkout and runtime values without a
+project-owned `.env` file.
 
 ## Mandatory prerequisites
 
@@ -73,20 +64,19 @@ available:
    - `nodics.ai`
    - `nodics.kickoff`
    - `nodics.exp` with `nodics.axis`, `nodics.nexus`, and Agora applications
-4. `nodics.kickoff/.env` exists and points to the framework root.
-5. `nodics.exp/nodics.axis/.env` points to the local Platform server.
+4. Kickoff package dependencies resolve to the intended framework checkout.
+5. Frontend applications point to the local Platform server through their
+   existing application configuration mechanism.
 
 Run this from `nodics.kickoff`:
 
 ```bash
-cp .env.example .env
 npm install
 ```
 
 Run this from `nodics.exp/nodics.axis`:
 
 ```bash
-cp .env.example .env
 npm install
 ```
 
@@ -272,7 +262,7 @@ Open Axis and use the local reference credentials:
 ```text
 Enterprise: default
 Login ID: admin
-Password: adminPassword
+Password: configured bootstrap administrator password
 ```
 
 Successful login proves:

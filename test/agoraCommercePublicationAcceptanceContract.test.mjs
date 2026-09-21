@@ -27,7 +27,7 @@ const packagePath = path.join(projectRoot, "package.json");
 test("Agora Commerce publication acceptance covers operator publication operational restore and customer discovery", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
+  const projectCommands = projectCommandService.resolveCommands(projectRoot);
 
   assert.match(
     pkg.scripts["acceptance:agora-commerce-publication"],

@@ -23,25 +23,7 @@ const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
 
-function readEnvFile(filePath) {
-    if (!fs.existsSync(filePath)) return {};
-    return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) return env;
-        const separatorIndex = trimmed.indexOf('=');
-        if (separatorIndex < 0) return env;
-        const key = trimmed.slice(0, separatorIndex).trim();
-        let value = trimmed.slice(separatorIndex + 1).trim();
-        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-            value = value.slice(1, -1);
-        }
-        env[key] = value;
-        return env;
-    }, {});
-}
-
-const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
-const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
+const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const coreRoot = path.join(frameworkRoot, 'nodics.foundation');
 const runtimeRoots = require('../envs/kickoffLocal/wasteServer/package.json').nodics.runtimeModuleRoots.map(relative => path.join(frameworkRoot, relative));
 const acceleratorRoot = path.join(frameworkRoot, 'nodics.accelerators/modules/waste');
@@ -67,7 +49,7 @@ const expectedWasteModules = [
     'rulesEvaluation',
     'rulesApi',
     'eWaste',
-    'kickoffWaste'
+    'circa.ewaste'
 ];
 
 const expectedSchemas = {
@@ -109,8 +91,8 @@ async function main() {
     assert.equal(CONFIG.get('waste').accelerator.umbrella, 'waste');
     assert.deepEqual(CONFIG.get('waste').accelerator.scenarioAccelerators, ['eWaste']);
     assert.deepEqual(CONFIG.get('waste').accelerator.presetPackCodes, ['EWASTE_CORE_PRESETS']);
-    assert.equal(CONFIG.get('waste').projectOverlay.module, 'kickoffWaste');
-    assert.equal(CONFIG.get('waste').projectOverlay.releaseCode, 'kickoffWaste:project-reference');
+    assert.equal(CONFIG.get('waste').projectOverlay.module, 'circa.ewaste');
+    assert.equal(CONFIG.get('waste').projectOverlay.releaseCode, 'circa.ewaste:waste-policy');
 
     expectedWasteModules.forEach(moduleName => {
         assert.equal(NODICS.isModuleActive(moduleName), true, `${moduleName} should be active for wasteServer`);
@@ -152,9 +134,9 @@ async function main() {
     const manifest = require(path.join(acceleratorRoot, 'modules/eWaste/data/manifest.json'));
     assert.equal(manifest.sections['core-reference'].destinationRole, 'WASTE');
     assert.equal(manifest.sections['core-reference'].dataType, 'core');
-    const overlayManifest = require(path.join(projectRoot, 'modules/kickoffWaste/data/manifest.json'));
-    assert.equal(overlayManifest.sections['project-reference'].destinationRole, 'WASTE');
-    assert.equal(overlayManifest.sections['project-reference'].dataType, 'core');
+    const overlayManifest = require(path.join(projectRoot, 'modules/circa.ewaste/data/manifest.json'));
+    assert.equal(overlayManifest.sections['waste-policy'].destinationRole, 'WASTE');
+    assert.equal(overlayManifest.sections['waste-policy'].dataType, 'core');
     console.log('Kickoff kickoffLocal wasteServer runtime composition passed');
 }
 

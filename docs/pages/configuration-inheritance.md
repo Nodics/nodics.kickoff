@@ -231,9 +231,9 @@ resolved Foundation package.
 
 ## Commands and capability inventories
 
-The framework supplies shared tooling operations. This project's
-`nodics.project.json` supplies its actual server/environment aliases and declares
-application-specific scripts under `scripts/acceptance`. For example,
+The framework supplies shared tooling operations. This project's server aliases
+are discovered from `envs/*` server metadata, and application-specific scripts
+are discovered from conventional files under `scripts/acceptance`. For example,
 `acceptance:agora-commerce` launches the project-owned customer journey through
 the shared executor. Moving ownership does not authorize executing that journey:
 its existing credential, import, startup and destructive confirmation gates apply.
@@ -316,17 +316,17 @@ restrict Sample execution without changing framework code.
 
 ## Credentials, initialization and runtime authentication
 
-Auth policy comes from nAuth. Customer root `config/properties.js` may set
-`bootstrapIdentity.adminPassword`; environment, server and node properties may
-override it through nConfig. Kickoff declares its current administrator bootstrap
-value at this customer-project layer. The value must satisfy nAuth password
-strength and remain distinct from service credentials. This configures future
-initialization; changing it does not rotate an already persisted administrator
-password. Use Profile credential operations for an existing account.
+Auth policy and bootstrap credential bindings come from nAuth. Kickoff does not
+declare a customer-root administrator password. Environment, server and node
+layers may override `bootstrapIdentity.adminPassword` through nConfig when a
+deployment intentionally supplies a different initial administrator credential.
+This configures future initialization; changing it does not rotate an already
+persisted administrator password. Use Profile credential operations for an
+existing account.
 
-This administrator bootstrap value is the sole literal-credential exception.
-JWT secrets, peppers, service passwords/API keys and binding fallbacks still use
-deployment inputs. Do not publish credential-bearing customer files or enable
+Administrator bootstrap values, JWT secrets, peppers, service passwords/API
+keys and binding fallbacks remain deployment inputs or governed runtime
+configuration. Do not publish credential-bearing customer files or enable
 blanket legacy-human/plaintext/missing-stamp compatibility exceptions.
 
 Supply deployment inputs through the framework's environment bindings or the
@@ -341,10 +341,13 @@ existing layered external/secret-provider mechanism:
 | `NODICS_BOOTSTRAP_SERVICE_API_KEY` | Initial service API-key provisioning |
 | `NODICS_RUNTIME_API_KEY` | Current retained runtime proof |
 
-All ten Local runtimes retain independent `NODICS_LOCAL_*_API_KEY` bindings and runtime instance identities.
-These are intentional deployment selections. Missing retained proof remains null;
-there is no fallback to a sample key or human administrator. Profile owns runtime
-scope grants, tenant/enterprise validation, token issuance, renewal and revocation.
+All ten Local runtimes retain independent generic `NODICS_*_API_KEY` bindings
+and runtime instance identities. The binding names are environment-neutral; the
+Local layer only supplies the selected value and keeps a compatibility fallback
+for older developer machines. These are intentional deployment selections.
+Missing retained proof remains null; there is no fallback to a sample key or
+human administrator. Profile owns runtime scope grants, tenant/enterprise
+validation, token issuance, renewal and revocation.
 
 Profile's `profileInitialization.requiredEmployeeLogins` defaults to the human and
 service identities supplied by its Init release. Initialization checks no longer

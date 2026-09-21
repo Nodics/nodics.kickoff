@@ -17,25 +17,7 @@ const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
 
-function readEnvFile(filePath) {
-    if (!fs.existsSync(filePath)) return {};
-    return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).reduce((env, line) => {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) return env;
-        const separatorIndex = trimmed.indexOf('=');
-        if (separatorIndex < 0) return env;
-        const key = trimmed.slice(0, separatorIndex).trim();
-        let value = trimmed.slice(separatorIndex + 1).trim();
-        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-            value = value.slice(1, -1);
-        }
-        env[key] = value;
-        return env;
-    }, {});
-}
-
-const localEnv = Object.assign({}, readEnvFile(path.join(projectRoot, '.env')), process.env);
-const frameworkRoot = path.resolve(projectRoot, localEnv.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
+const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
 const packageRoot = packageName => path.join(frameworkRoot, packageName);
 
 const scenarios = Object.freeze([
@@ -142,7 +124,6 @@ const scenarios = Object.freeze([
             'wasteServer',
             'waste',
             'eWaste',
-            'kickoffWaste',
             'circa.ewaste',
             'copilotPolicy',
             'copilotKnowledge',
@@ -158,7 +139,7 @@ const scenarios = Object.freeze([
             assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WASTE'), true);
             assert.equal(CONFIG.get('waste').accelerator.umbrella, 'waste');
             assert.deepEqual(CONFIG.get('waste').accelerator.scenarioAccelerators, ['eWaste']);
-            assert.equal(CONFIG.get('waste').projectOverlay.module, 'kickoffWaste');
+            assert.equal(CONFIG.get('waste').projectOverlay.module, 'circa.ewaste');
             assert.equal(NODICS.getRawModule('nodics.accelerators'), undefined);
             assert.equal(NODICS.isModuleActive('loyaltyCore'), false);
             assert.equal(NODICS.isModuleActive('promotion'), false);

@@ -48,7 +48,7 @@ framework:
 | Do I have to edit framework source to customize? | No. Customer modules and server/environment configuration load after framework modules. |
 | Can documentation and content be imported like real governed data? | Yes. Kickoff ships a project-owned documentation content pack. |
 | Can optional modules be added later? | Yes. Process demonstrates observed optional runtime capability and registry lifecycle while exposing workflow and cronjob capabilities. |
-| Can accelerators be customized without changing framework code? | Yes. Waste Management loads `nodics.waste`, `eWaste`, and the `kickoffWaste` project overlay as separate layers. |
+| Can accelerators be customized without changing framework code? | Yes. Waste Management loads `nodics.waste`, `eWaste`, and Circa-owned Waste policy data without changing framework or accelerator source. |
 | Can an accelerator be imported before its business capabilities are active? | No. The setup journey blocks it until required capabilities such as Commerce, Discovery, or Engagement are registered and active. |
 | Can my real project use a different folder layout? | Yes. `NODICS_FRAMEWORK_ROOT` points Kickoff to the framework checkout. |
 
@@ -98,7 +98,7 @@ into the production line. Each part has a job.
 - how Platform, WCMS Staged, WCMS Online, Process and Automation, Engagement, and
   Commerce can run as separate ownership domains while serving three frontends;
 - how Waste Management runs as a separate backend with framework, accelerator,
-  scenario, and project overlay layers;
+  scenario, and Circa application policy layers;
 - how project modules can customize runtime behavior without renaming the
   standard functional module identity;
 - how customer-owned documentation can appear in Axis beside Framework,
@@ -109,11 +109,10 @@ into the production line. Each part has a job.
 The important Kickoff locations are:
 
 - `package.json` describes the project package and local scripts;
-- `.env` describes developer-specific framework checkout location and local
-  overrides;
 - `package.json.name` declares the canonical stable project identity;
-- `nodics.project.json`, when present, declares only project-owned command or
-  acceptance overrides;
+- project command aliases are discovered from `envs/*` server metadata and
+  conventional `scripts/acceptance/*Service.mjs` files; do not create
+  `nodics.project.json`;
 - `package.json.nodics` declares human-readable project metadata;
 - `envs/<environment>/nodics.environment.json` declares environment domain
   selections, topology, acceptance, and qualification profile facts;

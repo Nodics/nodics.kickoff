@@ -25,13 +25,8 @@ const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrig
 
 const execFileAsync = promisify(execFile);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const manifestPath = path.join(projectRoot, "nodics.project.json");
-const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
-const projectPropertiesModule = await import((await import("node:url")).pathToFileURL(path.join(projectRoot, "config", "properties.js")).href);
-const projectProperties = projectPropertiesModule.default || projectPropertiesModule;
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || "");
 const config = environmentProfile.acceptance?.wasteBackofficeDiscovery ||
-  manifest.acceptance?.wasteBackofficeDiscovery ||
   {};
 const platformRuntime = projectRuntime(environmentProfile, config.platform);
 const wasteRuntime = projectRuntime(environmentProfile, config.waste);
@@ -179,9 +174,7 @@ async function authenticate() {
     body: JSON.stringify({
       loginId: process.env.AXIS_LOGIN_ID || "admin",
       password: process.env.AXIS_PASSWORD ||
-        process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD ||
-        projectProperties.bootstrapIdentity?.adminPassword ||
-        "adminPassword",
+        process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD,
     }),
   });
   if (!result?.authToken) throw new Error("Platform authentication returned no token");
@@ -232,7 +225,7 @@ async function reconcileWasteRuntimeGrant(headers) {
   if (!runtimeIdentity.instanceCode || expectedRuntimeModules.length === 0) {
     throw new Error("Waste runtime identity and module declaration are required before grant reconciliation");
   }
-  const grantCode = process.env.NODICS_LOCAL_WASTE_GRANT_CODE || "kickoff-local-waste-runtime-deployment";
+  const grantCode = process.env.NODICS_WASTE_GRANT_CODE || "kickoff-local-waste-runtime-deployment";
   const current = await request(platformUrl, `/nodics/profile/v0/principalscopeassignment/code/${encodeURIComponent(grantCode)}`, {
     headers,
   });

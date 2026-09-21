@@ -313,8 +313,8 @@ assert.equal(
 );
 
 const wasteRuntime = loadRuntime("wasteServer");
-const kickoffWasteProperties = require(
-  path.join(projectRoot, "modules", "kickoffWaste", "config", "properties.js"),
+const circaWasteProperties = require(
+  path.join(projectRoot, "modules", "circa.ewaste", "config", "properties.js"),
 );
 assert.equal(
   wasteRuntime.servers.default.endpoint.httpPort,
@@ -342,9 +342,9 @@ assert.deepEqual(
   [
     "wasteMaterial:core-v001",
     "eWaste:core-reference",
-    "kickoffWaste:project-reference",
+    "circa.ewaste:waste-policy",
   ],
-  "wasteServer must install material reference data, accelerator data and the Kickoff project overlay explicitly",
+  "wasteServer must install material reference data, accelerator data and the Circa Waste policy explicitly",
 );
 
 const locationRuntime = loadRuntime("locationServer");
@@ -374,8 +374,8 @@ assert.deepEqual(
   "locationServer must expose Waste-owned collection-centre location samples as Location-targeted contributions",
 );
 assert.equal(
-  kickoffWasteProperties.waste.projectOverlay.releaseCode,
-  "kickoffWaste:project-reference",
+  circaWasteProperties.waste.projectOverlay.releaseCode,
+  "circa.ewaste:waste-policy",
 );
 
 console.log("Kickoff guided initialization profile contract validated");

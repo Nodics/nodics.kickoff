@@ -192,10 +192,11 @@ The Telegram validator follows the [official launch validation contract](https:/
 It rejects duplicate fields, invalid signatures, expired/future launches and
 invalid subjects. Stable numeric subject/bot ID are persisted as origin on the
 Waste draft only after an authenticated customer creates it. A signed launch is
-not a Profile token. The supplied local bot passes `getMe`; its token is held in
-ignored `.env` configuration (`CIRCA_TELEGRAM_BOT_TOKEN`, file mode 0600), never in
-the frontend or tracked source. A reachable HTTPS Mini App URL and actual-client
-acceptance are still required. No webhook or bot menu URL was changed.
+not a Profile token. Telegram bot credentials are referenced by a logical
+credential reference in Profile and Communication configuration; the secret
+value belongs to governed runtime configuration and is never in frontend or
+tracked source. A reachable HTTPS Mini App URL and actual-client acceptance are
+still required. No webhook or bot menu URL was changed.
 
 Known scope limits: the full agreed size/material/weight-provenance extraction,
 customer knowledge publication/retrieval, complete Axis

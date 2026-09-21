@@ -27,7 +27,7 @@ const packagePath = path.join(projectRoot, "package.json");
 test("Loyalty reward checkout acceptance runs through live Platform, Commerce, and Loyalty boundaries", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  const projectCommands = projectCommandService.resolveCommands(projectCommandService.readManifest(projectRoot));
+  const projectCommands = projectCommandService.resolveCommands(projectRoot);
 
   assert.match(pkg.scripts["acceptance:loyalty-reward-checkout"], /nodics project:run acceptance:loyalty-reward-checkout/);
   assert.equal(projectCommands["acceptance:loyalty-reward-checkout"].script, "scripts/acceptance/defaultProjectLoyaltyRewardCheckoutAcceptanceService.mjs");

@@ -20,9 +20,6 @@
  */
 
 module.exports = {
-  "bootstrapIdentity": {
-    "adminPassword": "mIcvmrDPbRtf5cAsHspbspl618vSg1Ld"
-  },
   "tooling": {
     "acceptance": {
       "guidedInitialization": {

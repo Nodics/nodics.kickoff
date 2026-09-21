@@ -23,16 +23,11 @@ module.exports = {
   "defaultAuthDetail": {
     "apiKey": {
       "$config": "env",
-      "name": "NODICS_LOCAL_ENGAGEMENT_API_KEY",
+      "name": "NODICS_ENGAGEMENT_API_KEY",
       "fallback": null
     }
   },
   "localResetProvider": {
-    "enabled": true,
-    "environmentAllowlist": [
-      "kickoffLocal"
-    ],
-    "allowMissingModelServices": true,
     "requiredServiceNames": [
       "DefaultContactRequestService",
       "DefaultCommsIntentService"
@@ -131,7 +126,7 @@ module.exports = {
         "code": "telegram",
         "service": "DefaultTelegramCommunicationProviderService",
         "credentialReferences": [
-          "CIRCA_TELEGRAM_BOT_TOKEN"
+          "telegram.bot.local"
         ],
         "timeoutMilliseconds": 10000
       }
@@ -193,34 +188,10 @@ module.exports = {
       }
     },
     "profile": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
     },
     "backoffice": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "platformServer",
-        "path": "servers.default.endpoint"
-      },
       "remoteOnly": true
-    },
-    "process": {
-      "endpoint": {
-        "$config": "runtime",
-        "name": "processServer",
-        "path": "servers.default.endpoint"
-      }
-    }
-  },
-  "apiExposure": {
-    "categories": {
-      "dataImport": {
-        "enabled": true
-      }
     }
   },
   "tooling": {

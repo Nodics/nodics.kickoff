@@ -19,10 +19,8 @@ const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrig
 
 const execFileAsync = promisify(execFile);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const manifestPath = path.join(projectRoot, "nodics.project.json");
-const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || "");
-const config = environmentProfile.acceptance?.functionalJourney || manifest.acceptance?.functionalJourney || {};
+const config = environmentProfile.acceptance?.functionalJourney || {};
 const runtimes = Object.fromEntries(Object.entries(config.runtimes || {}).map(([name, selection]) => [name, projectRuntime(environmentProfile, selection)]));
 if (!runtimes?.platform || !runtimes.commerce || !runtimes.engagement) throw new Error("Functional acceptance requires configured runtime selections");
 const enterprise = process.env.AXIS_ENTERPRISE || "default";
@@ -109,7 +107,7 @@ async function authenticate() {
       headers: { Origin: projectCorsOrigin(environmentProfile, 'axis') },
       body: JSON.stringify({
         loginId: process.env.AXIS_LOGIN_ID || "admin",
-        password: process.env.AXIS_PASSWORD || "adminPassword",
+        password: process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD,
       }),
     },
   );

@@ -361,7 +361,7 @@ async function authenticateEmployee() {
   if (suppliedToken) return { Authorization: `Bearer ${suppliedToken}` };
   const credentials = {
     loginId: process.env.AXIS_LOGIN_ID || "admin",
-    password: process.env.AXIS_PASSWORD || "adminPassword",
+    password: process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD,
   };
   let lastError;
   for (const route of ["/nodics/profile/v0/employee/browser/authenticate", "/nodics/profile/v0/employee/authenticate"]) {

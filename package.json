@@ -528,7 +528,7 @@
     "prepare:runtime": "node test/runtime-prepare.test.js",
     "test:loyalty-runtime": "node test/loyaltyRuntimeCompositionContract.test.js",
     "test:waste-http": "node test/wasteHttpRuntimeSmoke.test.mjs",
-    "test:waste-overlay": "node modules/kickoffWaste/test/kickoffWasteOverlayContract.test.js",
+    "test:waste-overlay": "node modules/circa.ewaste/test/circaWastePolicyContract.test.js",
     "test:waste-runtime": "node test/wasteRuntimeCompositionContract.test.js",
     "test:documentation": "npm run docs:check && node test/documentationContract.test.js",
     "test:agora-commerce": "node --test test/agoraCommerceDataAcceptanceContract.test.mjs test/agoraCommercePublicationAcceptanceContract.test.mjs test/agoraCommerceAcceptanceContract.test.mjs test/agoraProductCatalogReleaseExecutionContract.test.js test/agoraProductSearchPublicationContract.test.js test/agoraCommerceSearchPublicationContract.test.js",
