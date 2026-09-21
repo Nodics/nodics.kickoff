@@ -495,4 +495,9 @@ require('node:test')('Local publication callback and operational Commerce activa
   const target = loadRuntime(pack.targetServer);
   const manifest = require(path.join(frameworkRoot, 'nodics.commerce/modules/baseCommerce/data/manifest.json'));
   assert.equal(target.runtimeRole.code, manifest.sections['core-reference'].destinationRole);
+  const rulesPack = platform.backofficeFunctionalModuleActivationData.modules['nodics.rulesEngine'].dataPackages.find(pack => pack.code === 'rulesApi:rulesPolicyApproval');
+  assert.equal(rulesPack.targetServer, 'processServer');
+  const rulesTarget = loadRuntime(rulesPack.targetServer);
+  const rulesManifest = require(path.join(frameworkRoot, 'nodics.rulesEngine/modules/rulesApi/data/manifest.json'));
+  assert.equal(rulesTarget.runtimeRole.code, rulesManifest.sections.rulesPolicyApproval.destinationRole);
 });

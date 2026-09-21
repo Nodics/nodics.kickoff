@@ -264,6 +264,19 @@ assert.deepEqual(
 );
 assert.deepEqual(
   platformRuntime.backofficeFunctionalModuleActivationData.modules[
+    "nodics.rulesEngine"
+  ].dataPackages,
+  [
+    {
+      code: "rulesApi:rulesPolicyApproval",
+      targetModule: "workflow",
+      targetServer: "processServer",
+    },
+  ],
+  "Rules Engine activation must install the approval workflow through the Process runtime",
+);
+assert.deepEqual(
+  platformRuntime.backofficeFunctionalModuleActivationData.modules[
     "nodics.waste"
   ].dependencies,
   undefined,

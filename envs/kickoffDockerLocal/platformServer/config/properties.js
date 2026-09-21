@@ -113,6 +113,18 @@ module.exports = {
           ]
         }
       },
+      "nodics.rulesEngine": {
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "rulesApi:rulesPolicyApproval",
+              "targetModule": "workflow",
+              "targetServer": "processServer"
+            }
+          ]
+        }
+      },
       "nodics.waste": {
         "dataPackages": {
           "$config": "replace",
