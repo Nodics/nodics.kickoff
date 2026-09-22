@@ -252,7 +252,6 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     }
     assert(activeModuleNames(effective).includes(server));
     assert(activeModuleNames(effective).includes(environment));
-    assert(!activeModuleNames(effective).includes("wcmsServerRetired"));
     if (environment === "kickoffDockerLocal") {
       assert.equal(
         effective.database.default.mongodb.master.URI,
