@@ -83,13 +83,23 @@ assert(
 );
 assert(
   staged.includes("runtimeRole: 'STAGED'") &&
-    staged.includes("publishEnabled: true"),
+    !staged.includes("publishEnabled"),
   "Staged role/versioning contract drifted",
 );
 assert(
   online.includes("runtimeRole: 'ONLINE'") &&
-    online.includes("publishEnabled: false"),
+    !online.includes("publishEnabled"),
   "Online role/versioning contract drifted",
+);
+assert.equal(
+  configuration.loadRuntime("wcmsStagedServer", "kickoffLocal").publishEnabled,
+  true,
+  "Staged publish activation must derive from the semantic publication role",
+);
+assert.equal(
+  configuration.loadRuntime("wcmsOnlineServer", "kickoffLocal").publishEnabled,
+  false,
+  "Online publish activation must derive from the semantic publication role",
 );
 assert(
   /runtimeRole:\s*\{\s*code:\s*'PROCESS'/.test(process),
@@ -101,9 +111,9 @@ assert.notStrictEqual(
   "Staged and Online database identities must not converge",
 );
 assert(
-  staged.includes("initializationProfiles") &&
-    staged.includes("localWcmsFoundation"),
-  "Local WCMS Staged must retain its guided initialization profile",
+  configuration.loadRuntime("wcmsStagedServer", "kickoffLocal").data.dataReleases
+    .initializationProfiles.localWcmsFoundation.enabled === true,
+  "Local WCMS Staged must resolve its guided initialization profile",
 );
 assert(
   guidedAcceptance.includes("runtimeRole?.publication === 'STAGED'"),

@@ -2,9 +2,9 @@
 
 Kickoff inherits tested framework defaults. Its environment and server files
 hold deployment choices and intentional differences. Shared customer
-administration descriptions live once in `kickoffAdministration`, selected only
-by the two Platform runtimes. Customers can change their applications without
-maintaining copies of framework behavior.
+administration descriptions live once in `kickoffCore` as Platform runtime-role
+profiles. Customers can change their applications without maintaining copies of
+framework behavior or adding a separate configuration-only module.
 
 For a beginner, start with the existing Local Platform example below and change
 one value. Read the resulting prepared configuration before adding another
@@ -22,7 +22,7 @@ publication and reset operations.
 
 | Concern | Kickoff location | What stays inherited |
 | --- | --- | --- |
-| Shared project administration profiles | `modules/kickoffAdministration/config/properties.js` | BackOffice orchestration, permissions, validation and imports |
+| Shared project administration profiles | `modules/kickoffCore/config/properties.js` under Platform runtime-role profiles | BackOffice orchestration, permissions, validation and imports |
 | Local Platform transport and local-only profile differences | `envs/kickoffLocal/platformServer/config/properties.js` | Shared customer descriptors and capability defaults |
 | Docker Local Platform differences | `envs/kickoffDockerLocal/platformServer/config/properties.js` and its existing topology contributions | Shared customer descriptors and framework behavior |
 | Local environment policy | `envs/kickoffLocal/config/properties.js` | Generic CORS cache duration and other unchanged capability defaults |
@@ -30,37 +30,29 @@ publication and reset operations.
 | Customer commerce policy | Local/Docker Commerce and Commerce Staged properties | Neutral framework behavior; the actual Agora store remains explicit |
 | Circa application policy | `modules/circa.ewaste/config/properties.js` | Waste, Profile, Location and BackOffice authorities |
 
-The shared administration module owns descriptors common to Local and Docker
-Local, including application identity/presentation, equal data-package lists
-and shared activation selections. It contains no deployment target, credential,
-project root or port. It neither starts a server nor performs installation.
-Its metadata declares only `configuration` and `llm` ownership; it does not
-extend WCMS, Commerce or another functional group.
-
-`runtimeModule: true` permits nConfig to load this selected configuration
-boundary. That is different from an independently running service.
-`runtimeModule: false` would exclude its properties from runtime inheritance.
-Foundation's nTooling and nSetup are non-runtime packages with separate tooling
-and governance entrypoints; their properties are not automatically inherited
-by extending Foundation.
+`kickoffCore` owns descriptors common to Local and Docker Local, including
+application identity/presentation, equal data-package lists and shared
+activation selections. nConfig projects those descriptors only when the selected
+runtime role is Platform. The descriptors contain no deployment credential,
+port, listener, or startup behavior. Environment and server files still own the
+actual deployment transport differences.
 
 ```mermaid
 flowchart LR
   Capabilities["Framework capability defaults"] --> Local["Local Platform differences"]
   Capabilities --> Docker["Docker Local Platform differences"]
-  Shared["Shared Kickoff administration descriptors"] --> Local
-  Shared --> Docker
+  Core["Kickoff Core Platform profiles"] --> Local
+  Core --> Docker
   Local --> LocalRuntime["Prepared Local Platform"]
   Docker --> DockerRuntime["Prepared Docker Platform"]
 ```
 
 ## Why the ordering matters
 
-The module uses index `950.10`, before the project at `1000.00`, Local environment
-at `1001.10` and Docker Local environment at `1001.20`. Their Platform server
-layers follow. This makes the shared values defaults and preserves deployment
-overrides. Both Platform `activeModules.modules` lists explicitly select
-`kickoffAdministration`; other runtimes do not select it.
+`kickoffCore` is part of the project module graph. Its BackOffice descriptors
+use `runtimeRoleProfiles.PLATFORM`, so Platform receives them and non-Platform
+runtimes do not. The selected Platform server files keep deployment-specific
+overrides such as operator origin or target transport details.
 
 The normal nConfig loader remains authoritative. There is no additional loader,
 profile registry, deployment process or project lifecycle script. Existing
@@ -70,21 +62,22 @@ assumed safe from a directory name.
 
 ## Start with the smallest change
 
-For Local employee browser sessions, the server needs only its intentional
+For Local employee browser sessions, the environment needs only its intentional
 local policy:
 
 ```js
 profileBrowserSession: {
     enabled: true,
-    secure: false,
+    allowInsecureLoopback: true,
     sameSite: 'Lax'
 }
 ```
 
 Cookie names, cookie paths and maximum age come from Profile. These are local
-settings; do not copy `secure: false` into a production environment. Docker
-keeps its distinct cookie names so Local and Docker browser sessions remain
-separate.
+settings; do not copy loopback relaxation into a production environment unless
+that deployment explicitly supports local HTTP development. Docker keeps its
+distinct cookie names at the Docker environment layer so Local and Docker browser
+sessions remain separate.
 
 For a Product catalogue limit, add only the value you intend to change under
 an already active Commerce server:
@@ -101,8 +94,8 @@ the intended catalogue size.
 
 ## Customize and extend safely
 
-To change a shared application description, edit the matching profile in
-`modules/kickoffAdministration/config/properties.js`. To change a deployment
+To change a shared application description, edit the matching Platform profile in
+`modules/kickoffCore/config/properties.js`. To change a deployment
 connection, edit that environment's Platform profile target. For example, a
 Local-only timeout override is:
 
@@ -133,8 +126,8 @@ When adding a new environment or server:
    index; do not copy an existing server's complete properties.
 2. Declare actual composition, coordinates, authority and required deployment
    inputs.
-3. Select shared administration defaults only for an administrative runtime
-   that consumes them, and put its override layer after the defaults.
+3. Keep shared administration defaults in the owning project/application module
+   and expose them through runtime-role profiles only for consuming runtimes.
 4. Add only intentional differences, then run preparation and focused checks.
 5. Test an unselected runtime to ensure that it does not gain application
    profiles or functional modules accidentally.
@@ -202,9 +195,9 @@ of assuming that a server file contains its entire effective configuration.
 
 For this refactor, complete before/after preparation comparisons covered nine
 Local and ten Docker Local runtimes across five domain selections: all, none,
-Apparel, Electronics and Telco. These 95 comparisons preserved effective values
-and the original module ordering. The deliberate graph change is the additional
-configuration module on the two Platform runtimes. These checks prepare configuration and metadata; they do not
+Apparel, Electronics and Telco. These checks verify that Platform receives the
+project-owned BackOffice descriptors through `kickoffCore` runtime-role profiles
+while non-Platform runtimes do not. They prepare configuration and metadata; they do not
 start listeners, reset databases, import packages or prove signed-in browser
 behavior. Re-run the relevant operational journey after deploying/restarting
 changed source through the usual project procedure.
@@ -213,16 +206,16 @@ changed source through the usual project procedure.
 
 | Symptom | Check | Recovery |
 | --- | --- | --- |
-| Platform profile identity or package list is missing | Is `kickoffAdministration` selected and ordered before the environment? | Restore its selection/index; run preparation. |
+| Platform profile identity or package list is missing | Does `kickoffCore` still define Platform runtime-role profiles and does nConfig project them? | Restore the profile block; run preparation. |
 | A target is missing | Does the selected environment still declare its profile transport? | Restore that environment's target; shared defaults intentionally do not supply it. |
 | A Local setting appears in Docker | Was deployment data placed in the shared module? | Move it back to the appropriate environment and compare both runtimes. |
 | An extra array item remains | Did a shorter array merge preserve a trailing entry? | Use supported removal semantics and inspect the effective list. |
 | An unrelated server exposes shared profiles | Was the module selected by a common group or every server? | Restore Platform-only selection and run the unselected-runtime check. |
 | Structure audit reports unrelated Circa gaps | Compare with the recorded baseline and inspect the owning work. | Keep those findings separate; do not overwrite ongoing Circa changes. |
 
-Rollback restores the previous declarations and removes the shared-module
-selection together. Re-run preparation before restarting. Do not revert
-unrelated Circa, content, initialization or framework documentation changes.
+Rollback restores the previous declarations together. Re-run preparation before
+restarting. Do not revert unrelated Circa, content, initialization or framework
+documentation changes.
 
 Continue with the Customer Customization Guide for application extension and
 the Local Runtime guide for deployment composition. The framework's permanent
@@ -244,15 +237,17 @@ identifiers; changing them requires an explicit content migration. Labels and
 channels remain application choices. A different project supplies its own values
 without editing framework source.
 
-Local reset definitions select capability inventories through
-`localResetProvider.modules`. Each capability contributes its own model service
-names; adding a contribution never enables reset. Servers retain their environment
-allowlist, required model checks, confirmation and explicit search projections.
-A later `serviceOverrides` false entry removes an optional inherited service.
-Removing a required service fails before mutation. Explicit optional service names
-for unavailable or historical models remain visible until their owners are selected
-or their cleanup requirements are retired. No reset is implied by configuration
-preparation or validation.
+Local reset definitions select capability inventories through module-owned
+`localResetProvider.profiles` keyed by runtime role. Each profile selects
+capability modules and required model checks for that runtime; adding a
+contribution never enables reset by itself. Environment configuration owns the
+enablement and allowlist, with optional runtime-role allowlists for constrained
+environments such as Docker Local. Server `config/properties.js` files do not
+repeat reset inventories. A later `serviceOverrides` false entry removes an
+optional inherited service. Removing a required service fails before mutation.
+Explicit optional service names for unavailable or historical models remain
+visible until their owners are selected or their cleanup requirements are
+retired. No reset is implied by configuration preparation or validation.
 
 Foundation initialization profiles continue selecting their declared Init/Core
 categories and destination roles. Release discovery and manifests determine each
@@ -307,12 +302,14 @@ cross-origin resource header are deliberate deployment differences. Search and
 cache providers still require explicit activation. Server database names and
 Process's separate Cron database remain project deployment choices.
 
-The canonical deployment classification is `environment.class`. nImport reads it
-for release scope and does not infer it from `kickoffLocal` or another runtime
-name. Sample releases are available for authorized manual execution by default;
-only Init runs automatically. Permissions, tenant/destination checks, release
-integrity and durable receipts remain mandatory. A deployment may explicitly
-restrict Sample execution without changing framework code.
+The effective deployment classification remains `environment.class` for nImport
+release-scope checks, but nConfig derives it from the selected environment
+module metadata. Do not author it in environment `properties.js`, and do not
+infer it from a runtime name such as `kickoffLocal`. Sample releases are
+available for authorized manual execution by default; only Init runs
+automatically. Permissions, tenant/destination checks, release integrity and
+durable receipts remain mandatory. A deployment may explicitly restrict Sample
+execution without changing framework code.
 
 ## Credentials, initialization and runtime authentication
 
@@ -339,15 +336,15 @@ existing layered external/secret-provider mechanism:
 | `NODICS_BOOTSTRAP_ADMIN_PASSWORD` | Initial human administrator provisioning |
 | `NODICS_BOOTSTRAP_SERVICE_PASSWORD` | Initial service-principal provisioning |
 | `NODICS_BOOTSTRAP_SERVICE_API_KEY` | Initial service API-key provisioning |
-| `NODICS_RUNTIME_API_KEY` | Current retained runtime proof |
+| `NODICS_API_KEY` | Current runtime proof inside one server process |
 
-All ten Local runtimes retain independent generic `NODICS_*_API_KEY` bindings
-and runtime instance identities. The binding names are environment-neutral; the
-Local layer only supplies the selected value and keeps a compatibility fallback
-for older developer machines. These are intentional deployment selections.
-Missing retained proof remains null; there is no fallback to a sample key or
-human administrator. Profile owns runtime scope grants, tenant/enterprise
-validation, token issuance, renewal and revocation.
+Each runtime server reads the same server-local `NODICS_API_KEY` binding from
+its own effective configuration. A shared launcher or environment-wide
+credential store may keep server-specific aliases while injecting the selected
+value into the child process as `NODICS_API_KEY`. Missing retained proof remains
+null; there is no fallback to a sample key or human administrator. Profile owns
+runtime scope grants, tenant/enterprise validation, token issuance, renewal and
+revocation.
 
 Profile's `profileInitialization.requiredEmployeeLogins` defaults to the human and
 service identities supplied by its Init release. Initialization checks no longer

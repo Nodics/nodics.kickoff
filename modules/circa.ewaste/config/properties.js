@@ -13,442 +13,753 @@
 
 /** @module circa.ewaste/config/properties @description Owns Circa application identity, presentation and illustrative deployment policies over eWaste. @layer config @owner circa.ewaste @override Later project layers replace these sample values. */
 module.exports = {
-  circaEWaste: {
-    catalogue: {
-      pageSize: 12,
-      maximumPageSize: 48,
-      discoveryBatchSize: 100,
-      maximumProducts: 2000,
-    },
-    journey: {
-      contractVersion: 2,
-      arrivalRadiusMetres: {
-        $config: "env",
-        name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
-        type: "number",
-        fallback: 50,
-      },
-      maximumPositionAgeMs: 60000,
-      captureTimeoutMs: 12000,
-      nearestCentreCount: 3,
-      conversationMaximumCharacters: 1500,
-      reviewAssignment: {
-        queueCode: "CIRCA_EWASTE_REVIEW",
-        label: "Circa review team",
-      },
-      depositInstruction:
-        "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions.",
-    },
-    presentation: {
-      brandName: "Circa",
-      brandByline: "by Nodics",
-      sampleMode: true,
-      walletLabels: {
-        points: "Reward points",
-        circaCarbon: "Carbon units",
-      },
-    },
-    rewardValuation: {
-      version: "circa-weight-rewards-v2",
-      illustrative: true,
-      programCode: "circa",
-      pointsRewardTypeCode: "points",
-      carbonRewardTypeCode: "circaCarbon",
-      pointsPerKg: 10,
-      carbonUnitsPerEstimatedKg: 1,
-    },
-    application: {
-      code: "CIRCA_EWASTE",
-      enabled: true,
-      displayName: "Nodics Circa eWaste",
-      frontendModuleName: "nodics.circa.eWaste",
-      projectModuleName: "circa.ewaste",
-      requiredScenarioModules: ["eWaste", "wasteRecycling"],
-      frameworkModuleName: "nodics.waste",
-      backendModuleName: "eWaste",
-    },
-    journeys: {
-      submission: {
-        enabled: true,
-      },
-      approvedAsset: {
-        enabled: true,
-      },
-      marketplace: {
-        enabled: true,
-      },
-      gift: {
-        enabled: true,
-      },
-      donation: {
-        enabled: true,
-      },
-      couponRedemption: {
-        enabled: true,
-      },
-      recyclingHandoff: {
-        enabled: true,
-      },
-    },
+  "data": {
+    "dataReleases": {
+      "runtimeRoleProfiles": {
+        "WASTE": {
+          "initializationProfiles": {
+            "localWasteFoundation": {
+              "enabled": true,
+              "label": "Local Waste foundation",
+              "description": "Install Waste Management reference releases for schema-driven family, category, material, collection, evidence, receipt, and impact presets.",
+              "completionMessage": "The Local Waste foundation is ready. Operators can validate collection eligibility, submissions, evidence, receipts, and impact calculations.",
+              "steps": {
+                "$config": "replace",
+                "value": [
+                  {
+                    "dataType": "core",
+                    "releaseCodes": [
+                      "wasteMaterial:core-v001",
+                      "eWaste:core-reference",
+                      "circa.ewaste:waste-policy"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
   },
-  order: {
-    disputes: { enabled: true, orderCodePrefixes: ["CIRCA_ORDER_"] },
-    refunds: {
-      enabled: true,
-      orderCodePrefixes: ["CIRCA_ORDER_"],
-      defaultOwnerPort: "eWaste",
-      ownerPorts: {
-        eWaste: {
-          moduleName: "eWaste",
-          connectionName: "waste",
-          targetAuthority: { runtimeRole: "WASTE" },
-          apiPrefix: "/internal/order-reversals",
-        },
-      },
-    },
+  "product": {
+    "runtimeRoleProfiles": {
+      "COMMERCE_STAGED": {
+        "marketplaceAuthoring": {
+          "enabled": true,
+          "catalogVersion": "circaStaged",
+          "locales": [
+            "en",
+            "ar"
+          ]
+        }
+      }
+    }
   },
-  promotion: { legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"] },
-  digitalCore: {
-    merchantRedemption: {
-      enabled: true,
-      providerService: "DefaultDigitalCommerceMerchantScreenProviderService",
-    },
+  "cart": {
+    "runtimeRoleProfiles": {
+      "COMMERCE": {
+        "customerApi": {
+          "defaultJurisdiction": "AE",
+          "defaultCurrency": "AED"
+        }
+      }
+    }
   },
-  bidding: {
-    enabled: true,
-    policyVersion: "circa-digital-bids-v1",
-    holdTiming: "CHECKOUT_AFTER_ACCEPTANCE",
-    validitySeconds: 86400,
-    amountScale: 0,
-    maximumAmount: "100000",
-    stores: {
-      circaMainStore: {
-        enterpriseCode: "default",
-        currency: "POINTS",
-        locale: "en",
-        orderCodePrefix: "CIRCA_ORDER_BID_",
-        allowOwnerReference: true,
-      },
-    },
-  },
-  cms: {
-    publication: {
-      baselines: {
-        circa: {
-          releaseCode: "circa.ewaste:content",
-          releaseVersion: "0.0.9",
-          dataType: "sample",
-          rootType: "site",
-          rootCode: "circaSite",
-          sourceVersion: "0",
-        },
-      },
-    },
-  },
-  backofficeApplicationInitialization: {
-    profiles: {
-      circa: {
-        code: "circa",
-        type: "STOREFRONT_DOMAIN_BUNDLE",
-        owner: "circa.ewaste",
-        applicationCode: "CIRCA_EWASTE",
-        siteCode: "circaSite",
-        baselineCode: "circa",
-        presentation: {
-          title: "Circa eWaste",
-          kind: "PROJECT",
-          category: "application",
-          order: 240,
-          summary:
-            "Circa published customer pages and media over the eWaste accelerator.",
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
+  "fulfillmentCore": {
+    "runtimeRoleProfiles": {
+      "COMMERCE": {
+        "customerShipping": {
+          "methods": {
+            "$config": "replace",
+            "value": [
+              {
+                "code": "STANDARD",
+                "label": "Standard",
+                "price": "0.00",
+                "currency": "USD",
+                "promise": "3-5 business days",
+                "requiresAddress": true,
+                "returnEligible": true
+              },
+              {
+                "code": "STANDARD_AED",
+                "label": "Standard",
+                "price": "0.00",
+                "currency": "AED",
+                "promise": "3-5 business days",
+                "requiresAddress": true,
+                "returnEligible": true
+              }
+            ]
           },
+          "returnMethods": {
+            "$config": "replace",
+            "value": [
+              {
+                "code": "PICKUP",
+                "label": "Pickup from address",
+                "requiresAddress": true
+              },
+              {
+                "code": "DROP_OFF",
+                "label": "Drop off",
+                "requiresAddress": false
+              },
+              {
+                "code": "STORE_RETURN",
+                "label": "Store return",
+                "requiresAddress": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "circaEWaste": {
+    "catalogue": {
+      "pageSize": 12,
+      "maximumPageSize": 48,
+      "discoveryBatchSize": 100,
+      "maximumProducts": 2000
+    },
+    "journey": {
+      "contractVersion": 2,
+      "arrivalRadiusMetres": {
+        "$config": "env",
+        "name": "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
+        "type": "number",
+        "fallback": 50
+      },
+      "maximumPositionAgeMs": 60000,
+      "captureTimeoutMs": 12000,
+      "nearestCentreCount": 3,
+      "conversationMaximumCharacters": 1500,
+      "reviewAssignment": {
+        "queueCode": "CIRCA_EWASTE_REVIEW",
+        "label": "Circa review team"
+      },
+      "depositInstruction": "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions."
+    },
+    "presentation": {
+      "brandName": "Circa",
+      "brandByline": "by Nodics",
+      "sampleMode": true,
+      "walletLabels": {
+        "points": "Reward points",
+        "circaCarbon": "Carbon units"
+      }
+    },
+    "rewardValuation": {
+      "version": "circa-weight-rewards-v2",
+      "illustrative": true,
+      "programCode": "circa",
+      "pointsRewardTypeCode": "points",
+      "carbonRewardTypeCode": "circaCarbon",
+      "pointsPerKg": 10,
+      "carbonUnitsPerEstimatedKg": 1
+    },
+    "application": {
+      "code": "CIRCA_EWASTE",
+      "enabled": true,
+      "displayName": "Nodics Circa eWaste",
+      "frontendModuleName": "nodics.circa.eWaste",
+      "projectModuleName": "circa.ewaste",
+      "requiredScenarioModules": [
+        "eWaste",
+        "wasteRecycling"
+      ],
+      "frameworkModuleName": "nodics.waste",
+      "backendModuleName": "eWaste"
+    },
+    "journeys": {
+      "submission": {
+        "enabled": true
+      },
+      "approvedAsset": {
+        "enabled": true
+      },
+      "marketplace": {
+        "enabled": true
+      },
+      "gift": {
+        "enabled": true
+      },
+      "donation": {
+        "enabled": true
+      },
+      "couponRedemption": {
+        "enabled": true
+      },
+      "recyclingHandoff": {
+        "enabled": true
+      }
+    }
+  },
+  "order": {
+    "disputes": {
+      "enabled": true,
+      "orderCodePrefixes": [
+        "CIRCA_ORDER_"
+      ]
+    },
+    "refunds": {
+      "enabled": true,
+      "orderCodePrefixes": [
+        "CIRCA_ORDER_"
+      ],
+      "defaultOwnerPort": "eWaste",
+      "ownerPorts": {
+        "eWaste": {
+          "moduleName": "eWaste",
+          "connectionName": "waste",
+          "targetAuthority": {
+            "runtimeRole": "WASTE"
+          },
+          "apiPrefix": "/internal/order-reversals"
+        }
+      }
+    }
+  },
+  "promotion": {
+    "legacyTokenHashPolicies": [
+      "TENANT_COLON_UPPERCASE_SHA256"
+    ]
+  },
+  "digitalCore": {
+    "merchantRedemption": {
+      "enabled": true,
+      "providerService": "DefaultDigitalCommerceMerchantScreenProviderService"
+    }
+  },
+  "profileExternalIdentity": {
+    "enabled": true,
+    "applications": {
+      "circa.ewaste": {
+        "enabled": true,
+        "provider": "TELEGRAM",
+        "enterpriseCode": {
+          "$config": "ref",
+          "path": "defaultEnterprise"
         },
-        dataPackages: {
-          $config: "replace",
-          value: [
-            {
-              code: "locationMap:init-v001",
-              kind: "Map provider foundation",
-              required: true,
-              trigger: "USER",
-              dataType: "init",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
-            },
-            {
-              code: "locationMap:core-map-reference",
-              kind: "Map styles and layers",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
-            },
-            {
-              code: "wasteMaterial:core-v001",
-              kind: "Waste material foundation",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
-            },
-            {
-              code: "eWaste:core-reference",
-              kind: "Electronics submission presets",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
-            },
-            {
-              code: "circa.ewaste:waste-policy",
-              kind: "Circa collection policy",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
-            },
-            {
-              code: "wasteCollection:sample-profile-addresses",
-              kind: "Collection network addresses",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "platformServer",
-              targetRuntimeRole: "PLATFORM",
-            },
-            {
-              code: "circa.ewaste:profile",
-              kind: "Local sample customer profiles",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "platformServer",
-              targetRuntimeRole: "PLATFORM",
-            },
-            {
-              code: "circa.ewaste:operations",
-              kind: "Local operator access",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "platformServer",
-              targetRuntimeRole: "PLATFORM",
-            },
-            {
-              code: "wasteCollection:sample-locations",
-              kind: "Collection network locations",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
-            },
-            {
-              code: "circa.ewaste:location",
-              kind: "Collection centre locations",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
-            },
-            {
-              code: "wasteCollection:sample-collection-points",
-              kind: "Collection network points",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
-            },
-            {
-              code: "circa.ewaste:waste",
-              kind: "Collection centres and submission reference data",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
-            },
-            {
-              code: "circa.ewaste:loyalty",
-              kind: "Local reward programme",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "loyaltyServer",
-              targetRuntimeRole: "LOYALTY",
-            },
-            {
-              code: "circa.ewaste:commerce",
-              kind: "Circular catalogue source",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "commerceStaged",
-              targetRuntimeRole: "COMMERCE_STAGED",
-            },
-            {
-              code: "circa.ewaste:content",
-              kind: "Website content",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "wcmsStaged",
-              targetRuntimeRole: "WCMS_STAGED",
-            },
-            {
-              code: "circa.ewaste:customer-workspace",
-              kind: "Customer item workspace content",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wcmsStaged",
-              targetRuntimeRole: "WCMS_STAGED",
-            },
-            {
-              code: "circa.ewaste:media",
-              type: "MEDIA_ASSET_MANIFEST",
-              kind: "Website media",
-              required: true,
-              trigger: "USER",
-              targetServer: "wcmsStaged",
-              targetRuntimeRole: "WCMS_STAGED",
-              manifestPath:
-                "modules/circa.ewaste/data/sample-v001/content/assets/circa-media/assetManifest.js",
-              businessPurpose: "CIRCA_SAMPLE_CONTENT",
-            },
+        "credentialReference": "telegram.bot.circa",
+        "requireBrowserHandoff": true
+      }
+    }
+  },
+  "runtimeConfigurationSchemas": {
+    "telegramExternalIdentity": {
+      "code": "telegramExternalIdentity",
+      "ownerModule": "circa.ewaste",
+      "label": "Circa Telegram external identity",
+      "description": "Logical bot credential required to verify Circa Telegram Mini App launch assertions. Source config declares the Circa application binding; operational values come from governed runtime configuration.",
+      "refreshBehavior": "runtime",
+      "updatePermission": "runtime.config.request.create",
+      "viewPermission": "runtime.config.effective.view",
+      "fields": [
+        {
+          "code": "botToken",
+          "label": "Telegram bot token",
+          "type": "string",
+          "required": true,
+          "sensitive": true,
+          "credentialReference": "telegram.bot.circa",
+          "path": [
+            "credentials",
+            "telegram.bot.circa",
+            "value"
           ],
+          "pattern": "^\\d+:[^\\s]+$",
+          "restartRequired": false,
+          "unconfiguredValues": [
+            "",
+            "sample",
+            "placeholder",
+            "changeme"
+          ]
+        }
+      ]
+    },
+    "telegramDelivery": {
+      "code": "telegramDelivery",
+      "ownerModule": "circa.ewaste",
+      "label": "Circa Telegram delivery channel",
+      "description": "Logical bot credential required for Circa Telegram sends. Source config declares the Circa channel reference; operational values come from governed runtime configuration.",
+      "refreshBehavior": "runtime",
+      "updatePermission": "runtime.config.request.create",
+      "viewPermission": "runtime.config.effective.view",
+      "fields": [
+        {
+          "code": "botToken",
+          "label": "Telegram bot token",
+          "type": "string",
+          "required": true,
+          "sensitive": true,
+          "credentialReference": "telegram.bot.circa",
+          "path": [
+            "credentials",
+            "telegram.bot.circa",
+            "value"
+          ],
+          "pattern": "^\\d+:[^\\s]+$",
+          "restartRequired": false,
+          "unconfiguredValues": [
+            "",
+            "sample",
+            "placeholder",
+            "changeme"
+          ]
+        }
+      ]
+    }
+  },
+  "bidding": {
+    "enabled": true,
+    "policyVersion": "circa-digital-bids-v1",
+    "holdTiming": "CHECKOUT_AFTER_ACCEPTANCE",
+    "validitySeconds": 86400,
+    "amountScale": 0,
+    "maximumAmount": "100000",
+    "stores": {
+      "circaMainStore": {
+        "enterpriseCode": "default",
+        "currency": "POINTS",
+        "locale": "en",
+        "orderCodePrefix": "CIRCA_ORDER_BID_",
+        "allowOwnerReference": true
+      }
+    }
+  },
+  "cms": {
+    "publication": {
+      "baselines": {
+        "circa": {
+          "releaseCode": "circa.ewaste:content",
+          "releaseVersion": "0.0.9",
+          "dataType": "sample",
+          "rootType": "site",
+          "rootCode": "circaSite",
+          "sourceVersion": "0"
+        }
+      }
+    }
+  },
+  "backofficeApplicationInitialization": {
+    "profiles": {
+      "circa": {
+        "code": "circa",
+        "type": "STOREFRONT_DOMAIN_BUNDLE",
+        "owner": "circa.ewaste",
+        "applicationCode": "CIRCA_EWASTE",
+        "siteCode": "circaSite",
+        "baselineCode": "circa",
+        "presentation": {
+          "title": "Circa eWaste",
+          "kind": "PROJECT",
+          "category": "application",
+          "order": 240,
+          "summary": "Circa published customer pages and media over the eWaste accelerator.",
+          "activationPolicy": {
+            "approvalRequiredForOnline": true,
+            "requiredDataTrigger": "USER",
+            "sampleDataTrigger": "USER"
+          }
         },
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
+            {
+              "code": "locationMap:init-v001",
+              "kind": "Map provider foundation",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "init",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
+            },
+            {
+              "code": "locationMap:core-map-reference",
+              "kind": "Map styles and layers",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
+            },
+            {
+              "code": "wasteMaterial:core-v001",
+              "kind": "Waste material foundation",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
+            },
+            {
+              "code": "eWaste:core-reference",
+              "kind": "Electronics submission presets",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
+            },
+            {
+              "code": "circa.ewaste:waste-policy",
+              "kind": "Circa collection policy",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
+            },
+            {
+              "code": "wasteCollection:sample-profile-addresses",
+              "kind": "Collection network addresses",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "circa.ewaste:profile",
+              "kind": "Local sample customer profiles",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "circa.ewaste:operations",
+              "kind": "Local operator access",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "wasteCollection:sample-locations",
+              "kind": "Collection network locations",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
+            },
+            {
+              "code": "circa.ewaste:location",
+              "kind": "Collection centre locations",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
+            },
+            {
+              "code": "wasteCollection:sample-collection-points",
+              "kind": "Collection network points",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
+            },
+            {
+              "code": "circa.ewaste:waste",
+              "kind": "Collection centres and submission reference data",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
+            },
+            {
+              "code": "circa.ewaste:loyalty",
+              "kind": "Local reward programme",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "loyaltyServer",
+              "targetRuntimeRole": "LOYALTY"
+            },
+            {
+              "code": "circa.ewaste:commerce",
+              "kind": "Circular catalogue source",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "commerceStaged",
+              "targetRuntimeRole": "COMMERCE_STAGED"
+            },
+            {
+              "code": "circa.ewaste:content",
+              "kind": "Website content",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wcmsStaged",
+              "targetRuntimeRole": "WCMS_STAGED"
+            },
+            {
+              "code": "circa.ewaste:customer-workspace",
+              "kind": "Customer item workspace content",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "wcmsStaged",
+              "targetRuntimeRole": "WCMS_STAGED"
+            },
+            {
+              "code": "circa.ewaste:media",
+              "type": "MEDIA_ASSET_MANIFEST",
+              "kind": "Website media",
+              "required": true,
+              "trigger": "USER",
+              "targetServer": "wcmsStaged",
+              "targetRuntimeRole": "WCMS_STAGED",
+              "manifestPath": "modules/circa.ewaste/data/sample-v001/content/assets/circa-media/assetManifest.js",
+              "businessPurpose": "CIRCA_SAMPLE_CONTENT"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "media": {
+    "customerUploads": {
+      "enabled": true
+    }
+  },
+  "waste": {
+    "projectOverlay": {
+      "enabled": true,
+      "module": "circa.ewaste",
+      "releaseCode": "circa.ewaste:waste-policy",
+      "layerKind": "PROJECT"
+    },
+    "operations": {
+      "requireScopes": true,
+      "requireVerification": true,
+      "requireDifferentApprover": false
+    }
+  },
+  "wasteImpact": {
+    "calculation": {
+      "providerService": "DefaultEWasteOpenAiImpactProviderService",
+      "fallbackProviderServices": {
+        "$config": "replace",
+        "value": [
+          "DefaultEWasteWarmImpactProviderService"
+        ]
       },
-    },
+      "timeoutMs": 90000,
+      "failureMode": "RESULT",
+      "mock": {
+        "defaultWeightsKg": {
+          "default": 1,
+          "itemTypes": {
+            "SMARTPHONE": 0.2,
+            "MOBILE_PHONE": 0.2,
+            "LAPTOP": 2.5,
+            "COMPUTER_MONITOR": 5,
+            "TABLET_DEVICE": 0.6,
+            "DESKTOP_TOWER": 7,
+            "CHARGER": 0.2,
+            "CABLE": 0.1,
+            "EARPHONES": 0.1,
+            "POWER_BANK_DEVICE": 0.3,
+            "SMALL_HOME_APPLIANCE": 3
+          }
+        },
+        "factors": {
+          "default": 1
+        },
+        "factorSetVersion": "circa-illustrative-v1"
+      }
+    }
   },
-  media: {
-    customerUploads: {
-      enabled: true,
+  "eWaste": {
+    "channelAuthentication": {
+      "enabled": true,
+      "channels": {
+        "TELEGRAM": {
+          "enabled": true,
+          "applicationCode": "circa.ewaste",
+          "seamlessSignIn": true
+        }
+      }
     },
+    "outcomeCommunication": {
+      "enabled": true,
+      "connectionName": "engagement",
+      "templateCode": "WASTE_REVIEW_OUTCOME_V1"
+    },
+    "targetAuthorities": {
+      "engagement": {
+        "runtimeRole": "ENGAGEMENT"
+      },
+      "commerce": {
+        "runtimeRole": "COMMERCE"
+      },
+      "commerceStaged": {
+        "runtimeRole": "COMMERCE_STAGED"
+      },
+      "wcms": {
+        "runtimeRole": "WCMS_STAGED"
+      }
+    },
+    "marketplace": {
+      "priceBookCode": "circaPointsPriceBook",
+      "warehouseCode": "circaDigitalRegistry",
+      "transferPolicyCode": "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
+      "storeCode": "circaMainStore",
+      "catalogVersion": "circaStaged",
+      "currency": "POINTS",
+      "programCode": "circa",
+      "rewardTypeCode": "points",
+      "carbonRewardTypeCode": "circaCarbon",
+      "carbonScale": 3,
+      "rewardScale": 2,
+      "jurisdiction": "CIRCA_SAMPLE",
+      "saleMode": "DIGITAL_OWNERSHIP",
+      "couponCarbonMode": "UNCHANGED",
+      "autoPublishListings": true,
+      "listingPresentation": {
+        "description": "Local sample digital asset ownership. No physical delivery is included.",
+        "imageUrl": "/nodics/media/v0/content/circa-asset-laptop",
+        "sample": true,
+        "warehouseName": "Circa sample digital registry"
+      },
+      "orderCodePrefix": "CIRCA_ORDER_",
+      "refundsEnabled": true
+    },
+    "assetCreationPolicyCode": "EWASTE_APPROVED_ASSET_STANDARD",
+    "applicationCode": "CIRCA_EWASTE",
+    "rewardValuationService": "DefaultCircaEWasteRewardValuationService",
+    "conversation": {
+      "rewardGuidance": "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor."
+    }
   },
-  waste: {
-    projectOverlay: {
-      enabled: true,
-      module: "circa.ewaste",
-      releaseCode: "circa.ewaste:waste-policy",
-      layerKind: "PROJECT",
-    },
-    operations: {
-      requireScopes: true,
-      requireVerification: true,
-      // Review and approval are independent grants; one employee may hold both.
-      requireDifferentApprover: false,
-    },
+  "apiExposure": {
+    "categories": {
+      "circaCustomer": {
+        "enabled": true
+      }
+    }
   },
-  wasteImpact: {
-    calculation: {
-      providerService: "DefaultEWasteOpenAiImpactProviderService",
-      fallbackProviderServices: { $config: "replace", value: ["DefaultEWasteWarmImpactProviderService"] },
-      timeoutMs: 90000,
-      failureMode: "RESULT",
-      mock: {
-        defaultWeightsKg: {
-          default: 1,
-          itemTypes: {
-            SMARTPHONE: 0.2,
-            MOBILE_PHONE: 0.2,
-            LAPTOP: 2.5,
-            COMPUTER_MONITOR: 5,
-            TABLET_DEVICE: 0.6,
-            DESKTOP_TOWER: 7,
-            CHARGER: 0.2,
-            CABLE: 0.1,
-            EARPHONES: 0.1,
-            POWER_BANK_DEVICE: 0.3,
-            SMALL_HOME_APPLIANCE: 3,
+  "copilot": {
+    "runtimeRoleProfiles": {
+      "WASTE": {
+        "knowledge": {
+          "ingestion": {
+            "enabled": true,
+            "indexTenant": "default"
           },
+          "retrieval": {
+            "enabled": true
+          },
+          "repositoryRoots": {
+            "circa-help": {
+              "$config": "path",
+              "base": "project",
+              "relative": "modules/circa.ewaste/docs/customer-knowledge"
+            }
+          },
+          "sourceRegistry": {
+            "definitions": {
+              "$config": "replace",
+              "value": [
+                {
+                  "code": "circa-customer-guidance-v1",
+                  "repository": "circa-help",
+                  "project": "circa.ewaste",
+                  "module": "circa.ewaste",
+                  "owner": "circa.ewaste",
+                  "version": "c8c3581bba2187d7a93f80ecf1d275fd4d400e411a18bda2795f3cdf954e3257",
+                  "sourceType": "CUSTOMER_PROJECT",
+                  "classification": "CUSTOMER",
+                  "paths": [
+                    "v1/journey.md"
+                  ],
+                  "allowedExtensions": [
+                    ".md"
+                  ],
+                  "allowedChannels": [
+                    "CUSTOMER"
+                  ],
+                  "tenantScopes": [
+                    "default"
+                  ],
+                  "enterpriseScopes": [
+                    "default"
+                  ],
+                  "customerProjectScopes": [
+                    "circa.ewaste"
+                  ],
+                  "requiredPermissions": [
+                    "waste.submission.create"
+                  ],
+                  "secretScanPolicy": "REQUIRED",
+                  "enabled": true
+                }
+              ]
+            }
+          }
         },
-        factors: {
-          default: 1,
-        },
-        factorSetVersion: "circa-illustrative-v1",
-      },
-    },
-  },
-  eWaste: {
-    channelAuthentication: {
-      enabled: true,
-      channels: {
-        TELEGRAM: {
-          enabled: true,
-          applicationCode: "circa.ewaste",
-          seamlessSignIn: true,
-        },
-      },
-    },
-
-    outcomeCommunication: {
-      enabled: true,
-      connectionName: "engagement",
-      templateCode: "WASTE_REVIEW_OUTCOME_V1",
-    },
-    targetAuthorities: {
-      engagement: { runtimeRole: "ENGAGEMENT" },
-      commerce: {
-        runtimeRole: "COMMERCE",
-      },
-      commerceStaged: {
-        runtimeRole: "COMMERCE_STAGED",
-      },
-      wcms: {
-        runtimeRole: "WCMS_STAGED",
-      },
-    },
-    marketplace: {
-      priceBookCode: "circaPointsPriceBook",
-      warehouseCode: "circaDigitalRegistry",
-      transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
-      storeCode: "circaMainStore",
-      catalogVersion: "circaStaged",
-      currency: "POINTS",
-      programCode: "circa",
-      rewardTypeCode: "points",
-      carbonRewardTypeCode: "circaCarbon",
-      carbonScale: 3,
-      rewardScale: 2,
-      jurisdiction: "CIRCA_SAMPLE",
-      saleMode: "DIGITAL_OWNERSHIP",
-      couponCarbonMode: "UNCHANGED",
-      autoPublishListings: true,
-      listingPresentation: {
-        description:
-          "Local sample digital asset ownership. No physical delivery is included.",
-        imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
-        sample: true,
-        warehouseName: "Circa sample digital registry",
-      },
-      orderCodePrefix: "CIRCA_ORDER_",
-      refundsEnabled: true,
-    },
-    assetCreationPolicyCode: "EWASTE_APPROVED_ASSET_STANDARD",
-    applicationCode: "CIRCA_EWASTE",
-    rewardValuationService: "DefaultCircaEWasteRewardValuationService",
-    conversation: {
-      rewardGuidance:
-        "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor.",
-    },
-  },
-
-  apiExposure: {
-    categories: {
-      circaCustomer: {
-        enabled: true,
-      },
-    },
-  },
+        "providers": {
+          "enabled": true,
+          "default": {
+            "maximumRequestBytes": 8000000
+          },
+          "adapters": {
+            "openai": {
+              "enabled": true,
+              "credential": {
+                "mode": "SECRET_REFERENCE",
+                "secretRef": "credentials:openai.circa"
+              },
+              "model": {
+                "name": "gpt-5.6-luna"
+              },
+              "generation": {
+                "reasoningEffort": "none"
+              },
+              "connection": {
+                "timeoutMs": 85000
+              }
+            },
+            "ollama": {
+              "enabled": true,
+              "model": {
+                "name": "gemma3:4b"
+              },
+              "generation": {
+                "numPredict": 1200
+              }
+            }
+          },
+          "profiles": {
+            "eWastePhotoMetadata": {
+              "maximumOutputTokens": 2400,
+              "structuredOutput": true,
+              "imageDetail": "high"
+            },
+            "structuredTool": {
+              "maximumOutputTokens": 1200
+            },
+            "customerGuidance": {
+              "temperature": 0.1,
+              "topP": 0.9,
+              "maximumOutputTokens": 500,
+              "structuredOutput": true
+            }
+          }
+        }
+      }
+    }
+  }
 };

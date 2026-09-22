@@ -24,7 +24,8 @@
     "displayName": "Docker Local Process Server",
     "runtimeModuleRoots": [
       "nodics.process",
-      "nodics.wcms"
+      "nodics.wcms",
+      "nodics.rulesEngine"
     ]
   },
   "description": "Docker Local Process Server runtime composition and configuration boundary for this Nodics project."

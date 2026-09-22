@@ -15,8 +15,16 @@ const {
   corsPolicy,
 } = require("./helpers/configuration");
 const routerProperties = require(path.join(frameworkRoot, "nodics.foundation/modules/nRouter/config/properties"));
-const administration = require("../modules/kickoffAdministration/config/properties");
-const metadata = require("../modules/kickoffAdministration/package.json");
+const coreProperties = require("../modules/kickoffCore/config/properties");
+const metadata = require("../modules/kickoffCore/package.json");
+const administration = {
+  backofficeApplicationInitialization:
+    coreProperties.backofficeApplicationInitialization.runtimeRoleProfiles
+      .PLATFORM,
+  backofficeFunctionalModuleActivationData:
+    coreProperties.backofficeFunctionalModuleActivationData.runtimeRoleProfiles
+      .PLATFORM,
+};
 
 assert.deepEqual(metadata.nodics.owns, ["configuration", "llm"]);
 assert.deepEqual(metadata.nodics.runtime, {
@@ -27,15 +35,21 @@ assert.deepEqual(metadata.nodics.runtime, {
 assert.equal(
   metadata.nodics.extends,
   undefined,
-  "Administration defaults must not activate WCMS or Commerce",
+  "Kickoff Core project defaults must not activate WCMS or Commerce",
+);
+assert.deepEqual(administration.backofficeApplicationInitialization.projectRoot, {
+  $config: "path",
+  base: "project",
+  relative: "",
+});
+assert.equal(
+  administration.backofficeApplicationInitialization.projectCode.$config,
+  "env",
+  "Administration owns project setup context without activating runtime capabilities",
 );
 assert.equal(
-  administration.backofficeApplicationInitialization.projectRoot,
-  undefined,
-);
-assert.equal(
-  administration.backofficeApplicationInitialization.projectCode,
-  undefined,
+  administration.backofficeApplicationInitialization.target.connectionName,
+  "wcmsStaged",
 );
 for (const profile of Object.values(
   administration.backofficeApplicationInitialization.profiles,
@@ -84,9 +98,9 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
   );
   const environmentRoot = path.join(__dirname, "../envs", environment);
   assert(
-    Number(metadata.index) <
+    Number(metadata.index) >
       Number(require(path.join(environmentRoot, "package.json")).index),
-    "Shared defaults must load before environment overrides",
+    "Project-owned defaults load after environment identity and before server overrides",
   );
   for (const entry of fs.readdirSync(environmentRoot, {
     withFileTypes: true,
@@ -98,11 +112,16 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       (properties.activeModules?.modules || []).includes(
         "kickoffAdministration",
       ),
-      entry.name === "platformServer",
-      "Only Platform may select administration profiles",
+      false,
+      "The synthetic kickoffAdministration module must not be selected",
     );
     if (entry.name !== "platformServer") continue;
     const effective = loadRuntime(entry.name, environment);
+    assert.equal(
+      effective.backofficeApplicationInitialization.runtimeRoleProfiles,
+      undefined,
+      "Runtime role profiles are projected out of effective Platform config",
+    );
     const consumer = require(
       path.join(
         frameworkRoot,
@@ -157,21 +176,36 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     } else {
       assert.equal(
         effective.localResetProvider.enabled,
-        false,
-        "Shared defaults must not opt Docker into local reset",
+        true,
+        "Docker reset enablement is environment-level, not repeated per server",
       );
+      assert.deepEqual(effective.localResetProvider.environmentAllowlist, [
+        environment,
+      ]);
+      assert.deepEqual(effective.localResetProvider.enabledRuntimeRoles, [
+        "WASTE",
+        "LOCATION",
+      ]);
     }
   }
 }
 assert.equal(
   require("../envs/kickoffLocal/platformServer/config/properties")
-    .profileBrowserSession.refreshCookieName,
+    .profileBrowserSession,
   undefined,
 );
 assert.equal(
-  require("../envs/kickoffLocal/commerceServer/config/properties").product
-    .discovery.catalogue.maximumCandidates,
+  require("../envs/kickoffLocal/config/properties").profileBrowserSession
+    .allowInsecureLoopback,
+  true,
+);
+assert.equal(
+  require("../envs/kickoffLocal/commerceServer/config/properties").product,
   undefined,
+);
+assert.equal(
+  loadRuntime("commerceServer").product.discovery.catalogue.maximumCandidates,
+  1000,
 );
 const localProcessPackage = require("../envs/kickoffLocal/processServer/package.json");
 assert(
@@ -275,13 +309,16 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     if (environment === "kickoffLocal") {
       assert.deepEqual(declaration.httpHardening.cors.allowedOrigins, [
         "http://localhost:3600",
+        "https://coming-designated-dialog-elevation.trycloudflare.com",
       ]);
     } else {
       assert.equal(declaration.httpHardening?.cors?.allowedOrigins, undefined);
     }
     const resolvedOrigins = http.resolveCorsOrigins(cors);
     assert(resolvedOrigins.allowedOrigins.length > 0);
-    const expectedOrigins = Object.values(declaration.httpHardening?.cors?.originEndpoints || routerProperties.httpHardening.cors.originEndpoints).map(endpoint => `http://localhost:${endpoint.port}`);
+    const expectedOrigins = Object.values(declaration.httpHardening?.cors?.originEndpoints || routerProperties.httpHardening.cors.originEndpoints)
+      .map(endpoint => `http://localhost:${endpoint.port}`)
+      .concat(declaration.httpHardening?.cors?.allowedOrigins || []);
     assert.deepEqual(
       [
         ...new Set([
@@ -297,11 +334,11 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     }
     for (const origin of resolvedOrigins.allowedOrigins) {
       const url = new URL(origin);
-      assert.equal(url.hostname, "localhost");
       assert.equal(
         http.resolveAllowedOrigin(origin, cors),
         resolvedOrigins.deniedOrigins.includes(origin) ? undefined : origin,
       );
+      if (url.hostname !== "localhost") continue;
       url.hostname = "127.0.0.1";
       assert.equal(http.resolveAllowedOrigin(url.origin, cors), undefined);
       url.hostname = "172.20.10.2";

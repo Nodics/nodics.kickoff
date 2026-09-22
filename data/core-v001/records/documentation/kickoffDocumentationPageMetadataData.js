@@ -1249,8 +1249,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/configuration-inheritance.md",
-    "sourceChecksum": "583bf985f78a542cf66076f46002ad8a6dd48d0d7976f31ca95d3dea4e6cfaf7",
-    "sourceWordCount": 3250,
+    "sourceChecksum": "d75ffbc5724c21b5cb4c7eb865262fdb5c6cf7616f21e84fa0bd2db090575a57",
+    "sourceWordCount": 3236,
     "audience": [
       "business-user",
       "administrator",

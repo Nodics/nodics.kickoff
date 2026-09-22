@@ -140,9 +140,10 @@ Inherit framework defaults and declare only intentional customer/deployment
 differences. Apply the resolved framework's
 `nSetup/llm/contracts/customer-config-classification-contract.md`. Read
 [the project configuration guide](docs/pages/configuration-inheritance.md).
-Shared administration descriptors belong in `kickoffAdministration`, selected
-only by Platform and ordered before deployment overlays. Foundation nTooling
-owns reusable command behavior; customer selectors and policy remain here.
+Shared project administration descriptors belong in `kickoffCore` under
+Platform runtime-role profiles. Do not recreate a separate configuration-only
+administration module. Foundation nTooling owns reusable command behavior;
+customer selectors and policy remain here.
 
 Application-specific acceptance and media seeding live under `scripts/acceptance`
 and are discovered by framework nTooling from conventional `*Service.mjs`

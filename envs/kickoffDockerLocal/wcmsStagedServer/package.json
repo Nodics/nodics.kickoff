@@ -22,6 +22,11 @@
       "web": false
     },
     "displayName": "Docker Local WCMS Staged Server",
+    "runtimeAliases": [
+      "wcmsStaged",
+      "cmsStaged",
+      "wcms"
+    ],
     "runtimeModuleRoots": [
       "nodics.wcms",
       "nodics.platform",

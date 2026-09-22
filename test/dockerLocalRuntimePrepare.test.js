@@ -94,7 +94,11 @@ async function main() {
       defaultEnvironment: "kickoffDockerLocal",
       defaultServer: server,
     });
-    assert.equal(NODICS.isModuleActive("kickoffAdministration"), server === "platformServer", "Shared administration defaults must be scoped to Platform");
+    assert.equal(NODICS.isModuleActive("kickoffAdministration"), false, "Synthetic administration module must not be selected");
+    assert.equal(NODICS.isModuleActive("kickoffCore"), true, "Project-owned administration defaults live in Kickoff Core");
+    assert.equal(Boolean(CONFIG.get("backofficeApplicationInitialization")?.runtimeRoleProfiles), false, "BackOffice runtime-role profiles are projected out of effective config");
+    assert.equal(Boolean(CONFIG.get("backofficeApplicationInitialization")?.profiles?.agoraapparel), server === "platformServer", "Shared BackOffice administration profiles must be scoped to Platform runtime role");
+    assert.equal(Boolean(CONFIG.get("backofficeFunctionalModuleActivationData")?.modules?.["nodics.commerce"]), server === "platformServer", "Shared BackOffice functional activation data must be scoped to Platform runtime role");
     assert.equal(NODICS.getSelectedEnvironmentName(), "kickoffDockerLocal");
     assert.equal(NODICS.getServerName(), server);
     assert.equal(

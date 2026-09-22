@@ -96,19 +96,19 @@ test('Staged WCMS keeps customer content packs local while Online remains delive
 test('All ten Local runtimes resolve distinct retained proof without sample fallback', () => {
     const helper = require('./helpers/configuration');
     const selections = [
-        ['platformServer', 'NODICS_PLATFORM_API_KEY'],
-        ['processServer', 'NODICS_PROCESS_API_KEY'],
-        ['wcmsStagedServer', 'NODICS_WCMS_STAGED_API_KEY'],
-        ['wcmsOnlineServer', 'NODICS_WCMS_ONLINE_API_KEY'],
-        ['commerceServer', 'NODICS_COMMERCE_API_KEY'],
-        ['commerceStagedServer', 'NODICS_COMMERCE_STAGED_API_KEY'],
-        ['engagementServer', 'NODICS_ENGAGEMENT_API_KEY'],
-        ['loyaltyServer', 'NODICS_LOYALTY_API_KEY'],
-        ['locationServer', 'NODICS_LOCATION_API_KEY'],
-        ['wasteServer', 'NODICS_WASTE_API_KEY']
+        'platformServer',
+        'processServer',
+        'wcmsStagedServer',
+        'wcmsOnlineServer',
+        'commerceServer',
+        'commerceStagedServer',
+        'engagementServer',
+        'loyaltyServer',
+        'locationServer',
+        'wasteServer'
     ];
     const instances = new Set();
-    for (const [server, variable] of selections) {
+    for (const server of selections) {
         const missing = helper.loadRuntime(server);
         assert.equal(missing.defaultAuthDetail.apiKey, null);
         assert.equal(missing.authSecurity.securityStamp.failClosed, true);
@@ -117,7 +117,7 @@ test('All ten Local runtimes resolve distinct retained proof without sample fall
         assert.equal(missing.cache.auth.channels.auth.fallback, false);
         assert(helper.activeModuleNames(missing).includes('redisCache'));
         instances.add(missing.runtimeIdentity.instanceCode);
-        const supplied = helper.loadRuntime(server, 'kickoffLocal', { [variable]: 'isolated-proof-binding-check' });
+        const supplied = helper.loadRuntime(server, 'kickoffLocal', { NODICS_API_KEY: 'isolated-proof-binding-check' });
         assert.equal(supplied.defaultAuthDetail.apiKey, 'isolated-proof-binding-check');
         assert.equal(supplied.defaultAuthDetail.entCode, 'default');
     }

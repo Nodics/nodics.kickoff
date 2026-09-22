@@ -9,71 +9,7 @@
 
  */
 
-"use strict";
-
-/** @module kickoffLocal/engagementServer/config/properties @description Enables the contact experience and local coordinates only for the reference Engagement server. @layer environment-server-config @owner nodics.kickoff @override Customer deployments provide their own feature, database, provider, and endpoint configuration. */
 module.exports = {
-  "runtimeIdentity": {
-    "instanceCode": "kickoff-local-engagement-1",
-    "remoteModules": [
-      "profile",
-      "backoffice"
-    ]
-  },
-  "defaultAuthDetail": {
-    "apiKey": {
-      "$config": "env",
-      "name": "NODICS_ENGAGEMENT_API_KEY",
-      "fallback": null
-    }
-  },
-  "localResetProvider": {
-    "requiredServiceNames": [
-      "DefaultContactRequestService",
-      "DefaultCommsIntentService"
-    ],
-    "modules": {
-      "commsSchema": true,
-      "contactSubmission": true,
-      "customerFeedback": true,
-      "customerReview": true,
-      "engagementCore": true,
-      "import": true,
-      "publish": true,
-      "system": true,
-      "testimonial": true,
-      "token": true,
-      "validator": true
-    },
-    "serviceNames": {
-      "$config": "replace",
-      "value": [
-        "DefaultCatalogService",
-        "DefaultClassConfigurationService",
-        "DefaultConfigurationActivationLogService",
-        "DefaultConfigurationActivationRequestService",
-        "DefaultCronJobLogService",
-        "DefaultCronJobService",
-        "DefaultEmsFailedMessagesService",
-        "DefaultIndexService",
-        "DefaultIndexerLogService",
-        "DefaultIndexerService",
-        "DefaultPipelineService",
-        "DefaultProcessAuditEventService",
-        "DefaultProcessDefinitionService",
-        "DefaultProcessDefinitionVersionService",
-        "DefaultProcessIncidentService",
-        "DefaultProcessInstanceService",
-        "DefaultProcessTaskService",
-        "DefaultProcessTriggerService",
-        "DefaultRouterConfigurationService",
-        "DefaultSchemaAccessPolicyService",
-        "DefaultSchemaConfigurationService",
-        "DefaultSearchService",
-        "DefaultWorkflow2SchemaService"
-      ]
-    }
-  },
   "activeModules": {
     "groups": [],
     "modules": [
@@ -94,29 +30,6 @@ module.exports = {
       "publish": "engagement.operational"
     }
   },
-  "data": {
-    "dataReleases": {
-      "initializationProfiles": {
-        "localEngagementFoundation": {
-          "enabled": true,
-          "label": "Local Engagement foundation",
-          "description": "Install Engagement core and sample communication releases for local contact, testimonial, review, feedback, and notification validation.",
-          "completionMessage": "The Local Engagement foundation is ready. Operators can validate engagement journeys with governed templates and runtime data.",
-          "steps": {
-            "$config": "replace",
-            "value": [
-              {
-                "dataType": "core"
-              },
-              {
-                "dataType": "sample"
-              }
-            ]
-          }
-        }
-      }
-    }
-  },
   "communication": {
     "trustedSourceModules": [
       "eWaste"
@@ -126,7 +39,7 @@ module.exports = {
         "code": "telegram",
         "service": "DefaultTelegramCommunicationProviderService",
         "credentialReferences": [
-          "telegram.bot.local"
+          "telegram.bot.circa"
         ],
         "timeoutMilliseconds": 10000
       }
@@ -172,13 +85,7 @@ module.exports = {
           "databaseName": "kickoffLocalEngagement"
         }
       }
-    },
-    "commsSchema": {},
-    "contactSubmission": {},
-    "customerFeedback": {},
-    "customerReview": {},
-    "engagementCore": {},
-    "testimonial": {}
+    }
   },
   "servers": {
     "default": {
@@ -186,19 +93,6 @@ module.exports = {
         "httpPort": 4340,
         "httpsPort": 4341
       }
-    },
-    "profile": {
-      "remoteOnly": true
-    },
-    "backoffice": {
-      "remoteOnly": true
-    }
-  },
-  "tooling": {
-    "runtime": {
-      "code": "engagement",
-      "script": "start:engagement",
-      "order": 4
     }
   }
 };

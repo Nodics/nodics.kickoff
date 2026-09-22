@@ -26,6 +26,7 @@ const commands = commandService.resolveCommands(projectRoot);
 const wasteAcceptanceSource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectWasteManagementAcceptanceService.mjs'), 'utf8');
 const wasteDiscoverySource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectWasteBackofficeDiscoveryAcceptanceService.mjs'), 'utf8');
 const runtimeGrantsSource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectRuntimeDeploymentGrantAcceptanceService.mjs'), 'utf8');
+const localBootstrapSource = fs.readFileSync(path.join(projectRoot, 'scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs'), 'utf8');
 for (const [alias, file] of [
     ['acceptance:waste-management', 'defaultProjectWasteManagementAcceptanceService.mjs'],
     ['acceptance:runtime-grants', 'defaultProjectRuntimeDeploymentGrantAcceptanceService.mjs'],
@@ -45,7 +46,20 @@ assert.match(wasteDiscoverySource, /enterpriseHeader:\s*false/);
 assert.match(wasteDiscoverySource, /NODICS_BOOTSTRAP_ADMIN_PASSWORD/);
 assert.match(runtimeGrantsSource, /configuredRuntimeServers/);
 assert.match(runtimeGrantsSource, /runtimeIdentity/);
+assert.match(runtimeGrantsSource, /rotateLocalServicePrincipalKey/);
+assert.match(runtimeGrantsSource, /apiKeyEnvironmentNameForServer/);
+assert.match(runtimeGrantsSource, /localBootstrapAdminPassword/);
+assert.match(runtimeGrantsSource, /NODICS_BOOTSTRAP_ADMIN_PASSWORD/);
+assert.match(runtimeGrantsSource, /identity\/credential\/rotate/);
+assert.match(runtimeGrantsSource, /DefaultProjectLocalRuntimeCredentialService|defaultProjectLocalRuntimeCredentialService/);
+assert.match(runtimeGrantsSource, /import\.release\.validate/);
+assert.match(runtimeGrantsSource, /import\.core\.run/);
 assert.match(runtimeGrantsSource, /rulesApi/);
+assert.match(
+    localBootstrapSource,
+    /ensureFunctionalModuleActive\(headers,\s*"nodics\.process"[\s\S]*publishAxisBaseline\(headers\)/,
+    'Local bootstrap must activate Process before Axis baseline publication',
+);
 const { projectRuntime, projectInitializationProfile } = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
 assert.equal(require('../envs/kickoffLocal/config/properties').tooling, undefined);
 assert.deepEqual(environment.acceptance.wasteManagement.runtime, { role: 'WASTE' });

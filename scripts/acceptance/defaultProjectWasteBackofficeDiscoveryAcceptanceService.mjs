@@ -12,8 +12,11 @@
 
 import { execFile, spawn } from "node:child_process";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { promisify } from "node:util";
+const require = createRequire(import.meta.url);
+const localRuntimeCredentialService = require(process.env.NODICS_FRAMEWORK_ROOT + "/nodics.foundation/modules/nTooling/src/service/project/defaultProjectLocalRuntimeCredentialService");
 const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 /**
@@ -76,6 +79,16 @@ const expectedNavigationIds = config.navigationIds || [
   "waste-movement",
   "waste-compliance",
 ];
+
+function localBootstrapAdminPassword() {
+  const environment = environmentProfile.environment;
+  const credentials = /Local$/u.test(environment)
+    ? localRuntimeCredentialService.ensureCredentials(projectRoot, environment)
+    : {};
+  return process.env.AXIS_PASSWORD ||
+    process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD ||
+    credentials.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
+}
 
 function log(message) {
   console.log(`[waste-backoffice-discovery] ${message}`);
@@ -173,8 +186,7 @@ async function authenticate() {
     headers: { Origin: requestOrigin },
     body: JSON.stringify({
       loginId: process.env.AXIS_LOGIN_ID || "admin",
-      password: process.env.AXIS_PASSWORD ||
-        process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD,
+      password: localBootstrapAdminPassword(),
     }),
   });
   if (!result?.authToken) throw new Error("Platform authentication returned no token");
@@ -237,6 +249,15 @@ async function reconcileWasteRuntimeGrant(headers) {
       ...[].concat(grant.runtimeScope.permissions || []),
       "auth.internal.token.read",
       "profile.enterprise.search",
+      "import.release.validate",
+      "import.core.run",
+      "profile.externalIdentity.prepare",
+      "profile.customer.register",
+      "location.location.read",
+      "profile.address.reference.read",
+      "profile.enterprise.reference.read",
+      "media.customer.upload",
+      "media.customer.read",
     ]),
   ];
   const body = {
@@ -314,17 +335,20 @@ async function transition(headers, action, revision) {
 
 async function ensureWasteEnabled(headers, registration) {
   let current = registration;
+  let activeHeaders = headers;
   let registeredByTest = false;
   let activatedByTest = false;
   if (current.registrationState !== "REGISTERED") {
-    current = await transition(headers, "register", current.catalogueRevision);
+    current = await transition(activeHeaders, "register", current.catalogueRevision);
+    activeHeaders = await ensureWasteViewPermission(await authenticate());
     registeredByTest = true;
   }
   if (current.enabled !== true) {
-    current = await transition(headers, "activate", current.catalogueRevision);
+    current = await transition(activeHeaders, "activate", current.catalogueRevision);
+    activeHeaders = await ensureWasteViewPermission(await authenticate());
     activatedByTest = true;
   }
-  return { registration: current, registeredByTest, activatedByTest };
+  return { registration: current, registeredByTest, activatedByTest, headers: activeHeaders };
 }
 
 function validateRegistration(registration) {
@@ -448,12 +472,13 @@ async function main() {
   const original = await waitForRegistration(headers);
   validateRegistration(original);
   const enabledState = await ensureWasteEnabled(headers, original);
+  const activeHeaders = enabledState.headers || headers;
   try {
     validateRegistration(enabledState.registration);
-    const bootstrap = await validateBootstrap(headers);
+    const bootstrap = await validateBootstrap(activeHeaders);
     log(`discovered ${expectedCapabilityId} via ${providerModule} with ${bootstrap.catalogue[providerModule].navigation.length} navigation entries`);
   } finally {
-    await restore(headers, Object.assign({ original }, enabledState));
+    await restore(await ensureWasteViewPermission(await authenticate()), Object.assign({ original }, enabledState));
   }
   log("Waste BackOffice discovery acceptance passed");
 }

@@ -9,62 +9,7 @@
 
  */
 
-"use strict";
-
-/**
- * @module kickoffLocal/processServer/config/properties
- * @description Defines only local Process server coordinates for the Kickoff reference environment.
- * @layer environment-server-config
- * @owner nodics.kickoff
- * @override Customer projects may change local host/port/topology without copying framework Process defaults.
- */
 module.exports = {
-  "runtimeIdentity": {
-    "instanceCode": "kickoff-local-process-1",
-    "remoteModules": [
-      "profile",
-      "backoffice",
-      "editorial",
-      "cms",
-      "rulesApi"
-    ]
-  },
-  "defaultAuthDetail": {
-    "apiKey": {
-      "$config": "env",
-      "name": "NODICS_PROCESS_API_KEY",
-      "fallback": null
-    }
-  },
-  "httpHardening": {
-    "cors": {
-      "originEndpointOverrides": {
-        "nexus": false
-      }
-    }
-  },
-  "localResetProvider": {
-    "modules": {
-      "cronjob": true,
-      "import": true,
-      "system": true,
-      "token": true,
-      "validator": true,
-      "workflow": true
-    },
-    "serviceNames": {
-      "$config": "replace",
-      "value": [
-        "DefaultCatalogService",
-        "DefaultEmsFailedMessagesService",
-        "DefaultIndexService",
-        "DefaultIndexerLogService",
-        "DefaultIndexerService",
-        "DefaultSearchService",
-        "DefaultWorkflow2SchemaService"
-      ]
-    }
-  },
   "activeModules": {
     "groups": [],
     "modules": [
@@ -78,46 +23,6 @@ module.exports = {
   "runtimeRole": {
     "code": "PROCESS",
     "publication": "OPERATIONAL"
-  },
-  "data": {
-    "dataReleases": {
-      "initializationProfiles": {
-        "localProcessWorkflowFoundation": {
-          "enabled": true,
-          "label": "Local Process and Workflow foundation",
-          "description": "Install required process definitions and workflow releases used by publication approvals and governed operator tasks.",
-          "completionMessage": "The Local Process and Workflow foundation is ready. Approval flows can be created for publishable data.",
-          "steps": {
-            "$config": "replace",
-            "value": [
-              {
-                "dataType": "init"
-              }
-            ]
-          }
-        }
-      },
-      "contributions": {
-        "$config": "replace",
-        "value": [
-          {
-            "moduleName": "cms",
-            "sections": [
-              "cmsPublicationApproval"
-            ]
-          },
-          {
-            "moduleName": "rulesApi",
-            "sections": [
-              "rulesPolicyApproval"
-            ]
-          }
-        ]
-      },
-      "installers": {
-        "PROCESS_DEFINITION": "DefaultProcessDefinitionContributionService"
-      }
-    }
   },
   "database": {
     "default": {
@@ -133,8 +38,7 @@ module.exports = {
           "databaseName": "kickoffLocalCron"
         }
       }
-    },
-    "workflow": {}
+    }
   },
   "process": {
     "publicationDecisionCallback": {
@@ -171,13 +75,6 @@ module.exports = {
         "httpPort": 4330,
         "httpsPort": 4331
       }
-    }
-  },
-  "tooling": {
-    "runtime": {
-      "code": "process",
-      "script": "start:process",
-      "order": 2
     }
   }
 };

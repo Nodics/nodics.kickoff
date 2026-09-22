@@ -43,6 +43,7 @@ const scenarios = Object.freeze([
         verify: function (coreRoot) {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerce');
             assert.equal(CONFIG.get('runtimeRole').code, 'COMMERCE');
+            assert.equal(CONFIG.get('stripeProvider').enabled, true);
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(require('./helpers/configuration').searchConfiguration(CONFIG.getProperties(), 'product').options.engine, 'elastic');
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
@@ -77,6 +78,8 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalCommerceStaged');
             assert.equal(CONFIG.get('runtimeRole').code, 'COMMERCE_STAGED');
             assert.equal(CONFIG.get('runtimeRole').publication, 'STAGED');
+            assert.equal(CONFIG.get('stripeProvider').enabled, false);
+            assert.equal(CONFIG.get('stripeProvider').maturity, 'NOT_APPLICABLE_FOR_STAGED_CATALOG');
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(require('./helpers/configuration').searchConfiguration(CONFIG.getProperties(), 'product').options.engine, 'elastic');
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
@@ -356,7 +359,11 @@ async function prepareScenario(scenario) {
         defaultServer: scenario.server
     }));
 
-    assert.equal(NODICS.isModuleActive('kickoffAdministration'), scenario.server === 'platformServer', 'Shared administration defaults must be scoped to Platform');
+    assert.equal(NODICS.isModuleActive('kickoffAdministration'), false, 'Synthetic administration module must not be selected');
+    assert.equal(NODICS.isModuleActive('kickoffCore'), true, 'Project-owned administration defaults live in Kickoff Core');
+    assert.equal(Boolean(CONFIG.get('backofficeApplicationInitialization')?.runtimeRoleProfiles), false, 'BackOffice runtime-role profiles are projected out of effective config');
+    assert.equal(Boolean(CONFIG.get('backofficeApplicationInitialization')?.profiles?.agoraapparel), scenario.server === 'platformServer', 'Shared BackOffice administration profiles must be scoped to Platform runtime role');
+    assert.equal(Boolean(CONFIG.get('backofficeFunctionalModuleActivationData')?.modules?.['nodics.commerce']), scenario.server === 'platformServer', 'Shared BackOffice functional activation data must be scoped to Platform runtime role');
 
     const selectedDomains = require(path.join(coreRoot, 'modules/nConfig/src/service/defaultConfigurationBindingService')).resolveDomainComposition(CONFIG.get('activeModules').compositions.agora).domains;
     const capabilityDomains = new Set(selectedDomains);
@@ -394,9 +401,27 @@ async function prepareScenario(scenario) {
     assert.equal(NODICS.getEnvironmentName(), 'nodics.kickoff');
     assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');
     const apiExposure = CONFIG.get('apiExposure') || {};
+    const isApiExposureEnabled = category => {
+        const defaultConfig = apiExposure.default || {};
+        const categories = apiExposure.categories || {};
+        const hasCategory = Object.prototype.hasOwnProperty.call(categories, category);
+        if (!hasCategory) {
+            if (apiExposure.unknown && Object.prototype.hasOwnProperty.call(apiExposure.unknown, 'enabled'))
+                return apiExposure.unknown.enabled === true;
+            if (Object.prototype.hasOwnProperty.call(defaultConfig, 'enabled'))
+                return defaultConfig.enabled === true;
+            return false;
+        }
+        const categoryConfig = categories[category] || {};
+        if (Object.prototype.hasOwnProperty.call(categoryConfig, 'enabled'))
+            return categoryConfig.enabled === true;
+        if (Object.prototype.hasOwnProperty.call(defaultConfig, 'enabled'))
+            return defaultConfig.enabled === true;
+        return false;
+    };
     (scenario.expectedApiExposure || []).forEach(category => {
         assert.equal(
-            apiExposure.categories && apiExposure.categories[category] && apiExposure.categories[category].enabled,
+            isApiExposureEnabled(category),
             true,
             `${category} API exposure should be enabled for ${scenario.server}`
         );

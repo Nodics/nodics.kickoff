@@ -14,11 +14,16 @@ import { execFile, spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { createRequire } from "node:module";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 const projectRoot = resolve(process.env.NODICS_PROJECT_ROOT || process.cwd());
 const workspaceRoot = resolve(projectRoot, "..");
+const require = createRequire(import.meta.url);
+const localRuntimeCredentialService = require(
+  process.env.NODICS_FRAMEWORK_ROOT + "/nodics.foundation/modules/nTooling/src/service/project/defaultProjectLocalRuntimeCredentialService"
+);
 const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || process.env.NODICS_ACCEPTANCE_RUNTIME || '');
 const platformUrl = process.env.AXIS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
@@ -27,14 +32,18 @@ const wcmsOnlineUrl = process.env.NEXUS_CMS_URL || projectEndpointUrl(environmen
 const processUrl = process.env.AXIS_PROCESS_URL || projectEndpointUrl(environmentProfile, 'processServer');
 const engagementUrl = process.env.NODICS_ENGAGEMENT_URL || projectEndpointUrl(environmentProfile, 'engagementServer');
 const locationUrl = process.env.AXIS_LOCATION_URL || projectEndpointUrl(environmentProfile, 'locationServer');
+const commerceStagedUrl = process.env.AXIS_COMMERCE_STAGED_URL || projectEndpointUrl(environmentProfile, 'commerceStagedServer');
+const commerceUrl = process.env.AXIS_COMMERCE_URL || projectEndpointUrl(environmentProfile, 'commerceServer');
+const loyaltyUrl = process.env.AXIS_LOYALTY_URL || projectEndpointUrl(environmentProfile, 'loyaltyServer');
+const wasteUrl = process.env.AXIS_WASTE_URL || projectEndpointUrl(environmentProfile, 'wasteServer');
 const operatorOrigin = process.env.NODICS_ACCEPTANCE_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE || "default";
 const loginId = process.env.AXIS_LOGIN_ID || "admin";
-const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
+const runtimeMode = process.env.NODICS_ACCEPTANCE_RUNTIME || "kickoffLocal";
+const password = localBootstrapAdminPassword();
 const clientContractVersion = process.env.AXIS_CLIENT_CONTRACT_VERSION || "1";
 const packageDescriptor = readProjectPackageDescriptor();
 const projectCode = process.env.AXIS_PROJECT || resolveProjectCode(packageDescriptor);
-const runtimeMode = process.env.NODICS_ACCEPTANCE_RUNTIME || "kickoffLocal";
 const managedStartupEnabled = runtimeMode === "kickoffLocal";
 const publicOrigin = process.env.NODICS_ACCEPTANCE_PUBLIC_ORIGIN || projectCorsOrigin(environmentProfile, 'nexus');
 const urlPort = (value) => Number(new URL(value).port || (new URL(value).protocol === "https:" ? 443 : 80));
@@ -42,6 +51,17 @@ const dropLocalDb = process.argv.includes("--drop-local-db");
 const leaveStarted = process.argv.includes("--leave-started");
 const expectDocumentationNotInstalled = process.argv.includes("--expect-documentation-not-installed");
 const qualifyDocumentationRollback = process.argv.includes("--qualify-documentation-rollback");
+
+function localBootstrapAdminPassword() {
+  const environment = environmentProfile.environment || runtimeMode;
+  const credentials = /Local$/u.test(environment)
+    ? localRuntimeCredentialService.ensureCredentials(projectRoot, environment)
+    : {};
+  return process.env.AXIS_PASSWORD ||
+    process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD ||
+    credentials.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
+}
+
 function defaultLocalBootstrapCapabilities() {
   return {
     documentationPacks: [
@@ -181,7 +201,10 @@ const localPorts = [
   { label: "Process", port: urlPort(processUrl) },
   { label: "Engagement", port: 4340 },
   { label: "Location", port: urlPort(locationUrl) },
-  { label: "Commerce", port: 4350 },
+  { label: "Commerce Staged", port: urlPort(commerceStagedUrl) },
+  { label: "Commerce", port: urlPort(commerceUrl) },
+  { label: "Loyalty", port: urlPort(loyaltyUrl) },
+  { label: "Waste", port: urlPort(wasteUrl) },
 ];
 const managedProcesses = [];
 
@@ -430,6 +453,16 @@ async function ensureProcess(label, port, cwd, scriptName, baseUrl, readyPath) {
   await waitForHttp(baseUrl, readyPath, label);
 }
 
+async function reconcileRuntimeDeploymentGrants() {
+  if (!managedStartupEnabled) return;
+  log("reconciling local runtime deployment grants before split runtimes start");
+  await execFileAsync("npm", ["run", "acceptance:runtime-grants"], {
+    cwd: projectRoot,
+    env: process.env,
+    maxBuffer: 1024 * 1024 * 10,
+  });
+}
+
 async function assertGovernedFreshResetAvailable() {
   if (!dropLocalDb) {
     log(
@@ -525,6 +558,81 @@ async function authenticate() {
   return {
     Authorization: `Bearer ${auth.authToken}`,
   };
+}
+
+async function startSplitRuntimes() {
+  await ensureProcess(
+    "WCMS Staged",
+    urlPort(wcmsUrl),
+    projectRoot,
+    "start:wcms:staged",
+    wcmsUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "WCMS Online",
+    urlPort(wcmsOnlineUrl),
+    projectRoot,
+    "start:wcms:online",
+    wcmsOnlineUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Process and Automation",
+    urlPort(processUrl),
+    projectRoot,
+    "start:process",
+    processUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Engagement",
+    urlPort(engagementUrl),
+    projectRoot,
+    "start:engagement",
+    engagementUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Location",
+    urlPort(locationUrl),
+    projectRoot,
+    "start:location",
+    locationUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Commerce Staged",
+    urlPort(commerceStagedUrl),
+    projectRoot,
+    "start:commerce:staged",
+    commerceStagedUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Commerce",
+    urlPort(commerceUrl),
+    projectRoot,
+    "start:commerce",
+    commerceUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Loyalty",
+    urlPort(loyaltyUrl),
+    projectRoot,
+    "start:loyalty",
+    loyaltyUrl,
+    "/nodics/system/v0/health/ready",
+  );
+  await ensureProcess(
+    "Waste",
+    urlPort(wasteUrl),
+    projectRoot,
+    "start:waste",
+    wasteUrl,
+    "/nodics/system/v0/health/ready",
+  );
 }
 
 async function loadRegistry(headers) {
@@ -1137,58 +1245,18 @@ async function main() {
     platformUrl,
     "/nodics/system/v0/health/ready",
   );
-  await ensureProcess(
-    "WCMS Staged",
-    urlPort(wcmsUrl),
-    projectRoot,
-    "start:wcms:staged",
-    wcmsUrl,
-    "/nodics/system/v0/health/ready",
-  );
-  await ensureProcess(
-    "WCMS Online",
-    urlPort(wcmsOnlineUrl),
-    projectRoot,
-    "start:wcms:online",
-    wcmsOnlineUrl,
-    "/nodics/system/v0/health/ready",
-  );
-  await ensureProcess(
-    "Process and Automation",
-    urlPort(processUrl),
-    projectRoot,
-    "start:process",
-    processUrl,
-    "/nodics/system/v0/health/ready",
-  );
-  await ensureProcess(
-    "Engagement",
-    urlPort(engagementUrl),
-    projectRoot,
-    "start:engagement",
-    engagementUrl,
-    "/nodics/system/v0/health/ready",
-  );
-  await ensureProcess(
-    "Location",
-    urlPort(locationUrl),
-    projectRoot,
-    "start:location",
-    locationUrl,
-    "/nodics/system/v0/health/ready",
-  );
-  await verifyLocalRouteSecurityMatrix();
+  await reconcileRuntimeDeploymentGrants();
+  await startSplitRuntimes();
   if (dropLocalDb) {
     const resetHeaders = await authenticate();
     await executeGovernedFreshReset(resetHeaders);
     await ensureProcess("Platform", urlPort(platformUrl), projectRoot, "start:platform", platformUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("WCMS Staged", urlPort(wcmsUrl), projectRoot, "start:wcms:staged", wcmsUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("WCMS Online", urlPort(wcmsOnlineUrl), projectRoot, "start:wcms:online", wcmsOnlineUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("Process and Automation", urlPort(processUrl), projectRoot, "start:process", processUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("Engagement", urlPort(engagementUrl), projectRoot, "start:engagement", engagementUrl, "/nodics/system/v0/health/ready");
-    await ensureProcess("Location", urlPort(locationUrl), projectRoot, "start:location", locationUrl, "/nodics/system/v0/health/ready");
-    await verifyLocalRouteSecurityMatrix();
+    const bootstrapHeaders = await authenticate();
+    await ensureInitializationProfileCurrent(bootstrapHeaders, platformUrl, "localPlatformFoundation", "Platform foundation");
+    await reconcileRuntimeDeploymentGrants();
+    await startSplitRuntimes();
   }
+  await verifyLocalRouteSecurityMatrix();
   await waitForHttp(
     platformUrl,
     "/nodics/backoffice/v0/bootstrap/public",
@@ -1213,6 +1281,7 @@ async function main() {
     "nodics.communication",
     "observed modules",
   );
+  await ensureFunctionalModuleActive(headers, "nodics.process", "Axis baseline publication requires governed Process approval");
   await ensureFunctionalModuleActive(headers, "nodics.communication", "Local Nexus bootstrap requires Engagement capability");
   await verifyDocumentationInitiallyNotInstalled(headers);
   await importContentPacks(headers);

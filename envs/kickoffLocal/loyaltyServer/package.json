@@ -20,7 +20,19 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Loyalty Server"
+    "displayName": "Loyalty Server",
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-loyalty-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "loyalty",
+      "script": "start:loyalty",
+      "order": 5
+    }
   },
   "description": "Reference customer Loyalty server runtime composition and configuration boundary for this Nodics project."
 }

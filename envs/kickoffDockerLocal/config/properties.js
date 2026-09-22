@@ -1,21 +1,19 @@
-/*
-    Nodics - Enterprice Micro-Services Management Framework
-
-    Copyright (c) 2026 Nodics All rights reserved.
-
-    This software is governed by the Nodics Source-Available Commercial License.
-    You may use, copy, modify, deploy, or distribute it only as permitted by the
-    root LICENSE file or a separate written agreement with Nodics.
-
- */
-
-/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
-"use strict";
-
-/** @description Declares Docker environment policy and shared endpoint coordinates for nConfig layering. @layer config @owner nodics.kickoff */
 module.exports = {
-  "environment": {
-    "class": "LOCAL_PRODUCTION_SIMULATION"
+  "credentials": {
+    "telegram.bot.circa": {
+      "value": null,
+      "label": "Circa Telegram bot token",
+      "status": "UNCONFIGURED",
+      "secret": true,
+      "credentialKind": "BOT_TOKEN"
+    },
+    "openai.circa": {
+      "value": null,
+      "label": "Circa OpenAI provider token",
+      "status": "UNCONFIGURED",
+      "secret": true,
+      "credentialKind": "API_TOKEN"
+    }
   },
   "database": {
     "default": {
@@ -288,5 +286,30 @@ module.exports = {
         }
       }
     }
+  },
+  "profileCustomerBrowserSession": {
+    "enabled": true,
+    "refreshCookieName": "nodics_docker_customer_refresh",
+    "csrfCookieName": "nodics_docker_customer_csrf",
+    "allowInsecureLoopback": true,
+    "sameSite": "Lax"
+  },
+  "profileBrowserSession": {
+    "enabled": true,
+    "refreshCookieName": "nodics_docker_axis_refresh",
+    "csrfCookieName": "nodics_docker_axis_csrf",
+    "allowInsecureLoopback": true,
+    "sameSite": "Lax"
+  },
+  "localResetProvider": {
+    "enabled": true,
+    "environmentAllowlist": [
+      "kickoffDockerLocal"
+    ],
+    "allowMissingModelServices": true,
+    "enabledRuntimeRoles": [
+      "WASTE",
+      "LOCATION"
+    ]
   }
 };

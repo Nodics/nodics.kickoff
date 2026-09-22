@@ -13,6 +13,9 @@
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 
 const { readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin, projectRuntime, projectInitializationProfile } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+const { createRequire } = await import('node:module');
+const require = createRequire(import.meta.url);
+const localRuntimeCredentialService = require(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectLocalRuntimeCredentialService');
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
@@ -22,7 +25,11 @@ const processUrl = process.env.NODICS_PROCESS_URL || projectEndpointUrl(environm
 const origin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const enterpriseCode = process.env.AXIS_ENTERPRISE_CODE || 'default';
 const loginId = process.env.AXIS_LOGIN_ID || 'admin';
-const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
+const localCredentials = /Local$/u.test(environmentProfile.environment)
+  ? localRuntimeCredentialService.ensureCredentials(projectRoot, environmentProfile.environment)
+  : {};
+const password = process.env.AXIS_PASSWORD || process.env.NODICS_BOOTSTRAP_ADMIN_PASSWORD ||
+  localCredentials.NODICS_BOOTSTRAP_ADMIN_PASSWORD;
 const profileCode = projectInitializationProfile(projectRuntime(environmentProfile, config.runtime), process.env.NODICS_INITIALIZATION_PROFILE || config.profileCode, config.profileTemplate);
 
 const publicationProfiles = config.publicationProfiles;

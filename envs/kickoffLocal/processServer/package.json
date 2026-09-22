@@ -26,7 +26,22 @@
       "nodics.process",
       "nodics.wcms",
       "nodics.rulesEngine"
-    ]
+    ],
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-process-1",
+      "remoteModules": [
+        "profile",
+        "backoffice",
+        "editorial",
+        "cms",
+        "rulesApi"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "process",
+      "script": "start:process",
+      "order": 2
+    }
   },
   "description": "Business Process & Automation Server runtime composition and configuration boundary for this Nodics project."
 }

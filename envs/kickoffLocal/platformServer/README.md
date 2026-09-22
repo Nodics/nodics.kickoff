@@ -20,7 +20,7 @@ allows the approved Circa HTTPS tunnel to use Secure cookies while retaining
 local browser development. Set the exact tunnel origin through Local CORS policy;
 this option never permits non-loopback HTTP or bypasses origin validation.
 
-Local testing intentionally sets `profileExternalIdentity.maximumAssertionAgeSeconds`
-to 3600 (60 minutes). This applies to signed external sign-in proofs, not session
-lifetime; signature and application checks remain enforced. Review this local-only
-override before promoting configuration to any shared or production environment.
+Profile's default `profileExternalIdentity.maximumAssertionAgeSeconds` is 3600
+(60 minutes). This applies to signed external sign-in proofs, not session
+lifetime; signature and application checks remain enforced. Override this through
+the normal layered configuration if a stricter business policy is required.

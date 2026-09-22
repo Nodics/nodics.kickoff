@@ -32,7 +32,26 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Platform Server"
+    "displayName": "Platform Server",
+    "runtimeAliases": [
+      "platform",
+      "profile",
+      "backoffice"
+    ],
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-platform-1",
+      "remoteModules": [
+        "workflow",
+        "publish",
+        "cms",
+        "editorial"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "platform",
+      "script": "start:platform",
+      "order": 0
+    }
   },
   "description": "Platform Server runtime composition and configuration boundary for this Nodics project."
 }

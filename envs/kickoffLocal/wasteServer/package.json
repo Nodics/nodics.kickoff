@@ -33,6 +33,34 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Waste Server"
+    "displayName": "Waste Server",
+    "runtimeAliases": [
+      "waste",
+      "rulesApi"
+    ],
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-waste-1",
+      "remoteModules": [
+        "profile",
+        "backoffice",
+        "media",
+        "cms",
+        "editorial",
+        "locationCore",
+        "loyaltyCore",
+        "loyaltyApi",
+        "commerceCore",
+        "engagementCore",
+        "workflow"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "waste",
+      "script": "start:waste",
+      "dependsOn": [
+        "platform"
+      ],
+      "order": 7
+    }
   }
 }

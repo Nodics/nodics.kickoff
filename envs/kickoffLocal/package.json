@@ -18,6 +18,7 @@
       "publish": false,
       "web": false
     },
+    "deploymentClass": "LOCAL",
     "displayName": "Kickoff Local"
   },
   "description": "Kickoff Local runtime composition and configuration boundary for this Nodics project."

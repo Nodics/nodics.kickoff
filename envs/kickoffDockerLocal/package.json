@@ -18,6 +18,7 @@
       "publish": false,
       "web": false
     },
+    "deploymentClass": "LOCAL_PRODUCTION_SIMULATION",
     "displayName": "Kickoff Docker Local"
   },
   "description": "Kickoff Docker Local runtime composition and configuration boundary for this Nodics project."

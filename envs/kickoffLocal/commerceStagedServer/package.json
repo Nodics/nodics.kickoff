@@ -23,6 +23,21 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Commerce Staged Server"
+    "displayName": "Commerce Staged Server",
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-commerce-staged-1",
+      "remoteModules": [
+        "profile",
+        "backoffice",
+        "loyaltyCore",
+        "wasteCore",
+        "media"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "commerceStaged",
+      "script": "start:commerce:staged",
+      "order": 8
+    }
   }
 }

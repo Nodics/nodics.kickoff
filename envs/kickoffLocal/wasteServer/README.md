@@ -31,6 +31,11 @@ bounded `loyalty.wallet.read` permission and `media.evidence.read` for
 owner-authorized item evidence; other reward mutations need their own
 explicit grants. Do not restore shared administrator groups to runtime tokens.
 
-Telegram channel entry also requires `profile.externalIdentity.prepare` on the
-Waste deployment grant and credential, for Profile's signed-launch browser
-handoff. Customer linking remains authenticated with the customer's own bearer.
+Telegram channel entry also requires the bounded Profile and Media permissions
+on the Waste deployment grant and credential: `profile.externalIdentity.prepare`
+for Profile's signed-launch browser handoff, `profile.customer.register` for
+Circa-owned local customer registration, and `media.customer.upload`/
+`location.location.read` for collection-centre arrival checks, and
+`media.customer.read` for private customer evidence. Customer linking remains
+authenticated with the customer's own bearer, and no broad administrator group
+permissions are restored to runtime tokens.

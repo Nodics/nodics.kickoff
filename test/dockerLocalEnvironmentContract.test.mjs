@@ -56,6 +56,7 @@ const containerQualificationService = fs.readFileSync(
   "utf8",
 );
 const environmentProfile = require("./helpers/configuration").loadContainer();
+const kickoffCoreProperties = require("../modules/kickoffCore/config/properties");
 
 const projectCommands = projectCommandService.resolveCommands(root);
 const servers = [
@@ -127,11 +128,7 @@ assert.match(compose, /docker\.elastic\.co\/elasticsearch\/elasticsearch/);
 assert.match(compose, /elasticsearch-data/);
 const loadRuntime = (server) =>
   require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
-const dockerPlatform = require("./helpers/configuration").merge(
-  {},
-  require("../modules/kickoffAdministration/config/properties"),
-  loadRuntime("platformServer"),
-);
+const dockerPlatform = loadRuntime("platformServer");
 const dockerLoyalty = loadRuntime("loyaltyServer");
 const dockerEnvironment = require("../envs/kickoffDockerLocal/config/properties");
 assert.equal(
@@ -140,12 +137,22 @@ assert.equal(
   "redis-sentinel",
 );
 assert.equal(
-  dockerPlatform.backofficeRegistry.clientEndpoints.platformServer,
-  "http://localhost:5300/",
+  dockerPlatform.backofficeRegistry.clientEndpoints,
+  undefined,
+  "BackOffice must not own a central runtime browser endpoint map",
 );
-assert.equal(
-  dockerPlatform.backofficeRegistry.clientEndpoints.loyaltyServer,
-  "http://localhost:5360/",
+assert.deepEqual(
+  dockerPlatform.servers.default.browserEndpoint,
+  { httpHost: "localhost", httpPort: 5300 },
+);
+assert.deepEqual(
+  dockerLoyalty.servers.default.browserEndpoint,
+  { httpHost: "localhost", httpPort: 5360 },
+);
+assert.notEqual(
+  dockerPlatform.servers.default.browserEndpoint.httpPort,
+  dockerPlatform.servers.default.endpoint.httpPort,
+  "Docker browser host ports remain server-owned deployment metadata",
 );
 assert.equal(
   dockerPlatform.profileBrowserSession.refreshCookieName,
@@ -198,8 +205,12 @@ for (const header of [
   );
 }
 assert.equal(
-  require("../envs/kickoffDockerLocal/commerceServer/config/properties").cart
-    .customerApi.defaultJurisdiction,
+  require("../envs/kickoffDockerLocal/commerceServer/config/properties").cart,
+  undefined,
+  "Cart jurisdiction must be projected from project runtime-role policy",
+);
+assert.equal(
+  loadRuntime("commerceServer").cart.customerApi.defaultJurisdiction,
   "AE",
   "Cart jurisdiction must match the governed reference tax policy",
 );
@@ -213,7 +224,7 @@ for (const server of ["wasteServer", "locationServer"]) {
   );
   assert(properties.activeModules.modules.includes("circa.ewaste"));
 }
-for (const domain of environmentProfile.composition.agora.domains) {
+for (const domain of kickoffCoreProperties.activeModules.compositions.agora.domains) {
   const prepared =
     dockerPlatform.backofficeApplicationInitialization.profiles[
       `agora${domain.code}`

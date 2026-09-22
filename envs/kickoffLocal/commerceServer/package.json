@@ -23,6 +23,21 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Commerce Server"
+    "displayName": "Commerce Server",
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-commerce-1",
+      "remoteModules": [
+        "profile",
+        "backoffice",
+        "loyaltyCore",
+        "wasteCore",
+        "media"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "commerce",
+      "script": "start:commerce",
+      "order": 9
+    }
   }
 }

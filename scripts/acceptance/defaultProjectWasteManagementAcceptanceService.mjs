@@ -24,9 +24,13 @@ const { readProjectEnvironmentConfiguration, projectRuntime, projectInitializati
 
 const require = createRequire(import.meta.url);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
+const localRuntimeCredentialService = require(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectLocalRuntimeCredentialService');
 const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.ENV || '');
 const acceptanceConfig = environmentProfile.acceptance?.wasteManagement || {};
 const environmentName = environmentProfile.environment;
+if (/Local$/u.test(environmentName)) {
+    Object.assign(process.env, localRuntimeCredentialService.mergeEnvironment(projectRoot, environmentName, process.env));
+}
 const runtime = projectRuntime(environmentProfile, process.env.SERVER || acceptanceConfig.server || acceptanceConfig.runtime);
 const serverName = runtime.server;
 const initializationProfile = projectInitializationProfile(runtime, process.env.NODICS_INITIALIZATION_PROFILE || acceptanceConfig.profileCode);
@@ -226,14 +230,18 @@ function validateProjectOverlayData() {
     const sectionCode = String(overlay.releaseCode || `${moduleName}:project-reference`).split(':')[1];
     const section = manifest.sections[sectionCode];
     assert(section, `Waste project overlay manifest must declare ${sectionCode}`);
-    const headerFile = Object.keys(section.files || {}).find(filePath => filePath.startsWith(`${section.sourceRoot}/headers/waste/`));
+    const headerFile = Object.keys(section.files || {}).find(filePath =>
+        filePath.startsWith(`${section.sourceRoot}/`) &&
+        filePath.includes('/headers/') &&
+        filePath.endsWith('Header.js'));
     assert(headerFile, 'Waste project overlay manifest must declare a Waste import header');
     const header = require(path.join(dataRoot, headerFile));
     const contributionPolicy = SERVICE.DefaultWasteDataContributionPolicyService;
     contributionPolicy.validateManifestSection(section);
     const headerEntries = contributionPolicy.validateHeader(header);
+    const recordsRoot = path.dirname(headerFile).replace(/(^|\/)headers(\/|$)/, '$1records$2');
     const recordsBySchemaName = headerEntries.reduce((result, entry) => {
-        const records = requireRecords(path.join(dataRoot, section.sourceRoot, 'records/waste'), `${entry.options.dataFilePrefix}.js`);
+        const records = requireRecords(path.join(dataRoot, recordsRoot), `${entry.options.dataFilePrefix}.js`);
         records.forEach(record => contributionPolicy.validateRecord(record, overlay.layerKind || 'PROJECT'));
         result[entry.options.schemaName] = (result[entry.options.schemaName] || []).concat(records);
         return result;

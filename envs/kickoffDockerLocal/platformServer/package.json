@@ -22,6 +22,11 @@
       "web": false
     },
     "displayName": "Docker Local Platform Server",
+    "runtimeAliases": [
+      "platform",
+      "profile",
+      "backoffice"
+    ],
     "runtimeModuleRoots": [
       "nodics.platform",
       "nodics.localization",

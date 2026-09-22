@@ -717,8 +717,8 @@
       ],
       "sourceEvidence": [
         "docs/pages/configuration-inheritance.md",
-        "modules/kickoffAdministration/config/properties.js",
-        "modules/kickoffAdministration/package.json",
+        "modules/kickoffCore/config/properties.js",
+        "modules/kickoffCore/package.json",
         "envs/kickoffLocal/platformServer/config/properties.js",
         "envs/kickoffDockerLocal/platformServer/config/properties.js",
         "test/configurationInheritanceContract.test.js"

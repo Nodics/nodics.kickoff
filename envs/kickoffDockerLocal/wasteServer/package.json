@@ -33,6 +33,10 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Docker Local Waste Server"
+    "displayName": "Docker Local Waste Server",
+    "runtimeAliases": [
+      "waste",
+      "rulesApi"
+    ]
   }
 }

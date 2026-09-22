@@ -12,7 +12,6 @@ const frameworkRequire = createRequire(
   path.join(frameworkRoot, "package.json"),
 );
 const merge = frameworkRequire("lodash/merge");
-const administration = require("../../modules/kickoffAdministration/config/properties");
 
 const runtimeGraphs = new WeakMap();
 
@@ -159,14 +158,4 @@ module.exports = {
   activeModuleNames: (properties) => runtimeGraphs.get(properties) || [],
   merge,
   frameworkRoot,
-  /** Compose only the selected project administration defaults for focused declaration tests. */
-  inheritAdministration: function (properties) {
-    return merge(
-      {},
-      properties.activeModules.modules.includes("kickoffAdministration")
-        ? administration
-        : {},
-      properties,
-    );
-  },
 };

@@ -22,13 +22,31 @@
       "web": false
     },
     "displayName": "WCMS Staged Server",
+    "runtimeAliases": [
+      "wcmsStaged",
+      "cmsStaged",
+      "wcms"
+    ],
     "runtimeModuleRoots": [
       "nodics.wcms",
       "nodics.discovery",
       "nodics.platform",
       "nodics.process",
       "nodics.accelerators/modules/nexus"
-    ]
+    ],
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-wcms-staged-1",
+      "remoteModules": [
+        "profile",
+        "backoffice",
+        "workflow"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "wcmsStaged",
+      "script": "start:wcms:staged",
+      "order": 3
+    }
   },
   "description": "WCMS Staged Server runtime composition and configuration boundary for this Nodics project."
 }

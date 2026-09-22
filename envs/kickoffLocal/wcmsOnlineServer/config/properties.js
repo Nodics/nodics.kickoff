@@ -1,84 +1,4 @@
-/*
-    Nodics - Enterprice Micro-Services Management Framework
-
-    Copyright (c) 2026 Nodics All rights reserved.
-
-    This software is governed by the Nodics Source-Available Commercial License.
-    You may use, copy, modify, deploy, or distribute it only as permitted by the
-    root LICENSE file or a separate written agreement with Nodics.
-
- */
-
-"use strict";
-const wcmsSearchRuntimeModules = ["search", "elastic"];
-const wcmsAuthorityModules = [
-  "cms",
-  "editorial",
-  "media",
-  "publish",
-  "wcmsExperience",
-  "discoveryConfig",
-  "discoveryMapping",
-  "discoveryProjection",
-  "discoveryPublication",
-  "discoveryQuery",
-  "discoveryRanking",
-  "discoveryRuntime",
-  "discoverySource",
-];
-
-/** @module wcmsOnlineServer/config/properties @description Defines the non-versioned Local WCMS Online target and delivery boundary. */
 module.exports = {
-  "runtimeIdentity": {
-    "instanceCode": "kickoff-local-wcms-online-1",
-    "remoteModules": [
-      "profile",
-      "backoffice"
-    ]
-  },
-  "defaultAuthDetail": {
-    "apiKey": {
-      "$config": "env",
-      "name": "NODICS_WCMS_ONLINE_API_KEY",
-      "fallback": null
-    }
-  },
-  "localResetProvider": {
-    "requiredServiceNames": [
-      "DefaultCmsDocumentationAccessPolicyService",
-      "DefaultCmsDocumentationDashboardService",
-      "DefaultCmsDocumentationNavigationService",
-      "DefaultCmsDocumentationNodeService",
-      "DefaultCmsDocumentationPageService",
-      "DefaultCmsDocumentationProductService",
-      "DefaultCmsDocumentationPublicationStateService",
-      "DefaultCmsDocumentationSearchMetadataService"
-    ],
-    "modules": {
-      "cms": true,
-      "editorial": true,
-      "import": true,
-      "media": true,
-      "publish": true,
-      "search": true,
-      "system": true,
-      "token": true,
-      "validator": true
-    },
-    "serviceNames": {
-      "$config": "replace",
-      "value": [
-        "DefaultEmsFailedMessagesService",
-        "DefaultWorkflow2SchemaService"
-      ]
-    },
-    "searchIndexes": [
-      {
-        "moduleName": "discoveryProjection",
-        "indexName": "discoveryDocumentProjection"
-      }
-    ]
-  },
   "activeModules": {
     "groups": [],
     "modules": [
@@ -104,7 +24,6 @@ module.exports = {
       "kickoffInt"
     ]
   },
-  "publishEnabled": false,
   "runtimeRole": {
     "code": "WCMS_ONLINE",
     "publication": "ONLINE"
@@ -127,18 +46,6 @@ module.exports = {
     },
     "default": "wcms.online"
   },
-  "search": {
-    "discoveryProjection": {
-      "options": {
-        "enabled": true
-      }
-    },
-    "wcmsExperience": {
-      "options": {
-        "enabled": true
-      }
-    }
-  },
   "database": {
     "default": {
       "mongodb": {
@@ -153,9 +60,6 @@ module.exports = {
     "publication": {
       "enabled": true,
       "runtimeRole": "ONLINE"
-    },
-    "delivery": {
-      "mediaDeliveryBaseUrl": "http://127.0.0.1:4314/nodics/media/v0/content"
     }
   },
   "editorial": {
@@ -164,52 +68,12 @@ module.exports = {
       "targetTransportProvider": null
     }
   },
-  "data": {
-    "dataReleases": {
-      "allowedDestinationRoles": {
-        "$config": "replace",
-        "value": []
-      }
-    }
-  },
-  "apiExposure": {
-    "categories": {
-      "schemaApi": {
-        "enabled": false
-      },
-      "schemaMaintenance": {
-        "enabled": false
-      },
-      "dataImport": {
-        "enabled": false
-      },
-      "dataExport": {
-        "enabled": false
-      },
-      "mediaManagement": {
-        "enabled": false
-      }
-    }
-  },
   "servers": {
     "default": {
       "endpoint": {
         "httpPort": 4314,
         "httpsPort": 4315
       }
-    },
-    "profile": {
-      "remoteOnly": true
-    },
-    "backoffice": {
-      "remoteOnly": true
-    }
-  },
-  "tooling": {
-    "runtime": {
-      "code": "wcmsOnline",
-      "script": "start:wcms:online",
-      "order": 1
     }
   }
 };

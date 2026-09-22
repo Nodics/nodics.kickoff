@@ -21,6 +21,10 @@
       "web": false
     },
     "displayName": "Docker Local WCMS Online Server",
+    "runtimeAliases": [
+      "wcmsOnline",
+      "cmsOnline"
+    ],
     "runtimeModuleRoots": [
       "nodics.wcms",
       "nodics.discovery"

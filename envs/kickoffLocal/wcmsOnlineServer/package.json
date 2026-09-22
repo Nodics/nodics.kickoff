@@ -21,7 +21,23 @@
       "publish": false,
       "web": false
     },
-    "displayName": "WCMS Online Server"
+    "displayName": "WCMS Online Server",
+    "runtimeAliases": [
+      "wcmsOnline",
+      "cmsOnline"
+    ],
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-local-wcms-online-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
+    "runtimeTooling": {
+      "code": "wcmsOnline",
+      "script": "start:wcms:online",
+      "order": 1
+    }
   },
   "description": "WCMS Online Server runtime composition and configuration boundary for this Nodics project."
 }
