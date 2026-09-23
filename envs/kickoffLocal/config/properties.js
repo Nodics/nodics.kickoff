@@ -54,5 +54,13 @@ module.exports = {
     "environmentAllowlist": [
       "kickoffLocal"
     ]
+  },
+  "tooling": {
+    "acceptance": {
+      "browserValidation": {
+        "enabled": true,
+        "reason": "Local validation can run browser smoke checks against developer-visible Axis, Circa, Nexus, Agora, and documentation pages."
+      }
+    }
   }
 };
