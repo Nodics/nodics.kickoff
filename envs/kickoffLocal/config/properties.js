@@ -19,7 +19,7 @@ module.exports = {
     "cors": {
       "allowedOrigins": [
         "http://localhost:3600",
-        "https://coming-designated-dialog-elevation.trycloudflare.com"
+        "https://arc-orbit-organization-dodge.trycloudflare.com"
       ]
     }
   },

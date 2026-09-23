@@ -17,7 +17,9 @@ module.exports = {
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
-      "kickoffInt"
+      "kickoffInt",
+      "workflow",
+      "cronjob"
     ]
   },
   "runtimeRole": {

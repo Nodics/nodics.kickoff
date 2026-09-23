@@ -58,7 +58,10 @@ test("Agora Commerce data acceptance remains preflight-first with explicit insta
 
 test("Agora Commerce data acceptance derives the selected domain release family", () => {
   const source = fs.readFileSync(scriptPath, "utf8");
-  assert.match(source, /readProjectEnvironmentComposition/);
+  assert.match(source, /modules\/kickoffCore\/config\/properties\.js/);
+  assert.match(source, /resolveDomainComposition\(projectCompositions\[selected\]\)/);
+  assert.doesNotMatch(source, /readProjectEnvironmentComposition/);
+  assert.doesNotMatch(source, /environmentProfile\.composition/);
   assert.match(source, /storefrontPacks\.flatMap/);
   assert.match(source, /const storefrontPacks = Object.freeze\(\[...composition.projectPacks\]\)/);
   assert.match(source, /section\.destinationRole === "COMMERCE_STAGED"/);

@@ -17,7 +17,7 @@ import { createRequire } from "node:module";
 import { setTimeout as delay } from "node:timers/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-const { readProjectEnvironmentComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+const { resolveDomainComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const require = createRequire(import.meta.url);
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
@@ -37,17 +37,33 @@ const wcmsOnlineUrl =
   process.env.NODICS_WCMS_ONLINE_URL || projectEndpointUrl(environmentProfile, 'wcmsOnlineServer');
 const axisOrigin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const managed = [];
-const composition = readProjectEnvironmentComposition(
-  projectRoot,
-  environmentCode,
-);
+
+function resolveProjectComposition() {
+  const projectCompositions = require(path.join(projectRoot, "modules/kickoffCore/config/properties.js")).activeModules?.compositions || {};
+  const selected =
+    process.env.NODICS_APPLICATION_COMPOSITION ||
+    process.env.NODICS_COMPOSITION ||
+    (Object.keys(projectCompositions).length === 1 ? Object.keys(projectCompositions)[0] : "");
+  if (!selected || !Object.prototype.hasOwnProperty.call(projectCompositions, selected))
+    throw new Error("Select an available application composition code");
+  const selectedComposition = projectCompositions[selected];
+  const resolved = resolveDomainComposition(selectedComposition);
+  return {
+    ...resolved,
+    domainDefinitions: (selectedComposition.domains || []).filter((domain) =>
+      resolved.projectPacks.includes(domain.projectPack),
+    ),
+  };
+}
+
+const composition = resolveProjectComposition();
 const legacyDomainByPack = Object.freeze({
   "agora.apparel": { folder: "apparel", prefix: "agoraApparel" },
   "agora.electronics": { folder: "electronics", prefix: "agoraElectronics" },
   "agora.telco": { folder: "telco", prefix: "agoraTelco" },
 });
 const domainByPack = Object.fromEntries(
-  (environmentProfile.composition?.agora?.domains || []).map((domain) => [
+  (composition.domainDefinitions || []).map((domain) => [
     domain.projectPack,
     {
       ...legacyDomainByPack[domain.projectPack],
@@ -257,8 +273,14 @@ async function authenticateService(servicePrincipalHeaders) {
         ...servicePrincipalHeaders,
         Origin: axisOrigin,
         "x-enterprise-code": process.env.NODICS_ENTERPRISE_CODE || "default",
-        "x-nodics-runtime-instance": "agora-commerce-publication-acceptance",
-        "x-nodics-modules": "media,product,pricing,inventory,tax",
+        "x-nodics-project": environmentProfile.projectCode,
+        "x-nodics-environment": environmentProfile.environment,
+        "x-nodics-server":
+          process.env.NODICS_SERVICE_RUNTIME_SERVER || "commerceServer",
+        "x-nodics-runtime-instance":
+          process.env.NODICS_SERVICE_RUNTIME_INSTANCE ||
+          "kickoff-local-commerce-1",
+        "x-nodics-modules": process.env.NODICS_SERVICE_RUNTIME_MODULES || "media",
       },
     },
   );

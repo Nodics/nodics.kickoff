@@ -95,17 +95,26 @@ function runtimeGrantCode(serverName) {
 }
 
 async function loadServerProperties(serverName) {
-  const file = path.join(projectRoot, "envs", environment, serverName, "config", "properties.js");
-  if (!fs.existsSync(file)) return null;
-  const mod = await import(pathToFileURL(file).href);
-  return mod.default || mod;
+  const serverRoot = path.join(projectRoot, "envs", environment, serverName);
+  const packageFile = path.join(serverRoot, "package.json");
+  const propertiesFile = path.join(serverRoot, "config", "properties.js");
+  let metadata = {};
+  let properties = {};
+  if (fs.existsSync(packageFile)) {
+    metadata = JSON.parse(fs.readFileSync(packageFile, "utf8")).nodics || {};
+  }
+  if (fs.existsSync(propertiesFile)) {
+    const mod = await import(pathToFileURL(propertiesFile).href);
+    properties = mod.default || mod;
+  }
+  return { ...metadata, ...properties };
 }
 
 async function configuredRuntimeServers() {
   const envRoot = path.join(projectRoot, "envs", environment);
   const names = fs.readdirSync(envRoot)
     .filter(name => name.endsWith("Server"))
-    .filter(name => fs.existsSync(path.join(envRoot, name, "config", "properties.js")));
+    .filter(name => fs.existsSync(path.join(envRoot, name, "package.json")));
   const servers = [];
   for (const name of names) {
     const properties = await loadServerProperties(name);
@@ -137,8 +146,7 @@ async function rotateLocalServicePrincipalKey(headers, principalCode, apiKey, co
 async function reconcileLocalBootstrapServicePrincipalKey(headers, apiKeyScopes = []) {
   if (!/Local$/u.test(environment)) return;
   const credentials = localRuntimeCredentialService.ensureCredentials(projectRoot, environment);
-  const apiKeyName = localRuntimeCredentialService.apiKeyEnvironmentNameForServer("platformServer") || "NODICS_RUNTIME_API_KEY";
-  await rotateLocalServicePrincipalKey(headers, "apiAdmin", credentials[apiKeyName], "apiAdmin", apiKeyScopes);
+  await rotateLocalServicePrincipalKey(headers, "apiAdmin", credentials.NODICS_API_KEY, "apiAdmin", apiKeyScopes);
   log("reconciled local bootstrap service principal credential with generated runtime proof");
 }
 

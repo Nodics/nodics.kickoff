@@ -124,7 +124,7 @@ module.exports = {
         },
         {
           label: "Sale",
-          collectionCode: "agoraPromotion",
+          collectionCode: "agoraSale",
           dropdown: true,
         },
       ],
@@ -159,17 +159,17 @@ module.exports = {
                 },
                 {
                   label: "Dresses",
-                  collectionCode: "agoraDresses",
+                  collectionCode: "agoraWomenDresses",
                   summary: "Soft shapes and polished details",
                 },
                 {
                   label: "Outerwear",
-                  path: "/shop?category=agoraOuterwear",
+                  path: "/shop?category=agoraWomenTops",
                   summary: "Trenches, blazers and lightweight layers",
                 },
                 {
                   label: "Pants & skirts",
-                  path: "/shop?category=agoraBottoms",
+                  path: "/shop?category=agoraWomen",
                   summary: "Tailored and relaxed bottoms",
                 },
               ],
@@ -193,7 +193,7 @@ module.exports = {
                 },
                 {
                   label: "Layering pieces",
-                  path: "/shop?category=agoraMenLayers",
+                  path: "/shop?category=agoraMen",
                   summary: "Comfortable everyday fits",
                 },
               ],
@@ -208,12 +208,12 @@ module.exports = {
                 },
                 {
                   label: "Shoulder bags",
-                  path: "/shop?category=agoraWomenBags&collection=agoraShoulderBags",
+                  path: "/shop?category=agoraWomenBags",
                   summary: "Clean everyday carry",
                 },
                 {
                   label: "Crossbody bags",
-                  path: "/shop?category=agoraWomenBags&collection=agoraCrossbodyBags",
+                  path: "/shop?category=agoraWomenBags",
                   summary: "Compact and textured",
                 },
               ],
@@ -228,12 +228,12 @@ module.exports = {
                 },
                 {
                   label: "Shoes",
-                  collectionCode: "agoraShoes",
+                  collectionCode: "agoraWomenAccessories",
                   summary: "Minimal flats and refined footwear",
                 },
                 {
                   label: "Sunglasses",
-                  path: "/shop?category=agoraSunglasses",
+                  path: "/shop?category=agoraWomenAccessories",
                   summary: "Gold-frame and statement shapes",
                 },
               ],
@@ -257,7 +257,7 @@ module.exports = {
               mediaCode: "agora-owned-collection-dresses",
               action: {
                 label: "Shop dresses",
-                collectionCode: "agoraDresses",
+                collectionCode: "agoraWomenDresses",
               },
             },
           ],
@@ -270,7 +270,7 @@ module.exports = {
             },
             {
               label: "Best sellers",
-              collectionCode: "agoraBestSelling",
+              path: "/shop",
               eyebrow: "Favourites",
               text: "Pieces to inspire your next look",
             },
@@ -326,7 +326,7 @@ module.exports = {
                 },
                 {
                   label: "Modern occasion",
-                  path: "/shop?category=agoraDresses",
+                  path: "/shop?category=agoraWomenDresses",
                   summary: "Dresses and refined styling",
                 },
               ],
@@ -398,13 +398,13 @@ module.exports = {
                 },
                 {
                   label: "Sale",
-                  collectionCode: "agoraPromotion",
+                  collectionCode: "agoraSale",
                   summary: "Capsule offers and edits",
                   badge: "Offer",
                 },
                 {
                   label: "Dresses",
-                  collectionCode: "agoraDresses",
+                  collectionCode: "agoraWomenDresses",
                   summary: "Soft neutrals and refined shapes",
                 },
               ],
@@ -445,7 +445,7 @@ module.exports = {
                 },
                 {
                   label: "Accessory labels",
-                  path: "/shop?brand=commerceEdit&category=agoraAccessories",
+                  path: "/shop?brand=commerceEdit&category=agoraWomenAccessories",
                   summary: "Finishing details",
                 },
               ],
@@ -488,7 +488,7 @@ module.exports = {
             },
             {
               label: "Sale edits",
-              collectionCode: "agoraPromotion",
+              collectionCode: "agoraSale",
               eyebrow: "Offers",
               text: "Explore current offers",
             },
@@ -497,7 +497,7 @@ module.exports = {
         {
           code: "sale",
           label: "Sale",
-          collectionCode: "agoraPromotion",
+          collectionCode: "agoraSale",
           eyebrow: "Limited offers",
           summary:
             "Explore sale edits and digital coupon codes for your next Agora purchase.",
@@ -507,18 +507,18 @@ module.exports = {
               links: [
                 {
                   label: "All sale",
-                  collectionCode: "agoraPromotion",
+                  collectionCode: "agoraSale",
                   summary: "All active promoted products",
                   badge: "Sale",
                 },
                 {
                   label: "Sale clothing",
-                  path: "/shop?category=agoraWomenTops&collection=agoraPromotion",
+                  path: "/shop?category=agoraWomenTops&collection=agoraSale",
                   summary: "Tops, dresses and layers",
                 },
                 {
                   label: "Sale bags",
-                  path: "/shop?category=agoraWomenBags&collection=agoraPromotion",
+                  path: "/shop?category=agoraWomenBags&collection=agoraSale",
                   summary: "Structured carry edits",
                 },
               ],
@@ -574,7 +574,7 @@ module.exports = {
               mediaCode: "agora-owned-promo-texture-edit",
               action: {
                 label: "Shop sale",
-                collectionCode: "agoraPromotion",
+                collectionCode: "agoraSale",
               },
               badge: "Offer",
             },
@@ -584,14 +584,14 @@ module.exports = {
               mediaCode: "agora-owned-promo-crossbody",
               action: {
                 label: "Explore offers",
-                collectionCode: "agoraPromotion",
+                collectionCode: "agoraSale",
               },
             },
           ],
           promoStripe: [
             {
               label: "Shop all sale",
-              collectionCode: "agoraPromotion",
+              collectionCode: "agoraSale",
               eyebrow: "Sale",
               text: "Discover current offers",
             },

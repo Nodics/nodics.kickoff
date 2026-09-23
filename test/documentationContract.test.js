@@ -14,7 +14,8 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const properties = require('../config/properties');
+const projectProperties = require('../config/properties');
+const kickoffCoreProperties = require('../modules/kickoffCore/config/properties');
 const manifestEnvelope = require('../data/manifest.json');
 const manifest = manifestEnvelope.sections.documentation;
 const catalogue = require('../docs/catalogue.json');
@@ -30,12 +31,15 @@ const accessPolicyRecords = Object.values(require('../data/core-v001/records/doc
 const publicationStateRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationPublicationStateData'));
 const searchMetadataRecords = Object.values(require('../data/core-v001/records/documentation/kickoffDocumentationSearchMetadataData'));
 const contentPackHeader = require('../data/core-v001/headers/kickoffDocumentationContentPackHeader');
+const kickoffBackofficeCapabilityProvider = require('../modules/kickoffCore/src/service/defaultKickoffCoreBackofficeCapabilityService');
+const kickoffBackofficeCapability = kickoffBackofficeCapabilityProvider.getCapability();
 
 const configuration = require('./helpers/configuration');
 const frameworkRoot = configuration.frameworkRoot;
 const importDefaults = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/config/properties'));
 const contentPackService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/contentPack/defaultContentPackService'));
-const effective = configuration.merge({}, importDefaults, properties);
+const backofficeContractService = require(path.join(frameworkRoot, 'nodics.platform/modules/backoffice/src/service/contract/defaultBackofficeContractService'));
+const effective = configuration.merge({}, importDefaults, projectProperties, kickoffCoreProperties);
 let contentPack, release;
 const previousConfig = global.CONFIG, previousNodics = global.NODICS;
 try {
@@ -103,7 +107,37 @@ assert.equal(contentPack.source.manifestSection, 'documentation');
 assert.equal(contentPack.updatePolicy.sameVersionContentChange, 'REJECT');
 assert.equal(contentPack.presentation.title, 'Nodics Kickoff documentation');
 assert.equal(contentPack.presentation.retryAction, importDefaults.data.contentPacks.defaults.presentation.retryAction);
-assert.equal(properties.backofficeCapabilities, undefined, 'Retired capability configuration must not duplicate CMS-owned documentation');
+assert.equal(projectProperties.backofficeCapabilities, undefined, 'Retired capability configuration must not duplicate CMS-owned documentation');
+assert.equal(kickoffCoreProperties.backofficeCapabilities, undefined, 'Retired capability configuration must not duplicate CMS-owned documentation');
+assert.equal(backofficeContractService.validateBackofficeMetadata(kickoffBackofficeCapability), true);
+assert.deepStrictEqual(
+    kickoffBackofficeCapability.documentation.map(source => source.id),
+    ['nodics-kickoff'],
+    'Kickoff Core must expose the project documentation source to the BackOffice dashboard'
+);
+assert.strictEqual(kickoffBackofficeCapability.documentation[0].packCode, 'kickoffDocumentation');
+assert.strictEqual(kickoffBackofficeCapability.documentation[0].initializationProfile, 'kickoffdocs');
+assert.strictEqual(kickoffBackofficeCapability.documentation[0].site, 'kickoffDocumentationSite');
+assert.strictEqual(kickoffBackofficeCapability.documentation[0].defaultPage, '/docs/nodics-kickoff');
+assert.strictEqual(kickoffBackofficeCapability.navigation[0].id, 'documentation-nodics-kickoff');
+assert.strictEqual(kickoffBackofficeCapability.navigation[0].route, '/docs/nodics-kickoff');
+{
+    const registered = [];
+    const previousService = global.SERVICE;
+    global.SERVICE = {
+        DefaultModuleRegistrationAgentService: {
+            registerBackofficeCapabilityProvider: function (moduleName, provider) {
+                registered.push({ moduleName, provider });
+                return true;
+            }
+        }
+    };
+    kickoffBackofficeCapabilityProvider.init();
+    global.SERVICE = previousService;
+    assert.strictEqual(registered.length, 1);
+    assert.strictEqual(registered[0].moduleName, 'kickoffCore');
+    assert.strictEqual(registered[0].provider, kickoffBackofficeCapabilityProvider);
+}
 assert.equal(productRecords[0].ownerFunctionalModule, catalogue.pack);
 assert.equal(productRecords[0].site, manifest.sites[0]);
 

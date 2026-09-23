@@ -14,17 +14,30 @@ import { spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
-const { readProjectEnvironmentComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
+const { resolveDomainComposition, readProjectEnvironmentConfiguration, projectEndpointUrl, projectCorsOrigin } = await import((await import('node:url')).pathToFileURL(process.env.NODICS_FRAMEWORK_ROOT + '/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs').href);
 
 const projectRoot = process.env.NODICS_PROJECT_ROOT || process.cwd();
-const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, process.env.NODICS_ENVIRONMENT || process.env.ENV || '');
+const environmentCode = process.env.NODICS_ENVIRONMENT || process.env.ENV || '';
+const environmentProfile = readProjectEnvironmentConfiguration(projectRoot, environmentCode);
 const platformUrl = process.env.NODICS_PLATFORM_URL || projectEndpointUrl(environmentProfile, 'platformServer');
 const commerceStagedUrl = process.env.NODICS_COMMERCE_STAGED_URL || projectEndpointUrl(environmentProfile, 'commerceStagedServer');
 const axisOrigin = process.env.AXIS_ORIGIN || projectCorsOrigin(environmentProfile, 'axis');
 const executeInstall = process.env.NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE === "true";
 const managed = [];
 const require = createRequire(import.meta.url);
-const composition = readProjectEnvironmentComposition(projectRoot);
+
+function resolveProjectComposition() {
+  const projectCompositions = require(path.join(projectRoot, "modules/kickoffCore/config/properties.js")).activeModules?.compositions || {};
+  const selected =
+    process.env.NODICS_APPLICATION_COMPOSITION ||
+    process.env.NODICS_COMPOSITION ||
+    (Object.keys(projectCompositions).length === 1 ? Object.keys(projectCompositions)[0] : "");
+  if (!selected || !Object.prototype.hasOwnProperty.call(projectCompositions, selected))
+    throw new Error("Select an available application composition code");
+  return resolveDomainComposition(projectCompositions[selected]);
+}
+
+const composition = resolveProjectComposition();
 const supportedPacks = Object.freeze(["agora.apparel", "agora.electronics", "agora.telco"]);
 const storefrontPacks = Object.freeze([...composition.projectPacks]);
 const requiredReleaseCodes = Object.freeze(storefrontPacks.flatMap((pack) => {

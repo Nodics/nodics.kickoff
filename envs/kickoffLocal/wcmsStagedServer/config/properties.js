@@ -97,7 +97,7 @@ module.exports = {
         },
         "agoraapparel": {
           "releaseCode": "agora.apparel:agoraApparelContentCatalog",
-          "releaseVersion": "0.0.7",
+          "releaseVersion": "0.0.8",
           "dataType": "sample",
           "rootType": "site",
           "rootCode": "agoraApparelSite",
