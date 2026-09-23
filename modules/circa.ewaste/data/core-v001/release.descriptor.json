@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "waste-policy": {
+      "capability": {
+        "code": "circa.ewaste.policy",
+        "displayName": "Circa eWaste policy",
+        "type": "RULE_POLICY_SET",
+        "group": "FOUNDATION_DATA",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa-owned Waste policy, acceptance, collection, and impact rules."
+      }
+    },
+    "customer-workspace": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare customer workspace records for the Circa eWaste experience."
+      }
+    }
+  }
+}

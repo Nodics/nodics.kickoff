@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "agoraApparelCommerceCatalog": {
+      "capability": {
+        "code": "agora.apparel",
+        "displayName": "Agora Apparel",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "businessOutcome": "Prepare Agora Apparel commerce catalog, search, product, price, inventory, and promotion data."
+      }
+    }
+  }
+}

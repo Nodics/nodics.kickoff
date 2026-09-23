@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "agoraElectronicsCommerceCatalog": {
+      "capability": {
+        "code": "agora.electronics",
+        "displayName": "Agora Electronics",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "businessOutcome": "Prepare Agora Electronics commerce catalog, product, price, inventory, and store data."
+      }
+    },
+    "agoraElectronicsContentCatalog": {
+      "capability": {
+        "code": "agora.electronics",
+        "displayName": "Agora Electronics",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "businessOutcome": "Prepare Agora Electronics content, media, pages, renderers, and storefront experience data."
+      }
+    }
+  }
+}

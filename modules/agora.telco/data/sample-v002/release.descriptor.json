@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "agoraTelcoCommerceCatalog": {
+      "capability": {
+        "code": "agora.telco",
+        "displayName": "Agora Telco",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "businessOutcome": "Prepare Agora Telco commerce catalog, plan, price, inventory, and store data."
+      }
+    },
+    "agoraTelcoContentCatalog": {
+      "capability": {
+        "code": "agora.telco",
+        "displayName": "Agora Telco",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "businessOutcome": "Prepare Agora Telco content, media, pages, renderers, and storefront experience data."
+      }
+    }
+  }
+}

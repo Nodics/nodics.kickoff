@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "profile": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa customer profile records for the eWaste experience."
+      }
+    },
+    "location": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa collection and customer location records."
+      }
+    },
+    "waste": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa eWaste submission, evidence, impact, and collection records."
+      }
+    },
+    "loyalty": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa reward and wallet records."
+      }
+    },
+    "content": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare the Circa website, pages, media, and customer-facing content."
+      }
+    },
+    "commerce": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa circular assets, offers, pricing, and storefront records."
+      }
+    },
+    "operations": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "ACCELERATOR",
+        "group": "PROJECT_ACCELERATOR",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa operational staff and scoped access records."
+      }
+    },
+    "sunmarke-profile": {
+      "capability": {
+        "code": "circa.ewaste.sunmarke",
+        "displayName": "Circa Sunmarke pilot",
+        "type": "PROJECT_EXTENSION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "circa.ewaste",
+        "businessOutcome": "Prepare Sunmarke profile records for the Circa pilot."
+      }
+    },
+    "sunmarke-location": {
+      "capability": {
+        "code": "circa.ewaste.sunmarke",
+        "displayName": "Circa Sunmarke pilot",
+        "type": "PROJECT_EXTENSION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "circa.ewaste",
+        "businessOutcome": "Prepare Sunmarke location records for the Circa pilot."
+      }
+    },
+    "sunmarke-waste": {
+      "capability": {
+        "code": "circa.ewaste.sunmarke",
+        "displayName": "Circa Sunmarke pilot",
+        "type": "PROJECT_EXTENSION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "circa.ewaste",
+        "businessOutcome": "Prepare Sunmarke eWaste records for the Circa pilot."
+      }
+    }
+  }
+}
