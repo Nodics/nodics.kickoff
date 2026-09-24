@@ -28,6 +28,7 @@ module.exports = {
             "nexus",
             "nexusupdate",
             "nexusecosystemrepair",
+            "circa",
             "agoraapparel",
             "agoraelectronics",
             "agoratelco"

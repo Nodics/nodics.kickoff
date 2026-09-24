@@ -360,6 +360,24 @@ module.exports = {
           "category": "application",
           "order": 240,
           "summary": "Circa published customer pages and media over the eWaste accelerator.",
+          "requiredFunctionalModules": [
+            {
+              "code": "nodics.location",
+              "label": "Location capability"
+            },
+            {
+              "code": "nodics.waste",
+              "label": "Waste Management capability"
+            },
+            {
+              "code": "nodics.loyalty",
+              "label": "Loyalty capability"
+            },
+            {
+              "code": "nodics.commerce",
+              "label": "Commerce capability"
+            }
+          ],
           "activationPolicy": {
             "approvalRequiredForOnline": true,
             "requiredDataTrigger": "USER",

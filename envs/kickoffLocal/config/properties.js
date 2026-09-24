@@ -33,6 +33,11 @@ module.exports = {
     "allowInsecureLoopback": true,
     "sameSite": "Lax"
   },
+  "authSecurity": {
+    "compatibility": {
+      "allowLocalBootstrapIdentity": true
+    }
+  },
   "cache": {
     "default": {
       "engines": {
