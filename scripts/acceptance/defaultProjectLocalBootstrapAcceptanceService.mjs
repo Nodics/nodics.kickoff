@@ -291,6 +291,28 @@ async function requestJsonResponse(baseUrl, path, options = {}) {
   return { status: response.status, body: body?.result || body?.data || body };
 }
 
+function isStaleAuthBody(body) {
+  return body?.code === "ERR_AUTH_00001" ||
+    String(body?.message || "").includes("token security stamp is stale") ||
+    [].concat(body?.errors || []).some((error) =>
+      String(error?.code || "") === "ERR_AUTH_00001" ||
+      String(error?.message || "").includes("token security stamp is stale"),
+    );
+}
+
+async function requestPublicDeliveryJson(path) {
+  let response;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    response = await requestJsonResponse(wcmsOnlineUrl, path);
+    if (response.status < 500 || !isStaleAuthBody(response.body)) break;
+    await new Promise((resolve) => setTimeout(resolve, 150 * (attempt + 1)));
+  }
+  if (response.status < 200 || response.status >= 300) {
+    throw new Error(`${path} returned HTTP ${String(response.status)}: ${JSON.stringify(response.body).slice(0, 500)}`);
+  }
+  return response.body;
+}
+
 /** Proves bounded operator diagnostics and dry-run reconciliation through nPublish APIs only. */
 async function verifyPublicationOperations(headers) {
   const diagnostics = await requestJson(wcmsUrl, "/nodics/publish/v0/publications/operations/diagnostics", { headers });
@@ -498,6 +520,23 @@ async function reconcileRuntimeDeploymentGrants() {
     env: process.env,
     maxBuffer: 1024 * 1024 * 10,
   });
+}
+
+async function runProjectAcceptance(scriptName, env = {}) {
+  log(`running ${scriptName}`);
+  await execFileAsync("npm", ["run", scriptName], {
+    cwd: projectRoot,
+    env: { ...process.env, ...env },
+    maxBuffer: 1024 * 1024 * 20,
+  });
+}
+
+async function publishAgoraCommerceDataAndProducts() {
+  await runProjectAcceptance("acceptance:agora-commerce-data", {
+    NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE: "true",
+  });
+  await runProjectAcceptance("acceptance:agora-commerce-publication");
+  log("Agora Commerce staged data, Online projections, and product media publication passed");
 }
 
 async function assertGovernedFreshResetAvailable() {
@@ -989,7 +1028,7 @@ async function publishNexusApplicationBundle(headers) {
   if (repeat.readiness !== "READY" || repeat.publication?.code !== status.publication?.code) {
     throw new Error(`Nexus application bundle repeat was not idempotent: ${JSON.stringify(repeat)}`);
   }
-  const delivered = await requestJson(wcmsOnlineUrl, "/nodics/cms/v0/delivery/pages/resolve?site=nexusCorporateSite&path=/&locale=en&channel=web", { headers });
+  const delivered = await requestPublicDeliveryJson("/nodics/cms/v0/delivery/pages/resolve?site=nexusCorporateSite&path=/&locale=en&channel=web");
   if (!delivered || !delivered.page) throw new Error(`Nexus Online delivery probe failed: ${JSON.stringify(delivered)}`);
   log("reusable Nexus application bundle is READY through Staged, Process approval, and Online delivery");
 }
@@ -1014,10 +1053,8 @@ async function publishApplicationProfileBundle(headers, profileCode, reason, del
   if (status.readiness !== "READY" || status.publication?.state !== "ONLINE") {
     throw new Error(`${profileCode} application bundle is not READY Online: ${JSON.stringify(status)}`);
   }
-  const delivered = await requestJson(
-    wcmsOnlineUrl,
+  const delivered = await requestPublicDeliveryJson(
     `/nodics/cms/v0/delivery/pages/resolve?site=${encodeURIComponent(deliveryProbe.site)}&path=${encodeURIComponent(deliveryProbe.path)}&locale=${encodeURIComponent(deliveryProbe.locale || "en")}&channel=${encodeURIComponent(deliveryProbe.channel || "web")}`,
-    { headers },
   );
   if (!delivered || !delivered.page) {
     throw new Error(`${profileCode} Online delivery probe failed: ${JSON.stringify(delivered)}`);
@@ -1081,7 +1118,7 @@ async function qualifyNexusApplicationUpdate(headers) {
     let response;
     let present;
     for (let attempt = 0; attempt < 20; attempt += 1) {
-      response = await requestJsonResponse(wcmsOnlineUrl, deliveryPath, { headers });
+      response = await requestJsonResponse(wcmsOnlineUrl, deliveryPath);
       present = response.status === 200 && JSON.stringify(response.body).includes("nexus-corporate-1.0.1");
       if (present === expected) return;
       await new Promise((resolve) => setTimeout(resolve, 100));
@@ -1129,7 +1166,7 @@ async function qualifyNexusApplicationUpdate(headers) {
     throw new Error(`Nexus v2 retirement failed: ${JSON.stringify(retired)}`);
   }
   const retirementErrorWindow = managedProcesses.map((entry) => ({ entry, errorCount: entry.errors.length }));
-  const unavailable = await requestJsonResponse(wcmsOnlineUrl, deliveryPath, { headers });
+  const unavailable = await requestJsonResponse(wcmsOnlineUrl, deliveryPath);
   if (unavailable.status !== 404) throw new Error(`Retired Nexus delivery remained visible: ${JSON.stringify(unavailable)}`);
   retirementErrorWindow.forEach(({ entry, errorCount }) => entry.errors.splice(errorCount));
   update = await initiate("Governed Nexus v2 recovery after retirement");
@@ -1193,9 +1230,8 @@ async function publishDocumentationBundles(headers) {
     if (status.readiness !== "READY" || status.publication?.state !== "ONLINE") {
       throw new Error(`${profile.profileCode} is not READY Online: ${JSON.stringify(status)}`);
     }
-    const delivered = await requestJson(wcmsOnlineUrl,
-      `/nodics/cms/v0/delivery/pages/resolve?site=${encodeURIComponent(profile.site)}&path=${encodeURIComponent(profile.path)}&locale=en&channel=web`,
-      { headers });
+    const delivered = await requestPublicDeliveryJson(
+      `/nodics/cms/v0/delivery/pages/resolve?site=${encodeURIComponent(profile.site)}&path=${encodeURIComponent(profile.path)}&locale=en&channel=web`);
     if (!delivered?.page) throw new Error(`${profile.code} Online delivery failed: ${JSON.stringify(delivered)}`);
   }
   log("optional documentation bundles are READY through Axis/Platform, Staged, Process, and Online delivery");
@@ -1382,6 +1418,7 @@ async function main() {
   await publishAxisBaseline(refreshedHeaders);
   await publishNexusApplicationBundle(refreshedHeaders);
   await publishCircaApplicationBundle(refreshedHeaders);
+  await publishAgoraCommerceDataAndProducts();
   await qualifyNexusApplicationUpdate(refreshedHeaders);
   await publishDocumentationBundles(refreshedHeaders);
   await qualifyDocumentationReleaseRollback(refreshedHeaders);
