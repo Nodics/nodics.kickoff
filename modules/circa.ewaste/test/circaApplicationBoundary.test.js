@@ -70,6 +70,7 @@ test("Circa decorates domain data without copying domain state or behavior", asy
   };
   global.SERVICE = {
     DefaultEWasteExperienceService: { experience: async () => domain },
+    DefaultCircaEWasteJourneyService: { settings: () => ({ arrivalRadiusMetres: 50 }) },
   };
   global.CONFIG = { get: (key) => config[key] };
   const result = await service.experience({});
@@ -93,4 +94,54 @@ test("project controllers delegate to the shared trusted request mapper", () => 
   assert.equal(called[0], "register");
   assert.equal(called[1], request);
   assert.equal(called[3], "DefaultCircaEWasteExperienceService");
+});
+
+test("Circa retains illustrative mock compatibility without implicitly selecting it", async () => {
+  const calculation = config.wasteImpact.calculation;
+  assert.equal(calculation.providerService, "DefaultEWasteOpenAiImpactProviderService");
+  assert.deepEqual(calculation.fallbackProviderServices, {
+    $config: "replace", value: ["DefaultEWasteWarmImpactProviderService"],
+  });
+  assert.equal(calculation.mock.factorSetVersion, "circa-illustrative-v1");
+
+  const { loadRuntime, frameworkRoot } = require("../../../test/helpers/configuration");
+  const path = require("node:path");
+  const calculator = require(path.join(frameworkRoot,
+    "nodics.waste/modules/wasteImpact/src/service/defaultWasteImpactCalculationService"));
+  const properties = loadRuntime("wasteServer", "kickoffLocal");
+  const effective = properties.wasteImpact.calculation;
+  const chain = [effective.providerService, ...effective.fallbackProviderServices];
+  assert.deepEqual(chain, [
+    "DefaultEWasteOpenAiImpactProviderService",
+    "DefaultEWasteWarmImpactProviderService",
+  ]);
+  assert.equal(chain.includes("DefaultWasteImpactMockProviderService"), false);
+  assert.equal(effective.mock.factorSetVersion, calculation.mock.factorSetVersion);
+  assert.equal(effective.mock.defaultWeightsKg.default, calculation.mock.defaultWeightsKg.default);
+  assert.deepEqual(effective.mock.defaultWeightsKg.itemTypes, calculation.mock.defaultWeightsKg.itemTypes);
+
+  const calls = [];
+  let mockCalls = 0;
+  global.CONFIG = { get: (key) => properties[key] };
+  global.SERVICE = Object.fromEntries(chain.map((name) => [name, {
+    calculate: async () => {
+      calls.push(name);
+      throw new Error("Provider unavailable");
+    },
+  }]));
+  SERVICE.DefaultWasteImpactMockProviderService = {
+    calculate: async () => {
+      mockCalls++;
+      throw new Error("Inactive mock must not be invoked");
+    },
+  };
+  const result = await calculator.calculateProvider({
+    profile: { code: "CIRCA_EWASTE_ESTIMATE", revision: 1 },
+    facts: { itemTypeCode: "SMARTPHONE", quantity: 1 },
+  });
+  assert.deepEqual(calls, chain);
+  assert.equal(mockCalls, 0);
+  assert.equal(result.calculationStatus, "FAILED");
+  assert.deepEqual(result.metadata.impactProvider.attempts.map((attempt) =>
+    [attempt.service, attempt.status]), chain.map((name) => [name, "FAILED"]));
 });

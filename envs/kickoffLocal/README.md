@@ -12,6 +12,13 @@ Change this package only when the requested behavior belongs to this boundary. P
 
 ## Verification
 
+Platform and Waste keep thin late `postInit` delegates to Copilot's framework
+startup service. Do not copy source loops, service authorization or ingestion
+report handling into these entrypoints. Project modules select source scope and
+failure/log policy through `copilot.knowledge.ingestion.startup`; this environment
+opts Waste into `ingestOnStart`. Later layers can disable startup. Docker Waste
+does not inherit this Local opt-in. No startup indexing runs during static tests.
+
 After changes, run the nearest focused test or the Kickoff structure and documentation checks from the project root.
 
 ## Telegram tunnel origin

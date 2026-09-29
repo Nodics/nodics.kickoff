@@ -1,5 +1,12 @@
 # Nodics Kickoff Agent Contract
 
+- `agora.apparel`, `agora.electronics`, `agora.telco` and `circa.ewaste` are
+  customer applications here. They consume `apparel`, `electronics`, `telco`
+  and `eWaste` respectively; extending a domain does not transfer ownership.
+  Keep their properties, BackOffice profiles, media and data in these modules.
+  Reference/demo status and data-pack metadata do not authorize relocation.
+  Follow nSetup's customer-project-mode contract before extracting reusable code.
+
 - Nodics Kickoff is a customer/reference project, not a Nodics product module.
 - Do not copy framework source into this repository.
 - Partners write only to their own backend/frontend repositories. Treat Nodics
@@ -37,7 +44,7 @@ data/
 - Use Kickoff `docs/` for project-wide setup, runtime composition, onboarding,
   customization, qualification and operations. Application-specific
   documentation belongs under the owning application data module, for example
-  `modules/agora.apparel/docs/``; its generated records
+  `modules/circa.ewaste/docs/`; its generated records
   belong in that module's lifecycle-qualified `data/` release. Keep `README.md`
   files concise.
 - Project, environment, and server contributions load after product modules by
@@ -47,7 +54,7 @@ data/
 - Keep runtime clean/build behavior scoped to the effective module graph for the
   server where the command is executed.
 - Follow the Phase 0 contract from the checked-out `nodics.ai` framework
-  repository at `llm/contracts/modularization-phase0-contract.md` before
+  repository at `nodics.foundation/modules/nSetup/llm/contracts/modularization-phase0-contract.md` before
   changing Nodics Kickoff dependency resolution, module skeletons, or runtime scripts.
 
 ## AI tool GitHub entry path
@@ -136,6 +143,20 @@ solve a customer-project problem by moving framework ownership into Kickoff.
 
 ## Minimal configuration
 
+`kickoffApi` and `kickoffInt` are intentional customer extension templates.
+Retain their standard module shape even when empty. Empty template hooks are not
+duplicated implementations and do not justify removal or framework relocation.
+
+Keep modules lightweight by separating reusable mechanisms from customer policy.
+Common domain capabilities belong to framework functional modules; reusable
+solution orchestration belongs to accelerators. Customer modules retain identity,
+presentation, data, explicit selections and policy deltas, with thin adapters.
+Runtime servers own deployment composition, not business implementations. Apply
+this to acceptance helpers and administrative descriptors too. Maintainer
+extractions require focused framework tests, customer-adapter regression tests,
+effective runtime configuration checks and explicit live-acceptance evidence.
+Never move an entire customer application merely to reduce project line count.
+
 Inherit framework defaults and declare only intentional customer/deployment
 differences. Apply the resolved framework's
 `nSetup/llm/contracts/customer-config-classification-contract.md`. Read
@@ -145,13 +166,47 @@ Platform runtime-role profiles. Do not recreate a separate configuration-only
 administration module. Foundation nTooling owns reusable command behavior;
 customer selectors and policy remain here.
 
-Application-specific acceptance and media seeding live under `scripts/acceptance`
+Application-specific journey acceptance lives under `scripts/acceptance`
 and are discovered by framework nTooling from conventional `*Service.mjs`
 script names. Do not add `nodics.project.json` or duplicate discovered command
 aliases in layered properties. Framework nTooling retains the shared executor
 and metadata resolvers. Keep deployment aliases and application publication
 identifiers in this project; never promote the reference journeys into universal
 framework defaults.
+
+Media seeding uses the protected framework `acceptance:media-seed` command.
+The Agora/Nexus npm aliases supply only manifest-module selections; do not restore
+project upload implementations. Append `-- --execute` to opt into Staged uploads.
+Online publication remains a separate approved lifecycle, not a seed side effect.
+
+Agora sample-data acceptance delegates to nImport's protected
+`acceptance:staged-sample-data`; its npm alias contains only module/role selection.
+Keep runtimes running through topology tooling before acceptance. Installation
+requires `-- --execute-install`, not the retired storefront environment flag.
+Do not restore customer copies of release-version, validation or CURRENT checks.
+
+Complete reusable contract suites must not stay here merely because their helpers
+are framework-owned. Capability registry, guided initialization and deployment
+qualification now execute from BackOffice, CMS and nTooling. Invoke their existing
+commands; do not restore project copies or shadow canonical aliases. Project tests
+retain adoption checks and customer-specific assertions only. Mutating canonical
+suites require explicit flags, and guided publication never uses emergency approval.
+The reusable acceptance implementations have moved to their framework owners.
+Keep customer npm aliases and declarative fixtures only. Commerce, Editorial,
+Waste, Loyalty checkout, runtime grants and application bootstrap use protected
+commands. Missing authorized setup or owner evidence is a prerequisite/gap,
+never permission to restore direct database access or acceptance-owned grants.
+The Local checklist documents current setup and verification. Keep dated
+extraction results under `docs/evidence/`, outside the published catalogue;
+never mix historical passes with current live-readiness claims. Maintain source
+links and catalogue related-page links between setup, validation and operations.
+
+Keep canonical command adoption consolidated in `test/acceptanceInfrastructureContract.test.mjs`.
+Customer bootstrap/deployment fixtures remain in `test/projectAcceptanceFixtures.test.js`;
+application-specific fixtures belong under the respective application's `test/`.
+Do not restore standalone wrapper tests per framework suite. Shared invariant tests
+use independent fixtures in their framework owners, and generic test consumers
+delegate to the framework rather than copying loader or policy mechanics here.
 
 
 Application Builder reference choices are declared in this project's

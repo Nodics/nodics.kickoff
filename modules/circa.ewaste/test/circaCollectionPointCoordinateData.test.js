@@ -3,7 +3,33 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const path = require("node:path");
+const fs = require("node:fs");
+const crypto = require("node:crypto");
 const locations = require("../data/sample-v001/location/records/circaLocationData");
+
+test("Circa data sources are claimed by current manifests with matching payload checksums", () => {
+  const root = path.resolve(__dirname, "../data");
+  const manifest = require("../data/manifest.json");
+  const releasePolicy = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService'));
+  releasePolicy.validateRetainedRoots(root, manifest);
+  const claimed = new Map([
+    ...Object.values(manifest.sections).flatMap(section => Object.entries(section.files)),
+    ...Object.values(manifest.retainedRoots || {}).flatMap(retained => Object.entries(retained.files))
+  ]);
+  const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const file = path.join(directory, entry.name);
+    return entry.isDirectory() ? walk(file) : [file];
+  });
+  const files = walk(root).map(file => path.relative(root, file))
+    .filter(file => file !== "manifest.json" && !file.endsWith("release.descriptor.json") && !file.endsWith(".DS_Store"));
+  assert.deepEqual(new Set(files), new Set(claimed.keys()));
+  for (const [file, hash] of claimed) {
+    assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(root, file))).digest("hex"), hash, file);
+  }
+  const section = manifest.sections["sunmarke-location"];
+  const descriptor = require(path.join(root, section.sourceRoot, "release.descriptor.json"));
+  assert.equal(descriptor.sections["sunmarke-location"].capability.code, "circa.ewaste.sunmarke");
+});
 const frameworkRoot = path.resolve(
   __dirname,
   process.env.NODICS_FRAMEWORK_ROOT || "../../../../nodics.ai",
@@ -15,19 +41,10 @@ const sharedLocations = require(
   ),
 );
 
-const distance = (a, b) => {
-  const rad = Math.PI / 180;
-  const h =
-    Math.sin(((b.latitude - a.latitude) * rad) / 2) ** 2 +
-    Math.cos(a.latitude * rad) *
-      Math.cos(b.latitude * rad) *
-      Math.sin(((b.longitude - a.longitude) * rad) / 2) ** 2;
-  return (
-    6371000 *
-    2 *
-    Math.atan2(Math.sqrt(Math.min(1, h)), Math.sqrt(Math.max(0, 1 - h)))
-  );
-};
+const { distance } = require(path.join(
+  frameworkRoot,
+  "nodics.location/modules/locationCore/src/service/defaultLocationDistanceService",
+));
 
 test("Motor City sample collection point stays at First Avenue Mall coordinates", () => {
   const motorCity = Object.values(locations).find(

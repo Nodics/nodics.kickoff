@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.0.3",
+  "version": "0.8.5",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "navigationSections": [
@@ -160,7 +160,9 @@
       "relatedPages": [
         "kickoff.local-runtime",
         "kickoff.customization",
-        "kickoff.functional-journeys"
+        "kickoff.functional-journeys",
+        "kickoff.local-setup-to-live",
+        "kickoff.local-acceptance"
       ],
       "sourceEvidence": [
         "README.md",
@@ -237,11 +239,12 @@
       "relatedPages": [
         "kickoff.overview",
         "kickoff.local-acceptance",
-        "kickoff.deployment-qualification"
+        "kickoff.deployment-qualification",
+        "kickoff.local-setup-to-live"
       ],
       "sourceEvidence": [
         "docs/pages/local-runtime.md",
-        "nodics.project.json",
+        "envs/kickoffLocal/config/properties.js",
         "package.json"
       ],
       "searchKeywords": [
@@ -323,7 +326,7 @@
         "docs/pages/local-setup-to-live-runbook.md",
         "docs/assets/images/local-setup/",
         "package.json",
-        "nodics.project.json"
+        "envs/kickoffLocal/config/properties.js"
       ],
       "searchKeywords": [
         "local setup",
@@ -349,7 +352,7 @@
     {
       "id": "kickoff.local-acceptance",
       "title": "Local acceptance checklist",
-      "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+      "summary": "Verify Kickoff configuration, authorized Local initialization, publication and separate frontend journeys; distinguish static checks, live evidence and release gates.",
       "functionalModule": "nodics.kickoff",
       "technicalModule": "kickoffLocal",
       "content": "docs/pages/local-acceptance-checklist.md",
@@ -400,18 +403,25 @@
       "relatedPages": [
         "kickoff.local-runtime",
         "kickoff.local-publishing-operations",
-        "kickoff.functional-journeys"
+        "kickoff.functional-journeys",
+        "kickoff.local-setup-to-live",
+        "kickoff.configuration-inheritance",
+        "kickoff.deployment-qualification"
       ],
       "sourceEvidence": [
         "docs/pages/local-acceptance-checklist.md",
         "package.json",
-        "nodics.project.json"
+        "envs/kickoffLocal/config/properties.js"
       ],
       "searchKeywords": [
         "acceptance",
         "fresh local",
         "verification",
-        "checklist"
+        "checklist",
+        "local validation",
+        "developer onboarding",
+        "QA",
+        "setup verification"
       ],
       "topicKeywords": [
         "import",
@@ -484,7 +494,7 @@
       "sourceEvidence": [
         "docs/pages/local-publishing-operations.md",
         "package.json",
-        "nodics.project.json"
+        "envs/kickoffLocal/config/properties.js"
       ],
       "searchKeywords": [
         "publishing",
@@ -555,12 +565,13 @@
       "implementationState": "current",
       "relatedPages": [
         "kickoff.local-runtime",
-        "kickoff.local-publishing-operations"
+        "kickoff.local-publishing-operations",
+        "kickoff.local-acceptance"
       ],
       "sourceEvidence": [
         "docs/pages/deployment-qualification.md",
         "package.json",
-        "nodics.project.json"
+        "envs/kickoffLocal/config/properties.js"
       ],
       "searchKeywords": [
         "deployment",
@@ -801,7 +812,7 @@
       "sourceEvidence": [
         "docs/pages/functional-journeys.md",
         "package.json",
-        "nodics.project.json"
+        "envs/kickoffLocal/config/properties.js"
       ],
       "searchKeywords": [
         "commerce",
@@ -822,13 +833,14 @@
     }
   ],
   "publication": {
+    "contentPath": "core-v005",
     "recordPrefix": "kickoffDocumentation",
     "codePrefix": "kickoffDocs",
     "sectionCode": "nodics-kickoff",
     "owningDomain": "kickoff.documentation",
     "keyword": "kickoff",
     "routeRoot": "/docs/nodics-kickoff",
-    "publicRootPath": "/docs/kickoff",
+    "publicRootPath": "/docs/nodics-kickoff",
     "label": "Nodics Kickoff",
     "shortLabel": "Kickoff",
     "channels": [

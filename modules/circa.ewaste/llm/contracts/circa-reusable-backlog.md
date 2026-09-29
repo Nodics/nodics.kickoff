@@ -1,8 +1,14 @@
 # Nodics Circa Reusable Backlog
 
-This backlog is reusable framework and accelerator work. It is not
-customer-project-specific. Customer projects later activate, override, or
-configure these records and flows through data and policy.
+This list preserves requirements originating from Circa. It mixes application
+experience choices with proposed reusable capabilities; it is not a framework
+contract, implementation status report or authorization to modify Nodics.
+Customer branding, copy and policy remain here. Reusable Waste lifecycles belong
+to nodics.waste; eWaste orchestration to the eWaste accelerator; wallet,
+commerce, identity and location behavior to their respective functional owners.
+Consult those owners' current README/AGENTS/contracts and qualify existing
+capabilities before proposing a new contribution. Do not infer completion or
+production readiness from a numbered item in this historical requirement list.
 
 ## Asset Foundation
 

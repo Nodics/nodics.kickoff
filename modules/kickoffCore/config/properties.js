@@ -21,6 +21,238 @@
 module.exports = {
   "tooling": {
     "acceptance": {
+      // Apparel journey and composition-selected catalog fixtures remain customer-owned.
+      // Publication evidence has no fallback: nImport release versions are not nPublish receipts.
+      "commerceJourney": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "apparel",
+        "value": {
+          "productCode": "agoraLinenWrapDress",
+          "variantCode": "agoraLinenWrapDressIvoryS",
+          "secondaryProductCode": "agoraOxfordShirt",
+          "secondaryVariantCode": "agoraOxfordShirtIvoryM",
+          "categoryCode": "agoraWomen",
+          "storeCode": "agoraMainStore",
+          "locale": "en",
+          "channelCode": "web",
+          "jurisdiction": "AE",
+          "currency": "USD",
+          "promotionCode": "agoraAcceptanceWelcome10",
+          "providerToken": {"$config":"env","name":"NODICS_STOREFRONT_PROVIDER_TOKEN","fallback":"tok_test_storefront_4242"},
+          "shippingAddress": {
+            "line1": "549 Oak St",
+            "city": "Crystal Lake",
+            "region": "IL",
+            "postalCode": "60014",
+            "country": "US"
+          },
+          "shippingMethod": "STANDARD",
+          "paymentMethod": "CARD"
+        },
+        "otherwise": {}
+      },
+      "commercePublication": {
+        "catalogs": {
+          "$config": "replace",
+          "value": [
+            {
+              "$config": "selected",
+              "name": "agora",
+              "field": "domains",
+              "includes": "apparel",
+              "value": {
+                "catalogVersion": "agoraApparelStaged",
+                "storeCode": "agoraMainStore",
+                "locale": "en",
+                "productCodes": [
+                  "agoraLinenWrapDress"
+                ],
+                "mediaModules": [
+                  "agora.apparel"
+                ],
+                "publications": {
+                  "product": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "pricing": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "promotion": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "inventory": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "tax": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "media": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  }
+                }
+              }
+            },
+            {
+              "$config": "selected",
+              "name": "agora",
+              "field": "domains",
+              "includes": "electronics",
+              "value": {
+                "catalogVersion": "agoraElectronicsStaged",
+                "storeCode": "agoraElectronicsStore",
+                "locale": "en",
+                "productCodes": [
+                  "agoraElectronicsNovaPhone"
+                ],
+                "mediaModules": [
+                  "agora.electronics"
+                ],
+                "publications": {
+                  "product": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "pricing": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "promotion": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "inventory": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "tax": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "media": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  }
+                }
+              }
+            },
+            {
+              "$config": "selected",
+              "name": "agora",
+              "field": "domains",
+              "includes": "telco",
+              "value": {
+                "catalogVersion": "agoraTelcoStaged",
+                "storeCode": "agoraTelcoStore",
+                "locale": "en",
+                "productCodes": [
+                  "agoraTelcoUnlimitedPostpaid"
+                ],
+                "mediaModules": [
+                  "agora.telco"
+                ],
+                "publications": {
+                  "product": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "pricing": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "promotion": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "inventory": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "tax": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  },
+                  "media": {
+                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_CODE","fallback":""},
+                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""}
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "commerceLive": {
+        "releaseModules": { "$config": "replace", "value": ["agora.apparel", "agora.electronics", "agora.telco"] }
+      },
+      "editorialLive": {
+        "siteCode": "nexusCorporateSite",
+        "contributionPath": "data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js",
+        "manifestPath": "data/manifest.json",
+        "contributionSection": "init-v001",
+        "contributionCode": "processServer:init-v001"
+      },
+      "localBootstrap": {
+        "publicOriginKey": "nexus",
+        "platformInitializationProfile": "localPlatformFoundation",
+        "locationInitializationProfile": "localLocationFoundation",
+        "verifyDefaultLocationMap": true,
+        "requiredCapabilities": { "$config": "replace", "value": [
+          "nodics.process", "nodics.communication", "nodics.location", "nodics.waste",
+          "nodics.loyalty", "nodics.commerce", "nodics.discovery"
+        ] },
+        "applicationBundles": { "$config": "replace", "value": [
+          { "profileCode": "nexus", "deliveryProbe": { "site": "nexusCorporateSite", "path": "/" } },
+          { "profileCode": "circa", "deliveryProbe": { "site": "circaSite", "path": "/" } }
+        ] },
+        "applicationUpdates": { "$config": "replace", "value": [
+          { "profileCode": "nexusupdate", "deliveryProbe": { "site": "nexusCorporateSite", "path": "/" }, "marker": "nexus-corporate-1.0.1" }
+        ] },
+        "rollbackDocumentationProfiles": { "$config": "replace", "value": ["frameworkdocs", "axisdocs"] },
+        "journeyCommands": { "$config": "replace", "value": [
+          { "command": "acceptance:agora-commerce-data", "args": ["--execute-install"] },
+          { "command": "acceptance:agora-commerce-publication", "args": ["--execute", "--approve-publications"] }
+        ] },
+        "documentationPackCodes": {
+          "$config": "replace",
+          "value": ["nodicsDocumentation", "axisDocumentation", "kickoffDocumentation"]
+        },
+        "documentationPacks": {
+          "kickoffDocumentation": {
+            "code": "kickoffDocumentation",
+            "profileCode": "kickoffdocs",
+            "minimumRoutes": 4,
+            "navigationComponent": "kickoffDocumentationNavigation",
+            "site": "kickoffDocumentationSite",
+            "path": "/docs/nodics-kickoff"
+          }
+        }
+      },
       "guidedInitialization": {
         "publicationProfiles": {
           "$config": "replace",
@@ -33,6 +265,23 @@ module.exports = {
             "agoraelectronics",
             "agoratelco"
           ]
+        }
+      }
+    }
+  },
+  "cms": {
+    "runtimeRoleProfiles": {
+      "WCMS_STAGED": {
+        "publication": {
+          "baselines": {
+            "kickoffdocs": {
+              "contentPackCode": "kickoffDocumentation",
+              "releaseVersion": "0.8.5",
+              "rootType": "site",
+              "rootCode": "kickoffDocumentationSite",
+              "sourceVersion": "0"
+            }
+          }
         }
       }
     }
@@ -61,16 +310,7 @@ module.exports = {
               "completionMessage": "The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.",
               "template": "axisDocumentationFoundation"
             }
-          },
-          "contributions": [
-            {
-              "moduleName": "axis",
-              "sections": [
-                "axisBaseline",
-                "core-v002"
-              ]
-            }
-          ]
+          }
         }
       }
     }
@@ -786,7 +1026,7 @@ module.exports = {
       "PLATFORM": {
         "core": {
           "customerProject": "kickoff",
-          "environment": "kickoffLocal"
+          "environment": { "$config": "context", "name": "environmentCode" }
         },
         "api": {
           "enabled": true
@@ -814,6 +1054,10 @@ module.exports = {
               "name": "NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START",
               "fallback": true,
               "type": "boolean"
+            },
+            "startup": {
+              "serviceId": "kickoff-local-knowledge-indexer",
+              "logSummary": true
             },
             "indexTenant": "default"
           },
@@ -846,18 +1090,14 @@ module.exports = {
             },
             "nodics.axis": {
               "$config": "env",
-              "name": "NODICS_COPILOT_AXIS_ROOT",
-              "fallback": {
-                "$config": "path",
-                "base": "project",
-                "relative": "../nodics.exp/nodics.axis"
-              }
+              "name": "NODICS_COPILOT_AXIS_ROOT"
             }
           },
           "sourceRegistry": {
             "definitions": {
-              "$config": "replace",
-              "value": [
+              "$config": "keyed",
+              "key": "code",
+              "entries": [
                 {
                   "code": "nodics-framework-readme",
                   "repository": "nodics.ai",
@@ -872,19 +1112,6 @@ module.exports = {
                       "name": "frameworkVersion"
                     }
                   },
-                  "sourceType": "README",
-                  "classification": "INTERNAL",
-                  "paths": [
-                    "README.md",
-                    "**/README.md"
-                  ],
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.internal.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
                   "enabled": {
                     "$config": "all",
                     "values": [
@@ -895,7 +1122,8 @@ module.exports = {
                         "type": "boolean"
                       }
                     ]
-                  }
+                  },
+                  "template": "employeeReadme"
                 },
                 {
                   "code": "nodics-framework-contracts",
@@ -911,20 +1139,6 @@ module.exports = {
                       "name": "frameworkVersion"
                     }
                   },
-                  "sourceType": "AGENTS_CONTRACT",
-                  "classification": "RESTRICTED",
-                  "paths": [
-                    "AGENTS.md",
-                    "**/AGENTS.md",
-                    "**/llm/contracts/*.md"
-                  ],
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.restricted.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
                   "enabled": {
                     "$config": "all",
                     "values": [
@@ -935,7 +1149,8 @@ module.exports = {
                         "type": "boolean"
                       }
                     ]
-                  }
+                  },
+                  "template": "employeeContracts"
                 },
                 {
                   "code": "nodics-axis-readme",
@@ -946,24 +1161,12 @@ module.exports = {
                   "version": {
                     "$config": "env",
                     "name": "NODICS_COPILOT_AXIS_VERSION",
-                    "fallback": "kickoff-local-development"
+                    "fallback": "unversioned"
                   },
-                  "sourceType": "README",
-                  "classification": "INTERNAL",
-                  "paths": [
-                    "README.md",
-                    "**/README.md"
-                  ],
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.internal.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
                   "enabled": {
                     "$config": "all",
                     "values": [
+                      { "$config": "env", "name": "NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED", "fallback": false, "type": "boolean" },
                       {
                         "$config": "env",
                         "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
@@ -971,7 +1174,8 @@ module.exports = {
                         "type": "boolean"
                       }
                     ]
-                  }
+                  },
+                  "template": "employeeReadme"
                 },
                 {
                   "code": "nodics-axis-contracts",
@@ -982,25 +1186,12 @@ module.exports = {
                   "version": {
                     "$config": "env",
                     "name": "NODICS_COPILOT_AXIS_VERSION",
-                    "fallback": "kickoff-local-development"
+                    "fallback": "unversioned"
                   },
-                  "sourceType": "AGENTS_CONTRACT",
-                  "classification": "RESTRICTED",
-                  "paths": [
-                    "AGENTS.md",
-                    "**/AGENTS.md",
-                    "**/llm/contracts/*.md"
-                  ],
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.restricted.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
                   "enabled": {
                     "$config": "all",
                     "values": [
+                      { "$config": "env", "name": "NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED", "fallback": false, "type": "boolean" },
                       {
                         "$config": "env",
                         "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
@@ -1008,7 +1199,8 @@ module.exports = {
                         "type": "boolean"
                       }
                     ]
-                  }
+                  },
+                  "template": "employeeContracts"
                 },
                 {
                   "code": "kickoff-project-readme",
@@ -1024,26 +1216,12 @@ module.exports = {
                       "name": "projectVersion"
                     }
                   },
-                  "sourceType": "CUSTOMER_PROJECT",
-                  "classification": "CUSTOMER",
-                  "paths": [
-                    "README.md",
-                    "**/README.md",
-                    "docs/**/*.md"
-                  ],
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
                   "tenantScopes": [
                     "default"
                   ],
                   "customerProjectScopes": [
                     "kickoff"
                   ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.customer.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
                   "enabled": {
                     "$config": "all",
                     "values": [
@@ -1054,7 +1232,8 @@ module.exports = {
                         "type": "boolean"
                       }
                     ]
-                  }
+                  },
+                  "template": "customerReadme"
                 },
                 {
                   "code": "kickoff-project-contracts",
@@ -1070,26 +1249,12 @@ module.exports = {
                       "name": "projectVersion"
                     }
                   },
-                  "sourceType": "CUSTOMER_PROJECT",
-                  "classification": "CUSTOMER",
-                  "paths": [
-                    "AGENTS.md",
-                    "**/AGENTS.md",
-                    "**/llm/contracts/*.md"
-                  ],
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
                   "tenantScopes": [
                     "default"
                   ],
                   "customerProjectScopes": [
                     "kickoff"
                   ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.customer.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
                   "enabled": {
                     "$config": "all",
                     "values": [
@@ -1100,7 +1265,8 @@ module.exports = {
                         "type": "boolean"
                       }
                     ]
-                  }
+                  },
+                  "template": "customerContracts"
                 },
                 {
                   "code": "nodics-copilot-source",
@@ -1116,8 +1282,6 @@ module.exports = {
                       "name": "frameworkVersion"
                     }
                   },
-                  "sourceType": "SOURCE_CODE",
-                  "classification": "RESTRICTED",
                   "paths": [
                     "nodics.copilot/**/*.js"
                   ],
@@ -1133,13 +1297,6 @@ module.exports = {
                     "maximumFileBytes": 524288,
                     "maximumSourceBytes": 8388608
                   },
-                  "requiredPermissions": [
-                    "copilot.knowledge.restricted.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
                   "enabled": {
                     "$config": "all",
                     "values": [
@@ -1167,7 +1324,8 @@ module.exports = {
                         ]
                       }
                     ]
-                  }
+                  },
+                  "template": "employeeSource"
                 },
                 {
                   "code": "nodics-discovery-source",
@@ -1183,8 +1341,6 @@ module.exports = {
                       "name": "frameworkVersion"
                     }
                   },
-                  "sourceType": "SOURCE_CODE",
-                  "classification": "RESTRICTED",
                   "paths": [
                     "nodics.discovery/**/*.js"
                   ],
@@ -1200,13 +1356,6 @@ module.exports = {
                     "maximumFileBytes": 524288,
                     "maximumSourceBytes": 8388608
                   },
-                  "requiredPermissions": [
-                    "copilot.knowledge.restricted.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
                   "enabled": {
                     "$config": "all",
                     "values": [
@@ -1234,7 +1383,8 @@ module.exports = {
                         ]
                       }
                     ]
-                  }
+                  },
+                  "template": "employeeSource"
                 },
                 {
                   "code": "nodics-axis-assistant-source",
@@ -1245,10 +1395,8 @@ module.exports = {
                   "version": {
                     "$config": "env",
                     "name": "NODICS_COPILOT_AXIS_VERSION",
-                    "fallback": "kickoff-local-development"
+                    "fallback": "unversioned"
                   },
-                  "sourceType": "SOURCE_CODE",
-                  "classification": "RESTRICTED",
                   "paths": [
                     "src/assistant/**/*.ts",
                     "src/assistant/**/*.tsx",
@@ -1268,16 +1416,10 @@ module.exports = {
                     "maximumFileBytes": 524288,
                     "maximumSourceBytes": 4194304
                   },
-                  "requiredPermissions": [
-                    "copilot.knowledge.restricted.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
                   "enabled": {
                     "$config": "all",
                     "values": [
+                      { "$config": "env", "name": "NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED", "fallback": false, "type": "boolean" },
                       {
                         "$config": "env",
                         "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
@@ -1296,85 +1438,14 @@ module.exports = {
                           {
                             "$config": "env",
                             "name": "NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED",
-                            "fallback": true,
+                            "fallback": false,
                             "type": "boolean"
                           }
                         ]
                       }
                     ]
-                  }
-                },
-                {
-                  "code": "kickoff-copilot-composition-source",
-                  "repository": "nodics.kickoff",
-                  "project": "kickoff",
-                  "module": "platformServer",
-                  "owner": "nodics.kickoff",
-                  "version": {
-                    "$config": "env",
-                    "name": "NODICS_COPILOT_KICKOFF_VERSION",
-                    "fallback": {
-                      "$config": "context",
-                      "name": "projectVersion"
-                    }
                   },
-                  "sourceType": "SOURCE_CODE",
-                  "classification": "RESTRICTED",
-                  "paths": [
-                    "envs/kickoffLocal/platformServer/**/*.js"
-                  ],
-                  "excludedPaths": [
-                    "envs/kickoffLocal/platformServer/llm/generated"
-                  ],
-                  "allowedExtensions": [
-                    ".js"
-                  ],
-                  "limits": {
-                    "maximumFiles": 100,
-                    "maximumFileBytes": 524288,
-                    "maximumSourceBytes": 2097152
-                  },
-                  "tenantScopes": [
-                    "default"
-                  ],
-                  "customerProjectScopes": [
-                    "kickoff"
-                  ],
-                  "requiredPermissions": [
-                    "copilot.knowledge.restricted.read"
-                  ],
-                  "secretScanPolicy": "REQUIRED",
-                  "allowedChannels": [
-                    "EMPLOYEE"
-                  ],
-                  "enabled": {
-                    "$config": "all",
-                    "values": [
-                      {
-                        "$config": "env",
-                        "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
-                        "fallback": true,
-                        "type": "boolean"
-                      },
-                      {
-                        "$config": "all",
-                        "values": [
-                          {
-                            "$config": "env",
-                            "name": "NODICS_COPILOT_SOURCE_CODE_ENABLED",
-                            "fallback": true,
-                            "type": "boolean"
-                          },
-                          {
-                            "$config": "env",
-                            "name": "NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED",
-                            "fallback": true,
-                            "type": "boolean"
-                          }
-                        ]
-                      }
-                    ]
-                  }
+                  "template": "employeeSource"
                 }
               ]
             }
@@ -1392,6 +1463,18 @@ module.exports = {
           }
         }
       }
+    }
+  },
+  "engagement": {
+    "runtimeRoleProfiles": {
+      "ENGAGEMENT": {
+        "capabilities": { "testimonial": true, "customerReview": true, "customerFeedback": true }
+      }
+    }
+  },
+  "customerFeedback": {
+    "runtimeRoleProfiles": {
+      "ENGAGEMENT": { "enabled": true }
     }
   },
   "apiExposure": {
@@ -1451,248 +1534,8 @@ module.exports = {
           "connectionName": "wcmsStaged"
         },
         "profiles": {
-          "agoraapparel": {
-            "code": "agoraapparel",
-            "type": "STOREFRONT_DOMAIN_BUNDLE",
-            "owner": "agora.apparel",
-            "applicationCode": "agora",
-            "siteCode": "agoraApparelSite",
-            "baselineCode": "agoraapparel",
-            "presentation": {
-              "title": "Agora Apparel",
-              "kind": "PROJECT",
-              "category": "accelerator",
-              "order": 210,
-              "summary": "Apparel storefront accelerator as a complete business-facing domain bundle.",
-              "requiredServers": [
-                "Platform",
-                "WCMS Staged",
-                "WCMS Online",
-                "Process",
-                "Commerce",
-                "Discovery"
-              ],
-              "requiredFunctionalModules": [
-                {
-                  "code": "nodics.commerce",
-                  "label": "Commerce capability"
-                },
-                {
-                  "code": "nodics.discovery",
-                  "label": "Discovery capability"
-                }
-              ],
-              "activationPolicy": {
-                "approvalRequiredForOnline": true,
-                "requiredDataTrigger": "USER",
-                "sampleDataTrigger": "USER"
-              }
-            },
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
-                {
-                  "code": "agora.apparel:agoraApparelContentCatalog",
-                  "kind": "Storefront content",
-                  "required": true,
-                  "trigger": "USER",
-                  "dataType": "sample",
-                  "targetServer": "wcmsStaged",
-                  "targetRuntimeRole": "WCMS_STAGED"
-                },
-                {
-                  "code": "agora.apparel:agoraApparelMediaAssets",
-                  "type": "MEDIA_ASSET_MANIFEST",
-                  "kind": "Storefront media files",
-                  "required": true,
-                  "trigger": "USER",
-                  "targetServer": "wcmsStaged",
-                  "targetRuntimeRole": "WCMS_STAGED",
-                  "manifestPath": "modules/agora.apparel/data/sample-v001/content/assets/agora-cms-media/assetManifest.js",
-                  "businessPurpose": "AGORA_STOREFRONT_CONTENT"
-                },
-                {
-                  "code": "agora.apparel:agoraApparelCommerceCatalog",
-                  "kind": "Commerce catalog",
-                  "required": true,
-                  "trigger": "USER",
-                  "dataType": "sample",
-                  "targetServer": "commerceStaged",
-                  "targetRuntimeRole": "COMMERCE_STAGED"
-                }
-              ]
-            }
-          },
-          "agoraelectronics": {
-            "code": "agoraelectronics",
-            "type": "STOREFRONT_DOMAIN_BUNDLE",
-            "owner": "agora.electronics",
-            "applicationCode": "agora",
-            "siteCode": "agoraElectronicsSite",
-            "baselineCode": "agoraelectronics",
-            "presentation": {
-              "title": "Agora Electronics",
-              "kind": "PROJECT",
-              "category": "accelerator",
-              "order": 220,
-              "summary": "Electronics storefront accelerator as a complete business-facing domain bundle.",
-              "requiredServers": [
-                "Platform",
-                "WCMS Staged",
-                "WCMS Online",
-                "Process",
-                "Commerce",
-                "Discovery"
-              ],
-              "requiredFunctionalModules": [
-                {
-                  "code": "nodics.commerce",
-                  "label": "Commerce capability"
-                },
-                {
-                  "code": "nodics.discovery",
-                  "label": "Discovery capability"
-                }
-              ],
-              "activationPolicy": {
-                "approvalRequiredForOnline": true,
-                "requiredDataTrigger": "USER",
-                "sampleDataTrigger": "USER"
-              }
-            },
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
-                {
-                  "code": "agora.electronics:agoraElectronicsContentCatalog",
-                  "kind": "Storefront content",
-                  "required": true,
-                  "trigger": "USER",
-                  "dataType": "sample",
-                  "targetServer": "wcmsStaged",
-                  "targetRuntimeRole": "WCMS_STAGED"
-                },
-                {
-                  "code": "agora.electronics:agoraElectronicsMediaAssets",
-                  "type": "MEDIA_ASSET_MANIFEST",
-                  "kind": "Storefront media files",
-                  "required": true,
-                  "trigger": "USER",
-                  "targetServer": "wcmsStaged",
-                  "targetRuntimeRole": "WCMS_STAGED",
-                  "manifestPath": "modules/agora.electronics/data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
-                  "businessPurpose": "AGORA_STOREFRONT_CONTENT"
-                },
-                {
-                  "code": "agora.electronics:agoraElectronicsCommerceCatalog",
-                  "kind": "Commerce catalog",
-                  "required": true,
-                  "trigger": "USER",
-                  "dataType": "sample",
-                  "targetServer": "commerceStaged",
-                  "targetRuntimeRole": "COMMERCE_STAGED"
-                }
-              ]
-            }
-          },
-          "agoratelco": {
-            "code": "agoratelco",
-            "type": "STOREFRONT_DOMAIN_BUNDLE",
-            "owner": "agora.telco",
-            "applicationCode": "agora",
-            "siteCode": "agoraTelcoSite",
-            "baselineCode": "agoratelco",
-            "presentation": {
-              "title": "Agora Telco",
-              "kind": "PROJECT",
-              "category": "accelerator",
-              "order": 230,
-              "summary": "Telco storefront accelerator as a complete business-facing domain bundle.",
-              "requiredServers": [
-                "Platform",
-                "WCMS Staged",
-                "WCMS Online",
-                "Process",
-                "Commerce",
-                "Discovery"
-              ],
-              "requiredFunctionalModules": [
-                {
-                  "code": "nodics.commerce",
-                  "label": "Commerce capability"
-                },
-                {
-                  "code": "nodics.discovery",
-                  "label": "Discovery capability"
-                }
-              ],
-              "activationPolicy": {
-                "approvalRequiredForOnline": true,
-                "requiredDataTrigger": "USER",
-                "sampleDataTrigger": "USER"
-              }
-            },
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
-                {
-                  "code": "agora.telco:agoraTelcoContentCatalog",
-                  "kind": "Storefront content",
-                  "required": true,
-                  "trigger": "USER",
-                  "dataType": "sample",
-                  "targetServer": "wcmsStaged",
-                  "targetRuntimeRole": "WCMS_STAGED"
-                },
-                {
-                  "code": "agora.telco:agoraTelcoMediaAssets",
-                  "type": "MEDIA_ASSET_MANIFEST",
-                  "kind": "Storefront media files",
-                  "required": true,
-                  "trigger": "USER",
-                  "targetServer": "wcmsStaged",
-                  "targetRuntimeRole": "WCMS_STAGED",
-                  "manifestPath": "modules/agora.telco/data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
-                  "businessPurpose": "AGORA_STOREFRONT_CONTENT"
-                },
-                {
-                  "code": "agora.telco:agoraTelcoCommerceCatalog",
-                  "kind": "Commerce catalog",
-                  "required": true,
-                  "trigger": "USER",
-                  "dataType": "sample",
-                  "targetServer": "commerceStaged",
-                  "targetRuntimeRole": "COMMERCE_STAGED"
-                }
-              ]
-            }
-          },
           "frameworkdocs": {
-            "code": "frameworkdocs",
-            "type": "DOCUMENTATION_BUNDLE",
-            "owner": "nodics.docs",
-            "applicationCode": "axis",
-            "siteCode": "nodicsDocumentationSite",
-            "baselineCode": "frameworkdocs",
-            "contentPackCode": "nodicsDocumentation",
-            "presentation": {
-              "title": "Framework Documentation",
-              "kind": "DOCUMENTATION",
-              "category": "documentation",
-              "order": 300,
-              "summary": "Framework documentation content pack and Online delivery profile.",
-              "requiredServers": [
-                "Platform",
-                "WCMS Staged",
-                "WCMS Online",
-                "Process"
-              ],
-              "activationPolicy": {
-                "approvalRequiredForOnline": true,
-                "requiredDataTrigger": "USER",
-                "sampleDataTrigger": "USER"
-              }
-            }
+            "enabled": true
           },
           "axisdocs": {
             "enabled": true

@@ -53,13 +53,6 @@ module.exports = {
       "waste": "waste.operational"
     }
   },
-  "wasteSubmission": {
-    "metadataSuggestion": {
-      "enabled": true,
-      "adapter": "openai",
-      "profile": "eWastePhotoMetadata"
-    }
-  },
   "rulesEngine": {
     "approval": {
       "processTarget": {
@@ -82,11 +75,6 @@ module.exports = {
           "parameter": "startapp"
         }
       }
-    },
-    "conversation": {
-      "project": "circa.ewaste",
-      "adapter": "ollama",
-      "profile": "customerGuidance"
     }
   },
   "waste": {

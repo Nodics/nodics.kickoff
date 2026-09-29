@@ -20,7 +20,7 @@
  */
 module.exports = {
     /**
-     * Initializes this Kickoff lifecycle boundary.
+     * Initializes this customer application boundary.
      *
      * @param {Object} options Optional lifecycle context.
      * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
@@ -30,7 +30,7 @@ module.exports = {
     },
 
     /**
-     * Runs post-initialization for this Kickoff lifecycle boundary.
+     * Runs post-initialization for this customer application boundary.
      *
      * @param {Object} options Optional lifecycle context.
      * @returns {Promise<boolean>} Resolves true when no boundary-specific post-start behavior is required.

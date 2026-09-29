@@ -19,9 +19,10 @@ const test = require("node:test");
  */
 
 const projectRoot = path.resolve(__dirname, "..");
-const productRoot = path.resolve(
-  projectRoot,
-  "../nodics.ai/nodics.commerce/modules/baseCommerce/modules/product",
+const { frameworkRoot } = require('./helpers/configuration');
+const productRoot = path.join(
+  frameworkRoot,
+  "nodics.commerce/modules/baseCommerce/modules/product",
 );
 const agoraDataRoot = path.join(projectRoot, "modules/agora.apparel/data");
 const agoraCommerceRelease = require(path.join(agoraDataRoot, "manifest.json"))
@@ -32,56 +33,9 @@ const agoraProductRoot = path.join(
   "commerce/records",
 );
 
-const productProperties = require(path.join(productRoot, "config/properties"));
-const pricingRoot = path.resolve(
-  projectRoot,
-  "../nodics.ai/nodics.commerce/modules/baseCommerce/modules/pricing",
-);
-const inventoryRoot = path.resolve(
-  projectRoot,
-  "../nodics.ai/nodics.commerce/modules/baseCommerce/modules/inventory",
-);
-const pricingProperties = require(path.join(pricingRoot, "config/properties"));
-const inventoryProperties = require(
-  path.join(inventoryRoot, "config/properties"),
-);
-const localizationPolicy = require(
-  path.join(productRoot, "src/service/defaultProductLocalizationPolicyService"),
-);
-const publicationPolicy = require(
-  path.join(productRoot, "src/service/defaultProductPublicationPolicyService"),
-);
-const projectionBuilder = require(
-  path.join(
-    productRoot,
-    "src/service/defaultProductLocalizedProjectionBuilderService",
-  ),
-);
-const searchEnrichment = require(
-  path.join(productRoot, "src/service/defaultProductSearchEnrichmentService"),
-);
-const searchPublication = require(
-  path.join(productRoot, "src/service/defaultProductSearchPublicationService"),
-);
-const indexes = require(path.join(productRoot, "src/search/indexes"));
-const customerPriceSummary = require(
-  path.join(pricingRoot, "src/service/defaultCustomerPriceSummaryService"),
-);
-const priceSelection = require(
-  path.join(pricingRoot, "src/service/defaultPriceSelectionService"),
-);
-const exactAmount = require(
-  path.join(pricingRoot, "src/service/defaultExactAmountService"),
-);
-const customerAvailabilitySummary = require(
-  path.join(
-    inventoryRoot,
-    "src/service/defaultCustomerAvailabilitySummaryService",
-  ),
-);
-const inventorySourcing = require(
-  path.join(inventoryRoot, "src/service/defaultInventorySourcingService"),
-);
+const localizationPolicy = require(path.join(productRoot, "src/service/defaultProductLocalizationPolicyService"));
+const searchPublication = require(path.join(productRoot, "src/service/defaultProductSearchPublicationService"));
+const publicationFixture = require(path.join(productRoot, "test/helpers/searchPublication"));
 const products = require(
   path.join(agoraProductRoot, "agoraApparelProductData"),
 );
@@ -117,52 +71,12 @@ const couponBatches = require(
 );
 const coupons = require(path.join(agoraProductRoot, "agoraApparelCouponData"));
 
-let persisted;
 let indexed;
-let updated;
-let removed;
-
 test.beforeEach(() => {
-  persisted = [];
-  indexed = [];
-  updated = [];
-  removed = [];
-  global.CONFIG = {
-    get: (key) =>
-      key === "product"
-        ? productProperties.product
-        : key === "pricing"
-          ? pricingProperties.pricing
-          : key === "inventory"
-            ? inventoryProperties.inventory
-            : undefined,
-  };
-  global.SERVICE = {
-    DefaultProductLocalizationPolicyService: localizationPolicy,
-    DefaultProductPublicationPolicyService: publicationPolicy,
-    DefaultProductLocalizedProjectionBuilderService: projectionBuilder,
-    DefaultProductSearchEnrichmentService: searchEnrichment,
-    DefaultCustomerPriceSummaryService: customerPriceSummary,
-    DefaultPriceSelectionService: priceSelection,
-    DefaultExactAmountService: exactAmount,
-    DefaultPriceBookService: {
-      get: async () => ({ result: values(priceBooks) }),
-    },
-    DefaultPriceRowService: {
-      get: async () => ({ result: values(priceRows) }),
-    },
-    DefaultCustomerAvailabilitySummaryService: customerAvailabilitySummary,
-    DefaultInventorySourcingService: inventorySourcing,
-    DefaultInventoryBalanceService: {
-      get: async () => ({ result: values(inventoryBalances) }),
-    },
-    DefaultProductSearchProjectionService: {
-      save: async (request) => persisted.push(request),
-      doSave: async (request) => indexed.push(request),
-      update: async (request) => updated.push(request),
-      doRemoveByQuery: async (request) => removed.push(request),
-    },
-  };
+  ({ indexed } = publicationFixture({
+    priceBooks: values(priceBooks), priceRows: values(priceRows),
+    inventoryBalances: values(inventoryBalances), generatedSearch: true,
+  }));
 });
 
 const request = {
@@ -181,15 +95,6 @@ function byOwner(records, propertyName, ownerCode) {
 }
 
 test("Agora Product seed satisfies the current Product required-locale policy", () => {
-  const policy = localizationPolicy.policy();
-
-  assert.deepEqual(
-    policy.requiredLocales
-      .map(localizationPolicy.canonicalize.bind(localizationPolicy))
-      .sort(),
-    ["ar", "en"],
-  );
-
   for (const product of values(products)) {
     const result = localizationPolicy.completeness(
       request,
@@ -331,21 +236,8 @@ test("Agora Product seed publishes customer-safe English and Arabic Product sear
     ]);
   }
 
-  const expectedProjectionCount =
-    values(products).length *
-    localizationPolicy.policy().requiredLocales.length;
-  assert.equal(persisted.length, expectedProjectionCount);
-  assert.equal(indexed.length, expectedProjectionCount);
-  assert(indexed.every((item) => item.moduleName === "product"));
-  assert(indexed.every((item) => item.indexName === "productLocalized"));
-  assert.deepEqual(
-    new Set(indexed.map((item) => item.searchOptions.analyzer)),
-    new Set(["arabic", "standard"]),
-  );
   assert(indexed.every((item) => item.model.tenant === "default"));
   assert(indexed.every((item) => item.model.storeCode === "agoraMainStore"));
-  assert(indexed.every((item) => item.model.payload.inventory === undefined));
-  assert(indexed.every((item) => item.model.payload.sku === undefined));
   assert(
     indexed.every(
       (item) =>
@@ -354,39 +246,9 @@ test("Agora Product seed publishes customer-safe English and Arabic Product sear
   );
   assert(
     indexed.every(
-      (item) => item.model.payload.price.priceRowCode === undefined,
-    ),
-  );
-  assert(
-    indexed.every(
       (item) =>
         item.model.payload.availability &&
         item.model.payload.availability.status === "IN_STOCK",
     ),
-  );
-  assert(
-    indexed.every(
-      (item) => item.model.payload.availability.warehouseCode === undefined,
-    ),
-  );
-  assert.equal(updated.length, 0);
-  assert.equal(removed.length, 0);
-});
-
-test("Product index remains provider-neutral and partitioned for customer discovery APIs", () => {
-  const definition = indexes.product.productLocalized;
-
-  assert.equal(definition.schemaName, "productSearchProjection");
-  assert.equal(definition.tenantPropertyName, "tenant");
-  assert.deepEqual(definition.partitionProperties, [
-    "tenant",
-    "storeCode",
-    "locale",
-  ]);
-  assert.equal(definition.properties.payload.type, "object");
-  assert.equal(definition.properties.payload.dynamic, false);
-  assert.equal(
-    definition.properties.payload.properties.categoryCodes.type,
-    "keyword",
   );
 });

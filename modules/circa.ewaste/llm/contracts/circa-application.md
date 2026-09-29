@@ -1,15 +1,16 @@
 # Nodics Circa Application Contract
 
-**Nodics Circa** is the reusable customer-facing application experience for
+**Nodics Circa** is the reference customer-owned application experience for
 e-waste and circular asset journeys.
 
 Circa composes reusable Nodics frameworks. It must not become the owner of Waste
-truth, wallet ledger, coupon, commerce, media, location, or customer-project
-policy records.
+truth, wallet ledger, coupon, commerce, media or location lifecycle machinery.
+It does own Circa branding, content, application selections and policy records
+expressed through those capabilities' supported contracts.
 
 ## Application Responsibilities
 
-Circa owns reusable customer experience contracts for:
+Circa owns its customer experience requirements and composition for:
 
 - presenting a public single-page Circa site that explains the business idea,
   customer participation model, environmental outcome, customer benefit, trust
@@ -46,10 +47,55 @@ Circa does not own:
 - Commerce/Product listings, bids, orders, payment, settlement, or fulfillment
 - Location/map coordinates, geocoding, nearby search, visibility, or map-provider
   state
-- customer-project-specific branding, campaign copy, partner contracts, provider
-  secrets, or regulatory certification claims
+
+Circa owns its branding, campaign copy, partner-specific choices and policy
+deltas. Provider secrets remain governed deployment references rather than
+authored content. Illustrative environmental estimates are not certification
+claims. Reusable business mechanics and canonical schemas remain with their
+framework/accelerator owners even when Circa first requests the capability.
 
 ## Policy Rule
+
+### Existing Data Compatibility
+
+The old sample taxonomy remains an immutable compatibility snapshot: 20 records
+equal to the old eWaste defaults, four impact-profile overrides and 28 customer
+additions. The selected reference-only successor is `circa.ewaste:waste-policy`
+version `0.0.1` in `core-v002`, above `eWaste:core-reference` version `0.0.1` in
+the same source sequence. Both are EXPLICIT. Existing nImport source-key
+composition supplies shared fields from eWaste and applies 24 Circa profile
+selection deltas plus the customer additions and final core policy. Matching
+filenames, export keys and header targets are required; these are not runtime
+JavaScript imports of mutable framework records. MOBILE_DEVICE's customer name,
+profile and revision-2 policy win once in the final composed record.
+
+The old `core-v001:waste-policy` and `sample-v001:waste` sections remain exact
+snapshots under `retainedRoots` with `scope: SECTIONS`. Unrelated sibling sections
+remain active and are not copied or frozen. The current sample successor is
+`circa.ewaste:waste` version `0.0.5` in `sample-v004`: it excludes category,
+item-type and impact-profile writes. It is EXPLICIT and optional in application
+preparation. This prevents automatic sample replay during reference adoption;
+it is not an importer-enforced fresh-only flag. The parent/operator must establish
+a genuinely fresh sample destination before explicitly selecting it. Never use
+this transaction pack to upgrade an installed customer's references.
+
+For reference adoption use the existing nImport core validation/install API with
+`releaseCodes: ["eWaste:core-reference", "circa.ewaste:waste-policy"]` and
+`expectedReleases: { "eWaste:core-reference": "0.0.1", "circa.ewaste:waste-policy": "0.0.1" }`.
+The existing Local Waste foundation profile selects material foundation first
+and these same reference owners. Canonical discovery orders the matching v002
+releases by owner index; composition requires a CURRENT baseline receipt with
+matching checksum/version, or a selected predecessor during preflight. Explicit
+version pins reject stale selections. No new dependency or migration registry
+exists. Source alignment and these pins must be requalified for later versions.
+
+Offline tests execute canonical nImport processing with in-memory receipt and
+persistence ports. They preserve all historical Circa keys, the exact profile
+metadata, collection/acceptance policy, and old saved assessments; they assert
+no submission/asset/impact-result writes during core adoption and no unrelated
+baseline replay. Eleven sample results retain `CIRCA_SAMPLE_OPENING` unchanged.
+Installed receipts, divergent operator policy, live imports and recovery remain
+separate parent-owned gates. Unknown provenance blocks operational adoption.
 
 Marketplace eligibility, asset transfer, reward settlement, carbon-credit
 settlement, and coupon-redemption settlement behavior must resolve from
@@ -60,9 +106,10 @@ not hardcode sale, gift, donation, reward consumption, carbon transfer, coupon
 purchase, issuer-enterprise settlement, or default-enterprise settlement
 behavior.
 
-Before implementation, use `circa-reusable-backlog.md` as the roadmap for
-asset, wallet, marketplace, coupon, customer experience, governance, security,
-compliance, and operational requirements.
+Use `circa-reusable-backlog.md` as customer requirement-origin context, not
+framework implementation authority or evidence that a capability is complete.
+Resolve current contracts in the owning Waste, eWaste, Loyalty, Commerce,
+Location, Profile and Communication modules before implementation.
 
 ## Public Customer Journey
 

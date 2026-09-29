@@ -1,4 +1,88 @@
 module.exports = {
+  "publish": {
+    "providers": {
+      "domainAdapters": {
+        "product": "DefaultProductPublicationAdapterService",
+        "pricing": "DefaultPricingPublicationService",
+        "tax": "DefaultTaxPublicationService",
+        "inventory": "DefaultInventoryPublicationService",
+        "promotion": "DefaultPromotionPublicationService"
+      },
+      "versionProviders": {
+        "product": "DefaultProductPublicationVersionProviderService",
+        "pricing": "DefaultPricingPublicationService",
+        "tax": "DefaultTaxPublicationService",
+        "inventory": "DefaultInventoryPublicationService",
+        "promotion": "DefaultPromotionPublicationService"
+      },
+      "workflowProviders": {
+        "product": "DefaultPublicationApprovalWorkflowService",
+        "pricing": "DefaultPublicationApprovalWorkflowService",
+        "tax": "DefaultPublicationApprovalWorkflowService",
+        "inventory": "DefaultPublicationApprovalWorkflowService",
+        "promotion": "DefaultPublicationApprovalWorkflowService"
+      }
+    },
+    "approvalWorkflow": {
+      "target": {
+        "connectionName": "process",
+        "connectionType": "abstract",
+        "runtimeRole": "PROCESS"
+      }
+    }
+  },
+  "pricing": {
+    "publication": {
+      "runtimeRole": "STAGED",
+      "sourceVersioningQualified": true,
+      "targetTransportProvider": "DefaultPricingPublicationTransportService",
+      "target": {
+        "moduleName": "pricing",
+        "connectionName": "commerce",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE"
+      }
+    }
+  },
+  "tax": {
+    "publication": {
+      "runtimeRole": "STAGED",
+      "sourceVersioningQualified": true,
+      "targetTransportProvider": "DefaultTaxPublicationTransportService",
+      "target": {
+        "moduleName": "tax",
+        "connectionName": "commerce",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE"
+      }
+    }
+  },
+  "inventory": {
+    "publication": {
+      "runtimeRole": "STAGED",
+      "sourceVersioningQualified": true,
+      "targetTransportProvider": "DefaultInventoryPublicationTransportService",
+      "target": {
+        "moduleName": "inventory",
+        "connectionName": "commerce",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE"
+      }
+    }
+  },
+  "promotion": {
+    "publication": {
+      "runtimeRole": "STAGED",
+      "sourceVersioningQualified": true,
+      "targetTransportProvider": "DefaultPromotionPublicationTransportService",
+      "target": {
+        "moduleName": "promotion",
+        "connectionName": "commerce",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE"
+      }
+    }
+  },
   "activeModules": {
     "groups": [
       {
@@ -9,6 +93,8 @@ module.exports = {
       }
     ],
     "modules": [
+      "publish",
+      "vMongodb",
       "circa.ewaste",
       "search",
       "elastic",
@@ -38,6 +124,26 @@ module.exports = {
   "runtimeRole": {
     "code": "COMMERCE_STAGED",
     "publication": "STAGED"
+  },
+  "schemaPolicies": {
+    "pricing": {
+      "publicationVersioned": { "isVersionedEnabled": true, "versionedReadMode": "CURRENT" }
+    },
+    "tax": {
+      "publicationVersioned": { "isVersionedEnabled": true, "versionedReadMode": "CURRENT" }
+    },
+    "inventory": {
+      "publicationVersioned": { "isVersionedEnabled": true, "versionedReadMode": "CURRENT" }
+    },
+    "promotion": {
+      "publicationVersioned": { "isVersionedEnabled": true, "versionedReadMode": "CURRENT" }
+    },
+    "product": {
+      "catalogueVersioned": {
+        "isVersionedEnabled": true,
+        "versionedReadMode": "CURRENT"
+      }
+    }
   },
   "runtimeAuthorityContexts": {
     "modules": {

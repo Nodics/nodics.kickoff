@@ -24,6 +24,27 @@ const path = require("node:path");
 const test = require("node:test");
 
 const root = path.resolve(__dirname, "..");
+const kickoffCoreProperties = require(path.join(root, "modules", "kickoffCore", "config", "properties.js"));
+
+test("Local and Docker administration consume customer profiles without domain services", () => {
+  const { loadRuntime, activeModuleNames } = require("./helpers/configuration");
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const platform = loadRuntime("platformServer", environment);
+    const modules = activeModuleNames(platform);
+    for (const domain of ["apparel", "electronics", "telco"]) {
+      assert(modules.includes("agora." + domain));
+      assert(!modules.includes(domain), "Content discovery must not activate Commerce domain services");
+      const profile = platform.backofficeApplicationInitialization.profiles["agora" + domain];
+      assert.equal(profile.dataPackages[1].manifestModule, "agora." + domain);
+      const metadata = require(path.join(root, "modules", "agora." + domain, "package.json"));
+      assert.deepEqual(metadata.nodics.extends, [domain]);
+      assert(Number(metadata.index) > 1000, "Application properties retain customer-layer precedence");
+    }
+    assert.equal(platform.backofficeApplicationInitialization.profiles.frameworkdocs.enabled, true);
+    const online = loadRuntime("wcmsOnlineServer", environment);
+    assert(!activeModuleNames(online).some(name => name.startsWith("agora.")));
+  }
+});
 
 /** Visits string leaves without treating labels or array positions as media identities. */
 function visitStrings(value, inspect, key = "") {
@@ -58,15 +79,23 @@ for (const domain of ["apparel", "electronics", "telco"]) {
     );
 
   test(`${domain} has no unclaimed legacy release files`, () => {
+    const { frameworkRoot } = require("./helpers/configuration");
+    const releasePolicy = require(path.join(frameworkRoot, "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
+    const retainedRoots = releasePolicy.validateRetainedRoots(dataRoot, manifest);
     const declared = new Set(
       Object.values(manifest.sections).flatMap((section) =>
         Object.keys(section.files),
       ),
     );
+    for (const sourceRoot of retainedRoots) {
+      for (const file of Object.keys(manifest.retainedRoots[sourceRoot].files)) declared.add(file);
+    }
     const files = [];
+    const descriptors = new Set(Object.values(manifest.sections).map(section => path.join(dataRoot, section.sourceRoot, "release.descriptor.json")));
     const collect = (directory) => {
       for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
         const file = path.join(directory, entry.name);
+        if (entry.name === ".DS_Store" || descriptors.has(file)) continue;
         if (entry.isDirectory()) collect(file);
         else if (file !== path.join(dataRoot, "manifest.json"))
           files.push(path.relative(dataRoot, file));
@@ -76,7 +105,32 @@ for (const domain of ["apparel", "electronics", "telco"]) {
     assert.deepEqual(
       new Set(files),
       declared,
-      "Every source file must be claimed by a current release; old roots must not become implicit imports",
+      "Every source file must be claimed by a current release or validated historical retention",
+    );
+  });
+
+  test(`${domain} dashboard artwork references its existing application Media data`, () => {
+    const visual = require(path.join(root, "modules", "agora." + domain, "config", "properties.js")).backofficeApplicationVisual;
+    const section = manifest.sections[prefix + "ContentCatalog"];
+    const records = require(path.join(dataRoot, section.sourceRoot, "content", "records", prefix + "SharedMediaData.js"));
+    assert.deepEqual(Object.keys(visual).sort(), ["alt", "mediaCode"]);
+    const media = Object.values(records).find(item => item.code === visual.mediaCode);
+    assert(media, "Preview must resolve to this application's actual Media record");
+    assert(fs.existsSync(path.join(dataRoot, section.sourceRoot, media.asset.sourceFile)));
+  });
+
+  test(`${domain} BackOffice application profile is owned by its customer module`, () => {
+    const profileCode = "agora" + domain;
+    const properties = require(path.join(root, "modules", "agora." + domain, "config", "properties.js"));
+    const profile = properties.backofficeApplicationInitialization
+      .runtimeRoleProfiles.PLATFORM.profiles[profileCode];
+    assert.equal(profile.owner, "agora." + domain);
+    assert.equal(profile.presentation.visual, properties.backofficeApplicationVisual);
+    assert.equal(
+      kickoffCoreProperties.backofficeApplicationInitialization
+        .runtimeRoleProfiles.PLATFORM.profiles[profileCode],
+      undefined,
+      "Project core must not own application-specific profiles",
     );
   });
 

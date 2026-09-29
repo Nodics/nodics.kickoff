@@ -1,4 +1,12 @@
 module.exports = {
+  // Controlled local qualification; retained Media forbids physical cleanup.
+  "media": {
+    "publication": {
+      "versionProviderEnabled": true,
+      "runtimeRole": "ONLINE",
+      "source": { "connectionName": "cmsStaged" }
+    }
+  },
   "activeModules": {
     "groups": [],
     "modules": [

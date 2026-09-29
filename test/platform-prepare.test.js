@@ -11,4 +11,6 @@
 
 'use strict';
 
+// Preserve this path for external callers whose usage cannot be observed here.
+// The historical no-argument invocation ran every scenario; retain that behavior.
 require('./runtime-prepare.test');

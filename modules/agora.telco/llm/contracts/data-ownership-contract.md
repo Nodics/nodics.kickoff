@@ -1,6 +1,6 @@
 # Agora Telco data ownership
 
-This customer/reference module owns its application sample data. Commerce and
+This customer application module owns its application sample data. Commerce and
 WCMS schemas and publication operations remain framework-owned.
 
 - Resolve active content and Commerce roots from their named sections in
@@ -26,4 +26,4 @@ WCMS schemas and publication operations remain framework-owned.
   through the owning Media/WCMS lifecycle before any live deletion.
 
 Run `npm run test:data-ownership` and `npm run test:multi-domain` from the Kickoff
-root. The normal `npm test` gate also includes the ownership/reference checks.
+root. Application data and profiles remain customer-owned.

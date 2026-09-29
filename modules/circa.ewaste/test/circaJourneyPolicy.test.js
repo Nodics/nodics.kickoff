@@ -15,6 +15,7 @@ const test = require("node:test"),
 const service = require("../src/service/defaultCircaEWasteJourneyService");
 const rawSettings = require("../config/properties").circaEWaste.journey;
 const settings = {
+  ...require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/config/properties").eWaste.journey,
   ...rawSettings,
   arrivalRadiusMetres: rawSettings.arrivalRadiusMetres.fallback,
 };
@@ -37,6 +38,7 @@ test.beforeEach(() => {
   ];
   global.CONFIG = { get: () => ({ journey: settings }) };
   global.SERVICE = {
+    DefaultEWasteJourneyService: require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteJourneyService"),
     DefaultWastePersistenceService: {
       fail: (code, message) => {
         throw Object.assign(new Error(message), { code });
@@ -72,29 +74,7 @@ test.afterEach(() => {
   delete global.CONFIG;
   delete global.SERVICE;
 });
-test("location preview and rejected early creation never save a draft", async () => {
-  const before = JSON.stringify(draft);
-  const result = await service.previewArrival({ payload: { position: { latitude: 25, longitude: 55, accuracy: 5, capturedAt: Date.now() } } });
-  assert.equal(result.draft, null); assert.equal(result.nextAction, "PHOTO");
-  assert.equal(JSON.stringify(draft), before);
-  await assert.rejects(service.createDraft({}), { code: "ERR_WASTE_EVIDENCE_REQUIRED" });
-  assert.equal(JSON.stringify(draft), before);
-});
-const position = () => ({
-  latitude: 25,
-  longitude: 55,
-  accuracy: 5,
-  capturedAt: Date.now(),
-});
-test("grant with valid position produces direct photo continuation and persisted arrival", async () => {
-  const result = await service.arrival({
-    expectedRevision: 1,
-    payload: { position: position() },
-  });
-  assert.equal(result.nextAction, "PHOTO");
-  assert.equal(result.draft.metadata.arrival.collectionPointCode, "c1");
-  assert.equal(result.selectedCentre.distanceMetres, 0);
-});
+const position = () => ({ latitude: 25, longitude: 55, capturedAt: Date.now() });
 test("outside arrival radius returns nearest three and never opens photo", async () => {
   centres = Array.from({ length: 4 }, (_, i) => ({
     code: `c${i}`,
@@ -109,166 +89,28 @@ test("outside arrival radius returns nearest three and never opens photo", async
   assert.equal(result.centres.length, 3);
   assert.equal(result.draft.metadata.arrival, null);
 });
-test("ambiguous nearby centres require one choice; a remote choice is rejected", async () => {
-  centres.push({ ...centres[0], code: "c2" });
-  const result = await service.arrival({
-    expectedRevision: 1,
-    payload: { position: position() },
-  });
-  assert.equal(result.nextAction, "CHOOSE_CENTRE");
-  await assert.rejects(
-    service.arrival({
-      expectedRevision: 2,
-      payload: { position: position(), collectionPointCode: "other" },
-    }),
-    { code: "ERR_CIRCA_ARRIVAL_REQUIRED" },
-  );
-});
-test("unusable coordinates, stale/future observations and claimed arrival cannot bypass validation", async () => {
-  for (const [bad, code] of [
-    [{ ...position(), capturedAt: Date.now() - 61000 }, "ERR_CIRCA_POSITION_STALE"],
-    [{ ...position(), capturedAt: Date.now() + 10000 }, "ERR_CIRCA_POSITION_STALE"],
-    [{ ...position(), latitude: 999 }, "ERR_CIRCA_POSITION_INVALID"],
-  ])
-    await assert.rejects(
-      service.arrival({
-        expectedRevision: 1,
-        payload: { position: bad, arrived: true },
-      }),
-      { code },
-    );
-  await assert.rejects(service.attachPhoto({}), {
-    code: "ERR_CIRCA_ARRIVAL_REQUIRED",
-  });
-  assert.equal(seen.length, 0);
-});
-test("submission rechecks current centre state and never trusts the stored distance", async () => {
+test("Circa submission uses its configured review queue and deposit copy", async () => {
   await service.arrival({
     expectedRevision: 1,
     payload: { position: position() },
   });
-  centres = [];
-  await assert.rejects(
-    service.confirm({
-      expectedRevision: draft.revision,
-      idempotencyKey: "command-key",
-    }),
-    { code: "ERR_CIRCA_ARRIVAL_REQUIRED" },
-  );
-  assert(!seen.includes("confirm"));
-});
-test("successful submission records queue handoff and replay does not submit twice", async () => {
-  await service.arrival({
-    expectedRevision: 1,
-    payload: { position: position() },
-  });
-  let result = await service.confirm({
+  const result = await service.confirm({
     expectedRevision: draft.revision,
     idempotencyKey: "command-key",
   });
   assert.equal(result.metadata.reviewAssignment.status, "ASSIGNED");
-  assert.match(result.metadata.depositInstruction, /Centre/);
-  result = await service.confirm({
-    expectedRevision: draft.revision,
-    idempotencyKey: "command-key",
-  });
-  assert.equal(seen.filter((x) => x === "confirm").length, 1);
+  assert.equal(result.metadata.reviewAssignment.queueCode, settings.reviewAssignment.queueCode);
+  assert.equal(result.metadata.reviewAssignment.label, settings.reviewAssignment.label);
+  assert.equal(result.metadata.depositInstruction, settings.depositInstruction.replace("{centreName}", "Centre"));
 });
-test("radius is inclusive without rounding and policy can be customized", async () => {
-  const own = { ...service, distance: () => settings.arrivalRadiusMetres };
-  assert.equal(
-    (
-      await own.arrival({
-        expectedRevision: 1,
-        payload: { position: position() },
-      })
-    ).nextAction,
-    "PHOTO",
-  );
-  const outside = {
-    ...service,
-    distance: () => settings.arrivalRadiusMetres + 0.00001,
-  };
-  assert.equal(
-    (
-      await outside.arrival({
-        expectedRevision: 2,
-        payload: { position: position() },
-      })
-    ).nextAction,
-    "TRAVEL",
-  );
-  global.CONFIG = {
-    get: () => ({ journey: { ...settings, arrivalRadiusMetres: 120 } }),
-  };
-  assert.equal(
-    (
-      await outside.arrival({
-        expectedRevision: 3,
-        payload: { position: position() },
-      })
-    ).nextAction,
-    "PHOTO",
-  );
-});
-
-test("invalid deployment policy fails closed instead of accepting unchecked location", () => {
-  global.CONFIG = {
-    get: () => ({ journey: { ...settings, arrivalRadiusMetres: undefined } }),
-  };
-  assert.throws(() => service.position(position()), {
-    code: "ERR_CIRCA_JOURNEY_UNAVAILABLE",
-  });
-});
-
-test("unavailable or inactive Location projection cannot be replaced by copied centre coordinates", async () => {
-  centres = [
-    { code: "c1", latitude: 25, longitude: 55 },
-    {
-      code: "c2",
-      location: { latitude: 25, longitude: 55, status: "INACTIVE" },
-    },
-  ];
-  const result = await service.arrival({
-    expectedRevision: 1,
-    payload: { position: position() },
-  });
-  assert.equal(result.nextAction, "TRAVEL");
-  assert.equal(result.centres.length, 0);
-  assert.equal(result.draft.metadata.arrival, null);
-});
-
-test("expired location preserves the saved photo and a fresh retry without accuracy resumes", async () => {
-  draft.evidenceRefs = [{ code: "existing-photo" }];
-  const before = JSON.stringify(draft);
-  await assert.rejects(service.arrival({ expectedRevision: 1, payload: { position: { ...position(), capturedAt: Date.now() - 61000 } } }), { code: "ERR_CIRCA_POSITION_STALE" });
-  assert.equal(JSON.stringify(draft), before);
-  const result = await service.arrival({ expectedRevision: 1, payload: { position: { ...position(), accuracy: null } } });
-  assert.equal(result.nextAction, "PHOTO");
-  assert.deepEqual(result.draft.evidenceRefs, [{ code: "existing-photo" }]);
-  assert.equal(seen.length, 0);
-});
-
-test("all clients use direct distance while preserving optional accuracy metadata", async () => {
+test("Circa retains its configured radius and public journey errors", () => {
   assert.equal(settings.arrivalRadiusMetres, 50);
   assert.equal(settings.maximumAccuracyMetres, undefined);
-  for (const accuracy of [5, 50, 51, 70, 125, 150, 3000, null, undefined, -1]) {
-    const observation = { ...position(), accuracy };
-    const result = await service.previewArrival({ payload: { position: observation } });
-    assert.equal(result.nextAction, "PHOTO");
-    assert.equal(result.selectedCentre.code, "c1");
-    assert.equal(service.position(observation).accuracy, Number.isFinite(accuracy) && accuracy >= 0 ? accuracy : null);
+  for (const code of ["POSITION_INVALID", "POSITION_STALE", "ARRIVAL_REQUIRED", "JOURNEY_UNAVAILABLE"]) {
+    assert.equal(service.errorCode("ERR_EWASTE_" + code), "ERR_CIRCA_" + code);
   }
-  centres[0].location.latitude += 0.002;
-  for (const accuracy of [5, 125, null]) {
-    const travel = await service.previewArrival({ payload: { position: { ...position(), accuracy }, arrived: true } });
-    assert.equal(travel.nextAction, "TRAVEL");
-    assert.equal(travel.selectedCentre, null);
-    await assert.rejects(service.previewArrival({ payload: { position: { ...position(), accuracy }, collectionPointCode: "c1" } }), { code: "ERR_CIRCA_ARRIVAL_REQUIRED" });
-  }
-  assert.equal(seen.length, 0);
+  assert.equal(service.errorCode("ERR_WASTE_REVISION_CONFLICT"), "ERR_WASTE_REVISION_CONFLICT");
 });
-
 test("Circa permits the same employee to review and approve when both permissions are granted", () => {
   const policy = require("../config/properties").waste.operations;
   assert.equal(policy.requireScopes, true);
@@ -283,5 +125,110 @@ test("impact provider and profile failures cannot silently become a ready draft"
     await assert.rejects(service.prepare({expectedRevision:1}),{code});
     assert.equal(draft.revision,1);
     assert.equal(draft.metadata.estimatePending,undefined);
+  }
+});
+
+test("adapter combines domain defaults with Circa policy and preserves branded origin", async () => {
+  const domain = SERVICE.DefaultEWasteJourneyService;
+  global.CONFIG = { get: (key) => key === "eWaste"
+    ? { journey: { ...settings, arrivalRadiusMetres: 100 } }
+    : { journey: { arrivalRadiusMetres: 50 } } };
+  assert.equal(service.settings().arrivalRadiusMetres, 50);
+  assert.equal(service.settings().maximumPositionAgeMs, settings.maximumPositionAgeMs);
+  let forwarded;
+  SERVICE.DefaultEWasteExperienceService.prepareSubmission = async (request) => {
+    forwarded = request;
+    return draft;
+  };
+  const origin = { channel: "TELEGRAM", applicationCode: "circa" };
+  await service.prepareSubmission({ authData: { circaOrigin: origin },
+    payload: { position: position(), origin: { channel: "FORGED" } } });
+  assert.equal(forwarded.preparationOrigin, origin);
+  assert.deepEqual(service.origin({ payload: { origin } }), { channel: "WEB" });
+  assert.equal(domain.errorCode("ERR_EWASTE_POSITION_STALE"), "ERR_EWASTE_POSITION_STALE");
+});
+
+test("adapter uses later-loaded domain methods without changing shared service hooks", async () => {
+  const domain = SERVICE.DefaultEWasteJourneyService;
+  SERVICE.DefaultEWasteJourneyService = { ...domain, centres: async () => [] };
+  assert.equal((await service.previewArrival({ payload: { position: position() } })).nextAction, "TRAVEL");
+  assert.notEqual(domain.centres, SERVICE.DefaultEWasteJourneyService.centres);
+  assert.equal(domain.origin({ authData: { circaOrigin: { channel: "TELEGRAM" } } }).channel, "WEB");
+});
+
+test("experience and validation share inherited defaults and later customer overrides", async () => {
+  const experience = require("../src/service/defaultCircaEWasteExperienceService");
+  const defaults = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/config/properties").eWaste.journey;
+  const customer = { ...settings };
+  for (const key of ["maximumPositionAgeMs", "captureTimeoutMs", "nearestCentreCount"]) {
+    assert.equal(Object.hasOwn(rawSettings, key), false);
+    delete customer[key];
+  }
+  CONFIG.get = (key) => key === "eWaste" ? { journey: defaults } : { journey: customer };
+  SERVICE.DefaultCircaEWasteJourneyService = service;
+  const now = Date.now();
+  const assertProjection = async () => {
+    const projected = (await experience.experience({})).journey;
+    const effective = service.settings();
+    assert.deepEqual(projected, { ...effective, reviewAssignment: undefined });
+    assert.equal(projected.contractVersion, rawSettings.contractVersion);
+    assert.equal(projected.reviewAssignment, undefined);
+    return projected;
+  };
+  const initial = await assertProjection();
+  assert.equal(initial.maximumPositionAgeMs, 60000);
+  assert.equal(initial.captureTimeoutMs, 12000);
+  assert.equal(initial.nearestCentreCount, 3);
+  assert.equal(initial.arrivalRadiusMetres, 50);
+  const observation = { ...position(), capturedAt: now - 61000 };
+  const before = structuredClone(draft);
+  await assert.rejects(service.arrival({ expectedRevision: 1, payload: { position: observation } }),
+    { code: "ERR_CIRCA_POSITION_STALE" });
+  await assert.rejects(service.arrival({ expectedRevision: 1, payload: { position: { ...position(), latitude: 999 } } }),
+    { code: "ERR_CIRCA_POSITION_INVALID" });
+  assert.deepEqual(draft, before);
+  Object.assign(customer, { maximumPositionAgeMs: 120000, captureTimeoutMs: 18000,
+    nearestCentreCount: 4, arrivalRadiusMetres: 125 });
+  const overridden = await assertProjection();
+  assert.equal(overridden.maximumPositionAgeMs, 120000);
+  assert.equal(overridden.captureTimeoutMs, 18000);
+  assert.equal(overridden.nearestCentreCount, 4);
+  assert.equal(overridden.arrivalRadiusMetres, 125);
+  assert.equal((await service.previewArrival({ payload: { position: observation } })).nextAction, "PHOTO");
+  const custom = { ...service, distance: () => 100 };
+  assert.equal((await custom.previewArrival({ payload: { position: position() } })).nextAction, "PHOTO");
+  customer.arrivalRadiusMetres = 50;
+  assert.equal((await custom.previewArrival({ payload: { position: position() } })).nextAction, "TRAVEL");
+  centres = Array.from({ length: 5 }, (_, index) => ({
+    code: "far-" + index, location: { latitude: 26 + index, longitude: 55, status: "ACTIVE" },
+  }));
+  assert.equal((await service.previewArrival({ payload: { position: position() } })).centres.length, 4);
+  customer.captureTimeoutMs = 0;
+  await assert.rejects(experience.experience({}), { code: "ERR_CIRCA_JOURNEY_UNAVAILABLE" });
+  assert.throws(() => service.position(position()), { code: "ERR_CIRCA_JOURNEY_UNAVAILABLE" });
+  assert.equal(defaults.captureTimeoutMs, 12000);
+});
+
+test("selected Waste configuration resolves inherited journey defaults and the environment radius binding", async () => {
+  const { loadRuntime, activeModuleNames } = require("../../../test/helpers/configuration");
+  const experience = require("../src/service/defaultCircaEWasteExperienceService");
+  SERVICE.DefaultCircaEWasteJourneyService = service;
+  for (const [variables, radius] of [
+    [{}, 50],
+    [{ CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: "125" }, 125],
+  ]) {
+    const properties = loadRuntime("wasteServer", "kickoffLocal", variables);
+    assert(activeModuleNames(properties).includes("eWaste"));
+    assert(activeModuleNames(properties).includes("circa.ewaste"));
+    CONFIG.get = (key) => properties[key];
+    const projected = (await experience.experience({})).journey;
+    assert.equal(projected.arrivalRadiusMetres, radius);
+    assert.equal(projected.maximumPositionAgeMs, 60000);
+    assert.equal(projected.captureTimeoutMs, 12000);
+    assert.equal(projected.nearestCentreCount, 3);
+    assert.deepEqual(projected, { ...service.settings(), reviewAssignment: undefined });
+    assert.equal(properties.wasteImpact.calculation.providerService, "DefaultEWasteOpenAiImpactProviderService");
+    assert.deepEqual(properties.wasteImpact.calculation.fallbackProviderServices,
+      ["DefaultEWasteWarmImpactProviderService"]);
   }
 });

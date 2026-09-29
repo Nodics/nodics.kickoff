@@ -13,6 +13,39 @@
 
 /** @module circa.ewaste/config/properties @description Owns Circa application identity, presentation and illustrative deployment policies over eWaste. @layer config @owner circa.ewaste @override Later project layers replace these sample values. */
 module.exports = {
+  "tooling": {
+    "acceptance": {
+      "wasteManagement": {
+        "fixture": {
+          "dataModule": "circa.ewaste",
+          "ruleRecordsPath": "data/core-v002/waste-policy/records/eWasteAcceptanceRuleData.js",
+          "impactProfileRecordsPath": "data/core-v002/waste-policy/records/eWasteImpactProfileData.js",
+          "impactProfileCode": "CIRCA_VERIFIED_DEVICE_RECOVERY",
+          "runId": "circa-waste-acceptance-001",
+          "submissionCode": "CIRCA_ACCEPTANCE_SUB_001",
+          "resultCode": "CIRCA_ACCEPTANCE_IMPACT_001",
+          "requiresReceipt": true,
+          "collectionPoint": {
+            "code": "CIRCA_ACCEPTANCE_CP_001",
+            "collectionPointType": "E_WASTE_DROP_OFF"
+          },
+          "facts": {
+            "familyCode": "ELECTRONICS",
+            "categoryCode": "SMART_HOME_DEVICE",
+            "itemTypeCode": "UNKNOWN_ELECTRONIC_ITEM",
+            "materialTypeCodes": ["CIRCUIT_BOARD", "COPPER", "PLASTIC_CASING"],
+            "conditionGrade": "RECYCLABLE",
+            "quantity": 2,
+            "weight": "3.5"
+          },
+          "expectedMetrics": [
+            { "metricCode": "EWASTE_WEIGHT_KG", "value": "3.5" },
+            { "metricCode": "RECOVERABLE_MATERIAL_ESTIMATE_KG", "value": "2.52" }
+          ]
+        }
+      }
+    }
+  },
   "data": {
     "dataReleases": {
       "runtimeRoleProfiles": {
@@ -118,12 +151,6 @@ module.exports = {
     }
   },
   "circaEWaste": {
-    "catalogue": {
-      "pageSize": 12,
-      "maximumPageSize": 48,
-      "discoveryBatchSize": 100,
-      "maximumProducts": 2000
-    },
     "journey": {
       "contractVersion": 2,
       "arrivalRadiusMetres": {
@@ -132,9 +159,6 @@ module.exports = {
         "type": "number",
         "fallback": 50
       },
-      "maximumPositionAgeMs": 60000,
-      "captureTimeoutMs": 12000,
-      "nearestCentreCount": 3,
       "conversationMaximumCharacters": 1500,
       "reviewAssignment": {
         "queueCode": "CIRCA_EWASTE_REVIEW",
@@ -166,6 +190,10 @@ module.exports = {
       "displayName": "Nodics Circa eWaste",
       "frontendModuleName": "nodics.circa.eWaste",
       "projectModuleName": "circa.ewaste",
+      "visual": {
+        "mediaCode": "circa-hero-circular-value",
+        "alt": "Circa circular value"
+      },
       "requiredScenarioModules": [
         "eWaste",
         "wasteRecycling"
@@ -229,8 +257,7 @@ module.exports = {
   },
   "digitalCore": {
     "merchantRedemption": {
-      "enabled": true,
-      "providerService": "DefaultDigitalCommerceMerchantScreenProviderService"
+      "enabled": true
     }
   },
   "profileExternalIdentity": {
@@ -317,8 +344,6 @@ module.exports = {
   "bidding": {
     "enabled": true,
     "policyVersion": "circa-digital-bids-v1",
-    "holdTiming": "CHECKOUT_AFTER_ACCEPTANCE",
-    "validitySeconds": 86400,
     "amountScale": 0,
     "maximumAmount": "100000",
     "stores": {
@@ -356,6 +381,10 @@ module.exports = {
         "baselineCode": "circa",
         "presentation": {
           "title": "Circa eWaste",
+          "visual": {
+            "mediaCode": "circa-hero-circular-value",
+            "alt": "Circa circular value"
+          },
           "kind": "PROJECT",
           "category": "application",
           "order": 240,
@@ -488,8 +517,8 @@ module.exports = {
             },
             {
               "code": "circa.ewaste:waste",
-              "kind": "Collection centres and submission reference data",
-              "required": true,
+              "kind": "Optional fresh-environment sample transactions",
+              "required": false,
               "trigger": "USER",
               "dataType": "sample",
               "targetServer": "wasteServer",
@@ -576,6 +605,9 @@ module.exports = {
       },
       "timeoutMs": 90000,
       "failureMode": "RESULT",
+      // CFG-08 KEEP_COMPATIBILITY_PIN: illustrative policy for explicit later-layer
+      // mock opt-in only; this subtree never activates a provider. Review removal
+      // or relocation once external mock selections and their provenance are qualified.
       "mock": {
         "defaultWeightsKg": {
           "default": 1,
@@ -655,11 +687,19 @@ module.exports = {
       "orderCodePrefix": "CIRCA_ORDER_",
       "refundsEnabled": true
     },
-    "assetCreationPolicyCode": "EWASTE_APPROVED_ASSET_STANDARD",
     "applicationCode": "CIRCA_EWASTE",
     "rewardValuationService": "DefaultCircaEWasteRewardValuationService",
     "conversation": {
       "rewardGuidance": "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor."
+    },
+    "runtimeRoleProfiles": {
+      "WASTE": {
+        "conversation": {
+          "project": "circa.ewaste",
+          "adapter": "ollama",
+          "profile": "customerGuidance"
+        }
+      }
     }
   },
   "apiExposure": {
@@ -675,6 +715,12 @@ module.exports = {
         "knowledge": {
           "ingestion": {
             "enabled": true,
+            "startup": {
+              "sourceProject": "circa.ewaste",
+              "serviceId": "circa-customer-knowledge-indexer",
+              "failOnRejectedFiles": true,
+              "rejectionMessage": "CIRCA_CUSTOMER_KNOWLEDGE_REJECTED"
+            },
             "indexTenant": "default"
           },
           "retrieval": {
@@ -776,6 +822,17 @@ module.exports = {
               "structuredOutput": true
             }
           }
+        }
+      }
+    }
+  },
+  "wasteSubmission": {
+    "runtimeRoleProfiles": {
+      "WASTE": {
+        "metadataSuggestion": {
+          "enabled": true,
+          "adapter": "openai",
+          "profile": "eWastePhotoMetadata"
         }
       }
     }

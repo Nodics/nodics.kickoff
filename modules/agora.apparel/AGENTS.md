@@ -1,5 +1,16 @@
 # agora.apparel Agents
 
+Commerce successors must use the nTooling forward-release planner and nImport's
+`retainedRoots` contract. Preserve historical source trees and release identity;
+fix the search binding only in the successor. See the data ownership contract and
+`test/apparelForwardRelease.test.js`.
+
+This is a customer application in nodics.kickoff, consuming the apparel accelerator.
+Keep application identity, properties, BackOffice profiles, media and data here.
+Sample/reference status and content-pack metadata do not transfer ownership to
+nodics.ai. Extract only separately reviewed reusable domain behavior. Apply the
+nSetup customer-project-mode contract and its application ownership table.
+
 Follow the root Nodics AI agent contract before changing this boundary:
 
 - root `README.md` explains the human/documentation route.

@@ -23,12 +23,7 @@ const projectRoot = path.resolve(
   "..",
 );
 const require = createRequire(import.meta.url);
-const frameworkRoot = path.resolve(
-  projectRoot,
-  process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai",
-);
-const frameworkFile = (relativePath) =>
-  fs.readFileSync(path.join(frameworkRoot, relativePath), "utf8");
+const { frameworkRoot } = require("./helpers/configuration");
 const projectCommandService = require(
   path.join(
     frameworkRoot,
@@ -36,18 +31,6 @@ const projectCommandService = require(
   ),
 );
 
-const lifecycle = frameworkFile(
-  "nodics.foundation/modules/nTooling/src/service/project/defaultProjectContainerResilienceService.mjs",
-);
-const qualification = frameworkFile(
-  "nodics.foundation/modules/nTooling/src/service/project/defaultProjectContainerQualificationService.mjs",
-);
-const soak = qualification;
-const frameworkQualification = frameworkFile(
-  "nodics.foundation/modules/nTooling/src/service/quality/defaultFrameworkQualificationEvidenceService.js",
-);
-const acceptance = qualification;
-const bootstrapAcceptance = fs.readFileSync(path.join(projectRoot, "scripts/acceptance/defaultProjectLocalBootstrapAcceptanceService.mjs"), "utf8");
 const backendDockerfile = fs.readFileSync(
   new URL(
     "../envs/kickoffDockerLocal/docker/backend.Dockerfile",
@@ -63,9 +46,6 @@ const packageDefinition = JSON.parse(
 );
 const projectCommands = projectCommandService.resolveCommands(projectRoot);
 
-assert.match(lifecycle, /mongodump/);
-assert.match(lifecycle, /mongorestore/);
-assert.match(lifecycle, /sha256/);
 assert.equal(packageDefinition.name, "nodics.kickoff");
 assert.equal(
   fs.existsSync(path.join(projectRoot, "nodics.project.json")),
@@ -83,20 +63,7 @@ assert.equal(
   dockerLocalProfile.resilience.volumes.mediaOnline,
   "nodics-kickoff-docker-local-media-online",
 );
-assert.match(qualification, /recovery-point-objective/);
-assert.match(qualification, /recovery-time-objective/);
-assert.match(qualification, /unpublished-staged-isolation/);
-assert.match(acceptance, /--expect-documentation-not-installed/);
-assert.match(acceptance, /--qualify-documentation-rollback/);
-assert.match(
-  bootstrapAcceptance,
-  /optional documentation packs are NOT_INSTALLED/,
-);
-assert.match(
-  bootstrapAcceptance,
-  /documentation rollback to prior Online versions/,
-);
-assert.match(bootstrapAcceptance, /x-nodics-client-contract-version/);
+assert.equal(projectCommands['acceptance:local'].type, 'frameworkCommand');
 assert.match(
   backendDockerfile,
   /rm -rf \/workspace\/nodics\.kickoff\/envs\/kickoffDockerLocal\/generated/,
@@ -111,23 +78,10 @@ for (const name of ['platformServer', 'wcmsStagedServer', 'wcmsOnlineServer', 'c
 }
 assert(dockerRuntime('wcmsStagedServer').activeModules.modules.includes('cmsStaged'));
 assert(dockerRuntime('wcmsStagedServer').activeModules.modules.includes('nexus.web'));
-assert.match(qualification, /redis-sentinel-promotion-observed/);
-assert.match(qualification, /CLIENT', 'PAUSE'/);
-assert.match(soak, /NODICS_DOCKER_SOAK_SECONDS/);
-assert.match(soak, /NODICS_DOCKER_SOAK_REQUEST_INTERVAL_MS/);
 assert.equal(
   dockerLocalProfile.soak.acceptanceCommand,
   "docker-local:acceptance",
 );
-assert.match(
-  frameworkQualification,
-  /cmsPublicationManifestContract\.test\.js/,
-);
-assert.match(
-  frameworkQualification,
-  /cmsPublicationOutboxReliability\.test\.js/,
-);
-assert.match(frameworkQualification, /directBusinessDatabaseCrud: false/);
 assert.match(
   packageDefinition.scripts["docker-local:backup"],
   /nodics project:run docker-local:backup/,

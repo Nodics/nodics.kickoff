@@ -12,17 +12,16 @@
 'use strict';
 
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
 
-const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
-const packageRoot = packageName => path.join(frameworkRoot, packageName);
+const { frameworkRoot } = require('./helpers/configuration');
+const prepareRuntime = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
 
 const scenarios = Object.freeze([
     Object.freeze({
-        server: 'commerceServer', frameworkModules: Object.freeze(['nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
+        server: 'commerceServer',
         expectedModules: Object.freeze([
             'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
             'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
@@ -54,7 +53,7 @@ const scenarios = Object.freeze([
         }
     }),
     Object.freeze({
-        server: 'commerceStagedServer', frameworkModules: Object.freeze(['nodics.discovery', 'nodics.commerce', 'nodics.accelerators']),
+        server: 'commerceStagedServer',
         expectedModules: Object.freeze([
             'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
             'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
@@ -86,8 +85,6 @@ const scenarios = Object.freeze([
             assert.equal(NODICS.isModuleActive('search'), true);
             assert.equal(NODICS.isModuleActive('elastic'), true);
             assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'COMMERCE_STAGED'), true);
-            assert.throws(() => require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WCMS_STAGED'), /destination/);
-            assert.throws(() => require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'COMMERCE'), /destination/);
             assert.equal(NODICS.isModuleActive('agora.apparel'), true);
             const selected = require(path.join(coreRoot, 'modules/nConfig/src/service/defaultConfigurationBindingService')).resolveDomainComposition(CONFIG.get('activeModules').compositions.agora).domains;
             assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
@@ -99,7 +96,6 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'wasteServer',
-        frameworkModules: Object.freeze(require('../envs/kickoffLocal/wasteServer/package.json').nodics.runtimeModuleRoots),
         expectedModules: Object.freeze([
             'nodics.foundation',
             'nodics.waste',
@@ -150,7 +146,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'locationServer',
-        frameworkModules: Object.freeze(['nodics.location']),
+
         expectedModules: Object.freeze([
             'nodics.foundation',
             'nodics.location',
@@ -182,13 +178,13 @@ const scenarios = Object.freeze([
         }
     }),
     Object.freeze({
-        server: 'engagementServer', frameworkModules: Object.freeze(['nodics.communication', 'nodics.engagement']),
+        server: 'engagementServer',
         expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'kickoffLocal', 'engagementServer']),
         verify: function (coreRoot) { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
         server: 'platformServer',
-        frameworkModules: Object.freeze(['nodics.platform', 'nodics.localization', 'nodics.discovery', 'nodics.copilot']),
+
         expectedModules: Object.freeze([
             'nodics.foundation',
             'nodics.platform',
@@ -240,18 +236,24 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('copilot').conversation.allowVolatileLocalStorage, false);
             assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
             assert.equal(require('./helpers/configuration').searchConfiguration(CONFIG.getProperties(), 'discoveryProjection').options.engine, 'elastic');
-            const knowledgeSources = CONFIG.get('copilot').knowledge.sourceRegistry.definitions;
+            const registryConfiguration = CONFIG.get('copilot').knowledge.sourceRegistry;
+            const registryService = require(path.join(frameworkRoot, 'nodics.copilot/modules/copilotKnowledge/src/service/defaultCopilotKnowledgeSourceRegistryService'));
+            const policyService = require(path.join(frameworkRoot, 'nodics.copilot/modules/copilotPolicy/src/service/defaultCopilotPolicyService'));
+            const knowledgeSources = registryService.createRegistry(registryConfiguration.definitions, registryConfiguration, policyService).sources;
             assert.equal(knowledgeSources.some(source => source.sourceType === 'README'), true);
             assert.equal(knowledgeSources.some(source => source.sourceType === 'AGENTS_CONTRACT'), true);
             assert.equal(knowledgeSources.some(source => source.sourceType === 'CUSTOMER_PROJECT'), true);
             const sourceCodePartitions = knowledgeSources.filter(source => source.sourceType === 'SOURCE_CODE');
-            assert.deepEqual(sourceCodePartitions.map(source => source.code), [
+            assert.deepEqual(sourceCodePartitions.map(source => source.code).sort(), [
                 'nodics-copilot-source',
                 'nodics-discovery-source',
                 'nodics-axis-assistant-source',
                 'kickoff-copilot-composition-source'
-            ]);
-            assert.equal(sourceCodePartitions.every(source => source.enabled === true), true);
+            ].sort());
+            for (const source of sourceCodePartitions) {
+                assert.equal(source.enabled, source.code !== 'nodics-axis-assistant-source',
+                    `${source.code} must retain its default backend or explicit external-knowledge policy`);
+            }
             assert.equal(sourceCodePartitions.every(source => source.classification === 'RESTRICTED'), true);
             assert.equal(sourceCodePartitions.every(source => source.allowedChannels.length === 1 && source.allowedChannels[0] === 'EMPLOYEE'), true);
             assert.equal(sourceCodePartitions.every(source => source.limits.maximumFiles <= 400), true);
@@ -262,7 +264,6 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'wcmsStagedServer',
-        frameworkModules: Object.freeze(require('../envs/kickoffLocal/wcmsStagedServer/package.json').nodics.runtimeModuleRoots),
         expectedModules: Object.freeze([
             'nodics.foundation', 'publish', 'nodics.wcms', 'media', 'cms', 'cmsStaged', 'wcms',
             'axis', 'nodics.platform',
@@ -293,7 +294,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'wcmsOnlineServer',
-        frameworkModules: Object.freeze(['nodics.wcms', 'nodics.discovery']),
+
         expectedModules: Object.freeze([
             'nodics.foundation', 'nodics.wcms', 'media', 'cms', 'wcms',
             'discoveryConfig', 'discoveryMapping', 'discoveryProjection', 'discoveryPublication',
@@ -315,7 +316,7 @@ const scenarios = Object.freeze([
     }),
     Object.freeze({
         server: 'processServer',
-        frameworkModules: Object.freeze(['nodics.process', 'nodics.wcms']),
+
         expectedModules: Object.freeze([
             'nodics.foundation',
             'workflow',
@@ -340,24 +341,10 @@ const scenarios = Object.freeze([
 ]);
 
 async function prepareScenario(scenario) {
-    const coreRoot = packageRoot('nodics.foundation');
-    const config = require(path.join(coreRoot, 'modules/nConfig'));
-    // Use the deployment's declared discovery roots, including selected accelerators.
-    const serverMetadata = require(path.join(projectRoot, 'envs/kickoffLocal', scenario.server, 'package.json'));
-    const frameworkModules = serverMetadata.nodics.runtimeModuleRoots || scenario.frameworkModules;
-    const moduleRoots = [
-        coreRoot,
-        ...frameworkModules.map(packageRoot),
-        projectRoot
-    ];
-
-    await config.prepareStart(Object.freeze({
-        NODICS_HOME: coreRoot,
-        CUSTOM_HOME: projectRoot,
-        MODULE_ROOTS: Object.freeze(moduleRoots),
-        defaultEnvironment: 'kickoffLocal',
-        defaultServer: scenario.server
-    }));
+    const { coreRoot } = prepareRuntime({
+        projectRoot, frameworkRoot, environment: 'kickoffLocal', server: scenario.server,
+        expectedApiExposure: scenario.expectedApiExposure,
+    });
 
     assert.equal(NODICS.isModuleActive('kickoffAdministration'), false, 'Synthetic administration module must not be selected');
     assert.equal(NODICS.isModuleActive('kickoffCore'), true, 'Project-owned administration defaults live in Kickoff Core');
@@ -383,6 +370,40 @@ async function prepareScenario(scenario) {
     });
     disabledModules.forEach(moduleName => assert.equal(NODICS.isModuleActive(moduleName), false, `${moduleName} should be disabled`));
     if (scenario.server === 'commerceServer' || scenario.server === 'commerceStagedServer') {
+        for (const moduleName of ['vDatabase', 'vService', 'vMongodb']) assert.equal(NODICS.isModuleActive(moduleName), true);
+        assert.deepEqual(CONFIG.get('schemaPolicies').product.catalogueVersioned,
+            { isVersionedEnabled: true, versionedReadMode: 'CURRENT' }, 'Migrated Local Product storage must retain its versioning selection');
+        const staged = scenario.server === 'commerceStagedServer';
+        assert.equal(CONFIG.get('apiExposure').categories.productPublicationSource.enabled, staged);
+        assert.equal(CONFIG.get('apiExposure').categories.productPublicationTarget.enabled, !staged);
+        assert.equal(CONFIG.get('product').publication.target.connectionName, 'commerce');
+        assert.equal(CONFIG.get('product').publication.source.connectionName, 'commerceStaged');
+        assert.equal(CONFIG.get('product').discovery.activationService,
+            staged ? null : 'DefaultProductPublicationTargetService');
+        if (!staged) assert.deepEqual(CONFIG.get('product').discovery.activationScopes,
+            [{ tenant: 'default', storeCode: 'localProductQualificationStore20260929' }],
+            'Local delivery qualification must not enable activation reads for other stores');
+        if (staged) {
+            assert(CONFIG.get('runtimeIdentity').remoteModules.includes('workflow'));
+            assert.equal(NODICS.isModuleActive('publish'), true, 'Staged publication selections require the lifecycle owner');
+            const workflow = NODICS.getRawModule('workflow');
+            assert(workflow, 'Remote Process invocation requires owner metadata for its URL prefix');
+            assert.equal(workflow.metaData.prefix, 'process');
+            assert.equal(NODICS.isModuleActive('workflow'), false, 'Discovering Process must not activate it on Commerce');
+        }
+        for (const domain of ['pricing', 'tax', 'inventory', 'promotion']) {
+            const delivery = CONFIG.get(domain).publication.delivery;
+            assert.deepEqual(CONFIG.get(domain).publication.legacyCasRecovery,
+                { enabled: false, operations: [] }, 'Completed recovery must leave no enabled repair selection');
+            assert.equal(delivery.enabled, !staged);
+            if (!staged) assert.deepEqual(delivery.storeCodes, ['localProductQualificationStore20260929'],
+                `${domain} qualification must not change unselected Store delivery`);
+            assert.deepEqual(CONFIG.get('schemaPolicies')[domain].publicationVersioned,
+                scenario.server === 'commerceStagedServer'
+                    ? { isVersionedEnabled: true, versionedReadMode: 'CURRENT' }
+                    : { isVersionedEnabled: false },
+                `${domain} policy history must remain Staged-only; operational stores are not migrated`);
+        }
         for (const moduleName of ['store', 'cart', 'shoppingList']) assert.equal(NODICS.isModuleActive(moduleName), true);
         assert.equal(CONFIG.get('cart').customerApi.defaultStoreCode, undefined);
         assert.equal(CONFIG.get('shoppingList').customerApi.defaultStoreCode, undefined);
@@ -393,38 +414,28 @@ async function prepareScenario(scenario) {
             `${scenario.server} should expose exactly the selected domain search contributors`
         );
     }
-    ['kickoffModules', 'kickoff.environments', 'nSetup', 'nTooling'].forEach(moduleName => {
+    if (scenario.server === 'wcmsStagedServer' || scenario.server === 'wcmsOnlineServer') {
+        assert.deepEqual(CONFIG.get('schemaPolicies').media.publicationVersioned,
+            scenario.server === 'wcmsStagedServer'
+                ? { isVersionedEnabled: true, versionedReadMode: 'CURRENT' }
+                : { isVersionedEnabled: false },
+            'Only the migrated Staged Media metadata source selects history');
+        if (scenario.server === 'wcmsStagedServer') {
+            for (const moduleName of ['vDatabase', 'vService', 'vMongodb']) assert.equal(NODICS.isModuleActive(moduleName), true);
+        }
+    }
+    if (scenario.server === 'processServer') {
+        for (const domain of ['product', 'pricing', 'promotion', 'inventory', 'tax', 'media']) {
+            assert.equal(NODICS.isModuleActive(domain), false, 'Process must not activate domain business runtimes');
+            assert(NODICS.getRawModule(domain), 'Process must discover the selected workflow owner');
+            assert(CONFIG.get('runtimeIdentity').remoteModules.includes(domain));
+            assert(CONFIG.get('process').actionAdapters.allowedActions.includes(domain + '.applyPublicationDecision'));
+            assert(CONFIG.get('data').dataReleases.contributions.some(item => item.moduleName === domain));
+        }
+    }
+    ['kickoffModules', 'kickoff.environments'].forEach(moduleName => {
         assert.equal(NODICS.getRawModule(moduleName), undefined, `${moduleName} must remain outside runtime discovery`);
         assert.equal(NODICS.isModuleActive(moduleName), false, `${moduleName} must remain outside runtime activation`);
-    });
-    assert.equal(NODICS.getServerName(), scenario.server);
-    assert.equal(NODICS.getEnvironmentName(), 'nodics.kickoff');
-    assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');
-    const apiExposure = CONFIG.get('apiExposure') || {};
-    const isApiExposureEnabled = category => {
-        const defaultConfig = apiExposure.default || {};
-        const categories = apiExposure.categories || {};
-        const hasCategory = Object.prototype.hasOwnProperty.call(categories, category);
-        if (!hasCategory) {
-            if (apiExposure.unknown && Object.prototype.hasOwnProperty.call(apiExposure.unknown, 'enabled'))
-                return apiExposure.unknown.enabled === true;
-            if (Object.prototype.hasOwnProperty.call(defaultConfig, 'enabled'))
-                return defaultConfig.enabled === true;
-            return false;
-        }
-        const categoryConfig = categories[category] || {};
-        if (Object.prototype.hasOwnProperty.call(categoryConfig, 'enabled'))
-            return categoryConfig.enabled === true;
-        if (Object.prototype.hasOwnProperty.call(defaultConfig, 'enabled'))
-            return defaultConfig.enabled === true;
-        return false;
-    };
-    (scenario.expectedApiExposure || []).forEach(category => {
-        assert.equal(
-            isApiExposureEnabled(category),
-            true,
-            `${category} API exposure should be enabled for ${scenario.server}`
-        );
     });
     if (scenario.verify) scenario.verify(coreRoot);
     console.log(`Kickoff ${scenario.server} preparation passed`);

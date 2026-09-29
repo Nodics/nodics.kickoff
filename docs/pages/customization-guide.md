@@ -20,9 +20,10 @@ and keep customer behavior visible in the customer project.
 
 The rule is simple: customize in the most specific owner that needs the
 change. Use configuration before code. Use a project module before editing a
-framework module. Use a later-loaded extension module before forking a standard
-functional module. Create a new functional module only when the business
-capability is genuinely new.
+framework module. Partners customize their own repositories only. Submit reusable
+capability gaps through the Nodics contribution process; framework maintenance
+requires separate authorization and review. Use existing supported extension
+points before proposing a genuinely new functional module.
 
 ## Customization decision tree
 
@@ -35,8 +36,8 @@ flowchart TD
   Config -- "no" --> Existing{"Does an existing functional module own it?"}
   Existing -- "yes" --> ProjectModule{"Is it customer-specific?"}
   ProjectModule -- "yes" --> Overlay["Create or update a customer/project module loaded after the framework owner"]
-  ProjectModule -- "no" --> Framework["Change the owning framework module with tests and docs"]
-  Existing -- "no" --> NewModule["Design a new functional module with explicit ownership"]
+  ProjectModule -- "no" --> Framework["Submit to the Nodics owner for review, implementation and release"]
+  Existing -- "no" --> NewModule["Propose capability ownership through the Nodics contribution process"]
   Env --> Verify["Regenerate artifacts and run acceptance"]
   Overlay --> Verify
   Framework --> Verify
@@ -94,7 +95,7 @@ the correct configuration owner before writing code.
 | A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |
 | A framework checkout path differs | Update the declared framework package dependency and lockfile | Workspace layout is project setup, not runtime configuration. |
 | Project identity is needed | `package.json.name` | Do not duplicate it in root descriptors or `config/properties.js`. |
-| A local domain selection is needed | `envs/<environment>/nodics.environment.json` | Runtime composition belongs to the selected environment, not a root helper file. |
+| A local domain selection is needed | Existing environment/server `config/properties.js` and package composition metadata | Runtime composition belongs to the selected deployment; do not introduce an environment descriptor. |
 | A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |
 | A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |
 | A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |

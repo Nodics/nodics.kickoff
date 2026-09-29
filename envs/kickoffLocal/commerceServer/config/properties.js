@@ -1,4 +1,48 @@
 module.exports = {
+  "pricing": {
+    "publication": {
+      "runtimeRole": "ONLINE",
+      "sourceAuthority": {
+        "moduleName": "pricing",
+        "connectionName": "commerceStaged",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE_STAGED"
+      }
+    }
+  },
+  "tax": {
+    "publication": {
+      "runtimeRole": "ONLINE",
+      "sourceAuthority": {
+        "moduleName": "tax",
+        "connectionName": "commerceStaged",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE_STAGED"
+      }
+    }
+  },
+  "inventory": {
+    "publication": {
+      "runtimeRole": "ONLINE",
+      "sourceAuthority": {
+        "moduleName": "inventory",
+        "connectionName": "commerceStaged",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE_STAGED"
+      }
+    }
+  },
+  "promotion": {
+    "publication": {
+      "runtimeRole": "ONLINE",
+      "sourceAuthority": {
+        "moduleName": "promotion",
+        "connectionName": "commerceStaged",
+        "connectionType": "abstract",
+        "runtimeRole": "COMMERCE_STAGED"
+      }
+    }
+  },
   "activeModules": {
     "groups": [
       {
@@ -9,7 +53,7 @@ module.exports = {
       }
     ],
     "modules": [
-      "circa.ewaste",
+      "vMongodb",
       "circa.ewaste",
       "search",
       "elastic",
@@ -33,6 +77,14 @@ module.exports = {
   "runtimeRole": {
     "code": "COMMERCE",
     "publication": "OPERATIONAL"
+  },
+  "schemaPolicies": {
+    "product": {
+      "catalogueVersioned": {
+        "isVersionedEnabled": true,
+        "versionedReadMode": "CURRENT"
+      }
+    }
   },
   "runtimeAuthorityContexts": {
     "modules": {

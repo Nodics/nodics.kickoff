@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "sunmarke-location": {
+      "capability": {
+        "code": "circa.ewaste.sunmarke",
+        "displayName": "Circa Sunmarke pilot",
+        "type": "PROJECT_EXTENSION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "circa.ewaste",
+        "businessOutcome": "Prepare Sunmarke location records for the Circa pilot."
+      }
+    }
+  }
+}

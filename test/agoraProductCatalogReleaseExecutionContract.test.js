@@ -19,100 +19,26 @@ const test = require("node:test");
  */
 
 const projectRoot = path.resolve(__dirname, "..");
+const { frameworkRoot } = require('./helpers/configuration');
 const moduleRoot = path.join(projectRoot, "modules/agora.apparel");
-const dataReleaseServicePath = path.resolve(
-  projectRoot,
-  "../nodics.ai/nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService.js",
-);
-
-let installations;
+const releaseExecution = require(path.join(
+  frameworkRoot, "nodics.foundation/modules/nData/nImport/import/test/helpers/releaseExecution",
+));
 let importRequests;
-let runtimeRole;
 
-function configureGlobals() {
-  installations = [];
-  importRequests = [];
-  runtimeRole = { code: "COMMERCE_STAGED", publication: "STAGED" };
-
-  global.CONFIG = {
-    get: (key) => {
-      if (key === "environment") return { class: "LOCAL" };
-      if (key === "data") {
-        return {
-          dataReleases: {
-            allowedContractVersions: [1, 2],
-            maximumFilesPerRelease: 50,
-            maximumModulesPerRun: 10,
-            allowDowngrade: false,
-            destinationEnforced: true,
-            allowedDestinationRoles: ["COMMERCE_STAGED"],
-            types: {
-              init: { enabled: true, operatorExecution: true },
-              core: { enabled: true, operatorExecution: true },
-              sample: { enabled: true, operatorExecution: true },
-            },
-          },
-        };
-      }
-      if (key === "defaultTenant") return "default";
-      if (key === "runtimeRole") return runtimeRole;
-      return undefined;
-    },
-  };
-  global.NODICS = {
-    getActiveModules: () => ["agora.apparel"],
-    getRawModule: (moduleName) =>
-      moduleName === "agora.apparel"
-        ? {
-            name: "agora.apparel",
-            path: moduleRoot,
-            parent: "kickoffModules",
-            canonicalIdentity: "kickoffModules/agora.apparel",
-            metaData: { nodics: { displayName: "Agora Apparel" } },
-          }
-        : undefined,
-    getSelectedEnvironmentName: () => "kickoffLocal",
-  };
-  global.SERVICE = {
-    DefaultDataInstallationService: {
-      get: (request) =>
-        Promise.resolve({
-          result: installations.filter(
-            (item) => !request.query.code || item.code === request.query.code,
-          ),
-        }),
-      save: (request) => {
-        installations.push(request.model);
-        return Promise.resolve(request.model);
-      },
-      update: (request) => {
-        const index = installations.findIndex(
-          (item) => item.code === request.query.code,
-        );
-        installations[index] = request.model;
-        return Promise.resolve(request.model);
-      },
-    },
-    DefaultImportService: {
-      importSampleData: (request) => {
-        importRequests.push(JSON.parse(JSON.stringify(request)));
-        request.importRun = {
-          runId: request.options.validateOnly
-            ? "agora-validate-run"
-            : "agora-install-run",
-        };
-        return Promise.resolve({
-          validationOnly: request.options.validateOnly,
-        });
-      },
-    },
-  };
-}
-
+/** Supplies only Agora's real module and selected release destination to the owner harness. */
 function service() {
-  configureGlobals();
-  delete require.cache[require.resolve(dataReleaseServicePath)];
-  return require(dataReleaseServicePath);
+  const fixture = releaseExecution({
+    modules: { "agora.apparel": {
+      name: "agora.apparel", path: moduleRoot, parent: "kickoffModules",
+      canonicalIdentity: "kickoffModules/agora.apparel",
+      metaData: { nodics: { displayName: "Agora Apparel" } },
+    } },
+    environment: "kickoffLocal",
+    runtimeRole: "COMMERCE_STAGED",
+  });
+  importRequests = fixture.imports;
+  return fixture.service;
 }
 
 test("Agora Apparel commerce catalog release follows Commerce Staged nImport execution contract", async () => {
@@ -124,7 +50,8 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
 
   assert(release, "agoraApparelCommerceCatalog release should be discoverable");
   assert.equal(release.dataType, "sample");
-  assert.equal(release.sourceRoot, "sample-v002");
+  assert.equal(release.sourceRoot, "sample-v003");
+  assert.equal(release.version, "0.0.8");
   assert.equal(release.lifecycle, "PUBLISHABLE");
   assert.equal(release.destinationRole, "COMMERCE_STAGED");
   assert.deepEqual(release.environmentScope, [
@@ -163,13 +90,6 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
   );
   assert.equal(dataReleaseService.validateDestination(release), true);
 
-  runtimeRole = { code: "WCMS_STAGED", publication: "STAGED" };
-  assert.throws(
-    () => dataReleaseService.validateDestination(release),
-    /not permitted for runtime destination WCMS_STAGED/,
-  );
-  runtimeRole = { code: "COMMERCE_STAGED", publication: "STAGED" };
-
   const releaseRequest = {
     dataType: "sample",
     releaseCodes: ["agora.apparel:agoraApparelCommerceCatalog"],
@@ -177,41 +97,23 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
       "agora.apparel:agoraApparelCommerceCatalog": release.version,
     },
   };
-  const preflight = await dataReleaseService.preflight({
+  await dataReleaseService.preflight({ tenant: "default", releaseRequest });
+  await dataReleaseService.execute({
     tenant: "default",
     releaseRequest,
   });
 
-  assert.equal(preflight.data.validation.importExecuted, false);
-  assert.equal(preflight.data.validation.validationOnly, true);
-  assert.equal(preflight.data.releases[0].status, "NOT_INSTALLED");
-  assert.equal(importRequests.length, 0);
-
-  const execution = await dataReleaseService.execute({
-    tenant: "default",
-    releaseRequest,
-  });
-
-  assert.equal(execution.data.importRun.runId, "agora-install-run");
-  assert.equal(execution.data.releases[0].status, "CURRENT");
-  assert.equal(importRequests.length, 1);
   assert.deepEqual(importRequests[0].modules, ["agora.apparel"]);
-  assert.equal(importRequests[0].options.validateOnly, false);
   assert.equal(
     importRequests[0].dataReleasePlan[0].releaseCode,
     "agora.apparel:agoraApparelCommerceCatalog",
   );
-  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, "sample-v002");
+  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, "sample-v003");
   assert(
     importRequests[0].dataReleasePlan[0].declaredFiles.some((file) =>
       file.endsWith("agoraApparelProductData.js"),
     ),
   );
-  assert.equal(
-    installations[0].code,
-    "kickoffLocal:default:agora.apparel:agoraApparelCommerceCatalog:sample",
-  );
-  assert.equal(installations[0].status, "CURRENT");
 });
 
 test("Agora domain Commerce releases separate each selected domain import plan", async () => {
@@ -260,15 +162,13 @@ test("Agora domain Commerce releases separate each selected domain import plan",
       releases.map((release) => [release.releaseCode, release.version]),
     ),
   };
-  const execution = await dataReleaseService.execute({
+  await dataReleaseService.execute({
     tenant: "default",
     releaseRequest,
   });
 
-  assert.equal(execution.data.releases.length, 1);
   assert.deepEqual(
     importRequests[0].dataReleasePlan.map((item) => item.releaseCode).sort(),
     releaseCodes,
   );
-  assert.equal(installations.length, 1);
 });

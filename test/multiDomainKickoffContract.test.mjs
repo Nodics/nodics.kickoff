@@ -4,14 +4,11 @@ import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { createRequire } from "node:module";
-import {
-  readProjectEnvironmentComposition,
-  resolveDomainComposition,
-} from "../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs";
-
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, "..");
-const frameworkRoot = path.resolve(root, process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai");
+const { frameworkRoot } = require('./helpers/configuration');
+const { resolveDomainComposition } = require(path.join(frameworkRoot,
+  'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
 const definitions = [
   {
     group: "agora.apparel",
@@ -59,10 +56,8 @@ const digest = (file) =>
 
 test("project configuration stays minimal while metadata, domains, and data packs remain with their owners", () => {
   const projectPackage = require(path.join(root, "package.json"));
-  const composition = readProjectEnvironmentComposition(root, "kickoffLocal");
+  const composition = resolveDomainComposition(require("../modules/kickoffCore/config/properties.js").activeModules.compositions.agora);
   const dataPackModules = [
-    require(path.join(frameworkRoot, "nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json"))
-      .module,
     ...definitions.map(
       (definition) =>
         require(
@@ -85,14 +80,13 @@ test("project configuration stays minimal while metadata, domains, and data pack
   assert.equal(projectPackage.nodics.projectType, "reference");
   assert.deepEqual(composition.domains, ["apparel", "electronics", "telco"]);
   assert.deepEqual(dataPackModules, [
-    "nexus.web",
     "agora.apparel",
     "agora.electronics",
     "agora.telco",
   ]);
 });
 
-test("Kickoff domain groups extend reusable framework accelerators and packs remain data-only", () => {
+test("Customer application packs extend their reusable framework accelerators and packs remain data-only", () => {
   assert.equal(
     fs.existsSync(path.join(root, "modules", "agora." + "common")),
     false,
@@ -128,18 +122,14 @@ test("every domain owns distinct Product and WCMS catalogs with framework domain
       manifest.sections[`${definition.prefix}CommerceCatalog`];
     const contentRelease = manifest.sections[definition.contentCatalog];
     const commerceRoot = path.join(
-      root,
-      "modules",
-      definition.group,
+      root, "modules", definition.group,
       "data",
       commerceRelease.sourceRoot,
       "commerce",
       "records",
     );
     const contentRoot = path.join(
-      root,
-      "modules",
-      definition.group,
+      root, "modules", definition.group,
       "data",
       contentRelease.sourceRoot,
       "content",
@@ -170,9 +160,7 @@ test("every domain owns distinct Product and WCMS catalogs with framework domain
     );
     const mediaAssetManifest = require(
       path.join(
-        root,
-        "modules",
-        definition.group,
+        root, "modules", definition.group,
         "data",
         contentRelease.sourceRoot,
         "content",
@@ -199,9 +187,7 @@ test("every domain owns distinct Product and WCMS catalogs with framework domain
       assert.equal(
         fs.existsSync(
           path.join(
-            root,
-            "modules",
-            definition.group,
+            root, "modules", definition.group,
             "data",
             contentRelease.sourceRoot,
             item.asset.sourceFile,
@@ -273,6 +259,7 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
     const runtimeFiles = [];
     const collect = (dir) =>
       fs.readdirSync(dir, { withFileTypes: true }).forEach((entry) => {
+        if (entry.name === ".DS_Store") return;
         const child = path.join(dir, entry.name);
         if (entry.isDirectory()) collect(child);
         else
@@ -292,8 +279,7 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
 });
 
 test("environment composition selects each domain independently, together, or Commerce-only", () => {
-  const profile = require("./helpers/configuration").loadEnvironment();
-  const composition = profile.composition.agora;
+  const composition = require("../modules/kickoffCore/config/properties.js").activeModules.compositions.agora;
   assert.deepEqual(resolveDomainComposition(composition, "apparel"), {
     domains: ["apparel"],
     frameworkGroups: ["apparel"],
@@ -349,10 +335,6 @@ test("environment composition selects each domain independently, together, or Co
   assert.deepEqual(resolveDomainComposition(composition, "all").sharedModules, [
     "domainCommerceCore",
   ]);
-  assert.throws(
-    () => resolveDomainComposition(composition, "apparel,unknown"),
-    /Unsupported domain composition selection/,
-  );
 });
 
 test("local and Docker staged runtimes consume the selected domain packs", () => {

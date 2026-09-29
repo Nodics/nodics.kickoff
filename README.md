@@ -5,6 +5,25 @@ Nodics runtime groups and local runtime topologies. It demonstrates how a
 customer can run Nodics locally, inspect the framework, and start
 customization.
 
+## Setup and Validation
+
+These guides are readable directly from the repository before any server or
+documentation pack is running:
+
+| Audience | Guide |
+| --- | --- |
+| New developer or administrator | [Local setup to live](docs/pages/local-setup-to-live-runbook.md) |
+| Developer configuring backends | [Local runtime](docs/pages/local-runtime.md) and [configuration inheritance](docs/pages/configuration-inheritance.md) |
+| Developer or QA verifying changes | [Local acceptance checklist](docs/pages/local-acceptance-checklist.md) |
+| Operator managing publication | [Local publishing operations](docs/pages/local-publishing-operations.md) |
+| Architect or release owner | [Deployment qualification](docs/pages/deployment-qualification.md) |
+
+After governed documentation publication, use Axis Documentation > Nodics
+Kickoff > Run Kickoff Locally, or search for "Local acceptance checklist".
+Backend checks and frontend verification are separate; live acceptance can
+mutate data and requires explicit execution and approval intent. Start with the
+checklist's configuration-only checks, not a fresh reset.
+
 Implementation partners customize only their own backend and frontend projects.
 Nodics maintains framework capabilities and domain accelerators; reusable
 improvements go through the separate Nodics contribution/request and release
@@ -137,7 +156,7 @@ server metadata and conventional acceptance scripts. Human-readable project
 metadata lives in `package.json.nodics`; environment domain selections, topology,
 acceptance, and qualification profiles are owned by the selected environment, for example
 `envs/kickoffLocal/config/properties.js` and
-`envs/kickoffDockerLocal/nodics.environment.json`. Data packs are declared by
+`envs/kickoffDockerLocal/config/properties.js`. Data packs are declared by
 each module's `data/manifest.json`. Runtime startup facts are discovered from
 the selected environment server packages under
 `envs/<environment>/*Server`. `package.json` aliases should stay thin and call
@@ -146,9 +165,27 @@ paths. This keeps generated projects upgrade-safe: project facts stay in the
 project, while framework execution, validation, lifecycle, and upgrade behavior
 can evolve in `nodics.ai`.
 
-For a complete zero-state local verification, use the Kickoff documentation
-page "Local acceptance checklist" after importing the Kickoff documentation
-content pack into WCMS.
+For Local verification, read the [Local acceptance checklist](docs/pages/local-acceptance-checklist.md).
+It is available before setup and through Axis after documentation publication.
+
+### CI Framework Selection
+
+Set the repository Actions variable `NODICS_FRAMEWORK_SHA` to the full 40-character
+commit of the compatible, published `Nodics/nodics.ai` revision. Verification
+fails before framework checkout when the selection is missing or malformed;
+there is no feature-branch fallback. Update the selection after the coordinated
+framework changes are available remotely, then retain that exact-commit CI result.
+A local pass against uncommitted framework changes is not release evidence.
+
+Current cleanup decisions and remaining work are tracked in the
+[ownership audit and remediation record](docs/evidence/final-ownership-audit.md).
+
+`test:qualification` includes the effective configuration inheritance regression.
+`npm test` includes the customer Commerce suite and the Circa module suite through
+`test:agora-commerce` and `test:circa`. Framework release suites retain the generic
+owner contracts; customer checks do not replace them. Local development can run
+these focused aliases without starting servers or Docker. The broader root test
+also performs its existing runtime preparation step.
 
 When the stack is running, open Axis at <http://localhost:3100> and use the
 Documentation group to read:
@@ -200,8 +237,8 @@ npm run qualification:deployment:local
 ```
 
 The first command prints a non-mutating plan. The second runs the strict
-framework release gate, retained-data project acceptance, Axis verification,
-and live Redis contracts, then writes sanitized local evidence under
+framework release gate, publishing/security checks, mutating retained-data
+project acceptance and live Redis contracts, then writes sanitized local evidence under
 `envs/kickoffLocal/generated/deployment-qualification/`. It never approves
 production. Peak load, soak, penetration, managed-provider failover,
 backup/restore, measured RPO/RTO, residency, real external providers, and human

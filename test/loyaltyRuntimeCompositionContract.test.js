@@ -11,13 +11,8 @@
 
 'use strict';
 
-// Isolated composition tests need valid signing inputs without deployment credentials.
-process.env.NODICS_JWT_SECRET = require('node:crypto').randomBytes(48).toString('hex');
-process.env.NODICS_API_KEY_PEPPER = require('node:crypto').randomBytes(48).toString('hex');
-
 const assert = require('node:assert/strict');
 const childProcess = require('node:child_process');
-const fs = require('node:fs');
 const path = require('node:path');
 
 /** @module test/loyaltyRuntimeCompositionContract @description Verifies the reference runtime observes the framework-owned Loyalty module and schema contracts. @layer test @owner nodics.kickoff */
@@ -25,9 +20,7 @@ const path = require('node:path');
 const projectRoot = path.resolve(__dirname, '..');
 
 const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
-const coreRoot = path.join(frameworkRoot, 'nodics.foundation');
-const loyaltyRoot = path.join(frameworkRoot, 'nodics.loyalty');
-const config = require(path.join(coreRoot, 'modules/nConfig'));
+const prepare = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
 
 const expectedLoyaltyModules = [
     'loyaltyCore',
@@ -41,39 +34,8 @@ const expectedLoyaltyModules = [
     'nodics.loyalty'
 ];
 
-const expectedSchemas = {
-    loyaltyCore: ['loyaltyOperationPolicy'],
-    loyaltyProgram: ['loyaltyProgram'],
-    loyaltyRewardType: ['loyaltyRewardType'],
-    loyaltyWallet: ['loyaltyWallet', 'loyaltyWalletRewardBalance'],
-    loyaltyLedger: ['rewardLedgerEntry'],
-    loyaltyReservation: ['rewardReservation'],
-    loyaltyRedemption: ['rewardRedemption']
-};
-const expectedGeneratedServices = [
-    'DefaultLoyaltyOperationPolicyService',
-    'DefaultLoyaltyProgramService',
-    'DefaultLoyaltyRewardTypeService',
-    'DefaultLoyaltyWalletService',
-    'DefaultLoyaltyWalletRewardBalanceService',
-    'DefaultRewardLedgerEntryService',
-    'DefaultRewardReservationService',
-    'DefaultRewardRedemptionService'
-];
-
 async function prepareRuntime(environment, databaseName, httpPort) {
-    const options = Object.freeze({
-        NODICS_HOME: coreRoot,
-        CUSTOM_HOME: projectRoot,
-        MODULE_ROOTS: Object.freeze([coreRoot, loyaltyRoot, projectRoot]),
-        defaultEnvironment: environment,
-        defaultServer: 'loyaltyServer'
-    });
-
-    await config.start(options);
-    await config.initUtilities(options);
-    await config.loadModules();
-    await config.initEntities();
+    prepare({ projectRoot, frameworkRoot, environment, server: 'loyaltyServer' });
 
     assert.equal(NODICS.getSelectedEnvironmentName(), environment);
     assert.equal(NODICS.getServerName(), 'loyaltyServer');
@@ -88,36 +50,8 @@ async function prepareRuntime(environment, databaseName, httpPort) {
         assert.equal(NODICS.isModuleActive(moduleName), false, `${moduleName} must remain outside ${environment} loyaltyServer`);
     });
 
-    assert(SERVICE.DefaultLoyaltyAmountService, 'Loyalty amount service must load');
-    assert(SERVICE.DefaultLoyaltyWalletOwnerService, 'Loyalty wallet owner service must load');
-    assert(SERVICE.DefaultLoyaltyLedgerPostingService, 'Loyalty ledger posting service must load');
-    assert(SERVICE.DefaultLoyaltyRewardOperationService, 'Loyalty reward operation service must load');
-    assert(FACADE.DefaultLoyaltyInternalFacade, 'Loyalty internal facade must load');
-    assert(CONTROLLER.DefaultLoyaltyInternalController, 'Loyalty internal controller must load');
-
-    const mergedSchema = SERVICE.DefaultFilesLoaderService.loadSchemaFiles('/src/schemas/schemas.js', null);
-    SERVICE.DefaultDatabaseConfigurationService.setRawSchema(mergedSchema);
-    await SERVICE.DefaultDatabaseSchemaHandlerService.buildDatabaseSchema(mergedSchema);
-    await SERVICE.DefaultInfraService.buildServices();
-
-    Object.keys(expectedSchemas).forEach(moduleName => {
-        const rawSchema = NODICS.getModule(moduleName).rawSchema || {};
-        expectedSchemas[moduleName].forEach(schemaName => {
-            assert(rawSchema[schemaName], `${moduleName}.${schemaName} should be materialized for ${environment} loyaltyServer`);
-            assert.equal(rawSchema[schemaName].service.enabled, true, `${moduleName}.${schemaName} should generate service capability`);
-            assert.equal(rawSchema[schemaName].router.enabled, true, `${moduleName}.${schemaName} should expose governed schema operations`);
-            assert.equal(rawSchema[schemaName].router.groups.schemaOperations, true, `${moduleName}.${schemaName} must retain schema operation governance`);
-            assert.equal(rawSchema[schemaName].definition.tenant, undefined, `${moduleName}.${schemaName} must derive tenant from runtime context`);
-            assert.equal(rawSchema[schemaName].definition.enterpriseCode, undefined, `${moduleName}.${schemaName} must not store enterpriseCode`);
-        });
-    });
-    expectedGeneratedServices.forEach(serviceName => {
-        const generatedPath = path.join(coreRoot, 'modules/nService/src/service/gen', serviceName + '.js');
-        assert(fs.existsSync(generatedPath), `${serviceName} should be generated for ${environment} loyaltyServer`);
-        const generatedService = require(generatedPath);
-        assert.equal(typeof generatedService.get, 'function', `${serviceName}.get should be available`);
-        assert.equal(typeof generatedService.save, 'function', `${serviceName}.save should be available`);
-    });
+    // Effective schema materialization and generated get/save coverage are owned
+    // by Loyalty's independent loyaltyGeneratedRuntimeContract suite.
 
     console.log(`Kickoff ${environment} loyaltyServer runtime composition passed`);
 }

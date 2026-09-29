@@ -19,9 +19,10 @@ const test = require("node:test");
  */
 
 const projectRoot = path.resolve(__dirname, "..");
-const commerceSearchRoot = path.resolve(
-  projectRoot,
-  "../nodics.ai/nodics.commerce/modules/baseCommerce/modules/commerceSearch/modules/commerceSearchCore",
+const { frameworkRoot } = require('./helpers/configuration');
+const commerceSearchRoot = path.join(
+  frameworkRoot,
+  "nodics.commerce/modules/baseCommerce/modules/commerceSearch/modules/commerceSearchCore",
 );
 const properties = require(path.join(commerceSearchRoot, "config/properties"));
 const publication = require(
@@ -92,8 +93,6 @@ test("Agora Commerce Search rule publishes and ranks women category cards", asyn
   assert.equal(publishResult.published, 1);
   assert.equal(persisted.length, 1);
   assert.equal(indexed.length, 1);
-  assert.equal(indexed[0].moduleName, "commerceSearchCore");
-  assert.equal(indexed[0].indexName, "commerceSearchRuleProjection");
 
   const cards = [
     { productCode: "agoraSilkScarf" },

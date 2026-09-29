@@ -19,40 +19,11 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
-const projectCommandService = require("../../nodics.ai/nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService");
+const { frameworkRoot } = require("./helpers/configuration");
+const projectCommandService = require(path.join(frameworkRoot, "nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService"));
 const environment = path.join(root, "envs", "kickoffDockerLocal");
 const compose = fs.readFileSync(
   path.join(environment, "docker", "compose.yaml"),
-  "utf8",
-);
-const containerEnvironmentService = fs.readFileSync(
-  path.join(
-    root,
-    "..",
-    "nodics.ai",
-    "nodics.foundation",
-    "modules",
-    "nTooling",
-    "src",
-    "service",
-    "project",
-    "defaultProjectContainerEnvironmentService.mjs",
-  ),
-  "utf8",
-);
-const containerQualificationService = fs.readFileSync(
-  path.join(
-    root,
-    "..",
-    "nodics.ai",
-    "nodics.foundation",
-    "modules",
-    "nTooling",
-    "src",
-    "service",
-    "project",
-    "defaultProjectContainerQualificationService.mjs",
-  ),
   "utf8",
 );
 const environmentProfile = require("./helpers/configuration").loadContainer();
@@ -258,50 +229,14 @@ assert.deepEqual(projectCommands["docker-local:preflight"].args, [
   "dockerLocal",
   "preflight",
 ]);
-assert.equal(
-  environmentProfile.acceptance.urls.engagement,
-  "http://127.0.0.1:5340",
-);
-assert.equal(
-  environmentProfile.acceptance.urls.loyalty,
-  "http://127.0.0.1:5360",
-);
-assert.equal(
-  environmentProfile.acceptance.urls.commerceStaged,
-  "http://127.0.0.1:5352",
-);
-assert.match(
-  containerEnvironmentService,
-  /BOOTSTRAP_ADMIN_PASSWORD: process\.env\.NODICS_DOCKER_ADMIN_PASSWORD \|\| profile\.bootstrapAdminPassword/,
-);
-assert.match(containerEnvironmentService, /readContainerEnvironmentConfiguration/);
-assert.match(
-  containerQualificationService,
-  /NODICS_ENGAGEMENT_URL: urls\.engagement/,
-);
-assert.match(
-  containerQualificationService,
-  /NODICS_COMMERCE_STAGED_URL: process\.env\.NODICS_COMMERCE_STAGED_URL \|\| urls\.commerceStaged/,
-);
-assert.match(
-  containerQualificationService,
-  /NODICS_SERVICE_API_KEY: process\.env\.NODICS_SERVICE_API_KEY \|\| values\.BOOTSTRAP_SERVICE_API_KEY/,
-);
-assert.match(
-  containerQualificationService,
-  /selected\.acceptance\.commerceDataCommand/,
-);
+for (const code of ['engagement', 'loyalty', 'commerceStaged', 'platform', 'commerce']) {
+  const endpoint = loadRuntime(code + 'Server').servers.default.browserEndpoint;
+  assert.equal(environmentProfile.acceptance.urls[code],
+    `http://${endpoint.httpHost}:${endpoint.httpPort}`);
+}
 assert.equal(
   environmentProfile.acceptance.commerceDataCommand,
   "acceptance:agora-commerce-data",
-);
-assert.match(
-  containerQualificationService,
-  /NODICS_STOREFRONT_COMMERCE_DATA_EXECUTE/,
-);
-assert.match(
-  containerQualificationService,
-  /selected\.acceptance\.commercePublicationCommand/,
 );
 console.log("kickoffDockerLocal environment contract validated");
 
@@ -319,3 +254,10 @@ for (const server of ["wcmsStagedServer", "wcmsOnlineServer"]) {
     );
   }
 }
+
+// Customer alias and published Docker endpoints retained from the Commerce contract.
+const packageDefinition = require("../package.json");
+assert.match(packageDefinition.scripts["acceptance:agora-commerce:docker"], /nodics project:run acceptance:agora-commerce:docker/);
+assert.equal(projectCommands["acceptance:agora-commerce:docker"].command, "project:container-qualification");
+assert.deepEqual(projectCommands["acceptance:agora-commerce:docker"].args, ["dockerLocal", "commerce-acceptance"]);
+assert.equal(environmentProfile.acceptance.urls.axis, undefined);

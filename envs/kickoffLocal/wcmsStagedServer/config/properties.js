@@ -1,9 +1,29 @@
 module.exports = {
+  // Controlled local qualification; retained/versioned Media forbids physical cleanup.
+  "media": {
+    "publication": {
+      "versionProviderEnabled": true,
+      "runtimeRole": "STAGED",
+      "targetTransportProvider": "DefaultMediaPublicationModuleTransportService",
+      "target": { "connectionName": "cmsOnline" }
+    }
+  },
+  "publish": {
+    "providers": {
+      "versionProviders": { "media": "DefaultMediaPublicationVersionProviderService" },
+      "domainAdapters": { "media": "DefaultMediaPublicationVersionProviderService" },
+      "workflowProviders": { "media": "DefaultPublicationApprovalWorkflowService" }
+    },
+    "approvalWorkflow": {
+      "target": { "connectionName": "process", "connectionType": "abstract", "runtimeRole": "PROCESS" }
+    }
+  },
   "activeModules": {
     "groups": [
       "nexus"
     ],
     "modules": [
+      "vMongodb",
       "redisCache",
       "axis",
       "circa.ewaste",
@@ -39,6 +59,11 @@ module.exports = {
   "runtimeRole": {
     "code": "WCMS_STAGED",
     "publication": "STAGED"
+  },
+  "schemaPolicies": {
+    "media": {
+      "publicationVersioned": { "isVersionedEnabled": true, "versionedReadMode": "CURRENT" }
+    }
   },
   "runtimeAuthorityContexts": {
     "modules": {
@@ -95,30 +120,6 @@ module.exports = {
         "axisassistant": {
           "releaseVersion": "0.0.1"
         },
-        "agoraapparel": {
-          "releaseCode": "agora.apparel:agoraApparelContentCatalog",
-          "releaseVersion": "0.0.8",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraApparelSite",
-          "sourceVersion": "0"
-        },
-        "agoraelectronics": {
-          "releaseCode": "agora.electronics:agoraElectronicsContentCatalog",
-          "releaseVersion": "0.0.2",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraElectronicsSite",
-          "sourceVersion": "0"
-        },
-        "agoratelco": {
-          "releaseCode": "agora.telco:agoraTelcoContentCatalog",
-          "releaseVersion": "0.0.2",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraTelcoSite",
-          "sourceVersion": "0"
-        },
         "frameworkdocs": {
           "contentPackCode": "nodicsDocumentation",
           "releaseVersion": "0.16.14",
@@ -132,41 +133,27 @@ module.exports = {
           "rootType": "site",
           "rootCode": "axisDocumentationSite",
           "sourceVersion": "0"
-        },
-        "kickoffdocs": {
-          "contentPackCode": "kickoffDocumentation",
-          "releaseVersion": "0.0.3",
-          "rootType": "site",
-          "rootCode": "kickoffDocumentationSite",
-          "sourceVersion": "0"
         }
       },
       "workflow": {
         "target": {
-          "moduleName": "process",
-          "connectionName": "process",
-          "connectionType": "abstract",
-          "timeoutMs": 10000,
-          "maxAttempts": 2
+          "connectionName": "process"
         }
       },
       "targetTransportProvider": "DefaultCmsPublicationModuleTransportService",
       "target": {
-        "moduleName": "cms",
         "connectionName": "cmsOnline"
       }
     }
   },
   "editorial": {
     "workflow": {
-      "processBaseUrl": "http://127.0.0.1:4330"
+      "processConnectionName": "process"
     },
     "publication": {
       "targetTransportProvider": "DefaultEditorialPublicationModuleTransportService",
       "target": {
-        "moduleName": "editorial",
-        "connectionName": "cmsOnline",
-        "connectionType": "abstract"
+        "connectionName": "cmsOnline"
       }
     }
   },

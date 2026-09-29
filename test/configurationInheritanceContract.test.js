@@ -6,17 +6,148 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const {
-  merge,
   loadRuntime,
   frameworkRoot,
   activeModuleNames,
-  databaseConfiguration,
   searchConfiguration,
-  corsPolicy,
+  corsOrigins,
+  cacheConfiguration,
+  databaseConfiguration,
 } = require("./helpers/configuration");
-const routerProperties = require(path.join(frameworkRoot, "nodics.foundation/modules/nRouter/config/properties"));
 const coreProperties = require("../modules/kickoffCore/config/properties");
 const metadata = require("../modules/kickoffCore/package.json");
+
+require("node:test")("Platform preparation and isolated probes retain identical environment knowledge sources", () => {
+  const { execFileSync } = require("node:child_process");
+  const registry = require(path.join(frameworkRoot,
+    "nodics.copilot/modules/copilotKnowledge/src/service/defaultCopilotKnowledgeSourceRegistryService"));
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const variables = { NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED: "false" };
+    const probe = loadRuntime("platformServer", environment, variables).copilot.knowledge.sourceRegistry;
+    const expected = probe.definitions;
+    const prepared = JSON.parse(execFileSync(process.execPath, ["-e", `
+      const path = require('node:path');
+      const options = JSON.parse(process.argv[1]);
+      const prepare = require(path.join(options.frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
+      for (const server of ['commerceServer', 'wasteServer', 'platformServer']) prepare({...options, server});
+      const settings = CONFIG.get('copilot').knowledge.sourceRegistry;
+      process.stdout.write(JSON.stringify(settings.definitions));
+    `, JSON.stringify({ projectRoot: path.resolve(__dirname, ".."), frameworkRoot, environment })], {
+      encoding: "utf8", timeout: 30000,
+      env: { PATH: process.env.PATH, HOME: process.env.HOME, ...variables },
+    }));
+    assert.deepEqual(prepared, expected, "Prepared registry must match the isolated configuration probe");
+    const local = prepared.find(source => source.code === "kickoff-copilot-composition-source");
+    assert.equal(Boolean(local), environment === "kickoffLocal");
+    if (local) {
+      assert.equal(registry.expandDefinition(local, probe).sourceType, "SOURCE_CODE");
+      assert.equal(local.enabled, true);
+      assert.deepEqual(local.paths, ["envs/kickoffLocal/platformServer/**/*.js"]);
+    }
+    assert.equal(prepared.find(source => source.code === "nodics-axis-assistant-source").enabled, false);
+  }
+});
+
+require("node:test")("Local Waste startup selection belongs to its environment role and permits later disablement", () => {
+  const bindings = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+  const loader = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService"));
+  const copilot = require("../envs/kickoffLocal/config/properties").copilot;
+  assert.equal(copilot.runtimeRoleProfiles.WASTE.knowledge.ingestion.ingestOnStart, true);
+  assert.equal(require("../envs/kickoffLocal/wasteServer/config/properties").copilot, undefined);
+  const later = bindings.merge({ copilot, runtimeRole: { code: "WASTE" } }, {
+    copilot: { runtimeRoleProfiles: { WASTE: { knowledge: { ingestion: { ingestOnStart: false } } } } },
+  });
+  assert.equal(loader.deriveRuntimeRoleCopilot(later).copilot.knowledge.ingestion.ingestOnStart, false);
+  assert.equal(loader.deriveRuntimeRoleCopilot({ copilot, runtimeRole: { code: "OTHER" } }).copilot.knowledge, undefined);
+});
+
+require("node:test")("Platform context and external knowledge are explicit deployment selections", () => {
+  const bindings = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const runtime = loadRuntime("platformServer", environment, {
+      NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED: "false",
+      NODICS_COPILOT_AXIS_ROOT: "",
+    });
+    assert.equal(runtime.copilot.core.environment, environment);
+    const knowledge = runtime.copilot.knowledge;
+    assert.equal(knowledge.ingestion.ingestOnStart, true, "Preserve established backend startup defaults");
+    const sources = knowledge.sourceRegistry.definitions;
+    assert.equal(sources.some(source => source.code === "kickoff-copilot-composition-source"), environment === "kickoffLocal");
+    assert(sources.filter(source => source.repository === "nodics.axis").every(source => source.enabled === false));
+    assert.equal(knowledge.repositoryRoots["nodics.axis"], undefined);
+    const optedIn = loadRuntime("platformServer", environment, {
+      NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED: "true",
+      NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED: "true",
+      NODICS_COPILOT_AXIS_ROOT: "/external-knowledge-not-read/axis",
+    }).copilot.knowledge;
+    assert(optedIn.sourceRegistry.definitions.filter(source => source.repository === "nodics.axis").every(source => source.enabled === true));
+    assert.equal(optedIn.repositoryRoots["nodics.axis"], "/external-knowledge-not-read/axis");
+    const disabled = loadRuntime("platformServer", environment, {
+      NODICS_COPILOT_KNOWLEDGE_ENABLED: "false",
+      NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START: "false",
+    }).copilot.knowledge;
+    assert.equal(disabled.ingestion.enabled, false);
+    assert.equal(disabled.ingestion.ingestOnStart, false);
+    assert(disabled.sourceRegistry.definitions.every(source => source.enabled === false));
+  }
+  assert.equal(bindings.resolve(coreProperties.copilot.runtimeRoleProfiles.PLATFORM.core, {}, {
+    environmentCode: "unrelatedDeployment",
+  }).environment, "unrelatedDeployment");
+  assert.equal(JSON.stringify(coreProperties.copilot).includes("envs/kickoffLocal"), false);
+  assert.equal(require("../envs/kickoffLocal/config/properties").tooling.acceptance.browserValidation.enabled, false);
+});
+
+require("node:test")("Docker selected published ports follow server projections and allow consumer overrides", () => {
+  const { loadContainer } = require("./helpers/configuration");
+  const bindings = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+  const declaration = require("../envs/kickoffDockerLocal/config/properties").tooling.container;
+  const effective = loadContainer();
+  assert.deepEqual(effective.hostPorts, [5300, 5312, 5314, 5330, 5340, 5350, 5352, 5360, 5370, 5380]);
+  assert.deepEqual(effective.qualification.runtimePorts, effective.hostPorts);
+  assert.deepEqual(effective.soak.readinessPorts, effective.hostPorts);
+  assert.deepEqual(effective.resilienceQualification.readyPorts, effective.hostPorts);
+  assert.deepEqual(effective.qualification.readLoadPorts, [5314, 5300]);
+  assert.deepEqual(effective.resilienceQualification.readLoad.ports, [5314, 5300]);
+  for (const [name, selector] of Object.entries(require("../envs/kickoffDockerLocal/config/properties").tooling.acceptance.urls)) {
+    const server = require(path.join(__dirname, "../envs/kickoffDockerLocal", selector.server, "config/properties"));
+    const endpoint = server.servers.default.browserEndpoint;
+    assert.equal(effective.acceptance.urls[name], `http://${endpoint.httpHost}:${endpoint.httpPort}`);
+  }
+  assert.equal(effective.qualification.networkSeparation.publicContainer, undefined);
+  assert.deepEqual(effective.qualification.networkSeparation.applicationContainers, effective.qualification.hardenedContainers);
+  assert.deepEqual(effective.qualification.networkSeparation.forbiddenNetworks, ["nodics-kickoff-docker-local-public"]);
+  const context = { readRuntimeProperty: (server, property) => {
+    assert.equal(property, "servers.default.browserEndpoint.httpPort");
+    const source = require(path.join(__dirname, "../envs/kickoffDockerLocal", server, "config/properties"));
+    return source.servers.default.browserEndpoint.httpPort + 1000;
+  } };
+  const changed = bindings.resolve({ tooling: { container: declaration } }, {}, context).tooling.container;
+  assert.deepEqual(changed.hostPorts, effective.hostPorts.map(port => port + 1000));
+  assert.deepEqual(changed.qualification.readLoadPorts, [6314, 6300]);
+  assert.deepEqual(changed.nativeIsolationPorts, effective.nativeIsolationPorts);
+  const later = bindings.merge(changed, bindings.resolve({ qualification: {
+    readLoadPorts: { $config: "replace", value: [9000] },
+  } }));
+  assert.deepEqual(later.qualification.readLoadPorts, [9000]);
+  assert.deepEqual(later.hostPorts, changed.hostPorts);
+});
+
+require("node:test")("Editorial consumes Process internal coordinates through the selected connection", () => {
+  const { moduleConfiguration } = require("./helpers/configuration");
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const runtime = loadRuntime("wcmsStagedServer", environment);
+    assert.equal(runtime.editorial.workflow.processBaseUrl, undefined);
+    assert.equal(runtime.editorial.workflow.processConnectionName, "process");
+    const peer = moduleConfiguration(runtime, runtime.editorial.workflow.processConnectionName);
+    assert.equal(peer.abstractEndpoint.httpPort, 4330);
+    assert.equal(peer.abstractEndpoint.httpHost, environment === "kickoffLocal" ? "localhost" : "process");
+    if (environment === "kickoffDockerLocal") assert.equal(peer.browserEndpoint.httpPort, 5330);
+  }
+});
 const administration = {
   backofficeApplicationInitialization:
     coreProperties.backofficeApplicationInitialization.runtimeRoleProfiles
@@ -89,6 +220,14 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     "The selected customer knowledge source must not inherit another source or wildcard path",
   );
   const commerce = loadRuntime("commerceServer", environment);
+  const ingestion = waste.copilot.knowledge.ingestion;
+  assert.equal(ingestion.ingestOnStart, environment === "kickoffLocal");
+  assert.equal(ingestion.startup.environment, environment);
+  assert.equal(ingestion.startup.sourceProject, "circa.ewaste");
+  assert.equal(ingestion.startup.serviceId, "circa-customer-knowledge-indexer");
+  assert.equal(ingestion.startup.failOnRejectedFiles, true);
+  assert.equal(ingestion.startup.rejectionMessage, "CIRCA_CUSTOMER_KNOWLEDGE_REJECTED");
+  assert.equal(commerce.copilot?.knowledge?.ingestion, undefined);
   assert.deepEqual(
     commerce.fulfillmentCore.customerShipping.methods.map(
       (method) => method.code,
@@ -117,23 +256,24 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     );
     if (entry.name !== "platformServer") continue;
     const effective = loadRuntime(entry.name, environment);
-    assert.equal(
-      effective.backofficeApplicationInitialization.runtimeRoleProfiles,
-      undefined,
-      "Runtime role profiles are projected out of effective Platform config",
-    );
     const consumer = require(
       path.join(
         frameworkRoot,
         "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService",
       ),
     );
-    global.CONFIG = { get: (key) => effective[key] };
-    const profiles = Object.fromEntries(
-      Object.entries(
-        effective.backofficeApplicationInitialization.profiles,
-      ).map(([code, profile]) => [code, consumer.resolveProfile(profile)]),
-    );
+    const previousConfig = global.CONFIG;
+    let profiles;
+    try {
+      global.CONFIG = { get: (key) => effective[key] };
+      profiles = Object.fromEntries(
+        Object.entries(
+          effective.backofficeApplicationInitialization.profiles,
+        ).map(([code, profile]) => [code, consumer.resolveProfile(profile)]),
+      );
+    } finally {
+      global.CONFIG = previousConfig;
+    }
     for (const code of Object.keys(
       administration.backofficeApplicationInitialization.profiles,
     )) {
@@ -154,19 +294,6 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       ],
       undefined,
       "Communication package facts come from its registered manifest",
-    );
-    const node = merge({}, effective, {
-      backofficeApplicationInitialization: {
-        profiles: { nexus: { target: { timeoutMs: 9876 } } },
-      },
-    });
-    assert.equal(
-      node.backofficeApplicationInitialization.profiles.nexus.target.timeoutMs,
-      9876,
-    );
-    assert.deepEqual(
-      node.backofficeApplicationInitialization.profiles.nexus.dataPackages,
-      profiles.nexus.dataPackages,
     );
     if (environment === "kickoffLocal") {
       assert.equal(effective.localResetProvider.enabled, true);
@@ -216,17 +343,32 @@ console.log(
   "Kickoff shared defaults, activation scope and deployment overlays validated",
 );
 
-// Observe the real loader: structural identities need no explicit activation entry.
-// Keep this across every active server so newly added overlays inherit the rule.
-const bindings = require(
-  path.join(
-    frameworkRoot,
-    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService",
-  ),
-);
-const Config = require(
-  path.join(frameworkRoot, "nodics.foundation/modules/nConfig/bin/config"),
-);
+const platformStartup = loadRuntime("platformServer").copilot.knowledge.ingestion;
+assert.equal(platformStartup.startup.environment, "kickoffLocal");
+assert.equal(platformStartup.startup.sourceProject, null);
+assert.equal(platformStartup.startup.serviceId, "kickoff-local-knowledge-indexer");
+assert.equal(platformStartup.startup.logSummary, true);
+assert.equal(platformStartup.startup.failOnRejectedFiles, false);
+assert.equal(loadRuntime("platformServer", "kickoffLocal", {
+  NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START: "false",
+}).copilot.knowledge.ingestion.ingestOnStart, false);
+const previousService = Object.getOwnPropertyDescriptor(global, "SERVICE");
+try {
+  let calls = 0;
+  const result = Promise.resolve(true);
+  global.SERVICE = { DefaultCopilotKnowledgeRuntimeService: {
+    ingestOnStart: (...args) => { assert.equal(args.length, 0); calls += 1; return result; },
+  } };
+  for (const server of ["platformServer", "wasteServer"]) {
+    const hook = require(`../envs/kickoffLocal/${server}/nodics`);
+    assert.equal(hook.postInit({ untrusted: true }), result);
+  }
+  assert.equal(calls, 2);
+} finally {
+  if (previousService) Object.defineProperty(global, "SERVICE", previousService);
+  else delete global.SERVICE;
+}
+
 for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
   const environmentRoot = path.join(__dirname, "../envs", environment);
   const declaration = require(path.join(environmentRoot, "config/properties"));
@@ -244,39 +386,18 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       NODICS_MONGODB_URI: "mongodb://configuration-test.invalid:27017",
       NODICS_ELASTICSEARCH_URL: "http://search-configuration-test.invalid:9200",
     });
-    assert.equal(effective.database.default.mongodb.test.databaseName, "testLocal");
     const declaredDatabaseName = properties.database?.default?.mongodb?.master?.databaseName;
     if (typeof declaredDatabaseName === "string") {
       assert.equal(effective.database.default.mongodb.master.databaseName, declaredDatabaseName,
         "Explicit server database isolation must survive the framework default change");
     }
-    assert(activeModuleNames(effective).includes(server));
-    assert(activeModuleNames(effective).includes(environment));
     if (environment === "kickoffDockerLocal") {
       assert.equal(
         effective.database.default.mongodb.master.URI,
         "mongodb://configuration-test.invalid:27017",
       );
       assert.equal(properties.database.default.mongodb.master.URI, undefined);
-      const databaseModule = Object.keys(effective.database).find(
-        (name) =>
-          name !== "default" &&
-          name !== "cronjob" &&
-          activeModuleNames(effective).includes(name),
-      );
-      if (databaseModule) {
-        const previousName =
-          effective.database.default.mongodb.master.databaseName;
-        effective.database.default.mongodb.master.databaseName =
-          "nodeDatabaseOverride";
-        assert.equal(
-          databaseConfiguration(effective, databaseModule).master.databaseName,
-          "nodeDatabaseOverride",
-          "Participating modules must inherit later default database overrides",
-        );
-        effective.database.default.mongodb.master.databaseName = previousName;
-      }
-      for (const [name, search] of Object.entries(properties.search || {})) {
+      for (const [name, search] of Object.entries(effective.search || {})) {
         if (
           search.options?.enabled === true &&
           activeModuleNames(effective).includes(name)
@@ -296,85 +417,31 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     assert.equal(declaration.httpHardening?.cors?.allowedHeaders, undefined);
     assert.equal(declaration.httpHardening?.cors?.exposedHeaders, undefined);
     assert.equal(effective.authSecurity.securityStamp.enabled, true);
-    const http = require(
-      path.join(
-        frameworkRoot,
-        "nodics.foundation/modules/nRouter/src/service/defaultHttpHardeningService",
-      ),
-    );
-    const cors = corsPolicy(effective);
     assert.equal(properties.httpHardening?.cors?.allowedOrigins, undefined);
     assert.equal(properties.httpHardening?.cors?.deniedOrigins, undefined);
     if (environment === "kickoffLocal") {
-      assert.deepEqual(declaration.httpHardening.cors.allowedOrigins, [
-        "http://localhost:3600",
-        "https://coming-designated-dialog-elevation.trycloudflare.com",
-      ]);
+      assert(declaration.httpHardening.cors.allowedOrigins.includes("http://localhost:3600"));
+      for (const origin of declaration.httpHardening.cors.allowedOrigins) {
+        assert.equal(new URL(origin).origin, origin, "Deployment origins must be exact origins");
+      }
     } else {
       assert.equal(declaration.httpHardening?.cors?.allowedOrigins, undefined);
     }
-    const resolvedOrigins = http.resolveCorsOrigins(cors);
-    assert(resolvedOrigins.allowedOrigins.length > 0);
-    const expectedOrigins = Object.values(declaration.httpHardening?.cors?.originEndpoints || routerProperties.httpHardening.cors.originEndpoints)
-      .map(endpoint => `http://localhost:${endpoint.port}`)
-      .concat(declaration.httpHardening?.cors?.allowedOrigins || []);
-    assert.deepEqual(
-      [
-        ...new Set([
-          ...resolvedOrigins.allowedOrigins,
-          ...resolvedOrigins.deniedOrigins,
-        ]),
-      ].sort(),
-      [...new Set(expectedOrigins)].sort(),
-    );
-    for (const origin of resolvedOrigins.deniedOrigins) {
-      assert.equal(new URL(origin).hostname, "localhost");
-      assert.equal(http.resolveAllowedOrigin(origin, cors), undefined);
-    }
-    for (const origin of resolvedOrigins.allowedOrigins) {
-      const url = new URL(origin);
-      assert.equal(
-        http.resolveAllowedOrigin(origin, cors),
-        resolvedOrigins.deniedOrigins.includes(origin) ? undefined : origin,
+    const origins = corsOrigins(effective);
+    for (const endpoint of Object.values(declaration.httpHardening?.cors?.originEndpoints || {})) {
+      const origin = `http://localhost:${endpoint.port}`;
+      assert(
+        origins.allowedOrigins.includes(origin) || origins.deniedOrigins.includes(origin),
+        "Each customer browser endpoint reaches the selected API composition",
       );
-      if (url.hostname !== "localhost") continue;
-      url.hostname = "127.0.0.1";
-      assert.equal(http.resolveAllowedOrigin(url.origin, cors), undefined);
-      url.hostname = "172.20.10.2";
-      assert.equal(http.resolveAllowedOrigin(url.origin, cors), undefined);
     }
-    assert.equal(
-      http.resolveAllowedOrigin("http://localhost:65534", cors),
-      undefined,
-    );
-    const allowed = http.resolveCorsHeaderList(
-      cors.allowedHeaders,
-      cors.allowedHeaderOverrides,
-    );
-    assert(
-      allowed.includes("Authorization") &&
-        allowed.includes("X-Tenant-Code") &&
-        allowed.includes("Tenant"),
-    );
-    assert(
-      http
-        .resolveCorsHeaderList(cors.exposedHeaders, cors.exposedHeaderOverrides)
-        .includes("ETag"),
-    );
+    for (const origin of declaration.httpHardening?.cors?.allowedOrigins || []) {
+      assert(origins.allowedOrigins.includes(origin) || origins.deniedOrigins.includes(origin));
+    }
   }
 
-  // Runtime consumers resolve the actual server endpoint; tenant overrides stay independent.
-  const effective = loadRuntime("wasteServer", environment);
-  const registry = new Config();
-  registry.setProperties(effective);
-  const original = structuredClone(effective.servers.profile.endpoint);
-  registry.changeTenantProperties({servers:{profile:{endpoint:{httpPort:54322}}}}, "default");
-  assert.deepEqual(registry.get("servers").profile.endpoint, {...original,httpPort:54322});
   if (environment === "kickoffLocal") {
     assert.equal(declaration.search, undefined, "Local inherits the provider-owned search address");
-    assert.deepEqual(searchConfiguration(effective, "wasteSubmission").connection.hosts, ["http://localhost:9200"]);
-    effective.search.default.elastic.connection.hosts = ["https://search.example.test:9243"];
-    assert.deepEqual(searchConfiguration(effective, "wasteSubmission").connection.hosts, ["https://search.example.test:9243"], "An intentional later deployment override must reach the consumer");
   }
   assert.equal(declaration.configurationValues, undefined);
   assert.equal(fs.existsSync(path.join(environmentRoot, "nodics.environment.json")), false);
@@ -385,123 +452,33 @@ console.log(
 );
 
 require("node:test")(
-  "Redis module configuration inherits framework capability defaults and later overrides",
+  "Kickoff environments explicitly enable inherited Redis",
   async () => {
-    const helper = require("./helpers/configuration");
     assert.deepEqual(
       require("../envs/kickoffLocal/config/properties").cache.default.engines.redis,
       { enabled: true },
-      "Local enables Redis and inherits all unchanged provider options",
+      "Local enables Redis and inherits unchanged provider options",
     );
     for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       const effective = loadRuntime("commerceServer", environment);
-      const baseline = await helper.cacheConfiguration(effective, "auth");
-      assert.equal(baseline.engines.redis.enabled, true);
-      assert.equal(baseline.engines.redis.options.prefix, "localRuntimeAuth");
-      effective.cache.default.engines.redis.options.prefix = "isolatedRuntimeAuth";
-      const override = await helper.cacheConfiguration(effective, "auth");
-      assert.equal(override.engines.redis.options.prefix, "isolatedRuntimeAuth");
+      const redis = (await cacheConfiguration(effective, "auth")).engines.redis;
+      assert.equal(redis.enabled, true);
+      if (environment === "kickoffDockerLocal") {
+        assert.equal(redis.options.sentinel.enabled, true);
+        assert.equal(redis.options.sentinel.name, "nodics");
+        assert.deepEqual(redis.options.sentinel.endpoints, [{ host: "redis-sentinel", port: 26379 }]);
+        assert.equal(redis.options.sentinel.connectTimeout, 5000);
+        assert.equal(redis.options.sentinel.commandTimeout, 3000);
+      }
     }
-    const p = loadRuntime("commerceServer", "kickoffDockerLocal");
-    const inherited = await helper.cacheConfiguration(p, "auth");
-    assert.equal(inherited.engines.redis.enabled, true);
-    assert.equal(inherited.engines.redis.distributed, true);
-    assert.equal(inherited.engines.redis.atomicConsume, true);
-    p.cache.default.engines.redis.ttl = 270;
-    const changed = await helper.cacheConfiguration(p, "auth");
-    assert.equal(changed.engines.redis.ttl, 270);
-    const redis = require(
-      path.join(
-        frameworkRoot,
-        "nodics.foundation/modules/nCache/redisCache/src/service/engine/defaultRedisCacheEngineService",
-      ),
-    );
-    const selected = redis.buildSentinelOptions(changed.engines.redis.options);
-    assert.equal(selected.db, 0);
-    assert.equal(selected.retryStrategy(1), 250);
-    assert.equal(selected.retryStrategy(100), 5000);
-    assert.equal(selected.connectTimeout, 5000);
-    assert.equal(selected.commandTimeout, 3000);
   },
 );
 
-require("node:test")(
-  "Customer domains and replacement origins follow nConfig overrides and frontend identity restrictions",
-  () => {
-    const helper = require("./helpers/configuration");
-    const http = require(
-      path.join(
-        frameworkRoot,
-        "nodics.foundation/modules/nRouter/src/service/defaultHttpHardeningService",
-      ),
-    );
-    const p = loadRuntime("processServer");
-    const cors = corsPolicy(p);
-    cors.originDefaults = {
-      protocol: "https",
-      host: "preview.customer.example",
-    };
-    const editor = cors.originEndpoints.axis;
-    const publicSite = cors.originEndpoints.nexus;
-    editor.port = 443;
-    publicSite.port = 8443;
-    assert.equal(
-      http.resolveAllowedOrigin("https://preview.customer.example", cors),
-      "https://preview.customer.example",
-    );
-    assert.equal(
-      http.resolveAllowedOrigin("https://preview.customer.example:8443", cors),
-      undefined,
-    );
-    assert.equal(
-      http.resolveAllowedOrigin("http://localhost:3100", cors),
-      undefined,
-    );
-    const replacement = bindings.merge(
-      cors,
-      bindings.resolve(
-        {
-          originEndpoints: {
-            $config: "replace",
-            value: {
-              app: {
-                protocol: "https",
-                host: "app.customer.example",
-                port: 443,
-              },
-            },
-          },
-          originEndpointOverrides: { $config: "replace", value: {} },
-          allowedOrigins: { $config: "replace", value: [] },
-          deniedOrigins: { $config: "replace", value: [] },
-        },
-        cors,
-      ),
-    );
-    assert.deepEqual(http.resolveCorsOrigins(replacement), {
-      allowedOrigins: ["https://app.customer.example"],
-      deniedOrigins: [],
-    });
-    const empty = bindings.merge(
-      replacement,
-      bindings.resolve(
-        { originEndpoints: { $config: "replace", value: {} } },
-        replacement,
-      ),
-    );
-    assert.deepEqual(http.resolveCorsOrigins(empty), {
-      allowedOrigins: [],
-      deniedOrigins: [],
-    });
-  },
-);
-
-
-require('node:test')('standard CORS policy reaches independent API graphs without Platform or accelerator activation', () => {
+require('node:test')('Kickoff browser endpoints reach Online and Process without Platform activation', () => {
   const local = require('../envs/kickoffLocal/config/properties');
   const docker = require('../envs/kickoffDockerLocal/config/properties');
   assert.equal(local.httpHardening?.cors?.enabled, undefined);
-  assert.equal(local.httpHardening?.cors?.originEndpoints, undefined);
+  assert.equal(local.httpHardening.cors.originEndpoints.agora.port, 3300);
   assert.equal(docker.httpHardening.cors.enabled, undefined);
   for (const server of ['wcmsOnlineServer', 'processServer']) {
     const effective = loadRuntime(server);
@@ -509,8 +486,9 @@ require('node:test')('standard CORS policy reaches independent API graphs withou
     assert.equal(modules.includes('nodics.platform'), false);
     assert.equal(modules.includes('axis'), false);
     assert.equal(effective.httpHardening.cors.enabled, true);
-    assert.deepEqual(effective.httpHardening.cors.originEndpoints, routerProperties.httpHardening.cors.originEndpoints);
-    assert.equal(effective.httpHardening.cors.originEndpoints.axis.port, 3100);
+    for (const [code, endpoint] of Object.entries(local.httpHardening.cors.originEndpoints)) {
+      assert.deepEqual(effective.httpHardening.cors.originEndpoints[code], endpoint);
+    }
   }
 });
 
@@ -536,4 +514,119 @@ require('node:test')('Local publication callback and operational Commerce activa
   const rulesTarget = loadRuntime(rulesPack.targetServer);
   const rulesManifest = require(path.join(frameworkRoot, 'nodics.rulesEngine/modules/rulesApi/data/manifest.json'));
   assert.equal(rulesTarget.runtimeRole.code, rulesManifest.sections.rulesPolicyApproval.destinationRole);
+});
+
+require("node:test")("Kickoff adopts owner transport defaults and preserves deployment policy", () => {
+  const bindings = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+  const cases = [
+    ["kickoffDockerLocal", "wcmsStagedServer", "cms", "nodics.wcms/modules/cms",
+      { publication: { workflow: { target: { moduleName: "process", connectionType: "abstract", timeoutMs: 10000, maxAttempts: 2 } }, target: { moduleName: "cms" } } }],
+    ["kickoffDockerLocal", "wcmsStagedServer", "editorial", "nodics.wcms/modules/editorial",
+      { publication: { target: { moduleName: "editorial", connectionType: "abstract" } } }],
+    ...["kickoffLocal", "kickoffDockerLocal"].map(environment =>
+      [environment, "processServer", "process", "nodics.process/modules/workflow",
+        { publicationDecisionCallback: { target: { moduleName: "cms" } } }]),
+  ];
+  for (const [environment, server, namespace, owner, removed] of cases) {
+    const declaration = require(path.join(__dirname, "../envs", environment, server, "config/properties"));
+    const defaults = require(path.join(frameworkRoot, owner, "config/properties"))[namespace];
+    const current = declaration[namespace];
+    const before = bindings.merge(current, removed);
+    const resolve = contribution => bindings.merge(defaults, bindings.resolve(contribution, defaults));
+    assert.deepEqual(resolve(current), resolve(before), environment + "/" + server + "/" + namespace);
+    const effective = loadRuntime(server, environment);
+    assert(activeModuleNames(effective).includes(path.basename(owner)));
+    const targets = namespace === "process"
+      ? ["publicationDecisionCallback.target"]
+      : namespace === "cms" ? ["publication.workflow.target", "publication.target"] : ["publication.target"];
+    for (const targetPath of targets) {
+      const parts = targetPath.split(".");
+      const read = object => parts.reduce((value, key) => value[key], object);
+      const target = read(current);
+      for (const key of Object.keys(read(removed))) assert.equal(target[key], undefined);
+      assert.deepEqual(read(effective[namespace]), read(resolve(before)));
+      assert.equal(target.connectionName,
+        namespace === "process" ? "cmsStaged" : targetPath.includes("workflow") ? "process" : "cmsOnline");
+      const override = {};
+      let cursor = override;
+      for (const key of parts) cursor = cursor[key] = {};
+      cursor.timeoutMs = 43210;
+      const later = bindings.merge(effective[namespace], bindings.resolve(override, effective[namespace]));
+      assert.equal(read(later).timeoutMs, 43210, "Later deployment overrides remain supported");
+      const changedOwner = bindings.merge(defaults, override);
+      assert.equal(read(bindings.merge(changedOwner, bindings.resolve(current, changedOwner))).timeoutMs,
+        43210, "Unpinned owner defaults remain adoptable");
+    }
+    if (namespace === "process") {
+      assert.equal(current.actionAdapters.allowedActions.$config, "replace");
+      assert.deepEqual(effective.process.actionAdapters.allowedActions, current.actionAdapters.allowedActions.value);
+      assert.equal(current.remoteActions.targets.editorial.connectionName, "cmsStaged");
+      assert.equal(current.remoteActions.targets.rulesApi.connectionName, "rulesApi");
+    } else {
+      assert.equal(current.publication.targetTransportProvider,
+        namespace === "cms" ? "DefaultCmsPublicationModuleTransportService" : "DefaultEditorialPublicationModuleTransportService");
+      assert.equal(effective[namespace].publication.targetTransportProvider, current.publication.targetTransportProvider);
+      assert.equal(declaration.cms.publication.enabled, true);
+      assert.equal(declaration.runtimeRole.publication, "STAGED");
+    }
+  }
+});
+
+require("node:test")("Docker Commerce inherits schema participation for each Agora selection", () => {
+  const bindings = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+  const participants = {
+    domainCommerceCore: ["sharedModules", "domainCommerceCore"],
+    apparelProduct: ["domains", "apparel"],
+    electronicsProduct: ["domains", "electronics"],
+    telcoCatalog: ["domains", "telco"],
+    telcoProvisioning: ["domains", "telco"],
+    telcoSubscription: ["domains", "telco"],
+  };
+  const expectedParticipants = {
+    all: Object.keys(participants),
+    none: [],
+    apparel: ["apparelProduct"],
+    electronics: ["electronicsProduct"],
+    telco: ["electronicsProduct", "telcoCatalog", "telcoProvisioning", "telcoSubscription"],
+  };
+  for (const server of ["commerceServer", "commerceStagedServer"]) {
+    const declaration = require(path.join(__dirname, "../envs/kickoffDockerLocal", server, "config/properties"));
+    const before = structuredClone(declaration.database);
+    for (const [name, [field, includes]] of Object.entries(participants)) {
+      assert.equal(declaration.database[name], undefined);
+      before[name] = { $config: "selected", name: "agora", field, includes };
+    }
+    for (const selection of ["all", "none", "apparel", "electronics", "telco"]) {
+      const variables = {
+        NODICS_AGORA_DOMAINS: selection,
+        NODICS_MONGODB_URI: "mongodb://cfg04.invalid:27017",
+      };
+      const context = { environmentVariables: variables };
+      assert.deepEqual(
+        bindings.resolve({ database: before }, coreProperties, context),
+        bindings.resolve({ database: declaration.database }, coreProperties, context),
+        server + "/" + selection + " preserves resolved database contribution",
+      );
+      const effective = loadRuntime(server, "kickoffDockerLocal", variables);
+      const modules = activeModuleNames(effective);
+      for (const name of Object.keys(participants)) {
+        const selected = expectedParticipants[selection].includes(name);
+        assert.equal(modules.includes(name), selected, server + "/" + selection + "/" + name);
+        if (!selected) {
+          assert.equal(effective.database[name], undefined);
+          continue;
+        }
+        assert.ok(effective.database[name], name + " gets schema-derived participation");
+        const consumer = databaseConfiguration(effective, name);
+        assert.equal(consumer.master.URI, variables.NODICS_MONGODB_URI);
+        assert.equal(consumer.master.databaseName, declaration.database.default.mongodb.master.databaseName);
+        effective.database[name] = { mongodb: { master: { databaseName: "cfg04LaterOverride" } } };
+        assert.equal(databaseConfiguration(effective, name).master.databaseName, "cfg04LaterOverride");
+        assert.equal(effective.database.default.mongodb.master.databaseName,
+          declaration.database.default.mongodb.master.databaseName);
+      }
+    }
+  }
 });

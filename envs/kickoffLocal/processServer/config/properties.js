@@ -56,12 +56,24 @@ module.exports = {
           "editorial.applyDecision",
           "editorial.publishApproved",
           "cms.applyPublicationDecision",
-          "rulesApi.applyDecision"
+          "rulesApi.applyDecision",
+          "product.applyPublicationDecision",
+          "pricing.applyPublicationDecision",
+          "promotion.applyPublicationDecision",
+          "inventory.applyPublicationDecision",
+          "tax.applyPublicationDecision",
+          "media.applyPublicationDecision"
         ]
       }
     },
     "remoteActions": {
       "targets": {
+        "product": { "connectionName": "commerceStaged" },
+        "pricing": { "connectionName": "commerceStaged" },
+        "promotion": { "connectionName": "commerceStaged" },
+        "inventory": { "connectionName": "commerceStaged" },
+        "tax": { "connectionName": "commerceStaged" },
+        "media": { "connectionName": "cmsStaged" },
         "editorial": {
           "connectionName": "cmsStaged"
         },

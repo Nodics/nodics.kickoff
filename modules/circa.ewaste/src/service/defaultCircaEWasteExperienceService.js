@@ -29,7 +29,7 @@ module.exports = {
     return Object.assign({}, data, {
       application: settings.application,
       presentation: settings.presentation || {},
-      journey: Object.assign({}, settings.journey, {
+      journey: Object.assign({}, SERVICE.DefaultCircaEWasteJourneyService.settings(), {
         reviewAssignment: undefined,
       }),
     });

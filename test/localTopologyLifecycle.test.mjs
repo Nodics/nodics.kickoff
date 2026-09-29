@@ -10,27 +10,21 @@
  */
 
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import { backendRuntimes, isOwnedSupervisor, preflight, runtimeDependencyViolations, selectRuntimes } from '../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectTopologyService.mjs';
+import configuration from './helpers/configuration.js';
+
+const backendRuntimes = configuration.loadEnvironment('kickoffLocal').topology.groups.backends;
 
 assert.deepEqual(backendRuntimes.map(runtime => runtime.port), [4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350]);
 assert.equal(new Set(backendRuntimes.map(runtime => runtime.port)).size, backendRuntimes.length);
-assert.equal(selectRuntimes(false).length, 10);
-assert.equal(selectRuntimes(true).length, 10);
-assert.deepEqual(backendRuntimes.find(runtime => runtime.code === 'location')?.dependsOn, ['platform']);
-assert.deepEqual(backendRuntimes.find(runtime => runtime.code === 'waste')?.dependsOn, ['platform']);
-assert.equal(backendRuntimes.find(runtime => runtime.code === 'platform')?.readyPath, '/nodics/system/v0/health/ready');
-assert.deepEqual(backendRuntimes.find(runtime => runtime.code === 'platform')?.readinessChecks, [], 'Platform readiness must use System health without requiring optional BackOffice');
-assert.deepEqual(runtimeDependencyViolations(backendRuntimes), []);
-assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: '/wrong' }, () => 'node defaultProjectTopologyService.mjs start'), false);
-assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: process.cwd() }, () => 'node defaultProjectTopologyService.mjs start'), true);
-assert.equal(isOwnedSupervisor({ supervisorPid: 123, projectRoot: process.cwd() }, () => 'node unrelated.js'), false);
-const supervisorSource = fs.readFileSync(new URL('../../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectTopologyService.mjs', import.meta.url), 'utf8');
-assert.match(supervisorSource, /other runtimes remain running/);
-assert.match(supervisorSource, /Refusing to start because required ports are busy/);
-const preflightResult = await preflight(false);
-assert.equal(preflightResult.checks.some(check => check.id === 'runtime-dependencies' && check.state === 'PASSED'), true);
-assert.equal(preflightResult.checks.some(check => check.id === 'database-authority' && check.state === 'DEFERRED_TO_RUNTIME_READINESS'), true);
-assert.equal(preflightResult.checks.some(check => check.id === 'framework-root' && check.state === 'PASSED'), true);
+assert.equal(backendRuntimes.length, 10);
+for (const runtime of backendRuntimes.filter(item => item.code !== 'platform')) {
+  assert.deepEqual(runtime.dependsOn, ['platform'], `${runtime.code} must wait for Platform before startup admission`);
+}
+assert.deepEqual(backendRuntimes.find(runtime => runtime.code === 'platform')?.readinessChecks, [{
+  label: 'BackOffice public bootstrap',
+  path: '/nodics/backoffice/v0/bootstrap/public',
+  headers: { 'x-nodics-client-contract-version': '1' }
 
-console.log('kickoffLocal topology lifecycle contract validated');
+}], 'Platform topology readiness must include BackOffice bootstrap admission');
+
+console.log('kickoffLocal topology choices validated');

@@ -1,189 +1,38 @@
-/*
-    Nodics - Enterprice Micro-Services Management Framework
+/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import configuration from './helpers/configuration.js';
 
-    Copyright (c) 2026 Nodics All rights reserved.
+const projectRoot = fileURLToPath(new URL('..', import.meta.url));
+const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'));
+const frameworkRoot = configuration.frameworkRoot;
+const releases = [
+  { pack: 'nodicsDocumentation', file: path.join(frameworkRoot, 'nodics.docs/data/manifest.json'), section: 'documentation' },
+  { pack: 'kickoffDocumentation', file: path.join(projectRoot, 'data/manifest.json'), section: 'documentation' },
+  { baseline: 'nexus', file: path.join(frameworkRoot, 'nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json'), section: 'nexusCorporateSite' },
+];
 
-    This software is governed by the Nodics Source-Available Commercial License.
-    You may use, copy, modify, deploy, or distribute it only as permitted by the
-    root LICENSE file or a separate written agreement with Nodics.
-
- */
-
-/* Local publishing contract freeze: static, deterministic, and database-free. */
-import assert from "node:assert";
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import configuration from "./helpers/configuration.js";
-
-const root = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../..",
-);
-const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
-const publishRoutes = read(
-  "nodics.ai/nodics.foundation/modules/nPublish/src/router/routers.js",
-);
-const cmsRoutes = read(
-  "nodics.ai/nodics.wcms/modules/cms/src/router/routers.js",
-);
-const staged = read(
-  "nodics.kickoff/envs/kickoffLocal/wcmsStagedServer/config/properties.js",
-).replace(/"([^"\n]+)":/g, "$1:").replaceAll('"', "'");
-const online = read(
-  "nodics.kickoff/envs/kickoffLocal/wcmsOnlineServer/config/properties.js",
-).replace(/"([^"\n]+)":/g, "$1:").replaceAll('"', "'");
-const process = read(
-  "nodics.kickoff/envs/kickoffLocal/processServer/config/properties.js",
-).replace(/"([^"\n]+)":/g, "$1:").replaceAll('"', "'");
-const runtimeBaselines = Object.fromEntries(
-  ["kickoffLocal", "kickoffDockerLocal"].map((environment) => [
-    environment,
-    configuration.loadRuntime("wcmsStagedServer", environment).cms.publication.baselines,
-  ]),
-);
-const guidedAcceptance = read(
-  "nodics.kickoff/scripts/acceptance/defaultProjectGuidedInitializationAcceptanceService.mjs",
-);
-
-for (const permission of [
-  "publish.operations.view",
-  "publish.operations.reconcile",
-  "publish.operations.recover",
-]) {
-  assert(
-    publishRoutes.includes(permission),
-    `Missing frozen nPublish permission ${permission}`,
-  );
-}
-for (const route of [
-  "/publications/operations/diagnostics",
-  "/publications/operations/reconcile",
-  "/publications/operations/correlations/:correlationId",
-  "/publications/:publicationCode/recover",
-]) {
-  assert(
-    publishRoutes.includes(route),
-    `Missing frozen nPublish operation route ${route}`,
-  );
-}
-assert(
-  cmsRoutes.includes("authTokenTypes: ['service']"),
-  "Online target mutations must remain service-token-only",
-);
-assert(
-  cmsRoutes.includes("key: '/publication/target/reconcile'"),
-  "Online evidence reconciliation route must remain internal and explicit",
-);
-assert(
-  cmsRoutes.includes(
-    "permissionConfig: 'authSecurity.internalToken.routePermission'",
-  ),
-  "Online target permission contract must remain explicit",
-);
-assert(
-  staged.includes("runtimeRole: 'STAGED'") &&
-    !staged.includes("publishEnabled"),
-  "Staged role/versioning contract drifted",
-);
-assert(
-  online.includes("runtimeRole: 'ONLINE'") &&
-    !online.includes("publishEnabled"),
-  "Online role/versioning contract drifted",
-);
-assert.equal(
-  configuration.loadRuntime("wcmsStagedServer", "kickoffLocal").publishEnabled,
-  true,
-  "Staged publish activation must derive from the semantic publication role",
-);
-assert.equal(
-  configuration.loadRuntime("wcmsOnlineServer", "kickoffLocal").publishEnabled,
-  false,
-  "Online publish activation must derive from the semantic publication role",
-);
-assert(
-  /runtimeRole:\s*\{\s*code:\s*'PROCESS'/.test(process),
-  "Process runtime contract must remain independently composed",
-);
-assert.notStrictEqual(
-  staged.match(/databaseName:\s*'([^']+)'/)?.[1],
-  online.match(/databaseName:\s*'([^']+)'/)?.[1],
-  "Staged and Online database identities must not converge",
-);
-assert(
-  configuration.loadRuntime("wcmsStagedServer", "kickoffLocal").data.dataReleases
-    .initializationProfiles.localWcmsFoundation.enabled === true,
-  "Local WCMS Staged must resolve its guided initialization profile",
-);
-assert(
-  guidedAcceptance.includes("runtimeRole?.publication === 'STAGED'"),
-  "Guided acceptance must resolve the authoring runtime by semantic publication role",
-);
-assert(
-  guidedAcceptance.includes("runtimeRole?.publication === 'ONLINE'"),
-  "Guided acceptance must resolve the delivery runtime by semantic publication role",
-);
-assert(
-  guidedAcceptance.includes("onlineResponse.status === 403") &&
-    guidedAcceptance.includes("includes('dataImport')"),
-  "Guided acceptance must prove that Online cannot execute data imports",
-);
-assert(
-  !/mongodb|mongoose|MongoClient|deleteMany|dropDatabase/i.test(
-    guidedAcceptance,
-  ),
-  "Guided acceptance must not use a database driver or direct database CRUD",
-);
-
-for (const documentation of [
-  {
-    packCode: "nodicsDocumentation",
-    manifestPath: "nodics.ai/nodics.docs/data/manifest.json",
-  },
-  {
-    packCode: "kickoffDocumentation",
-    manifestPath: "nodics.kickoff/data/manifest.json",
-  },
-]) {
-  const manifest = JSON.parse(read(documentation.manifestPath));
-  const releaseVersion = manifest.sections.documentation.version;
-  for (const [environment, baselines] of Object.entries(runtimeBaselines)) {
-    const baseline = Object.values(baselines).find(
-      (value) => value.contentPackCode === documentation.packCode,
-    );
-    assert.equal(
-      baseline?.releaseVersion,
-      releaseVersion,
-      `${environment} ${documentation.packCode} baseline must match its immutable manifest`,
-    );
-  }
-}
-
-const nexusManifest = JSON.parse(read("nodics.ai/nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json"));
-const nexusRelease = nexusManifest.sections.nexusCorporateSite;
-assert(nexusRelease, "Nexus corporate release must be declared");
-for (const [environment, baselines] of Object.entries(runtimeBaselines)) {
-  assert.equal(baselines.nexus.releaseVersion, nexusRelease.version, `${environment} Nexus release pin must match its manifest`);
-}
-
-for (const manifestPath of [
-  "nodics.ai/nodics.accelerators/modules/nexus/modules/nexus.web/data/manifest.json",
-]) {
-  const manifest = JSON.parse(read(manifestPath));
-  assert(
-    manifest.contractVersion === 2,
-    `${manifestPath} must retain contract v2`,
-  );
-  const releases = Object.values(manifest.sections || {}).filter(
-    (section) => section.kind === "DATA_RELEASE",
-  );
-  assert(releases.length, `${manifestPath} needs immutable releases`);
+for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
+  const staged = configuration.loadRuntime('wcmsStagedServer', environment);
+  const online = configuration.loadRuntime('wcmsOnlineServer', environment);
+  assert.equal(staged.cms.publication.runtimeRole, 'STAGED');
+  assert.equal(online.cms.publication.runtimeRole, 'ONLINE');
+  assert.equal(staged.publishEnabled, true);
+  assert.equal(online.publishEnabled, false);
+  assert.equal(online.cms.publication.baselines?.kickoffdocs, undefined,
+    'Customer documentation authoring selection must not leak into Online');
+  assert.notEqual(staged.database.default.mongodb.master.databaseName, online.database.default.mongodb.master.databaseName);
+  assert.equal(configuration.loadRuntime('processServer', environment).runtimeRole.code, 'PROCESS');
+  assert.equal(staged.data.dataReleases.initializationProfiles.localWcmsFoundation.enabled, true);
   for (const release of releases) {
-    assert(
-      release.version && release.lifecycle && release.destinationRole,
-      `${manifestPath} release classification is incomplete`,
-    );
+    const manifest = readJson(release.file);
+    const baseline = release.baseline ? staged.cms.publication.baselines[release.baseline]
+      : Object.values(staged.cms.publication.baselines).find(value => value.contentPackCode === release.pack);
+    assert.equal(baseline?.releaseVersion, manifest.sections[release.section].version,
+      environment + ' ' + (release.pack || release.baseline) + ' baseline must match its selected immutable release');
   }
 }
 
-console.log("Local publishing contract freeze validated");
+console.log('Kickoff publication choices and release pins validated');

@@ -14,8 +14,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare customer workspace records for the Circa eWaste experience."
       }

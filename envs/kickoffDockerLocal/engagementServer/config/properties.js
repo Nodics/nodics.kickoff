@@ -27,16 +27,6 @@ module.exports = {
     "code": "ENGAGEMENT",
     "publication": "OPERATIONAL"
   },
-  "engagement": {
-    "capabilities": {
-      "testimonial": true,
-      "customerReview": true,
-      "customerFeedback": true
-    }
-  },
-  "customerFeedback": {
-    "enabled": true
-  },
   "database": {
     "default": {
       "mongodb": {

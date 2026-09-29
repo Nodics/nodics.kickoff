@@ -104,42 +104,6 @@ module.exports = {
           "databaseName": "kickoffDockerLocalCommerce"
         }
       }
-    },
-    "domainCommerceCore": {
-      "$config": "selected",
-      "name": "agora",
-      "field": "sharedModules",
-      "includes": "domainCommerceCore"
-  },
-    "apparelProduct": {
-      "$config": "selected",
-      "name": "agora",
-      "field": "domains",
-      "includes": "apparel"
-  },
-    "electronicsProduct": {
-      "$config": "selected",
-      "name": "agora",
-      "field": "domains",
-      "includes": "electronics"
-  },
-    "telcoCatalog": {
-      "$config": "selected",
-      "name": "agora",
-      "field": "domains",
-      "includes": "telco"
-  },
-    "telcoProvisioning": {
-      "$config": "selected",
-      "name": "agora",
-      "field": "domains",
-      "includes": "telco"
-  },
-    "telcoSubscription": {
-      "$config": "selected",
-      "name": "agora",
-      "field": "domains",
-      "includes": "telco",
     }
   },
   "servers": {

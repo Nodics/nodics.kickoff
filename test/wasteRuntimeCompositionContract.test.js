@@ -11,12 +11,7 @@
 
 'use strict';
 
-// Isolated composition tests need valid signing inputs without deployment credentials.
-process.env.NODICS_JWT_SECRET = require('node:crypto').randomBytes(48).toString('hex');
-process.env.NODICS_API_KEY_PEPPER = require('node:crypto').randomBytes(48).toString('hex');
-
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
 const path = require('node:path');
 
 /** @module test/wasteRuntimeCompositionContract @description Verifies Kickoff owns a separate local Waste Management server that composes framework Waste and accelerator presets. @layer test @owner nodics.kickoff */
@@ -24,10 +19,7 @@ const path = require('node:path');
 const projectRoot = path.resolve(__dirname, '..');
 
 const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
-const coreRoot = path.join(frameworkRoot, 'nodics.foundation');
-const runtimeRoots = require('../envs/kickoffLocal/wasteServer/package.json').nodics.runtimeModuleRoots.map(relative => path.join(frameworkRoot, relative));
-const acceleratorRoot = path.join(frameworkRoot, 'nodics.accelerators/modules/waste');
-const config = require(path.join(coreRoot, 'modules/nConfig'));
+const prepare = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
 
 const expectedWasteModules = [
     'nodics.waste',
@@ -52,33 +44,8 @@ const expectedWasteModules = [
     'circa.ewaste'
 ];
 
-const expectedSchemas = {
-    wasteCore: ['wasteLifecyclePolicy'],
-    wasteMaterial: ['wasteFamily', 'wasteCategory', 'wasteItemType', 'wasteMaterialType', 'wasteConditionGrade', 'wasteEvidencePolicy'],
-    wasteCollection: ['wasteCollectionPointType', 'wasteCollectionPoint', 'wasteCollectionAcceptanceRule', 'wasteCollectionPreset', 'wasteReceiptPolicy'],
-    wasteSubmission: ['wasteSubmission', 'wasteEvidence', 'wasteMetadataSuggestion'],
-    wasteVerification: ['wasteVerificationPolicy', 'wasteVerification'],
-    wasteReceipt: ['wasteReceipt'],
-    wasteImpact: ['wasteImpactMetric', 'wasteImpactProfile', 'wasteImpactResult'],
-    wasteMovement: ['wasteBatch', 'wasteMovement'],
-    wasteCompliance: ['wasteComplianceProfile', 'wasteComplianceEvidence']
-};
-
 async function main() {
-    const options = Object.freeze({
-        NODICS_HOME: coreRoot,
-        CUSTOM_HOME: projectRoot,
-        MODULE_ROOTS: Object.freeze([coreRoot, ...runtimeRoots, projectRoot]),
-        defaultEnvironment: 'kickoffLocal',
-        defaultServer: 'wasteServer'
-    });
-
-    // Load the selected runtime from source so this contract remains independent
-    // of execution order and does not require pre-generated server artifacts.
-    await config.start(options);
-    await config.initUtilities(options);
-    await config.loadModules(Array.from(NODICS.getIndexedModules().keys()));
-    await config.initEntities();
+    prepare({ projectRoot, frameworkRoot, environment: 'kickoffLocal', server: 'wasteServer' });
 
     assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');
     assert.equal(NODICS.getServerName(), 'wasteServer');
@@ -102,38 +69,8 @@ async function main() {
     });
     assert.equal(NODICS.getRawModule('nodics.accelerators'), undefined, 'Waste runtime should discover only the Waste accelerator subtree');
 
-    assert(SERVICE.DefaultWasteDataContributionPolicyService, 'Waste data contribution policy service must load');
-    assert(SERVICE.DefaultWasteAcceptancePolicyService, 'Waste acceptance policy service must load');
-    assert(SERVICE.DefaultWasteSubmissionLifecycleService, 'Waste submission lifecycle service must load');
-    assert(SERVICE.DefaultWasteImpactCalculationService, 'Waste impact calculation service must load');
-    assert(SERVICE.DefaultWasteBackofficeCapabilityService, 'Waste BackOffice capability provider must load');
-    const wasteBackofficeCapability = SERVICE.DefaultWasteBackofficeCapabilityService.getCapability();
-    assert.equal(wasteBackofficeCapability.capabilityId, 'waste-management');
-    assert.equal(wasteBackofficeCapability.requiredPermissions.includes('waste.backoffice.view'), true);
-    assert.equal(wasteBackofficeCapability.navigation.some(item => item.id === 'waste-submissions'), true);
-    assert(FACADE.DefaultWasteInternalFacade, 'Waste internal facade must load');
-    assert(CONTROLLER.DefaultWasteInternalController, 'Waste internal controller must load');
-
-    const mergedSchema = SERVICE.DefaultFilesLoaderService.loadSchemaFiles('/src/schemas/schemas.js', null);
-    SERVICE.DefaultDatabaseConfigurationService.setRawSchema(mergedSchema);
-    await SERVICE.DefaultDatabaseSchemaHandlerService.buildDatabaseSchema(mergedSchema);
-    await SERVICE.DefaultInfraService.buildServices();
-
-    Object.entries(expectedSchemas).forEach(([moduleName, schemaNames]) => {
-        const rawSchema = NODICS.getModule(moduleName).rawSchema || {};
-        schemaNames.forEach(schemaName => {
-            assert(rawSchema[schemaName], `${moduleName}.${schemaName} should be materialized for wasteServer`);
-            assert.equal(rawSchema[schemaName].service.enabled, true, `${moduleName}.${schemaName} should generate service capability`);
-            assert.equal(rawSchema[schemaName].router.enabled, true, `${moduleName}.${schemaName} should expose governed schema operations`);
-            assert.equal(rawSchema[schemaName].router.groups.schemaOperations, true, `${moduleName}.${schemaName} must retain schema operation governance`);
-            assert.equal(rawSchema[schemaName].definition.tenant, undefined, `${moduleName}.${schemaName} must derive tenant from runtime context`);
-            assert.equal(rawSchema[schemaName].definition.enterpriseCode, undefined, `${moduleName}.${schemaName} must not store enterpriseCode`);
-        });
-    });
-
-    const manifest = require(path.join(acceleratorRoot, 'modules/eWaste/data/manifest.json'));
-    assert.equal(manifest.sections['core-reference'].destinationRole, 'WASTE');
-    assert.equal(manifest.sections['core-reference'].dataType, 'core');
+    // Effective schema materialization and generated services are covered by
+    // Waste's independent wasteGeneratedRuntimeContract, including service-only schemas.
     const overlayManifest = require(path.join(projectRoot, 'modules/circa.ewaste/data/manifest.json'));
     assert.equal(overlayManifest.sections['waste-policy'].destinationRole, 'WASTE');
     assert.equal(overlayManifest.sections['waste-policy'].dataType, 'core');

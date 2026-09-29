@@ -1,9 +1,16 @@
 # Deployment qualification
 
+Release owners and architects should start with the
+[Local acceptance checklist](local-acceptance-checklist.md). Developers use
+[Local setup to live](local-setup-to-live-runbook.md) for onboarding; operators
+use [Local publishing operations](local-publishing-operations.md) for recovery.
+
 Deployment qualification is the bridge between a release candidate that works
 locally and a release that accountable owners may approve for production. The
-Kickoff runner coordinates evidence from the framework, reference project,
-Axis, and local Redis, but it deliberately cannot approve production by itself.
+framework-owned runner coordinates evidence from the framework, reference
+project and local Redis, but it cannot approve production by itself.
+Frontend verification belongs to each frontend repository and is collected
+separately; this backend runner does not launch or test Axis.
 
 For beginners, the safest way to read this page is as an evidence map. Kickoff
 can prove that the local reference stack behaves consistently, but business
@@ -21,14 +28,15 @@ npm run qualification:deployment
 The JSON plan identifies each gate, its owner, the command that would run, and
 what it proves. It contains no credentials or provider URLs.
 
-Run the safe local gates:
+After reviewing the plan and obtaining authorization, run the Local gates.
+They include builds, live-provider tests and mutating retained-data acceptance:
 
 ```bash
 npm run qualification:deployment:local
 ```
 
-The runner executes the strict framework release gate, retained-data Kickoff
-acceptance, Axis verification, and the live Redis cache and distributed
+The runner executes publishing and security contracts, the strict framework
+release gate, retained-data Kickoff acceptance, and the live Redis cache and distributed
 registry contracts. It writes sanitized evidence to:
 
 ```text
@@ -63,7 +71,7 @@ environment and verify the configured database names first.
 | ------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
 | Framework          | Clean build, generated contracts, governance, dependency audit, and automated suites | Deployment-image and target-runtime confirmation                           |
 | Kickoff            | Integrated runtime, documentation, lifecycle, and business-user smoke journey        | Production topology and operational ownership                              |
-| Axis               | Formatting, lint, type safety, automated tests, and production bundle                | Supported browser/device and human assistive-technology matrix             |
+| Frontends (separate evidence) | Each application's own formatting, lint, type safety, tests and build | Browser/device and human assistive-technology matrix |
 | Redis              | Real local cache and distributed-registry behavior                                   | Managed TLS/authentication, topology, isolation, failover, and recovery    |
 | Payments/providers | Mock and offline contract behavior                                                   | Real non-production credentials, callbacks, failure handling, and rollback |
 
@@ -91,7 +99,7 @@ Named owners must attach evidence for all applicable rows:
 
 ```mermaid
 flowchart TD
-  Plan["Print qualification plan"] --> Local["Run safe local evidence"]
+  Plan["Review qualification plan and authorize mutation"] --> Local["Run Local evidence gates"]
   Local --> Fresh{"Isolated fresh environment available?"}
   Fresh -- "yes" --> Bootstrap["Run bounded fresh bootstrap"]
   Fresh -- "no" --> Provision["Provision qualification environment"]
@@ -120,8 +128,9 @@ repository first, rerun the focused failing command, then rerun the pack.
 
 If Redis is unavailable, start or configure an approved test endpoint and set
 `NODICS_CACHE_REDIS_URL` only in the execution environment. Do not commit it.
-If the framework, Axis, or Kickoff checkout lives elsewhere, provide
-`NODICS_QUALIFICATION_FRAMEWORK_ROOT` or `NODICS_QUALIFICATION_AXIS_ROOT`.
+Resolve the framework through the declared dependency or supported explicit
+framework-root configuration. Frontend locations and test commands belong
+to the respective frontend projects, not this backend qualification profile.
 
 ## Customization boundary
 
@@ -131,7 +140,7 @@ The runner implementation belongs to framework tooling. The root
 metadata and conventional acceptance scripts. Thin command aliases and
 human-readable project metadata live in `package.json`. Domain selections and qualification profile facts live
 beside the environment, for example
-`envs/kickoffDockerLocal/nodics.environment.json`. Data packs are owned by
+`envs/kickoffLocal/config/properties.js`. Data packs are owned by
 module data manifests. Runtime server startup facts stay with the selected
 environment server packages.
 A generated customer project should reuse the framework runner through project
@@ -179,8 +188,10 @@ npm run test:qualification
 npm run qualification:deployment
 ```
 
-Confirm the plan contains five non-destructive local gates, nine explicit
-external gates, no environment values, and `productionApproved: false`. Then
+Confirm the plan lists framework contracts, the release gate, retained-data
+acceptance and live Redis checks, plus nine explicit external gates, sanitized
+values and `productionApproved: false`. The retained-data journey is mutating
+even though no fresh reset is selected. Then
 run `npm run qualification:deployment:local` in the prepared local workspace.
 Confirm every attempted local gate is `PASSED`, the report is written only
 under the ignored `envs/kickoffLocal/generated` path, and all production-only

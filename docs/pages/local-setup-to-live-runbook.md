@@ -1,5 +1,11 @@
 # Local Setup to Live Runbook
 
+Start here for the administrator and new-developer screen journey. Use the
+[Local acceptance checklist](local-acceptance-checklist.md) for prerequisites,
+non-live checks, mutation warnings and sign-off. Backend developers can first
+read [Local runtime](local-runtime.md); operators use
+[Local publishing operations](local-publishing-operations.md) for recovery.
+
 This runbook is the new-user golden path for making the Nodics reference stack
 live on a developer machine. It starts from a local checkout, opens Axis, signs
 in, follows the guided setup workspaces, publishes governed data to Online, and
@@ -57,7 +63,7 @@ site, and Agora is the commerce storefront.
 Run the first setup from `nodics.kickoff`:
 
 ```bash
-npm install
+npm ci
 npm run nodics:project:validate
 ```
 
@@ -68,7 +74,7 @@ Run frontend setup from each frontend repository that will be opened:
 
 ```bash
 cd ../nodics.exp/nodics.axis
-npm install
+npm ci
 ```
 
 Repeat dependency installation for Nexus and Agora when their local
@@ -76,14 +82,16 @@ repositories have not been installed yet.
 
 ## Start the local stack
 
-From `nodics.kickoff`, start the full local stack:
+From `nodics.kickoff`, start the selected local backends:
 
 ```bash
 npm run topology:start
 ```
 
-This starts backend runtimes and frontends in dependency-aware order. Use this
-command when a new user wants to see the whole product work together.
+This starts backend runtimes in dependency-aware order. It does not start
+frontends. Run `npm run dev` separately inside Axis and each selected frontend
+repository; use those repositories' own verification instructions. Backend
+topology status and stop apply only to the owned backend processes.
 
 Use this command from another terminal to inspect status:
 
@@ -375,7 +383,7 @@ Verify:
 
 | Symptom | Likely cause | Where to fix |
 | --- | --- | --- |
-| Axis login page does not open | Axis frontend is not running or `3100` is occupied. | Run `npm run topology:status`, then restart the owned topology. |
+| Axis login page does not open | Axis frontend is not running or `3100` is occupied. | Check the Axis terminal and start it from its own repository; backend topology does not manage Axis. |
 | Bundled recovery login appears every time | The managed Axis baseline is not Online, publication was not approved, or the CMS route did not load. | Use the first-launch initialization workspace, then check Process approval and WCMS Online readiness. |
 | Initialize Axis stays approval pending | The baseline import finished, but the governed Process task has not been approved or published. | Open `/process/tasks`, review the task, approve it, then refresh Axis. |
 | Login fails for local admin | Platform/Profile is unavailable or seed data is missing. | Check Platform server logs and guided Platform foundation data. |
@@ -397,7 +405,10 @@ changes materially, update the matching image under:
 docs/assets/images/local-setup/
 ```
 
-Then regenerate and validate the Kickoff documentation content pack:
+Before regenerating, review the catalogue version and content path. Stable
+release changes require a forward version and unused `core-vNNN` path. Do not
+overwrite old release bytes; reconcile uncertain installed receipt/publication
+history first. Then generate and validate the selected successor content pack:
 
 ```bash
 npm run docs:generate
@@ -429,7 +440,7 @@ Avoid these mistakes during a first local setup:
 ## Verification
 
 Run these commands after changing this guide, screenshots, catalogue metadata,
-or setup behavior:
+or setup behavior, after the release-identity review above:
 
 ```bash
 npm run docs:generate
@@ -437,13 +448,15 @@ npm run docs:check
 npm run nodics:project:validate
 ```
 
-When setup behavior changes, also run the guided initialization and local
-qualification contracts:
+The local qualification contracts do not require live initialization:
 
 ```bash
-npm run acceptance:guided-initialization
 npm run test:qualification
 ```
+
+For authorized live initialization, follow the checklist's explicit
+`--execute --approve-publications` path. Do not run mutating acceptance simply
+because documentation changed.
 
 Browser verification should include the first-launch recovery login and
 Initialize Axis workspace on a fresh schema, then managed Axis login,

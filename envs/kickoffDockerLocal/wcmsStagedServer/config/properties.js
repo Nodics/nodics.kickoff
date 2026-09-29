@@ -65,30 +65,6 @@ module.exports = {
         "axis": {
           "releaseVersion": "0.0.0"
         },
-        "agoraapparel": {
-          "releaseCode": "agora.apparel:agoraApparelContentCatalog",
-          "releaseVersion": "0.0.7",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraApparelSite",
-          "sourceVersion": "0"
-        },
-        "agoraelectronics": {
-          "releaseCode": "agora.electronics:agoraElectronicsContentCatalog",
-          "releaseVersion": "0.0.2",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraElectronicsSite",
-          "sourceVersion": "0"
-        },
-        "agoratelco": {
-          "releaseCode": "agora.telco:agoraTelcoContentCatalog",
-          "releaseVersion": "0.0.2",
-          "dataType": "sample",
-          "rootType": "site",
-          "rootCode": "agoraTelcoSite",
-          "sourceVersion": "0"
-        },
         "frameworkdocs": {
           "contentPackCode": "nodicsDocumentation",
           "releaseVersion": "0.16.14",
@@ -102,41 +78,27 @@ module.exports = {
           "rootType": "site",
           "rootCode": "axisDocumentationSite",
           "sourceVersion": "0"
-        },
-        "kickoffdocs": {
-          "contentPackCode": "kickoffDocumentation",
-          "releaseVersion": "0.0.3",
-          "rootType": "site",
-          "rootCode": "kickoffDocumentationSite",
-          "sourceVersion": "0"
         }
       },
       "targetTransportProvider": "DefaultCmsPublicationModuleTransportService",
       "workflow": {
         "target": {
-          "moduleName": "process",
-          "connectionName": "process",
-          "connectionType": "abstract",
-          "timeoutMs": 10000,
-          "maxAttempts": 2
+          "connectionName": "process"
         }
       },
       "target": {
-        "moduleName": "cms",
         "connectionName": "cmsOnline"
       }
     }
   },
   "editorial": {
     "workflow": {
-      "processBaseUrl": "http://process:4330"
+      "processConnectionName": "process"
     },
     "publication": {
       "targetTransportProvider": "DefaultEditorialPublicationModuleTransportService",
       "target": {
-        "moduleName": "editorial",
-        "connectionName": "cmsOnline",
-        "connectionType": "abstract"
+        "connectionName": "cmsOnline"
       }
     }
   },

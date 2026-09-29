@@ -13,6 +13,9 @@ module.exports = {
     "modules": [
       "redisCache",
       "circa.ewaste",
+      "agora.apparel",
+      "agora.electronics",
+      "agora.telco",
       "nexusCore",
       "search",
       "elastic",

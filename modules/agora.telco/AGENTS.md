@@ -1,5 +1,11 @@
 # agora.telco Agents
 
+This is a customer application in nodics.kickoff, consuming the telco accelerator.
+Keep application identity, properties, BackOffice profiles, media and data here.
+Sample/reference status and content-pack metadata do not transfer ownership to
+nodics.ai. Extract only separately reviewed reusable domain behavior. Apply the
+nSetup customer-project-mode contract and its application ownership table.
+
 Follow the root Nodics AI agent contract before changing this boundary:
 
 - root `README.md` explains the human/documentation route.

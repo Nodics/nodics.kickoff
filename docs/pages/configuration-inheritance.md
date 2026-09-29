@@ -20,6 +20,17 @@ publication and reset operations.
 
 ## Understand the ownership before editing
 
+| Customer application in Kickoff | Accelerator dependency in nodics.ai |
+| --- | --- |
+| agora.apparel | apparel |
+| agora.electronics | electronics |
+| agora.telco | telco |
+| circa.ewaste | eWaste |
+
+An application remains customer-owned when used as a demo or reference. Extract
+only independently reusable domain behavior after an explicit ownership review;
+do not move the application's identity, policies, profiles or data with it.
+
 | Concern | Kickoff location | What stays inherited |
 | --- | --- | --- |
 | Shared project administration profiles | `modules/kickoffCore/config/properties.js` under Platform runtime-role profiles | BackOffice orchestration, permissions, validation and imports |
@@ -30,9 +41,10 @@ publication and reset operations.
 | Customer commerce policy | Local/Docker Commerce and Commerce Staged properties | Neutral framework behavior; the actual Agora store remains explicit |
 | Circa application policy | `modules/circa.ewaste/config/properties.js` | Waste, Profile, Location and BackOffice authorities |
 
-`kickoffCore` owns descriptors common to Local and Docker Local, including
-application identity/presentation, equal data-package lists and shared
-activation selections. nConfig projects those descriptors only when the selected
+`kickoffCore` owns project documentation and shared activation selections.
+Agora application packs and profiles belong to their respective customer modules
+here, just like Circa. Axis contributes disabled documentation setup descriptors;
+Kickoff enables the selected entries. nConfig projects project profiles when the selected
 runtime role is Platform. The descriptors contain no deployment credential,
 port, listener, or startup behavior. Environment and server files still own the
 actual deployment transport differences.
@@ -48,6 +60,14 @@ flowchart LR
 ```
 
 ## Why the ordering matters
+
+Customer application packs use project-module indexes after framework defaults.
+Platform and WCMS Staged select them through normal customer-module discovery,
+without importing application ownership into the framework. Media descriptors use
+`manifestModule` and a module-relative `manifestPath` for both customer and framework owners.
+Customer runtime selection, reset boundaries, destination aliases and database
+bindings stay here. Module manifests already supply activation-package facts;
+the project entries only route those observed packages to selected runtimes.
 
 `kickoffCore` is part of the project module graph. Its BackOffice descriptors
 use `runtimeRoleProfiles.PLATFORM`, so Platform receives them and non-Platform
@@ -134,9 +154,29 @@ When adding a new environment or server:
 
 ## Preserve arrays and operational safeguards
 
+Backend qualification does not require a frontend checkout. Axis knowledge is
+an explicit external-source choice: supply `NODICS_COPILOT_AXIS_ROOT` and enable
+`NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED`; source-code ingestion additionally uses
+`NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED`. Missing selections stay disabled.
+The Local composition source belongs only to the Local Platform profile.
+
+Shared customer Engagement opt-ins live in Kickoff Core's `ENGAGEMENT` role
+profile. Local notification templates and trusted-source bindings live in the
+Local environment's matching role profile, without selecting Circa there.
+Later deployment layers can still disable these choices.
+
+Acceptance URL selectors resolve the selected server's published endpoint;
+internal Editorial calls use the configured `processConnectionName` through
+nRouter. Explicit legacy `processBaseUrl` overrides retain precedence. Do not
+copy a second catalogue of listener, published or internal ports: they have
+different consumers and must not be substituted for one another. Backend
+container network qualification covers selected backend network boundaries;
+external frontend qualification is separate. Docker execution remains a
+separate validation step, not evidence supplied by configuration-only tests.
+
 Current nConfig merges arrays by position. A shorter override can retain
 inherited trailing entries; an empty array is not a general removal instruction.
-This migration shares a list only when the complete values match. Deployment
+Share a list only when its complete values and ownership match. Deployment
 lists that differ remain explicitly owned at their boundary. Use an existing
 capability-specific removal mechanism where available and verify the effective
 result before changing an activation or reset inventory.
@@ -183,23 +223,24 @@ From the Kickoff repository:
 node --test test/configurationInheritanceContract.test.js test/guidedInitializationProfilesContract.test.js test/communicationActivationDataContract.test.js test/dockerLocalEnvironmentContract.test.mjs
 node test/runtime-prepare.test.js
 node test/dockerLocalRuntimePrepare.test.js
-npm run docs:generate
 npm run docs:check
 ```
 
-The configuration contract checks selection scope, index order, inherited
-profile identity, environment-owned transports, a later node override and reset
-boundaries. Existing runtime preparation checks use real nConfig resolution for
+The customer configuration tests check selection scope, index order, profile
+identity, environment-owned transports and reset selections. Node-override and
+tenant-isolation behavior belongs to nConfig's `configurationBindingContract.test.js`;
+CORS, provider inheritance and neutral domain defaults are tested by their framework
+owners with independent fixtures. Existing runtime preparation checks use real nConfig resolution for
 Local and Docker Local. Declaration tests compose the shared defaults instead
 of assuming that a server file contains its entire effective configuration.
 
-For this refactor, complete before/after preparation comparisons covered nine
-Local and ten Docker Local runtimes across five domain selections: all, none,
-Apparel, Electronics and Telco. These checks verify that Platform receives the
+Compare Local and Docker Local runtimes across the supported domain selections:
+all, none, Apparel, Electronics and Telco. These checks verify that Platform receives the
 project-owned BackOffice descriptors through `kickoffCore` runtime-role profiles
 while non-Platform runtimes do not. They prepare configuration and metadata; they do not
 start listeners, reset databases, import packages or prove signed-in browser
-behavior. Re-run the relevant operational journey after deploying/restarting
+behavior. Dated outcomes belong in `docs/evidence/`, not this operating guide.
+Re-run the relevant operational journey after deploying/restarting
 changed source through the usual project procedure.
 
 ## Common mistakes, troubleshooting and rollback
@@ -224,11 +265,12 @@ resolved Foundation package.
 
 ## Commands and capability inventories
 
-The framework supplies shared tooling operations. This project's server aliases
-are discovered from `envs/*` server metadata, and application-specific scripts
-are discovered from conventional files under `scripts/acceptance`. For example,
-`acceptance:agora-commerce` launches the project-owned customer journey through
-the shared executor. Moving ownership does not authorize executing that journey:
+The framework supplies canonical acceptance operations. This project's server
+aliases are discovered from `envs/*` server metadata. Customer npm aliases select
+real applications and fixtures; they delegate to protected framework commands.
+For example, `acceptance:agora-commerce` selects the Commerce journey owned by
+the framework. Do not restore copied acceptance services under `scripts/acceptance`.
+Moving ownership does not authorize executing that journey:
 its existing credential, import, startup and destructive confirmation gates apply.
 
 The shared documentation generator reads this project's `docs/catalogue.json`
@@ -236,6 +278,16 @@ publication metadata. Record/code prefixes and routes are stable persisted
 identifiers; changing them requires an explicit content migration. Labels and
 channels remain application choices. A different project supplies its own values
 without editing framework source.
+
+After source documentation changes, select a reviewed forward release before
+generation. Stable generated content must not be overwritten under the same
+version or output path. The framework generator accepts a new governed
+`docs/catalogue.json.publication.contentPath` such as `core-v002` and preserves
+the previous artifacts. Review installed receipts and publication history before
+choosing the next version; local Git history alone cannot prove installed state.
+`docs:check` remains a generation-consistency gate and may correctly fail while
+a release-history issue is unresolved. Source validation and published readiness
+must be reported separately.
 
 Local reset definitions select capability inventories through module-owned
 `localResetProvider.profiles` keyed by runtime role. Each profile selects
@@ -413,6 +465,44 @@ Kickoff Local declares no default database-name block. Server-specific names,
 including separate Staged/Online and Process/Cron databases, remain explicit
 isolation overrides. This source cleanup does not migrate or rename existing data.
 
+## Local extraction ownership (2026-09-28)
+
+Complete capability-registry, guided-initialization and deployment-qualification
+suites now live in BackOffice, CMS and nTooling. The existing npm aliases invoke
+those owner commands without local script copies. Canonical command metadata
+rejects project replacements and same-name script shadowing. Customer fixtures,
+topology and application profile selection remain supported inputs.
+
+Registry acceptance requires `--execute`; guided initialization additionally
+requires `--approve-publications`. It uses normal Process approval, never an
+implicit emergency override. `qualification:deployment` prints a plan by default;
+its mandatory security/publication checks call framework tooling directly.
+Customer journey results supplement canonical gates and cannot approve production.
+Other mixed acceptance scripts remain extraction work, not approved examples of
+customer ownership for reusable framework assertions.
+
+Reusable domain behavior belongs to functional modules; reusable composed
+industry behavior belongs to accelerators. Customer applications, scenarios,
+data, selections and deployment bindings stay in Kickoff. The same rule applies
+to configuration, tests and documentation. `kickoffApi` and `kickoffInt` remain
+customer extension templates, not misplaced framework modules.
+
+CMS and Editorial now own neutral publication transport defaults. Local Staged
+retains peer connection selection, enablement and provider selection. Framework
+defaults alone neither publish nor approve a release. Communication owns inert
+Telegram technical defaults; Local Engagement selects the type and retains the
+Circa credential reference, notification policy and trusted sources.
+
+Framework documentation and Axis own their acceptance pack descriptors; Kickoff
+owns its documentation descriptor and the explicit pack selection. nTooling
+combines inert discovered defaults with the selected runtime's effective nConfig
+acceptance policy, including custom modules. Static discovery is not activation.
+Configuration placement enforcement also lives in nTooling's existing audit.
+
+Local-only follow-up validation and remaining migrations are tracked in the
+[local acceptance checklist](local-acceptance-checklist.md). Docker execution is
+deferred; previous Docker evidence does not qualify this follow-up batch.
+
 ## Nexus accelerator migration
 
 The `nexus` accelerator now owns the former Nexus reference content pack at
@@ -430,3 +520,41 @@ Common Nexus publication baselines and delivery defaults are accelerator-owned.
 The Local-only incremental/professional-copy proof selections remain Local deltas;
 Kickoff's combined Nexus/Agora acceptance profile list remains a project choice.
 No data was imported, uploaded or published by this source migration.
+
+## Application policy and role selection
+
+Agora publication baselines belong to each owning application under
+`cms.runtimeRoleProfiles.WCMS_STAGED`. Selecting no Agora domains supplies no
+Agora baseline; Platform presentation identifies these profiles as applications.
+Package selections, explicit user import triggers and Online approval remain intact.
+Release pins still require the publication manifest consistency check.
+
+Circa owns shared photo metadata and conversation selection under the WASTE
+profiles of `wasteSubmission` and `eWaste`. Local and Docker Waste keep their
+different public links. A later override of role policy must use the same
+`runtimeRoleProfiles.WASTE` path; role profiles are folded into effective
+configuration after ordinary namespace values. The eWaste journey supplies neutral
+position-age, capture-timeout and centre-count defaults. An application must
+supply its arrival radius: a missing radius fails closed before arrival decisions.
+
+Local and Docker environments own Agora/Circa CORS origins for all API roles,
+including roles where those applications are not active. nRouter retains only
+framework origins and origin-construction behavior. Exact-origin and denial
+semantics remain unchanged.
+
+The Circa refund owner-port descriptor remains an explicit cross-runtime binding:
+Commerce does not load eWaste. Do not activate the accelerator just to inherit
+its descriptor. Copilot source controls now use opt-in Knowledge-owned templates;
+project definitions retain roots, identities, versions, enablement and scope.
+Normalized Local and Docker source definitions match the pre-extraction snapshot.
+Docker Platform still does not activate Copilot Knowledge: these definitions
+remain inert there, and configuration checks do not imply Docker live acceptance.
+Telegram schema reuse likewise needs coordinated
+provider availability and central schema routing; existing operational schemas
+remain unchanged. Initialization package simplification is deferred: explicit
+selection, destination, reset and approval controls remain authoritative.
+
+Run `node --test test/applicationConfigurationOwnershipContract.test.js` with
+the configuration, publishing and guided-initialization gates above, followed by
+both Local and Docker runtime preparation tests. These checks do not start
+listeners or import/publish data.

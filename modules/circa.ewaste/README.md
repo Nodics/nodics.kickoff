@@ -9,6 +9,12 @@ Domain journeys use `/nodics/eWaste/v0`. Owning frameworks keep submissions,
 assets, wallets, orders, coupons, media and locations. Sample records retain their
 existing release identities and must not be reimported over transaction history.
 
+The EXPLICIT `waste-policy` 0.0.1 successor consumes neutral eWaste 0.0.1 through
+nImport source-key inheritance while retaining Circa identifiers and policy.
+The optional `waste` 0.0.5 sample contains no taxonomy/profile writes and is for
+separately verified fresh environments only. Historical payloads are retained.
+See [source and installed adoption boundaries](llm/contracts/circa-application.md#existing-data-compatibility).
+
 Circa checks arrival without creating a submission. Photo preparation analyzes
 temporary bytes first, then saves Media and a prepared Waste draft after success.
 The old empty-draft creation route is rejected. Closing before analysis succeeds
@@ -30,7 +36,7 @@ in the guide; durable Telegram identity links, source notifications, rich metada
 and full review-history contracts remain pending. The `/telegram` shell is not
 actual Telegram end-to-end qualification.
 
-Location recovery distinguishes unavailable, expired, missing-accuracy and approximate readings. Desktop capture may fall back to browser geolocation; the backend still requires the configured accuracy and arrival radius. A failed check preserves saved evidence and cannot confirm arrival.
+Location recovery distinguishes unavailable and expired readings. Desktop capture may fall back to browser geolocation; arrival requires fresh usable coordinates and direct distance within the configured inclusive radius. Accuracy is optional observation metadata, never an arrival gate. A failed check preserves saved evidence and cannot confirm arrival.
 
 The `customer-workspace` core release adds `/account/waste` WCMS composition for
 customer listing, Quick view and full item detail, with no transactional samples.

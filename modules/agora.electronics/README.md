@@ -12,7 +12,7 @@ The content pack contains Electronics media and merchandising, with shared
 commerce/rendering contracts retained. Active release roots and versions come
 from `data/manifest.json`. All retained content roots are checked for foreign
 assets, orphan files and missing page/media references by
-`npm run test:data-ownership` at the project root.
+`npm run test:data-ownership` at the Kickoff root.
 
 See [data ownership](llm/contracts/data-ownership-contract.md) for cleanup,
 publication and previously imported runtime-record boundaries.

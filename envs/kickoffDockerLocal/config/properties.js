@@ -78,16 +78,16 @@ module.exports = {
         "NEXUS_CMS_URL": "wcmsOnline"
       },
       "urls": {
-        "platform": "http://127.0.0.1:5300",
-        "wcmsStaged": "http://127.0.0.1:5312",
-        "wcmsOnline": "http://127.0.0.1:5314",
-        "process": "http://127.0.0.1:5330",
-        "engagement": "http://127.0.0.1:5340",
-        "loyalty": "http://127.0.0.1:5360",
-        "commerceStaged": "http://127.0.0.1:5352",
-        "commerce": "http://127.0.0.1:5350",
-        "waste": "http://127.0.0.1:5370",
-        "location": "http://127.0.0.1:5380"
+        "platform": { "server": "platformServer" },
+        "wcmsStaged": { "server": "wcmsStagedServer" },
+        "wcmsOnline": { "server": "wcmsOnlineServer" },
+        "process": { "server": "processServer" },
+        "engagement": { "server": "engagementServer" },
+        "loyalty": { "server": "loyaltyServer" },
+        "commerceStaged": { "server": "commerceStagedServer" },
+        "commerce": { "server": "commerceServer" },
+        "waste": { "server": "wasteServer" },
+        "location": { "server": "locationServer" }
       }
     },
     "container": {
@@ -99,16 +99,16 @@ module.exports = {
       "mongodbHost": "mongodb",
       "redisPrimaryHost": "redis-primary",
       "hostPorts": [
-        5300,
-        5312,
-        5314,
-        5330,
-        5340,
-        5350,
-        5352,
-        5360,
-        5370,
-        5380
+        {"$config":"runtime","name":"platformServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"wcmsStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"wcmsOnlineServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"processServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"engagementServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"commerceServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"commerceStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"loyaltyServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"wasteServer","path":"servers.default.browserEndpoint.httpPort"},
+        {"$config":"runtime","name":"locationServer","path":"servers.default.browserEndpoint.httpPort"}
       ],
       "nativeIsolationPorts": [
         4300,
@@ -139,20 +139,20 @@ module.exports = {
         "environmentContract": "test/dockerLocalEnvironmentContract.test.mjs",
         "runtimePrepare": "test/dockerLocalRuntimePrepare.test.js",
         "runtimePorts": [
-          5300,
-          5312,
-          5314,
-          5330,
-          5340,
-          5350,
-          5352,
-          5360,
-          5370,
-          5380
+          {"$config":"runtime","name":"platformServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wcmsStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wcmsOnlineServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"processServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"engagementServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"commerceServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"commerceStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"loyaltyServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wasteServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"locationServer","path":"servers.default.browserEndpoint.httpPort"}
         ],
         "readLoadPorts": [
-          5314,
-          5300
+          {"$config":"runtime","name":"wcmsOnlineServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"platformServer","path":"servers.default.browserEndpoint.httpPort"}
         ],
         "readLoadRequests": 50,
         "containerPrefix": "nodics-kickoff-docker-local-",
@@ -172,17 +172,12 @@ module.exports = {
           "commerce",
           "commerce-staged",
           "waste",
-          "location",
-          "axis",
-          "nexus",
-          "agora-apparel",
-          "agora-electronics",
-          "agora-telco",
-          "circa"
+          "location"
         ],
         "networkSeparation": {
-          "publicContainer": "nodics-kickoff-docker-local-nexus-1",
-          "applicationContainer": "nodics-kickoff-docker-local-wcms-staged-1"
+          "applicationContainers": { "$config": "ref", "path": "tooling.container.qualification.hardenedContainers" },
+          "requiredNetworks": ["nodics-kickoff-docker-local-application", "nodics-kickoff-docker-local-data"],
+          "forbiddenNetworks": ["nodics-kickoff-docker-local-public"]
         }
       },
       "soak": {
@@ -191,16 +186,16 @@ module.exports = {
         "concurrency": 12,
         "requestIntervalMs": 1000,
         "readinessPorts": [
-          5300,
-          5312,
-          5314,
-          5330,
-          5340,
-          5350,
-          5352,
-          5360,
-          5370,
-          5380
+          {"$config":"runtime","name":"platformServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wcmsStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wcmsOnlineServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"processServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"engagementServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"commerceServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"commerceStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"loyaltyServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wasteServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"locationServer","path":"servers.default.browserEndpoint.httpPort"}
         ],
         "acceptanceCommand": "docker-local:acceptance"
       },
@@ -208,23 +203,23 @@ module.exports = {
         "acceptanceCommand": "docker-local:acceptance",
         "restoreConfirmationToken": "--confirm-replace-docker-local-data",
         "readyPorts": [
-          5300,
-          5312,
-          5314,
-          5330,
-          5340,
-          5350,
-          5352,
-          5360,
-          5370,
-          5380
+          {"$config":"runtime","name":"platformServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wcmsStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wcmsOnlineServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"processServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"engagementServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"commerceServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"commerceStagedServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"loyaltyServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"wasteServer","path":"servers.default.browserEndpoint.httpPort"},
+          {"$config":"runtime","name":"locationServer","path":"servers.default.browserEndpoint.httpPort"}
         ],
         "readLoad": {
           "total": 1000,
           "concurrency": 40,
           "ports": [
-            5314,
-            5300
+            {"$config":"runtime","name":"wcmsOnlineServer","path":"servers.default.browserEndpoint.httpPort"},
+            {"$config":"runtime","name":"platformServer","path":"servers.default.browserEndpoint.httpPort"}
           ]
         },
         "containers": {

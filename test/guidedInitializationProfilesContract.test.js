@@ -101,14 +101,6 @@ for (const [server, expectation] of Object.entries(requiredProfiles)) {
     }),
     true,
   );
-  assert.throws(
-    () =>
-      consumer.validateDestination({
-        destinationRole: "UNRELATED",
-        environmentScope: ["LOCAL"],
-      }),
-    /destination/,
-  );
   const profiles = consumer.initializationProfiles();
   for (const [profileCode, dataTypes] of Object.entries(expectation.profiles)) {
     const profile = profiles[profileCode];

@@ -13,9 +13,20 @@ the Platform `axis` backend module; browser renderers belong in `nodics.axis`.
 Kickoff-wide documentation source belongs in this repository under `docs/` and
 is generated into this repository's governed content pack. Documentation for a
 specific installed application belongs under that application's data module,
-for example `modules/agora.apparel/docs/`.
+for example `modules/circa.ewaste/docs/`. Agora Apparel, Electronics and Telco
+are also customer applications under this project's `modules/`, consuming
+the respective reusable framework accelerators.
 
 ## Why Kickoff exists
+
+New developers and administrators can begin with
+[Local setup to live](local-setup-to-live-runbook.md). Developers and QA use the
+[Local acceptance checklist](local-acceptance-checklist.md) to select non-live
+checks or an authorized live journey. Operators continue to
+[Local publishing operations](local-publishing-operations.md), and release
+owners to [Deployment qualification](deployment-qualification.md). These pages
+are available from the repository before installation and through the Kickoff
+documentation navigation after governed publication.
 
 Kickoff exists so a new team can feel Nodics before they design their own
 project. A partner should be able to clone the framework, clone the reference
@@ -114,7 +125,7 @@ The important Kickoff locations are:
   conventional `scripts/acceptance/*Service.mjs` files; do not create
   `nodics.project.json`;
 - `package.json.nodics` declares human-readable project metadata;
-- `envs/<environment>/nodics.environment.json` declares environment domain
+- `envs/<environment>/config/properties.js` declares environment domain
   selections, topology, acceptance, and qualification profile facts;
 - `modules/*/data/manifest.json` declares module-owned data packs;
 - `envs/<environment>/*Server/package.json` declares the framework packages

@@ -43,16 +43,11 @@ test.beforeEach(() => {
       },
     },
     DefaultEWasteConversationService: {
-      message: async () => {
-        providerCalls++;
-        throw Object.assign(new Error("Provider unavailable"), {
-          code: "PROVIDER_UNAVAILABLE",
-        });
-      },
+      ...require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteConversationService"),
     },
   };
 });
-test.afterEach(() => delete global.SERVICE);
+test.afterEach(() => { delete global.SERVICE; delete global.CONFIG; });
 test("location policy help keeps estimate and confirmation state and invokes no LLM", async () => {
   const result = await guidance.message({
     code: "draft",
@@ -68,25 +63,13 @@ test("location policy help keeps estimate and confirmation state and invokes no 
   );
   assert.equal(providerCalls, 0);
 });
-test("conversation failure preserves the supported journey and uses the canonical history", async () => {
-  const result = await guidance.message({
-    code: "draft",
-    expectedRevision: 4,
-    payload: { message: "Can you help with this item?" },
-  });
+test("Circa propagates failures from the invoked guidance provider", async () => {
+  SERVICE.DefaultCopilotCustomerGuidanceService.reply = async () => {
+    providerCalls++;
+    throw Object.assign(new Error("Provider unavailable"), { code: "PROVIDER_UNAVAILABLE" });
+  };
+  await assert.rejects(guidance.message({ code: "draft", expectedRevision: 4,
+    payload: { message: "Can you help with this item?" } }), { code: "PROVIDER_UNAVAILABLE" });
   assert.equal(providerCalls, 1);
-  assert.equal(result.changed, false);
-  assert.equal(result.draft.metadata.conversation.length, 2);
-  assert.equal(result.draft.submittedFacts.itemTypeCode, "PHONE");
-});
-test("revision conflict is never hidden as provider fallback", async () => {
-  await assert.rejects(
-    guidance.message({
-      code: "draft",
-    expectedRevision: 3,
-      payload: { message: "Why location?" },
-    }),
-    { code: "ERR_WASTE_REVISION_CONFLICT" },
-  );
   assert.equal(draft.revision, 4);
 });

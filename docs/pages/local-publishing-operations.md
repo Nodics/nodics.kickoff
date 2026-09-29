@@ -1,5 +1,11 @@
 # Local publishing operations
 
+For operators: first complete the prerequisites in
+[Local acceptance](local-acceptance-checklist.md). Administrators can follow
+[Local setup to live](local-setup-to-live-runbook.md) for the UI sequence.
+After publication evidence is collected, continue to
+[Deployment qualification](deployment-qualification.md).
+
 ## Scope and authority
 
 This runbook operates the `kickoffLocal` Staged-to-Online publishing lifecycle.
@@ -41,9 +47,12 @@ signals only the validated supervisor and releases children in reverse order.
 
 ## Supported initialization and release upgrade
 
-Use `npm run acceptance:local:fresh` only when a bounded Local reset is intended.
+Use `npm run acceptance:local:fresh -- --execute --approve-publications` only
+when an authorized bounded Local reset is intended, after reviewing the
+checklist's isolation, recovery and owned-startup prerequisites.
 The command resets through the governed Platform API; it does not issue database
-commands. Use `npm run acceptance:local` for retained-schema initialization,
+commands. Use `npm run acceptance:local -- --execute --approve-publications`
+for authorized retained-schema initialization,
 content-pack upgrade, repeat installation, and publication verification.
 
 Immutable content-pack files use portable source revision zero. During a

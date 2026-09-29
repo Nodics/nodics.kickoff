@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "waste": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste fresh sample",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Populate explicitly authorized fresh sample environments after reference adoption; never use this transaction pack to migrate an installed Circa environment."
+      }
+    }
+  }
+}

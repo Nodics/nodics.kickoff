@@ -4,8 +4,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare Circa customer profile records for the eWaste experience."
       }
@@ -14,8 +14,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare Circa collection and customer location records."
       }
@@ -24,8 +24,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare Circa eWaste submission, evidence, impact, and collection records."
       }
@@ -34,8 +34,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare Circa reward and wallet records."
       }
@@ -44,8 +44,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare the Circa website, pages, media, and customer-facing content."
       }
@@ -54,8 +54,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare Circa circular assets, offers, pricing, and storefront records."
       }
@@ -64,8 +64,8 @@
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
-        "type": "ACCELERATOR",
-        "group": "PROJECT_ACCELERATOR",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare Circa operational staff and scoped access records."
       }
@@ -78,16 +78,6 @@
         "group": "APPLICATION_CONTENT",
         "extendsCapability": "circa.ewaste",
         "businessOutcome": "Prepare Sunmarke profile records for the Circa pilot."
-      }
-    },
-    "sunmarke-location": {
-      "capability": {
-        "code": "circa.ewaste.sunmarke",
-        "displayName": "Circa Sunmarke pilot",
-        "type": "PROJECT_EXTENSION",
-        "group": "APPLICATION_CONTENT",
-        "extendsCapability": "circa.ewaste",
-        "businessOutcome": "Prepare Sunmarke location records for the Circa pilot."
       }
     },
     "sunmarke-waste": {

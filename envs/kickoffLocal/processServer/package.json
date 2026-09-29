@@ -25,7 +25,8 @@
     "runtimeModuleRoots": [
       "nodics.process",
       "nodics.wcms",
-      "nodics.rulesEngine"
+      "nodics.rulesEngine",
+      "nodics.commerce"
     ],
     "runtimeIdentity": {
       "instanceCode": "kickoff-local-process-1",
@@ -34,7 +35,13 @@
         "backoffice",
         "editorial",
         "cms",
-        "rulesApi"
+        "rulesApi",
+        "product",
+        "pricing",
+        "promotion",
+        "inventory",
+        "tax",
+        "media"
       ]
     },
     "runtimeTooling": {

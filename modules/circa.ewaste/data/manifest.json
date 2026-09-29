@@ -31,7 +31,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.3",
+      "version": "0.0.4",
       "displayName": "Circa location sample",
       "description": "Explicit local Circa sample location records",
       "owningDomain": "location",
@@ -48,14 +48,14 @@
       "removalPolicy": "RETAIN",
       "files": {
         "sample-v001/location/headers/circaLocationSampleHeader.js": "be1760d316160a66d92ef1ff842d64ce0588a734c1c16aeb01950e8b0ce7b479",
-        "sample-v001/location/records/circaLocationData.js": "171f290f2d635a70e0e7b0010de65dfb34147730d5d46619f8f7cfd6514e8a1e"
+        "sample-v001/location/records/circaLocationData.js": "13b84d222d52a5e7b5b41e67dd324f975c2bbcaaff73eb68160a331e362782ad"
       }
     },
     "waste": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.4",
+      "sourceRoot": "sample-v004",
+      "version": "0.0.5",
       "displayName": "Circa waste sample",
       "description": "Explicit local Circa sample waste records",
       "owningDomain": "waste",
@@ -71,24 +71,22 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/waste/headers/circaWasteSampleHeader.js": "c890ffc9996e21d32a84b3239c71d5ffb507c1e1c1c18339809dd0483bd3fb90",
-        "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
-        "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
-        "sample-v001/waste/records/circaWasteCategoryData.js": "8bac1b71126192b180c9dba9b525b28c2c9eab8f2654259aa16339e1822542b7",
-        "sample-v001/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
-        "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
-        "sample-v001/waste/records/circaWasteImpactProfileData.js": "72d99ab6b4f425d35eb78143da27ab793cec85df1473c66c98d9d8400b7ef7bf",
-        "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
-        "sample-v001/waste/records/circaWasteItemTypeData.js": "5b138a9c542e1f8e3dbba957a22daba782e8c38ea0d54ad36a5a9f26652ceb83",
-        "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
-        "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
-      }
+        "sample-v004/waste/headers/circaWasteSampleHeader.js": "3f45f7a8392024be614389cdeb0a88ac08214afefaff4d011e61dbe08787e234",
+        "sample-v004/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
+        "sample-v004/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
+        "sample-v004/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
+        "sample-v004/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
+        "sample-v004/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
+        "sample-v004/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
+        "sample-v004/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "waste-policy": {
       "kind": "DATA_RELEASE",
       "dataType": "core",
-      "sourceRoot": "core-v001",
-      "version": "0.0.0",
+      "sourceRoot": "core-v002",
+      "version": "0.0.1",
       "displayName": "Circa Waste Policy",
       "description": "Circa-owned Waste policy records extending and overriding eWaste presets through nodics.waste schemas.",
       "owningDomain": "waste",
@@ -103,12 +101,14 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "core-v001/waste-policy/headers/circaWastePolicyHeader.js": "31d74d8e8868190e5b644e7fa4b1b2812dbfbb79de95c944d7e8dbd5b02842d0",
-        "core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData.js": "818e806ff37c9f87f19ea7ae36aa49510ab50f76fa104d06676ec497d3dcf826",
-        "core-v001/waste-policy/records/circaWastePolicyCategoryData.js": "3b12605cd1734957efc2566505ef9fd93cff1c4867d0f9c723aa70905b65f8dc",
-        "core-v001/waste-policy/records/circaWastePolicyCollectionPresetData.js": "c5aa852b34e4f1b9afb97c3389702019b66af1cdfedd4d9b0c1ca4239e1b6ee2",
-        "core-v001/waste-policy/records/circaWastePolicyImpactProfileData.js": "0e649cb670b8bec75288569c7940f2e73c54c9ea6fef6b0a9b0318f5b220e857"
-      }
+        "core-v002/waste-policy/headers/eWastePresetHeader.js": "7b23fa5e15d419547c65bc174359fa1839d65bc622ee7a1fbfb34cb7e11613e1",
+        "core-v002/waste-policy/records/eWasteAcceptanceRuleData.js": "79d353bc70503bb8235349eefcab27a10c9d4afa7774c820d62f8f8122d74d04",
+        "core-v002/waste-policy/records/eWasteCategoryData.js": "9a0471b2532d87cd64213950c3fabff8f0c8770ef6fcfec630392f66ff4c32d1",
+        "core-v002/waste-policy/records/eWasteCollectionPresetData.js": "8b630eb002c35b24e5ed7af0d40921668e9919c980d4c30b92b91624afe43447",
+        "core-v002/waste-policy/records/eWasteImpactProfileData.js": "7c3407eb2aa253bd4f1ad5aef40fe7485410457c1f1ee5a3083a93840a0b45b3",
+        "core-v002/waste-policy/records/eWasteItemTypeData.js": "659244ed497878046f502c67c55a61bad8780a73d2ac2293037fa8a5b68cbef9"
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "loyalty": {
       "kind": "DATA_RELEASE",
@@ -234,7 +234,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "displayName": "Circa operational roles",
       "description": "Local staff and scoped operational access without resetting customer transactions.",
       "owningDomain": "circa.ewaste",
@@ -252,7 +252,7 @@
       "files": {
         "sample-v001/operations/headers/circaOperationsHeader.js": "5f1e2b30b177d731fafef2f50b79db0d7aeafa845ee52ddc5a6f9670ffa489fa",
         "sample-v001/operations/records/circaOperationalEmployeeData.js": "1bf0f9496782de2f397e7d0a0e6d8ffda6275c292ccb6f27595f67f7f584d7e2",
-        "sample-v001/operations/records/circaOperationalScopeData.js": "2b571a5a91e721bfb8896615cdab2f5e7eb39e2ee21c2753fec9a2b418c51ced"
+        "sample-v001/operations/records/circaOperationalScopeData.js": "c2cdcbece79c849799840080a1d27b4a4256758f8db39c69abdb18f83bce74d4"
       }
     },
     "customer-workspace": {
@@ -356,6 +356,97 @@
       "files": {
         "sample-v001/sunmarke-waste/records/sunmarkeWasteCollectionPointData.js": "8aab8b4c9a89e5341e64f5fcf381ec2e63d261fbaf471e9dc80863bcaba19e9f",
         "sample-v001/sunmarke-waste/headers/sunmarkeHeader.js": "77cfcbf881ebf4e56ebdbcf0608a34039a53a6a4b470c001cd95a6db5bee99ca"
+      }
+    }
+  },
+  "retainedRoots": {
+    "core-v001": {
+      "scope": "SECTIONS",
+      "files": {
+        "core-v001/waste-policy/headers/circaWastePolicyHeader.js": "31d74d8e8868190e5b644e7fa4b1b2812dbfbb79de95c944d7e8dbd5b02842d0",
+        "core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData.js": "818e806ff37c9f87f19ea7ae36aa49510ab50f76fa104d06676ec497d3dcf826",
+        "core-v001/waste-policy/records/circaWastePolicyCategoryData.js": "3b12605cd1734957efc2566505ef9fd93cff1c4867d0f9c723aa70905b65f8dc",
+        "core-v001/waste-policy/records/circaWastePolicyCollectionPresetData.js": "c5aa852b34e4f1b9afb97c3389702019b66af1cdfedd4d9b0c1ca4239e1b6ee2",
+        "core-v001/waste-policy/records/circaWastePolicyImpactProfileData.js": "0e649cb670b8bec75288569c7940f2e73c54c9ea6fef6b0a9b0318f5b220e857"
+      },
+      "sections": {
+        "waste-policy": {
+          "kind": "DATA_RELEASE",
+          "dataType": "core",
+          "sourceRoot": "core-v001",
+          "version": "0.0.0",
+          "displayName": "Circa Waste Policy",
+          "description": "Circa-owned Waste policy records extending and overriding eWaste presets through nodics.waste schemas.",
+          "owningDomain": "waste",
+          "lifecycle": "REFERENCE",
+          "destinationRole": "WASTE",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "INTERNAL",
+          "versioningPolicy": "NONE",
+          "publicationPolicy": "NONE",
+          "initialPublicationPolicy": "NONE",
+          "removalPolicy": "RETAIN",
+          "files": {
+            "core-v001/waste-policy/headers/circaWastePolicyHeader.js": "31d74d8e8868190e5b644e7fa4b1b2812dbfbb79de95c944d7e8dbd5b02842d0",
+            "core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData.js": "818e806ff37c9f87f19ea7ae36aa49510ab50f76fa104d06676ec497d3dcf826",
+            "core-v001/waste-policy/records/circaWastePolicyCategoryData.js": "3b12605cd1734957efc2566505ef9fd93cff1c4867d0f9c723aa70905b65f8dc",
+            "core-v001/waste-policy/records/circaWastePolicyCollectionPresetData.js": "c5aa852b34e4f1b9afb97c3389702019b66af1cdfedd4d9b0c1ca4239e1b6ee2",
+            "core-v001/waste-policy/records/circaWastePolicyImpactProfileData.js": "0e649cb670b8bec75288569c7940f2e73c54c9ea6fef6b0a9b0318f5b220e857"
+          }
+        }
+      }
+    },
+    "sample-v001": {
+      "scope": "SECTIONS",
+      "files": {
+        "sample-v001/waste/headers/circaWasteSampleHeader.js": "c890ffc9996e21d32a84b3239c71d5ffb507c1e1c1c18339809dd0483bd3fb90",
+        "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
+        "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
+        "sample-v001/waste/records/circaWasteCategoryData.js": "8bac1b71126192b180c9dba9b525b28c2c9eab8f2654259aa16339e1822542b7",
+        "sample-v001/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
+        "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
+        "sample-v001/waste/records/circaWasteImpactProfileData.js": "72d99ab6b4f425d35eb78143da27ab793cec85df1473c66c98d9d8400b7ef7bf",
+        "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
+        "sample-v001/waste/records/circaWasteItemTypeData.js": "5b138a9c542e1f8e3dbba957a22daba782e8c38ea0d54ad36a5a9f26652ceb83",
+        "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
+        "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
+      },
+      "sections": {
+        "waste": {
+          "kind": "DATA_RELEASE",
+          "dataType": "sample",
+          "sourceRoot": "sample-v001",
+          "version": "0.0.4",
+          "displayName": "Circa waste sample",
+          "description": "Explicit local Circa sample waste records",
+          "owningDomain": "waste",
+          "lifecycle": "REFERENCE",
+          "destinationRole": "WASTE",
+          "environmentScope": [
+            "LOCAL",
+            "LOCAL_PRODUCTION_SIMULATION"
+          ],
+          "sensitivity": "INTERNAL",
+          "versioningPolicy": "NONE",
+          "publicationPolicy": "NONE",
+          "initialPublicationPolicy": "NONE",
+          "removalPolicy": "RETAIN",
+          "files": {
+            "sample-v001/waste/headers/circaWasteSampleHeader.js": "c890ffc9996e21d32a84b3239c71d5ffb507c1e1c1c18339809dd0483bd3fb90",
+            "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
+            "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
+            "sample-v001/waste/records/circaWasteCategoryData.js": "8bac1b71126192b180c9dba9b525b28c2c9eab8f2654259aa16339e1822542b7",
+            "sample-v001/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
+            "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
+            "sample-v001/waste/records/circaWasteImpactProfileData.js": "72d99ab6b4f425d35eb78143da27ab793cec85df1473c66c98d9d8400b7ef7bf",
+            "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
+            "sample-v001/waste/records/circaWasteItemTypeData.js": "5b138a9c542e1f8e3dbba957a22daba782e8c38ea0d54ad36a5a9f26652ceb83",
+            "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
+            "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
+          }
+        }
       }
     }
   }

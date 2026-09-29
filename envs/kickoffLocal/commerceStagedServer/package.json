@@ -24,6 +24,12 @@
       "web": false
     },
     "displayName": "Commerce Staged Server",
+    "runtimeModuleRoots": [
+      "nodics.discovery",
+      "nodics.commerce",
+      "nodics.accelerators",
+      "nodics.process"
+    ],
     "runtimeIdentity": {
       "instanceCode": "kickoff-local-commerce-staged-1",
       "remoteModules": [
@@ -31,7 +37,8 @@
         "backoffice",
         "loyaltyCore",
         "wasteCore",
-        "media"
+        "media",
+        "workflow"
       ]
     },
     "runtimeTooling": {

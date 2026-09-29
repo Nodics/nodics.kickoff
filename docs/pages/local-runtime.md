@@ -91,7 +91,8 @@ npm run start:wcms:online
 npm run start:process
 ```
 
-The governed supervisor starts all three frontends with the nine backends:
+Alternatively, the governed supervisor starts the selected backends in
+dependency order. Do not combine this with already running individual servers:
 
 ```bash
 npm run topology:start
@@ -110,11 +111,14 @@ nodicsRoot/
     └── nodics.agora.apparel/
 ```
 
-If a developer keeps the frontend apps somewhere else, set the explicit root
-environment variables used by the relevant script, for example
-`NODICS_AXIS_ROOT` for Axis smoke and `NODICS_QUALIFICATION_AXIS_ROOT`,
-`NODICS_QUALIFICATION_NEXUS_ROOT`, and `NODICS_QUALIFICATION_AGORA_ROOT` for
-deployment qualification evidence.
+Start frontends independently with `npm run dev` in their own repositories,
+wherever they are located. Backend topology does not discover, start, stop or
+qualify frontend processes. Follow each frontend's own test and browser guidance.
+
+Continue with [Local setup to live](local-setup-to-live-runbook.md) for the
+administrator journey, then [Local acceptance](local-acceptance-checklist.md)
+for developer and QA verification. These source guides are usable before any
+documentation pack is installed.
 
 The default local ports are:
 

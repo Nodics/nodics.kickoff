@@ -132,12 +132,14 @@ module.exports = {
     "relatedPages": [
       "kickoff.local-runtime",
       "kickoff.customization",
-      "kickoff.functional-journeys"
+      "kickoff.functional-journeys",
+      "kickoff.local-setup-to-live",
+      "kickoff.local-acceptance"
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/project-overview.md",
-    "sourceChecksum": "e9ffcfc4c880702510f167766e0feb48c5b1793977ba3ab5b20f6ee10b2c57d3",
-    "sourceWordCount": 2161,
+    "sourceChecksum": "5e0ca1bbb6a6e1905f398b6b1394b121710619f80331630c217a5837e37a2927",
+    "sourceWordCount": 2246,
     "audience": [
       "business-user",
       "administrator",
@@ -266,12 +268,13 @@ module.exports = {
     "relatedPages": [
       "kickoff.overview",
       "kickoff.local-acceptance",
-      "kickoff.deployment-qualification"
+      "kickoff.deployment-qualification",
+      "kickoff.local-setup-to-live"
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-runtime.md",
-    "sourceChecksum": "5735760abac6b82050190d7f23d74582e858f2a1dd375a44e4208b24a750af55",
-    "sourceWordCount": 2076,
+    "sourceChecksum": "cb63fbaec31249035efa34d5ef2e1fad8a03f0521b9b6a425f97bf4ae2abefed",
+    "sourceWordCount": 2121,
     "audience": [
       "business-user",
       "administrator",
@@ -485,8 +488,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-setup-to-live-runbook.md",
-    "sourceChecksum": "9bcb682548b84998b5af336c91c663687ca26c7a351fde4aad3d166485ee48e7",
-    "sourceWordCount": 2608,
+    "sourceChecksum": "281912b500f682695a91c77718b97309694fb07a7b8e66eb73272015e5c5ca8b",
+    "sourceWordCount": 2687,
     "audience": [
       "business-user",
       "administrator",
@@ -517,7 +520,7 @@ module.exports = {
     "product": "kickoffDocumentationProduct",
     "documentId": "kickoff.local-acceptance",
     "title": "Local acceptance checklist",
-    "summary": "Run a fresh local database bootstrap and verify Platform, WCMS, Cron, Axis, documentation, media, and module lifecycle behavior.",
+    "summary": "Verify Kickoff configuration, authorized Local initialization, publication and separate frontend journeys; distinguish static checks, live evidence and release gates.",
     "businessSummary": "Local acceptance checklist explains customer-project purpose, supported operations, runtime impact, and implementation handoff.",
     "technicalSummary": "Local acceptance checklist records owning module nodics.kickoff, technical module kickoffLocal, source path docs/pages/local-acceptance-checklist.md, validation, and troubleshooting evidence.",
     "ownerFunctionalModule": "nodics.kickoff",
@@ -529,142 +532,57 @@ module.exports = {
     "searchMetadata": "kickoffDocsSearchpagekickoffdocsmetadatakickofflocalacceptance",
     "headings": [
       {
-        "text": "What this checklist proves",
-        "anchor": "kickoffLocalAcceptance-1-what-this-checklist-proves",
+        "text": "Choose your path",
+        "anchor": "kickoffLocalAcceptance-1-choose-your-path",
         "level": 2
       },
       {
-        "text": "Repository layout used by the reference run",
-        "anchor": "kickoffLocalAcceptance-2-repository-layout-used-by-the-reference-run",
+        "text": "Prerequisites and authority",
+        "anchor": "kickoffLocalAcceptance-2-prerequisites-and-authority",
         "level": 2
       },
       {
-        "text": "Mandatory prerequisites",
-        "anchor": "kickoffLocalAcceptance-3-mandatory-prerequisites",
+        "text": "Verification without live mutation",
+        "anchor": "kickoffLocalAcceptance-3-verification-without-live-mutation",
         "level": 2
       },
       {
-        "text": "Fresh schema reset",
-        "anchor": "kickoffLocalAcceptance-4-fresh-schema-reset",
+        "text": "Start the selected local backends",
+        "anchor": "kickoffLocalAcceptance-4-start-the-selected-local-backends",
         "level": 2
       },
       {
-        "text": "Fresh-schema user journey",
-        "anchor": "kickoffLocalAcceptance-5-fresh-schema-user-journey",
+        "text": "Authorized initialization and publication",
+        "anchor": "kickoffLocalAcceptance-5-authorized-initialization-and-publication",
         "level": 2
       },
       {
-        "text": "Automated acceptance path",
-        "anchor": "kickoffLocalAcceptance-6-automated-acceptance-path",
+        "text": "Manual setup and browser verification",
+        "anchor": "kickoffLocalAcceptance-6-manual-setup-and-browser-verification",
         "level": 2
       },
       {
-        "text": "What the automated command proves",
-        "anchor": "kickoffLocalAcceptance-7-what-the-automated-command-proves",
-        "level": 3
-      },
-      {
-        "text": "Start and stop the complete Local topology",
-        "anchor": "kickoffLocalAcceptance-8-start-and-stop-the-complete-local-topology",
-        "level": 2
-      },
-      {
-        "text": "Start individual backend servers",
-        "anchor": "kickoffLocalAcceptance-9-start-individual-backend-servers",
-        "level": 2
-      },
-      {
-        "text": "Start Axis",
-        "anchor": "kickoffLocalAcceptance-10-start-axis",
-        "level": 2
-      },
-      {
-        "text": "Login",
-        "anchor": "kickoffLocalAcceptance-11-login",
-        "level": 2
-      },
-      {
-        "text": "Import initialization data",
-        "anchor": "kickoffLocalAcceptance-12-import-initialization-data",
-        "level": 2
-      },
-      {
-        "text": "Verify module registry",
-        "anchor": "kickoffLocalAcceptance-13-verify-module-registry",
-        "level": 2
-      },
-      {
-        "text": "Verify documentation",
-        "anchor": "kickoffLocalAcceptance-14-verify-documentation",
-        "level": 2
-      },
-      {
-        "text": "Verify application setup and Online delivery",
-        "anchor": "kickoffLocalAcceptance-15-verify-application-setup-and-online-delivery",
-        "level": 2
-      },
-      {
-        "text": "Verify content and media",
-        "anchor": "kickoffLocalAcceptance-16-verify-content-and-media",
-        "level": 2
-      },
-      {
-        "text": "Verify Page Designer authoring model",
-        "anchor": "kickoffLocalAcceptance-17-verify-page-designer-authoring-model",
-        "level": 3
-      },
-      {
-        "text": "Verify Cron",
-        "anchor": "kickoffLocalAcceptance-18-verify-cron",
-        "level": 2
-      },
-      {
-        "text": "Command-line smoke test",
-        "anchor": "kickoffLocalAcceptance-19-command-line-smoke-test",
-        "level": 2
-      },
-      {
-        "text": "Troubleshooting quick map",
-        "anchor": "kickoffLocalAcceptance-20-troubleshooting-quick-map",
-        "level": 2
-      },
-      {
-        "text": "Acceptance sign-off",
-        "anchor": "kickoffLocalAcceptance-21-acceptance-sign-off",
+        "text": "Record results and blockers",
+        "anchor": "kickoffLocalAcceptance-7-record-results-and-blockers",
         "level": 2
       },
       {
         "text": "Common mistakes",
-        "anchor": "kickoffLocalAcceptance-22-common-mistakes",
+        "anchor": "kickoffLocalAcceptance-8-common-mistakes",
         "level": 2
       },
       {
-        "text": "Verification",
-        "anchor": "kickoffLocalAcceptance-23-verification",
+        "text": "Sign-off and next step",
+        "anchor": "kickoffLocalAcceptance-9-sign-off-and-next-step",
         "level": 2
       }
     ],
     "diagrams": [
       {
         "language": "mermaid"
-      },
-      {
-        "language": "mermaid"
       }
     ],
     "visualAssets": [
-      {
-        "kind": "table"
-      },
-      {
-        "kind": "table"
-      },
-      {
-        "kind": "table"
-      },
-      {
-        "kind": "table"
-      },
       {
         "kind": "table"
       },
@@ -683,12 +601,15 @@ module.exports = {
     "relatedPages": [
       "kickoff.local-runtime",
       "kickoff.local-publishing-operations",
-      "kickoff.functional-journeys"
+      "kickoff.functional-journeys",
+      "kickoff.local-setup-to-live",
+      "kickoff.configuration-inheritance",
+      "kickoff.deployment-qualification"
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-acceptance-checklist.md",
-    "sourceChecksum": "a83f2885cdfdee04b5bfd93b0aa00c8f26964de7783611c76803e6f79ff23312",
-    "sourceWordCount": 3203,
+    "sourceChecksum": "b09b3f2b0909a72444fe7c2bc32f164eed9108e0112815c464356f0af9736a61",
+    "sourceWordCount": 1543,
     "audience": [
       "business-user",
       "administrator",
@@ -797,8 +718,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/local-publishing-operations.md",
-    "sourceChecksum": "137b2ca3e1a4fa3af3ea9ffdf7914c4088b10b53df783a0067bd3879a8b2a558",
-    "sourceWordCount": 1498,
+    "sourceChecksum": "f82db964d9af22a50f3b1c42afb1264143b80e2e0e3b41238ac9cac595dc1552",
+    "sourceWordCount": 1548,
     "audience": [
       "business-user",
       "administrator",
@@ -906,12 +827,13 @@ module.exports = {
     ],
     "relatedPages": [
       "kickoff.local-runtime",
-      "kickoff.local-publishing-operations"
+      "kickoff.local-publishing-operations",
+      "kickoff.local-acceptance"
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/deployment-qualification.md",
-    "sourceChecksum": "5880d9e587b11e4ec1c7b53bd5ed3131e5677e506b8ed5cc91f8ed30015009d4",
-    "sourceWordCount": 1242,
+    "sourceChecksum": "a1115aaa751a9ed04a3b2f9aaa432c2778f21e1613c26e14170e467daba83efe",
+    "sourceWordCount": 1350,
     "audience": [
       "business-user",
       "administrator",
@@ -1217,8 +1139,18 @@ module.exports = {
         "level": 2
       },
       {
+        "text": "Local extraction ownership (2026-09-28)",
+        "anchor": "kickoffConfigurationInheritance-17-local-extraction-ownership-2026-09-28",
+        "level": 2
+      },
+      {
         "text": "Nexus accelerator migration",
-        "anchor": "kickoffConfigurationInheritance-17-nexus-accelerator-migration",
+        "anchor": "kickoffConfigurationInheritance-18-nexus-accelerator-migration",
+        "level": 2
+      },
+      {
+        "text": "Application policy and role selection",
+        "anchor": "kickoffConfigurationInheritance-19-application-policy-and-role-selection",
         "level": 2
       }
     ],
@@ -1228,6 +1160,9 @@ module.exports = {
       }
     ],
     "visualAssets": [
+      {
+        "kind": "table"
+      },
       {
         "kind": "table"
       },
@@ -1249,8 +1184,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "docs/pages/configuration-inheritance.md",
-    "sourceChecksum": "d75ffbc5724c21b5cb4c7eb865262fdb5c6cf7616f21e84fa0bd2db090575a57",
-    "sourceWordCount": 3236,
+    "sourceChecksum": "8a4e43e51dd88c31fa5fb763ab90b80ad0862b4b56ae894ecbdeccb6ff654f4c",
+    "sourceWordCount": 3977,
     "audience": [
       "business-user",
       "administrator",

@@ -13,7 +13,6 @@
 "use strict";
 
 const assert = require("node:assert/strict");
-const fs = require("node:fs");
 const path = require("node:path");
 
 const projectRoot = path.resolve(__dirname, "..");
@@ -22,7 +21,7 @@ const frameworkRoot = path.resolve(
   projectRoot,
   process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai",
 );
-const packageRoot = (packageName) => path.join(frameworkRoot, packageName);
+const prepareRuntime = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
 const scenarios = [
   [
     "platformServer",
@@ -80,20 +79,12 @@ async function main() {
   process.env.NODICS_MONGODB_URI =
     "mongodb://mongodb:27017/?replicaSet=nodicsDockerLocal";
   for (const [server, modules, databaseName, role] of scenarios) {
-    const coreRoot = packageRoot("nodics.foundation");
-    const config = require(path.join(coreRoot, "modules/nConfig"));
     const metadata = require(
       path.join(projectRoot, "envs/kickoffDockerLocal", server, "package.json"),
     ).nodics;
     const moduleRoots = metadata.runtimeModuleRoots || metadata.extends;
     for (const expected of modules) assert(moduleRoots.includes(expected));
-    await config.prepareStart({
-      NODICS_HOME: coreRoot,
-      CUSTOM_HOME: projectRoot,
-      MODULE_ROOTS: [coreRoot, ...moduleRoots.map(packageRoot), projectRoot],
-      defaultEnvironment: "kickoffDockerLocal",
-      defaultServer: server,
-    });
+    prepareRuntime({ projectRoot, frameworkRoot, environment: 'kickoffDockerLocal', server });
     assert.equal(NODICS.isModuleActive("kickoffAdministration"), false, "Synthetic administration module must not be selected");
     assert.equal(NODICS.isModuleActive("kickoffCore"), true, "Project-owned administration defaults live in Kickoff Core");
     assert.equal(Boolean(CONFIG.get("backofficeApplicationInitialization")?.runtimeRoleProfiles), false, "BackOffice runtime-role profiles are projected out of effective config");

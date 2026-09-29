@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "waste-policy": {
+      "capability": {
+        "code": "circa.ewaste.policy",
+        "displayName": "Circa eWaste policy",
+        "type": "RULE_POLICY_SET",
+        "group": "FOUNDATION_DATA",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Apply Circa reference compatibility and final policy over neutral eWaste source records without importing sample transactions."
+      }
+    }
+  }
+}

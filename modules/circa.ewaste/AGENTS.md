@@ -16,6 +16,13 @@ orderCodePrefix and data release identity when migrating an active installation.
 Import samples only into a new environment through governed destination APIs;
 never reset transactional ownership or opening ledgers during a code refactor.
 
+Reference adoption now selects EXPLICIT core-v002 successors for eWaste and Circa
+at version 0.0.1 through nImport source-key inheritance. Read the existing data
+compatibility section in `llm/contracts/circa-application.md`. Keep the optional
+sample-v004 transaction pack out of installed-reference migration; fresh-only
+eligibility still requires parent/operator verification. Retained historical
+sections and their sibling active sections must remain disjoint.
+
 Run npm test for project adapter/configuration contracts and the frontend live
 journey against a local test runtime. Keep illustrative outcomes explicit.
 
