@@ -47,6 +47,7 @@ test("Local and Docker Process select protocol names and deployment connections"
         "inventory.applyPublicationDecision",
         "tax.applyPublicationDecision",
         "media.applyPublicationDecision",
+        "profile.applyEmployeeApplicationDecision",
       ] : []),
     ]);
     assert.equal(
@@ -110,6 +111,8 @@ test("actual Local/Docker package projection and selected profiles never automat
     global.CLASSES = { NodicsError: class extends Error { constructor(code, message) { super(message); this.code = code; } } };
     const registration = require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nService/src/service/module/defaultModuleRegistrationAgentService'));
     const releases = require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService'));
+    global.SERVICE = { ...global.SERVICE,
+      DefaultCustomerRegistrationService: require(path.join(input.frameworkRoot, 'nodics.platform/modules/profile/src/service/customer/defaultCustomerRegistrationService')) };
     // Only persistence ports are isolated; discovery, selection and profile construction are the actual owners.
     const service = { ...releases, getInstallations: async () => [],
       executePreparedPlan: async (request, plan) => ({ plannedCodes: plan.releases.map(release => release.releaseCode) }) };
