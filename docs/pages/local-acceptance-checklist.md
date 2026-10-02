@@ -144,6 +144,14 @@ run it against shared development or production data. A failed authorization,
 readiness or reset receipt is a blocker, not permission for a database-shell
 workaround. Ordinary documentation edits never require a reset.
 
+That alias is a governed **record reset and automated acceptance** path, not a
+physical all-schema rebuild or a browser-only import journey. For an explicitly
+approved disposable Mongo/auth-state rebuild followed by Axis UI imports, use
+the [native Local maintenance scope and stopped-stack sequence](local-runtime.md#disposable-native-local-rebuild).
+Mongo-only drops can leave versioned auth state that correctly prevents startup.
+Never erase shared Redis/search/Media or auto-clear security state at startup;
+do not run this acceptance alias when the approved session requires UI imports.
+
 ## Versioned domain publication qualification
 
 For Product, Pricing, Tax, Inventory, Promotion and Media, track these as separate

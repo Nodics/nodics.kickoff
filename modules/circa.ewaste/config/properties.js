@@ -307,38 +307,6 @@ module.exports = {
           ]
         }
       ]
-    },
-    "telegramDelivery": {
-      "code": "telegramDelivery",
-      "ownerModule": "circa.ewaste",
-      "label": "Circa Telegram delivery channel",
-      "description": "Logical bot credential required for Circa Telegram sends. Source config declares the Circa channel reference; operational values come from governed runtime configuration.",
-      "refreshBehavior": "runtime",
-      "updatePermission": "runtime.config.request.create",
-      "viewPermission": "runtime.config.effective.view",
-      "fields": [
-        {
-          "code": "botToken",
-          "label": "Telegram bot token",
-          "type": "string",
-          "required": true,
-          "sensitive": true,
-          "credentialReference": "telegram.bot.circa",
-          "path": [
-            "credentials",
-            "telegram.bot.circa",
-            "value"
-          ],
-          "pattern": "^\\d+:[^\\s]+$",
-          "restartRequired": false,
-          "unconfiguredValues": [
-            "",
-            "sample",
-            "placeholder",
-            "changeme"
-          ]
-        }
-      ]
     }
   },
   "bidding": {
@@ -416,6 +384,15 @@ module.exports = {
         "dataPackages": {
           "$config": "replace",
           "value": [
+            {
+              "code": "media:mediaPublicationWorkflow",
+              "kind": "Media publication approval workflow",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "init",
+              "targetServer": "process",
+              "targetRuntimeRole": "PROCESS"
+            },
             {
               "code": "locationMap:init-v001",
               "kind": "Map provider foundation",
@@ -541,6 +518,15 @@ module.exports = {
               "dataType": "sample",
               "targetServer": "commerceStaged",
               "targetRuntimeRole": "COMMERCE_STAGED"
+            },
+            {
+              "code": "circa.ewaste:commerce-operational",
+              "kind": "Optional governed coupon issuance and opening stock",
+              "required": false,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
               "code": "circa.ewaste:content",

@@ -9,6 +9,7 @@
 
  */
 
+/** @module kickoffLocal/processServer/config/properties @description Selects Local Process deployment and explicit owner callback/start capabilities without granting authority or qualifying their callers. @owner nodics.kickoff @layer configuration */
 module.exports = {
   "activeModules": {
     "groups": [],
@@ -43,6 +44,12 @@ module.exports = {
     }
   },
   "process": {
+    "runtime": {
+      "internalStarts": {
+        "enabled": true,
+        "allowedDefinitions": { "$config": "replace", "value": ["profileEmployeeApplicationReview"] }
+      }
+    },
     "publicationDecisionCallback": {
       "target": {
         "connectionName": "cmsStaged"
@@ -62,12 +69,14 @@ module.exports = {
           "promotion.applyPublicationDecision",
           "inventory.applyPublicationDecision",
           "tax.applyPublicationDecision",
-          "media.applyPublicationDecision"
+          "media.applyPublicationDecision",
+          "profile.applyEmployeeApplicationDecision"
         ]
       }
     },
     "remoteActions": {
       "targets": {
+        "profile": { "connectionName": "profile" },
         "product": { "connectionName": "commerceStaged" },
         "pricing": { "connectionName": "commerceStaged" },
         "promotion": { "connectionName": "commerceStaged" },

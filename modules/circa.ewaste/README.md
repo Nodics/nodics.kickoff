@@ -1,4 +1,25 @@
-# Circa customer backend
+## Profile Placement Successor
+
+The existing `circa.ewaste:profile` setup selector now resolves `0.0.5` from
+`sample-v007` on PLATFORM. Customer signup declares approved explicit enterprise
+placement; original records and historical `0.0.4` hashes are unchanged. Profile
+still owns tenant, enterprise, credentials and eligibility checks. See the
+[forward-release contract](llm/contracts/circa-application.md#profile-placement-forward-release)
+before authorized validation/preparation; this source change performs no import.
+
+## Commerce Forward Releases
+
+Circa selects `circa.ewaste:commerce` version `0.0.5` from `sample-v005`
+for Staged catalogue/policy preparation. Historical `0.0.4` and its original
+16 files remain unchanged under section-scoped retention. The optional,
+explicit `circa.ewaste:commerce-operational` version `0.0.1` targets `COMMERCE`,
+not Staged; its existing coupon and opening-stock snapshots remain blocked
+from direct import pending governed owner operations. No sample identities,
+codes, quantities or commercial terms have been added. Read
+[the application contract](llm/contracts/circa-application.md#commerce-forward-release-and-partial-import-recovery)
+before preparing or recovering an installed environment.
+
+## Circa customer backend
 
 `circa.ewaste` composes the Circa website over the reusable `eWaste` domain
 accelerator. It owns application identity, presentation, registration/contact
@@ -24,6 +45,13 @@ Drafts remain separate from submitted items in the customer workspace.
 Run `npm test` for project adapters and configuration. See
 [the connected journey guide](docs/pages/customer-journey.md) and
 [application contracts](llm/contracts/README.md) for configuration and acceptance.
+
+Telegram delivery configuration is supplied by Communication on the Engagement
+runtime, not by this Platform-loaded application module. Local contributes only
+the reference/path binding to its existing Telegram provider selection. External
+identity configuration remains on Platform. Rebuild/restart affected runtimes
+before checking schemas; business activation, private credentials and capture
+qualification remain separate approvals. No old runtime records are migrated.
 
 Published page composition and artwork are delivered from WCMS Online. The
 `operations` sample release supplies independent verifier/approver roles and

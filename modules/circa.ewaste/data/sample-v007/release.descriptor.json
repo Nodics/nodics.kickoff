@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "profile": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Circa customer profile records for the eWaste experience."
+      }
+    }
+  }
+}

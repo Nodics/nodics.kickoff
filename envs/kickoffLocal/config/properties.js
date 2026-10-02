@@ -1,4 +1,22 @@
+/**
+ * @module kickoffLocal/config/properties
+ * @description Declares Local deployment selections and explicitly scoped runtime policies.
+ * @layer config
+ * @owner nodics.kickoff
+ * @override Later deployment layers may narrow these selections without bypassing framework qualification or authorization.
+ */
 module.exports = {
+  // Operator-selected only after the Local console and launch capture checks.
+  "log": {
+    "requestPrivacy": {
+      "qualified": {
+        "$config": "env",
+        "name": "NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED",
+        "type": "boolean",
+        "fallback": false
+      }
+    }
+  },
   "pricing": {
     "runtimeRoleProfiles": {
       "COMMERCE": {
@@ -94,12 +112,21 @@ module.exports = {
   // Explicit Local service-grant allowlist; review inherited grant changes before extending this pin.
   "identityGovernance": {
     "migration": {
+      "assessment": {
+        "enabled": {
+          "$config": "env",
+          "name": "NODICS_LOCAL_IDENTITY_ASSESSMENT_ENABLED",
+          "type": "boolean",
+          "fallback": false
+        }
+      },
       "localRuntimeDeploymentGrantPermissions": {
         "$config": "replace",
         "value": [
           "auth.internal.token.read",
           "auth.internal.token.read.anyTenant",
           "profile.enterprise.search",
+          "profile.tenant.namespace.bind",
           "profile.customer.register",
           "profile.address.reference.read",
           "profile.enterprise.reference.read",
@@ -120,8 +147,37 @@ module.exports = {
       }
     }
   },
+  "profileTenantProvisioning": {
+    "enabled": {
+      "$config": "env",
+      "name": "NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED",
+      "type": "boolean",
+      "fallback": false
+    },
+    "allowInsecureLoopback": true
+  },
   "apiExposure": {
     "runtimeRoleProfiles": {
+      "PLATFORM": {
+        "categories": {
+          "profileTenantProvisioning": {
+            "enabled": {
+              "$config": "env",
+              "name": "NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED",
+              "type": "boolean",
+              "fallback": false
+            }
+          },
+          "profileEmployeeRecovery": {
+            "enabled": {
+              "$config": "env",
+              "name": "NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED",
+              "type": "boolean",
+              "fallback": false
+            }
+          }
+        }
+      },
       "COMMERCE_STAGED": {
         "categories": {
           "productPublicationSource": { "enabled": true },
@@ -262,7 +318,10 @@ module.exports = {
     "default": {
       "engines": {
         "redis": {
-          "enabled": true
+          "enabled": true,
+          "options": {
+            "prefix": "kickoffLocalRuntimeAuth"
+          }
         }
       }
     }
@@ -279,6 +338,24 @@ module.exports = {
     "environmentAllowlist": [
       "kickoffLocal"
     ]
+  },
+  "runtimeConfigurationSchemas": {
+    "runtimeRoleProfiles": {
+      "ENGAGEMENT": {
+        "telegramDelivery": {
+          "fields": [{
+            "credentialReference": {
+              "$config": "ref",
+              "path": ["communication", "runtimeRoleProfiles", "ENGAGEMENT", "providers", "TELEGRAM", "credentialReferences", "0"]
+            },
+            "path": ["credentials", {
+              "$config": "ref",
+              "path": ["communication", "runtimeRoleProfiles", "ENGAGEMENT", "providers", "TELEGRAM", "credentialReferences", "0"]
+            }, "value"]
+          }]
+        }
+      }
+    }
   },
   "communication": {
     "runtimeRoleProfiles": {

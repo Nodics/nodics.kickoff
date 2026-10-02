@@ -10,6 +10,14 @@
       "nodics.wcms",
       "nodics.discovery"
     ],
+    "runtimeModuleRoots": [
+      "nodics.wcms",
+      "nodics.discovery",
+      "nodics.platform"
+    ],
+    "runtimeConfigurationContributions": [
+      { "moduleName": "axis", "namespace": "cms", "runtimeRole": "WCMS_ONLINE" }
+    ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
     "owns": [

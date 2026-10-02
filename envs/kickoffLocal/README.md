@@ -12,6 +12,15 @@ Change this package only when the requested behavior belongs to this boundary. P
 
 ## Verification
 
+Runtime Configuration targets are independent: Platform hosts Telegram external
+identity; Engagement hosts the Communication-owned `telegramDelivery` schema.
+Local overrides only its credential reference/path via the existing selected
+provider binding. Schema authoring does not activate Communication/Engagement or
+provide keys/tokens. After source rebuild/restart, verify each target separately;
+do not save delivery credentials on Platform or copy the Circa module into
+Engagement merely to obtain its form. Persisted records remain in their original
+runtime/database scope.
+
 Platform and Waste keep thin late `postInit` delegates to Copilot's framework
 startup service. Do not copy source loops, service authorization or ingestion
 report handling into these entrypoints. Project modules select source scope and

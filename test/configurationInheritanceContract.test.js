@@ -17,6 +17,208 @@ const {
 const coreProperties = require("../modules/kickoffCore/config/properties");
 const metadata = require("../modules/kickoffCore/package.json");
 
+require("node:test")("WCMS Online discovers the canonical Axis composition policy without activating Axis", () => {
+  const projection = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
+  const result = projection.read({ projectRoot: path.resolve(__dirname, ".."), frameworkRoot,
+    environment: "kickoffLocal", server: "wcmsOnlineServer" });
+  const source = require(path.join(frameworkRoot, "nodics.platform/modules/axis/config/properties"));
+  assert.deepEqual(result.properties.cms.publication.baselines.axis, source.cms.publication.baselines.axis);
+  assert.equal(result.properties.cms.publication.runtimeRole, "ONLINE");
+  assert.equal(result.properties.cms.runtimeRoleProfiles, undefined);
+  assert.equal(result.properties.axis, undefined);
+  assert.equal(result.modules.includes("axis"), false);
+  assert.equal(result.modules.includes("profile"), false);
+  assert.deepEqual(result.properties.runtimeIdentity,
+    require("../envs/kickoffLocal/wcmsOnlineServer/package.json").nodics.runtimeIdentity);
+  const configuration = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService"));
+  const previous = global.NODICS;
+  try {
+    global.NODICS = undefined;
+    const offline = configuration.readDeploymentConfiguration({ projectRoot: path.resolve(__dirname, ".."), frameworkRoot,
+      environmentCode: "kickoffLocal", serverCode: "wcmsOnlineServer" });
+    assert.deepEqual(offline.cms.publication.baselines.axis, source.cms.publication.baselines.axis);
+    const disabled = configuration.readDeploymentConfiguration({ projectRoot: path.resolve(__dirname, ".."), frameworkRoot,
+      environmentCode: "kickoffLocal", serverCode: "wcmsOnlineServer",
+      inheritedProperties: { cms: { publication: { baselines: { axis: {
+        employeeCompositionPaths: { $config: "replace", value: [] }
+      } } } } } });
+    assert.deepEqual(disabled.cms.publication.baselines.axis.employeeCompositionPaths, []);
+    assert.equal(global.NODICS, undefined);
+  } finally { global.NODICS = previous; }
+});
+
+require("node:test")("Local private capture attestation is explicit and never follows onboarding enablement", () => {
+  const selected = { NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED: "true" };
+  for (const server of ["platformServer", "processServer", "commerceServer"]) {
+    const policy = loadRuntime(server, "kickoffLocal", selected).log.requestPrivacy;
+    assert.equal(policy.qualified, true);
+    assert.equal(policy.captureMode, "disabled");
+    assert.equal(loadRuntime(server, "kickoffLocal", {
+      NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true",
+      NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED: "false",
+    }).log.requestPrivacy.qualified, false);
+  }
+  assert.equal(loadRuntime("platformServer", "kickoffDockerLocal", selected).log.requestPrivacy.qualified, false);
+});
+
+require("node:test")("Local enterprise setup inspection and continuation qualifications remain independent", () => {
+  const flags = {
+    inspectionQualified: "NODICS_LOCAL_ENTERPRISE_SETUP_INSPECTION_QUALIFIED",
+    privateGuardsQualified: "NODICS_LOCAL_ENTERPRISE_SETUP_PRIVACY_QUALIFIED",
+    resumeQualified: "NODICS_LOCAL_ENTERPRISE_SETUP_RESUME_QUALIFIED",
+  };
+  const unset = Object.fromEntries(Object.values(flags).map(name => [name, "false"]));
+  const policy = environment => loadRuntime("platformServer", "kickoffLocal", environment)
+    .enterpriseManagement.setupContinuation;
+  const baseline = policy({ ...unset, NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" });
+  for (const key of Object.keys(flags)) assert.equal(baseline[key], false);
+  for (const [key, name] of Object.entries(flags)) {
+    const selected = policy({ ...unset, [name]: "true" });
+    for (const other of Object.keys(flags)) assert.equal(selected[other], other === key);
+  }
+  const all = Object.fromEntries(Object.values(flags).map(name => [name, "true"]));
+  const docker = loadRuntime("platformServer", "kickoffDockerLocal", all)
+    .enterpriseManagement.setupContinuation;
+  for (const key of Object.keys(flags)) assert.equal(docker[key], false);
+});
+
+require("node:test")("Local recovery API opt-in remains environment-owned and Platform-scoped", () => {
+  const server = require("../envs/kickoffLocal/platformServer/config/properties");
+  assert.equal(server.apiExposure, undefined);
+  const enabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" };
+  const disabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "false" };
+  assert.equal(loadRuntime("platformServer", "kickoffLocal", enabled).apiExposure.categories.profileEmployeeRecovery.enabled, true);
+  assert.equal(loadRuntime("platformServer", "kickoffLocal", disabled).apiExposure.categories.profileEmployeeRecovery.enabled, false);
+  for (const [name, environment] of [["commerceServer", "kickoffLocal"], ["platformServer", "kickoffDockerLocal"]]) {
+    assert.notEqual(loadRuntime(name, environment, enabled).apiExposure?.categories?.profileEmployeeRecovery?.enabled, true);
+  }
+});
+
+require("node:test")("Local read-only identity assessment does not qualify or activate identity mutations", () => {
+  const selected = { NODICS_LOCAL_IDENTITY_ASSESSMENT_ENABLED: "true" };
+  const local = loadRuntime("platformServer", "kickoffLocal", selected);
+  assert.equal(local.identityGovernance.migration.assessment.enabled, true);
+  assert.equal(local.enterpriseManagement.registration.inventoryQualified, false);
+  assert.equal(local.enterpriseManagement.registration.assignmentClaimIndexQualified, false);
+  assert.equal(local.profileEmployeeRecovery.credentialWriteQualified, false);
+  assert.equal(loadRuntime("platformServer", "kickoffLocal", {
+    NODICS_LOCAL_IDENTITY_ASSESSMENT_ENABLED: "false",
+  }).identityGovernance.migration.assessment.enabled, false);
+  assert.equal(loadRuntime("platformServer", "kickoffDockerLocal", selected)
+    .identityGovernance.migration.assessment.enabled, false);
+});
+
+require("node:test")("Local bootstrap source review remains separate from registration qualification", () => {
+  const flag = "NODICS_LOCAL_BOOTSTRAP_IDENTITY_REVIEW_ENABLED";
+  const selected = { [flag]: "true" };
+  const local = loadRuntime("platformServer", "kickoffLocal", selected);
+  assert.equal(local.identityGovernance.migration.assessment.bootstrapReview.enabled, true);
+  assert.equal(local.identityGovernance.migration.assessment.enabled, false);
+  assert.equal(local.enterpriseManagement.registration.inventoryQualified, false);
+  assert.equal(local.enterpriseManagement.registration.assignmentClaimIndexQualified, false);
+  assert.equal(local.profileEmployeeRecovery.inventoryQualified, false);
+  assert.equal(local.profileEmployeeRecovery.credentialWriteQualified, false);
+  assert.equal(loadRuntime("platformServer", "kickoffLocal", { [flag]: "false" })
+    .identityGovernance.migration.assessment.bootstrapReview.enabled, false);
+  for (const [server, environment] of [["processServer", "kickoffLocal"], ["platformServer", "kickoffDockerLocal"]]) {
+    assert.notEqual(loadRuntime(server, environment, selected)
+      .identityGovernance?.migration?.assessment?.bootstrapReview?.enabled, true);
+  }
+});
+
+require("node:test")("Local registration prerequisites require separate installed-owner attestations", () => {
+  const flags = {
+    inventoryQualified: "NODICS_LOCAL_REGISTRATION_INVENTORY_QUALIFIED",
+    assignmentClaimIndexQualified: "NODICS_LOCAL_REGISTRATION_CLAIM_INDEX_QUALIFIED",
+  };
+  const unset = Object.fromEntries(Object.values(flags).map(name => [name, "false"]));
+  for (const [key, flag] of Object.entries(flags)) {
+    const selected = { ...unset, [flag]: "true" };
+    const local = loadRuntime("platformServer", "kickoffLocal", selected);
+    for (const other of Object.keys(flags))
+      assert.equal(local.enterpriseManagement.registration[other], other === key);
+    assert.equal(local.enterpriseManagement.registration.enabled, false);
+    assert.equal(local.profileEmployeeRecovery.inventoryQualified, false);
+    assert.equal(local.profileEmployeeRecovery.credentialWriteQualified, false);
+    assert.equal(local.enterpriseManagement.memberships.inventoryQualified, false);
+    const docker = loadRuntime("platformServer", "kickoffDockerLocal", selected);
+    for (const other of Object.keys(flags))
+      assert.equal(docker.enterpriseManagement.registration[other], false);
+  }
+});
+
+require("node:test")("Local Platform explicitly delegates only its registration Communication operations", () => {
+  const local = loadRuntime("platformServer", "kickoffLocal");
+  const policy = local.identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
+  for (const permission of ["communication.request", "communication.verification.execute"])
+    assert.equal(policy.filter(value => value === permission).length, 1);
+  assert.ok(policy.includes("profile.tenant.namespace.bind"));
+  assert.equal(policy.includes("communication.callback.receive"), false);
+  const identity = require("../envs/kickoffLocal/platformServer/package.json").nodics.runtimeIdentity;
+  assert.equal(identity.remoteModules.filter(name => name === "commsApi").length, 1);
+  assert.equal(activeModuleNames(local).includes("commsApi"), false);
+  assert.deepEqual(local.profileTenantProvisioning.localRuntimeRemoteModuleExtensions, ["commsApi"]);
+  for (const [server, environment] of [["commerceServer", "kickoffLocal"], ["platformServer", "kickoffDockerLocal"]]) {
+    const runtime = loadRuntime(server, environment);
+    const permissions = runtime.identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
+    assert.equal(permissions.includes("communication.verification.execute"), false);
+    assert.deepEqual(runtime.profileTenantProvisioning.localRuntimeRemoteModuleExtensions || [], []);
+  }
+});
+
+require("node:test")("Local employee review selects only its existing Process owner declaration without qualifying Profile or other deployments", () => {
+  const { moduleConfiguration } = require("./helpers/configuration");
+  const local = loadRuntime("processServer", "kickoffLocal");
+  const docker = loadRuntime("processServer", "kickoffDockerLocal");
+  assert.equal(local.process.runtime.internalStarts.enabled, true);
+  assert.deepEqual(local.process.runtime.internalStarts.allowedDefinitions, ["profileEmployeeApplicationReview"]);
+  assert.equal(local.process.runtime.internalStarts.permission, "process.instance.start.internal");
+  assert.equal(local.process.runtime.internalRetirements.enabled, false);
+  const action = "profile.applyEmployeeApplicationDecision";
+  assert.equal(local.process.actionAdapters.allowedActions.filter(key => key === action).length, 1);
+  assert.equal(local.process.actionAdapters.definitions[action], undefined, "Remote owner declarations must not be copied into Process");
+  assert.equal(activeModuleNames(local).includes("profile"), false);
+  assert.ok(require("../envs/kickoffLocal/processServer/package.json")
+    .nodics.runtimeModuleRoots.includes("nodics.platform"),
+  "Remote Profile action declarations require their discovery root without activation");
+  assert.equal(local.process.remoteActions.targets.profile.connectionName, "profile");
+  assert.equal(moduleConfiguration(local, "profile").abstractEndpoint.httpPort, 4300);
+  const declaration = require(path.join(frameworkRoot, "nodics.platform/modules/profile/config/properties"))
+    .process.actionAdapters.definitions[action];
+  assert.equal(declaration.remote.runtimeRole, "PLATFORM");
+  assert.equal(declaration.remote.requiresCompletedTask, true);
+  assert.equal(declaration.remote.apiName, "/enterprise-access/applications/process-decision");
+  assert.equal(docker.process.runtime.internalStarts.enabled, false);
+  assert.equal(docker.process.actionAdapters.allowedActions.includes(action), false);
+  assert.equal(docker.process.remoteActions.targets.profile, undefined);
+  const platform = loadRuntime("platformServer", "kickoffLocal");
+  assert.equal(platform.enterpriseManagement.registration.enabled, false);
+  assert.equal(platform.enterpriseManagement.registration.inventoryQualified, false);
+  assert.equal(platform.enterpriseManagement.registration.assignmentClaimIndexQualified, false);
+  assert.equal(platform.enterpriseManagement.applications.review.enabled, false);
+  assert.equal(platform.profileEmployeeRecovery.credentialWriteQualified, false);
+});
+
+require("node:test")("Local tenant provisioning selects all consumers but exposes only the Profile owner", () => {
+  const enabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" };
+  const disabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "false" };
+  for (const name of ["platformServer", "commerceServer", "processServer", "wasteServer"]) {
+    const selected = loadRuntime(name, "kickoffLocal", enabled);
+    assert.equal(selected.profileTenantProvisioning.enabled, true);
+    assert.equal(selected.profileTenantProvisioning.allowInsecureLoopback, true);
+    assert.equal(loadRuntime(name, "kickoffLocal", disabled).profileTenantProvisioning.enabled, false);
+    assert.equal(selected.apiExposure?.categories?.profileTenantProvisioning?.enabled === true, name === "platformServer");
+  }
+  const local = loadRuntime("platformServer", "kickoffLocal", enabled);
+  const docker = loadRuntime("platformServer", "kickoffDockerLocal", enabled);
+  assert.equal(local.identityGovernance.migration.localRuntimeDeploymentGrantPermissions
+    .filter(permission => permission === "profile.tenant.namespace.bind").length, 1);
+  assert.notEqual(docker.profileTenantProvisioning?.enabled, true);
+  assert.notEqual(docker.apiExposure?.categories?.profileTenantProvisioning?.enabled, true);
+});
+
 require("node:test")("Platform preparation and isolated probes retain identical environment knowledge sources", () => {
   const { execFileSync } = require("node:child_process");
   const registry = require(path.join(frameworkRoot,
@@ -46,6 +248,23 @@ require("node:test")("Platform preparation and isolated probes retain identical 
     }
     assert.equal(prepared.find(source => source.code === "nodics-axis-assistant-source").enabled, false);
   }
+});
+
+require("node:test")("Local Process resolves its complete remote action inventory without activating Profile", () => {
+  const { execFileSync } = require("node:child_process");
+  const result = JSON.parse(execFileSync(process.execPath, ["-e", `
+    const path = require("node:path");
+    const options = JSON.parse(process.argv[1]);
+    require(path.join(options.frameworkRoot, "nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs"))(options);
+    const registry = require(path.join(options.frameworkRoot, "nodics.process/modules/workflow/src/service/operation/defaultProcessActionAdapterRegistryService"));
+    process.stdout.write(JSON.stringify({
+      profileActive: NODICS.getActiveModules().includes("profile"),
+      actions: registry.allowedActions().map(action => registry.actionKey(action))
+    }));
+  `, JSON.stringify({projectRoot: path.resolve(__dirname, ".."), frameworkRoot, environment: "kickoffLocal", server: "processServer"})], {encoding: "utf8"}));
+  assert.equal(result.profileActive, false);
+  assert.ok(result.actions.includes("profile.applyEmployeeApplicationDecision"));
+  assert.ok(result.actions.includes("cms.applyPublicationDecision"));
 });
 
 require("node:test")("Local Waste startup selection belongs to its environment role and permits later disablement", () => {
@@ -452,17 +671,22 @@ console.log(
 );
 
 require("node:test")(
-  "Kickoff environments explicitly enable inherited Redis",
+  "Kickoff environments enable inherited Redis with deployment-owned isolation",
   async () => {
     assert.deepEqual(
       require("../envs/kickoffLocal/config/properties").cache.default.engines.redis,
-      { enabled: true },
-      "Local enables Redis and inherits unchanged provider options",
+      { enabled: true, options: { prefix: "kickoffLocalRuntimeAuth" } },
+      "Local enables Redis and overrides only its disposable deployment namespace",
     );
     for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       const effective = loadRuntime("commerceServer", environment);
       const redis = (await cacheConfiguration(effective, "auth")).engines.redis;
       assert.equal(redis.enabled, true);
+      if (environment === "kickoffLocal") {
+        assert.equal(redis.options.prefix, "kickoffLocalRuntimeAuth");
+        assert.equal(redis.options.host, "localhost");
+        assert.equal(redis.options.port, 6379);
+      }
       if (environment === "kickoffDockerLocal") {
         assert.equal(redis.options.sentinel.enabled, true);
         assert.equal(redis.options.sentinel.name, "nodics");

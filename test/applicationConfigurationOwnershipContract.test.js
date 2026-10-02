@@ -12,7 +12,7 @@ test("Local communication policy is role-scoped without activating Circa on Enga
     .communication.runtimeRoleProfiles.ENGAGEMENT;
   assert.deepEqual(local.communication.templates.WASTE_REVIEW_OUTCOME_V1,
     expected.templates.WASTE_REVIEW_OUTCOME_V1);
-  assert.deepEqual(local.communication.trustedSourceModules, ["eWaste"]);
+  assert.deepEqual(local.communication.trustedSourceModules, ["eWaste", "profile"]);
   assert.deepEqual(local.communication.providers.TELEGRAM.credentialReferences, ["telegram.bot.circa"]);
   for (const name of ["circa.ewaste", "eWaste", "wasteCore"]) {
     assert.equal(activeModuleNames(local).includes(name), false);

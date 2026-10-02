@@ -24,6 +24,7 @@
     "displayName": "Business Process & Automation Server",
     "runtimeModuleRoots": [
       "nodics.process",
+      "nodics.platform",
       "nodics.wcms",
       "nodics.rulesEngine",
       "nodics.commerce"

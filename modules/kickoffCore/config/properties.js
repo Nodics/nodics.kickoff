@@ -19,6 +19,25 @@
  * @override Later active modules may override these defaults through configuration layering.
  */
 module.exports = {
+  "communication": {
+    "runtimeRoleProfiles": {
+      "ENGAGEMENT": {
+        "$config": "selected",
+        "name": "employeeMail",
+        "field": "domains",
+        "includes": "employee",
+        "value": {
+          "trustedSourceModules": [
+            "eWaste",
+            "profile"
+          ],
+          "templateResources": {
+            "modules": { "profile": true }
+          }
+        }
+      }
+    }
+  },
   "tooling": {
     "acceptance": {
       // Apparel journey and composition-selected catalog fixtures remain customer-owned.
@@ -276,7 +295,7 @@ module.exports = {
           "baselines": {
             "kickoffdocs": {
               "contentPackCode": "kickoffDocumentation",
-              "releaseVersion": "0.8.5",
+              "releaseVersion": "0.8.6",
               "rootType": "site",
               "rootCode": "kickoffDocumentationSite",
               "sourceVersion": "0"
@@ -317,6 +336,9 @@ module.exports = {
   },
   "activeModules": {
     "compositions": {
+      "employeeMail": {
+        "domains": [{ "code": "employee" }]
+      },
       "agora": {
         "environmentVariable": "NODICS_AGORA_DOMAINS",
         "selection": "all",

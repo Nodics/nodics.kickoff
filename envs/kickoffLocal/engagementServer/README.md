@@ -20,3 +20,16 @@ service principal and approved deployment grant before startup. Missing proof
 fails closed; never replace it with the shared bootstrap or administrator key.
 After a full Local reset, an authenticated operator must reprovision the approved
 deployment grants through Profile before restarting this runtime.
+
+## Employee email test binding
+
+This server selects the existing SMTP provider for controlled employee-email
+checks. Sending stays disabled without `NODICS_EMPLOYEE_SMTP_ENABLED=true` and
+complete approved test inputs. Secrets resolve in this sending runtime, not in
+Platform, Axis or another deployment. Existing Telegram/waste delivery is retained.
+
+The project binding and three Profile-purpose template selections are documented
+in [Local employee email](../../../docs/pages/local-runtime.md#local-employee-email-sending-runtime-configuration).
+Run `node --test test/communicationActivationDataContract.test.js` from the project
+root for non-sending effective-configuration checks. Configuration health is not
+SMTP authentication, inbox receipt or full employee-journey acceptance.

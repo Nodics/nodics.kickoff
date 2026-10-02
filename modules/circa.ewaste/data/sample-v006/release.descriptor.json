@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "commerce-operational": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Explicitly review existing Circa coupon issuance and opening stock after governed publication; never replay live balances."
+      }
+    }
+  }
+}

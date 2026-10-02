@@ -23,6 +23,7 @@
     },
     "displayName": "Customer Engagement Server",
     "runtimeModuleRoots": [
+      "nodics.platform",
       "nodics.communication",
       "nodics.engagement",
       "nodics.accelerators/modules/nexus"

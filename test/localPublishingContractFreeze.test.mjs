@@ -2,12 +2,16 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import configuration from './helpers/configuration.js';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const frameworkRoot = configuration.frameworkRoot;
+const require = createRequire(import.meta.url);
+const contentPacks = require(path.join(frameworkRoot,
+  'nodics.foundation/modules/nData/nImport/import/src/service/contentPack/defaultContentPackService.js'));
 const releases = [
   { pack: 'nodicsDocumentation', file: path.join(frameworkRoot, 'nodics.docs/data/manifest.json'), section: 'documentation' },
   { pack: 'kickoffDocumentation', file: path.join(projectRoot, 'data/manifest.json'), section: 'documentation' },
@@ -32,6 +36,29 @@ for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
       : Object.values(staged.cms.publication.baselines).find(value => value.contentPackCode === release.pack);
     assert.equal(baseline?.releaseVersion, manifest.sections[release.section].version,
       environment + ' ' + (release.pack || release.baseline) + ' baseline must match its selected immutable release');
+    if (release.pack) {
+      const previousConfig = global.CONFIG, previousNodics = global.NODICS;
+      try {
+        global.CONFIG = { get: key => staged[key] };
+        global.NODICS = {
+          getEnvironmentPath: () => projectRoot,
+          getNodicsHome: () => path.join(frameworkRoot, 'nodics.foundation'),
+        };
+        // Inspect actual source files and hashes; never import or query runtime state.
+        const available = contentPacks.inspectRelease(contentPacks.resolvePackContext(release.pack));
+        assert.equal(available.available, true, environment + ' ' + release.pack + ' source must be available');
+        assert.equal(available.version, baseline.releaseVersion);
+        assert.equal(available.manifest.destinationRole, 'WCMS_STAGED');
+        assert.equal(available.manifest.lifecycle, 'PUBLISHABLE');
+        assert.equal(available.manifest.initialPublicationPolicy, 'ADMIN_INITIATED');
+        assert.ok(available.manifest.sites.includes(baseline.rootCode));
+        assert.equal(available.contentPath, path.resolve(path.dirname(release.file), available.manifest.contentPath),
+          'The configured pack must resolve its current manifest-owned content root');
+      } finally {
+        global.CONFIG = previousConfig;
+        global.NODICS = previousNodics;
+      }
+    }
   }
 }
 

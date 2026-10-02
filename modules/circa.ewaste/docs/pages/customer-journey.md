@@ -1,4 +1,23 @@
-# Connected Circa local customer journey
+# Commerce Preparation And Recovery
+
+Circa setup selector `circa.ewaste:commerce` prepares immutable policy release
+`0.0.5` on `COMMERCE_STAGED`: catalogue, pricing, tax, warehouse configuration
+and promotion policy, not coupon codes, batches or stock balances. Original
+`0.0.4` source and failed evidence remain unchanged. Import is not publication.
+
+Optional `circa.ewaste:commerce-operational` targets `COMMERCE` at `0.0.1`.
+It retains existing approved source only, with no invented codes or terms.
+It is not automatically prepared and cannot directly import raw snapshots.
+Complete publication, issuer operations and stock movement provenance through
+existing owners; never overwrite live balances or replay single-use codes.
+
+For partial recovery, inspect secured run and installation receipts, preserve
+successful writes, validate the forward policy and use governed preparation
+and publication. Do not reset, retry the mixed pack or infer rollback.
+See the [application contract](../../llm/contracts/circa-application.md#commerce-forward-release-and-partial-import-recovery)
+for operator steps, customization and evidence boundaries.
+
+## Connected Circa local customer journey
 
 Updated: 2026-09-11
 

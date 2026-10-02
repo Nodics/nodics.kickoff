@@ -44,7 +44,8 @@
         "workflow",
         "publish",
         "cms",
-        "editorial"
+        "editorial",
+        "commsApi"
       ]
     },
     "runtimeTooling": {
