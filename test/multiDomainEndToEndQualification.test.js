@@ -19,6 +19,12 @@ const contentRoot = (domain) => recordsRoot(domain, "Content", "content");
 const apparelRoot = commerceRoot("apparel");
 const electronicsRoot = commerceRoot("electronics");
 const telcoRoot = commerceRoot("telco");
+// Retained stock records are test doubles only; active catalogs never import
+// live balances, which remain governed by Inventory's Online commands.
+const apparelInventoryFixture = path.join(root,
+  "modules/agora.apparel/data/sample-v003/commerce/records/agoraApparelInventoryBalanceData");
+const electronicsInventoryFixture = path.join(root,
+  "modules/agora.electronics/data/sample-v002/commerce/records/agoraElectronicsInventoryBalanceData");
 const apparelValidation = load(
   path.join(
     framework,
@@ -80,7 +86,7 @@ test("Apparel search projection data supports size and colour selection through 
     load(path.join(apparelRoot, "agoraApparelPriceRowData")),
   );
   const inventory = values(
-    load(path.join(apparelRoot, "agoraApparelInventoryBalanceData")),
+    load(apparelInventoryFixture),
   );
   const physicalProducts = products.filter(
     (product) => product.productType !== "DIGITAL",
@@ -157,7 +163,7 @@ test("Electronics fixtures compose specifications compatibility price inventory 
     load(path.join(electronicsRoot, "agoraElectronicsPriceRowData")),
   );
   const inventory = values(
-    load(path.join(electronicsRoot, "agoraElectronicsInventoryBalanceData")),
+    load(electronicsInventoryFixture),
   );
   assert.equal(
     electronicsValidation.validateSpecification(specs[0]).valid,
