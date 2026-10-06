@@ -295,7 +295,7 @@ module.exports = {
           "baselines": {
             "kickoffdocs": {
               "contentPackCode": "kickoffDocumentation",
-              "releaseVersion": "0.8.10",
+              "releaseVersion": "0.8.12",
               "rootType": "site",
               "rootCode": "kickoffDocumentationSite",
               "sourceVersion": "0"
