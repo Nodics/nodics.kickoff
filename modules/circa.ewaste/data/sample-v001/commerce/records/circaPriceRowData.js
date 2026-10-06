@@ -525,3 +525,4 @@ module.exports = {
     "minQuantity": "1"
   }
 };
+
