@@ -1,5 +1,16 @@
 # Agora Apparel data ownership
 
+Commerce release `0.0.10` (`sample-v005`) contains publishable catalog/policy
+records only. Historical `sample-v003` and `sample-v004` stay retained. Coupons, coupon batches
+and stock balances are not imported to Staged. Stock receiving/opening and coupon
+issuance must use their operational Online owners with independent evidence;
+catalog publication alone does not establish sellable stock. WCMS release and
+Media manifests are unchanged. `test:data-ownership` enforces this separation.
+Promotion authoring excludes operational analytics and budget spending. Category
+and localized category records have explicit import headers. The admission test
+checks actual owner policy validation and rejects unclaimed record files before
+installation. A failed earlier release is retained, never rewritten in place.
+
 This customer application module owns its application sample data. Commerce and
 WCMS schemas and publication operations remain framework-owned.
 

@@ -1,97 +1,1557 @@
-/*
-    Nodics - Enterprice Micro-Services Management Framework
-
-    Copyright (c) 2026 Nodics All rights reserved.
-
-    This software is governed by the Nodics Source-Available Commercial License.
-    You may use, copy, modify, deploy, or distribute it only as permitted by the
-    root LICENSE file or a separate written agreement with Nodics.
-
+/* Nodics. Copyright (c) 2026. Governed by the root LICENSE. */
+"use strict";
+/**
+ * @module circa.ewaste/data/sample-v001/commerce/records/circaPromotionData.js
+ * @description Supplies the unified Circa customer demonstration dataset through canonical owner imports.
+ * @layer data
+ * @owner circa.ewaste
+ * @override Author a successor release for customer-specific sample data; preserve installed transactions.
  */
-
-'use strict';
-
-/** @module circa.ewaste/data/commerce/circaPromotionData @description Owns illustrative Circa catalogue authoring data. @layer data @owner circa.ewaste @lifecycle PUBLISHABLE @destination COMMERCE_STAGED */
 module.exports = {
-    "record0": {
-        "tenant": "default",
-        "enterpriseCode": "default",
-        "revision": 1,
-        "active": true,
-        "code": "CIRCA_COUPON_CPN-GRN-30_PROMO",
-        "name": "AED 30 repair credit",
-        "status": "ACTIVE",
-        "priority": 25,
-        "conditions": {
-            "couponRequired": true,
-            "customerOwnsCouponCode": true,
-            "sourceProductCode": "CIRCA_COUPON_CPN-GRN-30"
-        },
-        "actions": {
-            "discountType": "AMOUNT",
-            "discountValue": "1",
-            "discountAmount": "1",
-            "reasonCode": "CIRCA_SAMPLE_OFFER"
-        },
-        "budget": {
-            "limit": "1000",
-            "spent": "0"
-        },
-        "validFrom": "2026-01-01T00:00:00.000Z",
-        "validTo": "2026-12-31T23:59:59.000Z"
+  "record0": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+    "name": "AED 30 repair credit",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_CPN-GRN-30"
     },
-    "record1": {
-        "tenant": "default",
-        "enterpriseCode": "default",
-        "revision": 1,
-        "active": true,
-        "code": "CIRCA_COUPON_CPN-ECO-15_PROMO",
-        "name": "15% recycled accessories offer",
-        "status": "ACTIVE",
-        "priority": 25,
-        "conditions": {
-            "couponRequired": true,
-            "customerOwnsCouponCode": true,
-            "sourceProductCode": "CIRCA_COUPON_CPN-ECO-15"
-        },
-        "actions": {
-            "discountType": "AMOUNT",
-            "discountValue": "1",
-            "discountAmount": "1",
-            "reasonCode": "CIRCA_SAMPLE_OFFER"
-        },
-        "budget": {
-            "limit": "1000",
-            "spent": "0"
-        },
-        "validFrom": "2026-01-01T00:00:00.000Z",
-        "validTo": "2026-11-15T23:59:59.000Z"
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "1",
+      "discountAmount": "1",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
     },
-    "record2": {
-        "tenant": "default",
-        "enterpriseCode": "default",
-        "revision": 1,
-        "active": true,
-        "code": "CIRCA_COUPON_CPN-SVC-50_PROMO",
-        "name": "AED 50 device diagnosis",
-        "status": "ACTIVE",
-        "priority": 25,
-        "conditions": {
-            "couponRequired": true,
-            "customerOwnsCouponCode": true,
-            "sourceProductCode": "CIRCA_COUPON_CPN-SVC-50"
-        },
-        "actions": {
-            "discountType": "AMOUNT",
-            "discountValue": "1",
-            "discountAmount": "1",
-            "reasonCode": "CIRCA_SAMPLE_OFFER"
-        },
-        "budget": {
-            "limit": "1000",
-            "spent": "0"
-        },
-        "validFrom": "2026-01-01T00:00:00.000Z",
-        "validTo": "2027-01-20T23:59:59.000Z"
+    "budget": {
+      "limit": "1000"
+    },
+    "validFrom": "2026-01-01T00:00:00.000Z",
+    "validTo": "2026-12-31T23:59:59.000Z"
+  },
+  "record1": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+    "name": "15% recycled accessories offer",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_CPN-ECO-15"
+    },
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "1",
+      "discountAmount": "1",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "budget": {
+      "limit": "1000"
+    },
+    "validFrom": "2026-01-01T00:00:00.000Z",
+    "validTo": "2026-11-15T23:59:59.000Z"
+  },
+  "record2": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+    "name": "AED 50 device diagnosis",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_CPN-SVC-50"
+    },
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "1",
+      "discountAmount": "1",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "budget": {
+      "limit": "1000"
+    },
+    "validFrom": "2026-01-01T00:00:00.000Z",
+    "validTo": "2027-01-20T23:59:59.000Z"
+  },
+  "record3": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C01_PROMO",
+    "name": "Espresso - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C01",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Espresso",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Espresso once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
     }
+  },
+  "record4": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C02_PROMO",
+    "name": "Americano - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C02",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Americano",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Americano once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record5": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C03_PROMO",
+    "name": "Cappuccino - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C03",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Cappuccino",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Cappuccino once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record6": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C04_PROMO",
+    "name": "Latte - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C04",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Latte",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Latte once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record7": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C05_PROMO",
+    "name": "Tea - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C05",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Tea",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Tea once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record8": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C06_PROMO",
+    "name": "Iced coffee - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C06",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Iced coffee",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Iced coffee once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record9": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C07_PROMO",
+    "name": "Croissant - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C07",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Croissant",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Croissant once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record10": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C08_PROMO",
+    "name": "Muffin - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C08",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Muffin",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Muffin once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record11": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C09_PROMO",
+    "name": "Cookie pair - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C09",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Cookie pair",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Cookie pair once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record12": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C10_PROMO",
+    "name": "Coffee and croissant - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C10",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Coffee and croissant",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record13": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C11_PROMO",
+    "name": "Tea and cake slice - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C11",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Tea and cake slice",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record14": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-C12_PROMO",
+    "name": "Breakfast sandwich and coffee - Hills Cafe",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-C12",
+      "storeCodes": [
+        "greenperks-cafe"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Breakfast sandwich and coffee",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record15": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B01_PROMO",
+    "name": "Soup of the day - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B01",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Soup of the day",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Soup of the day once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record16": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B02_PROMO",
+    "name": "Side salad - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B02",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Side salad",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Side salad once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record17": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B03_PROMO",
+    "name": "Starter plate - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B03",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Starter plate",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Starter plate once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record18": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B04_PROMO",
+    "name": "Sandwich - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B04",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Sandwich",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Sandwich once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record19": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B05_PROMO",
+    "name": "Pasta dish - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B05",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Pasta dish",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Pasta dish once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record20": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B06_PROMO",
+    "name": "Pizza - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B06",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Pizza",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Pizza once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record21": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B07_PROMO",
+    "name": "Main-course salad - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B07",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Main-course salad",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Main-course salad once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record22": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B08_PROMO",
+    "name": "Dessert - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B08",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Dessert",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Dessert once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record23": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B09_PROMO",
+    "name": "Main and soft drink - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B09",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Main and soft drink",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record24": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B10_PROMO",
+    "name": "Two-course lunch - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B10",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Two-course lunch",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record25": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B11_PROMO",
+    "name": "Meal for two - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B11",
+      "storeCodes": [
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Meal for two",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Meal for two once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record26": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-B12_PROMO",
+    "name": "AED 25 bill discount - Hills Bistro",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-B12",
+      "storeCodes": [
+        "greenperks-bistro"
+      ],
+      "minimumSubtotal": "100.00"
+    },
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "25.00",
+      "discountAmount": "25.00",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem AED 25 bill discount once at GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 100.00."
+      ]
+    }
+  },
+  "record27": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A01_PROMO",
+    "name": "Bottled water - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A01",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Bottled water",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record28": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A02_PROMO",
+    "name": "Tea - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A02",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Tea",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record29": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A03_PROMO",
+    "name": "Americano - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A03",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Americano",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record30": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A04_PROMO",
+    "name": "Fresh juice - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A04",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Fresh juice",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record31": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A05_PROMO",
+    "name": "Soft drink - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A05",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Soft drink",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record32": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A06_PROMO",
+    "name": "Dessert and tea - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A06",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ]
+    },
+    "actions": {
+      "benefitType": "ITEM",
+      "benefitDescription": "Dessert and tea",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
+  },
+  "record33": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A07_PROMO",
+    "name": "AED 10 bill discount - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A07",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ],
+      "minimumSubtotal": "40.00"
+    },
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "10.00",
+      "discountAmount": "10.00",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 40.00."
+      ]
+    }
+  },
+  "record34": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A08_PROMO",
+    "name": "AED 20 bill discount - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A08",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ],
+      "minimumSubtotal": "80.00"
+    },
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "20.00",
+      "discountAmount": "20.00",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 80.00."
+      ]
+    }
+  },
+  "record35": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A09_PROMO",
+    "name": "AED 30 bill discount - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A09",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ],
+      "minimumSubtotal": "120.00"
+    },
+    "actions": {
+      "discountType": "AMOUNT",
+      "discountValue": "30.00",
+      "discountAmount": "30.00",
+      "reasonCode": "CIRCA_SAMPLE_OFFER"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 120.00."
+      ]
+    }
+  },
+  "record36": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A10_PROMO",
+    "name": "10% bill discount - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A10",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ],
+      "minimumSubtotal": "50.00"
+    },
+    "actions": {
+      "discountType": "PERCENT",
+      "discountValue": "10.00",
+      "maximumDiscountAmount": "20.00",
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "percent": "10.00"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 50.00.",
+        "Maximum discount AED 20.00."
+      ]
+    }
+  },
+  "record37": {
+    "tenant": "default",
+    "enterpriseCode": "default",
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "revision": 1,
+    "active": true,
+    "code": "CIRCA_COUPON_GP-A11_PROMO",
+    "name": "15% bill discount - GreenPerks",
+    "status": "ACTIVE",
+    "priority": 25,
+    "conditions": {
+      "couponRequired": true,
+      "customerOwnsCouponCode": true,
+      "sourceProductCode": "CIRCA_COUPON_GP-A11",
+      "storeCodes": [
+        "greenperks-cafe",
+        "greenperks-bistro"
+      ],
+      "minimumSubtotal": "100.00"
+    },
+    "actions": {
+      "discountType": "PERCENT",
+      "discountValue": "15.00",
+      "maximumDiscountAmount": "40.00",
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "percent": "15.00"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 100.00.",
+        "Maximum discount AED 40.00."
+      ]
+    }
+  }
 };

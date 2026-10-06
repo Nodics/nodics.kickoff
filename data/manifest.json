@@ -4,9 +4,9 @@
   "sections": {
     "documentation": {
       "kind": "CONTENT_PACK",
-      "contentPath": "core-v009",
+      "contentPath": "core-v012",
       "pack": "nodics.kickoff",
-      "version": "0.8.9",
+      "version": "0.8.12",
       "owningDomain": "kickoff.documentation",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
@@ -28,26 +28,26 @@
       "pages": 9,
       "components": 10,
       "routes": 9,
-      "releaseChecksum": "cfc5f011e5f1228c200f6dfdb9bcdde6e65b9e06bb467296ffee8dad16152b6c",
+      "releaseChecksum": "3d882bb46bd238bcbfb9bd1822026611457edbbe2830a71603dee0c863ff009c",
       "generatedHashes": {
-        "core-v009/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
-        "core-v009/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
-        "core-v009/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
-        "core-v009/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
-        "core-v009/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
-        "core-v009/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
-        "core-v009/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
-        "core-v009/records/documentation/kickoffDocumentationPageMetadataData.js": "27d8fcfc3fddfa968f2d0461bb2e699eb86d0a0bef3fa732d69ea4f4896bf557",
-        "core-v009/records/documentation/kickoffDocumentationPublicationStateData.js": "0fd27b91b41a0d2e9e0ddfdf0bd05a20edfe17da9c7ace1084f02373929068b9",
-        "core-v009/records/documentation/kickoffDocumentationSearchMetadataData.js": "a1e13a943cd7c365840d1ef427f8444a8af739ff1fd28d3b2f296f9be7fe971a",
-        "core-v009/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
-        "core-v009/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
-        "core-v009/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
-        "core-v009/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
-        "core-v009/records/documentation/kickoffDocumentationComponentData.js": "58e10ae7a8bfdfd9c3959d201d76ed7481abc1ffec2db52fce1d02630b414334",
-        "core-v009/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
-        "core-v009/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
-        "core-v009/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0"
+        "core-v012/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "core-v012/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+        "core-v012/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+        "core-v012/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+        "core-v012/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+        "core-v012/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+        "core-v012/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+        "core-v012/records/documentation/kickoffDocumentationPageMetadataData.js": "7af0ec2a7e07f8300c51bcf2dc76afe8912a2ff28ef0ca5ed3776f1ba88d41f9",
+        "core-v012/records/documentation/kickoffDocumentationPublicationStateData.js": "2a869188e1963fddadd6cac69babbbe1e42a197402dea39cb6a267a3d757dec1",
+        "core-v012/records/documentation/kickoffDocumentationSearchMetadataData.js": "7915bfbd98bdd661482416f75ecfdfe8aa956605c69467fdb171e7d5287a2d56",
+        "core-v012/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
+        "core-v012/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+        "core-v012/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "core-v012/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+        "core-v012/records/documentation/kickoffDocumentationComponentData.js": "8d38245d537eb093a1b87da8c4b4760e86ecced26889d72b52a7228a82c47951",
+        "core-v012/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+        "core-v012/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+        "core-v012/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0"
       }
     }
   },
@@ -624,6 +624,222 @@
             "core-v008/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
             "core-v008/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
             "core-v008/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0"
+          }
+        }
+      }
+    },
+    "core-v009": {
+      "files": {
+        "core-v009/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0",
+        "core-v009/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+        "core-v009/records/documentation/kickoffDocumentationComponentData.js": "58e10ae7a8bfdfd9c3959d201d76ed7481abc1ffec2db52fce1d02630b414334",
+        "core-v009/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+        "core-v009/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+        "core-v009/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+        "core-v009/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+        "core-v009/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+        "core-v009/records/documentation/kickoffDocumentationPageMetadataData.js": "27d8fcfc3fddfa968f2d0461bb2e699eb86d0a0bef3fa732d69ea4f4896bf557",
+        "core-v009/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+        "core-v009/records/documentation/kickoffDocumentationPublicationStateData.js": "0fd27b91b41a0d2e9e0ddfdf0bd05a20edfe17da9c7ace1084f02373929068b9",
+        "core-v009/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+        "core-v009/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+        "core-v009/records/documentation/kickoffDocumentationSearchMetadataData.js": "a1e13a943cd7c365840d1ef427f8444a8af739ff1fd28d3b2f296f9be7fe971a",
+        "core-v009/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "core-v009/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "core-v009/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+        "core-v009/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c"
+      },
+      "sections": {
+        "documentation": {
+          "kind": "CONTENT_PACK",
+          "contentPath": "core-v009",
+          "pack": "nodics.kickoff",
+          "version": "0.8.9",
+          "owningDomain": "kickoff.documentation",
+          "lifecycle": "PUBLISHABLE",
+          "destinationRole": "WCMS_STAGED",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "PUBLIC",
+          "versioningPolicy": "IMMUTABLE",
+          "publicationPolicy": "REQUIRED",
+          "initialPublicationPolicy": "ADMIN_INITIATED",
+          "installationPolicy": "OPTIONAL_AXIS_INITIATED",
+          "removalPolicy": "UNPUBLISH_OR_RETIRE",
+          "sourceMode": "catalogue-markdown-source",
+          "sourceAuthority": "docs/catalogue.json",
+          "sites": [
+            "kickoffDocumentationSite"
+          ],
+          "accessMode": "PUBLIC",
+          "pages": 9,
+          "components": 10,
+          "routes": 9,
+          "releaseChecksum": "cfc5f011e5f1228c200f6dfdb9bcdde6e65b9e06bb467296ffee8dad16152b6c",
+          "generatedHashes": {
+            "core-v009/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+            "core-v009/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+            "core-v009/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+            "core-v009/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+            "core-v009/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+            "core-v009/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+            "core-v009/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+            "core-v009/records/documentation/kickoffDocumentationPageMetadataData.js": "27d8fcfc3fddfa968f2d0461bb2e699eb86d0a0bef3fa732d69ea4f4896bf557",
+            "core-v009/records/documentation/kickoffDocumentationPublicationStateData.js": "0fd27b91b41a0d2e9e0ddfdf0bd05a20edfe17da9c7ace1084f02373929068b9",
+            "core-v009/records/documentation/kickoffDocumentationSearchMetadataData.js": "a1e13a943cd7c365840d1ef427f8444a8af739ff1fd28d3b2f296f9be7fe971a",
+            "core-v009/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
+            "core-v009/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+            "core-v009/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+            "core-v009/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+            "core-v009/records/documentation/kickoffDocumentationComponentData.js": "58e10ae7a8bfdfd9c3959d201d76ed7481abc1ffec2db52fce1d02630b414334",
+            "core-v009/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+            "core-v009/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+            "core-v009/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0"
+          }
+        }
+      }
+    },
+    "core-v010": {
+      "files": {
+        "core-v010/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0",
+        "core-v010/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+        "core-v010/records/documentation/kickoffDocumentationComponentData.js": "6e00cae55ab8e84f2e8aa33be9a66a3507def552d2800a0fcaf86934da3389bb",
+        "core-v010/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+        "core-v010/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+        "core-v010/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+        "core-v010/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+        "core-v010/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+        "core-v010/records/documentation/kickoffDocumentationPageMetadataData.js": "a6949671a249b67f22bb40a4fd13326cd28e31a1765ee92b38055d5065fb5312",
+        "core-v010/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+        "core-v010/records/documentation/kickoffDocumentationPublicationStateData.js": "2aec506c90510ce93aa2b9ec6ea165296e0046ccb6bc30905aab53340ceb69d0",
+        "core-v010/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+        "core-v010/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+        "core-v010/records/documentation/kickoffDocumentationSearchMetadataData.js": "20b879d5ba34c330fc31f50d256f6e966dcb5bf5da8b695d1b1726c7c1891069",
+        "core-v010/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "core-v010/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "core-v010/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+        "core-v010/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c"
+      },
+      "sections": {
+        "documentation": {
+          "kind": "CONTENT_PACK",
+          "contentPath": "core-v010",
+          "pack": "nodics.kickoff",
+          "version": "0.8.10",
+          "owningDomain": "kickoff.documentation",
+          "lifecycle": "PUBLISHABLE",
+          "destinationRole": "WCMS_STAGED",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "PUBLIC",
+          "versioningPolicy": "IMMUTABLE",
+          "publicationPolicy": "REQUIRED",
+          "initialPublicationPolicy": "ADMIN_INITIATED",
+          "installationPolicy": "OPTIONAL_AXIS_INITIATED",
+          "removalPolicy": "UNPUBLISH_OR_RETIRE",
+          "sourceMode": "catalogue-markdown-source",
+          "sourceAuthority": "docs/catalogue.json",
+          "sites": [
+            "kickoffDocumentationSite"
+          ],
+          "accessMode": "PUBLIC",
+          "pages": 9,
+          "components": 10,
+          "routes": 9,
+          "releaseChecksum": "2dcb4b7289fb3f5afc727d92a15f7959cdaa919a0f91c9d680b0a6e6f601efd2",
+          "generatedHashes": {
+            "core-v010/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+            "core-v010/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+            "core-v010/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+            "core-v010/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+            "core-v010/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+            "core-v010/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+            "core-v010/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+            "core-v010/records/documentation/kickoffDocumentationPageMetadataData.js": "a6949671a249b67f22bb40a4fd13326cd28e31a1765ee92b38055d5065fb5312",
+            "core-v010/records/documentation/kickoffDocumentationPublicationStateData.js": "2aec506c90510ce93aa2b9ec6ea165296e0046ccb6bc30905aab53340ceb69d0",
+            "core-v010/records/documentation/kickoffDocumentationSearchMetadataData.js": "20b879d5ba34c330fc31f50d256f6e966dcb5bf5da8b695d1b1726c7c1891069",
+            "core-v010/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
+            "core-v010/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+            "core-v010/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+            "core-v010/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+            "core-v010/records/documentation/kickoffDocumentationComponentData.js": "6e00cae55ab8e84f2e8aa33be9a66a3507def552d2800a0fcaf86934da3389bb",
+            "core-v010/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+            "core-v010/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+            "core-v010/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0"
+          }
+        }
+      }
+    },
+    "core-v011": {
+      "files": {
+        "core-v011/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0",
+        "core-v011/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+        "core-v011/records/documentation/kickoffDocumentationComponentData.js": "4952827a0b32e9eb7447360cf9b4595c228da8761a38e7af9eff4aa179d84d0f",
+        "core-v011/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+        "core-v011/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+        "core-v011/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+        "core-v011/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+        "core-v011/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+        "core-v011/records/documentation/kickoffDocumentationPageMetadataData.js": "6ebaaf185ea1203ebde88094043053fde455eb9a6e8cdb8f56ee1078082b4464",
+        "core-v011/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+        "core-v011/records/documentation/kickoffDocumentationPublicationStateData.js": "aed4c0e411bce9d5661cf82264fe9d2e482e7616654ca12efb12d36583460ffa",
+        "core-v011/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+        "core-v011/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+        "core-v011/records/documentation/kickoffDocumentationSearchMetadataData.js": "e9bb360616a6a18d13f7ebf4c1d8bea2512b15b6ebbeef81f38e145947c8e1e7",
+        "core-v011/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "core-v011/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "core-v011/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+        "core-v011/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c"
+      },
+      "sections": {
+        "documentation": {
+          "kind": "CONTENT_PACK",
+          "contentPath": "core-v011",
+          "pack": "nodics.kickoff",
+          "version": "0.8.11",
+          "owningDomain": "kickoff.documentation",
+          "lifecycle": "PUBLISHABLE",
+          "destinationRole": "WCMS_STAGED",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "PUBLIC",
+          "versioningPolicy": "IMMUTABLE",
+          "publicationPolicy": "REQUIRED",
+          "initialPublicationPolicy": "ADMIN_INITIATED",
+          "installationPolicy": "OPTIONAL_AXIS_INITIATED",
+          "removalPolicy": "UNPUBLISH_OR_RETIRE",
+          "sourceMode": "catalogue-markdown-source",
+          "sourceAuthority": "docs/catalogue.json",
+          "sites": [
+            "kickoffDocumentationSite"
+          ],
+          "accessMode": "PUBLIC",
+          "pages": 9,
+          "components": 10,
+          "routes": 9,
+          "releaseChecksum": "618a2fab9dc02fa265ccf6eeaad14e95b1fb5da65d980560b80f7278f52d60bd",
+          "generatedHashes": {
+            "core-v011/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+            "core-v011/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+            "core-v011/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+            "core-v011/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+            "core-v011/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+            "core-v011/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+            "core-v011/records/documentation/kickoffDocumentationNodeData.js": "60ca083f27ade8400623a228f235fc6a3881f7dec7af65a957d53c2fd6108e0b",
+            "core-v011/records/documentation/kickoffDocumentationPageMetadataData.js": "6ebaaf185ea1203ebde88094043053fde455eb9a6e8cdb8f56ee1078082b4464",
+            "core-v011/records/documentation/kickoffDocumentationPublicationStateData.js": "aed4c0e411bce9d5661cf82264fe9d2e482e7616654ca12efb12d36583460ffa",
+            "core-v011/records/documentation/kickoffDocumentationSearchMetadataData.js": "e9bb360616a6a18d13f7ebf4c1d8bea2512b15b6ebbeef81f38e145947c8e1e7",
+            "core-v011/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
+            "core-v011/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+            "core-v011/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+            "core-v011/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+            "core-v011/records/documentation/kickoffDocumentationComponentData.js": "4952827a0b32e9eb7447360cf9b4595c228da8761a38e7af9eff4aa179d84d0f",
+            "core-v011/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+            "core-v011/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+            "core-v011/headers/kickoffDocumentationContentPackHeader.js": "52ab8f483a6560ac737eb8df8d2146dd835d6a0fcf6c7104816521b01f2182b0"
           }
         }
       }

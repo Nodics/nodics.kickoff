@@ -1,7 +1,7 @@
 {
   "name": "wasteServer",
   "version": "0.0.0",
-  "index": "1001.29",
+  "index": "4001.29",
   "private": true,
   "main": "nodics.js",
   "description": "Reference customer Waste Management server runtime composition and configuration boundary for this Nodics project.",

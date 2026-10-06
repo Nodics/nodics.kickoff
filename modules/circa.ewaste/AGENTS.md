@@ -16,15 +16,23 @@ orderCodePrefix and data release identity when migrating an active installation.
 Import samples only into a new environment through governed destination APIs;
 never reset transactional ownership or opening ledgers during a code refactor.
 
-Reference adoption now selects EXPLICIT core-v002 successors for eWaste and Circa
-at version 0.0.1 through nImport source-key inheritance. Read the existing data
-compatibility section in `llm/contracts/circa-application.md`. Keep the optional
-sample-v004 transaction pack out of installed-reference migration; fresh-only
-eligibility still requires parent/operator verification. Retained historical
-sections and their sibling active sections must remain disjoint.
+Reference adoption selects EXPLICIT `core-v002` Waste policy and `sample-v001`
+demo sections at version 0.0.1 through nImport source-key inheritance. The
+policy root stays aligned with the lower-layer eWaste core root so Circa
+overrides compose after eWaste source records. Read the existing data
+compatibility section in `llm/contracts/circa-application.md`. Fresh-only
+eligibility still requires parent/operator verification, and active demo samples
+must not be replayed over real customer history.
 
 Run npm test for project adapter/configuration contracts and the frontend live
 journey against a local test runtime. Keep illustrative outcomes explicit.
+
+Circa has one customer demonstration dataset, not separate full/partial modes.
+Its setup requires customer, enterprise/staff, location, Waste, Loyalty, Commerce
+and content sections. USER-triggered selection remains explicit and each owner
+still enforces onboarding, stock, issuance, consent and financial admission.
+Never report the demo ready from CMS publication alone or make a rejected owner
+step optional to obtain a green status. See `docs/pages/demo-data.md`.
 
 A partner adopting this reference creates its own application identity and writes
 only to its customer project. Reusable eWaste or Waste enhancements go to the

@@ -9,75 +9,125 @@
 
  */
 
-'use strict';
+"use strict";
 
 /** @module circa.ewaste/test/circaWastePolicyContract @description Verifies Circa-owned Waste policy data extends eWaste without owning framework concerns. @layer test @owner circa.ewaste */
-const assert = require('node:assert/strict');
-const crypto = require('node:crypto');
-const fs = require('node:fs');
-const path = require('node:path');
+const assert = require("node:assert/strict");
+const crypto = require("node:crypto");
+const fs = require("node:fs");
+const path = require("node:path");
 
-const projectRoot = path.resolve(__dirname, '../../..');
-const frameworkRoot = path.resolve(projectRoot, process.env.NODICS_FRAMEWORK_ROOT || '../nodics.ai');
-const contributionPolicy = require(path.join(frameworkRoot, 'nodics.waste/modules/wasteCore/src/service/defaultWasteDataContributionPolicyService'));
-const moduleRoot = path.resolve(__dirname, '..');
-const dataRoot = path.join(moduleRoot, 'data');
-const recordsRoot = path.join(dataRoot, 'core-v002/waste-policy/records');
-const pkg = require(path.join(moduleRoot, 'package.json'));
-const manifest = require(path.join(dataRoot, 'manifest.json'));
-const header = require(path.join(dataRoot, 'core-v002/waste-policy/headers/eWastePresetHeader'));
-const section = manifest.sections['waste-policy'];
-const eWasteRoot = path.join(frameworkRoot, 'nodics.accelerators/modules/waste/modules/eWaste');
-const processor = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/jsImport/src/service/init/defaultJsFileDataProcessService'));
-const base = name => require(path.join(eWasteRoot, 'data/core-v002/records/waste', name));
-const composed = name => {
-    const delta = require(path.join(recordsRoot, name));
-    const merged = processor.mergeModels(structuredClone(base(name)), delta);
-    return Object.keys(delta).map(key => merged[key]);
+const projectRoot = path.resolve(__dirname, "../../..");
+const frameworkRoot = path.resolve(
+  projectRoot,
+  process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai",
+);
+const contributionPolicy = require(
+  path.join(
+    frameworkRoot,
+    "nodics.waste/modules/wasteCore/src/service/defaultWasteDataContributionPolicyService",
+  ),
+);
+const moduleRoot = path.resolve(__dirname, "..");
+const dataRoot = path.join(moduleRoot, "data");
+const recordsRoot = path.join(dataRoot, "core-v002/waste-policy/records");
+const pkg = require(path.join(moduleRoot, "package.json"));
+const manifest = require(path.join(dataRoot, "manifest.json"));
+const header = require(
+  path.join(dataRoot, "core-v002/waste-policy/headers/eWastePresetHeader"),
+);
+const section = manifest.sections["waste-policy"];
+const eWasteRoot = path.join(
+  frameworkRoot,
+  "nodics.accelerators/modules/waste/modules/eWaste",
+);
+const processor = require(
+  path.join(
+    frameworkRoot,
+    "nodics.foundation/modules/nData/nImport/jsImport/src/service/init/defaultJsFileDataProcessService",
+  ),
+);
+const base = (name) =>
+  require(path.join(eWasteRoot, "data/core-v002/records/waste", name));
+const composed = (name) => {
+  const delta = require(path.join(recordsRoot, name));
+  const merged = processor.mergeModels(structuredClone(base(name)), delta);
+  return Object.keys(delta).map((key) => merged[key]);
 };
-const eWasteCategories = Object.values(base('eWasteCategoryData'));
-const eWastePresets = Object.values(base('eWasteCollectionPresetData'));
-const circaCategories = composed('eWasteCategoryData');
-const circaPresets = composed('eWasteCollectionPresetData');
-const circaRules = composed('eWasteAcceptanceRuleData');
-const circaImpactProfiles = composed('eWasteImpactProfileData');
+const eWasteCategories = Object.values(base("eWasteCategoryData"));
+const eWastePresets = Object.values(base("eWasteCollectionPresetData"));
+const circaCategories = composed("eWasteCategoryData");
+const circaPresets = composed("eWasteCollectionPresetData");
+const circaRules = composed("eWasteAcceptanceRuleData");
+const circaImpactProfiles = composed("eWasteImpactProfileData");
 
-assert.equal(pkg.nodics.kind, 'capability');
-assert.equal(pkg.name, 'circa.ewaste');
+assert.equal(pkg.nodics.kind, "capability");
+assert.equal(pkg.name, "circa.ewaste");
 assert.equal(pkg.nodics.runtime.router, true);
 assert.equal(manifest.contractVersion, 2);
-assert.equal(manifest.module, 'circa.ewaste');
-assert.equal(section.dataType, 'core');
-assert.equal(section.sourceRoot, 'core-v002');
-assert.equal(section.version, '0.0.1');
-assert.equal(section.selectionPolicy, 'EXPLICIT');
-assert.equal(contributionPolicy.validateManifestSection(section).destinationRole, 'WASTE');
+assert.equal(manifest.module, "circa.ewaste");
+assert.equal(section.dataType, "core");
+assert.equal(section.sourceRoot, "core-v002");
+assert.equal(section.version, "0.0.1");
+assert.equal(section.selectionPolicy, "EXPLICIT");
+assert.equal(
+  contributionPolicy.validateManifestSection(section).destinationRole,
+  "WASTE",
+);
 assert.equal(contributionPolicy.validateHeader(header).length, 5);
 
 Object.keys(section.files).forEach(function (relativeFilePath) {
-    const absoluteFilePath = path.join(dataRoot, relativeFilePath);
-    const actualHash = crypto.createHash('sha256').update(fs.readFileSync(absoluteFilePath)).digest('hex');
-    assert.equal(actualHash, section.files[relativeFilePath], relativeFilePath + ' checksum must match manifest');
+  const absoluteFilePath = path.join(dataRoot, relativeFilePath);
+  const actualHash = crypto
+    .createHash("sha256")
+    .update(fs.readFileSync(absoluteFilePath))
+    .digest("hex");
+  assert.equal(
+    actualHash,
+    section.files[relativeFilePath],
+    relativeFilePath + " checksum must match manifest",
+  );
 });
 
-circaCategories.concat(circaPresets, circaRules, circaImpactProfiles).forEach(function (record) {
-    contributionPolicy.validateRecord(record, 'PROJECT');
-});
+circaCategories
+  .concat(circaPresets, circaRules, circaImpactProfiles)
+  .forEach(function (record) {
+    contributionPolicy.validateRecord(record, "PROJECT");
+  });
 
 const effectiveCategories = contributionPolicy.resolveByCode([
-    { moduleName: 'eWaste', layerKind: 'SCENARIO_ACCELERATOR', records: eWasteCategories },
-    { moduleName: 'circa.ewaste', layerKind: 'PROJECT', records: circaCategories }
+  {
+    moduleName: "eWaste",
+    layerKind: "SCENARIO_ACCELERATOR",
+    records: eWasteCategories,
+  },
+  {
+    moduleName: "circa.ewaste",
+    layerKind: "PROJECT",
+    records: circaCategories,
+  },
 ]);
 const effectivePresets = contributionPolicy.resolveByCode([
-    { moduleName: 'eWaste', layerKind: 'SCENARIO_ACCELERATOR', records: eWastePresets },
-    { moduleName: 'circa.ewaste', layerKind: 'PROJECT', records: circaPresets }
+  {
+    moduleName: "eWaste",
+    layerKind: "SCENARIO_ACCELERATOR",
+    records: eWastePresets,
+  },
+  { moduleName: "circa.ewaste", layerKind: "PROJECT", records: circaPresets },
 ]);
 
-assert.equal(effectiveCategories.MOBILE_DEVICE.name.en, 'Circa Mobile Device');
-assert.equal(effectiveCategories.MOBILE_DEVICE._contributionLayer, 'PROJECT');
-assert.equal(effectiveCategories.SMART_HOME_DEVICE.familyCode, 'ELECTRONICS');
-assert.equal(effectivePresets.EWASTE_DROP_OFF_STANDARD.name.en, 'Circa E-Waste Drop-Off');
-assert(effectivePresets.EWASTE_DROP_OFF_STANDARD.acceptanceRuleCodes.includes('CIRCA_DROP_OFF_SMART_HOME'));
-assert.equal(effectivePresets.CIRCA_MALL_DROP_OFF.operatingMode, 'DROP_OFF');
+assert.equal(effectiveCategories.MOBILE_DEVICE.name.en, "Circa Mobile Device");
+assert.equal(effectiveCategories.MOBILE_DEVICE._contributionLayer, "PROJECT");
+assert.equal(effectiveCategories.SMART_HOME_DEVICE.familyCode, "ELECTRONICS");
+assert.equal(
+  effectivePresets.EWASTE_DROP_OFF_STANDARD.name.en,
+  "Circa E-Waste Drop-Off",
+);
+assert(
+  effectivePresets.EWASTE_DROP_OFF_STANDARD.acceptanceRuleCodes.includes(
+    "CIRCA_DROP_OFF_SMART_HOME",
+  ),
+);
+assert.equal(effectivePresets.CIRCA_MALL_DROP_OFF.operatingMode, "DROP_OFF");
 
-console.log('Circa Waste policy contract validated');
+console.log("Circa Waste policy contract validated");

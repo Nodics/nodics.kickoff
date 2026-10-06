@@ -15,14 +15,14 @@ const dataRoot = path.resolve(__dirname, '../data');
 const manifest = JSON.parse(fs.readFileSync(path.join(dataRoot, 'manifest.json')));
 
 test('Apparel retains 0.0.7 bytes and advances only the Commerce search header in 0.0.8', () => {
-    const active = manifest.sections.agoraApparelCommerceCatalog;
+    const active = manifest.retainedRoots['sample-v003'].sections.agoraApparelCommerceCatalog;
     const retained = manifest.retainedRoots['sample-v002'];
     const previous = retained.sections.agoraApparelCommerceCatalog;
     assert.equal(previous.version, '0.0.7');
     assert.equal(active.version, '0.0.8');
     assert.equal(active.sourceRoot, 'sample-v003');
     assert.deepEqual(release.sourceRootFiles(dataRoot, 'sample-v002'), retained.files);
-    assert.deepEqual([...release.validateRetainedRoots(dataRoot, manifest)], ['sample-v002']);
+    assert.deepEqual([...release.validateRetainedRoots(dataRoot, manifest)], ['sample-v002', 'sample-v003', 'sample-v004']);
     const changed = [];
     for (const [file, hash] of Object.entries(previous.files)) {
         const successorFile = file.replace(/^sample-v002\//, 'sample-v003/');

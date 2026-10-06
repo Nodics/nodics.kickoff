@@ -213,11 +213,12 @@ test("selected Waste configuration resolves inherited journey defaults and the e
   const { loadRuntime, activeModuleNames } = require("../../../test/helpers/configuration");
   const experience = require("../src/service/defaultCircaEWasteExperienceService");
   SERVICE.DefaultCircaEWasteJourneyService = service;
-  for (const [variables, radius] of [
-    [{}, 50],
-    [{ CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: "125" }, 125],
+  for (const [environment, variables, radius] of [
+    ["kickoffLocal", {}, 200],
+    ["kickoffDockerLocal", {}, 50],
+    ["kickoffLocal", { CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: "125" }, 125],
   ]) {
-    const properties = loadRuntime("wasteServer", "kickoffLocal", variables);
+    const properties = loadRuntime("wasteServer", environment, variables);
     assert(activeModuleNames(properties).includes("eWaste"));
     assert(activeModuleNames(properties).includes("circa.ewaste"));
     CONFIG.get = (key) => properties[key];
@@ -227,6 +228,14 @@ test("selected Waste configuration resolves inherited journey defaults and the e
     assert.equal(projected.captureTimeoutMs, 12000);
     assert.equal(projected.nearestCentreCount, 3);
     assert.deepEqual(projected, { ...service.settings(), reviewAssignment: undefined });
+    for (const distance of [96, radius, radius + 0.01]) {
+      const arrival = await service.previewArrival.call(
+        { ...service, distance: () => distance },
+        { payload: { position: position() } },
+      );
+      assert.equal(arrival.nextAction, distance <= radius ? "PHOTO" : "TRAVEL");
+      assert.equal(arrival.policy.arrivalRadiusMetres, radius);
+    }
     assert.equal(properties.wasteImpact.calculation.providerService, "DefaultEWasteOpenAiImpactProviderService");
     assert.deepEqual(properties.wasteImpact.calculation.fallbackProviderServices,
       ["DefaultEWasteWarmImpactProviderService"]);

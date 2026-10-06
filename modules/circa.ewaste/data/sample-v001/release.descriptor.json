@@ -89,6 +89,26 @@
         "extendsCapability": "circa.ewaste",
         "businessOutcome": "Prepare Sunmarke eWaste records for the Circa pilot."
       }
+    },
+    "sunmarke-location": {
+      "capability": {
+        "code": "circa.ewaste.sunmarke",
+        "displayName": "Circa Sunmarke pilot",
+        "type": "PROJECT_EXTENSION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "circa.ewaste",
+        "businessOutcome": "Prepare Sunmarke location records for the Circa pilot."
+      }
+    },
+    "commerce-operational": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Explicitly review existing Circa coupon issuance and opening stock after governed publication; never replay live balances."
+      }
     }
   }
 }

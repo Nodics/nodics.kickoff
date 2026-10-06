@@ -1,5 +1,17 @@
 # Waste Server Agent Contract
 
+- Keep the Local Circa arrival-radius fallback at 200 metres in this server's
+  properties; the application fallback remains 50 metres. Preserve the explicit
+  environment override and test effective startup without an injected radius.
+- The server index must follow the Circa application index so deployment policy
+  overrides application defaults through the standard nConfig loading order.
+
+- The native Local deployment explicitly permits `profile.externalIdentity.prepare`
+  for verified customer channel handoffs. Keep the existing deployment permissions
+  in the replacement list because ordinary arrays merge positionally. Profile's
+  native bootstrap owns reconciliation; no acceptance script or customer token
+  may acquire service permissions, and revoked grants remain revoked.
+
 - Follow the Nodics Kickoff project contract from the repository root `AGENTS.md`.
 - Follow every ancestor `AGENTS.md` before changing this server boundary.
 - This package owns only the responsibilities declared in `package.json.nodics.owns`.

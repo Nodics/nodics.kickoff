@@ -1,20 +1,19 @@
-# Commerce Preparation And Recovery
+# Commerce Preparation
 
 Circa setup selector `circa.ewaste:commerce` prepares immutable policy release
-`0.0.5` on `COMMERCE_STAGED`: catalogue, pricing, tax, warehouse configuration
-and promotion policy, not coupon codes, batches or stock balances. Original
-`0.0.4` source and failed evidence remain unchanged. Import is not publication.
+`0.0.1` from `sample-v001` on `COMMERCE_STAGED`: catalogue, pricing, tax,
+warehouse configuration and promotion policy, not coupon codes, batches or stock
+balances. Import is not publication.
 
-Optional `circa.ewaste:commerce-operational` targets `COMMERCE` at `0.0.1`.
+Required `circa.ewaste:commerce-operational` targets `COMMERCE` at `0.0.1`.
 It retains existing approved source only, with no invented codes or terms.
-It is not automatically prepared and cannot directly import raw snapshots.
-Complete publication, issuer operations and stock movement provenance through
-existing owners; never overwrite live balances or replay single-use codes.
+It cannot directly import raw snapshots. Complete publication, issuer operations
+and stock movement provenance through existing owners; never overwrite live
+balances or replay single-use codes.
 
-For partial recovery, inspect secured run and installation receipts, preserve
-successful writes, validate the forward policy and use governed preparation
-and publication. Do not reset, retry the mixed pack or infer rollback.
-See the [application contract](../../llm/contracts/circa-application.md#commerce-forward-release-and-partial-import-recovery)
+For first-start testing, inspect secured run and installation receipts, validate
+the v001 policy and use governed preparation and publication. See the
+[application contract](../../llm/contracts/circa-application.md#commerce-demo-catalogue-and-operational-admission)
 for operator steps, customization and evidence boundaries.
 
 ## Connected Circa local customer journey
@@ -60,19 +59,19 @@ runtime destination. With an authorized local employee session, submit
 `POST /nodics/import/v0/sample/install` on the destination runtime with:
 
 ```json
-{"releaseCodes":["circa.ewaste:profile"],"options":{"recursive":false}}
+{ "releaseCodes": ["circa.ewaste:profile"], "options": { "recursive": false } }
 ```
 
 Select the corresponding section and destination:
 
-| Section | Runtime | Main records |
-| --- | --- | --- |
-| `profile` | 4300 | Three sample customers and addresses |
-| `location` | 4380 | Sample collection coordinates |
-| `waste` | 4370 | Taxonomy, collection points, submissions, reviews, assets and impact evidence |
-| `loyalty` | 4360 | Reward types/program, wallets, opening balances and immutable opening ledger |
-| `commerce` | 4352 | Products, variants, localizations, prices, inventory, coupon pools and tax policy |
-| `content` | 4312 | 18 governed original/illustrative image and brand assets |
+| Section    | Runtime | Main records                                                                      |
+| ---------- | ------- | --------------------------------------------------------------------------------- |
+| `profile`  | 4300    | Three sample customers and addresses                                              |
+| `location` | 4380    | Sample collection coordinates                                                     |
+| `waste`    | 4370    | Taxonomy, collection points, submissions, reviews, assets and impact evidence     |
+| `loyalty`  | 4360    | Reward types/program, wallets, opening balances and immutable opening ledger      |
+| `commerce` | 4352    | Products, variants, localizations, prices, inventory, coupon pools and tax policy |
+| `content`  | 4312    | 18 governed original/illustrative image and brand assets                          |
 
 Media records declare `asset.sourceFile`; nImport hydrates the files through the
 Media storage provider. An assets-only folder is not an import of media records.
@@ -80,6 +79,14 @@ Media storage provider. An assets-only folder is not an import of media records.
 Import is an initial environment operation. Do not reimport opening balances or
 ownership over an environment already used for transactions. Preserve that
 history, or use a separately provisioned clean local environment.
+
+Customer samples imported through Profile's generated save operation must carry
+`ownerId` equal to `loginId` and `ownerType: customer`, matching Profile registration.
+Successful authentication alone does not establish a working demo: verify the
+customer's own Profile read, eWaste wallet and submission entry after import.
+If a pre-release local sample lacks these fields, repair only the affected
+customer records through an authorized Profile update. Do not remove ownership
+filters, substitute an employee token for customer reads, or reset wallet history.
 
 ### Restore the collection network after a local reset
 
@@ -100,17 +107,20 @@ For a clean environment, use the Circa application initialization flow in Axis.
 For an existing local environment missing only the collection network, validate
 then install these releases in order using the authenticated destination APIs:
 
-| Order | Runtime | Release code |
-| --- | --- | --- |
-| 1 | Platform 4300 | `wasteCollection:sample-profile-addresses` |
-| 2 | Location 4380 | `wasteCollection:sample-locations` |
-| 3 | Waste 4370 | `wasteCollection:sample-collection-points` |
+| Order | Runtime       | Release code                               |
+| ----- | ------------- | ------------------------------------------ |
+| 1     | Platform 4300 | `wasteCollection:sample-profile-addresses` |
+| 2     | Location 4380 | `wasteCollection:sample-locations`         |
+| 3     | Waste 4370    | `wasteCollection:sample-collection-points` |
 
 Call `POST /nodics/import/v0/sample/validate`, then
 `POST /nodics/import/v0/sample/install`, using the release code for that runtime:
 
 ```json
-{"releaseCodes":["wasteCollection:sample-profile-addresses"],"options":{"recursive":false}}
+{
+  "releaseCodes": ["wasteCollection:sample-profile-addresses"],
+  "options": { "recursive": false }
+}
 ```
 
 This restores the reference network without importing customer submissions,
@@ -121,14 +131,37 @@ install sample data.
 
 ## Commerce publication
 
-Publish the `circaStaged` catalogue for `circaMainStore` with Product's governed
-`POST /nodics/product/v0/products/publication/search`, requesting
-`includeProjectionSnapshots: true`. Send the returned snapshots to Online
-`POST /nodics/product/v0/internal/products/publication/search/restore`.
-Publish Pricing, Inventory, Promotion and Tax operational records through their
-own internal publication/restore APIs, following the existing Commerce
-publication acceptance service. Do not import a Staged product pack directly
-into Online or synthesize publication provenance.
+The Local runtime selects governed delivery for `circaMainStore` only. Import
+creates Staged authoring records; it does not activate them. Follow this order:
+
+1. Capture each policy with `POST /nodics/{domain}/v0/publication/policy` on
+   Commerce Staged. Use the actual source `versionId` for every reference.
+   Pricing uses root `priceBook:circaPointsPriceBook` and its price rows;
+   Inventory uses `warehouse:circaDigitalRegistry`; Tax uses
+   `taxPolicy:circaSamplePointsPolicy`; Promotion uses
+   `promotion:CIRCA_COUPON_CPN-ECO-15_PROMO` with the complete offer set.
+2. Validate the captured publication and request approval using its latest
+   revision through `/nodics/publish/v0/publications/{code}/validate` and
+   `/request-approval` respectively. Claim and complete its `policyReview`
+   task through the Process owner. Verify the resulting publication is `ONLINE`;
+   completing a task alone is not proof of successful activation.
+3. Publish each Product root through
+   `POST /nodics/product/v0/products/publication`, supplying a unique
+   `publicationCode`, `productCode`, `storeCode: circaMainStore` and the actual
+   source `versionId`. Complete its `productReview` Process task and verify
+   `ONLINE`. The source version may advance when the root is sealed.
+4. Keep the Local delivery roots in `envs/kickoffLocal/config/properties.js`
+   aligned with these approved publications. A fresh installation fails closed
+   until publication is complete. Rebuild/restart Commerce after configuration
+   changes; do not broaden unrelated store scopes.
+5. Check customer-visible prices, Inventory availability and an actual purchase.
+   Policy publication does not create operational stock or issued coupon codes.
+   Import those through the approved operational release, never by replaying
+   balances over existing customer transactions.
+
+Do not use the legacy projection snapshot restore endpoint to bypass governed
+activation. Do not import a Staged product pack directly into Online or
+synthesize publication provenance.
 
 For the explicitly configured local sample, confirmed customer listing uses
 Product authoring, Staged publication and Online restoration. The application
@@ -217,6 +250,45 @@ value belongs to governed runtime configuration and is never in frontend or
 tracked source. A reachable HTTPS Mini App URL and actual-client acceptance are
 still required. No webhook or bot menu URL was changed.
 
+### Local Telegram launch recovery
+
+Treat URL delivery, Profile identity verification and actual Telegram client
+acceptance as separate checks. A successful Web purchase proves none of them.
+
+1. Start the Circa frontend and its selected backend topology. Serve the built
+   Mini App over the approved HTTPS preview, keeping its customer API allowlist.
+   Confirm `/telegram`, its JavaScript assets and customer API proxy are reachable.
+   Never expose Platform administration or generic internal routes through the tunnel.
+2. Inspect the registered bot menu using Telegram `getChatMenuButton`. A quick
+   tunnel hostname changes when the tunnel is replaced; an old hostname can stop
+   resolving while localhost still works. Update `setChatMenuButton` with the
+   current HTTPS `/telegram` URL and a JSON-serialized `menu_button`, then read it
+   back. Save only the non-secret URL/readback receipt. Do not call a successful
+   update response verification until readback matches.
+3. Inspect Platform's `telegramExternalIdentity` runtime schema. Local Platform
+   selects the existing Dynamo persistence capability. The effective response
+   must report encryption readiness before entering the existing bot token through
+   the dedicated secret-save operation. Do not put a token in source, frontend
+   configuration, chat, generic property updates or a demo data pack.
+4. Read the masked effective status again. `CONFIGURED` is a configuration result,
+   not proof of Telegram authentication. Restart Platform and check the same
+   status again; tenant-default schema values are restored by nSystem. Keep the
+   environment's private generated encryption key stable across restarts.
+5. Close any old Mini App window and use the bot's **Open Circa** menu. A normal
+   browser visit intentionally lacks Telegram's signed launch context and shows
+   a reconnect screen. Do not manufacture a launch assertion to pass acceptance.
+6. Complete customer linking or registration when offered, then submit eWaste,
+   inspect the saved submission, buy the selected coupon and verify it after
+   reopening the Mini App. Real-device location/camera and permission refusals
+   need their own checks. A browser simulation is not native-client evidence.
+
+The bot's main Mini App launch setting and previously sent URL buttons can be
+separate from its chat menu. Check those entry points individually. A temporary
+tunnel is suitable only while the local processes remain running; a persistent
+demo needs an operator-provisioned stable HTTPS hostname. Notification delivery
+uses Communication's consuming runtime and must be configured and tested there
+separately; Platform configuration does not synchronize separate databases.
+
 Known scope limits: the full agreed size/material/weight-provenance extraction,
 customer knowledge publication/retrieval, complete Axis
 outcome pagination/counts and notification delivery remain open owner work.
@@ -291,12 +363,11 @@ Axis review discovers the `eWaste` endpoint from BackOffice.
 
 Set domain overrides in CONFIG.eWaste; retain Circa presentation and sample
 valuation under CONFIG.circaEWaste. The configured valuation service replaces a
-hardcoded application dependency. CIRCA_EWASTE applicationCode and CIRCA_ORDER_
+hardcoded application dependency. CIRCA*EWASTE applicationCode and CIRCA_ORDER*
 orderCodePrefix remain unchanged for existing drafts, purchases and retries.
 Update clients and restart affected runtimes together; the removed mixed-case
 application accelerator/API is not registered as an alias. Do not reimport data
 or reset ledgers during this structural migration.
-
 
 ## Operational roles and independent approval
 
@@ -306,16 +377,16 @@ submissions, ownership, wallets or orders. Each login is the role slug below
 followed by `@circa.local`; the local-only password is `CircaDemo!2026`.
 Replace these identities and assignments before deployment.
 
-| Role slug | Scope | Permitted work |
-| --- | --- | --- |
-| administrator | Default enterprise | Waste review, verification, approval, audit, marketplace moderation and coupon management; no platform-administrator group |
-| centre-operator | Collection centre `cc-dxb-01` | Read assigned submissions and original evidence |
-| verifier | Collection centre `cc-dxb-01` | Review evidence and confirm corrected facts; cannot approve |
-| approver | Collection centre `cc-dxb-01` | Approve or reject verified facts; cannot edit verification |
-| Employee with both grants / administrator | Within authorized scope | Review and approve the same submission; each action keeps its own audit evidence |
-| coupon-manager | Default enterprise | Commerce promotion management and merchant redemption permission; no Waste review access |
-| marketplace-moderator | Default enterprise | Listing moderation permission and Commerce product/order read access; no original evidence or verification |
-| auditor | Default enterprise | Read review and settlement references; no evidence images or mutations |
+| Role slug                                 | Scope                         | Permitted work                                                                                                                |
+| ----------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| administrator                             | Default enterprise            | Waste review, verification, approval, audit, marketplace moderation, coupon management and local setup publication completion |
+| centre-operator                           | Collection centre `cc-dxb-01` | Read assigned submissions and original evidence                                                                               |
+| verifier                                  | Collection centre `cc-dxb-01` | Review evidence and confirm corrected facts; cannot approve                                                                   |
+| approver                                  | Collection centre `cc-dxb-01` | Approve or reject verified facts; cannot edit verification                                                                    |
+| Employee with both grants / administrator | Within authorized scope       | Review and approve the same submission; each action keeps its own audit evidence                                              |
+| coupon-manager                            | Default enterprise            | Commerce promotion management and merchant redemption permission; no Waste review access                                      |
+| marketplace-moderator                     | Default enterprise            | Listing moderation permission and Commerce product/order read access; no original evidence or verification                    |
+| auditor                                   | Default enterprise            | Read review and settlement references; no evidence images or mutations                                                        |
 
 Profile owns identity, group membership and effective scopes. The canonical
 nAuth group targets supply permissions. Waste reads `/identity/scopes/me` using
@@ -409,7 +480,6 @@ and attached carbon and restore the former owner. Original waste-submission
 rewards stay unchanged. A used coupon, onward-transferred asset or unavailable
 seller proceeds/carbon needs manual resolution. Incomplete executions remain
 visible for recovery under the original case and command.
-
 
 ## Account and channel ownership
 

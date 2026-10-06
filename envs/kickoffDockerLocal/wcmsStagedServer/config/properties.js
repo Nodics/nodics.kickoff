@@ -67,7 +67,7 @@ module.exports = {
         },
         "frameworkdocs": {
           "contentPackCode": "nodicsDocumentation",
-          "releaseVersion": "0.16.22",
+          "releaseVersion": "0.16.29",
           "rootType": "site",
           "rootCode": "nodicsDocumentationSite",
           "sourceVersion": "0"

@@ -1,89 +1,56 @@
 /* Nodics. Copyright (c) 2026. Governed by the root LICENSE. */
 "use strict";
-/** @module circa.ewaste/test/circaCommerceForwardRelease @description Proves unchanged historical scope, existing-only policy/operational separation and backend-gated explicit setup. @layer test @owner circa.ewaste */
+/** @module circa.ewaste/test/circaCommerceForwardRelease @description Verifies the unified v001 Commerce demo selector and local-demo operational admission. @layer test @owner circa.ewaste */
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
-const { isDeepStrictEqual } = require("node:util");
 const dataRoot = path.resolve(__dirname, "../data");
 const framework = path.resolve(__dirname, "../../../../nodics.ai");
 const manifest = require("../data/manifest.json");
-const releaseService = require(
-  path.join(
-    framework,
-    "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService",
-  ),
-);
 const hash = (value) => crypto.createHash("sha256").update(value).digest("hex");
-const headers = (sequence) =>
-  require(
-    "../data/" +
-      sequence +
-      "/" +
-      (sequence === "sample-v005"
-        ? "commerce-policy"
-        : "commerce-operational") +
-      "/headers/circaCommerceSampleHeader",
-  );
-const targets = (header) =>
-  Object.values(header)
+const header = require("../data/sample-v001/commerce/headers/circaCommerceCatalogHeader");
+const operationalHeader = require("../data/sample-v001/commerce-operational/headers/circaCommerceSampleHeader");
+const targets = (value) =>
+  Object.values(value)
     .flatMap(Object.values)
-    .map((h) => h.options.schemaName);
+    .map((entry) => entry.options.schemaName);
 
-test("retained 0.0.4 keeps all original hashes and active policy successor excludes operational targets", () => {
-  releaseService.validateRetainedRoots(dataRoot, manifest);
-  const retained = manifest.retainedRoots["sample-v001"].sections.commerce;
-  assert.equal(retained.version, "0.0.4");
-  assert.equal(retained.destinationRole, "COMMERCE_STAGED");
-  assert.equal(retained.versioningPolicy, "IMMUTABLE");
-  assert.equal(Object.keys(retained.files).length, 16);
-  for (const [file, checksum] of Object.entries(retained.files))
+test("commerce catalogue is selected as unified v001 first-start data", () => {
+  const current = manifest.sections.commerce;
+  const productConfig = require("../config/properties").product;
+  assert.equal(current.version, "0.0.1");
+  assert.equal(current.sourceRoot, "sample-v001");
+  assert.equal(current.selectionPolicy, "EXPLICIT");
+  assert.equal(current.destinationRole, "COMMERCE_STAGED");
+  assert.equal(current.versioningPolicy, "IMMUTABLE");
+  for (const [file, checksum] of Object.entries(current.files))
     assert.equal(
       hash(fs.readFileSync(path.join(dataRoot, file))),
       checksum,
-      "Historical source must remain unchanged",
+      file,
     );
-  const current = manifest.sections.commerce;
-  assert.equal(current.version, "0.0.5");
-  assert.equal(current.sourceRoot, "sample-v005");
-  assert.equal(current.selectionPolicy, "EXPLICIT");
-  const schemas = targets(headers("sample-v005"));
-  for (const schema of ["coupon", "couponBatch", "inventoryBalance"])
+  const schemas = targets(header);
+  for (const schema of ["coupon", "couponBatch", "inventoryBalance", "store"])
     assert(!schemas.includes(schema));
   assert(schemas.includes("promotion"));
   assert(schemas.includes("warehouse"));
+  const catalogueHeaderPath = Object.keys(current.files).find((file) =>
+    file.includes("/headers/"),
+  );
+  const operationalHeaderPath = Object.keys(
+    manifest.sections["commerce-operational"].files,
+  ).find((file) => file.includes("/headers/"));
+  assert.notEqual(
+    path.basename(catalogueHeaderPath),
+    path.basename(operationalHeaderPath),
+  );
+  assert.deepEqual(productConfig.localization.requiredLocales, ["en"]);
+  assert(productConfig.localization.supportedLocales.includes("ar"));
 });
 
-test("forward source preserves every approved record except excluded promotion consumption", () => {
-  for (const [sequence, directory] of [
-    ["sample-v005", "commerce-policy"],
-    ["sample-v006", "commerce-operational"],
-  ]) {
-    for (const header of Object.values(headers(sequence)).flatMap(
-      Object.values,
-    )) {
-      const file = header.options.dataFilePrefix;
-      const previous = structuredClone(
-        require("../data/sample-v001/commerce/records/" + file),
-      );
-      const current = require(
-        "../data/" + sequence + "/" + directory + "/records/" + file,
-      );
-      if (header.options.schemaName === "promotion")
-        for (const row of Object.values(previous)) {
-          if (row.budget) delete row.budget.spent;
-        }
-      assert(
-        isDeepStrictEqual(previous, current),
-        "No new identity, code, quantity or business term may be invented",
-      );
-    }
-  }
-});
-
-test("setup explicitly selects policy while operational pack is optional, immutable and owner-gated", async () => {
+test("the demo requires operational readiness while preserving owner admission", async () => {
   const packs = require("../config/properties")
     .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
   assert.equal(
@@ -91,9 +58,14 @@ test("setup explicitly selects policy while operational pack is optional, immuta
     "COMMERCE_STAGED",
   );
   const ops = packs.find((p) => p.code === "circa.ewaste:commerce-operational");
-  assert.equal(ops.required, false);
+  assert.equal(ops.required, true);
   assert.equal(ops.trigger, "USER");
   assert.equal(ops.targetRuntimeRole, "COMMERCE");
+  assert.equal(
+    manifest.sections["commerce-operational"].sourceRoot,
+    "sample-v001",
+  );
+  assert.equal(manifest.sections["commerce-operational"].version, "0.0.1");
   assert.equal(
     manifest.sections["commerce-operational"].selectionPolicy,
     "EXPLICIT",
@@ -106,11 +78,16 @@ test("setup explicitly selects policy while operational pack is optional, immuta
     manifest.sections["commerce-operational"].publicationPolicy,
     "NONE",
   );
-  assert.deepEqual(targets(headers("sample-v006")).sort(), [
+  assert.deepEqual(targets(operationalHeader).sort(), [
     "coupon",
     "couponBatch",
     "inventoryBalance",
+    "store",
   ]);
+  for (const definition of Object.values(operationalHeader).flatMap(
+    Object.values,
+  ))
+    assert.equal(definition.options.indexName, undefined);
   const ports = require(
     path.join(
       framework,
@@ -126,9 +103,14 @@ test("setup explicitly selects policy while operational pack is optional, immuta
     runtimeRole: "COMMERCE",
   });
   CONFIG.get("data").dataReleases.targetValidators = {
-    inventory: "DefaultInventoryOperationService",
-    promotion: "DefaultPromotionOperationService",
+    inventory: "DefaultCircaDemoCommerceImportAdmissionService",
+    promotion: "DefaultCircaDemoCommerceImportAdmissionService",
   };
+  const originalGet = CONFIG.get;
+  CONFIG.get = (key) =>
+    key === "circaEWaste"
+      ? require("../config/properties").circaEWaste
+      : originalGet(key);
   SERVICE.DefaultInventoryOperationService = require(
     path.join(
       framework,
@@ -141,16 +123,14 @@ test("setup explicitly selects policy while operational pack is optional, immuta
       "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService",
     ),
   );
-  await assert.rejects(
-    ports.service.preflight({
-      tenant: "default",
-      releaseRequest: {
-        dataType: "sample",
-        releaseCodes: ["circa.ewaste:commerce-operational"],
-      },
-    }),
-    /violates owner runtime policy/,
-  );
+  SERVICE.DefaultCircaDemoCommerceImportAdmissionService = require("../src/service/defaultCircaDemoCommerceImportAdmissionService");
+  await ports.service.preflight({
+    tenant: "default",
+    releaseRequest: {
+      dataType: "sample",
+      releaseCodes: ["circa.ewaste:commerce-operational"],
+    },
+  });
   assert.equal(ports.imports.length, 0);
   assert.equal(ports.installations.length, 0);
 });

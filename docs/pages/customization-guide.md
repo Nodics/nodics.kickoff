@@ -55,15 +55,15 @@ customers what “good” looks like. A developer or AI tool should not behave l
 a script that only edits the nearest file. It should behave like a small expert
 team:
 
-| Role | What to check in Kickoff |
-| --- | --- |
-| Business analyst | Does this make the first-hour customer experience clearer, safer, or more convincing? |
-| Enterprise architect | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership? |
-| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output? |
-| Domain expert | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples? |
-| Principal engineer | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |
-| QA and tester | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution? |
-| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable? |
+| Role                    | What to check in Kickoff                                                                                                        |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Business analyst        | Does this make the first-hour customer experience clearer, safer, or more convincing?                                           |
+| Enterprise architect    | Does the change preserve framework, customer project, runtime server, Axis, WCMS, Profile, and BackOffice ownership?            |
+| Nodics framework expert | Is the behavior a project customization, a framework capability, a server topology decision, or generated content-pack output?  |
+| Domain expert           | Is the sample reusable enough for future commerce, workflow, content, integration, or industry-specific examples?               |
+| Principal engineer      | Can this be solved through configuration, project module overlay, generated documentation source, or a small exported function? |
+| QA and tester           | Does the setup work from zero database state, repeated runs, missing services, and failed dependency resolution?                |
+| TechOps/DevOps reviewer | Are framework paths, local databases, ports, logs, reset scope, and rollback behavior safe and understandable?                  |
 
 If the answer is unclear, stop and name the ownership decision before editing.
 For example, changing the local WCMS database name belongs in server
@@ -74,31 +74,31 @@ framework import service.
 
 Use these examples when deciding where code or data belongs:
 
-| Need | Correct owner | Why |
-| --- | --- | --- |
-| Change local Platform port | `envs/kickoffLocal/platformServer/config` | It is server topology, not framework behavior. |
-| Add a project-only service | `modules/<project-module>` | Customer behavior should load after framework modules. |
-| Explain Kickoff setup in Axis docs | `nodics.kickoff/docs` | Kickoff owns project-wide documentation that becomes CMS data. |
-| Change Axis renderer behavior | `nodics.axis` | Browser rendering is frontend code, not customer backend data. |
-| Change framework-wide import validation | `nodics.ai` owning module | Shared behavior belongs to the framework owner. |
-| Change generated CMS record text | Source Markdown, then regenerate | Generated files are projections and must not become manual authority. |
-| Add Circa Waste categories or presets | `modules/circa.ewaste/data/core-v001/waste-policy` | Waste values are schema-driven application policy data, not framework source edits. |
+| Need                                    | Correct owner                                      | Why                                                                                 |
+| --------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Change local Platform port              | `envs/kickoffLocal/platformServer/config`          | It is server topology, not framework behavior.                                      |
+| Add a project-only service              | `modules/<project-module>`                         | Customer behavior should load after framework modules.                              |
+| Explain Kickoff setup in Axis docs      | `nodics.kickoff/docs`                              | Kickoff owns project-wide documentation that becomes CMS data.                      |
+| Change Axis renderer behavior           | `nodics.axis`                                      | Browser rendering is frontend code, not customer backend data.                      |
+| Change framework-wide import validation | `nodics.ai` owning module                          | Shared behavior belongs to the framework owner.                                     |
+| Change generated CMS record text        | Source Markdown, then regenerate                   | Generated files are projections and must not become manual authority.               |
+| Add Circa Waste categories or presets   | `modules/circa.ewaste/data/core-v002/waste-policy` | Waste values are schema-driven application policy data, not framework source edits. |
 
 ## Configuration-first examples
 
 Configuration-first does not mean "put everything in properties." It means use
 the correct configuration owner before writing code.
 
-| Example change | Better first move | Why |
-| --- | --- | --- |
-| Local WCMS port must change | Server config under `envs/.../wcmsStagedServer/config` or `envs/.../wcmsOnlineServer/config` | Port is topology, not shared framework behavior. |
-| A project wants a different public label | WCMS/Axis content or project-owned documentation/content data | The label is presentation/content, not service logic. |
-| A framework checkout path differs | Update the declared framework package dependency and lockfile | Workspace layout is project setup, not runtime configuration. |
-| Project identity is needed | `package.json.name` | Do not duplicate it in root descriptors or `config/properties.js`. |
-| A local domain selection is needed | Existing environment/server `config/properties.js` and package composition metadata | Runtime composition belongs to the selected deployment; do not introduce an environment descriptor. |
-| A new API category should be enabled | Owning module default property, with server override only to disable or narrow it | Defaults belong to the module that owns the API. |
-| A new lifecycle state is needed | Owning status-definition file | Status values are contracts, not casual properties. |
-| A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner | Customer behavior should not fork framework source. |
+| Example change                              | Better first move                                                                            | Why                                                                                                 |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Local WCMS port must change                 | Server config under `envs/.../wcmsStagedServer/config` or `envs/.../wcmsOnlineServer/config` | Port is topology, not shared framework behavior.                                                    |
+| A project wants a different public label    | WCMS/Axis content or project-owned documentation/content data                                | The label is presentation/content, not service logic.                                               |
+| A framework checkout path differs           | Update the declared framework package dependency and lockfile                                | Workspace layout is project setup, not runtime configuration.                                       |
+| Project identity is needed                  | `package.json.name`                                                                          | Do not duplicate it in root descriptors or `config/properties.js`.                                  |
+| A local domain selection is needed          | Existing environment/server `config/properties.js` and package composition metadata          | Runtime composition belongs to the selected deployment; do not introduce an environment descriptor. |
+| A new API category should be enabled        | Owning module default property, with server override only to disable or narrow it            | Defaults belong to the module that owns the API.                                                    |
+| A new lifecycle state is needed             | Owning status-definition file                                                                | Status values are contracts, not casual properties.                                                 |
+| A customer needs different Profile behavior | Customer extension module loaded after Platform/Profile owner                                | Customer behavior should not fork framework source.                                                 |
 
 ## Safe customization model
 
@@ -189,7 +189,7 @@ nodics.waste
       -> circa.ewaste Waste policy
 ```
 
-Use `modules/circa.ewaste/data/core-v001/waste-policy` for Circa-owned Waste
+Use `modules/circa.ewaste/data/core-v002/waste-policy` for Circa-owned Waste
 policy data. It can add or override family, category, material, evidence policy,
 collection preset, acceptance rule, impact metric, and impact profile records
 through a manifest-backed data release. The local Waste server installs

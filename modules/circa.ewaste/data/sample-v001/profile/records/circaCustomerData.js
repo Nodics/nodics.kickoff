@@ -9,62 +9,74 @@
 
  */
 
-'use strict';
+"use strict";
 
 /** @module circa.ewaste/data/profile/circaCustomerData @description Supplies explicit local Circa sample customer records. @layer data @owner circa.ewaste */
 module.exports = {
-    "record0": {
-        "code": "circa-customer",
-        "loginId": "customer@circa.local",
-        "name": {
-            "firstName": "Circa",
-            "lastName": "Customer"
-        },
-        "password": {
-            "password": "CircaDemo!2026",
-            "confirmPassword": "CircaDemo!2026",
-            "loginId": "customer@circa.local"
-        },
-        "metadata": {
-            "sample": true,
-            "applicationCode": "CIRCA_EWASTE"
-        },
-        "active": true
+  record0: {
+    code: "circa-customer",
+    loginId: "customer@circa.local",
+    ownerId: "customer@circa.local",
+    ownerType: "customer",
+    name: {
+      firstName: "Circa",
+      lastName: "Customer",
     },
-    "record1": {
-        "code": "circa-seller",
-        "loginId": "seller@circa.local",
-        "name": {
-            "firstName": "Maya",
-            "lastName": "Green"
-        },
-        "password": {
-            "password": "CircaDemo!2026",
-            "confirmPassword": "CircaDemo!2026",
-            "loginId": "seller@circa.local"
-        },
-        "metadata": {
-            "sample": true,
-            "applicationCode": "CIRCA_EWASTE"
-        },
-        "active": true
+    password: {
+      password: "CircaDemo!2026",
+      confirmPassword: "CircaDemo!2026",
+      loginId: "customer@circa.local",
     },
-    "record2": {
-        "code": "circa-recipient",
-        "loginId": "recipient@circa.local",
-        "name": {
-            "firstName": "Sam",
-            "lastName": "Circa"
-        },
-        "password": {
-            "password": "CircaDemo!2026",
-            "confirmPassword": "CircaDemo!2026",
-            "loginId": "recipient@circa.local"
-        },
-        "metadata": {
-            "sample": true,
-            "applicationCode": "CIRCA_EWASTE"
-        },
-        "active": true
-    }
+    metadata: {
+      sample: true,
+      applicationCode: "CIRCA_EWASTE",
+    },
+    principalType: "customer",
+    userGroups: ["customerUserGroup"],
+    active: true,
+  },
+  record1: {
+    code: "circa-seller",
+    loginId: "seller@circa.local",
+    ownerId: "seller@circa.local",
+    ownerType: "customer",
+    name: {
+      firstName: "Maya",
+      lastName: "Green",
+    },
+    password: {
+      password: "CircaDemo!2026",
+      confirmPassword: "CircaDemo!2026",
+      loginId: "seller@circa.local",
+    },
+    metadata: {
+      sample: true,
+      applicationCode: "CIRCA_EWASTE",
+    },
+    principalType: "customer",
+    userGroups: ["customerUserGroup"],
+    active: true,
+  },
+  record2: {
+    code: "circa-recipient",
+    loginId: "recipient@circa.local",
+    ownerId: "recipient@circa.local",
+    ownerType: "customer",
+    name: {
+      firstName: "Sam",
+      lastName: "Circa",
+    },
+    password: {
+      password: "CircaDemo!2026",
+      confirmPassword: "CircaDemo!2026",
+      loginId: "recipient@circa.local",
+    },
+    metadata: {
+      sample: true,
+      applicationCode: "CIRCA_EWASTE",
+    },
+    principalType: "customer",
+    userGroups: ["customerUserGroup"],
+    active: true,
+  },
 };

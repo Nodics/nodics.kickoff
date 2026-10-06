@@ -1,4 +1,54 @@
+/**
+ * @module kickoffLocal/wasteServer/config/properties
+ * @description Selects Local Waste composition, customer journey policy and scoped owner API access.
+ * @layer config
+ * @owner nodics.kickoff
+ * @override Later deployment layers may narrow the selected owners without bypassing Profile authorization.
+ */
 module.exports = {
+  "runtimePropertyGovernance": {
+    "persistence": { "enabled": true }
+  },
+  "circaEWaste": {
+    "journey": {
+      "arrivalRadiusMetres": {
+        "$config": "env",
+        "name": "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
+        "type": "number",
+        "fallback": 200
+      }
+    }
+  },
+  "identityGovernance": {
+    "migration": {
+      "localRuntimeDeploymentGrantPermissions": {
+        "$config": "replace",
+        "value": [
+          "auth.internal.token.read",
+          "auth.internal.token.read.anyTenant",
+          "profile.enterprise.search",
+          "profile.tenant.namespace.bind",
+          "profile.customer.register",
+          "profile.address.reference.read",
+          "profile.enterprise.reference.read",
+          "location.location.read",
+          "loyalty.wallet.open",
+          "loyalty.wallet.read",
+          "media.evidence.read",
+          "media.customer.upload",
+          "media.customer.read",
+          "import.release.validate",
+          "import.core.run",
+          "publish.lifecycle.create",
+          "publish.lifecycle.view",
+          "publish.lifecycle.validate",
+          "publish.lifecycle.requestApproval",
+          "commerce.product.publish",
+          "profile.externalIdentity.prepare"
+        ]
+      }
+    }
+  },
   "activeModules": {
     "groups": [],
     "modules": [

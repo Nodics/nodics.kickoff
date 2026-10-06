@@ -1,23 +1,19 @@
-## Profile Placement Successor
+## Unified v001 Demo Dataset
 
-The existing `circa.ewaste:profile` setup selector now resolves `0.0.5` from
-`sample-v007` on PLATFORM. Customer signup declares approved explicit enterprise
-placement; original records and historical `0.0.4` hashes are unchanged. Profile
-still owns tenant, enterprise, credentials and eligibility checks. See the
-[forward-release contract](llm/contracts/circa-application.md#profile-placement-forward-release)
-before authorized validation/preparation; this source change performs no import.
+Circa now exposes one pre-launch `v001` demo dataset. The active manifest selects
+`0.0.1` from `sample-v001` for Profile, Operations, Location, Waste, Loyalty,
+Commerce, Commerce Operational and Content, and `0.0.1` from `core-v001` for
+workspace records. Circa Waste policy remains `0.0.1` under `core-v002` because
+nImport source-key composition requires the same lower-layer eWaste core source
+root before Circa policy overrides can win. Profile still owns tenant,
+enterprise, credentials and eligibility checks; Commerce still owns coupon
+issuance and inventory admission.
 
-## Commerce Forward Releases
-
-Circa selects `circa.ewaste:commerce` version `0.0.5` from `sample-v005`
-for Staged catalogue/policy preparation. Historical `0.0.4` and its original
-16 files remain unchanged under section-scoped retention. The optional,
-explicit `circa.ewaste:commerce-operational` version `0.0.1` targets `COMMERCE`,
-not Staged; its existing coupon and opening-stock snapshots remain blocked
-from direct import pending governed owner operations. No sample identities,
-codes, quantities or commercial terms have been added. Read
-[the application contract](llm/contracts/circa-application.md#commerce-forward-release-and-partial-import-recovery)
-before preparing or recovering an installed environment.
+The demo includes seven enterprises, fourteen scoped staff, two redemption
+outlets and thirty-five GreenPerks offers on top of the original customer-facing
+assets and coupon cards. See [the single demo dataset guide](docs/pages/demo-data.md)
+and read [the application contract](llm/contracts/circa-application.md) before
+preparing or recovering an installed environment.
 
 ## Circa customer backend
 
@@ -27,13 +23,14 @@ adapters, sample valuation and deployment deltas, plus governed sample content.
 
 Its site API `/nodics/circa.ewaste/v0` serves experience, registrations, contact and Telegram launch validation.
 Domain journeys use `/nodics/eWaste/v0`. Owning frameworks keep submissions,
-assets, wallets, orders, coupons, media and locations. Sample records retain their
-existing release identities and must not be reimported over transaction history.
+assets, wallets, orders, coupons, media and locations. Sample records are
+intended for fresh local and local-production-simulation setup; they must not be
+reimported over real transaction history.
 
-The EXPLICIT `waste-policy` 0.0.1 successor consumes neutral eWaste 0.0.1 through
+The EXPLICIT `waste-policy` 0.0.1 release consumes neutral eWaste 0.0.1 through
 nImport source-key inheritance while retaining Circa identifiers and policy.
-The optional `waste` 0.0.5 sample contains no taxonomy/profile writes and is for
-separately verified fresh environments only. Historical payloads are retained.
+The required `waste` 0.0.1 sample contains no taxonomy/profile writes and is for
+separately verified fresh environments only.
 See [source and installed adoption boundaries](llm/contracts/circa-application.md#existing-data-compatibility).
 
 Circa checks arrival without creating a submission. Photo preparation analyzes
@@ -85,9 +82,13 @@ Circa selects the eWaste OpenAI environmental assessment provider first, with th
 The [Shop and Coupons catalogue guide](docs/pages/catalogue.md) describes public product browsing, the supported Circa discovery extension, ownership boundaries and reference deployment limits.
 
 The Circa setup profile prepares its Location map foundation, Waste presets,
-local sample profiles/operator access, collection centres, reward programme,
-Commerce Staged catalogue and published website. These sample releases are
-limited to Local and Local Production Simulation. Commerce projection publication
+collection centres, Commerce Staged catalogue and published website. Demo customer
+profiles, operator access, reward wallets and Commerce operations are required
+parts of the same USER-triggered initialization, not separately branded modes.
+Owner prerequisites must pass; missing ones keep the demo blocked.
+A published website does not establish customer or reward readiness.
+See the [application contract](llm/contracts/circa-application.md) for the setup sequence.
+These sample releases are limited to Local and Local Production Simulation. Commerce projection publication
 remains a separate governed operation; website publication does not activate a
 Commerce catalogue. Reinitializing sample operational data is for fresh local
 qualification environments, never a production-data refresh.

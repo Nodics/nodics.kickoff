@@ -143,6 +143,11 @@ solve a customer-project problem by moving framework ownership into Kickoff.
 
 ## Minimal configuration
 
+Copilot knowledge selection is governed runtime data. Do not restore source
+catalogs in Kickoff, Circa, Agora or deployment properties. Keep content with its
+owner; active modules become candidates through nConfig. Read the framework's
+`copilotKnowledge/llm/contracts/runtime-knowledge-configuration-contract.md`.
+
 `kickoffApi` and `kickoffInt` are intentional customer extension templates.
 Retain their standard module shape even when empty. Empty template hooks are not
 duplicated implementations and do not justify removal or framework relocation.

@@ -30,6 +30,7 @@
         "profile",
         "backoffice",
         "loyaltyCore",
+        "loyaltyApi",
         "wasteCore",
         "media"
       ]

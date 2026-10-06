@@ -1,5 +1,11 @@
 # Agora Electronics data ownership
 
+Commerce release `0.0.4` (`sample-v003`) contains publishable catalog/policy
+records only. Stock balances require Inventory-owned Online operations and are
+not Staged imports. Historical Commerce `sample-v002` remains retained by section
+while WCMS still uses its unchanged `sample-v002` content. Catalog publication
+does not establish opening stock. `test:data-ownership` enforces this separation.
+
 This customer application module owns its application sample data. Commerce and
 WCMS schemas and publication operations remain framework-owned.
 

@@ -10,5 +10,7 @@ This Local deployment declares a distinct runtime instance and an environment
 reference for its retained service proof. Profile must hold the corresponding
 service principal and approved deployment grant before startup. Missing proof
 fails closed; never replace it with the shared bootstrap or administrator key.
-After a full Local reset, an authenticated operator must reprovision the approved
-deployment grants through Profile before restarting this runtime.
+Native-Local Profile bootstrap may reconcile its own active configured grants
+and generated proof. Revoked, disabled, differently owned and non-Local grants
+remain operator-owned. Reward-payment scopes belong only to this runtime's
+explicit permission pin; test inherited startup permissions and sibling denials.

@@ -50,8 +50,8 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
 
   assert(release, "agoraApparelCommerceCatalog release should be discoverable");
   assert.equal(release.dataType, "sample");
-  assert.equal(release.sourceRoot, "sample-v003");
-  assert.equal(release.version, "0.0.8");
+  assert.equal(release.sourceRoot, "sample-v005");
+  assert.equal(release.version, "0.0.10");
   assert.equal(release.lifecycle, "PUBLISHABLE");
   assert.equal(release.destinationRole, "COMMERCE_STAGED");
   assert.deepEqual(release.environmentScope, [
@@ -69,7 +69,7 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
     ),
   );
   assert(
-    release.declaredFiles.some((file) =>
+    !release.declaredFiles.some((file) =>
       file.endsWith("agoraApparelInventoryBalanceData.js"),
     ),
   );
@@ -79,12 +79,12 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
     ),
   );
   assert(
-    release.declaredFiles.some((file) =>
+    !release.declaredFiles.some((file) =>
       file.endsWith("agoraApparelCouponBatchData.js"),
     ),
   );
   assert(
-    release.declaredFiles.some((file) =>
+    !release.declaredFiles.some((file) =>
       file.endsWith("agoraApparelCouponData.js"),
     ),
   );
@@ -108,7 +108,7 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
     importRequests[0].dataReleasePlan[0].releaseCode,
     "agora.apparel:agoraApparelCommerceCatalog",
   );
-  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, "sample-v003");
+  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, "sample-v005");
   assert(
     importRequests[0].dataReleasePlan[0].declaredFiles.some((file) =>
       file.endsWith("agoraApparelProductData.js"),
@@ -135,7 +135,7 @@ test("Agora domain Commerce releases separate each selected domain import plan",
     ),
   );
   assert(
-    releases[0].declaredFiles.some((file) =>
+    !releases[0].declaredFiles.some((file) =>
       file.endsWith("agoraApparelInventoryBalanceData.js"),
     ),
   );
@@ -145,12 +145,12 @@ test("Agora domain Commerce releases separate each selected domain import plan",
     ),
   );
   assert(
-    releases[0].declaredFiles.some((file) =>
+    !releases[0].declaredFiles.some((file) =>
       file.endsWith("agoraApparelCouponBatchData.js"),
     ),
   );
   assert(
-    releases[0].declaredFiles.some((file) =>
+    !releases[0].declaredFiles.some((file) =>
       file.endsWith("agoraApparelCouponData.js"),
     ),
   );

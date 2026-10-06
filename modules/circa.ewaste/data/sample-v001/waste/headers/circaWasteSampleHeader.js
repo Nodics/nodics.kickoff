@@ -11,44 +11,9 @@
 
 'use strict';
 
-/** @module circa.ewaste/data/waste/header @description Imports the Circa sample section through owning generated services. @layer data-header @owner circa.ewaste */
+/** @description Fresh-install sample transactions; references belong to the required Circa policy successor. @owner circa.ewaste @layer data-header */
 module.exports = {
-    "wasteMaterial": {
-        "circaWasteCategoryData": {
-            "options": {
-                "enabled": true,
-                "schemaName": "wasteCategory",
-                "operation": "saveAll",
-                "dataFilePrefix": "circaWasteCategoryData"
-            },
-            "query": {
-                "code": "$code"
-            }
-        },
-        "circaWasteItemTypeData": {
-            "options": {
-                "enabled": true,
-                "schemaName": "wasteItemType",
-                "operation": "saveAll",
-                "dataFilePrefix": "circaWasteItemTypeData"
-            },
-            "query": {
-                "code": "$code"
-            }
-        }
-    },
     "wasteImpact": {
-        "circaWasteImpactProfileData": {
-            "options": {
-                "enabled": true,
-                "schemaName": "wasteImpactProfile",
-                "operation": "saveAll",
-                "dataFilePrefix": "circaWasteImpactProfileData"
-            },
-            "query": {
-                "code": "$code"
-            }
-        },
         "circaWasteImpactResultData": {
             "options": {
                 "enabled": true,

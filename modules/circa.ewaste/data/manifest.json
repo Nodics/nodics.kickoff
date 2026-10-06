@@ -5,10 +5,10 @@
     "profile": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v007",
-      "version": "0.0.5",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
       "displayName": "Circa profile sample",
-      "description": "Explicit local Circa sample profile records",
+      "description": "Unified v001 Circa sample profile records for first-time demo setup.",
       "owningDomain": "profile",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
@@ -22,9 +22,9 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v007/profile/headers/circaProfileSampleHeader.js": "f83a4a01d3c5567b5e1b928f336154a9609f36b00bfb7aa0828b3c6680f9cd27",
-        "sample-v007/profile/records/circaAddressData.js": "a463ec4753099496d5f38c87cf49dd8894d1782736df64a16126702095d12c67",
-        "sample-v007/profile/records/circaCustomerData.js": "1ea48756d5ecd88b073a913d9eff1654ec22b3292cea9cdb683dd9f8c7094b7a"
+        "sample-v001/profile/headers/circaProfileSampleHeader.js": "a3246e430ceb5fda094467aaf75b022aa29ea51e8ba52b9e1a633a634ea4a29c",
+        "sample-v001/profile/records/circaAddressData.js": "a463ec4753099496d5f38c87cf49dd8894d1782736df64a16126702095d12c67",
+        "sample-v001/profile/records/circaCustomerData.js": "62a001da331c9a72dad1142b1151d5957d8d096c53db4105aa66555dbecc5cfc"
       },
       "selectionPolicy": "EXPLICIT"
     },
@@ -32,9 +32,9 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.4",
+      "version": "0.0.1",
       "displayName": "Circa location sample",
-      "description": "Explicit local Circa sample location records",
+      "description": "Unified v001 Circa collection-centre and GreenPerks redemption outlet locations.",
       "owningDomain": "location",
       "lifecycle": "REFERENCE",
       "destinationRole": "LOCATION",
@@ -48,17 +48,17 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/location/headers/circaLocationSampleHeader.js": "be1760d316160a66d92ef1ff842d64ce0588a734c1c16aeb01950e8b0ce7b479",
-        "sample-v001/location/records/circaLocationData.js": "13b84d222d52a5e7b5b41e67dd324f975c2bbcaaff73eb68160a331e362782ad"
+        "sample-v001/location/headers/circaLocationSampleHeader.js": "2aa5d1c510c3b71f1231f9f98d97d010fb1fdcffbbb57c3ebc8f4676900670d9",
+        "sample-v001/location/records/circaLocationData.js": "b541cebf5e4dccc256f31b4869ecbcaa243f7e21d5910f0b9859f8d419398c75"
       }
     },
     "waste": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v004",
-      "version": "0.0.5",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
       "displayName": "Circa waste sample",
-      "description": "Explicit local Circa sample waste records",
+      "description": "Unified v001 Circa sample waste records for fresh local demo setup.",
       "owningDomain": "waste",
       "lifecycle": "REFERENCE",
       "destinationRole": "WASTE",
@@ -72,14 +72,14 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v004/waste/headers/circaWasteSampleHeader.js": "3f45f7a8392024be614389cdeb0a88ac08214afefaff4d011e61dbe08787e234",
-        "sample-v004/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
-        "sample-v004/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
-        "sample-v004/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
-        "sample-v004/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
-        "sample-v004/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
-        "sample-v004/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
-        "sample-v004/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
+        "sample-v001/waste/headers/circaWasteSampleHeader.js": "3f45f7a8392024be614389cdeb0a88ac08214afefaff4d011e61dbe08787e234",
+        "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
+        "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
+        "sample-v001/waste/records/circaWasteCollectionPointData.js": "5aaa83a779cadd74cc8c7105e1a30861547cfea47dbd6d82014df07e3135fbd6",
+        "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
+        "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
+        "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
+        "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
       },
       "selectionPolicy": "EXPLICIT"
     },
@@ -115,7 +115,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.4",
+      "version": "0.0.1",
       "displayName": "Circa loyalty sample",
       "description": "Explicit local Circa sample loyalty records",
       "owningDomain": "loyalty",
@@ -143,7 +143,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.9",
+      "version": "0.0.1",
       "displayName": "Circa published website",
       "description": "Typed page composition and governed Media publication for Circa.",
       "owningDomain": "circa.ewaste",
@@ -196,9 +196,9 @@
     "commerce": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v005",
-      "version": "0.0.5",
-      "description": "Existing Circa catalogue and promotion policy only; operational state excluded.",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "Unified v001 Circa demo asset catalogue and 38 partner offers, including the approved 35-offer GreenPerks network.",
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
@@ -212,19 +212,21 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "sample-v005/commerce-policy/headers/circaCommerceSampleHeader.js": "4a252044aa8622a40f54061aa8e3e5a3f36c15405611420e2a4bb16f3a74a08b",
-        "sample-v005/commerce-policy/records/circaCategoryData.js": "efd6abf06e319d044af33dee4e2225acdd15d30a4500d8d7451f720cf020d874",
-        "sample-v005/commerce-policy/records/circaCategoryLocalizationData.js": "9bf8364383180a490659c62eb236cedd4284593df9bc3d3055a9a40d5b42ba0e",
-        "sample-v005/commerce-policy/records/circaPriceBookData.js": "267bc630fb0d46e63d92a0f0f0e2823b7aa2516d5f5b96e028ddb5fd4dbc1a5b",
-        "sample-v005/commerce-policy/records/circaPriceRowData.js": "bd59f75fdceaa6976737bea6676cd3f0844611fe8bba8124ca31a5df35a7ac4b",
-        "sample-v005/commerce-policy/records/circaProductData.js": "b4379b7b5822b8f5669bedf7ab05f0cb4e1a72f8b6a3e5150dbd9a891f77a00a",
-        "sample-v005/commerce-policy/records/circaProductLocalizationData.js": "677de0e359647cc3cc47cc0357e116c48147854726d4d6f6ccb97644fb5645e2",
-        "sample-v005/commerce-policy/records/circaProductVariantData.js": "4d7b91baaf5da7d19b5f484953084413d138d3176f09568e884a80a0b62d574b",
-        "sample-v005/commerce-policy/records/circaProductVariantLocalizationData.js": "6c025caa5f3e878e67f18a023a3075300573b3dbefe7cd1d64037e2f43917fe4",
-        "sample-v005/commerce-policy/records/circaPromotionData.js": "248302861d9eda0915aef3a79d0aa031af381b79e32912b72f20739e8b5a04c3",
-        "sample-v005/commerce-policy/records/circaStoreData.js": "0e6ca6fc43656dac87dfbf1720872ee9b7e340eeae62de1b182661869f563789",
-        "sample-v005/commerce-policy/records/circaTaxPolicyData.js": "6f89d9c3d9fcad4e7bfabd0b03db421ae9101d0827da8d4671c17b258cdacf30",
-        "sample-v005/commerce-policy/records/circaWarehouseData.js": "9aac4c6a141ad70313dfabadabba3f3ed9b16fa7da50615aae9af0f90a6ee249"
+        "sample-v001/commerce/headers/circaCommerceCatalogHeader.js": "45a28a3fde1aade748d1f1d825003ee2a0485ef288020deb1f70e6898ff46d00",
+        "sample-v001/commerce/records/circaCategoryData.js": "d09f7be03f421d9c3744852ac9fc7cce631d74d1bff6ef4776dde44788370119",
+        "sample-v001/commerce/records/circaCategoryLocalizationData.js": "598914b45c497ba390abd04efc140edaae6f72750aeaacf94d5b191a0452b49e",
+        "sample-v001/commerce/records/circaCouponBatchData.js": "2d3e26ac5cdc700e9cca50f24088adfcb56d09b4839708e521112ea652095289",
+        "sample-v001/commerce/records/circaCouponData.js": "56abef2c55bfa1a8f49b78cdffb8b1dc88d19b2fb36acdb1652ddcf55e44f870",
+        "sample-v001/commerce/records/circaInventoryBalanceData.js": "c0fc70b29c0fc10223b2f93dc09db91a3227ec6b347ef2e006880d1f8fde5a6f",
+        "sample-v001/commerce/records/circaPriceBookData.js": "7f47d41b08d7056fd26b053342461bd46d46b601bd6f23c6ff3bc5154e84c365",
+        "sample-v001/commerce/records/circaPriceRowData.js": "cf635246ef851d15ee97deeda8618d0d61cc8ae5b9195a0f95630880be97be01",
+        "sample-v001/commerce/records/circaProductData.js": "619cf503b090ebf374c72f5255203a4b2780dad9c93f6c8e033b2cc24f4e2b92",
+        "sample-v001/commerce/records/circaProductLocalizationData.js": "1b27e213a2f8658035b47d070bffcf889170667b83062b7ed8bf68b191461604",
+        "sample-v001/commerce/records/circaProductVariantData.js": "e74f4feeffe970e4fca28ca1f50ed4375082d05b0ea2d09e981a04f891a472ed",
+        "sample-v001/commerce/records/circaProductVariantLocalizationData.js": "6824e0ff52ce261b5b576318c83450d21f9142ae1b0c592d395d1cb5e12022fd",
+        "sample-v001/commerce/records/circaPromotionData.js": "7ebe68f8e5b93322a1027d3913a665198299bc4326bd8361714fd26baaa0bf11",
+        "sample-v001/commerce/records/circaTaxPolicyData.js": "88cefd3da3e4bd98aa6a7e769a06dca775ced00c830ab039fec2c4a862d3f684",
+        "sample-v001/commerce/records/circaWarehouseData.js": "cf9ecf5b8f33da7edc7e223642c4d063a6e7270c82a9a9013bb3095869e16609"
       },
       "displayName": "Circa Commerce catalogue",
       "selectionPolicy": "EXPLICIT"
@@ -233,9 +235,9 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.2",
+      "version": "0.0.1",
       "displayName": "Circa operational roles",
-      "description": "Local staff and scoped operational access without resetting customer transactions.",
+      "description": "Unified v001 Circa demo partner enterprises, staff and explicitly scoped operational access.",
       "owningDomain": "circa.ewaste",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
@@ -249,16 +251,18 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/operations/headers/circaOperationsHeader.js": "5f1e2b30b177d731fafef2f50b79db0d7aeafa845ee52ddc5a6f9670ffa489fa",
-        "sample-v001/operations/records/circaOperationalEmployeeData.js": "1bf0f9496782de2f397e7d0a0e6d8ffda6275c292ccb6f27595f67f7f584d7e2",
-        "sample-v001/operations/records/circaOperationalScopeData.js": "c2cdcbece79c849799840080a1d27b4a4256758f8db39c69abdb18f83bce74d4"
+        "sample-v001/operations/headers/circaOperationsHeader.js": "0a2ff742980ad568e0e511c33c7a4b3325b5826af7bea78296fa2b21f29872a9",
+        "sample-v001/operations/records/circaEnterpriseData.js": "ded0ad61ac9241fa8dfdadfe96776512fe8f72e19b482697b02722519f615e43",
+        "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
+        "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
+        "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b"
       }
     },
     "customer-workspace": {
       "kind": "DATA_RELEASE",
       "dataType": "core",
       "sourceRoot": "core-v001",
-      "version": "0.0.3",
+      "version": "0.0.1",
       "displayName": "Circa customer item workspace",
       "description": "WCMS banner, copy, listing and detail composition for customer items; no transactional sample records",
       "owningDomain": "circa.ewaste",
@@ -289,7 +293,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.2",
+      "version": "0.0.1",
       "displayName": "Sunmarke School profile",
       "description": "Adds only the Sunmarke School, JVT collection-centre reference record.",
       "owningDomain": "profile",
@@ -305,15 +309,15 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/sunmarke-profile/records/sunmarkeAddressData.js": "a15392c3905b0d0936aa97146d7d7a4fa66c903ef9b67f0947ebf0fd47a7c13f",
-        "sample-v001/sunmarke-profile/headers/sunmarkeProfileHeader.js": "a46f6ca198c50ee7a780c9b330b4d6ab3b40c3224288013c2325209d81b079bf"
+        "sample-v001/sunmarke-profile/headers/sunmarkeProfileHeader.js": "a46f6ca198c50ee7a780c9b330b4d6ab3b40c3224288013c2325209d81b079bf",
+        "sample-v001/sunmarke-profile/records/sunmarkeAddressData.js": "a15392c3905b0d0936aa97146d7d7a4fa66c903ef9b67f0947ebf0fd47a7c13f"
       }
     },
     "sunmarke-location": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v003",
-      "version": "0.0.3",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
       "displayName": "Sunmarke School location",
       "description": "Corrects Sunmarke School to its official Google Maps place pin, not the map viewport centre.",
       "owningDomain": "location",
@@ -329,8 +333,8 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v003/sunmarke-location/records/sunmarkeLocationData.js": "22f9132738085373218e246a6fceb8c12c6426baf8d8ce1eb59fdc6b41e2bb21",
-        "sample-v003/sunmarke-location/headers/sunmarkeLocationHeader.js": "107369be01fd2d6ab23b901ac6f9cbae6144f7ba80586afbef9d9596dad06754"
+        "sample-v001/sunmarke-location/headers/sunmarkeLocationHeader.js": "107369be01fd2d6ab23b901ac6f9cbae6144f7ba80586afbef9d9596dad06754",
+        "sample-v001/sunmarke-location/records/sunmarkeLocationData.js": "22f9132738085373218e246a6fceb8c12c6426baf8d8ce1eb59fdc6b41e2bb21"
       }
     },
     "sunmarke-waste": {
@@ -353,18 +357,18 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/sunmarke-waste/records/sunmarkeWasteCollectionPointData.js": "8aab8b4c9a89e5341e64f5fcf381ec2e63d261fbaf471e9dc80863bcaba19e9f",
-        "sample-v001/sunmarke-waste/headers/sunmarkeHeader.js": "77cfcbf881ebf4e56ebdbcf0608a34039a53a6a4b470c001cd95a6db5bee99ca"
+        "sample-v001/sunmarke-waste/headers/sunmarkeHeader.js": "77cfcbf881ebf4e56ebdbcf0608a34039a53a6a4b470c001cd95a6db5bee99ca",
+        "sample-v001/sunmarke-waste/records/sunmarkeWasteCollectionPointData.js": "8aab8b4c9a89e5341e64f5fcf381ec2e63d261fbaf471e9dc80863bcaba19e9f"
       }
     },
     "commerce-operational": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v006",
+      "sourceRoot": "sample-v001",
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "displayName": "Circa governed coupon and stock source",
-      "description": "Existing approved source only. Explicit operator review after publication; issuance and opening stock admission remain owner governed.",
+      "description": "Unified v001 governed coupon and stock source; owner runtimes still qualify issuance and inventory admission.",
       "owningDomain": "circa.ewaste",
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
@@ -378,183 +382,11 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v006/commerce-operational/headers/circaCommerceSampleHeader.js": "5bd8194e6c5a83b2ea0e8acdc393151f56aaf89481aa66f21e3786669c65fb18",
-        "sample-v006/commerce-operational/records/circaCouponBatchData.js": "a21e83777155ecd412352146bedb0695285a02a66370b805b6623b973e6c5c48",
-        "sample-v006/commerce-operational/records/circaCouponData.js": "58367f8e0347d64b202ac07ed6c9ca4de9af386864b7ced1aa6c234056662492",
-        "sample-v006/commerce-operational/records/circaInventoryBalanceData.js": "1ed34ac4774deed51dfec9707aabeeb5d7cc498be73c5623a990f1ba3fde9b05"
-      }
-    }
-  },
-  "retainedRoots": {
-    "core-v001": {
-      "scope": "SECTIONS",
-      "files": {
-        "core-v001/waste-policy/headers/circaWastePolicyHeader.js": "31d74d8e8868190e5b644e7fa4b1b2812dbfbb79de95c944d7e8dbd5b02842d0",
-        "core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData.js": "818e806ff37c9f87f19ea7ae36aa49510ab50f76fa104d06676ec497d3dcf826",
-        "core-v001/waste-policy/records/circaWastePolicyCategoryData.js": "3b12605cd1734957efc2566505ef9fd93cff1c4867d0f9c723aa70905b65f8dc",
-        "core-v001/waste-policy/records/circaWastePolicyCollectionPresetData.js": "c5aa852b34e4f1b9afb97c3389702019b66af1cdfedd4d9b0c1ca4239e1b6ee2",
-        "core-v001/waste-policy/records/circaWastePolicyImpactProfileData.js": "0e649cb670b8bec75288569c7940f2e73c54c9ea6fef6b0a9b0318f5b220e857"
-      },
-      "sections": {
-        "waste-policy": {
-          "kind": "DATA_RELEASE",
-          "dataType": "core",
-          "sourceRoot": "core-v001",
-          "version": "0.0.0",
-          "displayName": "Circa Waste Policy",
-          "description": "Circa-owned Waste policy records extending and overriding eWaste presets through nodics.waste schemas.",
-          "owningDomain": "waste",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "WASTE",
-          "environmentScope": [
-            "ALL"
-          ],
-          "sensitivity": "INTERNAL",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "files": {
-            "core-v001/waste-policy/headers/circaWastePolicyHeader.js": "31d74d8e8868190e5b644e7fa4b1b2812dbfbb79de95c944d7e8dbd5b02842d0",
-            "core-v001/waste-policy/records/circaWastePolicyAcceptanceRuleData.js": "818e806ff37c9f87f19ea7ae36aa49510ab50f76fa104d06676ec497d3dcf826",
-            "core-v001/waste-policy/records/circaWastePolicyCategoryData.js": "3b12605cd1734957efc2566505ef9fd93cff1c4867d0f9c723aa70905b65f8dc",
-            "core-v001/waste-policy/records/circaWastePolicyCollectionPresetData.js": "c5aa852b34e4f1b9afb97c3389702019b66af1cdfedd4d9b0c1ca4239e1b6ee2",
-            "core-v001/waste-policy/records/circaWastePolicyImpactProfileData.js": "0e649cb670b8bec75288569c7940f2e73c54c9ea6fef6b0a9b0318f5b220e857"
-          }
-        }
-      }
-    },
-    "sample-v001": {
-      "scope": "SECTIONS",
-      "files": {
-        "sample-v001/waste/headers/circaWasteSampleHeader.js": "c890ffc9996e21d32a84b3239c71d5ffb507c1e1c1c18339809dd0483bd3fb90",
-        "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
-        "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
-        "sample-v001/waste/records/circaWasteCategoryData.js": "8bac1b71126192b180c9dba9b525b28c2c9eab8f2654259aa16339e1822542b7",
-        "sample-v001/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
-        "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
-        "sample-v001/waste/records/circaWasteImpactProfileData.js": "72d99ab6b4f425d35eb78143da27ab793cec85df1473c66c98d9d8400b7ef7bf",
-        "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
-        "sample-v001/waste/records/circaWasteItemTypeData.js": "5b138a9c542e1f8e3dbba957a22daba782e8c38ea0d54ad36a5a9f26652ceb83",
-        "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
-        "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b",
-        "sample-v001/commerce/headers/circaCommerceSampleHeader.js": "393eb31ec0b00b7b6e460687381423e1c7900046a58fdb510c279e5426c50104",
-        "sample-v001/commerce/records/circaCategoryData.js": "21c09d797ca855f218be5e32752c775c4d62b3b56ab2fa6cd4ce627fa019a1ab",
-        "sample-v001/commerce/records/circaCategoryLocalizationData.js": "299ba71e997a1c239dcaa3ba492fc282f76ae17bfe6afc56f440b19208c12a81",
-        "sample-v001/commerce/records/circaCouponBatchData.js": "2d3e26ac5cdc700e9cca50f24088adfcb56d09b4839708e521112ea652095289",
-        "sample-v001/commerce/records/circaCouponData.js": "56abef2c55bfa1a8f49b78cdffb8b1dc88d19b2fb36acdb1652ddcf55e44f870",
-        "sample-v001/commerce/records/circaInventoryBalanceData.js": "c0fc70b29c0fc10223b2f93dc09db91a3227ec6b347ef2e006880d1f8fde5a6f",
-        "sample-v001/commerce/records/circaPriceBookData.js": "5b1505a9c146407ca35c738fdf5c4b1701840d560cd67e8808f770f47272ede7",
-        "sample-v001/commerce/records/circaPriceRowData.js": "3a09b03d884897a939ea06c52482aab0544f7821f4c6dad7f1797a6fb8ffcdeb",
-        "sample-v001/commerce/records/circaProductData.js": "dcbd71290b4642ac064507abc3d320ed6c0e259c8d6f4d7c85b00c85fe6a8322",
-        "sample-v001/commerce/records/circaProductLocalizationData.js": "5cf905d4662fa557de41d553543f1956d6115a277b5054431da65e79a32f8a75",
-        "sample-v001/commerce/records/circaProductVariantData.js": "9940ca55d3388f9641222282e74ee1b418da35f6cf03fe082f5244795680533e",
-        "sample-v001/commerce/records/circaProductVariantLocalizationData.js": "03c3b434973cd8cbddce7e2e8c47f59af54a85501f22e4f0bb1118117f19ef5d",
-        "sample-v001/commerce/records/circaPromotionData.js": "8ceda04a287944bf8ca27d3bf5d6bb28c3bb2a0027123cb68cfcc44e5505aa41",
-        "sample-v001/commerce/records/circaStoreData.js": "82dadd03f034fb3247784630e453d4dc57cb851897810d7ec7d8e890d42d971f",
-        "sample-v001/commerce/records/circaTaxPolicyData.js": "5277980e0c81c416c01c7c6875c478ec216139d5c7c0e2b714595bddc7d35ee0",
-        "sample-v001/commerce/records/circaWarehouseData.js": "19a8978686b9edee909b65ea34a76e6f5bc2e6c65abc673ac765dc7f5f2e59b4",
-        "sample-v001/profile/headers/circaProfileSampleHeader.js": "b1ec91066eb2c67176343db820871680d2a88d9f61bd24e35b323294b160c028",
-        "sample-v001/profile/records/circaAddressData.js": "a463ec4753099496d5f38c87cf49dd8894d1782736df64a16126702095d12c67",
-        "sample-v001/profile/records/circaCustomerData.js": "1ea48756d5ecd88b073a913d9eff1654ec22b3292cea9cdb683dd9f8c7094b7a"
-      },
-      "sections": {
-        "waste": {
-          "kind": "DATA_RELEASE",
-          "dataType": "sample",
-          "sourceRoot": "sample-v001",
-          "version": "0.0.4",
-          "displayName": "Circa waste sample",
-          "description": "Explicit local Circa sample waste records",
-          "owningDomain": "waste",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "WASTE",
-          "environmentScope": [
-            "LOCAL",
-            "LOCAL_PRODUCTION_SIMULATION"
-          ],
-          "sensitivity": "INTERNAL",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "files": {
-            "sample-v001/waste/headers/circaWasteSampleHeader.js": "c890ffc9996e21d32a84b3239c71d5ffb507c1e1c1c18339809dd0483bd3fb90",
-            "sample-v001/waste/records/circaWasteAssetData.js": "65ab9c3360f10090a9f0a1b0353ad95d2968f73a243051dd6c16a15fc1637756",
-            "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js": "d86c6bb4b72d9b70d88b6cf8270edcd83f22a4ab5cebf39d2867ceca873ef336",
-            "sample-v001/waste/records/circaWasteCategoryData.js": "8bac1b71126192b180c9dba9b525b28c2c9eab8f2654259aa16339e1822542b7",
-            "sample-v001/waste/records/circaWasteCollectionPointData.js": "e6fea57c6b3b5f01d62652c3d850446de57856deb0815adee117870ea6fdbd35",
-            "sample-v001/waste/records/circaWasteEvidenceData.js": "72118f0c9306bee29d369ea97fc52cbc48ba83a9a1a44dbb2ae7ff0253e3467e",
-            "sample-v001/waste/records/circaWasteImpactProfileData.js": "72d99ab6b4f425d35eb78143da27ab793cec85df1473c66c98d9d8400b7ef7bf",
-            "sample-v001/waste/records/circaWasteImpactResultData.js": "ce83fa0690c7846fce68d17d23630b01873941db95e43ed47ee169a86b7c921a",
-            "sample-v001/waste/records/circaWasteItemTypeData.js": "5b138a9c542e1f8e3dbba957a22daba782e8c38ea0d54ad36a5a9f26652ceb83",
-            "sample-v001/waste/records/circaWasteSubmissionData.js": "430f465c3fec27cc92b3ebb0633fb9569407b3175bfeda3381de6687d906ab13",
-            "sample-v001/waste/records/circaWasteVerificationData.js": "ac7102e5a4f0c2eb8ab653e1e787ff1dbf7da90e078c054f2f5c74eb8b5ea24b"
-          }
-        },
-        "commerce": {
-          "kind": "DATA_RELEASE",
-          "dataType": "sample",
-          "sourceRoot": "sample-v001",
-          "version": "0.0.4",
-          "description": "Illustrative circular assets and coupon offers",
-          "owningDomain": "circa.ewaste",
-          "lifecycle": "PUBLISHABLE",
-          "destinationRole": "COMMERCE_STAGED",
-          "environmentScope": [
-            "LOCAL",
-            "LOCAL_PRODUCTION_SIMULATION"
-          ],
-          "sensitivity": "PUBLIC",
-          "versioningPolicy": "IMMUTABLE",
-          "publicationPolicy": "REQUIRED",
-          "initialPublicationPolicy": "ADMIN_INITIATED",
-          "removalPolicy": "UNPUBLISH_OR_RETIRE",
-          "files": {
-            "sample-v001/commerce/headers/circaCommerceSampleHeader.js": "393eb31ec0b00b7b6e460687381423e1c7900046a58fdb510c279e5426c50104",
-            "sample-v001/commerce/records/circaCategoryData.js": "21c09d797ca855f218be5e32752c775c4d62b3b56ab2fa6cd4ce627fa019a1ab",
-            "sample-v001/commerce/records/circaCategoryLocalizationData.js": "299ba71e997a1c239dcaa3ba492fc282f76ae17bfe6afc56f440b19208c12a81",
-            "sample-v001/commerce/records/circaCouponBatchData.js": "2d3e26ac5cdc700e9cca50f24088adfcb56d09b4839708e521112ea652095289",
-            "sample-v001/commerce/records/circaCouponData.js": "56abef2c55bfa1a8f49b78cdffb8b1dc88d19b2fb36acdb1652ddcf55e44f870",
-            "sample-v001/commerce/records/circaInventoryBalanceData.js": "c0fc70b29c0fc10223b2f93dc09db91a3227ec6b347ef2e006880d1f8fde5a6f",
-            "sample-v001/commerce/records/circaPriceBookData.js": "5b1505a9c146407ca35c738fdf5c4b1701840d560cd67e8808f770f47272ede7",
-            "sample-v001/commerce/records/circaPriceRowData.js": "3a09b03d884897a939ea06c52482aab0544f7821f4c6dad7f1797a6fb8ffcdeb",
-            "sample-v001/commerce/records/circaProductData.js": "dcbd71290b4642ac064507abc3d320ed6c0e259c8d6f4d7c85b00c85fe6a8322",
-            "sample-v001/commerce/records/circaProductLocalizationData.js": "5cf905d4662fa557de41d553543f1956d6115a277b5054431da65e79a32f8a75",
-            "sample-v001/commerce/records/circaProductVariantData.js": "9940ca55d3388f9641222282e74ee1b418da35f6cf03fe082f5244795680533e",
-            "sample-v001/commerce/records/circaProductVariantLocalizationData.js": "03c3b434973cd8cbddce7e2e8c47f59af54a85501f22e4f0bb1118117f19ef5d",
-            "sample-v001/commerce/records/circaPromotionData.js": "8ceda04a287944bf8ca27d3bf5d6bb28c3bb2a0027123cb68cfcc44e5505aa41",
-            "sample-v001/commerce/records/circaStoreData.js": "82dadd03f034fb3247784630e453d4dc57cb851897810d7ec7d8e890d42d971f",
-            "sample-v001/commerce/records/circaTaxPolicyData.js": "5277980e0c81c416c01c7c6875c478ec216139d5c7c0e2b714595bddc7d35ee0",
-            "sample-v001/commerce/records/circaWarehouseData.js": "19a8978686b9edee909b65ea34a76e6f5bc2e6c65abc673ac765dc7f5f2e59b4"
-          },
-          "displayName": "Circa Commerce catalogue"
-        },
-        "profile": {
-          "kind": "DATA_RELEASE",
-          "dataType": "sample",
-          "sourceRoot": "sample-v001",
-          "version": "0.0.4",
-          "displayName": "Circa profile sample",
-          "description": "Explicit local Circa sample profile records",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL",
-            "LOCAL_PRODUCTION_SIMULATION"
-          ],
-          "sensitivity": "INTERNAL",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "files": {
-            "sample-v001/profile/headers/circaProfileSampleHeader.js": "b1ec91066eb2c67176343db820871680d2a88d9f61bd24e35b323294b160c028",
-            "sample-v001/profile/records/circaAddressData.js": "a463ec4753099496d5f38c87cf49dd8894d1782736df64a16126702095d12c67",
-            "sample-v001/profile/records/circaCustomerData.js": "1ea48756d5ecd88b073a913d9eff1654ec22b3292cea9cdb683dd9f8c7094b7a"
-          }
-        }
+        "sample-v001/commerce-operational/headers/circaCommerceSampleHeader.js": "0ffcc1aa8809c4058c7caf75d962728222c197759e5678b064e2ad49df86e249",
+        "sample-v001/commerce-operational/records/circaCouponBatchData.js": "a21e83777155ecd412352146bedb0695285a02a66370b805b6623b973e6c5c48",
+        "sample-v001/commerce-operational/records/circaCouponData.js": "58367f8e0347d64b202ac07ed6c9ca4de9af386864b7ced1aa6c234056662492",
+        "sample-v001/commerce-operational/records/circaInventoryBalanceData.js": "1ed34ac4774deed51dfec9707aabeeb5d7cc498be73c5623a990f1ba3fde9b05",
+        "sample-v001/commerce-operational/records/circaStoreData.js": "3ea28f20134fd1a67ca74e553804ad052d275e57c872bacf000143dccef885ec"
       }
     }
   }

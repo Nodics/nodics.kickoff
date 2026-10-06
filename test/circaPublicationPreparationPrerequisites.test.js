@@ -29,6 +29,9 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       ),
     );
     const steps = service.preparationSteps(profiles.circa);
+    for (const code of ["circa.ewaste:profile", "circa.ewaste:operations", "circa.ewaste:loyalty"]) {
+      assert.equal(steps.find((step) => step.code === code).required, true);
+    }
     const selectedOwners =
       environment === "kickoffLocal"
         ? [...owners.slice(1), "media"]

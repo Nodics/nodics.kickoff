@@ -6,6 +6,10 @@
  * @override Later deployment layers may narrow application selections without replacing framework preparation or owner authorization.
  */
 module.exports = {
+  dynamoEnabled: true,
+  runtimePropertyGovernance: {
+    persistence: { enabled: true },
+  },
   profileTenantProvisioning: {
     localRuntimeRemoteModuleExtensions: ["commsApi"],
   },

@@ -12,6 +12,12 @@ Change this package only when the requested behavior belongs to this boundary. P
 
 ## Verification
 
+Local Platform explicitly selects `dynamo` and enables Runtime Governance for
+schema-owned provider configuration. Native Local tooling supplies the stable
+encryption prerequisite in its private generated credential file. Provider
+tokens still require an authorized write through their declared runtime schema;
+neither module activation nor a successful build provisions a Telegram bot token.
+
 After changes, run the nearest focused test or the Kickoff structure and documentation checks from the project root.
 
 Local customer sessions inherit Secure cookies and opt into

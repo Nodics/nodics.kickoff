@@ -4,6 +4,7 @@
   "index": "1001.11",
   "private": true,
   "main": "nodics.js",
+  "requiredModules": ["dynamo"],
   "nodics": {
     "kind": "server",
     "extends": [

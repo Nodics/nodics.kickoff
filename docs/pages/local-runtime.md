@@ -80,7 +80,8 @@ or intentionally reusable through their owners; otherwise report residual state.
    target and a bounded count-only verification of zero matching isolated auth
    keys. Do not log key names/values or assume a fixed number of keys. Preserve
    shared state and record excluded/residual provider scope explicitly.
-6. Restart through `npm run topology:start`; require all ten selected backends
+6. Complete the private-capture qualification below, then restart through
+   `npm run topology:start`; require all ten selected backends
    ready, then verify normal Axis login and owner readiness. Startup must never
    autoerase the security cache or weaken versioned principal writes. A stale
    cache-write failure is a reset reconciliation failure, not a retry workaround.
@@ -94,7 +95,7 @@ the exact configured Mongo/Redis owners. After review, from the project root:
 
 ```sh
 nodics project:local-reset-maintenance \
-  --environment=kickoffLocal --project=nodics.kickoff \
+  --environment=kickoffLocal --project-code=nodics.kickoff \
   --databases=kickoffLocalPlatform,kickoffLocalWcmsStaged,kickoffLocalWcmsOnline,kickoffLocalProcess,kickoffLocalCron,kickoffLocalCommerceStaged,kickoffLocalCommerce,kickoffLocalEngagement,kickoffLocalLoyalty,kickoffLocalLocation,kickoffLocalWaste \
   --auth-namespace=auth_kickoffLocalRuntimeAuth_
 ```
@@ -119,6 +120,31 @@ Installed qualification remains separate from source tests. Current support is
 native standalone Mongo/Redis with conservative environment-prefixed names;
 replicas, Sentinel, ambiguous/proxy endpoints and scopes exceeding bounds refuse.
 Operator outage/exclusivity cannot be inferred from naming or a port scan alone.
+
+### Private Startup Qualification
+
+Tenant inventory uses protected framework-to-Profile calls even when optional
+enterprise onboarding is disabled. Native Local deliberately leaves
+`NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED` false until the operator reviews the
+actual launch: upstream proxies, `NODE_OPTIONS` preloads, APM agents, custom
+middleware and direct logging sinks. Disable request/body/header capture before
+intake. A disabled agent alone does not qualify other sinks.
+
+For a reviewed direct-loopback, console-only Local deployment with no custom
+capture hooks, select the existing Local opt-in for the supervisor and its children:
+
+```sh
+env NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED=true \
+  ELASTIC_APM_ACTIVE=false ELASTIC_APM_CAPTURE_BODY=off \
+  ELASTIC_APM_CAPTURE_HEADERS=false NODE_OPTIONS= npm run topology:start
+```
+
+This example intentionally omits Node preloads; installations that require them
+must qualify those preloads before adapting it. Preserve the framework default
+`qualified: false` and `captureMode: disabled`. Do not turn the gate into a default
+or bypass private admission. `Tenant startup held at ENTER_PRIVATE_CONTEXT`
+indicates missing private-entry qualification, not a reason to reset data again.
+This local attestation is not production or external-provider privacy acceptance.
 
 ### Observed Recovery And Evidence Boundary
 

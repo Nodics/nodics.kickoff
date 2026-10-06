@@ -154,11 +154,12 @@ When adding a new environment or server:
 
 ## Preserve arrays and operational safeguards
 
-Backend qualification does not require a frontend checkout. Axis knowledge is
-an explicit external-source choice: supply `NODICS_COPILOT_AXIS_ROOT` and enable
-`NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED`; source-code ingestion additionally uses
-`NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED`. Missing selections stay disabled.
-The Local composition source belongs only to the Local Platform profile.
+Backend qualification does not require a frontend checkout. Copilot source
+selection is governed runtime data, not an environment-variable catalog.
+The retired `NODICS_COPILOT_AXIS_*` source-selection variables no longer register
+or activate sources. The current backend's active module graph supplies eligible
+partitions. External content needs explicit owner registration and deployment
+transport; it is not discovered by scanning sibling frontend checkouts.
 
 Shared customer Engagement opt-ins live in Kickoff Core's `ENGAGEMENT` role
 profile. Local notification templates and trusted-source bindings live in the
@@ -430,10 +431,14 @@ Tests cover custom HTTPS, empty/replaced collections, forbidden origins and head
 ## Application selections and optional features
 
 Customer knowledge sources retain their classification, scopes, permissions and
-explicit enablement. Repository roots use nConfig context/path bindings. Framework
-and project source versions inherit package metadata unless the operator supplies
-an intentional version override. There is no `configurationValues.knowledge` helper
-registry. Source selection is independent of source-ingestion authority.
+explicit enablement in durable runtime configuration. Framework/project roots
+inherit nConfig's trusted path bindings. Administrators select reviewed revisions,
+inclusions and exclusions through existing governance, not module source edits.
+Fresh installations start with no selected sources. Local Platform and Waste
+explicitly opt into nDynamo durable properties in their server configuration;
+Knowledge declares its existing governance-owner dependencies. Do not enable
+persistence environment-wide: sibling runtimes without that owner must retain
+their defaults. Source selection remains independent of ingestion authority.
 
 Keep explicit content-pack, reset, publication baseline, provider, data-release,
 store/catalogue, frontend and runtime identity selections. Their presence does not
@@ -544,11 +549,11 @@ semantics remain unchanged.
 
 The Circa refund owner-port descriptor remains an explicit cross-runtime binding:
 Commerce does not load eWaste. Do not activate the accelerator just to inherit
-its descriptor. Copilot source controls now use opt-in Knowledge-owned templates;
-project definitions retain roots, identities, versions, enablement and scope.
-Normalized Local and Docker source definitions match the pre-extraction snapshot.
-Docker Platform still does not activate Copilot Knowledge: these definitions
-remain inert there, and configuration checks do not imply Docker live acceptance.
+its descriptor. Copilot retains generic Knowledge-owned templates, but no authored
+project source catalog. Existing installed selections must be migrated through
+reviewed nDynamo property activation, never restored as application defaults.
+Docker Platform does not activate Copilot Knowledge. Configuration checks do not
+imply Docker live acceptance.
 Telegram schema reuse likewise needs coordinated
 provider availability and central schema routing; existing operational schemas
 remain unchanged. Initialization package simplification is deferred: explicit

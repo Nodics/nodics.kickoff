@@ -240,23 +240,13 @@ const scenarios = Object.freeze([
             const registryService = require(path.join(frameworkRoot, 'nodics.copilot/modules/copilotKnowledge/src/service/defaultCopilotKnowledgeSourceRegistryService'));
             const policyService = require(path.join(frameworkRoot, 'nodics.copilot/modules/copilotPolicy/src/service/defaultCopilotPolicyService'));
             const knowledgeSources = registryService.createRegistry(registryConfiguration.definitions, registryConfiguration, policyService).sources;
-            assert.equal(knowledgeSources.some(source => source.sourceType === 'README'), true);
-            assert.equal(knowledgeSources.some(source => source.sourceType === 'AGENTS_CONTRACT'), true);
-            assert.equal(knowledgeSources.some(source => source.sourceType === 'CUSTOMER_PROJECT'), true);
-            const sourceCodePartitions = knowledgeSources.filter(source => source.sourceType === 'SOURCE_CODE');
-            assert.deepEqual(sourceCodePartitions.map(source => source.code).sort(), [
-                'nodics-copilot-source',
-                'nodics-discovery-source',
-                'nodics-axis-assistant-source',
-                'kickoff-copilot-composition-source'
-            ].sort());
-            for (const source of sourceCodePartitions) {
-                assert.equal(source.enabled, source.code !== 'nodics-axis-assistant-source',
-                    `${source.code} must retain its default backend or explicit external-knowledge policy`);
-            }
-            assert.equal(sourceCodePartitions.every(source => source.classification === 'RESTRICTED'), true);
-            assert.equal(sourceCodePartitions.every(source => source.allowedChannels.length === 1 && source.allowedChannels[0] === 'EMPLOYEE'), true);
-            assert.equal(sourceCodePartitions.every(source => source.limits.maximumFiles <= 400), true);
+            assert.deepEqual(knowledgeSources, []);
+            const runtimeSources = require(path.join(frameworkRoot, 'nodics.copilot/modules/copilotKnowledge/src/service/defaultCopilotRuntimeKnowledgeSourceService'));
+            const choices = runtimeSources.choices(CONFIG.get('copilot').knowledge.repositoryRoots);
+            assert(choices.some(choice => choice.moduleName === 'copilotKnowledge'));
+            assert(choices.some(choice => choice.moduleName === 'platformServer'));
+            assert(!choices.some(choice => choice.moduleName === 'eWaste'));
+            assert.deepEqual(CONFIG.get('copilot').knowledge.sourceRegistry.definitions, [], 'Discovery never selects sources');
             assert.equal(NODICS.isModuleActive('discoveryRuntime'), true);
             assert.equal(NODICS.isModuleActive('search'), true);
             assert.equal(NODICS.isModuleActive('elastic'), true);
@@ -381,8 +371,8 @@ async function prepareScenario(scenario) {
         assert.equal(CONFIG.get('product').discovery.activationService,
             staged ? null : 'DefaultProductPublicationTargetService');
         if (!staged) assert.deepEqual(CONFIG.get('product').discovery.activationScopes,
-            [{ tenant: 'default', storeCode: 'localProductQualificationStore20260929' }],
-            'Local delivery qualification must not enable activation reads for other stores');
+            [{ tenant: 'default', storeCode: 'circaMainStore' }],
+            'Local Circa delivery must not enable activation reads for other stores');
         if (staged) {
             assert(CONFIG.get('runtimeIdentity').remoteModules.includes('workflow'));
             assert.equal(NODICS.isModuleActive('publish'), true, 'Staged publication selections require the lifecycle owner');
@@ -396,8 +386,16 @@ async function prepareScenario(scenario) {
             assert.deepEqual(CONFIG.get(domain).publication.legacyCasRecovery,
                 { enabled: false, operations: [] }, 'Completed recovery must leave no enabled repair selection');
             assert.equal(delivery.enabled, !staged);
-            if (!staged) assert.deepEqual(delivery.storeCodes, ['localProductQualificationStore20260929'],
-                `${domain} qualification must not change unselected Store delivery`);
+            if (!staged) {
+                assert.deepEqual(delivery.storeCodes, ['circaMainStore'],
+                    `${domain} delivery must not change unselected stores`);
+                assert.deepEqual(delivery.rootCodes, [{
+                    pricing: 'circaPointsPriceBook',
+                    tax: 'circaSamplePointsPolicy',
+                    inventory: 'circaDigitalRegistry',
+                    promotion: 'CIRCA_COUPON_CPN-ECO-15_PROMO'
+                }[domain]], `${domain} must select its approved Circa policy root`);
+            }
             assert.deepEqual(CONFIG.get('schemaPolicies')[domain].publicationVersioned,
                 scenario.server === 'commerceStagedServer'
                     ? { isVersionedEnabled: true, versionedReadMode: 'CURRENT' }

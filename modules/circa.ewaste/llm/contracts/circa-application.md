@@ -19,94 +19,97 @@ definitions; never borrow CMS approval or rewrite a prior workflow instance.
 Later projects customize their selected providers and prerequisite descriptors
 through their own application/deployment layers, not framework source copies.
 
-## Profile Placement Forward Release
+## Unified v001 Demo Release
 
-`circa.ewaste:profile` now selects version `0.0.5`, `sample-v007`, EXPLICIT,
+The existing Circa initialization profile selects one customer demo dataset.
+`circa.ewaste:profile`, `:operations`, `:waste`, `:loyalty` and
+`:commerce-operational` are required USER-triggered packages alongside Location,
+CMS, Media and the catalogue. There is no separate full or partial demo mode.
+Required selection does not weaken owner eligibility, consent, employee scope,
+financial admission or Media approval. Unavailable owners keep the demo blocked.
+
+For first start, prepare the Circa website in Axis, inspect each native import
+receipt, review its CMS publication, then separately review retained Media
+publications. Verify the public site through Online delivery. Website publication
+does not certify registration, customer submission, operator review or rewards.
+Sample identities and wallets remain dependent on their real owning operations.
+An unavailable prerequisite remains blocked; do not change qualification flags
+or import owner records directly. See the [single demo dataset guide](../../docs/pages/demo-data.md)
+for counts, the required order, recovery and outstanding operational admission.
+
+`circa.ewaste:profile` now selects version `0.0.1`, `sample-v001`, EXPLICIT,
 REFERENCE, PLATFORM. Its stable source is checksummed; reference records do not
-acquire artificial business versioning (`versioningPolicy: NONE`). Historical
-`0.0.4` is retained in `retainedRoots.sample-v001.sections.profile` with its
-original three file hashes and bytes unchanged.
+acquire artificial business versioning (`versioningPolicy: NONE`). This is the
+canonical pre-launch first-start dataset, not a migration over an active customer
+installation.
 
-Only the Customer `signUpAll` header adds approved `enterpriseCode: default`.
-Address headers and both approved record files are unchanged. nImport validates
-the explicit target through Profile, which requires a fresh active enterprise
-and active exact import tenant. Only private awaited request admission carries
-placement; no importer identity, row marker, inferred enterprise, fabricated
-consent or eligibility exemption is supplied.
+The local demo Customer header uses the same generated Profile `saveAll`
+initializer pattern as Profile's own default customer seed. It carries exact
+`code` and `loginId` constraints, `customerUserGroup` source rows and no private
+eligibility metadata. Real customer onboarding remains Profile `signUpAll` and
+must satisfy active enterprise placement and eligibility owner readiness.
 
 Platform readiness alone does not admit Customer import. Eligibility defaults
 remain disabled/unqualified and no approved policy is invented. Profile must
 report onboarding readiness first; without that evidence, do not retry Customer
-preparation. The independent `circa.ewaste:operations` `0.0.2` selector contains
-only staff and scope writes, but still requires active referenced groups and
+preparation. The `circa.ewaste:operations` `0.0.1` sample adds seven demo
+enterprise references, fourteen scoped staff and two outlet addresses, preserving
+existing personas. Employee imports use Profile `saveAll` with exact `code` and `loginId` constraints for the fresh v001 demo setup.
+It still requires active referenced groups and
 principals, existing guard admission and credential-stamp owners. Selecting it
 does not disable human-scope or canonical identity protections.
 
-After both rebuilt Platform source and Profile onboarding readiness are proven,
-the authorized operator validates
-the exact `circa.ewaste:profile` catalogue version `0.0.5` and then prepares it
-through the existing Axis application setup flow. Preserve old failed receipts;
-do not force `0.0.4`, reset rows, or select the optional Commerce operational
-snapshot. Existing eligibility/credential/consent requirements may still refuse
-records; such refusal remains a genuine owner prerequisite, not a bypass.
-Source/test passes do not establish live installation acceptance.
+After rebuilt Platform source is proven, the authorized operator validates the
+exact `circa.ewaste:profile` catalogue version `0.0.1` and then prepares it
+through the existing Axis Data Initialization flow with explicit release
+selection. Source/test passes do not establish live installation acceptance.
 
-## Commerce Forward Release And Partial Import Recovery
+## Commerce Demo Catalogue And Operational Admission
 
-The historical `circa.ewaste:commerce` version `0.0.4` mixed policy and
-operational schemas under `PUBLISHABLE -> COMMERCE_STAGED`. Its exact section
-snapshot and file hashes remain in `retainedRoots.sample-v001.sections.commerce`.
-Do not edit, delete or relabel this evidence, its original files, failed run,
-or already imported rows. Other active sibling sections remain independent.
-
-The active selector remains `circa.ewaste:commerce`, now version `0.0.5`,
-source root `sample-v005`, `EXPLICIT`, immutable and publishable to
+The active selector remains `circa.ewaste:commerce`, version `0.0.1`,
+source root `sample-v001`, `EXPLICIT`, immutable and publishable to
 `COMMERCE_STAGED`. Its 12 schema targets are store, priceBook, priceRow,
 taxPolicy, warehouse, category, categoryLocalization, product,
 productLocalization, productVariant, productVariantLocalization and promotion.
 Existing record identities, references, prices and business terms remain
-unchanged. Promotion budget retains policy limit only; `spent` is omitted.
+unchanged. Thirty-five new GreenPerks offers and two outlet stores are added.
+Promotion budget retains policy limit only; `spent` is omitted.
 No coupon, couponBatch or inventoryBalance target is included.
 
 The separate `circa.ewaste:commerce-operational` version `0.0.1` in
-`sample-v006` is immutable `OPERATIONAL_VERSIONED -> COMMERCE`, `EXPLICIT`
-and optional in Circa setup. It retains only existing approved coupon,
+`sample-v001` is immutable `OPERATIONAL_VERSIONED -> COMMERCE`, `EXPLICIT`
+and required in Circa setup. It retains only existing approved coupon,
 couponBatch and inventoryBalance source records. It is not a publication
-source, automatic preparation step, sale authorization or instruction to reset
-stock. Its raw snapshot imports are backend-blocked: approved issuance must
-use Promotion-owned operations, and stock quantities require Inventory-owned
-movement evidence. Publication, qualified seller/issuer authority and
-approved stock provenance are prerequisites, not grants created by a sample
-or configuration flag. Even enabling existing qualification flags does not
-turn raw snapshots into owner-approved operations. No new grant, flag,
-credential, token, coupon code, person or business term is authored here.
+source, sale authorization or instruction to reset
+stock. Circa contributes a project-owned local demo admission marker for this
+v001 first-start dataset only; unmarked raw snapshot imports remain
+backend-blocked. Publication, qualified seller/issuer authority and approved
+stock provenance are prerequisites for real customer operations, not grants
+created by a sample or configuration flag. The new catalogue's
+`demoPurchaseUnits: 100` is a quantity target, not issued supply or a grant.
+An owner-governed issuance contribution and post-publication orchestration remain
+required; raw tokens and ledger snapshots are not a substitute.
 
 Operator order:
 
-1. Read the retained failed run through secured Import History and correlate
-   `dataReleases` releaseCode/version/checksum with installation receipts,
-   tenant, environment, destination and attempt status. Counters alone do not
-   establish an immutable receipt or rollback.
-2. Validate the forward policy selector with expected version `0.0.5`, then
-   explicitly prepare it through nImport. Do not retry or force old `0.0.4`.
-   Preserve the 74 reported successes and all existing operational rows.
-3. Complete governed publication and verify current Online pointers and
+1. Validate the v001 catalogue selector with expected version `0.0.1`, then
+   explicitly prepare it through nImport for a fresh local demo environment.
+2. Complete governed publication and verify current Online pointers and
    retained policy before exposing offers. Staged import alone is not live.
-4. Review the optional operational selector separately. Existing approved
+3. Inspect the required operational selector. Existing approved
    source describes intended stock, not permission to overwrite it. Use the
-   existing issuer and Inventory operations for approved effects, retaining
-   idempotency and movement evidence. The snapshot pack stays blocked until
-   a genuine owner-governed import protocol exists; never bypass it with direct
-   DB writes, generic saveAll retries or enabled qualification flags.
+   existing issuer and Inventory operations for real approved effects, retaining
+   idempotency and movement evidence. The v001 snapshot pack is admitted only
+   through the Circa local demo marker; never bypass it with direct DB writes,
+   broad generic retries or enabled qualification flags.
 
-The source fix does not migrate earlier misplaced rows, certify live receipts,
-or run imports. Cleanup/migration requires a separately scoped owner plan.
-Customer customization can author later immutable roots and layer existing
-setup selectors; it cannot mutate retained releases or put operational state
-in Staged publication. Rebuild before validating the new catalogue. CLI receipt
-inspection requires supplied employee authority with history/detail and
-release-view permissions; never scrape browser secrets or substitute unsigned
-service identity.
+The source fix does not certify live receipts or run imports. Customer
+customization before launch can update the unified v001 source and refresh
+hashes; after launch it must author later immutable roots and layer existing
+setup selectors. It cannot put operational state in Staged publication. Rebuild
+before validating the new catalogue. CLI receipt inspection requires supplied
+employee authority with history/detail and release-view permissions; never
+scrape browser secrets or substitute unsigned service identity.
 
 ## Nodics Circa Application Contract
 
@@ -168,32 +171,30 @@ framework/accelerator owners even when Circa first requests the capability.
 
 ### Existing Data Compatibility
 
-The old sample taxonomy remains an immutable compatibility snapshot: 20 records
-equal to the old eWaste defaults, four impact-profile overrides and 28 customer
-additions. The selected reference-only successor is `circa.ewaste:waste-policy`
-version `0.0.1` in `core-v002`, above `eWaste:core-reference` version `0.0.1` in
-the same source sequence. Both are EXPLICIT. Existing nImport source-key
+The sample taxonomy remains a compatibility snapshot: 20 records equal to the
+old eWaste defaults, four impact-profile overrides and 28 customer additions.
+The selected reference-only release is `circa.ewaste:waste-policy` version
+`0.0.1` in `core-v002`, above `eWaste:core-reference` version `0.0.1` in the
+same source sequence. Both are EXPLICIT. Existing nImport source-key
 composition supplies shared fields from eWaste and applies 24 Circa profile
 selection deltas plus the customer additions and final core policy. Matching
 filenames, export keys and header targets are required; these are not runtime
 JavaScript imports of mutable framework records. MOBILE_DEVICE's customer name,
 profile and revision-2 policy win once in the final composed record.
 
-The old `core-v001:waste-policy` and `sample-v001:waste` sections remain exact
-snapshots under `retainedRoots` with `scope: SECTIONS`. Unrelated sibling sections
-remain active and are not copied or frozen. The current sample successor is
-`circa.ewaste:waste` version `0.0.5` in `sample-v004`: it excludes category,
-item-type and impact-profile writes. It is EXPLICIT and optional in application
-preparation. This prevents automatic sample replay during reference adoption;
-it is not an importer-enforced fresh-only flag. The parent/operator must establish
-a genuinely fresh sample destination before explicitly selecting it. Never use
-this transaction pack to upgrade an installed customer's references.
+The current sample is `circa.ewaste:waste` version `0.0.1` in `sample-v001`: it
+excludes category, item-type and impact-profile writes. It is EXPLICIT and
+required in Circa application preparation. This prevents automatic sample replay
+during reference adoption; it is not an importer-enforced fresh-only flag. The
+parent/operator must establish a genuinely fresh sample destination before
+explicitly selecting it. Never use this transaction pack to upgrade an installed
+customer's references.
 
 For reference adoption use the existing nImport core validation/install API with
 `releaseCodes: ["eWaste:core-reference", "circa.ewaste:waste-policy"]` and
 `expectedReleases: { "eWaste:core-reference": "0.0.1", "circa.ewaste:waste-policy": "0.0.1" }`.
 The existing Local Waste foundation profile selects material foundation first
-and these same reference owners. Canonical discovery orders the matching v002
+and these same reference owners. Canonical discovery orders the matching v001
 releases by owner index; composition requires a CURRENT baseline receipt with
 matching checksum/version, or a selected predecessor during preflight. Explicit
 version pins reject stale selections. No new dependency or migration registry

@@ -1,4 +1,45 @@
+/**
+ * @module kickoffLocal/commerceServer/config/properties
+ * @description Selects Local Commerce deployment composition, publication and scoped reward-payment authority.
+ * @layer config
+ * @owner nodics.kickoff
+ * @override Later deployment layers may narrow the selected capabilities without bypassing owner authorization.
+ */
 module.exports = {
+  "identityGovernance": {
+    "migration": {
+      // Explicit security pin: preserve Local prerequisites; arrays otherwise merge positionally.
+      "localRuntimeDeploymentGrantPermissions": {
+        "$config": "replace",
+        "value": [
+          "auth.internal.token.read",
+          "auth.internal.token.read.anyTenant",
+          "profile.enterprise.search",
+          "profile.tenant.namespace.bind",
+          "profile.customer.register",
+          "profile.address.reference.read",
+          "profile.enterprise.reference.read",
+          "location.location.read",
+          "loyalty.wallet.open",
+          "loyalty.wallet.read",
+          "media.evidence.read",
+          "media.customer.upload",
+          "media.customer.read",
+          "import.release.validate",
+          "import.core.run",
+          "publish.lifecycle.create",
+          "publish.lifecycle.view",
+          "publish.lifecycle.validate",
+          "publish.lifecycle.requestApproval",
+          "commerce.product.publish",
+          "loyalty.rewards.reserve",
+          "loyalty.rewards.capture",
+          "loyalty.rewards.release",
+          "loyalty.rewards.reverse"
+        ]
+      }
+    }
+  },
   "pricing": {
     "publication": {
       "runtimeRole": "ONLINE",

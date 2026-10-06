@@ -14,6 +14,18 @@ Change this package only when the requested behavior belongs to the local Waste 
 
 After changes, run the nearest focused test or the Kickoff structure and runtime preparation checks from the project root.
 
+## Arrival radius
+
+Local Waste defaults `circaEWaste.journey.arrivalRadiusMetres` to 200 metres
+in this server's `config/properties.js`. Other environments inherit the Circa
+application default of 50 metres. `CIRCA_EWASTE_ARRIVAL_RADIUS_METRES` can
+explicitly override either default. Rebuild and restart Waste after changing
+server properties. Browser and Telegram both use the backend policy; neither
+needs a separate frontend setting. Fresh location and collection-point eligibility
+checks still apply, and the distance boundary is inclusive.
+The server module index follows the Circa application index so this deployment
+override is applied after the application default by nConfig.
+
 ## Photo metadata provider
 
 Local eWaste photo metadata explicitly selects OpenAI `gpt-5.6-luna` with the dedicated `eWastePhotoMetadata` profile: high image detail, JSON object output, 1200 output tokens, reasoning disabled, 60-second timeout, and response storage disabled. Set `OPENAI_EWASTE_API_KEY` in the ignored backend `.env`; its API key needs Responses write access. Customer guidance remains explicitly on Ollama `gemma3:4b`. Environmental calculations remain WasteImpact-owned. Restart Waste after changing these settings.

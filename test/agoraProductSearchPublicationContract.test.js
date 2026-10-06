@@ -60,16 +60,19 @@ const priceBooks = require(
 const priceRows = require(
   path.join(agoraProductRoot, "agoraApparelPriceRowData"),
 );
+// Historical records are isolated operational doubles, never the active import
+// plan. Live stock and coupon issuance require their Online owner commands.
+const operationalFixtureRoot = path.join(agoraDataRoot, "sample-v003/commerce/records");
 const inventoryBalances = require(
-  path.join(agoraProductRoot, "agoraApparelInventoryBalanceData"),
+  path.join(operationalFixtureRoot, "agoraApparelInventoryBalanceData"),
 );
 const promotions = require(
   path.join(agoraProductRoot, "agoraApparelPromotionData"),
 );
 const couponBatches = require(
-  path.join(agoraProductRoot, "agoraApparelCouponBatchData"),
+  path.join(operationalFixtureRoot, "agoraApparelCouponBatchData"),
 );
-const coupons = require(path.join(agoraProductRoot, "agoraApparelCouponData"));
+const coupons = require(path.join(operationalFixtureRoot, "agoraApparelCouponData"));
 
 let indexed;
 test.beforeEach(() => {

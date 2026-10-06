@@ -26,13 +26,13 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "localProductQualificationStore20260929"
+                "circaMainStore"
               ]
             },
             "rootCodes": {
               "$config": "replace",
               "value": [
-                "local-policy-casfixed-20260928-pricebook"
+                "circaPointsPriceBook"
               ]
             }
           }
@@ -49,13 +49,13 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "localProductQualificationStore20260929"
+                "circaMainStore"
               ]
             },
             "rootCodes": {
               "$config": "replace",
               "value": [
-                "local-policy-casfixed-20260928-taxpolicy"
+                "circaSamplePointsPolicy"
               ]
             }
           }
@@ -72,13 +72,13 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "localProductQualificationStore20260929"
+                "circaMainStore"
               ]
             },
             "rootCodes": {
               "$config": "replace",
               "value": [
-                "local-policy-casfixed-20260928-warehouse"
+                "circaDigitalRegistry"
               ]
             }
           }
@@ -95,13 +95,13 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "localProductQualificationStore20260929"
+                "circaMainStore"
               ]
             },
             "rootCodes": {
               "$config": "replace",
               "value": [
-                "local-policy-casfixed-20260928-promotion"
+                "CIRCA_COUPON_CPN-ECO-15_PROMO"
               ]
             }
           }
@@ -206,7 +206,7 @@ module.exports = {
           "activationService": "DefaultProductPublicationTargetService",
           "activationScopes": {
             "$config": "replace",
-            "value": [{ "tenant": "default", "storeCode": "localProductQualificationStore20260929" }]
+            "value": [{ "tenant": "default", "storeCode": "circaMainStore" }]
           }
         },
         "publication": {
@@ -401,84 +401,27 @@ module.exports = {
     "runtimeRoleProfiles": {
       "WASTE": {
         "knowledge": {
-          "ingestion": { "ingestOnStart": true }
+          "ingestion": { "enabled": true, "ingestOnStart": true },
+          "retrieval": { "enabled": true }
         }
       },
       "PLATFORM": {
-        "knowledge": {
-          "sourceRegistry": {
-            "definitions": {
-              "$config": "keyed",
-              "key": "code",
-              "entries": [
-                {
-                  "code": "kickoff-copilot-composition-source",
-                  "repository": "nodics.kickoff",
-                  "project": "kickoff",
-                  "module": "platformServer",
-                  "owner": "nodics.kickoff",
-                  "version": {
-                    "$config": "env",
-                    "name": "NODICS_COPILOT_KICKOFF_VERSION",
-                    "fallback": {
-                      "$config": "context",
-                      "name": "projectVersion"
-                    }
-                  },
-                  "paths": [
-                    "envs/kickoffLocal/platformServer/**/*.js"
-                  ],
-                  "excludedPaths": [
-                    "envs/kickoffLocal/platformServer/llm/generated"
-                  ],
-                  "allowedExtensions": [
-                    ".js"
-                  ],
-                  "limits": {
-                    "maximumFiles": 100,
-                    "maximumFileBytes": 524288,
-                    "maximumSourceBytes": 2097152
-                  },
-                  "tenantScopes": [
-                    "default"
-                  ],
-                  "customerProjectScopes": [
-                    "kickoff"
-                  ],
-                  "enabled": {
-                    "$config": "all",
-                    "values": [
-                      {
-                        "$config": "env",
-                        "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
-                        "fallback": true,
-                        "type": "boolean"
-                      },
-                      {
-                        "$config": "all",
-                        "values": [
-                          {
-                            "$config": "env",
-                            "name": "NODICS_COPILOT_SOURCE_CODE_ENABLED",
-                            "fallback": true,
-                            "type": "boolean"
-                          },
-                          {
-                            "$config": "env",
-                            "name": "NODICS_COPILOT_KICKOFF_SOURCE_CODE_ENABLED",
-                            "fallback": true,
-                            "type": "boolean"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  "template": "employeeSource"
-                }
-              ]
-            }
+        "providers": {
+          "accounting": {
+            "enabled": true,
+            "tenantLimit": 100000,
+            "enterprises": [
+              {
+                "tenantCode": "default",
+                "enterpriseCode": "default",
+                "limit": 100000,
+                "adapters": ["ollama"],
+                "profiles": ["conversation", "structuredTool", "evaluation"],
+                "users": [{ "principalCode": "admin", "limit": 100000 }]
+              }
+            ]
           }
-        }
+        },
       }
     }
   },

@@ -17,6 +17,52 @@ const {
 const coreProperties = require("../modules/kickoffCore/config/properties");
 const metadata = require("../modules/kickoffCore/package.json");
 
+require("node:test")("Local Waste may prepare a verified Profile channel handoff without widening siblings", () => {
+  const baseline = loadRuntime("loyaltyServer", "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
+  const waste = loadRuntime("wasteServer", "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
+  assert.deepEqual([...waste].sort(), [...baseline, "profile.externalIdentity.prepare"].sort());
+  for (const server of ["platformServer", "commerceServer", "loyaltyServer"]) {
+    assert.equal(loadRuntime(server, "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions
+      .includes("profile.externalIdentity.prepare"), false);
+  }
+  assert.equal(loadRuntime("wasteServer", "kickoffDockerLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions
+    .includes("profile.externalIdentity.prepare"), false);
+});
+
+require("node:test")("Knowledge runtimes include governance without enabling unrelated sibling runtimes", () => {
+  const platform = loadRuntime("platformServer", "kickoffLocal");
+  assert.equal(platform.dynamoEnabled, true);
+  assert.equal(activeModuleNames(platform).includes("dynamo"), true);
+  assert.equal(platform.runtimePropertyGovernance.persistence.enabled, true);
+  for (const server of ["commerceServer", "commerceStagedServer", "wasteServer", "engagementServer",
+    "wcmsStagedServer", "wcmsOnlineServer", "processServer", "locationServer", "loyaltyServer"]) {
+    const sibling = loadRuntime(server, "kickoffLocal");
+    assert.equal(sibling.dynamoEnabled, false);
+    assert.equal(activeModuleNames(sibling).includes("dynamo"), server === "wasteServer");
+    if (server === "wasteServer") {
+      assert.equal(sibling.runtimePropertyGovernance.persistence.enabled, true);
+      assert.deepEqual(sibling.copilot.knowledge.sourceRegistry.definitions, []);
+    } else {
+      assert.notEqual(sibling.runtimePropertyGovernance?.persistence?.enabled, true,
+        server + " must not opt into persistence without its owner");
+    }
+  }
+  assert.equal(loadRuntime("platformServer", "kickoffDockerLocal").dynamoEnabled, false);
+});
+
+require("node:test")("Local Copilot has a bounded Ollama-only bootstrap allocation without broad enrollment", () => {
+  const local = loadRuntime("platformServer", "kickoffLocal").copilot.providers.accounting;
+  const usage = require(path.join(frameworkRoot, "nodics.copilot/modules/copilotProviders/modules/copilotProvider/src/service/defaultCopilotUsageService"));
+  assert.equal(usage.validate(local), local);
+  assert.equal(local.tenantLimit, 100000);
+  assert.deepEqual(local.enterprises, [{
+    tenantCode: "default", enterpriseCode: "default", limit: 100000,
+    adapters: ["ollama"], profiles: ["conversation", "structuredTool", "evaluation"],
+    users: [{ principalCode: "admin", limit: 100000 }],
+  }]);
+  assert.notEqual(loadRuntime("platformServer", "kickoffDockerLocal").copilot.providers.accounting?.enabled, true);
+});
+
 require("node:test")("WCMS Online discovers the canonical Axis composition policy without activating Axis", () => {
   const projection = require(path.join(frameworkRoot,
     "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
@@ -168,6 +214,22 @@ require("node:test")("Local Platform explicitly delegates only its registration 
   }
 });
 
+require("node:test")("Local Commerce delegates reward payment only to its remote Loyalty owner", () => {
+  const permissions = ["loyalty.rewards.reserve", "loyalty.rewards.capture", "loyalty.rewards.release", "loyalty.rewards.reverse"];
+  const runtime = loadRuntime("commerceServer", "kickoffLocal");
+  assert.equal(runtime.runtimeIdentity.remoteModules.filter(name => name === "loyaltyApi").length, 1);
+  assert.equal(activeModuleNames(runtime).includes("loyaltyApi"), false);
+  const inherited = require("../envs/kickoffLocal/config/properties").identityGovernance.migration.localRuntimeDeploymentGrantPermissions.value;
+  assert.deepEqual(new Set(runtime.identityGovernance.migration.localRuntimeDeploymentGrantPermissions), new Set([...inherited, ...permissions]));
+  for (const permission of permissions)
+    assert.equal(runtime.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.filter(value => value === permission).length, 1);
+  for (const server of ["platformServer", "wasteServer", "commerceStagedServer"]) {
+    const sibling = loadRuntime(server, "kickoffLocal");
+    for (const permission of permissions)
+      assert.equal(sibling.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.includes(permission), false);
+  }
+});
+
 require("node:test")("Local employee review selects only its existing Process owner declaration without qualifying Profile or other deployments", () => {
   const { moduleConfiguration } = require("./helpers/configuration");
   const local = loadRuntime("processServer", "kickoffLocal");
@@ -219,34 +281,27 @@ require("node:test")("Local tenant provisioning selects all consumers but expose
   assert.notEqual(docker.apiExposure?.categories?.profileTenantProvisioning?.enabled, true);
 });
 
-require("node:test")("Platform preparation and isolated probes retain identical environment knowledge sources", () => {
+require("node:test")("Platform preparation and isolated probes leave knowledge selection to runtime governance", () => {
   const { execFileSync } = require("node:child_process");
   const registry = require(path.join(frameworkRoot,
     "nodics.copilot/modules/copilotKnowledge/src/service/defaultCopilotKnowledgeSourceRegistryService"));
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const variables = { NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED: "false" };
     const probe = loadRuntime("platformServer", environment, variables).copilot.knowledge.sourceRegistry;
-    const expected = probe.definitions;
+    const expected = probe?.definitions || [];
     const prepared = JSON.parse(execFileSync(process.execPath, ["-e", `
       const path = require('node:path');
       const options = JSON.parse(process.argv[1]);
       const prepare = require(path.join(options.frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
       for (const server of ['commerceServer', 'wasteServer', 'platformServer']) prepare({...options, server});
       const settings = CONFIG.get('copilot').knowledge.sourceRegistry;
-      process.stdout.write(JSON.stringify(settings.definitions));
+      process.stdout.write(JSON.stringify(settings?.definitions || []));
     `, JSON.stringify({ projectRoot: path.resolve(__dirname, ".."), frameworkRoot, environment })], {
       encoding: "utf8", timeout: 30000,
       env: { PATH: process.env.PATH, HOME: process.env.HOME, ...variables },
     }));
     assert.deepEqual(prepared, expected, "Prepared registry must match the isolated configuration probe");
-    const local = prepared.find(source => source.code === "kickoff-copilot-composition-source");
-    assert.equal(Boolean(local), environment === "kickoffLocal");
-    if (local) {
-      assert.equal(registry.expandDefinition(local, probe).sourceType, "SOURCE_CODE");
-      assert.equal(local.enabled, true);
-      assert.deepEqual(local.paths, ["envs/kickoffLocal/platformServer/**/*.js"]);
-    }
-    assert.equal(prepared.find(source => source.code === "nodics-axis-assistant-source").enabled, false);
+    assert.deepEqual(prepared, [], "Module activation must not select knowledge sources");
   }
 });
 
@@ -293,24 +348,27 @@ require("node:test")("Platform context and external knowledge are explicit deplo
     assert.equal(runtime.copilot.core.environment, environment);
     const knowledge = runtime.copilot.knowledge;
     assert.equal(knowledge.ingestion.ingestOnStart, true, "Preserve established backend startup defaults");
-    const sources = knowledge.sourceRegistry.definitions;
-    assert.equal(sources.some(source => source.code === "kickoff-copilot-composition-source"), environment === "kickoffLocal");
-    assert(sources.filter(source => source.repository === "nodics.axis").every(source => source.enabled === false));
-    assert.equal(knowledge.repositoryRoots["nodics.axis"], undefined);
+    const sources = knowledge.sourceRegistry?.definitions || [];
+    assert.deepEqual(sources, []);
+    if (environment === "kickoffLocal") {
+      assert.equal(knowledge.repositoryRoots.framework, frameworkRoot);
+      assert.equal(knowledge.repositoryRoots.project, path.resolve(__dirname, ".."));
+    } else assert.equal(knowledge.repositoryRoots, undefined, "Inactive Knowledge contributes no roots");
+    assert.equal(knowledge.repositoryRoots?.["nodics.axis"], undefined);
     const optedIn = loadRuntime("platformServer", environment, {
       NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED: "true",
       NODICS_COPILOT_AXIS_SOURCE_CODE_ENABLED: "true",
       NODICS_COPILOT_AXIS_ROOT: "/external-knowledge-not-read/axis",
     }).copilot.knowledge;
-    assert(optedIn.sourceRegistry.definitions.filter(source => source.repository === "nodics.axis").every(source => source.enabled === true));
-    assert.equal(optedIn.repositoryRoots["nodics.axis"], "/external-knowledge-not-read/axis");
+    assert.deepEqual(optedIn.sourceRegistry?.definitions || [], [], "Retired source-selection environment variables cannot grant knowledge");
+    assert.equal(optedIn.repositoryRoots?.["nodics.axis"], undefined);
     const disabled = loadRuntime("platformServer", environment, {
       NODICS_COPILOT_KNOWLEDGE_ENABLED: "false",
       NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START: "false",
     }).copilot.knowledge;
     assert.equal(disabled.ingestion.enabled, false);
     assert.equal(disabled.ingestion.ingestOnStart, false);
-    assert(disabled.sourceRegistry.definitions.every(source => source.enabled === false));
+    assert.deepEqual(disabled.sourceRegistry?.definitions || [], []);
   }
   assert.equal(bindings.resolve(coreProperties.copilot.runtimeRoleProfiles.PLATFORM.core, {}, {
     environmentCode: "unrelatedDeployment",
@@ -412,13 +470,7 @@ for (const profile of Object.values(
 }
 
 for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
-  const waste = loadRuntime(
-    "wasteServer",
-    environment,
-    environment === "kickoffLocal"
-      ? { CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: "200" }
-      : {},
-  );
+  const waste = loadRuntime("wasteServer", environment, {});
   assert.equal(
     require("../modules/circa.ewaste/config/properties").circaEWaste.journey
       .arrivalRadiusMetres.fallback,
@@ -430,22 +482,29 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     environment === "kickoffLocal" ? 200 : 50,
     "Only local development widens Circa arrival radius for easier device testing",
   );
+  assert.equal(
+    loadRuntime("wasteServer", environment, {
+      CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: "125",
+    }).circaEWaste.journey.arrivalRadiusMetres,
+    125,
+    "Explicit deployment input overrides both Local and application defaults",
+  );
   assert.deepEqual(
     waste.copilot.knowledge.sourceRegistry.definitions.map((source) => ({
       code: source.code,
       paths: source.paths,
     })),
-    [{ code: "circa-customer-guidance-v1", paths: ["v1/journey.md"] }],
-    "The selected customer knowledge source must not inherit another source or wildcard path",
+    [],
+    "Circa must not preselect or replace framework knowledge sources",
   );
   const commerce = loadRuntime("commerceServer", environment);
   const ingestion = waste.copilot.knowledge.ingestion;
   assert.equal(ingestion.ingestOnStart, environment === "kickoffLocal");
   assert.equal(ingestion.startup.environment, environment);
-  assert.equal(ingestion.startup.sourceProject, "circa.ewaste");
-  assert.equal(ingestion.startup.serviceId, "circa-customer-knowledge-indexer");
-  assert.equal(ingestion.startup.failOnRejectedFiles, true);
-  assert.equal(ingestion.startup.rejectionMessage, "CIRCA_CUSTOMER_KNOWLEDGE_REJECTED");
+  assert.equal(ingestion.startup.sourceProject, null);
+  assert.equal(ingestion.startup.serviceId, "copilot-knowledge-startup");
+  assert.equal(ingestion.startup.failOnRejectedFiles, false);
+  assert.equal(ingestion.startup.rejectionMessage, null);
   assert.equal(commerce.copilot?.knowledge?.ingestion, undefined);
   assert.deepEqual(
     commerce.fulfillmentCore.customerShipping.methods.map(

@@ -12,6 +12,15 @@ Change this package only when the requested behavior belongs to this boundary. P
 
 ## Verification
 
+Local Platform explicitly allocates 100,000 tokens per month to the `default`
+tenant/enterprise pool and bootstrap `admin`, restricted to Ollama and the
+conversation, structuredTool and evaluation profiles. The owner inherits UTC
+periods and warning thresholds. Other users and environments are not enrolled.
+Change these deployment values in the Local environment's PLATFORM role or use approved
+Copilot settings for supported adjustments; zero means no allowance, not unlimited.
+After rebuilding, refresh the Profile session and verify Usage and the explicit
+model check. An available allocation does not prove a working model or index.
+
 Runtime Configuration targets are independent: Platform hosts Telegram external
 identity; Engagement hosts the Communication-owned `telegramDelivery` schema.
 Local overrides only its credential reference/path via the existing selected
@@ -23,9 +32,10 @@ runtime/database scope.
 
 Platform and Waste keep thin late `postInit` delegates to Copilot's framework
 startup service. Do not copy source loops, service authorization or ingestion
-report handling into these entrypoints. Project modules select source scope and
-failure/log policy through `copilot.knowledge.ingestion.startup`; this environment
-opts Waste into `ingestOnStart`. Later layers can disable startup. Docker Waste
+report handling into these entrypoints. Source selection is governed runtime data;
+`copilot.knowledge.ingestion.startup` only controls optional narrowing and failure/log
+policy. This environment opts Waste into ingestion/retrieval and `ingestOnStart`,
+and enables nDynamo durable property persistence. Later layers can disable startup. Docker Waste
 does not inherit this Local opt-in. No startup indexing runs during static tests.
 
 After changes, run the nearest focused test or the Kickoff structure and documentation checks from the project root.

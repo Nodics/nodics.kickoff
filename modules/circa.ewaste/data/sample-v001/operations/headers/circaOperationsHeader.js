@@ -1,39 +1,59 @@
-/*
-    Nodics - Enterprice Micro-Services Management Framework
-
-    Copyright (c) 2026 Nodics All rights reserved.
-
-    This software is governed by the Nodics Source-Available Commercial License.
-    You may use, copy, modify, deploy, or distribute it only as permitted by the
-    root LICENSE file or a separate written agreement with Nodics.
-
+/* Nodics. Copyright (c) 2026. Governed by the root LICENSE. */
+"use strict";
+/**
+ * @module circa.ewaste/data/sample-v001/operations/headers/circaOperationsHeader.js
+ * @description Supplies the unified Circa customer demonstration dataset through canonical owner imports.
+ * @layer data
+ * @owner circa.ewaste
+ * @override Author a successor release for customer-specific sample data; preserve installed transactions.
  */
-
-'use strict';
-/** @module circa.ewaste/data/operations/circaOperationsHeader @description Supplies explicit local staff identities and Profile-owned operational scopes for Circa qualification. @layer data @owner circa.ewaste @override Replace sample identities and scope assignments in each customer project. */
 module.exports = {
-  "profile": {
-    "circaOperationalEmployeeData": {
-      "options": {
-        "enabled": true,
-        "schemaName": "employee",
-        "operation": "saveAll",
-        "dataFilePrefix": "circaOperationalEmployeeData"
+  profile: {
+    circaOutletAddressData: {
+      options: {
+        enabled: true,
+        schemaName: "address",
+        operation: "saveAll",
+        dataFilePrefix: "circaOutletAddressData",
       },
-      "query": {
-        "code": "$code"
-      }
+      query: {
+        code: "$code",
+      },
     },
-    "circaOperationalScopeData": {
-      "options": {
-        "enabled": true,
-        "schemaName": "principalScopeAssignment",
-        "operation": "saveAll",
-        "dataFilePrefix": "circaOperationalScopeData"
+    circaEnterpriseData: {
+      options: {
+        enabled: true,
+        schemaName: "enterprise",
+        operation: "saveAll",
+        tenants: ["default"],
+        dataFilePrefix: "circaEnterpriseData",
       },
-      "query": {
-        "code": "$code"
-      }
-    }
-  }
+      query: {
+        code: "$code",
+      },
+    },
+    circaOperationalEmployeeData: {
+      options: {
+        enabled: true,
+        schemaName: "employee",
+        operation: "saveAll",
+        dataFilePrefix: "circaOperationalEmployeeData",
+      },
+      query: {
+        code: "$code",
+        loginId: "$loginId",
+      },
+    },
+    circaOperationalScopeData: {
+      options: {
+        enabled: true,
+        schemaName: "principalScopeAssignment",
+        operation: "saveAll",
+        dataFilePrefix: "circaOperationalScopeData",
+      },
+      query: {
+        code: "$code",
+      },
+    },
+  },
 };

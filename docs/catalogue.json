@@ -1,6 +1,6 @@
 {
   "pack": "nodics.kickoff",
-  "version": "0.8.9",
+  "version": "0.8.12",
   "contractVersion": 1,
   "title": "Nodics Kickoff",
   "navigationSections": [
@@ -833,7 +833,7 @@
     }
   ],
   "publication": {
-    "contentPath": "core-v009",
+    "contentPath": "core-v012",
     "recordPrefix": "kickoffDocumentation",
     "codePrefix": "kickoffDocs",
     "sectionCode": "nodics-kickoff",
