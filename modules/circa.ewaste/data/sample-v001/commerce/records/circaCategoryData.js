@@ -10,7 +10,7 @@
 module.exports = {
   "record0": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaAssets",
@@ -19,7 +19,7 @@ module.exports = {
   },
   "record1": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaCoupons",
@@ -27,4 +27,3 @@ module.exports = {
     "status": "ACTIVE"
   }
 };
-

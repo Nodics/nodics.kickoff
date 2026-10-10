@@ -1,0 +1,28 @@
+{
+  "scope": "FICTIONAL_NATIVE_KICKOFF_LOCAL_ONLY",
+  "operationalAuthority": false,
+  "releaseCode": "circa.ewaste:circaDigitalOwnershipPolicies",
+  "destinationRole": "WASTE",
+  "assetCodes": [
+    "EWA-1047",
+    "EWA-1051",
+    "EWA-1052",
+    "EWA-1055",
+    "EWA-1092"
+  ],
+  "quantityPerAsset": 1,
+  "policyCodes": {
+    "transfer": "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
+    "reward": "CIRCA_LOCAL_DIGITAL_SALE_REWARD_V1",
+    "carbon": "CIRCA_LOCAL_DIGITAL_SALE_CARBON_NONE_V1"
+  },
+  "refund": "ORIGINAL_TRANSFER_REVERSAL_ONLY_BEFORE_ONWARD_TRANSFER",
+  "order": [
+    "EXPLICIT_POLICY_REFERENCE_IMPORT_WITH_CANONICAL_OWNER_GATES",
+    "GENUINE_WASTE_LISTING_AND_EXACT_DIGITAL_BINDING",
+    "ORIGINAL_SALE_RETAINS_THREE_CURRENT_POLICIES_BEFORE_RESERVATION",
+    "ORIGINAL_ORDER_CAPTURE_SELLER_PROCEEDS_AND_OWNERSHIP_DELIVERY",
+    "SEPARATE_ORIGINAL_ORDER_REFUND_APPROVAL_BEFORE_REVERSAL"
+  ],
+  "historicalSnapshots": "DO_NOT_REWRITE_OR_BACKFILL"
+}

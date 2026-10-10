@@ -10,7 +10,7 @@
 module.exports = {
   "record0": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaAssets-en",
@@ -22,7 +22,7 @@ module.exports = {
   },
   "record1": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaCoupons-en",
@@ -34,7 +34,7 @@ module.exports = {
   },
   "record2": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaAssets-ar",
@@ -46,7 +46,7 @@ module.exports = {
   },
   "record3": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaCoupons-ar",
@@ -57,4 +57,3 @@ module.exports = {
     "status": "READY"
   }
 };
-

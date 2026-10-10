@@ -1,0 +1,3982 @@
+{
+  "contractVersion": 1,
+  "code": "circa-native-reviewed",
+  "revision": 4,
+  "tenant": "default",
+  "profileCode": "circa",
+  "baselineCode": "circa",
+  "profileDigest": "b8fb40ace4a3552b1f1ddc0cfedf66699b5376796bd50b0100270f2c0d735213",
+  "stages": [
+    {
+      "code": "product:productPublicationWorkflow",
+      "descriptor": {
+        "code": "product:productPublicationWorkflow",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PROCESS",
+        "targetServer": "process",
+        "type": "DATA_RELEASE"
+      },
+      "server": "processServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "product",
+        "releaseCode": "product:productPublicationWorkflow",
+        "sectionCode": "productPublicationWorkflow",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "897b7abbc393b85091a832eae1b53ed52a2ec7b50ba94f574cbc24afaf9f87c8",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/records/process/productPublicationWorkflowDefinitionData.js"
+        ],
+        "installer": "PROCESS_DEFINITION",
+        "owningDomain": "product",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "PROCESS",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "pricing:pricingPublicationWorkflow",
+      "descriptor": {
+        "code": "pricing:pricingPublicationWorkflow",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PROCESS",
+        "targetServer": "process",
+        "type": "DATA_RELEASE"
+      },
+      "server": "processServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "pricing",
+        "releaseCode": "pricing:pricingPublicationWorkflow",
+        "sectionCode": "pricingPublicationWorkflow",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "31e905d7038433a1d6880186d8858d05ad148283dd2df2abbbfc8f09da5f0a00",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/records/process/pricingPublicationWorkflowDefinitionData.js"
+        ],
+        "installer": "PROCESS_DEFINITION",
+        "owningDomain": "pricing",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "PROCESS",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "tax:taxPublicationWorkflow",
+      "descriptor": {
+        "code": "tax:taxPublicationWorkflow",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PROCESS",
+        "targetServer": "process",
+        "type": "DATA_RELEASE"
+      },
+      "server": "processServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "tax",
+        "releaseCode": "tax:taxPublicationWorkflow",
+        "sectionCode": "taxPublicationWorkflow",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "266ea78d0910e26974b59ec020fa6d1f41e16af45143984ce7bdc9f908db82ff",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/records/process/taxPublicationWorkflowDefinitionData.js"
+        ],
+        "installer": "PROCESS_DEFINITION",
+        "owningDomain": "tax",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "PROCESS",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "promotion:promotionPublicationWorkflow",
+      "descriptor": {
+        "code": "promotion:promotionPublicationWorkflow",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PROCESS",
+        "targetServer": "process",
+        "type": "DATA_RELEASE"
+      },
+      "server": "processServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "promotion",
+        "releaseCode": "promotion:promotionPublicationWorkflow",
+        "sectionCode": "promotionPublicationWorkflow",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "da6e648f01e1884733ea63450584dc4fa9747a80cf8b5469153418b8c8811c9b",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/records/process/promotionPublicationWorkflowDefinitionData.js"
+        ],
+        "installer": "PROCESS_DEFINITION",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "PROCESS",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "inventory:inventoryPublicationWorkflow",
+      "descriptor": {
+        "code": "inventory:inventoryPublicationWorkflow",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PROCESS",
+        "targetServer": "process",
+        "type": "DATA_RELEASE"
+      },
+      "server": "processServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "inventory",
+        "releaseCode": "inventory:inventoryPublicationWorkflow",
+        "sectionCode": "inventoryPublicationWorkflow",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "626e73c42b98add683b3487b3c9d45ddd1bf3ba81b263ab9a44fedddb90990f9",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/records/process/inventoryPublicationWorkflowDefinitionData.js"
+        ],
+        "installer": "PROCESS_DEFINITION",
+        "owningDomain": "inventory",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "PROCESS",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "profile:commerceSetupPublisherRole",
+      "descriptor": {
+        "code": "profile:commerceSetupPublisherRole",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "profile",
+        "releaseCode": "profile:commerceSetupPublisherRole",
+        "sectionCode": "commerceSetupPublisherRole",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "a7cdf108fc1abcca049f0688631c4eaeeda21804a0bc3a4ca1c0fa65b210107d",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/groups/commerceSetupPublisherHeader.js",
+          "core-v001/records/groups/commerceSetupPublisherGroupData.js"
+        ],
+        "owningDomain": "profile",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "profile:commercePublicationStarterRole",
+      "descriptor": {
+        "code": "profile:commercePublicationStarterRole",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "profile",
+        "releaseCode": "profile:commercePublicationStarterRole",
+        "sectionCode": "commercePublicationStarterRole",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "5111b1e573bf0ebbfae326147543865d9b04e841ef7c150ee48139c1ef732aa9",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/groups/commercePublicationStarterHeader.js",
+          "core-v001/records/groups/commercePublicationStarterGroupData.js"
+        ],
+        "owningDomain": "profile",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "profile:commerceCouponIssuerRole",
+      "descriptor": {
+        "code": "profile:commerceCouponIssuerRole",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "profile",
+        "releaseCode": "profile:commerceCouponIssuerRole",
+        "sectionCode": "commerceCouponIssuerRole",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "78523af3e2d7a1bb0ab4a7afd9959e7034de742ff615c761de93b28337ddc747",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/groups/commerceCouponIssuerHeader.js",
+          "core-v001/records/groups/commerceCouponIssuerGroupData.js"
+        ],
+        "owningDomain": "profile",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "profile:commerceAxisRefundReviewerRole",
+      "descriptor": {
+        "code": "profile:commerceAxisRefundReviewerRole",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "profile",
+        "releaseCode": "profile:commerceAxisRefundReviewerRole",
+        "sectionCode": "commerceAxisRefundReviewerRole",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "65b5da5dbe3c7a9a68fb7491b4a36590c6366c3df1fc075acb1363965b1aa3b7",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/groups/commerceAxisRefundReviewerHeader.js",
+          "core-v001/records/groups/commerceAxisRefundReviewerGroupData.js"
+        ],
+        "owningDomain": "profile",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaCommerceStaffAssignments",
+      "descriptor": {
+        "code": "circa.ewaste:circaCommerceStaffAssignments",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaCommerceStaffAssignments",
+        "sectionCode": "circaCommerceStaffAssignments",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/staff-access/headers/circaCommerceStaffAssignmentHeader.js",
+          "sample-v001/staff-access/records/circaCommerceStaffAssignmentData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaMerchantOutletAccess",
+      "descriptor": {
+        "code": "circa.ewaste:circaMerchantOutletAccess",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaMerchantOutletAccess",
+        "sectionCode": "circaMerchantOutletAccess",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "60f67905843db3d6d74a678957fecba5c74ac679d45f667d3a7fc3cdd80a524e",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/outlet-access/headers/circaOutletAccessHeader.js",
+          "sample-v001/outlet-access/records/circaMerchantOutletScopeData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaDigitalOwnershipPolicies",
+      "descriptor": {
+        "code": "circa.ewaste:circaDigitalOwnershipPolicies",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaDigitalOwnershipPolicies",
+        "sectionCode": "circaDigitalOwnershipPolicies",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "1ce359de0f8469f79854a71597315fa375d0d0d6f9c75fd51aac90628f5c06ae",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/asset-policy/headers/circaDigitalOwnershipPolicyHeader.js",
+          "sample-v001/operations/asset-policy/records/circaDigitalCarbonPolicyData.js",
+          "sample-v001/operations/asset-policy/records/circaDigitalRewardPolicyData.js",
+          "sample-v001/operations/asset-policy/records/circaDigitalTransferPolicyData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaAssetClassification",
+      "descriptor": {
+        "code": "circa.ewaste:circaAssetClassification",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaAssetClassification",
+        "sectionCode": "circaAssetClassification",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "877d57fb3ce2e235ea8979162cba7868f6275fb2cfc6631ac2174f19d0bf7fc2",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/asset-classification/headers/circaAssetClassificationHeader.js",
+          "sample-v001/asset-classification/records/circaAssetClassificationLocalizationData.js"
+        ],
+        "owningDomain": "product",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "COMMERCE_STAGED",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaCatalogueCurrentPublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaCatalogueCurrentPublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_ONLINE",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-product-CIRCA_ASSET_EWA-1047-classification-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_ASSET_EWA-1047",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1047-classification-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 1
+              },
+              "rootCode": "CIRCA_ASSET_EWA-1047",
+              "rootType": "product",
+              "sourceVersion": "2"
+            },
+            {
+              "code": "circa-product-CIRCA_ASSET_EWA-1051-classification-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_ASSET_EWA-1051",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1051-classification-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 1
+              },
+              "rootCode": "CIRCA_ASSET_EWA-1051",
+              "rootType": "product",
+              "sourceVersion": "2"
+            },
+            {
+              "code": "circa-product-CIRCA_ASSET_EWA-1052-classification-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_ASSET_EWA-1052",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1052-classification-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 1
+              },
+              "rootCode": "CIRCA_ASSET_EWA-1052",
+              "rootType": "product",
+              "sourceVersion": "2"
+            },
+            {
+              "code": "circa-product-CIRCA_ASSET_EWA-1055-classification-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_ASSET_EWA-1055",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1055-classification-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 1
+              },
+              "rootCode": "CIRCA_ASSET_EWA-1055",
+              "rootType": "product",
+              "sourceVersion": "2"
+            },
+            {
+              "code": "circa-product-CIRCA_ASSET_EWA-1092-classification-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_ASSET_EWA-1092",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1092-classification-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 1
+              },
+              "rootCode": "CIRCA_ASSET_EWA-1092",
+              "rootType": "product",
+              "sourceVersion": "2"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_CPN-GRN-30-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_CPN-GRN-30",
+                "publicationCode": "circa-product-CIRCA_COUPON_CPN-GRN-30-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_CPN-GRN-30",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_CPN-ECO-15-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_CPN-ECO-15",
+                "publicationCode": "circa-product-CIRCA_COUPON_CPN-ECO-15-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_CPN-ECO-15",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_CPN-SVC-50-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_CPN-SVC-50",
+                "publicationCode": "circa-product-CIRCA_COUPON_CPN-SVC-50-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_CPN-SVC-50",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C01-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C01",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C01-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C01",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C02-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C02",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C02-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C02",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C03-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C03",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C03-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C03",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C04-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C04",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C04-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C04",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C05-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C05",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C05-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C05",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C06-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C06",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C06-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C06",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C07-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C07",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C07-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C07",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C08-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C08",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C08-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C08",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C09-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C09",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C09-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C09",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C10-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C10",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C10-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C10",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C11-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C11",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C11-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C11",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-C12-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-C12",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-C12-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-C12",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B01-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B01",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B01-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B01",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B02-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B02",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B02-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B02",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B03-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B03",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B03-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B03",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B04-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B04",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B04-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B04",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B05-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B05",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B05-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B05",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B06-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B06",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B06-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B06",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B07-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B07",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B07-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B07",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B08-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B08",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B08-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B08",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B09-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B09",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B09-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B09",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B10-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B10",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B10-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B10",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B11-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B11",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B11-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B11",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-B12-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-B12",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-B12-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-B12",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A01-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A01",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A01-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A01",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A02-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A02",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A02-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A02",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A03-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A03",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A03-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A03",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A04-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A04",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A04-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A04",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A05-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A05",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A05-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A05",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A06-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A06",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A06-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A06",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A07-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A07",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A07-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A07",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A08-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A08",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A08-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A08",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A09-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A09",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A09-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A09",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A10-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A10",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A10-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A10",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-product-CIRCA_COUPON_GP-A11-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_COUPON_GP-A11",
+                "publicationCode": "circa-product-CIRCA_COUPON_GP-A11-v001",
+                "storeCode": "circaMainStore",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_COUPON_GP-A11",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-pricing-circaPointsPriceBook-v001",
+              "domain": "pricing",
+              "input": {
+                "publicationCode": "circa-pricing-circaPointsPriceBook-v001",
+                "references": [
+                  {
+                    "code": "circaPointsPriceBook",
+                    "schema": "priceBook",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_ASSET_EWA-1047_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_ASSET_EWA-1051_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_ASSET_EWA-1052_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_ASSET_EWA-1055_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_ASSET_EWA-1092_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_CPN-ECO-15_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_CPN-GRN-30_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_CPN-SVC-50_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A01_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A02_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A03_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A04_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A05_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A06_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A07_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A08_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A09_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A10_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-A11_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B01_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B02_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B03_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B04_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B05_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B06_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B07_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B08_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B09_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B10_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B11_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-B12_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C01_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C02_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C03_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C04_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C05_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C06_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C07_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C08_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C09_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C10_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C11_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_COUPON_GP-C12_POINTS",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaPointsPriceBook",
+                "rootType": "priceBook"
+              },
+              "rootCode": "circaPointsPriceBook",
+              "rootType": "priceBook",
+              "sourceVersion": "eef7a4c55c950ae6271e49d93d66d7313304b84a9bdf80f883394a312e7646c0"
+            },
+            {
+              "code": "circa-inventory-circaDigitalRegistry-v001",
+              "domain": "inventory",
+              "input": {
+                "publicationCode": "circa-inventory-circaDigitalRegistry-v001",
+                "references": [
+                  {
+                    "code": "circaDigitalRegistry",
+                    "schema": "warehouse",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaDigitalRegistry",
+                "rootType": "warehouse"
+              },
+              "rootCode": "circaDigitalRegistry",
+              "rootType": "warehouse",
+              "sourceVersion": "758c1104a1788dc95f2d5b672b9ab28d72066b4e4a7e0bd255f464a9e42e97bf"
+            },
+            {
+              "code": "circa-tax-circaSamplePointsPolicy-v001",
+              "domain": "tax",
+              "input": {
+                "publicationCode": "circa-tax-circaSamplePointsPolicy-v001",
+                "references": [
+                  {
+                    "code": "circaSamplePointsPolicy",
+                    "schema": "taxPolicy",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaSamplePointsPolicy",
+                "rootType": "taxPolicy"
+              },
+              "rootCode": "circaSamplePointsPolicy",
+              "rootType": "taxPolicy",
+              "sourceVersion": "bc234b7a629b2799c0a55e3d4857a6f37de490b2783790b39ee09950778953ae"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "GREENPERKS_ONLINE",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaGreenPerksPublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaGreenPerksPublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C01_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C01_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C01_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "f242b0b606e3a8e0c58f22069bcf1ad4911768eba69f77095af79ab66f605250"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C02_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C02_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C02_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "da884296e94b209bc8771da21b258d3056f52c46be7d279b4156e52344de9a11"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C03_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C03_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C03_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "63cd3d81a50d3db7c74da5b3013e68574cb2d3862db922120328e4ef56599652"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C04_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C04_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C04_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "3a16adedc2f520f5428b4b284e994bd233728aa10c7766857ac3b4d1f9bff2d5"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C05_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C05_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C05_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "1e88611824dcf601273150db9b34f23ab2353cc08aa89e3a61c1e8c87abce49f"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C06_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C06_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C06_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "bb85a006df5168a7031b33f277d3b6966db5077367887e25e5f391490b01af50"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C07_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C07_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C07_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "d7ea9da02ec5947ce3c6ab9935ea58b875043dbb6fac515fda38eecd1f98f1d5"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C08_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C08_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C08_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "98a63751dff43543112e8387e6928890cd0a1d5c2c40f3dd9d295033b15678c9"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C09_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C09_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C09_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "d61bccd226b0ad9be4f08f576810d8e59390fd158725cd828932e91952301873"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C10_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C10_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C10_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "1a1094c3010e5afbb0a06ca4c5381236cca6d54830fbbaafba80353d534fff08"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C11_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C11_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C11_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "f6e8ba675384ead1908d7e407074c63bd31c2c71a7beafe6a7594422819eb0bb"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-C12_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C12_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-C12_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "30f6e15fc6e7c7b0e14645f4468fe764763a1f4175f403668acd1c1cf7e42faf"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B01_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B01_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B01_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "da29e240e488c9ad70f6e6e113fc54855ef9f82f031de8be33e7c008c7c4cdd2"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B02_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B02_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B02_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "7536a4aa9cd0bd52d2899fbf028e7130eec790799224ee6c2714f419894042f2"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B03_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B03_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B03_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "72df9a9e9123b72421c68f10e1ffa3f009c4ac5a80e2eb611274bb2228af454a"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B04_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B04_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B04_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "39ed6b6d264123da72fffb1153e2cedc6ce943ae5c6843ab00ec06a5dbc2b780"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B05_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B05_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B05_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "8e6d16767acc45372828b686174dcacc4b84fab75fad84c8c86e482d071c0a25"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B06_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B06_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B06_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "13b36ee05e0fa442c24e0a031fad4baa4faa05905f6e5d5b3c2d517420e44ef6"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B07_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B07_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B07_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "a25fe58128a1a01db53ec18aa27650c21200e5d640be45326e0c55f494e5287e"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B08_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B08_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B08_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "dcb74a568a4eeea6eacb9dfde2449bddbacafcfd3723c40c4b8d9be11d5fe8e9"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B09_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B09_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B09_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "64fb3ede513951f66f453abfb23a59982c76bc229e23bee54c55b478a7fba08b"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B10_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B10_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B10_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "13b142763231b40d78d3310c09a4a21829c623ba60bda08920fe7a8b8f3b8cca"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B11_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B11_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B11_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "2efdfaaef0a285ffda6b7ed6dd4ae002f8a5b41376322ba1360c6de4554d2658"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-B12_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B12_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-B12_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "b2d64214676f6c25e0d050bc51abd4298800f139ef104e6e40d94d57495291cf"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A01_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A01_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A01_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "423f10363d4919c2ae17ca9478951d11f0f5ae7aa3d07433e4242714fd6954ac"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A02_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A02_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A02_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "687114349961e29d1fcf3985f4922bb3a6d26f4c2775fc9097e4d4572182f3e8"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A03_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A03_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A03_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "6dbc0dde793abd474ababe292df0d11f1a0bd51f3fa726ed90f620a313202f0f"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A04_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A04_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A04_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "ed13782bb4ffcd80c71d8eeda196a2a938c913ab1f16711c460a333d5ffb02e5"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A05_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A05_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A05_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "852874b6c6380142a3bd52e0b826534434e5950a699dd1cb0c08f16bac5341d1"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A06_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A06_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A06_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "8e74c096a448da11bfecf14a6647800fa3414f7ceecb13bdb28d9bab8bc6cb57"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A07_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A07_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A07_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "fb2880fca0d1d1a701f1de8f64c3b11a89e34efc603cd2cd50c36dfa3b8b7f7c"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A08_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A08_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A08_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "8b5acdf1190033605c94b00c94edbb28a7e65b41574841935e4bc534d13d0a9c"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A09_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A09_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A09_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "9b3b0768050d8551eedab14083692842796bc011673d53613cc96d387df678ce"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A10_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A10_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A10_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "bf807b9e6ed9be7bbb799b7ea9de65fc45b47d990f4c094a9022e804ac5638b2"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_GP-A11_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A11_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_GP-A11_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "78a2fec4a815f1fdc101225b359833b30682a65232252b5c474698dc600a2891"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "GREENPERKS_RETAIL",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRenewWorksPublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaRenewWorksPublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-promotion-CIRCA_COUPON_CPN-GRN-30_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-GRN-30_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "5935b5252b3aed50cc878a37f53c5a3634b02ecc8ddf16c402ea2b9338f81f71"
+            },
+            {
+              "code": "circa-promotion-CIRCA_COUPON_CPN-SVC-50_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-SVC-50_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "8f58ba0253ff54d9653e8f9b72ea6936feca6018425fd11cef36706f97653569"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLoopCyclePublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaLoopCyclePublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-promotion-CIRCA_COUPON_CPN-ECO-15_PROMO-v001",
+              "domain": "promotion",
+              "input": {
+                "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-ECO-15_PROMO-v001",
+                "references": [
+                  {
+                    "code": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+                    "schema": "promotion",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+                "rootType": "promotion"
+              },
+              "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+              "rootType": "promotion",
+              "sourceVersion": "fd4a7a9e76584c93acbdba88eb3161f7f7a5aeb00fc2848d7e2706d968442698"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "LOOPCYCLE_RECYCLING",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLocalDemoCreditRole",
+      "descriptor": {
+        "code": "circa.ewaste:circaLocalDemoCreditRole",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLocalDemoCreditRole",
+        "sectionCode": "circaLocalDemoCreditRole",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "a32e02a6e8cf8a3eefe11a5588d2f8a255a595b3514b763b6cb4c6a05144e716",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/credit-role/headers/circaLocalDemoCreditRoleHeader.js",
+          "sample-v001/credit-role/records/circaLocalDemoCreditGroupData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLocalDemoCreditStaffAssignment",
+      "descriptor": {
+        "code": "circa.ewaste:circaLocalDemoCreditStaffAssignment",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLocalDemoCreditStaffAssignment",
+        "sectionCode": "circaLocalDemoCreditStaffAssignment",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "520858cf076946600d4dfa7a070debf0c94555d9929b3122f6c40c2fd5cc0c43",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/credit-staff/headers/circaLocalDemoCreditStaffHeader.js",
+          "sample-v001/credit-staff/records/circaLocalDemoCreditStaffData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLocalOpeningRole",
+      "descriptor": {
+        "code": "circa.ewaste:circaLocalOpeningRole",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLocalOpeningRole",
+        "sectionCode": "circaLocalOpeningRole",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "a3956d182d90a7c0117523039cc85243c5120f045c15e63ccca65797920e7b21",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/opening-role/headers/circaLocalOpeningRoleHeader.js",
+          "sample-v001/opening-role/records/circaLocalOpeningGroupData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLocalOpeningStaffAssignments",
+      "descriptor": {
+        "code": "circa.ewaste:circaLocalOpeningStaffAssignments",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLocalOpeningStaffAssignments",
+        "sectionCode": "circaLocalOpeningStaffAssignments",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "d5ffccbc0df95a058fcc77fdbae3ab2e39fda83532e9f6756c68debda39ea162",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/opening-staff/headers/circaLocalOpeningStaffHeader.js",
+          "sample-v001/opening-staff/records/circaLocalOpeningStaffData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaGreenPerksOutletCommerce",
+      "descriptor": {
+        "code": "circa.ewaste:circaGreenPerksOutletCommerce",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksOutletCommerce",
+        "sectionCode": "circaGreenPerksOutletCommerce",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "7475053a219885c2364ceded06d2415864a7af5411eca0ad43594cfdaa07a3a6",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/merchant-outlets/greenperks/commerce/headers/circaLocalOutletHeader.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletPriceBookData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletPriceRowData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductLocalizationData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductVariantData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductVariantLocalizationData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletTaxPolicyData.js",
+          "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletWarehouseData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "COMMERCE_STAGED",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRenewWorksOutletCommerce",
+      "descriptor": {
+        "code": "circa.ewaste:circaRenewWorksOutletCommerce",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRenewWorksOutletCommerce",
+        "sectionCode": "circaRenewWorksOutletCommerce",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "6b149e3b2d89f2e4a2a0e1a2c36d408bdac76272b2a7d82ac585f243c434a090",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/merchant-outlets/renewworks/commerce/headers/circaLocalOutletHeader.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletPriceBookData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletPriceRowData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductLocalizationData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductVariantData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductVariantLocalizationData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletTaxPolicyData.js",
+          "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletWarehouseData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "COMMERCE_STAGED",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLoopCycleOutletCommerce",
+      "descriptor": {
+        "code": "circa.ewaste:circaLoopCycleOutletCommerce",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLoopCycleOutletCommerce",
+        "sectionCode": "circaLoopCycleOutletCommerce",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "85181f49fcd90743951c20a128d03e13c3a6c678f725704ed45c7c40c9b4e329",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/merchant-outlets/loopcycle/commerce/headers/circaLocalOutletHeader.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletPriceBookData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletPriceRowData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductLocalizationData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductVariantData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductVariantLocalizationData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletTaxPolicyData.js",
+          "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletWarehouseData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "COMMERCE_STAGED",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLocalDemoCredit",
+      "descriptor": {
+        "code": "circa.ewaste:circaLocalDemoCredit",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_ONLINE",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "LOYALTY",
+        "targetServer": "loyaltyServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "loyaltyServer",
+      "enterpriseCode": "GREENPERKS_ONLINE",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLocalDemoCredit",
+        "sectionCode": "circaLocalDemoCredit",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "991a3f063caeaef83ada14a426c824650bdc5eef9c9cb43a5872ef2545e1c1d8",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/loyalty-credit/records/loyaltyCredits.json"
+        ],
+        "installer": "LOYALTY_SAMPLE_CREDITS",
+        "owningDomain": "loyaltyWallet",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "LOYALTY",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaGreenPerksOutletPublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaGreenPerksOutletPublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-local-outlet-product-CIRCA_LOCAL_CAFE_GOODS-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_LOCAL_CAFE_GOODS",
+                "publicationCode": "circa-local-outlet-product-CIRCA_LOCAL_CAFE_GOODS-v001",
+                "storeCode": "greenperks-cafe",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_LOCAL_CAFE_GOODS",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-local-outlet-product-CIRCA_LOCAL_BISTRO_GOODS-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_LOCAL_BISTRO_GOODS",
+                "publicationCode": "circa-local-outlet-product-CIRCA_LOCAL_BISTRO_GOODS-v001",
+                "storeCode": "greenperks-bistro",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_LOCAL_BISTRO_GOODS",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-local-outlet-priceBook-circaLocalGreenPerksAed-v001",
+              "domain": "pricing",
+              "input": {
+                "publicationCode": "circa-local-outlet-priceBook-circaLocalGreenPerksAed-v001",
+                "references": [
+                  {
+                    "code": "circaLocalGreenPerksAed",
+                    "schema": "priceBook",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_LOCAL_BISTRO_GOODS_AED",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_LOCAL_CAFE_GOODS_AED",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalGreenPerksAed",
+                "rootType": "priceBook"
+              },
+              "rootCode": "circaLocalGreenPerksAed",
+              "rootType": "priceBook",
+              "sourceVersion": "4da3f8af0d29d05d6645e9ebecd334837d9b1b84c7f7bfe9907f79e2eae6e302"
+            },
+            {
+              "code": "circa-local-outlet-taxPolicy-circaLocalGreenPerksZeroTax-v001",
+              "domain": "tax",
+              "input": {
+                "publicationCode": "circa-local-outlet-taxPolicy-circaLocalGreenPerksZeroTax-v001",
+                "references": [
+                  {
+                    "code": "circaLocalGreenPerksZeroTax",
+                    "schema": "taxPolicy",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalGreenPerksZeroTax",
+                "rootType": "taxPolicy"
+              },
+              "rootCode": "circaLocalGreenPerksZeroTax",
+              "rootType": "taxPolicy",
+              "sourceVersion": "0d94e6e452c0cd93f64f845797f0c05c1621ee20aab13c2e443043e82cb6854e"
+            },
+            {
+              "code": "circa-local-outlet-warehouse-circaLocalCafeWarehouse-v001",
+              "domain": "inventory",
+              "input": {
+                "publicationCode": "circa-local-outlet-warehouse-circaLocalCafeWarehouse-v001",
+                "references": [
+                  {
+                    "code": "circaLocalCafeWarehouse",
+                    "schema": "warehouse",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalCafeWarehouse",
+                "rootType": "warehouse"
+              },
+              "rootCode": "circaLocalCafeWarehouse",
+              "rootType": "warehouse",
+              "sourceVersion": "2caedd5a271a12f2291d4d94d82bfd8b17f5575f3735e7b8fd87771a55a46070"
+            },
+            {
+              "code": "circa-local-outlet-warehouse-circaLocalBistroWarehouse-v001",
+              "domain": "inventory",
+              "input": {
+                "publicationCode": "circa-local-outlet-warehouse-circaLocalBistroWarehouse-v001",
+                "references": [
+                  {
+                    "code": "circaLocalBistroWarehouse",
+                    "schema": "warehouse",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalBistroWarehouse",
+                "rootType": "warehouse"
+              },
+              "rootCode": "circaLocalBistroWarehouse",
+              "rootType": "warehouse",
+              "sourceVersion": "e75da78697d6b9a9a92709ec96f6b7367f8715d583addfe57722f396c8a7d3e6"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "GREENPERKS_RETAIL",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaGreenPerksOutletOpening",
+      "descriptor": {
+        "code": "circa.ewaste:circaGreenPerksOutletOpening",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "GREENPERKS_RETAIL",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksOutletOpening",
+        "sectionCode": "circaGreenPerksOutletOpening",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "d0d39b08cbee380e596e764e6f6fdee1f02f911608ee8bcbcff927f3f6d40f78",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/merchant-outlets/greenperks/operations/records/inventoryOpening.json"
+        ],
+        "installer": "INVENTORY_OPENING_RECEIPTS",
+        "owningDomain": "inventory",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRenewWorksOutletPublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaRenewWorksOutletPublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-local-outlet-product-CIRCA_LOCAL_DEVICE_CARE_GOODS-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_LOCAL_DEVICE_CARE_GOODS",
+                "publicationCode": "circa-local-outlet-product-CIRCA_LOCAL_DEVICE_CARE_GOODS-v001",
+                "storeCode": "renewworks-repair",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_LOCAL_DEVICE_CARE_GOODS",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-local-outlet-priceBook-circaLocalRenewWorksAed-v001",
+              "domain": "pricing",
+              "input": {
+                "publicationCode": "circa-local-outlet-priceBook-circaLocalRenewWorksAed-v001",
+                "references": [
+                  {
+                    "code": "circaLocalRenewWorksAed",
+                    "schema": "priceBook",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_LOCAL_DEVICE_CARE_GOODS_AED",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalRenewWorksAed",
+                "rootType": "priceBook"
+              },
+              "rootCode": "circaLocalRenewWorksAed",
+              "rootType": "priceBook",
+              "sourceVersion": "6a3927a8dbf798e84e6cdb5aaa6fc5338d530404c8b20e8294066cef8e3867e3"
+            },
+            {
+              "code": "circa-local-outlet-taxPolicy-circaLocalRenewWorksZeroTax-v001",
+              "domain": "tax",
+              "input": {
+                "publicationCode": "circa-local-outlet-taxPolicy-circaLocalRenewWorksZeroTax-v001",
+                "references": [
+                  {
+                    "code": "circaLocalRenewWorksZeroTax",
+                    "schema": "taxPolicy",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalRenewWorksZeroTax",
+                "rootType": "taxPolicy"
+              },
+              "rootCode": "circaLocalRenewWorksZeroTax",
+              "rootType": "taxPolicy",
+              "sourceVersion": "b762f6b2e286e0b858d713b82e0481532a9a4ea380e7df99dafc232af9e624e2"
+            },
+            {
+              "code": "circa-local-outlet-warehouse-circaLocalRenewWorksWarehouse-v001",
+              "domain": "inventory",
+              "input": {
+                "publicationCode": "circa-local-outlet-warehouse-circaLocalRenewWorksWarehouse-v001",
+                "references": [
+                  {
+                    "code": "circaLocalRenewWorksWarehouse",
+                    "schema": "warehouse",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalRenewWorksWarehouse",
+                "rootType": "warehouse"
+              },
+              "rootCode": "circaLocalRenewWorksWarehouse",
+              "rootType": "warehouse",
+              "sourceVersion": "f70c03029d7c89de7c5c16bb85ecfe436c9fc1b2d68c56f4a8e457156962bb08"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRenewWorksOutletOpening",
+      "descriptor": {
+        "code": "circa.ewaste:circaRenewWorksOutletOpening",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRenewWorksOutletOpening",
+        "sectionCode": "circaRenewWorksOutletOpening",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "24f97e85edc297eb6d3f47da118619b3c6c2c7abe3867e009d76d6f27d4e156c",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/merchant-outlets/renewworks/operations/records/inventoryOpening.json"
+        ],
+        "installer": "INVENTORY_OPENING_RECEIPTS",
+        "owningDomain": "inventory",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLoopCycleOutletPublicationPlan",
+      "descriptor": {
+        "code": "circa.ewaste:circaLoopCycleOutletPublicationPlan",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "phase": "AFTER_PUBLICATION",
+        "publicationPlan": {
+          "contractVersion": 1,
+          "items": [
+            {
+              "code": "circa-local-outlet-product-CIRCA_LOCAL_RECYCLED_ACCESSORIES-v001",
+              "domain": "product",
+              "input": {
+                "productCode": "CIRCA_LOCAL_RECYCLED_ACCESSORIES",
+                "publicationCode": "circa-local-outlet-product-CIRCA_LOCAL_RECYCLED_ACCESSORIES-v001",
+                "storeCode": "loopcycle-accessories",
+                "versionId": 0
+              },
+              "rootCode": "CIRCA_LOCAL_RECYCLED_ACCESSORIES",
+              "rootType": "product",
+              "sourceVersion": "1"
+            },
+            {
+              "code": "circa-local-outlet-priceBook-circaLocalLoopCycleAed-v001",
+              "domain": "pricing",
+              "input": {
+                "publicationCode": "circa-local-outlet-priceBook-circaLocalLoopCycleAed-v001",
+                "references": [
+                  {
+                    "code": "circaLocalLoopCycleAed",
+                    "schema": "priceBook",
+                    "versionId": 0
+                  },
+                  {
+                    "code": "CIRCA_LOCAL_RECYCLED_ACCESSORIES_AED",
+                    "schema": "priceRow",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalLoopCycleAed",
+                "rootType": "priceBook"
+              },
+              "rootCode": "circaLocalLoopCycleAed",
+              "rootType": "priceBook",
+              "sourceVersion": "c88fd7a9469c1c84f81b85a853e095b0e1ee6cc9518deffb4f53228020438738"
+            },
+            {
+              "code": "circa-local-outlet-taxPolicy-circaLocalLoopCycleZeroTax-v001",
+              "domain": "tax",
+              "input": {
+                "publicationCode": "circa-local-outlet-taxPolicy-circaLocalLoopCycleZeroTax-v001",
+                "references": [
+                  {
+                    "code": "circaLocalLoopCycleZeroTax",
+                    "schema": "taxPolicy",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalLoopCycleZeroTax",
+                "rootType": "taxPolicy"
+              },
+              "rootCode": "circaLocalLoopCycleZeroTax",
+              "rootType": "taxPolicy",
+              "sourceVersion": "a0d014bbef9f53870d86c16f541269316ed112db2a89ca521e0b8095c8a5c85b"
+            },
+            {
+              "code": "circa-local-outlet-warehouse-circaLocalLoopCycleWarehouse-v001",
+              "domain": "inventory",
+              "input": {
+                "publicationCode": "circa-local-outlet-warehouse-circaLocalLoopCycleWarehouse-v001",
+                "references": [
+                  {
+                    "code": "circaLocalLoopCycleWarehouse",
+                    "schema": "warehouse",
+                    "versionId": 0
+                  }
+                ],
+                "rootCode": "circaLocalLoopCycleWarehouse",
+                "rootType": "warehouse"
+              },
+              "rootCode": "circaLocalLoopCycleWarehouse",
+              "rootType": "warehouse",
+              "sourceVersion": "050ce2c186a5fcf519b876e6dece69b3ff15a9949a59ae6460a530b98c42dce7"
+            }
+          ]
+        },
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "GOVERNED_PUBLICATIONS"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "LOOPCYCLE_RECYCLING",
+      "online": {
+        "server": "commerceServer",
+        "runtimeRole": "COMMERCE"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLoopCycleOutletOpening",
+      "descriptor": {
+        "code": "circa.ewaste:circaLoopCycleOutletOpening",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "LOOPCYCLE_RECYCLING",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLoopCycleOutletOpening",
+        "sectionCode": "circaLoopCycleOutletOpening",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "151a28920d6f4d5ab124e9ca35134cbd98364e4353949fa711e5d2145b0075d5",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/merchant-outlets/loopcycle/operations/records/inventoryOpening.json"
+        ],
+        "installer": "INVENTORY_OPENING_RECEIPTS",
+        "owningDomain": "inventory",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "media:mediaPublicationWorkflow",
+      "descriptor": {
+        "code": "media:mediaPublicationWorkflow",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PROCESS",
+        "targetServer": "process",
+        "type": "DATA_RELEASE"
+      },
+      "server": "processServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "media",
+        "releaseCode": "media:mediaPublicationWorkflow",
+        "sectionCode": "mediaPublicationWorkflow",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "1aed5ac7d9bac936f8fb42feaccc33d2b0d84d8fad90c336d70eb27fffb127e8",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/records/process/mediaPublicationWorkflowDefinitionData.js"
+        ],
+        "installer": "PROCESS_DEFINITION",
+        "owningDomain": "media",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "PROCESS",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "locationMap:init-v001",
+      "descriptor": {
+        "code": "locationMap:init-v001",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "LOCATION",
+        "targetServer": "locationServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "locationServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "locationMap",
+        "releaseCode": "locationMap:init-v001",
+        "sectionCode": "init-v001",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "3c793d0872377fc5ee2f360f37b65a2c3077789606b88d66e9806de4ca5c7b99",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/location/defaultLocationMapProviderConfigurationHeader.js",
+          "init-v001/records/location/defaultLocationMapProviderConfigurationData.js"
+        ],
+        "owningDomain": "location",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "locationMap:core-map-reference",
+      "descriptor": {
+        "code": "locationMap:core-map-reference",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "LOCATION",
+        "targetServer": "locationServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "locationServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "locationMap",
+        "releaseCode": "locationMap:core-map-reference",
+        "sectionCode": "core-map-reference",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "4500df729914483e688dbda2b2f872ab756e355b9d0354388b74c4475811776f",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/location/locationMapConfigurationHeader.js",
+          "core-v001/records/backoffice/locationMapBackofficeCapabilityData.js",
+          "core-v001/records/location/locationMapControlPresetData.js",
+          "core-v001/records/location/locationMapProviderData.js",
+          "core-v001/records/location/locationMapStylePresetData.js",
+          "core-v001/records/location/locationMapUsageData.js"
+        ],
+        "owningDomain": "location",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "wasteMaterial:core-v001",
+      "descriptor": {
+        "code": "wasteMaterial:core-v001",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteMaterial",
+        "releaseCode": "wasteMaterial:core-v001",
+        "sectionCode": "core-v001",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "f1910f0e90300be6a8c5c7630a6778277e3671c9e16ed697f73c4a342c40aca3",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/material/wasteMaterialCoreHeader.js",
+          "core-v001/records/material/wasteCategoryCoreData.js",
+          "core-v001/records/material/wasteFamilyCoreData.js",
+          "core-v001/records/material/wasteItemTypeCoreData.js",
+          "core-v001/records/material/wasteMaterialTypeCoreData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "eWaste:core-reference",
+      "descriptor": {
+        "code": "eWaste:core-reference",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "eWaste",
+        "releaseCode": "eWaste:core-reference",
+        "sectionCode": "core-reference",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "cbc9e3e59bc31b72d1d70337b8e6481142026fd572addf695870d8b199ccfedf",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/waste/eWastePresetHeader.js",
+          "core-v001/records/waste/eWasteAcceptanceRuleData.js",
+          "core-v001/records/waste/eWasteAssetCreationPolicyData.js",
+          "core-v001/records/waste/eWasteAssetTransferPolicyData.js",
+          "core-v001/records/waste/eWasteAssetTypeData.js",
+          "core-v001/records/waste/eWasteCarbonSettlementPolicyData.js",
+          "core-v001/records/waste/eWasteCategoryData.js",
+          "core-v001/records/waste/eWasteCollectionPointTypeData.js",
+          "core-v001/records/waste/eWasteCollectionPresetData.js",
+          "core-v001/records/waste/eWasteCouponRedemptionSettlementPolicyData.js",
+          "core-v001/records/waste/eWasteEvidencePolicyData.js",
+          "core-v001/records/waste/eWasteFamilyData.js",
+          "core-v001/records/waste/eWasteImpactMetricData.js",
+          "core-v001/records/waste/eWasteImpactProfileData.js",
+          "core-v001/records/waste/eWasteItemTypeData.js",
+          "core-v001/records/waste/eWasteMarketplaceEligibilityPolicyData.js",
+          "core-v001/records/waste/eWasteMaterialTypeData.js",
+          "core-v001/records/waste/eWasteReceiptPolicyData.js",
+          "core-v001/records/waste/eWasteRewardSettlementPolicyData.js",
+          "core-v001/records/waste/eWasteVerificationPolicyData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:waste-policy",
+      "descriptor": {
+        "code": "circa.ewaste:waste-policy",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:waste-policy",
+        "sectionCode": "waste-policy",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "4e11c1961091311b429786d485a80cf7da76ecde31f130a28189e75b258988f7",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/waste-policy/headers/eWastePresetHeader.js",
+          "core-v001/waste-policy/records/eWasteAcceptanceRuleData.js",
+          "core-v001/waste-policy/records/eWasteCategoryData.js",
+          "core-v001/waste-policy/records/eWasteCollectionPresetData.js",
+          "core-v001/waste-policy/records/eWasteImpactProfileData.js",
+          "core-v001/waste-policy/records/eWasteItemTypeData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "wasteCollection:sample-profile-addresses",
+      "descriptor": {
+        "code": "wasteCollection:sample-profile-addresses",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteCollection",
+        "releaseCode": "wasteCollection:sample-profile-addresses",
+        "sectionCode": "sample-profile-addresses",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "5e845c31f9a94694f0aef9538492cac03535db7f1910b181bace047a8c2b3945",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/headers/profile/sampleCollectionCentreAddressHeader.js",
+          "sample-v001/records/profile/sampleCollectionCentreAddressData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL",
+          "DEVELOPMENT",
+          "TEST"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:profile",
+      "descriptor": {
+        "code": "circa.ewaste:profile",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:profile",
+        "sectionCode": "profile",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "b21ab34b6217117dfdf7b496cc7a745d83d238cd3f7fa62e1df49599882fdb0a",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/profile/headers/circaProfileSampleHeader.js",
+          "sample-v001/profile/records/circaAddressData.js",
+          "sample-v001/profile/records/circaCustomerData.js"
+        ],
+        "owningDomain": "profile",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:operations",
+      "descriptor": {
+        "code": "circa.ewaste:operations",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:operations",
+        "sectionCode": "operations",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "f2356a5f20819d5a2ba6a4cfc8d20fb6e27c8e13b93be2d88696441115e472a2",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/headers/circaOperationsHeader.js",
+          "sample-v001/operations/records/circaEnterpriseData.js",
+          "sample-v001/operations/records/circaOperationalEmployeeData.js",
+          "sample-v001/operations/records/circaOperationalScopeData.js",
+          "sample-v001/operations/records/circaOutletAddressData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "wasteCollection:sample-locations",
+      "descriptor": {
+        "code": "wasteCollection:sample-locations",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "LOCATION",
+        "targetServer": "locationServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "locationServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteCollection",
+        "releaseCode": "wasteCollection:sample-locations",
+        "sectionCode": "sample-locations",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "739e18a9b3ab2a817be0431d4afe0eb841163595f73bc983899542b97a509868",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/headers/location/sampleCollectionCentreLocationHeader.js",
+          "sample-v001/records/location/sampleCollectionCentreLocationCapabilityData.js",
+          "sample-v001/records/location/sampleCollectionCentreLocationCategoryData.js",
+          "sample-v001/records/location/sampleCollectionCentreLocationData.js",
+          "sample-v001/records/location/sampleCollectionCentreLocationTypeData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "LOCAL",
+          "DEVELOPMENT",
+          "TEST"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:location",
+      "descriptor": {
+        "code": "circa.ewaste:location",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "LOCATION",
+        "targetServer": "locationServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "locationServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:location",
+        "sectionCode": "location",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "ee89347a496d737812cb33eb8f6d3ed1067bd026d6eacc81ed0226aa59ea03c5",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/location/headers/circaLocationSampleHeader.js",
+          "sample-v001/location/records/circaLocationData.js"
+        ],
+        "owningDomain": "location",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "wasteCollection:sample-collection-points",
+      "descriptor": {
+        "code": "wasteCollection:sample-collection-points",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteCollection",
+        "releaseCode": "wasteCollection:sample-collection-points",
+        "sectionCode": "sample-collection-points",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "b9840f3bc60f1b3a920632b406cfa8d02bc23c283031d14332255101e91d10eb",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/headers/waste/sampleCollectionCentrePointHeader.js",
+          "sample-v001/records/waste/sampleCollectionCentrePointData.js",
+          "sample-v001/records/waste/sampleCollectionCentrePointTypeData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "LOCAL",
+          "DEVELOPMENT",
+          "TEST"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:waste",
+      "descriptor": {
+        "code": "circa.ewaste:waste",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:waste",
+        "sectionCode": "waste",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "e087eeafac052538c91be3c1afaf7acb5fa5fd26e2cb74bd64ac93de0c1d495f",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/waste/headers/circaWasteSampleHeader.js",
+          "sample-v001/waste/records/circaWasteAssetData.js",
+          "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js",
+          "sample-v001/waste/records/circaWasteCollectionPointData.js",
+          "sample-v001/waste/records/circaWasteEvidenceData.js",
+          "sample-v001/waste/records/circaWasteImpactResultData.js",
+          "sample-v001/waste/records/circaWasteSubmissionData.js",
+          "sample-v001/waste/records/circaWasteVerificationData.js"
+        ],
+        "owningDomain": "waste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:loyalty",
+      "descriptor": {
+        "code": "circa.ewaste:loyalty",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "LOYALTY",
+        "targetServer": "loyaltyServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "loyaltyServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:loyalty",
+        "sectionCode": "loyalty",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "d945b8ef256236fe8b5cc9ca5c83dab5a816f3bd6f006d14bb8d93fd61340e94",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js",
+          "sample-v001/loyalty/records/circaLoyaltyProgramData.js",
+          "sample-v001/loyalty/records/circaLoyaltyRewardTypeData.js",
+          "sample-v001/loyalty/records/circaLoyaltyWalletData.js",
+          "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js",
+          "sample-v001/loyalty/records/circaRewardLedgerEntryData.js"
+        ],
+        "owningDomain": "loyalty",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOYALTY",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:store",
+      "descriptor": {
+        "code": "circa.ewaste:store",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:store",
+        "sectionCode": "store",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "d14599110eb98f24a3ac134c2daf75a1033cd65d7e657f525bc0ff6838e18824",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/store/headers/circaStoreReferenceHeader.js",
+          "sample-v001/store/records/circaStoreData.js"
+        ],
+        "owningDomain": "store",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:commerce",
+      "descriptor": {
+        "code": "circa.ewaste:commerce",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "targetServer": "commerceStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:commerce",
+        "sectionCode": "commerce",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "6cc0d6f150a8d5598a8584f68c2a454a6427394f31f35006ce9ca0d935765c5a",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/commerce/headers/circaCommerceCatalogHeader.js",
+          "sample-v001/commerce/records/circaCategoryData.js",
+          "sample-v001/commerce/records/circaCategoryLocalizationData.js",
+          "sample-v001/commerce/records/circaPriceBookData.js",
+          "sample-v001/commerce/records/circaPriceRowData.js",
+          "sample-v001/commerce/records/circaProductData.js",
+          "sample-v001/commerce/records/circaProductLocalizationData.js",
+          "sample-v001/commerce/records/circaProductVariantData.js",
+          "sample-v001/commerce/records/circaProductVariantLocalizationData.js",
+          "sample-v001/commerce/records/circaPromotionData.js",
+          "sample-v001/commerce/records/circaTaxPolicyData.js",
+          "sample-v001/commerce/records/circaWarehouseData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "COMMERCE_STAGED",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaGreenPerksBudget",
+      "descriptor": {
+        "code": "circa.ewaste:circaGreenPerksBudget",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "GREENPERKS_RETAIL",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "sectionCode": "circaGreenPerksBudget",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/promotion/greenperks/budget/records/promotionSetup.json"
+        ],
+        "installer": "PROMOTION_CAMPAIGN_ISSUANCE",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaGreenPerksIssuance",
+      "descriptor": {
+        "code": "circa.ewaste:circaGreenPerksIssuance",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "GREENPERKS_RETAIL",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksIssuance",
+        "sectionCode": "circaGreenPerksIssuance",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "672dff3f1058dec8ba3eacc22d752ccc1bd505aa72213351a2d63d86fa4ba964",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/promotion/greenperks/issuance/records/promotionSetup.json"
+        ],
+        "installer": "PROMOTION_CAMPAIGN_ISSUANCE",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRenewWorksBudget",
+      "descriptor": {
+        "code": "circa.ewaste:circaRenewWorksBudget",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRenewWorksBudget",
+        "sectionCode": "circaRenewWorksBudget",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "73a38ca000acbc07afa81ff3c1090d39a084ef77b5d33f88bf4a411fa8b0ad64",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/promotion/renewworks/budget/records/promotionSetup.json"
+        ],
+        "installer": "PROMOTION_CAMPAIGN_ISSUANCE",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRenewWorksIssuance",
+      "descriptor": {
+        "code": "circa.ewaste:circaRenewWorksIssuance",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRenewWorksIssuance",
+        "sectionCode": "circaRenewWorksIssuance",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "624aa90d3fd3243fb39cb8edb8c3ac66063736246d57d58f47d664549a076ae0",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/promotion/renewworks/issuance/records/promotionSetup.json"
+        ],
+        "installer": "PROMOTION_CAMPAIGN_ISSUANCE",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLoopCycleBudget",
+      "descriptor": {
+        "code": "circa.ewaste:circaLoopCycleBudget",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "LOOPCYCLE_RECYCLING",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLoopCycleBudget",
+        "sectionCode": "circaLoopCycleBudget",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "7a3e013e7050f0b3d33da65bb5234a3ee80f65a0bce928b11b2fb361333c2dd3",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/promotion/loopcycle/budget/records/promotionSetup.json"
+        ],
+        "installer": "PROMOTION_CAMPAIGN_ISSUANCE",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaLoopCycleIssuance",
+      "descriptor": {
+        "code": "circa.ewaste:circaLoopCycleIssuance",
+        "dataType": "sample",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "phase": "AFTER_PUBLICATION",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerce",
+        "type": "DATA_RELEASE"
+      },
+      "server": "commerceServer",
+      "enterpriseCode": "LOOPCYCLE_RECYCLING",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLoopCycleIssuance",
+        "sectionCode": "circaLoopCycleIssuance",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "799a3cd2718d63418c05cb97c49c08e5fa62ff756ddf58cf9081b143be37cb14",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/operations/promotion/loopcycle/issuance/records/promotionSetup.json"
+        ],
+        "installer": "PROMOTION_CAMPAIGN_ISSUANCE",
+        "owningDomain": "promotion",
+        "lifecycle": "OPERATIONAL_VERSIONED",
+        "destinationRole": "COMMERCE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:content",
+      "descriptor": {
+        "code": "circa.ewaste:content",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WCMS_STAGED",
+        "targetServer": "wcmsStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wcmsStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:content",
+        "sectionCode": "content",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "b459c4a6c94e8450f800fe0a3f11c98eff17da30ae5150ce5a1b400749e53b13",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/content/assets/circa-media/assetManifest.js",
+          "sample-v001/content/assets/circa-media/files/asset-camera.svg",
+          "sample-v001/content/assets/circa-media/files/asset-headphones.svg",
+          "sample-v001/content/assets/circa-media/files/asset-keyboard.svg",
+          "sample-v001/content/assets/circa-media/files/asset-laptop.svg",
+          "sample-v001/content/assets/circa-media/files/asset-monitor.svg",
+          "sample-v001/content/assets/circa-media/files/asset-phone.svg",
+          "sample-v001/content/assets/circa-media/files/asset-printer.svg",
+          "sample-v001/content/assets/circa-media/files/asset-router.svg",
+          "sample-v001/content/assets/circa-media/files/asset-speaker.svg",
+          "sample-v001/content/assets/circa-media/files/asset-tablet.svg",
+          "sample-v001/content/assets/circa-media/files/circa-hero-circular-value.png",
+          "sample-v001/content/assets/circa-media/files/circa-hero-community.png",
+          "sample-v001/content/assets/circa-media/files/circa-hero-second-life.png",
+          "sample-v001/content/assets/circa-media/files/circa-hero.svg",
+          "sample-v001/content/assets/circa-media/files/circa-mark-light.svg",
+          "sample-v001/content/assets/circa-media/files/circa-mark-monochrome.svg",
+          "sample-v001/content/assets/circa-media/files/circa-mark.svg",
+          "sample-v001/content/assets/circa-media/files/coupon-market.svg",
+          "sample-v001/content/headers/circaContentHeader.js",
+          "sample-v001/content/headers/circaMediaHeader.js",
+          "sample-v001/content/records/circaCmsComponentData.js",
+          "sample-v001/content/records/circaCmsGroupData.js",
+          "sample-v001/content/records/circaCmsPageData.js",
+          "sample-v001/content/records/circaCmsRendererData.js",
+          "sample-v001/content/records/circaCmsRouteData.js",
+          "sample-v001/content/records/circaCmsSiteData.js",
+          "sample-v001/content/records/circaCmsSlotData.js",
+          "sample-v001/content/records/circaCmsTemplateData.js",
+          "sample-v001/content/records/circaCmsTypeData.js",
+          "sample-v001/content/records/circaContentCatalogData.js",
+          "sample-v001/content/records/circaMediaData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "WCMS_STAGED",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:customer-workspace",
+      "descriptor": {
+        "code": "circa.ewaste:customer-workspace",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WCMS_STAGED",
+        "targetServer": "wcmsStaged",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wcmsStagedServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:customer-workspace",
+        "sectionCode": "customer-workspace",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "460bbe8b290a63bd047f118a9ab705dff8b9db57ea4fac0564b8e5da0982951d",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/customer-workspace/headers/circaWorkspaceHeader.js",
+          "core-v001/customer-workspace/records/circaWorkspaceComponentData.js",
+          "core-v001/customer-workspace/records/circaWorkspaceGroupData.js",
+          "core-v001/customer-workspace/records/circaWorkspacePageData.js",
+          "core-v001/customer-workspace/records/circaWorkspaceRendererData.js",
+          "core-v001/customer-workspace/records/circaWorkspaceRouteData.js",
+          "core-v001/customer-workspace/records/circaWorkspaceSlotData.js",
+          "core-v001/customer-workspace/records/circaWorkspaceTemplateData.js",
+          "core-v001/customer-workspace/records/circaWorkspaceTypeData.js"
+        ],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "PUBLISHABLE",
+        "destinationRole": "WCMS_STAGED",
+        "environmentScope": [
+          "LOCAL",
+          "LOCAL_PRODUCTION_SIMULATION"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:media",
+      "descriptor": {
+        "code": "circa.ewaste:media",
+        "dataType": "media",
+        "manifestModule": "circa.ewaste",
+        "manifestPath": "data/sample-v001/content/assets/circa-media/assetManifest.js",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WCMS_STAGED",
+        "targetServer": "wcmsStaged",
+        "type": "MEDIA_ASSET_MANIFEST"
+      },
+      "server": "wcmsStagedServer",
+      "enterpriseCode": "default",
+      "assets": [
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-camera",
+          "name": "Asset Camera",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "aa4a84099062f0f59ec04447f0e3b3fdf9b1d7d8af5f38835d24fecf1fe67950",
+          "sizeBytes": 703,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-camera.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-headphones",
+          "name": "Asset Headphones",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "eb2665a65570a84f8a6ab47829e8a18f3d8992ef17e67effba4f1776daebc0a7",
+          "sizeBytes": 766,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-headphones.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-keyboard",
+          "name": "Asset Keyboard",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "ee37faf47fd76b3f5064f9eae95869b85ba48f501c4ecad8bf3b03292cf3232b",
+          "sizeBytes": 2481,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-keyboard.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-laptop",
+          "name": "Asset Laptop",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "2ce32d3fe6e114a38e1adbd2571f64ffa3387d68ba5fdb636b38ff8beabcf288",
+          "sizeBytes": 452,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-laptop.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-monitor",
+          "name": "Asset Monitor",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "0fc281401f769c2e0711eee95349e70e028804e7f00e224ae1e595c338257d78",
+          "sizeBytes": 660,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-monitor.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-phone",
+          "name": "Asset Phone",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "77395f67bf0b81b1ca9efc64876fc4c2e73171c9426526b6d61dd1baec8bc2d8",
+          "sizeBytes": 477,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-phone.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-printer",
+          "name": "Asset Printer",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "f58c56d118d6e0311ac61d53a9796025b6674ec3db362bb99da551a2eea1d186",
+          "sizeBytes": 707,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-printer.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-router",
+          "name": "Asset Router",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "edbad8dec465e610197fbb81be66080d2f1ad266fed8c97271038e3ec1b81eae",
+          "sizeBytes": 541,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-router.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-speaker",
+          "name": "Asset Speaker",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "c27cec9fb5191bfe94b1774449119f2e2ad2f5ff80c0245ab15d11b311b76fac",
+          "sizeBytes": 617,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-speaker.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-asset-tablet",
+          "name": "Asset Tablet",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "4edb261de318d81bbfc8f1a4328567a9dd20526f18f8f2165449d1d0cb8571d4",
+          "sizeBytes": 548,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "asset-tablet.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-hero-circular-value",
+          "name": "Circa Hero Circular Value",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "3157a822a21252032f0e37f82f39e60fb337e8c1acd1f50b1c67411895f03156",
+          "sizeBytes": 2098421,
+          "mimeType": "image/png",
+          "originalFileName": "circa-hero-circular-value.png"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-hero-community",
+          "name": "Circa Hero Community",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "aa5824dd74cd1a8c37e2a17272278f4e41a7d7a1fe8097c9e2801aa8e077408c",
+          "sizeBytes": 1879964,
+          "mimeType": "image/png",
+          "originalFileName": "circa-hero-community.png"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-hero-second-life",
+          "name": "Circa Hero Second Life",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "c8ac10173a23fc4febb8cd49be5a26a480faefd62da803571984362a6c6f2611",
+          "sizeBytes": 1970618,
+          "mimeType": "image/png",
+          "originalFileName": "circa-hero-second-life.png"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-hero",
+          "name": "Circa Hero",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "73a59d6ff1299837d16da7723adbba8fa5f2c3cb5079d86549634d7997707bde",
+          "sizeBytes": 2280,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "circa-hero.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-coupon-market",
+          "name": "Coupon Market",
+          "description": "Original or illustrative local Circa sample content",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "fef0f6dd2f04fa4036312fcffb9a7170a7bc62d81127ae80e1e1ef69d068b96c",
+          "sizeBytes": 624,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "coupon-market.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-mark",
+          "name": "Circa Growing N",
+          "description": "Selected Growing N geometry with Nexus brackets.",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "f68fac57c0e9596ce810df7bda8c33d16be6ea7af1ab253124c9ea16606eb9f5",
+          "sizeBytes": 412,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "circa-mark.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-mark-light-v4",
+          "name": "Circa Growing N",
+          "description": "Selected Growing N geometry with Nexus brackets.",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "075f17668ccf67646be6783d4d05df967eedebca355b3aec1386850f370443c3",
+          "sizeBytes": 415,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "circa-mark-light.svg"
+        },
+        {
+          "folderCode": "cmsAssets",
+          "formatCode": "original",
+          "mediaCode": "circa-mark-monochrome",
+          "name": "Circa Growing N",
+          "description": "Selected Growing N geometry with Nexus brackets.",
+          "moduleName": "media",
+          "schemaName": "media",
+          "businessPurpose": "CIRCA_SAMPLE_CONTENT",
+          "ownerType": "APPLICATION",
+          "ownerReference": "CIRCA_EWASTE",
+          "checksum": "d519bcde74225a9f89f7e0bc6711d8fcd11409e29b829c13bc87795e709b7994",
+          "sizeBytes": 412,
+          "mimeType": "image/svg+xml",
+          "originalFileName": "circa-mark-monochrome.svg"
+        }
+      ],
+      "manifest": {
+        "moduleName": "circa.ewaste",
+        "path": "data/sample-v001/content/assets/circa-media/assetManifest.js",
+        "checksum": "4cd605fa6afbf5e5d554ad2df11564542c0ace5f80ac5b471428d6236b27badc"
+      }
+    }
+  ],
+  "baseline": {
+    "server": "wcmsStagedServer",
+    "runtimeRole": "WCMS_STAGED",
+    "enterpriseCode": "default",
+    "descriptorDigest": "757d94ff45d7af8a2d4c075c326ae6d805c64ee77eca3081826bd1a2658e8c08"
+  }
+}

@@ -222,8 +222,15 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
     const sections = Object.values(manifest.sections);
     assert.deepEqual(
       new Set(sections.map((section) => section.destinationRole)),
-      new Set(["COMMERCE_STAGED", "WCMS_STAGED"]),
+      new Set(["COMMERCE_STAGED", "WCMS_STAGED", ...(definition.pack === "agora.apparel" ? ["COMMERCE"] : [])]),
     );
+    for (const section of sections.filter((item) => item.destinationRole === "COMMERCE")) {
+      assert.equal(definition.pack, "agora.apparel", "Only reviewed Apparel opening operations are in scope");
+      assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
+      assert.equal(section.selectionPolicy, "EXPLICIT");
+      assert(["INVENTORY_OPENING_RECEIPTS", "PROMOTION_CAMPAIGN_ISSUANCE"].includes(section.installer));
+      assert(Object.keys(section.files).every((file) => /^sample-v001\/operations\/records\/.+\.json$/.test(file)));
+    }
     const wcmsSection = sections.find(
       (section) => section.destinationRole === "WCMS_STAGED",
     );
@@ -265,14 +272,18 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
         else
           runtimeFiles.push(path.relative(path.join(packRoot, "data"), child));
       });
-    for (const section of sections) {
-      const folder =
-        section.destinationRole === "WCMS_STAGED" ? "content" : "commerce";
-      collect(path.join(packRoot, "data", section.sourceRoot, folder));
-    }
+    const sourceFolders = new Set(sections.map((section) => path.join(
+      packRoot, "data", section.sourceRoot,
+      section.destinationRole === "WCMS_STAGED" ? "content" :
+        section.destinationRole === "COMMERCE" ? "operations" :
+          Object.keys(section.files).every(file => file.startsWith(section.sourceRoot + "/publication/")) ? "publication" : "commerce",
+    )));
+    for (const folder of sourceFolders) collect(folder);
     runtimeFiles.sort();
+    const claimedFiles = sections.flatMap((section) => Object.keys(section.files));
+    assert.equal(new Set(claimedFiles).size, claimedFiles.length, "Each source belongs to exactly one release section");
     assert.deepEqual(
-      sections.flatMap((section) => Object.keys(section.files)).sort(),
+      claimedFiles.sort(),
       runtimeFiles,
     );
   }

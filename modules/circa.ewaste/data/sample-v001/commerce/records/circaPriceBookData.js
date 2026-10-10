@@ -10,7 +10,7 @@
 module.exports = {
   "record0": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaPointsPriceBook",
@@ -19,4 +19,3 @@ module.exports = {
     "validFrom": "2026-01-01T00:00:00.000Z"
   }
 };
-

@@ -1,0 +1,136 @@
+{
+  "contractVersion": 1,
+  "recordedAt": "2026-10-08 20:47:02 UTC",
+  "scope": "Independent Circa Store reference preparation and canonical accelerator guide alignment; source and isolated owner ports only",
+  "supersedesPendingItem": {
+    "evidence": "circa-publication-source-acceptance-2026-10-09.json",
+    "gate": "Store reference segregation",
+    "status": "SOURCE_COMPLETE_NOT_LIVE_ADOPTED",
+    "historicalEvidenceRewritten": false
+  },
+  "sourcePins": {
+    "nodics.kickoff": {
+      "modules/circa.ewaste/data/manifest.json": "44ef34794e11bcf756ee75dfc29737dacb71af1778f4cfe9a56ba168add5ea83",
+      "modules/circa.ewaste/config/properties.js": "20392b5fac1288d3c4bcda11ae236a99fdf5b63c693521da551ba24e1d270906",
+      "modules/circa.ewaste/data/sample-v001/release.descriptor.json": "723cc94abd82c1535dc7c5f7568b40e4e24bb115d15d1479e6ca6ddbea9bfdb6",
+      "modules/circa.ewaste/data/sample-v001/store/headers/circaStoreReferenceHeader.js": "47e7c02fe790173fc55b1371de74f1fdff9f55529d3119d160f1f6debe0c8f65",
+      "modules/circa.ewaste/data/sample-v001/store/records/circaStoreData.js": "c2da434d415083c179409f925753051a44878832d217639fb9803a9b41f28885",
+      "modules/circa.ewaste/data/sample-v001/commerce-operational/headers/circaCommerceSampleHeader.js": "5bd8194e6c5a83b2ea0e8acdc393151f56aaf89481aa66f21e3786669c65fb18",
+      "modules/circa.ewaste/test/circaStoreReferencePack.test.js": "6642a97ea41e2b491487a8417a16b3e79306871cf16c46a80d92452c34d9213f"
+    },
+    "nodics.ai": {
+      "nodics.accelerators/modules/waste/modules/eWaste/data/manifest.json": "2b7d9b58def42386d90e0739da300b4380dcd589217a702a411dfd77cf2d8e20",
+      "nodics.accelerators/modules/waste/modules/eWaste/data/docs-v001/records/documentation/eWasteDocumentationComponentData.js": "7af740e711dccc15a0c75a2774615a7e219e0f59992224f4a5871093e7102b0a",
+      "nodics.accelerators/modules/waste/modules/eWaste/data/docs-v001/records/documentation/eWasteDocumentationPageMetadataData.js": "f7ebecc3e7eb3ecef4b7c6b7dfd16bec892ad44d9f6915eb2614009993617755",
+      "nodics.accelerators/modules/waste/modules/eWaste/data/docs-v001/records/documentation/eWasteDocumentationSearchMetadataData.js": "734a13b57bab586d800a3180ee9a8a16664385202d9b6ba512c06c8c4ae47065"
+    }
+  },
+  "source": {
+    "releaseCode": "circa.ewaste:store",
+    "version": "0.0.1",
+    "sourceRoot": "sample-v001",
+    "selectionPolicy": "EXPLICIT",
+    "lifecycle": "REFERENCE",
+    "destinationRole": "COMMERCE",
+    "versioningPolicy": "NONE",
+    "publicationPolicy": "NONE",
+    "initialPublicationPolicy": "NONE",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION via canonical default",
+    "declaredFiles": 2,
+    "records": ["circaMainStore", "greenperks-cafe", "greenperks-bistro"],
+    "recordValuesPreserved": true,
+    "headerSelector": { "code": "$code", "tenant": "$tenant" },
+    "manifestSections": 15,
+    "verifiedPayloadHashes": 99,
+    "legacyOperationalTargets": ["inventoryBalance", "couponBatch", "coupon"],
+    "legacyOperationalAdmission": "REJECTED_BEFORE_DISPATCH",
+    "assetsAddedOrChanged": 0
+  },
+  "importQualification": {
+    "harness": "Canonical release planner and system header initializer, JavaScript file processor and model handoff; isolated generated Store saveAll and receipt ports",
+    "verified": [
+      "Store-only preflight is read-only and selects only its two manifest files",
+      "Actual Store records reach canonical model handoff with original portable enterprise/location references",
+      "Caller groups are forwarded unchanged; source exports are not mutated",
+      "No explicit header enterprise placement, privileged groups, insertOnly or supply targets are introduced",
+      "CURRENT receipt refuses repeat execution without replaying Store writes",
+      "Wrong destination and stale exact version reject before dispatch or receipts",
+      "Same-version installed checksum drift rejects without rewriting history",
+      "Owner failure marks the isolated receipt FAILED, never CURRENT",
+      "Selecting rejected supply with Stores rejects the whole plan before either dispatch"
+    ],
+    "limitations": [
+      "Generated persistence and installed authorization overlays are not exercised by the isolated Store saveAll port",
+      "saveAll can update existing Stores under managed revision reconciliation; this is not create-or-preserve semantics",
+      "Portable references do not create or validate the eligibility of their Profile/Location targets",
+      "circaMainStore retains its original missing enterpriseRef; no merchant authority is inferred",
+      "Store preparation grants no seller consent, coupon supply, stock, Profile membership or payment qualification"
+    ]
+  },
+  "documentation": {
+    "owner": "eWaste",
+    "changedGuideReferences": 5,
+    "sourceInventoryRows": 15,
+    "oldStorePathsRemaining": 0,
+    "canonicalBlocksMaintainedDirectly": true,
+    "derivedSearchAndSourceMetadataSynchronized": true,
+    "imagesAndMediaReferencesPreserved": true,
+    "lifecycleAndPublicationStatesPreserved": true,
+    "frameworkPagesValidated": 176,
+    "eWasteComposedPagesValidated": 41,
+    "optionalReferencePagesValidated": 4
+  },
+  "validation": {
+    "countedNodeTests": 144,
+    "groups": [
+      { "command": "npm run test:circa", "repository": "nodics.kickoff", "tests": 70, "passed": true },
+      { "command": "node --test test/configurationInheritanceContract.test.js test/circaPublicationPreparationPrerequisites.test.js", "repository": "nodics.kickoff", "tests": 28, "passed": true },
+      {
+        "command": "node --test nodics.foundation/modules/nDatabase/database/test/{namedSchemaPolicyComposition,schemaWriteAccessPolicyService,insertOnlySaveContract,modelConcurrencyContract,modelsSaveInitializerPipelineContract}.test.js nodics.commerce/modules/baseCommerce/modules/store/test/coreReferenceLocationContract.test.js nodics.platform/modules/profile/test/enterpriseAccessAssignmentSafety.test.js nodics.foundation/test/enterpriseAssociationPrincipleContract.test.js",
+        "repository": "nodics.ai",
+        "executor": "Read-only independent owner review",
+        "tests": 46,
+        "passed": true
+      }
+    ],
+    "additionalChecks": [
+      "eWaste full npm test suite passed; not included in the counted groups",
+      "Framework docs:check: 176 pages",
+      "eWaste documentation and optional referenceDocumentation release validation",
+      "Project documentation validation: 9 pages",
+      "Guided initialization profile contract",
+      "Data lifecycle classification contract",
+      "Project and eWaste ownership-language governance: zero findings",
+      "Scoped semantic review and git diff --check"
+    ]
+  },
+  "ownershipPlacementReview": {
+    "status": "PASS_WITH_SOURCE_ONLY_LIMITS",
+    "businessRecords": "Remain customer-owned in circa.ewaste; Store generated services remain the sole persistence owner",
+    "configuration": "One required module-owned setup selection; no copied environment transport, framework defaults or new authority",
+    "documentation": "Canonical accelerator CMS records remain eWaste-owned; only stale Store paths, setup explanation and derived metadata/checksums changed",
+    "coverageAndGuidance": "Focused adoption tests and existing dataset expectations updated; nearest guidance and application contract describe safety boundaries",
+    "unrelatedChanges": "Pre-existing workspace refactor changes preserved; no cleanup, revert or commit performed",
+    "liveReadiness": "NOT_QUALIFIED_BY_THIS_BATCH"
+  },
+  "boundaries": {
+    "nativeOrDockerRuntimeStarted": false,
+    "installedDataChanged": false,
+    "receiptsRewritten": false,
+    "dataOrIndexesReset": false,
+    "approvalsManufactured": false,
+    "liveActivationPerformed": false,
+    "secretsReadOrRetained": false,
+    "fullCircaEndToEndAccepted": false
+  },
+  "remaining": [
+    "Reviewed campaign benefits, budgets, issuer/vendor identities and consent inputs",
+    "Canonical cross-enterprise seller authorization and secure issuance integration",
+    "Canonical item-benefit fulfillment and digital asset delivery support",
+    "Owner-governed operational contribution instead of rejected legacy snapshots",
+    "Installed receipt/partial-write inspection and separately governed adoption or recovery",
+    "Docker destination/workflow qualification remains outside the approved native target"
+  ]
+}

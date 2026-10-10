@@ -13,15 +13,45 @@
 
 /** @module circa.ewaste/config/properties @description Owns Circa application identity, presentation and illustrative deployment policies over eWaste. @layer config @owner circa.ewaste @override Later project layers replace these sample values. */
 module.exports = {
+  enterpriseManagement: {
+    accessAssignments: {
+      roles: {
+        CIRCA_LOCAL_UNUSED_REFUND_EXCEPTION: {
+          label: "Circa Local Unused Coupon Review",
+          description: "Adjudicates only the separately enabled original unused-coupon refund exception; grants no payment or redeemed-benefit authority.",
+          groupCodes: ["circaLocalUnusedRefundExceptionUserGroup"],
+          scopeType: "ENTERPRISE",
+          delegable: true,
+          assignmentPermissions: [],
+        },
+        CIRCA_LOCAL_DEMO_CREDIT: {
+          label: "Circa Local Demo Credit",
+          description: "Imports the separately approved Local demo credit through its exact Loyalty source admission.",
+          groupCodes: ["circaLocalDemoCreditUserGroup"],
+          scopeType: "ENTERPRISE",
+          delegable: true,
+          assignmentPermissions: [],
+        },
+        CIRCA_LOCAL_OPENING_INVENTORY: {
+          label: "Circa Local Opening Inventory",
+          description: "Receives approved first stock through Inventory under the original issuer enterprise.",
+          groupCodes: ["commerceInventoryOpeningUserGroup"],
+          scopeType: "ENTERPRISE",
+          delegable: true,
+          assignmentPermissions: [],
+        },
+      },
+    },
+  },
   tooling: {
     acceptance: {
       wasteManagement: {
         fixture: {
           dataModule: "circa.ewaste",
           ruleRecordsPath:
-            "data/core-v002/waste-policy/records/eWasteAcceptanceRuleData.js",
+            "data/core-v001/waste-policy/records/eWasteAcceptanceRuleData.js",
           impactProfileRecordsPath:
-            "data/core-v002/waste-policy/records/eWasteImpactProfileData.js",
+            "data/core-v001/waste-policy/records/eWasteImpactProfileData.js",
           impactProfileCode: "CIRCA_VERIFIED_DEVICE_RECOVERY",
           runId: "circa-waste-acceptance-001",
           submissionCode: "CIRCA_ACCEPTANCE_SUB_001",
@@ -232,12 +262,6 @@ module.exports = {
       recyclingHandoff: {
         enabled: true,
       },
-    },
-    demoImportAdmission: {
-      enabled: true,
-      qualified: true,
-      releaseCode: "circa.ewaste:commerce-operational",
-      releaseVersion: "0.0.1",
     },
   },
   order: {
@@ -513,6 +537,15 @@ module.exports = {
               targetRuntimeRole: "LOYALTY",
             },
             {
+              code: "circa.ewaste:store",
+              kind: "Store and redemption outlet references",
+              required: true,
+              trigger: "USER",
+              dataType: "sample",
+              targetServer: "commerce",
+              targetRuntimeRole: "COMMERCE",
+            },
+            {
               code: "circa.ewaste:commerce",
               kind: "Circular catalogue source",
               required: true,
@@ -522,10 +555,67 @@ module.exports = {
               targetRuntimeRole: "COMMERCE_STAGED",
             },
             {
-              code: "circa.ewaste:commerce-operational",
-              kind: "Governed coupon issuance and opening stock",
+              code: "circa.ewaste:circaGreenPerksBudget",
+              kind: "GreenPerks issuer opening budget",
+              operatorEnterpriseCode: "GREENPERKS_RETAIL",
               required: true,
               trigger: "USER",
+              phase: "AFTER_PUBLICATION",
+              dataType: "sample",
+              targetServer: "commerce",
+              targetRuntimeRole: "COMMERCE",
+            },
+            {
+              code: "circa.ewaste:circaGreenPerksIssuance",
+              kind: "GreenPerks protected coupon issuance after consent",
+              operatorEnterpriseCode: "GREENPERKS_RETAIL",
+              required: true,
+              trigger: "USER",
+              phase: "AFTER_PUBLICATION",
+              dataType: "sample",
+              targetServer: "commerce",
+              targetRuntimeRole: "COMMERCE",
+            },
+            {
+              code: "circa.ewaste:circaRenewWorksBudget",
+              kind: "RenewWorks issuer opening budget",
+              operatorEnterpriseCode: "RENEWWORKS_REPAIR_REUSE",
+              required: true,
+              trigger: "USER",
+              phase: "AFTER_PUBLICATION",
+              dataType: "sample",
+              targetServer: "commerce",
+              targetRuntimeRole: "COMMERCE",
+            },
+            {
+              code: "circa.ewaste:circaRenewWorksIssuance",
+              kind: "RenewWorks protected coupon issuance after consent",
+              operatorEnterpriseCode: "RENEWWORKS_REPAIR_REUSE",
+              required: true,
+              trigger: "USER",
+              phase: "AFTER_PUBLICATION",
+              dataType: "sample",
+              targetServer: "commerce",
+              targetRuntimeRole: "COMMERCE",
+            },
+            {
+              code: "circa.ewaste:circaLoopCycleBudget",
+              kind: "LoopCycle issuer opening budget",
+              operatorEnterpriseCode: "LOOPCYCLE_RECYCLING",
+              required: true,
+              trigger: "USER",
+              phase: "AFTER_PUBLICATION",
+              dataType: "sample",
+              targetServer: "commerce",
+              targetRuntimeRole: "COMMERCE",
+            },
+            {
+              code: "circa.ewaste:circaLoopCycleIssuance",
+              kind: "LoopCycle protected coupon issuance after consent",
+              operatorEnterpriseCode: "LOOPCYCLE_RECYCLING",
+              required: true,
+              trigger: "USER",
+              phase: "AFTER_PUBLICATION",
               dataType: "sample",
               targetServer: "commerce",
               targetRuntimeRole: "COMMERCE",

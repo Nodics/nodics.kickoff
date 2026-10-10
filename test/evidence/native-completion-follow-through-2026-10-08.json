@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-08",
+  "environment": "native kickoffLocal",
+  "state": "FINAL_NATIVE_ACCEPTANCE_PASSED_WITH_AUTHORIZATION_AND_CIRCA_OWNER_GATES",
+  "allRequestedWorkComplete": false,
+  "previousEvidence": "native-browser-documentation-and-reverse-safety-2026-10-08.json",
+  "readiness": {
+    "mode": "Explicit Nodics maintainer implementation and disposable Local qualification",
+    "request": "Finish the remaining documentation and reversal work continuously",
+    "releaseDecision": "Retain prerelease v001 as already requested; rebuild the previously authorized disposable native kickoffLocal installation rather than rewriting installed receipts",
+    "businessOutcome": "Separate optional canonical documentation packs, coordinated data/assets publication and governed Apparel purchase/reversal journeys",
+    "owners": {
+      "documentation": "Implementing backend capability CMS data; nodics.docs composes canonical packs",
+      "order": "Reviewed intent, signed Profile scope, persisted approval, original command and phase orchestration",
+      "fulfillment": "Consignment, shipment, return receipt and inspection authority",
+      "inventory": "Atomic original hold release and qualified physical disposition",
+      "payment": "Capture-bound simulator operations and receipt reconciliation; external provider qualification remains separate",
+      "kickoff": "Selected Apparel Store, local deployment and acceptance evidence"
+    },
+    "studiedSources": [
+      "Root and nearest owner AGENTS, README and nSetup contracts",
+      "Order refund recovery, disputes and lifecycle processor",
+      "Checkout placement ports including existing READY consignment creation",
+      "Inventory installed transaction/index and reservation authority",
+      "Fulfillment existing operational models and return scaffolding",
+      "Payment execution, original-capture refund gate and offline Stripe simulator",
+      "Canonical CMS documentation manifests, reference graph, ownership staging tests and semantic review contract",
+      "nConfig role profiles and existing composition selection",
+      "nTooling exact native maintenance owner and exclusion requirements"
+    ],
+    "implementationBoundaries": [
+      "Preserve dirty worktrees, credentials, media files and unrelated provider state",
+      "No direct database imports, receipt rewrite, grant repair, fake provider success or qualification flags",
+      "No production charge, refund, delivery or carrier handover",
+      "Use exact owner APIs, normal CMS/Media/Commerce Process approvals and current retained receipts",
+      "Validate source first and freeze worker changes before runtime startup"
+    ]
+  },
+  "preflight": {
+    "registeredTenantDiscovery": {"mode": "READ_ONLY_DISCOVERY", "tenantCount": 0, "registeredTenants": [], "effects": 0},
+    "maintenancePlan": {
+      "mode": "DRY_RUN",
+      "status": "PLANNED",
+      "databaseCount": 11,
+      "searchIndexCount": 4,
+      "runtimeCount": 10,
+      "authNamespace": "auth_kickoffLocalRuntimeAuth_",
+      "effects": 0,
+      "independentExclusivityProof": false,
+      "limit": "Planning only; real owner must repeat independent writer/exclusivity/outage checks immediately before execution"
+    }
+  },
+  "sourceValidation": {
+    "apparelOperationalPack": {"passed": 6, "failed": 0, "includes": "Actual nConfig Store and manual physical-operation selection for Apparel versus none, Electronics and Telco; Circa scope and external carrier refusal preserved"},
+    "captureBoundOfflinePayment": {"passed": 17, "failed": 0, "boundary": "Isolated original-capture source contracts; not native refunds or real financial settlement"},
+    "physicalOwnerOrchestration": {"passed": 16, "failed": 0, "boundary": "Transactional generated-store doubles; native reversal execution is not qualified by these tests"},
+    "releaseInventory": {
+      "scope": ["nodics.ai", "nodics.kickoff", "nodics.exp"],
+      "productionReleaseRoots": 114,
+      "rootsByType": {"docs": 68, "sample": 16, "core": 14, "init": 16},
+      "manifests": 88,
+      "manifestSections": 152,
+      "deployableSections": 147,
+      "invalidReleaseFolders": [],
+      "invalidDeployableVersions": [],
+      "boundary": "Current non-fixture production release paths and DATA_RELEASE/CONTENT_PACK versions only; immutable checksums will be checked after editorial freeze"
+    }
+  },
+  "nativeExecution": {
+    "state": "RESET_COMPLETED",
+    "databasesDropped": 11,
+    "searchIndexesDropped": 4,
+    "authKeysRemoved": 133,
+    "remainingCollections": 0,
+    "remainingAuthKeys": 0,
+    "independentExclusivityProof": true,
+    "writerEvidence": {"kind": "NATIVE_LOCAL_OBSERVED_WRITER_EXCLUSION", "observedAt": "2026-10-08T17:44:02.550Z", "providerProcessCount": 3, "connectedSocketCount": 10, "continuousFence": false},
+    "sharedProvidersPreserved": ["media", "otherCacheNamespaces"],
+    "nativeStartup": {"state": "READY", "runtimeCount": 10, "environment": "kickoffLocal", "ecommerceDomains": ["apparel"]}
+  },
+  "finalSourceChecks": {
+    "combinedCommerceOwners": {"passed": 223, "failed": 0},
+    "kickoffContracts": {"passed": 43, "failed": 0},
+    "axis": {"typecheck": "PASSED", "focusedFiles": 17, "focusedTests": 146, "failed": 0},
+    "documentation": {"frameworkPages": 176, "semanticItemsClosed": 22, "semanticItemsOpen": 0, "sourceSections": 18, "ownerReviewedReferences": 7, "mentionBasedTriage": 178, "hardening": "PASSED", "boundary": "Bounded source review, not provider/native/browser acceptance"},
+    "generatedContext": {"modules": 202, "status": "PASSED"},
+    "ownership": {"filesChecked": 8409, "findings": 0},
+    "codeDocumentation": {"filesChecked": 3895, "methodsChecked": 11921, "undocumentedFiles": 0, "missingMethodDocumentation": 0},
+    "lifecycleSuite": {"inventory": 206, "passed": 206, "failed": 0, "status": "PASSED"}
+  },
+  "publication": {
+    "evidenceRun": "BEFORE_FINAL_EDITORIAL_REFRESH",
+    "state": "PASSED_SELECTED_DOCUMENTATION_AND_APPAREL_BUNDLES",
+    "axisBaseline": {"state": "ONLINE", "reviewedRecords": 136, "validationWarnings": 0, "reviewAndApproval": "ACTUAL_AXIS_BROWSER"},
+    "documentation": {
+      "observedAt": "2026-10-08T18:07:50.359Z",
+      "profiles": [
+        {"code": "frameworkdocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 54},
+        {"code": "axisdocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 0},
+        {"code": "kickoffdocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 13},
+        {"code": "circadocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 0}
+      ],
+      "publicAssetSha256Matches": 67,
+      "publicPagesMatchedToCanonicalBlocksAndSourceChecksums": 207,
+      "headingsMatched": 2263,
+      "typedReferencesMatched": 660,
+      "approvalBoundary": "Coordinated CMS and exact pinned Media publication through their existing independent Process approvals; no merged or skipped approvals"
+    },
+    "apparel": {"readiness": "READY", "requiredStepsCurrent": 8, "cms": "ONLINE", "mediaApproved": 83, "commercePublicationsCurrent": 67,
+      "productsDeliveredAndDiscovered": 61, "physicalProducts": 58, "digitalProducts": 3, "productMediaSha256Matches": 83, "discoveryPages": 3},
+    "browser": {
+      "axisDocumentationApproval": "PASSED_ACTUAL_AXIS_UI",
+      "cartDigitalPromotionGuideReferences": "PASSED_EXACT_TARGET_ANCHORS",
+      "desktopViewport": {"width": 1440, "height": 1000, "pageOverflow": false},
+      "mobileViewport": {"width": 390, "height": 844, "pageOverflow": false},
+      "foundationImagesDecoded": 8,
+      "screenshots": ["/tmp/nodics-axis-cart-guide-desktop-2026-10-08.png", "/tmp/nodics-axis-promotion-guide-mobile-2026-10-08.png", "/tmp/nodics-axis-docs-imported-image-2026-10-08.png"],
+      "boundary": "Representative browser rendering and link checks, not a visual review of all 207 pages"
+    }
+  },
+  "operationalReplay": {"evidenceRun": "BEFORE_FINAL_EDITORIAL_REFRESH", "state": "PASSED", "physicalBalancesCompared": 464, "campaignsCompared": 3, "couponBatches": 3, "issuedCouponUnits": 170,
+    "directCurrentImportGuard": "ERR_IMP_00003", "coordinatedApplicationReplay": true, "completeStockAndCampaignSnapshotsUnchanged": true},
+  "purchaseAndReversal": {
+    "evidenceRun": "BEFORE_FINAL_EDITORIAL_REFRESH",
+    "state": "PURCHASE_AND_COMPENSATION_PASSED_REVERSAL_AUTHORIZATION_BLOCKED",
+    "passedNativePhases": ["DIGITAL_CHECKOUT", "PRIVATE_REVEAL", "PHYSICAL_DECLINE_COMPENSATION", "DISCOUNTED_PHYSICAL_JOURNEY", "POST_REDEMPTION_REVEAL_REFUSAL"],
+    "checkoutReplaySameOrder": true,
+    "privateReveal": {"sameOriginalTokenOnReplay": true, "wrongCustomerAndAdministratorRefused": true, "listingSecretFree": true, "noStore": true},
+    "declinedPhysicalPayment": {"httpStatus": 402, "checkpoint": "COMPENSATED", "stockRestored": true, "campaignSpendUnchanged": true},
+    "discountedPhysicalCheckout": {"reservedQuantityIncrease": 2, "onHandAndAllocatedUnchanged": true, "campaignSpendChanged": true, "repeatHasNoAdditionalEffects": true},
+    "blockedNativePhase": "NATIVE_PHYSICAL_CANCELLATION",
+    "refusal": {"httpStatus": 403, "code": "ERR_AUTH_00003", "missingPermissions": ["commerce.dispute.review", "commerce.refund.execute"]},
+    "notExecuted": ["PRE_DISPATCH_REVIEWED_FULL_REFUND", "MANUAL_DISPATCH_AND_TWO_RECEIPT_INSPECTED_RETURN", "UNUSED_DIGITAL_COUPON_REFUND"],
+    "reviewerProvisioning": {"userApproval": "PENDING", "configuredLeastPrivilegeRole": "NOT_AVAILABLE", "launchConfigurationProjection": {"registrationEnabled": false, "registrationVerificationEnabled": false, "inventoryQualified": false, "assignmentClaimIndexQualified": false},
+      "boundary": "Launch projection is not installed runtime qualification; no administrator grant expansion, raw employee creation or borrowed Circa roles"},
+    "retainedTestState": "Historical only: the refused cancellation left its original review case and two held stock units. The subsequent authorized final disposable-installation reset removed that entire installation; no unilateral stock cleanup or receipt rewrite was used.",
+    "externalFinancialOrCarrierQualificationClaimed": false
+  },
+  "circaFreshStartCheck": {
+    "evidenceRun": "BEFORE_FINAL_EDITORIAL_REFRESH",
+    "state": "INCOMPATIBLE_LEGACY_OPERATIONAL_SNAPSHOT_REFUSED",
+    "functionalModulesRegisteredAndActivated": ["nodics.location", "nodics.waste", "nodics.loyalty"],
+    "failedImportRun": "import_eb30712a-562a-45ad-976a-876c34e4e740",
+    "recordsRead": 164, "recordsDispatched": 153, "recordsSucceeded": 3, "recordsFailed": 150,
+    "ownerFailure": "ERR_PROMOTION_SECURE_ISSUANCE_UNCONFIRMED",
+    "sourceSafetyFix": "PASSED_CANONICAL_OWNER_DELEGATION_NO_DEMO_EXCEPTION",
+    "sourceTests": {"circa": 56, "relatedQualification": 19, "failed": 0},
+    "nativePreflightAfterRestart": {"observedAt": "2026-10-08T18:23:22.939Z", "state": "PASSED_NATIVE_FAIL_CLOSED", "httpStatus": 400, "code": "ERR_IMP_00003", "importHistoryUnchanged": true},
+    "boundary": "No automatic retry of incompatible coupon snapshots, no fabricated issuer/vendor consent, no private-guard bypass and no claim that Circa business setup is ready"
+  },
+  "finalEditorialRefresh": {
+    "state": "NATIVE_REINSTALL_AND_SELECTED_ACCEPTANCE_PASSED",
+    "reason": "Five canonical Circa articles contained stale product/section counts and legacy snapshot advice. Refresh the approved disposable installation rather than rewriting immutable CURRENT v001 receipts.",
+    "sourceArticlesCorrected": 5,
+    "currentAuthoredCircaDataset": {"products": 43, "assets": 5, "couponOffers": 38, "legacyOffers": 3, "greenPerksAdditions": 35, "manifestSections": 13, "releaseVersion": "0.0.1"},
+    "sourceValidation": {"documentationTests": 4, "compositionTests": 10, "frameworkGuides": 176, "kickoffGuides": 9, "semanticClosed": 22, "semanticOpen": 0, "hardening": "PASSED", "sourceCoverage": "PASSED", "frameworkLlmModules": 202, "kickoffLlmModules": 31, "frameworkOwnershipFindings": 0, "kickoffOwnershipFindings": 0},
+    "registeredTenantDiscovery": {"tenantCount": 0, "effects": 0},
+    "reset": {"status": "COMPLETED", "databasesDropped": 11, "searchIndexesDropped": 4, "authKeysRemoved": 102, "remainingCollections": 0, "remainingAuthKeys": 0, "cleanupFailedCount": 0, "independentExclusivityProof": true,
+      "writerEvidence": {"kind": "NATIVE_LOCAL_OBSERVED_WRITER_EXCLUSION", "observedAt": "2026-10-08T18:25:06.878Z", "providerProcessCount": 3, "connectedSocketCount": 10, "continuousFence": false},
+      "preserved": ["mediaFiles", "unrelatedDatabases", "unrelatedSearchIndexes", "otherCacheNamespaces"]},
+    "nativeStartup": {"state": "READY", "runtimeCount": 10},
+    "axisBaseline": {"state": "ONLINE", "reviewedRecords": 136, "validationWarnings": 0, "reviewAndApproval": "ACTUAL_AXIS_BROWSER"},
+    "releaseInventory": {"productionReleaseRoots": 114, "rootsByType": {"docs": 68, "sample": 16, "core": 14, "init": 16}, "manifests": 88, "manifestSections": 152, "deployableSections": 147, "invalidReleaseFolders": [], "invalidDeployableVersions": []},
+    "documentation": {
+      "state": "PASSED",
+      "bundlesObservedAt": "2026-10-08T18:37:53.875Z",
+      "pagesObservedAt": "2026-10-08T18:38:42.127Z",
+      "profiles": [
+        {"code": "frameworkdocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 54},
+        {"code": "axisdocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 0},
+        {"code": "kickoffdocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 13},
+        {"code": "circadocs", "readiness": "READY", "pack": "CURRENT", "version": "0.0.1", "cms": "ONLINE", "assets": 0}
+      ],
+      "publicAssetSha256Matches": 67,
+      "publicPagesMatchedToCanonicalBlocksAndSourceChecksums": 207,
+      "headingsMatched": 2263,
+      "typedReferencesMatched": 660,
+      "actualAxisCoordinatedApproval": {"framework": "ONE_ACTION_CMS_AND_54_MEDIA", "kickoff": "ONE_ACTION_CMS_AND_13_MEDIA", "apparel": "CMS_AND_83_MEDIA_WITH_EXISTING_COORDINATED_RESUME_AFTER_THROTTLING", "approvalBoundary": "Existing independent CMS and exact pinned Media Process approvals retained"},
+      "correctedCircaGuideBrowser": {"onlineVersion": "0.0.1", "current43ProductCountRendered": true, "tables": 2, "missingLocalAnchors": 0, "desktopPageOverflow": false, "mobilePageOverflow": false},
+      "screenshots": ["/tmp/nodics-axis-final-baseline-online-2026-10-08.png", "/tmp/nodics-axis-final-framework-bundle-online-2026-10-08.png", "/tmp/nodics-axis-final-kickoff-bundle-online-2026-10-08.png", "/tmp/nodics-axis-final-circa-catalogue-2026-10-08.png", "/tmp/nodics-axis-final-circa-catalogue-mobile-2026-10-08.png"]
+    },
+    "apparel": {"readiness": "READY", "requiredStepsCurrent": 8, "cms": "ONLINE", "mediaApproved": 83, "commercePublicationsCurrent": 67, "productsDeliveredAndDiscovered": 61, "physicalProducts": 58, "digitalProducts": 3, "productMediaSha256Matches": 83, "discoveryPages": 3, "actualAxisFinalReadiness": "ONLINE_READY", "screenshot": "/tmp/nodics-axis-final-apparel-online-2026-10-08.png"},
+    "circaOperationalSafety": {"observedAt": "2026-10-08T18:37:20.722Z", "state": "PASSED_NATIVE_FAIL_CLOSED", "httpStatus": 400, "code": "ERR_IMP_00003", "importHistoryUnchanged": true, "legacyPartialWritesRemovedByAuthorizedReset": true, "businessReadiness": "NOT_QUALIFIED"},
+    "operationalReplay": {"state": "PASSED", "physicalBalancesCompared": 464, "campaignsCompared": 3, "couponBatches": 3, "issuedCouponUnits": 170, "directCurrentImportGuard": "ERR_IMP_00003", "coordinatedApplicationReplay": true, "completeStockAndCampaignSnapshotsUnchanged": true},
+    "purchaseAndCompensation": {
+      "state": "PASSED",
+      "paymentMode": "LOCAL_SANDBOX",
+      "phases": ["DIGITAL_CHECKOUT", "PRIVATE_REVEAL", "PHYSICAL_DECLINE_COMPENSATION", "DISCOUNTED_PHYSICAL_JOURNEY", "POST_REDEMPTION_REVEAL_REFUSAL"],
+      "checkoutReplaySameOrder": true,
+      "privateReveal": {"sameOriginalTokenOnReplay": true, "wrongCustomerAndAdministratorRefused": true, "genericListingSecretFree": true, "noStore": true},
+      "declinedPhysicalPayment": {"httpStatus": 402, "checkpoint": "COMPENSATED", "stockRestored": true, "campaignSpendUnchanged": true},
+      "discountedPhysicalCheckout": {"reservedQuantityIncrease": 2, "onHandAndAllocatedUnchanged": true, "campaignSpendChanged": true, "repeatHasNoAdditionalEffects": true},
+      "lifecycleRequestsSubmitted": ["CANCELLATION", "RETURN", "REFUND"],
+      "reviewedReversals": "NOT_EXECUTED_REVIEWER_AUTHORITY_REQUIRED",
+      "retainedTestState": "The successful discounted physical purchase retains its original two reserved units and submitted lifecycle requests. Requests are not completed refunds or manual fulfillment; no raw stock cleanup, grant expansion or receipt rewrite.",
+      "externalFinancialOrCarrierQualificationClaimed": false
+    }
+  },
+  "remainingGates": [
+    {"code": "QUALIFIED_REVERSAL_REVIEWER_REQUIRED", "owner": "Profile and Commerce authorization", "notExecuted": ["PRE_DISPATCH_REVIEWED_FULL_REFUND", "MANUAL_DISPATCH_AND_TWO_RECEIPT_INSPECTED_RETURN", "UNUSED_DIGITAL_COUPON_REFUND"], "missingPermissions": ["commerce.dispute.review", "commerce.refund.execute"], "invitationApproval": "PENDING_USER_RESPONSE", "configuredLeastPrivilegeRole": "NOT_AVAILABLE", "prerequisites": "Actual owner-qualified registration verification and assignment claims, scoped reviewer role and governed invitation; setting configuration qualification flags is not proof"},
+    {"code": "CIRCA_GOVERNED_OPERATIONAL_MIGRATION_REQUIRED", "owner": "Promotion, Inventory, DigitalCore and commercial enterprise authority", "prerequisites": "Replace raw legacy stock/coupon snapshots with existing governed owner setup contributions. Resolve distinct GreenPerks issuer/vendor authorization and digital asset supply without pretending self-issued scope, partner consent or physical inventory.", "legacyOperationalImport": "REFUSED_BEFORE_DISPATCH", "circaBusinessReady": false}
+  ],
+  "cleanup": {"state": "PASSED", "nativeRuntimesStopped": 10, "nativeSupervisorExitCode": 0, "axisDevServerStopped": true, "checkedPorts": [3100, 4300, 4312, 4314, 4330, 4340, 4350, 4352, 4360, 4370, 4380], "remainingOwnedListeners": [], "temporaryViewportReset": true, "existingAxisTabPreserved": true, "unrelatedProvidersPreserved": true, "scopedDiffCheck": "PASSED", "evidenceJsonParse": "PASSED"}
+}

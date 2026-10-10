@@ -1,0 +1,155 @@
+{
+  "scope": "NATIVE_KICKOFF_LOCAL_ONLY",
+  "status": "COORDINATED_SETUP_READY_BUSINESS_JOURNEYS_NOT_YET_QUALIFIED",
+  "observationDate": "2026-10-09",
+  "productionQualification": false,
+  "resetPerformed": false,
+  "authority": {
+    "issuerSessions": "Fresh canonical Profile employee authentication under each original enterprise",
+    "reviewer": "Independent default-enterprise administrator through canonical Process review",
+    "runtimeDeploymentGrants": { "verified": 10, "owner": "Profile.runRuntimeDeploymentGrantAcceptance" },
+    "credentialsOrCouponSecretsRecorded": false,
+    "signedPrincipalEnterpriseRewritten": false
+  },
+  "publications": {
+    "ownerApi": "POST /nodics/publish/v0/publications/setup/status",
+    "currentRoots": 84,
+    "currentScope": "Effective revision-2 plan; five classification successors replace the original asset intents without duplicating required roots",
+    "observationPlanChecksum": "2198ebad654eb1f954c582c9473bbc167f41555692934b289ee83f74a63e9367",
+    "successorsActivatedThisContinuation": 5,
+    "subsets": [
+      { "enterpriseCode": "GREENPERKS_ONLINE", "subset": "current-catalogue", "current": 46, "ready": true },
+      { "enterpriseCode": "GREENPERKS_RETAIL", "subset": "greenperks", "current": 35, "ready": true },
+      { "enterpriseCode": "RENEWWORKS_REPAIR_REUSE", "subset": "renewworks", "current": 2, "ready": true },
+      { "enterpriseCode": "LOOPCYCLE_RECYCLING", "subset": "loopcycle", "current": 1, "ready": true }
+    ],
+    "originalFailedActionRecovery": {
+      "publicationCode": "circa-product-CIRCA_ASSET_EWA-1047-v001",
+      "ownerApi": "POST /nodics/process/v0/instances/:instanceCode/retry",
+      "originalReviewDecisionPreserved": true,
+      "expectedAttempt": 1,
+      "result": "COMPLETED",
+      "journalBackfillOrRewrite": false
+    }
+  },
+  "financialExecution": {
+    "budgetPacksInstalledThisRun": 3,
+    "budgetInstallationEvidence": {
+      "preflight": "All three original issuer sessions; ready true, exact selected release, no blocked or waiting contributions",
+      "installation": "All three releases CURRENT at 0.0.1 with unchanged preflight checksums",
+      "freshReadback": "All three CURRENT; validation skipped true; no forced replay or budget replenishment"
+    },
+    "issuancePacksInstalledThisRun": 3,
+    "issuanceInstallationEvidence": {
+      "circaRenewWorksIssuance": "CURRENT at 0.0.1; original issuer preflight, install, unchanged checksum and fresh CURRENT readback",
+      "circaLoopCycleIssuance": "CURRENT at 0.0.1; original issuer preflight, install, unchanged checksum and fresh CURRENT readback",
+      "circaGreenPerksIssuance": "CURRENT at 0.0.1 after canonical FAILED retry; exact pinned checksum, 35 quantity-100 batches, seven original batches preserved and 28 newly issued; strict receipt and fresh CURRENT readback passed",
+      "greenPerksChecksum": "672dff3f1058dec8ba3eacc22d752ccc1bd505aa72213351a2d63d86fa4ba964",
+      "partialBatchProof": "Secure owner prepare verified all retained original units, immutable intent, private retention and original consent; canonical retry retained all seven original batches; no stock reset, replenishment or receipt rewrite",
+      "totalCampaignsIssued": 38,
+      "totalUnitsIssued": 3800,
+      "recoveryLogout": "PASS",
+      "failedAttemptLogout": "UNCONFIRMED: rate-limit refusal; later qualification commands authenticated and logged out independently"
+    },
+    "sellerConsent": {
+      "campaignsCommitted": 38,
+      "actors": "Three original issuer administrators",
+      "exactCommandReplayAndFreshReadback": "PASS",
+      "installedDistributionGuards": "Passed through each canonical consent POST",
+      "meaning": "Reviewed issuer consent, not issued stock, completed purchase or monetary delivery qualification"
+    },
+    "firstIssuancePreflight": "Historical authorization handoff refusal repaired; subsequent original issuer preflights passed for all three releases",
+    "purchasesOrRedemptionsClaimed": 0,
+    "refundsClaimed": 0,
+    "firstBudgetPreflight": "REFUSED_BEFORE_WRITE_ONLINE_READ_INCORRECTLY_REQUIRES_STAGED_SOURCE",
+    "aggregateReadiness": "READY",
+    "rebuiltAggregateObservation": {
+      "beforeDataStagesCurrent": 31,
+      "mediaStage": "SOURCE_READY_PERSISTED_METADATA_NOT_STORED_BYTE_VERIFICATION",
+      "functionalOwnersCurrent": 4,
+      "budgetStagesCurrent": 3,
+      "publicationStages": "All four CURRENT through shared aggregate observation, including full effective 46-root catalogue",
+      "issuanceStages": "All three CURRENT through fresh shared aggregate observation",
+      "publicationState": "ONLINE",
+      "meaning": "All ten scoped after-publication stages CURRENT; setup readiness does not qualify purchase, redemption, fulfillment or refund journeys"
+    },
+    "freshOutletScopes": "Four exact ACTIVE DIRECT STORE ALLOWs under the three original operator sessions, no relevant DENY",
+    "localItemDelivery": "Approved simulation only; no actual goods delivery claimed",
+    "alreadyRedeemedBenefitReversals": "DISABLED"
+  },
+  "predefinedDemoStaffRelease": {
+    "releaseCode": "circa.ewaste:circaCommerceStaffAssignments",
+    "version": "0.0.1",
+    "checksum": "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049",
+    "nativeInstallation": "CURRENT_NORMAL_NIMPORT_PREFLIGHT_INSTALL_FRESH_READBACK",
+    "employeesVerified": 7,
+    "originalIdentitiesCredentialReferencesAndPriorGroupsPreserved": true,
+    "newNativeMembership": "circa-online-administrator:commerceAxisRefundReviewerUserGroup",
+    "otherReviewedMemberships": "Existing exact groups preserved without replaying operations or rewriting credentials",
+    "freshOriginalOnlineAdministratorSession": "Refund reviewer group present; enterprise GREENPERKS_ONLINE; exact existing ENTERPRISE scope",
+    "wholePreparationAction": "Native coordinated Prepare attempted true and changed true; asset classification imported normally, all before-publication stages CURRENT or Media SOURCE_READY; later fresh aggregate READY after all three issuance packs became CURRENT"
+  },
+  "encounteredReadDefects": {
+    "customerCatalogue": "RESOLVED: fresh native customer discovery returns 43 DIGITAL products after complete issuance; unqualified ownership entries are unavailable without disabling strict checkout gates",
+    "walletEvidence": "RESOLVED: fresh genuine WASTE protected owner read confirms circa-customer wallet available 118 POINTS, reserved 0, revision 0 after canonical tenant-less row evidence repair",
+    "profileCustomerEvidence": "RESOLVED: rebuilt native genuine WASTE protected read confirms the original active circa-seller in default tenant and GREENPERKS_ONLINE business scope",
+    "assetListingPlan": "RESOLVED: genuine COMMERCE read-only preview passes with canonical generated-create asset revision 1; the source record's revision 0 is not its installed managed revision",
+    "fundingOrMonetaryGoodsImported": false
+  },
+  "nativeAssetListingOnboarding": {
+    "assetCode": "EWA-1092",
+    "productCode": "CIRCA_ASSET_EWA-1092",
+    "sellerCode": "circa-seller",
+    "businessEnterpriseCode": "GREENPERKS_ONLINE",
+    "originalPrincipalEnterpriseCode": "default",
+    "expectedInstalledAssetRevision": 1,
+    "reviewedPlanDigest": "722211132261d24ba2f4bcffa269c228201045d1adb1dca3f3b95e70db49f9ee",
+    "retainedLocales": ["ar", "en"],
+    "protectedIndependentReads": "Profile customer-evidence, DigitalCore LISTING evidence and Product current publication pointer all PASS; pointer revision 2",
+    "bindingCode": "digitalBinding:c2134a01ccd1b2063f16acaef4b94dfca6bb5c14a028bd7fe2a9a90c257e18f8",
+    "bindingAdmission": "BINDING_ADMITTED through exact already configured COMMERCE deployment grant; fresh owner readback and original-command replay PASS",
+    "projectionCode": "WASTE_MARKETPLACE_PROJECTION_EWA_1092",
+    "wasteListingCompletion": "LISTED through genuine binding readback, installed generated CAS/index checks and original-command replay PASS",
+    "resultingAssetRevision": 2,
+    "physicalCustodyTransferred": false,
+    "purchasePerformed": false,
+    "refundPerformed": false,
+    "qualificationFlagsEnabled": false,
+    "historicalRefusals": "Revision-0 preview refused without writes; wrong WASTE admission caller refused 403 before binding creation; corrected selectors and existing COMMERCE grant used without broadening authority",
+    "logout": "PASS"
+  },
+  "sourceReleaseBaselineAudit": {
+    "framework": { "releaseDirectories": 107, "executableSections": 128, "violations": 0 },
+    "kickoff": { "releaseDirectories": 8, "executableSections": 41, "violations": 0 },
+    "releaseDirectoryBaseline": "v001",
+    "executableSectionVersionBaseline": "0.0.1",
+    "exceptions": "Five non-executable Framework SOURCE_CONTRIBUTION descriptors at 0.0.0 and an excluded reference test fixture are not executable release violations",
+    "installedHistoryRewritten": false
+  },
+  "remainingAcceptanceGates": {
+    "couponFunding": "Awaiting the separately requested approval for 7645 additional test-only POINTS; existing buyer balance remains 118, no credit executed",
+    "monetaryOutletGoods": "Awaiting the separately requested four fictional outlet goods proposal approval; no proposed goods imported",
+    "ownershipJourneys": "One of five approved assets has genuine listing/binding onboarding proof; other assets and native purchase/seller settlement/original refund remain unqualified; sale qualification flags remain off",
+    "couponJourneys": "Issued stock is complete; native purchase, redemption, simulated ITEM delivery and unused refund qualification are not claimed by this evidence",
+    "cmsGuideCorrections": "Frozen canonical eWaste CMS data needs a governed forward correction for predefined demo staff guidance and the second reviewer CLAIM after QUEUE/revision reread; original imported pack bytes were not edited",
+    "axisUi": "Timeout selection and source tests passed; local login page rendered, but signed-in coordinated publication UI acceptance is not claimed"
+  },
+  "cleanup": {
+    "nativeSupervisor": "STOPPED_THROUGH_CANONICAL_TOPOLOGY_STOP_EXIT_0",
+    "axisOwnedDevServer": "STOPPED",
+    "temporaryBrowserTab": "CLOSED",
+    "verifiedClosedPorts": [3100, 4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350],
+    "subagents": "CLOSED"
+  },
+  "isolatedSourceChecks": {
+    "financialPolicyProviders": { "passed": 258, "failed": 0, "skipped": 0 },
+    "publicationApprovalBridge": { "passed": 24, "failed": 0, "skipped": 0 },
+    "productGovernedPublication": { "passed": 28, "failed": 0, "skipped": 0 },
+    "migratedBoundedProfileReferenceSuites": { "passed": 196, "failed": 0, "skipped": 0 },
+    "nativeItemSelectionAdoption": { "passed": 3, "failed": 0, "skipped": 0 },
+    "profileCustomerEvidenceContinuation": { "passed": 20, "failed": 0, "skipped": 0 },
+    "listingOwnershipAcceptanceAndDigitalEvidenceContinuation": { "passed": 85, "failed": 0, "skipped": 0 },
+    "managedCreateListingRevisionRegression": { "passed": 6, "failed": 0, "skipped": 0 },
+    "meaning": "Source checks are distinct from the native publication receipts and unfinished financial journeys"
+  }
+}

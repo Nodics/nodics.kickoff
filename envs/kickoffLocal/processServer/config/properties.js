@@ -11,9 +11,11 @@
 
 /** @module kickoffLocal/processServer/config/properties @description Selects Local Process deployment and explicit owner callback/start capabilities without granting authority or qualifying their callers. @owner nodics.kickoff @layer configuration */
 module.exports = {
+  "publish": { "setup": { "observation": { "enabled": true } } },
   "activeModules": {
     "groups": [],
     "modules": [
+      "publish",
       "redisCache",
       "nodics.kickoff",
       "kickoffCore",

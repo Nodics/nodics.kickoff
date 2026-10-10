@@ -1,0 +1,78 @@
+{
+  "scope": "FICTIONAL_NATIVE_KICKOFF_LOCAL_ONLY",
+  "operationalAuthority": false,
+  "owner": "DefaultCouponSellerAuthorizationService",
+  "purpose": "SEPARATE_HUMAN_ISSUER_REVIEW_BEFORE_ISSUANCE",
+  "grantsImported": false,
+  "instructions": [
+    "Each issuer signs under its own canonical enterprise and existing employee permission.",
+    "Read the current campaign and consent revision through the existing consent owner.",
+    "Review the exact vendor, expiry and benefit consumption purpose; submit only via the canonical consent manage command.",
+    "Source budget intent does not grant authority. Do not import grants or substitute signed issuer identity.",
+    "Re-read the canonical projected consent and original budget admission before selecting issuance."
+  ],
+  "issuers": [
+    {
+      "signedEnterprise": "GREENPERKS_RETAIL",
+      "vendorEnterprise": "GREENPERKS_ONLINE",
+      "expiresAt": "2026-11-08T23:59:59.000Z",
+      "benefitConsumption": "ISSUED_COUPON_BENEFIT_V1",
+      "campaignCodes": [
+        "CIRCA_COUPON_GP-C01_PROMO",
+        "CIRCA_COUPON_GP-C02_PROMO",
+        "CIRCA_COUPON_GP-C03_PROMO",
+        "CIRCA_COUPON_GP-C04_PROMO",
+        "CIRCA_COUPON_GP-C05_PROMO",
+        "CIRCA_COUPON_GP-C06_PROMO",
+        "CIRCA_COUPON_GP-C07_PROMO",
+        "CIRCA_COUPON_GP-C08_PROMO",
+        "CIRCA_COUPON_GP-C09_PROMO",
+        "CIRCA_COUPON_GP-C10_PROMO",
+        "CIRCA_COUPON_GP-C11_PROMO",
+        "CIRCA_COUPON_GP-C12_PROMO",
+        "CIRCA_COUPON_GP-B01_PROMO",
+        "CIRCA_COUPON_GP-B02_PROMO",
+        "CIRCA_COUPON_GP-B03_PROMO",
+        "CIRCA_COUPON_GP-B04_PROMO",
+        "CIRCA_COUPON_GP-B05_PROMO",
+        "CIRCA_COUPON_GP-B06_PROMO",
+        "CIRCA_COUPON_GP-B07_PROMO",
+        "CIRCA_COUPON_GP-B08_PROMO",
+        "CIRCA_COUPON_GP-B09_PROMO",
+        "CIRCA_COUPON_GP-B10_PROMO",
+        "CIRCA_COUPON_GP-B11_PROMO",
+        "CIRCA_COUPON_GP-B12_PROMO",
+        "CIRCA_COUPON_GP-A01_PROMO",
+        "CIRCA_COUPON_GP-A02_PROMO",
+        "CIRCA_COUPON_GP-A03_PROMO",
+        "CIRCA_COUPON_GP-A04_PROMO",
+        "CIRCA_COUPON_GP-A05_PROMO",
+        "CIRCA_COUPON_GP-A06_PROMO",
+        "CIRCA_COUPON_GP-A07_PROMO",
+        "CIRCA_COUPON_GP-A08_PROMO",
+        "CIRCA_COUPON_GP-A09_PROMO",
+        "CIRCA_COUPON_GP-A10_PROMO",
+        "CIRCA_COUPON_GP-A11_PROMO"
+      ]
+    },
+    {
+      "signedEnterprise": "RENEWWORKS_REPAIR_REUSE",
+      "vendorEnterprise": "GREENPERKS_ONLINE",
+      "expiresAt": "2026-11-08T23:59:59.000Z",
+      "benefitConsumption": "ISSUED_COUPON_BENEFIT_V1",
+      "campaignCodes": [
+        "CIRCA_COUPON_CPN-GRN-30_PROMO",
+        "CIRCA_COUPON_CPN-SVC-50_PROMO"
+      ]
+    },
+    {
+      "signedEnterprise": "LOOPCYCLE_RECYCLING",
+      "vendorEnterprise": "GREENPERKS_ONLINE",
+      "expiresAt": "2026-11-08T23:59:59.000Z",
+      "benefitConsumption": "ISSUED_COUPON_BENEFIT_V1",
+      "campaignCodes": [
+        "CIRCA_COUPON_CPN-ECO-15_PROMO"
+      ]
+    }
+  ]
+}

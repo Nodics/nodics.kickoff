@@ -1,0 +1,70 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "circa-product-CIRCA_ASSET_EWA-1047-classification-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "CIRCA_ASSET_EWA-1047",
+      "sourceVersion": "2",
+      "input": {
+        "publicationCode": "circa-product-CIRCA_ASSET_EWA-1047-classification-v001",
+        "productCode": "CIRCA_ASSET_EWA-1047",
+        "storeCode": "circaMainStore",
+        "versionId": 1
+      }
+    },
+    {
+      "code": "circa-product-CIRCA_ASSET_EWA-1051-classification-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "CIRCA_ASSET_EWA-1051",
+      "sourceVersion": "2",
+      "input": {
+        "publicationCode": "circa-product-CIRCA_ASSET_EWA-1051-classification-v001",
+        "productCode": "CIRCA_ASSET_EWA-1051",
+        "storeCode": "circaMainStore",
+        "versionId": 1
+      }
+    },
+    {
+      "code": "circa-product-CIRCA_ASSET_EWA-1052-classification-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "CIRCA_ASSET_EWA-1052",
+      "sourceVersion": "2",
+      "input": {
+        "publicationCode": "circa-product-CIRCA_ASSET_EWA-1052-classification-v001",
+        "productCode": "CIRCA_ASSET_EWA-1052",
+        "storeCode": "circaMainStore",
+        "versionId": 1
+      }
+    },
+    {
+      "code": "circa-product-CIRCA_ASSET_EWA-1055-classification-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "CIRCA_ASSET_EWA-1055",
+      "sourceVersion": "2",
+      "input": {
+        "publicationCode": "circa-product-CIRCA_ASSET_EWA-1055-classification-v001",
+        "productCode": "CIRCA_ASSET_EWA-1055",
+        "storeCode": "circaMainStore",
+        "versionId": 1
+      }
+    },
+    {
+      "code": "circa-product-CIRCA_ASSET_EWA-1092-classification-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "CIRCA_ASSET_EWA-1092",
+      "sourceVersion": "2",
+      "input": {
+        "publicationCode": "circa-product-CIRCA_ASSET_EWA-1092-classification-v001",
+        "productCode": "CIRCA_ASSET_EWA-1092",
+        "storeCode": "circaMainStore",
+        "versionId": 1
+      }
+    }
+  ]
+}

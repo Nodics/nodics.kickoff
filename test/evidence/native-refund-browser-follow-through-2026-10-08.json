@@ -1,0 +1,128 @@
+{
+  "observedAt": "2026-10-08T19:40:44.000Z",
+  "state": "SOURCE_FIXES_VALIDATED_BROWSER_ADMISSION_PENDING",
+  "environment": "kickoffLocal",
+  "application": "agoraapparel",
+  "previousEvidence": "native-refund-return-2026-10-08.json",
+  "previousNativeApiAcceptancePreserved": true,
+  "browserRefundAcceptancePassed": false,
+  "allProjectWorkComplete": false,
+  "changes": [
+    "Axis offers the existing guarded refund preview for RETURN cases as well as CANCELLATION and REFUND.",
+    "Order recovery preview exposes the original approvalCommandKey only to the authorized reviewer for the original case; another case is ineligible and missing or malformed references fail closed.",
+    "Axis preserves the original command and immutable approval reason across clients, sends the shared transport idempotency header and permits explicit read-only plan refresh.",
+    "Confirmed completion closes the approval before refreshing the parent queue; a refresh failure cannot leave the completed approval open.",
+    "Existing owner API authorization, financial preflight, scope checks and exact original-command execution binding remain unchanged."
+  ],
+  "sourcePins": {
+    "orderRecoveryServiceSha256": "2f6be914f20b57c1336bd8aa2aedf3ce17231dd4eac7889eb0fc39ebfb802e53",
+    "axisRefundReviewSha256": "fe113a0ae724ec7234cdd140f50e8ba51b1f5253de19b752f35413f55f55a559",
+    "axisReviewPanelSha256": "72926f8f9a12e0b5f0b9fd524bb0ca9e22c0d560149840d6e954cb4fc58310a2"
+  },
+  "validation": {
+    "commerceTestsPassed": 214,
+    "profileReviewerRoleTestsPassed": 4,
+    "axisOrderLifecycleAndOwnerEnvelopeTestsPassed": 21,
+    "uniqueTestsPassed": 239,
+    "finalTestsFailed": 0,
+    "axisTypecheck": "PASSED",
+    "axisScopedEslint": "PASSED",
+    "axisProductionBuild": "PASSED_WITH_EXISTING_LARGE_CHUNK_WARNING",
+    "frameworkOwnershipFilesChecked": 8413,
+    "frameworkOwnershipFindings": 0,
+    "frameworkLlmModulesGeneratedAndValidated": 202,
+    "scopedAndRepositoryDiffWhitespaceChecks": "PASSED"
+  },
+  "controlledNativeBuild": {
+    "method": "CANONICAL_SELECTED_SERVER_BUILD_AND_START_FROM_FROZEN_CHECKOUT",
+    "selectedRuntimesBuiltAndReadyPerWindow": 10,
+    "profileAndIdentityReviewedSourceFileCount": 34431,
+    "profileAndIdentityReviewedSourceSha256": "4b9376b82a9d964d938d089a19c9a25c9e354735cd43156ec9ad11bf2465be83",
+    "profileAndIdentitySourceUnchangedAfterBothBuilds": true,
+    "readOnlyInventoryAndIndexObservedAt": "2026-10-08T19:34:28.915Z",
+    "inventoryComplete": true,
+    "consistency": "TWO_PASS_OBSERVED_MATCH",
+    "atomicSnapshot": false,
+    "countsBeforeRegistration": {
+      "tenants": 1,
+      "enterprises": 1,
+      "assignments": 2,
+      "employees": 8,
+      "customers": 7,
+      "servicePrincipals": 1,
+      "passwords": 15
+    },
+    "exactPartialUniqueAssignmentClaimIndex": true,
+    "installedAssignmentIndexCount": 7,
+    "bootstrapReviewDisposition": "REVIEWED_SOURCE_MATCH",
+    "readOnlyReceiptRegistrationQualified": false,
+    "readOnlyReceiptInstalledRuntimeSourceMatch": "NOT_ESTABLISHED",
+    "readOnlyReceiptQualificationGranted": false,
+    "adoption": "Separate controlled native source/build review plus installed inventory and index observations preceded the explicit temporary Local registration window. Read-only evidence itself did not grant qualification."
+  },
+  "liveAttempt": {
+    "normalProfileInvitationAndMailboxVerifiedRegistration": "PASSED",
+    "reviewerRole": "COMMERCE_REFUND_REVIEWER",
+    "reviewerCoreRelease": "profile:commerceRefundReviewerRole",
+    "reviewerCoreReleaseVersion": "0.0.1",
+    "reviewerCoreReleaseAlreadyCurrent": true,
+    "freshReviewerOwnerApiAuthentication": "PASSED",
+    "normalDisposableCustomerSignupAndAuthentication": "PASSED",
+    "browser": "ISOLATED_HEADLESS_CHROME_ACTUAL_AXIS_LOGIN_FORM",
+    "browserSessionInjected": false,
+    "observedStop": "SIGN_IN_DID_NOT_LEAVE_LOGIN_WITHIN_60000_MS",
+    "reviewerBrowserAuthenticationHttpOutcome": "NOT_CAPTURED",
+    "browserBootstrapHttpOutcome": "NOT_CAPTURED",
+    "sourceAdmissionGap": "The API-only reviewer group inherits ordinary employeeUserGroup and does not grant backoffice.bootstrap.view or Axis shell visibility. BackOffice bootstrap independently requires backoffice.bootstrap.view.",
+    "browserRefundWrites": 0,
+    "newCheckoutOrReturnLogisticsEffects": 0,
+    "newRefundScreenshots": 0,
+    "requestedNextAuthorization": "Separate explicitly selected least-privilege Axis refund reviewer role; preserve the API-only reviewer role and all existing administrator grants.",
+    "broadAxisViewerGroupAttached": false,
+    "permissionChecksBypassed": false
+  },
+  "attemptCorrections": [
+    "Frontend tests initially needed typed fetch mocks and synchronous reply factories to satisfy strict TypeScript and ESLint; the final source gates pass.",
+    "The pending-write test now uses a DOM event to verify that the disabled native button prevents dispatch; user-event correctly rejects pointer interaction with MUI's disabled pointer-events style.",
+    "No failed test was repaired by changing installed identities, approval journals, stock or payment evidence."
+  ],
+  "circaReadOnlyReview": {
+    "state": "CIRCA_GOVERNED_OPERATIONAL_MIGRATION_REQUIRED",
+    "manifestFileHashesMatched": 97,
+    "executedOrImported": false,
+    "sourceGaps": [
+      "Replace legacy operational stock/coupon snapshots with separately governed owner contributions after required Online publication.",
+      "Resolve explicit campaign issuer/vendor references and budget semantics; do not invent limits.",
+      "Promotion secure issuance currently restricts issuer and vendor to the authenticated enterprise; cross-enterprise issuance needs an owner extension preserving consent, encrypted retention, transactions and replay.",
+      "DigitalCore supplies coupon pools, not the five Waste asset ownership units; the asset supply/listing owner bridge requires migration.",
+      "Correct localized digital classification and publish all required product and financial-policy roots.",
+      "Purchase-relative rights and ITEM benefits retain their independent qualification and supported-action gates."
+    ],
+    "fictionalGreenPerksTreatedAsRealExternalConsentEvidence": false,
+    "anotherResetJustified": false
+  },
+  "retainedTestState": "One additional normally invited and registered API-only reviewer and one normally registered disposable customer remain. Their transient passwords and OTPs were not persisted. No browser checkout, dispatch, return receipt, inspection or refund was executed before the sign-in stop. Prior acceptance journals and accounts remain unchanged.",
+  "cleanup": {
+    "nativeAcceptanceSupervisorExitCode": 1,
+    "nativeRuntimesStopped": 10,
+    "axisDevelopmentServerStopped": true,
+    "isolatedBrowserClosed": true,
+    "smtpCaptureClosed": true,
+    "captureMessagesCleared": true,
+    "externalMailRelay": false,
+    "secretsRetained": false,
+    "defaultOnboardingConfigurationUnchanged": true,
+    "administratorGrantsChanged": false,
+    "rawIdentityOrGrantWrites": false,
+    "databaseOrSearchResetPerformed": false,
+    "remainingOwnedListeners": [],
+    "unrelatedProvidersPreserved": true,
+    "historicalEvidencePreserved": true
+  },
+  "remainingGates": [
+    "SEPARATELY_APPROVED_AXIS_REFUND_REVIEWER_ADMISSION_REQUIRED",
+    "BROWSER_REFUND_RETURN_ACCEPTANCE_NOT_COMPLETED",
+    "CIRCA_GOVERNED_OPERATIONAL_MIGRATION_REQUIRED",
+    "EXTERNAL_FINANCIAL_CARRIER_AND_WAREHOUSE_QUALIFICATION_NOT_CLAIMED"
+  ]
+}

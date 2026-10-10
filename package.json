@@ -545,7 +545,7 @@
     "nodics:publishing-soak": "nodics qualification:publishing-soak",
     "nodics:publishing-interruption-contracts": "nodics qualification:publishing-interruption-contracts",
     "release:check": "nodics release:check",
-    "test:data-ownership": "node --test test/agoraDataOwnershipContract.test.js test/agoraCommerceReleaseAdmission.test.js"
+    "test:data-ownership": "node --test test/agoraDataOwnershipContract.test.js test/agoraCommerceReleaseAdmission.test.js modules/agora.apparel/test/apparelOperationalPack.test.js"
   },
   "dependencies": {
     "nodics.foundation": "file:../nodics.ai/nodics.foundation"

@@ -1,0 +1,1373 @@
+{
+  "contractVersion": 1,
+  "purpose": "SOURCE_PINNED_NATIVE_LOCAL_ITEM_SELECTION_NOT_EXECUTION_OR_AUTHORITY",
+  "importable": false,
+  "operationalAuthority": false,
+  "independentOwnerGatesWaived": false,
+  "sourcePins": {
+    "campaigns": {
+      "path": "data/sample-v001/commerce/records/circaPromotionData.js",
+      "sha256": "900635f8d7597a9f02190d8fe5f69dcc453440e54e081f4742f9b7e3d2c7c9db"
+    },
+    "prices": {
+      "path": "data/sample-v001/commerce/records/circaPriceRowData.js",
+      "sha256": "2891c9b75bbd5e54369072a514f0fd942107e88cd43592802e64bd991da17b1d"
+    },
+    "products": {
+      "path": "data/sample-v001/commerce/records/circaProductData.js",
+      "sha256": "1b3a79efa5a02bcdbc9e9ed34b3d9e76d0b941796680cfac1ed67cfb82940ee3"
+    },
+    "variants": {
+      "path": "data/sample-v001/commerce/records/circaProductVariantData.js",
+      "sha256": "829abd7ce2a995b9da0c779db8b0aa3554ed99893d8daa3560772d0b11326cca"
+    },
+    "priceBook": {
+      "path": "data/sample-v001/commerce/records/circaPriceBookData.js",
+      "sha256": "29de0bf1c22f1181c6f53c51ce5872c11e47db45c98c48add9ed02bef79986ea"
+    },
+    "tax": {
+      "path": "data/sample-v001/commerce/records/circaTaxPolicyData.js",
+      "sha256": "2a6adc07c13a413184b0bab90297505076fb28b4f19441e3b9914fed20a3f2b4"
+    },
+    "stores": {
+      "path": "data/sample-v001/store/records/circaStoreData.js",
+      "sha256": "40a3bcc4a6558f415ff59492e32c407975e37f47d96fb10ae7cbaa01f9477548"
+    },
+    "reviewedPolicy": {
+      "path": "test/fixtures/circaDemoPolicyProposal.json",
+      "sha256": "506fc741a8d05893750a491ce5472483883268272d4dec29c34af2fa003d748f"
+    }
+  },
+  "selection": {
+    "contractVersion": 1,
+    "localDemo": true,
+    "tenant": "default",
+    "storeCode": "circaMainStore",
+    "channelCode": "web",
+    "locale": "en",
+    "jurisdiction": "CIRCA_SAMPLE",
+    "currency": "POINTS",
+    "payment": {
+      "paymentMethod": "LOYALTY_REWARD",
+      "programCode": "circa",
+      "rewardTypeCode": "points",
+      "rewardCurrency": "POINTS"
+    },
+    "priceSourceSha256": "2891c9b75bbd5e54369072a514f0fd942107e88cd43592802e64bd991da17b1d",
+    "campaignSourceSha256": "900635f8d7597a9f02190d8fe5f69dcc453440e54e081f4742f9b7e3d2c7c9db",
+    "approvedCampaignCodes": [
+      "CIRCA_COUPON_CPN-GRN-30_PROMO",
+      "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "CIRCA_COUPON_CPN-SVC-50_PROMO",
+      "CIRCA_COUPON_GP-C01_PROMO",
+      "CIRCA_COUPON_GP-C02_PROMO",
+      "CIRCA_COUPON_GP-C03_PROMO",
+      "CIRCA_COUPON_GP-C04_PROMO",
+      "CIRCA_COUPON_GP-C05_PROMO",
+      "CIRCA_COUPON_GP-C06_PROMO",
+      "CIRCA_COUPON_GP-C07_PROMO",
+      "CIRCA_COUPON_GP-C08_PROMO",
+      "CIRCA_COUPON_GP-C09_PROMO",
+      "CIRCA_COUPON_GP-C10_PROMO",
+      "CIRCA_COUPON_GP-C11_PROMO",
+      "CIRCA_COUPON_GP-C12_PROMO",
+      "CIRCA_COUPON_GP-B01_PROMO",
+      "CIRCA_COUPON_GP-B02_PROMO",
+      "CIRCA_COUPON_GP-B03_PROMO",
+      "CIRCA_COUPON_GP-B04_PROMO",
+      "CIRCA_COUPON_GP-B05_PROMO",
+      "CIRCA_COUPON_GP-B06_PROMO",
+      "CIRCA_COUPON_GP-B07_PROMO",
+      "CIRCA_COUPON_GP-B08_PROMO",
+      "CIRCA_COUPON_GP-B09_PROMO",
+      "CIRCA_COUPON_GP-B10_PROMO",
+      "CIRCA_COUPON_GP-B11_PROMO",
+      "CIRCA_COUPON_GP-B12_PROMO",
+      "CIRCA_COUPON_GP-A01_PROMO",
+      "CIRCA_COUPON_GP-A02_PROMO",
+      "CIRCA_COUPON_GP-A03_PROMO",
+      "CIRCA_COUPON_GP-A04_PROMO",
+      "CIRCA_COUPON_GP-A05_PROMO",
+      "CIRCA_COUPON_GP-A06_PROMO",
+      "CIRCA_COUPON_GP-A07_PROMO",
+      "CIRCA_COUPON_GP-A08_PROMO",
+      "CIRCA_COUPON_GP-A09_PROMO",
+      "CIRCA_COUPON_GP-A10_PROMO",
+      "CIRCA_COUPON_GP-A11_PROMO"
+    ],
+    "approvedUnitsPerCampaign": 100,
+    "expectedCampaignCount": 38,
+    "expectedItemCount": 29,
+    "itemCases": [
+      {
+        "caseCode": "GP-C01",
+        "productCode": "CIRCA_COUPON_GP-C01",
+        "sku": "CIRCA_COUPON_GP-C01_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C01_PROMO",
+        "expectedTotal": "80",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_ESPRESSO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C02",
+        "productCode": "CIRCA_COUPON_GP-C02",
+        "sku": "CIRCA_COUPON_GP-C02_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C02_PROMO",
+        "expectedTotal": "100",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C03",
+        "productCode": "CIRCA_COUPON_GP-C03",
+        "sku": "CIRCA_COUPON_GP-C03_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C03_PROMO",
+        "expectedTotal": "120",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_CAPPUCCINO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C04",
+        "productCode": "CIRCA_COUPON_GP-C04",
+        "sku": "CIRCA_COUPON_GP-C04_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C04_PROMO",
+        "expectedTotal": "130",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_LATTE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C05",
+        "productCode": "CIRCA_COUPON_GP-C05",
+        "sku": "CIRCA_COUPON_GP-C05_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C05_PROMO",
+        "expectedTotal": "90",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C06",
+        "productCode": "CIRCA_COUPON_GP-C06",
+        "sku": "CIRCA_COUPON_GP-C06_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C06_PROMO",
+        "expectedTotal": "140",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_ICED_COFFEE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C07",
+        "productCode": "CIRCA_COUPON_GP-C07",
+        "sku": "CIRCA_COUPON_GP-C07_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C07_PROMO",
+        "expectedTotal": "100",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_CROISSANT",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C08",
+        "productCode": "CIRCA_COUPON_GP-C08",
+        "sku": "CIRCA_COUPON_GP-C08_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C08_PROMO",
+        "expectedTotal": "110",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_MUFFIN",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C09",
+        "productCode": "CIRCA_COUPON_GP-C09",
+        "sku": "CIRCA_COUPON_GP-C09_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C09_PROMO",
+        "expectedTotal": "90",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_COOKIE",
+            "quantity": 2,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C10",
+        "productCode": "CIRCA_COUPON_GP-C10",
+        "sku": "CIRCA_COUPON_GP-C10_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C10_PROMO",
+        "expectedTotal": "190",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_CROISSANT",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C11",
+        "productCode": "CIRCA_COUPON_GP-C11",
+        "sku": "CIRCA_COUPON_GP-C11_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C11_PROMO",
+        "expectedTotal": "210",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_CAKE_SLICE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C12",
+        "productCode": "CIRCA_COUPON_GP-C12",
+        "sku": "CIRCA_COUPON_GP-C12_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-C12_PROMO",
+        "expectedTotal": "280",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_BREAKFAST_SANDWICH",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B01",
+        "productCode": "CIRCA_COUPON_GP-B01",
+        "sku": "CIRCA_COUPON_GP-B01_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B01_PROMO",
+        "expectedTotal": "160",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_VEGETABLE_SOUP",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B02",
+        "productCode": "CIRCA_COUPON_GP-B02",
+        "sku": "CIRCA_COUPON_GP-B02_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B02_PROMO",
+        "expectedTotal": "170",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_SIDE_SALAD",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B03",
+        "productCode": "CIRCA_COUPON_GP-B03",
+        "sku": "CIRCA_COUPON_GP-B03_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B03_PROMO",
+        "expectedTotal": "220",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_STARTER_PLATE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B04",
+        "productCode": "CIRCA_COUPON_GP-B04",
+        "sku": "CIRCA_COUPON_GP-B04_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B04_PROMO",
+        "expectedTotal": "260",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_SANDWICH",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B05",
+        "productCode": "CIRCA_COUPON_GP-B05",
+        "sku": "CIRCA_COUPON_GP-B05_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B05_PROMO",
+        "expectedTotal": "350",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_PASTA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B06",
+        "productCode": "CIRCA_COUPON_GP-B06",
+        "sku": "CIRCA_COUPON_GP-B06_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B06_PROMO",
+        "expectedTotal": "380",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_PIZZA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B07",
+        "productCode": "CIRCA_COUPON_GP-B07",
+        "sku": "CIRCA_COUPON_GP-B07_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B07_PROMO",
+        "expectedTotal": "300",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_MAIN_SALAD",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B08",
+        "productCode": "CIRCA_COUPON_GP-B08",
+        "sku": "CIRCA_COUPON_GP-B08_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B08_PROMO",
+        "expectedTotal": "200",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_DESSERT",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B09",
+        "productCode": "CIRCA_COUPON_GP-B09",
+        "sku": "CIRCA_COUPON_GP-B09_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B09_PROMO",
+        "expectedTotal": "420",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_PASTA",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_SOFT_DRINK",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B10",
+        "productCode": "CIRCA_COUPON_GP-B10",
+        "sku": "CIRCA_COUPON_GP-B10_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B10_PROMO",
+        "expectedTotal": "550",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_VEGETABLE_SOUP",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_PASTA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B11",
+        "productCode": "CIRCA_COUPON_GP-B11",
+        "sku": "CIRCA_COUPON_GP-B11_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-B11_PROMO",
+        "expectedTotal": "900",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-bistro",
+        "staffSessionKey": "greenperksBistroOperator",
+        "items": [
+          {
+            "sku": "GP_PASTA",
+            "quantity": 2,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_SOFT_DRINK",
+            "quantity": 2,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A01",
+        "productCode": "CIRCA_COUPON_GP-A01",
+        "sku": "CIRCA_COUPON_GP-A01_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
+        "expectedTotal": "50",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_BOTTLED_WATER",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A02",
+        "productCode": "CIRCA_COUPON_GP-A02",
+        "sku": "CIRCA_COUPON_GP-A02_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A02_PROMO",
+        "expectedTotal": "90",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A03",
+        "productCode": "CIRCA_COUPON_GP-A03",
+        "sku": "CIRCA_COUPON_GP-A03_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A03_PROMO",
+        "expectedTotal": "100",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A04",
+        "productCode": "CIRCA_COUPON_GP-A04",
+        "sku": "CIRCA_COUPON_GP-A04_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A04_PROMO",
+        "expectedTotal": "150",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_ORANGE_JUICE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A05",
+        "productCode": "CIRCA_COUPON_GP-A05",
+        "sku": "CIRCA_COUPON_GP-A05_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A05_PROMO",
+        "expectedTotal": "80",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_SOFT_DRINK",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A06",
+        "productCode": "CIRCA_COUPON_GP-A06",
+        "sku": "CIRCA_COUPON_GP-A06_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A06_PROMO",
+        "expectedTotal": "260",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "staffSessionKey": "greenperksCafeOperator",
+        "items": [
+          {
+            "sku": "GP_DESSERT",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      }
+    ],
+    "refundCase": {
+      "caseCode": "GP-A01-UNUSED-REFUND",
+      "productCode": "CIRCA_COUPON_GP-A01",
+      "sku": "CIRCA_COUPON_GP-A01_SKU",
+      "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
+      "expectedTotal": "50"
+    },
+    "allowRedeemedBenefitReversal": false
+  },
+  "expectedTerms": {
+    "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+    "sellerEnterpriseCode": "GREENPERKS_ONLINE",
+    "couponQuantityPerPurchase": 1,
+    "issuedUnitsPerApprovedCampaign": 100,
+    "issuanceOrReplenishmentExecuted": false,
+    "itemMonetaryBudget": "0",
+    "benefitType": "ITEM",
+    "substitutions": "NONE",
+    "evidenceMode": "LOCAL_SIMULATION",
+    "merchantReferencePrefix": "SIM:",
+    "simulated": true,
+    "deliveryVerified": false,
+    "monetaryBenefitsQualified": false,
+    "redeemedBenefitReversalsExecuted": false,
+    "eitherOutletSelection": "greenperks-cafe",
+    "itemSpendPoints": "6280",
+    "unusedRefundFloatPoints": "50",
+    "unusedRefundSequence": "BEFORE_ITEM_SPEND_REQUIRE_CONFIRMED_ORIGINAL_PAYMENT_REFUND_REVOKED_ENTITLEMENT_AND_REFUNDED_ORDER",
+    "unusedRefundCase": "GP-A01-UNUSED-REFUND",
+    "unusedRefundEligibility": "OWNER_PREVIEW_AND_ORIGINAL_APPROVAL_REQUIRED_NOT_GRANTED_BY_FIXTURE",
+    "fundingIncluded": false,
+    "campaigns": [
+      {
+        "caseCode": "GP-C01",
+        "promotionCode": "CIRCA_COUPON_GP-C01_PROMO",
+        "name": "Espresso - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Espresso once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_ESPRESSO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C02",
+        "promotionCode": "CIRCA_COUPON_GP-C02_PROMO",
+        "name": "Americano - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Americano once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C03",
+        "promotionCode": "CIRCA_COUPON_GP-C03_PROMO",
+        "name": "Cappuccino - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Cappuccino once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_CAPPUCCINO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C04",
+        "promotionCode": "CIRCA_COUPON_GP-C04_PROMO",
+        "name": "Latte - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Latte once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_LATTE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C05",
+        "promotionCode": "CIRCA_COUPON_GP-C05_PROMO",
+        "name": "Tea - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Tea once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C06",
+        "promotionCode": "CIRCA_COUPON_GP-C06_PROMO",
+        "name": "Iced coffee - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Iced coffee once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_ICED_COFFEE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C07",
+        "promotionCode": "CIRCA_COUPON_GP-C07_PROMO",
+        "name": "Croissant - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Croissant once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_CROISSANT",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C08",
+        "promotionCode": "CIRCA_COUPON_GP-C08_PROMO",
+        "name": "Muffin - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Muffin once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_MUFFIN",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C09",
+        "promotionCode": "CIRCA_COUPON_GP-C09_PROMO",
+        "name": "Cookie pair - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Cookie pair once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_COOKIE",
+            "quantity": 2,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C10",
+        "promotionCode": "CIRCA_COUPON_GP-C10_PROMO",
+        "name": "Coffee and croissant - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_CROISSANT",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C11",
+        "promotionCode": "CIRCA_COUPON_GP-C11_PROMO",
+        "name": "Tea and cake slice - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_CAKE_SLICE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-C12",
+        "promotionCode": "CIRCA_COUPON_GP-C12_PROMO",
+        "name": "Breakfast sandwich and coffee - Hills Cafe",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_BREAKFAST_SANDWICH",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B01",
+        "promotionCode": "CIRCA_COUPON_GP-B01_PROMO",
+        "name": "Soup of the day - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Soup of the day once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_VEGETABLE_SOUP",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B02",
+        "promotionCode": "CIRCA_COUPON_GP-B02_PROMO",
+        "name": "Side salad - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Side salad once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_SIDE_SALAD",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B03",
+        "promotionCode": "CIRCA_COUPON_GP-B03_PROMO",
+        "name": "Starter plate - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Starter plate once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_STARTER_PLATE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B04",
+        "promotionCode": "CIRCA_COUPON_GP-B04_PROMO",
+        "name": "Sandwich - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Sandwich once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_SANDWICH",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B05",
+        "promotionCode": "CIRCA_COUPON_GP-B05_PROMO",
+        "name": "Pasta dish - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Pasta dish once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_PASTA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B06",
+        "promotionCode": "CIRCA_COUPON_GP-B06_PROMO",
+        "name": "Pizza - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Pizza once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_PIZZA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B07",
+        "promotionCode": "CIRCA_COUPON_GP-B07_PROMO",
+        "name": "Main-course salad - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Main-course salad once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_MAIN_SALAD",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B08",
+        "promotionCode": "CIRCA_COUPON_GP-B08_PROMO",
+        "name": "Dessert - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Dessert once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_DESSERT",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B09",
+        "promotionCode": "CIRCA_COUPON_GP-B09_PROMO",
+        "name": "Main and soft drink - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_PASTA",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_SOFT_DRINK",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B10",
+        "promotionCode": "CIRCA_COUPON_GP-B10_PROMO",
+        "name": "Two-course lunch - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_VEGETABLE_SOUP",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_PASTA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-B11",
+        "promotionCode": "CIRCA_COUPON_GP-B11_PROMO",
+        "name": "Meal for two - Hills Bistro",
+        "allowedOutletStoreCodes": [
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Meal for two once at GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_PASTA",
+            "quantity": 2,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_SOFT_DRINK",
+            "quantity": 2,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A01",
+        "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
+        "name": "Bottled water - GreenPerks",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe",
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_BOTTLED_WATER",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A02",
+        "promotionCode": "CIRCA_COUPON_GP-A02_PROMO",
+        "name": "Tea - GreenPerks",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe",
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A03",
+        "promotionCode": "CIRCA_COUPON_GP-A03_PROMO",
+        "name": "Americano - GreenPerks",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe",
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_AMERICANO",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A04",
+        "promotionCode": "CIRCA_COUPON_GP-A04_PROMO",
+        "name": "Fresh juice - GreenPerks",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe",
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_ORANGE_JUICE",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A05",
+        "promotionCode": "CIRCA_COUPON_GP-A05_PROMO",
+        "name": "Soft drink - GreenPerks",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe",
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_SOFT_DRINK",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      },
+      {
+        "caseCode": "GP-A06",
+        "promotionCode": "CIRCA_COUPON_GP-A06_PROMO",
+        "name": "Dessert and tea - GreenPerks",
+        "allowedOutletStoreCodes": [
+          "greenperks-cafe",
+          "greenperks-bistro"
+        ],
+        "validityDays": 30,
+        "terms": [
+          "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+          "Valid for 30 days from successful purchase.",
+          "Fictional local demonstration offer; no real-world venue participation or cash value.",
+          "Exact listed SKU quantities only; no substitutions."
+        ],
+        "budget": "0",
+        "items": [
+          {
+            "sku": "GP_DESSERT",
+            "quantity": 1,
+            "unit": "EACH"
+          },
+          {
+            "sku": "GP_TEA",
+            "quantity": 1,
+            "unit": "EACH"
+          }
+        ]
+      }
+    ]
+  }
+}

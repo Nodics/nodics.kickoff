@@ -1,0 +1,380 @@
+{
+  "contractVersion": 1,
+  "date": "2026-10-09",
+  "environment": "kickoffLocal",
+  "scope": "NATIVE_SETUP_PUBLICATION_AND_SIGNED_OPERATOR_FOLLOW_THROUGH",
+  "status": "SETUP_AND_CMS_MEDIA_VERIFIED_FINANCIAL_E2E_PENDING",
+  "businessAcceptance": false,
+  "fullInstalledOwnerQualification": false,
+  "previousEvidence": "circa-native-setup-prerequisites-2026-10-09.json",
+  "boundaries": {
+    "resetPerformed": false,
+    "receiptHistoryRewritten": false,
+    "credentialsPrinted": false,
+    "credentialsRotated": false,
+    "privateCapture": "Existing human attestation; temporary NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED=true launch selection",
+    "qualificationFlagsChanged": false,
+    "staffRoleGrantsChanged": false,
+    "alreadyRedeemedBenefitReversalsEnabled": false,
+    "itemDelivery": "Approved LOCAL_SIMULATION only; not verified goods delivery"
+  },
+  "completedNative": {
+    "functionalCapabilities": {
+      "registeredAndActivated": [
+        "nodics.location",
+        "nodics.waste",
+        "nodics.loyalty"
+      ],
+      "owner": "Existing BackOffice governed register/activate actions with fresh revisions; Commerce already active"
+    },
+    "beforePublication": {
+      "current": 28,
+      "sourceReady": 1,
+      "requiredTotal": 29,
+      "preSalePolicy": "circa.ewaste:circaDigitalOwnershipPolicies installed through nImport; no stock/coupon/budget snapshot replay",
+      "resume": "Initial Profile import invalidated initiating security stamp; explicit fresh authentication resumed only non-current releases"
+    },
+    "cms": {
+      "publicationCode": "cmsBaseline_circa_0_0_1",
+      "state": "ONLINE",
+      "approval": "Existing CMS Process publicationReview task completed explicitly",
+      "publicPageResolveHttp": 200
+    },
+    "media": {
+      "manifestAssets": 18,
+      "publicationRequests": 18,
+      "independentProcessApprovals": 18,
+      "readiness": "READY",
+      "anonymousOnlineAssetsVerified": 18,
+      "sha256Matches": 18,
+      "totalVerifiedBytes": 5961098,
+      "coordinator": "Actual Axis coordinatePublicationAssets with actual Media request client; existing mediaReview task per pinned asset",
+      "publicNativeTarget": "WCMS_ONLINE 4314; general Staged Media management remains 4312"
+    },
+    "documentation": {
+      "profile": "circadocs",
+      "readiness": "READY",
+      "publicationState": "ONLINE"
+    },
+    "restart": {
+      "rebuiltRuntimes": 10,
+      "readyRuntimes": 10,
+      "allPrerequisitesAndOnlineStatePreserved": true
+    },
+    "operatorBoundary": {
+      "requiredAfterStages": 10,
+      "publicationSubsets": 4,
+      "financialStages": 6,
+      "bootstrapProjection": "10 AUTHORITY_PENDING; no selectable stages",
+      "unselectedInitiate": "HTTP 200; CMS/Media Online; all ten stages still pending",
+      "foreignBudgetSelection": {
+        "http": 403,
+        "code": "ERR_BOF_00082"
+      },
+      "signedIssuerChecks": {
+        "enterprises": 4,
+        "authenticationPassed": 4,
+        "directScopeInspectionHttp200": 4,
+        "publicationStatusDenied": 4,
+        "denialCode": "ERR_AUTH_00003",
+        "roleFinding": "Existing issuer accounts have Waste roles, not publication/seller-management or merchant Store authority"
+      }
+    }
+  },
+  "browserAcceptance": {
+    "circaPublishedContent": {
+      "status": "PASS",
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "checks": [
+        "All three CMS banners",
+        "Published Media rendering",
+        "Privacy and Terms navigation and reload",
+        "Mobile horizontal layout",
+        "Explicit unavailable Online content without unpublished fallback"
+      ],
+      "screenshots": [
+        "/tmp/circa-batch/cms-desktop.png",
+        "/tmp/circa-batch/cms-mobile.png"
+      ]
+    },
+    "axisSetup": {
+      "status": "PASS_READ_ONLY_BOOTSTRAP_ADMINISTRATOR",
+      "route": "/setup-accelerators?profile=circa&expanded=circa",
+      "authorityPendingLabels": 10,
+      "stageSelectorDisabled": true,
+      "pageErrors": 0,
+      "desktopHorizontalOverflow": false,
+      "mobileHorizontalOverflow": false,
+      "screenshots": [
+        "/tmp/circa-batch/axis-setup-desktop.png",
+        "/tmp/circa-batch/axis-setup-mobile.png"
+      ],
+      "positiveIssuerActionExecuted": false
+    },
+    "catalogue": {
+      "status": "FAIL",
+      "runner": "test/live/catalogue-browsing.mjs",
+      "firstFailure": "No .catalogue-card on /shop; actual public view reports 0 products",
+      "meaning": "Required issuer publications remain pending; does not establish product, checkout, redemption or refund acceptance"
+    },
+    "attemptedRuns": [
+      "Early owner inspection during startup reported runtimes offline; repeated only after all ten ready and obtained current prerequisites",
+      "Early browser waits timed out; final longer bounded signed-in run passed",
+      "One early browser cleanup attempt failed because the supervisor had already stopped; revocation of that attempt is not established. Later attempts completed Profile token/logout HTTP 200."
+    ],
+    "privateTraceHarOrStorageStateSaved": false
+  },
+  "sourceChanges": [
+    "Separate four operator-scoped publication subsets and six explicit singleton budget/issuance stages; retire obsolete mixed operational selector",
+    "Explicit afterPublicationStepCode checked against signed original operator; foreign requirements stay visible and block aggregate readiness",
+    "No after-stage dispatch when selection omitted; one local stage cannot publish/issue foreign work",
+    "First-start selectionRequired remains false until CMS/Media/preparation permit after-stage observation",
+    "Axis owner-projected stage choice starts empty, expires on owner status/session change, and never switches enterprise",
+    "Canonical commerce.coupon.seller.manage permission recognized without automatic role grants",
+    "Profile source-review guide corrected to actual 0.0.1 initial release",
+    "Public Circa Media proxy targets Online; private Waste photos and Staged management unchanged",
+    "Stale tests corrected to existing six-recipient capture and three canonical Apparel promotions; no runtime policy change"
+  ],
+  "validation": [
+    {
+      "scope": "Circa module",
+      "tests": 93,
+      "passed": 93
+    },
+    {
+      "scope": "Circa deployment/prerequisite contracts",
+      "tests": 16,
+      "passed": 16
+    },
+    {
+      "scope": "Kickoff data ownership",
+      "tests": 23,
+      "passed": 23
+    },
+    {
+      "scope": "Framework v001 baseline and optional docs separation",
+      "tests": 5,
+      "passed": 5
+    },
+    {
+      "scope": "BackOffice application owner",
+      "tests": 86,
+      "passed": 86
+    },
+    {
+      "scope": "BackOffice Media owner",
+      "tests": 20,
+      "passed": 20
+    },
+    {
+      "scope": "Profile bootstrap assessment contract",
+      "tests": 16,
+      "passed": 16
+    },
+    {
+      "scope": "Promotion regression sweep for canonical seller permission",
+      "tests": 86,
+      "passed": 86
+    },
+    {
+      "scope": "Axis setup/bootstrap/dashboard/approval",
+      "files": 7,
+      "tests": 210,
+      "passed": 210
+    },
+    {
+      "scope": "Circa frontend verify",
+      "files": 38,
+      "tests": 205,
+      "passed": 205,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "warnings": "Large bundle chunks"
+    },
+    {
+      "scope": "Axis typecheck/build/scoped ESLint and Prettier",
+      "status": "PASS",
+      "warnings": "Large bundle chunks"
+    },
+    {
+      "scope": "Kickoff qualification",
+      "nodeTests": 57,
+      "passed": 57,
+      "followOnContracts": "PASS; data lifecycle, guided profiles, publishing freeze, native topology, Docker contracts and all ten Docker runtime preparations; no Docker runtime started"
+    },
+    {
+      "scope": "Kickoff documentation",
+      "pages": 9,
+      "status": "PASS"
+    },
+    {
+      "scope": "Ownership language",
+      "files": 4766,
+      "findings": 0
+    },
+    {
+      "scope": "Generated module guidance",
+      "framework": 202,
+      "kickoff": 31,
+      "status": "PASS"
+    }
+  ],
+  "validationNotes": "Overlapping focused suites are not summed into a unique test total. Source/provider fixtures do not qualify installed financial owners. Historical evidence is preserved, not reclassified.",
+  "remaining": [
+    {
+      "code": "ISSUER_PROFILE_AUTHORITY",
+      "required": "Choose reviewed staff responsibilities; adopt narrow publication/seller roles and exact outlet STORE scopes through Profile, preserving existing identities and installed receipts",
+      "automaticGrantsAllowed": false
+    },
+    {
+      "code": "REQUIRED_AFTER_STAGES",
+      "required": "Execute four issuer-signed publication subsets with normal approvals, then three budgets and three separate issuance packs; all ten currently pending"
+    },
+    {
+      "code": "INSTALLED_PRIVATE_OWNER_QUALIFICATION",
+      "required": "Real seller-consent/private-persistence, purchased-rights, priced-cart, merchant STORE scope and Digital/Waste ownership transport/CAS/settlement evidence; flags remain unqualified"
+    },
+    {
+      "code": "GLOBAL_MULTI_OPERATOR_OBSERVATION",
+      "required": "Canonical authorized cross-operator readiness evidence is not implemented by this local projection. Foreign stages remain AUTHORITY_PENDING; local success cannot certify global READY"
+    },
+    {
+      "code": "BUSINESS_POSITIVE_JOURNEYS",
+      "required": "Published catalogue, customer purchase/reveal, approved simulated ITEM and priced redemption, unused coupon refund and original-sale asset refund/replay; no financial mutations or these successes claimed"
+    }
+  ],
+  "completedAt": "2026-10-09T08:39:13Z",
+  "repositories": [
+    {
+      "repository": "framework",
+      "head": "77564981431ae20ac0eb1019c1c8902dd66b7dc5",
+      "branch": "development",
+      "dirtyWorkingTree": true
+    },
+    {
+      "repository": "kickoff",
+      "head": "526c679041e4e3528767dde9063c5ef71fb78aab",
+      "branch": "development",
+      "dirtyWorkingTree": true
+    },
+    {
+      "repository": "axis",
+      "head": "046ad8953230f3d74729e247d43a28bb20d90533",
+      "branch": "development",
+      "dirtyWorkingTree": true
+    },
+    {
+      "repository": "circa",
+      "head": "3b04fa7f60eb26aa2868ada2e6e14ca042b68772",
+      "branch": "development",
+      "dirtyWorkingTree": true
+    }
+  ],
+  "sourcePins": [
+    {
+      "repository": "framework",
+      "path": "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService.js",
+      "sha256": "6d079eaf966d5e3a7cfd8147f3c3189555d4ce3a7ab4d38a0a5507235e6f4428"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.platform/modules/backoffice/src/controller/defaultBackofficeApplicationInitializationController.js",
+      "sha256": "7be3674991ed455f9248a6a3ddc27a049df8a7e7ceb14871b843f8d9a116bb23"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.platform/modules/backoffice/llm/contracts/governed-application-setup.md",
+      "sha256": "048ae7d7d377ab6e72c16313d566ec24cdc1ac1e83123062dc775a50886f5af5"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.foundation/modules/nAuth/config/properties.js",
+      "sha256": "88e0a0b423dbf198cd52dc63dc5e6ce9e8bebadff938ed6cc9c29ccfa799866f"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.platform/modules/profile/llm/contracts/identity-assessment.md",
+      "sha256": "ca30b2e892f18ac329e577d47d110075a60b703f2291d7afdbdb6660ead33a2e"
+    },
+    {
+      "repository": "kickoff",
+      "path": "modules/circa.ewaste/config/properties.js",
+      "sha256": "7f9881ae69c685ba3ac1f799278db6b93a545548ca5179584db54d8eff44ece1"
+    },
+    {
+      "repository": "kickoff",
+      "path": "envs/kickoffLocal/platformServer/config/properties.js",
+      "sha256": "dfc394b146f6349a18868022452d389c20cb45456edce51cff12f0643684d7e6"
+    },
+    {
+      "repository": "kickoff",
+      "path": "modules/circa.ewaste/llm/contracts/circa-promotion-setup.md",
+      "sha256": "d55cd2504454735bb3d108fead5cb9de9eb04b3928a792ef953ff6435a4b8671"
+    },
+    {
+      "repository": "kickoff",
+      "path": "test/circaPublicationPreparationPrerequisites.test.js",
+      "sha256": "dfa96d75830cf937c6f031192d0b24a9215199aba12be7b487e21800ead44e13"
+    },
+    {
+      "repository": "kickoff",
+      "path": "test/communicationActivationDataContract.test.js",
+      "sha256": "e892b79ff198179967ae7ed9d6d68271ba56ad944b890a4bea6f0e3d20ebe835"
+    },
+    {
+      "repository": "kickoff",
+      "path": "test/projectAcceptanceFixtures.test.js",
+      "sha256": "131956203b7eae50d0cced71d45c47d3b6b70012114ab3ae2c25c96db0d96c45"
+    },
+    {
+      "repository": "axis",
+      "path": "src/operations/setupAccelerators/SetupAcceleratorsRoutePage.tsx",
+      "sha256": "dd8f245678af666def6fc9ead9d59fc2032d71a5300cbb18c954b799ccd3c156"
+    },
+    {
+      "repository": "axis",
+      "path": "src/operations/setupAccelerators/api/applicationInitializationClient.ts",
+      "sha256": "939ca3e4f67cd51ca4d6bb2d812436b3e831206bcdfcdff88de335eb6be1f772"
+    },
+    {
+      "repository": "circa",
+      "path": "vite.config.ts",
+      "sha256": "22fcfc62254199b6671b73dc1587af53c3dbb1ccb6c57cd38dd7da1babb69383"
+    },
+    {
+      "repository": "circa",
+      "path": "src/mediaProxyConfig.test.ts",
+      "sha256": "0dd0b3b2616a6c16938a939f4da5672e96f1bc58d4cc4cda72a2f623fa09c864"
+    }
+  ],
+  "cleanup": {
+    "status": "PASS",
+    "nativeSupervisorStopped": true,
+    "frontendServersStopped": true,
+    "closedPorts": [
+      4300,
+      4314,
+      4330,
+      4312,
+      4340,
+      4360,
+      4380,
+      4370,
+      4352,
+      4350,
+      3100,
+      3600
+    ],
+    "unrelatedServicesOrDataChanged": false,
+    "browserRevocationLimitation": "One early browser access-session logout failed during restart; that attempt's revocation remains unestablished. Later API and browser access-session logout calls returned HTTP 200."
+  }
+}

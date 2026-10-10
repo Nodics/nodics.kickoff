@@ -1,5 +1,6 @@
 module.exports = {
   "publish": {
+    "setup": { "observation": { "enabled": true } },
     "providers": {
       "domainAdapters": {
         "product": "DefaultProductPublicationAdapterService",

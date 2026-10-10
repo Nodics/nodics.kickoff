@@ -50,8 +50,8 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
 
   assert(release, "agoraApparelCommerceCatalog release should be discoverable");
   assert.equal(release.dataType, "sample");
-  assert.equal(release.sourceRoot, "sample-v005");
-  assert.equal(release.version, "0.0.10");
+  assert.equal(release.sourceRoot, "sample-v001");
+  assert.equal(release.version, "0.0.1");
   assert.equal(release.lifecycle, "PUBLISHABLE");
   assert.equal(release.destinationRole, "COMMERCE_STAGED");
   assert.deepEqual(release.environmentScope, [
@@ -108,7 +108,7 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
     importRequests[0].dataReleasePlan[0].releaseCode,
     "agora.apparel:agoraApparelCommerceCatalog",
   );
-  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, "sample-v005");
+  assert.equal(importRequests[0].dataReleasePlan[0].sourceRoot, "sample-v001");
   assert(
     importRequests[0].dataReleasePlan[0].declaredFiles.some((file) =>
       file.endsWith("agoraApparelProductData.js"),
@@ -123,34 +123,40 @@ test("Agora domain Commerce releases separate each selected domain import plan",
     .filter((item) => item.destinationRole === "COMMERCE_STAGED");
   const releaseCodes = releases.map((item) => item.releaseCode).sort();
 
-  assert.deepEqual(releaseCodes, ["agora.apparel:agoraApparelCommerceCatalog"]);
+  assert.deepEqual(releaseCodes, [
+    "agora.apparel:agoraApparelCommerceCatalog",
+    "agora.apparel:agoraApparelPublicationPlan",
+  ]);
+  const catalog = releases.find(item => item.releaseCode === "agora.apparel:agoraApparelCommerceCatalog");
+  const publicationPlan = releases.find(item => item.releaseCode === "agora.apparel:agoraApparelPublicationPlan");
+  assert.deepEqual(publicationPlan.declaredFiles, ["sample-v001/publication/records/publicationPlan.json"]);
   assert(
-    releases[0].declaredFiles.some((file) =>
+    catalog.declaredFiles.some((file) =>
       file.endsWith("agoraApparelProductData.js"),
     ),
   );
   assert(
-    releases[0].declaredFiles.some((file) =>
+    catalog.declaredFiles.some((file) =>
       file.endsWith("agoraApparelPriceBookData.js"),
     ),
   );
   assert(
-    !releases[0].declaredFiles.some((file) =>
+    !catalog.declaredFiles.some((file) =>
       file.endsWith("agoraApparelInventoryBalanceData.js"),
     ),
   );
   assert(
-    releases[0].declaredFiles.some((file) =>
+    catalog.declaredFiles.some((file) =>
       file.endsWith("agoraApparelPromotionData.js"),
     ),
   );
   assert(
-    !releases[0].declaredFiles.some((file) =>
+    !catalog.declaredFiles.some((file) =>
       file.endsWith("agoraApparelCouponBatchData.js"),
     ),
   );
   assert(
-    !releases[0].declaredFiles.some((file) =>
+    !catalog.declaredFiles.some((file) =>
       file.endsWith("agoraApparelCouponData.js"),
     ),
   );
@@ -168,7 +174,7 @@ test("Agora domain Commerce releases separate each selected domain import plan",
   });
 
   assert.deepEqual(
-    importRequests[0].dataReleasePlan.map((item) => item.releaseCode).sort(),
+    importRequests.flatMap(request => request.dataReleasePlan.map(item => item.releaseCode)).sort(),
     releaseCodes,
   );
 });

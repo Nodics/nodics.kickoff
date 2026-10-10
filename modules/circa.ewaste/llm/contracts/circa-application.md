@@ -21,9 +21,20 @@ through their own application/deployment layers, not framework source copies.
 
 ## Unified v001 Demo Release
 
+### Human-Approved Local Business Terms
+
+The complete fictional native Local policy was approved by the human on
+2026-10-09. The review fixture remains outside importable data and grants no
+operational authority. Its exact 38 campaigns, nine monetary budgets and 29 ITEM
+bundles are now adopted into issuer-owned policy records and six immutable
+budget/issuance instruction packs. See [ordered Promotion setup](circa-promotion-setup.md)
+for exact source hierarchy, signed issuer selections, admission provenance,
+consent expiry, publication subsets and recovery. All independent owner gates
+remain required; approval never substitutes for installed qualification.
+
 The existing Circa initialization profile selects one customer demo dataset.
-`circa.ewaste:profile`, `:operations`, `:waste`, `:loyalty` and
-`:commerce-operational` are required USER-triggered packages alongside Location,
+`circa.ewaste:profile`, `:operations`, `:waste`, `:loyalty` and the six ordered
+issuer Budget/Issuance selections are required USER-triggered packages alongside Location,
 CMS, Media and the catalogue. There is no separate full or partial demo mode.
 Required selection does not weaken owner eligibility, consent, employee scope,
 financial admission or Media approval. Unavailable owners keep the demo blocked.
@@ -34,8 +45,11 @@ publications. Verify the public site through Online delivery. Website publicatio
 does not certify registration, customer submission, operator review or rewards.
 Sample identities and wallets remain dependent on their real owning operations.
 An unavailable prerequisite remains blocked; do not change qualification flags
-or import owner records directly. See the [single demo dataset guide](../../docs/pages/demo-data.md)
+or import owner records directly. See the framework-owned Circa CMS guide in
+`nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/data/docs-v001/records/documentation/circaDocumentationComponentData.js`
 for counts, the required order, recovery and outstanding operational admission.
+Its `referenceDocumentation` pack is selected separately from this application's
+business releases. Framework journey content is not duplicated in this project.
 
 `circa.ewaste:profile` now selects version `0.0.1`, `sample-v001`, EXPLICIT,
 REFERENCE, PLATFORM. Its stable source is checksummed; reference records do not
@@ -66,42 +80,199 @@ selection. Source/test passes do not establish live installation acceptance.
 
 ## Commerce Demo Catalogue And Operational Admission
 
-The active selector remains `circa.ewaste:commerce`, version `0.0.1`,
-source root `sample-v001`, `EXPLICIT`, immutable and publishable to
-`COMMERCE_STAGED`. Its 12 schema targets are store, priceBook, priceRow,
-taxPolicy, warehouse, category, categoryLocalization, product,
-productLocalization, productVariant, productVariantLocalization and promotion.
-Existing record identities, references, prices and business terms remain
-unchanged. Thirty-five new GreenPerks offers and two outlet stores are added.
-Promotion budget retains policy limit only; `spent` is omitted.
-No coupon, couponBatch or inventoryBalance target is included.
+The EXPLICIT catalogue selects immutable sample-v001 version 0.0.1 into
+COMMERCE_STAGED. It retains 11 policy/catalogue targets and no coupon,
+couponBatch or inventoryBalance imports. GREENPERKS_ONLINE owns the marketplace
+Product, pricing, tax and warehouse source. Promotion policies belong to their
+three canonical issuers; every policy includes canonical issuer/vendor references
+and its approved limit, never spent, seller grants or opening receipts. The 29
+ITEM actions contain exact SKU quantities and EACH units with no substitutions.
 
-The separate `circa.ewaste:commerce-operational` version `0.0.1` in
-`sample-v001` is immutable `OPERATIONAL_VERSIONED -> COMMERCE`, `EXPLICIT`
-and required in Circa setup. It retains only existing approved coupon,
-couponBatch and inventoryBalance source records. It is not a publication
-source, sale authorization or instruction to reset
-stock. Circa contributes a project-owned local demo admission marker for this
-v001 first-start dataset only; unmarked raw snapshot imports remain
-backend-blocked. Publication, qualified seller/issuer authority and approved
-stock provenance are prerequisites for real customer operations, not grants
-created by a sample or configuration flag. The new catalogue's
-`demoPurchaseUnits: 100` is a quantity target, not issued supply or a grant.
-An owner-governed issuance contribution and post-publication orchestration remain
-required; raw tokens and ledger snapshots are not a substitute.
+The retired commerce-operational section and all its snapshots are removed,
+including duplicate raw stock/token files formerly carried in catalogue source.
+Three Budget and three subsequent Issuance sections use the existing
+PROMOTION_CAMPAIGN_ISSUANCE installer, OPERATIONAL_VERSIONED to COMMERCE,
+EXPLICIT, immutable 0.0.1, native Local only. Each later issuance pins its exact
+original admission contribution and requires current original consent before
+issuing 100 protected units per campaign. These packs do not grant membership,
+consent, budgets over existing history or deployed qualification. The compatibility
+validator still delegates any legacy snapshot attempt to its canonical owner
+without a demo exception. See [the exact issuer matrix](circa-promotion-setup.md#signed-selections).
+
+### Store Reference Setup
+
+`circa.ewaste:store` is EXPLICIT `0.0.1`, `sample-v001`, lifecycle REFERENCE,
+destination COMMERCE, versioning/publication/initial-publication NONE. Its two
+manifest-pinned files are a normal Store `saveAll` header and five Store
+master records. The required USER-triggered setup entry follows Location
+and precedes Commerce catalogue preparation. Its omitted phase uses the existing
+BEFORE_PUBLICATION default. Business setup never needs documentation import to
+obtain these records. No new importer, admission exception or runtime service is
+introduced.
+
+| Store | Tenant | Profile enterprise association | Primary Location | Currency |
+| --- | --- | --- | --- | --- |
+| circaMainStore | default | GREENPERKS_ONLINE, explicitly approved marketplace | None supplied | POINTS |
+| greenperks-cafe | default | GREENPERKS_RETAIL | greenperks-cafe-location | AED |
+| greenperks-bistro | default | GREENPERKS_RETAIL | greenperks-bistro-location | AED |
+| renewworks-repair | default | RENEWWORKS_REPAIR_REUSE | None supplied | AED |
+| loopcycle-accessories | default | LOOPCYCLE_RECYCLING | None supplied | AED |
+
+The outlet enterpriseRef descriptors remain owned by Profile; their Location
+descriptors remain owned by locationCore. Tenant placement is independent of
+enterprise association. The compatibility enterpriseCode field is retained, but
+must not substitute for the Store owner's canonical enterpriseRef validation.
+Importing descriptors does not create the referenced enterprise/location or
+prove their eligibility. Owner resolution must still validate them when used.
+Do not infer merchant association from the tenant; the marketplace and outlet
+associations are explicit approved Profile descriptors.
+
+The canonical nImport pipeline selects only the two declared files, composes the
+Store header, reads the existing record exports and hands them to the generated
+Store service. The request tenant selects the partition. Caller groups are
+forwarded unchanged; the header contains no elevated groups or explicit
+enterprise-placement override. Store's generated write policy and managed
+revision checks remain authoritative. No coupon, stock, Profile membership,
+seller authorization, loyalty balance or payment qualification is created.
+
+This is fresh reference preparation, not create-or-preserve semantics. Store
+`saveAll` may update existing records after canonical revision reconciliation.
+Generic insertOnly is unsupported for managed-concurrency schemas. An exact
+CURRENT receipt prevents replay; same-version checksum drift requires governed
+recovery rather than rewriting the receipt. Rebasing this unreleased source
+retires the legacy operational identity: any previous installed receipt
+or partial writes must be inspected separately. A Store-only source pass neither
+adopts an installed deployment nor completes Circa activation. Selecting Store
+and rejected supply in one action must still reject the entire plan before
+dispatch or installation claims.
+
+### Exact Publication And Digital Classification
+
+The complete circaPublicationPlan remains inert exact v001 coverage data for all
+84 roots. It is partitioned into four exact authority-scoped publication packs:
+marketplace catalogue under GREENPERKS_ONLINE and one for each issuer. A mixed
+enterprise inventory is not a single signed submission. Preserve existing
+GOVERNED_PUBLICATIONS, Process workflow and AFTER_PUBLICATION requirements;
+never inject enterprise/auth overrides to traverse the groups. Native guided
+multi-operator selection and installed distribution qualification are independent
+integration gates. Docker Local receives no new setup selection. See
+[capture and recovery](circa-promotion-setup.md#source-pins-and-recovery).
+
+| Domain | Exact roots | Source pin |
+| --- | --- | --- |
+| Product | 43 active Products | Revision 1, immutable source versionId 0, circaMainStore |
+| Pricing | circaPointsPriceBook plus all 43 price rows | Owner-captured fingerprint over exact versionId 0 references |
+| Promotion | All 38 campaigns, including unqualified policies | Separate owner fingerprint for each campaign |
+| Tax | circaSamplePointsPolicy | Owner fingerprint of exact policy |
+| Inventory | circaDigitalRegistry warehouse configuration | Owner fingerprint, never a balance snapshot |
+
+All 84 roots remain required. The coordinated action first verifies CMS Online
+and pinned Media evidence, then observes/reviews each Commerce publication with
+its existing owner and Process approvals. Only all exact CURRENT roots admit
+the later operational preflight. Pending approval retains its original workflow
+reference; status/ordinary startup does not create effects. A blocked campaign
+must not be omitted, reassigned or declared CURRENT to complete setup.
+
+Product's localized projection reads `productLocalization.attributes`, not the
+Product's top-level classification. Every variant and English/Arabic Product
+and variant localization therefore carries DIGITAL and DIGITAL_COMMERCE.
+The 38 coupon offers also carry COUPON_CODE and COUPON_CODE_POOL. Their supply
+remains a live Promotion-owned read; missing supply does not become warehouse
+stock. The five digital ownership asset offers do not acquire fabricated coupon
+bindings or physical delivery. DigitalCore now has a selected, default-off
+ownership port backed by eWaste's persisted Waste transfer/lock and original
+Commerce Payment/Loyalty evidence. This source does not qualify the five
+project assets: exact retained Product/binding pins, approved active policies,
+trusted service transport and installed owner persistence are still required.
+Checkout routes only complete DIGITAL/DIGITAL_COMMERCE/DIGITAL_OWNERSHIP
+classification to that owner, retaining the saved Cart Store and locale.
+Contradictory classification, missing owners and uncertain compensation refuse;
+none may route to physical stock or a coupon pool.
+
+Signed customer/employee distribution now resolves issuer-pinned coupon policy
+from the original private issuance receipt and fresh issuer consent. Purchase
+uses the unchanged retained policy; live budget consumption is read separately.
+Product preserves the original signed context for this digital handoff. This
+does not authorize anonymous/service discovery or a merchant employee to read
+another enterprise's seller stock. Those owner admissions remain separate work.
+Exact ITEM bundles can use Promotion's independently selected verified-delivery
+port, but no authenticated receipt adapter is installed or qualified by this change.
+Neither a staff confirmation nor a description proves item fulfillment.
+
+The human separately approved simulated ITEM delivery for local-demo testing and
+keeping already-redeemed benefit reversals disabled. Native `kickoffLocal` selects
+the existing Promotion `merchantBenefits` mode `LOCAL_SIMULATION`, enabled true,
+service `DefaultFulfillmentItemSimulationService`; Fulfillment enables only the
+exact selected environment allowlist `[kickoffLocal]`. nConfig derives LOCAL from
+the environment package, not a second properties descriptor. Real delivery
+qualification remains false; Docker and framework defaults remain off.
+
+All 29 approved ITEM declarations keep their original exact SKU/quantity/EACH
+promises. A `SIM:` reference yields SIMULATED_ITEMS with simulated true, verified
+and immutable false, and no deliveredAt or monetary amount. The same merchant
+claim/receipt/redemption coordination applies, including original issuer staff,
+Store revision, consent, scope and protected persistence. Queue, confirmation and
+receipt inspection must explicitly show simulation/unverified goods. Success
+means demo orchestration only, not physical delivery or native acceptance from a
+fixture. Used-benefit RELEASE remains unsupported; this approval does not widen
+unused purchase refund or original-sale asset refund policy.
+
+`test/circaItemSimulationSelection.test.js` checks effective native versus Docker
+configuration and passes all 29 unchanged source bundles through the real
+framework consumer/simulator. It performs no issuance, import, grant, delivery or
+runtime mutation. Refer to the owning Promotion/Fulfillment contracts for shared
+details rather than copying their guides into this project.
+
+Source tests consume real Product projection, enrichment, DigitalCore and exact
+financial capture services with isolated persistence/supply ports. They verify
+both locales, every root, fingerprints, replay, unavailable exact versions and
+no physical fallback. They are not installed publication, issuer consent,
+payment, private reveal or full Circa journey acceptance.
+
+### Remaining Operational Gates
+
+| Gate | Current boundary | Required owner or decision |
+| --- | --- | --- |
+| Legacy supply | Retired coupon, batch and balance source removed; selecting its former release refuses before dispatch | Six explicit issuer-specific owner instruction packs; retain installed history |
+| Original three campaigns | Approved issuer/vendor identities, exact actions and monetary budgets adopted into source | Exact retained owner publication and signed issuer execution, not installed acceptance from source |
+| GreenPerks supply | All 35 policies have approved budgets, including zero for 29 exact ITEM bundles; variant targets are 100 | Original budget admission and later issuance; quantity targets are not issued supply |
+| Cross-enterprise issuance | Issuer GREENPERKS_RETAIL differs from vendor GREENPERKS_ONLINE; bounded delegated issuance source exists, not installed acceptance | Joint qualification of Promotion issuance, live consent and issuer-policy distribution owners |
+| Seller consent | Separate nonimportable issuer checklist retains vendor, expiry and ISSUED_COUPON_BENEFIT_V1 purpose; no grant imported | Existing signed issuer GRANT/REVOKE command and projected purpose, current revision, permission and revocation evidence |
+| Item benefits | Approved LOCAL_SIMULATION exercises exact bundles with explicit unverified tags; real delivery still unavailable | Installed merchant/persistence qualification for demo; authenticated owner integration separately for real delivery |
+| Asset delivery | Five quantity-one ownership offers have a separate local-only three-policy source selection; not coupon units or installed bindings | Genuine Waste listing, retained Digital binding, original capture and seller proceeds; refund term retained before sale, never backfilled |
+| Store master data | Independent required `circa.ewaste:store` REFERENCE pack, v001, COMMERCE before publication | Verify fresh installation separately; existing rows and receipts need governed adoption, not rejected supply import |
+| Docker Local | Commerce publication owners and five Process definitions are not selected/qualified | Deployment-specific integration and acceptance before enabling the coordinated step |
+| Installed data | Earlier immutable receipts or partial writes may exist | Inspect provenance; separately approved fresh initialization or governed recovery, never receipt rewriting |
+
+Keep seller authorization and onboarding qualification default-off until their
+owners supply evidence. This project refactor changes source data and setup
+selection only; it cannot qualify missing framework capability or business terms.
 
 Operator order:
 
 1. Validate the v001 catalogue selector with expected version `0.0.1`, then
    explicitly prepare it through nImport for a fresh local demo environment.
-2. Complete governed publication and verify current Online pointers and
-   retained policy before exposing offers. Staged import alone is not live.
-3. Inspect the required operational selector. Existing approved
-   source describes intended stock, not permission to overwrite it. Use the
-   existing issuer and Inventory operations for real approved effects, retaining
-   idempotency and movement evidence. The v001 snapshot pack is admitted only
-   through the Circa local demo marker; never bypass it with direct DB writes,
-   broad generic retries or enabled qualification flags.
+2. Use the coordinated action's required 84-root Commerce publication step after
+   CMS/Media review. Complete the existing owner approvals and verify every exact
+   Online pointer and retained policy before exposing offers. Staged import alone
+   is not live; pending or rejected roots block operational preparation.
+3. Each signed issuer selects its own budget instructions after exact publication,
+   reviews original seller consent separately through Promotion with the exact
+   ISSUED_COUPON_BENEFIT_V1 purpose and expiry, then selects issuance referencing
+   the original budget contribution. A missing owner qualification or consent
+   remains blocked. ITEM consumption in this approved native demo requires exact
+   explicitly simulated evidence; other deployments require qualified verified
+   delivery. Already-redeemed benefit inverses remain disabled.
+4. Separately select circaDigitalOwnershipPolicies on WASTE before genuine
+   listing/binding and any original asset sale. Retain all three policies and the
+   reviewed refund term in the original command; verify quantity-one capture and
+   full original seller proceeds without fees or carbon. Refund requires its
+   original Order approval and independent owner evidence, not this data pack.
+5. Do not import coupon tokens, batches, balances or customer transaction
+   snapshots, fabricate replay evidence, or bypass refusal through direct DB
+   writes, generic retries or qualification flags. Never amend an old sale's
+   retained policy to enable refund. Earlier partial writes remain recovery work;
+   source readiness does not qualify the full Circa business journey.
 
 The source fix does not certify live receipts or run imports. Customer
 customization before launch can update the unified v001 source and refresh
@@ -174,7 +345,7 @@ framework/accelerator owners even when Circa first requests the capability.
 The sample taxonomy remains a compatibility snapshot: 20 records equal to the
 old eWaste defaults, four impact-profile overrides and 28 customer additions.
 The selected reference-only release is `circa.ewaste:waste-policy` version
-`0.0.1` in `core-v002`, above `eWaste:core-reference` version `0.0.1` in the
+`0.0.1` in `core-v001`, above `eWaste:core-reference` version `0.0.1` in the
 same source sequence. Both are EXPLICIT. Existing nImport source-key
 composition supplies shared fields from eWaste and applies 24 Circa profile
 selection deltas plus the customer additions and final core policy. Matching

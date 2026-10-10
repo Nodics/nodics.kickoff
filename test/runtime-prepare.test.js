@@ -364,6 +364,9 @@ async function prepareScenario(scenario) {
         assert.deepEqual(CONFIG.get('schemaPolicies').product.catalogueVersioned,
             { isVersionedEnabled: true, versionedReadMode: 'CURRENT' }, 'Migrated Local Product storage must retain its versioning selection');
         const staged = scenario.server === 'commerceStagedServer';
+        const outletProposal = require('../modules/circa.ewaste/test/fixtures/circaMonetaryOutletProposal.json');
+        const outletStores = outletProposal.outletGoods.map(good => good.storeCode);
+        const agoraStores = { apparel: 'agoraMainStore', electronics: 'agoraElectronicsStore', telco: 'agoraTelcoStore' };
         assert.equal(CONFIG.get('apiExposure').categories.productPublicationSource.enabled, staged);
         assert.equal(CONFIG.get('apiExposure').categories.productPublicationTarget.enabled, !staged);
         assert.equal(CONFIG.get('product').publication.target.connectionName, 'commerce');
@@ -371,8 +374,9 @@ async function prepareScenario(scenario) {
         assert.equal(CONFIG.get('product').discovery.activationService,
             staged ? null : 'DefaultProductPublicationTargetService');
         if (!staged) assert.deepEqual(CONFIG.get('product').discovery.activationScopes,
-            [{ tenant: 'default', storeCode: 'circaMainStore' }],
-            'Local Circa delivery must not enable activation reads for other stores');
+            ['circaMainStore', ...outletStores, ...selectedDomains.map(domain => agoraStores[domain])]
+                .map(storeCode => ({ tenant: 'default', storeCode })),
+            'Local Product delivery must select only reviewed outlets and active Agora domains');
         if (staged) {
             assert(CONFIG.get('runtimeIdentity').remoteModules.includes('workflow'));
             assert.equal(NODICS.isModuleActive('publish'), true, 'Staged publication selections require the lifecycle owner');
@@ -387,14 +391,28 @@ async function prepareScenario(scenario) {
                 { enabled: false, operations: [] }, 'Completed recovery must leave no enabled repair selection');
             assert.equal(delivery.enabled, !staged);
             if (!staged) {
-                assert.deepEqual(delivery.storeCodes, ['circaMainStore'],
+                const outletRoots = domain === 'promotion' ? {} : Object.fromEntries(outletProposal.outletGoods.map(good => {
+                    const issuer = outletProposal.issuerPacks.find(row => row.issuerEnterpriseCode === good.issuerEnterpriseCode);
+                    return [good.storeCode, [domain === 'pricing' ? issuer.priceBookCode
+                        : domain === 'tax' ? issuer.taxPolicyCode : good.warehouseCode]];
+                }));
+                const circaRoots = domain === 'promotion'
+                    ? ['greenperks', 'renewworks', 'loopcycle'].flatMap(issuer => require(
+                        '../modules/circa.ewaste/data/sample-v001/publication/' + issuer + '/records/publicationPlan.json'
+                    ).items.map(row => row.rootCode))
+                    : [{ pricing: 'circaPointsPriceBook', tax: 'circaSamplePointsPolicy', inventory: 'circaDigitalRegistry' }[domain]];
+                const apparelRoots = {
+                    pricing: ['agoraApparelRetailUsd'], tax: ['agoraAeVatPolicy'], inventory: ['agoraApparelWarehouse'],
+                    promotion: ['agoraStylePass5PercentRule', 'agoraCapsuleEdit10PercentRule', 'agoraPrivateSale20PercentRule']
+                }[domain];
+                const apparelSelected = selectedDomains.includes('apparel');
+                assert.deepEqual(delivery.storeCodes,
+                    ['circaMainStore', ...Object.keys(outletRoots), ...(apparelSelected ? ['agoraMainStore'] : [])],
                     `${domain} delivery must not change unselected stores`);
-                assert.deepEqual(delivery.rootCodes, [{
-                    pricing: 'circaPointsPriceBook',
-                    tax: 'circaSamplePointsPolicy',
-                    inventory: 'circaDigitalRegistry',
-                    promotion: 'CIRCA_COUPON_CPN-ECO-15_PROMO'
-                }[domain]], `${domain} must select its approved Circa policy root`);
+                assert.deepEqual(delivery.rootCodes, [], `${domain} must not select roots across Store scopes`);
+                assert.deepEqual(delivery.rootCodesByStore,
+                    { circaMainStore: circaRoots, ...outletRoots, ...(apparelSelected ? { agoraMainStore: apparelRoots } : {}) },
+                    `${domain} must select its exact reviewed policy roots for each Store`);
             }
             assert.deepEqual(CONFIG.get('schemaPolicies')[domain].publicationVersioned,
                 scenario.server === 'commerceStagedServer'

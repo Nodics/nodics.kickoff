@@ -10,7 +10,7 @@
 module.exports = {
   "record0": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "circaSamplePointsPolicy",
@@ -20,4 +20,3 @@ module.exports = {
     "status": "ACTIVE"
   }
 };
-

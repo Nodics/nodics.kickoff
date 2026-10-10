@@ -19,7 +19,7 @@ test("Circa active data sources are claimed by current manifests with matching p
   releasePolicy.validateRetainedRoots(root, manifest);
   const claimed = new Map([
     ...Object.values(manifest.sections).flatMap((section) =>
-      Object.entries(section.files),
+      Object.entries(section.files || section.generatedHashes),
     ),
   ]);
   for (const [file, hash] of claimed) {

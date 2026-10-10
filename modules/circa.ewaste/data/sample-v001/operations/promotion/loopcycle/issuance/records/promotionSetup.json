@@ -1,0 +1,25 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "policyFingerprint": "3808344ded979e3aae181a97b69c9730bd551e1ffc89d7a069f193f1e8841831",
+      "commandReference": "opening-CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaLoopCycleBudget",
+        "version": "0.0.1",
+        "checksum": "7a3e013e7050f0b3d33da65bb5234a3ee80f65a0bce928b11b2fb361333c2dd3"
+      }
+    }
+  ],
+  "couponBatches": [
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "batchCode": "CIRCA_COUPON_CPN-ECO-15_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_CPN-ECO-15_PROMO"
+    }
+  ]
+}

@@ -10,10 +10,10 @@ const releases = require(path.join(frameworkRoot, "nodics.foundation/modules/nDa
 const inventory = require(path.join(frameworkRoot, "nodics.commerce/modules/baseCommerce/modules/inventory/src/service/defaultInventoryOperationService"));
 const promotion = require(path.join(frameworkRoot, "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService"));
 
-for (const [application, section, version, oldRoot] of [
-  ["apparel", "agoraApparelCommerceCatalog", "0.0.10", "sample-v004"],
-  ["electronics", "agoraElectronicsCommerceCatalog", "0.0.4", "sample-v002"],
-  ["telco", "agoraTelcoCommerceCatalog", "0.0.4", "sample-v002"],
+for (const [application, section, version] of [
+  ["apparel", "agoraApparelCommerceCatalog", "0.0.1"],
+  ["electronics", "agoraElectronicsCommerceCatalog", "0.0.1"],
+  ["telco", "agoraTelcoCommerceCatalog", "0.0.1"],
 ]) test(application + " publishes catalog policy without operational records", (t) => {
   const root = path.resolve(__dirname, "../modules/agora." + application + "/data");
   const manifest = require(path.join(root, "manifest.json"));
@@ -22,7 +22,8 @@ for (const [application, section, version, oldRoot] of [
   assert.equal(active.destinationRole, "COMMERCE_STAGED");
   assert.equal(active.lifecycle, "PUBLISHABLE");
   releases.validateRetainedRoots(root, manifest);
-  assert(manifest.retainedRoots[oldRoot].sections[section]);
+  assert.equal(manifest.retainedRoots, undefined);
+  assert.equal(active.sourceRoot, 'sample-v001');
   const priorConfig = global.CONFIG;
   global.CONFIG = { get: (key) => key === "runtimeRole" ? { code: "COMMERCE_STAGED" } : key === "promotion" ? { publication: { runtimeRole: "STAGED" } } : undefined };
   t.after(() => { global.CONFIG = priorConfig; });

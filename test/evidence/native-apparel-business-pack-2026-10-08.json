@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-08",
+  "environment": "kickoffLocal",
+  "state": "PACK_IMPLEMENTED_NATIVE_READINESS_BLOCKED",
+  "scope": "Coordinated Apparel business setup with opening stock and Promotion setup contributions alongside existing products, CMS and Media",
+  "excluded": ["Electronics requirements or operational data", "Telco requirements or operational data", "Circa business mutations"],
+  "priorEvidence": "native-apparel-cart-checkout-batch-2026-10-08.json",
+  "implementation": {
+    "baseline": "sample-v001, version 0.0.1; optional documentation remains docs-v001",
+    "applicationOwner": "agora.apparel owns branded sample choices and setup profile; framework Inventory and Promotion own operational effects",
+    "contributions": [
+      { "releaseCode": "agora.apparel:agoraApparelOpeningStock", "installer": "INVENTORY_OPENING_RECEIPTS", "receipts": 464, "physicalProducts": 58, "quantityPerVariant": "40", "digitalCouponVariantsExcluded": 3 },
+      { "releaseCode": "agora.apparel:agoraApparelPromotionSetup", "installer": "PROMOTION_CAMPAIGN_ISSUANCE", "campaigns": 3, "couponIntents": [{ "batchCode": "agoraStylePass5Batch001", "quantity": 100 }, { "batchCode": "agoraCapsuleEdit10Batch001", "quantity": 50 }, { "batchCode": "agoraPrivateSale20Batch001", "quantity": 20 }] }
+    ],
+    "composition": "kickoffCore explicitly references only the two selected Apparel contributions in the COMMERCE role; the application module remains inactive there. Local and Docker selection contracts are tested.",
+    "ordering": "Existing catalogue and Media setup plus existing CMS/Media approvals precede required AFTER_PUBLICATION operational contributions. Original human authorization is forwarded through existing nImport execution.",
+    "readiness": "Status is read-only. Pending approval, failed Media qualification, rollback and retirement do not execute operational contributions. All required operational receipts must be CURRENT before READY.",
+    "inventory": "Inventory-owned first receipt atomically inserts balance, movement and private original-intent evidence. Replay never replenishes consumed stock. Installed transaction policy, atomic provider, eligible schemas and actual unique indexes are required. Complete pack preflight precedes writes; atomicity is per receipt, not the entire pack.",
+    "promotion": "Activated scoped policy and absence of prior operational consumption permit a first-use budget admission. Private guards and existing consumption/reversal preserve original evidence and current spend. Authorized replay does not replace the original actor.",
+    "couponLimit": "Coupon intents are validated but intentionally not executable without a qualified private token-retention/reveal owner. A nonempty intent list blocks the entire contribution before campaign writes. No new vault, authority flag or plaintext redeemable code was introduced.",
+    "sharedPayloadReader": "nImport requalifies immutable descriptors and bounded selected declared JSON bytes. Symlinks, traversal, changed provenance, unknown owner/installer, unsafe file names and unbounded payloads fail closed.",
+    "documentation": "Detailed owner contracts, tables, Mermaid flow diagrams and Inventory CMS records explain operations, replay, ordering, customization and qualification boundaries.",
+    "inventoryDocumentationBaseline": "Unreleased Inventory docs-v001 hashes were refreshed using the existing manifest checksum/section-validation owner. Immutable-generation comparison correctly refused changed 0.0.1 bytes; that runtime guard was not altered or bypassed. Existing installed documentation receipts were not overwritten; deployment requires its governed fresh-init or reviewed forward handling."
+  },
+  "native": {
+    "startup": "All ten native runtimes reached READY after source stabilization and rebuild, using the user's previously verified private-capture launch selection. No repository qualification setting was changed.",
+    "mode": "Authenticated operator preflight and read-only owner API inspection; no install or application initiate request",
+    "importValidate": {
+      "httpStatus": 200,
+      "selections": ["opening stock alone", "Promotion setup alone", "both contributions"],
+      "discoveredStatuses": "Both exact contributions discovered as NOT_INSTALLED, version 0.0.1",
+      "ready": false,
+      "inventoryBlocker": "ERR_INVENTORY_OPENING_POLICY",
+      "promotionBlockerObserved": "TOKEN_RETENTION_OWNER_REQUIRED"
+    },
+    "applicationStatus": {
+      "httpStatus": 200,
+      "readiness": "BLOCKED",
+      "publicationState": "ONLINE",
+      "mediaQualified": true,
+      "preparationStatus": "BLOCKED",
+      "stockStep": "VALIDATION_BLOCKED",
+      "promotionStep": "VALIDATION_BLOCKED",
+      "approvalEvidencePreserved": true
+    },
+    "inventoryDiagnosis": {
+      "authority": "Authenticated generated Product capabilities and exact Store/locale safe-search, followed by public Product owner delivery reads",
+      "onlineProjectionCount": 1,
+      "requiredPhysicalProducts": 58,
+      "requiredVariantInstructions": 464,
+      "unmatchedProducts": 57,
+      "unmatchedInstructions": 456,
+      "matchedExample": { "productCode": "agoraLinenWrapDress", "variantCode": "agoraLinenWrapDressIvoryS", "skuMatchesPack": true, "pdpHttpStatus": 200 },
+      "missingExample": { "productCode": "agoraSatinMidiDress", "pdpHttpStatus": 404, "code": "ERR_FIND_00004" },
+      "conclusion": "The full opening pack lacks required Online catalogue projections. Publish and activate its full scoped catalogue through existing governed owners, then rerun all owner preflight checks. This does not independently qualify every warehouse or installed transaction prerequisite."
+    },
+    "operationalInspection": { "allReadResponses": 200, "warehouseCode": "agoraApparelWarehouse", "matchingBalances": 0, "campaignCode": "agoraCapsuleEdit10PercentRule", "matchingOperationalCampaigns": 0, "batchCode": "agoraCapsuleEdit10Batch001", "matchingCouponBatches": 0, "budgetLedgerEntries": 0 },
+    "lastSourceCorrection": "After stopping the runtimes, standardized Promotion preflight to ERR_PROMOTION_SETUP_TOKEN_OWNER_REQUIRED so BackOffice preserves the typed blocker. Promotion and BackOffice regression tests passed. Native observations above precede this code-only diagnostic correction; it was not deployed or rechecked live."
+  },
+  "verification": {
+    "combinedOwnerRegression": { "tests": 374, "passed": 373, "failed": 0, "skipped": 1, "owners": ["Inventory", "Promotion", "nImport", "BackOffice application setup"], "skip": "Optional real replica-set migration journal integration; independent provider and owner-port tests are not native transaction acceptance" },
+    "kickoffDataOwnership": { "passed": 21, "failed": 0 },
+    "frameworkBaselineDocumentationOwnershipAndReferencesFinal": { "passed": 18, "failed": 0 },
+    "generatedModuleContext": { "frameworkModules": 202, "kickoffModules": 31, "generation": "PASS", "validation": "PASS" },
+    "evidenceJsonAndCouponIntentReferences": "PASS",
+    "additionalChecksEarlierInBatch": { "commerce": 201, "kickoffMultiDomain": 14, "kickoffAgoraCommerce": 14, "frameworkBaselineDocumentationOwnershipAndReferences": 18, "documentationModulesValidated": 173, "overlap": "Suite counts overlap and must not be summed into a distinct test total." },
+    "whitespaceDiffCheck": "PASS in framework and Kickoff",
+    "nativeAcceptance": "NOT_PASSED: no pack installation, native Inventory transaction, secure coupon delivery, discounted checkout, payment or order lifecycle acceptance claimed"
+  },
+  "remaining": [
+    "Governed publication/activation of all required Apparel Product policies and projections, followed by full Inventory policy/provider preflight and native opening-receipt acceptance",
+    "Select and activate all three scoped campaign roots through their existing owners; native delivery currently selects Capsule Edit 10 only",
+    "Implement and qualify Promotion's private generated-token retention, recovery and purchased-owner reveal boundary; then execute the combined pack and purchase/reveal/discounted-checkout journey",
+    "Repeat live readiness after the final typed diagnostic-code correction"
+  ],
+  "safety": { "resetPerformed": false, "rawDatabaseAccess": false, "operationalWrites": false, "approvalBypass": false, "qualificationFlagsChanged": false, "credentialsInEvidence": false, "unrelatedWorktreeChangesPreserved": true },
+  "cleanup": { "state": "VERIFIED", "ownedRuntimesOnly": true, "supervisor": "NOT_RUNNING", "backendPortsNotListening": [4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350] }
+}

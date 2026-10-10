@@ -30,11 +30,11 @@ const contributionPolicy = require(
 );
 const moduleRoot = path.resolve(__dirname, "..");
 const dataRoot = path.join(moduleRoot, "data");
-const recordsRoot = path.join(dataRoot, "core-v002/waste-policy/records");
+const recordsRoot = path.join(dataRoot, "core-v001/waste-policy/records");
 const pkg = require(path.join(moduleRoot, "package.json"));
 const manifest = require(path.join(dataRoot, "manifest.json"));
 const header = require(
-  path.join(dataRoot, "core-v002/waste-policy/headers/eWastePresetHeader"),
+  path.join(dataRoot, "core-v001/waste-policy/headers/eWastePresetHeader"),
 );
 const section = manifest.sections["waste-policy"];
 const eWasteRoot = path.join(
@@ -48,7 +48,7 @@ const processor = require(
   ),
 );
 const base = (name) =>
-  require(path.join(eWasteRoot, "data/core-v002/records/waste", name));
+  require(path.join(eWasteRoot, "data/core-v001/records/waste", name));
 const composed = (name) => {
   const delta = require(path.join(recordsRoot, name));
   const merged = processor.mergeModels(structuredClone(base(name)), delta);
@@ -67,7 +67,7 @@ assert.equal(pkg.nodics.runtime.router, true);
 assert.equal(manifest.contractVersion, 2);
 assert.equal(manifest.module, "circa.ewaste");
 assert.equal(section.dataType, "core");
-assert.equal(section.sourceRoot, "core-v002");
+assert.equal(section.sourceRoot, "core-v001");
 assert.equal(section.version, "0.0.1");
 assert.equal(section.selectionPolicy, "EXPLICIT");
 assert.equal(

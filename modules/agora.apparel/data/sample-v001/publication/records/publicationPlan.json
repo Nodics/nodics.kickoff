@@ -1,0 +1,1217 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "agora-apparel-product-agoraLinenWrapDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraLinenWrapDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraLinenWrapDress-v001",
+        "productCode": "agoraLinenWrapDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSatinMidiDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSatinMidiDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSatinMidiDress-v001",
+        "productCode": "agoraSatinMidiDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRibbedKnitTop-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRibbedKnitTop",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRibbedKnitTop-v001",
+        "productCode": "agoraRibbedKnitTop",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraCottonPoplinShirtWomen-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraCottonPoplinShirtWomen",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraCottonPoplinShirtWomen-v001",
+        "productCode": "agoraCottonPoplinShirtWomen",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraLeatherTote-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraLeatherTote",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraLeatherTote-v001",
+        "productCode": "agoraLeatherTote",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSilkScarf-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSilkScarf",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSilkScarf-v001",
+        "productCode": "agoraSilkScarf",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraOxfordShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraOxfordShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraOxfordShirt-v001",
+        "productCode": "agoraOxfordShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraLinenCampShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraLinenCampShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraLinenCampShirt-v001",
+        "productCode": "agoraLinenCampShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraTailoredChino-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraTailoredChino",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraTailoredChino-v001",
+        "productCode": "agoraTailoredChino",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRelaxedTrouser-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRelaxedTrouser",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRelaxedTrouser-v001",
+        "productCode": "agoraRelaxedTrouser",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraCanvasBelt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraCanvasBelt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraCanvasBelt-v001",
+        "productCode": "agoraCanvasBelt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraWoolCap-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraWoolCap",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraWoolCap-v001",
+        "productCode": "agoraWoolCap",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraStretchStrapTop-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraStretchStrapTop",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraStretchStrapTop-v001",
+        "productCode": "agoraStretchStrapTop",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRamiePocketShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRamiePocketShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRamiePocketShirt-v001",
+        "productCode": "agoraRamiePocketShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRattanHandleBag-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRattanHandleBag",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRattanHandleBag-v001",
+        "productCode": "agoraRattanHandleBag",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraStripedKnitDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraStripedKnitDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraStripedKnitDress-v001",
+        "productCode": "agoraStripedKnitDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraBeltWrapDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraBeltWrapDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraBeltWrapDress-v001",
+        "productCode": "agoraBeltWrapDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraDoubleButtonTrench-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraDoubleButtonTrench",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraDoubleButtonTrench-v001",
+        "productCode": "agoraDoubleButtonTrench",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraButtonedCottonShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraButtonedCottonShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraButtonedCottonShirt-v001",
+        "productCode": "agoraButtonedCottonShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraLayeredTankTop-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraLayeredTankTop",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraLayeredTankTop-v001",
+        "productCode": "agoraLayeredTankTop",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraPleatedKnitDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraPleatedKnitDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraPleatedKnitDress-v001",
+        "productCode": "agoraPleatedKnitDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraMinimalSlipDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraMinimalSlipDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraMinimalSlipDress-v001",
+        "productCode": "agoraMinimalSlipDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraCollarKnitCardigan-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraCollarKnitCardigan",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraCollarKnitCardigan-v001",
+        "productCode": "agoraCollarKnitCardigan",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSoftShoulderBag-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSoftShoulderBag",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSoftShoulderBag-v001",
+        "productCode": "agoraSoftShoulderBag",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSummerKnitVest-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSummerKnitVest",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSummerKnitVest-v001",
+        "productCode": "agoraSummerKnitVest",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraTailoredSleevelessTop-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraTailoredSleevelessTop",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraTailoredSleevelessTop-v001",
+        "productCode": "agoraTailoredSleevelessTop",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraWideLegLinenPant-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraWideLegLinenPant",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraWideLegLinenPant-v001",
+        "productCode": "agoraWideLegLinenPant",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraTexturedCrossbodyBag-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraTexturedCrossbodyBag",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraTexturedCrossbodyBag-v001",
+        "productCode": "agoraTexturedCrossbodyBag",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraMinimalBalletFlat-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraMinimalBalletFlat",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraMinimalBalletFlat-v001",
+        "productCode": "agoraMinimalBalletFlat",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraOpenWeaveCardigan-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraOpenWeaveCardigan",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraOpenWeaveCardigan-v001",
+        "productCode": "agoraOpenWeaveCardigan",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRefinedShortSleeveDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRefinedShortSleeveDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRefinedShortSleeveDress-v001",
+        "productCode": "agoraRefinedShortSleeveDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraGoldFrameSunglasses-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraGoldFrameSunglasses",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraGoldFrameSunglasses-v001",
+        "productCode": "agoraGoldFrameSunglasses",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSoftRibbedDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSoftRibbedDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSoftRibbedDress-v001",
+        "productCode": "agoraSoftRibbedDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRelaxedCottonTee-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRelaxedCottonTee",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRelaxedCottonTee-v001",
+        "productCode": "agoraRelaxedCottonTee",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraCompactCrossbody-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraCompactCrossbody",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraCompactCrossbody-v001",
+        "productCode": "agoraCompactCrossbody",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSculptedHoopEarrings-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSculptedHoopEarrings",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSculptedHoopEarrings-v001",
+        "productCode": "agoraSculptedHoopEarrings",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraEverydayColumnDress-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraEverydayColumnDress",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraEverydayColumnDress-v001",
+        "productCode": "agoraEverydayColumnDress",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSheerRamieShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSheerRamieShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSheerRamieShirt-v001",
+        "productCode": "agoraSheerRamieShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraFineKnitPolo-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraFineKnitPolo",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraFineKnitPolo-v001",
+        "productCode": "agoraFineKnitPolo",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraNaturalCanvasTote-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraNaturalCanvasTote",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraNaturalCanvasTote-v001",
+        "productCode": "agoraNaturalCanvasTote",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraLuxeWrapTop-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraLuxeWrapTop",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraLuxeWrapTop-v001",
+        "productCode": "agoraLuxeWrapTop",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraPearlTrimCardigan-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraPearlTrimCardigan",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraPearlTrimCardigan-v001",
+        "productCode": "agoraPearlTrimCardigan",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraBiasCutMidiSkirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraBiasCutMidiSkirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraBiasCutMidiSkirt-v001",
+        "productCode": "agoraBiasCutMidiSkirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraTexturedKnitPullover-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraTexturedKnitPullover",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraTexturedKnitPullover-v001",
+        "productCode": "agoraTexturedKnitPullover",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraPolishedMiniBag-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraPolishedMiniBag",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraPolishedMiniBag-v001",
+        "productCode": "agoraPolishedMiniBag",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraCleanLineBlazer-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraCleanLineBlazer",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraCleanLineBlazer-v001",
+        "productCode": "agoraCleanLineBlazer",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSoftLinenShort-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSoftLinenShort",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSoftLinenShort-v001",
+        "productCode": "agoraSoftLinenShort",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraClassicDenimShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraClassicDenimShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraClassicDenimShirt-v001",
+        "productCode": "agoraClassicDenimShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraOvershirtJacket-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraOvershirtJacket",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraOvershirtJacket-v001",
+        "productCode": "agoraOvershirtJacket",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSlimCottonTrouser-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSlimCottonTrouser",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSlimCottonTrouser-v001",
+        "productCode": "agoraSlimCottonTrouser",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraRelaxedPoloShirt-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraRelaxedPoloShirt",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraRelaxedPoloShirt-v001",
+        "productCode": "agoraRelaxedPoloShirt",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraWashedChoreJacket-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraWashedChoreJacket",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraWashedChoreJacket-v001",
+        "productCode": "agoraWashedChoreJacket",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraEverydayCrewNeck-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraEverydayCrewNeck",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraEverydayCrewNeck-v001",
+        "productCode": "agoraEverydayCrewNeck",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraUtilityCargoTrouser-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraUtilityCargoTrouser",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraUtilityCargoTrouser-v001",
+        "productCode": "agoraUtilityCargoTrouser",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraLeatherCardHolder-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraLeatherCardHolder",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraLeatherCardHolder-v001",
+        "productCode": "agoraLeatherCardHolder",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraSignatureSunglasses-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraSignatureSunglasses",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraSignatureSunglasses-v001",
+        "productCode": "agoraSignatureSunglasses",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraNeutralShoulderBag-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraNeutralShoulderBag",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraNeutralShoulderBag-v001",
+        "productCode": "agoraNeutralShoulderBag",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraModernKnitSet-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraModernKnitSet",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraModernKnitSet-v001",
+        "productCode": "agoraModernKnitSet",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraStylePass5Coupon-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraStylePass5Coupon",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraStylePass5Coupon-v001",
+        "productCode": "agoraStylePass5Coupon",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraCapsuleEdit10Coupon-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraCapsuleEdit10Coupon",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraCapsuleEdit10Coupon-v001",
+        "productCode": "agoraCapsuleEdit10Coupon",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-product-agoraPrivateSale20Coupon-v001",
+      "domain": "product",
+      "rootType": "product",
+      "rootCode": "agoraPrivateSale20Coupon",
+      "sourceVersion": "1",
+      "input": {
+        "publicationCode": "agora-apparel-product-agoraPrivateSale20Coupon-v001",
+        "productCode": "agoraPrivateSale20Coupon",
+        "storeCode": "agoraMainStore",
+        "versionId": 0
+      }
+    },
+    {
+      "code": "agora-apparel-pricing-agoraApparelRetailUsd-v001",
+      "domain": "pricing",
+      "rootType": "priceBook",
+      "rootCode": "agoraApparelRetailUsd",
+      "sourceVersion": "66113a7608c8fb7cba2e402be8190386d576a6ed27dca640c3af4004a7b41ae0",
+      "input": {
+        "publicationCode": "agora-apparel-pricing-agoraApparelRetailUsd-v001",
+        "rootType": "priceBook",
+        "rootCode": "agoraApparelRetailUsd",
+        "references": [
+          {
+            "schema": "priceBook",
+            "code": "agoraApparelRetailUsd",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraBeltWrapDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraBiasCutMidiSkirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraButtonedCottonShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraCanvasBeltPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraCapsuleEdit10CouponPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraClassicDenimShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraCleanLineBlazerPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraCollarKnitCardiganPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraCompactCrossbodyPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraCottonPoplinShirtWomenPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraDoubleButtonTrenchPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraEverydayColumnDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraEverydayCrewNeckPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraFineKnitPoloPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraGoldFrameSunglassesPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraLayeredTankTopPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraLeatherCardHolderPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraLeatherTotePrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraLinenCampShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraLinenWrapDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraLuxeWrapTopPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraMinimalBalletFlatPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraMinimalSlipDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraModernKnitSetPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraNaturalCanvasTotePrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraNeutralShoulderBagPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraOpenWeaveCardiganPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraOvershirtJacketPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraOxfordShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraPearlTrimCardiganPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraPleatedKnitDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraPolishedMiniBagPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraPrivateSale20CouponPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRamiePocketShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRattanHandleBagPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRefinedShortSleeveDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRelaxedCottonTeePrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRelaxedPoloShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRelaxedTrouserPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraRibbedKnitTopPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSatinMidiDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSculptedHoopEarringsPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSheerRamieShirtPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSignatureSunglassesPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSilkScarfPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSlimCottonTrouserPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSoftLinenShortPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSoftRibbedDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSoftShoulderBagPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraStretchStrapTopPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraStripedKnitDressPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraStylePass5CouponPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraSummerKnitVestPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraTailoredChinoPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraTailoredSleevelessTopPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraTexturedCrossbodyBagPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraTexturedKnitPulloverPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraUtilityCargoTrouserPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraWashedChoreJacketPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraWideLegLinenPantPrice",
+            "versionId": 0
+          },
+          {
+            "schema": "priceRow",
+            "code": "agoraWoolCapPrice",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "agora-apparel-inventory-agoraApparelWarehouse-v001",
+      "domain": "inventory",
+      "rootType": "warehouse",
+      "rootCode": "agoraApparelWarehouse",
+      "sourceVersion": "7ea9f55acb15e16ec163cbc111c44956cd859fbb7a6e0677c49c90e83ab56763",
+      "input": {
+        "publicationCode": "agora-apparel-inventory-agoraApparelWarehouse-v001",
+        "rootType": "warehouse",
+        "rootCode": "agoraApparelWarehouse",
+        "references": [
+          {
+            "schema": "warehouse",
+            "code": "agoraApparelWarehouse",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "agora-apparel-tax-agoraAeVatPolicy-v001",
+      "domain": "tax",
+      "rootType": "taxPolicy",
+      "rootCode": "agoraAeVatPolicy",
+      "sourceVersion": "6f1d9bbfa715090dc32b17e90a0ac1637305fbf5287c51644bb5e7348d9f3cb4",
+      "input": {
+        "publicationCode": "agora-apparel-tax-agoraAeVatPolicy-v001",
+        "rootType": "taxPolicy",
+        "rootCode": "agoraAeVatPolicy",
+        "references": [
+          {
+            "schema": "taxPolicy",
+            "code": "agoraAeVatPolicy",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "agora-apparel-promotion-agoraStylePass5PercentRule-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "agoraStylePass5PercentRule",
+      "sourceVersion": "068e4975cbee13f07c2b6945e5a58e537795d4c88f02401b521c48f789297471",
+      "input": {
+        "publicationCode": "agora-apparel-promotion-agoraStylePass5PercentRule-v001",
+        "rootType": "promotion",
+        "rootCode": "agoraStylePass5PercentRule",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "agoraStylePass5PercentRule",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "agora-apparel-promotion-agoraCapsuleEdit10PercentRule-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "agoraCapsuleEdit10PercentRule",
+      "sourceVersion": "dab938121c15195686014c7fe71f888f5135363f0eea97b506314659db9a87d3",
+      "input": {
+        "publicationCode": "agora-apparel-promotion-agoraCapsuleEdit10PercentRule-v001",
+        "rootType": "promotion",
+        "rootCode": "agoraCapsuleEdit10PercentRule",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "agoraCapsuleEdit10PercentRule",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "agora-apparel-promotion-agoraPrivateSale20PercentRule-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "agoraPrivateSale20PercentRule",
+      "sourceVersion": "3c88115f8c03a8e845a0e6aa3068be15fea73bc32f5443ccaa796782904587fa",
+      "input": {
+        "publicationCode": "agora-apparel-promotion-agoraPrivateSale20PercentRule-v001",
+        "rootType": "promotion",
+        "rootCode": "agoraPrivateSale20PercentRule",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "agoraPrivateSale20PercentRule",
+            "versionId": 0
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -26,6 +26,34 @@ const test = require("node:test");
 const root = path.resolve(__dirname, "..");
 const kickoffCoreProperties = require(path.join(root, "modules", "kickoffCore", "config", "properties.js"));
 
+test("all unreleased project data and documentation releases use the v001 initial baseline", () => {
+  const crypto = require("node:crypto");
+  let releases = 0;
+  const inspect = (directory) => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      if (!entry.isDirectory() || entry.name.startsWith(".") ||
+        ["node_modules", "test", "tests", "temp", "logs", "generated", "dist"].includes(entry.name)) continue;
+      const next = path.join(directory, entry.name);
+      if (entry.name !== "data") { inspect(next); continue; }
+      const file = path.join(next, "manifest.json");
+      if (!fs.existsSync(file)) continue;
+      const manifest = JSON.parse(fs.readFileSync(file));
+      assert.equal(Object.keys(manifest.retainedRoots || {}).length, 0, file);
+      for (const section of Object.values(manifest.sections || {})) {
+        if (!["DATA_RELEASE", "CONTENT_PACK"].includes(section.kind)) continue;
+        releases++;
+        assert.equal(section.version, "0.0.1", file);
+        for (const [relative, digest] of Object.entries(section.files || section.generatedHashes || {})) {
+          assert.match(relative, /^(?:init|core|sample|docs)-v001\//, file);
+          assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(next, relative))).digest("hex"), digest, relative);
+        }
+      }
+    }
+  };
+  inspect(root);
+  assert(releases > 10);
+});
+
 test("Local and Docker administration consume customer profiles without domain services", () => {
   const { loadRuntime, activeModuleNames } = require("./helpers/configuration");
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {

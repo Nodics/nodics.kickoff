@@ -1,0 +1,43 @@
+{
+  "scope": "FICTIONAL_NATIVE_KICKOFF_LOCAL_ONLY",
+  "operationalAuthority": false,
+  "publicationInventory": "circa.ewaste:circaPublicationPlan",
+  "marketplace": {
+    "signedEnterprise": "GREENPERKS_ONLINE",
+    "publicationRelease": "circa.ewaste:circaCataloguePublicationPlan"
+  },
+  "issuers": [
+    {
+      "signedEnterprise": "GREENPERKS_RETAIL",
+      "publicationRelease": "circa.ewaste:circaGreenPerksPublicationPlan",
+      "budgetRelease": "circa.ewaste:circaGreenPerksBudget",
+      "issuanceRelease": "circa.ewaste:circaGreenPerksIssuance"
+    },
+    {
+      "signedEnterprise": "RENEWWORKS_REPAIR_REUSE",
+      "publicationRelease": "circa.ewaste:circaRenewWorksPublicationPlan",
+      "budgetRelease": "circa.ewaste:circaRenewWorksBudget",
+      "issuanceRelease": "circa.ewaste:circaRenewWorksIssuance"
+    },
+    {
+      "signedEnterprise": "LOOPCYCLE_RECYCLING",
+      "publicationRelease": "circa.ewaste:circaLoopCyclePublicationPlan",
+      "budgetRelease": "circa.ewaste:circaLoopCycleBudget",
+      "issuanceRelease": "circa.ewaste:circaLoopCycleIssuance"
+    }
+  ],
+  "consentReview": {
+    "owner": "DefaultCouponSellerAuthorizationService",
+    "vendorEnterprise": "GREENPERKS_ONLINE",
+    "expiresAt": "2026-11-08T23:59:59.000Z",
+    "benefitConsumption": "ISSUED_COUPON_BENEFIT_V1",
+    "instructionsFixture": "circaIssuerConsentReviewInstructions.json",
+    "grantsImported": false
+  },
+  "order": [
+    "EXACT_RETAINED_PUBLICATION_AND_INDEPENDENT_PROCESS_APPROVAL",
+    "SIGNED_ISSUER_BUDGET_ADMISSION",
+    "SEPARATE_SIGNED_ISSUER_SELLER_CONSENT_REVIEW",
+    "SIGNED_ISSUER_ISSUANCE_WITH_ORIGINAL_ADMISSION_REFERENCE"
+  ]
+}

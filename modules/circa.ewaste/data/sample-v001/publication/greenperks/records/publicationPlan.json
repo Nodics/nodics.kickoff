@@ -1,0 +1,670 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C01_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
+      "sourceVersion": "f242b0b606e3a8e0c58f22069bcf1ad4911768eba69f77095af79ab66f605250",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C01_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C01_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C02_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
+      "sourceVersion": "da884296e94b209bc8771da21b258d3056f52c46be7d279b4156e52344de9a11",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C02_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C02_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C03_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
+      "sourceVersion": "63cd3d81a50d3db7c74da5b3013e68574cb2d3862db922120328e4ef56599652",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C03_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C03_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C04_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
+      "sourceVersion": "3a16adedc2f520f5428b4b284e994bd233728aa10c7766857ac3b4d1f9bff2d5",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C04_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C04_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C05_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
+      "sourceVersion": "1e88611824dcf601273150db9b34f23ab2353cc08aa89e3a61c1e8c87abce49f",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C05_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C05_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C06_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
+      "sourceVersion": "bb85a006df5168a7031b33f277d3b6966db5077367887e25e5f391490b01af50",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C06_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C06_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C07_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
+      "sourceVersion": "d7ea9da02ec5947ce3c6ab9935ea58b875043dbb6fac515fda38eecd1f98f1d5",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C07_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C07_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C08_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
+      "sourceVersion": "98a63751dff43543112e8387e6928890cd0a1d5c2c40f3dd9d295033b15678c9",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C08_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C08_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C09_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
+      "sourceVersion": "d61bccd226b0ad9be4f08f576810d8e59390fd158725cd828932e91952301873",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C09_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C09_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C10_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
+      "sourceVersion": "1a1094c3010e5afbb0a06ca4c5381236cca6d54830fbbaafba80353d534fff08",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C10_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C10_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C11_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
+      "sourceVersion": "f6e8ba675384ead1908d7e407074c63bd31c2c71a7beafe6a7594422819eb0bb",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C11_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C11_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-C12_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
+      "sourceVersion": "30f6e15fc6e7c7b0e14645f4468fe764763a1f4175f403668acd1c1cf7e42faf",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-C12_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-C12_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B01_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
+      "sourceVersion": "da29e240e488c9ad70f6e6e113fc54855ef9f82f031de8be33e7c008c7c4cdd2",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B01_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B01_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B02_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
+      "sourceVersion": "7536a4aa9cd0bd52d2899fbf028e7130eec790799224ee6c2714f419894042f2",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B02_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B02_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B03_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
+      "sourceVersion": "72df9a9e9123b72421c68f10e1ffa3f009c4ac5a80e2eb611274bb2228af454a",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B03_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B03_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B04_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
+      "sourceVersion": "39ed6b6d264123da72fffb1153e2cedc6ce943ae5c6843ab00ec06a5dbc2b780",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B04_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B04_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B05_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
+      "sourceVersion": "8e6d16767acc45372828b686174dcacc4b84fab75fad84c8c86e482d071c0a25",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B05_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B05_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B06_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
+      "sourceVersion": "13b36ee05e0fa442c24e0a031fad4baa4faa05905f6e5d5b3c2d517420e44ef6",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B06_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B06_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B07_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
+      "sourceVersion": "a25fe58128a1a01db53ec18aa27650c21200e5d640be45326e0c55f494e5287e",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B07_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B07_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B08_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
+      "sourceVersion": "dcb74a568a4eeea6eacb9dfde2449bddbacafcfd3723c40c4b8d9be11d5fe8e9",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B08_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B08_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B09_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
+      "sourceVersion": "64fb3ede513951f66f453abfb23a59982c76bc229e23bee54c55b478a7fba08b",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B09_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B09_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B10_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
+      "sourceVersion": "13b142763231b40d78d3310c09a4a21829c623ba60bda08920fe7a8b8f3b8cca",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B10_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B10_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B11_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
+      "sourceVersion": "2efdfaaef0a285ffda6b7ed6dd4ae002f8a5b41376322ba1360c6de4554d2658",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B11_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B11_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-B12_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
+      "sourceVersion": "b2d64214676f6c25e0d050bc51abd4298800f139ef104e6e40d94d57495291cf",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-B12_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-B12_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A01_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
+      "sourceVersion": "423f10363d4919c2ae17ca9478951d11f0f5ae7aa3d07433e4242714fd6954ac",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A01_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A01_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A02_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
+      "sourceVersion": "687114349961e29d1fcf3985f4922bb3a6d26f4c2775fc9097e4d4572182f3e8",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A02_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A02_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A03_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
+      "sourceVersion": "6dbc0dde793abd474ababe292df0d11f1a0bd51f3fa726ed90f620a313202f0f",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A03_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A03_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A04_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
+      "sourceVersion": "ed13782bb4ffcd80c71d8eeda196a2a938c913ab1f16711c460a333d5ffb02e5",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A04_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A04_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A05_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
+      "sourceVersion": "852874b6c6380142a3bd52e0b826534434e5950a699dd1cb0c08f16bac5341d1",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A05_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A05_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A06_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
+      "sourceVersion": "8e74c096a448da11bfecf14a6647800fa3414f7ceecb13bdb28d9bab8bc6cb57",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A06_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A06_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A07_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
+      "sourceVersion": "fb2880fca0d1d1a701f1de8f64c3b11a89e34efc603cd2cd50c36dfa3b8b7f7c",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A07_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A07_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A08_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
+      "sourceVersion": "8b5acdf1190033605c94b00c94edbb28a7e65b41574841935e4bc534d13d0a9c",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A08_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A08_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A09_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
+      "sourceVersion": "9b3b0768050d8551eedab14083692842796bc011673d53613cc96d387df678ce",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A09_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A09_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A10_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
+      "sourceVersion": "bf807b9e6ed9be7bbb799b7ea9de65fc45b47d990f4c094a9022e804ac5638b2",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A10_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A10_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_GP-A11_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
+      "sourceVersion": "78a2fec4a815f1fdc101225b359833b30682a65232252b5c474698dc600a2891",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_GP-A11_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_GP-A11_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    }
+  ]
+}

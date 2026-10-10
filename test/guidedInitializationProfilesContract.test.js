@@ -207,6 +207,7 @@ assert.deepEqual(
     "nodics.copilot",
     "nodics.waste",
     "nodics.loyalty",
+    "nodics.docs",
     "nodics.accelerators/modules/nexus",
   ],
   "platformServer must discover capability-owned Platform-targeted data contributions without activating optional runtime modules",

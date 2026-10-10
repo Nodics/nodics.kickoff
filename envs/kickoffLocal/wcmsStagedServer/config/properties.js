@@ -9,6 +9,7 @@ module.exports = {
     }
   },
   "publish": {
+    "setup": { "observation": { "enabled": true } },
     "providers": {
       "versionProviders": { "media": "DefaultMediaPublicationVersionProviderService" },
       "domainAdapters": { "media": "DefaultMediaPublicationVersionProviderService" },
@@ -100,7 +101,7 @@ module.exports = {
       "baselines": {
         "nexusincremental": {
           "releaseCode": "nexus.web:nexusCorporateIncrementalProof",
-          "releaseVersion": "0.0.0",
+          "releaseVersion": "0.0.1",
           "dataType": "sample",
           "rootType": "site",
           "rootCode": "nexusCorporateSite",
@@ -108,28 +109,28 @@ module.exports = {
         },
         "nexusprofessionalcopy": {
           "releaseCode": "nexus.web:nexusCorporateProfessionalCopyUpdate",
-          "releaseVersion": "0.0.0",
+          "releaseVersion": "0.0.1",
           "dataType": "sample",
           "rootType": "site",
           "rootCode": "nexusCorporateSite",
           "sourceVersion": "0"
         },
         "axis": {
-          "releaseVersion": "0.0.0"
+          "releaseVersion": "0.0.1"
         },
         "axisassistant": {
           "releaseVersion": "0.0.1"
         },
         "frameworkdocs": {
           "contentPackCode": "nodicsDocumentation",
-          "releaseVersion": "0.16.29",
+          "releaseVersion": "0.0.1",
           "rootType": "site",
           "rootCode": "nodicsDocumentationSite",
           "sourceVersion": "0"
         },
         "axisdocs": {
           "contentPackCode": "axisDocumentation",
-          "releaseVersion": "0.0.3",
+          "releaseVersion": "0.0.1",
           "rootType": "site",
           "rootCode": "axisDocumentationSite",
           "sourceVersion": "0"

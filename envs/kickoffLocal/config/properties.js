@@ -6,6 +6,41 @@
  * @override Later deployment layers may narrow these selections without bypassing framework qualification or authorization.
  */
 module.exports = {
+  "publish": {
+    "setup": {
+      "observation": {
+        "plans": {
+          "circa-native-reviewed": {
+            "moduleName": "circa.ewaste",
+            "path": "config/setup-observation/circa-native-reviewed.json",
+            "checksum": "8e0743a8655ef5e6b40a2ddd895d978e46817fc58276643d37a0f063765729a2",
+            "revision": 4
+          }
+        },
+        "callers": {
+          "nativePlatform": {
+            "tenant": "default",
+            "enterpriseCode": "default",
+            "serviceId": "apiAdmin",
+            "projectCode": "nodics.kickoff",
+            "environmentCode": "kickoffLocal",
+            "serverCode": "platformServer",
+            "instanceCode": "kickoff-local-platform-1",
+            "assignmentCode": "kickoff-local-platform-runtime-deployment",
+            "plans": [
+              "circa-native-reviewed"
+            ]
+          }
+        }
+      }
+    },
+    "approvalWorkflow": {
+      "runtimeEnterpriseScope": {
+        "enabled": true,
+        "enterpriseCodes": ["GREENPERKS_ONLINE", "GREENPERKS_RETAIL", "RENEWWORKS_REPAIR_REUSE", "LOOPCYCLE_RECYCLING"]
+      }
+    }
+  },
   // Operator-selected only after the Local console and launch capture checks.
   "log": {
     "requestPrivacy": {
@@ -26,14 +61,23 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "circaMainStore"
+                "circaMainStore",
+                "greenperks-cafe", "greenperks-bistro", "renewworks-repair", "loopcycle-accessories",
+                { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": "agoraMainStore" }
               ]
             },
-            "rootCodes": {
+            "rootCodesByStore": {
               "$config": "replace",
-              "value": [
-                "circaPointsPriceBook"
-              ]
+              "value": {
+                "circaMainStore": ["circaPointsPriceBook"],
+                "greenperks-cafe": ["circaLocalGreenPerksAed"],
+                "greenperks-bistro": ["circaLocalGreenPerksAed"],
+                "renewworks-repair": ["circaLocalRenewWorksAed"],
+                "loopcycle-accessories": ["circaLocalLoopCycleAed"],
+                "agoraMainStore": { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": ["agoraApparelRetailUsd"] }
+              }
             }
           }
         }
@@ -49,14 +93,23 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "circaMainStore"
+                "circaMainStore",
+                "greenperks-cafe", "greenperks-bistro", "renewworks-repair", "loopcycle-accessories",
+                { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": "agoraMainStore" }
               ]
             },
-            "rootCodes": {
+            "rootCodesByStore": {
               "$config": "replace",
-              "value": [
-                "circaSamplePointsPolicy"
-              ]
+              "value": {
+                "circaMainStore": ["circaSamplePointsPolicy"],
+                "greenperks-cafe": ["circaLocalGreenPerksZeroTax"],
+                "greenperks-bistro": ["circaLocalGreenPerksZeroTax"],
+                "renewworks-repair": ["circaLocalRenewWorksZeroTax"],
+                "loopcycle-accessories": ["circaLocalLoopCycleZeroTax"],
+                "agoraMainStore": { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": ["agoraAeVatPolicy"] }
+              }
             }
           }
         }
@@ -72,14 +125,23 @@ module.exports = {
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "circaMainStore"
+                "circaMainStore",
+                "greenperks-cafe", "greenperks-bistro", "renewworks-repair", "loopcycle-accessories",
+                { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": "agoraMainStore" }
               ]
             },
-            "rootCodes": {
+            "rootCodesByStore": {
               "$config": "replace",
-              "value": [
-                "circaDigitalRegistry"
-              ]
+              "value": {
+                "circaMainStore": ["circaDigitalRegistry"],
+                "greenperks-cafe": ["circaLocalCafeWarehouse"],
+                "greenperks-bistro": ["circaLocalBistroWarehouse"],
+                "renewworks-repair": ["circaLocalRenewWorksWarehouse"],
+                "loopcycle-accessories": ["circaLocalLoopCycleWarehouse"],
+                "agoraMainStore": { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": ["agoraApparelWarehouse"] }
+              }
             }
           }
         }
@@ -87,26 +149,71 @@ module.exports = {
     }
   },
   "promotion": {
+    // Explicitly approved native demo selection; this does not qualify real ITEM delivery or monetary benefits.
+    "merchantBenefits": {
+      "enabled": true,
+      "itemEvidenceMode": "LOCAL_SIMULATION",
+      "itemEvidenceService": "DefaultFulfillmentItemSimulationService"
+    },
     "runtimeRoleProfiles": {
       "COMMERCE": {
+        // Reviewed native owner prerequisites; consent/issuance still pass their installed guards.
+        "sellerAuthorization": { "enabled": true, "qualified": true },
+        "purchasedRights": { "enabled": true, "qualified": true },
+        // Ten loopback runtimes share Platform's finite IP request budget.
+        "setupPacing": { "preflightDelayMs": 1200, "issuanceDelayMs": 3600 },
         "publication": {
           "delivery": {
             "enabled": true,
             "storeCodes": {
               "$config": "replace",
               "value": [
-                "circaMainStore"
+                "circaMainStore",
+                { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": "agoraMainStore" }
               ]
             },
-            "rootCodes": {
+            "rootCodesByStore": {
               "$config": "replace",
-              "value": [
-                "CIRCA_COUPON_CPN-ECO-15_PROMO"
-              ]
+              "value": {
+                "circaMainStore": [
+                  "CIRCA_COUPON_GP-C01_PROMO", "CIRCA_COUPON_GP-C02_PROMO", "CIRCA_COUPON_GP-C03_PROMO",
+                  "CIRCA_COUPON_GP-C04_PROMO", "CIRCA_COUPON_GP-C05_PROMO", "CIRCA_COUPON_GP-C06_PROMO",
+                  "CIRCA_COUPON_GP-C07_PROMO", "CIRCA_COUPON_GP-C08_PROMO", "CIRCA_COUPON_GP-C09_PROMO",
+                  "CIRCA_COUPON_GP-C10_PROMO", "CIRCA_COUPON_GP-C11_PROMO", "CIRCA_COUPON_GP-C12_PROMO",
+                  "CIRCA_COUPON_GP-B01_PROMO", "CIRCA_COUPON_GP-B02_PROMO", "CIRCA_COUPON_GP-B03_PROMO",
+                  "CIRCA_COUPON_GP-B04_PROMO", "CIRCA_COUPON_GP-B05_PROMO", "CIRCA_COUPON_GP-B06_PROMO",
+                  "CIRCA_COUPON_GP-B07_PROMO", "CIRCA_COUPON_GP-B08_PROMO", "CIRCA_COUPON_GP-B09_PROMO",
+                  "CIRCA_COUPON_GP-B10_PROMO", "CIRCA_COUPON_GP-B11_PROMO", "CIRCA_COUPON_GP-B12_PROMO",
+                  "CIRCA_COUPON_GP-A01_PROMO", "CIRCA_COUPON_GP-A02_PROMO", "CIRCA_COUPON_GP-A03_PROMO",
+                  "CIRCA_COUPON_GP-A04_PROMO", "CIRCA_COUPON_GP-A05_PROMO", "CIRCA_COUPON_GP-A06_PROMO",
+                  "CIRCA_COUPON_GP-A07_PROMO", "CIRCA_COUPON_GP-A08_PROMO", "CIRCA_COUPON_GP-A09_PROMO",
+                  "CIRCA_COUPON_GP-A10_PROMO", "CIRCA_COUPON_GP-A11_PROMO",
+                  "CIRCA_COUPON_CPN-GRN-30_PROMO", "CIRCA_COUPON_CPN-SVC-50_PROMO", "CIRCA_COUPON_CPN-ECO-15_PROMO"
+                ],
+                "agoraMainStore": { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                  "value": ["agoraStylePass5PercentRule", "agoraCapsuleEdit10PercentRule", "agoraPrivateSale20PercentRule"] }
+              }
             }
           }
         }
       }
+    }
+  },
+  "digitalCore": {
+    "runtimeRoleProfiles": {
+      "COMMERCE": {
+        "merchantRedemption": {
+          "enabled": true,
+          "storeScope": { "enabled": true, "qualified": true }
+        }
+      }
+    }
+  },
+  "fulfillmentCore": {
+    "itemSimulation": {
+      "enabled": true,
+      "environmentAllowlist": { "$config": "replace", "value": ["kickoffLocal"] }
     }
   },
   // Explicit Local service-grant allowlist; review inherited grant changes before extending this pin.
@@ -188,7 +295,12 @@ module.exports = {
         }
       },
       "COMMERCE": {
-        "categories": { "productPublicationTarget": { "enabled": true } }
+        "categories": {
+          "productPublicationTarget": { "enabled": true },
+          "commerceSellerAuthorizationManagement": { "enabled": true },
+          "commerceMerchantPricing": { "enabled": true },
+          "commerceOwnershipEvidence": { "enabled": true }
+        }
       }
     }
   },
@@ -206,7 +318,19 @@ module.exports = {
           "activationService": "DefaultProductPublicationTargetService",
           "activationScopes": {
             "$config": "replace",
-            "value": [{ "tenant": "default", "storeCode": "circaMainStore" }]
+            "value": [
+              { "tenant": "default", "storeCode": "circaMainStore" },
+              { "tenant": "default", "storeCode": "greenperks-cafe" },
+              { "tenant": "default", "storeCode": "greenperks-bistro" },
+              { "tenant": "default", "storeCode": "renewworks-repair" },
+              { "tenant": "default", "storeCode": "loopcycle-accessories" },
+              { "$config": "selected", "name": "agora", "field": "domains", "includes": "apparel",
+                "value": { "tenant": "default", "storeCode": "agoraMainStore" } },
+              { "$config": "selected", "name": "agora", "field": "domains", "includes": "electronics",
+                "value": { "tenant": "default", "storeCode": "agoraElectronicsStore" } },
+              { "$config": "selected", "name": "agora", "field": "domains", "includes": "telco",
+                "value": { "tenant": "default", "storeCode": "agoraTelcoStore" } }
+            ]
           }
         },
         "publication": {
@@ -228,14 +352,14 @@ module.exports = {
               "source": {
                 "moduleName": "processServer",
                 "releaseCode": "processServer:init-v001",
-                "version": "0.0.0",
+                "version": "0.0.1",
                 "checksum": "0024cecb65ef2e34f3db8d314fbea6f926e3cc887fdc8c38612b3ac0fb646613"
               },
               "target": {
                 "moduleName": "editorial",
                 "releaseCode": "editorial:editorialWorkflows",
-                "version": "1.0.0",
-                "checksum": "37473f7bd84460871d92c355a7f57ca32b9b0206c6b3318445fe7fd4306ab4b1"
+                "version": "0.0.1",
+                "checksum": "d754c2c3ddbe4c5188e96b329a99b8686c19cdfd994f423424ea56e4a2f84103"
               },
               "publishedChecksum": "d429c6567247add99fb275466af93a33ca64e3628c6a3119c97ccc05a3b70daf"
             },
@@ -245,14 +369,14 @@ module.exports = {
               "source": {
                 "moduleName": "processServer",
                 "releaseCode": "processServer:init-v001",
-                "version": "0.0.0",
+                "version": "0.0.1",
                 "checksum": "0024cecb65ef2e34f3db8d314fbea6f926e3cc887fdc8c38612b3ac0fb646613"
               },
               "target": {
                 "moduleName": "editorial",
                 "releaseCode": "editorial:editorialWorkflows",
-                "version": "1.0.0",
-                "checksum": "37473f7bd84460871d92c355a7f57ca32b9b0206c6b3318445fe7fd4306ab4b1"
+                "version": "0.0.1",
+                "checksum": "d754c2c3ddbe4c5188e96b329a99b8686c19cdfd994f423424ea56e4a2f84103"
               },
               "publishedChecksum": "f9fe1d8ab0da0acef1327c4dab32b6d2291f87e9c4486b8f9cf6af61d663c42a"
             }

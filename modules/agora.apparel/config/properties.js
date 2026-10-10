@@ -24,6 +24,31 @@ const backofficeApplicationVisual = {
  * @override Project, environment, server, node, tenant, or customer layers may override these defaults through Nodics configuration layering.
  */
 module.exports = {
+    "fulfillmentCore": {
+        "runtimeRoleProfiles": {
+            "COMMERCE": {
+                "physicalOperations": {
+                    "enabled": true,
+                    "evidenceMode": "MANUAL_ATTESTATION"
+                }
+            }
+        }
+    },
+    "order": {
+        "runtimeRoleProfiles": {
+            "COMMERCE": {
+                "disputes": {
+                    "enabled": true,
+                    "storeCodes": { "agoraMainStore": true }
+                },
+                "refunds": {
+                    "enabled": true,
+                    "storeCodes": { "agoraMainStore": true },
+                    "ownerByStore": { "agoraMainStore": "fulfillmentCore" }
+                }
+            }
+        }
+    },
     "tooling": {
         "acceptance": {
             "loyaltyRewardCheckout": {
@@ -66,7 +91,7 @@ module.exports = {
                     "baselines": {
                         "agoraapparel": {
                             "releaseCode": "agora.apparel:agoraApparelContentCatalog",
-                            "releaseVersion": "0.0.8",
+                            "releaseVersion": "0.0.1",
                             "dataType": "sample",
                             "rootType": "site",
                             "rootCode": "agoraApparelSite",
@@ -152,6 +177,38 @@ module.exports = {
                                     "dataType": "sample",
                                     "targetServer": "commerceStaged",
                                     "targetRuntimeRole": "COMMERCE_STAGED"
+                                },
+                                {
+                                    "code": "agora.apparel:agoraApparelPublicationPlan",
+                                    "type": "GOVERNED_PUBLICATIONS",
+                                    "kind": "Complete governed Commerce publication",
+                                    "required": true,
+                                    "trigger": "USER",
+                                    "phase": "AFTER_PUBLICATION",
+                                    "dataType": "sample",
+                                    "targetServer": "commerceStaged",
+                                    "targetRuntimeRole": "COMMERCE_STAGED",
+                                    "publicationPlan": require('../data/sample-v001/publication/records/publicationPlan.json')
+                                },
+                                {
+                                    "code": "agora.apparel:agoraApparelOpeningStock",
+                                    "kind": "Sample opening stock intake",
+                                    "required": true,
+                                    "trigger": "USER",
+                                    "phase": "AFTER_PUBLICATION",
+                                    "dataType": "sample",
+                                    "targetServer": "commerce",
+                                    "targetRuntimeRole": "COMMERCE"
+                                },
+                                {
+                                    "code": "agora.apparel:agoraApparelPromotionSetup",
+                                    "kind": "Sample campaign budget and coupon issuance",
+                                    "required": true,
+                                    "trigger": "USER",
+                                    "phase": "AFTER_PUBLICATION",
+                                    "dataType": "sample",
+                                    "targetServer": "commerce",
+                                    "targetRuntimeRole": "COMMERCE"
                                 }
                             ]
                         }

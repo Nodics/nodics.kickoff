@@ -62,7 +62,7 @@ const priceRows = require(
 );
 // Historical records are isolated operational doubles, never the active import
 // plan. Live stock and coupon issuance require their Online owner commands.
-const operationalFixtureRoot = path.join(agoraDataRoot, "sample-v003/commerce/records");
+const operationalFixtureRoot = path.join(__dirname, "fixtures/compatibility/apparelOperational");
 const inventoryBalances = require(
   path.join(operationalFixtureRoot, "agoraApparelInventoryBalanceData"),
 );

@@ -63,18 +63,18 @@ module.exports = {
       "runtimeRole": "STAGED",
       "baselines": {
         "axis": {
-          "releaseVersion": "0.0.0"
+          "releaseVersion": "0.0.1"
         },
         "frameworkdocs": {
           "contentPackCode": "nodicsDocumentation",
-          "releaseVersion": "0.16.29",
+          "releaseVersion": "0.0.1",
           "rootType": "site",
           "rootCode": "nodicsDocumentationSite",
           "sourceVersion": "0"
         },
         "axisdocs": {
           "contentPackCode": "axisDocumentation",
-          "releaseVersion": "0.0.3",
+          "releaseVersion": "0.0.1",
           "rootType": "site",
           "rootCode": "axisDocumentationSite",
           "sourceVersion": "0"

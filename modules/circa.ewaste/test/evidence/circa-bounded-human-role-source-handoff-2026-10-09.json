@@ -1,0 +1,154 @@
+{
+  "status": "SOURCE_READY_MANIFEST_ADOPTION_PENDING",
+  "nativeActionsExecuted": false,
+  "manifestWrittenByThisTask": false,
+  "sectionsToAdd": {
+    "circaLocalDemoCreditRole": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local demo credit role",
+      "description": "Approved four-permission human group only; no general earnings or core import authority.",
+      "files": {
+        "sample-v001/credit-role/headers/circaLocalDemoCreditRoleHeader.js": "7968447b605151c57b94f8283216d3f24ee93e8cda9a52a87017e930ece5eca7",
+        "sample-v001/credit-role/records/circaLocalDemoCreditGroupData.js": "0f11e2828fe9655fff733eee67f717f052482929ed8eaf75dd38eb060ce9f1aa"
+      }
+    },
+    "circaLocalDemoCreditStaffAssignment": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local demo credit staff assignment",
+      "description": "Profile additive group instruction for the one original GREENPERKS_ONLINE human; preserves employee state.",
+      "files": {
+        "sample-v001/credit-staff/headers/circaLocalDemoCreditStaffHeader.js": "349a20267cfc1fdff1785421970b436d3f56310adfeb97158b75fa270c7c7043",
+        "sample-v001/credit-staff/records/circaLocalDemoCreditStaffData.js": "57411e4c704e4dcf3678fca636fa2d8866ea6aa459bcb4a3cf3f996784154654"
+      }
+    },
+    "circaLocalOpeningRole": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local opening Inventory role",
+      "description": "Approved Inventory operation permission only; no broad Commerce or schema administration.",
+      "files": {
+        "sample-v001/opening-role/headers/circaLocalOpeningRoleHeader.js": "4a52eee617807529bdf3e4c6cb5022eaa617ce045399c18fae63b666582ba0d1",
+        "sample-v001/opening-role/records/circaLocalOpeningGroupData.js": "44c48ed3af06ef02c1ce5b74c57e85a945a6cfb3c4c7649148dffa411e820b92"
+      }
+    },
+    "circaLocalOpeningStaffAssignments": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local opening Inventory staff assignments",
+      "description": "Profile additive groups for the exact original retail, repair and recycling administrators.",
+      "files": {
+        "sample-v001/opening-staff/headers/circaLocalOpeningStaffHeader.js": "e610c688986629418e8388641da677051f8623456cf409b22e558d9ea8f2dc47",
+        "sample-v001/opening-staff/records/circaLocalOpeningStaffData.js": "603805e12519c127095e8d9d9cccd96840ff1950f37d9e648c04adde62dbd17f"
+      }
+    }
+  },
+  "adoptionOrder": [
+    "Reload the source-owned CIRCA_LOCAL_DEMO_CREDIT role vocabulary from modules/circa.ewaste/config/properties.js in Platform before the additive import.",
+    "Using existing authorized Profile/nImport administration, validate and import circa.ewaste:circaLocalDemoCreditRole sample 0.0.1 on PLATFORM.",
+    "Then validate and import circa.ewaste:circaLocalDemoCreditStaffAssignment sample 0.0.1 on PLATFORM. Header invokes DefaultEmployeeService.addReferenceGroupsAll; never replay operations/staff snapshots.",
+    "Refresh the original circa-online-administrator session through normal sign-in after Profile invalidates the prior security stamp. Verify the retained GREENPERKS_ONLINE association and only the reviewed missing group addition.",
+    "Before any buyer wallet mutation, use that genuine human on LOYALTY to validate and install the unchanged circa.ewaste:circaLocalDemoCredit sample 0.0.1 through LOYALTY_SAMPLE_CREDITS. Preserve its existing checksum and exact approved source.",
+    "Credit must retain the original 118 available/earned, zero other counters, revision 0 guard. Owner atomic posting is 7645 POINTS once. A changed guard blocks; do not retarget it or use general reward earn.",
+    "Inspect original receipt/ledger after an uncertain outcome; retain the same source and instruction. Credit completion requires owner readback, not role installation. Asset mutations follow this gate."
+  ],
+  "openingAdoptionOrder": [
+    "Load the source-only Inventory config/properties.js and src/schemas/schemas.js changes through the deployment's normal rebuild/reload; no generated artifacts were written by this task.",
+    "On PLATFORM, validate and import circa.ewaste:circaLocalOpeningRole sample 0.0.1 before circa.ewaste:circaLocalOpeningStaffAssignments sample 0.0.1, using existing authorized Profile/nImport administration.",
+    "Refresh only the three original human sessions through normal sign-in after the additive CAS updates; verify original enterprise and retained groups. Existing issuer roles already provide sample-import permissions.",
+    "Separately review and select each exact issuer-owned INVENTORY_OPENING_RECEIPTS contribution on COMMERCE through the existing nImport owner install action, after its activated Product/warehouse and Store bindings pass.",
+    "These role packs contain no goods, opening quantities or stock writes. Inventory must qualify installed unique identities and atomic transactions; provider refusal blocks first receipt. Replay retains original receipt and never replenishes consumed stock."
+  ],
+  "releaseChecksums": {
+    "circa.ewaste:circaLocalDemoCreditRole": "a32e02a6e8cf8a3eefe11a5588d2f8a255a595b3514b763b6cb4c6a05144e716",
+    "circa.ewaste:circaLocalDemoCreditStaffAssignment": "520858cf076946600d4dfa7a070debf0c94555d9929b3122f6c40c2fd5cc0c43",
+    "circa.ewaste:circaLocalOpeningRole": "a3956d182d90a7c0117523039cc85243c5120f045c15e63ccca65797920e7b21",
+    "circa.ewaste:circaLocalOpeningStaffAssignments": "d5ffccbc0df95a058fcc77fdbae3ab2e39fda83532e9f6756c68debda39ea162"
+  },
+  "sourceFiles": {
+    "K/modules/circa.ewaste/config/properties.js": "9a681d58ab4681ac2d0b9bc0857a1d1bec5075170be6d6978b9739067e574548",
+    "F/nodics.commerce/modules/baseCommerce/modules/inventory/config/properties.js": "736bf1dae04f271f291bd68f7201c09d9472eff31f6888bed7fb511e822ab5ca",
+    "F/nodics.commerce/modules/baseCommerce/modules/inventory/src/schemas/schemas.js": "c5e3d2c5353e19800997f0b764bd2a0d477e744f2d2d643b18563bbaffc2ec68"
+  },
+  "unchangedCreditPayloadSha256": "19cdd9068da60789f36ff2fe0f72ebfd485ff14b3dc96dfe654a48c3db3e7641",
+  "ownerActions": {
+    "module": "import",
+    "validate": {
+      "method": "POST",
+      "routeKey": "/sample/validate",
+      "controller": "DefaultDataReleaseController.preflightSample"
+    },
+    "install": {
+      "method": "POST",
+      "routeKey": "/sample/install",
+      "controller": "DefaultDataReleaseController.executeSample"
+    },
+    "body": "Use releaseCodes with the single exact selected release and expectedReleases version 0.0.1. Select the correct runtime owner, do not select the entire module.",
+    "employeeOperation": "DefaultEmployeeService.addReferenceGroupsAll via the declared Profile header; group installation uses the ordinary UserGroup owner.",
+    "routeAuthorization": "Existing nRouter treats permission/permissions route metadata as alternatives. import.release.validate suffices for sample preflight; do not add import.core.run."
+  },
+  "verification": {
+    "status": "PASS_SOURCE_ONLY",
+    "kickoffTests": 17,
+    "frameworkAndProfileTests": 119,
+    "ownershipPlacementScopeReview": "PASS. Customer owns two role vocabularies, two bounded groups and four exact additive employee instructions in four separate Local sample contribution descriptors. Framework changes are confined to Inventory named schema admission, owner guidance and focused tests. Pre-existing and concurrent changes were preserved.",
+    "limits": "No native calls, auth, server starts, runtime bearer edits, goods/environment/credit edits or manifest writes by this task. Native installed schemas, provider qualification, owner imports and wallet readback remain with main. Platform prerequisites/observation revision remain with Kierkegaard."
+  }
+}

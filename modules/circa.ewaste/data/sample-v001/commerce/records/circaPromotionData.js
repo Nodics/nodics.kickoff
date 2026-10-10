@@ -10,7 +10,7 @@
 module.exports = {
   "record0": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_CPN-GRN-30_PROMO",
@@ -20,23 +20,49 @@ module.exports = {
     "conditions": {
       "couponRequired": true,
       "customerOwnsCouponCode": true,
-      "sourceProductCode": "CIRCA_COUPON_CPN-GRN-30"
+      "sourceProductCode": "CIRCA_COUPON_CPN-GRN-30",
+      "storeCodes": [
+        "renewworks-repair"
+      ]
     },
     "actions": {
       "discountType": "AMOUNT",
-      "discountValue": "1",
-      "discountAmount": "1",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "discountValue": "30",
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "discountAmount": "30"
     },
     "budget": {
-      "limit": "1000"
+      "limit": "3000"
     },
     "validFrom": "2026-01-01T00:00:00.000Z",
-    "validTo": "2026-12-31T23:59:59.000Z"
+    "validTo": "2026-12-31T23:59:59.000Z",
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "RENEWWORKS_REPAIR_REUSE"
+    },
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "RENEWWORKS_REPAIR_REUSE"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem AED 30 repair credit once at renewworks-repair.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
   },
   "record1": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "LOOPCYCLE_RECYCLING",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_CPN-ECO-15_PROMO",
@@ -46,23 +72,50 @@ module.exports = {
     "conditions": {
       "couponRequired": true,
       "customerOwnsCouponCode": true,
-      "sourceProductCode": "CIRCA_COUPON_CPN-ECO-15"
+      "sourceProductCode": "CIRCA_COUPON_CPN-ECO-15",
+      "storeCodes": [
+        "loopcycle-accessories"
+      ]
     },
     "actions": {
-      "discountType": "AMOUNT",
-      "discountValue": "1",
-      "discountAmount": "1",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "discountType": "PERCENT",
+      "discountValue": "15",
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "percent": "15",
+      "maximumDiscountAmount": "30"
     },
     "budget": {
-      "limit": "1000"
+      "limit": "3000"
     },
     "validFrom": "2026-01-01T00:00:00.000Z",
-    "validTo": "2026-11-15T23:59:59.000Z"
+    "validTo": "2026-11-15T23:59:59.000Z",
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "LOOPCYCLE_RECYCLING"
+    },
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "LOOPCYCLE_RECYCLING"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem 15% recycled accessories offer once at loopcycle-accessories.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
   },
   "record2": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_CPN-SVC-50_PROMO",
@@ -72,23 +125,49 @@ module.exports = {
     "conditions": {
       "couponRequired": true,
       "customerOwnsCouponCode": true,
-      "sourceProductCode": "CIRCA_COUPON_CPN-SVC-50"
+      "sourceProductCode": "CIRCA_COUPON_CPN-SVC-50",
+      "storeCodes": [
+        "renewworks-repair"
+      ]
     },
     "actions": {
       "discountType": "AMOUNT",
-      "discountValue": "1",
-      "discountAmount": "1",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "discountValue": "50",
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "discountAmount": "50"
     },
     "budget": {
-      "limit": "1000"
+      "limit": "5000"
     },
     "validFrom": "2026-01-01T00:00:00.000Z",
-    "validTo": "2027-01-20T23:59:59.000Z"
+    "validTo": "2027-01-20T23:59:59.000Z",
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "RENEWWORKS_REPAIR_REUSE"
+    },
+    "issuerEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "RENEWWORKS_REPAIR_REUSE"
+    },
+    "vendorEnterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_ONLINE"
+    },
+    "purchasedCouponPolicy": {
+      "validityDays": 30,
+      "terms": [
+        "Redeem AED 50 device diagnosis once at renewworks-repair.",
+        "Valid for 30 days from successful purchase.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value."
+      ]
+    }
   },
   "record3": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -116,20 +195,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Espresso",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_ESPRESSO",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Espresso once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record4": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -157,20 +252,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Americano",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_AMERICANO",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Americano once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record5": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -198,20 +309,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Cappuccino",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_CAPPUCCINO",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Cappuccino once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record6": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -239,20 +366,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Latte",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_LATTE",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Latte once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record7": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -280,20 +423,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Tea",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_TEA",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Tea once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record8": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -321,20 +480,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Iced coffee",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_ICED_COFFEE",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Iced coffee once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record9": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -362,20 +537,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Croissant",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_CROISSANT",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Croissant once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record10": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -403,20 +594,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Muffin",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_MUFFIN",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Muffin once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record11": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -444,20 +651,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Cookie pair",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_COOKIE",
+          "quantity": 2,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Cookie pair once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record12": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -485,20 +708,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Coffee and croissant",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_AMERICANO",
+          "quantity": 1,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_CROISSANT",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record13": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -526,20 +770,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Tea and cake slice",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_TEA",
+          "quantity": 1,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_CAKE_SLICE",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record14": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -567,20 +832,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Breakfast sandwich and coffee",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_BREAKFAST_SANDWICH",
+          "quantity": 1,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_AMERICANO",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record15": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -608,20 +894,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Soup of the day",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_VEGETABLE_SOUP",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Soup of the day once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record16": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -649,20 +951,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Side salad",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_SIDE_SALAD",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Side salad once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record17": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -690,20 +1008,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Starter plate",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_STARTER_PLATE",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Starter plate once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record18": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -731,20 +1065,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Sandwich",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_SANDWICH",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Sandwich once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record19": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -772,20 +1122,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Pasta dish",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_PASTA",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Pasta dish once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record20": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -813,20 +1179,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Pizza",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_PIZZA",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Pizza once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record21": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -854,20 +1236,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Main-course salad",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_MAIN_SALAD",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Main-course salad once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record22": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -895,20 +1293,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Dessert",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_DESSERT",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Dessert once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record23": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -936,20 +1350,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Main and soft drink",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_PASTA",
+          "quantity": 1,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_SOFT_DRINK",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record24": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -977,20 +1412,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Two-course lunch",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_VEGETABLE_SOUP",
+          "quantity": 1,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_PASTA",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record25": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1018,20 +1474,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Meal for two",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_PASTA",
+          "quantity": 2,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_SOFT_DRINK",
+          "quantity": 2,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Meal for two once at GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record26": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1071,11 +1548,19 @@ module.exports = {
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 100.00."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "2500"
     }
   },
   "record27": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1104,20 +1589,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Bottled water",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_BOTTLED_WATER",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record28": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1146,20 +1647,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Tea",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_TEA",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record29": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1188,20 +1705,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Americano",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_AMERICANO",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record30": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1230,20 +1763,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Fresh juice",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_ORANGE_JUICE",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record31": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1272,20 +1821,36 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Soft drink",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_SOFT_DRINK",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record32": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1314,20 +1879,41 @@ module.exports = {
     "actions": {
       "benefitType": "ITEM",
       "benefitDescription": "Dessert and tea",
-      "reasonCode": "CIRCA_SAMPLE_OFFER"
+      "reasonCode": "CIRCA_SAMPLE_OFFER",
+      "items": [
+        {
+          "sku": "GP_DESSERT",
+          "quantity": 1,
+          "unit": "EACH"
+        },
+        {
+          "sku": "GP_TEA",
+          "quantity": 1,
+          "unit": "EACH"
+        }
+      ]
     },
     "purchasedCouponPolicy": {
       "validityDays": 30,
       "terms": [
         "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
         "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value."
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "0"
     }
   },
   "record33": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1368,11 +1954,19 @@ module.exports = {
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 40.00."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "1000"
     }
   },
   "record34": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1413,11 +2007,19 @@ module.exports = {
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 80.00."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "2000"
     }
   },
   "record35": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1458,11 +2060,19 @@ module.exports = {
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 120.00."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "3000"
     }
   },
   "record36": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1505,11 +2115,19 @@ module.exports = {
         "Minimum eligible bill subtotal AED 50.00.",
         "Maximum discount AED 20.00."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "2000"
     }
   },
   "record37": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_RETAIL",
     "issuerEnterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1552,6 +2170,14 @@ module.exports = {
         "Minimum eligible bill subtotal AED 100.00.",
         "Maximum discount AED 40.00."
       ]
+    },
+    "enterpriseRef": {
+      "moduleName": "profile",
+      "schemaName": "enterprise",
+      "code": "GREENPERKS_RETAIL"
+    },
+    "budget": {
+      "limit": "4000"
     }
   }
 };

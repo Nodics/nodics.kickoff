@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-08",
+  "environment": "native kickoffLocal",
+  "state": "LOCAL_SANDBOX_APPAREL_JOURNEY_AND_POST_PURCHASE_REPLAY_PASSED",
+  "priorEvidence": "native-apparel-recovery-follow-through-2026-10-08.json",
+  "scope": "Previously authorized exact native reset and v001 Apparel setup, followed by native local-sandbox customer purchase, private reveal, discounted physical checkout, declined-payment compensation and post-purchase replay; no additional reset during the follow-through",
+  "excluded": ["Electronics and Telco business setup", "Circa business mutations", "unrelated databases and search indexes", "media file removal", "production qualification", "unrelated dirty worktree changes"],
+  "physicalReset": {
+    "owner": "nTooling project:local-reset-maintenance",
+    "status": "COMPLETED",
+    "qualified": false,
+    "registeredTenantCount": 0,
+    "databaseNames": ["kickoffLocalCommerce", "kickoffLocalCommerceStaged", "kickoffLocalCron", "kickoffLocalEngagement", "kickoffLocalLocation", "kickoffLocalLoyalty", "kickoffLocalPlatform", "kickoffLocalProcess", "kickoffLocalWaste", "kickoffLocalWcmsOnline", "kickoffLocalWcmsStaged"],
+    "searchIndexes": ["kickofflocal_commercesearchruleprojection", "kickofflocal_discoverydocumentprojection", "kickofflocal_productlocalized", "kickofflocal_productsearchprojection"],
+    "authNamespace": "auth_kickoffLocalRuntimeAuth_",
+    "databasesDropped": 11,
+    "indexesDropped": 4,
+    "authKeysRemoved": 173,
+    "collectionsObservedBefore": 671,
+    "collectionsRemaining": 0,
+    "authKeysRemaining": 0,
+    "cleanupFailedCount": 0,
+    "independentExclusivityProof": true,
+    "continuousFence": false,
+    "limit": "Observed exact local maintenance outage and provider cleanup, not a distributed write fence or application qualification",
+    "mediaFilesPreserved": true
+  },
+  "nativeSetup": {
+    "backendRuntimeCountReady": 10,
+    "restoredModuleRegistrations": ["nodics.commerce", "nodics.discovery"],
+    "workflowDefinitions": ["mediaPublicationApproval", "productPublicationApproval", "pricingPublicationApproval", "inventoryPublicationApproval", "taxPublicationApproval", "promotionPublicationApproval"],
+    "cms": { "publicationCode": "cmsBaseline_agoraapparel_0_0_1", "state": "ONLINE" },
+    "media": { "approvedAndQualifiedCount": 83, "coordinator": "Existing Axis coordinatePublicationAssets action helper with independent normal Media approvals", "sharedMediaDuplicated": false },
+    "domainPublications": { "ready": true, "total": 67, "product": 61, "pricing": 1, "inventory": 1, "tax": 1, "promotion": 3, "status": "CURRENT" },
+    "approvalAuthority": "Original signed human administrator, existing Process task claim and complete; no approval bypass or synthetic receipt",
+    "operationalContributions": {
+      "installedVersions": "sample-v001 / 0.0.1",
+      "openingReceiptCount": 464,
+      "currentOpeningReceiptCount": 464,
+      "campaignCount": 3,
+      "couponBatchQuantities": [100, 50, 20],
+      "couponUnitCount": 170,
+      "couponRetention": "Promotion-owned encrypted aggregates with original issuance receipts, generated atomic transactions and persistent nSystem purpose key",
+      "applicationReadiness": "READY",
+      "preparationStatus": "CURRENT"
+    },
+    "installedIssuanceIndexes": {
+      "authority": "Authenticated nDatabase installed-index inspection",
+      "coupon": { "versioned": false, "uniqueIdentities": [["code"], ["tenant", "tokenHash"]] },
+      "couponBatch": { "versioned": false, "uniqueIdentities": [["code"]] }
+    }
+  },
+  "nativeCatalogue": {
+    "state": "PASSED",
+    "expectedProducts": 61,
+    "discoveredProducts": 61,
+    "discoveryPageCount": 3,
+    "qualifiedPdpCount": 61,
+    "qualifiedSelectedMediaChecksums": 83,
+    "internalFieldsAbsentFromCheckedProductDetails": ["sku", "warehouseCode", "priceRowCode", "supplierCost", "internalOnly"],
+    "repeatAfterFinalRuntimeRestart": "PASSED"
+  },
+  "nativeReplay": {
+    "state": "PASSED",
+    "repeatAfterFinalRuntimeRestart": "PASSED",
+    "completeStockBalanceCount": 464,
+    "completeCampaignCount": 3,
+    "stockAndCampaignManagementSnapshotsUnchanged": true,
+    "currentCouponBatchCount": 3,
+    "originalCouponUnitsVerified": 170,
+    "couponIdentityAuthority": "Secure issuance owner preflight verifies original batch commands, unit identities and retained encrypted fingerprints; no generic protected-record export",
+    "directCurrentImport": { "httpStatus": 400, "code": "ERR_IMP_00003", "meaning": "Selected releases already current; no forceCurrent or receipt rewrite used" },
+    "coordinatedApplicationReplay": "READY",
+    "limit": "No customer purchase completed, so replay after sold/redeemed units remains a pending native case; source tests cover it"
+  },
+  "ownerCorrections": {
+    "campaignAdmission": "Seller guard recognizes only the BudgetAdmission owner's exact temporary WeakSet insert identity. Ordered save hooks retain exact insert-only query constraints. Database insert-only guard unchanged.",
+    "purchaseEntryIdentity": "Entitlement creation and reveal share the original checkout entry resolver. Actual Promotion entryCode is accepted; absent, malformed, conflicting aliases and mismatched entitlement entries refuse.",
+    "revealDenial": "Missing, duplicate, foreign and unsupported entitlements use content-free ERR_DIGITAL_REVEAL_FORBIDDEN, including the older controller fixture.",
+    "tests": "Actual ordered save hooks and reservation/sale/delivery owners exercised with isolated persistence doubles; those results do not substitute for native purchase qualification.",
+    "documentation": "Nearest Promotion and Digital contracts updated; generated module context refreshed. No immutable CMS guide bytes changed or new CMS guide publication claimed."
+  },
+  "customerJourney": {
+    "state": "BLOCKED",
+    "phase": "CUSTOMER_REGISTRATION",
+    "route": "/nodics/profile/v0/customer/signup",
+    "httpStatus": 503,
+    "code": "ERR_PROFILE_MEMBERSHIP_UNAVAILABLE",
+    "sourceFinding": "Current Profile default eligibility owner requires enabled independently qualified enforcement, published policy, evidence, decision audit/invalidation and native-session integration. Current layered source has these gates disabled and no selected policyType/platformScopeCode; no kickoffLocal override was found.",
+    "profileFilesChangedByThisBatch": false,
+    "userInputRequested": "Identify the reviewed customer-onboarding policy or existing Profile work responsible for its qualification; no credentials requested",
+    "purchaseAttempted": false,
+    "paymentCaptureQualified": false,
+    "nativePurchasedRevealQualified": false,
+    "discountedPhysicalCheckoutQualified": false,
+    "qualificationFlagsChanged": false,
+    "syntheticCustomerClaimsOrApprovalUsed": false
+  },
+  "verification": {
+    "promotionDigitalAndDatabaseInsertOnly": { "passed": 209, "failed": 0 },
+    "apparelOperationalPack": { "passed": 5, "failed": 0 },
+    "frameworkBaselineOwnershipAndReferences": { "passed": 18, "failed": 0, "includes": "Every declared baseline file checksum, v001 releases, documentation segregation, canonical owners and references" },
+    "sourceReleaseFolderScan": { "framework": 103, "kickoff": 8, "nonV001": 0 },
+    "documentationGovernance": { "state": "PASSED", "checkedFiles": 3865, "undocumentedFiles": 0, "exportedMethods": 11833, "missingMethodJSDoc": 0 },
+    "ownershipLanguage": { "checkedFiles": 8363, "findings": 0 },
+    "generatedContext": { "frameworkModules": 202, "generation": "PASS", "validation": "PASS" },
+    "diffWhitespace": "PASS in Framework and Kickoff",
+    "countLimit": "Test scopes may overlap historical evidence and must not be summed into a distinct total.",
+    "browserAcceptance": "Not claimed; native owner APIs and the existing Axis asset-coordination helper were exercised"
+  },
+  "intermediateObservations": [
+    "An early preflight context was created before Commerce readiness; it made no Commerce requests. Repeated after all ten runtimes were ready, complete preflight passed.",
+    "Generic CouponBatch safe-search refused with ERR_PROMOTION_SECURE_ISSUANCE_UNCONFIRMED (409). Protected-read guards were retained; issuance verification uses the canonical private owner.",
+    "The first direct replay assertion expected success, while the canonical import owner deliberately refuses already-current installation. The assertion was corrected to verify that refusal alongside positive CURRENT preflight and unchanged complete snapshots.",
+    "Documentation gate initially found one fixture helper without JSDoc; the comment was added and the gate passed.",
+    "The broader Digital suite initially retained the old untyped missing-entitlement assertion; its isolated status fixture was updated and all 209 focused tests passed."
+  ],
+  "ownershipPlacementScopeReview": {
+    "state": "PASS_WITH_NATIVE_CUSTOMER_ACCEPTANCE_LIMIT",
+    "sourceOwners": ["Promotion BudgetAdmission and SellerAuthorization", "DigitalCore Entitlement"],
+    "testOwners": ["Promotion ordered secure-issuance fixture and contract", "DigitalCore reveal and customer-controller contracts"],
+    "documentationOwners": ["Existing Promotion and DigitalCore developer contracts", "Generated framework module context"],
+    "evidenceOwner": "Kickoff dated local adoption evidence",
+    "unrelatedProfileChangesPreserved": true,
+    "databaseGuardRelaxed": false,
+    "newBusinessAuthorityOrImporter": false,
+    "remaining": ["Resolve digital coupon cart admission ERR_CART_INVENTORY_UNAVAILABLE through the Commerce inventory/availability owners", "Rerun native customer purchase, captured payment, delivery, private reveal and discounted physical checkout", "Repeat replay after sold/redeemed coupon and changed stock/budget state", "Earlier detailed CMS guide additions remain unclaimed and subject to immutable publication governance"]
+  },
+  "customerRegistrationFollowThrough": {
+    "date": "2026-10-08",
+    "state": "PROFILE_SIGNUP_AND_AUTHENTICATION_PASSED_COMMERCE_CART_BLOCKED",
+    "historicalEvidence": "customerJourney above records the original failed attempt and is retained unchanged; this follow-through supersedes its current blocker and policy request",
+    "decision": "Ordinary Customer signup/import use existing profileCustomerEligibility.enabled: false without eligibility evaluation or fabricated approval. Explicit true retains configured authoritative decisions and audit guards. Employee-backed participation remains independently governed.",
+    "sourceCorrection": "Profile registration owns optional eligibility selection and shared fresh active Enterprise/Tenant placement. Import preflight uses the same selection. Before persistence ordinary signup rechecks placement and rejects policy enablement drift. No Commerce, membership, authentication or qualification flags were changed.",
+    "regressionFirst": { "newDefaultSignupAndImportTestsFailedBeforeFix": 2, "reason": "Unconditional eligibility-owner dependency despite disabled eligibility" },
+    "nativeAcceptance": {
+      "backendRuntimesReady": 10,
+      "customerSignupCount": 2,
+      "customerSignupHttpStatus": 200,
+      "customerPasswordAuthenticationCount": 2,
+      "customerPasswordAuthenticationHttpStatus": 200,
+      "cartCreationHttpStatus": 200,
+      "couponCartEntryHttpStatus": 409,
+      "couponCartEntryCode": "ERR_CART_INVENTORY_UNAVAILABLE",
+      "purchaseCompleted": false,
+      "privateRevealQualified": false,
+      "discountedPhysicalCheckoutQualified": false,
+      "dataReset": false,
+      "testAccountsAndCartPreserved": true
+    },
+    "validation": {
+      "targetedRegistrationAndPlacement": { "passed": 29, "failed": 0 },
+      "profileSuite": { "passed": 999, "failed": 0, "skipped": 6 },
+      "documentationGovernance": { "state": "PASS", "checkedFiles": 3865, "exportedMethods": 11835, "missingMethodJSDoc": 0 },
+      "ownershipLanguage": { "state": "PASS", "checkedFiles": 8363, "findings": 0 },
+      "generatedContext": { "modules": 202, "generation": "PASS", "validation": "PASS" },
+      "limits": "Isolated tests do not qualify enabled eligibility providers or their native sessions; this native run proves default ordinary signup and password authentication only. No immutable CMS documentation records were edited or republished."
+    },
+    "ownershipPlacementScopeReview": {
+      "state": "PASS_FOR_PROFILE_CORRECTION_ONLY",
+      "frameworkHead": "77564981431ae20ac0eb1019c1c8902dd66b7dc5",
+      "baseline": "Registration source, its two focused tests and two edited contracts were clean at the opening scoped status inspection. AGENTS/README and unrelated data/configuration work were already dirty and preserved. No commits occurred during this correction.",
+      "sourceOwner": "Profile DefaultCustomerRegistrationService; existing layered enablement, Enterprise placement, generated Customer and private decision owners reused",
+      "changedFrameworkFiles": ["nodics.platform/modules/profile/src/service/customer/defaultCustomerRegistrationService.js", "nodics.platform/modules/profile/test/profileCustomerRegistrationForm.test.js", "nodics.platform/modules/profile/test/customerRegistrationPlacementContract.test.js", "nodics.platform/modules/profile/llm/contracts/customer-registration-form.md", "nodics.platform/modules/profile/llm/contracts/enterprise-membership.md", "nodics.platform/modules/profile/AGENTS.md", "nodics.platform/modules/profile/README.md"],
+      "evidenceOwner": "This existing Kickoff dated local adoption record",
+      "review": "Semantic source, tests and contract diffs reviewed. Existing dirty guidance/data/configuration and unrelated changes preserved. No new registry, loader, public API, policy, approval, credential authority or project-specific framework branch. Current Boolean selection and every placement check remain owner-controlled; request fields cannot disable enforcement.",
+      "configurationImpact": "Existing framework default reused without value changes or environment overrides. Live default behavior verified; persisted policies for other deployments and enabled eligibility adoption are outside this correction's evidence.",
+      "remainingOwner": "Commerce Cart/Inventory for digital coupon availability; full purchased-coupon qualification remains open"
+    },
+    "cleanup": { "ownedNativeSupervisor": "STOPPED", "backendPortsListening": 0, "verification": "Topology status confirmed all ten declared backend ports not listening", "existingDataAndMediaPreserved": true }
+  },
+  "digitalCouponJourneyFollowThrough": {
+    "date": "2026-10-08",
+    "state": "PASSED_LOCAL_SANDBOX_OWNER_API_ACCEPTANCE",
+    "historicalEvidence": "Earlier customerJourney, customerRegistrationFollowThrough and nativeReplay limits remain historical observations, not current blockers. This follow-through supersedes their customer cart, purchase, reveal and post-sale replay limits and the earlier ownershipPlacementScopeReview.remaining list.",
+    "frameworkHead": "77564981431ae20ac0eb1019c1c8902dd66b7dc5",
+    "sourceCorrections": [
+      "Cart delegates digital availability to DigitalCore, which binds the exact retained Product projection to the selected Store's approved Promotion policy and generated batch. Bounded uncached unit reads reject failed, oversized, duplicate or foreign evidence; availability never reserves.",
+      "Product's retained projection owner is reused for complete internal Product identity without exposing SKU, enterprise, warehouse or digital internals through customer responses. Existing STALE consumer-enrichment selection is preserved.",
+      "Digital purchase and reveal share the canonical checkout entry resolver, including Cart's pipe-delimited entry identity. Conflicting aliases refuse before entitlement persistence.",
+      "Legacy fixed-window coupon sales retain the intersection of approved campaign and original unit validity. Purchase-relative policy and independent qualification flags are not enabled to manufacture missing expiry evidence.",
+      "Order dispute route names are unique within the module, preserving the existing public URLs while preventing nRouter registration from replacing lifecycle handlers.",
+      "Inventory now owns atomic physical acquisition and release through qualified generated transactions, installed unique identities and revision predicates. Available and reserved quantities, original holds and RESERVE/RELEASE movements commit together. Uncertain acquisition evidence remains explicit recovery work.",
+      "Inventory readback compares every intended business field exactly while allowing persistence-managed created/updated timestamps. The regression fixture independently advances updated timestamps.",
+      "Promotion checkout consumption and reversal now reuse the existing private lifecycle CAS and uncached readback with narrow usage/status/revision patches. Generic encrypted-record write guards remain intact; zero-match writes cannot qualify consumption. Ciphertext and purchase identity are preserved."
+    ],
+    "regressionFirst": [
+      "Actual router registration reproduced the lifecycle/dispute identity collision before the route-name correction.",
+      "The native Inventory transaction refused mismatched persistence-managed timestamps; the isolated fixture reproduced the mismatch before readback correction.",
+      "The first native post-redemption reveal returned 200 because generic coupon consumption matched no encrypted aggregate. Two actual protected-owner regressions failed before the lifecycle writer correction and passed afterward."
+    ],
+    "nativeAcceptance": {
+      "backendRuntimesReady": 10,
+      "paymentMode": "LOCAL_SANDBOX",
+      "customerSignupAndPasswordAuthentication": { "customers": 2, "httpStatus": 200 },
+      "digitalCartAddAndCalculation": "PASSED",
+      "digitalPurchaseCaptureDelivery": "COMPLETED",
+      "completedDigitalCheckoutReplay": { "sameOrder": true, "status": "COMPLETED" },
+      "privateReveal": { "state": "PASSED", "ownedEntitlementCount": 1, "repeatSameToken": true, "otherCustomerRefused": true, "administratorRefused": true, "genericListingSecretFree": true, "noStore": true, "noCache": true },
+      "declinedPhysicalPayment": { "httpStatus": 402, "code": "ERR_CHECKOUT_PAYMENT_DECLINED", "checkpoint": "COMPENSATED", "inventoryRelease": "COMPLETED", "availableReservedAllocatedOnHandRestored": true, "campaignSpendUnchanged": true },
+      "discountedPhysicalJourney": { "state": "PASSED", "campaignCode": "agoraCapsuleEdit10PercentRule", "campaignAndCouponBoundToOrder": true, "availableQuantityDecrease": 2, "reservedQuantityIncrease": 2, "onHandAndAllocatedUnchanged": true, "campaignSpendIncreased": true, "completedReplaySameOrder": true, "completedReplayStockAndSpendUnchanged": true, "nonOwnerReadsRefused": true },
+      "reverseLifecycle": { "requestsSubmitted": ["CANCELLATION", "RETURN", "REFUND"], "previewAndIsolationChecks": "PASSED", "executedCancellationReturnRefundOrShipmentClaimed": false },
+      "consumedSingleUseCouponReveal": { "state": "REFUSED", "expectedHttpStatus": [403, 404], "plaintextAbsent": true },
+      "dataReset": false,
+      "testAccountsOrdersAndPriorFailedAttemptsPreserved": true,
+      "historicalReservationOnlyRecordsRepaired": false
+    },
+    "postPurchaseReplay": {
+      "state": "PASSED",
+      "after": "Purchased and redeemed coupon, changed physical stock and campaign spend",
+      "completeStockBalanceCount": 464,
+      "completeCampaignCount": 3,
+      "currentOpeningReceiptCount": 464,
+      "currentCouponBatchCount": 3,
+      "originalCouponUnitsVerified": 170,
+      "stockAndCampaignManagementSnapshotsUnchanged": true,
+      "directCurrentImport": { "httpStatus": 400, "code": "ERR_IMP_00003" },
+      "coordinatedApplicationReplay": "READY",
+      "couponIdentityAuthority": "Canonical secure issuance owner preflight, not generic protected-record export"
+    },
+    "catalogueAfterCorrections": { "state": "PASSED", "qualifiedPublicationCount": 67, "expectedProducts": 61, "discoveredProducts": 61, "discoveryPages": 3, "qualifiedPdpCount": 61, "qualifiedMediaChecksums": 83 },
+    "verification": {
+      "focusedInventoryProductDigitalCartPromotionOrderCheckout": { "passed": 415, "failed": 0, "skipped": 0 },
+      "commerceGate": { "passed": 202, "failed": 0, "skipped": 0 },
+      "documentationGovernance": { "state": "PASS", "checkedFiles": 3866, "exportedMethods": 11848, "undocumentedFiles": 0, "missingMethodJSDoc": 0 },
+      "ownershipLanguage": { "state": "PASS", "checkedFiles": 8367, "findings": 0 },
+      "generatedContext": { "modules": 202, "generation": "PASS", "validation": "PASS" },
+      "diffWhitespace": "PASS",
+      "countLimit": "Focused and Commerce scopes overlap; counts are not a distinct combined total."
+    },
+    "ownershipPlacementScopeReview": {
+      "state": "PASS_FOR_THIS_OWNER_API_BATCH",
+      "sourceOwners": ["Cart", "DigitalCore", "Product", "Promotion", "Inventory", "CheckoutCore", "Order"],
+      "evidenceOwner": "Kickoff local adoption evidence only; capability regressions and contracts remain with their framework owners",
+      "developerContractsUpdated": true,
+      "unrelatedDirtyChangesPreserved": true,
+      "noNewImporterRegistryPublicAPIOrIdentityAuthority": true,
+      "qualificationOrApprovalBypass": false,
+      "immutableCmsRecordsEditedOrRepublished": false
+    },
+    "limits": [
+      "This qualifies the tested native local-sandbox owner API journey, not a real payment provider, production deployment or browser UI.",
+      "Cancellation, return and refund request submission is not execution or settlement. Physical stock is reserved, not shipped.",
+      "Earlier failed local test artifacts remain unchanged; this batch does not reconstruct their missing historical effects.",
+      "Earlier detailed CMS guide additions still require their separate immutable-content review and governed publication. Electronics, Telco and Circa business acceptance remain outside this Apparel batch."
+    ]
+  },
+  "currentRemaining": ["Browser/Axis and storefront UI acceptance is not claimed by this API batch", "Earlier detailed CMS guide additions require separate immutable-content review and governed publication", "Production and real-provider qualification are not claimed"],
+  "safety": { "rawDatabaseAccess": false, "approvalBypass": false, "installedReceiptRewrite": false, "qualificationShortcut": false, "secretsOrPlaintextCouponsInEvidence": false, "commitsOrPushes": false },
+  "cleanup": { "state": "VERIFIED", "ownedNativeSupervisor": "STOPPED", "backendPortsListening": 0, "backendPorts": [4300, 4312, 4314, 4330, 4340, 4350, 4352, 4360, 4370, 4380], "subagents": "CLOSED", "importedDataAndMediaPreserved": true }
+}

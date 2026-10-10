@@ -12,6 +12,17 @@ Change this package only when the requested behavior belongs to this boundary. P
 
 ## Verification
 
+Product discovery reads activated versions for Circa and composition-selected
+Agora Stores. Source imports remain Staged until their normal owner approvals;
+the Store selection supplies no publication, policy delivery or payment evidence.
+Docker Local retains its separately selected deployment configuration.
+
+Financial policy delivery is independently selected per Store through each owner's
+`publication.delivery.rootCodesByStore`. Circa retains its existing roots; only
+composition-selected Apparel adds Agora roots. Electronics and Telco financial
+delivery are not enabled while their requirements remain incomplete. Every mapped
+root still needs its own approved Online pointer; the selection grants no approval.
+
 Local Platform explicitly allocates 100,000 tokens per month to the `default`
 tenant/enterprise pool and bootstrap `admin`, restricted to Ollama and the
 conversation, structuredTool and evaluation profiles. The owner inherits UTC

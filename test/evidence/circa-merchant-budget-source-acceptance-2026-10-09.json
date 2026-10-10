@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-09",
+  "scope": "SOURCE_VALIDATION_LOCAL_DEMO_POLICY_REVIEW_AND_READ_ONLY_PROCESS_STATUS",
+  "environment": "kickoffLocal",
+  "businessAcceptance": false,
+  "previousEvidencePreserved": [
+    "circa-owner-setup-source-acceptance-2026-10-09.json",
+    "circa-owner-integration-source-acceptance-2026-10-09.json"
+  ],
+  "implemented": [
+    "Digital merchant admission preserves original signed tenant/enterprise and fresh canonical Profile staff scopes; request-provided scopes and conflicting aliases cannot grant authority",
+    "Bounded scope envelopes reject terminal failures, count contradictions, malformed selectors and DENY conflicts while retaining canonical optional unrestricted qualifiers",
+    "Entitlement and coupon reads verify original tenant, enterprise, buyer, Product, Order and provider identity; merchant CAS confirms the exact lifecycle successor and unchanged purchase identity",
+    "Activated own-enterprise Promotion budget COMMIT and RELEASE use existing generated counter and ledger owners in one qualified opaque database transaction",
+    "COMMIT identity is stable across changing spend and keyed by original tenant, enterprise and exact command key; changed campaign, target, amount, buyer, policy, admission or currency refuses",
+    "RELEASE requires the exact original immutable COMMIT and has one durable identity per COMMIT, with original first-use admission retained",
+    "Private receipt reads/writes require exact in-flight identities; generic generated reads/exports and mutations cannot expose, forge, alter or erase retained commands",
+    "Actual installed transaction schemas, private hooks/read protection, unique indexes and positive generated acknowledgements are mandatory; declarations and flags cannot qualify them",
+    "Disabled or unselected delivery cannot downgrade admitted counters to legacy accounting",
+    "Legacy consume and reversal atomically exclude admitted replacements, require positive single-row update plus exact uncached readback, never upsert, and append no ledger evidence on refusal",
+    "Human approval of complete fictional local-demo policy and its exact coupon quantities and monetary budgets is retained separately from operational authority"
+  ],
+  "validation": {
+    "commerceSourceTests": {
+      "passed": 1028,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test $(rg --files nodics.commerce | rg '/test/[^/]+\\.test\\.(js|mjs)$')",
+      "includes": "All top-level JS and MJS Commerce tests; focused merchant/budget reviews are subsets, not additional passes"
+    },
+    "wasteAndEWasteSourceTests": {
+      "passed": 298,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test $(rg --files nodics.waste nodics.accelerators/modules/waste/modules/eWaste | rg '/test/[^/]+\\.test\\.js$')"
+    },
+    "circaAndApparelOperationalSourceTests": {
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test modules/circa.ewaste/test/*.test.js modules/agora.apparel/test/*Operational*.test.js"
+    },
+    "dataBaselineAndGovernanceTests": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test nodics.foundation/modules/nTooling/test/dataBaselineConsolidationContract.test.js nodics.foundation/modules/nTooling/test/repositoryGovernanceDocumentsContract.test.js",
+      "baseline": "Initial release folders remain v001; declared byte checksums match; documentation is optional and separately selectable from business data"
+    },
+    "profileScopeTests": {
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test nodics.platform/modules/profile/test/principalAuthorizationScopeContract.test.js nodics.platform/modules/profile/test/principalScopeLifetimeContract.test.js nodics.platform/modules/profile/test/humanScopeInvalidationContract.test.js"
+    },
+    "databaseTransactionTests": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test nodics.foundation/modules/nDatabase/mongodb/test/mongodbTransactionContract.test.js nodics.foundation/modules/nDatabase/database/test/insertOnlySaveContract.test.js nodics.foundation/modules/nDatabase/database/test/databaseTransactionContract.test.js nodics.foundation/modules/nDatabase/database/test/schemaTransactionGovernanceContract.test.js"
+    },
+    "totalPassed": 1453,
+    "frameworkSyntax": { "files": 6151, "failures": 0, "finalChangedJavaScriptRechecked": true },
+    "designPrincipleAudit": "PASSED",
+    "documentationGovernance": { "status": "PASSED", "files": 3906, "exportedMethods": 12019, "undocumentedFiles": 0, "methodsWithoutJSDoc": 0 },
+    "generatedModuleContext": { "generated": 202, "validated": 202 },
+    "canonicalBuilds": [
+      { "command": "nodics build --environment=kickoffLocal --server=commerceServer", "status": "PASSED", "openApiPaths": 1078, "schemas": 126 },
+      { "command": "nodics build --environment=kickoffLocal --server=commerceStagedServer", "status": "PASSED", "openApiPaths": 1122, "schemas": 128 }
+    ],
+    "buildWarnings": ["Optional externalProps.js absent"],
+    "scopedWhitespaceCheck": "PASSED",
+    "independentReview": "No remaining actionable findings in reviewed merchant and budget deltas; replacement-race finding fixed and regression tested",
+    "limits": [
+      "Isolated generated-owner/provider tests do not qualify installed persistence, cross-runtime authority, native financial effects or browser acceptance",
+      "Atomic budget accounting is own-enterprise only and is not a transaction across coupons, redemptions, Checkout and Payment",
+      "Non-admitted legacy accounting retains separate counter/ledger commit boundaries; the absence fence does not claim exactly-once legacy accounting"
+    ]
+  },
+  "policyReview": {
+    "fixture": "modules/circa.ewaste/test/fixtures/circaDemoPolicyProposal.json",
+    "status": "APPROVED_LOCAL_DEMO_ONLY",
+    "scope": "FICTIONAL_NATIVE_KICKOFF_LOCAL_ONLY",
+    "originalProposalSha256": "dd5e5d1fcbc984db2bd24069ac5455867c485098a444097bc7a53f78b4c009a1",
+    "humanConfirmedCompleteProposal": true,
+    "humanSeparatelyConfirmedExactQuantitiesAndBudgets": true,
+    "quantityPerCouponCampaign": 100,
+    "uniformMonetaryBudgetOf100": false,
+    "campaigns": 38,
+    "itemCampaigns": 29,
+    "assetBindings": 5,
+    "operationalAuthority": false,
+    "importable": false,
+    "customerOrProductionPolicy": false,
+    "independentOwnerGatesWaived": false,
+    "termsAdoptedIntoOperationalPacks": false
+  },
+  "remaining": [
+    "Issuer-employee to vendor-stock merchant authority and receipt-bound delegated issuer budget mutation/reversal bridge",
+    "Trusted service/public distribution admission and installed consent/private persistence qualification",
+    "Canonical installed immutable ITEM delivery adapter and exact asset/policy setup",
+    "Approved original-sale asset refund orchestration through canonical Payment, Loyalty and Waste owners; automatic rollback remains unavailable",
+    "Replace required refused legacy operational snapshots with complete reviewed issuer-scoped owner instructions using approved local-demo terms",
+    "Qualify native installed indexes, transactions, private capture, signed scopes and exact retained publication without rewriting receipts",
+    "Complete coordinated Axis import/publication with existing independent CMS and Media approvals",
+    "Run native purchase, repeat reveal, monetary and ITEM redemption, compensation, return/refund and safe replay"
+  ],
+  "nativeEffects": {
+    "processStatus": { "supervisor": "NOT_RUNNING", "declaredBackendPortsChecked": 10, "listeningBackendPorts": 0 },
+    "runtimesStarted": false,
+    "resetExecuted": false,
+    "businessImportsExecuted": false,
+    "publicationExecuted": false,
+    "consentsGranted": false,
+    "stockIssued": false,
+    "paymentOrOwnershipEffectsExecuted": false,
+    "receiptAdoptionExecuted": false,
+    "receiptRewriteExecuted": false,
+    "axisOrCustomerBrowserAcceptanceExecuted": false
+  },
+  "sourcePins": [
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionBudgetMutationService.js", "sha256": "4f4c09087193e4bc54c57585991e5d72644722765426f99243b65ee5ad8c2232" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService.js", "sha256": "0fe74e20291a18653be7e340ded24f4edc5644f0984443abe863a671a84b4d48" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/schemas/schemas.js", "sha256": "a2839bf4bfc30786a0304e0cfc96d7e0384a1e2a3fcddbdaec1f85f5b3081736" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/interceptors/interceptors.js", "sha256": "69697b1edd990e2e403b1ad492438c5087c4b2a4f7589c86f0b0172e22a8f088" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionActivatedBudgetMutationContract.test.js", "sha256": "7067f55f6985d1ddce4188f699e872c7d9b5677f459dc256caa9200451fbaccf" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionCustomerApiContract.test.js", "sha256": "5f3ce69c091b0d6bf51f125d965ebcc1fa6e9a0eace09c18ad8309a446036fbc" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/llm/contracts/issuer-seller-and-merchant-benefits.md", "sha256": "37fffb56615ba1c3fd7136855e5d319c8c68524dc0e6bcaee502461b493c987c" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/llm/contracts/accelerator-setup-contributions.md", "sha256": "5f995987ab98ae97eb2a6a9b628a12e978fb457f38c682d510dd0207c2e7164a" },
+    { "repository": "framework", "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceMerchantService.js", "sha256": "fdad41158819fe6d36222adb512c8c8f2b375b76d046d7cd170ed6d8477ccecb" },
+    { "repository": "framework", "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/test/merchantStaffAuthorityContract.test.js", "sha256": "ced08e35a0754ee8f88e08159361b6ef5026600939d63fb2ef39a1fe513dc1e9" },
+    { "repository": "framework", "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/llm/contracts/merchant-redemption-contract.md", "sha256": "45a84c7cdb9867d90f3c4c8f7f4b06faa358f2ce17621e143df671fd43408844" },
+    { "repository": "kickoff", "path": "modules/circa.ewaste/test/fixtures/circaDemoPolicyProposal.json", "sha256": "506fc741a8d05893750a491ce5472483883268272d4dec29c34af2fa003d748f" },
+    { "repository": "kickoff", "path": "modules/circa.ewaste/test/circaDemoPolicyProposal.test.js", "sha256": "82a774eeb896d49c39d463a7b19b0d099a8331d2ce704313c280d4b14a43a5d9" },
+    { "repository": "kickoff", "path": "modules/circa.ewaste/AGENTS.md", "sha256": "0621c22853e9f8e08cd28c8a8ee48dcc74584d61d6a600af8fbc700c9a09df9c" }
+  ]
+}

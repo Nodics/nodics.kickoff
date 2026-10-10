@@ -1,0 +1,43 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "circa-promotion-CIRCA_COUPON_CPN-GRN-30_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+      "sourceVersion": "5935b5252b3aed50cc878a37f53c5a3634b02ecc8ddf16c402ea2b9338f81f71",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-GRN-30_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": "circa-promotion-CIRCA_COUPON_CPN-SVC-50_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+      "sourceVersion": "8f58ba0253ff54d9653e8f9b72ea6936feca6018425fd11cef36706f97653569",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-SVC-50_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    }
+  ]
+}

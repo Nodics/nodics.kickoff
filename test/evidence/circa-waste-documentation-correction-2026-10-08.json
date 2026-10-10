@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-08",
+  "scope": "ISOLATED_SOURCE_AND_DOCUMENTATION_CONTRACTS",
+  "state": "PASSED_WITH_INSTALLED_PACK_RECONCILIATION_REQUIRED",
+  "purpose": "Correct generic Waste acceptance guidance and its search projections without claiming full Circa business E2E.",
+  "changedFiles": [
+    "data/docs-v001/records/documentation/kickoffDocumentationPageMetadataData.js",
+    "data/docs-v001/records/documentation/kickoffDocumentationSearchMetadataData.js",
+    "data/docs-v001/records/documentation/kickoffDocumentationComponentData.js",
+    "data/manifest.json",
+    "test/documentationContract.test.js",
+    "test/evidence/circa-waste-documentation-correction-2026-10-08.json"
+  ],
+  "checks": {
+    "regressionBeforeCorrection": {
+      "command": "node test/documentationContract.test.js",
+      "result": "EXPECTED_FAILURE_ON_RELEASE_INSTALLATION_CLAIM"
+    },
+    "circa": {
+      "command": "npm run test:circa",
+      "exitCode": 0,
+      "tests": 55,
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0
+    },
+    "wasteComposition": {
+      "command": "npm run test:waste-runtime",
+      "exitCode": 0,
+      "result": "ISOLATED_CONFIGURATION_COMPOSITION_PASSED"
+    },
+    "documentation": {
+      "command": "npm run test:documentation",
+      "exitCode": 0,
+      "pages": 9,
+      "referenceGraphDocuments": 186,
+      "wasteGuidanceCopies": 4,
+      "declaredPackFiles": 33,
+      "result": "CMS_DATA_AND_REGRESSION_PASSED"
+    },
+    "whitespace": {
+      "command": "git diff --check -- data/manifest.json test/documentationContract.test.js",
+      "exitCode": 0,
+      "packAndTestTrailingWhitespaceIssues": 0
+    }
+  },
+  "manifest": {
+    "version": "0.0.1",
+    "previousReleaseChecksum": "1bf6fd3f907fdabc3499e2026e2122a10658047659e8b8d2dcf904c1f8fcffd9",
+    "releaseChecksum": "5212b21de90bc2ff9245649d7aa28efb35a12b008aa804bb5ab24645d4130f8a",
+    "checksumOwner": "DefaultApplicationDocumentationContractService.buildReleaseSection",
+    "normalSameVersionGeneration": "REFUSED_AS_IMMUTABLE_BY_validateGeneration",
+    "sourceAmendment": "Explicitly authorized unreleased 0.0.1 source-baseline correction; constructed through owner sha256/buildReleaseSection and validateReleaseSection, then applied with apply_patch.",
+    "installedPackReconciliationRequired": true,
+    "installedReceiptsChanged": false
+  },
+  "evidenceLimits": [
+    "Generic acceptance is plan-only without --execute; execution requires authorized employee access and explicit service-only waste.impact.calculate authority.",
+    "Generic execution reports SECURED_WASTE_API_CONTRACT, persistenceVerified: false and importVerified: false.",
+    "No live APIs, runtime startup/shutdown, network, credentials or logs accessed; the main agent's active native topology was not operated.",
+    "No runtime/configuration/grants/qualification flags or historical evidence changed.",
+    "Installed imports, publication, provider behavior, customer sessions and full Circa business E2E were not qualified."
+  ]
+}

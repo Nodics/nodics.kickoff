@@ -10,7 +10,7 @@
 module.exports = {
   record0: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1047-en",
@@ -22,6 +22,8 @@ module.exports = {
     slug: "circa-asset-ewa-1047",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1047",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -30,7 +32,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 34,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -42,7 +44,7 @@ module.exports = {
   },
   record1: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1051-en",
@@ -54,6 +56,8 @@ module.exports = {
     slug: "circa-asset-ewa-1051",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1051",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -62,7 +66,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 26,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -74,7 +78,7 @@ module.exports = {
   },
   record2: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1052-en",
@@ -86,6 +90,8 @@ module.exports = {
     slug: "circa-asset-ewa-1052",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1052",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -94,7 +100,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 16,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -106,7 +112,7 @@ module.exports = {
   },
   record3: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1055-en",
@@ -118,6 +124,8 @@ module.exports = {
     slug: "circa-asset-ewa-1055",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1055",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -126,7 +134,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 20,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -138,7 +146,7 @@ module.exports = {
   },
   record4: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1092-en",
@@ -150,6 +158,8 @@ module.exports = {
     slug: "circa-asset-ewa-1092",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1092",
       kind: "ASSET",
       ownerCode: "seller-amal",
@@ -158,7 +168,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 16,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -170,7 +180,7 @@ module.exports = {
   },
   record5: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_CPN-GRN-30-en",
@@ -182,6 +192,10 @@ module.exports = {
     slug: "circa-coupon-cpn-grn-30",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenTech Store",
@@ -200,7 +214,7 @@ module.exports = {
   },
   record6: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_CPN-ECO-15-en",
@@ -212,6 +226,10 @@ module.exports = {
     slug: "circa-coupon-cpn-eco-15",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "EcoMart",
@@ -230,7 +248,7 @@ module.exports = {
   },
   record7: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_CPN-SVC-50-en",
@@ -242,6 +260,10 @@ module.exports = {
     slug: "circa-coupon-cpn-svc-50",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "FixPoint",
@@ -260,7 +282,7 @@ module.exports = {
   },
   record8: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1047-ar",
@@ -272,6 +294,8 @@ module.exports = {
     slug: "circa-asset-ewa-1047",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1047",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -280,7 +304,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 34,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -292,7 +316,7 @@ module.exports = {
   },
   record9: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1051-ar",
@@ -304,6 +328,8 @@ module.exports = {
     slug: "circa-asset-ewa-1051",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1051",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -312,7 +338,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 26,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -324,7 +350,7 @@ module.exports = {
   },
   record10: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1052-ar",
@@ -336,6 +362,8 @@ module.exports = {
     slug: "circa-asset-ewa-1052",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1052",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -344,7 +372,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 16,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -356,7 +384,7 @@ module.exports = {
   },
   record11: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1055-ar",
@@ -368,6 +396,8 @@ module.exports = {
     slug: "circa-asset-ewa-1055",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1055",
       kind: "ASSET",
       ownerCode: "circa-customer",
@@ -376,7 +406,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 20,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -388,7 +418,7 @@ module.exports = {
   },
   record12: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_ASSET_EWA-1092-ar",
@@ -400,6 +430,8 @@ module.exports = {
     slug: "circa-asset-ewa-1092",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
       assetCode: "EWA-1092",
       kind: "ASSET",
       ownerCode: "seller-amal",
@@ -408,7 +440,7 @@ module.exports = {
       issuer: "Circa community",
       sample: true,
       rewardPrice: 16,
-      carbonSettlement: "TRANSFER_WITH_ASSET",
+      carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
     },
     media: {
@@ -420,7 +452,7 @@ module.exports = {
   },
   record13: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_CPN-GRN-30-ar",
@@ -432,6 +464,10 @@ module.exports = {
     slug: "circa-coupon-cpn-grn-30",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenTech Store",
@@ -450,7 +486,7 @@ module.exports = {
   },
   record14: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_CPN-ECO-15-ar",
@@ -462,6 +498,10 @@ module.exports = {
     slug: "circa-coupon-cpn-eco-15",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "EcoMart",
@@ -480,7 +520,7 @@ module.exports = {
   },
   record15: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_CPN-SVC-50-ar",
@@ -492,6 +532,10 @@ module.exports = {
     slug: "circa-coupon-cpn-svc-50",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "FixPoint",
@@ -510,7 +554,7 @@ module.exports = {
   },
   record16: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C01-en",
@@ -522,6 +566,10 @@ module.exports = {
     slug: "circa_coupon_gp-c01",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -547,7 +595,7 @@ module.exports = {
   },
   record17: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C02-en",
@@ -559,6 +607,10 @@ module.exports = {
     slug: "circa_coupon_gp-c02",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -584,7 +636,7 @@ module.exports = {
   },
   record18: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C03-en",
@@ -596,6 +648,10 @@ module.exports = {
     slug: "circa_coupon_gp-c03",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -621,7 +677,7 @@ module.exports = {
   },
   record19: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C04-en",
@@ -633,6 +689,10 @@ module.exports = {
     slug: "circa_coupon_gp-c04",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -658,7 +718,7 @@ module.exports = {
   },
   record20: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C05-en",
@@ -670,6 +730,10 @@ module.exports = {
     slug: "circa_coupon_gp-c05",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -695,7 +759,7 @@ module.exports = {
   },
   record21: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C06-en",
@@ -707,6 +771,10 @@ module.exports = {
     slug: "circa_coupon_gp-c06",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -732,7 +800,7 @@ module.exports = {
   },
   record22: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C07-en",
@@ -744,6 +812,10 @@ module.exports = {
     slug: "circa_coupon_gp-c07",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -769,7 +841,7 @@ module.exports = {
   },
   record23: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C08-en",
@@ -781,6 +853,10 @@ module.exports = {
     slug: "circa_coupon_gp-c08",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -806,7 +882,7 @@ module.exports = {
   },
   record24: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C09-en",
@@ -818,6 +894,10 @@ module.exports = {
     slug: "circa_coupon_gp-c09",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -843,7 +923,7 @@ module.exports = {
   },
   record25: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C10-en",
@@ -855,6 +935,10 @@ module.exports = {
     slug: "circa_coupon_gp-c10",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -880,7 +964,7 @@ module.exports = {
   },
   record26: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C11-en",
@@ -892,6 +976,10 @@ module.exports = {
     slug: "circa_coupon_gp-c11",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -917,7 +1005,7 @@ module.exports = {
   },
   record27: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C12-en",
@@ -929,6 +1017,10 @@ module.exports = {
     slug: "circa_coupon_gp-c12",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -954,7 +1046,7 @@ module.exports = {
   },
   record28: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B01-en",
@@ -966,6 +1058,10 @@ module.exports = {
     slug: "circa_coupon_gp-b01",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -991,7 +1087,7 @@ module.exports = {
   },
   record29: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B02-en",
@@ -1003,6 +1099,10 @@ module.exports = {
     slug: "circa_coupon_gp-b02",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1028,7 +1128,7 @@ module.exports = {
   },
   record30: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B03-en",
@@ -1040,6 +1140,10 @@ module.exports = {
     slug: "circa_coupon_gp-b03",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1065,7 +1169,7 @@ module.exports = {
   },
   record31: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B04-en",
@@ -1077,6 +1181,10 @@ module.exports = {
     slug: "circa_coupon_gp-b04",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1102,7 +1210,7 @@ module.exports = {
   },
   record32: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B05-en",
@@ -1114,6 +1222,10 @@ module.exports = {
     slug: "circa_coupon_gp-b05",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1139,7 +1251,7 @@ module.exports = {
   },
   record33: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B06-en",
@@ -1151,6 +1263,10 @@ module.exports = {
     slug: "circa_coupon_gp-b06",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1176,7 +1292,7 @@ module.exports = {
   },
   record34: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B07-en",
@@ -1188,6 +1304,10 @@ module.exports = {
     slug: "circa_coupon_gp-b07",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1213,7 +1333,7 @@ module.exports = {
   },
   record35: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B08-en",
@@ -1225,6 +1345,10 @@ module.exports = {
     slug: "circa_coupon_gp-b08",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1250,7 +1374,7 @@ module.exports = {
   },
   record36: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B09-en",
@@ -1262,6 +1386,10 @@ module.exports = {
     slug: "circa_coupon_gp-b09",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1287,7 +1415,7 @@ module.exports = {
   },
   record37: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B10-en",
@@ -1299,6 +1427,10 @@ module.exports = {
     slug: "circa_coupon_gp-b10",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1324,7 +1456,7 @@ module.exports = {
   },
   record38: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B11-en",
@@ -1336,6 +1468,10 @@ module.exports = {
     slug: "circa_coupon_gp-b11",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1361,7 +1497,7 @@ module.exports = {
   },
   record39: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B12-en",
@@ -1373,6 +1509,10 @@ module.exports = {
     slug: "circa_coupon_gp-b12",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1399,7 +1539,7 @@ module.exports = {
   },
   record40: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A01-en",
@@ -1411,6 +1551,10 @@ module.exports = {
     slug: "circa_coupon_gp-a01",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1436,7 +1580,7 @@ module.exports = {
   },
   record41: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A02-en",
@@ -1448,6 +1592,10 @@ module.exports = {
     slug: "circa_coupon_gp-a02",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1473,7 +1621,7 @@ module.exports = {
   },
   record42: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A03-en",
@@ -1485,6 +1633,10 @@ module.exports = {
     slug: "circa_coupon_gp-a03",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1510,7 +1662,7 @@ module.exports = {
   },
   record43: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A04-en",
@@ -1522,6 +1674,10 @@ module.exports = {
     slug: "circa_coupon_gp-a04",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1547,7 +1703,7 @@ module.exports = {
   },
   record44: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A05-en",
@@ -1559,6 +1715,10 @@ module.exports = {
     slug: "circa_coupon_gp-a05",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1584,7 +1744,7 @@ module.exports = {
   },
   record45: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A06-en",
@@ -1596,6 +1756,10 @@ module.exports = {
     slug: "circa_coupon_gp-a06",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1621,7 +1785,7 @@ module.exports = {
   },
   record46: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A07-en",
@@ -1633,6 +1797,10 @@ module.exports = {
     slug: "circa_coupon_gp-a07",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1659,7 +1827,7 @@ module.exports = {
   },
   record47: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A08-en",
@@ -1671,6 +1839,10 @@ module.exports = {
     slug: "circa_coupon_gp-a08",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1697,7 +1869,7 @@ module.exports = {
   },
   record48: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A09-en",
@@ -1709,6 +1881,10 @@ module.exports = {
     slug: "circa_coupon_gp-a09",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1735,7 +1911,7 @@ module.exports = {
   },
   record49: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A10-en",
@@ -1747,6 +1923,10 @@ module.exports = {
     slug: "circa_coupon_gp-a10",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1774,7 +1954,7 @@ module.exports = {
   },
   record50: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A11-en",
@@ -1786,6 +1966,10 @@ module.exports = {
     slug: "circa_coupon_gp-a11",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1813,7 +1997,7 @@ module.exports = {
   },
   record51: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C01-ar",
@@ -1825,6 +2009,10 @@ module.exports = {
     slug: "circa_coupon_gp-c01",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1850,7 +2038,7 @@ module.exports = {
   },
   record52: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C02-ar",
@@ -1862,6 +2050,10 @@ module.exports = {
     slug: "circa_coupon_gp-c02",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1887,7 +2079,7 @@ module.exports = {
   },
   record53: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C03-ar",
@@ -1899,6 +2091,10 @@ module.exports = {
     slug: "circa_coupon_gp-c03",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1924,7 +2120,7 @@ module.exports = {
   },
   record54: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C04-ar",
@@ -1936,6 +2132,10 @@ module.exports = {
     slug: "circa_coupon_gp-c04",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1961,7 +2161,7 @@ module.exports = {
   },
   record55: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C05-ar",
@@ -1973,6 +2173,10 @@ module.exports = {
     slug: "circa_coupon_gp-c05",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -1998,7 +2202,7 @@ module.exports = {
   },
   record56: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C06-ar",
@@ -2010,6 +2214,10 @@ module.exports = {
     slug: "circa_coupon_gp-c06",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2035,7 +2243,7 @@ module.exports = {
   },
   record57: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C07-ar",
@@ -2047,6 +2255,10 @@ module.exports = {
     slug: "circa_coupon_gp-c07",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2072,7 +2284,7 @@ module.exports = {
   },
   record58: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C08-ar",
@@ -2084,6 +2296,10 @@ module.exports = {
     slug: "circa_coupon_gp-c08",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2109,7 +2325,7 @@ module.exports = {
   },
   record59: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C09-ar",
@@ -2121,6 +2337,10 @@ module.exports = {
     slug: "circa_coupon_gp-c09",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2146,7 +2366,7 @@ module.exports = {
   },
   record60: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C10-ar",
@@ -2158,6 +2378,10 @@ module.exports = {
     slug: "circa_coupon_gp-c10",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2183,7 +2407,7 @@ module.exports = {
   },
   record61: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C11-ar",
@@ -2195,6 +2419,10 @@ module.exports = {
     slug: "circa_coupon_gp-c11",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2220,7 +2448,7 @@ module.exports = {
   },
   record62: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-C12-ar",
@@ -2232,6 +2460,10 @@ module.exports = {
     slug: "circa_coupon_gp-c12",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2257,7 +2489,7 @@ module.exports = {
   },
   record63: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B01-ar",
@@ -2269,6 +2501,10 @@ module.exports = {
     slug: "circa_coupon_gp-b01",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2294,7 +2530,7 @@ module.exports = {
   },
   record64: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B02-ar",
@@ -2306,6 +2542,10 @@ module.exports = {
     slug: "circa_coupon_gp-b02",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2331,7 +2571,7 @@ module.exports = {
   },
   record65: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B03-ar",
@@ -2343,6 +2583,10 @@ module.exports = {
     slug: "circa_coupon_gp-b03",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2368,7 +2612,7 @@ module.exports = {
   },
   record66: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B04-ar",
@@ -2380,6 +2624,10 @@ module.exports = {
     slug: "circa_coupon_gp-b04",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2405,7 +2653,7 @@ module.exports = {
   },
   record67: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B05-ar",
@@ -2417,6 +2665,10 @@ module.exports = {
     slug: "circa_coupon_gp-b05",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2442,7 +2694,7 @@ module.exports = {
   },
   record68: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B06-ar",
@@ -2454,6 +2706,10 @@ module.exports = {
     slug: "circa_coupon_gp-b06",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2479,7 +2735,7 @@ module.exports = {
   },
   record69: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B07-ar",
@@ -2491,6 +2747,10 @@ module.exports = {
     slug: "circa_coupon_gp-b07",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2516,7 +2776,7 @@ module.exports = {
   },
   record70: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B08-ar",
@@ -2528,6 +2788,10 @@ module.exports = {
     slug: "circa_coupon_gp-b08",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2553,7 +2817,7 @@ module.exports = {
   },
   record71: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B09-ar",
@@ -2565,6 +2829,10 @@ module.exports = {
     slug: "circa_coupon_gp-b09",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2590,7 +2858,7 @@ module.exports = {
   },
   record72: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B10-ar",
@@ -2602,6 +2870,10 @@ module.exports = {
     slug: "circa_coupon_gp-b10",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2627,7 +2899,7 @@ module.exports = {
   },
   record73: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B11-ar",
@@ -2639,6 +2911,10 @@ module.exports = {
     slug: "circa_coupon_gp-b11",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2664,7 +2940,7 @@ module.exports = {
   },
   record74: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-B12-ar",
@@ -2676,6 +2952,10 @@ module.exports = {
     slug: "circa_coupon_gp-b12",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2702,7 +2982,7 @@ module.exports = {
   },
   record75: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A01-ar",
@@ -2714,6 +2994,10 @@ module.exports = {
     slug: "circa_coupon_gp-a01",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2739,7 +3023,7 @@ module.exports = {
   },
   record76: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A02-ar",
@@ -2751,6 +3035,10 @@ module.exports = {
     slug: "circa_coupon_gp-a02",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2776,7 +3064,7 @@ module.exports = {
   },
   record77: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A03-ar",
@@ -2788,6 +3076,10 @@ module.exports = {
     slug: "circa_coupon_gp-a03",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2813,7 +3105,7 @@ module.exports = {
   },
   record78: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A04-ar",
@@ -2825,6 +3117,10 @@ module.exports = {
     slug: "circa_coupon_gp-a04",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2850,7 +3146,7 @@ module.exports = {
   },
   record79: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A05-ar",
@@ -2862,6 +3158,10 @@ module.exports = {
     slug: "circa_coupon_gp-a05",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2887,7 +3187,7 @@ module.exports = {
   },
   record80: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A06-ar",
@@ -2899,6 +3199,10 @@ module.exports = {
     slug: "circa_coupon_gp-a06",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2924,7 +3228,7 @@ module.exports = {
   },
   record81: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A07-ar",
@@ -2936,6 +3240,10 @@ module.exports = {
     slug: "circa_coupon_gp-a07",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -2962,7 +3270,7 @@ module.exports = {
   },
   record82: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A08-ar",
@@ -2974,6 +3282,10 @@ module.exports = {
     slug: "circa_coupon_gp-a08",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -3000,7 +3312,7 @@ module.exports = {
   },
   record83: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A09-ar",
@@ -3012,6 +3324,10 @@ module.exports = {
     slug: "circa_coupon_gp-a09",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -3038,7 +3354,7 @@ module.exports = {
   },
   record84: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A10-ar",
@@ -3050,6 +3366,10 @@ module.exports = {
     slug: "circa_coupon_gp-a10",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",
@@ -3077,7 +3397,7 @@ module.exports = {
   },
   record85: {
     tenant: "default",
-    enterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_ONLINE",
     revision: 1,
     active: true,
     code: "CIRCA_COUPON_GP-A11-ar",
@@ -3089,6 +3409,10 @@ module.exports = {
     slug: "circa_coupon_gp-a11",
     status: "READY",
     attributes: {
+      productType: "DIGITAL",
+      fulfillmentStrategy: "DIGITAL_COMMERCE",
+      digitalDeliveryType: "COUPON_CODE",
+      inventoryStrategy: "COUPON_CODE_POOL",
       kind: "COUPON",
       imageUrl: "/media/coupon-market.svg",
       issuer: "GreenPerks Retail",

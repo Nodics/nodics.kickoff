@@ -1,0 +1,225 @@
+{
+  "observedAt": "2026-10-08T20:12:56.000Z",
+  "state": "PASSED_NATIVE_AXIS_REFUND_AND_RETURN_ACCEPTANCE",
+  "environment": "kickoffLocal",
+  "application": "agoraapparel",
+  "previousEvidence": [
+    "native-refund-return-2026-10-08.json",
+    "native-refund-browser-follow-through-2026-10-08.json"
+  ],
+  "browserRefundAcceptancePassed": true,
+  "allProjectWorkComplete": false,
+  "scope": {
+    "paymentMode": "LOCAL_SANDBOX_DEMO",
+    "externalMoneyOrGoods": false,
+    "logistics": "FULFILLMENT_OWNER_API_SYNTHETIC_ATTESTATION",
+    "allLogisticsBrowserAccepted": false,
+    "productionOrOtherDeploymentQualified": false,
+    "circaMigrationExecuted": false
+  },
+  "changes": [
+    "Separate explicitly selected COMMERCE_AXIS_REFUND_REVIEWER role preserves the existing API-only reviewer role and all administrator grants.",
+    "Authenticated BackOffice bootstrap projects only owner-derived READY, NOT_READY or UNAVAILABLE for employees without detailed initialization inspection rights.",
+    "Axis admits only owner READY, otherwise offers read-only bootstrap refresh and sign-out without setup permissions or actions.",
+    "Profile registration and Media navigation contract fixtures now assert current command-receipt claims and governed backend workspaces."
+  ],
+  "reviewer": {
+    "role": "COMMERCE_AXIS_REFUND_REVIEWER",
+    "releaseCode": "profile:commerceAxisRefundReviewerRole",
+    "releaseVersion": "0.0.1",
+    "sourceRoot": "core-v001",
+    "selection": "EXPLICIT_INSERT_ONLY",
+    "additionalPresentationPermissions": [
+      "axis.view",
+      "axis.dashboard.view",
+      "backoffice.bootstrap.view"
+    ],
+    "originalApiRolePermissionCount": 7,
+    "ordinaryEmployeeAncestryOnly": true,
+    "broadAxisViewerAttached": false,
+    "administratorGrantsChanged": false,
+    "installedInitChanged": false,
+    "invitationAndRegistration": "NORMAL_PROFILE_PREASSIGNMENT_MAILBOX_PROOF_AND_REGISTRATION",
+    "browser": "ISOLATED_HEADLESS_CHROME_ACTUAL_AXIS_LOGIN_FORM",
+    "sessionInjected": false,
+    "authenticationHttpStatus": 200,
+    "authenticatedBootstrapHttpStatus": 200,
+    "declaredPermissionCount": 10
+  },
+  "cases": [
+    {
+      "type": "CANCELLATION",
+      "state": "PASSED",
+      "physicalQuantity": 2,
+      "approvalThroughAxis": true,
+      "originalCaptureBound": true,
+      "observedStockBaselineRestored": true
+    },
+    {
+      "type": "RETURN_CROSS_CLIENT_RECOVERY",
+      "state": "PASSED",
+      "physicalQuantity": 2,
+      "originalApprovalThroughOwnerApi": true,
+      "retryAndRefreshThroughAxis": true,
+      "immutableOriginalReasonAndCommandPreserved": true,
+      "blockedBeforeCompleteReceiptAndInspection": true,
+      "distinctReceivedAndInspectedPackages": 2,
+      "originalCaptureBound": true,
+      "observedStockBaselineRestored": true,
+      "replaySingleRefund": true
+    },
+    {
+      "type": "UNUSED_DIGITAL_REFUND",
+      "state": "PASSED",
+      "approvalThroughAxis": true,
+      "originalCaptureBound": true,
+      "revokedEntitlementRevealRefused": true
+    }
+  ],
+  "primaryBrowserResults": {
+    "completedCases": 3,
+    "browserRefundWriteCount": 7,
+    "completedQueueHasNoRefundApprovalAction": true,
+    "restrictedReviewerRunsPassed": 2,
+    "completedCasesAcrossBothRuns": 6
+  },
+  "validation": {
+    "profileSecurityAndReviewerTestsPassed": 226,
+    "commerceTestsPassed": 214,
+    "backofficeNodeChecksPassed": 157,
+    "backofficeMochaCasesPassed": 24,
+    "axisFocusedTestsPassed": 101,
+    "kickoffConfigurationTestsPassed": 25,
+    "kickoffDocumentationLifecycleAndIsolationChecksPassed": 4,
+    "importReleaseSelectionAndAllowlistChecksPassed": 2,
+    "uniqueChecksPassed": 796,
+    "finalChecksFailed": 0,
+    "axisTypecheck": "PASSED",
+    "axisScopedEslint": "PASSED",
+    "axisProductionBuild": "PASSED_WITH_EXISTING_LARGE_CHUNK_WARNING",
+    "frameworkLlmModulesGeneratedAndValidated": 202,
+    "frameworkOwnershipFilesChecked": 8416,
+    "frameworkOwnershipFindings": 0,
+    "diffWhitespaceChecks": "PASSED",
+    "axisInitializationAndNavigationRecoveryTestsPassed": 43
+  },
+  "sourcePins": {
+    "backofficeRegistryServiceSha256": "70a0157744461dc03f084adc17c83aa61420638e35e71996a697b4d9a5a5fbca",
+    "backofficeApiContractsSha256": "6ecb1633233935b69addc507361e9e49cd2955809a8f42a872ea9680476cfa04",
+    "axisAppSha256": "23b0f610c5fc3163261642a3a199a5c51a597a5430c2a10c72ceac1872d09caa",
+    "axisBootstrapClientSha256": "ded6a203615bfe29036da6f24276d28db792f583450b9e6f5345748a05e72abc",
+    "axisRefundReviewSha256": "fe113a0ae724ec7234cdd140f50e8ba51b1f5253de19b752f35413f55f55a559",
+    "axisReviewPanelSha256": "72926f8f9a12e0b5f0b9fd524bb0ca9e22c0d560149840d6e954cb4fc58310a2",
+    "axisReviewerHeaderSha256": "16692dbc7afd337233df2771a9116b2cc6fa20fbe365db96c6e8ba4ad5f2b59c",
+    "axisReviewerRecordsSha256": "549d0dd998f0a16ca5682f15c98a46be1e6401a378f9f903ac86c8f875fc209a",
+    "originalApiReviewerHeaderUnchangedSha256": "15e74adf1344e0f39e3da5adebd8e4cedd4644cb5d0336d0a4d1038a20bac0b7",
+    "originalApiReviewerRecordsUnchangedSha256": "863f9867ecc68114f6c07e423335ebe5788660f94cf7ca776a0f14054c81a168"
+  },
+  "attemptCorrections": [
+    "First separate-reviewer normal sign-in and bootstrap succeeded, but Axis unnecessarily requested detailed initialization status and received 403; no checkout or refund occurred in that failed browser attempt.",
+    "An over-inclusive retry fingerprint included ignored temporary import output and refused the retry after pack installation. Cleanup discarded the ephemeral reviewer password. Subsequent source checks exclude ignored temp/gen output, retain actual identity/configuration source, and separately observe installed schemas and indexes.",
+    "The first successful restricted-reviewer run completed all three cases. Its screenshots caught transitions, so a subsequent run uses animations-disabled screenshot capture.",
+    "A separate existing-administrator screenshot attempt was correctly denied dispute navigation because that identity lacks commerce.dispute.review. Its generic parent Orders workspace was not treated as refund admission; no checkout or refund was made and grants were not broadened.",
+    "Mixed BackOffice test runners were separated; two stale contract fixtures were repaired without runtime permission or authority changes."
+  ],
+  "controlledNativeBuild": {
+    "method": "CANONICAL_SELECTED_SERVER_BUILD_AND_START_FROM_FROZEN_IDENTITY_CONFIGURATION_SOURCES",
+    "selectedRuntimesBuiltAndReadyPerWindow": 10,
+    "readOnlyReceiptRegistrationQualified": false,
+    "readOnlyReceiptInstalledRuntimeSourceMatch": "NOT_ESTABLISHED",
+    "readOnlyReceiptQualificationGranted": false,
+    "adoption": "Separate controlled native source/build review plus installed inventory and exact claim-index observations preceded the explicitly enabled temporary Local registration window. Read-only observations alone grant no qualification.",
+    "externalMailRelay": false,
+    "mailboxProof": "EXACT_RECIPIENT_AUTHENTICATED_LOOPBACK_CAPTURE_ONLY",
+    "defaultOnboardingConfigurationRemainsDisabled": true,
+    "identityConfigurationSourceSha256": "1232e6d75f8c426077732f99c825ffc91b86d17d78fc46745da3953934a96d18",
+    "identityConfigurationSourceFileCount": 446,
+    "sourceFingerprintExcludesIgnoredTemporaryImportsAndGeneratedOutput": true,
+    "readOnlyInventoryObservedAt": "2026-10-08T20:10:19.363Z",
+    "inventoryComplete": true,
+    "inventoryConsistency": "TWO_PASS_OBSERVED_MATCH",
+    "atomicSnapshot": false,
+    "countsBeforeFinalReviewerRegistration": {
+      "tenants": 1,
+      "enterprises": 1,
+      "assignments": 5,
+      "employees": 11,
+      "customers": 11,
+      "servicePrincipals": 1,
+      "passwords": 22
+    },
+    "bootstrapReviewDisposition": "REVIEWED_SOURCE_MATCH",
+    "exactPartialUniqueAssignmentClaimIndex": true,
+    "installedAssignmentIndexCount": 7,
+    "profileSchemaFingerprint": "ba969f7d1f2b81b3b5d26c8497cda4b195636a84757ed7b7ac19c1d4b7592962",
+    "identityConfigurationSourceUnchangedAfterBothFinalBuilds": true
+  },
+  "cleanup": {
+    "state": "PASSED",
+    "nativeTopologyStopped": true,
+    "axisTestDevServerStopped": true,
+    "mailboxCaptureClosed": true,
+    "ephemeralReviewerPasswordsDiscarded": true,
+    "defaultOnboardingConfigurationRemainsDisabled": true,
+    "rawIdentityOrGrantWrites": false,
+    "databaseReset": false,
+    "receiptsRewritten": false,
+    "portsClosed": [
+      3100,
+      4300,
+      4301,
+      4312,
+      4313,
+      4314,
+      4315,
+      4330,
+      4331,
+      4340,
+      4341,
+      4350,
+      4351,
+      4352,
+      4353,
+      4360,
+      4361,
+      4370,
+      4371,
+      4380,
+      4381
+    ],
+    "addressFamiliesChecked": [
+      "IPv4",
+      "IPv6"
+    ],
+    "unexpectedListeners": 0
+  },
+  "visualEvidence": {
+    "state": "PASSED_MANUAL_SCREENSHOT_INSPECTION",
+    "identity": "NORMALLY_REGISTERED_COMMERCE_AXIS_REFUND_REVIEWER",
+    "animationsDisabled": true,
+    "desktopViewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "mobileViewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dialogFullyFramedWithoutHorizontalOverflow": true,
+    "completedQueue": "VISIBLE_VIEWPORT_CAPTURE_WITH_SEPARATE_DOM_ASSERTIONS_FOR_ALL_THREE_FINAL_CASES",
+    "artifacts": [
+      {
+        "path": "native-axis-refund-return-2026-10-08/nodics-axis-refund-desktop-2026-10-08.png",
+        "sha256": "50d825404c75048f0d4a4279d1039e7ff2a82dc4cbcede335958ff1799f37ebf"
+      },
+      {
+        "path": "native-axis-refund-return-2026-10-08/nodics-axis-refund-mobile-2026-10-08.png",
+        "sha256": "3cfd15f5b8b6a59f4b3a38452e9d0e76924ff311e5cf31260b31e6923ef82cf3"
+      },
+      {
+        "path": "native-axis-refund-return-2026-10-08/nodics-axis-refunds-completed-2026-10-08.png",
+        "sha256": "968c3ae3b86a6689891c2ec25041b5aedea9db7f3a3dcbd06c1d870bb44a01d5"
+      }
+    ]
+  }
+}

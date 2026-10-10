@@ -32,18 +32,18 @@ const successor = {
     require(
       path.join(
         eWasteRoot,
-        "data/core-v002/records/waste/eWasteImpactProfileData",
+        "data/core-v001/records/waste/eWasteImpactProfileData",
       ),
     ),
   ),
   categories: Object.values(
     require(
-      path.join(eWasteRoot, "data/core-v002/records/waste/eWasteCategoryData"),
+      path.join(eWasteRoot, "data/core-v001/records/waste/eWasteCategoryData"),
     ),
   ),
   itemTypes: Object.values(
     require(
-      path.join(eWasteRoot, "data/core-v002/records/waste/eWasteItemTypeData"),
+      path.join(eWasteRoot, "data/core-v001/records/waste/eWasteItemTypeData"),
     ),
   ),
 };
@@ -56,15 +56,18 @@ const policy = require(
 const dataRoot = path.resolve(__dirname, "../data");
 const sample = (name) =>
   Object.values(
-    require(path.join(dataRoot, "sample-v001/waste/records", name)),
+    require(path.join(
+      ["circaWasteCategoryData", "circaWasteImpactProfileData", "circaWasteItemTypeData"].includes(name)
+        ? path.join(__dirname, "fixtures/compatibility/waste")
+        : path.join(dataRoot, "sample-v001/waste/records"), name)),
   );
 const customerPolicy = (name) =>
   Object.values(
-    require(path.join(dataRoot, "core-v001/waste-policy/records", name)),
+    require(path.join(__dirname, "fixtures/compatibility/waste-policy", name)),
   );
 const reference = (name) =>
   Object.values(
-    require(path.join(eWasteRoot, "data/core-v001/records/waste", name)),
+    require(path.join(eWasteRoot, "test/fixtures/compatibility", name)),
   );
 const contribution = (records, project = false) => ({
   moduleName: project ? "circa.ewaste" : "eWaste",

@@ -1,0 +1,24 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "circa-promotion-CIRCA_COUPON_CPN-ECO-15_PROMO-v001",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "sourceVersion": "fd4a7a9e76584c93acbdba88eb3161f7f7a5aeb00fc2848d7e2706d968442698",
+      "input": {
+        "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-ECO-15_PROMO-v001",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+            "versionId": 0
+          }
+        ]
+      }
+    }
+  ]
+}

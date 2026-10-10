@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-08",
+  "environment": "native kickoffLocal",
+  "state": "SOURCE_CORRECTED_AWAITING_FRESH_BASELINE_DECISION",
+  "subsequentExecutionEvidence": "native-apparel-fresh-setup-and-replay-2026-10-08.json",
+  "priorEvidence": "native-apparel-business-pack-2026-10-08.json",
+  "scope": "Apparel governed catalogue recovery, coordinated operational setup and private coupon delivery",
+  "excluded": ["Electronics and Telco operational mutations", "Circa business mutations", "production qualification", "unrelated dirty worktree changes"],
+  "nativeBeforeCampaignSourceCorrection": {
+    "publicationQualification": {
+      "ready": true,
+      "total": 67,
+      "product": 61,
+      "pricing": 1,
+      "inventory": 1,
+      "tax": 1,
+      "promotion": 3,
+      "approval": "Existing normal Process task claim and complete with the original authenticated administrator; exact existing approved publications reused where current",
+      "limit": "These receipts qualify the then-installed campaign sources, not the subsequently corrected issuer/vendor references"
+    },
+    "catalogue": {
+      "state": "PASSED",
+      "searchSource": "SEARCH_INDEX",
+      "searchPages": 3,
+      "expectedProducts": 61,
+      "discoveredProducts": 61,
+      "qualifiedPdpCount": 61,
+      "qualifiedSelectedMediaChecksums": 83,
+      "projection": "No internal SKU, warehouse, price-row or supplier-cost fields in checked public Product details"
+    },
+    "operationalPreflight": {
+      "openingStockReady": true,
+      "openingReceiptInstructions": 464,
+      "currentOpeningReceipts": 0,
+      "promotionRefusal": "ERR_PROMOTION_SECURE_ISSUANCE_UNCONFIRMED",
+      "applicationPublicationStep": "VALIDATION_BLOCKED",
+      "operationalInstallExecuted": false
+    },
+    "installedIssuanceIndexes": {
+      "authority": "Authenticated read-only nDatabase installed-index inspection",
+      "coupon": { "versioned": false, "uniqueIdentities": [["code"], ["tenant", "tokenHash"]] },
+      "couponBatch": { "versioned": false, "uniqueIdentities": [["code"]] }
+    }
+  },
+  "corrections": {
+    "sharedMedia": "Product acceptance resolves all assets in the selected confined Media manifests, including canonical CMS-owned images reused by digital Products. No ownership relabeling or duplicated files.",
+    "applicationTimeout": "BackOffice forwards the existing layered application timeout to the full publication-status/submit owner call. Previously the implicit 5000 ms module timeout was shorter than the measured 6917 ms check. Safe bounded phase/code diagnostics retain original human bearer, target binding and one attempt.",
+    "campaignSource": "All three initial Apparel campaigns explicitly declare canonical Profile enterprise, issuer and vendor references. Their exact publication source pins, setup policy pins and three affected manifest file hashes were recomputed through existing canonical fingerprint/checksum semantics.",
+    "campaignAdmission": "First-use budget creation preserves reviewed enterprise references rather than dropping them while copying other policy fields.",
+    "privateIssuance": "Typed content-free refusals distinguish missing reviewed enterprises, atomic transactions, protected schemas, private hooks and actual unique indexes. Missing references never imply self-issued/self-vended rights.",
+    "immutability": "Release folders and versions remain sample-v001 / 0.0.1. No installed import receipt, publication approval or same-version guard was rewritten. Corrected source bytes are not applied to the existing immutable installation.",
+    "documentation": "Existing developer-owner contracts document setup ordering, reference preservation, diagnostic boundaries and fresh-baseline requirements. No new canonical CMS guide publication is claimed."
+  },
+  "verification": {
+    "promotion": { "passed": 113, "failed": 0 },
+    "publicationSetupProductAcceptanceBackofficeAndSecretProtection": { "passed": 84, "failed": 0 },
+    "mediaConfinedResolver": { "passed": 7, "failed": 0 },
+    "kickoffDataOwnership": { "passed": 22, "failed": 0 },
+    "kickoffMultiDomain": { "passed": 14, "failed": 0 },
+    "frameworkBaselineOwnershipAndReferences": { "passed": 18, "failed": 0 },
+    "frameworkOwnershipLanguage": { "checkedFiles": 8363, "findings": 0 },
+    "documentationGovernance": { "state": "PASSED", "checkedFiles": 3865, "undocumentedFiles": 0, "exportedMethods": 11830, "missingMethodJSDoc": 0 },
+    "generatedContext": { "frameworkModules": 202, "kickoffModules": 31, "generation": "PASS", "validation": "PASS" },
+    "diffWhitespace": "PASS in Framework and Kickoff",
+    "countLimit": "Suite counts overlap and must not be summed into a distinct test total.",
+    "broaderEarlierBackofficeTestLimits": [
+      "AxisReusableComponentGovernance fixture does not initialize CONFIG for the Media capability; no unrelated harness change made",
+      "ProfileConfiguredRegistration fixture expected 26 authority claims while current unrelated Profile work supplies 28; no Profile behavior changed"
+    ],
+    "liveLimit": "Final timeout and campaign-source corrections have not yet been qualified after fresh installation. Native stock transaction, secure issuance, purchased-owner reveal, discount, payment and order lifecycle acceptance remain pending."
+  },
+  "freshBaselinePreflight": {
+    "mode": "READ_ONLY_DISCOVERY_AND_DRY_RUN",
+    "registeredTenantCount": 0,
+    "databaseCount": 11,
+    "searchIndexCount": 4,
+    "scopeMatchesPriorReset": "native-physical-reset-2026-10-08.json",
+    "effects": { "databasesDropped": 0, "indexesDropped": 0, "authKeysRemoved": 0 },
+    "qualified": false,
+    "decision": "Asked user whether to repeat the previously authorized native reset or preserve current data for later reset; no destructive execution in this continuation"
+  },
+  "remaining": [
+    "Resolve the fresh-baseline decision without bypassing immutable installed receipts",
+    "Install corrected source packs and complete ordinary CMS, Media and domain publication approvals",
+    "Execute coordinated 464 opening receipts, three campaign admissions and 170 encrypted coupon units through their existing owners",
+    "Verify exact replay preserves stock, budgets, coupon identities and encrypted retention",
+    "Run signed purchase/payment/delivery/reveal and discounted physical checkout acceptance",
+    "Publish detailed CMS guide additions through a qualified fresh baseline or reviewed forward release, not same-version installed replacement"
+  ],
+  "safety": { "physicalResetPerformed": false, "rawDatabaseAccess": false, "operationalWrites": false, "publicationWrites": true, "approvalBypass": false, "qualificationFlagsChanged": false, "credentialsOrPlaintextCouponsInEvidence": false, "unrelatedChangesPreserved": true },
+  "cleanup": { "state": "VERIFIED", "ownedNativeSupervisor": "STOPPED", "backendPortsListening": 0, "backendPorts": [4300, 4312, 4314, 4330, 4340, 4350, 4352, 4360, 4370, 4380], "subagents": "CLOSED" }
+}

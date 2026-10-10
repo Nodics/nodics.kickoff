@@ -1,0 +1,45 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "agoraStylePass5PercentRule",
+      "commandReference": "opening-agoraStylePass5PercentRule",
+      "rootCode": "agoraStylePass5PercentRule",
+      "storeCode": "agoraMainStore",
+      "policyFingerprint": "3746a80a88f86fdc7c8c7b1fc834ae20ef44f7800072e3b682da0e9382692841"
+    },
+    {
+      "promotionCode": "agoraCapsuleEdit10PercentRule",
+      "commandReference": "opening-agoraCapsuleEdit10PercentRule",
+      "rootCode": "agoraCapsuleEdit10PercentRule",
+      "storeCode": "agoraMainStore",
+      "policyFingerprint": "739286b379bca644e0e739f3f641ffc9c152571c51fbc8959b9e2af135c2e703"
+    },
+    {
+      "promotionCode": "agoraPrivateSale20PercentRule",
+      "commandReference": "opening-agoraPrivateSale20PercentRule",
+      "rootCode": "agoraPrivateSale20PercentRule",
+      "storeCode": "agoraMainStore",
+      "policyFingerprint": "1c67a37770c02c7efe5328ae86e89383e638fa43cd68060032937d77561baf6a"
+    }
+  ],
+  "couponBatches": [
+    {
+      "promotionCode": "agoraStylePass5PercentRule",
+      "batchCode": "agoraStylePass5Batch001",
+      "quantity": 100,
+      "commandReference": "issue-agoraStylePass5PercentRule"
+    },
+    {
+      "promotionCode": "agoraCapsuleEdit10PercentRule",
+      "batchCode": "agoraCapsuleEdit10Batch001",
+      "quantity": 50,
+      "commandReference": "issue-agoraCapsuleEdit10PercentRule"
+    },
+    {
+      "promotionCode": "agoraPrivateSale20PercentRule",
+      "batchCode": "agoraPrivateSale20Batch001",
+      "quantity": 20,
+      "commandReference": "issue-agoraPrivateSale20PercentRule"
+    }
+  ]
+}

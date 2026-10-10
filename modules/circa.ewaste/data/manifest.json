@@ -86,7 +86,7 @@
     "waste-policy": {
       "kind": "DATA_RELEASE",
       "dataType": "core",
-      "sourceRoot": "core-v002",
+      "sourceRoot": "core-v001",
       "version": "0.0.1",
       "displayName": "Circa Waste Policy",
       "description": "Circa-owned Waste policy records extending and overriding eWaste presets through nodics.waste schemas.",
@@ -102,12 +102,12 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "core-v002/waste-policy/headers/eWastePresetHeader.js": "7b23fa5e15d419547c65bc174359fa1839d65bc622ee7a1fbfb34cb7e11613e1",
-        "core-v002/waste-policy/records/eWasteAcceptanceRuleData.js": "79d353bc70503bb8235349eefcab27a10c9d4afa7774c820d62f8f8122d74d04",
-        "core-v002/waste-policy/records/eWasteCategoryData.js": "9a0471b2532d87cd64213950c3fabff8f0c8770ef6fcfec630392f66ff4c32d1",
-        "core-v002/waste-policy/records/eWasteCollectionPresetData.js": "8b630eb002c35b24e5ed7af0d40921668e9919c980d4c30b92b91624afe43447",
-        "core-v002/waste-policy/records/eWasteImpactProfileData.js": "7c3407eb2aa253bd4f1ad5aef40fe7485410457c1f1ee5a3083a93840a0b45b3",
-        "core-v002/waste-policy/records/eWasteItemTypeData.js": "659244ed497878046f502c67c55a61bad8780a73d2ac2293037fa8a5b68cbef9"
+        "core-v001/waste-policy/headers/eWastePresetHeader.js": "7b23fa5e15d419547c65bc174359fa1839d65bc622ee7a1fbfb34cb7e11613e1",
+        "core-v001/waste-policy/records/eWasteAcceptanceRuleData.js": "79d353bc70503bb8235349eefcab27a10c9d4afa7774c820d62f8f8122d74d04",
+        "core-v001/waste-policy/records/eWasteCategoryData.js": "9a0471b2532d87cd64213950c3fabff8f0c8770ef6fcfec630392f66ff4c32d1",
+        "core-v001/waste-policy/records/eWasteCollectionPresetData.js": "8b630eb002c35b24e5ed7af0d40921668e9919c980d4c30b92b91624afe43447",
+        "core-v001/waste-policy/records/eWasteImpactProfileData.js": "7c3407eb2aa253bd4f1ad5aef40fe7485410457c1f1ee5a3083a93840a0b45b3",
+        "core-v001/waste-policy/records/eWasteItemTypeData.js": "659244ed497878046f502c67c55a61bad8780a73d2ac2293037fa8a5b68cbef9"
       },
       "selectionPolicy": "EXPLICIT"
     },
@@ -198,7 +198,7 @@
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",
-      "description": "Unified v001 Circa demo asset catalogue and 38 partner offers, including the approved 35-offer GreenPerks network.",
+      "description": "GREENPERKS_ONLINE marketplace catalogue and 38 issuer-owned approved policies, including exact monetary budgets and ITEM bundles; source terms are not operational authority.",
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
@@ -213,20 +213,17 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
         "sample-v001/commerce/headers/circaCommerceCatalogHeader.js": "45a28a3fde1aade748d1f1d825003ee2a0485ef288020deb1f70e6898ff46d00",
-        "sample-v001/commerce/records/circaCategoryData.js": "d09f7be03f421d9c3744852ac9fc7cce631d74d1bff6ef4776dde44788370119",
-        "sample-v001/commerce/records/circaCategoryLocalizationData.js": "598914b45c497ba390abd04efc140edaae6f72750aeaacf94d5b191a0452b49e",
-        "sample-v001/commerce/records/circaCouponBatchData.js": "2d3e26ac5cdc700e9cca50f24088adfcb56d09b4839708e521112ea652095289",
-        "sample-v001/commerce/records/circaCouponData.js": "56abef2c55bfa1a8f49b78cdffb8b1dc88d19b2fb36acdb1652ddcf55e44f870",
-        "sample-v001/commerce/records/circaInventoryBalanceData.js": "c0fc70b29c0fc10223b2f93dc09db91a3227ec6b347ef2e006880d1f8fde5a6f",
-        "sample-v001/commerce/records/circaPriceBookData.js": "7f47d41b08d7056fd26b053342461bd46d46b601bd6f23c6ff3bc5154e84c365",
-        "sample-v001/commerce/records/circaPriceRowData.js": "cf635246ef851d15ee97deeda8618d0d61cc8ae5b9195a0f95630880be97be01",
-        "sample-v001/commerce/records/circaProductData.js": "619cf503b090ebf374c72f5255203a4b2780dad9c93f6c8e033b2cc24f4e2b92",
-        "sample-v001/commerce/records/circaProductLocalizationData.js": "1b27e213a2f8658035b47d070bffcf889170667b83062b7ed8bf68b191461604",
-        "sample-v001/commerce/records/circaProductVariantData.js": "e74f4feeffe970e4fca28ca1f50ed4375082d05b0ea2d09e981a04f891a472ed",
-        "sample-v001/commerce/records/circaProductVariantLocalizationData.js": "6824e0ff52ce261b5b576318c83450d21f9142ae1b0c592d395d1cb5e12022fd",
-        "sample-v001/commerce/records/circaPromotionData.js": "7ebe68f8e5b93322a1027d3913a665198299bc4326bd8361714fd26baaa0bf11",
-        "sample-v001/commerce/records/circaTaxPolicyData.js": "88cefd3da3e4bd98aa6a7e769a06dca775ced00c830ab039fec2c4a862d3f684",
-        "sample-v001/commerce/records/circaWarehouseData.js": "cf9ecf5b8f33da7edc7e223642c4d063a6e7270c82a9a9013bb3095869e16609"
+        "sample-v001/commerce/records/circaCategoryData.js": "77b43a49faf90c05600b79a3b7b8c24ec52dd1be0f4ff7e91b3e13a2aea35733",
+        "sample-v001/commerce/records/circaCategoryLocalizationData.js": "cba3d42dd59e6b86a3ca8c7e5e029c39647d3b4c9158398b3490b68189e22def",
+        "sample-v001/commerce/records/circaPriceBookData.js": "29de0bf1c22f1181c6f53c51ce5872c11e47db45c98c48add9ed02bef79986ea",
+        "sample-v001/commerce/records/circaPriceRowData.js": "2891c9b75bbd5e54369072a514f0fd942107e88cd43592802e64bd991da17b1d",
+        "sample-v001/commerce/records/circaProductData.js": "1b3a79efa5a02bcdbc9e9ed34b3d9e76d0b941796680cfac1ed67cfb82940ee3",
+        "sample-v001/commerce/records/circaProductLocalizationData.js": "fd87972ffe0b75795ee9f6268c7d9f3dc15229126e17bad017e687b50c26fd16",
+        "sample-v001/commerce/records/circaProductVariantData.js": "829abd7ce2a995b9da0c779db8b0aa3554ed99893d8daa3560772d0b11326cca",
+        "sample-v001/commerce/records/circaProductVariantLocalizationData.js": "5923a6c6ca9c9f9eb0a7871ee9ad3c6ef71d177c2083a0d315cede0ac15cefbc",
+        "sample-v001/commerce/records/circaPromotionData.js": "900635f8d7597a9f02190d8fe5f69dcc453440e54e081f4742f9b7e3d2c7c9db",
+        "sample-v001/commerce/records/circaTaxPolicyData.js": "2a6adc07c13a413184b0bab90297505076fb28b4f19441e3b9914fed20a3f2b4",
+        "sample-v001/commerce/records/circaWarehouseData.js": "53b0c813307d39eed491cded0d71d088bfbd568bf4016b4d58ab70769a78d68e"
       },
       "displayName": "Circa Commerce catalogue",
       "selectionPolicy": "EXPLICIT"
@@ -256,6 +253,55 @@
         "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
         "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
         "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b"
+      }
+    },
+    "circaCommerceStaffAssignments": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "displayName": "Circa predefined Commerce staff roles",
+      "description": "Explicit additive Profile roles for seven exact existing demo staff; preserves current groups, credentials and security-stamp governance.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/staff-access/headers/circaCommerceStaffAssignmentHeader.js": "3479cffee110bf428b7750b5a5830e757fbb862d4563903f5105d2decd83797a",
+        "sample-v001/staff-access/records/circaCommerceStaffAssignmentData.js": "4497132414b4e3f7dd3466fa6c06025fe537f4f335e84f0bcf35f4b463b9bf6d"
+      }
+    },
+    "circaMerchantOutletAccess": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "displayName": "Circa merchant outlet access",
+      "description": "Explicit native Local scopes for existing merchant operators at the four reviewed demo outlets; no staff, credentials, roles or seller consent.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/outlet-access/headers/circaOutletAccessHeader.js": "ef1f070e67ff2e4a9ceb2ea12ab3bcdb3c171981597e55593809880adeff5c45",
+        "sample-v001/outlet-access/records/circaMerchantOutletScopeData.js": "e996668088ae93b28ff553eaaaadfd3e2f9e1d2ada5db39548a7c6b53f7b5c80"
       }
     },
     "customer-workspace": {
@@ -361,20 +407,67 @@
         "sample-v001/sunmarke-waste/records/sunmarkeWasteCollectionPointData.js": "8aab8b4c9a89e5341e64f5fcf381ec2e63d261fbaf471e9dc80863bcaba19e9f"
       }
     },
-    "commerce-operational": {
+    "circaPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "Complete 84-root coverage inventory. Mixed enterprise policy roots must be submitted through the separate exact catalogue and issuer publication selections; this inventory grants no scope override.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/publication/records/publicationPlan.json": "b6f54c987be147f88a753fbe3ea252e4c3f4ebed96301deb16d5be4e4440f11f"
+      }
+    },
+    "store": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
-      "displayName": "Circa governed coupon and stock source",
-      "description": "Unified v001 governed coupon and stock source; owner runtimes still qualify issuance and inventory admission.",
-      "owningDomain": "circa.ewaste",
-      "lifecycle": "OPERATIONAL_VERSIONED",
+      "displayName": "Circa Store references",
+      "description": "Approved GREENPERKS_ONLINE marketplace and four issuer outlet Store references, independent of coupon issuance, balances and live consent.",
+      "owningDomain": "store",
+      "lifecycle": "REFERENCE",
       "destinationRole": "COMMERCE",
       "environmentScope": [
         "LOCAL",
         "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/store/headers/circaStoreReferenceHeader.js": "47e7c02fe790173fc55b1371de74f1fdff9f55529d3119d160f1f6debe0c8f65",
+        "sample-v001/store/records/circaStoreData.js": "40a3bcc4a6558f415ff59492e32c407975e37f47d96fb10ae7cbaa01f9477548"
+      }
+    },
+    "circaGreenPerksBudget": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa GreenPerks opening budgets",
+      "description": "Signed GREENPERKS_RETAIL operator only: original opening budget admission before separately reviewed seller consent; no issuance or replenishment.",
+      "owningDomain": "promotion",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -382,11 +475,742 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/commerce-operational/headers/circaCommerceSampleHeader.js": "0ffcc1aa8809c4058c7caf75d962728222c197759e5678b064e2ad49df86e249",
-        "sample-v001/commerce-operational/records/circaCouponBatchData.js": "a21e83777155ecd412352146bedb0695285a02a66370b805b6623b973e6c5c48",
-        "sample-v001/commerce-operational/records/circaCouponData.js": "58367f8e0347d64b202ac07ed6c9ca4de9af386864b7ced1aa6c234056662492",
-        "sample-v001/commerce-operational/records/circaInventoryBalanceData.js": "1ed34ac4774deed51dfec9707aabeeb5d7cc498be73c5623a990f1ba3fde9b05",
-        "sample-v001/commerce-operational/records/circaStoreData.js": "3ea28f20134fd1a67ca74e553804ad052d275e57c872bacf000143dccef885ec"
+        "sample-v001/operations/promotion/greenperks/budget/records/promotionSetup.json": "8e9bdcd43a4882def65e0b6fa719a6d228d7e4fa56bc42611f4a21c59a48bbb0"
+      },
+      "installer": "PROMOTION_CAMPAIGN_ISSUANCE"
+    },
+    "circaGreenPerksIssuance": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa GreenPerks reviewed issuance",
+      "description": "Signed GREENPERKS_RETAIL operator only: 100 protected coupon units per campaign after exact original budget admission and current issuer-owned seller consent.",
+      "owningDomain": "promotion",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/operations/promotion/greenperks/issuance/records/promotionSetup.json": "37aeb598fce1383d33106c3a417cb8dffda601ed0cd41c9b389030d98b067aa0"
+      },
+      "installer": "PROMOTION_CAMPAIGN_ISSUANCE"
+    },
+    "circaGreenPerksPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "Exact promotion roots for separate signed GREENPERKS_RETAIL publication; never an enterprise override.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/publication/greenperks/records/publicationPlan.json": "ca192a3c124c9735c03fdbe641ef55510468d53d5faef0645d9ccc7acd1377d5"
+      },
+      "displayName": "Circa GreenPerks issuer publication"
+    },
+    "circaRenewWorksBudget": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa RenewWorks opening budgets",
+      "description": "Signed RENEWWORKS_REPAIR_REUSE operator only: original opening budget admission before separately reviewed seller consent; no issuance or replenishment.",
+      "owningDomain": "promotion",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/operations/promotion/renewworks/budget/records/promotionSetup.json": "6a8872aa943ea3e2652db03c5a0709acfe7a0ab3239c189e64c2fce51e64f246"
+      },
+      "installer": "PROMOTION_CAMPAIGN_ISSUANCE"
+    },
+    "circaRenewWorksIssuance": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa RenewWorks reviewed issuance",
+      "description": "Signed RENEWWORKS_REPAIR_REUSE operator only: 100 protected coupon units per campaign after exact original budget admission and current issuer-owned seller consent.",
+      "owningDomain": "promotion",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/operations/promotion/renewworks/issuance/records/promotionSetup.json": "e9fb521719686c00804a10b43ea59c86658cfa585d9baf5f5294c15b7c5197df"
+      },
+      "installer": "PROMOTION_CAMPAIGN_ISSUANCE"
+    },
+    "circaRenewWorksPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "Exact promotion roots for separate signed RENEWWORKS_REPAIR_REUSE publication; never an enterprise override.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/publication/renewworks/records/publicationPlan.json": "5b9d28cb3eca8fd6a53c61135d50255660bfd47353a2962973b87d04babbefd5"
+      },
+      "displayName": "Circa RenewWorks issuer publication"
+    },
+    "circaLoopCycleBudget": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa LoopCycle opening budgets",
+      "description": "Signed LOOPCYCLE_RECYCLING operator only: original opening budget admission before separately reviewed seller consent; no issuance or replenishment.",
+      "owningDomain": "promotion",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/operations/promotion/loopcycle/budget/records/promotionSetup.json": "f63ed2cf45b4c08cdedd1b9dfca3b7e49eaa542c77c61ef96867455eeade563b"
+      },
+      "installer": "PROMOTION_CAMPAIGN_ISSUANCE"
+    },
+    "circaLoopCycleIssuance": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa LoopCycle reviewed issuance",
+      "description": "Signed LOOPCYCLE_RECYCLING operator only: 100 protected coupon units per campaign after exact original budget admission and current issuer-owned seller consent.",
+      "owningDomain": "promotion",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/operations/promotion/loopcycle/issuance/records/promotionSetup.json": "5f05cda4ee5bdb89d35e708fd66a37d4392fc0ab7f1a121e976fd8b8a3bab1f5"
+      },
+      "installer": "PROMOTION_CAMPAIGN_ISSUANCE"
+    },
+    "circaLoopCyclePublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "Exact promotion roots for separate signed LOOPCYCLE_RECYCLING publication; never an enterprise override.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/publication/loopcycle/records/publicationPlan.json": "0a67f8b0a75598ee0dd5921c41309592fd0005049961ef7338fc758c8fbf7536"
+      },
+      "displayName": "Circa LoopCycle issuer publication"
+    },
+    "circaCataloguePublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "GREENPERKS_ONLINE marketplace Product, pricing, inventory and tax publication; issuer Promotion roots are separate signed selections.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/publication/catalogue/records/publicationPlan.json": "52b7a31f6b1dd4d18a96a345c4ddafb3996c2ca940023e939eda3f1ed76e8c44"
+      },
+      "displayName": "Circa catalogue publication"
+    },
+    "circaCatalogueCurrentPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa current catalogue publication",
+      "description": "Full effective 46-root catalogue selection: five corrected asset Product successors at source version 2 and 41 unchanged original intents. Select instead of the historical catalogue plan for current readiness; the five-root successor subset remains independently available.",
+      "files": {
+        "sample-v001/publication/current-catalogue/records/publicationPlan.json": "8de3510f3a94f1146da2238e5311ffb9927b6fead8fb1858c3995b39a9183761"
+      },
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa current catalogue publication",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Qualify every current catalogue root together after forward asset classification while preserving original releases and publication history."
+      }
+    },
+    "circaAssetClassification": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa forward asset classification",
+      "description": "Ten en/ar Product localization successors add canonical DIGITAL_OWNERSHIP delivery and DIGITAL_COMMERCE inventory classification for five approved assets; no source catalogue, financial terms, bindings or transactional state replay.",
+      "files": {
+        "sample-v001/asset-classification/headers/circaAssetClassificationHeader.js": "99badcb02e325866621fa44e1ca32b5dd9c533ba619e8895ab03680e5878cda6",
+        "sample-v001/asset-classification/records/circaAssetClassificationLocalizationData.js": "861955836d1e47e654093abdc6063693f383b5d28799d9388092dfc933462825"
+      },
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa asset classification correction",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Forward canonical digital ownership classification for five existing assets, without replaying business samples or rewriting installed releases."
+      }
+    },
+    "circaAssetClassificationPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa corrected asset republication",
+      "description": "Separate GREENPERKS_ONLINE governed successor publication for exactly five Product roots after classification import; original root version 1 is required and source version 2 is sealed through Product. Preserve prior publication identities and approval history.",
+      "files": {
+        "sample-v001/asset-publication/records/publicationPlan.json": "be9cec90b6bed7f8cc48ed160a929943d44d29782809f3957cb7b78e675bd851"
+      },
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa corrected asset publication",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Separately request ordinary governed republication of the five corrected Product graphs; preserve original approvals, journals and payment policies."
+      }
+    },
+    "circaLocalDemoCredit": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa reviewed Local demo POINTS credit",
+      "description": "One original 7,645 POINTS credit to the existing sample buyer for the reviewed local coupon batch. Not a wallet snapshot, campaign budget, carbon credit, real money or replenishment.",
+      "owningDomain": "loyaltyWallet",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "LOYALTY",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "installer": "LOYALTY_SAMPLE_CREDITS",
+      "files": {
+        "sample-v001/operations/loyalty-credit/records/loyaltyCredits.json": "19cdd9068da60789f36ff2fe0f72ebfd485ff14b3dc96dfe654a48c3db3e7641"
+      }
+    },
+    "circaDigitalOwnershipPolicies": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "displayName": "Circa reviewed local digital ownership policies",
+      "description": "Approved local-only original-sale transfer/refund and captured seller proceeds without fees or carbon settlement. Import before genuine owner binding and sale reservation, never backfill historical events.",
+      "owningDomain": "waste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "WASTE",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/operations/asset-policy/headers/circaDigitalOwnershipPolicyHeader.js": "58d7bbf03af55275fc36e0801901db54028cbc60569b27d94b267265d589ff0a",
+        "sample-v001/operations/asset-policy/records/circaDigitalTransferPolicyData.js": "0259e8ef3e38f62ab2a2b979445e5b5e950c6e58ece4cd8c533f2773cfc8c0a3",
+        "sample-v001/operations/asset-policy/records/circaDigitalRewardPolicyData.js": "3a531e7900f1e68d2bb14fb5cd8687a40246cf73c6c12bb97280f427093e5fc5",
+        "sample-v001/operations/asset-policy/records/circaDigitalCarbonPolicyData.js": "0002e8b68d1d7f4beac243a526ea03d058ea3f52a975ccea4aea39c7a88c72ab"
+      }
+    },
+    "circaGreenPerksOutletCommerce": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa greenperks fictional outlet goods",
+      "description": "Signed GREENPERKS_RETAIL: approved Local-only goods, AED pricing, fictional zero tax and warehouse policy. Source selection supplies no stock or delivery authority.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/merchant-outlets/greenperks/commerce/headers/circaLocalOutletHeader.js": "d9284b764b5ab9891f30b964a609f99ab586f2470db2604d7a1d324c6f6d2810",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletPriceBookData.js": "479605ad6319e664734f9d5bbd6bfe6f7bbe5519e815443a3ceb9f453299a985",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletPriceRowData.js": "70a6378bd600b92736eb70e0ed76b538e71fd2ab9591eb5d6dfbd603b7f698eb",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductData.js": "51e3a3b1c75cf92134ed838727d5c49ae9bc7e9577faccf8e93c7174115ed62c",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductLocalizationData.js": "ce19e1b023678c47d4c0f5a22c5417a6318a13d7292e8a569aa773e5dda76763",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductVariantData.js": "60c77c7002aaa26bb210e8c31a337c4d20e78970f0559c95e6d9912fec415b9e",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductVariantLocalizationData.js": "7c9a3b881d146dbcf7a91de891c480170ce1d8cb8acba8a4086f699cbaf49dca",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletTaxPolicyData.js": "fc283ad0102c5acdd219231f997abff189b3dabbf10a634df32940e25edad07a",
+        "sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletWarehouseData.js": "85cff84c2e525e9d0a2a6e1600a9d4f61a05c00ed935241e2c75ae62e480bf20"
+      }
+    },
+    "circaGreenPerksOutletPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa greenperks outlet publication",
+      "description": "Exact 6 new outlet roots for separate signed GREENPERKS_RETAIL governed publication through Process; no approval is imported.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/merchant-outlets/greenperks/publication/records/publicationPlan.json": "26b72407d893a982c946341fa4c88498a01626214adf0751cfe695124e43a574"
+      }
+    },
+    "circaGreenPerksOutletOpening": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa greenperks outlet opening intake",
+      "description": "Signed GREENPERKS_RETAIL: 100 fictional first-intake units per new SKU through Inventory after exact activated Product and warehouse policy; exact replay never replenishes.",
+      "owningDomain": "inventory",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "installer": "INVENTORY_OPENING_RECEIPTS",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/merchant-outlets/greenperks/operations/records/inventoryOpening.json": "f001d969c79018d61c9221a40a4c6e7a8bf018b0145377e60307070c6cf03476"
+      }
+    },
+    "circaRenewWorksOutletCommerce": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa renewworks fictional outlet goods",
+      "description": "Signed RENEWWORKS_REPAIR_REUSE: approved Local-only goods, AED pricing, fictional zero tax and warehouse policy. Source selection supplies no stock or delivery authority.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/merchant-outlets/renewworks/commerce/headers/circaLocalOutletHeader.js": "d65d21a00a65ae829da98892d56bb67f92caa0334b7adb7e1b6866bbffd9fc82",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletPriceBookData.js": "5eb6eb1fd561130d6814b9dac8ee3c89e9ce42a53d5fab793079362c35bc27f9",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletPriceRowData.js": "21756cc963788c014e37a8ae5fe7e5faab501ce5b17efa6dec43a4489337d920",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductData.js": "094b1d0cc1a3968ebfb5b1c53302bfae14608b855a7a1d34212fb71cb480304b",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductLocalizationData.js": "3c553d260fa597c3a299f58d12f67a61fc1c6bd463e8a342dc8ad67836d972c3",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductVariantData.js": "521c58f5d9e3702172eb0374eaac9867ba7d9ba07e080e36797cd405d0a8e8b0",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductVariantLocalizationData.js": "60db2c34e5578a61efc1e36e8416b4910189cc692e8fbbcca7d728b1dece472b",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletTaxPolicyData.js": "378c2f7860b654a84768cca641f248267a319ff36c9ed6cbbbaf329944e1b5d0",
+        "sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletWarehouseData.js": "6e88edfe7f2cb3a23c0f28bfb8038300e7f498e281a05747e288ee115dbd2735"
+      }
+    },
+    "circaRenewWorksOutletPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa renewworks outlet publication",
+      "description": "Exact 4 new outlet roots for separate signed RENEWWORKS_REPAIR_REUSE governed publication through Process; no approval is imported.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/merchant-outlets/renewworks/publication/records/publicationPlan.json": "1211feddfdfa5a454962466b9ccee6675a3276d00d422868455669ad2053b938"
+      }
+    },
+    "circaRenewWorksOutletOpening": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa renewworks outlet opening intake",
+      "description": "Signed RENEWWORKS_REPAIR_REUSE: 100 fictional first-intake units per new SKU through Inventory after exact activated Product and warehouse policy; exact replay never replenishes.",
+      "owningDomain": "inventory",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "installer": "INVENTORY_OPENING_RECEIPTS",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/merchant-outlets/renewworks/operations/records/inventoryOpening.json": "9ff7aae8de7d72d9591eed9094204a5343a1a33871830f6e55d81d285aee18c8"
+      }
+    },
+    "circaLoopCycleOutletCommerce": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa loopcycle fictional outlet goods",
+      "description": "Signed LOOPCYCLE_RECYCLING: approved Local-only goods, AED pricing, fictional zero tax and warehouse policy. Source selection supplies no stock or delivery authority.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/merchant-outlets/loopcycle/commerce/headers/circaLocalOutletHeader.js": "b478dc59f99f5f80a1a912384ad87835c0aaf939fbb8d78bb77e540c38c08c43",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletPriceBookData.js": "94bacc1df8d2523e191204076bb337cd0af07c2a568995486dc1a310fbcfeef6",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletPriceRowData.js": "bf9395e35fb8f49e216de2e0d77850b82c1f1cd60e5321255eaca6612c17aa86",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductData.js": "3317ee363267275db6d6bc47d0dd588f5d7c1e2c01cb156c29ee6b1aeee613ff",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductLocalizationData.js": "3d2557b25c3c111d21f4b3a6168d877b81b6e0452af83a80304b465842d1d680",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductVariantData.js": "0096245b76c962fb8f6d8f2136a89c904bf8100d5cbc33cf6ba32515c431680f",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductVariantLocalizationData.js": "4ff8c55d2162aaa4ebe54e958bb1218d001012763d8d1d7fb450e6cdf5acf0c6",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletTaxPolicyData.js": "4173f4380fec43903fe55ba3e4817ef7601e4d8d150bbccc6d222247f63d0139",
+        "sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletWarehouseData.js": "ea525e8310724570d5382e5017cb0fc583fdb653028e1032397a15e6c028d13a"
+      }
+    },
+    "circaLoopCycleOutletPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa loopcycle outlet publication",
+      "description": "Exact 4 new outlet roots for separate signed LOOPCYCLE_RECYCLING governed publication through Process; no approval is imported.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "files": {
+        "sample-v001/merchant-outlets/loopcycle/publication/records/publicationPlan.json": "d5f05c3ceb1dd6f8afbfc637c784498b3fb04c837148efcb3d493633ffdee773"
+      }
+    },
+    "circaLoopCycleOutletOpening": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "displayName": "Circa loopcycle outlet opening intake",
+      "description": "Signed LOOPCYCLE_RECYCLING: 100 fictional first-intake units per new SKU through Inventory after exact activated Product and warehouse policy; exact replay never replenishes.",
+      "owningDomain": "inventory",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "COMMERCE",
+      "installer": "INVENTORY_OPENING_RECEIPTS",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "files": {
+        "sample-v001/merchant-outlets/loopcycle/operations/records/inventoryOpening.json": "fda3f4f8ecefc516c67788f83f3c1b9897bb46bb63114dd618cf59431867f20b"
+      }
+    },
+    "circaLocalUnusedRefundExceptionRole": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local unused coupon review role",
+      "description": "One adjudication permission only; no payment execution, new credit or redeemed-benefit authority.",
+      "files": {
+        "sample-v001/refund-exception-role/headers/circaLocalUnusedRefundExceptionRoleHeader.js": "6992f1e929192dcf0a6a06da1b3d3ebdcbfe444620cca422331078203dea3f12",
+        "sample-v001/refund-exception-role/records/circaLocalUnusedRefundExceptionGroupData.js": "afada6ea8ed054d7032c5d3aa10342440732ad7aaba065790b3cf34d733e0230"
+      }
+    },
+    "circaLocalUnusedRefundExceptionStaffAssignment": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local unused coupon reviewer assignment",
+      "description": "Additive Profile role for the original GREENPERKS_ONLINE administrator only; preserves credentials, groups and employee state.",
+      "files": {
+        "sample-v001/refund-exception-staff/headers/circaLocalUnusedRefundExceptionStaffHeader.js": "fc229c575a22a3175d9d6d37dbb8e504fda697ff8b3f68f9c4474780da970033",
+        "sample-v001/refund-exception-staff/records/circaLocalUnusedRefundExceptionStaffData.js": "71b8fe241f682635d424503ba0b8071a4927df1c0a513a1b72adc62e205b4a87"
+      }
+    },
+    "circaLocalDemoCreditRole": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local demo credit role",
+      "description": "Approved four-permission human group only; no general earnings or core import authority.",
+      "files": {
+        "sample-v001/credit-role/headers/circaLocalDemoCreditRoleHeader.js": "7968447b605151c57b94f8283216d3f24ee93e8cda9a52a87017e930ece5eca7",
+        "sample-v001/credit-role/records/circaLocalDemoCreditGroupData.js": "0f11e2828fe9655fff733eee67f717f052482929ed8eaf75dd38eb060ce9f1aa"
+      }
+    },
+    "circaLocalDemoCreditStaffAssignment": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local demo credit staff assignment",
+      "description": "Profile additive group instruction for the one original GREENPERKS_ONLINE human; preserves employee state.",
+      "files": {
+        "sample-v001/credit-staff/headers/circaLocalDemoCreditStaffHeader.js": "349a20267cfc1fdff1785421970b436d3f56310adfeb97158b75fa270c7c7043",
+        "sample-v001/credit-staff/records/circaLocalDemoCreditStaffData.js": "57411e4c704e4dcf3678fca636fa2d8866ea6aa459bcb4a3cf3f996784154654"
+      }
+    },
+    "circaLocalOpeningRole": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local opening Inventory role",
+      "description": "Approved Inventory operation permission only; no broad Commerce or schema administration.",
+      "files": {
+        "sample-v001/opening-role/headers/circaLocalOpeningRoleHeader.js": "4a52eee617807529bdf3e4c6cb5022eaa617ce045399c18fae63b666582ba0d1",
+        "sample-v001/opening-role/records/circaLocalOpeningGroupData.js": "44c48ed3af06ef02c1ce5b74c57e85a945a6cfb3c4c7649148dffa411e820b92"
+      }
+    },
+    "circaLocalOpeningStaffAssignments": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "selectionPolicy": "EXPLICIT",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "displayName": "Circa Local opening Inventory staff assignments",
+      "description": "Profile additive groups for the exact original retail, repair and recycling administrators.",
+      "files": {
+        "sample-v001/opening-staff/headers/circaLocalOpeningStaffHeader.js": "e610c688986629418e8388641da677051f8623456cf409b22e558d9ea8f2dc47",
+        "sample-v001/opening-staff/records/circaLocalOpeningStaffData.js": "603805e12519c127095e8d9d9cccd96840ff1950f37d9e648c04adde62dbd17f"
       }
     }
   }

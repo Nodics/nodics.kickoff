@@ -15,7 +15,7 @@ Do not copy framework or shared project defaults into environment/server/node
 properties. Keep only composition, deployment values and intentional differences;
 validate the active owner and index order. Preserve explicit reset, secret,
 provider qualification and authority boundaries. See
-[the project configuration guide](../docs/pages/configuration-inheritance.md).
+[the project configuration guide](../data/docs-v001/records/documentation/kickoffDocumentationComponentData.js).
 
 Do not repeat the selected environment/server/node in `activeModules.modules`.
 Inherit unchanged environment connection bindings. Endpoint aliases reference

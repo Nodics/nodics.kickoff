@@ -23,7 +23,7 @@ test("all selected and retained release payloads keep their declared checksums",
     Object.values(root.sections),
   );
   for (const section of [...Object.values(manifest.sections), ...retained]) {
-    for (const [file, hash] of Object.entries(section.files)) {
+    for (const [file, hash] of Object.entries(section.files || section.generatedHashes)) {
       assert.equal(
         crypto
           .createHash("sha256")
@@ -71,7 +71,7 @@ test("seven partner enterprises have two distinct directly scoped staff each and
   }
 });
 
-test("Circa administrator can complete local demo setup and governed publication", () => {
+test("Circa administrator retains setup group assignments without granting owner admission", () => {
   const staff = records("operations", "circaOperationalEmployeeData");
   const admin = staff.find(
     (row) => row.loginId === "administrator@circa.local",
@@ -99,7 +99,7 @@ test("the existing three centres retain identities and use their explicit demo o
     );
     assert(locations.some((row) => row.code === centre.locationRef.code));
   }
-  const outlets = records("commerce-operational", "circaStoreData").filter((row) =>
+  const outlets = records("store", "circaStoreData").filter((row) =>
     row.code.startsWith("greenperks-"),
   );
   const addresses = records("operations", "circaOutletAddressData");
@@ -217,8 +217,14 @@ test("one Circa setup requires all demo sections and retains explicit operator-t
     "location",
     "waste",
     "loyalty",
+    "store",
     "commerce",
-    "commerce-operational",
+    "circaGreenPerksBudget",
+    "circaGreenPerksIssuance",
+    "circaRenewWorksBudget",
+    "circaRenewWorksIssuance",
+    "circaLoopCycleBudget",
+    "circaLoopCycleIssuance",
     "content",
   ]) {
     const selected = packages.filter(
@@ -228,10 +234,8 @@ test("one Circa setup requires all demo sections and retains explicit operator-t
     assert.equal(selected[0].required, true);
     assert.equal(selected[0].trigger, "USER");
   }
-  assert.equal(
-    config.circaEWaste.demoImportAdmission.releaseCode,
-    "circa.ewaste:commerce-operational",
-  );
+  assert.equal(config.circaEWaste.demoImportAdmission, undefined,
+    "Demo configuration must not claim stock or coupon issuance qualification");
   assert.equal(config.profileCustomerEligibility, undefined);
   assert.equal(config.promotion?.sellerAuthorization, undefined);
 });

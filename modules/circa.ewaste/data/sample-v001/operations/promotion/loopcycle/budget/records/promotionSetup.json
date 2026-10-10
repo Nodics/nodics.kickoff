@@ -1,0 +1,12 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "policyFingerprint": "3808344ded979e3aae181a97b69c9730bd551e1ffc89d7a069f193f1e8841831",
+      "commandReference": "opening-CIRCA_COUPON_CPN-ECO-15_PROMO"
+    }
+  ],
+  "couponBatches": []
+}

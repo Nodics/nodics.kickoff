@@ -1,6 +1,6 @@
 /* Nodics. Copyright (c) 2026. Governed by the root LICENSE. */
 "use strict";
-/** @module circa.ewaste/test/circaCommerceForwardRelease @description Verifies the unified v001 Commerce demo selector and local-demo operational admission. @layer test @owner circa.ewaste */
+/** @module circa.ewaste/test/circaCommerceForwardRelease @description Verifies the unified v001 Commerce selector and canonical owner refusal of legacy operational snapshots before dispatch. @layer test @owner circa.ewaste */
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
@@ -11,7 +11,6 @@ const framework = path.resolve(__dirname, "../../../../nodics.ai");
 const manifest = require("../data/manifest.json");
 const hash = (value) => crypto.createHash("sha256").update(value).digest("hex");
 const header = require("../data/sample-v001/commerce/headers/circaCommerceCatalogHeader");
-const operationalHeader = require("../data/sample-v001/commerce-operational/headers/circaCommerceSampleHeader");
 const targets = (value) =>
   Object.values(value)
     .flatMap(Object.values)
@@ -36,101 +35,57 @@ test("commerce catalogue is selected as unified v001 first-start data", () => {
     assert(!schemas.includes(schema));
   assert(schemas.includes("promotion"));
   assert(schemas.includes("warehouse"));
-  const catalogueHeaderPath = Object.keys(current.files).find((file) =>
-    file.includes("/headers/"),
-  );
-  const operationalHeaderPath = Object.keys(
-    manifest.sections["commerce-operational"].files,
-  ).find((file) => file.includes("/headers/"));
-  assert.notEqual(
-    path.basename(catalogueHeaderPath),
-    path.basename(operationalHeaderPath),
-  );
+  assert.equal(manifest.sections["commerce-operational"], undefined);
+  assert(Object.values(manifest.sections).some(section => section.installer === "PROMOTION_CAMPAIGN_ISSUANCE"));
   assert.deepEqual(productConfig.localization.requiredLocales, ["en"]);
   assert(productConfig.localization.supportedLocales.includes("ar"));
 });
 
-test("the demo requires operational readiness while preserving owner admission", async () => {
-  const packs = require("../config/properties")
-    .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
-  assert.equal(
-    packs.find((p) => p.code === "circa.ewaste:commerce").targetRuntimeRole,
-    "COMMERCE_STAGED",
-  );
-  const ops = packs.find((p) => p.code === "circa.ewaste:commerce-operational");
-  assert.equal(ops.required, true);
-  assert.equal(ops.trigger, "USER");
-  assert.equal(ops.targetRuntimeRole, "COMMERCE");
-  assert.equal(
-    manifest.sections["commerce-operational"].sourceRoot,
-    "sample-v001",
-  );
-  assert.equal(manifest.sections["commerce-operational"].version, "0.0.1");
-  assert.equal(
-    manifest.sections["commerce-operational"].selectionPolicy,
-    "EXPLICIT",
-  );
-  assert.equal(
-    manifest.sections["commerce-operational"].versioningPolicy,
-    "IMMUTABLE",
-  );
-  assert.equal(
-    manifest.sections["commerce-operational"].publicationPolicy,
-    "NONE",
-  );
-  assert.deepEqual(targets(operationalHeader).sort(), [
-    "coupon",
-    "couponBatch",
-    "inventoryBalance",
-    "store",
-  ]);
-  for (const definition of Object.values(operationalHeader).flatMap(
-    Object.values,
-  ))
-    assert.equal(definition.options.indexName, undefined);
-  const ports = require(
-    path.join(
-      framework,
-      "nodics.foundation/modules/nData/nImport/import/test/helpers/releaseExecution",
-    ),
-  )({
-    modules: {
-      "circa.ewaste": {
-        name: "circa.ewaste",
-        path: path.resolve(__dirname, ".."),
-      },
-    },
-    runtimeRole: "COMMERCE",
-  });
-  CONFIG.get("data").dataReleases.targetValidators = {
-    inventory: "DefaultCircaDemoCommerceImportAdmissionService",
-    promotion: "DefaultCircaDemoCommerceImportAdmissionService",
+test("retired snapshot targets remain refused by canonical owners regardless of demo flags", async (t) => {
+  const prior = { SERVICE: global.SERVICE, CONFIG: global.CONFIG };
+  t.after(() => Object.assign(global, prior));
+  global.CONFIG = { get: () => ({ publication: { runtimeRole: "ONLINE", delivery: { enabled: true } },
+    sellerAuthorization: { enabled: true, qualified: true } }) };
+  global.SERVICE = {
+    DefaultInventoryOperationService: require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/inventory/src/service/defaultInventoryOperationService")),
+    DefaultPromotionOperationService: require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService")),
   };
-  const originalGet = CONFIG.get;
-  CONFIG.get = (key) =>
-    key === "circaEWaste"
-      ? require("../config/properties").circaEWaste
-      : originalGet(key);
-  SERVICE.DefaultInventoryOperationService = require(
-    path.join(
-      framework,
-      "nodics.commerce/modules/baseCommerce/modules/inventory/src/service/defaultInventoryOperationService",
-    ),
-  );
-  SERVICE.DefaultPromotionOperationService = require(
-    path.join(
-      framework,
-      "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService",
-    ),
-  );
-  SERVICE.DefaultCircaDemoCommerceImportAdmissionService = require("../src/service/defaultCircaDemoCommerceImportAdmissionService");
-  await ports.service.preflight({
-    tenant: "default",
-    releaseRequest: {
-      dataType: "sample",
-      releaseCodes: ["circa.ewaste:commerce-operational"],
-    },
-  });
-  assert.equal(ports.imports.length, 0);
-  assert.equal(ports.installations.length, 0);
+  const adapter = require("../src/service/defaultCircaDemoCommerceImportAdmissionService");
+  for (const [moduleName, schemaName, refusal] of [
+    ["inventory", "inventoryBalance", /stock snapshots require governed Inventory operations/],
+    ["promotion", "couponBatch", /coupon snapshots require governed issuance/],
+    ["promotion", "coupon", /coupon snapshots require governed issuance/],
+  ]) assert.throws(() => adapter.validateImportTarget({
+    releaseCode: "circa.ewaste:commerce-operational", moduleName, schemaName, operation: "saveAll",
+    destinationRole: "COMMERCE", lifecycle: "OPERATIONAL_VERSIONED",
+    enabled: true, qualified: true,
+  }), refusal);
+});
+
+test("the compatibility validator preserves canonical decisions and fails closed when unavailable", async (t) => {
+  const prior = global.SERVICE;
+  t.after(() => { global.SERVICE = prior; });
+  const adapter = require("../src/service/defaultCircaDemoCommerceImportAdmissionService");
+  for (const [moduleName, ownerName] of [
+    ["inventory", "DefaultInventoryOperationService"],
+    ["promotion", "DefaultPromotionOperationService"],
+  ]) {
+    const request = { moduleName, schemaName: "owner-selected-target", releaseCode: "circa.ewaste:commerce-operational" };
+    const refusal = new Error("Synthetic canonical refusal");
+    global.SERVICE = { [ownerName]: { validateImportTarget: function (actual) {
+      assert.equal(actual, request, "Target metadata must not be rewritten");
+      assert.equal(this, SERVICE[ownerName]);
+      return true;
+    } } };
+    assert.equal(adapter.validateImportTarget(request), true);
+    SERVICE[ownerName].validateImportTarget = () => false;
+    assert.equal(adapter.validateImportTarget(request), false);
+    SERVICE[ownerName].validateImportTarget = async () => { throw refusal; };
+    await assert.rejects(() => adapter.validateImportTarget(request), (error) => error === refusal);
+    delete SERVICE[ownerName];
+    assert.throws(() => adapter.validateImportTarget(request), /owner is unavailable/);
+    SERVICE[ownerName] = {};
+    assert.throws(() => adapter.validateImportTarget(request), /owner is unavailable/);
+  }
+  assert.throws(() => adapter.validateImportTarget({ moduleName: "unknown" }), /owner is unavailable/);
 });

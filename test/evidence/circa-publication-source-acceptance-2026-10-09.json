@@ -1,0 +1,120 @@
+{
+  "contractVersion": 1,
+  "recordedAt": "2026-10-08 20:32:28 UTC",
+  "scope": "Circa source publication and digital classification refactor; isolated owner ports and offline configuration only",
+  "sourcePins": {
+    "modules/circa.ewaste/data/manifest.json": "87a5362777a26601292b2bf18b1550c64ca52321fb4d8cddeb08622931fe190f",
+    "modules/circa.ewaste/data/sample-v001/publication/records/publicationPlan.json": "5329d67563882eb11b568d0199e06d3ec7ec17e5f4cd5dd0eddf5dbd03dbbccf",
+    "modules/circa.ewaste/data/sample-v001/commerce/records/circaProductVariantData.js": "88b429076bfbbf81d6a735ad642450ee9f20231f1fe4edc3ad771c69a36bdc85",
+    "modules/circa.ewaste/data/sample-v001/commerce/records/circaProductLocalizationData.js": "5b85d9ae4944d68681a64184f73d138536e538aaaaf0e5acaf09336a5c2d8814",
+    "modules/circa.ewaste/data/sample-v001/commerce/records/circaProductVariantLocalizationData.js": "2666b64436075651c5c69de8b5fe8efeebe69916272a0881d0cb9ca7dbff9bff",
+    "modules/circa.ewaste/config/properties.js": "2daf76b3baa592a40bcff3b418c915a9d63713cb44eae817a5966dbb026c86b5",
+    "envs/kickoffLocal/platformServer/config/properties.js": "e4eba97d5d22c480776b02cc6a86e674ae6346e2b4233bcfedd9f3844491b830",
+    "modules/circa.ewaste/test/circaPublicationPlan.test.js": "b6f08b04f53e187e017bf728815e992490e00853e8ab6e9f60cfe92d58f8716e",
+    "test/circaPublicationPreparationPrerequisites.test.js": "1f1a014b0a093032015b9206e89812893674602cc3d6e99fc603f55e346b1624"
+  },
+  "source": {
+    "releaseVersion": "0.0.1",
+    "sourceRoot": "sample-v001",
+    "manifestSections": 14,
+    "verifiedPayloadHashes": 98,
+    "publicationRoots": {
+      "product": 43,
+      "promotion": 38,
+      "pricing": 1,
+      "tax": 1,
+      "inventory": 1,
+      "total": 84,
+      "priceRows": 43
+    },
+    "classification": {
+      "variants": 43,
+      "productLocalizations": 86,
+      "variantLocalizations": 86,
+      "couponAvailabilityReads": 76,
+      "unsupportedLocalizedAssetRefusals": 10,
+      "physicalFallbacks": 0
+    }
+  },
+  "deployment": {
+    "nativeKickoffLocal": "Required publication step selected through existing preparation descriptor list; all exact roots gate deferred operational setup",
+    "dockerLocal": "Publication step unselected because destination integration and five Commerce workflow prerequisites are absent; required legacy operations remain blocked",
+    "sharedPackagesPreserved": true,
+    "documentationRequiredByBusinessSetup": false
+  },
+  "validation": {
+    "uniqueNodeTests": 183,
+    "groups": [
+      {
+        "command": "npm run test:circa",
+        "tests": 63,
+        "passed": true
+      },
+      {
+        "command": "node --test test/configurationInheritanceContract.test.js test/circaPublicationPreparationPrerequisites.test.js",
+        "tests": 28,
+        "passed": true
+      },
+      {
+        "command": "node --test nodics.platform/modules/backoffice/test/applicationContributionReadiness.test.js nodics.commerce/modules/baseCommerce/modules/product/test/productDigitalAvailabilityContract.test.js nodics.commerce/modules/baseCommerce/modules/product/test/productLocalizedSearchPublicationContract.test.js nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionSetupContributionContract.test.js nodics.commerce/modules/baseCommerce/modules/promotion/test/couponSecureIssuanceContract.test.js nodics.commerce/modules/baseCommerce/modules/promotion/test/couponSellerAuthorizationContract.test.js",
+        "repository": "nodics.ai",
+        "tests": 92,
+        "passed": true
+      }
+    ],
+    "additionalChecks": [
+      "Guided initialization profile contract",
+      "Data lifecycle classification contract",
+      "Project documentation validation: 9 pages",
+      "Ownership-language governance: 4683 files, zero findings",
+      "Scoped git diff --check"
+    ],
+    "financialCapture": "Actual owner exact-version capture and retention with isolated source/persistence ports; exact replay and unavailable-version refusal verified"
+  },
+  "boundaries": {
+    "nativeOrDockerRuntimeStarted": false,
+    "installedDataChanged": false,
+    "receiptsRewritten": false,
+    "dataOrIndexesReset": false,
+    "approvalsManufactured": false,
+    "liveActivationPerformed": false,
+    "secretsReadOrRetained": false,
+    "assetsChanged": false,
+    "fullCircaEndToEndAccepted": false,
+    "allProjectWorkComplete": false
+  },
+  "pending": [
+    {
+      "gate": "Canonical operational instructions",
+      "detail": "Legacy coupon, batch and balance snapshots remain rejected before dispatch; reviewed existing-owner setup contribution required."
+    },
+    {
+      "gate": "Campaign policy inputs",
+      "detail": "Original three offers lack issuer/vendor references and configure discount 1 despite monetary/percentage labels. All 35 GreenPerks policies lack budget limits. Quantities, actual benefits, consent expiry and signed seller context need reviewed decisions."
+    },
+    {
+      "gate": "Cross-enterprise issuance",
+      "detail": "Existing secure setup admits same-enterprise issuance only; integrate and qualify existing Promotion seller-authorization and issuance owners without reassigning issuer/vendor references."
+    },
+    {
+      "gate": "Item benefits",
+      "detail": "29 ITEM campaigns require canonical item-benefit fulfillment support; monetary owner must not promise SKU/bundle delivery."
+    },
+    {
+      "gate": "Digital assets",
+      "detail": "Five digital ownership offers require their actual Waste/eWaste and Commerce delivery owner; current coupon-only DigitalCore rejects without warehouse fallback."
+    },
+    {
+      "gate": "Store reference segregation",
+      "detail": "Store master records remain coupled to the rejected legacy operational section and need independent canonical Store setup."
+    },
+    {
+      "gate": "Installed adoption",
+      "detail": "Inspect current immutable receipts and partial writes. Any fresh initialization/reset or governed recovery remains a separate explicit operation; source tests do not qualify live activation."
+    },
+    {
+      "gate": "Docker integration",
+      "detail": "Out of the approved native testing target; qualify destination owner composition and five Process workflow prerequisites before selecting publication."
+    }
+  ]
+}

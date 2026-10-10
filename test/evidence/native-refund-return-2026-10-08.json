@@ -1,0 +1,207 @@
+{
+  "observedAt": "2026-10-08T19:20:31.000Z",
+  "state": "PASSED_NATIVE_API_REFUND_AND_RETURN_ACCEPTANCE",
+  "project": "nodics.kickoff",
+  "environment": "kickoffLocal",
+  "application": "agoraapparel",
+  "allRefundReturnCasesPassed": true,
+  "allProjectWorkComplete": false,
+  "previousEvidence": "native-completion-follow-through-2026-10-08.json",
+  "closedPreviousGate": "QUALIFIED_REVERSAL_REVIEWER_REQUIRED",
+  "scope": {
+    "nativeGeneratedOwners": true,
+    "normalProfileInvitationAndVerifiedRegistration": true,
+    "normalCustomerAuthenticationAndCheckout": true,
+    "paymentMode": "LOCAL_SANDBOX_DEMO",
+    "paymentMaturity": "OFFLINE_CONFORMANCE",
+    "physicalEvidenceMode": "DISPOSABLE_LOCAL_SYNTHETIC_MANUAL_ATTESTATION",
+    "smtpTransport": "LOOPBACK_CAPTURE_ONLY",
+    "browserAccepted": false,
+    "externalMoneyMoved": false,
+    "realCarrierOrWarehouseQualified": false,
+    "productionOrOtherDeploymentQualified": false,
+    "databaseOrSearchResetPerformed": false
+  },
+  "controlledNativeBuild": {
+    "frameworkRoot": "/Users/himkardwivedi/Apps/HimkarPrj/nodicsRoot/nodics.ai",
+    "method": "CANONICAL_SELECTED_SERVER_BUILD_AND_START_FROM_FROZEN_CHECKOUT",
+    "selectedServersBuiltAndReadyPerWindow": 10,
+    "reviewedSourceFileCount": 34431,
+    "reviewedSourceSha256": "4b9376b82a9d964d938d089a19c9a25c9e354735cd43156ec9ad11bf2465be83",
+    "sourceUnchangedAfterBothSelectedServerBuilds": true,
+    "sourceSchemaFingerprint": "ba969f7d1f2b81b3b5d26c8497cda4b195636a84757ed7b7ac19c1d4b7592962"
+  },
+  "installedOwnerPrerequisites": {
+    "observedAt": "2026-10-08T19:17:29.839Z",
+    "inventoryComplete": true,
+    "consistency": "TWO_PASS_OBSERVED_MATCH",
+    "atomicSnapshot": false,
+    "countsBeforeFinalReviewerRegistration": {
+      "tenants": 1,
+      "enterprises": 1,
+      "assignments": 1,
+      "employees": 7,
+      "customers": 5,
+      "servicePrincipals": 1,
+      "passwords": 12
+    },
+    "bootstrapFindings": 6,
+    "bootstrapReviewDisposition": "REVIEWED_SOURCE_MATCH",
+    "exactPartialUniqueAssignmentClaimIndex": true,
+    "installedAssignmentIndexCount": 7,
+    "readOnlyReceiptRetains": {
+      "installedRuntimeSourceMatch": "NOT_ESTABLISHED",
+      "registrationQualified": false,
+      "qualificationGranted": false,
+      "browserAccepted": false
+    },
+    "adoption": "Separate controlled native-checkout build review plus installed owner inventory and index observations preceded explicit temporary Local registration attestations. The read-only runner did not activate or qualify registration.",
+    "recoveryMembershipOtherDeploymentsAndBrowserQualificationUnchanged": true
+  },
+  "reviewer": {
+    "releaseCode": "profile:commerceRefundReviewerRole",
+    "dataType": "core",
+    "version": "0.0.1",
+    "selectionPolicy": "EXPLICIT",
+    "roleCode": "COMMERCE_REFUND_REVIEWER",
+    "scopeType": "ENTERPRISE",
+    "administrationClass": null,
+    "permissionGroup": "commerceRefundReviewerUserGroup",
+    "parentGroups": ["employeeUserGroup"],
+    "permissions": [
+      "commerce.dispute.review",
+      "commerce.refund.execute",
+      "commerce.fulfillment.return",
+      "commerce.order.read",
+      "commerce.lifecycle.read",
+      "commerce.fulfillment.read",
+      "profile.scope.read"
+    ],
+    "invitation": "NORMAL_AUTHORIZED_PROFILE_PRE_ASSIGNMENT",
+    "mailboxProof": "NORMAL_PROFILE_CONTINUATION_AND_COMMUNICATION_OTP",
+    "credentialAndScopeOwner": "PROFILE_GENERATED_REGISTRATION",
+    "authentication": "FRESH_PROFILE_EMPLOYEE_SESSION",
+    "currentScopeRead": "PASSED",
+    "administratorGrantsExpanded": false,
+    "existingInitReleaseChanged": false,
+    "rawIdentityOrGrantWrites": false,
+    "borrowedWasteAuthority": false,
+    "reviewPreviewRefusedFor": ["OWNING_CUSTOMER", "OTHER_CUSTOMER", "EXISTING_ADMINISTRATOR"]
+  },
+  "cases": [
+    {
+      "code": "PRE_DISPATCH_REVIEWED_FULL_REFUND",
+      "state": "PASSED",
+      "originalHeldQuantity": 2,
+      "refundStatus": "COMPLETED",
+      "orderStatus": "REFUNDED",
+      "availableReservedAllocatedAndOnHandRestored": true,
+      "refundReplayDoesNotChangeStock": true,
+      "originalCaptureCount": 1,
+      "refundLedgerRecordCountAfterReplay": 1,
+      "originalCaptureReferenceAndCodeBound": true,
+      "fullOriginalAmountCurrencyOrderAndOwnerMatch": true
+    },
+    {
+      "code": "MANUAL_DISPATCH_AND_TWO_RECEIPT_INSPECTED_RETURN",
+      "state": "PASSED",
+      "originalShippedQuantity": 2,
+      "separatePackagesReceivedAndInspected": 2,
+      "quantityPerPackage": 1,
+      "dispatchStatus": "SHIPPED",
+      "dispatchConsumedOriginalHoldAndReducedOnHandByTwo": true,
+      "dispatchAndReceiptReplayStable": true,
+      "refundBlockedWithoutStockOrPaymentEffects": [
+        "BEFORE_ANY_RECEIPT",
+        "AFTER_FIRST_RECEIPT_BEFORE_INSPECTION",
+        "AFTER_FIRST_PACKAGE_INSPECTION",
+        "AFTER_SECOND_RECEIPT_BEFORE_INSPECTION"
+      ],
+      "blockedStatus": "RECONCILIATION_REQUIRED",
+      "refundCompletedOnlyAfterBothPackagesInspected": true,
+      "refundStatus": "COMPLETED",
+      "orderStatus": "REFUNDED",
+      "availableReservedAllocatedAndOnHandRestored": true,
+      "refundReplayDoesNotChangeStock": true,
+      "originalCaptureCount": 1,
+      "refundLedgerRecordCountAfterReplay": 1,
+      "originalCaptureReferenceAndCodeBound": true,
+      "fullOriginalAmountCurrencyOrderAndOwnerMatch": true
+    },
+    {
+      "code": "UNUSED_DIGITAL_COUPON_REFUND",
+      "state": "PASSED",
+      "purchasedUnusedEntitlementCount": 1,
+      "refundProvider": "digitalCore",
+      "refundStatus": "COMPLETED",
+      "orderStatus": "REFUNDED",
+      "revokedEntitlementRevealRefused": true,
+      "originalCaptureCount": 1,
+      "refundLedgerRecordCountAfterReplay": 1,
+      "originalCaptureReferenceAndCodeBound": true,
+      "fullOriginalAmountCurrencyOrderAndOwnerMatch": true
+    }
+  ],
+  "additionalNativeRegression": {
+    "digitalCheckoutAndReplay": "PASSED",
+    "ownerOnlyPrivateRevealAndNoStore": "PASSED",
+    "otherCustomerAndAdministratorRevealRefused": true,
+    "genericEntitlementListingSecretFree": true,
+    "declinedPhysicalPayment": {
+      "httpStatus": 402,
+      "checkpoint": "COMPENSATED",
+      "stockRestored": true,
+      "campaignSpendUnchanged": true
+    },
+    "purchasedCouponDiscountedPhysicalCheckout": "PASSED",
+    "checkoutReplayHasNoAdditionalStockOrCampaignSpendEffect": true,
+    "redeemedCouponCannotBeRevealedAgain": true
+  },
+  "sourceValidation": {
+    "profileReviewerInvitationAndRegistrationTestsPassed": 130,
+    "orderFulfillmentInventoryDigitalAndPaymentTestsPassed": 66,
+    "v001BaselineChecksumAndDocumentationSegregationTestsPassed": 5,
+    "uniqueTestsPassed": 201,
+    "testsFailed": 0,
+    "llmModulesGeneratedAndValidated": 202,
+    "ownershipLanguageFilesChecked": 8413,
+    "ownershipLanguageFindings": 0
+  },
+  "attemptHistory": [
+    {
+      "stage": "TEST_HARNESS_PREREQUISITE_PROJECTION",
+      "outcome": "CORRECTED",
+      "detail": "The runner initially checked inventory.complete instead of the owner's inventory.inventoryComplete field. No identity, group or refund action had occurred."
+    },
+    {
+      "stage": "FIRST_NATIVE_PAYMENT_EVIDENCE_READ",
+      "outcome": "CORRECTED_AND_COMPLETE_BATCH_RERUN",
+      "httpStatus": 400,
+      "code": "ERR_DBS_00003",
+      "detail": "The audit safe-search requested page size 20; the existing owner admits 10, 25 or 50. The test runner now requests 10. The preceding cancellation and its replay had already completed and restored stock; no financial or stock record was repaired or erased."
+    }
+  ],
+  "retainedTestState": "Normal disposable reviewer/customer accounts and owner journals remain for inspection. Two additional successful discounted physical purchases retain their legitimate two-unit holds and submitted lifecycle requests each. They are not the three separately verified reversal orders. No raw stock cleanup, password overwrite, identity checkpoint fabrication or receipt rewrite was performed. Plaintext test credentials and captured OTPs were not written to evidence or credential files.",
+  "remainingOutsideThisRequest": [
+    "CIRCA_GOVERNED_OPERATIONAL_MIGRATION_REQUIRED",
+    "BROWSER_REFUND_RETURN_ACCEPTANCE_NOT_RUN",
+    "EXTERNAL_FINANCIAL_CARRIER_AND_WAREHOUSE_QUALIFICATION_NOT_CLAIMED"
+  ],
+  "cleanup": {
+    "state": "PASSED",
+    "nativeRuntimesStopped": 10,
+    "nativeAcceptanceSupervisorExitCode": 0,
+    "smtpCaptureClosed": true,
+    "captureMessagesCleared": true,
+    "externalMailRelay": false,
+    "defaultOnboardingEnabled": false,
+    "defaultRegistrationInventoryQualified": false,
+    "defaultRegistrationClaimIndexQualified": false,
+    "defaultRegistrationVerificationEnabled": false,
+    "defaultMembershipsEnabled": false,
+    "checkedPorts": [3100, 4300, 4301, 4312, 4313, 4314, 4315, 4330, 4331, 4340, 4341, 4350, 4351, 4352, 4353, 4360, 4361, 4370, 4371, 4380, 4381],
+    "remainingOwnedListeners": [],
+    "unrelatedProvidersPreserved": true,
+    "historicalEvidencePreserved": true
+  }
+}

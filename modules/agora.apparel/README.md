@@ -2,9 +2,10 @@
 
 Agora Apparel product and content catalogs.
 
-Commerce release `0.0.8` uses `sample-v003` and corrects the Apparel search header.
-The `0.0.7` tree remains intact under validated manifest retention. Release identity
-is unchanged; installation and publication require their existing governed flows.
+The unreleased Commerce and content baseline is `0.0.1` in `sample-v001`,
+including the corrected Apparel search header. Prior development iterations are
+consolidated, not retained customer releases. Existing local receipts require
+governed fresh initialization; installation and publication retain their normal approvals.
 
 Use this README to understand what this module is for, which capability or composition boundary it owns, how it fits its parent hierarchy, and where developers or AI tools should continue reading.
 
@@ -24,6 +25,33 @@ assets, orphan files and missing page/media references by
 
 See [data ownership](llm/contracts/data-ownership-contract.md) for cleanup,
 publication and previously imported runtime-record boundaries.
+
+## Coordinated sample setup
+
+The selected Commerce role admits reviewed reversals only for the retained
+`agoraMainStore` checkout identity. Profile staff scope, persisted approval,
+Fulfillment/Inventory evidence and original-capture Payment checks still govern
+execution. Electronics and Telco are not admitted by a common order-code prefix.
+The offline sandbox path proves no external charge, carrier handover or settlement.
+Apparel also selects Fulfillment Core's `MANUAL_ATTESTATION` operations. Signed
+staff may record a reviewed dispatch, returned package and inspection through
+the owner APIs. A return cannot release Payment until every original shipped
+quantity has an accepted inspection; cancellation is limited to undispatched
+holds. Synthetic Local acceptance records do not certify real warehouse events.
+
+The same application profile selects catalog records, CMS content and owned
+assets, followed by explicit Online opening instructions under
+`data/sample-v001/operations/records`. These are not balance or coupon snapshots.
+The existing CMS and Media approvals remain in effect. Only after publication
+does the profile submit its complete governed Commerce plan: all 61 Product roots,
+Pricing, Inventory, Tax and three Promotion roots. Each uses normal Process review;
+one Online Product never qualifies the remaining catalogue. Only after every root
+has a matching approved activation receipt does Inventory admit opening stock and
+Promotion admit budgets and encrypted coupon batches. A blocked contribution keeps the profile
+incomplete; it must not be reported as a ready storefront.
+
+See the [operational pack contract](llm/contracts/operational-pack.md) for exact
+quantities, lifecycle, overrides, replay and current qualification limits.
 
 
 This module explicitly participates in Application Builder through

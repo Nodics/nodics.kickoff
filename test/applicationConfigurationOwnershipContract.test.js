@@ -6,6 +6,35 @@ const assert = require("node:assert/strict");
 const test = require("node:test");
 const { loadRuntime, activeModuleNames, corsOrigins } = require("./helpers/configuration");
 
+test("Native Waste selects reviewed sale admission and canonical evidence without claiming installed financial success", () => {
+  const native = require("../envs/kickoffLocal/wasteServer/config/properties");
+  const identity = require("../envs/kickoffLocal/wasteServer/package.json").nodics.runtimeIdentity;
+  assert.deepEqual(native.eWaste.marketplace.digitalOwnership.targets, { commerce: "COMMERCE", loyalty: "LOYALTY", profile: "PLATFORM" });
+  for (const name of ["digitalCore", "product", "loyaltyApi", "profile"]) assert(identity.remoteModules.includes(name));
+  const permissions = native.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.value;
+  assert(permissions.includes("commerce.digital.own.read"));
+  assert(permissions.includes("loyalty.wallet.read"));
+  const runtime = loadRuntime("wasteServer", "kickoffLocal");
+  assert.equal(runtime.eWaste.marketplace.digitalOwnership.enabled, true);
+  assert.equal(runtime.eWaste.marketplace.digitalOwnership.qualified, true);
+  assert.deepEqual(runtime.eWaste.marketplace.digitalOwnership.allowedServicePrincipals, ["apiAdmin"]);
+  assert.equal(runtime.eWaste.marketplace.digitalOwnership.customerEvidenceApiName, "/internal/customer-evidence");
+  const business = runtime.eWaste.marketplace.digitalOwnership.businessCallers;
+  assert.equal(business.length, 1); assert.equal(business[0].serverCode, "commerceServer");
+  assert.equal(business[0].enterpriseCode, "GREENPERKS_ONLINE"); assert.equal(business[0].principalEnterpriseCode, "default");
+  assert.deepEqual(business[0].permissions, ["waste.asset.marketplace.project", "waste.asset.sale.transfer"]);
+  const loyalty = loadRuntime("loyaltyServer", "kickoffLocal");
+  assert.equal(loyalty.apiExposure.categories.loyaltyInternal.enabled, true);
+  assert.equal(loyalty.loyalty.api.readEvidence.callers.length, 1);
+  assert.equal(loyalty.loyalty.api.readEvidence.callers[0].serverCode, "wasteServer");
+  const platform = loadRuntime("platformServer", "kickoffLocal");
+  assert.equal(platform.profileCustomerEvidence.enabled, true);
+  assert.equal(platform.profileCustomerEvidence.callers.length, 1);
+  assert.equal(platform.profileCustomerEvidence.callers[0].serverCode, "wasteServer");
+  const docker = require("../envs/kickoffDockerLocal/wasteServer/config/properties");
+  assert.equal(docker.eWaste?.marketplace?.digitalOwnership, undefined);
+});
+
 test("Local communication policy is role-scoped without activating Circa on Engagement", () => {
   const local = loadRuntime("engagementServer");
   const expected = require("../envs/kickoffLocal/config/properties")

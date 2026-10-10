@@ -1,0 +1,532 @@
+{
+  "contractVersion": 1,
+  "date": "2026-10-09",
+  "status": "SOURCE_READY_NATIVE_NOT_EXECUTED",
+  "checkout": "/Users/himkardwivedi/Apps/HimkarPrj/nodicsRoot/nodics.kickoff",
+  "nativeActionsExecuted": false,
+  "noFurtherEditsAfterHandoff": true,
+  "scope": {
+    "approvedProposal": "modules/circa.ewaste/test/fixtures/circaMonetaryOutletProposal.json",
+    "newGoods": 4,
+    "unitAmountsAED": [
+      "300.00",
+      "300.00",
+      "100.00",
+      "300.00"
+    ],
+    "openingQuantityEach": "100",
+    "fictionalTax": {
+      "jurisdiction": "CIRCA_LOCAL_DEMO",
+      "taxCode": "LOCAL_DEMO_ZERO",
+      "rate": "0"
+    },
+    "newSections": 9,
+    "newPayloadFiles": 33,
+    "newGovernedRoots": 14,
+    "sourceRoot": "sample-v001",
+    "version": "0.0.1",
+    "environmentScope": [
+      "LOCAL"
+    ],
+    "selectionPolicy": "EXPLICIT",
+    "replenishment": false,
+    "realPayment": false,
+    "transactionSnapshots": false,
+    "sourceIsolation": "Issuer-unique record basenames/dataFilePrefix prevent nImport's source-root-wide prefix expansion from selecting sibling issuer files. Header options.enterpriseCode uses existing Profile placement admission."
+  },
+  "frozenDataVerification": {
+    "verifiedFiles": 117,
+    "missing": [],
+    "changed": []
+  },
+  "sourceFiles": {
+    "modules/circa.ewaste/data/manifest.json": "9696bce110518af4ac61eb149339385d638c672135a4c4d69822e551b2fa49b8",
+    "modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json": "f6345604a9a360d15422812f399b443c86a5f59d7541cf2997eb965329448eaa",
+    "modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-2.json": "2198ebad654eb1f954c582c9473bbc167f41555692934b289ee83f74a63e9367",
+    "modules/circa.ewaste/test/fixtures/circaMonetaryOutletProposal.json": "b33ee29f08d280d49110b50fe362cfdfdac1f2037a4da7aea4dfe27d63b549ab",
+    "modules/circa.ewaste/test/fixtures/circaMonetaryOutletSetupSelection.json": "f439a3d82addfa7f94a478b8536fd055c7480511027689cf1c96c43f271a903c",
+    "modules/circa.ewaste/test/circaMonetaryOutletPack.test.js": "f4d4f493e143d40028429c621a07284a189d80f45bcddd93ee785d1d66550d54",
+    "modules/circa.ewaste/test/circaMonetaryOutletProposal.test.js": "0ea030db9c12ebbc76d52380ed8ba09799d9c8214dce4a99211020b91d684d39",
+    "modules/circa.ewaste/test/circaPublicationPlan.test.js": "9e439deaeb92947c15c6742942dea7c4946fca2e8b9063b4348b5768e2a0e644",
+    "modules/circa.ewaste/llm/contracts/circa-monetary-outlet-pack.md": "d93bf687dfd6f6d0f84565693487668720e6f1fc0df979475afffa5c8aa3df5b"
+  },
+  "payloadFiles": {
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/headers/circaLocalOutletHeader.js": "2abf71924a8cacff463e2d4fe520b67e5f6691b18c8282c775a2d176b7581e79",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletPriceBookData.js": "479605ad6319e664734f9d5bbd6bfe6f7bbe5519e815443a3ceb9f453299a985",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletPriceRowData.js": "70a6378bd600b92736eb70e0ed76b538e71fd2ab9591eb5d6dfbd603b7f698eb",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductData.js": "51e3a3b1c75cf92134ed838727d5c49ae9bc7e9577faccf8e93c7174115ed62c",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductLocalizationData.js": "ce19e1b023678c47d4c0f5a22c5417a6318a13d7292e8a569aa773e5dda76763",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductVariantData.js": "60c77c7002aaa26bb210e8c31a337c4d20e78970f0559c95e6d9912fec415b9e",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletProductVariantLocalizationData.js": "7c9a3b881d146dbcf7a91de891c480170ce1d8cb8acba8a4086f699cbaf49dca",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletTaxPolicyData.js": "fc283ad0102c5acdd219231f997abff189b3dabbf10a634df32940e25edad07a",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/commerce/records/circaLocalGreenPerksOutletWarehouseData.js": "85cff84c2e525e9d0a2a6e1600a9d4f61a05c00ed935241e2c75ae62e480bf20",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/publication/records/publicationPlan.json": "26b72407d893a982c946341fa4c88498a01626214adf0751cfe695124e43a574",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/operations/records/inventoryOpening.json": "f001d969c79018d61c9221a40a4c6e7a8bf018b0145377e60307070c6cf03476",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/headers/circaLocalOutletHeader.js": "58f444110a7b35bc45bd66a0ba0e50cb6042e19f7526577e543d1814ba6d66a2",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletPriceBookData.js": "5eb6eb1fd561130d6814b9dac8ee3c89e9ce42a53d5fab793079362c35bc27f9",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletPriceRowData.js": "21756cc963788c014e37a8ae5fe7e5faab501ce5b17efa6dec43a4489337d920",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductData.js": "094b1d0cc1a3968ebfb5b1c53302bfae14608b855a7a1d34212fb71cb480304b",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductLocalizationData.js": "3c553d260fa597c3a299f58d12f67a61fc1c6bd463e8a342dc8ad67836d972c3",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductVariantData.js": "521c58f5d9e3702172eb0374eaac9867ba7d9ba07e080e36797cd405d0a8e8b0",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletProductVariantLocalizationData.js": "60db2c34e5578a61efc1e36e8416b4910189cc692e8fbbcca7d728b1dece472b",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletTaxPolicyData.js": "378c2f7860b654a84768cca641f248267a319ff36c9ed6cbbbaf329944e1b5d0",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/commerce/records/circaLocalRenewWorksOutletWarehouseData.js": "6e88edfe7f2cb3a23c0f28bfb8038300e7f498e281a05747e288ee115dbd2735",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/publication/records/publicationPlan.json": "1211feddfdfa5a454962466b9ccee6675a3276d00d422868455669ad2053b938",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/operations/records/inventoryOpening.json": "9ff7aae8de7d72d9591eed9094204a5343a1a33871830f6e55d81d285aee18c8",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/headers/circaLocalOutletHeader.js": "426511906d582125db5fa2b101960260c6fa7ff3f171608f266a430bdc3849e0",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletPriceBookData.js": "94bacc1df8d2523e191204076bb337cd0af07c2a568995486dc1a310fbcfeef6",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletPriceRowData.js": "bf9395e35fb8f49e216de2e0d77850b82c1f1cd60e5321255eaca6612c17aa86",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductData.js": "3317ee363267275db6d6bc47d0dd588f5d7c1e2c01cb156c29ee6b1aeee613ff",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductLocalizationData.js": "3d2557b25c3c111d21f4b3a6168d877b81b6e0452af83a80304b465842d1d680",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductVariantData.js": "0096245b76c962fb8f6d8f2136a89c904bf8100d5cbc33cf6ba32515c431680f",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletProductVariantLocalizationData.js": "4ff8c55d2162aaa4ebe54e958bb1218d001012763d8d1d7fb450e6cdf5acf0c6",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletTaxPolicyData.js": "4173f4380fec43903fe55ba3e4817ef7601e4d8d150bbccc6d222247f63d0139",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/commerce/records/circaLocalLoopCycleOutletWarehouseData.js": "ea525e8310724570d5382e5017cb0fc583fdb653028e1032397a15e6c028d13a",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/publication/records/publicationPlan.json": "d5f05c3ceb1dd6f8afbfc637c784498b3fb04c837148efcb3d493633ffdee773",
+    "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/operations/records/inventoryOpening.json": "fda3f4f8ecefc516c67788f83f3c1b9897bb46bb63114dd618cf59431867f20b"
+  },
+  "releaseChecksums": {
+    "circa.ewaste:circaGreenPerksOutletCommerce": "5ecba483143044bc718359b3a9ae491401353b6bbeba3aa439f9d2eb615615c5",
+    "circa.ewaste:circaGreenPerksOutletPublicationPlan": "92c57a0cc9eba51c23df9faf98349556e5d9c58e58a9f68adcd0cbd25e83301d",
+    "circa.ewaste:circaGreenPerksOutletOpening": "d0d39b08cbee380e596e764e6f6fdee1f02f911608ee8bcbcff927f3f6d40f78",
+    "circa.ewaste:circaRenewWorksOutletCommerce": "b50ca6bd772ce2e1c0bd565cf0a67514843da4b832c37f39b531807008b85907",
+    "circa.ewaste:circaRenewWorksOutletPublicationPlan": "2cb21d85c8adaa6c4deb1be61775fba5fe0d701aaf559382c66f13db2626aeaf",
+    "circa.ewaste:circaRenewWorksOutletOpening": "24f97e85edc297eb6d3f47da118619b3c6c2c7abe3867e009d76d6f27d4e156c",
+    "circa.ewaste:circaLoopCycleOutletCommerce": "c2bce37704a746f1c12ea7bd086cf1ef88216be4cacbbe3f57b51abf6f67794b",
+    "circa.ewaste:circaLoopCycleOutletPublicationPlan": "ae0f208ba1af443dc71d8e039af1112030b44aa9b50e5fd32868de82fb749763",
+    "circa.ewaste:circaLoopCycleOutletOpening": "151a28920d6f4d5ab124e9ca35134cbd98364e4353949fa711e5d2145b0075d5"
+  },
+  "coordinatedRoleReleaseChecksums": {
+    "circa.ewaste:circaLocalDemoCreditRole": "a32e02a6e8cf8a3eefe11a5588d2f8a255a595b3514b763b6cb4c6a05144e716",
+    "circa.ewaste:circaLocalDemoCreditStaffAssignment": "520858cf076946600d4dfa7a070debf0c94555d9929b3122f6c40c2fd5cc0c43",
+    "circa.ewaste:circaLocalOpeningRole": "a3956d182d90a7c0117523039cc85243c5120f045c15e63ccca65797920e7b21",
+    "circa.ewaste:circaLocalOpeningStaffAssignments": "d5ffccbc0df95a058fcc77fdbae3ab2e39fda83532e9f6756c68debda39ea162"
+  },
+  "coordinatedRoleHandoff": "modules/circa.ewaste/test/evidence/circa-bounded-human-role-source-handoff-2026-10-09.json",
+  "manifestAdoption": "Nine goods sections and all four exact Russell role sections are combined. Prior 30 manifest sections and their frozen payload hashes remain unchanged. Scoped owner --check confirms zero generated changes; no further regeneration is needed for these contributions.",
+  "observation": {
+    "path": "modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json",
+    "revision": 3,
+    "requiredStages": 56,
+    "profileDigest": "b8fb40ace4a3552b1f1ddc0cfedf66699b5376796bd50b0100270f2c0d735213",
+    "sha256": "f6345604a9a360d15422812f399b443c86a5f59d7541cf2997eb965329448eaa",
+    "predecessor": "modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-2.json",
+    "predecessorSha256": "2198ebad654eb1f954c582c9473bbc167f41555692934b289ee83f74a63e9367",
+    "canonicalOwners": [
+      "configuredSteps",
+      "stepIdentity",
+      "digest",
+      "nImport.inspectManifest",
+      "observer.describeRelease"
+    ],
+    "priorStagesPreserved": true,
+    "runtimeReceiptsFabricated": false,
+    "rootEnvironmentEditsByThisTask": "Observation plan checksum and revision only; main's outlet delivery/activation selections retained."
+  },
+  "nativePrerequisites": {
+    "source": "envs/kickoffLocal/platformServer/config/properties.js",
+    "changesByThisTask": "Appended only prerequisites; preserved main Profile enterprise placement and prior setup stages.",
+    "additions": [
+      {
+        "code": "circa.ewaste:circaLocalDemoCreditRole",
+        "kind": "Circa Local demo credit role",
+        "order": 120,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "platformServer",
+        "targetRuntimeRole": "PLATFORM"
+      },
+      {
+        "code": "circa.ewaste:circaLocalDemoCreditStaffAssignment",
+        "kind": "Circa Local demo credit staff assignment",
+        "order": 121,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "platformServer",
+        "targetRuntimeRole": "PLATFORM"
+      },
+      {
+        "code": "circa.ewaste:circaLocalOpeningRole",
+        "kind": "Circa Local opening Inventory role",
+        "order": 122,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "platformServer",
+        "targetRuntimeRole": "PLATFORM"
+      },
+      {
+        "code": "circa.ewaste:circaLocalOpeningStaffAssignments",
+        "kind": "Circa Local opening Inventory staff assignments",
+        "order": 123,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "platformServer",
+        "targetRuntimeRole": "PLATFORM"
+      },
+      {
+        "code": "circa.ewaste:circaGreenPerksOutletCommerce",
+        "kind": "Fictional greenperks outlet goods catalogue",
+        "order": 130,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerceStaged",
+        "targetRuntimeRole": "COMMERCE_STAGED"
+      },
+      {
+        "code": "circa.ewaste:circaRenewWorksOutletCommerce",
+        "kind": "Fictional renewworks outlet goods catalogue",
+        "order": 131,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerceStaged",
+        "targetRuntimeRole": "COMMERCE_STAGED"
+      },
+      {
+        "code": "circa.ewaste:circaLoopCycleOutletCommerce",
+        "kind": "Fictional loopcycle outlet goods catalogue",
+        "order": 132,
+        "required": true,
+        "trigger": "USER",
+        "phase": "BEFORE_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerceStaged",
+        "targetRuntimeRole": "COMMERCE_STAGED"
+      },
+      {
+        "code": "circa.ewaste:circaLocalDemoCredit",
+        "kind": "Approved guarded one-time Local demo POINTS credit",
+        "order": 190,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "operatorEnterpriseCode": "GREENPERKS_ONLINE",
+        "dataType": "sample",
+        "targetServer": "loyaltyServer",
+        "targetRuntimeRole": "LOYALTY"
+      },
+      {
+        "code": "circa.ewaste:circaGreenPerksOutletPublicationPlan",
+        "type": "GOVERNED_PUBLICATIONS",
+        "kind": "Fictional greenperks outlet governed publication",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "order": 200,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerceStaged",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "publicationPlanFile": "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/publication/records/publicationPlan.json"
+      },
+      {
+        "code": "circa.ewaste:circaGreenPerksOutletOpening",
+        "kind": "Fictional greenperks Inventory first intake after outlet publication",
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "order": 201,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerce",
+        "targetRuntimeRole": "COMMERCE"
+      },
+      {
+        "code": "circa.ewaste:circaRenewWorksOutletPublicationPlan",
+        "type": "GOVERNED_PUBLICATIONS",
+        "kind": "Fictional renewworks outlet governed publication",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "order": 202,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerceStaged",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "publicationPlanFile": "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/publication/records/publicationPlan.json"
+      },
+      {
+        "code": "circa.ewaste:circaRenewWorksOutletOpening",
+        "kind": "Fictional renewworks Inventory first intake after outlet publication",
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "order": 203,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerce",
+        "targetRuntimeRole": "COMMERCE"
+      },
+      {
+        "code": "circa.ewaste:circaLoopCycleOutletPublicationPlan",
+        "type": "GOVERNED_PUBLICATIONS",
+        "kind": "Fictional loopcycle outlet governed publication",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "order": 204,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerceStaged",
+        "targetRuntimeRole": "COMMERCE_STAGED",
+        "publicationPlanFile": "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/publication/records/publicationPlan.json"
+      },
+      {
+        "code": "circa.ewaste:circaLoopCycleOutletOpening",
+        "kind": "Fictional loopcycle Inventory first intake after outlet publication",
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "order": 205,
+        "required": true,
+        "trigger": "USER",
+        "phase": "AFTER_PUBLICATION",
+        "dataType": "sample",
+        "targetServer": "commerce",
+        "targetRuntimeRole": "COMMERCE"
+      }
+    ],
+    "ordering": "Original operations preparation precedes late additive staff batches. Role definitions precede staff additions. Catalogue imports BEFORE_PUBLICATION carry exact issuer placement in headers. Each required GOVERNED_PUBLICATIONS stage is AFTER_PUBLICATION under its genuine signed issuer. All selected issuer publications must be CURRENT before opening. Opening stages are separate AFTER_PUBLICATION COMMERCE instructions. The unchanged guarded credit stage remains GREENPERKS_ONLINE/LOYALTY.",
+    "requiredPublicationRootsAfterAddition": 98,
+    "totalGovernedPublicationStages": 8,
+    "requiredGovernedPublicationStages": 7
+  },
+  "operatorHandoff": {
+    "guidance": "modules/circa.ewaste/llm/contracts/circa-monetary-outlet-pack.md",
+    "inertSelection": "modules/circa.ewaste/test/fixtures/circaMonetaryOutletSetupSelection.json",
+    "authentication": "Use genuine authorized human tokens for the selected phase and issuer. No tenant/enterprise header overrides, grant mutation, native auth bootstrap, or authority waiver.",
+    "freshAxisSetup": [
+      {
+        "method": "GET",
+        "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization"
+      },
+      {
+        "method": "POST",
+        "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/prepare",
+        "body": {
+          "reason": "Approved fictional Local Circa setup"
+        }
+      },
+      "Complete the original CMS baseline and normal Process approvals. All existing required stages remain.",
+      "Use the exact AFTER_PUBLICATION selection descriptors below via Axis or initialization/initiate, one issuer stage at a time. Refresh original human sessions normally after additive role imports.",
+      "Do not launch opening before retained Product/warehouse activation and installed Inventory atomic qualification. Local Mongo source observations do not replace the owner install gate."
+    ],
+    "issuerSelections": [
+      {
+        "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+        "stagedCatalogue": {
+          "runtime": "COMMERCE_STAGED",
+          "phase": "BEFORE_PUBLICATION",
+          "body": {
+            "releaseCodes": [
+              "circa.ewaste:circaGreenPerksOutletCommerce"
+            ],
+            "expectedReleases": {
+              "circa.ewaste:circaGreenPerksOutletCommerce": "0.0.1"
+            }
+          }
+        },
+        "publication": {
+          "method": "POST",
+          "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/initiate",
+          "body": {
+            "reason": "Approved fictional greenperks outlet publication",
+            "afterPublicationStepCode": "circa.ewaste:circaGreenPerksOutletPublicationPlan"
+          },
+          "planFile": "modules/circa.ewaste/data/sample-v001/merchant-outlets/greenperks/publication/records/publicationPlan.json",
+          "runtime": "COMMERCE_STAGED"
+        },
+        "opening": {
+          "method": "POST",
+          "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/initiate",
+          "body": {
+            "reason": "Approved fictional greenperks first intake",
+            "afterPublicationStepCode": "circa.ewaste:circaGreenPerksOutletOpening"
+          },
+          "runtime": "COMMERCE",
+          "ownerInstaller": "INVENTORY_OPENING_RECEIPTS",
+          "ownerImportBody": {
+            "releaseCodes": [
+              "circa.ewaste:circaGreenPerksOutletOpening"
+            ],
+            "expectedReleases": {
+              "circa.ewaste:circaGreenPerksOutletOpening": "0.0.1"
+            }
+          }
+        }
+      },
+      {
+        "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+        "stagedCatalogue": {
+          "runtime": "COMMERCE_STAGED",
+          "phase": "BEFORE_PUBLICATION",
+          "body": {
+            "releaseCodes": [
+              "circa.ewaste:circaRenewWorksOutletCommerce"
+            ],
+            "expectedReleases": {
+              "circa.ewaste:circaRenewWorksOutletCommerce": "0.0.1"
+            }
+          }
+        },
+        "publication": {
+          "method": "POST",
+          "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/initiate",
+          "body": {
+            "reason": "Approved fictional renewworks outlet publication",
+            "afterPublicationStepCode": "circa.ewaste:circaRenewWorksOutletPublicationPlan"
+          },
+          "planFile": "modules/circa.ewaste/data/sample-v001/merchant-outlets/renewworks/publication/records/publicationPlan.json",
+          "runtime": "COMMERCE_STAGED"
+        },
+        "opening": {
+          "method": "POST",
+          "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/initiate",
+          "body": {
+            "reason": "Approved fictional renewworks first intake",
+            "afterPublicationStepCode": "circa.ewaste:circaRenewWorksOutletOpening"
+          },
+          "runtime": "COMMERCE",
+          "ownerInstaller": "INVENTORY_OPENING_RECEIPTS",
+          "ownerImportBody": {
+            "releaseCodes": [
+              "circa.ewaste:circaRenewWorksOutletOpening"
+            ],
+            "expectedReleases": {
+              "circa.ewaste:circaRenewWorksOutletOpening": "0.0.1"
+            }
+          }
+        }
+      },
+      {
+        "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+        "stagedCatalogue": {
+          "runtime": "COMMERCE_STAGED",
+          "phase": "BEFORE_PUBLICATION",
+          "body": {
+            "releaseCodes": [
+              "circa.ewaste:circaLoopCycleOutletCommerce"
+            ],
+            "expectedReleases": {
+              "circa.ewaste:circaLoopCycleOutletCommerce": "0.0.1"
+            }
+          }
+        },
+        "publication": {
+          "method": "POST",
+          "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/initiate",
+          "body": {
+            "reason": "Approved fictional loopcycle outlet publication",
+            "afterPublicationStepCode": "circa.ewaste:circaLoopCycleOutletPublicationPlan"
+          },
+          "planFile": "modules/circa.ewaste/data/sample-v001/merchant-outlets/loopcycle/publication/records/publicationPlan.json",
+          "runtime": "COMMERCE_STAGED"
+        },
+        "opening": {
+          "method": "POST",
+          "url": "$CIRCA_PLATFORM_URL/nodics/backoffice/v0/applications/circa/initialization/initiate",
+          "body": {
+            "reason": "Approved fictional loopcycle first intake",
+            "afterPublicationStepCode": "circa.ewaste:circaLoopCycleOutletOpening"
+          },
+          "runtime": "COMMERCE",
+          "ownerInstaller": "INVENTORY_OPENING_RECEIPTS",
+          "ownerImportBody": {
+            "releaseCodes": [
+              "circa.ewaste:circaLoopCycleOutletOpening"
+            ],
+            "expectedReleases": {
+              "circa.ewaste:circaLoopCycleOutletOpening": "0.0.1"
+            }
+          }
+        }
+      }
+    ],
+    "ownerDiagnostics": [
+      {
+        "method": "POST",
+        "routes": [
+          "/nodics/import/v0/sample/validate",
+          "/nodics/import/v0/sample/install"
+        ],
+        "body": "Exact per-issuer commerceRequest or openingRequest in the inert selection. Select one release, expected version 0.0.1, on its declared runtime. Do not import the whole module."
+      },
+      {
+        "method": "POST",
+        "routes": [
+          "/nodics/publish/v0/publications/setup/status",
+          "/nodics/publish/v0/publications/setup/submit"
+        ],
+        "body": "Use the exact issuer publicationPlan.json unchanged on Staged; normal workflow approval and retained Online evidence remain mandatory."
+      }
+    ],
+    "credit": "Select circa.ewaste:circaLocalDemoCredit on LOYALTY using the original GREENPERKS_ONLINE human after bounded role adoption/session refresh and before buyer mutations. Existing 118/revision-0 guard is unchanged; changed state must refuse. Do not replay staff snapshots or use general earnings."
+  },
+  "verification": {
+    "focused": {
+      "command": "node --test modules/circa.ewaste/test/circaMonetaryOutletPack.test.js modules/circa.ewaste/test/circaMonetaryOutletProposal.test.js modules/circa.ewaste/test/circaPublicationPlan.test.js test/circaNativeObservationSelection.test.js",
+      "passed": 23,
+      "failed": 0
+    },
+    "scopedOwnerManifest": {
+      "command": "node ../nodics.ai/nodics.foundation/modules/nTooling/src/service/project/defaultProjectDataManifestService.js --project=. --module=circa.ewaste --check",
+      "exitCode": 0,
+      "changedFiles": 0
+    },
+    "standardManifestWrapper": {
+      "command": "npm run domains:manifests -- --module=circa.ewaste --check",
+      "exitCode": 1,
+      "blockedBeforeManifestCheck": true,
+      "message": "Configuration coding restrictions failed: envs/kickoffLocal/commerceServer/config/properties.js: keep capability policy in module-owned runtime-role profiles or the environment at apiExposure",
+      "unrelatedMainSelectionUntouched": true
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    "broaderCirca": {
+      "command": "npm run test:circa",
+      "tests": 143,
+      "passed": 139,
+      "failed": 4,
+      "failures": [
+        {
+          "file": "modules/circa.ewaste/test/circaDocumentationDataContract.test.js",
+          "line": 54,
+          "reason": "Framework canonical Circa documentation inventory does not list the nine goods and four role manifest additions. Frozen framework documentation was not rewritten in this K-only task."
+        },
+        {
+          "file": "modules/circa.ewaste/test/circaStoreReferencePack.test.js",
+          "line": 190,
+          "reason": "Same canonical framework documentation inventory mismatch."
+        },
+        {
+          "file": "modules/circa.ewaste/test/circaItemSimulationSelection.test.js",
+          "line": 31,
+          "reason": "Existing test expects native merchantBenefits.qualified=false; main now selects qualification."
+        },
+        {
+          "file": "modules/circa.ewaste/test/circaItemSimulationSelection.test.js",
+          "line": 84,
+          "reason": "Existing coupon-only selection test expects merchantBenefits and priced provider qualification=false, conflicting with main's new monetary selections."
+        }
+      ],
+      "existingTestsNotWeakened": true
+    }
+  },
+  "remainingAcceptance": [
+    "Main owns fresh topology build/start and native installed gates; this handoff executed no services, native imports, publications, approvals, stock writes, auth changes or payments.",
+    "Resolve/report the global project configuration coding restriction before assuming the standard manifest/build CLI is clean.",
+    "Reconcile forward canonical documentation and old qualification expectations through their owners; the full Circa suite is not green.",
+    "Perform genuine Axis visibility, importer admission, publisher Process approval/Online CURRENT, signed issuer opening receipt readback and monetary HTTP acceptance against the installed fresh topology. No source test is a runtime receipt."
+  ]
+}

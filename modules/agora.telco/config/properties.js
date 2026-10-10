@@ -31,7 +31,7 @@ module.exports = {
                     "baselines": {
                         "agoratelco": {
                             "releaseCode": "agora.telco:agoraTelcoContentCatalog",
-                            "releaseVersion": "0.0.2",
+                            "releaseVersion": "0.0.1",
                             "dataType": "sample",
                             "rootType": "site",
                             "rootCode": "agoraTelcoSite",
@@ -106,7 +106,7 @@ module.exports = {
                                     "targetServer": "wcmsStaged",
                                     "targetRuntimeRole": "WCMS_STAGED",
                                     "manifestModule": "agora.telco",
-                                    "manifestPath": "data/sample-v002/content/assets/agora-cms-media/assetManifest.js",
+                                    "manifestPath": "data/sample-v001/content/assets/agora-cms-media/assetManifest.js",
                                     "businessPurpose": "AGORA_STOREFRONT_CONTENT"
                                 },
                                 {

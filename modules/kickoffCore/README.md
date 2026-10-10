@@ -5,6 +5,12 @@
 It is activated explicitly by the selected server; the containing `modules/`
 group participates only in structural discovery.
 
+Commerce acceptance selects exact approved publication evidence through
+`NODICS_AGORA_<DOMAIN>_<OWNER>_PUBLICATION_{CODE,ROOT_CODE,SOURCE_VERSION,TARGET_VERSION}`
+bindings. All four default to empty and fail closed. Read the owning contract in
+`llm/contracts/README.md` before qualifying a deployment; these selections do not
+publish or approve data.
+
 The Communication ENGAGEMENT role profile selects Profile's framework-owned
 template resources and trusted sources, gated by existing nConfig composition.
 `activeModules.compositions.employeeMail` defaults to `none`; only the Local

@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-08",
+  "environment": "kickoffLocal",
+  "state": "PARTIAL_LIVE_ACCEPTANCE_WITH_EXPLICIT_GATES",
+  "scope": {
+    "commerceAccelerator": "agora.apparel",
+    "promotionsRequired": true,
+    "excludedCommerceAccelerators": ["agora.electronics", "agora.telco"],
+    "nextBusinessJourney": "circa",
+    "freshResetPerformedThisRun": false,
+    "priorResetEvidence": "native-physical-reset-2026-10-08.json"
+  },
+  "sourceChanges": {
+    "financialDelivery": "Existing Pricing, Promotion, Inventory and Tax owners accept an exact rootCodesByStore mapping. Invalid mappings reject before reads; legacy rootCodes remains supported when the map is absent.",
+    "localSelection": "Circa roots retained; composition-selected Apparel alone adds financial roots. No Electronics/Telco financial selection or acceptance performed.",
+    "promotionFixture": "agoraCapsuleEdit10PercentRule",
+    "journey": "Uses the existing published campaign, persisted Cart Store/currency and actual calculation evidence. Preview and quote do not consume the campaign; Checkout alone commits it. Campaign/cart, rule version, redemption and Order evidence are required. Purchased coupons require an existing purchasing customer fixture.",
+    "retainedIdentity": "Promotion source versionId is a nonnegative safe integer, including zero, not a textual target digest.",
+    "checkoutStore": "Promotion commitment resolves Store from the owned persisted Cart and rejects absent/foreign Cart context before apply.",
+    "runtimeLimit": "The running topology included the Store-specific financial owner/configuration changes. The later Checkout Store propagation change was unit-tested, but its commitment path was not live-executed; no completed checkout is claimed. Future topology startup rebuilds selected servers."
+  },
+  "verification": {
+    "financialPolicyProviderTests": { "passed": 110, "failed": 0 },
+    "checkoutAndJourneyTests": { "passed": 28, "failed": 0 },
+    "kickoffConfigurationAndFixtures": { "passed": 26, "failed": 0 },
+    "llmGeneration": { "modules": 202, "state": "PASSED" },
+    "llmValidation": { "modules": 202, "state": "PASSED" },
+    "diffChecks": { "framework": "PASSED", "kickoff": "PASSED", "axis": "PASSED" },
+    "commands": [
+      "node --test nodics.commerce/modules/baseCommerce/modules/pricing/test/pricingPolicyProvider.test.js nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionPolicyProvider.test.js nodics.commerce/modules/baseCommerce/modules/inventory/test/inventoryPolicyProvider.test.js nodics.commerce/modules/baseCommerce/modules/tax/test/taxPolicyProvider.test.js",
+      "node --test nodics.commerce/modules/checkout/modules/checkoutCore/test/commerceJourneyAcceptance.test.mjs nodics.commerce/modules/checkout/modules/checkoutCore/test/checkoutLoyaltyRewardJourneyContract.test.js nodics.commerce/modules/checkout/modules/checkoutCore/test/orderPlacementContract.test.js nodics.commerce/modules/checkout/modules/checkoutCore/test/checkoutCustomerApiContract.test.js",
+      "node --test test/projectAcceptanceFixtures.test.js test/configurationInheritanceContract.test.js",
+      "npm run llm:generate",
+      "npm run llm:validate",
+      "git diff --check"
+    ]
+  },
+  "apparel": {
+    "policyPublications": [
+      { "owner": "pricing", "code": "agora-apparel-pricing-native-20261008", "rootCode": "agoraApparelRetailUsd", "state": "ONLINE" },
+      { "owner": "promotion", "code": "agora-apparel-promotion-native-20261008", "rootCode": "agoraCapsuleEdit10PercentRule", "state": "ONLINE" },
+      { "owner": "inventory", "code": "agora-apparel-inventory-native-20261008", "rootCode": "agoraApparelWarehouse", "state": "ONLINE" },
+      { "owner": "tax", "code": "agora-apparel-tax-native-20261008", "rootCode": "agoraAeVatPolicy", "state": "ONLINE" }
+    ],
+    "newCustomerSignup": { "httpStatus": 503, "code": "ERR_PROFILE_MEMBERSHIP_UNAVAILABLE", "state": "BLOCKED", "qualificationFlagsChanged": false },
+    "existingCustomerJourney": {
+      "fixtureOwner": "circa.ewaste:profile",
+      "signupPerformed": false,
+      "authentication": "PASSED",
+      "productDiscovery": { "state": "PASSED", "source": "SEARCH_INDEX", "count": 1 },
+      "productDetail": { "productCode": "agoraLinenWrapDress", "currency": "USD", "unitAmount": "119.99", "availability": "OUT_OF_STOCK" },
+      "shippingAndReturnMethods": "PASSED",
+      "shoppingLists": { "state": "PASSED", "types": ["WISHLIST", "COMPARE", "SAVE_FOR_LATER"] },
+      "cartCreationAndRead": "PASSED",
+      "cartEntry": { "httpStatus": 500, "code": "ERR_SYS_00000", "state": "FAILED", "causeEstablished": false },
+      "promotionQuoteAndCheckout": "NOT_REACHED",
+      "orderLifecycleAndNonOwnerDenials": "NOT_REACHED",
+      "effects": "Acceptance carts and list entries were created through normal APIs. A failed Cart mutation response is not evidence of rollback; no direct cleanup or database writes were performed."
+    },
+    "remaining": [
+      "Diagnose the Cart-entry HTTP 500 separately from the observed out-of-stock status; do not assume they have the same cause.",
+      "Admit legitimate opening stock and the required campaign operational state through their owning modules, then obtain a purchased customer coupon through the normal flow. No stock, budget, coupon ownership or payment evidence was fabricated.",
+      "Repeat customer Cart, promotion quote, Checkout commitment, Order lifecycle and ownership-denial acceptance.",
+      "New customer registration additionally requires the independent Profile membership qualification work. Existing imported customer authentication is not proof of new registration."
+    ]
+  },
+  "circa": {
+    "moduleRegistrationsRestored": ["nodics.location", "nodics.waste", "nodics.loyalty"],
+    "registrationAuthority": "Normal authenticated Module Registry register/activate operations using observed catalogue revisions",
+    "locationPreflight": { "releases": ["wasteCollection:sample-locations", "circa.ewaste:location"], "state": "PASSED", "importExecuted": false },
+    "axisPreparation": {
+      "route": "/setup-accelerators?profile=circa&expanded=circa",
+      "action": "Prepare capability",
+      "httpStatus": 200,
+      "beforeStatus": "ACTION_REQUIRED",
+      "afterStatus": "CURRENT",
+      "stepCount": 28,
+      "groupReceiptStatus": "UNCONFIRMED",
+      "confirmation": "Independent refreshed preparation catalogue reports all 23 data releases CURRENT. Immediate install response group receipts lacked per-release status and are not used as the sole completion evidence."
+    },
+    "cms": { "code": "cmsBaseline_circa_0_0_1", "state": "ONLINE", "workflowDefinition": "cmsPublicationApproval" },
+    "media": { "pinnedDependencies": 18, "approvedThroughExistingMediaWorkflows": 18, "qualified": true, "coordinator": "Axis coordinatePublicationAssets with exact version/checksum inputs", "independentOnlineByteDownloads": false },
+    "finalReadiness": "READY",
+    "axisVisualResult": "Online ready; Staged current; 1 Online, 0 Pending approval, 0 Need attention in the Circa-filtered view",
+    "axisScreenshot": "nodics.exp/nodics.axis/test/evidence/native-circa-prepared-2026-10-08.png",
+    "wasteDiscovery": { "state": "PASSED", "evidence": "AUTHORIZED_BACKOFFICE_DISCOVERY", "observedServer": "kickoffLocal:wasteServer:default" },
+    "genericWasteContract": { "state": "PLANNED", "evidence": "NONE", "serviceImpactCredentialAvailable": false, "executionPerformed": false },
+    "fullBusinessE2E": "NOT_QUALIFIED",
+    "remaining": [
+      "Qualify Circa Product and financial Online delivery through their existing owners; CMS Online readiness does not prove Commerce readiness.",
+      "Execute customer submission, employee review/claim, verification, physical custody, approval and reward settlement with persisted owner evidence.",
+      "Execute actual coupon purchase/redemption and inspect settlement and impact history.",
+      "Obtain a legitimately Profile-issued service-only Impact credential through the private credential owner before executing that acceptance route. No grant or service principal was invented."
+    ]
+  },
+  "cleanup": {
+    "state": "VERIFIED",
+    "topologySupervisor": "NOT_RUNNING",
+    "backendPortsNotListening": [4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350],
+    "axisPort3100Listening": false,
+    "ownedRuntimesOnly": true,
+    "unrelatedServicesPreserved": true,
+    "credentialsOrTokensStoredInEvidence": false
+  }
+}

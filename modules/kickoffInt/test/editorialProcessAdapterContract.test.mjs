@@ -33,6 +33,16 @@ test("Local and Docker Process select protocol names and deployment connections"
       assert.deepEqual(transitions.map(item => item.definitionCode), ["editorialApproval", "editorialPublication"]);
       assert(transitions.every(item => item.mode === "RETAIN" && item.source.releaseCode === "processServer:init-v001" &&
         item.target.releaseCode === "editorial:editorialWorkflows" && /^[a-f0-9]{64}$/.test(item.publishedChecksum)));
+      const source = require("../../../envs/kickoffLocal/processServer/data/manifest.json").sections["init-v001"];
+      const target = require(path.join(frameworkRoot, "nodics.wcms/modules/editorial/data/manifest.json")).sections.editorialWorkflows;
+      const checksum = section => crypto.createHash("sha256")
+        .update(Object.keys(section.files).sort().map(file => file + ":" + section.files[file]).join("|")).digest("hex");
+      for (const transition of transitions) {
+        assert.equal(transition.source.version, source.version);
+        assert.equal(transition.source.checksum, checksum(source));
+        assert.equal(transition.target.version, target.version);
+        assert.equal(transition.target.checksum, checksum(target));
+      }
     } else assert.deepEqual(transitions, [], "Local evidence cannot authorize Docker adoption");
     assert.deepEqual(config.process.actionAdapters.allowedActions, [
       "nodics.process.noop",
@@ -78,7 +88,7 @@ test("Local and Docker Process select protocol names and deployment connections"
 
 test("customer reviewer policy consumes Editorial graphs while retaining the released Local payload", () => {
   const payload = require(path.join(frameworkRoot,
-    "nodics.wcms/modules/editorial/data/init-v002/records/process/editorialWorkflowDefinitionData.js"));
+    "nodics.wcms/modules/editorial/data/init-v001/records/process/editorialWorkflowDefinitionData.js"));
   const legacyPath = new URL("../../../envs/kickoffLocal/processServer/data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js", import.meta.url);
   assert.equal(crypto.createHash("sha256").update(fs.readFileSync(legacyPath)).digest("hex"),
     "17a8035e71bf114b72406c555cf32bc5cb5fe052de2d844b6d25af04053c00f0");
@@ -133,7 +143,12 @@ test("actual Local/Docker package projection and selected profiles never automat
     for (const [server, role] of [["processServer", "PROCESS"], ["wcmsStagedServer", "WCMS_STAGED"], ["wcmsOnlineServer", "WCMS_ONLINE"]]) {
       const result = JSON.parse(execFileSync(process.execPath, ["-e", probe, JSON.stringify({
         projectRoot: fileURLToPath(new URL("../../../", import.meta.url)), frameworkRoot, environment, server,
-      })], { encoding: "utf8", timeout: 30000, maxBuffer: 16 * 1024 * 1024 }));
+      })], { encoding: "utf8", timeout: 30000, maxBuffer: 16 * 1024 * 1024, env: {
+        ...process.env,
+        NODICS_BOOTSTRAP_ADMIN_PASSWORD: "test-admin-password-12345",
+        NODICS_BOOTSTRAP_SERVICE_PASSWORD: "test-service-password-12345",
+        NODICS_BOOTSTRAP_SERVICE_API_KEY: "test-service-api-key-value-12345678901234567890",
+      } }));
       assert.equal(result.role, role);
       const optional = result.packages.find(pack => pack.code === "editorial:editorialWorkflows");
       if (optional) {

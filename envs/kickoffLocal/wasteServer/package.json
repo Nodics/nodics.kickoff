@@ -50,6 +50,8 @@
         "loyaltyCore",
         "loyaltyApi",
         "commerceCore",
+        "digitalCore",
+        "product",
         "engagementCore",
         "workflow"
       ]

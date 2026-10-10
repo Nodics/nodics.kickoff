@@ -10,7 +10,7 @@
 module.exports = {
   "record0": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_ASSET_EWA-1047",
@@ -31,7 +31,7 @@ module.exports = {
   },
   "record1": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_ASSET_EWA-1051",
@@ -52,7 +52,7 @@ module.exports = {
   },
   "record2": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_ASSET_EWA-1052",
@@ -73,7 +73,7 @@ module.exports = {
   },
   "record3": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_ASSET_EWA-1055",
@@ -94,7 +94,7 @@ module.exports = {
   },
   "record4": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_ASSET_EWA-1092",
@@ -115,7 +115,7 @@ module.exports = {
   },
   "record5": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_CPN-GRN-30",
@@ -137,7 +137,7 @@ module.exports = {
   },
   "record6": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_CPN-ECO-15",
@@ -159,7 +159,7 @@ module.exports = {
   },
   "record7": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_CPN-SVC-50",
@@ -181,7 +181,7 @@ module.exports = {
   },
   "record8": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C01",
@@ -203,7 +203,7 @@ module.exports = {
   },
   "record9": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C02",
@@ -225,7 +225,7 @@ module.exports = {
   },
   "record10": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C03",
@@ -247,7 +247,7 @@ module.exports = {
   },
   "record11": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C04",
@@ -269,7 +269,7 @@ module.exports = {
   },
   "record12": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C05",
@@ -291,7 +291,7 @@ module.exports = {
   },
   "record13": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C06",
@@ -313,7 +313,7 @@ module.exports = {
   },
   "record14": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C07",
@@ -335,7 +335,7 @@ module.exports = {
   },
   "record15": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C08",
@@ -357,7 +357,7 @@ module.exports = {
   },
   "record16": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C09",
@@ -379,7 +379,7 @@ module.exports = {
   },
   "record17": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C10",
@@ -401,7 +401,7 @@ module.exports = {
   },
   "record18": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C11",
@@ -423,7 +423,7 @@ module.exports = {
   },
   "record19": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-C12",
@@ -445,7 +445,7 @@ module.exports = {
   },
   "record20": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B01",
@@ -467,7 +467,7 @@ module.exports = {
   },
   "record21": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B02",
@@ -489,7 +489,7 @@ module.exports = {
   },
   "record22": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B03",
@@ -511,7 +511,7 @@ module.exports = {
   },
   "record23": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B04",
@@ -533,7 +533,7 @@ module.exports = {
   },
   "record24": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B05",
@@ -555,7 +555,7 @@ module.exports = {
   },
   "record25": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B06",
@@ -577,7 +577,7 @@ module.exports = {
   },
   "record26": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B07",
@@ -599,7 +599,7 @@ module.exports = {
   },
   "record27": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B08",
@@ -621,7 +621,7 @@ module.exports = {
   },
   "record28": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B09",
@@ -643,7 +643,7 @@ module.exports = {
   },
   "record29": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B10",
@@ -665,7 +665,7 @@ module.exports = {
   },
   "record30": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B11",
@@ -687,7 +687,7 @@ module.exports = {
   },
   "record31": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-B12",
@@ -709,7 +709,7 @@ module.exports = {
   },
   "record32": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A01",
@@ -731,7 +731,7 @@ module.exports = {
   },
   "record33": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A02",
@@ -753,7 +753,7 @@ module.exports = {
   },
   "record34": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A03",
@@ -775,7 +775,7 @@ module.exports = {
   },
   "record35": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A04",
@@ -797,7 +797,7 @@ module.exports = {
   },
   "record36": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A05",
@@ -819,7 +819,7 @@ module.exports = {
   },
   "record37": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A06",
@@ -841,7 +841,7 @@ module.exports = {
   },
   "record38": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A07",
@@ -863,7 +863,7 @@ module.exports = {
   },
   "record39": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A08",
@@ -885,7 +885,7 @@ module.exports = {
   },
   "record40": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A09",
@@ -907,7 +907,7 @@ module.exports = {
   },
   "record41": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A10",
@@ -929,7 +929,7 @@ module.exports = {
   },
   "record42": {
     "tenant": "default",
-    "enterpriseCode": "default",
+    "enterpriseCode": "GREENPERKS_ONLINE",
     "revision": 1,
     "active": true,
     "code": "CIRCA_COUPON_GP-A11",
@@ -950,4 +950,3 @@ module.exports = {
     "digitalDeliveryType": "COUPON_CODE"
   }
 };
-

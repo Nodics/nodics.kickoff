@@ -60,6 +60,16 @@
         "businessOutcome": "Prepare Circa circular assets, offers, pricing, and storefront records."
       }
     },
+    "store": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare the approved GREENPERKS_ONLINE marketplace and four issuer outlet references without importing coupon, stock or consent snapshots."
+      }
+    },
     "operations": {
       "capability": {
         "code": "circa.ewaste",
@@ -100,14 +110,124 @@
         "businessOutcome": "Prepare Sunmarke location records for the Circa pilot."
       }
     },
-    "commerce-operational": {
+    "circaPublicationPlan": {
       "capability": {
         "code": "circa.ewaste",
         "displayName": "Circa eWaste",
         "type": "APPLICATION",
         "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
-        "businessOutcome": "Explicitly review existing Circa coupon issuance and opening stock after governed publication; never replay live balances."
+        "businessOutcome": "Request governed publication of every Circa catalogue root before operational setup; preserve owner approval and source-drift gates."
+      }
+    },
+    "circaGreenPerksBudget": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Signed GREENPERKS_RETAIL operator only: original opening budget admission before separately reviewed seller consent; no issuance or replenishment."
+      }
+    },
+    "circaGreenPerksIssuance": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Signed GREENPERKS_RETAIL operator only: 100 protected coupon units per campaign after exact original budget admission and current issuer-owned seller consent."
+      }
+    },
+    "circaGreenPerksPublicationPlan": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Exact promotion roots for separate signed GREENPERKS_RETAIL publication; never an enterprise override."
+      }
+    },
+    "circaRenewWorksBudget": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Signed RENEWWORKS_REPAIR_REUSE operator only: original opening budget admission before separately reviewed seller consent; no issuance or replenishment."
+      }
+    },
+    "circaRenewWorksIssuance": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Signed RENEWWORKS_REPAIR_REUSE operator only: 100 protected coupon units per campaign after exact original budget admission and current issuer-owned seller consent."
+      }
+    },
+    "circaRenewWorksPublicationPlan": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Exact promotion roots for separate signed RENEWWORKS_REPAIR_REUSE publication; never an enterprise override."
+      }
+    },
+    "circaLoopCycleBudget": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Signed LOOPCYCLE_RECYCLING operator only: original opening budget admission before separately reviewed seller consent; no issuance or replenishment."
+      }
+    },
+    "circaLoopCycleIssuance": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Signed LOOPCYCLE_RECYCLING operator only: 100 protected coupon units per campaign after exact original budget admission and current issuer-owned seller consent."
+      }
+    },
+    "circaLoopCyclePublicationPlan": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Exact promotion roots for separate signed LOOPCYCLE_RECYCLING publication; never an enterprise override."
+      }
+    },
+    "circaCataloguePublicationPlan": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "GREENPERKS_ONLINE marketplace Product, pricing, inventory and tax publication; issuer Promotion roots are separate signed selections."
+      }
+    },
+    "circaDigitalOwnershipPolicies": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare the reviewed local original-sale policies before five quantity-one asset sales; no bindings, sale receipts, approval, wallet funding or ownership snapshots are imported."
       }
     }
   }

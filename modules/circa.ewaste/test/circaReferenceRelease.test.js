@@ -100,7 +100,7 @@ test("reference adoption preserves customer additions and final policy without s
     ["wasteItemType", "circaWasteItemTypeData"],
   ]) {
     for (const record of Object.values(
-      require("../data/sample-v001/waste/records/" + filename),
+      require("./fixtures/compatibility/waste/" + filename),
     )) {
       if (!record.code.startsWith("CIRCA_")) continue;
       assert.deepEqual(
@@ -111,24 +111,28 @@ test("reference adoption preserves customer additions and final policy without s
     }
   }
   for (const [schema, filename] of [
-    ["wasteCategory", "circaWastePolicyCategoryData"],
-    ["wasteCollectionPreset", "circaWastePolicyCollectionPresetData"],
-    ["wasteCollectionAcceptanceRule", "circaWastePolicyAcceptanceRuleData"],
-    ["wasteImpactProfile", "circaWastePolicyImpactProfileData"],
+    ["wasteCategory", "eWasteCategoryData"],
+    ["wasteCollectionPreset", "eWasteCollectionPresetData"],
+    ["wasteCollectionAcceptanceRule", "eWasteAcceptanceRuleData"],
+    ["wasteImpactProfile", "eWasteImpactProfileData"],
   ]) {
     for (const record of Object.values(
       require("../data/core-v001/waste-policy/records/" + filename),
     )) {
+      const baseline = Object.values(require(path.join(ew, "data/core-v001/records/waste/" + filename)))
+        .find(row => row.code === record.code);
+      const expected = require(path.join(framework, "nodics.foundation/modules/nData/nImport/jsImport/src/service/init/defaultJsFileDataProcessService"))
+        .mergeModel(structuredClone(baseline || {}), record);
       assert.deepEqual(
         state.models.get(schema + ":" + record.code),
-        record,
+        expected,
         record.code,
       );
     }
   }
   assert.deepEqual(
     state.models.get("wasteImpactProfile:CIRCA_EWASTE_ESTIMATE"),
-    require("../data/sample-v001/waste/records/circaWasteImpactProfileData")
+    require("./fixtures/compatibility/waste/circaWasteImpactProfileData")
       .record0,
   );
   assert.deepEqual(

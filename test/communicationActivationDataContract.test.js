@@ -31,16 +31,18 @@ console.log('Kickoff communication activation-data selectors validated');
 
 /** Project-specific SMTP adoption checks use the existing effective-runtime harness. */
 const test = require('node:test');
+const approvedLocalCaptureRecipients = [
+    'admin@axis-onboarding-acceptance.test', 'operator@axis-onboarding-acceptance.test',
+    'applicant@axis-onboarding-acceptance.test', 'reviewer@axis-onboarding-acceptance.test',
+    'reviewer2@axis-onboarding-acceptance.test', 'reviewer3@axis-onboarding-acceptance.test'
+];
 test('Local employee email remains disabled and credential-free until explicit runtime input', () => {
     const runtime = loadRuntime('engagementServer', 'kickoffLocal', {});
     assert.equal(runtime.smtpCommsProvider.enabled, false);
     assert.equal(runtime.smtpCommsProvider.mode, 'SMTP');
     assert.equal(runtime.smtpCommsProvider.testOnly, true);
     assert.equal(runtime.smtpCommsProvider.liveQualified, false);
-    assert.deepEqual(runtime.smtpCommsProvider.allowedRecipients, [
-        'admin@axis-onboarding-acceptance.test', 'operator@axis-onboarding-acceptance.test',
-        'applicant@axis-onboarding-acceptance.test'
-    ]);
+    assert.deepEqual(runtime.smtpCommsProvider.allowedRecipients, approvedLocalCaptureRecipients);
     assert.equal(runtime.runtimeConfiguration.credentials.kickoffEmployeeMail.pass, null);
     assert.equal(runtime.communication.senders.kickoffEmployeeMail.address, null);
     assert.equal(runtime.communication.providerTypes.SMTP.service, 'DefaultSmtpCommunicationProviderService');
@@ -50,13 +52,13 @@ test('Local employee SMTP overrides bind in the sending runtime and inherit secu
     const runtime = loadRuntime('engagementServer', 'kickoffLocal', {
         NODICS_EMPLOYEE_SMTP_ENABLED: 'true', NODICS_EMPLOYEE_EMAIL_SENDER: 'sender@example.test',
         NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT: 'recipient@example.test', NODICS_EMPLOYEE_SMTP_HOST: 'smtp.example.test',
+        NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_2: 'other@example.test',
+        NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_3: 'another@example.test',
         NODICS_EMPLOYEE_SMTP_PASSWORD: 'fixture-only-not-a-live-credential'
     });
     assert.equal(runtime.smtpCommsProvider.enabled, true);
-    assert.deepEqual(runtime.smtpCommsProvider.allowedRecipients, [
-        'admin@axis-onboarding-acceptance.test', 'operator@axis-onboarding-acceptance.test',
-        'applicant@axis-onboarding-acceptance.test'
-    ], 'An environment recipient cannot broaden the approved Local capture allowlist');
+    assert.deepEqual(runtime.smtpCommsProvider.allowedRecipients, approvedLocalCaptureRecipients,
+        'Environment recipients cannot broaden the approved Local capture allowlist');
     assert.equal(runtime.smtpCommsProvider.smtp.host, 'smtp.example.test');
     assert.equal(runtime.smtpCommsProvider.smtp.port, 587);
     assert.equal(runtime.smtpCommsProvider.smtp.secure, false);
@@ -86,7 +88,7 @@ test('Implicit TLS may be explicitly selected without weakening inherited certif
     assert.equal(runtime.smtpCommsProvider.smtp.allowInsecureLoopback, false);
     assert.equal(runtime.smtpCommsProvider.enabled, false);
 });
-test('Approved Local capture uses the existing SMTP owner with three recipients and loopback-only plaintext', () => {
+test('Approved Local capture uses the existing SMTP owner with six recipients and loopback-only plaintext', () => {
     const runtime = loadRuntime('engagementServer', 'kickoffLocal', {
         NODICS_EMPLOYEE_SMTP_ENABLED: 'true',
         NODICS_EMPLOYEE_EMAIL_SENDER: 'noreply@nodics-local.test',
@@ -98,10 +100,7 @@ test('Approved Local capture uses the existing SMTP owner with three recipients 
         NODICS_EMPLOYEE_SMTP_ALLOW_INSECURE_LOOPBACK: 'true',
         NODICS_EMPLOYEE_SMTP_PASSWORD: 'isolated-capture-fixture-only'
     });
-    assert.deepEqual(runtime.smtpCommsProvider.allowedRecipients, [
-        'admin@axis-onboarding-acceptance.test', 'operator@axis-onboarding-acceptance.test',
-        'applicant@axis-onboarding-acceptance.test'
-    ]);
+    assert.deepEqual(runtime.smtpCommsProvider.allowedRecipients, approvedLocalCaptureRecipients);
     const provider = require(path.join(frameworkRoot,
         'nodics.communication/modules/smtpCommsProvider/src/service/defaultSmtpCommunicationProviderService'));
     const options = provider.smtpOptions(runtime.smtpCommsProvider, runtime.runtimeConfiguration.credentials.kickoffEmployeeMail);

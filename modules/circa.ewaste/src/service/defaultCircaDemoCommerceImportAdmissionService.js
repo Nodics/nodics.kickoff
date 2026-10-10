@@ -11,30 +11,9 @@
 
 "use strict";
 
-/** @module circa.ewaste/service/defaultCircaDemoCommerceImportAdmissionService @description Admits only the bounded Circa local v001 operational demo import while delegating all other Commerce owner decisions. @layer service @owner circa.ewaste */
+/** @module circa.ewaste/service/defaultCircaDemoCommerceImportAdmissionService @description Retains the Circa validator binding while delegating every Inventory and Promotion import target to its canonical owner. No demo flag grants operational admission. @layer service @owner circa.ewaste */
 module.exports = {
-  /** Returns true only when the current runtime is explicitly scoped to local demo sample imports. */
-  demoPolicy: function () {
-    return (CONFIG.get("circaEWaste") || {}).demoImportAdmission || {};
-  },
-
-  /** Keeps the override narrow to the immutable Circa v001 operational fixture. */
-  isCircaOperationalDemo: function (request) {
-    const policy = this.demoPolicy();
-    return (
-      policy.enabled === true &&
-      policy.qualified === true &&
-      request.releaseCode === policy.releaseCode &&
-      request?.destinationRole === "COMMERCE" &&
-      request.lifecycle === "OPERATIONAL_VERSIONED" &&
-      ((request.moduleName === "inventory" &&
-        request.schemaName === "inventoryBalance") ||
-        (request.moduleName === "promotion" &&
-          ["coupon", "couponBatch"].includes(request.schemaName)))
-    );
-  },
-
-  /** Delegates non-demo decisions back to the owning Commerce services. */
+  /** Preserves exact target metadata and owner refusals; missing owners fail closed. */
   delegate: function (request) {
     const owner =
       request?.moduleName === "inventory"
@@ -47,9 +26,8 @@ module.exports = {
     return owner.validateImportTarget(request);
   },
 
-  /** Admits only the marked Circa local demo snapshot; all ordinary imports retain Commerce owner policy. */
+  /** Delegates all imports, including legacy Circa snapshots, without granting stock or issuance authority. */
   validateImportTarget: function (request) {
-    if (this.isCircaOperationalDemo(request)) return true;
     return this.delegate(request);
   },
 };

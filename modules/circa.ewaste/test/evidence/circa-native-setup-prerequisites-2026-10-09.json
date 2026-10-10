@@ -1,0 +1,233 @@
+{
+  "contractVersion": 1,
+  "date": "2026-10-09",
+  "environment": "kickoffLocal",
+  "scope": "NATIVE_SETUP_AND_INSTALLED_PREREQUISITE_INSPECTION",
+  "status": "INFRASTRUCTURE_VERIFIED_FULL_OWNER_QUALIFICATION_PENDING",
+  "completedAt": "2026-10-09T07:58:10.131Z",
+  "businessAcceptance": false,
+  "fullInstalledOwnerQualification": false,
+  "previousEvidence": "circa-batch-1-6-source-2026-10-09.json",
+  "authority": {
+    "requestedAction": "Proceed point 1 end to end: native setup, installed-state inspection and qualification checks",
+    "privateCapture": "Human previously confirmed console, launch and upstream/APM capture paths qualified with capture disabled",
+    "launchSelection": "NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED=true",
+    "readOnlyAssessmentWindow": "NODICS_LOCAL_IDENTITY_ASSESSMENT_ENABLED=true; temporary launch selection, no persisted configuration change",
+    "excluded": [
+      "Reset or destructive maintenance",
+      "Business or documentation imports and publication",
+      "Seller consent, coupon issuance or budget opening",
+      "Merchant scope or access-grant repair",
+      "Financial, refund or ownership mutations",
+      "Bootstrap review confirmation or qualification-flag changes"
+    ]
+  },
+  "completedChecks": {
+    "topologyPreflight": { "ready": true, "availableBackendPorts": 10 },
+    "nativeStartup": {
+      "readyRuntimes": 10,
+      "declaredRuntimes": 10,
+      "runtimes": [
+        "platformServer", "wcmsOnlineServer", "processServer", "wcmsStagedServer",
+        "engagementServer", "loyaltyServer", "locationServer", "wasteServer",
+        "commerceStagedServer", "commerceServer"
+      ],
+      "buildOwner": "Existing nTooling topology owner rebuilt all selected runtimes before launch",
+      "frontendRequired": false
+    },
+    "credentialStorage": {
+      "ownerReadExistingEnvironment": "PASS",
+      "mode": "0600",
+      "ownerMatchesCurrentUser": true,
+      "runtimeConfigurationEncryptionKeyPresent": true,
+      "couponPurposeKeyPresent": true,
+      "credentialsPrinted": false,
+      "credentialRotationRequested": false
+    },
+    "authentication": {
+      "employeeOwnerAuthentication": "PASS",
+      "backofficeBootstrapHttpStatus": 200,
+      "inspectionSessionsRevokedThroughProfile": true
+    },
+    "runtimeGrants": {
+      "owner": "Profile.runRuntimeDeploymentGrantAcceptance",
+      "state": "PASS",
+      "verifiedRuntimes": 10,
+      "grantWrites": 0,
+      "meaning": "Each runtime matched its own effective deployment identity, module ceiling and required permission policy"
+    },
+    "installedIndexes": {
+      "ownerApi": "GET /nodics/system/v0/schema/indexes/module/:owner/schema/:schema",
+      "scope": "Authenticated default-tenant master models; no index rebuild",
+      "unversionedUniqueCodeModels": [
+        "COMMERCE:promotion:promotion",
+        "COMMERCE:promotion:coupon",
+        "COMMERCE:promotion:couponBatch",
+        "COMMERCE:promotion:promotionBudgetLedger",
+        "COMMERCE:store:store",
+        "COMMERCE:digitalCore:digitalDelivery",
+        "COMMERCE:digitalCore:digitalEntitlement",
+        "WASTE:wasteCore:wasteAsset",
+        "WASTE:wasteCore:wasteAssetOwnershipEvent",
+        "PLATFORM:profile:enterpriseAccessAssignment"
+      ],
+      "couponUnconditionalUniqueTokenIdentity": { "tenant": 1, "tokenHash": 1 },
+      "profileClaimIndex": {
+        "key": { "normalizedEmail": 1 },
+        "unique": true,
+        "partialFilterExpression": { "identityClaimed": true }
+      },
+      "indexWrites": 0,
+      "migrationAuthorized": false,
+      "afterSupervisedRestart": { "passed": 10, "failed": 0, "total": 10 },
+      "correctedProbe": "An initial digitalMerchantRedemptionReceipt schema selection returned 404. Digital's canonical receipt owner is digitalDelivery, inspected successfully together with digitalEntitlement. No replacement schema was added."
+    },
+    "providerTopology": {
+      "owner": "DefaultMongodbDatabaseConnectionHandlerService.createConnection/discoverCapabilities",
+      "selection": "Effective commerceServer Promotion default-tenant binding, resolved through nConfig",
+      "multiRecordAtomic": true,
+      "durableJournal": true,
+      "primaryMajorityReadback": true,
+      "businessWrites": 0,
+      "connectionClosed": true,
+      "limitation": "Live topology capability observation is not a Promotion transaction, rollback or race acceptance result"
+    },
+    "nativeProviderPrimitives": {
+      "ownerRunner": "nodics.platform/modules/profile/test/installedOnboardingQualification.test.js",
+      "fullRunnerExitCodeWithNativeProvidersSelected": 0,
+      "focusedNativeRun": { "tests": 3, "passed": 3, "failed": 0, "skipped": 0 },
+      "cases": [
+        "Installed MongoDB CAS single winner, stale rejection, exact readback, partial claim uniqueness and positive writer acknowledgement",
+        "Installed Redis atomic consume, bounded distributed limit and monotonic stamp",
+        "Installed Redis membership invalidation across seven worker processes without affecting another membership"
+      ],
+      "fixtureScope": "Runner-created nodics_profile_qualification_<random UUID> database and Redis namespaces; only owned fixture records and keys are removed",
+      "businessPrincipalsCreated": false,
+      "limitation": "Native provider primitives do not establish full generated Profile signup, merchant authority, Promotion private persistence or customer/browser acceptance"
+    },
+    "couponPurposeKey": {
+      "owner": "DefaultSecretProtectionService.assertReady",
+      "purpose": "PROMOTION_COUPON_TOKEN",
+      "state": "PASS",
+      "privateCaptureGate": true,
+      "keyWritten": false,
+      "evidenceScope": "Current effective deployment configuration owner check, not an invocation inside the running Commerce process"
+    },
+    "wasteInstalledInventory": {
+      "ownerApi": "POST /nodics/wasteApi/v0/waste/installed-data/inspect",
+      "wasteAsset": {
+        "total": 0, "returned": 0, "nextPage": null,
+        "pageChecksum": "302998a88fc03ae5b67d1db8e0ee09e32599fbe7d887bcefab67e07430978db3"
+      },
+      "wasteAssetOwnershipEvent": {
+        "total": 0, "returned": 0, "nextPage": null,
+        "pageChecksum": "75494ea1f224f0cab2683ec9eddfa7c459ec0290480162d2da826df4cb8a1527"
+      },
+      "migrationAuthorized": false,
+      "limitation": "These two complete empty inventories do not prove absence of partial state in other owner resources"
+    },
+    "documentation": {
+      "profile": "circadocs",
+      "ownerStatusHttpStatus": 200,
+      "readiness": "READY",
+      "preparation": "CURRENT",
+      "publicationState": "ONLINE",
+      "afterSupervisedRestart": { "readiness": "READY", "publicationState": "ONLINE" },
+      "meaning": "Existing documentation remains Online independently of uninstalled business packs"
+    }
+  },
+  "installedBusinessState": {
+    "owner": "nImport sample catalogue",
+    "httpStatusPerRole": 200,
+    "roles": ["PLATFORM", "COMMERCE_STAGED", "COMMERCE", "WASTE", "LOYALTY", "LOCATION"],
+    "circaReleaseCount": 22,
+    "status": "NOT_INSTALLED",
+    "version": "0.0.1",
+    "releaseCountPerRole": {
+      "PLATFORM": 3, "COMMERCE_STAGED": 6, "COMMERCE": 7,
+      "WASTE": 3, "LOYALTY": 1, "LOCATION": 2
+    },
+    "installedReceiptAdoptionOrRewrite": false,
+    "limitation": "Absent receipts alone never prove absence of unmanaged operational records or authorize opening balances"
+  },
+  "remainingGates": [
+    {
+      "code": "PROFILE_IDENTITY_REVIEW_REQUIRED",
+      "owner": "Profile identity assessment",
+      "observed": "Complete matching two-pass inventory has six RSN_PROFILE_IDENTITY_NON_EMAIL_LOGIN_REVIEW findings",
+      "nextAction": "Review findings through the existing Profile workflow. No bootstrap compatibility disposition, identity rewrite or qualification is inferred from inspection."
+    },
+    {
+      "code": "REQUIRED_CAPABILITY_REGISTRATION",
+      "owner": "BackOffice Module Registry",
+      "observed": ["nodics.location:NOT_REGISTERED", "nodics.waste:NOT_REGISTERED", "nodics.loyalty:NOT_REGISTERED"],
+      "alreadyActive": "nodics.commerce",
+      "nextAction": "Use governed module lifecycle and its required activation-data preflight; do not equate a ready runtime with registered capability visibility"
+    },
+    {
+      "code": "CIRCA_SETUP_NOT_INSTALLED",
+      "owner": "BackOffice application initialization and nImport",
+      "observed": "circa readiness BLOCKED; 22 inspected Circa sample releases NOT_INSTALLED, with additional required reference/core prerequisites",
+      "nextAction": "Stage 2 must perform owner partial-state preflight and explicitly selected setup before publication, consent and issuance"
+    },
+    {
+      "code": "MERCHANT_AUTHORITY_NOT_ESTABLISHED",
+      "owner": "Profile, Store and Digital Core",
+      "workspaceHttpStatus": 403,
+      "workspaceCode": "ERR_AUTH_00003",
+      "administratorScopeCount": 0,
+      "nextAction": "Use actual issuer staff and canonical scoped permissions/outlet records; do not promote the bootstrap administrator or manufacture Profile scopes"
+    },
+    {
+      "code": "PRIVATE_OWNER_ACCEPTANCE_NOT_ESTABLISHED",
+      "owner": "Promotion, Digital Core, Store, Profile and Waste",
+      "observed": "Seller authorization, purchased rights and Store scope remain disabled/unqualified; monetary evidence remains unqualified",
+      "nextAction": "Qualify actual installed owner flows, private hooks/read protection, generated transaction/CAS acknowledgements, rollback, race and recovery after their prerequisites exist",
+      "limitation": "No supported read-only Promotion/Digital runner was found for the complete chain. Distribution assertInstalled already requires qualified seller policy and cannot justify initial qualification circularly."
+    }
+  ],
+  "profileReadOnlyAssessment": {
+    "initialRunnerRefusal": "OWNER_ASSESSMENT_ADMISSION_REFUSED",
+    "temporaryReadOnlyWindowOpened": true,
+    "assessmentHttpStatus": 200,
+    "inventoryComplete": true,
+    "consistency": "TWO_PASS_OBSERVED_MATCH",
+    "atomicSnapshot": false,
+    "readyForApply": false,
+    "counts": {
+      "tenants": 1, "enterprises": 1, "assignments": 6,
+      "employees": 12, "customers": 12, "servicePrincipals": 1, "passwords": 24
+    },
+    "reviewRequired": true,
+    "findingCount": 6,
+    "findingCodes": ["RSN_PROFILE_IDENTITY_NON_EMAIL_LOGIN_REVIEW"],
+    "runnerExitCode": 1,
+    "runnerRefusalAfterOpeningWindow": "OWNER_ASSESSMENT_NOT_READY",
+    "registrationQualified": false,
+    "browserAccepted": false,
+    "bootstrapReviewConfirmed": false,
+    "meaning": "Assessment admission now works; unresolved findings, not disabled inspection, prevent a positive prerequisite receipt"
+  },
+  "cleanup": {
+    "state": "VERIFIED_STOPPED",
+    "owner": "nTooling topology:stop and verifyMaintenanceOutage",
+    "verifiedAt": "2026-10-09T07:58:10.131Z",
+    "declaredBackendPortsChecked": 10,
+    "listeningBackendPorts": 0,
+    "runtimeAndSupervisorProcessInventoryChecked": true,
+    "temporaryAssessmentWindowClosed": true,
+    "persistedConfigurationChanges": false,
+    "businessImportOrPublicationCommandsExecuted": false,
+    "installedReceiptRewriteExecuted": false,
+    "qualificationFlagsChanged": false,
+    "limitation": "Normal startup/bootstrap and inspection authentication have their existing owner lifecycle effects; this report does not claim a globally mutation-free environment"
+  },
+  "ownershipReview": {
+    "status": "PASS",
+    "placement": "Circa-owned test evidence, outside importable data releases",
+    "behavioralChanges": false,
+    "newApiOrQualificationAuthority": false,
+    "historicalEvidenceRewritten": false,
+    "review": "All operations reused existing topology, Profile, nImport, BackOffice, System index, Waste inspection, secret-protection and native provider test owners. No direct database shell, generic service dispatch, new API, copied harness, permission repair, receipt adoption or business-data mutation was introduced. Only current-run evidence and its discoverability pointer were edited. Source tests, live prerequisites, unresolved owner acceptance and later business stages remain distinct."
+  }
+}

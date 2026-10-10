@@ -1,0 +1,260 @@
+{
+  "date": "2026-10-09",
+  "scope": "SOURCE_VALIDATION_AND_READ_ONLY_NATIVE_PROCESS_STATUS",
+  "environment": "kickoffLocal",
+  "businessAcceptance": false,
+  "previousEvidencePreserved": "circa-owner-setup-source-acceptance-2026-10-09.json",
+  "implemented": [
+    "Signed issuer issuance retains original live consent revision, private encrypted receipt and vendor-scoped coupon stock",
+    "Receipt-bound seller reader resolves exact activated issuer policy and original budget provenance without changing signed customer scope",
+    "Operation preview, purchase campaign selection and Product pool availability use the real bridge; purchase policy remains fingerprint-stable as live spend changes",
+    "Product digital availability preserves original signed access context instead of synthetic service identity or catalogue-manufactured enterprise authority",
+    "Delegated read policy cannot enter seller-scoped issuer budget consumption; typed denial occurs before any read or write",
+    "Qualified ITEM integration requires exact bounded bundles and independent immutable delivered-item evidence, never staff assertions or a monetary fallback",
+    "DigitalCore and eWaste connect one retained asset reservation to original captured Loyalty payment, seller-only credit and persisted Waste ownership transfer",
+    "Checkout routes exact digital classification without physical-stock fallback and retains saved Cart Store and locale",
+    "Asset capture verifies original enterprise, Checkout keys, authorization, buyer debit and seller earning; replay retains original transfer and delivery evidence",
+    "Conflicting signed/request enterprise aliases refuse before new Payment retention or eWaste owner calls; historical payments are not backfilled",
+    "Owner contracts document sequence diagrams, evidence tables, recovery, unsupported boundaries and installed qualification gates"
+  ],
+  "validation": {
+    "commerceSourceTests": {
+      "passed": 792,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test --test-reporter=spec $(rg --files nodics.commerce | rg '/test/[^/]+\\.test\\.js$')"
+    },
+    "wasteAndEWasteSourceTests": {
+      "passed": 298,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test --test-reporter=spec $(rg --files nodics.waste nodics.accelerators/modules/waste/modules/eWaste | rg '/test/[^/]+\\.test\\.js$')"
+    },
+    "circaAndApparelOperationalSourceTests": {
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test --test-reporter=spec modules/circa.ewaste/test/*.test.js modules/agora.apparel/test/*Operational*.test.js"
+    },
+    "dataBaselineAndGovernanceTests": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "selector": "node --test --test-reporter=spec nodics.foundation/modules/nTooling/test/dataBaselineConsolidationContract.test.js nodics.foundation/modules/nTooling/test/repositoryGovernanceDocumentsContract.test.js"
+    },
+    "totalPassed": 1178,
+    "baseline": "All initial production release folders v001, declared byte checksums match, documentation packs optional and separate from business sections",
+    "canonicalBuilds": [
+      {
+        "command": "nodics build --environment=kickoffLocal --server=commerceServer",
+        "status": "PASSED",
+        "openApiPaths": 1078,
+        "schemas": 126
+      },
+      {
+        "command": "nodics build --environment=kickoffLocal --server=commerceStagedServer",
+        "status": "PASSED",
+        "openApiPaths": 1122,
+        "schemas": 128
+      },
+      {
+        "command": "nodics build --environment=kickoffLocal --server=wasteServer",
+        "status": "PASSED",
+        "openApiPaths": 556,
+        "schemas": 87
+      }
+    ],
+    "buildWarnings": [
+      "Optional externalProps.js absent",
+      "Existing eWaste experience controller overrides reported by Waste build"
+    ],
+    "designPrincipleAudit": "PASSED",
+    "documentationGovernance": {
+      "status": "PASSED",
+      "files": 3905,
+      "exportedMethods": 11991,
+      "undocumentedFiles": 0,
+      "methodsWithoutJSDoc": 0
+    },
+    "generatedModuleContext": {
+      "generated": 202,
+      "validated": 202
+    },
+    "scopedWhitespaceCheck": "PASSED",
+    "diagnostics": "Standalone governance report attempts did not resolve the correct project module graph; canonical deployment builds passed without changing module selection",
+    "limits": [
+      "Isolated source/provider doubles do not establish installed persistence, transport, financial or business acceptance",
+      "Existing refund/return source regression coverage passed; no live Circa refund/return journey ran in this batch"
+    ]
+  },
+  "policyReview": {
+    "proposal": "modules/circa.ewaste/test/fixtures/circaDemoPolicyProposal.json",
+    "status": "PROPOSED_NOT_APPROVED",
+    "operationalAuthority": false,
+    "importable": false,
+    "campaigns": 38,
+    "itemCampaigns": 29,
+    "assetBindings": 5,
+    "adopted": false
+  },
+  "workstreams": [
+    {
+      "point": 1,
+      "status": "PARTIAL_SOURCE_IMPLEMENTED",
+      "remaining": [
+        "Trusted service/public distribution admission",
+        "Issuer-employee to vendor-stock merchant operation admission",
+        "Receipt-bound issuer budget consumption and reversal owner bridge",
+        "Installed consent/private persistence qualification"
+      ]
+    },
+    {
+      "point": 2,
+      "status": "PARTIAL_SOURCE_IMPLEMENTED",
+      "remaining": [
+        "Review exact item bundles and financial/asset terms",
+        "Canonical installed immutable ITEM delivery adapter",
+        "Exact asset binding and active policy setup",
+        "Installed secured cross-runtime ownership/payment/ledger qualification",
+        "Captured asset refund/reversal remains manual review; no automatic rollback"
+      ]
+    },
+    {
+      "point": 3,
+      "status": "PENDING_POLICY_AND_OWNER_ADMISSION",
+      "remaining": [
+        "Replace all required legacy operational snapshots with complete reviewed issuer-scoped setup instructions after policy review",
+        "Preserve exact publication fingerprints and original immutable installed receipts",
+        "Do not weaken required setup or import rejected legacy snapshots"
+      ]
+    },
+    {
+      "point": 4,
+      "status": "NATIVE_BUSINESS_ACCEPTANCE_NOT_RUN",
+      "remaining": [
+        "Owner partial-state inspection and any justified governed recovery",
+        "Complete existing Axis import/publication/approval flow",
+        "Native purchase, repeat reveal, monetary and ITEM redemption, compensation, return/refund and safe replay after all preceding owner gates"
+      ]
+    }
+  ],
+  "nativeEffects": {
+    "processStatus": {
+      "supervisor": "NOT_RUNNING",
+      "declaredBackendPortsChecked": 10,
+      "listeningBackendPorts": 0
+    },
+    "runtimesStarted": false,
+    "resetExecuted": false,
+    "businessImportsExecuted": false,
+    "publicationExecuted": false,
+    "consentsGranted": false,
+    "stockIssued": false,
+    "paymentOrOwnershipEffectsExecuted": false,
+    "receiptAdoptionExecuted": false,
+    "receiptRewriteExecuted": false,
+    "axisOrCustomerBrowserAcceptanceExecuted": false
+  },
+  "sourcePins": [
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultCouponSecureIssuanceService.js",
+      "sha256": "e12b72c9ac33edcb28a58a37b6f0f6bd434ca439d6de1c3ed3797c93f9b4349a"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultCouponSellerAuthorizationService.js",
+      "sha256": "18ba8523769d15a81a283ce63e899103e281c43a37b3035008e0a95ade585e67"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionSellerPolicyService.js",
+      "sha256": "5911c493e98b3ae3096b7bb54eb89309b5118543ba1346f64fbd7e5de28bfef6"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionPublicationService.js",
+      "sha256": "fab564e57873c72c31ef3504af4c04f73c2b425f31366fb58bdb02a9549abaa6"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService.js",
+      "sha256": "989fc5e9f96fa108ebc8f3767458153c61a0996b2e355d3c6a388ba7c1352783"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionItemBenefitService.js",
+      "sha256": "78ec798418d5252a4e1871b7940357d6f1d66c10c7f562bebed072a3160c3291"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/product/src/service/defaultProductSearchEnrichmentService.js",
+      "sha256": "74ae1c1b6094c7b55c69d118ccd6c652c2c1f118d0a27538740f0a9a3e26868f"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceOwnershipService.js",
+      "sha256": "93fa52e536270b89484f3e4ada5605a5f76e5d8ae29386f01c945b54d0360e21"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceItemMerchantProviderService.js",
+      "sha256": "66e6c2bb4f228c99647bf89d562a8301a2398e5b870253d9b354fcb29ccdaeaf"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceCheckoutService.js",
+      "sha256": "dae4772dbcc3f3f626929adad9e9839532fded063e2cc307c68195afb642e428"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/checkout/modules/checkoutCore/src/service/defaultCheckoutPlacementPortsService.js",
+      "sha256": "685458c0a3c0c85ce3fb2b92783e6a674012f7ccc16fdd9b06456c37565024bd"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/payment/modules/paymentCore/src/service/defaultPaymentExecutionService.js",
+      "sha256": "582bd237034b34aa34c59e038f166153ef3b25796af56817e2242732d370205d"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/payment/modules/paymentCore/src/schemas/schemas.js",
+      "sha256": "23d66ea7b561c7b4b9df38e2984d2b51672e461e7e931c489be68a213144f158"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.waste/modules/wasteCore/src/service/defaultWasteAssetTransferOperationService.js",
+      "sha256": "dce526ae42edbbe07b542cbf03092dbc1b99043b620240b896e8d77ba427b8de"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteDigitalSaleService.js",
+      "sha256": "6c54f8e274b283f78be499b553af343a8802da899682f12f86de67bee9132115"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteOrderReversalService.js",
+      "sha256": "eee9a3eaff503111bd52c7b763ce459911f809dc63cc23c47b476778547fa3dc"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionSellerPolicyBridgeContract.test.js",
+      "sha256": "f0a8929f3bf47ba5601268378d523d7c2970d156319cfb49550aa30bb91dc00b"
+    },
+    {
+      "repository": "framework",
+      "path": "nodics.accelerators/modules/waste/modules/eWaste/test/eWasteDigitalOwnershipBridge.test.js",
+      "sha256": "191d34fbe09071f416c4fe8a1fa2e9a9a7f2e9df5962dcf99a936c78fd105f09"
+    },
+    {
+      "repository": "kickoff",
+      "path": "modules/circa.ewaste/data/manifest.json",
+      "sha256": "44ef34794e11bcf756ee75dfc29737dacb71af1778f4cfe9a56ba168add5ea83"
+    },
+    {
+      "repository": "kickoff",
+      "path": "modules/circa.ewaste/test/fixtures/circaDemoPolicyProposal.json",
+      "sha256": "dd5e5d1fcbc984db2bd24069ac5455867c485098a444097bc7a53f78b4c009a1"
+    }
+  ]
+}

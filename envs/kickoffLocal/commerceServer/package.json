@@ -32,7 +32,8 @@
         "loyaltyCore",
         "loyaltyApi",
         "wasteCore",
-        "media"
+        "media",
+        "eWaste"
       ]
     },
     "runtimeTooling": {

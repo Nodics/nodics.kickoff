@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-09",
+  "scope": "SOURCE_AND_READ_ONLY_NATIVE_INSPECTION",
+  "environment": "kickoffLocal",
+  "businessAcceptance": false,
+  "implemented": [
+    "Exact private seller-consent CAS can update admitted campaigns without changing budgets or admission receipts",
+    "Purchased rights use activated benefit policy and fresh live consent, preserving the reservation grant revision",
+    "Separately pinned issuance packs can verify an explicit original admissionContribution without initializing or replacing a budget",
+    "Issuance receipts bind current issuance provenance separately from referenced original budget provenance",
+    "Unsupported ITEM benefits refuse Product availability, new and retried reservations, first sale and merchant eligibility independently of monetary selection",
+    "Completed sale replay, release and refund recovery retain original evidence",
+    "Checkout selects the authenticated persisted Cart Store and DigitalCore forwards it to Promotion reservation"
+  ],
+  "validation": {
+    "promotionTests": { "passed": 166, "failed": 0 },
+    "digitalCoreTests": { "passed": 101, "failed": 0 },
+    "checkoutCoreTests": { "passed": 51, "failed": 0 },
+    "circaAndApparelOperationalTests": { "passed": 78, "failed": 0 },
+    "repositoryGovernanceTests": { "passed": 1, "failed": 0 },
+    "totalPassed": 397,
+    "itemCampaignMatrixCount": 29,
+    "itemCampaignMatrixMonetarySelections": [false, true],
+    "separatePackProvenanceReview": "No remaining findings after correcting nImport composite release identity bounds",
+    "releaseDirectoryInspection": "No non-v001 init/core/sample/docs data files found in framework or kickoff, excluding generated output and test fixtures",
+    "limitations": [
+      "Isolated provider tests are not installed transaction, race or cross-runtime business qualification",
+      "No Axis or customer browser business acceptance was executed in this batch"
+    ]
+  },
+  "nativeInspection": {
+    "startup": "All ten declared backend runtimes reached readiness",
+    "registeredTenantDiscovery": { "count": 0, "qualified": false, "mode": "READ_ONLY_DISCOVERY" },
+    "catalogueRoles": ["PLATFORM", "COMMERCE_STAGED", "COMMERCE", "WASTE", "LOYALTY", "LOCATION"],
+    "catalogueHttpStatus": 200,
+    "historyHttpStatus": 200,
+    "circaReleases": [
+      { "releaseCode": "circa.ewaste:profile", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:operations", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:sunmarke-profile", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:commerce", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:circaPublicationPlan", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:store", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:commerce-operational", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:waste", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:sunmarke-waste", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:loyalty", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:location", "version": "0.0.1", "status": "NOT_INSTALLED" },
+      { "releaseCode": "circa.ewaste:sunmarke-location", "version": "0.0.1", "status": "NOT_INSTALLED" }
+    ],
+    "circaImportHistory": { "moduleName": "circa.ewaste", "limitPerRole": 50, "returnedRunsPerRole": 0 },
+    "apparelReceipts": [
+      { "releaseCode": "agora.apparel:agoraApparelCommerceCatalog", "version": "0.0.1", "status": "CURRENT", "installedChecksumMatches": true },
+      { "releaseCode": "agora.apparel:agoraApparelPromotionSetup", "version": "0.0.1", "status": "CURRENT", "installedChecksumMatches": true },
+      { "releaseCode": "agora.apparel:agoraApparelOpeningStock", "version": "0.0.1", "status": "CURRENT", "installedChecksumMatches": true }
+    ],
+    "inspectionSessionsLogout": "Owner API returned HTTP 200 SUC_AUTH_00000",
+    "cleanup": { "supervisor": "NOT_RUNNING", "declaredBackendPortsChecked": 10, "listeningBackendPorts": 0 },
+    "resetExecuted": false,
+    "businessImportsExecuted": false,
+    "receiptAdoptionExecuted": false,
+    "receiptRewriteExecuted": false,
+    "partialWriteAbsenceQualified": false,
+    "limitations": [
+      "Absent receipts and import history do not prove absence of unmanaged or partial operational rows",
+      "Future installation must retain owner preflight and governed recovery rather than infer safe opening balances"
+    ]
+  },
+  "remainingWorkstreams": [
+    { "point": 1, "status": "PENDING_POLICY", "required": "Reviewed campaign benefits, budgets, issuance quantities, original three issuer/vendor identities, consent terms and item mappings" },
+    { "point": 2, "status": "PARTIAL_SOURCE_FIXES", "required": "Cross-enterprise secure issuance and seller-scoped stock integration; current secure issuance intentionally remains self-issued/self-vended" },
+    { "point": 3, "status": "UNSUPPORTED_REFUSED", "required": "Verified ITEM fulfillment for 29 campaigns and Waste-owned DIGITAL_OWNERSHIP reservation/payment/transfer/recovery integration for five assets" },
+    { "point": 4, "status": "PARTIAL_INSTRUCTION_OWNER_SUPPORT", "required": "Reviewed Circa owner instructions replacing rejected legacy operational snapshots; do not import or bypass those snapshots" },
+    { "point": 5, "status": "READ_ONLY_INSPECTION_COMPLETE_ACCEPTANCE_PENDING", "required": "Owner partial-state preflight, any justified governed recovery, publication/setup and live Axis/customer acceptance after preceding gates" }
+  ],
+  "sourcePins": [
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionSetupContributionService.js", "sha256": "697490d9bc5d732ab983a88b67b82245a74ca1f6f0de38dc8ed48d5cbac6a74a" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultCouponSecureIssuanceService.js", "sha256": "740738872cc81baba49035ec4139402f1835966d62d09214ced3163dd98b7fd7" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionBudgetAdmissionService.js", "sha256": "36fae4abba113266a562181404acf76d5d359d9adce6de94fbb43c41ddd9a143" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultCouponSellerAuthorizationService.js", "sha256": "a5f67ba54051dcc461219f4b69ceb9954f2cc31a36bf139a772054d7df7eae82" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService.js", "sha256": "cf3b1279a6671286b32928307111d6377eb2a56d8bd8444ff71f533c362ab658" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionOrderedSetupContract.test.js", "sha256": "ce00354e8ecf788b7d601945b247ecc1c2d920e91fcbe924b824827a3c0c0895" },
+    { "repository": "framework", "path": "nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionUnsupportedItemBenefitContract.test.js", "sha256": "8c03000baf05d94e3651e1343072e8f0fe93cadebe47a3ec84ad2d14055093c8" },
+    { "repository": "framework", "path": "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceCheckoutService.js", "sha256": "dcd65ff5b2b7bbe13e05fc8f3e70535a63b0bccc5752e3c8d8d5fd5792e067de" },
+    { "repository": "framework", "path": "nodics.commerce/modules/checkout/modules/checkoutCore/src/service/defaultCheckoutPlacementPortsService.js", "sha256": "9b62e8270ce680c3b526396efed290e35b95f9b60e4a518fe8bdecb1733d3679" },
+    { "repository": "kickoff", "path": "modules/circa.ewaste/data/manifest.json", "sha256": "44ef34794e11bcf756ee75dfc29737dacb71af1778f4cfe9a56ba168add5ea83" },
+    { "repository": "kickoff", "path": "modules/circa.ewaste/data/sample-v001/commerce/records/circaPromotionData.js", "sha256": "7ebe68f8e5b93322a1027d3913a665198299bc4326bd8361714fd26baaa0bf11" },
+    { "repository": "kickoff", "path": "modules/circa.ewaste/test/circaUnsupportedItemBenefit.test.js", "sha256": "317575ded2567b90a3558df8a135f0674977fe5786d093feefe97878fbd6db78" }
+  ]
+}

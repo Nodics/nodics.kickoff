@@ -4,14 +4,17 @@
   "index": "1001.11",
   "private": true,
   "main": "nodics.js",
-  "requiredModules": ["dynamo"],
+  "requiredModules": [
+    "dynamo"
+  ],
   "nodics": {
     "kind": "server",
     "extends": [
       "nodics.platform",
       "nodics.localization",
       "nodics.discovery",
-      "nodics.copilot"
+      "nodics.copilot",
+      "nodics.docs"
     ],
     "runtimeModuleRoots": [
       "nodics.platform",
@@ -20,6 +23,7 @@
       "nodics.copilot",
       "nodics.waste",
       "nodics.loyalty",
+      "nodics.docs",
       "nodics.accelerators/modules/nexus"
     ],
     "runtimeModule": true,

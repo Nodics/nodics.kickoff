@@ -1,0 +1,156 @@
+{
+  "scope": "NATIVE_KICKOFF_LOCAL_ONLY",
+  "observationDate": "2026-10-09",
+  "status": "SETUP_AND_ASSET_ONBOARDING_QUALIFIED_BUSINESS_E2E_PENDING",
+  "productionQualification": false,
+  "resetPerformed": false,
+  "historicalEvidence": "circa-native-publication-and-issuer-follow-through-2026-10-09.json",
+  "authority": {
+    "authentication": "Existing canonical Profile employee and service-runtime issuance; signed principal identity and enterprise preserved",
+    "financialGrantExpansionPerformed": false,
+    "credentialsOrCouponSecretsRecorded": false,
+    "privateCaptureQualification": "Human confirmed existing native capture paths qualified with capture disabled",
+    "newQualificationCommandSessionLogout": "PASS"
+  },
+  "setup": {
+    "freshReadiness": "READY",
+    "publicationState": "ONLINE",
+    "beforeDataStagesCurrent": 31,
+    "functionalOwnersCurrent": 4,
+    "scopedPublicationStagesCurrent": 4,
+    "budgetStagesCurrent": 3,
+    "issuanceStagesCurrent": 3,
+    "mediaStage": "SOURCE_READY_METADATA_ONLY_NOT_A_STORED_BYTE_PROOF",
+    "meaning": "Setup readiness is not purchase, redemption, fulfillment or refund acceptance"
+  },
+  "assetOnboarding": {
+    "owners": ["eWaste.digitalListing", "DigitalCore.ownershipAdmission"],
+    "execution": "Exact pinned read-only plan, normal binding admission, durable binding readback, original admission replay, listing completion and original completion replay",
+    "initialInstalledAssetRevision": 1,
+    "completedAssetRevision": 2,
+    "locales": ["en", "ar"],
+    "storeCode": "circaMainStore",
+    "planPins": [
+      {"assetCode": "EWA-1047", "sellerCode": "circa-customer", "planDigest": "74c61168316d0805bae75ab645df51e8e1250c2f915f9b6c3e94663afb0f09ed"},
+      {"assetCode": "EWA-1051", "sellerCode": "circa-customer", "planDigest": "bd9a8aa3debcd4f9d0e267da3203fd94c5db436ce7de0bcc6f1bb45d403a568e"},
+      {"assetCode": "EWA-1052", "sellerCode": "circa-customer", "planDigest": "249e2edfdb70e3d1149ba852e72ea7d20fd53f465c0b1b1b23779a7e768efa54"},
+      {"assetCode": "EWA-1055", "sellerCode": "circa-customer", "planDigest": "c0e6b9c2941bd2e7f0a99b09e405f4e06377f391f53f6424028ae47057c79d6e"},
+      {"assetCode": "EWA-1092", "sellerCode": "circa-seller", "planDigest": "722211132261d24ba2f4bcffa269c228201045d1adb1dca3f3b95e70db49f9ee"}
+    ],
+    "rebuiltNativePlanReadback": "PASS_ALL_FIVE_ORIGINAL_DIGESTS_UNCHANGED_INCLUDING_FINAL_NAVIGATION_REBUILD",
+    "installedPersistence": [
+      {"schema": "wasteAsset", "compareAndSetAvailable": true, "uniqueCodeIdentity": true, "revisionOwner": "MANAGED"},
+      {"schema": "wasteAssetMarketplaceProjection", "compareAndSetAvailable": true, "uniqueCodeIdentity": true, "revisionOwner": "MANAGED"},
+      {"schema": "wasteAssetOwnershipEvent", "compareAndSetAvailable": true, "uniqueCodeIdentity": true, "revisionOwner": "DOMAIN"}
+    ],
+    "originalDigitalOwnersAndPhysicalCustodyPreserved": true,
+    "saleTransferOrSettlementClaimed": false
+  },
+  "readDefectsResolved": {
+    "tenantPartition": "Canonical tenant-less operational rows admitted only through verified generated-read tenant partition; no stored tenant-field patch",
+    "sellerWallet": "Existing protected Loyalty wallet-evidence endpoint supports exact existing CUSTOMER owner selection without opening a wallet",
+    "normalizedPaging": "Real DefaultModelsGetInitializerService normalization reproduced the refusal; exact limit 2, skip 0, snapshot false now admitted alongside original bounded paging; widened reads remain refused",
+    "nativeWalletEvidenceAfterFinalRebuild": [
+      {"customerCode": "circa-customer", "walletCode": "WALLET_ED16C8FCF19E1FE586E3DA5D", "available": "118", "reserved": "0", "revision": 0},
+      {"customerCode": "circa-seller", "walletCode": "WALLET_2E540F02E3E064593B00CA5D", "available": "8", "reserved": "0", "revision": 0}
+    ],
+    "nativeWalletReadAuthority": "Genuine WASTE service identity, original default tenant, GREENPERKS_ONLINE business scope, circa program and points reward; explicit wallet and exact-owner selection verified",
+    "walletCreatedOrBalanceChanged": false,
+    "finalReadOnlyWalletReadback": "Buyer available 118/reserved 0/revision 0 and seller available 8/reserved 0/revision 0 unchanged after all publication and public asset checks",
+    "wasteSaleEvidenceFinancialPhase": "SOURCE_TESTED_NOT_NATIVE_QUALIFIED_WITH_FINANCIAL_FLAGS_AND_GRANTS_DISABLED"
+  },
+  "documentation": {
+    "releaseFolder": "docs-v001",
+    "semanticSuccessorVersion": "0.0.2",
+    "frozen001FilesAndAssetsPreserved": {"eWaste": 47, "backoffice": 8},
+    "publication": [
+      {"profile": "docs-ewaste", "readiness": "READY", "releaseStatus": "CURRENT", "publicationCode": "cmsBaseline_docs-ewaste_0_0_2", "state": "ONLINE", "revision": 18, "sourceVersion": "0", "exactOnlineArticlesVerified": 12, "qualifiedMediaAssets": 54},
+      {"profile": "circadocs", "readiness": "READY", "releaseStatus": "CURRENT", "publicationCode": "cmsBaseline_circadocs_0_0_2", "state": "ONLINE", "revision": 12, "sourceVersion": "0", "exactOnlineArticlesVerified": 4, "qualifiedMediaAssets": 0},
+      {"profile": "docs-backoffice", "readiness": "READY", "releaseStatus": "CURRENT", "publicationCode": "cmsBaseline_docs-backoffice_0_0_2", "state": "ONLINE", "revision": 12, "sourceVersion": "0", "exactOnlineArticlesVerified": 4, "qualifiedMediaAssets": 54}
+    ],
+    "publicationProcess": "Existing coordinated BackOffice import, CMS Process approval and independent Media approvals when required. Initial eWaste publication reused already qualified assets; BackOffice later renewed eight exact shared Media publications through their normal Process workflows",
+    "deliveryProof": "Each corrected article's Online blocks and source checksum exactly match its active canonical component after final rebuild",
+    "publicAssetDelivery": {"status": "PASS", "assets": 54, "proof": "Anonymous public HTTP GETs each match the manifest-pinned SHA-256; fresh qualified owner dependency selection and publication revision unchanged after all reads", "browserImageRendering": "NOT_EXECUTED"},
+    "sharedReferencesAvailable": [
+      "/docs/framework/location-approval-schema-boundary",
+      "/docs/framework/location-shared-map-configuration",
+      "/docs/framework/docs-documentation-publishing-runbook"
+    ],
+    "sharedReferenceProbeCorrection": "Ephemeral helper initially expected only delivery contract 1; native published snapshot 0 is supported by CMS. Helper corrected to actual supported 0/1/2, with exact route and page identity still required; all three probes passed",
+    "axisSetupArticle": "REAL_SOURCE_CONTENT_GAP_REPAIRED_IN_IMMUTABLE_BACKOFFICE_SUCCESSOR_AND_EXACT_ONLINE_CONTENT_VERIFIED",
+    "backofficeSourceBinding": {"localChecksum": "1731c69aef697ba0cfe4fe8e52916cbadefb41e02dbdee20fa777787a6b7aa4f", "composedChecksum": "621ad2b7909aaaca011a933dd739f7c5f4ee87b8486cd6f64630e023762c220f"},
+    "sharedMediaCrossPackRenewal": {
+      "encountered": "BackOffice import advanced the eight shared foundation Media metadata versions. Its coordinated action completed independent exact-version Media approvals; earlier eWaste CMS pins then qualified only 46 of 54 assets",
+      "renewedMediaApprovalEvidence": "Eight exact BackOffice-correlated Media publications independently read through nPublish: ONLINE, exact source version dependency and Process workflow reference present",
+      "repair": "Existing nPublish CMS validate, request-approval and canonical Process claim/complete renewed eWaste from revision 6 to 12 without reimporting data or assets",
+      "firstRenewalHelperFailure": "CMS validation and request-approval succeeded; helper used incorrect cmsReview node and refused before decision. Fresh status confirmed original pending revision 9. Recovery selected actual publicationReview node and completed that same pending cycle; no replacement cycle or history rewrite",
+      "finalReadback": "Both docs-ewaste and docs-backoffice READY/CURRENT/ONLINE with all 54 Media assets qualified; circadocs READY with zero assets",
+      "exactVersionOrApprovalPolicyRelaxed": false,
+      "retainedHistoricalManifestsPreserved": true
+    },
+    "deliveryHelperCorrection": "BackOffice catalogue includes shared foundation documents. Initial exact-four selection refused before comparison; helper restricted selection to canonical ownerRoot, then all four exact Online block/source checksums passed",
+    "readerNavigationSearch": {
+      "status": "PASS_NATIVE_EXACT_CANONICAL_PROJECTION",
+      "initialNativeReadOnlyProbe": {"route": "/docs/framework/applications-axis-setup-error-contracts", "articleContainsCurrentSelector": true, "navigationSearchContainsCurrentSelector": false},
+      "finalNativeReadOnlyProbe": {"route": "/docs/framework/applications-axis-setup-error-contracts", "articleContainsCurrentSelector": true, "navigationSearchContainsCurrentSelector": true, "navigationSearchEqualsCanonicalArticle": true},
+      "sourceFinding": "Axis reader filters shared navigation items.searchText, not current canonical SearchMetadata. Frozen shared scaffold contains historical text; new CMS snapshot projection now derives current reader metadata without rewriting the scaffold",
+      "remediationBoundary": "CMS derives navigation metadata only from reachable active exact frozen articles in the same Site/locale/channel/access scope. Missing, redirected, foreign or ambiguous articles are omitted. Authored shared scaffold, release payloads and historical manifests remain unchanged; normal CMS validation and independent Process approval are required for a new snapshot",
+      "sourceSha256": "fd9e8cddb1f3495bb3f3d91dca8afeef9679f5e383a2ea1d62ffe82b45df6738",
+      "sourceReviewArtifact": "nodics.ai/nodics.docs/test/evidence/semantic-documentation-cms-navigation-source-review-2026-10-09.json",
+      "startupRecovery": "First startup rejected stale build inputs while comment-only documentation edits were finishing; canonical complete rebuild performed without bypassing the guard",
+      "approvalRecovery": "Initial BackOffice renewal persisted original PENDING_APPROVAL revision 9 and workflow lineage, but Process task creation refused operational-state drift during admission. Fresh owner readback verified the exact pending cycle; after all ten services READY, recovery reused its ordinary request-approval path and original workflow reference, completing ONLINE revision 12. No replacement approval cycle or wider authority",
+      "normalRenewalReadback": "BackOffice revision 6 to 12, eWaste 12 to 18, circadocs 6 to 12, each CURRENT/READY/ONLINE; no records or assets reimported and previous immutable manifests preserved",
+      "browserSearchAcceptance": "NOT_EXECUTED"
+    },
+    "signedInAxisBrowserAcceptance": "NOT_EXECUTED",
+    "axisBrowserBoundaryProbe": "Temporary real in-app browser tab reached employee sign-in at /login?returnTo=the exact guide route. No credentials, session tokens or browser storage injected; no authenticated reader/publication or browser-image proof claimed. Temporary tab and owned Axis dev server closed after this read-only boundary check"
+  },
+  "catalogue": {"customerDiscovery": "PASS", "digitalProducts": 43, "source": "SEARCH_INDEX", "financialAvailabilityQualification": false},
+  "sourceValidation": {
+    "focusedFinalOwnerTests": {"passed": 119, "failed": 0},
+    "cmsCompleteTopLevelSourceSuite": {"passed": 98, "failed": 0},
+    "digitalCoreAndSetupObservationSourceSuite": {"passed": 282, "failed": 0, "skipped": 3, "skipBoundary": "Two direct Mongo fixtures and one actual native graph test require explicit inputs; graph test separately executed below"},
+    "actualNativeSetupObservationGraphs": {"passed": 1, "failed": 0, "skipped": 0},
+    "documentationGovernance": {"status": "PASS", "addedMethodDocumentation": 27, "files": 7, "executableAstsUnchanged": true},
+    "normalizedReadRegressionBeforeFix": {"failed": 2},
+    "normalizedReadRegressionAfterFix": {"passed": 29, "failed": 0},
+    "sharedToolingDocumentationTests": {"passed": 16, "failed": 0},
+    "axisSetupDocumentationAndMediaHandoffClientTests": {"filesPassed": 6, "passed": 121, "failed": 0, "signedInBrowserAcceptance": false},
+    "circaFullTests": {"passed": 124, "failed": 0},
+    "eWasteConfiguredSuiteAfterFinalPagingFix": {"passed": 215, "failed": 0},
+    "loyaltyFullSuiteAfterPagingFix": "PASS_EXIT_ZERO",
+    "eWasteForwardReleaseAndOwnershipTests": {"passed": 11, "failed": 0},
+    "backofficeSuccessorAndSemanticTests": {"passed": 11, "failed": 0},
+    "frameworkDocumentationValidation": "PASS_176_PAGES",
+    "frameworkDocumentationFullSuite": {"status": "PASS", "nodeTestsPassed": 7, "contentCheck": "PASS", "validation": "PASS", "sourceCoverageCheck": "PASS", "hardening": "PASS", "semanticScopesClosed": 22, "semanticScopesOpen": 0},
+    "hardeningAuditCorrection": "Replaced duplicate unconditional future-actor requirements with the existing shared complete AUTHORING validation. Three integration regressions prove nonmutation, missing-author/null-actor/later-state rejection and continued PUBLIC_DELIVERY refusal. No public or runtime approval gate weakened"
+  },
+  "releaseFolderAudit": {
+    "framework": {"releaseFolders": 107, "executableSections": 128, "businessSections": 60, "documentationSections": 68, "nonExecutableContributionsExcluded": 5},
+    "kickoff": {"releaseFolders": 8, "executableSections": 41, "businessSections": 40, "documentationSections": 1},
+    "allReleaseFolderNamesEndInV001": true,
+    "businessSemanticVersions": "0.0.1",
+    "documentationSemanticSuccessors": "Two eWaste selections and one backoffice selection at 0.0.2, all under docs-v001",
+    "fixtureScope": "Non-runtime test/fixtures, including the deliberately 0.0.0 partnerOverlay contract fixture, excluded from executable module release audit",
+    "installedHistoryRebasedOrRewritten": false
+  },
+  "financialExecution": {
+    "fundingPerformedThisContinuation": false,
+    "proposedMonetaryOutletGoodsImported": false,
+    "purchases": 0,
+    "redemptions": 0,
+    "refunds": 0,
+    "approvedItemDeliveryMode": "LOCAL_SIMULATION_ONLY_UNVERIFIED_SIM_RECEIPTS",
+    "alreadyRedeemedBenefitReversals": "DISABLED",
+    "pendingHumanDecisions": [
+      "One-time 7645 test-only POINTS credit and four fictional monetary outlet goods proposal",
+      "Exact kickoffLocal runtime grant expansion: Commerce waste.asset.sale.transfer; Waste loyalty.rewards.earn and loyalty.rewards.reverse"
+    ],
+    "meaning": "No complete purchase/redemption/refund journey or production qualification claimed"
+  },
+  "remainingAcceptance": [
+    "Signed-in Axis browser acceptance",
+    "Pending exact local funding/goods and runtime permission decisions, then purchase/redemption/refund execution"
+  ],
+  "cleanup": {"nativeTopology": "CANONICALLY_STOPPED_EXIT_ZERO", "startupAndStopSessionsAwaited": true, "finalPortProbe": "ALL_TEN_NATIVE_RUNTIME_PORTS_AND_TEMPORARY_AXIS_3100_CLOSED", "temporaryBrowserTab": "CLOSED", "ownedAxisDevServer": "STOPPED_AND_AWAITED", "semanticReviewAgent": "COMPLETED_AND_CLOSED", "methodDocumentationAgent": "COMPLETED_AND_CLOSED"}
+}

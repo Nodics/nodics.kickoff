@@ -1,0 +1,355 @@
+{
+  "date": "2026-10-08",
+  "state": "PARTIAL_QUALIFICATION_WITH_EXPLICIT_REMAINING_GATES",
+  "environment": "native kickoffLocal",
+  "purpose": "Record source fixes and normal governed publication qualification without claiming physical search reset or full Circa business E2E.",
+  "sourceChanges": [
+    "Axis Setup coordinates existing CMS and independent pinned Media approvals and supports asset-only retry.",
+    "Kickoff supplies independent targetVersion environment bindings for all 18 Agora owner/catalogue pairs.",
+    "Native Product discovery scopes follow selected active Agora domains and retain Circa.",
+    "Elastic index removal uses the existing async/callback client bridge; tenant search inventories include productSearchProjection.",
+    "Product acceptance reconciles first-activation optional root predecessor with authoritative operation and audit evidence; successor lineage stays strict.",
+    "Kickoff Waste documentation and search projections distinguish plan-only generic acceptance from secured API execution and full business E2E."
+  ],
+  "releaseInventory": {
+    "manifests": 86,
+    "releaseSections": 141,
+    "declaredFiles": 1270,
+    "executableSemanticVersion": "0.0.1",
+    "versionedDirectorySuffix": "v001",
+    "declaredFileChecksums": "PASSED",
+    "documentationAggregateChecksums": "PASSED"
+  },
+  "liveSnapshot": {
+    "observedAt": "2026-10-08T07:39:48.563Z",
+    "environment": "kickoffLocal",
+    "profiles": [
+      {
+        "profileCode": "agoraapparel",
+        "readiness": "READY",
+        "releaseCode": "agora.apparel:agoraApparelContentCatalog",
+        "releaseVersion": "0.0.1",
+        "publication": {
+          "code": "cmsBaseline_agoraapparel_0_0_1",
+          "state": "ONLINE"
+        },
+        "mediaQualified": true,
+        "mediaAssets": 83
+      },
+      {
+        "profileCode": "agoraelectronics",
+        "readiness": "READY",
+        "releaseCode": "agora.electronics:agoraElectronicsContentCatalog",
+        "releaseVersion": "0.0.1",
+        "publication": {
+          "code": "cmsBaseline_agoraelectronics_0_0_1",
+          "state": "ONLINE"
+        },
+        "mediaQualified": true,
+        "mediaAssets": 8
+      },
+      {
+        "profileCode": "agoratelco",
+        "readiness": "READY",
+        "releaseCode": "agora.telco:agoraTelcoContentCatalog",
+        "releaseVersion": "0.0.1",
+        "publication": {
+          "code": "cmsBaseline_agoratelco_0_0_1",
+          "state": "ONLINE"
+        },
+        "mediaQualified": true,
+        "mediaAssets": 8
+      }
+    ],
+    "publications": [
+      {
+        "catalogue": "apparel",
+        "domain": "product",
+        "code": "agora-apparel-product-native-20261008",
+        "rootCode": "agoraLinenWrapDress",
+        "sourceVersion": "1",
+        "targetVersion": "649bc7416fb4586e2fee9d3a290ba9e4aff528026685827c577b57dbe0df0a44",
+        "state": "ONLINE",
+        "approvedAudit": true,
+        "committed": true,
+        "operationKeyMatches": true,
+        "explicitNullPredecessor": true
+      },
+      {
+        "catalogue": "apparel",
+        "domain": "pricing",
+        "code": "agora-apparel-pricing-native-20261008",
+        "rootCode": "agoraApparelRetailUsd",
+        "sourceVersion": "66113a7608c8fb7cba2e402be8190386d576a6ed27dca640c3af4004a7b41ae0",
+        "targetVersion": "66113a7608c8fb7cba2e402be8190386d576a6ed27dca640c3af4004a7b41ae0",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "apparel",
+        "domain": "inventory",
+        "code": "agora-apparel-inventory-native-20261008",
+        "rootCode": "agoraApparelWarehouse",
+        "sourceVersion": "7ea9f55acb15e16ec163cbc111c44956cd859fbb7a6e0677c49c90e83ab56763",
+        "targetVersion": "7ea9f55acb15e16ec163cbc111c44956cd859fbb7a6e0677c49c90e83ab56763",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "apparel",
+        "domain": "tax",
+        "code": "agora-apparel-tax-native-20261008",
+        "rootCode": "agoraAeVatPolicy",
+        "sourceVersion": "235a5cc82356a92d7cc9beab4bcbcf2d7c5e5ca9c589b8a459ff9138f6391b69",
+        "targetVersion": "235a5cc82356a92d7cc9beab4bcbcf2d7c5e5ca9c589b8a459ff9138f6391b69",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "apparel",
+        "domain": "promotion",
+        "code": "agora-apparel-promotion-native-20261008",
+        "rootCode": "agoraCapsuleEdit10PercentRule",
+        "sourceVersion": "8f3dabbc56ee4686d8fd63fc9c96d01fe56e772dcffbcdee6b8e2826132f0681",
+        "targetVersion": "8f3dabbc56ee4686d8fd63fc9c96d01fe56e772dcffbcdee6b8e2826132f0681",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "electronics",
+        "domain": "product",
+        "code": "agora-electronics-product-native-20261008",
+        "rootCode": "agoraElectronicsNovaPhone",
+        "sourceVersion": "1",
+        "targetVersion": "773ffb6031c10ae82382c0429a4331a748c8f81c85642a8e98bc5e06efe39c13",
+        "state": "ONLINE",
+        "approvedAudit": true,
+        "committed": true,
+        "operationKeyMatches": true,
+        "explicitNullPredecessor": true
+      },
+      {
+        "catalogue": "electronics",
+        "domain": "pricing",
+        "code": "agora-electronics-pricing-native-20261008",
+        "rootCode": "agoraElectronicsRetailAed",
+        "sourceVersion": "367248be078f5bb919fe47be4185990cdf2db1eb6025916486971580233383ae",
+        "targetVersion": "367248be078f5bb919fe47be4185990cdf2db1eb6025916486971580233383ae",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "electronics",
+        "domain": "inventory",
+        "code": "agora-electronics-inventory-native-20261008",
+        "rootCode": "agoraElectronicsWarehouse",
+        "sourceVersion": "5f68780125cd8d55e98347b2944126397c47237809b003c1ec206ad00228e2ef",
+        "targetVersion": "5f68780125cd8d55e98347b2944126397c47237809b003c1ec206ad00228e2ef",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "electronics",
+        "domain": "tax",
+        "code": "agora-electronics-tax-native-20261008",
+        "rootCode": "agoraAeVatPolicy",
+        "sourceVersion": "235a5cc82356a92d7cc9beab4bcbcf2d7c5e5ca9c589b8a459ff9138f6391b69",
+        "targetVersion": "235a5cc82356a92d7cc9beab4bcbcf2d7c5e5ca9c589b8a459ff9138f6391b69",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "telco",
+        "domain": "product",
+        "code": "agora-telco-product-native-20261008",
+        "rootCode": "agoraTelcoUnlimitedPostpaid",
+        "sourceVersion": "1",
+        "targetVersion": "88288c2e2431b98a7ee12f74069113720dcdeaad9cfd2fc92fab8d39fcf854e1",
+        "state": "ONLINE",
+        "approvedAudit": true,
+        "committed": true,
+        "operationKeyMatches": true,
+        "explicitNullPredecessor": true
+      },
+      {
+        "catalogue": "telco",
+        "domain": "pricing",
+        "code": "agora-telco-pricing-native-20261008",
+        "rootCode": "agoraTelcoRetailAed",
+        "sourceVersion": "efc231b6852766e9a7ad92efe41e438f033c6d07c8849d643573d8a6c5e0b78e",
+        "targetVersion": "efc231b6852766e9a7ad92efe41e438f033c6d07c8849d643573d8a6c5e0b78e",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "telco",
+        "domain": "inventory",
+        "code": "agora-telco-inventory-native-20261008",
+        "rootCode": "agoraTelcoWarehouse",
+        "sourceVersion": "d5b824b0803563432f8235395c58576d8a62d21de8377600d045a3b8d65c395c",
+        "targetVersion": "d5b824b0803563432f8235395c58576d8a62d21de8377600d045a3b8d65c395c",
+        "state": "ONLINE",
+        "approvedAudit": true
+      },
+      {
+        "catalogue": "telco",
+        "domain": "tax",
+        "code": "agora-telco-tax-native-20261008",
+        "rootCode": "agoraAeVatPolicy",
+        "sourceVersion": "235a5cc82356a92d7cc9beab4bcbcf2d7c5e5ca9c589b8a459ff9138f6391b69",
+        "targetVersion": "235a5cc82356a92d7cc9beab4bcbcf2d7c5e5ca9c589b8a459ff9138f6391b69",
+        "state": "ONLINE",
+        "approvedAudit": true
+      }
+    ],
+    "installedKickoffDocumentation": {
+      "pageDelivered": true,
+      "stillContainsOldWasteInstallationClaim": true
+    }
+  },
+  "liveVerification": {
+    "publicationProcess": "Normal secured owner capture, validation, existing Process approvals and publication activation; no fabricated receipts or internal restore.",
+    "recordAndAssetImport": "Existing application initialization imports records and same-release assets together; coordinated existing CMS and Media approvals publish them.",
+    "publicMedia": {
+      "state": "PASSED",
+      "assets": 99,
+      "verification": "Unauthenticated public delivery SHA-256 equals each declared Media seed asset."
+    },
+    "publicSites": {
+      "state": "PASSED",
+      "sites": [
+        "agoraApparelSite",
+        "agoraElectronicsSite",
+        "agoraTelcoSite"
+      ],
+      "verification": "Normal public CMS home-page delivery."
+    },
+    "apparelCommerce": {
+      "state": "PASSED",
+      "selectedCatalog": "apparel",
+      "storeCode": "agoraMainStore",
+      "catalogVersion": "agoraApparelStaged",
+      "ownerReceipts": 6,
+      "onlineTransfer": "EXTERNAL_GOVERNED_PREREQUISITE",
+      "legacyProjectionQualification": null,
+      "verification": "Canonical acceptance with actual owner GET receipts, committed Product lineage, SEARCH_INDEX-backed product cards/PDP and canonical Media asset hashes.",
+      "limits": "Selected Apparel catalogue only; not financial policy delivery, checkout or full business E2E."
+    },
+    "partialRetry": {
+      "profileCode": "agoraapparel",
+      "firstAttemptMediaQualified": 77,
+      "remainingMedia": 6,
+      "errorCode": "ERR_MED_00023",
+      "recovery": "Read/reconcile pinned identities and retry existing coordinated approvals; all 83 eventually READY.",
+      "cause": "Not established; not evidence of an atomic all-or-nothing transaction."
+    },
+    "waste": {
+      "readiness": "PASSED",
+      "backofficeDiscovery": "PASSED",
+      "observedRegistration": "kickoffLocal:wasteServer:default",
+      "genericAcceptance": {
+        "state": "PLANNED",
+        "evidence": "NONE",
+        "execute": false
+      },
+      "impactServiceAuthoritySupplied": false,
+      "fullCircaBusinessE2E": "NOT_QUALIFIED"
+    },
+    "axisBrowser": {
+      "state": "NOT_QUALIFIED",
+      "reason": "No Axis frontend server was listening on localhost:3100; API qualification and mocked UI tests are separate evidence."
+    }
+  },
+  "sourceVerification": {
+    "kickoffProjectFixtures": "PASSED",
+    "kickoffConfigurationInheritance": {
+      "passed": 25
+    },
+    "dataBaselineContract": {
+      "passed": 5
+    },
+    "elasticOperationAndConnectionContracts": "PASSED",
+    "productAcceptance": {
+      "passed": 25,
+      "regressionBeforeFix": "Five newly added lineage cases failed before the implementation correction."
+    },
+    "productAcceptanceWithPublishAtomicAudit": {
+      "passed": 26
+    },
+    "axisFocusedTests": {
+      "passed": 88
+    },
+    "axisTypechecks": "PASSED",
+    "axisFocusedLintAndFormat": "PASSED",
+    "circaBackend": {
+      "passed": 55
+    },
+    "wasteRuntimeComposition": "PASSED",
+    "kickoffDocumentation": {
+      "pages": 9,
+      "referenceGraphDocuments": 186,
+      "declaredPackFiles": 33,
+      "state": "PASSED"
+    },
+    "circaFrontend": {
+      "passed": 201,
+      "testFiles": 38,
+      "typecheck": "PASSED",
+      "build": "PASSED",
+      "warning": "Existing bundle-size warning."
+    },
+    "generatedLlmContexts": {
+      "validated": 202
+    },
+    "gitDiffCheck": {
+      "framework": "PASSED",
+      "kickoff": "PASSED",
+      "axis": "PASSED"
+    }
+  },
+  "remainingGates": [
+    {
+      "id": "physical-search-reset",
+      "state": "NOT_EXECUTED",
+      "detail": "Implement qualified offline physical index drop through nTooling/nSearch/Elastic owners with exact deployment bindings and UUID revalidation, writer outage, typed acknowledged absence, cache invalidation, cleanup and partial-outcome evidence. Tenant-document reset is not physical index deletion. No raw Elasticsearch reset performed."
+    },
+    {
+      "id": "promotion-applicability",
+      "state": "AWAITING_BUSINESS_CHOICE",
+      "detail": "Electronics and Telco contain no sample campaigns, while current all-catalogue acceptance requires Promotion. Decide explicit not-applicable semantics or genuine sample campaigns; never substitute Apparel campaigns."
+    },
+    {
+      "id": "commerce-full-qualification",
+      "state": "NOT_QUALIFIED",
+      "detail": "Bind actual receipts for the remaining selected catalogue acceptance inputs and qualify effective financial policy delivery/checkout. Apparel bounded catalog/Media success is not full commerce E2E."
+    },
+    {
+      "id": "kickoff-docs-installed-reconciliation",
+      "state": "REQUIRED",
+      "detail": "Online local-runtime guide still contains the corrected source's old installation claim. Source unreleased 0.0.1 checksum changed; reconcile through approved governed fresh initialization/reset, not receipt rewrite, force replay or version drift bypass.",
+      "sourceReleaseChecksum": "5212b21de90bc2ff9245649d7aa28efb35a12b008aa804bb5ab24645d4130f8a"
+    },
+    {
+      "id": "circa-full-journey",
+      "state": "NOT_QUALIFIED",
+      "detail": "Dedicated waste.impact.calculate service authority and authorized customer/reviewer/verifier journeys are still needed for full signup, settlement, custody, redemption and integration acceptance. No qualification flags or grants changed."
+    },
+    {
+      "id": "axis-browser",
+      "state": "NOT_QUALIFIED",
+      "detail": "Exercise real signed-in coordinated Setup publication and recovery in Axis; focused UI tests are not browser acceptance."
+    }
+  ],
+  "ownedTopologyShutdown": {
+    "command": "npm run topology:stop",
+    "state": "STOPPED",
+    "stopCommandExitCode": 0,
+    "supervisorExitCode": 0
+  },
+  "evidenceLimits": [
+    "Historical evidence and installed receipts preserved.",
+    "No commit or push performed.",
+    "No unrelated database, index or media deletion.",
+    "The native topology started for this qualification was stopped through its canonical owner after verification."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "contractVersion": 1,
+  "selectionOnly": true,
+  "operatorEnterpriseCode": "GREENPERKS_ONLINE",
+  "dependencies": {
+    "installedCatalogueRelease": "circa.ewaste:commerce",
+    "originalPublicationSelection": "circa.ewaste:circaCataloguePublicationPlan",
+    "requiredOriginalRootVersion": 1,
+    "productWorkflowRelease": "product:productPublicationWorkflow",
+    "ownershipPolicyRelease": "circa.ewaste:circaDigitalOwnershipPolicies",
+    "qualification": "Source selection is not proof of installed owner versions, approval, activation or sale readiness."
+  },
+  "steps": [
+    {
+      "code": "circa.ewaste:circaAssetClassification",
+      "type": "DATA_RELEASE",
+      "kind": "Forward five-asset Product localization classification",
+      "required": true,
+      "trigger": "USER",
+      "phase": "BEFORE_PUBLICATION",
+      "dataType": "sample",
+      "targetServer": "commerceStaged",
+      "targetRuntimeRole": "COMMERCE_STAGED"
+    },
+    {
+      "code": "circa.ewaste:circaAssetClassificationPublicationPlan",
+      "type": "GOVERNED_PUBLICATIONS",
+      "kind": "Forward five-asset governed Product republication",
+      "operatorEnterpriseCode": "GREENPERKS_ONLINE",
+      "required": true,
+      "trigger": "USER",
+      "phase": "AFTER_PUBLICATION",
+      "dataType": "sample",
+      "targetServer": "commerceStaged",
+      "targetRuntimeRole": "COMMERCE_STAGED"
+    }
+  ],
+  "publicationPlanFile": "sample-v001/asset-publication/records/publicationPlan.json",
+  "firstNativeJourney": {
+    "assetCode": "EWA-1092",
+    "productCode": "CIRCA_ASSET_EWA-1092",
+    "sellerCode": "circa-seller",
+    "buyerCode": "circa-customer",
+    "amount": "16",
+    "currency": "POINTS"
+  }
+}

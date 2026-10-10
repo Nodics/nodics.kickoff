@@ -10,9 +10,11 @@
  */
 
 module.exports = {
+  "publish": { "setup": { "observation": { "enabled": true } } },
   "activeModules": {
     "groups": [],
     "modules": [
+      "publish",
       "circa.ewaste",
       "nodics.kickoff",
       "kickoffCore",

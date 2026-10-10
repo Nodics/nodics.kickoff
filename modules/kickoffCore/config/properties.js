@@ -19,6 +19,28 @@
  * @override Later active modules may override these defaults through configuration layering.
  */
 module.exports = {
+  "fulfillmentCore": {
+    "runtimeRoleProfiles": {
+      "COMMERCE": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "apparel",
+        "value": require('../../agora.apparel/config/properties').fulfillmentCore.runtimeRoleProfiles.COMMERCE
+      }
+    }
+  },
+  "order": {
+    "runtimeRoleProfiles": {
+      "COMMERCE": {
+        "$config": "selected",
+        "name": "agora",
+        "field": "domains",
+        "includes": "apparel",
+        "value": require('../../agora.apparel/config/properties').order.runtimeRoleProfiles.COMMERCE
+      }
+    }
+  },
   "communication": {
     "runtimeRoleProfiles": {
       "ENGAGEMENT": {
@@ -58,7 +80,7 @@ module.exports = {
           "channelCode": "web",
           "jurisdiction": "AE",
           "currency": "USD",
-          "promotionCode": "agoraAcceptanceWelcome10",
+          "promotionCode": "agoraCapsuleEdit10PercentRule",
           "providerToken": {"$config":"env","name":"NODICS_STOREFRONT_PROVIDER_TOKEN","fallback":"tok_test_storefront_4242"},
           "shippingAddress": {
             "line1": "549 Oak St",
@@ -86,8 +108,72 @@ module.exports = {
                 "storeCode": "agoraMainStore",
                 "locale": "en",
                 "productCodes": [
-                  "agoraLinenWrapDress"
+                  "agoraLinenWrapDress",
+                  "agoraSatinMidiDress",
+                  "agoraRibbedKnitTop",
+                  "agoraCottonPoplinShirtWomen",
+                  "agoraLeatherTote",
+                  "agoraSilkScarf",
+                  "agoraOxfordShirt",
+                  "agoraLinenCampShirt",
+                  "agoraTailoredChino",
+                  "agoraRelaxedTrouser",
+                  "agoraCanvasBelt",
+                  "agoraWoolCap",
+                  "agoraStretchStrapTop",
+                  "agoraRamiePocketShirt",
+                  "agoraRattanHandleBag",
+                  "agoraStripedKnitDress",
+                  "agoraBeltWrapDress",
+                  "agoraDoubleButtonTrench",
+                  "agoraButtonedCottonShirt",
+                  "agoraLayeredTankTop",
+                  "agoraPleatedKnitDress",
+                  "agoraMinimalSlipDress",
+                  "agoraCollarKnitCardigan",
+                  "agoraSoftShoulderBag",
+                  "agoraSummerKnitVest",
+                  "agoraTailoredSleevelessTop",
+                  "agoraWideLegLinenPant",
+                  "agoraTexturedCrossbodyBag",
+                  "agoraMinimalBalletFlat",
+                  "agoraOpenWeaveCardigan",
+                  "agoraRefinedShortSleeveDress",
+                  "agoraGoldFrameSunglasses",
+                  "agoraSoftRibbedDress",
+                  "agoraRelaxedCottonTee",
+                  "agoraCompactCrossbody",
+                  "agoraSculptedHoopEarrings",
+                  "agoraEverydayColumnDress",
+                  "agoraSheerRamieShirt",
+                  "agoraFineKnitPolo",
+                  "agoraNaturalCanvasTote",
+                  "agoraLuxeWrapTop",
+                  "agoraPearlTrimCardigan",
+                  "agoraBiasCutMidiSkirt",
+                  "agoraTexturedKnitPullover",
+                  "agoraPolishedMiniBag",
+                  "agoraCleanLineBlazer",
+                  "agoraSoftLinenShort",
+                  "agoraClassicDenimShirt",
+                  "agoraOvershirtJacket",
+                  "agoraSlimCottonTrouser",
+                  "agoraRelaxedPoloShirt",
+                  "agoraWashedChoreJacket",
+                  "agoraEverydayCrewNeck",
+                  "agoraUtilityCargoTrouser",
+                  "agoraLeatherCardHolder",
+                  "agoraSignatureSunglasses",
+                  "agoraNeutralShoulderBag",
+                  "agoraModernKnitSet",
+                  "agoraStylePass5Coupon",
+                  "agoraCapsuleEdit10Coupon",
+                  "agoraPrivateSale20Coupon"
                 ],
+                "discoveryPagination": {
+                  "pageSize": 24,
+                  "maximumProducts": 1000
+                },
                 "mediaModules": [
                   "agora.apparel"
                 ],
@@ -95,32 +181,38 @@ module.exports = {
                   "product": {
                     "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "pricing": {
                     "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "promotion": {
                     "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "inventory": {
                     "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "tax": {
                     "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "media": {
                     "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_TARGET_VERSION","fallback":""}
                   }
                 }
               }
@@ -144,32 +236,38 @@ module.exports = {
                   "product": {
                     "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "pricing": {
                     "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "promotion": {
                     "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "inventory": {
                     "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "tax": {
                     "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "media": {
                     "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_TARGET_VERSION","fallback":""}
                   }
                 }
               }
@@ -193,32 +291,38 @@ module.exports = {
                   "product": {
                     "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "pricing": {
                     "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "promotion": {
                     "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "inventory": {
                     "code": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "tax": {
                     "code": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_TARGET_VERSION","fallback":""}
                   },
                   "media": {
                     "code": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_CODE","fallback":""},
                     "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""}
+                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""},
+                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_TARGET_VERSION","fallback":""}
                   }
                 }
               }
@@ -295,7 +399,7 @@ module.exports = {
           "baselines": {
             "kickoffdocs": {
               "contentPackCode": "kickoffDocumentation",
-              "releaseVersion": "0.8.12",
+              "releaseVersion": "0.0.1",
               "rootType": "site",
               "rootCode": "kickoffDocumentationSite",
               "sourceVersion": "0"
@@ -320,6 +424,20 @@ module.exports = {
     },
     "dataReleases": {
       "runtimeRoleProfiles": {
+        "COMMERCE": {
+          "contributions": [
+            {
+              "$config": "selected",
+              "name": "agora",
+              "field": "domains",
+              "includes": "apparel",
+              "value": {
+                "moduleName": "agora.apparel",
+                "sections": ["agoraApparelOpeningStock", "agoraApparelPromotionSetup"]
+              }
+            }
+          ]
+        },
         "WCMS_STAGED": {
           "initializationProfiles": {
             "localDocumentationFoundation": {
@@ -691,6 +809,10 @@ module.exports = {
             "indexName": "productLocalized"
           },
           {
+            "moduleName": "product",
+            "indexName": "productSearchProjection"
+          },
+          {
             "moduleName": "commerceSearchCore",
             "indexName": "commerceSearchRuleProjection"
           }
@@ -800,6 +922,10 @@ module.exports = {
           {
             "moduleName": "product",
             "indexName": "productLocalized"
+          },
+          {
+            "moduleName": "product",
+            "indexName": "productSearchProjection"
           },
           {
             "moduleName": "commerceSearchCore",
@@ -1221,8 +1347,8 @@ module.exports = {
               "$config": "replace",
               "value": [
                 {
-                  "code": "baseCommerce:core-reference",
-                  "targetModule": "baseCommerce",
+                  "code": "store:core-reference",
+                  "targetModule": "store",
                   "targetServer": "commerceServer"
                 }
               ]

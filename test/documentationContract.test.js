@@ -18,7 +18,18 @@ const projectProperties = require('../config/properties');
 const kickoffCoreProperties = require('../modules/kickoffCore/config/properties');
 const manifestEnvelope = require('../data/manifest.json');
 const manifest = manifestEnvelope.sections.documentation;
-const catalogue = require('../docs/catalogue.json');
+const configuration = require('./helpers/configuration');
+const frameworkRoot = configuration.frameworkRoot;
+const documentationContract = require(path.join(frameworkRoot,
+    'nodics.foundation/modules/nTooling/src/service/defaultApplicationDocumentationContractService'));
+const catalogue = documentationContract.validateDataRelease(root);
+assert.equal(manifest.contentPath, 'docs-v001');
+assert.equal(documentationContract.validateReferenceGraph([
+    catalogue,
+    documentationContract.readDataCatalogue(path.join(frameworkRoot, 'nodics.accelerators/modules/waste/modules/eWaste'), 'referenceDocumentation'),
+    documentationContract.readDataCatalogue(path.join(frameworkRoot, 'nodics.docs')),
+]).documents, 189);
+assert.equal(catalogue.documents.length, 9, 'Cross-framework references validate without importing framework article copies');
 const recordsPath = path.join(root, 'data', manifest.contentPath, 'records/documentation');
 const siteRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationSiteData')));
 const pageRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationPageData')));
@@ -29,6 +40,8 @@ const nodeRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumen
 const dashboardRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationDashboardData')));
 const pageMetadataRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationPageMetadataData')));
 const accessPolicyRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationAccessPolicyData')));
+const componentRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationComponentData')));
+const searchMetadataRecords = Object.values(require(path.join(recordsPath, 'kickoffDocumentationSearchMetadataData')));
 
 // Kickoff's onboarding path must work both before installation and in its CMS pack.
 const documentsById = new Map(catalogue.documents.map(document => [document.id, document]));
@@ -60,8 +73,38 @@ assert(catalogue.documents.every(document => !document.content.startsWith('docs/
     'Dated extraction evidence must not be presented as a current setup page');
 assert(catalogue.documents.every(document => !document.sourceEvidence.includes('nodics.project.json')));
 
-const configuration = require('./helpers/configuration');
-const frameworkRoot = configuration.frameworkRoot;
+// Rendered guidance and search projections must preserve Waste acceptance evidence limits.
+const wasteVerificationCopies = [
+    documentsById.get('kickoff.local-runtime').body,
+    ...componentRecords.flatMap(component => [
+        component.properties?.searchText,
+        ...(component.properties?.items || []).map(item => item.searchText),
+    ]),
+    ...searchMetadataRecords.map(record => record.searchText),
+].filter(text => typeof text === 'string' && text.includes('`test:waste-overlay` proves'));
+assert.strictEqual(wasteVerificationCopies.length, 4,
+    'Waste verification must remain consistent in the article and its three search projections');
+for (const text of wasteVerificationCopies) {
+    assert(!text.includes('installs the schema-driven accelerator and application policy releases'),
+        'Generic Waste acceptance must not claim release installation or persisted-record validation');
+    for (const clause of [
+        'prints a plan without API calls',
+        'npm run acceptance:waste-management -- --execute',
+        'authorized employee',
+        'NODICS_WASTE_IMPACT_SERVICE_TOKEN',
+        'service-only `waste.impact.calculate`',
+        'SECURED_WASTE_API_CONTRACT',
+        'persistenceVerified: false',
+        'importVerified: false',
+        'full Circa business E2E remain separate qualification gates',
+    ]) assert(text.includes(clause), 'Waste verification must explain: ' + clause);
+}
+const runtimeDocument = documentsById.get('kickoff.local-runtime');
+const runtimeMetadata = pageMetadataRecords.find(page => page.documentId === runtimeDocument.id);
+assert.strictEqual(runtimeMetadata.sourceChecksum, documentationContract.sha256(runtimeDocument.body));
+assert.strictEqual(runtimeMetadata.sourceWordCount, documentationContract.countWords(runtimeDocument.body));
+assert.strictEqual(runtimeMetadata.wordCount, runtimeMetadata.sourceWordCount);
+
 const importDefaults = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/config/properties'));
 const contentPackService = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/contentPack/defaultContentPackService'));
 const documentationService = require(path.join(frameworkRoot, 'nodics.wcms/modules/cms/src/service/documentation/defaultCmsDocumentationGovernanceService'));
@@ -81,11 +124,10 @@ try {
     global.NODICS = previousNodics;
 }
 
-const documentationContract = require(path.join(frameworkRoot,
-    'nodics.foundation/modules/nTooling/src/service/defaultApplicationDocumentationContractService'));
 documentationContract.validateCatalogue({ ownerRoot: root, catalogue,
+    allowExternalReferences: documentationContract.validateReferenceCatalogues(root, manifest, catalogue),
     requireNavigationSections: true, requireEnterpriseMetadata: true, validateContentQuality: true });
-const customizationGuide = fs.readFileSync(path.join(root, 'docs/pages/customization-guide.md'), 'utf8');
+const customizationGuide = catalogue.documents.find(document => document.id === 'kickoff.customization').body;
 assert(!customizationGuide.includes('nodics.environment.json'), 'Use existing deployment properties, not a retired descriptor');
 const circaReadme = fs.readFileSync(path.join(root, 'modules/circa.ewaste/README.md'), 'utf8');
 assert(circaReadme.includes('Accuracy is optional observation metadata, never an arrival gate'));
@@ -97,7 +139,8 @@ assert.strictEqual(manifestEnvelope.contractVersion, 2);
 assert.strictEqual(manifestEnvelope.module, 'nodics.kickoff');
 assert.strictEqual(manifest.pack, 'nodics.kickoff');
 assert.strictEqual(manifest.version, catalogue.version);
-assert.strictEqual(manifest.sourceAuthority, 'docs/catalogue.json');
+assert.strictEqual(manifest.sourceAuthority, 'data/docs-v001/records/documentation');
+assert.strictEqual(manifest.sourceMode, 'cms-records');
 assert.strictEqual(manifest.installationPolicy, 'OPTIONAL_AXIS_INITIATED');
 assert.deepStrictEqual(manifest.sites, ['kickoffDocumentationSite']);
 assert.strictEqual(manifest.pages, catalogue.documents.length);
@@ -240,8 +283,8 @@ assert(
 
 catalogue.documents.forEach(document => {
     assert(
-        document.content.startsWith('docs/pages/'),
-        document.id + ' must use the repository-owned docs source boundary'
+        document.content.startsWith('data/docs-v001/records/documentation/'),
+        document.id + ' must use the module-owned CMS data boundary'
     );
 });
 assert.strictEqual(

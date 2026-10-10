@@ -20,13 +20,19 @@ const metadata = require("../modules/kickoffCore/package.json");
 require("node:test")("Local Waste may prepare a verified Profile channel handoff without widening siblings", () => {
   const baseline = loadRuntime("loyaltyServer", "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
   const waste = loadRuntime("wasteServer", "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
-  assert.deepEqual([...waste].sort(), [...baseline, "profile.externalIdentity.prepare"].sort());
+  // Native Waste explicitly selects profile.customer.reference.read; Platform's
+  // profileCustomerEvidence caller pins this deployment and GREENPERKS_ONLINE.
+  assert.deepEqual([...waste].sort(), [...baseline, "profile.externalIdentity.prepare", "commerce.digital.own.read", "profile.customer.reference.read", "loyalty.rewards.earn", "loyalty.rewards.reverse"].sort());
   for (const server of ["platformServer", "commerceServer", "loyaltyServer"]) {
-    assert.equal(loadRuntime(server, "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions
-      .includes("profile.externalIdentity.prepare"), false);
+    const permissions = loadRuntime(server, "kickoffLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
+    for (const permission of ["profile.externalIdentity.prepare", "profile.customer.reference.read"]) {
+      assert.equal(permissions.includes(permission), false, server + ": " + permission);
+    }
   }
-  assert.equal(loadRuntime("wasteServer", "kickoffDockerLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions
-    .includes("profile.externalIdentity.prepare"), false);
+  const dockerPermissions = loadRuntime("wasteServer", "kickoffDockerLocal").identityGovernance.migration.localRuntimeDeploymentGrantPermissions;
+  for (const permission of ["profile.externalIdentity.prepare", "profile.customer.reference.read"]) {
+    assert.equal(dockerPermissions.includes(permission), false, "kickoffDockerLocal: " + permission);
+  }
 });
 
 require("node:test")("Knowledge runtimes include governance without enabling unrelated sibling runtimes", () => {
@@ -220,13 +226,13 @@ require("node:test")("Local Commerce delegates reward payment only to its remote
   assert.equal(runtime.runtimeIdentity.remoteModules.filter(name => name === "loyaltyApi").length, 1);
   assert.equal(activeModuleNames(runtime).includes("loyaltyApi"), false);
   const inherited = require("../envs/kickoffLocal/config/properties").identityGovernance.migration.localRuntimeDeploymentGrantPermissions.value;
-  assert.deepEqual(new Set(runtime.identityGovernance.migration.localRuntimeDeploymentGrantPermissions), new Set([...inherited, ...permissions]));
+  assert.deepEqual(new Set(runtime.identityGovernance.migration.localRuntimeDeploymentGrantPermissions), new Set([...inherited, ...permissions, "waste.asset.marketplace.project", "waste.asset.sale.transfer", "commerce.pricing.merchant.evidence"]));
   for (const permission of permissions)
     assert.equal(runtime.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.filter(value => value === permission).length, 1);
   for (const server of ["platformServer", "wasteServer", "commerceStagedServer"]) {
     const sibling = loadRuntime(server, "kickoffLocal");
     for (const permission of permissions)
-      assert.equal(sibling.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.includes(permission), false);
+      assert.equal(sibling.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.includes(permission), server === "wasteServer" && permission === "loyalty.rewards.reverse");
   }
 });
 
@@ -787,10 +793,10 @@ require('node:test')('Local publication callback and operational Commerce activa
     contribution.moduleName === 'rulesApi' &&
     contribution.sections.includes('rulesPolicyApproval')));
   const platform = loadRuntime('platformServer');
-  const pack = platform.backofficeFunctionalModuleActivationData.modules['nodics.commerce'].dataPackages.find(pack => pack.code === 'baseCommerce:core-reference');
+  const pack = platform.backofficeFunctionalModuleActivationData.modules['nodics.commerce'].dataPackages.find(pack => pack.code === 'store:core-reference');
   assert.equal(pack.targetServer, 'commerceServer');
   const target = loadRuntime(pack.targetServer);
-  const manifest = require(path.join(frameworkRoot, 'nodics.commerce/modules/baseCommerce/data/manifest.json'));
+  const manifest = require(path.join(frameworkRoot, 'nodics.commerce/modules/baseCommerce/modules/store/data/manifest.json'));
   assert.equal(target.runtimeRole.code, manifest.sections['core-reference'].destinationRole);
   const rulesPack = platform.backofficeFunctionalModuleActivationData.modules['nodics.rulesEngine'].dataPackages.find(pack => pack.code === 'rulesApi:rulesPolicyApproval');
   assert.equal(rulesPack.targetServer, 'processServer');

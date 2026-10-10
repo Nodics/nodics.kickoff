@@ -28,8 +28,15 @@ checks. Sending stays disabled without `NODICS_EMPLOYEE_SMTP_ENABLED=true` and
 complete approved test inputs. Secrets resolve in this sending runtime, not in
 Platform, Axis or another deployment. Existing Telegram/waste delivery is retained.
 
+The explicit Local capture allowlist is exactly `admin`, `operator`, `applicant`,
+`reviewer`, `reviewer2` and `reviewer3` at `axis-onboarding-acceptance.test`.
+Recipient environment inputs cannot broaden this list. Preserve disabled-by-default
+sending, credential-free defaults, test-only/non-live qualification and the SMTP
+owner's loopback-only plaintext exception. These are configuration checks, not
+approval to connect or send.
+
 The project binding and three Profile-purpose template selections are documented
-in [Local employee email](../../../docs/pages/local-runtime.md#local-employee-email-sending-runtime-configuration).
+in [Local employee email](../../../data/docs-v001/records/documentation/kickoffDocumentationComponentData.js#local-employee-email-sending-runtime-configuration).
 Run `node --test test/communicationActivationDataContract.test.js` from the project
 root for non-sending effective-configuration checks. Configuration health is not
 SMTP authentication, inbox receipt or full employee-journey acceptance.

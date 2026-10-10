@@ -1,0 +1,123 @@
+{
+  "scope": "NATIVE_KICKOFF_LOCAL_ONLY",
+  "observationDate": "2026-10-09",
+  "status": "APPROVED_RUNTIME_GRANTS_VERIFIED_BUSINESS_E2E_PENDING",
+  "historicalEvidence": "circa-native-assets-and-documentation-follow-through-2026-10-09.json",
+  "productionQualification": false,
+  "resetPerformed": false,
+  "authority": {
+    "humanApproval": "Approve these exact local-only grants",
+    "canonicalOwner": "Profile mandatory identity bootstrap and runtime deployment grant acceptance",
+    "runtimePrincipal": "apiAdmin",
+    "principalEnterprise": "default",
+    "tenant": "default",
+    "originalRuntimeInstancesPreserved": true,
+    "signedClaimsRewritten": false,
+    "otherGrantExpansion": false,
+    "credentialsOrCouponSecretsRecorded": false,
+    "acceptanceSessionsLoggedOut": true
+  },
+  "nativeVerification": {
+    "requiredServicesReady": 10,
+    "deploymentGrantsVerified": 10,
+    "exactConfiguredPermissionSetsVerified": true,
+    "normalProfileRuntimeTokenIssuance": "PASS",
+    "additions": [
+      {"server": "commerceServer", "permissions": ["waste.asset.sale.transfer"]},
+      {"server": "wasteServer", "permissions": ["loyalty.rewards.earn", "loyalty.rewards.reverse"]}
+    ],
+    "digitalOwnershipEnabled": false,
+    "digitalOwnershipQualified": false,
+    "meaning": "Deployment authorization is verified, not financial sale/refund qualification"
+  },
+  "unchangedNativeEvidence": {
+    "originalListingPlanDigests": "ALL_FIVE_MATCH_PREVIOUS_EVIDENCE",
+    "buyer": {"walletCode": "WALLET_ED16C8FCF19E1FE586E3DA5D", "available": "118", "reserved": "0", "revision": 0},
+    "seller": {"walletCode": "WALLET_2E540F02E3E064593B00CA5D", "available": "8", "reserved": "0", "revision": 0}
+  },
+  "sampleCredit": {
+    "releaseCode": "circa.ewaste:circaLocalDemoCredit",
+    "version": "0.0.1",
+    "releaseFolder": "sample-v001",
+    "sourceSha256": "19cdd9068da60789f36ff2fe0f72ebfd485ff14b3dc96dfe654a48c3db3e7641",
+    "releaseChecksum": "991a3f063caeaef83ada14a426c824650bdc5eef9c9cb43a5872ef2545e1c1d8",
+    "amount": "7645",
+    "unit": "POINTS",
+    "nativeHttpPreflight": {"status": 403, "code": "ERR_AUTH_00003", "boundary": "nImport route authorization before credit installer", "route": "/nodics/import/v0/sample/validate"},
+    "operator": "circa-online-administrator",
+    "enterprise": "GREENPERKS_ONLINE",
+    "importExecuted": false,
+    "creditPosted": false,
+    "humanRoleApproval": "PENDING_SEPARATE_BOUNDED_SAMPLE_CREDIT_ROLE",
+    "originalWalletSampleAndReceiptsRewritten": false,
+    "atomicProviderNativeQualification": "NOT_REACHED",
+    "sourceValidation": "Full Loyalty suite PASS; 55 focused transaction, sample-credit and schema-participation tests PASS, including different installed database-wrapper refusal and failed acknowledgement rollback",
+    "meaning": "A separate explicit instruction pack and source tests do not prove installed funding"
+  },
+  "sourceCorrections": {
+    "frozenSampleDescriptor": {"sha256": "d41303223405f5bea29d209a32c27be7e2ebd48b656fba1190239b1ce177f56e", "restoredOriginalBytes": true},
+    "originalBusinessManifestSections": {"count": 30, "unchangedDigest": "ae2c254d458cfa2342fee95234cd5a60a4ab6e73cbc5545292cbd5a50dd71280"},
+    "checkoutPlacement": "Observed cart revision forwarded as expectedCartRevision to real Checkout stale-revision guard",
+    "itemRunCode": "Original CIRCA_ORDER_ prefix and actual owner-safe length enforced without rewriting source pins or recovery identities",
+    "checkoutOwnerTests": {"passed": 22, "failed": 0},
+    "itemSelectionTests": {"passed": 8, "failed": 0},
+    "configurationAndGrantAdoptionTests": {"passed": 29, "failed": 0},
+    "assetForwardAndCreditPackTests": {"passed": 10, "failed": 0},
+    "frameworkOwnershipAndDocumentationGovernance": "PASS",
+    "circaCompleteSourceSuite": {"passed": 128, "failed": 0},
+    "eWasteDocumentationForwardSuite": {"passed": 13, "failed": 0}
+  },
+  "documentationSuccessor": {
+    "owner": "eWaste",
+    "releaseFolder": "docs-v001",
+    "version": "0.0.3",
+    "releaseChecksum": "2bccbf44ec8af347fec02c4560fe6a079f851973495c6a7955121c254bfb975a",
+    "componentSha256": "ba0dfd5ae9c8f7f2a10491e709e5805c3d8f6a970e20db7c460b05d480fe27c1",
+    "sourceInventoryArticleWords": 3241,
+    "inventoryManifestSections": 31,
+    "frozenPredecessorFilesAndAssetsUnchanged": 58,
+    "otherArticleBodiesUnchanged": 11,
+    "sourceState": "STAGED",
+    "publicationSelectorAligned": true,
+    "importExecuted": true,
+    "publicationExecuted": true,
+    "manualAssetUploadsExecuted": false,
+    "publicationProcess": "Existing coordinated BackOffice action, normal CMS Process approval and independent exact-version Media approvals",
+    "nativePublication": {"code": "cmsBaseline_docs-ewaste_0_0_3", "revision": 6, "sourceVersion": "0", "state": "ONLINE", "readiness": "READY", "releaseStatus": "CURRENT", "qualifiedMediaAssets": 54, "exactDeliveredArticles": 12},
+    "sharedMediaRenewal": {
+      "encountered": "eWaste import advanced its six Media metadata records and eight shared foundation records; BackOffice retained fourteen older exact-version pins",
+      "preimage": {"code": "cmsBaseline_docs-backoffice_0_0_2", "revision": 12, "state": "ONLINE", "qualifiedMediaAssets": 40, "mismatchedMediaAssets": 14},
+      "recovery": "Exact source-owned fourteen-asset set verified, then normal CMS validate/request-approval and original Process publicationReview; no records or assets reimported",
+      "final": {"code": "cmsBaseline_docs-backoffice_0_0_2", "revision": 18, "state": "ONLINE", "readiness": "READY", "releaseStatus": "CURRENT", "qualifiedMediaAssets": 54, "exactDeliveredArticles": 4},
+      "eWasteStillQualifiedAfterRenewal": true,
+      "historicalManifestsRewritten": false,
+      "exactVersionOrApprovalPolicyRelaxed": false
+    },
+    "circaReferenceFinal": {"code": "cmsBaseline_circadocs_0_0_2", "revision": 12, "state": "ONLINE", "readiness": "READY", "releaseStatus": "CURRENT", "qualifiedMediaAssets": 0, "exactDeliveredArticles": 4},
+    "publicAssetDelivery": {"assets": 54, "status": "PASS_EXACT_SHA256_ALL_ASSETS", "freshQualifiedOwnerReadbackUnchanged": true},
+    "sharedReferenceDelivery": {"references": 3, "status": "PASS_ONLINE_DELIVERY_AVAILABLE"},
+    "signedInAxisAndBrowserImageAcceptance": "NOT_EXECUTED",
+    "frameworkDocumentationSuite": {"nodeTestsPassed": 7, "contentCheck": "PASS", "validation": "PASS_176_PAGES", "sourceCoverageCheck": "PASS", "hardening": "PASS", "semanticScopesClosed": 22, "semanticScopesOpen": 0},
+    "meaning": "New documentation source and coordinated native publication are qualified through owner APIs, not a signed-in browser or business financial journey. Historical 0.0.2 evidence remains unchanged"
+  },
+  "financialExecution": {
+    "purchases": 0,
+    "redemptions": 0,
+    "refunds": 0,
+    "sampleCredits": 0,
+    "monetaryOutletGoodsImported": false,
+    "itemDelivery": "LOCAL_SIMULATION_ONLY_UNVERIFIED_SIM_RECEIPTS",
+    "alreadyRedeemedBenefitReversals": "DISABLED"
+  },
+  "remainingAcceptance": [
+    "Separate bounded human sample-credit role approval, installation and native atomic credit qualification",
+    "Four fictional monetary outlet goods proposal decision and governed owner pack adoption",
+    "Independent asset-sale/refund qualification and native purchase, redemption and original refund execution",
+    "Signed-in Axis browser acceptance"
+  ],
+  "cleanup": {
+    "nativeTopology": "CANONICALLY_STOPPED_EXIT_ZERO",
+    "supervisorAndStopSessionsAwaited": true,
+    "finalPortProbe": "ALL_TEN_NATIVE_RUNTIME_PORTS_AND_AXIS_3100_CLOSED"
+  }
+}

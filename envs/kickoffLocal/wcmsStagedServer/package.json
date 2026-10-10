@@ -8,7 +8,8 @@
     "kind": "server",
     "extends": [
       "nodics.wcms",
-      "nodics.discovery"
+      "nodics.discovery",
+      "nodics.docs"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
@@ -32,6 +33,7 @@
       "nodics.discovery",
       "nodics.platform",
       "nodics.process",
+      "nodics.docs",
       "nodics.accelerators/modules/nexus"
     ],
     "runtimeIdentity": {

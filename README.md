@@ -12,11 +12,11 @@ documentation pack is running:
 
 | Audience | Guide |
 | --- | --- |
-| New developer or administrator | [Local setup to live](docs/pages/local-setup-to-live-runbook.md) |
-| Developer configuring backends | [Local runtime](docs/pages/local-runtime.md) and [configuration inheritance](docs/pages/configuration-inheritance.md) |
-| Developer or QA verifying changes | [Local acceptance checklist](docs/pages/local-acceptance-checklist.md) |
-| Operator managing publication | [Local publishing operations](docs/pages/local-publishing-operations.md) |
-| Architect or release owner | [Deployment qualification](docs/pages/deployment-qualification.md) |
+| New developer or administrator | [Local setup to live](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
+| Developer configuring backends | [Local runtime](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) and [configuration inheritance](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
+| Developer or QA verifying changes | [Local acceptance checklist](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
+| Operator managing publication | [Local publishing operations](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
+| Architect or release owner | [Deployment qualification](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
 
 After governed documentation publication, use Axis Documentation > Nodics
 Kickoff > Run Kickoff Locally, or search for "Local acceptance checklist".
@@ -165,7 +165,7 @@ paths. This keeps generated projects upgrade-safe: project facts stay in the
 project, while framework execution, validation, lifecycle, and upgrade behavior
 can evolve in `nodics.ai`.
 
-For Local verification, read the [Local acceptance checklist](docs/pages/local-acceptance-checklist.md).
+For Local verification, read the [Local acceptance checklist](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js).
 It is available before setup and through Axis after documentation publication.
 
 ### CI Framework Selection
@@ -178,7 +178,7 @@ framework changes are available remotely, then retain that exact-commit CI resul
 A local pass against uncommitted framework changes is not release evidence.
 
 Current cleanup decisions and remaining work are tracked in the
-[ownership audit and remediation record](docs/evidence/final-ownership-audit.md).
+[ownership audit and remediation record](test/evidence/final-ownership-audit.md).
 
 `test:qualification` includes the effective configuration inheritance regression.
 `npm test` includes the customer Commerce suite and the Circa module suite through

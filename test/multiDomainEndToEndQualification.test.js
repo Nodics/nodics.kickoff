@@ -21,10 +21,10 @@ const electronicsRoot = commerceRoot("electronics");
 const telcoRoot = commerceRoot("telco");
 // Retained stock records are test doubles only; active catalogs never import
 // live balances, which remain governed by Inventory's Online commands.
-const apparelInventoryFixture = path.join(root,
-  "modules/agora.apparel/data/sample-v003/commerce/records/agoraApparelInventoryBalanceData");
-const electronicsInventoryFixture = path.join(root,
-  "modules/agora.electronics/data/sample-v002/commerce/records/agoraElectronicsInventoryBalanceData");
+const apparelInventoryFixture = path.join(__dirname,
+  "fixtures/compatibility/apparelOperational/agoraApparelInventoryBalanceData");
+const electronicsInventoryFixture = path.join(__dirname,
+  "fixtures/compatibility/electronicsOperational/agoraElectronicsInventoryBalanceData");
 const apparelValidation = load(
   path.join(
     framework,

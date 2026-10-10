@@ -6,6 +6,94 @@
  * @override Later deployment layers may narrow the selected capabilities without bypassing owner authorization.
  */
 module.exports = {
+  order: {
+    refunds: {
+      policyExceptions: {
+        enabled: true,
+        environmentNames: ["kickoffLocal"],
+        approvals: [{
+          tenant: "default",
+          enterpriseCode: "GREENPERKS_ONLINE",
+          ownerId: "customer@circa.local",
+          orderCode: "CIRCA_ORDER_261009:GP-A01-UNUSED-REFUND:order",
+          caseCode: "ORDER_REVIEW_EBAABBBC41098AF799F44B680CDDD130",
+          amount: "50.00",
+          currency: "POINTS",
+          entitlementCode: "digitalEntitlement:5ea8973f942b650766948c9ef9b163fbe84a4a28",
+          couponCode: "CIRCA_COUPON_GP-A01_BATCH:1",
+        }],
+      },
+    },
+  },
+  "databaseTransactions": { "enabled": true, "failClosed": true, "maximumCommitTimeMs": 10000 },
+  enterpriseResolution: { runtimeLookup: { enabled: true } },
+  "publish": { "setup": { "observation": {
+    "enabled": true,
+    "targetObservers": {
+      "product": "DefaultProductPublicationVersionProviderService",
+      "pricing": "DefaultPricingPublicationService",
+      "inventory": "DefaultInventoryPublicationService",
+      "tax": "DefaultTaxPublicationService",
+      "promotion": "DefaultPromotionPublicationService"
+    }
+  } } },
+  "digitalCore": {
+    "merchantRedemption": { "pricedProvider": { "qualified": true } },
+    // Local admission for the reviewed original-sale test, not financial acceptance evidence.
+    "digitalOwnership": {
+      "enabled": true,
+      "qualified": true,
+      "owner": {
+        "moduleName": "eWaste",
+        "connectionName": "waste",
+        "targetAuthority": "WASTE",
+        "apiPrefix": "/internal/digital-sales"
+      }
+    },
+    "ownershipEvidence": {
+      "enabled": true,
+      "runtimeRole": "COMMERCE",
+      "callers": {
+        "$config": "replace",
+        "value": [
+          {
+            "tenant": "default",
+            "principalEnterpriseCode": "default",
+            "enterpriseCode": "GREENPERKS_ONLINE",
+            "serviceId": "apiAdmin",
+            "projectCode": "nodics.kickoff",
+            "environmentCode": "kickoffLocal",
+            "serverCode": "wasteServer",
+            "instanceCode": "kickoff-local-waste-1",
+            "assignmentCode": "kickoff-local-waste-runtime-deployment",
+            "kinds": ["LISTING", "BINDING", "PURCHASE", "REFUND"]
+          },
+          {
+            "tenant": "default",
+            "principalEnterpriseCode": "default",
+            "enterpriseCode": "GREENPERKS_ONLINE",
+            "serviceId": "apiAdmin",
+            "projectCode": "nodics.kickoff",
+            "environmentCode": "kickoffLocal",
+            "serverCode": "commerceServer",
+            "instanceCode": "kickoff-local-commerce-1",
+            "assignmentCode": "kickoff-local-commerce-runtime-deployment",
+            "kinds": ["ADMIT_BINDING"]
+          }
+        ]
+      },
+      "bindingAdmission": {
+        "enabled": true,
+        "moduleName": "eWaste",
+        "connectionName": "waste",
+        "targetAuthority": {
+          "server": "wasteServer",
+          "runtimeRole": { "code": "WASTE", "publication": "OPERATIONAL" }
+        },
+        "apiName": "/internal/digital-listings/plan"
+      }
+    }
+  },
   "identityGovernance": {
     "migration": {
       // Explicit security pin: preserve Local prerequisites; arrays otherwise merge positionally.
@@ -35,12 +123,35 @@ module.exports = {
           "loyalty.rewards.reserve",
           "loyalty.rewards.capture",
           "loyalty.rewards.release",
-          "loyalty.rewards.reverse"
+          "loyalty.rewards.reverse",
+          "waste.asset.marketplace.project",
+          "waste.asset.sale.transfer",
+          "commerce.pricing.merchant.evidence"
         ]
       }
     }
   },
   "pricing": {
+    "merchantEvidence": {
+      "qualified": true,
+      "businessCallers": {
+        "enabled": true, "runtimeRole": "COMMERCE",
+        "callers": { "$config": "replace", "value": [
+          { "tenant": "default", "principalEnterpriseCode": "default", "enterpriseCode": "GREENPERKS_RETAIL",
+            "serviceId": "apiAdmin", "projectCode": "nodics.kickoff", "environmentCode": "kickoffLocal",
+            "serverCode": "commerceServer", "instanceCode": "kickoff-local-commerce-1",
+            "assignmentCode": "kickoff-local-commerce-runtime-deployment" },
+          { "tenant": "default", "principalEnterpriseCode": "default", "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+            "serviceId": "apiAdmin", "projectCode": "nodics.kickoff", "environmentCode": "kickoffLocal",
+            "serverCode": "commerceServer", "instanceCode": "kickoff-local-commerce-1",
+            "assignmentCode": "kickoff-local-commerce-runtime-deployment" },
+          { "tenant": "default", "principalEnterpriseCode": "default", "enterpriseCode": "LOOPCYCLE_RECYCLING",
+            "serviceId": "apiAdmin", "projectCode": "nodics.kickoff", "environmentCode": "kickoffLocal",
+            "serverCode": "commerceServer", "instanceCode": "kickoff-local-commerce-1",
+            "assignmentCode": "kickoff-local-commerce-runtime-deployment" }
+        ] }
+      }
+    },
     "publication": {
       "runtimeRole": "ONLINE",
       "sourceAuthority": {
@@ -74,6 +185,10 @@ module.exports = {
     }
   },
   "promotion": {
+    "runtimeRoleProfiles": { "COMMERCE": { "merchantBenefits": {
+      "qualified": true,
+      "pricedSource": { "qualified": true, "connectionName": "commerceServer", "allowInsecureLoopback": true }
+    } } },
     "publication": {
       "runtimeRole": "ONLINE",
       "sourceAuthority": {
@@ -94,6 +209,7 @@ module.exports = {
       }
     ],
     "modules": [
+      "publish",
       "vMongodb",
       "circa.ewaste",
       "search",

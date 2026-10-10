@@ -1,5 +1,17 @@
 # Loyalty Server Agent Contract
 
+Native business-enterprise read evidence admits only the original Waste
+deployment for GREENPERKS_ONLINE; preserve its default principal enterprise and
+empty token groups. This read policy does not authorize reward posting, open a
+wallet, fund a buyer or establish a native sale/refund result.
+
+Only this native deployment selects Loyalty's optional fail-closed transaction
+provider and the exact checksummed Circa sample-credit source. Keep the human
+`loyalty.sampleCredit.apply` permission independent; the existing staff roles do
+not grant it. All participating installed schema wrappers, indexes, original
+balance revision and source approval must qualify before an import can post.
+No Docker selection, automatic wallet creation or snapshot replenishment.
+
 - Follow the Nodics Kickoff project contract from the repository root `AGENTS.md`.
 - Follow every ancestor `AGENTS.md` before changing this server boundary.
 - This package owns only the responsibilities declared in `package.json.nodics.owns`.

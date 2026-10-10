@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-08",
+  "environment": "kickoffLocal",
+  "scope": "Apparel Cart failure correction and promotion/checkout acceptance in one batch",
+  "excluded": ["agora.electronics", "agora.telco", "Circa business operations"],
+  "state": "CART_CORRECTION_VERIFIED_CHECKOUT_BLOCKED",
+  "priorEvidence": "native-apparel-circa-follow-through-2026-10-08.json",
+  "readinessAndOwnership": {
+    "mode": "Framework-maintainer correction plus authorized native Local acceptance",
+    "businessOutcome": "Return an actionable Cart business rejection, then qualify the existing Apparel promotion and checkout journey without manufacturing operational state.",
+    "owner": "nodics.commerce/checkout/cart",
+    "layer": "Existing Cart operation service and Cart status definitions",
+    "studied": ["Root and owner AGENTS/README contracts", "nSetup coding, role and customer-project contracts", "Cart controller/facade/validation/calculation/ports and tests", "Inventory operation/import admission and schemas", "Promotion activated consumption, issuance and secure reveal", "Checkout payment selection and offline provider contract", "Kickoff effective Apparel acceptance selection"],
+    "changedOwnerFiles": ["AGENTS.md", "README.md", "llm/contracts/store-defaults.md", "llm/examples/store-defaults.md", "src/service/defaultCartOperationService.js", "src/utils/statusDefinitions.js", "test/cartCustomerApiContract.test.js"],
+    "scopeReview": "PASS: Cart owns response validation errors. Existing HTTP resources, permissions, tenant/customer ownership, persisted Store and owner ports are unchanged. No stock, campaign, coupon, grant, provider qualification or runtime configuration was written to bypass a prerequisite. Pre-existing unrelated worktree changes were preserved.",
+    "customization": "Later-loaded validation overrides retain typed stock-only rejection, other-validation rejection, owner-fault propagation and no-calculation-on-block boundaries. Independent partner fixtures exercise this contract."
+  },
+  "point1": {
+    "state": "PASSED",
+    "cause": "Entry-response validation threw an ordinary Error when Inventory validation blocked the Cart. The calculation engine already used a typed stock rejection, but the earlier response-validation branch produced HTTP 500.",
+    "correction": "Stock-only blocking reasons now use ERR_CART_INVENTORY_UNAVAILABLE (409); other/mixed blocking validation uses ERR_CART_VALIDATION_FAILED (422). Owner read errors propagate unchanged and blocked validation does not calculate.",
+    "runtimeRebuiltAfterCorrection": true,
+    "live": {
+      "evidence": "LIVE_CART_REJECTION_RECOVERY_AND_OWNERSHIP",
+      "customerAuthentication": 200,
+      "cartCreate": 200,
+      "addOutOfStockVariant": { "httpStatus": 409, "code": "ERR_CART_INVENTORY_UNAVAILABLE" },
+      "ownedCartRead": { "httpStatus": 200, "persistedEntries": 1 },
+      "updateInvalidQuantity": { "httpStatus": 422, "code": "ERR_CART_VALIDATION_FAILED" },
+      "removeRejectedEntry": { "httpStatus": 200, "entries": 0, "totalAmount": "0" },
+      "foreignCustomerRead": { "httpStatus": 403, "code": "ERR_AUTH_00003" }
+    },
+    "rollbackLimit": "Entry mutation precedes response validation. A rejected response is not transaction rollback; the live test read the persisted entry and removed its own rejected entry through the Cart API."
+  },
+  "point2": {
+    "state": "BLOCKED_NOT_PASSED",
+    "runner": "checkoutCore/defaultCommerceJourneyAcceptanceService",
+    "execution": "Explicit execute with two existing imported customer fixtures kept in memory; signup was not bypassed or requalified.",
+    "passedBeforeGate": ["Effective Commerce OpenAPI operations", "Existing customer authentication", "Search-backed Product discovery and PDP", "Shipping and return method reads", "WISHLIST, COMPARE and SAVE_FOR_LATER operations", "Owned Cart creation and read"],
+    "stop": { "operation": "Cart add entry", "httpStatus": 409, "code": "ERR_CART_INVENTORY_UNAVAILABLE" },
+    "operationalInspection": {
+      "authority": "Normal authenticated Commerce schema capabilities and exact-filter safe-search APIs; budget-ledger read through Promotion",
+      "allReadResponses": 200,
+      "warehouseCode": "agoraApparelWarehouse",
+      "matchingBalances": 0,
+      "campaignCode": "agoraCapsuleEdit10PercentRule",
+      "matchingOperationalCampaigns": 0,
+      "batchCode": "agoraCapsuleEdit10Batch001",
+      "matchingCouponBatches": 0,
+      "budgetLedgerEntries": 0,
+      "limit": "Empty read results do not authorize inserting opening stock or asserting reconciled zero consumption."
+    },
+    "requiredOwnerWork": [
+      { "owner": "inventory", "gap": "RECEIVE requires an existing balance. No first-receipt/opening-balance operation exists, and operational stock snapshot imports are explicitly rejected.", "requiredEvidence": "Approved intake provenance and quantities, Inventory-owned first receipt, atomic/replay-safe balance and movement evidence, and absence/conflict/recovery tests. Do not insert a balance through generic CRUD." },
+      { "owner": "promotion", "gap": "Activated policy retains budget.limit but requires an existing operational budget.spent. There is no evidenced first-use consumption admission operation.", "requiredEvidence": "Owner-reviewed new-campaign or reconciled opening-consumption semantics, retained policy/scope binding, ledger/redemption checks, replay/conflict evidence. A legacy draft write with spent=0 is not that evidence." },
+      { "owner": "promotion/digitalCore", "gap": "Generated coupon batch issuance stores token hashes without a protected-token or vault handoff; customer secure reveal remains deferred for such rows.", "requiredEvidence": "Secure issuance/reveal through the existing owner boundary, then a real coupon purchase with payment, sale, delivery and purchased-owner evidence before discounted Apparel Checkout. Never pre-apply the campaign or invent coupon ownership." }
+    ],
+    "paymentBoundary": "The configured CARD path uses DefaultStripeSandboxAdapterService, an offline simulator with no Stripe network execution. Even a future successful local run qualifies offline conformance only, not credentialed gateway acceptance. No payment execution was reached in this batch.",
+    "unexecuted": ["Purchased coupon checkout and secure reveal", "Mandatory campaign quote and one-time Checkout commitment", "Payment and Order placement", "Order cancellation/return/refund lifecycle", "Order non-owner rejection"],
+    "effects": "The canonical runner created its own acceptance Cart/list entries before stopping. No direct database cleanup was performed. Earlier and runner-created records were preserved rather than assuming failure rolled them back."
+  },
+  "verification": {
+    "cartFocusedTests": { "passed": 31, "failed": 0, "overlap": "Cart API tests also run in Commerce; activated port tests also run in additional suites." },
+    "commerceSuite": { "command": "npm run test:commerce", "passed": 201, "failed": 0 },
+    "additionalOwnerSuites": { "passed": 30, "failed": 0, "suites": ["commerceJourneyAcceptance", "checkoutLoyaltyRewardJourneyContract", "cartActivatedPolicyPorts"] },
+    "sourceSyntax": "PASSED",
+    "llmGenerationAndValidation": { "modules": 202, "state": "PASSED" },
+    "semanticDiffAndOwnershipReview": "PASSED",
+    "diffWhitespaceCheck": "PASSED"
+  },
+  "safety": { "resetPerformed": false, "qualificationFlagsChanged": false, "rawDatabaseAccess": false, "fabricatedOperationalState": false, "credentialsInEvidence": false },
+  "cleanup": { "state": "VERIFIED", "ownedRuntimesOnly": true, "topologySupervisor": "NOT_RUNNING", "backendPortsNotListening": [4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350] }
+}

@@ -26,29 +26,39 @@
   the standard functional module identity exposed to BackOffice/Axis.
 - Kickoff-wide documentation belongs in this customer backend project, not in
   `nodics.docs`, `nodics.platform/modules/axis`, or the `nodics.axis` frontend.
-  Author permanent Kickoff-wide source under `docs/`; generate CMS-importable
-  records into the governed project data tree:
+  Maintain CMS-importable documentation records directly in the governed project
+  data tree, with no parallel `docs/` authoring source:
 
 ```text
-docs/
-  catalogue.json
-  pages/
 data/
-  core/
-    data/
+  docs-v001/
+    records/
       documentation/
     headers/
+    assets/
+      documentation/
   manifest.json
 ```
 
-- Use Kickoff `docs/` for project-wide setup, runtime composition, onboarding,
-  customization, qualification and operations. Application-specific
-  documentation belongs under the owning application data module, for example
-  `modules/circa.ewaste/docs/`; its generated records
-  belong in that module's lifecycle-qualified `data/` release. Keep `README.md`
+- Use Kickoff CMS documentation data for project-wide setup, runtime composition,
+  onboarding, qualification and operations. Framework capabilities and accelerator
+  journeys remain in their owning `nodics.ai` modules, including the Circa
+  reference journey in `nodics.accelerators/modules/waste/modules/eWaste/data/docs-v001`.
+  Reference those canonical guides rather than copying them into the project.
+  Only genuine partner customization guides belong in the owning customer module's
+  `data/docs-v001`; do not invent customization content for an unchanged reference.
+  Documentation images are Media records and same-release assets referenced by
+  `mediaCode`; business imports must not implicitly select documentation packs.
+  Keep `README.md`
   files concise.
 - Project, environment, and server contributions load after product modules by
   index and customize services through the standard merge process.
+- The unreleased data baseline is consolidated into `v001` within each data type,
+  with executable data and documentation sections pinned to semantic `0.0.1`.
+  Existing local installations may retain receipts for earlier bytes. Inspect
+  installed history and use an explicitly approved governed fresh initialization
+  or reset where needed; never rewrite receipts, bypass drift protection or replay
+  Init over an established deployment. Future frozen releases use forward versions.
 - Add environments and servers only when Nodics Kickoff owns those runnable
   topologies.
 - Keep runtime clean/build behavior scoped to the effective module graph for the
@@ -138,8 +148,8 @@ solve a customer-project problem by moving framework ownership into Kickoff.
   formatter-clean, intentionally indented, and documented with file-level and
   exported-function comments where the file participates in runtime,
   documentation generation, setup, or acceptance.
-- Do not hand-edit generated documentation data to fix source documentation.
-  Update the owning `docs/` source, then regenerate the content pack.
+- Update documentation directly in the owning CMS page/component records and
+  validate the release hashes. Do not introduce a Markdown-to-CMS generator.
 
 ## Minimal configuration
 
@@ -165,7 +175,7 @@ Never move an entire customer application merely to reduce project line count.
 Inherit framework defaults and declare only intentional customer/deployment
 differences. Apply the resolved framework's
 `nSetup/llm/contracts/customer-config-classification-contract.md`. Read
-[the project configuration guide](docs/pages/configuration-inheritance.md).
+[the project configuration guide](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js).
 Shared project administration descriptors belong in `kickoffCore` under
 Platform runtime-role profiles. Do not recreate a separate configuration-only
 administration module. Foundation nTooling owns reusable command behavior;
@@ -202,7 +212,7 @@ Waste, Loyalty checkout, runtime grants and application bootstrap use protected
 commands. Missing authorized setup or owner evidence is a prerequisite/gap,
 never permission to restore direct database access or acceptance-owned grants.
 The Local checklist documents current setup and verification. Keep dated
-extraction results under `docs/evidence/`, outside the published catalogue;
+extraction results under `test/evidence/`, outside the published catalogue;
 never mix historical passes with current live-readiness claims. Maintain source
 links and catalogue related-page links between setup, validation and operations.
 

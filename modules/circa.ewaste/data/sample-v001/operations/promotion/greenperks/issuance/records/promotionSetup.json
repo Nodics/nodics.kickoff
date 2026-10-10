@@ -1,0 +1,671 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C01_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
+      "policyFingerprint": "c6c3a555d5c1b7c9de0739e9d2b06f7d507dd7d9e28df6e1f3051ee4b8d6eda3",
+      "commandReference": "opening-CIRCA_COUPON_GP-C01_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C02_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
+      "policyFingerprint": "7942f8f23f0fc8db81b748fa3f66f6a89ce12ee3e25551765bb80c37b4811f62",
+      "commandReference": "opening-CIRCA_COUPON_GP-C02_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C03_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
+      "policyFingerprint": "bdb5457580e617fdbb19fed12c89f6c7b9a8c10751555393ae1c6bfe50fe4d49",
+      "commandReference": "opening-CIRCA_COUPON_GP-C03_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C04_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
+      "policyFingerprint": "938ddbd19614065d66c414c0f3204000a84e8b8debdb8f8dc76b0c347b579306",
+      "commandReference": "opening-CIRCA_COUPON_GP-C04_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C05_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
+      "policyFingerprint": "b6088b78709a429e46a6415ef02adef66c7c351ceef6d82028f75496b387c197",
+      "commandReference": "opening-CIRCA_COUPON_GP-C05_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C06_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
+      "policyFingerprint": "cf1a0d593e411d835d3b8c8d7548b1b9e4d57c3f4c55090704c102ed82da6802",
+      "commandReference": "opening-CIRCA_COUPON_GP-C06_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C07_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
+      "policyFingerprint": "4086aa3fdfc6974171115cfed623fd31e7149ada2c00188e77a4d95fbe09fb8a",
+      "commandReference": "opening-CIRCA_COUPON_GP-C07_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C08_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
+      "policyFingerprint": "a91ea43d0594ca87349900ece23ce3a96065359a2fff98d92f3165ac608a7d48",
+      "commandReference": "opening-CIRCA_COUPON_GP-C08_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C09_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
+      "policyFingerprint": "570870a73da1ddafd4fd500bcd55a8b1333463ec68e4d256559ddeb3f4cfb33a",
+      "commandReference": "opening-CIRCA_COUPON_GP-C09_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C10_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
+      "policyFingerprint": "ff84945402fce0b331c216cb84a8a69411ebd76f5ad846abdd410518e9e62bf4",
+      "commandReference": "opening-CIRCA_COUPON_GP-C10_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C11_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
+      "policyFingerprint": "80ee6625a870f144bb5d63a2b75a47abc8a9818c294c91fd8b3d51fd41b2a9a5",
+      "commandReference": "opening-CIRCA_COUPON_GP-C11_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C12_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
+      "policyFingerprint": "22a6e0ad8df7c2b0e6771b301121b3601e1f9aaa17b5100185da39392317bdbe",
+      "commandReference": "opening-CIRCA_COUPON_GP-C12_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B01_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
+      "policyFingerprint": "3bc5c87ed3c9160afb1d6d63fb29804c9fec9a7c30576726e03bcc88698ef5a1",
+      "commandReference": "opening-CIRCA_COUPON_GP-B01_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B02_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
+      "policyFingerprint": "582a1b0e8f5e15369b832b0b288142d8274148c0b61d83c441028588b2e7764c",
+      "commandReference": "opening-CIRCA_COUPON_GP-B02_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B03_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
+      "policyFingerprint": "a3548fbbc9c1a4d763f8c00c3a44288b84492ba67427954fbead481d44ab978e",
+      "commandReference": "opening-CIRCA_COUPON_GP-B03_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B04_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
+      "policyFingerprint": "520cd100fabdf9422112ac15003edc3f51dc1ab6ecc527ac048b3f2a4b617d27",
+      "commandReference": "opening-CIRCA_COUPON_GP-B04_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B05_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
+      "policyFingerprint": "461a9b38265435f5c782e35b8be2d06fd9a54de746894c1710ed8f994bb3e952",
+      "commandReference": "opening-CIRCA_COUPON_GP-B05_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B06_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
+      "policyFingerprint": "3d53ae20465fb57f6e14331f4d0df43c33c1ba13fa4e5f680632024edd3f8fb8",
+      "commandReference": "opening-CIRCA_COUPON_GP-B06_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B07_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
+      "policyFingerprint": "f55a82214f89f2bf30a8a4ce68032813f3eafcf8998e0866a1b3d354c3283fc6",
+      "commandReference": "opening-CIRCA_COUPON_GP-B07_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B08_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
+      "policyFingerprint": "bec7c7c8101082b9436fc7dc7a81316da144827d40cabf49c1f7f12b6ae4ef3c",
+      "commandReference": "opening-CIRCA_COUPON_GP-B08_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B09_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
+      "policyFingerprint": "c810fc755af7a4145eb4a74b9e85d39d7e40eda2c926bd409323f29bff0b4ad7",
+      "commandReference": "opening-CIRCA_COUPON_GP-B09_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B10_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
+      "policyFingerprint": "6ea3af94f60b42c931761a4b02513f1e46c8710d7e63bbe6c32bc871874a4c8a",
+      "commandReference": "opening-CIRCA_COUPON_GP-B10_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B11_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
+      "policyFingerprint": "a39d9280094606c108e20f2f3af26141921e8a64f0f1354f03c896a8a3df1fc0",
+      "commandReference": "opening-CIRCA_COUPON_GP-B11_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B12_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
+      "policyFingerprint": "4183d42e449653c3572d6b4c3e09cd64834a8dc13bb01447ad32f3abec520a20",
+      "commandReference": "opening-CIRCA_COUPON_GP-B12_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
+      "policyFingerprint": "e59de0b450ad4afba2aa24a5e38fe0969669c30a54a80a7dde33be9d82b0d7a6",
+      "commandReference": "opening-CIRCA_COUPON_GP-A01_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A02_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
+      "policyFingerprint": "db58c8c8b7179f77741f2a16db3f327fcdeb664baaf7b42196374fe6656e1b62",
+      "commandReference": "opening-CIRCA_COUPON_GP-A02_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A03_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
+      "policyFingerprint": "a5b2baeb0b74c2e372498a133766ad27024f4f07550543af977bf941fd1b70d1",
+      "commandReference": "opening-CIRCA_COUPON_GP-A03_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A04_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
+      "policyFingerprint": "acefbb70baab27e8930bf791315092aa0bdde5006151cbd85e69dca77576ead9",
+      "commandReference": "opening-CIRCA_COUPON_GP-A04_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A05_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
+      "policyFingerprint": "4c9d64023e03f28db39fe909d7356e73314cdd3b82348e73dcfdfa8ee67be703",
+      "commandReference": "opening-CIRCA_COUPON_GP-A05_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A06_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
+      "policyFingerprint": "fd0e1311593c60bacb9c53677f7c5d754968e0b0b230d74afc6b857c8a1be26a",
+      "commandReference": "opening-CIRCA_COUPON_GP-A06_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A07_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
+      "policyFingerprint": "abaf8e08b596e4977b99439ef211de65811569b6deb572d1961d8d6c05f6d9cf",
+      "commandReference": "opening-CIRCA_COUPON_GP-A07_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A08_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
+      "policyFingerprint": "2a84047c72a879092f9b15c83dd3a381893345125a6d3754487004372ddffddf",
+      "commandReference": "opening-CIRCA_COUPON_GP-A08_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A09_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
+      "policyFingerprint": "c752ed44dffe5adced145c837c2a6198e0dcdc44315d6cf9be439a554803a6ad",
+      "commandReference": "opening-CIRCA_COUPON_GP-A09_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A10_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
+      "policyFingerprint": "1f984a8a7260f8eea9ce4b4eaca72eb12b1331aa7d028b28ca6c1c73bd601c2e",
+      "commandReference": "opening-CIRCA_COUPON_GP-A10_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A11_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
+      "policyFingerprint": "99188eb139f2ee9c65e7e1c272359b87b012b461e86e57d859d7ad4f8581ead4",
+      "commandReference": "opening-CIRCA_COUPON_GP-A11_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaGreenPerksBudget",
+        "version": "0.0.1",
+        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+      }
+    }
+  ],
+  "couponBatches": [
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C01_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C01_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C01_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C02_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C02_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C02_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C03_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C03_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C03_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C04_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C04_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C04_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C05_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C05_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C05_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C06_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C06_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C06_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C07_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C07_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C07_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C08_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C08_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C08_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C09_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C09_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C09_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C10_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C10_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C10_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C11_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C11_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C11_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C12_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-C12_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-C12_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B01_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B01_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B01_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B02_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B02_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B02_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B03_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B03_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B03_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B04_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B04_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B04_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B05_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B05_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B05_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B06_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B06_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B06_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B07_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B07_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B07_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B08_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B08_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B08_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B09_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B09_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B09_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B10_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B10_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B10_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B11_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B11_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B11_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B12_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-B12_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-B12_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A01_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A01_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A02_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A02_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A02_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A03_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A03_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A03_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A04_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A04_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A04_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A05_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A05_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A05_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A06_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A06_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A06_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A07_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A07_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A07_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A08_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A08_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A08_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A09_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A09_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A09_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A10_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A10_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A10_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A11_PROMO",
+      "batchCode": "CIRCA_COUPON_GP-A11_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_GP-A11_PROMO"
+    }
+  ]
+}

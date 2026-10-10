@@ -1,5 +1,10 @@
 # Commerce Staged Server Agent Contract
 
+Native Local's four-issuer runtime publication scope is selected once at the
+environment layer. Process claims and retained source authority bind each
+business enterprise; keep the signed deployment principal unchanged. Neither
+this selection nor the new publication starter group grants review or activation.
+
 - Follow the Nodics Kickoff project contract from the repository root `AGENTS.md`.
 - Follow every ancestor `AGENTS.md` before changing this server boundary.
 - This package owns only the responsibilities declared in `package.json.nodics.owns`.

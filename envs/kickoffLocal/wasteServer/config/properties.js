@@ -6,6 +6,7 @@
  * @override Later deployment layers may narrow the selected owners without bypassing Profile authorization.
  */
 module.exports = {
+  "publish": { "setup": { "observation": { "enabled": true } } },
   "runtimePropertyGovernance": {
     "persistence": { "enabled": true }
   },
@@ -31,9 +32,12 @@ module.exports = {
           "profile.customer.register",
           "profile.address.reference.read",
           "profile.enterprise.reference.read",
+          "profile.customer.reference.read",
           "location.location.read",
           "loyalty.wallet.open",
           "loyalty.wallet.read",
+          "loyalty.rewards.earn",
+          "loyalty.rewards.reverse",
           "media.evidence.read",
           "media.customer.upload",
           "media.customer.read",
@@ -44,6 +48,7 @@ module.exports = {
           "publish.lifecycle.validate",
           "publish.lifecycle.requestApproval",
           "commerce.product.publish",
+          "commerce.digital.own.read",
           "profile.externalIdentity.prepare"
         ]
       }
@@ -52,6 +57,7 @@ module.exports = {
   "activeModules": {
     "groups": [],
     "modules": [
+      "publish",
       "circa.ewaste",
       "nodics.kickoff",
       "kickoffCore",
@@ -114,6 +120,27 @@ module.exports = {
     }
   },
   "eWaste": {
+    "marketplace": {
+      "digitalOwnership": {
+        // Admission only; every phase retains installed owner and original financial evidence checks.
+        "enabled": true,
+        "qualified": true,
+        "allowedServicePrincipals": { "$config": "replace", "value": ["apiAdmin"] },
+        "businessCallers": { "$config": "replace", "value": [{
+          "tenant": "default", "principalEnterpriseCode": "default", "enterpriseCode": "GREENPERKS_ONLINE",
+          "serviceId": "apiAdmin", "projectCode": "nodics.kickoff", "environmentCode": "kickoffLocal",
+          "serverCode": "commerceServer", "instanceCode": "kickoff-local-commerce-1",
+          "assignmentCode": "kickoff-local-commerce-runtime-deployment",
+          "permissions": ["waste.asset.marketplace.project", "waste.asset.sale.transfer"]
+        }] },
+        "customerEvidenceApiName": "/internal/customer-evidence",
+        "targets": {
+          "commerce": "COMMERCE",
+          "loyalty": "LOYALTY",
+          "profile": "PLATFORM"
+        }
+      }
+    },
     "outcomeCommunication": {
       "detailLinks": {
         "IN_APP": {

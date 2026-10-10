@@ -1,0 +1,283 @@
+{
+  "evidenceType": "SOURCE_VALIDATION_NOT_NATIVE_ACCEPTANCE",
+  "date": "2026-10-09",
+  "scope": "Circa end-to-end prerequisites, items 1 through 6",
+  "liveMutationsExecuted": false,
+  "nativeAcceptanceClaimed": false,
+  "items": [
+    {
+      "item": 1,
+      "status": "SOURCE_VALIDATED",
+      "summary": "Exact issuer-staff admission to vendor-owned purchased coupon operations preserves the original authenticated caller and privately bounds persistence and lifecycle writes."
+    },
+    {
+      "item": 2,
+      "status": "SOURCE_VALIDATED_WITH_APPROVED_REVERSAL_EXCLUSION",
+      "summary": "Coupon-bound delegated COMMIT and RELEASE receivers, original receipt linkage, consent purpose, replay protection and qualified transaction checks are source-tested.",
+      "supportedScope": "The human explicitly approved keeping already-redeemed benefit inverses disabled. Actual MerchantScope refuses RELEASE, including genuine COMMIT identity; defensive receiver tests do not enable a canonical reversal caller.",
+      "remaining": "Native installed COMMIT/receipt/transaction qualification. Used-benefit reversal is intentionally unsupported, not promised in this local-demo batch; unused purchase refunds retain their separate policy."
+    },
+    {
+      "item": 3,
+      "status": "SOURCE_VALIDATED",
+      "summary": "Product-bound public and trusted-origin distribution admission, installed consent checks and private persistence fail closed. Service flows without a genuine original caller remain unsupported."
+    },
+    {
+      "item": 4,
+      "status": "SOURCE_VALIDATED_SIMULATION_ONLY",
+      "summary": "All 29 unchanged approved ITEM bundles pass the real consumer and explicitly selected LOCAL simulator. Actual private merchant orchestration is source-tested with isolated persistence. Results remain simulated, unverified and nonimmutable, without deliveredAt, monetary inference or physical effects.",
+      "remaining": "Native installation, authorized publication and full signed-in demo execution. Authenticated original-allocation delivery remains unavailable and is not claimed by simulation."
+    },
+    {
+      "item": 5,
+      "status": "SOURCE_VALIDATED",
+      "summary": "Original-sale asset refund orchestration retains original capture and seller proceeds, rejects unsupported onward-transfer cases, and covers replay, interruption and missing-ledger failures."
+    },
+    {
+      "item": 6,
+      "status": "SOURCE_VALIDATED",
+      "summary": "Six issuer-scoped immutable budget and issuance instruction packs replace active raw coupon, batch and balance snapshots. Four authority-scoped publication subsets retain the inert 84-root inventory. Source packs grant no consent or operational authority."
+    }
+  ],
+  "completedChecks": [
+    {
+      "scope": "Framework Commerce contract sweep",
+      "testFiles": 178,
+      "passed": 1338,
+      "failed": 0
+    },
+    {
+      "scope": "Framework Waste and eWaste contract sweep",
+      "testFiles": 70,
+      "passed": 326,
+      "failed": 0
+    },
+    {
+      "scope": "Circa project contracts",
+      "passed": 91,
+      "failed": 0
+    },
+    {
+      "scope": "Documentation composition, references and v001 baseline",
+      "passed": 19,
+      "failed": 0
+    },
+    {
+      "scope": "Source-backed semantic documentation audit",
+      "closedScopes": 22,
+      "openScopes": 0
+    },
+    {
+      "scope": "Framework nTooling contract sweep",
+      "testFiles": 83,
+      "passed": 199,
+      "failed": 0
+    },
+    {
+      "scope": "Framework documentation test, validation and hardening gates",
+      "contractTestsPassed": 4,
+      "validatedPages": 176,
+      "status": "PASSED"
+    },
+    {
+      "scope": "Framework documentation, ownership and AI governance gates",
+      "status": "PASSED"
+    },
+    {
+      "scope": "Framework and project module LLM context validation",
+      "frameworkModules": 202,
+      "projectModules": 31,
+      "status": "PASSED"
+    },
+    {
+      "scope": "Native kickoffLocal Commerce and Commerce Staged build generation",
+      "status": "PASSED",
+      "runtimeStarted": false
+    },
+    {
+      "scope": "Framework and kickoffLocal Commerce governance report generation",
+      "status": "PASSED",
+      "runtimeStarted": false
+    }
+  ],
+  "testCountNotes": "Counts describe separate focused sweeps, not an additive unique-test total. Source fixtures and build generation do not qualify installed services or live provider behavior.",
+  "followUp": {
+    "scope": "ITEM provider private merchant handoff correction",
+    "workingMode": "MAINTAINER_SOURCE_IMPLEMENTATION_AND_REVIEW",
+    "frameworkHead": "77564981431ae20ac0eb1019c1c8902dd66b7dc5",
+    "baselineNotes": "The framework and project already contain extensive uncommitted programme changes. This follow-up does not revert or claim ownership of that earlier work.",
+    "defect": "ITEM confirmation directly called Promotion with a copied request, losing the existing private issuer-staff admission for vendor-owned stock.",
+    "correction": "The actual ITEM provider now uses Merchant.validateCoupon with the exact object returned by pricedAuthority. Same-enterprise validation retains the ordinary Promotion path; owner failure has no fallback.",
+    "sourceInventory": [
+      "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceItemMerchantProviderService.js",
+      "nodics.commerce/modules/digitalCommerce/modules/digitalCore/test/digitalCommerceItemMerchantContract.test.js",
+      "nodics.commerce/modules/digitalCommerce/modules/digitalCore/AGENTS.md",
+      "nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionItemBenefitContract.test.js",
+      "nodics.commerce/modules/baseCommerce/modules/promotion/llm/contracts/verified-item-benefits.md"
+    ],
+    "ownershipPlacementScopeReview": {
+      "status": "PASS_FOR_THE_LISTED_SOURCE_CORRECTION",
+      "owner": "Digital Core retains merchant orchestration; Promotion retains private stock admission and ITEM promise validation; Fulfillment retains delivery provenance.",
+      "configurationImpact": "None. No enablement, qualification, provider selection, runtime bindings or deployment policy changed. External and persisted settings were not inspected.",
+      "authorityImpact": "Original issuer staff identity is preserved through the existing dispatcher; no new credentials, grant, receipt store, API, schema or business lifecycle is introduced.",
+      "customization": "The provider calls the existing mergeable Merchant.validateCoupon member; later layers retain the same private admission and receipt-binding invariants.",
+      "scopeLimits": "This is not a full-repository placement review, native provider qualification, verified goods delivery or used-benefit reversal implementation. Existing semantic review evidence remains separately governed."
+    },
+    "regressionBeforeCorrection": { "passed": 1, "failed": 7 },
+    "regressionAfterCorrection": { "passed": 8, "failed": 0 },
+    "focusedMerchantAndItemSweep": { "passed": 210, "failed": 0 },
+    "commerceBuildGeneration": { "status": "PASSED", "runtimeStarted": false },
+    "documentationGovernance": "PASSED",
+    "remainingDecisions": [
+      "Choose an authoritative authenticated ITEM delivery source and its protocol, or explicitly select an isolated simulator without real-delivery claims.",
+      "Identify the original discounted-transaction reversal authority, or explicitly keep used-benefit reversals unsupported. Unused coupon refunds provide no such authority."
+    ],
+    "liveMutationsExecuted": false
+  },
+  "approvedSimulationFollowUp": {
+    "date": "2026-10-09",
+    "workingMode": "MAINTAINER_SOURCE_IMPLEMENTATION_AND_REVIEW",
+    "humanDecisions": {
+      "simulatedItemDelivery": "APPROVED_FOR_LOCAL_DEMO_ONLY",
+      "alreadyRedeemedBenefitReversals": "KEEP_DISABLED",
+      "productionOrRealDeliveryAuthority": false,
+      "independentOwnerGatesWaived": false
+    },
+    "historicalEvidence": "completedChecks and followUp retain their original earlier results and pending-decision wording as history. This follow-up records the later approval and implementation; no historical native acceptance is upgraded.",
+    "runtimeSourceInventory": [
+      "framework:nodics.commerce/modules/fulfillment/modules/fulfillmentCore/src/service/defaultFulfillmentItemSimulationService.js",
+      "framework:nodics.commerce/modules/fulfillment/modules/fulfillmentCore/config/properties.js",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionItemBenefitService.js",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionMerchantScopeService.js",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/config/properties.js",
+      "framework:nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceItemMerchantProviderService.js",
+      "framework:nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceMerchantService.js",
+      "framework:nodics.copilot/modules/copilotWorkbench/src/service/defaultCopilotCouponActionService.js",
+      "kickoff:envs/kickoffLocal/config/properties.js"
+    ],
+    "focusedTestInventory": [
+      "framework:nodics.commerce/modules/fulfillment/modules/fulfillmentCore/test/fulfillmentItemSimulationContract.test.js",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionItemSimulationContract.test.js",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionMerchantScopeContract.test.js",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/test/promotionUsedBenefitReversalDisabledContract.test.js",
+      "framework:nodics.copilot/modules/copilotWorkbench/test/copilotCouponAction.test.js",
+      "kickoff:modules/circa.ewaste/test/circaItemSimulationSelection.test.js"
+    ],
+    "frontendSourceInventory": [
+      "axis:src/operations/promotions/MerchantRedemptionPanel.tsx",
+      "axis:src/operations/promotions/README.md",
+      "axis:test/enterprise/merchantItemEvidenceUi.test.tsx",
+      "axis:src/assistant/api/copilotCouponClient.ts",
+      "axis:src/assistant/CopilotCouponComposer.tsx",
+      "axis:test/assistant/copilotCouponEvidence.test.ts",
+      "axis:test/assistant/CopilotCouponEvidenceUi.test.tsx",
+      "axis:src/assistant/README.md"
+    ],
+    "guidanceInventory": [
+      "framework:nodics.commerce/modules/fulfillment/modules/fulfillmentCore/AGENTS.md",
+      "framework:nodics.commerce/modules/fulfillment/modules/fulfillmentCore/README.md",
+      "framework:nodics.commerce/modules/fulfillment/modules/fulfillmentCore/llm/contracts/verified-item-delivery.md",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/AGENTS.md",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/README.md",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/llm/contracts/verified-item-benefits.md",
+      "framework:nodics.commerce/modules/baseCommerce/modules/promotion/llm/contracts/coupon-bound-issuer-budget.md",
+      "framework:nodics.commerce/modules/digitalCommerce/modules/digitalCore/AGENTS.md",
+      "framework:nodics.commerce/modules/digitalCommerce/modules/digitalCore/README.md",
+      "framework:nodics.commerce/modules/digitalCommerce/modules/digitalCore/llm/contracts/merchant-redemption-contract.md",
+      "framework:nodics.copilot/modules/copilotWorkbench/AGENTS.md",
+      "framework:nodics.copilot/modules/copilotWorkbench/README.md",
+      "framework:nodics.copilot/modules/copilotWorkbench/llm/contracts/README.md",
+      "framework:nodics.copilot/modules/copilotWorkbench/llm/examples/secure-coupon-fulfillment.md",
+      "kickoff:envs/kickoffLocal/AGENTS.md",
+      "kickoff:modules/circa.ewaste/AGENTS.md",
+      "kickoff:modules/circa.ewaste/llm/contracts/circa-application.md",
+      "kickoff:modules/circa.ewaste/llm/contracts/circa-promotion-setup.md"
+    ],
+    "ownershipPlacementScopeReview": {
+      "status": "PASS_FOR_LISTED_BACKEND_AND_NATIVE_SELECTION_FILES",
+      "owner": "Fulfillment owns reusable simulator admission/canonical context; Promotion owns retained ITEM rights and private issuer stock validation; Digital Core owns existing receipt/claim/redemption coordination. Kickoff owns its explicit native environment selection only.",
+      "configurationClassification": "Framework default-off itemSimulation policy and default VERIFIED mode are capability-owned. kickoffLocal intentionally selects LOCAL_SIMULATION and the exact environment allowlist. LOCAL classification remains package-derived through nConfig. Docker and framework defaults stay inert; no copied endpoint, credential or second environment descriptor is introduced.",
+      "authorityReview": "Original issuer staff bearer, Profile scopes, Store owner revision, live consent and private mutation phases remain mandatory. The simulator performs no database, provider, stock, allocation or delivery receipt writes. No general service authority, new ledger, route or schema is added. qualified is not changed to true.",
+      "customizationReview": "Loader-visible mergeable service members preserve this-based narrowing and real context reuse; tests cover later-layer narrowing and selection revocation. Simulation cannot enter VERIFIED evidence or create used-benefit inverse authority.",
+      "documentationOwnership": "Shared capability articles remain in their implementing framework modules; reusable accelerator journeys remain in eWaste. Kickoff contains only actual environment/test selection instructions. Existing media references and optional docs-v001 segregation are preserved.",
+      "scopeLimits": "Scoped semantic review, not a full-repository audit. Extensive unrelated programme edits are preserved. Source doubles and build generation do not qualify installed persistence, current runtime settings, real delivery or native browser execution."
+    },
+    "checks": {
+      "focusedActualSourceSweep": { "passed": 200, "failed": 0 },
+      "allCommerceIncludingGeneratedSchemaContracts": { "testFiles": 182, "passed": 1434, "failed": 0, "skipped": 0 },
+      "allCircaContracts": { "passed": 93, "failed": 0, "skipped": 0 },
+      "simulatorIsolation": { "passed": 43, "failed": 0, "persistenceAndTransportForbidden": true },
+      "usedBenefitReversalDisabled": { "passed": 13, "failed": 0 },
+      "circaDeclaredBundleCoverage": { "campaigns": 29, "campaignOutletPairs": 35, "passed": true, "sourceRecordsChanged": false },
+      "copilotWorkbenchNonLiveSourceTests": { "passed": 156, "failed": 0, "nativeTestsExcluded": true },
+      "axisMerchantAndCopilotSourceSuites": { "testFiles": 6, "passed": 118, "failed": 0, "nativeBrowserAcceptance": false },
+      "axisBuildTypecheckLintFormatting": { "status": "PASSED", "buildWarning": "Existing large-chunk warning; no new runtime or browser acceptance claimed" },
+      "documentationOwnershipCompositionReferencesAndBaseline": { "passed": 20, "failed": 0, "v001AndManifestChecksums": "PASSED", "optionalDocumentationSegregation": "PASSED" },
+      "documentationLibrary": { "contractTestsPassed": 4, "validatedPages": 176, "releaseVersion": "0.0.1", "closedSemanticScopes": 22, "openSemanticScopes": 0, "hardening": "PASSED" },
+      "receiptReferenceRegression": { "reference": "SIM:original@outlet", "beforeFix": { "passed": 0, "failed": 1 }, "afterFix": { "passed": 1, "failed": 0 }, "scope": "Actual private merchant source flow through confirmation, receipt persistence, redemption, replay and original receipt inspection; isolated owner persistence, not native acceptance" },
+      "frameworkSyntax": { "checked": 6168, "failed": 0, "lastChangedSourceAndTestRechecked": true },
+      "commerceBuildGeneration": { "status": "PASSED", "openApiPaths": 1078, "schemas": 126, "runtimeStarted": false },
+      "commerceStagedBuildGeneration": { "status": "PASSED", "openApiPaths": 1122, "schemas": 128, "runtimeStarted": false },
+      "frameworkLlmContext": { "generated": 202, "validated": 202 },
+      "kickoffLlmContext": { "generated": 31, "validated": 31 },
+      "frameworkDocumentationOwnershipAndAiGates": "PASSED",
+      "countLimit": "Focused checks are subsets of the broad sweep; do not add the counts as unique tests."
+    },
+    "consumerProjectionReview": {
+      "status": "PASS_SCOPED_SOURCE_REVIEW",
+      "axis": "Distinct ITEM bundle display has no fabricated monetary fields. Explicit warnings survive confirmation, recovery and queue. Simulator receipt grammar including @ is aligned; the backend remains authority.",
+      "copilot": "Exact own enumerable data-property triad is preserved only from actual native queue and receipt DTOs. Partial, contradictory, inherited and accessor tags refuse. No caller/environment inference or raw private evidence is returned. ITEM preparation/execution remains unsupported and unexpected simulated execution stays uncertain.",
+      "limits": "Source and component tests only. No signed-in native browser acceptance or installed service qualification."
+    },
+    "semanticCmsReview": {
+      "status": "PASS_SCOPED_SOURCE_EDITORIAL_REVIEW",
+      "exactChangedFileInventoryAndFindings": "framework:nodics.docs/test/evidence/semantic-documentation-local-item-simulation-review-2026-10-09.json",
+      "copilotReadProjectionReview": "framework:nodics.docs/test/evidence/semantic-documentation-copilot-simulation-read-review-2026-10-09.json",
+      "scope": "Promotion, Digital, Fulfillment and Copilot owning CMS records, derived page/search metadata and manifests. Only the affected Commerce closure evidence was renewed after actual source review; prior native evidence and unrelated pins were preserved.",
+      "assets": "Existing Media references and assets unchanged; no separate upload or publication performed.",
+      "initialTransientFailure": "A parent baseline/composition check ran between CMS record edits and manifest generation and detected the expected temporary byte mismatch. After owner generation/freeze the exact same 20 checks passed, including all v001 checksums and optional documentation segregation.",
+      "acceptanceLimits": "Validated source/editorial content only. No imports, approvals, native publication or installed browser acceptance."
+    },
+    "runtimeEffects": {
+      "nativeProcessesObserved": "NO_NODE_APPLICATION_PORTS_LISTENING",
+      "runtimesStarted": false,
+      "resetExecuted": false,
+      "importsOrPublicationExecuted": false,
+      "consentsOrStockIssuanceExecuted": false,
+      "financialOrOwnershipEffectsExecuted": false,
+      "installedReceiptRewriteExecuted": false,
+      "nativeBrowserAcceptanceExecuted": false
+    }
+  },
+  "laterAcceptance": [
+    {
+      "item": 7,
+      "scope": "Native installation and private-persistence qualification",
+      "status": "NOT_EXECUTED_IN_THIS_BATCH"
+    },
+    {
+      "item": 8,
+      "scope": "Coordinated Axis publication with existing approvals",
+      "status": "NOT_EXECUTED_IN_THIS_BATCH"
+    },
+    {
+      "item": 9,
+      "scope": "Full native end-to-end execution",
+      "status": "NOT_EXECUTED_IN_THIS_BATCH"
+    }
+  ],
+  "nativeSetupFollowUp": {
+    "date": "2026-10-09",
+    "evidence": "circa-native-setup-prerequisites-2026-10-09.json",
+    "status": "INFRASTRUCTURE_VERIFIED_FULL_OWNER_QUALIFICATION_PENDING",
+    "scope": "Native setup point 1 only; source-batch history above remains unchanged",
+    "readyRuntimes": 10,
+    "verifiedRuntimeGrants": 10,
+    "installedIndexModelsVerifiedBeforeAndAfterRestart": 10,
+    "focusedNativeProviderTests": { "passed": 3, "failed": 0, "skipped": 0 },
+    "fullInstalledOwnerQualification": false,
+    "businessAcceptance": false,
+    "laterImportPublicationConsentAndIssuanceExecuted": false,
+    "finalRuntimeState": "VERIFIED_STOPPED"
+  }
+}

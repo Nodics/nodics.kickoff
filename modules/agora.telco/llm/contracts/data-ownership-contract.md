@@ -1,9 +1,10 @@
 # Agora Telco data ownership
 
-Commerce release `0.0.4` (`sample-v003`) contains publishable catalog/policy
+Commerce release `0.0.1` (`sample-v001`) contains publishable catalog/policy
 records only. Stock balances require Inventory-owned Online operations and are
-not Staged imports. Historical Commerce `sample-v002` remains retained by section
-while WCMS still uses its unchanged `sample-v002` content. Catalog publication
+not Staged imports. The pre-customer development iterations are consolidated;
+Commerce and WCMS sections share the initial `sample-v001` baseline. Existing
+development receipts require governed fresh initialization, not downgrade or replay. Catalog publication
 does not establish opening stock. `test:data-ownership` enforces this separation.
 
 This customer application module owns its application sample data. Commerce and
