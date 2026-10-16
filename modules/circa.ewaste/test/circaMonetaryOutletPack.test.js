@@ -10,6 +10,7 @@ const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configurat
 const proposal = require("./fixtures/circaMonetaryOutletProposal.json");
 const selection = require("./fixtures/circaMonetaryOutletSetupSelection.json");
 const manifest = require("../data/manifest.json");
+const { historicalSection } = require("./helpers/releasePortability");
 const dataRoot = path.resolve(__dirname, "../data");
 const sha = value => crypto.createHash("sha256").update(value).digest("hex");
 const owner = (domain, name) => require(path.join(frameworkRoot,
@@ -21,15 +22,16 @@ const payload = (pack, kind, name) => require(path.join(dataRoot,
   `sample-v001/merchant-outlets/${pack.slug}/${kind}/records/${name}.json`));
 const sectionCodes = proposal.issuerPacks.flatMap(pack =>
   [pack.commerceSection, pack.publicationSection, pack.openingSection]);
-const coordinatedRoleSections = ["circaLocalDemoCreditRole", "circaLocalDemoCreditStaffAssignment",
-  "circaLocalOpeningRole", "circaLocalOpeningStaffAssignments"];
+const coordinatedRoleSections = ["circaLocalDemoCreditStaffAssignment", "circaLocalOpeningStaffAssignments"];
 
-test("nine explicit Local-only additions preserve every prior manifest section and payload hash", () => {
+test("nine explicit portable additions retain current payload hashes and separate frozen historical seals", () => {
   const laterRefundSections = ["circaLocalUnusedRefundExceptionRole", "circaLocalUnusedRefundExceptionStaffAssignment"];
-  assert.equal(sha(JSON.stringify(Object.fromEntries(laterRefundSections.map(code => [code, manifest.sections[code]])))),
+  assert.equal(sha(JSON.stringify(Object.fromEntries(laterRefundSections.map(code => [code, historicalSection(code)])))),
     "71062dcc473c480b1498d24bba2325481865b4997415a2b7396df0d673c0388c");
-  const prior = { ...manifest, sections: Object.fromEntries(Object.entries(manifest.sections)
-    .filter(([code]) => !sectionCodes.includes(code) && !coordinatedRoleSections.includes(code) && !laterRefundSections.includes(code))) };
+  const before = require("./fixtures/circaPreExtractionManifest.json");
+  const prior = { ...before, sections: Object.fromEntries(Object.entries(before.sections)
+    .filter(([code]) => !sectionCodes.includes(code) && !coordinatedRoleSections.includes(code) && !["circaLocalDemoCreditRole", "circaLocalOpeningRole"].includes(code) && !laterRefundSections.includes(code))
+    .map(([code]) => [code, historicalSection(code)])) };
   assert.equal(sha(JSON.stringify(prior)), "57a73a6ac5486624d3889943946631fd6a6bc75dd2889be0999f8ebe18d8cce7");
   assert.equal(sectionCodes.length, 9);
   const claimed = new Set();
@@ -47,7 +49,7 @@ test("nine explicit Local-only additions preserve every prior manifest section a
     assert.equal(section.version, "0.0.1");
     assert.equal(section.selectionPolicy, "EXPLICIT");
     assert.equal(section.versioningPolicy, "IMMUTABLE");
-    assert.deepEqual(section.environmentScope, ["LOCAL"]);
+    assert.deepEqual(section.environmentScope, ["ALL"]);
   }
   assert.equal(claimed.size, 33);
   assert.equal(sha(fs.readFileSync(path.join(__dirname, "fixtures/circaMonetaryOutletProposal.json"))), selection.approval.proposalSha256);
@@ -63,8 +65,7 @@ test("ordinary goods pass real placement preflight without adding missing Produc
     "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
   global.CONFIG = { get: key => runtime[key] };
   global.NODICS = { getRawModule: () => ({ path: path.resolve(__dirname, "..") }) };
-  global.SERVICE = { DefaultInventoryOperationService: owner("inventory", "defaultInventoryOperationService"),
-    DefaultCircaDemoCommerceImportAdmissionService: require("../src/service/defaultCircaDemoCommerceImportAdmissionService") };
+  global.SERVICE = { DefaultInventoryOperationService: owner("inventory", "defaultInventoryOperationService") };
   global.CLASSES = { DataImportError: class extends Error {
     constructor(code, message) { super(message); this.code = code; }
   } };
@@ -268,7 +269,7 @@ test("all nine monetary cases price the actual new source goods through the exac
   }
 });
 
-test("native fresh setup exposes all goods and bounded role stages with canonical revision-4 observation", t => {
+test("native fresh setup exposes all goods and bounded role stages with canonical revision-5 observation", t => {
   const previous = { CONFIG: global.CONFIG };
   t.after(() => Object.assign(global, previous));
   const runtime = loadRuntime("platformServer", "kickoffLocal");
@@ -290,11 +291,12 @@ test("native fresh setup exposes all goods and bounded role stages with canonica
   const predecessor = require("../config/setup-observation/history/circa-native-reviewed-revision-3.json");
   const plan = require("../config/setup-observation/circa-native-reviewed.json");
   assert.equal(predecessor.revision, 3);
-  assert.equal(plan.revision, 4);
+  assert.equal(plan.revision, 5);
+  const retained = require("../config/setup-observation/history/circa-native-reviewed-revision-4.json");
   assert.equal(plan.profileDigest, observer.digest(profile));
   const corrected = new Set(proposal.issuerPacks.map(pack => "circa.ewaste:" + pack.commerceSection));
   for (const original of predecessor.stages) {
-    const current = plan.stages.find(stage => stage.code === original.code);
+    const current = retained.stages.find(stage => stage.code === original.code);
     if (!corrected.has(original.code)) assert.deepEqual(current, original);
     else {
       assert.deepEqual({ ...current, release: original.release }, original);
@@ -318,10 +320,11 @@ test("native fresh setup exposes all goods and bounded role stages with canonica
     assert.deepEqual(stage.release.declaredFiles, actual.declaredFiles);
     assert.deepEqual(actual.declaredFiles, Object.keys(manifest.sections[code].files).sort(), "No sibling issuer file may expand into this release");
   }
-  for (const [role, staff] of [["circaLocalDemoCreditRole", "circaLocalDemoCreditStaffAssignment"],
-    ["circaLocalOpeningRole", "circaLocalOpeningStaffAssignments"]]) {
+  for (const [role, staff] of [["loyaltyWallet:specialAccessRoles", "circaLocalDemoCreditStaffAssignment"],
+    ["import:specialAccessRoles", "circaLocalDemoCreditStaffAssignment"],
+    ["inventory:specialAccessRoles", "circaLocalOpeningStaffAssignments"]]) {
     assert(order.indexOf("circa.ewaste:operations") < order.indexOf("circa.ewaste:" + staff));
-    assert(order.indexOf("circa.ewaste:" + role) < order.indexOf("circa.ewaste:" + staff));
+    assert(order.indexOf(role) < order.indexOf("circa.ewaste:" + staff));
   }
   for (const pack of proposal.issuerPacks) {
     const commerce = steps.find(step => step.code === "circa.ewaste:" + pack.commerceSection);

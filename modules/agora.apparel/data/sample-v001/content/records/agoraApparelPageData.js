@@ -80,3 +80,12 @@ module.exports = {
     ]
   }
 };
+
+
+// Explicit fresh-source ownership; never infer ownership for installed records.
+for (const record of Object.values(module.exports)) {
+    record.authoringScope = { enterpriseCode: 'default', catalogCode: 'agoraApparelContentCatalog', siteCode: 'agoraApparelSite' };
+    for (const placement of record.cmsComponents || []) {
+        if (placement && typeof placement === 'object') placement.authoringScope = { ...record.authoringScope };
+    }
+}

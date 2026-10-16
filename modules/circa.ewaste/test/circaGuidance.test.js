@@ -12,7 +12,7 @@
 "use strict";
 const test = require("node:test"),
   assert = require("node:assert/strict");
-const guidance = require("../src/service/defaultCircaEWasteGuidanceService");
+const guidance = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteGuidanceService");
 let draft, providerCalls;
 test.beforeEach(() => {
   draft = {
@@ -25,6 +25,7 @@ test.beforeEach(() => {
   providerCalls = 0;
   global.CONFIG={get:()=>({conversation:{project:"circa.ewaste"}})};
   global.SERVICE = {
+    DefaultEWasteJourneyService: { settings: () => ({ arrivalRadiusMetres: 50 }) },
     DefaultCopilotCustomerGuidanceService:{reply:async(request,settings)=>{if(!settings.fixedMessage)providerCalls++;return {message:settings.fixedMessage || "Your progress is saved",conversationCode:"copilot-conversation",history:[{role:"user",text:request.message},{role:"assistant",text:"Your progress is saved"}],changed:false,actions:[]}}},
     DefaultEWasteExperienceService: { readDraft: async () => draft },
     DefaultWastePersistenceService: {

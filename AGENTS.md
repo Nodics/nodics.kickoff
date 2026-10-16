@@ -1,11 +1,24 @@
 # Nodics Kickoff Agent Contract
 
 - `agora.apparel`, `agora.electronics`, `agora.telco` and `circa.ewaste` are
-  customer applications here. They consume `apparel`, `electronics`, `telco`
-  and `eWaste` respectively; extending a domain does not transfer ownership.
-  Keep their properties, BackOffice profiles, media and data in these modules.
-  Reference/demo status and data-pack metadata do not authorize relocation.
-  Follow nSetup's customer-project-mode contract before extracting reusable code.
+  demo data/composition ONLY. They consume `apparel`, `electronics`, `telco`
+  and `eWaste` respectively. Keep reference identities, branding, media, sample
+  records and explicit composition selections here; reusable behavior, defaults
+  and access definitions belong to their existing implementing framework or
+  accelerator owners. Do not retain reference adapters or create a catch-all.
+  Genuine partner projects remain extensible under nSetup's customer contract.
+- Profile owns standard bootstrap users, access mechanics and runtime assignments;
+  implementing modules own their permission contributions and business-area access
+  definitions. Demo identities/accounts/assignments are optional Kickoff data,
+  never prerequisites for standard bootstrap or access administration.
+- Axis uses business area + No access / View / Edit / Full control + Scope.
+  Profile resolves effective access and backend owners enforce it. Full control
+  never bypasses approval, ledger/financial rules, simulation gates or tenant
+  isolation. Keep exact level mappings/runtime assignments with Profile and owners.
+- The authorized reference/access refactor has no backwards compatibility. Update
+  consumers and remove superseded adapters, routes, role aliases and duplicate
+  definitions. Preserve historical evidence and installed receipts without
+  treating them as current grants or authority for data replay/live operations.
 
 - Nodics Kickoff is a customer/reference project, not a Nodics product module.
 - Do not copy framework source into this repository.
@@ -48,13 +61,16 @@ data/
   Only genuine partner customization guides belong in the owning customer module's
   `data/docs-v001`; do not invent customization content for an unchanged reference.
   Documentation images are Media records and same-release assets referenced by
-  `mediaCode`; business imports must not implicitly select documentation packs.
+  `mediaCode`; business imports must not implicitly select documentation packs,
+  and documentation imports must not select business releases or grant access.
   Keep `README.md`
   files concise.
 - Project, environment, and server contributions load after product modules by
   index and customize services through the standard merge process.
-- The unreleased data baseline is consolidated into `v001` within each data type,
-  with executable data and documentation sections pinned to semantic `0.0.1`.
+- The unreleased data directories are consolidated into `v001` within each data
+  type. Section versions are independently pinned in the owning manifest;
+  changed or frozen content may have explicit semantic successors. Do not force
+  those versions back to `0.0.1` merely because the directory remains `v001`.
   Existing local installations may retain receipts for earlier bytes. Inspect
   installed history and use an explicitly approved governed fresh initialization
   or reset where needed; never rewrite receipts, bypass drift protection or replay
@@ -153,6 +169,15 @@ solve a customer-project problem by moving framework ownership into Kickoff.
 
 ## Minimal configuration
 
+Apply the framework's nSetup `customer-config-classification-contract.md`
+mandatory default ownership gate. Kickoff selects deployments and demo packs;
+it must not supply standard framework adapters, observer implementations,
+schema/versioning mechanics or copied technical defaults. Split mixed objects:
+preserve real endpoints, explicit opt-ins and exact release choices while moving
+reusable mechanics to their implementing owners. A previous audit, equal-value
+pin or source-shaped test is not a blanket exception. Preserve qualification,
+approval, tenant isolation and simulation safeguards during correction.
+
 Copilot knowledge selection is governed runtime data. Do not restore source
 catalogs in Kickoff, Circa, Agora or deployment properties. Keep content with its
 owner; active modules become candidates through nConfig. Read the framework's
@@ -164,22 +189,24 @@ duplicated implementations and do not justify removal or framework relocation.
 
 Keep modules lightweight by separating reusable mechanisms from customer policy.
 Common domain capabilities belong to framework functional modules; reusable
-solution orchestration belongs to accelerators. Customer modules retain identity,
-presentation, data, explicit selections and policy deltas, with thin adapters.
+solution orchestration belongs to accelerators. Circa/Agora references retain
+demo data/composition only. Genuine partner modules may own custom behavior,
+presentation, integrations and policy through supported extension contracts.
 Runtime servers own deployment composition, not business implementations. Apply
 this to acceptance helpers and administrative descriptors too. Maintainer
-extractions require focused framework tests, customer-adapter regression tests,
+extractions require focused owner tests, reference composition checks,
 effective runtime configuration checks and explicit live-acceptance evidence.
 Never move an entire customer application merely to reduce project line count.
 
 Inherit framework defaults and declare only intentional customer/deployment
 differences. Apply the resolved framework's
 `nSetup/llm/contracts/customer-config-classification-contract.md`. Read
-[the project configuration guide](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js).
-Shared project administration descriptors belong in `kickoffCore` under
-Platform runtime-role profiles. Do not recreate a separate configuration-only
-administration module. Foundation nTooling owns reusable command behavior;
-customer selectors and policy remain here.
+[the project configuration guide](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js).
+Only project composition selections belong in `kickoffCore` under Platform
+runtime-role profiles. Reusable administration/access descriptors belong to the
+implementing framework owner, not `kickoffCore` or a new shared administration
+module. Foundation nTooling owns reusable command behavior; customer selectors
+and genuine project policy remain here.
 
 Application-specific journey acceptance lives under `scripts/acceptance`
 and are discovered by framework nTooling from conventional `*Service.mjs`

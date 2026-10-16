@@ -24,31 +24,6 @@ const backofficeApplicationVisual = {
  * @override Project, environment, server, node, tenant, or customer layers may override these defaults through Nodics configuration layering.
  */
 module.exports = {
-    "fulfillmentCore": {
-        "runtimeRoleProfiles": {
-            "COMMERCE": {
-                "physicalOperations": {
-                    "enabled": true,
-                    "evidenceMode": "MANUAL_ATTESTATION"
-                }
-            }
-        }
-    },
-    "order": {
-        "runtimeRoleProfiles": {
-            "COMMERCE": {
-                "disputes": {
-                    "enabled": true,
-                    "storeCodes": { "agoraMainStore": true }
-                },
-                "refunds": {
-                    "enabled": true,
-                    "storeCodes": { "agoraMainStore": true },
-                    "ownerByStore": { "agoraMainStore": "fulfillmentCore" }
-                }
-            }
-        }
-    },
     "tooling": {
         "acceptance": {
             "loyaltyRewardCheckout": {
@@ -91,7 +66,7 @@ module.exports = {
                     "baselines": {
                         "agoraapparel": {
                             "releaseCode": "agora.apparel:agoraApparelContentCatalog",
-                            "releaseVersion": "0.0.1",
+                            "releaseVersion": "0.0.2",
                             "dataType": "sample",
                             "rootType": "site",
                             "rootCode": "agoraApparelSite",

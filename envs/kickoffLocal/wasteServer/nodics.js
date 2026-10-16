@@ -9,27 +9,27 @@
 
  */
 
-'use strict';
+"use strict";
 
 /** @module kickoffLocal/wasteServer @description Declares the reference customer Waste Management server lifecycle. @layer environment-server @owner nodics.kickoff @override Customer projects own their topology. */
 module.exports = {
-    /**
-     * Initializes this Kickoff lifecycle boundary.
-     *
-     * @param {Object} options Optional lifecycle context.
-     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
-     */
-    init: function (options) {
-        return Promise.resolve(true);
-    },
+  /**
+   * Initializes this Kickoff lifecycle boundary.
+   *
+   * @param {Object} options Optional lifecycle context.
+   * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
+   */
+  init: function (options) {
+    return Promise.resolve(true);
+  },
 
-    /**
-     * Delegates configured knowledge ingestion after server dependencies initialize.
-     *
-     * @param {Object} options Optional lifecycle context.
-     * @returns {Promise<boolean>} Resolves after the framework startup policy completes.
-     */
-    postInit: function (options) {
-        return SERVICE.DefaultCopilotKnowledgeRuntimeService.ingestOnStart();
-    }
+  /**
+   * Finalizes the customer server boundary without duplicating owner lifecycle work.
+   *
+   * @param {Object} options Optional lifecycle context.
+   * @returns {Promise<boolean>} Resolves when no customer-specific work is selected.
+   */
+  postInit: function (options) {
+    return Promise.resolve(true);
+  },
 };

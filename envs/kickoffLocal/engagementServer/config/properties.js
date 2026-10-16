@@ -35,12 +35,8 @@ module.exports = {
     "credentialReference": "kickoffEmployeeMail",
     "senderReference": "kickoffEmployeeMail",
     "allowedRecipients": { "$config": "replace", "value": [
-      "admin@axis-onboarding-acceptance.test",
-      "operator@axis-onboarding-acceptance.test",
-      "applicant@axis-onboarding-acceptance.test",
-      "reviewer@axis-onboarding-acceptance.test",
-      "reviewer2@axis-onboarding-acceptance.test",
-      "reviewer3@axis-onboarding-acceptance.test"
+      "admin@circa-ui-acceptance-20261013.test",
+      "operator@circa-ui-acceptance-20261013.test"
     ] },
     "smtp": {
       "host": { "$config": "env", "name": "NODICS_EMPLOYEE_SMTP_HOST" },

@@ -1,11 +1,11 @@
 {
   "contractVersion": 1,
   "code": "circa-native-reviewed",
-  "revision": 4,
+  "revision": 5,
   "tenant": "default",
   "profileCode": "circa",
   "baselineCode": "circa",
-  "profileDigest": "b8fb40ace4a3552b1f1ddc0cfedf66699b5376796bd50b0100270f2c0d735213",
+  "profileDigest": "07a0fff37d96790217a661dc926c4a75cc10615bd4a1c5653f4ab6d541b7b8ac",
   "stages": [
     {
       "code": "product:productPublicationWorkflow",
@@ -168,10 +168,10 @@
       }
     },
     {
-      "code": "profile:commerceSetupPublisherRole",
+      "code": "product:accessGroups",
       "descriptor": {
-        "code": "profile:commerceSetupPublisherRole",
-        "dataType": "core",
+        "code": "product:accessGroups",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
         "targetServer": "platformServer",
@@ -180,18 +180,18 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "profile",
-        "releaseCode": "profile:commerceSetupPublisherRole",
-        "sectionCode": "commerceSetupPublisherRole",
-        "dataType": "core",
-        "version": "0.0.1",
-        "checksum": "a7cdf108fc1abcca049f0688631c4eaeeda21804a0bc3a4ca1c0fa65b210107d",
-        "sourceRoot": "core-v001",
+        "moduleName": "product",
+        "releaseCode": "product:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.2",
+        "checksum": "6476e85ce43cd1b70c206b45af8c8516fac8140f7904c057f15d7e5c8e6550ce",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "core-v001/headers/groups/commerceSetupPublisherHeader.js",
-          "core-v001/records/groups/commerceSetupPublisherGroupData.js"
+          "init-v001/headers/identity/productUserGroupHeader.js",
+          "init-v001/records/identity/productUserGroupData.js"
         ],
-        "owningDomain": "profile",
+        "owningDomain": "product",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -200,10 +200,10 @@
       }
     },
     {
-      "code": "profile:commercePublicationStarterRole",
+      "code": "publish:accessGroups",
       "descriptor": {
-        "code": "profile:commercePublicationStarterRole",
-        "dataType": "core",
+        "code": "publish:accessGroups",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
         "targetServer": "platformServer",
@@ -212,18 +212,18 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "profile",
-        "releaseCode": "profile:commercePublicationStarterRole",
-        "sectionCode": "commercePublicationStarterRole",
-        "dataType": "core",
-        "version": "0.0.1",
-        "checksum": "5111b1e573bf0ebbfae326147543865d9b04e841ef7c150ee48139c1ef732aa9",
-        "sourceRoot": "core-v001",
+        "moduleName": "publish",
+        "releaseCode": "publish:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.2",
+        "checksum": "cfa73ab9a7aa7e54922b1858e8976ad196818899841dcf6596c09b9290a6e937",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "core-v001/headers/groups/commercePublicationStarterHeader.js",
-          "core-v001/records/groups/commercePublicationStarterGroupData.js"
+          "init-v001/headers/identity/publishUserGroupHeader.js",
+          "init-v001/records/identity/publishUserGroupData.js"
         ],
-        "owningDomain": "profile",
+        "owningDomain": "publish",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -232,10 +232,10 @@
       }
     },
     {
-      "code": "profile:commerceCouponIssuerRole",
+      "code": "promotion:accessGroups",
       "descriptor": {
-        "code": "profile:commerceCouponIssuerRole",
-        "dataType": "core",
+        "code": "promotion:accessGroups",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
         "targetServer": "platformServer",
@@ -244,18 +244,18 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "profile",
-        "releaseCode": "profile:commerceCouponIssuerRole",
-        "sectionCode": "commerceCouponIssuerRole",
-        "dataType": "core",
-        "version": "0.0.1",
-        "checksum": "78523af3e2d7a1bb0ab4a7afd9959e7034de742ff615c761de93b28337ddc747",
-        "sourceRoot": "core-v001",
+        "moduleName": "promotion",
+        "releaseCode": "promotion:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.2",
+        "checksum": "5cb91f339856a26c4d864eed4918c318318d50061792a357c045737c8c26ee4c",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "core-v001/headers/groups/commerceCouponIssuerHeader.js",
-          "core-v001/records/groups/commerceCouponIssuerGroupData.js"
+          "init-v001/headers/identity/promotionUserGroupHeader.js",
+          "init-v001/records/identity/promotionUserGroupData.js"
         ],
-        "owningDomain": "profile",
+        "owningDomain": "promotion",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -264,10 +264,10 @@
       }
     },
     {
-      "code": "profile:commerceAxisRefundReviewerRole",
+      "code": "order:accessGroups",
       "descriptor": {
-        "code": "profile:commerceAxisRefundReviewerRole",
-        "dataType": "core",
+        "code": "order:accessGroups",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
         "targetServer": "platformServer",
@@ -276,18 +276,18 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "profile",
-        "releaseCode": "profile:commerceAxisRefundReviewerRole",
-        "sectionCode": "commerceAxisRefundReviewerRole",
-        "dataType": "core",
-        "version": "0.0.1",
-        "checksum": "65b5da5dbe3c7a9a68fb7491b4a36590c6366c3df1fc075acb1363965b1aa3b7",
-        "sourceRoot": "core-v001",
+        "moduleName": "order",
+        "releaseCode": "order:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.2",
+        "checksum": "9956f02f29ce9431e523ca594a7d4ab50603176a2d025e4ee01942c7b70d5aef",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "core-v001/headers/groups/commerceAxisRefundReviewerHeader.js",
-          "core-v001/records/groups/commerceAxisRefundReviewerGroupData.js"
+          "init-v001/headers/identity/orderUserGroupHeader.js",
+          "init-v001/records/identity/orderUserGroupData.js"
         ],
-        "owningDomain": "profile",
+        "owningDomain": "order",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -323,8 +323,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -356,7 +355,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -390,7 +389,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "WASTE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -422,7 +421,7 @@
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "COMMERCE_STAGED",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2072,10 +2071,10 @@
       }
     },
     {
-      "code": "circa.ewaste:circaLocalDemoCreditRole",
+      "code": "import:specialAccessRoles",
       "descriptor": {
-        "code": "circa.ewaste:circaLocalDemoCreditRole",
-        "dataType": "sample",
+        "code": "import:specialAccessRoles",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
         "targetServer": "platformServer",
@@ -2084,22 +2083,54 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "circa.ewaste",
-        "releaseCode": "circa.ewaste:circaLocalDemoCreditRole",
-        "sectionCode": "circaLocalDemoCreditRole",
-        "dataType": "sample",
+        "moduleName": "import",
+        "releaseCode": "import:specialAccessRoles",
+        "sectionCode": "specialAccessRoles",
+        "dataType": "init",
         "version": "0.0.1",
-        "checksum": "a32e02a6e8cf8a3eefe11a5588d2f8a255a595b3514b763b6cb4c6a05144e716",
-        "sourceRoot": "sample-v001",
+        "checksum": "fffe3cb333be4b88b276a1d73286cf15e8f36d51a67ae1ccc225bd541badd065",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "sample-v001/credit-role/headers/circaLocalDemoCreditRoleHeader.js",
-          "sample-v001/credit-role/records/circaLocalDemoCreditGroupData.js"
+          "init-v001/headers/identity/importSpecialAccessRoleHeader.js",
+          "init-v001/records/identity/importSpecialAccessRoleData.js"
         ],
-        "owningDomain": "circa.ewaste",
+        "owningDomain": "import",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "loyaltyWallet:specialAccessRoles",
+      "descriptor": {
+        "code": "loyaltyWallet:specialAccessRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "loyaltyWallet",
+        "releaseCode": "loyaltyWallet:specialAccessRoles",
+        "sectionCode": "specialAccessRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "77d336fd0db20cf5b4617b8ba15d7dc94470d5aafb362f5c59aa2a926491f4bb",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/loyaltyWalletSpecialAccessRoleHeader.js",
+          "init-v001/records/identity/loyaltyWalletSpecialAccessRoleData.js"
+        ],
+        "owningDomain": "loyaltyWallet",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
         ]
       }
     },
@@ -2120,8 +2151,8 @@
         "releaseCode": "circa.ewaste:circaLocalDemoCreditStaffAssignment",
         "sectionCode": "circaLocalDemoCreditStaffAssignment",
         "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "520858cf076946600d4dfa7a070debf0c94555d9929b3122f6c40c2fd5cc0c43",
+        "version": "0.0.2",
+        "checksum": "9b4350399c313d006f22d723151dce0c15036ecd5d6afb1cfcb08ad0c381e884",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/credit-staff/headers/circaLocalDemoCreditStaffHeader.js",
@@ -2131,15 +2162,15 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
     {
-      "code": "circa.ewaste:circaLocalOpeningRole",
+      "code": "inventory:specialAccessRoles",
       "descriptor": {
-        "code": "circa.ewaste:circaLocalOpeningRole",
-        "dataType": "sample",
+        "code": "inventory:specialAccessRoles",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
         "targetServer": "platformServer",
@@ -2148,22 +2179,22 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "circa.ewaste",
-        "releaseCode": "circa.ewaste:circaLocalOpeningRole",
-        "sectionCode": "circaLocalOpeningRole",
-        "dataType": "sample",
+        "moduleName": "inventory",
+        "releaseCode": "inventory:specialAccessRoles",
+        "sectionCode": "specialAccessRoles",
+        "dataType": "init",
         "version": "0.0.1",
-        "checksum": "a3956d182d90a7c0117523039cc85243c5120f045c15e63ccca65797920e7b21",
-        "sourceRoot": "sample-v001",
+        "checksum": "be82f8e9b057eced4a7f91be453b1a84ca407e1f27b5218e24ed0b936ade9d76",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "sample-v001/opening-role/headers/circaLocalOpeningRoleHeader.js",
-          "sample-v001/opening-role/records/circaLocalOpeningGroupData.js"
+          "init-v001/headers/identity/inventorySpecialAccessRoleHeader.js",
+          "init-v001/records/identity/inventorySpecialAccessRoleData.js"
         ],
-        "owningDomain": "circa.ewaste",
+        "owningDomain": "inventory",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2184,8 +2215,8 @@
         "releaseCode": "circa.ewaste:circaLocalOpeningStaffAssignments",
         "sectionCode": "circaLocalOpeningStaffAssignments",
         "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "d5ffccbc0df95a058fcc77fdbae3ab2e39fda83532e9f6756c68debda39ea162",
+        "version": "0.0.2",
+        "checksum": "0f081e586eefae3346b7be896b9131bec755c062ef17794d7231edb84e11cf89",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/opening-staff/headers/circaLocalOpeningStaffHeader.js",
@@ -2195,7 +2226,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2234,7 +2265,7 @@
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "COMMERCE_STAGED",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2273,7 +2304,7 @@
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "COMMERCE_STAGED",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2312,7 +2343,7 @@
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "COMMERCE_STAGED",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2345,7 +2376,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "LOYALTY",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2513,7 +2544,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2644,7 +2675,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2775,7 +2806,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -2968,7 +2999,7 @@
       "code": "circa.ewaste:waste-policy",
       "descriptor": {
         "code": "circa.ewaste:waste-policy",
-        "dataType": "core",
+        "dataType": "sample",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "WASTE",
         "targetServer": "wasteServer",
@@ -2980,17 +3011,17 @@
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:waste-policy",
         "sectionCode": "waste-policy",
-        "dataType": "core",
-        "version": "0.0.1",
-        "checksum": "4e11c1961091311b429786d485a80cf7da76ecde31f130a28189e75b258988f7",
-        "sourceRoot": "core-v001",
+        "dataType": "sample",
+        "version": "0.0.2",
+        "checksum": "e2c0e5dddbdfbdadd240e32f64b430fa25a3a94a4092a339353df4ae6c311d70",
+        "sourceRoot": "sample-v001",
         "declaredFiles": [
-          "core-v001/waste-policy/headers/eWastePresetHeader.js",
-          "core-v001/waste-policy/records/eWasteAcceptanceRuleData.js",
-          "core-v001/waste-policy/records/eWasteCategoryData.js",
-          "core-v001/waste-policy/records/eWasteCollectionPresetData.js",
-          "core-v001/waste-policy/records/eWasteImpactProfileData.js",
-          "core-v001/waste-policy/records/eWasteItemTypeData.js"
+          "sample-v001/waste-policy/headers/eWastePresetHeader.js",
+          "sample-v001/waste-policy/records/eWasteAcceptanceRuleData.js",
+          "sample-v001/waste-policy/records/eWasteCategoryData.js",
+          "sample-v001/waste-policy/records/eWasteCollectionPresetData.js",
+          "sample-v001/waste-policy/records/eWasteImpactProfileData.js",
+          "sample-v001/waste-policy/records/eWasteItemTypeData.js"
         ],
         "owningDomain": "waste",
         "lifecycle": "REFERENCE",
@@ -3063,8 +3094,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3099,8 +3129,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3169,8 +3198,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "LOCATION",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3243,8 +3271,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "WASTE",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3280,8 +3307,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "LOYALTY",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3313,8 +3339,7 @@
         "lifecycle": "REFERENCE",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3356,8 +3381,7 @@
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "COMMERCE_STAGED",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3390,7 +3414,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -3423,7 +3447,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -3456,7 +3480,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -3489,7 +3513,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -3522,7 +3546,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -3555,7 +3579,7 @@
         "lifecycle": "OPERATIONAL_VERSIONED",
         "destinationRole": "COMMERCE",
         "environmentScope": [
-          "LOCAL"
+          "ALL"
         ]
       }
     },
@@ -3576,8 +3600,8 @@
         "releaseCode": "circa.ewaste:content",
         "sectionCode": "content",
         "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "b459c4a6c94e8450f800fe0a3f11c98eff17da30ae5150ce5a1b400749e53b13",
+        "version": "0.0.2",
+        "checksum": "1b2eae31d4c08efc6a2b5d11b45b2d98067c5b280b43e7f8335ed771c4cc5865",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/content/assets/circa-media/assetManifest.js",
@@ -3617,8 +3641,7 @@
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "WCMS_STAGED",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },
@@ -3626,7 +3649,7 @@
       "code": "circa.ewaste:customer-workspace",
       "descriptor": {
         "code": "circa.ewaste:customer-workspace",
-        "dataType": "core",
+        "dataType": "sample",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "WCMS_STAGED",
         "targetServer": "wcmsStaged",
@@ -3638,27 +3661,26 @@
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:customer-workspace",
         "sectionCode": "customer-workspace",
-        "dataType": "core",
-        "version": "0.0.1",
-        "checksum": "460bbe8b290a63bd047f118a9ab705dff8b9db57ea4fac0564b8e5da0982951d",
-        "sourceRoot": "core-v001",
+        "dataType": "sample",
+        "version": "0.0.2",
+        "checksum": "92237ba47e380230524f4537a7786da709fbb89368c49005d958553f0832cb80",
+        "sourceRoot": "sample-v001",
         "declaredFiles": [
-          "core-v001/customer-workspace/headers/circaWorkspaceHeader.js",
-          "core-v001/customer-workspace/records/circaWorkspaceComponentData.js",
-          "core-v001/customer-workspace/records/circaWorkspaceGroupData.js",
-          "core-v001/customer-workspace/records/circaWorkspacePageData.js",
-          "core-v001/customer-workspace/records/circaWorkspaceRendererData.js",
-          "core-v001/customer-workspace/records/circaWorkspaceRouteData.js",
-          "core-v001/customer-workspace/records/circaWorkspaceSlotData.js",
-          "core-v001/customer-workspace/records/circaWorkspaceTemplateData.js",
-          "core-v001/customer-workspace/records/circaWorkspaceTypeData.js"
+          "sample-v001/customer-workspace/headers/circaWorkspaceHeader.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceComponentData.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceGroupData.js",
+          "sample-v001/customer-workspace/records/circaWorkspacePageData.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceRendererData.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceRouteData.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceSlotData.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceTemplateData.js",
+          "sample-v001/customer-workspace/records/circaWorkspaceTypeData.js"
         ],
         "owningDomain": "circa.ewaste",
         "lifecycle": "PUBLISHABLE",
         "destinationRole": "WCMS_STAGED",
         "environmentScope": [
-          "LOCAL",
-          "LOCAL_PRODUCTION_SIMULATION"
+          "ALL"
         ]
       }
     },

@@ -4,6 +4,7 @@
   "sections": {
     "agoraTelcoCommerceCatalog": {
       "kind": "DATA_RELEASE",
+      "selectionPolicy": "EXPLICIT",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",
@@ -37,6 +38,7 @@
     },
     "agoraTelcoContentCatalog": {
       "kind": "DATA_RELEASE",
+      "selectionPolicy": "EXPLICIT",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",

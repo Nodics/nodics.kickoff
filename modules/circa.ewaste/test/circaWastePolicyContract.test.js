@@ -30,45 +30,36 @@ const contributionPolicy = require(
 );
 const moduleRoot = path.resolve(__dirname, "..");
 const dataRoot = path.join(moduleRoot, "data");
-const recordsRoot = path.join(dataRoot, "core-v001/waste-policy/records");
+const recordsRoot = path.join(dataRoot, "sample-v001/waste-policy/records");
 const pkg = require(path.join(moduleRoot, "package.json"));
 const manifest = require(path.join(dataRoot, "manifest.json"));
 const header = require(
-  path.join(dataRoot, "core-v001/waste-policy/headers/eWastePresetHeader"),
+  path.join(dataRoot, "sample-v001/waste-policy/headers/eWastePresetHeader"),
 );
 const section = manifest.sections["waste-policy"];
 const eWasteRoot = path.join(
   frameworkRoot,
   "nodics.accelerators/modules/waste/modules/eWaste",
 );
-const processor = require(
-  path.join(
-    frameworkRoot,
-    "nodics.foundation/modules/nData/nImport/jsImport/src/service/init/defaultJsFileDataProcessService",
-  ),
-);
 const base = (name) =>
   require(path.join(eWasteRoot, "data/core-v001/records/waste", name));
-const composed = (name) => {
-  const delta = require(path.join(recordsRoot, name));
-  const merged = processor.mergeModels(structuredClone(base(name)), delta);
-  return Object.keys(delta).map((key) => merged[key]);
-};
+const sampleRecords = (name) => Object.values(require(path.join(recordsRoot, name)));
 const eWasteCategories = Object.values(base("eWasteCategoryData"));
 const eWastePresets = Object.values(base("eWasteCollectionPresetData"));
-const circaCategories = composed("eWasteCategoryData");
-const circaPresets = composed("eWasteCollectionPresetData");
-const circaRules = composed("eWasteAcceptanceRuleData");
-const circaImpactProfiles = composed("eWasteImpactProfileData");
+const circaCategories = sampleRecords("eWasteCategoryData");
+const circaPresets = sampleRecords("eWasteCollectionPresetData");
+const circaRules = sampleRecords("eWasteAcceptanceRuleData");
+const circaImpactProfiles = sampleRecords("eWasteImpactProfileData");
+const circaItemTypes = sampleRecords("eWasteItemTypeData");
 
-assert.equal(pkg.nodics.kind, "capability");
+assert.equal(pkg.nodics.kind, "content-pack");
 assert.equal(pkg.name, "circa.ewaste");
-assert.equal(pkg.nodics.runtime.router, true);
+assert.equal(pkg.nodics.runtime.router, false);
 assert.equal(manifest.contractVersion, 2);
 assert.equal(manifest.module, "circa.ewaste");
-assert.equal(section.dataType, "core");
-assert.equal(section.sourceRoot, "core-v001");
-assert.equal(section.version, "0.0.1");
+assert.equal(section.dataType, "sample");
+assert.equal(section.sourceRoot, "sample-v001");
+assert.equal(section.version, "0.0.2");
 assert.equal(section.selectionPolicy, "EXPLICIT");
 assert.equal(
   contributionPolicy.validateManifestSection(section).destinationRole,
@@ -90,7 +81,7 @@ Object.keys(section.files).forEach(function (relativeFilePath) {
 });
 
 circaCategories
-  .concat(circaPresets, circaRules, circaImpactProfiles)
+  .concat(circaPresets, circaRules, circaImpactProfiles, circaItemTypes)
   .forEach(function (record) {
     contributionPolicy.validateRecord(record, "PROJECT");
   });

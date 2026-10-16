@@ -52,7 +52,7 @@ const requiredProfiles = {
   wasteServer: {
     role: "WASTE",
     profiles: {
-      localWasteFoundation: ["core"],
+      localWasteFoundation: ["core", "sample"],
     },
   },
   locationServer: {
@@ -319,9 +319,6 @@ assert.equal(
 );
 
 const wasteRuntime = loadRuntime("wasteServer");
-const circaWasteProperties = require(
-  path.join(projectRoot, "modules", "circa.ewaste", "config", "properties.js"),
-);
 assert.equal(
   wasteRuntime.servers.default.endpoint.httpPort,
   4370,
@@ -348,9 +345,13 @@ assert.deepEqual(
   [
     "wasteMaterial:core-v001",
     "eWaste:core-reference",
-    "circa.ewaste:waste-policy",
   ],
-  "wasteServer must install material reference data, accelerator data and the Circa Waste policy explicitly",
+  "Framework core references must remain independent of optional demo policy",
+);
+assert.deepEqual(
+  wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation.steps[1],
+  { dataType: "sample", releaseCodes: ["circa.ewaste:waste-policy"] },
+  "The selected Circa demo policy must use an explicit separate sample step",
 );
 
 const locationRuntime = loadRuntime("locationServer");
@@ -380,7 +381,7 @@ assert.deepEqual(
   "locationServer must expose Waste-owned collection-centre location samples as Location-targeted contributions",
 );
 assert.equal(
-  circaWasteProperties.waste.projectOverlay.releaseCode,
+  wasteRuntime.waste.projectOverlay.releaseCode,
   "circa.ewaste:waste-policy",
 );
 

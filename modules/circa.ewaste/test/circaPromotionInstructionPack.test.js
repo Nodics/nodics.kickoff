@@ -84,7 +84,7 @@ test("each issuer has a budget-only original and exact replay-only issuance of 1
       assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
       assert.equal(section.destinationRole, "COMMERCE");
       assert.equal(section.version, "0.0.1");
-      assert.deepEqual(section.environmentScope, ["LOCAL"]);
+      assert.deepEqual(section.environmentScope, ["ALL"]);
       assert.equal(Object.keys(section.files).length, 1);
       for (const [file, hash] of Object.entries(section.files)) assert.equal(sha(fs.readFileSync(path.join(dataRoot, file))), hash);
       const text = JSON.stringify(payload(section));

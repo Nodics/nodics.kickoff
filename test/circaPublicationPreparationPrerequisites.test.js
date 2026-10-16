@@ -111,7 +111,7 @@ test("native Circa preparation selects additive staff access without credential-
   const service = require(path.join(frameworkRoot, "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
   const steps = service.preparationSteps(platform.backofficeApplicationInitialization.profiles.circa);
   const dockerSteps = service.preparationSteps(docker.backofficeApplicationInitialization.profiles.circa);
-  for (const [code, dataType] of [["profile:commerceSetupPublisherRole", "core"], ["profile:commercePublicationStarterRole", "core"], ["profile:commerceCouponIssuerRole", "core"], ["profile:commerceAxisRefundReviewerRole", "core"], ["circa.ewaste:circaMerchantOutletAccess", "sample"], ["circa.ewaste:circaCommerceStaffAssignments", "sample"]]) {
+  for (const [code, dataType] of [["product:accessGroups", "init"], ["publish:accessGroups", "init"], ["promotion:accessGroups", "init"], ["order:accessGroups", "init"], ["circa.ewaste:circaMerchantOutletAccess", "sample"], ["circa.ewaste:circaCommerceStaffAssignments", "sample"]]) {
     const step = steps.find(row => row.code === code);
     assert(step, code);
     assert.equal(step.required, true);
@@ -135,9 +135,9 @@ test("fresh preparation separates dependent staff and classification batches aft
   const groups = service.preparationGroups(profile, { authData: { principalId: "reviewed-operator" } }, steps);
   for (const [dependent, prerequisites] of [
     ["circa.ewaste:circaCommerceStaffAssignments", [
-      "circa.ewaste:operations", "profile:commerceSetupPublisherRole",
-      "profile:commercePublicationStarterRole", "profile:commerceCouponIssuerRole",
-      "profile:commerceAxisRefundReviewerRole",
+      "circa.ewaste:operations", "product:accessGroups",
+      "publish:accessGroups", "promotion:accessGroups",
+      "order:accessGroups",
     ]],
     ["circa.ewaste:circaAssetClassification", ["circa.ewaste:commerce"]],
   ]) {

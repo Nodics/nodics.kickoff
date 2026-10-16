@@ -16,7 +16,11 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const manifests = ['data/manifest.json', 'envs/kickoffLocal/processServer/data/manifest.json'];
+const manifests = [
+  'data/manifest.json',
+  'modules/kickoffCore/data/manifest.json',
+  'envs/kickoffLocal/processServer/data/manifest.json',
+];
 const fields = ['owningDomain', 'lifecycle', 'destinationRole', 'environmentScope', 'sensitivity',
   'versioningPolicy', 'publicationPolicy', 'initialPublicationPolicy', 'removalPolicy'];
 
@@ -51,5 +55,5 @@ assert.strictEqual(processServerInit.owningDomain, 'editorial');
 assert.deepStrictEqual(Object.keys(processServerInit.files || {}), [
   'init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js'
 ]);
-assert.strictEqual(sections, 2, 'Kickoff executable lifecycle inventory drifted');
+assert.strictEqual(sections, 3, 'Kickoff project documentation, runtime assignments and Process lifecycle inventory drifted');
 console.log('Kickoff data lifecycle classification contract validated');

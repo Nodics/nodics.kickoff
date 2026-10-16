@@ -2,7 +2,7 @@
 "use strict";
 /** @module circa.ewaste/test/circaLocalUnusedRefundException @description Verifies exact native-only original-purchase exception selection and immutable campaign sources. @layer test @owner circa.ewaste */
 const test = require("node:test"), assert = require("node:assert/strict");
-const { loadRuntime } = require("../../../test/helpers/configuration");
+const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configuration");
 
 test("native Commerce selects only the original 50-POINTS unused purchase for explicit owner adjudication", () => {
   const runtime = loadRuntime("commerceServer");
@@ -15,8 +15,11 @@ test("native Commerce selects only the original 50-POINTS unused purchase for ex
       amount: "50.00", currency: "POINTS", entitlementCode: "digitalEntitlement:5ea8973f942b650766948c9ef9b163fbe84a4a28",
       couponCode: "CIRCA_COUPON_GP-A01_BATCH:1" }],
   });
-  assert.equal(runtime.enterpriseManagement.accessAssignments.roles.CIRCA_LOCAL_UNUSED_REFUND_EXCEPTION.groupCodes[0],
-    "circaLocalUnusedRefundExceptionUserGroup");
+  assert.equal(runtime.enterpriseManagement?.accessAssignments?.roles, undefined);
+  const role = Object.values(require(frameworkRoot + "/nodics.commerce/modules/checkout/modules/order/data/init-v001/records/identity/orderSpecialAccessRoleData"))
+    .find(row => row.code === "COMMERCE_REFUND_EXCEPTION_REVIEW");
+  assert.equal(role.groupCodes[0],
+    "commerceRefundExceptionReviewerUserGroup");
 });
 
 test("sibling runtimes and Docker do not enable original unused-coupon exceptions", () => {

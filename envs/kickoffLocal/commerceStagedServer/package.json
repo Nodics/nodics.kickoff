@@ -6,6 +6,9 @@
   "main": "nodics.js",
   "description": "Reference customer Commerce Staged server for governed Product catalog publication.",
   "nodics": {
+    "runtimeConfigurationContributions": [
+      { "moduleName": "eWaste", "namespace": "product", "runtimeRole": "COMMERCE_STAGED" }
+    ],
     "kind": "server",
     "extends": [
       "nodics.discovery",
@@ -37,6 +40,7 @@
         "backoffice",
         "loyaltyCore",
         "wasteCore",
+        "eWaste",
         "media",
         "workflow"
       ]

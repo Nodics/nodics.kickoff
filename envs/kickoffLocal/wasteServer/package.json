@@ -52,7 +52,9 @@
         "commerceCore",
         "digitalCore",
         "product",
+        "pricing",
         "engagementCore",
+        "commsApi",
         "workflow"
       ]
     },

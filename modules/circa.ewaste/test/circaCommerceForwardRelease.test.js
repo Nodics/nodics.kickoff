@@ -18,7 +18,7 @@ const targets = (value) =>
 
 test("commerce catalogue is selected as unified v001 first-start data", () => {
   const current = manifest.sections.commerce;
-  const productConfig = require("../config/properties").product;
+  const productConfig = require("./helpers/deploymentPolicy").runtime("commerceStagedServer").product;
   assert.equal(current.version, "0.0.1");
   assert.equal(current.sourceRoot, "sample-v001");
   assert.equal(current.selectionPolicy, "EXPLICIT");
@@ -37,7 +37,7 @@ test("commerce catalogue is selected as unified v001 first-start data", () => {
   assert(schemas.includes("warehouse"));
   assert.equal(manifest.sections["commerce-operational"], undefined);
   assert(Object.values(manifest.sections).some(section => section.installer === "PROMOTION_CAMPAIGN_ISSUANCE"));
-  assert.deepEqual(productConfig.localization.requiredLocales, ["en"]);
+  assert.deepEqual(productConfig.localization.requiredLocales, ["en", "ar"]);
   assert(productConfig.localization.supportedLocales.includes("ar"));
 });
 
@@ -50,42 +50,14 @@ test("retired snapshot targets remain refused by canonical owners regardless of 
     DefaultInventoryOperationService: require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/inventory/src/service/defaultInventoryOperationService")),
     DefaultPromotionOperationService: require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService")),
   };
-  const adapter = require("../src/service/defaultCircaDemoCommerceImportAdmissionService");
+
   for (const [moduleName, schemaName, refusal] of [
     ["inventory", "inventoryBalance", /stock snapshots require governed Inventory operations/],
     ["promotion", "couponBatch", /coupon snapshots require governed issuance/],
     ["promotion", "coupon", /coupon snapshots require governed issuance/],
-  ]) assert.throws(() => adapter.validateImportTarget({
+  ]) assert.throws(() => SERVICE[moduleName === "inventory" ? "DefaultInventoryOperationService" : "DefaultPromotionOperationService"].validateImportTarget({
     releaseCode: "circa.ewaste:commerce-operational", moduleName, schemaName, operation: "saveAll",
     destinationRole: "COMMERCE", lifecycle: "OPERATIONAL_VERSIONED",
     enabled: true, qualified: true,
   }), refusal);
-});
-
-test("the compatibility validator preserves canonical decisions and fails closed when unavailable", async (t) => {
-  const prior = global.SERVICE;
-  t.after(() => { global.SERVICE = prior; });
-  const adapter = require("../src/service/defaultCircaDemoCommerceImportAdmissionService");
-  for (const [moduleName, ownerName] of [
-    ["inventory", "DefaultInventoryOperationService"],
-    ["promotion", "DefaultPromotionOperationService"],
-  ]) {
-    const request = { moduleName, schemaName: "owner-selected-target", releaseCode: "circa.ewaste:commerce-operational" };
-    const refusal = new Error("Synthetic canonical refusal");
-    global.SERVICE = { [ownerName]: { validateImportTarget: function (actual) {
-      assert.equal(actual, request, "Target metadata must not be rewritten");
-      assert.equal(this, SERVICE[ownerName]);
-      return true;
-    } } };
-    assert.equal(adapter.validateImportTarget(request), true);
-    SERVICE[ownerName].validateImportTarget = () => false;
-    assert.equal(adapter.validateImportTarget(request), false);
-    SERVICE[ownerName].validateImportTarget = async () => { throw refusal; };
-    await assert.rejects(() => adapter.validateImportTarget(request), (error) => error === refusal);
-    delete SERVICE[ownerName];
-    assert.throws(() => adapter.validateImportTarget(request), /owner is unavailable/);
-    SERVICE[ownerName] = {};
-    assert.throws(() => adapter.validateImportTarget(request), /owner is unavailable/);
-  }
-  assert.throws(() => adapter.validateImportTarget({ moduleName: "unknown" }), /owner is unavailable/);
 });

@@ -1,5 +1,8 @@
 /* Nodics. Copyright (c) 2026. Governed by the root LICENSE. */
 "use strict";
+// Frozen reviewed fixture, not deployed authority or configuration-derived access.
+const runtimePermissions = require("./fixtures/kickoffNativeRuntimePermissions.json");
+
 /** @module kickoff/test/runtimeEnterpriseResolutionAdoption @description Checks exact resolved Local public-business placement selection without installed identity or publication qualification. @owner nodics.kickoff @layer test */
 const test = require("node:test"), assert = require("node:assert/strict"), path = require("node:path");
 const { loadRuntime, frameworkRoot } = require("./helpers/configuration");
@@ -15,10 +18,10 @@ test("Local namespace resolution admits only existing Commerce deployment and fo
   assert.deepEqual(platform.profileRuntimeEnterpriseResolution.callers, [{
     tenant: commerce.defaultTenant, principalEnterpriseCode: commerce.defaultEnterprise, serviceId: "apiAdmin",
     projectCode: startup.resolveProjectCode(path.resolve(__dirname, "..")), environmentCode: "kickoffLocal", serverCode: "commerceServer",
-    instanceCode: commerce.runtimeIdentity.instanceCode, assignmentCode: bootstrap.localRuntimeGrantCode("kickoffLocal", "commerceServer"),
+    instanceCode: commerce.runtimeIdentity.instanceCode, assignmentCode: bootstrap.runtimeDeploymentGrantCode("kickoffLocal", "commerceServer"),
     enterpriseCodes: ["GREENPERKS_ONLINE", "GREENPERKS_RETAIL", "RENEWWORKS_REPAIR_REUSE", "LOOPCYCLE_RECYCLING"],
   }]);
-  assert(commerce.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.includes("profile.enterprise.search"));
+  assert(runtimePermissions.commerceServer.includes("profile.enterprise.search"));
   assert(commerce.runtimeIdentity.remoteModules.includes("profile"));
   assert.equal(require("../envs/kickoffLocal/platformServer/config/properties").profileRuntimeEnterpriseResolution.callers.$config, "replace");
 });

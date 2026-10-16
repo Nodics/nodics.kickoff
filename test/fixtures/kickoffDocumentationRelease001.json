@@ -1,0 +1,80 @@
+{
+  "contractVersion": 2,
+  "module": "nodics.kickoff",
+  "sections": {
+    "documentation": {
+      "referenceCatalogues": [
+        {
+          "manifestPack": "nodics.docs",
+          "source": {
+            "type": "LOCAL_SIBLING",
+            "repositoryName": "nodics.ai",
+            "manifestPath": "nodics.docs/data/manifest.json",
+            "manifestSection": "documentation"
+          }
+        }
+      ],
+      "kind": "CONTENT_PACK",
+      "contentPath": "docs-v001",
+      "pack": "nodics.kickoff",
+      "version": "0.0.1",
+      "owningDomain": "kickoff.documentation",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "installationPolicy": "OPTIONAL_AXIS_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "sourceMode": "cms-records",
+      "sourceAuthority": "data/docs-v001/records/documentation",
+      "sites": [
+        "kickoffDocumentationSite"
+      ],
+      "accessMode": "PUBLIC",
+      "pages": 9,
+      "components": 10,
+      "routes": 9,
+      "releaseChecksum": "700d04c04e2add2b78f76349fdcb312947b9b298d5581ea7a2197a7d2a569fe0",
+      "generatedHashes": {
+        "docs-v001/records/documentation/kickoffDocumentationSiteData.js": "5d5ede51b187762546270a6a62d561cb2c5ab1f748d9dc22c3c615c00736dd3a",
+        "docs-v001/records/documentation/kickoffDocumentationProductData.js": "98a6d6c769de01d4772642af067cb6e40c72f868d1bf36ff2e152b688bf39526",
+        "docs-v001/records/documentation/kickoffDocumentationAccessPolicyData.js": "73b637a9da2e5aebbe90acbdd39b6658353cac4635b13fa22ada7c6b4025adbf",
+        "docs-v001/records/documentation/kickoffDocumentationNavigationData.js": "0471c19ce021ae947219c7a20b2e04de096cc819370853f92c36a77f75f57b2c",
+        "docs-v001/records/documentation/kickoffDocumentationDashboardData.js": "5e97e8ca411e3d4a7d95a71058e8a716cd0cefe3cf41a10f071a3f6bc0277bb5",
+        "docs-v001/records/documentation/kickoffDocumentationLegacyNavigationCleanupData.js": "80b8990d5f1e4b0b85cf3484f8e0b1f471d19ed9b52189dcda0585c737f0b0aa",
+        "docs-v001/records/documentation/kickoffDocumentationNodeData.js": "b9782889e008d3239922f4e55e005bfabac5d0546ee647495061800e7b792467",
+        "docs-v001/records/documentation/kickoffDocumentationPageMetadataData.js": "b8a5b234bcd80b1b386ba2701e8b5d686ae766d66fad84b60f542766f3056e55",
+        "docs-v001/records/documentation/kickoffDocumentationPublicationStateData.js": "04d03d5967766bda57bd4eb27acbbe0cf827741f949e88715751852f1b0e4c0d",
+        "docs-v001/records/documentation/kickoffDocumentationSearchMetadataData.js": "6a20d32df7898be60910bcfd4b66fce8cf94393e170bbee0241b70a8a20e4a2e",
+        "docs-v001/records/documentation/kickoffDocumentationTypeCodeData.js": "8de6a74a45ad21f5fff64384f3ac233744004f3bdcda6fca105a20ae196da09c",
+        "docs-v001/records/documentation/kickoffDocumentationRendererData.js": "f0815e9b723251ceb0f7cd76b705a10eba44efc4ae4f95df53f8df5c6443c3cc",
+        "docs-v001/records/documentation/kickoffDocumentationSlotData.js": "bdbdcc9e97725eccf6417d60cc7fe1ea6749b349b4fbf41c92ac361cf296119e",
+        "docs-v001/records/documentation/kickoffDocumentationTemplateData.js": "b2d6b942effb733d7372d13b06164e924357ac1ce4efd907eabc8cd9c29833c2",
+        "docs-v001/records/documentation/kickoffDocumentationComponentData.js": "5ab91c6566f0bddfc0d5545ac1b1b0937dec7fb72c4d2ed9baa15f4c3baf8204",
+        "docs-v001/records/documentation/kickoffDocumentationPageData.js": "27d0c7a19525a86eb509c6e5f1fb9bf334fe02188cd8eb8f7e3a268b20f86871",
+        "docs-v001/records/documentation/kickoffDocumentationRouteData.js": "1175b51a3bfafe4e91e4f4da1cd03acdb59fac23cabf69532832dbdb182c0ba7",
+        "docs-v001/headers/kickoffDocumentationContentPackHeader.js": "08463426cc9cb61dc5b0b60d1b4c942be00259fbf572f28e864dc3f4a279f081",
+        "docs-v001/records/documentation/kickoffDocumentationMediaData.js": "e8e767e3bf98de4340313ea113069ea0868e700e2e4e59f9787d090a62b42f7c",
+        "docs-v001/assets/documentation/assetManifest.js": "f26db9cc3bdd4ffc4958908bf73f4fbc9f637ee12f81f314808f4c10f1612d0a",
+        "docs-v001/assets/documentation/files/images/local-setup/agora-apparel-online.jpg": "edc62b048e82c253de2d9701627c5aeeebc3c0d6d807f4b56af4cce48ca61c9c",
+        "docs-v001/assets/documentation/files/images/local-setup/axis-dashboard.jpg": "db084e3fca2b48dd161b665e4b606366e4b322c618646b14c382dff80de2a80f",
+        "docs-v001/assets/documentation/files/images/local-setup/axis-entry.jpg": "852c731f7d316d83dc30316c717bbf375988557c3419ea29f97cab8164084de0",
+        "docs-v001/assets/documentation/files/images/local-setup/axis-first-launch-initialize.jpg": "832f1b8a4701817190c6b95f331d9e9c26945b3b471577ec240b12343a7a6cc4",
+        "docs-v001/assets/documentation/files/images/local-setup/axis-first-launch-recovery-login.jpg": "2e4c1fe55087470f1bf8e91da07ccd1dfa05bcc6bae0e9459b9af155f1c87621",
+        "docs-v001/assets/documentation/files/images/local-setup/documentation-dashboard.jpg": "7073a2b01464d7e66b7356f4cb869b2d7cffc2b6f95cb5058650c893e91ace11",
+        "docs-v001/assets/documentation/files/images/local-setup/imports-and-exports.jpg": "ef9610558e4e57197d456639de4c8746d66e287172567afcf421dbd2365d25bf",
+        "docs-v001/assets/documentation/files/images/local-setup/module-registry.jpg": "71b7abc25764fc9c4232184ad6bc2b0a04fdb8195cff0655ee3575a55798c082",
+        "docs-v001/assets/documentation/files/images/local-setup/nexus-online.jpg": "cbf9b854bea1e3c7db786b664aa02f3c532449e6bda162e274b14437213fba78",
+        "docs-v001/assets/documentation/files/images/local-setup/process-approval-queue.jpg": "ef0282d59f58eab4596b6ebb3aeb36a872107756e6e22d64ea7621e3f56bb65f",
+        "docs-v001/assets/documentation/files/images/local-setup/publishing.jpg": "d70850a2699ec18d2b8f54b63d4dac399031a4a06c0ea5076200dfa00ba286c0",
+        "docs-v001/assets/documentation/files/images/local-setup/setup-accelerators.jpg": "36bc205dd8d49920aa3c29a0a26245fd7e086f4ed9f670151eb98ed261032ccb",
+        "docs-v001/assets/documentation/files/images/local-setup/swagger-reference.jpg": "867d42f0ffe9c29ed8421b5c694f90d1f0e9ce3540e461caf2da9ddf1c7b627c"
+      }
+    }
+  }
+}

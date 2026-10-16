@@ -20,3 +20,9 @@
  */
 
 module.exports = { record0: { code: 'agoraApparelHomePageType', kind: 'PAGE', contractVersion: 0, active: true }, record1: { code: 'agoraApparelProductCardType', kind: 'COMPONENT', contractVersion: 0, active: true } };
+
+
+// Explicit fresh-source ownership; never infer ownership for installed records.
+for (const record of Object.values(module.exports)) {
+    record.authoringScope = { enterpriseCode: 'default', catalogCode: 'agoraApparelContentCatalog' };
+}

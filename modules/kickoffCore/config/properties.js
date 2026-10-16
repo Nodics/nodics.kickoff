@@ -9,7 +9,7 @@
 
  */
 
-'use strict';
+"use strict";
 
 /**
  * @module nodics.kickoff/modules/kickoffCore/config/properties
@@ -19,95 +19,74 @@
  * @override Later active modules may override these defaults through configuration layering.
  */
 module.exports = {
-  "fulfillmentCore": {
-    "runtimeRoleProfiles": {
-      "COMMERCE": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": require('../../agora.apparel/config/properties').fulfillmentCore.runtimeRoleProfiles.COMMERCE
-      }
-    }
+  communication: {
+    runtimeRoleProfiles: {
+      ENGAGEMENT: {
+        $config: "selected",
+        name: "employeeMail",
+        field: "domains",
+        includes: "employee",
+        value: {
+          trustedSourceModules: ["eWaste", "profile"],
+          templateResources: {
+            modules: { profile: true },
+          },
+        },
+      },
+    },
   },
-  "order": {
-    "runtimeRoleProfiles": {
-      "COMMERCE": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": require('../../agora.apparel/config/properties').order.runtimeRoleProfiles.COMMERCE
-      }
-    }
-  },
-  "communication": {
-    "runtimeRoleProfiles": {
-      "ENGAGEMENT": {
-        "$config": "selected",
-        "name": "employeeMail",
-        "field": "domains",
-        "includes": "employee",
-        "value": {
-          "trustedSourceModules": [
-            "eWaste",
-            "profile"
-          ],
-          "templateResources": {
-            "modules": { "profile": true }
-          }
-        }
-      }
-    }
-  },
-  "tooling": {
-    "acceptance": {
+  tooling: {
+    acceptance: {
       // Apparel journey and composition-selected catalog fixtures remain customer-owned.
       // Publication evidence has no fallback: nImport release versions are not nPublish receipts.
-      "commerceJourney": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": {
-          "productCode": "agoraLinenWrapDress",
-          "variantCode": "agoraLinenWrapDressIvoryS",
-          "secondaryProductCode": "agoraOxfordShirt",
-          "secondaryVariantCode": "agoraOxfordShirtIvoryM",
-          "categoryCode": "agoraWomen",
-          "storeCode": "agoraMainStore",
-          "locale": "en",
-          "channelCode": "web",
-          "jurisdiction": "AE",
-          "currency": "USD",
-          "promotionCode": "agoraCapsuleEdit10PercentRule",
-          "providerToken": {"$config":"env","name":"NODICS_STOREFRONT_PROVIDER_TOKEN","fallback":"tok_test_storefront_4242"},
-          "shippingAddress": {
-            "line1": "549 Oak St",
-            "city": "Crystal Lake",
-            "region": "IL",
-            "postalCode": "60014",
-            "country": "US"
+      commerceJourney: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "apparel",
+        value: {
+          productCode: "agoraLinenWrapDress",
+          variantCode: "agoraLinenWrapDressIvoryS",
+          secondaryProductCode: "agoraOxfordShirt",
+          secondaryVariantCode: "agoraOxfordShirtIvoryM",
+          categoryCode: "agoraWomen",
+          storeCode: "agoraMainStore",
+          locale: "en",
+          channelCode: "web",
+          jurisdiction: "AE",
+          currency: "USD",
+          promotionCode: "agoraCapsuleEdit10PercentRule",
+          providerToken: {
+            $config: "env",
+            name: "NODICS_STOREFRONT_PROVIDER_TOKEN",
+            fallback: "tok_test_storefront_4242",
           },
-          "shippingMethod": "STANDARD",
-          "paymentMethod": "CARD"
+          shippingAddress: {
+            line1: "549 Oak St",
+            city: "Crystal Lake",
+            region: "IL",
+            postalCode: "60014",
+            country: "US",
+          },
+          shippingMethod: "STANDARD",
+          paymentMethod: "CARD",
         },
-        "otherwise": {}
+        otherwise: {},
       },
-      "commercePublication": {
-        "catalogs": {
-          "$config": "replace",
-          "value": [
+      commercePublication: {
+        catalogs: {
+          $config: "replace",
+          value: [
             {
-              "$config": "selected",
-              "name": "agora",
-              "field": "domains",
-              "includes": "apparel",
-              "value": {
-                "catalogVersion": "agoraApparelStaged",
-                "storeCode": "agoraMainStore",
-                "locale": "en",
-                "productCodes": [
+              $config: "selected",
+              name: "agora",
+              field: "domains",
+              includes: "apparel",
+              value: {
+                catalogVersion: "agoraApparelStaged",
+                storeCode: "agoraMainStore",
+                locale: "en",
+                productCodes: [
                   "agoraLinenWrapDress",
                   "agoraSatinMidiDress",
                   "agoraRibbedKnitTop",
@@ -168,391 +147,720 @@ module.exports = {
                   "agoraModernKnitSet",
                   "agoraStylePass5Coupon",
                   "agoraCapsuleEdit10Coupon",
-                  "agoraPrivateSale20Coupon"
+                  "agoraPrivateSale20Coupon",
                 ],
-                "discoveryPagination": {
-                  "pageSize": 24,
-                  "maximumProducts": 1000
+                mediaModules: ["agora.apparel"],
+                publications: {
+                  product: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                  pricing: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRICING_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRICING_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRICING_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PRICING_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                  promotion: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                  inventory: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                  tax: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_TAX_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_TAX_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_TAX_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_TAX_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                  media: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
                 },
-                "mediaModules": [
-                  "agora.apparel"
-                ],
-                "publications": {
-                  "product": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRODUCT_PUBLICATION_TARGET_VERSION","fallback":""}
-                  },
-                  "pricing": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PRICING_PUBLICATION_TARGET_VERSION","fallback":""}
-                  },
-                  "promotion": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_PROMOTION_PUBLICATION_TARGET_VERSION","fallback":""}
-                  },
-                  "inventory": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_INVENTORY_PUBLICATION_TARGET_VERSION","fallback":""}
-                  },
-                  "tax": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_TAX_PUBLICATION_TARGET_VERSION","fallback":""}
-                  },
-                  "media": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_APPAREL_MEDIA_PUBLICATION_TARGET_VERSION","fallback":""}
-                  }
-                }
-              }
+              },
             },
             {
-              "$config": "selected",
-              "name": "agora",
-              "field": "domains",
-              "includes": "electronics",
-              "value": {
-                "catalogVersion": "agoraElectronicsStaged",
-                "storeCode": "agoraElectronicsStore",
-                "locale": "en",
-                "productCodes": [
-                  "agoraElectronicsNovaPhone"
-                ],
-                "mediaModules": [
-                  "agora.electronics"
-                ],
-                "publications": {
-                  "product": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_TARGET_VERSION","fallback":""}
+              $config: "selected",
+              name: "agora",
+              field: "domains",
+              includes: "electronics",
+              value: {
+                catalogVersion: "agoraElectronicsStaged",
+                storeCode: "agoraElectronicsStore",
+                locale: "en",
+                productCodes: ["agoraElectronicsNovaPhone"],
+                mediaModules: ["agora.electronics"],
+                publications: {
+                  product: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRODUCT_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "pricing": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_TARGET_VERSION","fallback":""}
+                  pricing: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PRICING_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "promotion": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_TARGET_VERSION","fallback":""}
+                  promotion: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_PROMOTION_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "inventory": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_TARGET_VERSION","fallback":""}
+                  inventory: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_INVENTORY_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "tax": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_TARGET_VERSION","fallback":""}
+                  tax: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_TAX_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "media": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_TARGET_VERSION","fallback":""}
-                  }
-                }
-              }
+                  media: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_ELECTRONICS_MEDIA_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                },
+              },
             },
             {
-              "$config": "selected",
-              "name": "agora",
-              "field": "domains",
-              "includes": "telco",
-              "value": {
-                "catalogVersion": "agoraTelcoStaged",
-                "storeCode": "agoraTelcoStore",
-                "locale": "en",
-                "productCodes": [
-                  "agoraTelcoUnlimitedPostpaid"
-                ],
-                "mediaModules": [
-                  "agora.telco"
-                ],
-                "publications": {
-                  "product": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_TARGET_VERSION","fallback":""}
+              $config: "selected",
+              name: "agora",
+              field: "domains",
+              includes: "telco",
+              value: {
+                catalogVersion: "agoraTelcoStaged",
+                storeCode: "agoraTelcoStore",
+                locale: "en",
+                productCodes: ["agoraTelcoUnlimitedPostpaid"],
+                mediaModules: ["agora.telco"],
+                publications: {
+                  product: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRODUCT_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "pricing": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PRICING_PUBLICATION_TARGET_VERSION","fallback":""}
+                  pricing: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRICING_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRICING_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRICING_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PRICING_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "promotion": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_TARGET_VERSION","fallback":""}
+                  promotion: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_PROMOTION_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "inventory": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_TARGET_VERSION","fallback":""}
+                  inventory: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_INVENTORY_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "tax": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_TAX_PUBLICATION_TARGET_VERSION","fallback":""}
+                  tax: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_TAX_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_TAX_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_TAX_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_TAX_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
                   },
-                  "media": {
-                    "code": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_CODE","fallback":""},
-                    "rootCode": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_ROOT_CODE","fallback":""},
-                    "sourceVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_SOURCE_VERSION","fallback":""},
-                    "targetVersion": {"$config":"env","name":"NODICS_AGORA_TELCO_MEDIA_PUBLICATION_TARGET_VERSION","fallback":""}
-                  }
-                }
-              }
-            }
-          ]
-        }
-      },
-      "commerceLive": {
-        "releaseModules": { "$config": "replace", "value": ["agora.apparel", "agora.electronics", "agora.telco"] }
-      },
-      "editorialLive": {
-        "siteCode": "nexusCorporateSite",
-        "contributionPath": "data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js",
-        "manifestPath": "data/manifest.json",
-        "contributionSection": "init-v001",
-        "contributionCode": "processServer:init-v001"
-      },
-      "localBootstrap": {
-        "publicOriginKey": "nexus",
-        "platformInitializationProfile": "localPlatformFoundation",
-        "locationInitializationProfile": "localLocationFoundation",
-        "verifyDefaultLocationMap": true,
-        "requiredCapabilities": { "$config": "replace", "value": [
-          "nodics.process", "nodics.communication", "nodics.location", "nodics.waste",
-          "nodics.loyalty", "nodics.commerce", "nodics.discovery"
-        ] },
-        "applicationBundles": { "$config": "replace", "value": [
-          { "profileCode": "nexus", "deliveryProbe": { "site": "nexusCorporateSite", "path": "/" } },
-          { "profileCode": "circa", "deliveryProbe": { "site": "circaSite", "path": "/" } }
-        ] },
-        "applicationUpdates": { "$config": "replace", "value": [
-          { "profileCode": "nexusupdate", "deliveryProbe": { "site": "nexusCorporateSite", "path": "/" }, "marker": "nexus-corporate-1.0.1" }
-        ] },
-        "rollbackDocumentationProfiles": { "$config": "replace", "value": ["frameworkdocs", "axisdocs"] },
-        "journeyCommands": { "$config": "replace", "value": [
-          { "command": "acceptance:agora-commerce-data", "args": ["--execute-install"] },
-          { "command": "acceptance:agora-commerce-publication", "args": ["--execute", "--approve-publications"] }
-        ] },
-        "documentationPackCodes": {
-          "$config": "replace",
-          "value": ["nodicsDocumentation", "axisDocumentation", "kickoffDocumentation"]
+                  media: {
+                    code: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_MEDIA_PUBLICATION_CODE",
+                      fallback: "",
+                    },
+                    rootCode: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_MEDIA_PUBLICATION_ROOT_CODE",
+                      fallback: "",
+                    },
+                    sourceVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_MEDIA_PUBLICATION_SOURCE_VERSION",
+                      fallback: "",
+                    },
+                    targetVersion: {
+                      $config: "env",
+                      name: "NODICS_AGORA_TELCO_MEDIA_PUBLICATION_TARGET_VERSION",
+                      fallback: "",
+                    },
+                  },
+                },
+              },
+            },
+          ],
         },
-        "documentationPacks": {
-          "kickoffDocumentation": {
-            "code": "kickoffDocumentation",
-            "profileCode": "kickoffdocs",
-            "minimumRoutes": 4,
-            "navigationComponent": "kickoffDocumentationNavigation",
-            "site": "kickoffDocumentationSite",
-            "path": "/docs/nodics-kickoff"
-          }
-        }
       },
-      "guidedInitialization": {
-        "publicationProfiles": {
-          "$config": "replace",
-          "value": [
+      commerceLive: {
+        releaseModules: {
+          $config: "replace",
+          value: ["agora.apparel", "agora.electronics", "agora.telco"],
+        },
+      },
+      editorialLive: {
+        siteCode: "nexusCorporateSite",
+        contributionPath:
+          "data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js",
+        manifestPath: "data/manifest.json",
+        contributionSection: "init-v001",
+        contributionCode: "processServer:init-v001",
+      },
+      localBootstrap: {
+        publicOriginKey: "nexus",
+        platformInitializationProfile: "localPlatformFoundation",
+        locationInitializationProfile: "localLocationFoundation",
+        verifyDefaultLocationMap: true,
+        requiredCapabilities: {
+          $config: "replace",
+          value: [
+            "nodics.process",
+            "nodics.communication",
+            "nodics.location",
+            "nodics.waste",
+            "nodics.loyalty",
+            "nodics.commerce",
+            "nodics.discovery",
+          ],
+        },
+        applicationBundles: {
+          $config: "replace",
+          value: [
+            {
+              profileCode: "nexus",
+              deliveryProbe: { site: "nexusCorporateSite", path: "/" },
+            },
+            {
+              profileCode: "circa",
+              deliveryProbe: { site: "circaSite", path: "/" },
+            },
+          ],
+        },
+        applicationUpdates: {
+          $config: "replace",
+          value: [
+            {
+              profileCode: "nexusupdate",
+              deliveryProbe: { site: "nexusCorporateSite", path: "/" },
+              marker: "nexus-corporate-1.0.1",
+            },
+          ],
+        },
+        rollbackDocumentationProfiles: {
+          $config: "replace",
+          value: ["frameworkdocs", "axisdocs"],
+        },
+        journeyCommands: {
+          $config: "replace",
+          value: [
+            {
+              command: "acceptance:agora-commerce-data",
+              args: ["--execute-install"],
+            },
+            {
+              command: "acceptance:agora-commerce-publication",
+              args: ["--execute", "--approve-publications"],
+            },
+          ],
+        },
+        documentationPackCodes: {
+          $config: "replace",
+          value: [
+            "nodicsDocumentation",
+            "axisDocumentation",
+            "kickoffDocumentation",
+          ],
+        },
+        documentationPacks: {
+          kickoffDocumentation: {
+            code: "kickoffDocumentation",
+            profileCode: "kickoffdocs",
+            minimumRoutes: 4,
+            navigationComponent: "kickoffDocumentationNavigation",
+            site: "kickoffDocumentationSite",
+            path: "/docs/nodics-kickoff",
+          },
+        },
+      },
+      guidedInitialization: {
+        publicationProfiles: {
+          $config: "replace",
+          value: [
             "nexus",
             "nexusupdate",
             "nexusecosystemrepair",
             "circa",
             "agoraapparel",
             "agoraelectronics",
-            "agoratelco"
-          ]
-        }
-      }
-    }
-  },
-  "cms": {
-    "runtimeRoleProfiles": {
-      "WCMS_STAGED": {
-        "publication": {
-          "baselines": {
-            "kickoffdocs": {
-              "contentPackCode": "kickoffDocumentation",
-              "releaseVersion": "0.0.1",
-              "rootType": "site",
-              "rootCode": "kickoffDocumentationSite",
-              "sourceVersion": "0"
-            }
-          }
-        }
-      }
-    }
-  },
-  "data": {
-    "contentPacks": {
-      "packs": {
-        "kickoffDocumentation": {
-          "source": {
-            "manifestSection": "documentation"
-          },
-          "presentation": {
-            "title": "Nodics Kickoff documentation"
-          }
-        }
-      }
-    },
-    "dataReleases": {
-      "runtimeRoleProfiles": {
-        "COMMERCE": {
-          "contributions": [
-            {
-              "$config": "selected",
-              "name": "agora",
-              "field": "domains",
-              "includes": "apparel",
-              "value": {
-                "moduleName": "agora.apparel",
-                "sections": ["agoraApparelOpeningStock", "agoraApparelPromotionSetup"]
-              }
-            }
-          ]
+            "agoratelco",
+          ],
         },
-        "WCMS_STAGED": {
-          "initializationProfiles": {
-            "localDocumentationFoundation": {
-              "enabled": true,
-              "label": "Local Documentation foundation",
-              "description": "Install the WCMS initialization releases required before documentation content packs can be reviewed and published.",
-              "completionMessage": "The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.",
-              "template": "axisDocumentationFoundation"
-            }
-          }
-        }
-      }
-    }
-  },
-  "activeModules": {
-    "compositions": {
-      "employeeMail": {
-        "domains": [{ "code": "employee" }]
       },
-      "agora": {
-        "environmentVariable": "NODICS_AGORA_DOMAINS",
-        "selection": "all",
-        "domains": [
-          {
-            "code": "apparel",
-            "frameworkGroup": "apparel",
-            "projectPack": "agora.apparel",
-            "productSearchContributor": {
-              "serviceName": "DefaultApparelProductSearchEnrichmentService",
-              "required": true
-            },
-            "publication": {
-              "storeCode": "agoraMainStore",
-              "catalogVersion": "agoraApparelStaged",
-              "releaseCode": "agoraApparelCommerceCatalog",
-              "recordPrefix": "agoraApparel"
-            }
-          },
-          {
-            "code": "electronics",
-            "frameworkGroup": "electronics",
-            "projectPack": "agora.electronics",
-            "productSearchContributor": {
-              "serviceName": "DefaultElectronicsProductSearchEnrichmentService",
-              "required": true
-            },
-            "publication": {
-              "storeCode": "agoraElectronicsStore",
-              "catalogVersion": "agoraElectronicsStaged",
-              "releaseCode": "agoraElectronicsCommerceCatalog",
-              "recordPrefix": "agoraElectronics"
-            }
-          },
-          {
-            "code": "telco",
-            "frameworkGroup": "telco",
-            "projectPack": "agora.telco",
-            "impliedProductSearchContributorDomains": [
-              "electronics"
-            ],
-            "productSearchContributor": {
-              "serviceName": "DefaultTelcoProductSearchEnrichmentService",
-              "required": true
-            },
-            "publication": {
-              "storeCode": "agoraTelcoStore",
-              "catalogVersion": "agoraTelcoStaged",
-              "releaseCode": "agoraTelcoCommerceCatalog",
-              "recordPrefix": "agoraTelco"
-            }
-          }
-        ],
-        "sharedModules": [
-          {
-            "module": "domainCommerceCore",
-            "minSelectedDomains": 2
-          }
-        ],
-        "emptySelections": [
-          "none",
-          "commerce"
-        ]
-      }
-    }
+    },
   },
-  "localResetProvider": {
-    "profiles": {
-      "PLATFORM": {
-        "modules": {
-          "backoffice": true,
-          "import": true,
-          "localizationCore": true,
-          "profile": true,
-          "search": true,
-          "system": true,
-          "token": true,
-          "validator": true
+  cms: {
+    runtimeRoleProfiles: {
+      WCMS_STAGED: {
+        publication: {
+          baselines: {
+            kickoffdocs: {
+              contentPackCode: "kickoffDocumentation",
+              releaseVersion: "0.0.2",
+              rootType: "site",
+              rootCode: "kickoffDocumentationSite",
+              sourceVersion: "0",
+            },
+          },
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+      },
+    },
+  },
+  data: {
+    contentPacks: {
+      packs: {
+        kickoffDocumentation: {
+          source: {
+            manifestSection: "documentation",
+          },
+          presentation: {
+            title: "Nodics Kickoff documentation",
+          },
+        },
+      },
+    },
+    dataReleases: {
+      runtimeRoleProfiles: {
+        PLATFORM: {
+          initializationProfiles: {
+            nativeRuntimeAuthority: {
+              enabled: true,
+              label: "Reviewed native runtime assignments",
+              description:
+                "Explicitly install reviewed native deployment assignments after Profile identity authority. Existing grants remain unchanged; other deployments require governed Profile bindings.",
+              completionMessage:
+                "Deployment assignment import completed without modifying retained authority. Inspect current grants through Profile before qualification.",
+              steps: {
+                $config: "replace",
+                value: [
+                  {
+                    dataType: "init",
+                    releaseCodes: ["kickoffCore:nativeRuntimeAssignments"],
+                  },
+                ],
+              },
+            },
+          },
+        },
+        COMMERCE: {
+          contributions: [
+            {
+              $config: "selected",
+              name: "agora",
+              field: "domains",
+              includes: "apparel",
+              value: {
+                moduleName: "agora.apparel",
+                sections: [
+                  "agoraApparelOpeningStock",
+                  "agoraApparelPromotionSetup",
+                ],
+              },
+            },
+          ],
+        },
+        WCMS_STAGED: {
+          initializationProfiles: {
+            localDocumentationFoundation: {
+              enabled: true,
+              label: "Local Documentation foundation",
+              description:
+                "Install the WCMS initialization releases required before documentation content packs can be reviewed and published.",
+              completionMessage:
+                "The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.",
+              template: "axisDocumentationFoundation",
+            },
+          },
+        },
+      },
+    },
+  },
+  activeModules: {
+    compositions: {
+      employeeMail: {
+        domains: [{ code: "employee" }],
+      },
+      agora: {
+        environmentVariable: "NODICS_AGORA_DOMAINS",
+        selection: "all",
+        domains: [
+          {
+            code: "apparel",
+            frameworkGroup: "apparel",
+            projectPack: "agora.apparel",
+            publication: {
+              storeCode: "agoraMainStore",
+              catalogVersion: "agoraApparelStaged",
+              releaseCode: "agoraApparelCommerceCatalog",
+              recordPrefix: "agoraApparel",
+            },
+          },
+          {
+            code: "electronics",
+            frameworkGroup: "electronics",
+            projectPack: "agora.electronics",
+            publication: {
+              storeCode: "agoraElectronicsStore",
+              catalogVersion: "agoraElectronicsStaged",
+              releaseCode: "agoraElectronicsCommerceCatalog",
+              recordPrefix: "agoraElectronics",
+            },
+          },
+          {
+            code: "telco",
+            frameworkGroup: "telco",
+            projectPack: "agora.telco",
+            publication: {
+              storeCode: "agoraTelcoStore",
+              catalogVersion: "agoraTelcoStaged",
+              releaseCode: "agoraTelcoCommerceCatalog",
+              recordPrefix: "agoraTelco",
+            },
+          },
+        ],
+        sharedModules: [
+          {
+            module: "domainCommerceCore",
+            minSelectedDomains: 2,
+          },
+        ],
+        emptySelections: ["none", "commerce"],
+      },
+    },
+  },
+  localResetProvider: {
+    // Required services are deployment completeness assertions. Explicit services
+    // below are residual models outside selected owner inventories, not defaults.
+    // Preserve this exact destructive scope; discovery must never expand it.
+    profiles: {
+      PLATFORM: {
+        modules: {
+          backoffice: true,
+          import: true,
+          localizationCore: true,
+          profile: true,
+          search: true,
+          system: true,
+          token: true,
+          validator: true,
+        },
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultEmsFailedMessagesService",
-            "DefaultWorkflow2SchemaService"
-          ]
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "searchIndexes": [
+        searchIndexes: [
           {
-            "moduleName": "discoveryProjection",
-            "indexName": "discoveryDocumentProjection"
-          }
-        ]
+            moduleName: "discoveryProjection",
+            indexName: "discoveryDocumentProjection",
+          },
+        ],
       },
-      "WCMS_STAGED": {
-        "requiredServiceNames": [
+      WCMS_STAGED: {
+        requiredServiceNames: [
           "DefaultCmsDocumentationAccessPolicyService",
           "DefaultCmsDocumentationDashboardService",
           "DefaultCmsDocumentationNavigationService",
@@ -560,35 +868,35 @@ module.exports = {
           "DefaultCmsDocumentationPageService",
           "DefaultCmsDocumentationProductService",
           "DefaultCmsDocumentationPublicationStateService",
-          "DefaultCmsDocumentationSearchMetadataService"
+          "DefaultCmsDocumentationSearchMetadataService",
         ],
-        "modules": {
-          "cms": true,
-          "editorial": true,
-          "import": true,
-          "media": true,
-          "publish": true,
-          "search": true,
-          "system": true,
-          "token": true,
-          "validator": true
+        modules: {
+          cms: true,
+          editorial: true,
+          import: true,
+          media: true,
+          publish: true,
+          search: true,
+          system: true,
+          token: true,
+          validator: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultEmsFailedMessagesService",
-            "DefaultWorkflow2SchemaService"
-          ]
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "searchIndexes": [
+        searchIndexes: [
           {
-            "moduleName": "discoveryProjection",
-            "indexName": "discoveryDocumentProjection"
-          }
-        ]
+            moduleName: "discoveryProjection",
+            indexName: "discoveryDocumentProjection",
+          },
+        ],
       },
-      "WCMS_ONLINE": {
-        "requiredServiceNames": [
+      WCMS_ONLINE: {
+        requiredServiceNames: [
           "DefaultCmsDocumentationAccessPolicyService",
           "DefaultCmsDocumentationDashboardService",
           "DefaultCmsDocumentationNavigationService",
@@ -596,76 +904,76 @@ module.exports = {
           "DefaultCmsDocumentationPageService",
           "DefaultCmsDocumentationProductService",
           "DefaultCmsDocumentationPublicationStateService",
-          "DefaultCmsDocumentationSearchMetadataService"
+          "DefaultCmsDocumentationSearchMetadataService",
         ],
-        "modules": {
-          "cms": true,
-          "editorial": true,
-          "import": true,
-          "media": true,
-          "publish": true,
-          "search": true,
-          "system": true,
-          "token": true,
-          "validator": true
+        modules: {
+          cms: true,
+          editorial: true,
+          import: true,
+          media: true,
+          publish: true,
+          search: true,
+          system: true,
+          token: true,
+          validator: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultEmsFailedMessagesService",
-            "DefaultWorkflow2SchemaService"
-          ]
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "searchIndexes": [
+        searchIndexes: [
           {
-            "moduleName": "discoveryProjection",
-            "indexName": "discoveryDocumentProjection"
-          }
-        ]
+            moduleName: "discoveryProjection",
+            indexName: "discoveryDocumentProjection",
+          },
+        ],
       },
-      "PROCESS": {
-        "modules": {
-          "cronjob": true,
-          "import": true,
-          "system": true,
-          "token": true,
-          "validator": true,
-          "workflow": true
+      PROCESS: {
+        modules: {
+          cronjob: true,
+          import: true,
+          system: true,
+          token: true,
+          validator: true,
+          workflow: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultEmsFailedMessagesService",
             "DefaultIndexService",
             "DefaultIndexerLogService",
             "DefaultIndexerService",
             "DefaultSearchService",
-            "DefaultWorkflow2SchemaService"
-          ]
-        }
-      },
-      "ENGAGEMENT": {
-        "requiredServiceNames": [
-          "DefaultContactRequestService",
-          "DefaultCommsIntentService"
-        ],
-        "modules": {
-          "commsSchema": true,
-          "contactSubmission": true,
-          "customerFeedback": true,
-          "customerReview": true,
-          "engagementCore": true,
-          "import": true,
-          "publish": true,
-          "system": true,
-          "testimonial": true,
-          "token": true,
-          "validator": true
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+      },
+      ENGAGEMENT: {
+        requiredServiceNames: [
+          "DefaultContactRequestService",
+          "DefaultCommsIntentService",
+        ],
+        modules: {
+          commsSchema: true,
+          contactSubmission: true,
+          customerFeedback: true,
+          customerReview: true,
+          engagementCore: true,
+          import: true,
+          publish: true,
+          system: true,
+          testimonial: true,
+          token: true,
+          validator: true,
+        },
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultClassConfigurationService",
             "DefaultConfigurationActivationLogService",
@@ -688,94 +996,94 @@ module.exports = {
             "DefaultSchemaAccessPolicyService",
             "DefaultSchemaConfigurationService",
             "DefaultSearchService",
-            "DefaultWorkflow2SchemaService"
-          ]
-        }
+            "DefaultWorkflow2SchemaService",
+          ],
+        },
       },
-      "COMMERCE": {
-        "requiredServiceNames": [
+      COMMERCE: {
+        requiredServiceNames: [
           "DefaultCommerceOrderService",
           "DefaultProductService",
           "DefaultPaymentTransactionService",
-          "DefaultCartService"
+          "DefaultCartService",
         ],
-        "modules": {
-          "apparelProduct": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "apparel",
-            "value": true,
-            "otherwise": false
+        modules: {
+          apparelProduct: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "apparel",
+            value: true,
+            otherwise: false,
           },
-          "bidding": true,
-          "cart": true,
-          "checkoutCore": true,
-          "commerceSearchCore": true,
-          "digitalCore": true,
-          "discoveryConfig": true,
-          "discoveryMapping": true,
-          "discoveryProjection": true,
-          "discoveryRanking": true,
-          "discoverySource": true,
-          "electronicsProduct": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "electronics",
-            "value": true,
-            "otherwise": {
-              "$config": "selected",
-              "name": "agora",
-              "field": "domains",
-              "includes": "telco",
-              "value": true,
-              "otherwise": false
-            }
+          bidding: true,
+          cart: true,
+          checkoutCore: true,
+          commerceSearchCore: true,
+          digitalCore: true,
+          discoveryConfig: true,
+          discoveryMapping: true,
+          discoveryProjection: true,
+          discoveryRanking: true,
+          discoverySource: true,
+          electronicsProduct: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "electronics",
+            value: true,
+            otherwise: {
+              $config: "selected",
+              name: "agora",
+              field: "domains",
+              includes: "telco",
+              value: true,
+              otherwise: false,
+            },
           },
-          "fulfillmentCore": true,
-          "import": true,
-          "inventory": true,
-          "order": true,
-          "paymentCore": true,
-          "pricing": true,
-          "product": true,
-          "promotion": true,
-          "search": true,
-          "shoppingList": true,
-          "store": true,
-          "system": true,
-          "tax": true,
-          "telcoCatalog": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "telco",
-            "value": true,
-            "otherwise": false
+          fulfillmentCore: true,
+          import: true,
+          inventory: true,
+          order: true,
+          paymentCore: true,
+          pricing: true,
+          product: true,
+          promotion: true,
+          search: true,
+          shoppingList: true,
+          store: true,
+          system: true,
+          tax: true,
+          telcoCatalog: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "telco",
+            value: true,
+            otherwise: false,
           },
-          "telcoProvisioning": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "telco",
-            "value": true,
-            "otherwise": false
+          telcoProvisioning: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "telco",
+            value: true,
+            otherwise: false,
           },
-          "telcoSubscription": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "telco",
-            "value": true,
-            "otherwise": false
+          telcoSubscription: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "telco",
+            value: true,
+            otherwise: false,
           },
-          "token": true,
-          "validator": true
+          token: true,
+          validator: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultClassConfigurationService",
             "DefaultConfigurationActivationLogService",
@@ -796,110 +1104,110 @@ module.exports = {
             "DefaultRouterConfigurationService",
             "DefaultSchemaAccessPolicyService",
             "DefaultSchemaConfigurationService",
-            "DefaultWorkflow2SchemaService"
-          ]
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "searchIndexes": [
+        searchIndexes: [
           {
-            "moduleName": "discoveryProjection",
-            "indexName": "discoveryDocumentProjection"
+            moduleName: "discoveryProjection",
+            indexName: "discoveryDocumentProjection",
           },
           {
-            "moduleName": "product",
-            "indexName": "productLocalized"
+            moduleName: "product",
+            indexName: "productLocalized",
           },
           {
-            "moduleName": "product",
-            "indexName": "productSearchProjection"
+            moduleName: "product",
+            indexName: "productSearchProjection",
           },
           {
-            "moduleName": "commerceSearchCore",
-            "indexName": "commerceSearchRuleProjection"
-          }
-        ]
-      },
-      "COMMERCE_STAGED": {
-        "requiredServiceNames": [
-          "DefaultProductService",
-          "DefaultProductPublicationService"
+            moduleName: "commerceSearchCore",
+            indexName: "commerceSearchRuleProjection",
+          },
         ],
-        "modules": {
-          "apparelProduct": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "apparel",
-            "value": true,
-            "otherwise": false
+      },
+      COMMERCE_STAGED: {
+        requiredServiceNames: [
+          "DefaultProductService",
+          "DefaultProductPublicationService",
+        ],
+        modules: {
+          apparelProduct: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "apparel",
+            value: true,
+            otherwise: false,
           },
-          "bidding": true,
-          "cart": true,
-          "checkoutCore": true,
-          "commerceSearchCore": true,
-          "digitalCore": true,
-          "discoveryConfig": true,
-          "discoveryMapping": true,
-          "discoveryProjection": true,
-          "discoveryRanking": true,
-          "discoverySource": true,
-          "electronicsProduct": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "electronics",
-            "value": true,
-            "otherwise": {
-              "$config": "selected",
-              "name": "agora",
-              "field": "domains",
-              "includes": "telco",
-              "value": true,
-              "otherwise": false
-            }
+          bidding: true,
+          cart: true,
+          checkoutCore: true,
+          commerceSearchCore: true,
+          digitalCore: true,
+          discoveryConfig: true,
+          discoveryMapping: true,
+          discoveryProjection: true,
+          discoveryRanking: true,
+          discoverySource: true,
+          electronicsProduct: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "electronics",
+            value: true,
+            otherwise: {
+              $config: "selected",
+              name: "agora",
+              field: "domains",
+              includes: "telco",
+              value: true,
+              otherwise: false,
+            },
           },
-          "fulfillmentCore": true,
-          "import": true,
-          "inventory": true,
-          "order": true,
-          "paymentCore": true,
-          "pricing": true,
-          "product": true,
-          "promotion": true,
-          "search": true,
-          "shoppingList": true,
-          "store": true,
-          "system": true,
-          "tax": true,
-          "telcoCatalog": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "telco",
-            "value": true,
-            "otherwise": false
+          fulfillmentCore: true,
+          import: true,
+          inventory: true,
+          order: true,
+          paymentCore: true,
+          pricing: true,
+          product: true,
+          promotion: true,
+          search: true,
+          shoppingList: true,
+          store: true,
+          system: true,
+          tax: true,
+          telcoCatalog: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "telco",
+            value: true,
+            otherwise: false,
           },
-          "telcoProvisioning": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "telco",
-            "value": true,
-            "otherwise": false
+          telcoProvisioning: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "telco",
+            value: true,
+            otherwise: false,
           },
-          "telcoSubscription": {
-            "$config": "selected",
-            "name": "agora",
-            "field": "domains",
-            "includes": "telco",
-            "value": true,
-            "otherwise": false
+          telcoSubscription: {
+            $config: "selected",
+            name: "agora",
+            field: "domains",
+            includes: "telco",
+            value: true,
+            otherwise: false,
           },
-          "token": true,
-          "validator": true
+          token: true,
+          validator: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultClassConfigurationService",
             "DefaultConfigurationActivationLogService",
@@ -911,49 +1219,49 @@ module.exports = {
             "DefaultRouterConfigurationService",
             "DefaultSchemaAccessPolicyService",
             "DefaultSchemaConfigurationService",
-            "DefaultWorkflow2SchemaService"
-          ]
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "searchIndexes": [
+        searchIndexes: [
           {
-            "moduleName": "discoveryProjection",
-            "indexName": "discoveryDocumentProjection"
+            moduleName: "discoveryProjection",
+            indexName: "discoveryDocumentProjection",
           },
           {
-            "moduleName": "product",
-            "indexName": "productLocalized"
+            moduleName: "product",
+            indexName: "productLocalized",
           },
           {
-            "moduleName": "product",
-            "indexName": "productSearchProjection"
+            moduleName: "product",
+            indexName: "productSearchProjection",
           },
           {
-            "moduleName": "commerceSearchCore",
-            "indexName": "commerceSearchRuleProjection"
-          }
-        ]
-      },
-      "LOYALTY": {
-        "requiredServiceNames": [
-          "DefaultLoyaltyWalletService",
-          "DefaultRewardLedgerEntryService"
+            moduleName: "commerceSearchCore",
+            indexName: "commerceSearchRuleProjection",
+          },
         ],
-        "modules": {
-          "import": true,
-          "system": true,
-          "token": true,
-          "validator": true,
-          "loyaltyCore": true,
-          "loyaltyProgram": true,
-          "loyaltyRewardType": true,
-          "loyaltyWallet": true,
-          "loyaltyLedger": true,
-          "loyaltyRedemption": true,
-          "loyaltyReservation": true
+      },
+      LOYALTY: {
+        requiredServiceNames: [
+          "DefaultLoyaltyWalletService",
+          "DefaultRewardLedgerEntryService",
+        ],
+        modules: {
+          import: true,
+          system: true,
+          token: true,
+          validator: true,
+          loyaltyCore: true,
+          loyaltyProgram: true,
+          loyaltyRewardType: true,
+          loyaltyWallet: true,
+          loyaltyLedger: true,
+          loyaltyRedemption: true,
+          loyaltyReservation: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultClassConfigurationService",
             "DefaultConfigurationActivationLogService",
@@ -969,37 +1277,37 @@ module.exports = {
             "DefaultIndexService",
             "DefaultIndexerLogService",
             "DefaultIndexerService",
-            "DefaultSearchService"
-          ]
-        }
+            "DefaultSearchService",
+          ],
+        },
       },
-      "WASTE": {
-        "requiredServiceNames": [
+      WASTE: {
+        requiredServiceNames: [
           "DefaultWasteSubmissionService",
           "DefaultWasteAssetService",
           "DefaultWasteImpactResultService",
-          "DefaultWasteRewardAssessmentService"
+          "DefaultWasteRewardAssessmentService",
         ],
-        "modules": {
-          "import": true,
-          "search": true,
-          "system": true,
-          "token": true,
-          "validator": true,
-          "wasteCollection": true,
-          "wasteCompliance": true,
-          "wasteCore": true,
-          "wasteImpact": true,
-          "wasteReward": true,
-          "wasteMaterial": true,
-          "wasteMovement": true,
-          "wasteReceipt": true,
-          "wasteSubmission": true,
-          "wasteVerification": true
+        modules: {
+          import: true,
+          search: true,
+          system: true,
+          token: true,
+          validator: true,
+          wasteCollection: true,
+          wasteCompliance: true,
+          wasteCore: true,
+          wasteImpact: true,
+          wasteReward: true,
+          wasteMaterial: true,
+          wasteMovement: true,
+          wasteReceipt: true,
+          wasteSubmission: true,
+          wasteVerification: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultCatalogService",
             "DefaultClassConfigurationService",
             "DefaultConfigurationActivationLogService",
@@ -1011,407 +1319,395 @@ module.exports = {
             "DefaultRouterConfigurationService",
             "DefaultSchemaAccessPolicyService",
             "DefaultSchemaConfigurationService",
-            "DefaultWorkflow2SchemaService"
-          ]
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        "searchIndexes": [
+        searchIndexes: [
           {
-            "moduleName": "discoveryProjection",
-            "indexName": "discoveryDocumentProjection"
-          }
-        ]
-      },
-      "LOCATION": {
-        "requiredServiceNames": [
-          "DefaultLocationMapProviderConfigurationService"
+            moduleName: "discoveryProjection",
+            indexName: "discoveryDocumentProjection",
+          },
         ],
-        "modules": {
-          "import": true,
-          "locationCore": true,
-          "locationDraft": true,
-          "locationMap": true,
-          "locationProjection": true,
-          "locationSearch": true,
-          "locationType": true,
-          "system": true,
-          "token": true,
-          "validator": true
+      },
+      LOCATION: {
+        requiredServiceNames: [
+          "DefaultLocationMapProviderConfigurationService",
+        ],
+        modules: {
+          import: true,
+          locationCore: true,
+          locationDraft: true,
+          locationMap: true,
+          locationProjection: true,
+          locationSearch: true,
+          locationType: true,
+          system: true,
+          token: true,
+          validator: true,
         },
-        "serviceNames": {
-          "$config": "replace",
-          "value": [
+        serviceNames: {
+          $config: "replace",
+          value: [
             "DefaultLocationApprovalService",
             "DefaultEmsFailedMessagesService",
             "DefaultIndexService",
             "DefaultIndexerLogService",
             "DefaultIndexerService",
             "DefaultSearchService",
-            "DefaultWorkflow2SchemaService"
-          ]
-        }
-      }
-    }
-  },
-  "backofficeLocalReset": {
-    "providers": {
-      "$config": "replace",
-      "value": [
-        {
-          "code": "wcmsStaged",
-          "connectionName": "wcmsStaged",
-          "targetAuthority": {
-            "server": "wcmsStagedServer",
-            "runtimeRole": {
-              "code": "WCMS_STAGED",
-              "publication": "STAGED"
-            }
-          }
+            "DefaultWorkflow2SchemaService",
+          ],
         },
-        {
-          "code": "wcmsOnline",
-          "connectionName": "wcmsOnline",
-          "targetAuthority": {
-            "server": "wcmsOnlineServer",
-            "runtimeRole": {
-              "code": "WCMS_ONLINE",
-              "publication": "ONLINE"
-            }
-          }
-        },
-        {
-          "code": "process",
-          "connectionName": "process",
-          "targetAuthority": {
-            "server": "processServer",
-            "runtimeRole": {
-              "code": "PROCESS",
-              "publication": "OPERATIONAL"
-            }
-          }
-        },
-        {
-          "code": "location",
-          "connectionName": "location",
-          "targetAuthority": {
-            "server": "locationServer",
-            "runtimeRole": {
-              "code": "LOCATION",
-              "publication": "OPERATIONAL"
-            }
-          }
-        },
-        {
-          "code": "commerce",
-          "connectionName": "commerce",
-          "targetAuthority": {
-            "server": "commerceServer",
-            "runtimeRole": {
-              "code": "COMMERCE",
-              "publication": "OPERATIONAL"
-            }
-          }
-        },
-        {
-          "code": "commerceStaged",
-          "connectionName": "commerceStaged",
-          "targetAuthority": {
-            "server": "commerceStagedServer",
-            "runtimeRole": {
-              "code": "COMMERCE_STAGED",
-              "publication": "STAGED"
-            }
-          }
-        },
-        {
-          "code": "engagement",
-          "connectionName": "engagement",
-          "targetAuthority": {
-            "server": "engagementServer",
-            "runtimeRole": {
-              "code": "ENGAGEMENT",
-              "publication": "OPERATIONAL"
-            }
-          }
-        },
-        {
-          "code": "loyalty",
-          "connectionName": "loyalty",
-          "targetAuthority": {
-            "server": "loyaltyServer",
-            "runtimeRole": {
-              "code": "LOYALTY",
-              "publication": "OPERATIONAL"
-            }
-          }
-        },
-        {
-          "code": "waste",
-          "connectionName": "waste",
-          "targetAuthority": {
-            "server": "wasteServer",
-            "runtimeRole": {
-              "code": "WASTE",
-              "publication": "OPERATIONAL"
-            }
-          }
-        },
-        {
-          "code": "platform",
-          "connectionName": "default",
-          "targetAuthority": {
-            "server": "platformServer",
-            "runtimeRole": {
-              "code": "PLATFORM",
-              "publication": "OPERATIONAL"
-            }
-          }
-        }
-      ]
-    }
-  },
-  "copilot": {
-    "runtimeRoleProfiles": {
-      "PLATFORM": {
-        "core": {
-          "customerProject": "kickoff",
-          "environment": { "$config": "context", "name": "environmentCode" }
-        },
-        "api": {
-          "enabled": true
-        },
-        "workbench": {
-          "target": {
-            "productModule": "product",
-            "pricingModule": "pricing",
-            "connectionName": "commerceStaged",
-            "targetAuthority": {
-              "runtimeRole": "COMMERCE_STAGED"
-            }
-          }
-        },
-        "knowledge": {
-          "ingestion": {
-            "enabled": {
-              "$config": "env",
-              "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
-              "fallback": true,
-              "type": "boolean"
-            },
-            "ingestOnStart": {
-              "$config": "env",
-              "name": "NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START",
-              "fallback": true,
-              "type": "boolean"
-            },
-            "startup": {
-              "serviceId": "kickoff-local-knowledge-indexer",
-              "logSummary": true
-            },
-            "indexTenant": "default"
-          },
-          "retrieval": {
-            "enabled": {
-              "$config": "env",
-              "name": "NODICS_COPILOT_KNOWLEDGE_ENABLED",
-              "fallback": true,
-              "type": "boolean"
-            }
-          },
-        },
-        "providers": {
-          "enabled": true,
-          "default": {
-            "adapter": "ollama"
-          },
-          "adapters": {
-            "ollama": {
-              "enabled": true
-            }
-          }
-        }
-      }
-    }
-  },
-  "engagement": {
-    "runtimeRoleProfiles": {
-      "ENGAGEMENT": {
-        "capabilities": { "testimonial": true, "customerReview": true, "customerFeedback": true }
-      }
-    }
-  },
-  "customerFeedback": {
-    "runtimeRoleProfiles": {
-      "ENGAGEMENT": { "enabled": true }
-    }
-  },
-  "apiExposure": {
-    "runtimeRoleProfiles": {
-      "WCMS_STAGED": {
-        "categories": {
-          "dataExport": {
-            "enabled": true
-          }
-        }
       },
-      "WCMS_ONLINE": {
-        "categories": {
-          "schemaApi": {
-            "enabled": false
-          },
-          "schemaMaintenance": {
-            "enabled": false
-          },
-          "dataImport": {
-            "enabled": false
-          },
-          "dataExport": {
-            "enabled": false
-          },
-          "mediaManagement": {
-            "enabled": false
-          }
-        }
-      },
-      "PROCESS": {
-        "categories": {
-          "dataExport": {
-            "enabled": false
-          }
-        }
-      }
-    }
+    },
   },
-  "backofficeApplicationInitialization": {
-    "runtimeRoleProfiles": {
-      "PLATFORM": {
-        "projectCode": {
-          "$config": "env",
-          "name": "NODICS_PROJECT_CODE",
-          "fallback": {
-            "$config": "context",
-            "name": "projectCode"
-          }
-        },
-        "projectRoot": {
-          "$config": "path",
-          "base": "project",
-          "relative": ""
-        },
-        "target": {
-          "connectionName": "wcmsStaged"
-        },
-        "profiles": {
-          "frameworkdocs": {
-            "enabled": true
+  backofficeLocalReset: {
+    providers: {
+      $config: "replace",
+      value: [
+        {
+          code: "wcmsStaged",
+          connectionName: "wcmsStaged",
+          targetAuthority: {
+            server: "wcmsStagedServer",
+            runtimeRole: {
+              code: "WCMS_STAGED",
+              publication: "STAGED",
+            },
           },
-          "axisdocs": {
-            "enabled": true
+        },
+        {
+          code: "wcmsOnline",
+          connectionName: "wcmsOnline",
+          targetAuthority: {
+            server: "wcmsOnlineServer",
+            runtimeRole: {
+              code: "WCMS_ONLINE",
+              publication: "ONLINE",
+            },
           },
-          "kickoffdocs": {
-            "code": "kickoffdocs",
-            "type": "DOCUMENTATION_BUNDLE",
-            "owner": "nodics.kickoff",
-            "applicationCode": "axis",
-            "siteCode": "kickoffDocumentationSite",
-            "baselineCode": "kickoffdocs",
-            "contentPackCode": "kickoffDocumentation",
-            "presentation": {
-              "title": "Nodics Kickoff Documentation",
-              "kind": "DOCUMENTATION",
-              "category": "documentation",
-              "order": 500,
-              "summary": "Reference-project documentation content pack and Online delivery profile.",
-              "requiredServers": [
+        },
+        {
+          code: "process",
+          connectionName: "process",
+          targetAuthority: {
+            server: "processServer",
+            runtimeRole: {
+              code: "PROCESS",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+        {
+          code: "location",
+          connectionName: "location",
+          targetAuthority: {
+            server: "locationServer",
+            runtimeRole: {
+              code: "LOCATION",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+        {
+          code: "commerce",
+          connectionName: "commerce",
+          targetAuthority: {
+            server: "commerceServer",
+            runtimeRole: {
+              code: "COMMERCE",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+        {
+          code: "commerceStaged",
+          connectionName: "commerceStaged",
+          targetAuthority: {
+            server: "commerceStagedServer",
+            runtimeRole: {
+              code: "COMMERCE_STAGED",
+              publication: "STAGED",
+            },
+          },
+        },
+        {
+          code: "engagement",
+          connectionName: "engagement",
+          targetAuthority: {
+            server: "engagementServer",
+            runtimeRole: {
+              code: "ENGAGEMENT",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+        {
+          code: "loyalty",
+          connectionName: "loyalty",
+          targetAuthority: {
+            server: "loyaltyServer",
+            runtimeRole: {
+              code: "LOYALTY",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+        {
+          code: "waste",
+          connectionName: "waste",
+          targetAuthority: {
+            server: "wasteServer",
+            runtimeRole: {
+              code: "WASTE",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+        {
+          code: "platform",
+          connectionName: "default",
+          targetAuthority: {
+            server: "platformServer",
+            runtimeRole: {
+              code: "PLATFORM",
+              publication: "OPERATIONAL",
+            },
+          },
+        },
+      ],
+    },
+  },
+  copilot: {
+    runtimeRoleProfiles: {
+      PLATFORM: {
+        core: {
+          customerProject: "kickoff",
+        },
+        api: {
+          enabled: true,
+        },
+        workbench: {
+          target: {
+            connectionName: "commerceStaged",
+            targetAuthority: {
+              runtimeRole: "COMMERCE_STAGED",
+            },
+          },
+        },
+        knowledge: {
+          ingestion: {
+            enabled: {
+              $config: "env",
+              name: "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+              fallback: true,
+              type: "boolean",
+            },
+            ingestOnStart: {
+              $config: "env",
+              name: "NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START",
+              fallback: true,
+              type: "boolean",
+            },
+            startup: {
+              serviceId: "kickoff-local-knowledge-indexer",
+              logSummary: true,
+            },
+          },
+          retrieval: {
+            enabled: {
+              $config: "env",
+              name: "NODICS_COPILOT_KNOWLEDGE_ENABLED",
+              fallback: true,
+              type: "boolean",
+            },
+          },
+        },
+        providers: {
+          enabled: true,
+          default: {
+            adapter: "ollama",
+          },
+          adapters: {
+            ollama: {
+              enabled: true,
+            },
+          },
+        },
+      },
+    },
+  },
+  engagement: {
+    runtimeRoleProfiles: {
+      ENGAGEMENT: {
+        capabilities: {
+          testimonial: true,
+          customerReview: true,
+          customerFeedback: true,
+        },
+      },
+    },
+  },
+  customerFeedback: {
+    runtimeRoleProfiles: {
+      ENGAGEMENT: { enabled: true },
+    },
+  },
+  apiExposure: {
+    runtimeRoleProfiles: {
+      WCMS_STAGED: {
+        categories: {
+          dataExport: {
+            enabled: true,
+          },
+        },
+      },
+      WCMS_ONLINE: {
+        categories: {
+          schemaApi: {
+            enabled: false,
+          },
+          schemaMaintenance: {
+            enabled: false,
+          },
+          dataImport: {
+            enabled: false,
+          },
+          dataExport: {
+            enabled: false,
+          },
+          mediaManagement: {
+            enabled: false,
+          },
+        },
+      },
+      PROCESS: {
+        categories: {
+          dataExport: {
+            enabled: false,
+          },
+        },
+      },
+    },
+  },
+  backofficeApplicationInitialization: {
+    runtimeRoleProfiles: {
+      PLATFORM: {
+        target: {
+          connectionName: "wcmsStaged",
+        },
+        profiles: {
+          frameworkdocs: {
+            enabled: true,
+          },
+          axisdocs: {
+            enabled: true,
+          },
+          kickoffdocs: {
+            code: "kickoffdocs",
+            type: "DOCUMENTATION_BUNDLE",
+            owner: "nodics.kickoff",
+            applicationCode: "axis",
+            siteCode: "kickoffDocumentationSite",
+            baselineCode: "kickoffdocs",
+            contentPackCode: "kickoffDocumentation",
+            presentation: {
+              title: "Nodics Kickoff Documentation",
+              kind: "DOCUMENTATION",
+              category: "documentation",
+              order: 500,
+              summary:
+                "Reference-project documentation content pack and Online delivery profile.",
+              requiredServers: [
                 "Platform",
                 "WCMS Staged",
                 "WCMS Online",
-                "Process"
+                "Process",
               ],
-              "activationPolicy": {
-                "approvalRequiredForOnline": true,
-                "requiredDataTrigger": "USER",
-                "sampleDataTrigger": "USER"
-              }
-            }
-          }
-        }
-      }
-    }
+              activationPolicy: {
+                approvalRequiredForOnline: true,
+                requiredDataTrigger: "USER",
+                sampleDataTrigger: "USER",
+              },
+            },
+          },
+        },
+      },
+    },
   },
-  "backofficeFunctionalModuleActivationData": {
-    "runtimeRoleProfiles": {
-      "PLATFORM": {
-        "modules": {
+  backofficeFunctionalModuleActivationData: {
+    runtimeRoleProfiles: {
+      PLATFORM: {
+        modules: {
           "nodics.commerce": {
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
+            dataPackages: {
+              $config: "replace",
+              value: [
                 {
-                  "code": "store:core-reference",
-                  "targetModule": "store",
-                  "targetServer": "commerceServer"
-                }
-              ]
-            }
+                  code: "store:core-reference",
+                  targetModule: "store",
+                  targetServer: "commerceServer",
+                },
+              ],
+            },
           },
           "nodics.rulesEngine": {
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
+            dataPackages: {
+              $config: "replace",
+              value: [
                 {
-                  "code": "rulesApi:rulesPolicyApproval",
-                  "targetModule": "workflow",
-                  "targetServer": "processServer"
-                }
-              ]
-            }
+                  code: "rulesApi:rulesPolicyApproval",
+                  targetModule: "workflow",
+                  targetServer: "processServer",
+                },
+              ],
+            },
           },
           "nodics.loyalty": {
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
+            dataPackages: {
+              $config: "replace",
+              value: [
                 {
-                  "code": "loyaltyCore:core-enterprise-reference",
-                  "targetModule": "profile",
-                  "targetServer": "platformServer",
-                  "targetDatabase": {
-                    "$config": "runtime",
-                    "name": "platformServer",
-                    "path": "database.default.mongodb.master.databaseName"
-                  }
-                }
-              ]
-            }
+                  code: "loyaltyCore:core-enterprise-reference",
+                  targetModule: "profile",
+                  targetServer: "platformServer",
+                  targetDatabase: {
+                    $config: "runtime",
+                    name: "platformServer",
+                    path: "database.default.mongodb.master.databaseName",
+                  },
+                },
+              ],
+            },
           },
           "nodics.waste": {
-            "dataPackages": {
-              "$config": "replace",
-              "value": [
+            dataPackages: {
+              $config: "replace",
+              value: [
                 {
-                  "code": "wasteCore:core-reference",
-                  "targetModule": "profile",
-                  "targetServer": "platformServer",
-                  "targetDatabase": {
-                    "$config": "runtime",
-                    "name": "platformServer",
-                    "path": "database.default.mongodb.master.databaseName"
-                  }
+                  code: "wasteCore:core-reference",
+                  targetModule: "profile",
+                  targetServer: "platformServer",
+                  targetDatabase: {
+                    $config: "runtime",
+                    name: "platformServer",
+                    path: "database.default.mongodb.master.databaseName",
+                  },
                 },
                 {
-                  "code": "wasteCollection:sample-profile-addresses",
-                  "targetModule": "profile",
-                  "targetServer": "platformServer",
-                  "targetDatabase": {
-                    "$config": "runtime",
-                    "name": "platformServer",
-                    "path": "database.default.mongodb.master.databaseName"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
+                  code: "wasteCollection:sample-profile-addresses",
+                  targetModule: "profile",
+                  targetServer: "platformServer",
+                  targetDatabase: {
+                    $config: "runtime",
+                    name: "platformServer",
+                    path: "database.default.mongodb.master.databaseName",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  },
 };

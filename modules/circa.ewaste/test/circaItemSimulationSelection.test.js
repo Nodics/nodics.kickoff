@@ -26,7 +26,7 @@ test("native Local explicitly selects simulation while Docker and framework defa
     const native = loadRuntime(server, "kickoffLocal");
     const docker = loadRuntime(server, "kickoffDockerLocal");
     assert.equal(native.environment.class, "LOCAL");
-    assert.equal(native.promotion.merchantBenefits.itemEvidenceMode, "LOCAL_SIMULATION");
+    assert.equal(native.promotion.merchantBenefits.itemEvidenceMode, "SIMULATION");
     assert.equal(native.promotion.merchantBenefits.itemEvidenceService, "DefaultFulfillmentItemSimulationService");
     assert.equal(native.promotion.merchantBenefits.qualified, server === "commerceServer");
     assert.deepEqual(native.fulfillmentCore.itemSimulation.environmentAllowlist, ["kickoffLocal"]);

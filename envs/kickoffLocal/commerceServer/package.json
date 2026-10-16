@@ -6,6 +6,9 @@
   "main": "nodics.js",
   "description": "Reference customer full Commerce server.",
   "nodics": {
+    "runtimeConfigurationContributions": [
+      { "moduleName": "eWaste", "namespace": "digitalCore", "runtimeRole": "COMMERCE" }
+    ],
     "kind": "server",
     "extends": [
       "nodics.discovery",

@@ -1,15 +1,14 @@
 module.exports = {
   // Controlled local qualification; retained Media forbids physical cleanup.
-  "media": {
-    "publication": {
-      "versionProviderEnabled": true,
-      "runtimeRole": "ONLINE",
-      "source": { "connectionName": "cmsStaged" }
-    }
+  media: {
+    publication: {
+      versionProviderEnabled: true,
+      source: { connectionName: "cmsStaged" },
+    },
   },
-  "activeModules": {
-    "groups": [],
-    "modules": [
+  activeModules: {
+    groups: [],
+    modules: [
       "redisCache",
       "search",
       "elastic",
@@ -29,59 +28,52 @@ module.exports = {
       "nodics.kickoff",
       "kickoffCore",
       "kickoffApi",
-      "kickoffInt"
-    ]
+      "kickoffInt",
+    ],
   },
-  "runtimeRole": {
-    "code": "WCMS_ONLINE",
-    "publication": "ONLINE"
+  runtimeRole: {
+    code: "WCMS_ONLINE",
+    publication: "ONLINE",
   },
-  "runtimeAuthorityContexts": {
-    "modules": {
-      "cms": true,
-      "editorial": true,
-      "media": true,
-      "publish": true,
-      "wcmsExperience": true,
-      "discoveryConfig": true,
-      "discoveryMapping": true,
-      "discoveryProjection": true,
-      "discoveryPublication": true,
-      "discoveryQuery": true,
-      "discoveryRanking": true,
-      "discoveryRuntime": true,
-      "discoverySource": true
+  runtimeAuthorityContexts: {
+    modules: {
+      cms: true,
+      editorial: true,
+      media: true,
+      publish: true,
+      wcmsExperience: true,
+      discoveryConfig: true,
+      discoveryMapping: true,
+      discoveryProjection: true,
+      discoveryPublication: true,
+      discoveryQuery: true,
+      discoveryRanking: true,
+      discoveryRuntime: true,
+      discoverySource: true,
     },
-    "default": "wcms.online"
+    default: "wcms.online",
   },
-  "database": {
-    "default": {
-      "mongodb": {
-        "master": {
-          "URI": "mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal",
-          "databaseName": "kickoffLocalWcmsOnline"
-        }
-      }
-    }
+  database: {
+    default: {
+      mongodb: {
+        master: {
+          URI: "mongodb://127.0.0.1:27017/?replicaSet=nodicsLocal",
+          databaseName: "kickoffLocalWcmsOnline",
+        },
+      },
+    },
   },
-  "cms": {
-    "publication": {
-      "enabled": true,
-      "runtimeRole": "ONLINE"
-    }
+  cms: {
+    publication: {
+      enabled: true,
+    },
   },
-  "editorial": {
-    "publication": {
-      "runtimeRole": "ONLINE",
-      "targetTransportProvider": null
-    }
+  servers: {
+    default: {
+      endpoint: {
+        httpPort: 4314,
+        httpsPort: 4315,
+      },
+    },
   },
-  "servers": {
-    "default": {
-      "endpoint": {
-        "httpPort": 4314,
-        "httpsPort": 4315
-      }
-    }
-  }
 };

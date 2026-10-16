@@ -12,8 +12,9 @@ enterprise. Binding admission targets Waste's read-only listing plan through
 normal Module runtime authentication; do not forward caller/system auth. These
 sale admission is selected for reviewed native-Local connected acceptance only.
 Its qualified flag never replaces installed owner or original financial checks
-and does not establish executed financial acceptance. Keep permissions
-in the existing replacement list and preserve all remote-module declarations.
+and does not establish executed financial acceptance. Keep rights in the
+module-owned Profile-managed packs and governed assignments; preserve exact
+deployment coordinates and remote-module declarations independently.
 
 The human approved native-Local `waste.asset.sale.transfer` for this deployment.
 Keep it confined to the existing signed deployment grant; it is not employee
@@ -38,6 +39,17 @@ admission used by protected financial targets. Native Local's four literal
 enterprises are selected at the environment layer; source authorization and
 stored activation identity remain mandatory before target mutations.
 
+Pricing Online's existing `sourceAuthority` selects only the original Local
+Commerce Staged publisher through its exact eight-field deployment caller pin.
+Preserve connection, role, namespace and business-enterprise selections. Waste's
+separate read scope must never enter this publication writer mapping.
+
+The Local environment's COMMERCE profile owns Store placement API exposure;
+do not place `apiExposure` in this server's properties. This server pins the exact original Staged
+caller, bounded to `circaMainStore` / `GREENPERKS_ONLINE`. Preserve the private
+generated read admission, signed identity and double fresh read. No generic
+schema bypass, Store writes, extra placement, seed copying or import is implied.
+
 - Follow the Nodics Kickoff project contract from the repository root `AGENTS.md`.
 - Follow every ancestor `AGENTS.md` before changing this server boundary.
 - This package owns only the responsibilities declared in `package.json.nodics.owns`.
@@ -48,7 +60,8 @@ This Local deployment declares a distinct runtime instance and an environment
 reference for its retained service proof. Profile must hold the corresponding
 service principal and approved deployment grant before startup. Missing proof
 fails closed; never replace it with the shared bootstrap or administrator key.
-Native-Local Profile bootstrap may reconcile its own active configured grants
-and generated proof. Revoked, disabled, differently owned and non-Local grants
-remain operator-owned. Reward-payment scopes belong only to this runtime's
-explicit permission pin; test inherited startup permissions and sibling denials.
+Optional demo assignment data may bind the selected deployment on first install;
+later changes require authorized Profile operations. Startup validates retained
+authority without restoring revoked or disabled grants. Reward-payment rights
+come from owner-defined access packs and this runtime's governed assignment,
+not server permission properties; test exact assignment scope and sibling denials.

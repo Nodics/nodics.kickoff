@@ -1,0 +1,38 @@
+{
+  "contractVersion": 2,
+  "module": "kickoffCore",
+  "sections": {
+    "nativeRuntimeAssignments": {
+      "kind": "DATA_RELEASE",
+      "dataType": "init",
+      "sourceRoot": "init-v001",
+      "version": "0.0.2",
+      "displayName": "Reviewed native runtime assignments",
+      "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; never runs at startup.",
+      "owningDomain": "profile",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "init-v001/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
+        "init-v001/runtime-assignments/records/nativeRuntimeAssignmentData.js": "d6621d1c423351be49ea67415f2ffc1870e97f38fced277336286cd55e26c9fc"
+      },
+      "prerequisites": [
+        {
+          "moduleName": "profile",
+          "sectionCode": "init-v001",
+          "version": "0.0.3",
+          "checksum": "2d5fe908c8040c109ccc71fdb2b2cad7e32a522fbe7cb627765ebf715a362c35"
+        }
+      ]
+    }
+  }
+}

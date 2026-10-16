@@ -1,5 +1,8 @@
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 "use strict";
+// Frozen reviewed fixture, not deployed authority or configuration-derived access.
+const runtimePermissions = require("./fixtures/kickoffNativeRuntimePermissions.json");
+
 /** @module kickoff/test/circaMonetaryNativeAdoption @description Checks approved native admission selections, never installed financial qualification. @owner nodics.kickoff @layer test */
 const test = require("node:test"), assert = require("node:assert/strict");
 const { loadRuntime } = require("./helpers/configuration");
@@ -20,7 +23,7 @@ test("monetary admission retains the exact original Commerce runtime and three r
   assert.equal(p.promotion.merchantBenefits.qualified, true);
   assert.equal(p.promotion.merchantBenefits.pricedSource.qualified, true);
   assert.equal(p.promotion.merchantBenefits.pricedSource.allowInsecureLoopback, true);
-  assert.equal(p.promotion.merchantBenefits.itemEvidenceMode, "LOCAL_SIMULATION");
+  assert.equal(p.promotion.merchantBenefits.itemEvidenceMode, "SIMULATION");
   assert.equal(p.digitalCore.merchantRedemption.pricedProvider.qualified, true);
   assert.equal(p.databaseTransactions.enabled, true);
   assert.equal(p.databaseTransactions.failClosed, true);
@@ -33,6 +36,6 @@ test("monetary selection does not enable Docker or sibling owner integrations", 
     assert.notEqual(p.pricing?.merchantEvidence?.businessCallers?.enabled, true);
     assert.notEqual(p.apiExposure.categories.commerceMerchantPricing?.enabled, true);
     assert.notEqual(p.digitalCore?.merchantRedemption?.pricedProvider?.qualified, true);
-    assert.equal(p.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.includes("commerce.pricing.merchant.evidence"), false);
+    assert.equal((environment === "kickoffLocal" ? runtimePermissions[server] : []).includes("commerce.pricing.merchant.evidence"), false);
   }
 });

@@ -1,13 +1,67 @@
-## Unified v001 Demo Dataset
+# Circa Reference Composition
 
-Circa now exposes one pre-launch `v001` demo dataset. The active manifest selects
-`0.0.1` from `sample-v001` for Profile, Operations, Location, Waste, Loyalty,
-Store, Commerce, issuer-specific setup instructions and Content, and `0.0.1` from `core-v001` for
-workspace records. Circa Waste policy remains `0.0.1` under `core-v001` because
-nImport source-key composition requires the same lower-layer eWaste core source
-root before Circa policy overrides can win. Profile still owns tenant,
-enterprise, credentials and eligibility checks; Commerce still owns coupon
-issuance and inventory admission.
+`circa.ewaste` owns demo data/composition ONLY: reference identity, branding,
+content, optional demo records and explicit composition selections. Reusable
+behavior, defaults and access definitions belong to their existing implementing
+framework or eWaste owners. Profile owns standard bootstrap users, access mechanics
+and runtime assignments; modules contribute their own permissions and business-area
+definitions. Demo identities/accounts/assignments are optional Kickoff data.
+
+Axis presents business area + No access / View / Edit / Full control + Scope.
+Full control never bypasses approval, ledger/financial rules, simulation gates or
+tenant isolation. The authorized refactor has no backwards compatibility or new
+catch-all authority; genuine partner projects retain supported customization.
+Documentation and business releases are independently selected and governed.
+See [AGENTS.md](AGENTS.md) for the standing ownership contract. This guidance update
+does not establish completed source migration or current installed readiness.
+
+## Historical v001 Demo Dataset And Adoption Evidence
+
+The dataset details, named accounts, role-pack ordering and previous setup below
+describe the existing demonstration baseline. Preserve their evidence and installed
+receipts; they do not mandate legacy access definitions or authorize data replay.
+The refactored source uses owner-contributed definitions and optional demo
+assignments. Current installed state requires separate authorized verification.
+
+Current source selects `waste-policy` and `customer-workspace` at `0.0.2` from
+`sample-v001`, independently of framework-owned core references. Policy samples
+are materialized records, not partial overrides composed from a Circa core lane.
+Old core selections survive only in historical evidence and receipts, never as
+current import instructions. Other demo sections keep their own manifest versions;
+do not infer one dataset-wide version. Profile still owns tenant, enterprise,
+credentials and eligibility checks; Commerce owns coupon issuance and inventory
+admission. Source changes do not establish installed adoption.
+
+### Deployment Portability
+
+Release `environmentScope: ["ALL"]` makes the same source packs discoverable
+across environments through nImport's existing contract. It does not import
+them automatically or authorize any operation. Each environment selects its
+setup profile, providers and policies through normal configuration inheritance;
+server layers retain exact runtime identity and deployment selections. Profile's
+`profileTenantProvisioning.runtimeRemoteModuleExtensions` selects remote-only
+namespace adoption, while default-false
+`identityGovernance.migration.runtimeDeploymentBootstrapEnabled` explicitly
+selects deployment bootstrap. Neither selector supplies permissions. Permission
+definitions and roles come from implementing-owner data packs; runtime grants
+are governed Profile `principalScopeAssignment` data with exact deployment
+coordinates. The explicit `kickoffCore:nativeRuntimeAssignments` pack describes
+only the reviewed native deployment, not a template grant for other environments.
+Startup validates retained authority without restoring permissions, credentials
+or lockouts. Subsequent access changes require governed Profile/Axis operations;
+configuration changes never rewrite tenant namespace ceilings or assignments.
+Production deployments can disable sample operations through the existing
+`data.dataReleases.types.sample` configuration. Never adopt demo credentials or
+fictional credit, stock or fulfillment into a real customer deployment.
+
+Simulation remains disabled by default, explicitly deployment-allowlisted and
+unverified. A hosted demo must select its own environment name and reviewed
+provider settings; copying a Local qualification flag is not qualification.
+Existing codes containing `Local`, including role, release, product and policy
+identifiers, are retained immutable references, not environment predicates.
+Changing them would break installed assignments, receipt pins and transactions.
+Payload versions/checksums, prior observations and completed demo evidence are
+unchanged; no data replay is needed for this configuration refactor.
 
 The retired `circa.ewaste:commerce-operational` snapshots are replaced with three
 issuer-specific budget packs and three subsequent issuance packs. They adopt the
@@ -16,14 +70,14 @@ nine exact monetary budgets and 29 exact ITEM bundles. Each issuance pack pins
 its original budget admission; current consent, signed Profile authority,
 retained publication and installed persistence qualification remain mandatory.
 Separate issuer review instructions require ISSUED_COUPON_BENEFIT_V1 through
-the existing signed consent command. No grant is imported. The explicit Local-only
+the existing signed consent command. No grant is imported. The explicit
 WASTE pack `circa.ewaste:circaDigitalOwnershipPolicies` carries the reviewed
 original-sale refund, complete seller proceeds and no-carbon policies before
 five genuine asset sales; it supplies no sale events or binding receipts.
 See [the ordered setup contract](llm/contracts/circa-promotion-setup.md).
 
 The approved fictional monetary outlet pack adds four ordinary goods, nine
-explicit Local-only sections and fourteen governed publication roots. Native
+explicit sections and fourteen governed publication roots. Native
 Platform exposes its preparation, issuer publication and first-intake stages in
 the same Circa setup. See [source checksums and operator commands](llm/contracts/circa-monetary-outlet-pack.md).
 
@@ -47,27 +101,70 @@ stock. Both locales retain digital classification. The five asset offers require
 the independent Digital ownership/eWaste binding, policies and installed owner
 qualification; a coupon-only owner must refuse them, never use physical stock.
 
-The demo includes seven enterprises, fourteen scoped staff, four redemption
+The demo includes seven enterprises, fourteen partner staff plus seven operational
+staff (twenty-one total), three customer personas, four redemption
 outlets and thirty-five GreenPerks offers on top of the original customer-facing
 assets and coupon cards. See the framework-owned Circa guide in
 `nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/data/docs-v001/records/documentation/circaDocumentationComponentData.js`
 and read [the application contract](llm/contracts/circa-application.md) before
 preparing or recovering an installed environment.
 
-## Circa customer backend
+### Predefined Demo Accounts
+
+Use the existing `circa-customer`, `circa-seller` and `circa-recipient` personas
+from the `profile` pack and staff from `operations`; obtain existing credentials
+only through the authorized private owner/handoff, never this README. Isolated
+new-account registration is a separate onboarding case, not a prerequisite for
+testing the predefined demo. Sample import is fresh-setup-only; never replay
+identity snapshots or reset completed transactions to recover a login.
+
+Use `circa-integrated-administrator` in CIRCA_INTEGRATED_SERVICES for the twenty-one
+seeded submission fixtures, including five originally pending examples. Its
+existing role permits verification and decisions under the unchanged owner policy;
+mark simulated facts explicitly, never treat artwork as physical custody.
+`circa-integrated-operator` sees the same fixtures but has read-only review access.
+The separate verifier/approver/centre operator remain scoped to YOU_AND_CO, which
+has no seeded Circa submissions. Default administrator/auditor review scopes also
+match no seeded points. Empty views are valid isolation checks, not permission to
+widen a scope; source fixture counts are not current installed business counts.
+
+Local setup explicitly selects the four Profile Commerce role packs before
+`circaCommerceStaffAssignments`, which augments seven existing staff, plus
+`circaMerchantOutletAccess` for the four exact outlets. Credit/opening roles and
+their additive staff packs are required before-publication selections in the
+current Local setup. Role data precedes its assignment and `operations` precedes
+employee augmentation; assignment imports do not replace credentials or authorize
+publication, credit or stock commands by themselves. The unused-refund-exception
+role/staff packs are **not** selected by that setup: they require separate explicit
+Local selection, role before staff after the original employee exists. Do not
+replay the completed financial demo to exercise them. Read the existing
+[opening-role](llm/contracts/circa-local-opening-human-roles.md) and
+[unused-refund](llm/contracts/circa-local-unused-refund-exception.md) contracts.
+
+Run `node --test modules/circa.ewaste/test/circaDemoDataset.test.js` for predefined
+persona/permission/scope/fixture coverage and selected role-pack ordering,
+payload freshness and sealed setup observation. These are source checks, not
+installed grants, balances, physical treatment or full E2E qualification.
+
+## Reference Composition And Owner Journeys
 
 `circa.ewaste` composes the Circa website over the reusable `eWaste` domain
-accelerator. It owns application identity, presentation, registration/contact
-adapters, sample valuation and deployment deltas, plus governed sample content.
+accelerator. It owns reference identity, presentation values, acceptance fixture
+inputs, release/scenario selections and governed sample content. Deployment
+configuration owns operational valuation, provider and simulation selections.
+Profile and the
+implementing framework/eWaste owners own registration, contact, channel and
+reusable journey behavior.
 
-Its site API `/nodics/circa.ewaste/v0` serves experience, registrations, contact and Telegram launch validation.
-Domain journeys use `/nodics/eWaste/v0`. Owning frameworks keep submissions,
+The historical site API `/nodics/circa.ewaste/v0` is superseded in the authorized
+refactor; current consumers must use the implementing owners' canonical APIs,
+without a compatibility route or adapter. Domain journeys use eWaste. Owning frameworks keep submissions,
 assets, wallets, orders, coupons, media and locations. Sample records are
-intended for fresh local and local-production-simulation setup; they must not be
+intended for explicitly selected fresh demonstration deployments; they must not be
 reimported over real transaction history.
 
-The EXPLICIT `waste-policy` 0.0.1 release consumes neutral eWaste 0.0.1 through
-nImport source-key inheritance while retaining Circa identifiers and policy.
+The EXPLICIT `waste-policy` 0.0.2 sample contains complete demo policy records.
+Neutral eWaste 0.0.1 remains a separate core reference selection.
 The required `waste` 0.0.1 sample contains no taxonomy/profile writes and is for
 separately verified fresh environments only.
 See [source and installed adoption boundaries](llm/contracts/circa-application.md#existing-data-compatibility).
@@ -78,7 +175,7 @@ The old empty-draft creation route is rejected. Closing before analysis succeeds
 cancels preparation; a failed replacement retains the previously saved item.
 Drafts remain separate from submitted items in the customer workspace.
 
-Run `npm test` for project adapters and configuration. See
+Use focused reference composition checks and implementing-owner tests. See
 the framework-owned Circa connected journey guide and
 [application contracts](llm/contracts/README.md) for configuration and acceptance.
 
@@ -94,22 +191,23 @@ Published page composition and artwork are delivered from WCMS Online. The
 Profile-owned scopes; see the guide's operational-role matrix before assigning
 staff or running approval acceptance.
 
-The shared submission now applies permission-aware fresh arrival and automatic
-photo analysis through project policy adapters. Web browser acceptance is recorded
+The eWaste owner supplies permission-aware fresh arrival and automatic photo
+analysis; the reference supplies composition inputs only. Historical Web acceptance is recorded
 in the guide; durable Telegram identity links, source notifications, rich metadata
 and full review-history contracts remain pending. The `/telegram` shell is not
 actual Telegram end-to-end qualification.
 
 Location recovery distinguishes unavailable and expired readings. Desktop capture may fall back to browser geolocation; arrival requires fresh usable coordinates and direct distance within the configured inclusive radius. Accuracy is optional observation metadata, never an arrival gate. A failed check preserves saved evidence and cannot confirm arrival.
 
-The `customer-workspace` core release adds `/account/waste` WCMS composition for
+The `customer-workspace` 0.0.2 sample release adds `/account/waste` WCMS composition for
 customer listing, Quick view and full item detail, with no transactional samples.
 It owns the banner, labels and detail section order. Customer initialization
 includes this release before publishing the Circa site. Existing installations
-install only `circa.ewaste:customer-workspace` into WCMS Staged, then create and
-validate a `cms` / `pageRoute` publication for `circaWasteWorkspaceRoute` using
-its actual saved source version. Request approval and complete the normal Process
-review to activate Online; do not reimport the old sample ownership/ledger data.
+require separately authorized owner reconciliation of retained versions, source
+checksums and ownership before selecting a forward release. Source selection alone
+does not adopt unowned CMS records. Any later publication uses the actual saved
+`circaWasteWorkspaceRoute` version and normal Process approval; do not reimport
+the old sample ownership/ledger data or reopen completed demonstration work.
 
 The frontend renderer is shared by web, mobile and Telegram. eWaste supplies
 owner-scoped pagination, details and domain actions, while the canonical Waste
@@ -120,22 +218,35 @@ Circa selects the eWaste OpenAI environmental assessment provider first, with th
 
 The framework-owned Circa Shop and Coupons catalogue guide describes public product browsing, the supported Circa discovery extension, ownership boundaries and reference deployment limits. Select the eWaste `referenceDocumentation` content pack independently of business data; this module does not duplicate those CMS records.
 
-The Circa setup profile prepares its Location map foundation, Waste presets,
+The explicitly selected complete Circa demo prepares its Location map foundation, Waste presets,
 collection centres, Commerce Staged catalogue and published website. Demo customer
-profiles, operator access, reward wallets and Commerce operations are required
-parts of the same USER-triggered initialization, not separately branded modes.
+profiles, operator assignments, reward wallets and Commerce fixtures are requirements
+of that optional demo selection only. Standard Profile bootstrap and access
+administration must work without the demo; reusable access definitions are
+module-owned contributions, not Circa role packs.
 Owner prerequisites must pass; missing ones keep the demo blocked.
 A published website does not establish customer or reward readiness.
 See the [application contract](llm/contracts/circa-application.md) for the setup sequence.
-These sample releases are limited to Local and Local Production Simulation.
+These sample sources are environment-portable; deployment selection and owner
+admission remain mandatory.
 Commerce publication remains separately governed within the coordinated setup
 action; website publication does not activate a Commerce catalogue.
 Reinitializing sample operational data is for fresh local
 qualification environments, never a production-data refresh.
 
-Keep the canonical router and utility registry files even when empty. They are
-inherited extension points, not copied framework implementations. `package.json`
-`nodics.owns` must reflect actual source responsibilities, including `utility`.
-See `llm/examples/README.md` for customer extension and rejection examples.
+Remove superseded reference adapters, routes and ownership metadata during the
+authorized source refactor. Empty compatibility scaffolding is not required.
+Real partner modules retain supported customization through the existing hierarchy.
 
-Impact assessment is mandatory in the eWaste journey. Circa returns the domain-prepared assessment and propagates provider/profile failures for retry; it must not convert them into an empty ready draft. Partial input-only coverage remains explicit and does not imply carbon calculation.
+Operational selections are deployment-owned in `envs/kickoffLocal/config/properties.js`
+and `envs/kickoffDockerLocal/config/properties.js`, scoped by runtime role. This
+content pack keeps only identity, branding, presentation, acceptance fixtures and
+explicit release composition. It does not configure valuation rates, safety policy,
+provider credentials, shipping, publication automation or capability enablement.
+Profile owns credential validation metadata; environment profiles bind logical
+credential references without redefining that authority. The resolved-policy
+regression covers all twenty Native/Docker runtimes, including unselected roles.
+
+Impact assessment is mandatory in the eWaste owner journey. Reference consumers
+preserve domain-prepared assessment and provider/profile failures for retry;
+partial input-only coverage remains explicit and does not imply carbon calculation.

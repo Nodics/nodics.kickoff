@@ -12,11 +12,11 @@ documentation pack is running:
 
 | Audience | Guide |
 | --- | --- |
-| New developer or administrator | [Local setup to live](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
-| Developer configuring backends | [Local runtime](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) and [configuration inheritance](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
-| Developer or QA verifying changes | [Local acceptance checklist](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
-| Operator managing publication | [Local publishing operations](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
-| Architect or release owner | [Deployment qualification](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js) |
+| New developer or administrator | [Local setup to live](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js) |
+| Developer configuring backends | [Local runtime](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js) and [configuration inheritance](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js) |
+| Developer or QA verifying changes | [Local acceptance checklist](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js) |
+| Operator managing publication | [Local publishing operations](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js) |
+| Architect or release owner | [Deployment qualification](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js) |
 
 After governed documentation publication, use Axis Documentation > Nodics
 Kickoff > Run Kickoff Locally, or search for "Local acceptance checklist".
@@ -29,9 +29,28 @@ Nodics maintains framework capabilities and domain accelerators; reusable
 improvements go through the separate Nodics contribution/request and release
 channel. Follow `AGENTS.md` and the resolved framework's canonical
 `nodics.foundation/modules/nSetup/llm/contracts/customer-project-mode-contract.md`.
-For an e-waste project, use `circa.ewaste` as a reference to create your own
-application identity and consume `eWaste` and `nodics.waste` through supported
-contracts.
+Circa and Agora reference extensions are demo data/composition ONLY. They retain
+reference identities, branding, content, optional sample records and explicit
+composition selections. Reusable behavior, defaults and access definitions belong
+to the existing implementing framework module or accelerator. Genuine partner
+projects remain extensible: an e-waste partner can create its own application and
+customize `eWaste` and `nodics.waste` through supported contracts.
+
+Profile owns standard bootstrap users, access mechanics and runtime assignments;
+implementing modules contribute permissions and business-area access definitions.
+Axis presents business area + No access / View / Edit / Full control + Scope,
+resolved by Profile and enforced by backend owners. Full control never bypasses
+approval, ledger/financial rules, simulation gates or tenant isolation.
+Demo identities, accounts and assignments are optional Kickoff data, not standard
+bootstrap prerequisites. A selected complete demo may require its declared
+fixtures. Documentation and business releases are independently selected and
+governed; neither silently imports the other or grants access.
+
+The authorized reference/access refactor has no backwards compatibility. Current
+consumers move to canonical owners and superseded adapters, routes and role aliases
+are removed. Preserve historical evidence and installed receipts; this source
+contract does not authorize replay or live migration. No new catch-all module or
+parallel authority is permitted.
 
 ```text
 nodics.kickoff/
@@ -165,7 +184,7 @@ paths. This keeps generated projects upgrade-safe: project facts stay in the
 project, while framework execution, validation, lifecycle, and upgrade behavior
 can evolve in `nodics.ai`.
 
-For Local verification, read the [Local acceptance checklist](data/docs-v001/records/documentation/kickoffDocumentationComponentData.js).
+For Local verification, read the [Local acceptance checklist](data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js).
 It is available before setup and through Axis after documentation publication.
 
 ### CI Framework Selection
@@ -268,9 +287,14 @@ Kickoff configuration follows the framework classification contract:
 - local shared environment defaults belong in `envs/kickoffLocal/config/`;
 - server topology, ports, server database names, and active module lists belong
   under each server config;
-- module-owned defaults such as `apiExposure`, import/export, media management,
-  provider defaults, permissions, limits, discovery flags, and tooling gates
-  belong in the owning framework or customer module;
+- reusable policy defaults such as `apiExposure`, import/export, media management,
+  provider defaults, limits, discovery flags, and tooling gates belong in the
+  implementing framework or reusable domain module; genuine customer modules
+  contribute only intentional policy differences;
+- permission definitions, roles and group-permission mappings are implementing
+  owner data packs under Profile governance, not configuration defaults. Grants
+  and assignments are governed Profile data; demo principals and assignments
+  remain explicitly selected project data. Properties never grant permissions;
 - project, environment, server, and node config files should contain only
   intentional deltas: topology, local coordinates, secret references, active
   runtime composition, or explicit enable/disable overrides;

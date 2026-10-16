@@ -49,12 +49,13 @@ budget and issuance stages remain required. All selected issuer publication
 roots must be CURRENT before that operator can select opening instructions.
 
 Axis uses the same Platform profile; the nine stages are not confined to a helper
-import script. Observation revision 4 seals 56 required stages through the owner
+import script. Current observation revision 5 seals 57 required stages through the owner
 `configuredSteps`, `stepIdentity`, nImport release inspection and profile digest.
-The original revision-2 and revision-3 bytes remain under
-`config/setup-observation/history/`. Revision 4 changes only the three
-never-installed goods catalogue source checksums; profile identity, other stage
-seals, role releases, publication plans and opening instructions stay unchanged.
+The original revision-2, revision-3 and revision-4 bytes remain under
+`config/setup-observation/history/`. Historical revision 4 changed only the three
+never-installed goods catalogue source checksums. Revision 5 selects the current
+owner access contributions and explicit demo/content successors for this refactor;
+historical stage seals are not descriptions of that new selection.
 This is a forward source selection, not a rewritten runtime journal or receipt.
 An already admitted older setup still needs normal reviewed plan adoption;
 never mutate its sealed profile or use a reset to bypass installed history.

@@ -191,7 +191,7 @@ test("canonical accelerator guides resolve the Store move and retain matching se
   const page = metadata.find(row => row.articleComponent === inventory.code);
   assert.equal(page.sourcePath, inventory.properties.source.sourcePath);
   assert.equal(page.sourceWordCount, inventory.properties.source.wordCount);
-  for (const name of ["circaLocalUnusedRefundExceptionRole", "circaLocalUnusedRefundExceptionStaffAssignment"])
+  for (const name of ["circaLocalUnusedRefundExceptionStaffAssignment"])
     assert(searches.find(row => row.code === page.searchMetadata).searchText.includes("circa.ewaste:" + name), name);
   const article = Object.values(components).find((row) => row.properties.code === "accelerators.circa-catalogue-reference");
   for (const boundary of ["circa.ewaste:store", "insertOnly", "CURRENT", "GREENPERKS_ONLINE"])

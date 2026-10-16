@@ -12,12 +12,12 @@
 "use strict";
 const test = require("node:test"),
   assert = require("node:assert/strict");
-const service = require("../src/service/defaultCircaEWasteJourneyService");
-const rawSettings = require("../config/properties").circaEWaste.journey;
+const service = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteJourneyService");
+const rawSettings = require("./helpers/deploymentPolicy").runtime().eWaste.journey;
 const settings = {
   ...require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/config/properties").eWaste.journey,
   ...rawSettings,
-  arrivalRadiusMetres: rawSettings.arrivalRadiusMetres.fallback,
+  arrivalRadiusMetres: rawSettings.arrivalRadiusMetres,
 };
 let draft, seen, centres;
 test.beforeEach(() => {
@@ -107,12 +107,12 @@ test("Circa retains its configured radius and public journey errors", () => {
   assert.equal(settings.arrivalRadiusMetres, 50);
   assert.equal(settings.maximumAccuracyMetres, undefined);
   for (const code of ["POSITION_INVALID", "POSITION_STALE", "ARRIVAL_REQUIRED", "JOURNEY_UNAVAILABLE"]) {
-    assert.equal(service.errorCode("ERR_EWASTE_" + code), "ERR_CIRCA_" + code);
+    assert.equal(service.errorCode("ERR_EWASTE_" + code), "ERR_EWASTE_" + code);
   }
   assert.equal(service.errorCode("ERR_WASTE_REVISION_CONFLICT"), "ERR_WASTE_REVISION_CONFLICT");
 });
 test("Circa permits the same employee to review and approve when both permissions are granted", () => {
-  const policy = require("../config/properties").waste.operations;
+  const policy = require("./helpers/deploymentPolicy").runtime().waste.operations;
   assert.equal(policy.requireScopes, true);
   assert.equal(policy.requireVerification, true);
   assert.equal(policy.requireDifferentApprover, false);
@@ -128,10 +128,10 @@ test("impact provider and profile failures cannot silently become a ready draft"
   }
 });
 
-test("adapter combines domain defaults with Circa policy and preserves branded origin", async () => {
+test("eWaste journey consumes deployment policy and preserves trusted branded origin", async () => {
   const domain = SERVICE.DefaultEWasteJourneyService;
   global.CONFIG = { get: (key) => key === "eWaste"
-    ? { journey: { ...settings, arrivalRadiusMetres: 100 } }
+    ? { journey: { ...settings, arrivalRadiusMetres: 50 } }
     : { journey: { arrivalRadiusMetres: 50 } } };
   assert.equal(service.settings().arrivalRadiusMetres, 50);
   assert.equal(service.settings().maximumPositionAgeMs, settings.maximumPositionAgeMs);
@@ -141,37 +141,30 @@ test("adapter combines domain defaults with Circa policy and preserves branded o
     return draft;
   };
   const origin = { channel: "TELEGRAM", applicationCode: "circa" };
-  await service.prepareSubmission({ authData: { circaOrigin: origin },
+  await service.prepareSubmission({ authData: { eWasteOrigin: origin },
     payload: { position: position(), origin: { channel: "FORGED" } } });
   assert.equal(forwarded.preparationOrigin, origin);
   assert.deepEqual(service.origin({ payload: { origin } }), { channel: "WEB" });
   assert.equal(domain.errorCode("ERR_EWASTE_POSITION_STALE"), "ERR_EWASTE_POSITION_STALE");
 });
 
-test("adapter uses later-loaded domain methods without changing shared service hooks", async () => {
-  const domain = SERVICE.DefaultEWasteJourneyService;
-  SERVICE.DefaultEWasteJourneyService = { ...domain, centres: async () => [] };
-  assert.equal((await service.previewArrival({ payload: { position: position() } })).nextAction, "TRAVEL");
-  assert.notEqual(domain.centres, SERVICE.DefaultEWasteJourneyService.centres);
-  assert.equal(domain.origin({ authData: { circaOrigin: { channel: "TELEGRAM" } } }).channel, "WEB");
-});
-
 test("experience and validation share inherited defaults and later customer overrides", async () => {
-  const experience = require("../src/service/defaultCircaEWasteExperienceService");
+  const experienceSource = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteExperienceService");
+  const experience = { ...experienceSource, settings: () => CONFIG.get("eWaste") };
   const defaults = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/config/properties").eWaste.journey;
   const customer = { ...settings };
   for (const key of ["maximumPositionAgeMs", "captureTimeoutMs", "nearestCentreCount"]) {
-    assert.equal(Object.hasOwn(rawSettings, key), false);
+    assert.equal(require("../config/properties").eWaste.journey, undefined);
     delete customer[key];
   }
-  CONFIG.get = (key) => key === "eWaste" ? { journey: defaults } : { journey: customer };
-  SERVICE.DefaultCircaEWasteJourneyService = service;
+  CONFIG.get = () => ({ journey: { ...defaults, ...customer } });
+  SERVICE.DefaultEWasteJourneyService = service;
   const now = Date.now();
   const assertProjection = async () => {
-    const projected = (await experience.experience({})).journey;
+    const projected = experience.publicJourney();
     const effective = service.settings();
-    assert.deepEqual(projected, { ...effective, reviewAssignment: undefined });
-    assert.equal(projected.contractVersion, rawSettings.contractVersion);
+    assert.deepEqual(projected, Object.fromEntries(Object.entries(effective).filter(([key]) => key !== "reviewAssignment")));
+    assert.equal(projected.contractVersion, defaults.contractVersion);
     assert.equal(projected.reviewAssignment, undefined);
     return projected;
   };
@@ -183,9 +176,9 @@ test("experience and validation share inherited defaults and later customer over
   const observation = { ...position(), capturedAt: now - 61000 };
   const before = structuredClone(draft);
   await assert.rejects(service.arrival({ expectedRevision: 1, payload: { position: observation } }),
-    { code: "ERR_CIRCA_POSITION_STALE" });
+    { code: "ERR_EWASTE_POSITION_STALE" });
   await assert.rejects(service.arrival({ expectedRevision: 1, payload: { position: { ...position(), latitude: 999 } } }),
-    { code: "ERR_CIRCA_POSITION_INVALID" });
+    { code: "ERR_EWASTE_POSITION_INVALID" });
   assert.deepEqual(draft, before);
   Object.assign(customer, { maximumPositionAgeMs: 120000, captureTimeoutMs: 18000,
     nearestCentreCount: 4, arrivalRadiusMetres: 125 });
@@ -204,15 +197,16 @@ test("experience and validation share inherited defaults and later customer over
   }));
   assert.equal((await service.previewArrival({ payload: { position: position() } })).centres.length, 4);
   customer.captureTimeoutMs = 0;
-  await assert.rejects(experience.experience({}), { code: "ERR_CIRCA_JOURNEY_UNAVAILABLE" });
-  assert.throws(() => service.position(position()), { code: "ERR_CIRCA_JOURNEY_UNAVAILABLE" });
+  assert.throws(() => experience.publicJourney(), { code: "ERR_EWASTE_JOURNEY_UNAVAILABLE" });
+  assert.throws(() => service.position(position()), { code: "ERR_EWASTE_JOURNEY_UNAVAILABLE" });
   assert.equal(defaults.captureTimeoutMs, 12000);
 });
 
-test("selected Waste configuration resolves inherited journey defaults and the environment radius binding", async () => {
+test("approved native 200m and application 50m radii retain inclusive boundaries and explicit environment overrides", async () => {
   const { loadRuntime, activeModuleNames } = require("../../../test/helpers/configuration");
-  const experience = require("../src/service/defaultCircaEWasteExperienceService");
-  SERVICE.DefaultCircaEWasteJourneyService = service;
+  const experienceSource = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteExperienceService");
+  const experience = { ...experienceSource, settings: () => CONFIG.get("eWaste") };
+  SERVICE.DefaultEWasteJourneyService = service;
   for (const [environment, variables, radius] of [
     ["kickoffLocal", {}, 200],
     ["kickoffDockerLocal", {}, 50],
@@ -222,13 +216,13 @@ test("selected Waste configuration resolves inherited journey defaults and the e
     assert(activeModuleNames(properties).includes("eWaste"));
     assert(activeModuleNames(properties).includes("circa.ewaste"));
     CONFIG.get = (key) => properties[key];
-    const projected = (await experience.experience({})).journey;
+    const projected = experience.publicJourney();
     assert.equal(projected.arrivalRadiusMetres, radius);
     assert.equal(projected.maximumPositionAgeMs, 60000);
     assert.equal(projected.captureTimeoutMs, 12000);
     assert.equal(projected.nearestCentreCount, 3);
-    assert.deepEqual(projected, { ...service.settings(), reviewAssignment: undefined });
-    for (const distance of [96, radius, radius + 0.01]) {
+    assert.deepEqual(projected, Object.fromEntries(Object.entries(service.settings()).filter(([key]) => key !== "reviewAssignment")));
+    for (const distance of [radius - 1, radius, radius + 0.01, radius + 1]) {
       const arrival = await service.previewArrival.call(
         { ...service, distance: () => distance },
         { payload: { position: position() } },

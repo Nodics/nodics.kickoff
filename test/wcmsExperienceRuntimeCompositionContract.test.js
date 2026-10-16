@@ -53,7 +53,10 @@ test('Local WCMS runtimes load WCMS Experience through WCMS plus Discovery modul
     for (const definition of runtimeDefinitions) {
         const packageJson = loadPackage(definition.server);
         assert.equal(packageJson.nodics.kind, 'server');
-        assert.deepEqual(packageJson.nodics.extends, ['nodics.wcms', 'nodics.discovery']);
+        assert.deepEqual(packageJson.nodics.extends, [
+            'nodics.wcms', 'nodics.discovery',
+            ...(definition.role === 'WCMS_STAGED' ? ['nodics.docs'] : [])
+        ]);
 
         const properties = loadProperties(definition.server);
         assert.equal(properties.runtimeRole.code, definition.role);

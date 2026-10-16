@@ -1413,3 +1413,14 @@ module.exports = {
     },
   },
 };
+
+
+// Explicit fresh-source ownership; never infer ownership for installed records.
+for (const record of Object.values(module.exports)) {
+    // These identities are shared with other Agora catalogs, not Apparel-owned.
+    if (['agoraOrderLifecyclePanel', 'agoraAccountCenter', 'agoraProductionGateSummary'].includes(record.code)) continue;
+    record.authoringScope = { enterpriseCode: 'default', catalogCode: 'agoraApparelContentCatalog' };
+    for (const placement of record.subComponents || []) {
+        if (placement && typeof placement === 'object') placement.authoringScope = { ...record.authoringScope };
+    }
+}

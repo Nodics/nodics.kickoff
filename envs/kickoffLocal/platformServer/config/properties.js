@@ -6,7 +6,7 @@
  * @override Later deployment layers may narrow application selections without replacing framework preparation or owner authorization.
  */
 module.exports = {
-  profileRuntimeEnterpriseResolution: {
+profileRuntimeEnterpriseResolution: {
     enabled: true,
     callers: { $config: "replace", value: [{
       tenant: "default", principalEnterpriseCode: "default", serviceId: "apiAdmin",
@@ -32,39 +32,11 @@ module.exports = {
     persistence: { enabled: true },
   },
   profileTenantProvisioning: {
-    localRuntimeRemoteModuleExtensions: ["commsApi"],
+    runtimeRemoteModuleExtensions: ["commsApi"],
   },
   identityGovernance: {
     migration: {
-      // Preserve the full canonical Platform permission set; add only exact-plan observation.
-      localRuntimeDeploymentGrantPermissions: {
-        $config: "replace",
-        value: [
-          "auth.internal.token.read",
-          "auth.internal.token.read.anyTenant",
-          "location.location.read",
-          "profile.address.reference.read",
-          "profile.enterprise.reference.read",
-          "communication.request",
-          "communication.verification.execute",
-          "profile.enterprise.search",
-          "profile.tenant.namespace.bind",
-          "profile.customer.register",
-          "loyalty.wallet.open",
-          "loyalty.wallet.read",
-          "media.evidence.read",
-          "media.customer.upload",
-          "media.customer.read",
-          "import.release.validate",
-          "import.core.run",
-          "publish.lifecycle.create",
-          "publish.lifecycle.view",
-          "publish.lifecycle.validate",
-          "publish.lifecycle.requestApproval",
-          "commerce.product.publish",
-          "publish.setup.observe"
-        ],
-      },
+      // Review opt-in only; persisted Platform grants remain Profile-owned data.
       assessment: {
         bootstrapReview: {
           enabled: {
@@ -201,38 +173,38 @@ module.exports = {
                     targetRuntimeRole: "PROCESS",
                   },
                   {
-                    code: "profile:commerceSetupPublisherRole",
+                    code: "product:accessGroups",
                     kind: "Enterprise-scoped Commerce setup publisher role",
                     required: true,
                     trigger: "USER",
-                    dataType: "core",
+                    dataType: "init",
                     targetServer: "platformServer",
                     targetRuntimeRole: "PLATFORM",
                   },
                   {
-                    code: "profile:commercePublicationStarterRole",
+                    code: "publish:accessGroups",
                     kind: "Existing Process start access for Commerce publication requesters",
                     required: true,
                     trigger: "USER",
-                    dataType: "core",
+                    dataType: "init",
                     targetServer: "platformServer",
                     targetRuntimeRole: "PLATFORM",
                   },
                   {
-                    code: "profile:commerceCouponIssuerRole",
+                    code: "promotion:accessGroups",
                     kind: "Enterprise-scoped coupon issuer role",
                     required: true,
                     trigger: "USER",
-                    dataType: "core",
+                    dataType: "init",
                     targetServer: "platformServer",
                     targetRuntimeRole: "PLATFORM",
                   },
                   {
-                    code: "profile:commerceAxisRefundReviewerRole",
+                    code: "order:accessGroups",
                     kind: "Axis access and refund review for predefined demo staff",
                     required: true,
                     trigger: "USER",
-                    dataType: "core",
+                    dataType: "init",
                     targetServer: "platformServer",
                     targetRuntimeRole: "PLATFORM",
                   },
@@ -341,13 +313,16 @@ module.exports = {
                     publicationPlan: require("../../../../modules/circa.ewaste/data/sample-v001/publication/loopcycle/records/publicationPlan.json"),
                   },
                   {
-                    "code": "circa.ewaste:circaLocalDemoCreditRole",
+                    code: "import:specialAccessRoles", kind: "Sample import responsibility", order: 119, required: true, trigger: "USER", phase: "BEFORE_PUBLICATION", dataType: "init", targetServer: "platformServer", targetRuntimeRole: "PLATFORM",
+                  },
+                  {
+                    "code": "loyaltyWallet:specialAccessRoles",
                     "kind": "Circa Local demo credit role",
                     "order": 120,
                     "required": true,
                     "trigger": "USER",
                     "phase": "BEFORE_PUBLICATION",
-                    "dataType": "sample",
+                    "dataType": "init",
                     "targetServer": "platformServer",
                     "targetRuntimeRole": "PLATFORM"
                   },
@@ -363,13 +338,13 @@ module.exports = {
                     "targetRuntimeRole": "PLATFORM"
                   },
                   {
-                    "code": "circa.ewaste:circaLocalOpeningRole",
+                    "code": "inventory:specialAccessRoles",
                     "kind": "Circa Local opening Inventory role",
                     "order": 122,
                     "required": true,
                     "trigger": "USER",
                     "phase": "BEFORE_PUBLICATION",
-                    "dataType": "sample",
+                    "dataType": "init",
                     "targetServer": "platformServer",
                     "targetRuntimeRole": "PLATFORM"
                   },

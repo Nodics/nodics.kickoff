@@ -8,23 +8,19 @@
 module.exports = {
   discoveryProjection: {
     discoveryDocumentProjection: {
-      typeName: "discoveryDocumentProjection",
       indexName: "kickofflocal_discoverydocumentprojection",
     },
   },
   product: {
     productLocalized: {
-      typeName: "productLocalized",
       indexName: "kickofflocal_productlocalized",
     },
     productSearchProjection: {
-      typeName: "productSearchProjection",
       indexName: "kickofflocal_productsearchprojection",
     },
   },
   commerceSearchCore: {
     commerceSearchRuleProjection: {
-      typeName: "commerceSearchRuleProjection",
       indexName: "kickofflocal_commercesearchruleprojection",
     },
   },

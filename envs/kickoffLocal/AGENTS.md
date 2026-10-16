@@ -1,5 +1,14 @@
 # Kickoff Local Agent Contract
 
+Local Product listing owner transports belong to this environment's
+`product.runtimeRoleProfiles.COMMERCE_STAGED`, and the Store placement exposure
+belongs to `apiExposure.runtimeRoleProfiles.COMMERCE`. Never place these capability
+namespaces in server properties or widen nTooling's classification gate. Exact
+Store caller/placement pins and signed instance coordinates stay with the runtime
+configuration or assignment data. Rights come from module-owned Profile-managed
+packs and governed Profile assignments, not server permission lists. Test canonical
+project validation as well as resolved scope before coordinated builds.
+
 - Follow the Nodics Kickoff project contract from the repository root `AGENTS.md`.
 - Follow every ancestor `AGENTS.md` before changing this group boundary.
 - This package owns only the responsibilities declared in `package.json.nodics.owns`.
@@ -10,6 +19,19 @@ Native Local Product discovery selects exact tenant/Store activation scopes for
 Circa and only composition-active Agora domains. This selection reads normally
 activated owner versions; it never publishes source data or qualifies another
 environment. Preserve independent policy delivery selections and receipts.
+
+Product owns Store identity, role, neutral transport and the 15000ms read timeout.
+eWaste owns its listing-intent integration descriptor; Commerce Staged selects it
+through package `runtimeConfigurationContributions` without activating eWaste.
+Retain connection and loopback differences in this environment, not standard
+implementation names or protocol defaults. Qualification remains independent.
+
+Product publication inherits its standard transport, logical identity and role
+defaults from Product. Retain connection aliases and signed caller restrictions;
+override a role profile only for an intentional deployment difference.
+The Local search overlay owns physical
+index names only. nSearch derives logical type names from the keyed owner
+definitions; preserve those keys and inherited mappings when changing isolation.
 
 Apparel's selected Promotion roots are exactly `agoraStylePass5PercentRule`,
 `agoraCapsuleEdit10PercentRule` and `agoraPrivateSale20PercentRule`, backed by the
@@ -24,9 +46,9 @@ equality assertion; this selection permits delivery lookup, not issuer consent,
 budget funding, issuance or provider qualification.
 
 Native Local explicitly selects `promotion.merchantBenefits.itemEvidenceMode:
-LOCAL_SIMULATION` with `DefaultFulfillmentItemSimulationService` and the
+SIMULATION` with `DefaultFulfillmentItemSimulationService` and the
 Fulfillment `itemSimulation` allowlist containing only `kickoffLocal`. The human
-approved local-demo simulation, not authenticated delivery or used-benefit
-reversals. nConfig derives LOCAL class from package metadata; do not author a
-second classification. Docker and framework defaults remain off. This selection
+approved demo simulation, not authenticated delivery or used-benefit
+reversals. Admission uses the existing explicit environment allowlist rather
+than a hardcoded environment class. Docker and framework defaults remain off. This selection
 does not qualify Store scopes, issuer consent, installed persistence or publication.

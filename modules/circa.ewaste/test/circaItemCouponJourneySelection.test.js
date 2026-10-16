@@ -37,7 +37,7 @@ test("fixture is nonimportable and every source pin matches existing immutable b
 });
 
 test("Circa run codes retain the actual Order policy prefix and owner-safe command boundaries without normalization", async () => {
-  const policy = require("../config/properties").order;
+  const policy = require("./helpers/deploymentPolicy").runtime("commerceServer").order;
   const dispute = require(path.join(frameworkRoot, "nodics.commerce/modules/checkout/modules/order/src/service/defaultOrderDisputeService"));
   const merchant = require(path.join(frameworkRoot, "nodics.commerce/modules/digitalCommerce/modules/digitalCore/src/service/defaultDigitalCommerceMerchantService"));
   const fail = message => { throw new Error(message); };

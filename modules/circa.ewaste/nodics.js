@@ -11,5 +11,5 @@
 
 'use strict';
 
-/** @module circa.ewaste/nodics @description Registers the Circa sample data and configured valuation contribution. @layer module @owner circa.ewaste */
+/** @module circa.ewaste/nodics @description Declares the inert Circa demo data module; reusable runtime behavior belongs to framework owners. @layer module @owner circa.ewaste */
 module.exports = {};

@@ -1,5 +1,36 @@
 # Agora Apparel data ownership
 
+## Reference Demo Inventory
+
+The maintainer-approved demo-only boundary supersedes the previous blanket
+no-relocation rule for this reference module. It does not restrict real partner
+customizations in their own modules. `nodics.referenceDemo: true` is checked by
+the existing nTooling design-principle audit and project validation command.
+
+- `src/`: absent. Reusable schemas, validation and projection services already
+  belong to `nodics.accelerators/modules/apparel` and their Commerce owners.
+- `config/properties.js`: explicit site/catalog/media selection, publication
+  baseline and BackOffice demo profile. These select USER-triggered setup and
+  retain normal publication approval; they do not own setup execution.
+- `nodics.js`, `config/prescripts.js`, `config/postscripts.js`: inert hooks only.
+- `data/sample-v001`: fictional catalog/content/media records and local record
+  assembly helpers. Helpers assemble this pack's records, not runtime services.
+  Manifest sections require EXPLICIT selection; no init/core activation data.
+- Access: no permission, role, user-group or runtime-assignment definitions.
+  Catalog `accessGroups` and page `accessMode` only reference existing authority.
+- No aliases, framework dependence on this pack, live import or receipt rewrite
+  is introduced. Source selection changes do not migrate an installed release.
+
+Apparel retains its reward-checkout fixture and opening/publication instructions.
+The selected deployment owns bounded Store refund/dispute and physical-operations
+opt-ins through runtime-role composition; this demo pack contributes neither
+`order` nor `fulfillmentCore` policy. Fulfillment owns the inherited
+`MANUAL_ATTESTATION` evidence default. Inventory, Promotion, Payment, Order and
+BackOffice own execution. Fixture reward precision/provider/program values are
+deliberate demo inputs, not generic defaults. Identity, contact and spending inputs
+remain external. Unselected domains must not inherit these deployment opt-ins.
+
+
 Commerce catalog release `0.0.1` (`sample-v001/commerce`) contains publishable catalog/policy
 records only. The pre-customer development iterations are consolidated. Coupons, coupon batches
 and stock balances are not imported to Staged. Stock receiving/opening and coupon

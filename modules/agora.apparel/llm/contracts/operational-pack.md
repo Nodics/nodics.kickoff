@@ -136,8 +136,9 @@ owner-checked reveal journey must still run before a coupon can discount checkou
 
 ## Reviewed reversal selection
 
-The application contributes `order.runtimeRoleProfiles.COMMERCE` selectors for
-the exact Store `agoraMainStore`. Order resolves that identity from retained
+The selected environment contributes `order.runtimeRoleProfiles.COMMERCE`
+selectors for the exact Store `agoraMainStore`, conditional on the Apparel
+composition. The demo module does not own operational enablement. Order resolves that identity from retained
 checkout evidence, never a caller's Store field. The selected physical owner is
 Fulfillment Core; digital purchases retain Digital Core ownership. This selection
 does not replace signed staff scope, the reviewed preview and original approval,
@@ -150,10 +151,11 @@ They must not broaden the selection to a shared storefront prefix or enable a
 real financial/carrier provider using an offline qualification flag. Local tests
 with simulator receipts are explicitly no-money demonstrations, not real refunds.
 
-The same selected application contributes
+The selected environment also contributes
 `fulfillmentCore.runtimeRoleProfiles.COMMERCE.physicalOperations` with
-`enabled: true` and `evidenceMode: MANUAL_ATTESTATION`. Framework defaults remain
-disabled. Normal staff scope, original retained Store, Order and consignment
+`enabled: true` only for the Apparel composition, inheriting
+`evidenceMode: MANUAL_ATTESTATION` from Fulfillment Core. Framework enablement
+defaults remain disabled. Normal staff scope, original retained Store, Order and consignment
 bindings still govern every command. The manual dispatch, return receipt and
 inspection routes are owner records, not carrier telemetry. Local synthetic
 fixtures must be labelled as such; they never qualify physical handover or goods.

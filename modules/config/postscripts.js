@@ -13,10 +13,10 @@
 
 /**
  * @module nodics.kickoff/modules/config/postscripts
- * @description Shared Nodics Kickoff project-module post-start script declarations.
+ * @description Preserves an empty post-start boundary for the non-runtime module group.
  * @layer config
  * @owner kickoffModules
- * @override Later active project modules may override these declarations through configuration layering.
+ * @override Do not add group startup behavior; genuine project hooks belong to selected child modules.
  */
 module.exports = {
 

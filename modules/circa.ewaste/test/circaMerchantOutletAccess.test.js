@@ -41,7 +41,7 @@ test("scope release is explicit native Local v001 and leaves installed operation
   assert.equal(section.sourceRoot, "sample-v001");
   assert.equal(section.selectionPolicy, "EXPLICIT");
   assert.equal(section.destinationRole, "PLATFORM");
-  assert.deepEqual(section.environmentScope, ["LOCAL"]);
+  assert.deepEqual(section.environmentScope, ["ALL"]);
   assert.equal(Object.keys(section.files).length, 2);
   for (const [file, checksum] of Object.entries({ ...section.files, ...manifest.sections.operations.files })) {
     assert.equal(createHash("sha256").update(fs.readFileSync(path.join(__dirname, "../data", file))).digest("hex"), checksum);

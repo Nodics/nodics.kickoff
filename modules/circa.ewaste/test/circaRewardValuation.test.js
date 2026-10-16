@@ -13,13 +13,13 @@
 /** @module circa.ewaste/test/circaRewardValuation @description Keeps customer rewards separate from WARM coefficients and issued credits, including unavailable assessments. @owner circa.ewaste @layer test */
 const { test, beforeEach, afterEach } = require("node:test");
 const assert = require("node:assert/strict");
-const valuation = require("../src/service/defaultCircaEWasteRewardValuationService");
+const valuation = require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteWeightRewardValuationService");
 let policy;
 beforeEach(() => {
   global.SERVICE = {
     DefaultEWasteWeightRewardValuationService: require("../../../../nodics.ai/nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteWeightRewardValuationService"),
   };
-  policy = { ...require("../config/properties").circaEWaste.rewardValuation };
+  policy = { ...require("./helpers/deploymentPolicy").runtime().eWaste.rewardValuation };
   global.CONFIG = { get: () => ({ rewardValuation: policy }) };
   global.CLASSES = {
     NodicsError: class extends Error {
@@ -38,30 +38,15 @@ afterEach(() => {
 test("invalid configured rates are rejected", () => {
   policy.pointsPerKg = -1;
   assert.throws(() => valuation.assess({}), {
-    code: "ERR_CIRCA_VALUATION_POLICY",
+    code: "ERR_EWASTE_VALUATION_UNAVAILABLE",
   });
 });
-test("Circa forwards the request, actual rates and compatibility bindings", () => {
-  const request = { asset: { code: "customer-asset" } };
-  const response = { selected: true };
-  SERVICE.DefaultEWasteWeightRewardValuationService = { assess: (received, configured, errors) => {
-    assert.equal(received, request);
-    assert.equal(configured, policy);
-    assert.equal(configured.version, "circa-weight-rewards-v2");
-    assert.equal(configured.programCode, "circa");
-    assert.equal(configured.pointsPerKg, 10);
-    assert.equal(configured.carbonUnitsPerEstimatedKg, 1);
-    assert.equal(configured.pointsRewardTypeCode, "points");
-    assert.equal(configured.carbonRewardTypeCode, "circaCarbon");
-    assert.deepEqual(errors, { policy: "ERR_CIRCA_VALUATION_POLICY", input: "ERR_CIRCA_VALUATION_INPUT" });
-    return response;
-  } };
-  assert.equal(valuation.assess(request), response);
+test("Circa selects configured rates through the framework valuation owner", () => {
+  const input = { asset: { metadata: { facts: { weight: 2 } } } };
+  const result = valuation.assess(input);
+  assert.equal(result.version, "circa-weight-rewards-v2");
+  assert.equal(result.rewards[0].programCode, "circa");
+  assert.equal(result.rewards[0].amount, "20.00");
   policy.pointsPerKg = 7;
-  SERVICE.DefaultEWasteWeightRewardValuationService.assess = (received, configured) => {
-    assert.equal(received, request);
-    assert.equal(configured.pointsPerKg, 7);
-    return response;
-  };
-  assert.equal(valuation.assess(request), response);
+  assert.equal(valuation.assess(input).rewards[0].amount, "14.00");
 });

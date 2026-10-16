@@ -1,102 +1,325 @@
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 "use strict";
+// Frozen reviewed fixture, not deployed authority or configuration-derived access.
+const runtimePermissions = require("./fixtures/kickoffNativeRuntimePermissions.json");
 
 /** @module test/applicationConfigurationOwnershipContract @description Verifies customer application selections, policy and deployment bindings without starting listeners. @owner nodics.kickoff */
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const { loadRuntime, activeModuleNames, corsOrigins } = require("./helpers/configuration");
+const {
+  loadRuntime,
+  activeModuleNames,
+  corsOrigins,
+} = require("./helpers/configuration");
+
+test("reference server lifecycle hooks do not duplicate Knowledge startup", async (t) => {
+  const descriptor = Object.getOwnPropertyDescriptor(global, "SERVICE");
+  t.after(() => {
+    if (descriptor) Object.defineProperty(global, "SERVICE", descriptor);
+    else delete global.SERVICE;
+  });
+  global.SERVICE = new Proxy(
+    {},
+    {
+      get: () => {
+        throw new Error("Reference hook must be inert");
+      },
+    },
+  );
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    for (const server of ["platformServer", "wasteServer"]) {
+      const lifecycle = require(`../envs/${environment}/${server}/nodics`);
+      assert.equal(await lifecycle.init(), true);
+      assert.equal(await lifecycle.postInit(), true);
+    }
+  }
+});
+
+test("reference Waste profiles inherit framework metadata defaults in both environments", () => {
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const runtime = loadRuntime("wasteServer", environment);
+    assert.equal(
+      runtime.wasteSubmission.metadataSuggestion.profile,
+      "eWastePhotoMetadata",
+    );
+    assert.equal(
+      runtime.copilot.providers.profiles.eWastePhotoMetadata
+        .maximumOutputTokens,
+      2400,
+    );
+    assert.equal(
+      runtime.copilot.providers.profiles.customerGuidance.maximumOutputTokens,
+      500,
+    );
+    assert.equal(runtime.eWaste.conversation.profile, "customerGuidance");
+    const raw = require(`../envs/${environment}/config/properties`);
+    const profiles = raw.copilot.runtimeRoleProfiles.WASTE.providers.profiles;
+    assert.equal(profiles.eWastePhotoMetadata, undefined);
+    assert.equal(profiles.customerGuidance, undefined);
+  }
+  const commerce = loadRuntime("commerceServer", "kickoffLocal");
+  assert.equal(commerce.store.placementRead.runtimeRole, "COMMERCE");
+  assert.equal(commerce.store.placementRead.enabled, true);
+  const raw = require("../envs/kickoffLocal/commerceServer/config/properties");
+  assert.equal(raw.store.placementRead.runtimeRole, undefined);
+  assert.equal(
+    raw.pricing.merchantEvidence.businessCallers.runtimeRole,
+    undefined,
+  );
+});
+
+test("Native Telegram credential is shared only by its verifier and delivery runtime roles", () => {
+  const source = require("../envs/kickoffLocal/config/properties");
+  assert.equal(Object.hasOwn(source.credentials, "telegram.bot.circa"), false);
+  assert.deepEqual(Object.keys(source.credentials.runtimeRoleProfiles).sort(), [
+    "ENGAGEMENT",
+    "PLATFORM",
+  ]);
+  assert.deepEqual(
+    source.credentials.runtimeRoleProfiles.ENGAGEMENT["telegram.bot.circa"],
+    {
+      $config: "ref",
+      path: [
+        "credentials",
+        "runtimeRoleProfiles",
+        "PLATFORM",
+        "telegram.bot.circa",
+      ],
+    },
+  );
+  for (const server of ["platformServer", "engagementServer"]) {
+    const runtime = loadRuntime(server, "kickoffLocal");
+    const credential = runtime.credentials["telegram.bot.circa"];
+    assert.equal(
+      credential?.value ===
+        source.credentials.runtimeRoleProfiles.PLATFORM["telegram.bot.circa"]
+          .value,
+      true,
+      server,
+    );
+    assert.equal(credential.secret, true);
+    assert.equal(credential.credentialKind, "BOT_TOKEN");
+    assert.equal(runtime.credentials.runtimeRoleProfiles, undefined);
+    assert.equal(
+      loadRuntime(server, "kickoffDockerLocal").credentials?.[
+        "telegram.bot.circa"
+      ]?.value,
+      null,
+    );
+  }
+  for (const server of [
+    "wasteServer",
+    "commerceServer",
+    "commerceStagedServer",
+    "loyaltyServer",
+    "wcmsStagedServer",
+    "wcmsOnlineServer",
+    "processServer",
+    "locationServer",
+  ]) {
+    const runtime = loadRuntime(server, "kickoffLocal");
+    assert.equal(
+      Object.hasOwn(runtime.credentials, "telegram.bot.circa"),
+      false,
+      server,
+    );
+    assert.equal(runtime.credentials.runtimeRoleProfiles, undefined, server);
+  }
+});
 
 test("Native Waste selects reviewed sale admission and canonical evidence without claiming installed financial success", () => {
   const native = require("../envs/kickoffLocal/wasteServer/config/properties");
-  const identity = require("../envs/kickoffLocal/wasteServer/package.json").nodics.runtimeIdentity;
-  assert.deepEqual(native.eWaste.marketplace.digitalOwnership.targets, { commerce: "COMMERCE", loyalty: "LOYALTY", profile: "PLATFORM" });
-  for (const name of ["digitalCore", "product", "loyaltyApi", "profile"]) assert(identity.remoteModules.includes(name));
-  const permissions = native.identityGovernance.migration.localRuntimeDeploymentGrantPermissions.value;
+  const identity = require("../envs/kickoffLocal/wasteServer/package.json")
+    .nodics.runtimeIdentity;
+  assert.equal(native.eWaste.marketplace.digitalOwnership.targets, undefined);
+  assert.equal(
+    native.eWaste.marketplace.digitalOwnership.customerEvidenceApiName,
+    undefined,
+  );
+  for (const name of ["digitalCore", "product", "loyaltyApi", "profile"])
+    assert(identity.remoteModules.includes(name));
+  const permissions = runtimePermissions.wasteServer;
   assert(permissions.includes("commerce.digital.own.read"));
   assert(permissions.includes("loyalty.wallet.read"));
   const runtime = loadRuntime("wasteServer", "kickoffLocal");
+  assert.deepEqual(runtime.eWaste.marketplace.digitalOwnership.targets, {
+    commerce: "COMMERCE",
+    loyalty: "LOYALTY",
+    profile: "PLATFORM",
+  });
   assert.equal(runtime.eWaste.marketplace.digitalOwnership.enabled, true);
   assert.equal(runtime.eWaste.marketplace.digitalOwnership.qualified, true);
-  assert.deepEqual(runtime.eWaste.marketplace.digitalOwnership.allowedServicePrincipals, ["apiAdmin"]);
-  assert.equal(runtime.eWaste.marketplace.digitalOwnership.customerEvidenceApiName, "/internal/customer-evidence");
+  assert.deepEqual(
+    runtime.eWaste.marketplace.digitalOwnership.allowedServicePrincipals,
+    ["apiAdmin"],
+  );
+  assert.equal(
+    runtime.eWaste.marketplace.digitalOwnership.customerEvidenceApiName,
+    "/internal/customer-evidence",
+  );
   const business = runtime.eWaste.marketplace.digitalOwnership.businessCallers;
-  assert.equal(business.length, 1); assert.equal(business[0].serverCode, "commerceServer");
-  assert.equal(business[0].enterpriseCode, "GREENPERKS_ONLINE"); assert.equal(business[0].principalEnterpriseCode, "default");
-  assert.deepEqual(business[0].permissions, ["waste.asset.marketplace.project", "waste.asset.sale.transfer"]);
+  assert.equal(business.length, 2);
+  assert.equal(business[0].serverCode, "commerceServer");
+  assert.equal(business[0].enterpriseCode, "GREENPERKS_ONLINE");
+  assert.equal(business[0].principalEnterpriseCode, "default");
+  assert.deepEqual(business[0].permissions, [
+    "waste.asset.marketplace.project",
+    "waste.asset.sale.transfer",
+  ]);
+  assert.equal(business[1].serverCode, "commerceStagedServer");
+  assert.equal(business[1].enterpriseCode, "GREENPERKS_ONLINE");
+  assert.equal(business[1].principalEnterpriseCode, "default");
+  assert.deepEqual(business[1].permissions, [
+    "waste.asset.listing.intent.read",
+  ]);
   const loyalty = loadRuntime("loyaltyServer", "kickoffLocal");
   assert.equal(loyalty.apiExposure.categories.loyaltyInternal.enabled, true);
   assert.equal(loyalty.loyalty.api.readEvidence.callers.length, 1);
-  assert.equal(loyalty.loyalty.api.readEvidence.callers[0].serverCode, "wasteServer");
+  assert.equal(
+    loyalty.loyalty.api.readEvidence.callers[0].serverCode,
+    "wasteServer",
+  );
   const platform = loadRuntime("platformServer", "kickoffLocal");
   assert.equal(platform.profileCustomerEvidence.enabled, true);
   assert.equal(platform.profileCustomerEvidence.callers.length, 1);
-  assert.equal(platform.profileCustomerEvidence.callers[0].serverCode, "wasteServer");
+  assert.equal(
+    platform.profileCustomerEvidence.callers[0].serverCode,
+    "wasteServer",
+  );
   const docker = require("../envs/kickoffDockerLocal/wasteServer/config/properties");
   assert.equal(docker.eWaste?.marketplace?.digitalOwnership, undefined);
 });
 
 test("Local communication policy is role-scoped without activating Circa on Engagement", () => {
   const local = loadRuntime("engagementServer");
-  const expected = require("../envs/kickoffLocal/config/properties")
-    .communication.runtimeRoleProfiles.ENGAGEMENT;
-  assert.deepEqual(local.communication.templates.WASTE_REVIEW_OUTCOME_V1,
-    expected.templates.WASTE_REVIEW_OUTCOME_V1);
-  assert.deepEqual(local.communication.trustedSourceModules, ["eWaste", "profile"]);
-  assert.deepEqual(local.communication.providers.TELEGRAM.credentialReferences, ["telegram.bot.circa"]);
+  assert.equal(
+    local.communication.templates.WASTE_REVIEW_OUTCOME_V1,
+    undefined,
+  );
+  assert.equal(local.communication.templateResources.modules.eWaste, true);
+  assert.equal(
+    local.communication.templateResources.selections.WASTE_REVIEW_OUTCOME_V1,
+    true,
+  );
+  assert.deepEqual(local.communication.trustedSourceModules, [
+    "eWaste",
+    "profile",
+  ]);
+  assert.deepEqual(
+    local.communication.providers.TELEGRAM.credentialReferences,
+    ["telegram.bot.circa"],
+  );
   for (const name of ["circa.ewaste", "eWaste", "wasteCore"]) {
     assert.equal(activeModuleNames(local).includes(name), false);
   }
-  for (const [server, environment] of [["platformServer", "kickoffLocal"],
-    ["engagementServer", "kickoffDockerLocal"]]) {
+  for (const [server, environment] of [
+    ["platformServer", "kickoffLocal"],
+    ["engagementServer", "kickoffDockerLocal"],
+  ]) {
     const runtime = loadRuntime(server, environment);
-    assert.equal(runtime.communication?.templates?.WASTE_REVIEW_OUTCOME_V1, undefined);
+    assert.equal(
+      runtime.communication?.templates?.WASTE_REVIEW_OUTCOME_V1,
+      undefined,
+    );
   }
 });
 
 test("Customer Engagement opt-ins apply only to the selected role and allow later disablement", () => {
   const path = require("node:path");
   const { frameworkRoot } = require("./helpers/configuration");
-  const binding = require(path.join(frameworkRoot,
-    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
-  const loader = require(path.join(frameworkRoot,
-    "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService"));
+  const binding = require(
+    path.join(
+      frameworkRoot,
+      "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService",
+    ),
+  );
+  const loader = require(
+    path.join(
+      frameworkRoot,
+      "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService",
+    ),
+  );
   const core = require("../modules/kickoffCore/config/properties");
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const runtime = loadRuntime("engagementServer", environment);
-    for (const capability of ["testimonial", "customerReview", "customerFeedback"]) {
+    for (const capability of [
+      "testimonial",
+      "customerReview",
+      "customerFeedback",
+    ]) {
       assert.equal(runtime.engagement.capabilities[capability], true);
     }
     assert.equal(runtime.customerFeedback.enabled, true);
-    assert.equal(require(`../envs/${environment}/engagementServer/config/properties`).engagement, undefined);
+    assert.equal(
+      require(`../envs/${environment}/engagementServer/config/properties`)
+        .engagement,
+      undefined,
+    );
   }
-  const policy = { engagement: core.engagement, customerFeedback: core.customerFeedback };
-  const unrelated = loader.deriveRuntimeRoleCapabilityProfiles({ ...policy, runtimeRole: { code: "OTHER" } });
+  const policy = {
+    engagement: core.engagement,
+    customerFeedback: core.customerFeedback,
+  };
+  const unrelated = loader.deriveRuntimeRoleCapabilityProfiles({
+    ...policy,
+    runtimeRole: { code: "OTHER" },
+  });
   assert.equal(unrelated.engagement.capabilities, undefined);
   assert.equal(unrelated.customerFeedback.enabled, undefined);
   const later = binding.merge(policy, {
-    engagement: { runtimeRoleProfiles: { ENGAGEMENT: { capabilities: { customerFeedback: false } } } },
-    customerFeedback: { runtimeRoleProfiles: { ENGAGEMENT: { enabled: false } } },
+    engagement: {
+      runtimeRoleProfiles: {
+        ENGAGEMENT: { capabilities: { customerFeedback: false } },
+      },
+    },
+    customerFeedback: {
+      runtimeRoleProfiles: { ENGAGEMENT: { enabled: false } },
+    },
   });
-  const disabled = loader.deriveRuntimeRoleCapabilityProfiles({ ...later, runtimeRole: { code: "ENGAGEMENT" } });
+  const disabled = loader.deriveRuntimeRoleCapabilityProfiles({
+    ...later,
+    runtimeRole: { code: "ENGAGEMENT" },
+  });
   assert.equal(disabled.engagement.capabilities.customerFeedback, false);
   assert.equal(disabled.customerFeedback.enabled, false);
 });
 
 for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
   test(`${environment}: application baselines follow selection and consuming role`, () => {
-    for (const selection of ["all", "none", "apparel", "electronics", "telco"]) {
-      const staged = loadRuntime("wcmsStagedServer", environment, { NODICS_AGORA_DOMAINS: selection });
+    for (const selection of [
+      "all",
+      "none",
+      "apparel",
+      "electronics",
+      "telco",
+    ]) {
+      const staged = loadRuntime("wcmsStagedServer", environment, {
+        NODICS_AGORA_DOMAINS: selection,
+      });
       for (const domain of ["apparel", "electronics", "telco"]) {
         const code = `agora${domain}`;
         const selected = selection === "all" || selection === domain;
         assert.equal(Boolean(staged.cms.publication.baselines[code]), selected);
         if (selected) {
           const owner = require(`../modules/agora.${domain}/config/properties`);
-          assert.deepEqual(staged.cms.publication.baselines[code], owner.cms.runtimeRoleProfiles.WCMS_STAGED.publication.baselines[code]);
-          const profile = owner.backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM.profiles[code];
+          assert.deepEqual(
+            staged.cms.publication.baselines[code],
+            owner.cms.runtimeRoleProfiles.WCMS_STAGED.publication.baselines[
+              code
+            ],
+          );
+          const profile =
+            owner.backofficeApplicationInitialization.runtimeRoleProfiles
+              .PLATFORM.profiles[code];
           assert.equal(profile.presentation.category, "application");
-          assert.equal(profile.presentation.activationPolicy.approvalRequiredForOnline, true);
-          assert.equal(profile.presentation.activationPolicy.requiredDataTrigger, "USER");
+          assert.equal(
+            profile.presentation.activationPolicy.approvalRequiredForOnline,
+            true,
+          );
+          assert.equal(
+            profile.presentation.activationPolicy.requiredDataTrigger,
+            "USER",
+          );
         }
       }
     }
@@ -110,26 +333,41 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     assert.equal(waste.wasteSubmission.metadataSuggestion.adapter, "openai");
     assert.equal(waste.eWaste.conversation.project, "circa.ewaste");
     assert.equal(waste.eWaste.conversation.adapter, "ollama");
-    assert(waste.circaEWaste.journey.arrivalRadiusMetres > 0);
-    assert.equal(waste.eWaste.outcomeCommunication.detailLinks.IN_APP.url,
-      environment === "kickoffLocal" ? "http://localhost:3600/mobile" : "http://localhost:6600/mobile");
+    assert(waste.eWaste.journey.arrivalRadiusMetres > 0);
+    assert.equal(
+      waste.eWaste.outcomeCommunication.detailLinks.IN_APP.url,
+      environment === "kickoffLocal"
+        ? "http://localhost:3600/mobile"
+        : "http://localhost:6600/mobile",
+    );
     const commerce = loadRuntime("commerceServer", environment);
     assert.equal(commerce.eWaste.conversation.project, undefined);
     assert.equal(activeModuleNames(commerce).includes("eWaste"), false);
     assert.deepEqual(commerce.order.refunds.ownerPorts.eWaste, {
-      moduleName: "eWaste", connectionName: "waste", targetAuthority: { runtimeRole: "WASTE" }, apiPrefix: "/internal/order-reversals",
+      moduleName: "eWaste",
+      connectionName: "waste",
+      targetAuthority: { runtimeRole: "WASTE" },
+      apiPrefix: "/internal/order-reversals",
     });
     assert.equal(commerce.bidding.holdTiming, "CHECKOUT_AFTER_ACCEPTANCE");
     assert.equal(commerce.bidding.validitySeconds, 86400);
     assert.equal(commerce.digitalCore.merchantRedemption.enabled, true);
-    assert.equal(commerce.digitalCore.merchantRedemption.providerService, "DefaultDigitalCommerceMerchantScreenProviderService");
+    assert.equal(
+      commerce.digitalCore.merchantRedemption.providerService,
+      "DefaultDigitalCommerceMerchantScreenProviderService",
+    );
   });
 
   test(`${environment}: customer CORS survives an unselected application graph`, () => {
-    const runtime = loadRuntime("wcmsOnlineServer", environment, { NODICS_AGORA_DOMAINS: "none" });
+    const runtime = loadRuntime("wcmsOnlineServer", environment, {
+      NODICS_AGORA_DOMAINS: "none",
+    });
     assert.equal(activeModuleNames(runtime).includes("agora.apparel"), false);
     const origins = corsOrigins(runtime);
     const port = environment === "kickoffLocal" ? 3300 : 6300;
-    assert(origins.allowedOrigins.includes(`http://localhost:${port}`) || origins.deniedOrigins.includes(`http://localhost:${port}`));
+    assert(
+      origins.allowedOrigins.includes(`http://localhost:${port}`) ||
+        origins.deniedOrigins.includes(`http://localhost:${port}`),
+    );
   });
 }

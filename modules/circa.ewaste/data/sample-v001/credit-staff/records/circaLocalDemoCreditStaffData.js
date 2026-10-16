@@ -6,7 +6,7 @@ module.exports = {
     code: "circa-online-administrator",
     loginId: "online.administrator@circa.local",
     enterpriseCode: "GREENPERKS_ONLINE",
-    roleCodes: ["CIRCA_LOCAL_DEMO_CREDIT"],
-    groupCodes: ["circaLocalDemoCreditUserGroup"],
+    roleCodes: ["LOYALTY_SAMPLE_CREDIT", "IMPORT_SAMPLE_OPERATOR"],
+    groupCodes: ["loyaltySampleCreditUserGroup", "importSampleOperatorUserGroup"],
   },
 };

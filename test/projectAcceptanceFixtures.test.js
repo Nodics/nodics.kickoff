@@ -109,7 +109,7 @@ assert.equal(apparelProducts.length, 61, 'Apparel acceptance must include all 58
 assert.deepEqual(apparelCatalogue.productCodes, apparelProducts.map(product => product.code),
   'The complete source catalogue, not a representative product, defines Apparel acceptance');
 assert.equal(new Set(apparelCatalogue.productCodes).size, apparelProducts.length);
-assert.deepEqual(apparelCatalogue.discoveryPagination, { pageSize: 24, maximumProducts: 1000 });
+assert.equal(apparelCatalogue.discoveryPagination, undefined, 'Inherit Product-owned acceptance pagination defaults');
 const targetBindings = {};
 for (const catalog of publicationCatalogs) {
   for (const [domain, receipt] of Object.entries(catalog.value.publications)) {

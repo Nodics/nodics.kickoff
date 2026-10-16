@@ -1,14 +1,14 @@
 module.exports = {
-  "activeModules": {
-    "groups": [
+  activeModules: {
+    groups: [
       {
-        "$config": "composition",
-        "name": "agora",
-        "field": "frameworkGroups",
-        "spread": true
-      }
+        $config: "composition",
+        name: "agora",
+        field: "frameworkGroups",
+        spread: true,
+      },
     ],
-    "modules": [
+    modules: [
       "redisCache",
       "search",
       "elastic",
@@ -16,11 +16,11 @@ module.exports = {
       "commerceSearch",
       "digitalCommerce",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "sharedModules",
-        "includes": "domainCommerceCore",
-        "value": "domainCommerceCore"
+        $config: "selected",
+        name: "agora",
+        field: "sharedModules",
+        includes: "domainCommerceCore",
+        value: "domainCommerceCore",
       },
       "nodics.kickoff",
       "kickoffCore",
@@ -28,18 +28,18 @@ module.exports = {
       "kickoffInt",
       "circa.ewaste",
       {
-        "$config": "composition",
-        "name": "agora",
-        "field": "projectPacks",
-        "spread": true
+        $config: "composition",
+        name: "agora",
+        field: "projectPacks",
+        spread: true,
       },
       "digitalCore",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": "apparelProduct"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "apparel",
+        value: "apparelProduct",
       },
       "cart",
       "checkoutCore",
@@ -50,11 +50,11 @@ module.exports = {
       "discoveryRanking",
       "discoverySource",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "electronics",
-        "value": "electronicsProduct"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "electronics",
+        value: "electronicsProduct",
       },
       "fulfillmentCore",
       "inventory",
@@ -66,25 +66,25 @@ module.exports = {
       "store",
       "tax",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "telcoCatalog"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "telcoCatalog",
       },
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "telcoProvisioning"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "telcoProvisioning",
       },
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "telcoSubscription"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "telcoSubscription",
       },
       "cardPayment",
       "walletPayment",
@@ -96,105 +96,126 @@ module.exports = {
       "paypalProvider",
       "cyberSourceProvider",
       "visaProvider",
-      "loyaltyRewardProvider"
-    ]
+      "loyaltyRewardProvider",
+    ],
   },
-  "runtimeRole": {
-    "code": "COMMERCE_STAGED",
-    "publication": "STAGED"
+  runtimeRole: {
+    code: "COMMERCE_STAGED",
+    publication: "STAGED",
   },
-  "database": {
-    "default": {
-      "mongodb": {
-        "master": {
-          "databaseName": "kickoffDockerLocalCommerceStaged"
-        }
-      }
-    }
-  },
-  "servers": {
-    "default": {
-      "endpoint": {
-        "httpHost": "0.0.0.0",
-        "httpPort": 4352,
-        "httpsHost": "0.0.0.0",
-        "httpsPort": 4353
-      },
-      "browserEndpoint": {
-        "httpHost": "localhost",
-        "httpPort": 5352
-      },
-      "abstractEndpoint": {
-        "httpHost": "commerce-staged",
-        "httpPort": {
-          "$config": "ref",
-          "path": "servers.default.endpoint.httpPort"
+  database: {
+    default: {
+      mongodb: {
+        master: {
+          databaseName: "kickoffDockerLocalCommerceStaged",
         },
-        "httpsHost": "commerce-staged",
-        "httpsPort": {
-          "$config": "ref",
-          "path": "servers.default.endpoint.httpsPort"
-        }
-      }
-    }
-  },
-  "runtimeAuthorityContexts": {
-    "modules": {
-      "apparelProduct": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": "commerce.staged"
       },
-      "cart": true,
-      "checkoutCore": true,
-      "commerceSearchCore": true,
-      "shoppingList": true,
-      "digitalCore": true,
-      "discoveryConfig": true,
-      "discoveryMapping": true,
-      "discoveryProjection": true,
-      "discoveryRanking": true,
-      "discoverySource": true,
-      "electronicsProduct": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "electronics",
-        "value": "commerce.staged"
-      },
-      "fulfillmentCore": true,
-      "inventory": true,
-      "order": true,
-      "paymentCore": true,
-      "pricing": true,
-      "product": true,
-      "promotion": true,
-      "store": true,
-      "tax": true,
-      "telcoCatalog": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "commerce.staged"
-      },
-      "telcoProvisioning": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "commerce.staged"
-      },
-      "telcoSubscription": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "commerce.staged"
-      }
     },
-    "default": "commerce.staged"
-  }
+  },
+  servers: {
+    default: {
+      endpoint: {
+        httpHost: "0.0.0.0",
+        httpPort: 4352,
+        httpsHost: "0.0.0.0",
+        httpsPort: 4353,
+      },
+      browserEndpoint: {
+        httpHost: "localhost",
+        httpPort: 5352,
+      },
+      abstractEndpoint: {
+        httpHost: "commerce-staged",
+        httpPort: {
+          $config: "ref",
+          path: "servers.default.endpoint.httpPort",
+        },
+        httpsHost: "commerce-staged",
+        httpsPort: {
+          $config: "ref",
+          path: "servers.default.endpoint.httpsPort",
+        },
+      },
+    },
+  },
+  runtimeAuthorityContexts: {
+    modules: {
+      apparelProduct: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "apparel",
+        value: "commerce.staged",
+      },
+      cart: true,
+      checkoutCore: true,
+      commerceSearchCore: true,
+      shoppingList: true,
+      digitalCore: true,
+      discoveryConfig: true,
+      discoveryMapping: true,
+      discoveryProjection: true,
+      discoveryRanking: true,
+      discoverySource: true,
+      electronicsProduct: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "electronics",
+        value: "commerce.staged",
+      },
+      fulfillmentCore: true,
+      inventory: true,
+      order: true,
+      paymentCore: true,
+      pricing: true,
+      product: true,
+      promotion: true,
+      store: true,
+      tax: true,
+      telcoCatalog: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "commerce.staged",
+      },
+      telcoProvisioning: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "commerce.staged",
+      },
+      telcoSubscription: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "commerce.staged",
+      },
+    },
+    default: "commerce.staged",
+  },
+  schemaPolicies: {
+    runtimeRoleProfiles: {
+      COMMERCE_STAGED: {
+        product: {
+          catalogueVersioned: { isVersionedEnabled: false },
+        },
+        pricing: {
+          publicationVersioned: { isVersionedEnabled: false },
+        },
+        tax: {
+          publicationVersioned: { isVersionedEnabled: false },
+        },
+        inventory: {
+          publicationVersioned: { isVersionedEnabled: false },
+        },
+        promotion: {
+          publicationVersioned: { isVersionedEnabled: false },
+        },
+      },
+    },
+  },
 };

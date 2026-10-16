@@ -51,6 +51,7 @@
     },
     "agoraApparelCommerceCatalog": {
       "kind": "DATA_RELEASE",
+      "selectionPolicy": "EXPLICIT",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",
@@ -89,9 +90,10 @@
     },
     "agoraApparelContentCatalog": {
       "kind": "DATA_RELEASE",
+      "selectionPolicy": "EXPLICIT",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "description": "Agora Apparel content and renderer catalog",
       "owningDomain": "agora.apparel.wcms",
       "lifecycle": "PUBLISHABLE",
@@ -190,11 +192,11 @@
         "sample-v001/content/headers/agoraApparelContentHeader.js": "d60d881b8202ce6343b5ef011ed15d3a3d3e088f4b92e51f9218d599a03e9c0d",
         "sample-v001/content/records/agoraApparelContentCatalogData.js": "0730de13e6426955767bf65bccb777414b724f43d5d4b28d44bc888c55a1164d",
         "sample-v001/content/records/agoraApparelExperiencePlacementData.js": "a543ad4af8f4087cfbecf69047e056bcd05c20e327cecec445701e6f03642d07",
-        "sample-v001/content/records/agoraApparelPageData.js": "d7ed5f06df4a9d0a8b5950c1b1906037216550084bf4864fdbe2d089e3f69cfb",
-        "sample-v001/content/records/agoraApparelRendererData.js": "134ab379a8fe8f70a434cd020174996748e072bb4b531a30eb30ca1b868a0e62",
-        "sample-v001/content/records/agoraApparelRouteData.js": "4e98df09cab665734558f398e53b6423cab05791b3f9264d52a7a7d59fc98e6a",
-        "sample-v001/content/records/agoraApparelSharedComponentData.js": "2fab33368105778c239c4814b7b814fd774936fe0742dba8b307f16b0e7f0bc7",
-        "sample-v001/content/records/agoraApparelSharedComponentMediaData.js": "d1e5d2681752cb0164c462d5b2c435be737f676f12910ab938a2fe841c2f7c03",
+        "sample-v001/content/records/agoraApparelPageData.js": "5953ecbe78e54ff78bfde763a7f67116004631c2b3633ddbc9bcf494236632cb",
+        "sample-v001/content/records/agoraApparelRendererData.js": "3525c19b25fa35d84e1706172b62a9745fa205d925b5ac69e362c16f2418f65e",
+        "sample-v001/content/records/agoraApparelRouteData.js": "67fe75d60360e46c556cdfd53a62ce8be65a371ba71a79c40bb87bca5bc5cd39",
+        "sample-v001/content/records/agoraApparelSharedComponentData.js": "a8ddd95521f69f85fa07164f2aa1dc61e5c49453213a8d370ce6cd54e9fb7caf",
+        "sample-v001/content/records/agoraApparelSharedComponentMediaData.js": "d8d9238df3956eb2e117a7b7cf46e21a35e2a7889944f3f95a16e46d26299571",
         "sample-v001/content/records/agoraApparelSharedComponentTypeGroupData.js": "592e545fc8acefbbbedcd4d3cd903ca738f44828d120111c175358a92d5ef497",
         "sample-v001/content/records/agoraApparelSharedMediaData.js": "99906d59d01829e570acfd09ec4bdd20abba0fec2d73c234f8b1ce9dd44b6e7c",
         "sample-v001/content/records/agoraApparelSharedMediaReferenceData.js": "607ec5e649a5947c4d62c8e1bb1b0bc910188f885d865cbf24686777cb53a691",
@@ -202,8 +204,8 @@
         "sample-v001/content/records/agoraApparelSharedSlotData.js": "f6ace2ee39a3d2e8d45cbfbda27cf06721fe75f91204897c513cfbb809ab7602",
         "sample-v001/content/records/agoraApparelSharedTemplateData.js": "140d17c6f9f4c2045514912c0f04fe9a17c27507c153dbf773f5a1f4fa3380d5",
         "sample-v001/content/records/agoraApparelSharedTypeCodeData.js": "d20084d8ae2bef4b9d9904a124a53926ba54a7cf60d558ceee87f384a83222a4",
-        "sample-v001/content/records/agoraApparelSiteData.js": "7bde5a5a3ada716ef03a3020c9ad36a30c0caeca4e5e62e1d3077c44949ce151",
-        "sample-v001/content/records/agoraApparelTypeCodeData.js": "8669e7ec2650aac69696a760ee7d6b5e3aac9b9a34d0cbbefba0826b7d7f9cec"
+        "sample-v001/content/records/agoraApparelSiteData.js": "f3b394f40bd932da28ede73bcca86462e9c0f821e6716082a57cbebd8ac69867",
+        "sample-v001/content/records/agoraApparelTypeCodeData.js": "1430a3d54cdab07e11e7db666cb9634385521ad6bd1cef78c8c85992f1e1b8f6"
       }
     },
     "agoraApparelOpeningStock": {

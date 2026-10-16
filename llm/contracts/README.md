@@ -1,5 +1,8 @@
 # Nodics Kickoff Contracts
 
+- [Root and module configuration ownership](module-configuration-ownership.md)
+  inventories retained project choices and inherited framework defaults.
+
 This folder contains maintained AI/developer contracts for the Nodics Kickoff boundary. Keep this README concise and put only durable module-specific rules here.
 
 - Follow the root and ancestor AGENTS chain before changing this package.

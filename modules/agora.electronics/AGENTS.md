@@ -1,10 +1,24 @@
 # agora.electronics Agents
 
-This is a customer application in nodics.kickoff, consuming the electronics accelerator.
-Keep application identity, properties, BackOffice profiles, media and data here.
-Sample/reference status and content-pack metadata do not transfer ownership to
-nodics.ai. Extract only separately reviewed reusable domain behavior. Apply the
-nSetup customer-project-mode contract and its application ownership table.
+Preserve `nodics.referenceDemo: true`. nTooling's existing project validation and
+the project `test:data-ownership` suite enforce this reference's demo-only shape.
+See the reviewed inventory in `llm/contracts/data-ownership-contract.md`.
+
+This reference extension consumes the electronics accelerator and owns demo
+data/composition ONLY: reference identities, branding, media, sample records and
+explicit composition selections. Reusable behavior, defaults and access definitions
+belong to the existing implementing framework module or accelerator. Genuine
+partner projects retain supported customization under nSetup's customer contract.
+
+Profile owns standard bootstrap users, access mechanics and runtime assignments;
+implementing modules contribute permissions and business-area definitions. Demo
+identities/accounts/assignments are optional Kickoff data. Axis presents business
+area + No access / View / Edit / Full control + Scope, enforced by backend owners.
+Full control never bypasses approval, ledger, simulation or tenant boundaries.
+The authorized refactor has no backwards compatibility: remove superseded
+adapters/routes/role aliases after updating consumers. Preserve historical evidence
+and installed receipts; do not replay data or introduce parallel authority.
+Documentation and business releases remain independently selected and governed.
 
 Follow the root Nodics AI agent contract before changing this boundary:
 

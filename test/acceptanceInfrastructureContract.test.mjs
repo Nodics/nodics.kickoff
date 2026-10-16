@@ -26,10 +26,28 @@ test('project verification includes its configuration, Commerce and Circa adopti
     'test/communicationActivationDataContract.test.js',
     'test/loyaltyRuntimeCompositionContract.test.js',
     'test/wasteRuntimeCompositionContract.test.js',
+    'test/circaPublicationPreparationPrerequisites.test.js',
+    'test/localResetCoverageContract.test.js',
+    'test/locationRuntimeTopologyContract.test.js',
+    'test/nativeLocalProviderIsolation.test.js',
+    'test/nexusAcceleratorIntegrationContract.test.js',
+    'test/runtimeDeliverySchemaAdoption.test.js',
+    'test/wasteManagementAcceptanceCommandContract.test.js',
+    'test/wcmsExperienceRuntimeCompositionContract.test.js',
     'test/dockerLocalRuntimePrepare.test.js',
     'modules/kickoffInt/test/editorialProcessAdapterContract.test.mjs',
   ]) assert(scripts['test:qualification'].split(/\s+/).includes(file), file);
-  assert.equal(scripts['test:circa'], 'npm test --prefix modules/circa.ewaste');
+  for (const [suite, files] of Object.entries({
+    'test:agora-commerce': ['test/agoraDemoSellingContextContract.test.js', 'test/agoraWcmsExperienceDataContract.test.js'],
+    'test:identity-authority': ['test/circaMonetaryNativeAdoption.test.js',
+      'test/commerceOwnershipEvidenceAdoption.test.js', 'test/runtimeEnterpriseResolutionAdoption.test.js'],
+  })) {
+    assert(steps.includes('npm run ' + suite), suite);
+    for (const file of files) assert(scripts[suite].split(/\s+/).includes(file), file);
+  }
+  assert.equal(scripts['test:circa'], 'node --test modules/circa.ewaste/test/*.test.js');
+  assert.equal(require('../modules/circa.ewaste/package.json').scripts, undefined,
+    'The reference data pack has no executable lifecycle; project validation owns its tests');
   const workflow = fs.readFileSync(path.join(root, '.github/workflows/verification.yml'), 'utf8');
   assert(workflow.includes('ref: ${{ vars.NODICS_FRAMEWORK_SHA }}'));
   assert(workflow.includes('NODICS_FRAMEWORK_SHA: ${{ vars.NODICS_FRAMEWORK_SHA }}'));

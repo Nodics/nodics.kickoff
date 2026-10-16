@@ -6,9 +6,13 @@ import test from "node:test";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, "..");
-const { frameworkRoot } = require('./helpers/configuration');
-const { resolveDomainComposition } = require(path.join(frameworkRoot,
-  'nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs'));
+const { frameworkRoot } = require("./helpers/configuration");
+const { resolveDomainComposition } = require(
+  path.join(
+    frameworkRoot,
+    "nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs",
+  ),
+);
 const definitions = [
   {
     group: "agora.apparel",
@@ -56,7 +60,10 @@ const digest = (file) =>
 
 test("project configuration stays minimal while metadata, domains, and data packs remain with their owners", () => {
   const projectPackage = require(path.join(root, "package.json"));
-  const composition = resolveDomainComposition(require("../modules/kickoffCore/config/properties.js").activeModules.compositions.agora);
+  const composition = resolveDomainComposition(
+    require("../modules/kickoffCore/config/properties.js").activeModules
+      .compositions.agora,
+  );
   const dataPackModules = [
     ...definitions.map(
       (definition) =>
@@ -122,14 +129,18 @@ test("every domain owns distinct Product and WCMS catalogs with framework domain
       manifest.sections[`${definition.prefix}CommerceCatalog`];
     const contentRelease = manifest.sections[definition.contentCatalog];
     const commerceRoot = path.join(
-      root, "modules", definition.group,
+      root,
+      "modules",
+      definition.group,
       "data",
       commerceRelease.sourceRoot,
       "commerce",
       "records",
     );
     const contentRoot = path.join(
-      root, "modules", definition.group,
+      root,
+      "modules",
+      definition.group,
       "data",
       contentRelease.sourceRoot,
       "content",
@@ -160,7 +171,9 @@ test("every domain owns distinct Product and WCMS catalogs with framework domain
     );
     const mediaAssetManifest = require(
       path.join(
-        root, "modules", definition.group,
+        root,
+        "modules",
+        definition.group,
         "data",
         contentRelease.sourceRoot,
         "content",
@@ -187,7 +200,9 @@ test("every domain owns distinct Product and WCMS catalogs with framework domain
       assert.equal(
         fs.existsSync(
           path.join(
-            root, "modules", definition.group,
+            root,
+            "modules",
+            definition.group,
             "data",
             contentRelease.sourceRoot,
             item.asset.sourceFile,
@@ -222,14 +237,32 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
     const sections = Object.values(manifest.sections);
     assert.deepEqual(
       new Set(sections.map((section) => section.destinationRole)),
-      new Set(["COMMERCE_STAGED", "WCMS_STAGED", ...(definition.pack === "agora.apparel" ? ["COMMERCE"] : [])]),
+      new Set([
+        "COMMERCE_STAGED",
+        "WCMS_STAGED",
+        ...(definition.pack === "agora.apparel" ? ["COMMERCE"] : []),
+      ]),
     );
-    for (const section of sections.filter((item) => item.destinationRole === "COMMERCE")) {
-      assert.equal(definition.pack, "agora.apparel", "Only reviewed Apparel opening operations are in scope");
+    for (const section of sections.filter(
+      (item) => item.destinationRole === "COMMERCE",
+    )) {
+      assert.equal(
+        definition.pack,
+        "agora.apparel",
+        "Only reviewed Apparel opening operations are in scope",
+      );
       assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
       assert.equal(section.selectionPolicy, "EXPLICIT");
-      assert(["INVENTORY_OPENING_RECEIPTS", "PROMOTION_CAMPAIGN_ISSUANCE"].includes(section.installer));
-      assert(Object.keys(section.files).every((file) => /^sample-v001\/operations\/records\/.+\.json$/.test(file)));
+      assert(
+        ["INVENTORY_OPENING_RECEIPTS", "PROMOTION_CAMPAIGN_ISSUANCE"].includes(
+          section.installer,
+        ),
+      );
+      assert(
+        Object.keys(section.files).every((file) =>
+          /^sample-v001\/operations\/records\/.+\.json$/.test(file),
+        ),
+      );
     }
     const wcmsSection = sections.find(
       (section) => section.destinationRole === "WCMS_STAGED",
@@ -272,71 +305,64 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
         else
           runtimeFiles.push(path.relative(path.join(packRoot, "data"), child));
       });
-    const sourceFolders = new Set(sections.map((section) => path.join(
-      packRoot, "data", section.sourceRoot,
-      section.destinationRole === "WCMS_STAGED" ? "content" :
-        section.destinationRole === "COMMERCE" ? "operations" :
-          Object.keys(section.files).every(file => file.startsWith(section.sourceRoot + "/publication/")) ? "publication" : "commerce",
-    )));
+    const sourceFolders = new Set(
+      sections.map((section) =>
+        path.join(
+          packRoot,
+          "data",
+          section.sourceRoot,
+          section.destinationRole === "WCMS_STAGED"
+            ? "content"
+            : section.destinationRole === "COMMERCE"
+              ? "operations"
+              : Object.keys(section.files).every((file) =>
+                    file.startsWith(section.sourceRoot + "/publication/"),
+                  )
+                ? "publication"
+                : "commerce",
+        ),
+      ),
+    );
     for (const folder of sourceFolders) collect(folder);
     runtimeFiles.sort();
-    const claimedFiles = sections.flatMap((section) => Object.keys(section.files));
-    assert.equal(new Set(claimedFiles).size, claimedFiles.length, "Each source belongs to exactly one release section");
-    assert.deepEqual(
-      claimedFiles.sort(),
-      runtimeFiles,
+    const claimedFiles = sections.flatMap((section) =>
+      Object.keys(section.files),
     );
+    assert.equal(
+      new Set(claimedFiles).size,
+      claimedFiles.length,
+      "Each source belongs to exactly one release section",
+    );
+    assert.deepEqual(claimedFiles.sort(), runtimeFiles);
   }
 });
 
 test("environment composition selects each domain independently, together, or Commerce-only", () => {
-  const composition = require("../modules/kickoffCore/config/properties.js").activeModules.compositions.agora;
+  const composition = require("../modules/kickoffCore/config/properties.js")
+    .activeModules.compositions.agora;
   assert.deepEqual(resolveDomainComposition(composition, "apparel"), {
     domains: ["apparel"],
     frameworkGroups: ["apparel"],
     sharedModules: [],
     projectPacks: ["agora.apparel"],
-    productSearchContributors: {
-      apparel: {
-        serviceName: "DefaultApparelProductSearchEnrichmentService",
-        required: true,
-      },
-    },
   });
   assert.deepEqual(resolveDomainComposition(composition, "electronics"), {
     domains: ["electronics"],
     frameworkGroups: ["electronics"],
     sharedModules: [],
     projectPacks: ["agora.electronics"],
-    productSearchContributors: {
-      electronics: {
-        serviceName: "DefaultElectronicsProductSearchEnrichmentService",
-        required: true,
-      },
-    },
   });
   assert.deepEqual(resolveDomainComposition(composition, "telco"), {
     domains: ["telco"],
     frameworkGroups: ["telco"],
     sharedModules: [],
     projectPacks: ["agora.telco"],
-    productSearchContributors: {
-      electronics: {
-        serviceName: "DefaultElectronicsProductSearchEnrichmentService",
-        required: true,
-      },
-      telco: {
-        serviceName: "DefaultTelcoProductSearchEnrichmentService",
-        required: true,
-      },
-    },
   });
   assert.deepEqual(resolveDomainComposition(composition, "commerce"), {
     domains: [],
     frameworkGroups: [],
     sharedModules: [],
     projectPacks: [],
-    productSearchContributors: {},
   });
   assert.deepEqual(resolveDomainComposition(composition, "all").domains, [
     "apparel",
@@ -349,13 +375,44 @@ test("environment composition selects each domain independently, together, or Co
 });
 
 test("local and Docker staged runtimes consume the selected domain packs", () => {
-  const { loadRuntime } = require('./helpers/configuration');
-  for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
-    for (const server of ['commerceStagedServer', 'wcmsStagedServer']) {
-      const selected = loadRuntime(server, environment, { NODICS_AGORA_DOMAINS: 'telco,apparel' });
-      assert.deepEqual(selected.activeModules.modules.filter(code => typeof code === 'string' && code.startsWith('agora.')), ['agora.telco', 'agora.apparel']);
-      const empty = loadRuntime(server, environment, { NODICS_AGORA_DOMAINS: 'none' });
-      assert(!empty.activeModules.modules.some(code => typeof code === 'string' && code.startsWith('agora.')));
+  const { loadRuntime } = require("./helpers/configuration");
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    for (const server of ["commerceStagedServer", "wcmsStagedServer"]) {
+      const selected = loadRuntime(server, environment, {
+        NODICS_AGORA_DOMAINS: "telco,apparel",
+      });
+      assert.deepEqual(
+        selected.activeModules.modules.filter(
+          (code) => typeof code === "string" && code.startsWith("agora."),
+        ),
+        ["agora.telco", "agora.apparel"],
+      );
+      if (server === "commerceStagedServer") {
+        const contributors =
+          selected.product.publication.searchEnrichment.domains.contributors;
+        assert.equal(
+          contributors.apparel.serviceName,
+          "DefaultApparelProductSearchEnrichmentService",
+        );
+        assert.equal(
+          contributors.electronics.serviceName,
+          "DefaultElectronicsProductSearchEnrichmentService",
+        );
+        assert.equal(
+          contributors.telco.serviceName,
+          "DefaultTelcoProductSearchEnrichmentService",
+        );
+        for (const domain of ["apparel", "electronics", "telco"])
+          assert.equal(contributors[domain].required, true);
+      }
+      const empty = loadRuntime(server, environment, {
+        NODICS_AGORA_DOMAINS: "none",
+      });
+      assert(
+        !empty.activeModules.modules.some(
+          (code) => typeof code === "string" && code.startsWith("agora."),
+        ),
+      );
     }
   }
 });

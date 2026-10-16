@@ -8,7 +8,8 @@ const path = require("node:path");
 const crypto = require("node:crypto");
 const { loadRuntime, activeModuleNames, frameworkRoot } = require("./helpers/configuration");
 const observer = require(path.join(frameworkRoot, "nodics.foundation/modules/nPublish/src/service/defaultPublicationSetupObservationService"));
-const bootstrap = require(path.join(frameworkRoot, "nodics.platform/modules/profile/src/service/identity/defaultMandatoryIdentityBootstrapService"));
+// Reviewed pre-refactor authority snapshot; this fixture is not runtime grant configuration.
+const runtimePermissions = require("./fixtures/kickoffNativeRuntimePermissions.json");
 const root = path.resolve(__dirname, "..");
 const receivers = ["platformServer", "processServer", "commerceServer", "commerceStagedServer",
   "wcmsStagedServer", "loyaltyServer", "locationServer", "wasteServer"];
@@ -58,18 +59,31 @@ test("eight native receivers adopt the same confined exact plan and unchanged de
     if (server !== "platformServer") assert.deepEqual(policy.profilePlans, {});
     if (server !== "commerceServer") assert.deepEqual(policy.targetObservers, {});
     if (server !== "platformServer")
-      assert.equal(bootstrap.runtimeGrantPermissions(runtime.identityGovernance.migration).includes("publish.setup.observe"), false);
+      assert.equal(runtimePermissions[server].includes("publish.setup.observe"), false);
   }
   for (const server of ["wcmsOnlineServer", "engagementServer"])
     assert.equal(loadRuntime(server, "kickoffLocal").publish.setup.observation.enabled, false);
   assert.notEqual(loadRuntime("platformServer", "kickoffDockerLocal").publish?.setup?.observation?.enabled, true);
 });
 
-test("Platform preserves all existing permissions and adds only the dedicated observer grant selection", () => {
+test("reviewed Platform assignment fixture preserves the exact observer grant without configuration authority", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal");
-  const permissions = bootstrap.runtimeGrantPermissions(platform.identityGovernance.migration);
+  const permissions = runtimePermissions.platformServer;
   assert.deepEqual(permissions, [...beforePermissions, "publish.setup.observe"]);
   assert.deepEqual(platform.publish.setup.observation.profilePlans, { circa: planCode });
+});
+
+test("Circa identity authority is a separate explicit fresh-install prerequisite, leaving the reviewed demo unchanged", () => {
+  const runtime = loadRuntime("platformServer", "kickoffLocal");
+  const config = runtime.backofficeApplicationInitialization;
+  const profile = { ...config.profiles.circa, target: { ...config.target, ...config.profiles.circa.target } };
+  assert.equal(observer.digest(profile), plan.profileDigest);
+  assert(!observer.configuredSteps(profile).some(step => step.code === "circa.ewaste:circaEnterpriseRoles"));
+  const identity = runtime.data.dataReleases.initializationProfiles.circaIdentityAuthority;
+  assert.equal(identity.enabled, true);
+  assert.match(identity.description, /Fresh Circa installations require.*before demo setup/);
+  assert.deepEqual(identity.steps, [{ dataType: "init", releaseCodes: ["loyaltyWallet:specialAccessGroups", "loyaltyWallet:specialAccessRoles", "import:specialAccessGroups", "import:specialAccessRoles", "inventory:specialAccessGroups", "inventory:specialAccessRoles", "order:specialAccessGroups", "order:specialAccessRoles"] }]);
+  assert.equal(loadRuntime("wasteServer", "kickoffLocal").data.dataReleases.initializationProfiles.circaIdentityAuthority, undefined);
 });
 
 test("reviewed plan exactly matches the full current Platform profile without remote profile copies", () => {

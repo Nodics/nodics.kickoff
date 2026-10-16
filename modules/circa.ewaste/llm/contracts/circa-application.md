@@ -1,3 +1,54 @@
+## Current Source Ownership
+
+Circa is a metadata-marked reference content pack with no runtime source.
+Current consumers call `/nodics/eWaste/v0`; registration calls Profile and contact
+submission calls Engagement directly. There are no old-route fallbacks. Catalogue,
+journey, guidance, channel provenance and reward valuation belong to eWaste.
+Demo presentation and values use `eWaste` configuration, not `circaEWaste`.
+
+Advanced roles are supplied by `loyaltyWallet:specialAccessRoles`,
+`import:specialAccessRoles`, `inventory:specialAccessRoles` and
+`order:specialAccessRoles`, with their owner group prerequisites. Demo employees
+and exact additive assignments remain here; no sample role definitions remain.
+Assignment releases are 0.0.2 and do not replay installed employees. The canonical
+Commerce selectors are `product:accessGroups`, `publish:accessGroups`,
+`promotion:accessGroups` and `order:accessGroups`.
+
+All demo data is explicitly selected sample data. The `waste-policy` and
+`customer-workspace` releases are 0.0.2 under `sample-v001`; Waste policy samples
+materialize their effective records, retaining demo IDs without importing framework
+JavaScript. Core reference datasets remain separately owned and selected.
+Current setup observation revision 5 describes source composition only. Revisions
+2, 3 and 4 and completed demo evidence are retained unchanged, not installed proof
+for this extraction. No live import, deployment or migration is authorized here.
+
+## Approved Local Acceptance Boundary
+
+The human confirmed on 2026-10-12 that native `kickoffLocal` keeps a 200-metre
+arrival radius and the existing application/framework-default configuration stays
+at 50 metres. The application supplies that 50-metre fallback; the native Waste
+server supplies the 200-metre override. Docker retains the inherited 50 metres.
+`CIRCA_EWASTE_ARRIVAL_RADIUS_METRES` remains the explicit deployment override.
+Web and Telegram consume the same backend projection and inclusive, unrounded
+distance check. Older 100-metre prose is not the approved default. Accuracy remains
+optional metadata, not an additional arrival gate; fresh coordinates and an active
+eligible centre are still required. The configuration test covers one metre below,
+the exact boundary, a fractional excess and one metre above for each selection.
+
+The completion target is native Local. Payments remain mocked/no real money;
+Telegram and email qualification use Local only. A loopback SMTP exchange or
+simulated Telegram launch is not proof of actual mailbox/device delivery. Do not
+enable production providers or broaden recipient scopes to obtain a passing test.
+Previously completed native financial demo cases stay closed.
+
+Every record and asset required for the permanent demo belongs in its canonical
+module's existing `/data` release. Runtime preparation must not recreate missing
+demo products, staff, permissions, campaigns, CMS or images as ad hoc records.
+Private credentials remain with the existing secret authority, never a data pack.
+Draft-media inspection grants no deletion authority over demo packs, submitted
+evidence or shared media; unknown provenance remains protected. No abandoned or
+rejected retention duration was approved by this clarification.
+
 ## Publication Workflow Preparation
 
 Circa selects the explicit `media:mediaPublicationWorkflow` release on Process
@@ -78,6 +129,43 @@ exact `circa.ewaste:profile` catalogue version `0.0.1` and then prepares it
 through the existing Axis Data Initialization flow with explicit release
 selection. Source/test passes do not establish live installation acceptance.
 
+## Bounded Catalogue Discovery
+
+Circa intentionally selects `eWaste.catalogue.discoveryBatchSize: 24`
+through `DefaultEWasteCatalogueService.settings`. Other catalogue limits remain
+inherited from eWaste, whose neutral discovery default stays 100. Later customer
+layers may refine the existing catalogue configuration; public query fields never
+select this trusted hop bound, Store, runtime or maximum-product limit.
+
+The existing eWaste `published` pipeline still reads every bounded Product page
+sequentially before composing offers, filtering, sorting, display pagination,
+totals and complete kind-specific facets. A full final page requires another read
+to establish completion. Duplicate rows, missing product arrays, late owner errors,
+cancellation and the maximum-product ceiling reject without partial cards or
+facets; a retry starts an independent fresh read. Circa's marketplace list uses
+the same customer catalogue hook. No new API, cache, worker pool or orchestration
+override is introduced.
+
+This reduces work in each Product remote hop, not the complete marketplace read.
+All per-Product before/after receipt, consent, activation, installed-private-owner,
+retained-policy, benefit and coupon checks remain unchanged. The isolated
+38-coupon Promotion owner regression retains 76 consent checks, 76 Product
+activation reads and 456 Promotion publication-proof reads. Profile enterprise
+references remain freshly checked before and after each selected Product batch;
+more pages can increase fixed overhead and the number of reference batches.
+Timeouts, retry policy, rate limits, authentication, grants and financial/data
+policies are not changed.
+
+`test/circaCatalogue.test.js` covers the inherited settings, 24-row hops, a complete
+96-row read with late-page coupon facets and global sorting, exact/short/empty
+page termination, caller override isolation, late failures and fresh recovery.
+These isolated checks are not native latency qualification. After a source-frozen
+non-reset rebuild, separately measure public catalogue completion and individual
+Product-hop durations under the existing timeout. Retain all products/facets and
+report concurrent/background traffic; 24 is not a latency guarantee. Native
+qualification requires separate operator execution, not an automatic test side
+effect or authorization to reset/import installed data.
+
 ## Commerce Demo Catalogue And Operational Admission
 
 The EXPLICIT catalogue selects immutable sample-v001 version 0.0.1 into
@@ -92,12 +180,11 @@ The retired commerce-operational section and all its snapshots are removed,
 including duplicate raw stock/token files formerly carried in catalogue source.
 Three Budget and three subsequent Issuance sections use the existing
 PROMOTION_CAMPAIGN_ISSUANCE installer, OPERATIONAL_VERSIONED to COMMERCE,
-EXPLICIT, immutable 0.0.1, native Local only. Each later issuance pins its exact
+EXPLICIT, immutable 0.0.1, environment-portable. Each later issuance pins its exact
 original admission contribution and requires current original consent before
 issuing 100 protected units per campaign. These packs do not grant membership,
-consent, budgets over existing history or deployed qualification. The compatibility
-validator still delegates any legacy snapshot attempt to its canonical owner
-without a demo exception. See [the exact issuer matrix](circa-promotion-setup.md#signed-selections).
+consent, budgets over existing history or deployed qualification. Canonical Inventory and Promotion validators reject snapshot imports
+without a demo exception; no project compatibility validator remains. See [the exact issuer matrix](circa-promotion-setup.md#signed-selections).
 
 ### Store Reference Setup
 
@@ -201,10 +288,11 @@ Neither a staff confirmation nor a description proves item fulfillment.
 
 The human separately approved simulated ITEM delivery for local-demo testing and
 keeping already-redeemed benefit reversals disabled. Native `kickoffLocal` selects
-the existing Promotion `merchantBenefits` mode `LOCAL_SIMULATION`, enabled true,
+the existing Promotion `merchantBenefits` mode `SIMULATION`, enabled true,
 service `DefaultFulfillmentItemSimulationService`; Fulfillment enables only the
-exact selected environment allowlist `[kickoffLocal]`. nConfig derives LOCAL from
-the environment package, not a second properties descriptor. Real delivery
+exact selected environment allowlist `[kickoffLocal]`. Other demo deployments
+use the same keys with their own explicit environment names; no environment
+class comparison or additional configuration registry is involved. Real delivery
 qualification remains false; Docker and framework defaults remain off.
 
 All 29 approved ITEM declarations keep their original exact SKU/quantity/EACH
@@ -238,7 +326,7 @@ payment, private reveal or full Circa journey acceptance.
 | GreenPerks supply | All 35 policies have approved budgets, including zero for 29 exact ITEM bundles; variant targets are 100 | Original budget admission and later issuance; quantity targets are not issued supply |
 | Cross-enterprise issuance | Issuer GREENPERKS_RETAIL differs from vendor GREENPERKS_ONLINE; bounded delegated issuance source exists, not installed acceptance | Joint qualification of Promotion issuance, live consent and issuer-policy distribution owners |
 | Seller consent | Separate nonimportable issuer checklist retains vendor, expiry and ISSUED_COUPON_BENEFIT_V1 purpose; no grant imported | Existing signed issuer GRANT/REVOKE command and projected purpose, current revision, permission and revocation evidence |
-| Item benefits | Approved LOCAL_SIMULATION exercises exact bundles with explicit unverified tags; real delivery still unavailable | Installed merchant/persistence qualification for demo; authenticated owner integration separately for real delivery |
+| Item benefits | Explicit SIMULATION exercises exact bundles with unverified tags; historical LOCAL_SIMULATION results remain unverified | Exact deployment allowlist and owner qualification for demo; authenticated owner integration separately for real delivery |
 | Asset delivery | Five quantity-one ownership offers have a separate local-only three-policy source selection; not coupon units or installed bindings | Genuine Waste listing, retained Digital binding, original capture and seller proceeds; refund term retained before sale, never backfilled |
 | Store master data | Independent required `circa.ewaste:store` REFERENCE pack, v001, COMMERCE before publication | Verify fresh installation separately; existing rows and receipts need governed adoption, not rejected supply import |
 | Docker Local | Commerce publication owners and five Process definitions are not selected/qualified | Deployment-specific integration and acceptance before enabling the coordinated step |
@@ -340,18 +428,13 @@ framework/accelerator owners even when Circa first requests the capability.
 
 ## Policy Rule
 
-### Existing Data Compatibility
+### Current Source Selection And Retained History
 
-The sample taxonomy remains a compatibility snapshot: 20 records equal to the
-old eWaste defaults, four impact-profile overrides and 28 customer additions.
-The selected reference-only release is `circa.ewaste:waste-policy` version
-`0.0.1` in `core-v001`, above `eWaste:core-reference` version `0.0.1` in the
-same source sequence. Both are EXPLICIT. Existing nImport source-key
-composition supplies shared fields from eWaste and applies 24 Circa profile
-selection deltas plus the customer additions and final core policy. Matching
-filenames, export keys and header targets are required; these are not runtime
-JavaScript imports of mutable framework records. MOBILE_DEVICE's customer name,
-profile and revision-2 policy win once in the final composed record.
+The selected policy release is `circa.ewaste:waste-policy` version `0.0.2` in
+`sample-v001`. Its demo records are materialized, not partial core-lane overrides
+or runtime JavaScript imports of mutable framework data. `eWaste:core-reference`
+version `0.0.1` remains an independently selected EXPLICIT core release owned by
+eWaste. Neither selection adopts installed policy or permits transaction replay.
 
 The current sample is `circa.ewaste:waste` version `0.0.1` in `sample-v001`: it
 excludes category, item-type and impact-profile writes. It is EXPLICIT and
@@ -361,23 +444,19 @@ parent/operator must establish a genuinely fresh sample destination before
 explicitly selecting it. Never use this transaction pack to upgrade an installed
 customer's references.
 
-For reference adoption use the existing nImport core validation/install API with
-`releaseCodes: ["eWaste:core-reference", "circa.ewaste:waste-policy"]` and
-`expectedReleases: { "eWaste:core-reference": "0.0.1", "circa.ewaste:waste-policy": "0.0.1" }`.
-The existing Local Waste foundation profile selects material foundation first
-and these same reference owners. Canonical discovery orders the matching v001
-releases by owner index; composition requires a CURRENT baseline receipt with
-matching checksum/version, or a selected predecessor during preflight. Explicit
-version pins reject stale selections. No new dependency or migration registry
-exists. Source alignment and these pins must be requalified for later versions.
+Current source preparation uses separate nImport selections: core for the
+framework material/eWaste references, then sample for `circa.ewaste:waste-policy`
+with expected version `0.0.2`. Do not combine the Circa sample in a core request
+or require a same-source-root merge. Existing source regression cases retain
+stale-version refusal, materialized policy values, unchanged saved assessments and
+no unrelated core/transaction replay. Their execution remains a separate gate.
 
-Offline tests execute canonical nImport processing with in-memory receipt and
-persistence ports. They preserve all historical Circa keys, the exact profile
-metadata, collection/acceptance policy, and old saved assessments; they assert
-no submission/asset/impact-result writes during core adoption and no unrelated
-baseline replay. Eleven sample results retain `CIRCA_SAMPLE_OPENING` unchanged.
+Historical core-lane receipts and completed demo observations are retained as
+evidence, not current consumption instructions. Matching current version and
+checksum is required for a CURRENT receipt; refreshing source hashes does not
+make an older receipt current or grant ordinary CMS authoring to unowned records.
 Installed receipts, divergent operator policy, live imports and recovery remain
-separate parent-owned gates. Unknown provenance blocks operational adoption.
+separately authorized owner operations. Unknown provenance blocks adoption.
 
 Marketplace eligibility, asset transfer, reward settlement, carbon-credit
 settlement, and coupon-redemption settlement behavior must resolve from

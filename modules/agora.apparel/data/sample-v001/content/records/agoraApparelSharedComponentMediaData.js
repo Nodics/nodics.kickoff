@@ -251,3 +251,9 @@ const entries = [
 module.exports = Object.freeze(
   Object.fromEntries(entries.map((entry, index) => ["record" + index, entry])),
 );
+
+
+// Explicit fresh-source ownership; never infer ownership for installed records.
+for (const record of Object.values(module.exports)) {
+    record.authoringScope = { enterpriseCode: 'default', catalogCode: 'agoraApparelContentCatalog' };
+}

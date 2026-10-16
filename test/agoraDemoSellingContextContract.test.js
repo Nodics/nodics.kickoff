@@ -5,8 +5,10 @@ const test = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
-const profile = require("./helpers/configuration").loadEnvironment();
-for (const domain of profile.composition.agora.domains) {
+const profile = require("./helpers/configuration").loadRuntime(
+  "commerceStagedServer",
+);
+for (const domain of profile.activeModules.compositions.agora.domains) {
   test(`${domain.code} release has consistent enterprise, currency and sellable references`, () => {
     const dataRoot = path.resolve(
       __dirname,

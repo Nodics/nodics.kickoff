@@ -11,6 +11,5 @@
 
 'use strict';
 
-/** @module modules/circa.ewaste/config/prescripts @description Reserved pre-start hook registry for Circa eWaste. @layer config @owner circa.ewaste */
-/** @module circa.ewaste/config/prescripts @description Declares project lifecycle contributions. @layer config @owner circa.ewaste */
+/** @module circa.ewaste/config/prescripts @description Preserves an empty demo boundary; startup behavior belongs to implementing framework owners. @layer config @owner circa.ewaste */
 module.exports = {};

@@ -3,16 +3,17 @@
 /** @module circa.ewaste/test/circaLocalDemoCreditPack @description Verifies the separate reviewed credit contribution without treating source selection as installed financial acceptance. @owner circa.ewaste @layer test */
 const test = require("node:test"), assert = require("node:assert/strict"), path = require("node:path"), crypto = require("node:crypto");
 const manifest = require("../data/manifest.json");
+const { historicalSection } = require("./helpers/releasePortability");
 const payload = require("../data/sample-v001/operations/loyalty-credit/records/loyaltyCredits.json");
 const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configuration");
 const releases = require(path.join(frameworkRoot, "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
 const sourceRoot = path.resolve(__dirname, "../data");
 
-test("credit is separate explicit Local sample data, not a rewritten wallet release", () => {
+test("credit is separate explicit portable sample data, not a rewritten wallet release", () => {
   const section = manifest.sections.circaLocalDemoCredit;
   assert.equal(section.dataType, "sample"); assert.equal(section.sourceRoot, "sample-v001"); assert.equal(section.version, "0.0.1");
   assert.equal(section.selectionPolicy, "EXPLICIT"); assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
-  assert.equal(section.destinationRole, "LOYALTY"); assert.deepEqual(section.environmentScope, ["LOCAL"]);
+  assert.equal(section.destinationRole, "LOYALTY"); assert.deepEqual(section.environmentScope, ["ALL"]);
   assert.equal(section.installer, "LOYALTY_SAMPLE_CREDITS");
   assert.deepEqual(Object.keys(section.files), ["sample-v001/operations/loyalty-credit/records/loyaltyCredits.json"]);
   const actual = releases.sourceRootFiles(sourceRoot, "sample-v001");
@@ -25,7 +26,7 @@ test("credit is separate explicit Local sample data, not a rewritten wallet rele
     "circaLoopCycleBudget", "circaLoopCycleIssuance", "circaLoopCyclePublicationPlan",
     "circaCataloguePublicationPlan", "circaCatalogueCurrentPublicationPlan", "circaAssetClassification",
     "circaAssetClassificationPublicationPlan", "circaDigitalOwnershipPolicies"];
-  const prior = Object.fromEntries(originalSections.map(code => [code, manifest.sections[code]]));
+  const prior = Object.fromEntries(originalSections.map(code => [code, historicalSection(code)]));
   assert.equal(crypto.createHash("sha256").update(JSON.stringify(prior)).digest("hex"), "ae2c254d458cfa2342fee95234cd5a60a4ab6e73cbc5545292cbd5a50dd71280");
 });
 

@@ -21,3 +21,9 @@
 
 /** @description Logical Apparel renderer keys. Executable React code belongs to nodics.agora. */
 module.exports = { record0: { code: 'agoraApparelProductCardType', renderer: 'agora.apparel.product-card', contractVersion: 0, channels: ['web'], deprecated: false, active: true }, record1: { code: 'agoraApparelHomePageType', renderer: 'agora.apparel.page.home', contractVersion: 0, channels: ['web'], deprecated: false, active: true } };
+
+
+// Explicit fresh-source ownership; never infer ownership for installed records.
+for (const record of Object.values(module.exports)) {
+    record.authoringScope = { enterpriseCode: 'default', catalogCode: 'agoraApparelContentCatalog' };
+}

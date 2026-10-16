@@ -73,7 +73,9 @@ async function main() {
     // Waste's independent wasteGeneratedRuntimeContract, including service-only schemas.
     const overlayManifest = require(path.join(projectRoot, 'modules/circa.ewaste/data/manifest.json'));
     assert.equal(overlayManifest.sections['waste-policy'].destinationRole, 'WASTE');
-    assert.equal(overlayManifest.sections['waste-policy'].dataType, 'core');
+    assert.equal(overlayManifest.sections['waste-policy'].dataType, 'sample');
+    assert.equal(overlayManifest.sections['waste-policy'].lifecycle, 'REFERENCE');
+    assert.equal(overlayManifest.sections['waste-policy'].sourceRoot, 'sample-v001');
     console.log('Kickoff kickoffLocal wasteServer runtime composition passed');
 }
 

@@ -2,15 +2,19 @@
 
 The human approved one bounded Inventory responsibility for the original
 retail, repair and recycling administrators in fictional native Local testing.
-The customer module owns group data and exact employee instructions. Inventory
-owns opening intake and its generated schema admission. Profile owns identities,
+The customer module owns only exact demo employee assignment instructions.
+Inventory owns reusable group/role definitions, opening intake and its generated
+schema admission. Profile owns identities,
 group governance, CAS updates and session invalidation; nImport owns installed
 release history. Role installation does not create goods or stock.
 
-Import `circa.ewaste:circaLocalOpeningRole` sample 0.0.1 on PLATFORM before
-`circa.ewaste:circaLocalOpeningStaffAssignments` sample 0.0.1. Both are explicit,
-Local-only, REFERENCE/RETAIN contributions. The group has employee ancestry and
-only `commerce.inventory.operate`. Its exact additive instructions are:
+For fresh setup, select `inventory:specialAccessGroups` before
+`inventory:specialAccessRoles` through their PLATFORM Init releases and pinned
+prerequisites. Then explicitly select
+`circa.ewaste:circaLocalOpeningStaffAssignments`, sample 0.0.2 under `sample-v001`,
+environment-portable and REFERENCE/RETAIN. Resolve current owner versions and
+checksums from Inventory's manifest. The group has employee ancestry and only
+`commerce.inventory.operate`. Its exact additive instructions are:
 
 | Human | Retained Enterprise |
 | --- | --- |
@@ -18,8 +22,9 @@ only `commerce.inventory.operate`. Its exact additive instructions are:
 | circa-repair-administrator | RENEWWORKS_REPAIR_REUSE |
 | circa-recycling-administrator | LOOPCYCLE_RECYCLING |
 
-The distinct `CIRCA_LOCAL_OPENING_INVENTORY` vocabulary in
-`config/properties.js` resolves to `commerceInventoryOpeningUserGroup`.
+Inventory's `COMMERCE_INVENTORY_OPENING` role references
+`commerceInventoryOpeningUserGroup`; both definitions are framework data, not
+Circa configuration. The demo staff records reference that exact role/group pair.
 Headers select `DefaultEmployeeService.addReferenceGroupsAll`, appending only
 missing reviewed groups and preserving original state through current-group and
 security-stamp CAS. Existing issuer roles already supply sample-import rights.
@@ -45,8 +50,11 @@ the original receipt and never restores sold/consumed quantities. No quantities,
 goods, stock records or provider flags are authorized by these role sources.
 
 The source handoff at
-`test/evidence/circa-bounded-human-role-source-handoff-2026-10-09.json` contains
-descriptors, hashes and adoption order for the coordinating manifest owner.
+`test/evidence/circa-bounded-human-role-source-handoff-2026-10-09.json` retains
+historical descriptors, hashes and adoption order, including the retired Circa
+role pack. Do not rewrite that evidence or use it as current import instructions.
+Existing installed roles/receipts require separately reviewed Profile
+reconciliation, not replay of employee snapshots or completed opening intake.
 Platform prerequisites and the forward sealed observation stay with their
 designated deployment owner. Run `node --test
 modules/circa.ewaste/test/circaBoundedHumanRoles.test.js` for exact source and

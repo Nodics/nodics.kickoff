@@ -12,6 +12,14 @@ Change this package only when the requested behavior belongs to this boundary. P
 
 ## Verification
 
+Enterprise setup inspection, privacy and resume qualifications remain independent,
+default-false process bindings on Local Platform only. Adopt resume qualification
+only after the installed owner evidence and scoped human approval; it enables no
+automatic continuation or registration. Fresh inspection and a separate explicit
+UI Resume retain the original setup key, actor checks and immutable intent.
+Run the setup qualification test in `test/configurationInheritanceContract.test.js`
+to check independent flags, sibling isolation and unchanged registration defaults.
+
 Local Platform explicitly selects `dynamo` and enables Runtime Governance for
 schema-owned provider configuration. Native Local tooling supplies the stable
 encryption prerequisite in its private generated credential file. Provider

@@ -26,7 +26,8 @@
       "nodics.platform",
       "nodics.communication",
       "nodics.engagement",
-      "nodics.accelerators/modules/nexus"
+      "nodics.accelerators/modules/nexus",
+      "nodics.accelerators/modules/waste/modules/eWaste"
     ],
     "runtimeIdentity": {
       "instanceCode": "kickoff-local-engagement-1",

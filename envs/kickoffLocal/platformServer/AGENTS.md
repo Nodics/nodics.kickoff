@@ -31,10 +31,12 @@ mixed-authority publication inventory as an executable plan. Each selected actio
 names one exact `afterPublicationStepCode`; foreign pending stages remain visible.
 Install the pre-sale ownership policy before genuine sales. These descriptors do
 not grant issuer permissions, seller consent, or private-owner qualification.
-Native preparation also requires the separate Profile Commerce setup role
-definitions, the forward publication requester Process-start pack and Circa's
-explicit merchant outlet scope pack. The new pack preserves previously installed
-publisher release bytes and grants neither review nor activation. Importing role
-definitions assigns no staff: preserve existing identities and use the authorized
-Profile operation for reviewed role additions, followed by fresh authentication.
-Never replay installed credential-bearing operations data to add these grants.
+Native preparation consumes canonical domain-owned access packs, including the
+Publication owner's Process-start contribution, through Profile. Do not restore
+duplicate Profile Commerce setup definitions. Optional Kickoff demo data may
+predefine demo identities, merchant outlet scopes and assignments; installing
+definitions alone assigns no staff. Preserve installed receipts and existing
+identities. Reviewed updates to existing assignments use authorized Profile
+operations followed by fresh authentication, never credential-bearing data replay.
+Neither definitions nor demo assignments grant review, activation, financial
+qualification or tenant bypass.

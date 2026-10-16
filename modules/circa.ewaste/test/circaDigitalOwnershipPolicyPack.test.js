@@ -27,7 +27,7 @@ test("separate explicit local v001 policy pack passes Waste contribution and dec
   assert.equal(section.sourceRoot, "sample-v001");
   assert.equal(section.version, "0.0.1");
   assert.equal(section.lifecycle, "REFERENCE");
-  assert.deepEqual(section.environmentScope, ["LOCAL"]);
+  assert.deepEqual(section.environmentScope, ["ALL"]);
   const entries = owner.validateHeader(header);
   assert.equal(entries.length, 3);
   for (const entry of entries) {

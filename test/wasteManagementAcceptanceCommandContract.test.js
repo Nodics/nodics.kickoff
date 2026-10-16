@@ -50,6 +50,9 @@ const owners = modules.filter(module => module.name === overlay.module);
 assert.equal(owners.length, 1);
 const dataRoot = path.join(owners[0].path, 'data');
 const section = require(path.join(dataRoot, 'manifest.json')).sections['waste-policy'];
+assert.equal(section.dataType, 'sample');
+assert.equal(section.sourceRoot, 'sample-v001');
+assert.equal(section.selectionPolicy, 'EXPLICIT');
 const policy = require(path.join(frameworkRoot, 'nodics.waste/modules/wasteCore/src/service/defaultWasteDataContributionPolicyService'));
 policy.validateManifestSection(section);
 const headerFiles = Object.keys(section.files).filter(file => file.includes('/headers/'));
@@ -74,9 +77,8 @@ for (const [schema, code] of [
 
 const profile = effective.properties.data.dataReleases.initializationProfiles.localWasteFoundation;
 assert.equal(profile.enabled, true);
-const core = profile.steps.filter(step => step.dataType === 'core');
-assert(core.length > 0);
-const releases = core.flatMap(step => step.releaseCodes || []);
-assert(releases.includes('eWaste:core-reference'));
-assert(releases.includes(overlay.releaseCode));
+assert.deepEqual(profile.steps, [
+  { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },
+  { dataType: 'sample', releaseCodes: [overlay.releaseCode] },
+], 'Framework references precede the explicit demo policy without importing demo transactions');
 console.log('Waste framework acceptance adoption validated');

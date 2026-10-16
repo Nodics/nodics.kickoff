@@ -13,10 +13,10 @@
 
 /**
  * @module nodics.kickoff/modules/config/prescripts
- * @description Shared Nodics Kickoff project-module pre-start script declarations.
+ * @description Preserves an empty pre-start boundary for the non-runtime module group.
  * @layer config
  * @owner kickoffModules
- * @override Later active project modules may override these declarations through configuration layering.
+ * @override Do not add group startup behavior; genuine project hooks belong to selected child modules.
  */
 module.exports = {
 

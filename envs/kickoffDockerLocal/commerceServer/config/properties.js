@@ -1,14 +1,14 @@
 module.exports = {
-  "activeModules": {
-    "groups": [
+  activeModules: {
+    groups: [
       {
-        "$config": "composition",
-        "name": "agora",
-        "field": "frameworkGroups",
-        "spread": true
-      }
+        $config: "composition",
+        name: "agora",
+        field: "frameworkGroups",
+        spread: true,
+      },
     ],
-    "modules": [
+    modules: [
       "redisCache",
       "search",
       "elastic",
@@ -16,11 +16,11 @@ module.exports = {
       "commerceSearch",
       "digitalCommerce",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "sharedModules",
-        "includes": "domainCommerceCore",
-        "value": "domainCommerceCore"
+        $config: "selected",
+        name: "agora",
+        field: "sharedModules",
+        includes: "domainCommerceCore",
+        value: "domainCommerceCore",
       },
       "nodics.kickoff",
       "kickoffCore",
@@ -29,11 +29,11 @@ module.exports = {
       "circa.ewaste",
       "digitalCore",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": "apparelProduct"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "apparel",
+        value: "apparelProduct",
       },
       "cart",
       "checkoutCore",
@@ -44,11 +44,11 @@ module.exports = {
       "discoveryRanking",
       "discoverySource",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "electronics",
-        "value": "electronicsProduct"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "electronics",
+        value: "electronicsProduct",
       },
       "fulfillmentCore",
       "inventory",
@@ -60,25 +60,25 @@ module.exports = {
       "store",
       "tax",
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "telcoCatalog"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "telcoCatalog",
       },
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "telcoProvisioning"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "telcoProvisioning",
       },
       {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "telcoSubscription"
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "telcoSubscription",
       },
       "cardPayment",
       "walletPayment",
@@ -90,105 +90,114 @@ module.exports = {
       "paypalProvider",
       "cyberSourceProvider",
       "visaProvider",
-      "loyaltyRewardProvider"
-    ]
+      "loyaltyRewardProvider",
+    ],
   },
-  "runtimeRole": {
-    "code": "COMMERCE",
-    "publication": "OPERATIONAL"
+  runtimeRole: {
+    code: "COMMERCE",
+    publication: "OPERATIONAL",
   },
-  "database": {
-    "default": {
-      "mongodb": {
-        "master": {
-          "databaseName": "kickoffDockerLocalCommerce"
-        }
-      }
-    }
-  },
-  "servers": {
-    "default": {
-      "endpoint": {
-        "httpHost": "0.0.0.0",
-        "httpPort": 4350,
-        "httpsHost": "0.0.0.0",
-        "httpsPort": 4351
-      },
-      "browserEndpoint": {
-        "httpHost": "localhost",
-        "httpPort": 5350
-      },
-      "abstractEndpoint": {
-        "httpHost": "commerce",
-        "httpPort": {
-          "$config": "ref",
-          "path": "servers.default.endpoint.httpPort"
+  database: {
+    default: {
+      mongodb: {
+        master: {
+          databaseName: "kickoffDockerLocalCommerce",
         },
-        "httpsHost": "commerce",
-        "httpsPort": {
-          "$config": "ref",
-          "path": "servers.default.endpoint.httpsPort"
-        }
-      }
-    }
-  },
-  "runtimeAuthorityContexts": {
-    "modules": {
-      "apparelProduct": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "apparel",
-        "value": "commerce.operational"
       },
-      "cart": true,
-      "checkoutCore": true,
-      "commerceSearchCore": true,
-      "shoppingList": true,
-      "digitalCore": true,
-      "discoveryConfig": true,
-      "discoveryMapping": true,
-      "discoveryProjection": true,
-      "discoveryRanking": true,
-      "discoverySource": true,
-      "electronicsProduct": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "electronics",
-        "value": "commerce.operational"
-      },
-      "fulfillmentCore": true,
-      "inventory": true,
-      "order": true,
-      "paymentCore": true,
-      "pricing": true,
-      "product": true,
-      "promotion": true,
-      "store": true,
-      "tax": true,
-      "telcoCatalog": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "commerce.operational"
-      },
-      "telcoProvisioning": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "commerce.operational"
-      },
-      "telcoSubscription": {
-        "$config": "selected",
-        "name": "agora",
-        "field": "domains",
-        "includes": "telco",
-        "value": "commerce.operational"
-      }
     },
-    "default": "commerce.operational"
-  }
+  },
+  servers: {
+    default: {
+      endpoint: {
+        httpHost: "0.0.0.0",
+        httpPort: 4350,
+        httpsHost: "0.0.0.0",
+        httpsPort: 4351,
+      },
+      browserEndpoint: {
+        httpHost: "localhost",
+        httpPort: 5350,
+      },
+      abstractEndpoint: {
+        httpHost: "commerce",
+        httpPort: {
+          $config: "ref",
+          path: "servers.default.endpoint.httpPort",
+        },
+        httpsHost: "commerce",
+        httpsPort: {
+          $config: "ref",
+          path: "servers.default.endpoint.httpsPort",
+        },
+      },
+    },
+  },
+  runtimeAuthorityContexts: {
+    modules: {
+      apparelProduct: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "apparel",
+        value: "commerce.operational",
+      },
+      cart: true,
+      checkoutCore: true,
+      commerceSearchCore: true,
+      shoppingList: true,
+      digitalCore: true,
+      discoveryConfig: true,
+      discoveryMapping: true,
+      discoveryProjection: true,
+      discoveryRanking: true,
+      discoverySource: true,
+      electronicsProduct: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "electronics",
+        value: "commerce.operational",
+      },
+      fulfillmentCore: true,
+      inventory: true,
+      order: true,
+      paymentCore: true,
+      pricing: true,
+      product: true,
+      promotion: true,
+      store: true,
+      tax: true,
+      telcoCatalog: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "commerce.operational",
+      },
+      telcoProvisioning: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "commerce.operational",
+      },
+      telcoSubscription: {
+        $config: "selected",
+        name: "agora",
+        field: "domains",
+        includes: "telco",
+        value: "commerce.operational",
+      },
+    },
+    default: "commerce.operational",
+  },
+  schemaPolicies: {
+    runtimeRoleProfiles: {
+      COMMERCE: {
+        product: {
+          catalogueVersioned: { isVersionedEnabled: false },
+        },
+      },
+    },
+  },
 };

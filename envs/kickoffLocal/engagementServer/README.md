@@ -21,6 +21,14 @@ fails closed; never replace it with the shared bootstrap or administrator key.
 After a full Local reset, an authenticated operator must reprovision the approved
 deployment grants through Profile before restarting this runtime.
 
+This deployment's governed Profile assignment requires the Communication owner's
+`communication.request` definition to resolve an existing Telegram destination
+through Profile. Rights come from the module-owned Profile-managed pack, not a
+migration permission property. Optional demo assignment data selects this exact
+deployment; changes to installed authority require authorized Profile operations.
+Neither the definition nor assignment grants another deployment or authorizes a
+new recipient. Verify installed authority separately.
+
 ## Employee email test binding
 
 This server selects the existing SMTP provider for controlled employee-email
@@ -28,15 +36,23 @@ checks. Sending stays disabled without `NODICS_EMPLOYEE_SMTP_ENABLED=true` and
 complete approved test inputs. Secrets resolve in this sending runtime, not in
 Platform, Axis or another deployment. Existing Telegram/waste delivery is retained.
 
-The explicit Local capture allowlist is exactly `admin`, `operator`, `applicant`,
-`reviewer`, `reviewer2` and `reviewer3` at `axis-onboarding-acceptance.test`.
+The explicitly approved isolated Local capture allowlist is exactly `admin` and
+`operator` at `circa-ui-acceptance-20261013.test`. Existing demo/financial accounts
+and their records remain untouched; they are not fresh registration nominees.
 Recipient environment inputs cannot broaden this list. Preserve disabled-by-default
 sending, credential-free defaults, test-only/non-live qualification and the SMTP
 owner's loopback-only plaintext exception. These are configuration checks, not
 approval to connect or send.
 
 The project binding and three Profile-purpose template selections are documented
-in [Local employee email](../../../data/docs-v001/records/documentation/kickoffDocumentationComponentData.js#local-employee-email-sending-runtime-configuration).
+in [Local employee email](../../../../data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js#local-employee-email-sending-runtime-configuration).
 Run `node --test test/communicationActivationDataContract.test.js` from the project
 root for non-sending effective-configuration checks. Configuration health is not
 SMTP authentication, inbox receipt or full employee-journey acceptance.
+
+The SMTP owner's explicit `test/localSmtpCapture.mjs` harness may capture this
+approved pair at `127.0.0.1:2525`, with no relay and loopback-only plaintext.
+Use its private `readBinding` handoff for the sending process only; do not print
+the binding or change shared credentials. Backend restart, registration adoption
+and real Axis provisioning remain separate parent-operated actions. Artificial
+capture probes are not OTP or completed registration evidence.

@@ -1,5 +1,31 @@
 # Agora Electronics data ownership
 
+## Reference Demo Inventory
+
+The maintainer-approved demo-only boundary supersedes the previous blanket
+no-relocation rule for this reference module. It does not restrict real partner
+customizations in their own modules. `nodics.referenceDemo: true` is checked by
+the existing nTooling design-principle audit and project validation command.
+
+- `src/`: absent. Reusable schemas, validation and projection services already
+  belong to `nodics.accelerators/modules/electronics` and their Commerce owners.
+- `config/properties.js`: explicit site/catalog/media selection, publication
+  baseline and BackOffice demo profile. These select USER-triggered setup and
+  retain normal publication approval; they do not own setup execution.
+- `nodics.js`, `config/prescripts.js`, `config/postscripts.js`: inert hooks only.
+- `data/sample-v001`: fictional catalog/content/media records and local record
+  assembly helpers. Helpers assemble this pack's records, not runtime services.
+  Manifest sections require EXPLICIT selection; no init/core activation data.
+- Access: no permission, role, user-group or runtime-assignment definitions.
+  Catalog `accessGroups` and page `accessMode` only reference existing authority.
+- No aliases, framework dependence on this pack, live import or receipt rewrite
+  is introduced. Source selection changes do not migrate an installed release.
+
+Electronics contributes existing specification/product fixtures only. This
+inventory adds no device, warranty, repair or fulfillment implementation and
+does not claim those journeys are complete.
+
+
 Commerce release `0.0.1` (`sample-v001`) contains publishable catalog/policy
 records only. Stock balances require Inventory-owned Online operations and are
 not Staged imports. The pre-customer development iterations are consolidated;

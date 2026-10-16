@@ -4,7 +4,26 @@ Local Waste declares remote digitalCore/product and commerce.digital.own.read
 for Commerce's exact protected ownership evidence and current Product status.
 This is the existing signed deployment grant, not a service-group addition,
 generic schema access or digital settlement qualification. Preserve the complete
-permission replacement list and existing remote modules when changing this pin.
+governed Profile assignment and existing remote modules when changing this pin.
+Access definitions belong to their implementing owners' Profile-managed packs,
+not a server-property permission replacement list.
+
+The separately approved native Local Product/Pricing listing read adds only
+`commerce.product.read`, remote `pricing` and the exact remote-only extension
+`["pricing"]`, after the Pricing writer guard's independent review. Preserve
+GREENPERKS_ONLINE / circaMainStore / circaPointsPriceBook and the existing
+enterprise scope. Never map Waste into Pricing publication writers, activate
+Pricing here, rewrite frozen tenant snapshots or infer handoff enablement from
+this read grant. Source changes can be observed by Profile's sibling resolver
+before restart. Stop the old topology before grant reconciliation and verify the
+new Pricing guard's installed/source match before any listing call.
+
+The separately reviewed Local listing workflow explicitly enables the shared
+`eWaste.marketplace.listingHandoff.enabled` feature. This permits retained intent
+capture and pending completion; never describe it as read-only or auto-execute an
+old command. Preserve runtime-property layering and current human admission;
+require positive native describe readback after restart, inspect the queue first,
+and leave completion to the separately authorized human action.
 
 The human approved native-Local `loyalty.rewards.earn` and
 `loyalty.rewards.reverse` for this deployment's asset proceeds and original
@@ -13,17 +32,23 @@ other grants. These permissions do not authorize a human demo credit, qualify
 settlement, permit general employee earnings or enable redeemed-benefit refunds.
 Docker and sibling runtimes must not inherit these additions.
 
+The human separately approved native Local `commsApi` remote scope and bounded
+`communication.request` for existing outcome intents. Preserve all other scope
+entries and the signed deployment identity. Profile owns governed assignment
+updates; startup validates retained grants without expanding them. This is not
+SMTP or notification delivery qualification.
+
 - Keep the Local Circa arrival-radius fallback at 200 metres in this server's
   properties; the application fallback remains 50 metres. Preserve the explicit
   environment override and test effective startup without an injected radius.
 - The server index must follow the Circa application index so deployment policy
   overrides application defaults through the standard nConfig loading order.
 
-- The native Local deployment explicitly permits `profile.externalIdentity.prepare`
-  for verified customer channel handoffs. Keep the existing deployment permissions
-  in the replacement list because ordinary arrays merge positionally. Profile's
-  native bootstrap owns reconciliation; no acceptance script or customer token
-  may acquire service permissions, and revoked grants remain revoked.
+- Verified customer channel handoffs require `profile.externalIdentity.prepare`
+  from its owner-defined Profile-managed pack and this deployment's governed
+  assignment. Preserve existing assignment scope through authorized Profile
+  updates, never server permission-array replacement. No acceptance script or
+  customer token may acquire service permissions; revoked grants remain revoked.
 
 - Follow the Nodics Kickoff project contract from the repository root `AGENTS.md`.
 - Follow every ancestor `AGENTS.md` before changing this server boundary.
@@ -42,7 +67,7 @@ deployment grants through Profile before restarting this runtime.
 
 Native digital ownership evidence selects only Commerce, Loyalty and Platform
 target roles here, requests the `digitalCore` and `product` remote modules, and
-adds bounded `commerce.digital.own.read` to the deployment permission request.
+requires bounded `commerce.digital.own.read` in the governed Profile assignment.
 The native selection admits only the original Commerce deployment's `apiAdmin`
 runtime for the GREENPERKS_ONLINE business scope, and selects Profile's exact
 customer-evidence route with its bounded read permission. These declarations

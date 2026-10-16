@@ -15,18 +15,27 @@ benefits. Original purchase terms remain immutable.
 | Original purchased coupon | `CIRCA_COUPON_GP-A01_BATCH:1` |
 | Maximum effect | Full original capture of 50 POINTS, once |
 
-## Repeatable Setup
+## Fresh Setup And Historical Receipts
 
-Select the independent `circa.ewaste:circaLocalUnusedRefundExceptionRole`
-sample release on PLATFORM, then
-`circa.ewaste:circaLocalUnusedRefundExceptionStaffAssignment`. Both are
-explicit Local-only REFERENCE selections in `sample-v001`, version `0.0.1`.
-The first defines only `commerce.refund.exception.adjudicate`; the second adds
-`CIRCA_LOCAL_UNUSED_REFUND_EXCEPTION` to the original
-`circa-online-administrator` through Profile's additive reference-group owner.
+Select `order:specialAccessGroups` before `order:specialAccessRoles` through their
+PLATFORM Init releases and pinned prerequisites. Order owns the reusable
+`COMMERCE_REFUND_EXCEPTION_REVIEW` role and
+`commerceRefundExceptionReviewerUserGroup`, whose special permission is
+`commerce.refund.exception.adjudicate`. Resolve owner versions and checksums from
+Order's manifest. Then explicitly select
+`circa.ewaste:circaLocalUnusedRefundExceptionStaffAssignment`, the environment-portable
+REFERENCE sample 0.0.2 under `sample-v001`. It adds those exact role/group references
+to the original `circa-online-administrator` through Profile's additive
+reference-group owner. No Circa role pack or configuration vocabulary remains.
 Neither selection changes credentials, replaces prior groups, grants scopes,
 executes Payment or supplies a financial approval. Existing refund-review and
 execution permissions remain independently required.
+
+The original Circa role selections, receipt pins and completed refund evidence
+remain historical records. Preserve their bytes without compatibility imports or
+replay. Existing installations require separately reviewed Profile access
+reconciliation; selecting new source definitions never re-executes the original
+refund or qualifies installed authority.
 
 The exact original case/purchase binding belongs to the native Commerce server
 configuration, not to reusable framework defaults or the role. Docker and

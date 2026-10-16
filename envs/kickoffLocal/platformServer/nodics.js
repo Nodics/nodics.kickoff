@@ -9,7 +9,7 @@
 
  */
 
-'use strict';
+"use strict";
 
 /**
  * @module envs/kickoffLocal/platformServer/nodics
@@ -19,23 +19,23 @@
  * @override Customer projects may extend or replace this artifact in their own project layer.
  */
 module.exports = {
-    /**
-     * Initializes this Kickoff lifecycle boundary.
-     *
-     * @param {Object} options Optional lifecycle context.
-     * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
-     */
-    init: function (options) {
-        return Promise.resolve(true);
-    },
+  /**
+   * Initializes this Kickoff lifecycle boundary.
+   *
+   * @param {Object} options Optional lifecycle context.
+   * @returns {Promise<boolean>} Resolves true when no boundary-specific startup behavior is required.
+   */
+  init: function (options) {
+    return Promise.resolve(true);
+  },
 
-    /**
-     * Delegates configured knowledge ingestion after server dependencies initialize.
-     *
-     * @param {Object} options Optional lifecycle context.
-     * @returns {Promise<boolean>} Resolves after the framework startup policy completes.
-     */
-    postInit: function (options) {
-        return SERVICE.DefaultCopilotKnowledgeRuntimeService.ingestOnStart();
-    }
+  /**
+   * Finalizes the customer server boundary without duplicating owner lifecycle work.
+   *
+   * @param {Object} options Optional lifecycle context.
+   * @returns {Promise<boolean>} Resolves when no customer-specific work is selected.
+   */
+  postInit: function (options) {
+    return Promise.resolve(true);
+  },
 };

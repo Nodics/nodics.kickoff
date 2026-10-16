@@ -49,9 +49,12 @@ file order. BackOffice owns the dependency-ordered preparation and Axis exposes
 its exact stage projection. Customer applications do not add a second installer.
 
 1. Normal Profile initialization prepares existing merchant/base group definitions.
-2. Select Profile core 0.0.1 commerceSetupPublisherRole,
-   commercePublicationStarterRole, commerceCouponIssuerRole and
-   commerceAxisRefundReviewerRole explicitly.
+2. Select the implementing owners' `product:accessGroups`,
+   `publish:accessGroups`, `promotion:accessGroups` and `order:accessGroups`
+   sections at their current manifest-pinned versions. These provide the
+   setup-publisher, publication-starter, coupon-issuer and refund-reviewer
+   contributions under Profile governance; no retired Profile core role pack
+   is required.
 3. Prepare Circa's existing operations sample 0.0.1 for the fresh demo employees,
    enterprise masters and original operational scopes.
 4. Select circa.ewaste:circaMerchantOutletAccess sample 0.0.1, retaining the four
@@ -80,7 +83,7 @@ The required operation contract is:
   enterpriseCode, roleCodes, groupCodes. No arbitrary update body or credential
   fields; repeated identities and duplicate groups reject before writes.
 - Resolve the selected roleCodes through Profile's current enterprise access
-  role vocabulary and require exact configured groupCodes. No administrative
+  persisted role vocabulary and require exact owner-declared groupCodes. No administrative
   role class, runtime-admin or administrator group may be added.
 - Read every target through the generated Employee owner using fresh,
   non-recursive exact code/login lookup, rejecting missing/ambiguous/inactive,

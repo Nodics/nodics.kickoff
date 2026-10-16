@@ -38,16 +38,16 @@ const modules = {
 const selection = (releaseCodes) => ({
   tenant: "default",
   releaseRequest: {
-    dataType: "core",
+    dataType: releaseCodes.includes("circa.ewaste:waste-policy") ? "sample" : "core",
     releaseCodes,
     expectedReleases: {
       "eWaste:core-reference": "0.0.1",
-      "circa.ewaste:waste-policy": "0.0.1",
+      "circa.ewaste:waste-policy": "0.0.2",
     },
   },
 });
 
-test("real source dependency and exact selected versions fail closed before importing", async () => {
+test("current core discovery and exact sample versions fail closed before importing", async () => {
   const state = createHarness(modules);
   const releases = state.service.discoverReleases("core");
   assert.equal(
@@ -58,22 +58,10 @@ test("real source dependency and exact selected versions fail closed before impo
     releases.some((item) => item.releaseCode === "eWaste:core-v001"),
     false,
   );
-  await assert.rejects(
-    state.service.preflight(selection(["circa.ewaste:waste-policy"])),
-    /matching lower-layer release/,
-  );
-  const stale = selection([
-    "eWaste:core-reference",
-    "circa.ewaste:waste-policy",
-  ]);
-  stale.releaseRequest.expectedReleases["eWaste:core-reference"] = "0.0.0";
-  await assert.rejects(
-    state.service.preflight(stale),
-    /changed after selection/,
-  );
-  await state.service.preflight(
-    selection(["circa.ewaste:waste-policy", "eWaste:core-reference"]),
-  );
+  const stale = selection(["circa.ewaste:waste-policy"]);
+  stale.releaseRequest.expectedReleases["circa.ewaste:waste-policy"] = "0.0.1";
+  await assert.rejects(state.service.preflight(stale), /changed after selection/);
+  await state.service.preflight(selection(["circa.ewaste:waste-policy"]));
   assert.equal(state.imports.length, 0);
 });
 
@@ -88,9 +76,8 @@ test("reference adoption preserves customer additions and final policy without s
     "wasteImpactResult:saved-assessment",
     structuredClone(historical),
   );
-  await state.service.execute(
-    selection(["circa.ewaste:waste-policy", "eWaste:core-reference"]),
-  );
+  await state.service.execute(selection(["eWaste:core-reference"]));
+  await state.service.execute(selection(["circa.ewaste:waste-policy"]));
   assert.deepEqual(
     state.imports.map((request) => request.dataReleasePlan.at(-1).releaseCode),
     ["eWaste:core-reference", "circa.ewaste:waste-policy"],
@@ -117,15 +104,11 @@ test("reference adoption preserves customer additions and final policy without s
     ["wasteImpactProfile", "eWasteImpactProfileData"],
   ]) {
     for (const record of Object.values(
-      require("../data/core-v001/waste-policy/records/" + filename),
+      require("../data/sample-v001/waste-policy/records/" + filename),
     )) {
-      const baseline = Object.values(require(path.join(ew, "data/core-v001/records/waste/" + filename)))
-        .find(row => row.code === record.code);
-      const expected = require(path.join(framework, "nodics.foundation/modules/nData/nImport/jsImport/src/service/init/defaultJsFileDataProcessService"))
-        .mergeModel(structuredClone(baseline || {}), record);
       assert.deepEqual(
         state.models.get(schema + ":" + record.code),
-        expected,
+        record,
         record.code,
       );
     }
@@ -154,7 +137,7 @@ test("reference adoption preserves customer additions and final policy without s
   );
 });
 
-test("CURRENT baseline supplies source fields without replaying unrelated records", async () => {
+test("materialized sample preserves unrelated CURRENT core records without replay", async () => {
   const state = createHarness(modules);
   await state.service.execute(selection(["eWaste:core-reference"]));
   state.models.get("wasteFamily:ELECTRONICS").name.en =
@@ -172,7 +155,27 @@ test("CURRENT baseline supplies source fields without replaying unrelated record
     false,
   );
   assert.equal(state.models.get("wasteCategory:MOBILE_DEVICE").revision, 2);
-  assert.equal(state.imports[1].dataReleasePlan[0].sourceOnly, true);
+  assert.equal(state.imports[1].dataReleasePlan.length, 1);
+  assert.notEqual(state.imports[1].dataReleasePlan[0].sourceOnly, true);
+});
+
+test("materialized policy sample imports independently of historical core composition", async () => {
+  const state = createHarness(modules);
+  await state.service.execute(selection(["circa.ewaste:waste-policy"]));
+  assert.equal(state.imports.length, 1);
+  assert.equal(state.imports[0].dataReleasePlan.length, 1);
+  assert.equal(state.imports[0].dataReleasePlan[0].dataType, "sample");
+  for (const [schema, filename] of [
+    ["wasteCategory", "eWasteCategoryData"],
+    ["wasteCollectionPreset", "eWasteCollectionPresetData"],
+    ["wasteCollectionAcceptanceRule", "eWasteAcceptanceRuleData"],
+    ["wasteImpactProfile", "eWasteImpactProfileData"],
+  ]) {
+    for (const record of Object.values(require("../data/sample-v001/waste-policy/records/" + filename))) {
+      assert.deepEqual(state.models.get(schema + ":" + record.code), record, record.code);
+    }
+  }
+  assert.equal(state.writes.some(write => ["wasteFamily", "wasteSubmission", "wasteAsset", "wasteImpactResult"].includes(write.schema)), false);
 });
 
 test("the required demo pack remains explicit v001 and separate from reference datasets", () => {

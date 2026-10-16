@@ -14,7 +14,8 @@ const instructions = Object.values(require("../data/sample-v001/staff-access/rec
 const employees = Object.values(require("../data/sample-v001/operations/records/circaOperationalEmployeeData"));
 const scopes = Object.values(require("../data/sample-v001/outlet-access/records/circaMerchantOutletScopeData"));
 const profileRoot = path.join(frameworkRoot, "nodics.platform/modules/profile");
-const roles = require(path.join(profileRoot, "config/properties")).enterpriseManagement.accessAssignments.roles;
+const identityFixture = require(path.join(profileRoot, "test/helpers/identityCatalogueFixture"));
+const roles = identityFixture.roles();
 const hash = value => crypto.createHash("sha256").update(value).digest("hex");
 
 test("new explicit v001 forward section owns only additive instructions and leaves installed role/operations/outlet sections unchanged", () => {
@@ -25,7 +26,7 @@ test("new explicit v001 forward section owns only additive instructions and leav
   assert.equal(section.destinationRole, "PLATFORM");
   assert.equal(section.selectionPolicy, "EXPLICIT");
   assert.equal(section.lifecycle, "REFERENCE");
-  assert.deepEqual(section.environmentScope, ["LOCAL", "LOCAL_PRODUCTION_SIMULATION"]);
+  assert.deepEqual(section.environmentScope, ["ALL"]);
   assert.equal(section.removalPolicy, "RETAIN");
   assert.equal(section.publicationPolicy, "NONE");
   assert.equal(Object.keys(section.files).length, 2);
@@ -40,10 +41,11 @@ test("new explicit v001 forward section owns only additive instructions and leav
     "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0");
   assert.equal(manifest.sections.circaMerchantOutletAccess.files["sample-v001/outlet-access/records/circaMerchantOutletScopeData.js"],
     "e996668088ae93b28ff553eaaaadfd3e2f9e1d2ada5db39548a7c6b53f7b5c80");
-  const profileManifest = require(path.join(profileRoot, "data/manifest.json"));
-  for (const code of ["init-v001", "commerceSetupPublisherRole", "commercePublicationStarterRole", "commerceCouponIssuerRole", "commerceAxisRefundReviewerRole"])
-    for (const [file, checksum] of Object.entries(profileManifest.sections[code].files))
-      assert.equal(hash(fs.readFileSync(path.join(profileRoot, "data", file))), checksum);
+  for (const owner of ["nodics.commerce/modules/baseCommerce/modules/product", "nodics.foundation/modules/nPublish", "nodics.commerce/modules/baseCommerce/modules/promotion", "nodics.commerce/modules/checkout/modules/order"]) {
+    const root = path.join(frameworkRoot, owner, "data");
+    for (const [file, checksum] of Object.entries(require(path.join(root, "manifest.json")).sections.accessGroups.files))
+      assert.equal(hash(fs.readFileSync(path.join(root, file))), checksum);
+  }
   for (const code of ["operations", "circaMerchantOutletAccess"])
     for (const [file, checksum] of Object.entries(manifest.sections[code].files))
       assert.equal(hash(fs.readFileSync(path.join(__dirname, "../data", file))), checksum);
@@ -110,7 +112,7 @@ test("all exact publisher/issuer/merchant assignments are predefined without gra
     ["circa-online-administrator"]);
 });
 
-test("actual layered kickoffLocal role configuration admits every predefined instruction through the real Profile operation", async t => {
+test("persisted owner role definitions admit every predefined instruction through the real Profile operation", async t => {
   const runtime = loadRuntime("platformServer");
   const previous = Object.fromEntries(["CONFIG", "SERVICE", "CLASSES"].map(key => [key, global[key]]));
   t.after(() => Object.assign(global, previous));
@@ -123,6 +125,7 @@ test("actual layered kickoffLocal role configuration admits every predefined ins
   const ok = result => ({ code: "SUC_FIXTURE_READ", count: result.length, result });
   const authData = { userGroups: ["original-import-owner"] };
   global.SERVICE = {
+    DefaultIdentityCatalogueService: identityFixture.catalogue(roles),
     DefaultUserGroupService: { get: async read => {
       assert.equal(read.authData, authData);
       return ok(read.query.code.$in.map(code => ({ code, active: true })));
@@ -137,7 +140,8 @@ test("actual layered kickoffLocal role configuration admits every predefined ins
     return ok(adopted.filter(row => read.query.$or.some(part =>
       Object.entries(part).every(([field, value]) => row[field] === value))));
   }, update: () => assert.fail("Already adopted roles must be a no-op") };
-  assert.deepEqual(runtime.enterpriseManagement.accessAssignments.roles.COMMERCE_SETUP_PUBLISHER.groupCodes,
+  assert.equal(runtime.enterpriseManagement.accessAssignments.roles, undefined);
+  assert.deepEqual(roles.COMMERCE_SETUP_PUBLISHER.groupCodes,
     ["commerceSetupPublisherUserGroup", "commercePublicationStarterUserGroup"]);
   assert.deepEqual(await owner.addReferenceGroupsAll({ tenant: "default", authData, models: instructions }),
     { result: instructions.map(row => ({ code: row.code })) });

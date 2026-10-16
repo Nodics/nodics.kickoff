@@ -10,7 +10,27 @@ This group boundary owns the areas declared in `package.json.nodics.owns`. It mu
 
 Change this package only when the requested behavior belongs to this boundary. Prefer layered configuration, data, environment, server, or module overrides before changing framework source.
 
+Runtime rights come from implementing modules' Profile-managed access packs and
+governed Profile assignments, not migration permission properties. Optional demo
+assignment data binds selected identities to exact deployments; changes to existing
+grants require authorized Profile operations. Signed instances, endpoints and
+namespace extensions remain runtime configuration or assignment coordinates;
+`profileTenantProvisioning.runtimeRemoteModuleExtensions` stays with its owning
+server. Bootstrap selection cannot restore revoked rights or widen retained grants.
+Circa demo release metadata is portable, while `SIMULATION`, exact environment
+allowlists and reviewed credit/refund/provider selections remain deployment-owned.
+No other environment is enabled by importing or copying the demo source.
+
 ## Verification
+
+Local Store placement exposure is selected by the environment's COMMERCE role
+profile; Product Store and intent proof transports are selected by its
+COMMERCE_STAGED role profile. Exact caller/Store and signed-instance pins remain
+runtime configuration or assignment data; access definitions and assignments
+remain with their implementing owners and Profile. These read selections neither provision Stores nor resume
+enterprise setup. Run `node --test test/commerceOwnershipEvidenceAdoption.test.js
+test/configurationInheritanceContract.test.js` from the project root to check
+resolved isolation and canonical project validation before rebuilding.
 
 Product discovery reads activated versions for Circa and composition-selected
 Agora Stores. Source imports remain Staged until their normal owner approvals;

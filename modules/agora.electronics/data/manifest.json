@@ -4,6 +4,7 @@
   "sections": {
     "agoraElectronicsCommerceCatalog": {
       "kind": "DATA_RELEASE",
+      "selectionPolicy": "EXPLICIT",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",
@@ -36,6 +37,7 @@
     },
     "agoraElectronicsContentCatalog": {
       "kind": "DATA_RELEASE",
+      "selectionPolicy": "EXPLICIT",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",

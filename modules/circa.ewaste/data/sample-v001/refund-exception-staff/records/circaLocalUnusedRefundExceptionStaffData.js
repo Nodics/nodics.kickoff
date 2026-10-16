@@ -6,7 +6,7 @@ module.exports = {
     code: "circa-online-administrator",
     loginId: "online.administrator@circa.local",
     enterpriseCode: "GREENPERKS_ONLINE",
-    roleCodes: ["CIRCA_LOCAL_UNUSED_REFUND_EXCEPTION"],
-    groupCodes: ["circaLocalUnusedRefundExceptionUserGroup"],
+    roleCodes: ["COMMERCE_REFUND_EXCEPTION_REVIEW"],
+    groupCodes: ["commerceRefundExceptionReviewerUserGroup"],
   },
 };

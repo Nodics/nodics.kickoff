@@ -131,6 +131,8 @@ test("actual Local/Docker package projection and selected profiles never automat
       const startup = await service.installStartupReleases({ tenant: 'default' });
       process.stdout.write(JSON.stringify({
         role: CONFIG.get('runtimeRole').code,
+        startupEnabled: service.configuration().types.init.enabled !== false &&
+          service.configuration().types.init.startupExecution !== false,
         editorialActive: NODICS.getActiveModules().includes('editorial'),
         packages: registration.buildActivationDataPackages('editorial', NODICS.getRawModule('editorial')),
         discoverable: service.discoverReleases('init').some(release => release.releaseCode === 'editorial:editorialWorkflows'),
@@ -167,7 +169,12 @@ test("actual Local/Docker package projection and selected profiles never automat
       assert.equal((result.startup.plannedCodes || []).includes("editorial:editorialWorkflows"), false);
       if (server === "wcmsStagedServer") {
         assert.ok(result.profiles.some(profile => profile.codes.includes("editorial:init-v001")));
-        assert.ok(result.startup.plannedCodes.includes("editorial:init-v001"));
+        if (result.startupEnabled) {
+          assert.ok(result.startup.plannedCodes.includes("editorial:init-v001"));
+        } else {
+          assert.deepEqual(result.startup, { skipped: true, reason: "INIT_DISABLED" },
+            "Disabled startup imports cannot be inferred from discoverable profiles");
+        }
       }
     }
   }

@@ -22,6 +22,7 @@
         "loadableByNodicsModuleLoader": true,
         "owns": [
             "configuration",
+            "data",
             "llm"
         ],
         "runtime": {

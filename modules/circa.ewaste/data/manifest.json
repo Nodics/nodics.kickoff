@@ -13,8 +13,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -39,8 +38,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "LOCATION",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -50,7 +48,8 @@
       "files": {
         "sample-v001/location/headers/circaLocationSampleHeader.js": "2aa5d1c510c3b71f1231f9f98d97d010fb1fdcffbbb57c3ebc8f4676900670d9",
         "sample-v001/location/records/circaLocationData.js": "b541cebf5e4dccc256f31b4869ecbcaa243f7e21d5910f0b9859f8d419398c75"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "waste": {
       "kind": "DATA_RELEASE",
@@ -63,8 +62,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "WASTE",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -85,9 +83,9 @@
     },
     "waste-policy": {
       "kind": "DATA_RELEASE",
-      "dataType": "core",
-      "sourceRoot": "core-v001",
-      "version": "0.0.1",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.2",
       "displayName": "Circa Waste Policy",
       "description": "Circa-owned Waste policy records extending and overriding eWaste presets through nodics.waste schemas.",
       "owningDomain": "waste",
@@ -102,12 +100,12 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "core-v001/waste-policy/headers/eWastePresetHeader.js": "7b23fa5e15d419547c65bc174359fa1839d65bc622ee7a1fbfb34cb7e11613e1",
-        "core-v001/waste-policy/records/eWasteAcceptanceRuleData.js": "79d353bc70503bb8235349eefcab27a10c9d4afa7774c820d62f8f8122d74d04",
-        "core-v001/waste-policy/records/eWasteCategoryData.js": "9a0471b2532d87cd64213950c3fabff8f0c8770ef6fcfec630392f66ff4c32d1",
-        "core-v001/waste-policy/records/eWasteCollectionPresetData.js": "8b630eb002c35b24e5ed7af0d40921668e9919c980d4c30b92b91624afe43447",
-        "core-v001/waste-policy/records/eWasteImpactProfileData.js": "7c3407eb2aa253bd4f1ad5aef40fe7485410457c1f1ee5a3083a93840a0b45b3",
-        "core-v001/waste-policy/records/eWasteItemTypeData.js": "659244ed497878046f502c67c55a61bad8780a73d2ac2293037fa8a5b68cbef9"
+        "sample-v001/waste-policy/headers/eWastePresetHeader.js": "7b23fa5e15d419547c65bc174359fa1839d65bc622ee7a1fbfb34cb7e11613e1",
+        "sample-v001/waste-policy/records/eWasteAcceptanceRuleData.js": "fd0f3b4ad5b487b609559407e696fd1e456be0cf3aadd78f5e7aa32598df6915",
+        "sample-v001/waste-policy/records/eWasteCategoryData.js": "dfdee560d263cb0a0e37f3eeceead9bb5cdff6d19b404f72de7c5eef8891a025",
+        "sample-v001/waste-policy/records/eWasteCollectionPresetData.js": "b3c55bb3983a302d897f4bba90d695c0182108e75141aeae56f794fe0679ee7d",
+        "sample-v001/waste-policy/records/eWasteImpactProfileData.js": "4a0e08124582f818552431bd457f3d36c4c47c031f49bb6c3fde7636e4ba3bb2",
+        "sample-v001/waste-policy/records/eWasteItemTypeData.js": "cf347d88941b0edc652143cbd17a7709c0913577c6f49d65bd3fcd468cee8286"
       },
       "selectionPolicy": "EXPLICIT"
     },
@@ -122,8 +120,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "LOYALTY",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -137,21 +134,21 @@
         "sample-v001/loyalty/records/circaLoyaltyWalletData.js": "2b7878a1180a24624938d63f8ee00d854a1ca245a53a26ae79babcad0e0e90ef",
         "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js": "6919580ddf70756743e6e5777b79c7449d4fbf34c8dffa7ebaf50c1f6560b83f",
         "sample-v001/loyalty/records/circaRewardLedgerEntryData.js": "6f96a5ac3be3a40cb48f0e6d568b7489b9943b1aa4126abbe6e012002707131d"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "content": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "displayName": "Circa published website",
       "description": "Typed page composition and governed Media publication for Circa.",
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -180,18 +177,19 @@
         "sample-v001/content/assets/circa-media/files/coupon-market.svg": "fef0f6dd2f04fa4036312fcffb9a7170a7bc62d81127ae80e1e1ef69d068b96c",
         "sample-v001/content/headers/circaContentHeader.js": "9029e2594cd57c399cc4ef1bb239c5a39ec6dea24c66279ced5564a6c8b7b831",
         "sample-v001/content/headers/circaMediaHeader.js": "9a04d8045f1b7a8f7241f4114b9958cd13057a0ce3b3335b00f6ed7208329635",
-        "sample-v001/content/records/circaCmsComponentData.js": "05082afe7674c6babddf96abf01463f11098c40023c021709c027a5aeb2dad40",
-        "sample-v001/content/records/circaCmsGroupData.js": "698931d01f42db5171f7f2de0b86a0c33783904cae4e8474282eeee1ddb33fdf",
-        "sample-v001/content/records/circaCmsPageData.js": "7136eeb95b2d275d1d3c5110e23f89a5cad155851c6eff3553d6756d87ed7db1",
-        "sample-v001/content/records/circaCmsRendererData.js": "e0f1d0499d0cef1d58dca0918da3b8a486bfe65f90d3a516be9a96817ccec802",
-        "sample-v001/content/records/circaCmsRouteData.js": "35976a1b12fe4a9602495444d87793435252d1a60706ac8817095ef13a746e28",
-        "sample-v001/content/records/circaCmsSiteData.js": "db835dbd815f560681e183357c0c86d4aea2a8aca22c69f6532482f28c30b2f9",
-        "sample-v001/content/records/circaCmsSlotData.js": "e7ee43d69f6825e99f88d6ceee30d0aaaa9c1cdb13f6c1421f434e3e2c747d6d",
-        "sample-v001/content/records/circaCmsTemplateData.js": "b1b571fc759d4ebda412f86925bd002cf0318d9b24109c2414cda92b72b4115a",
-        "sample-v001/content/records/circaCmsTypeData.js": "aed4c67dc69c2be89afb0f4cd2ca0c2edf30fed52fe87a5f6952b7f3ea3360df",
+        "sample-v001/content/records/circaCmsComponentData.js": "789dd415939d32c8912a57d00fed24a558d9de3b887d57bd8286344ba2b9d0ab",
+        "sample-v001/content/records/circaCmsGroupData.js": "7b814743c38d3f40b64f3635c6c2dd9dba0e8bfa99c0ba0fa882e6dd796d39e9",
+        "sample-v001/content/records/circaCmsPageData.js": "9535747c6b5a624be3b8779b20f85b9357cef93439917fe7f79334e24ccfd8b8",
+        "sample-v001/content/records/circaCmsRendererData.js": "073210d24618b2c12a061faa53fe3fbb85354f2cf6abf104acede80c776efed5",
+        "sample-v001/content/records/circaCmsRouteData.js": "e661dfc17e57810aa96b3c42adbbd4ddc0539bd20ef78c93dc141f45db9c84c4",
+        "sample-v001/content/records/circaCmsSiteData.js": "30938bc211fcdbeba5f9ff0210043d669de07b86d088dec12e087d294b098091",
+        "sample-v001/content/records/circaCmsSlotData.js": "69f596a38fe98d5cd89796dd479d3e337f68b382fb4aae4b56943f804b334a10",
+        "sample-v001/content/records/circaCmsTemplateData.js": "b26e572dce147ad223dcde59654c49a6543dbabe63e05de163682ac74f200b57",
+        "sample-v001/content/records/circaCmsTypeData.js": "ae71fc9824309a7126fa675c054dfa22ca23a046a80b6f56e5b34edb0c8dd58b",
         "sample-v001/content/records/circaContentCatalogData.js": "adb30393fa7355f54ccf3f9dd2d90641d9d27e5d2539f68965b8adb2467db249",
         "sample-v001/content/records/circaMediaData.js": "6f2d69ef9e4b191c24d53324eeb577a959f6992490d80277436cdb73757efde0"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "commerce": {
       "kind": "DATA_RELEASE",
@@ -203,8 +201,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -239,8 +236,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "RESTRICTED",
       "versioningPolicy": "NONE",
@@ -253,7 +249,8 @@
         "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
         "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
         "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "circaCommerceStaffAssignments": {
       "kind": "DATA_RELEASE",
@@ -266,8 +263,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "RESTRICTED",
       "selectionPolicy": "EXPLICIT",
@@ -291,7 +287,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "RESTRICTED",
       "selectionPolicy": "EXPLICIT",
@@ -306,17 +302,16 @@
     },
     "customer-workspace": {
       "kind": "DATA_RELEASE",
-      "dataType": "core",
-      "sourceRoot": "core-v001",
-      "version": "0.0.1",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.2",
       "displayName": "Circa customer item workspace",
       "description": "WCMS banner, copy, listing and detail composition for customer items; no transactional sample records",
       "owningDomain": "circa.ewaste",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "WCMS_STAGED",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -324,16 +319,17 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "core-v001/customer-workspace/headers/circaWorkspaceHeader.js": "579dcc1f28d367e44054afa46710f972cca70137f9acbb5fa882986312ecbfe3",
-        "core-v001/customer-workspace/records/circaWorkspaceComponentData.js": "83b7400fac3d256b8983aa9c9bfda3cd2fd3f36f75ed686c01e9a51b474a0f67",
-        "core-v001/customer-workspace/records/circaWorkspaceGroupData.js": "d0ba8a74cb0193aca46b87605705003e8344b7d4e52b79ad9c322e3b6af2ff79",
-        "core-v001/customer-workspace/records/circaWorkspacePageData.js": "a2e03c865e17e11e5be08c06f298d112667065e7e8a8806ff67ab1dfbe0c418a",
-        "core-v001/customer-workspace/records/circaWorkspaceRendererData.js": "adcc91bd1368e9d9a747d4ca7ffd8b3cd449f5be142f4a1fd8f9edf20a7f71d7",
-        "core-v001/customer-workspace/records/circaWorkspaceRouteData.js": "849f0a3c55c091c1677f3c236fad3b3f47920593bc2816ff4b600f70135ca4e2",
-        "core-v001/customer-workspace/records/circaWorkspaceSlotData.js": "4fadce1809765f938b0d2dd3c2426a9279f49a05c116e66cfda60b829f0bb572",
-        "core-v001/customer-workspace/records/circaWorkspaceTemplateData.js": "3c0409eb9dff1a3d13de65189f73738403e9a26fe9510362b19122bf993b3c78",
-        "core-v001/customer-workspace/records/circaWorkspaceTypeData.js": "e7174a214870c00723ac91f4a723840b158b2f613421c86fbd9d5a02f9d16a81"
-      }
+        "sample-v001/customer-workspace/headers/circaWorkspaceHeader.js": "579dcc1f28d367e44054afa46710f972cca70137f9acbb5fa882986312ecbfe3",
+        "sample-v001/customer-workspace/records/circaWorkspaceComponentData.js": "1957678836472c200da99942fd650926968fcf8eb46302b1d01e8951f31292ee",
+        "sample-v001/customer-workspace/records/circaWorkspaceGroupData.js": "1316e40ea5c9a2cb018f70d6d2dfa2dac23f8e7151f9ff63a60c7794f094d485",
+        "sample-v001/customer-workspace/records/circaWorkspacePageData.js": "66ce2fd849f972de36230326c8669eae66f8395d4ec42ece1db9afbeeac07378",
+        "sample-v001/customer-workspace/records/circaWorkspaceRendererData.js": "5e49fce283e37a2b7d96cdca4aa4630c4317cf5dc7d3d7d68d5027560de4b005",
+        "sample-v001/customer-workspace/records/circaWorkspaceRouteData.js": "512674a445758b3cc182b36d9a87ce7854f1f9d6fa36a23fce4d211af21e46ae",
+        "sample-v001/customer-workspace/records/circaWorkspaceSlotData.js": "f8b5fe80676001bef38196a9f52bb6606d9fdf393af24288b4eaa58c3ed242e8",
+        "sample-v001/customer-workspace/records/circaWorkspaceTemplateData.js": "6ceed95b6d394136154c74345aea8033985acc53df1a1319fb6d26f821ae2a46",
+        "sample-v001/customer-workspace/records/circaWorkspaceTypeData.js": "a117f74f3a233045ac76404e55fac47853c43463c830720d194b0407c390531e"
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "sunmarke-profile": {
       "kind": "DATA_RELEASE",
@@ -346,8 +342,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -357,7 +352,8 @@
       "files": {
         "sample-v001/sunmarke-profile/headers/sunmarkeProfileHeader.js": "a46f6ca198c50ee7a780c9b330b4d6ab3b40c3224288013c2325209d81b079bf",
         "sample-v001/sunmarke-profile/records/sunmarkeAddressData.js": "a15392c3905b0d0936aa97146d7d7a4fa66c903ef9b67f0947ebf0fd47a7c13f"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "sunmarke-location": {
       "kind": "DATA_RELEASE",
@@ -370,8 +366,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "LOCATION",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -381,7 +376,8 @@
       "files": {
         "sample-v001/sunmarke-location/headers/sunmarkeLocationHeader.js": "107369be01fd2d6ab23b901ac6f9cbae6144f7ba80586afbef9d9596dad06754",
         "sample-v001/sunmarke-location/records/sunmarkeLocationData.js": "22f9132738085373218e246a6fceb8c12c6426baf8d8ce1eb59fdc6b41e2bb21"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "sunmarke-waste": {
       "kind": "DATA_RELEASE",
@@ -394,8 +390,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "WASTE",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -405,7 +400,8 @@
       "files": {
         "sample-v001/sunmarke-waste/headers/sunmarkeHeader.js": "77cfcbf881ebf4e56ebdbcf0608a34039a53a6a4b470c001cd95a6db5bee99ca",
         "sample-v001/sunmarke-waste/records/sunmarkeWasteCollectionPointData.js": "8aab8b4c9a89e5341e64f5fcf381ec2e63d261fbaf471e9dc80863bcaba19e9f"
-      }
+      },
+      "selectionPolicy": "EXPLICIT"
     },
     "circaPublicationPlan": {
       "kind": "DATA_RELEASE",
@@ -417,8 +413,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -442,8 +437,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL",
-        "LOCAL_PRODUCTION_SIMULATION"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -467,7 +461,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -491,7 +485,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -513,7 +507,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -538,7 +532,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -562,7 +556,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -584,7 +578,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -609,7 +603,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -633,7 +627,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "COMMERCE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -655,7 +649,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -678,7 +672,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -700,7 +694,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -731,7 +725,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -763,7 +757,7 @@
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "PUBLIC",
       "versioningPolicy": "IMMUTABLE",
@@ -797,7 +791,7 @@
       "lifecycle": "OPERATIONAL_VERSIONED",
       "destinationRole": "LOYALTY",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -820,7 +814,7 @@
       "lifecycle": "REFERENCE",
       "destinationRole": "WASTE",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "NONE",
@@ -842,7 +836,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -873,7 +867,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -896,7 +890,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -920,7 +914,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -951,7 +945,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -974,7 +968,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -998,7 +992,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -1029,7 +1023,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -1052,7 +1046,7 @@
       "version": "0.0.1",
       "selectionPolicy": "EXPLICIT",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "INTERNAL",
       "versioningPolicy": "IMMUTABLE",
@@ -1069,40 +1063,16 @@
         "sample-v001/merchant-outlets/loopcycle/operations/records/inventoryOpening.json": "fda3f4f8ecefc516c67788f83f3c1b9897bb46bb63114dd618cf59431867f20b"
       }
     },
-    "circaLocalUnusedRefundExceptionRole": {
-      "kind": "DATA_RELEASE",
-      "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.1",
-      "owningDomain": "circa.ewaste",
-      "lifecycle": "REFERENCE",
-      "destinationRole": "PLATFORM",
-      "environmentScope": [
-        "LOCAL"
-      ],
-      "sensitivity": "RESTRICTED",
-      "selectionPolicy": "EXPLICIT",
-      "versioningPolicy": "NONE",
-      "publicationPolicy": "NONE",
-      "initialPublicationPolicy": "NONE",
-      "removalPolicy": "RETAIN",
-      "displayName": "Circa Local unused coupon review role",
-      "description": "One adjudication permission only; no payment execution, new credit or redeemed-benefit authority.",
-      "files": {
-        "sample-v001/refund-exception-role/headers/circaLocalUnusedRefundExceptionRoleHeader.js": "6992f1e929192dcf0a6a06da1b3d3ebdcbfe444620cca422331078203dea3f12",
-        "sample-v001/refund-exception-role/records/circaLocalUnusedRefundExceptionGroupData.js": "afada6ea8ed054d7032c5d3aa10342440732ad7aaba065790b3cf34d733e0230"
-      }
-    },
     "circaLocalUnusedRefundExceptionStaffAssignment": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "owningDomain": "circa.ewaste",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "RESTRICTED",
       "selectionPolicy": "EXPLICIT",
@@ -1114,43 +1084,19 @@
       "description": "Additive Profile role for the original GREENPERKS_ONLINE administrator only; preserves credentials, groups and employee state.",
       "files": {
         "sample-v001/refund-exception-staff/headers/circaLocalUnusedRefundExceptionStaffHeader.js": "fc229c575a22a3175d9d6d37dbb8e504fda697ff8b3f68f9c4474780da970033",
-        "sample-v001/refund-exception-staff/records/circaLocalUnusedRefundExceptionStaffData.js": "71b8fe241f682635d424503ba0b8071a4927df1c0a513a1b72adc62e205b4a87"
-      }
-    },
-    "circaLocalDemoCreditRole": {
-      "kind": "DATA_RELEASE",
-      "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.1",
-      "owningDomain": "circa.ewaste",
-      "lifecycle": "REFERENCE",
-      "destinationRole": "PLATFORM",
-      "environmentScope": [
-        "LOCAL"
-      ],
-      "sensitivity": "RESTRICTED",
-      "selectionPolicy": "EXPLICIT",
-      "versioningPolicy": "NONE",
-      "publicationPolicy": "NONE",
-      "initialPublicationPolicy": "NONE",
-      "removalPolicy": "RETAIN",
-      "displayName": "Circa Local demo credit role",
-      "description": "Approved four-permission human group only; no general earnings or core import authority.",
-      "files": {
-        "sample-v001/credit-role/headers/circaLocalDemoCreditRoleHeader.js": "7968447b605151c57b94f8283216d3f24ee93e8cda9a52a87017e930ece5eca7",
-        "sample-v001/credit-role/records/circaLocalDemoCreditGroupData.js": "0f11e2828fe9655fff733eee67f717f052482929ed8eaf75dd38eb060ce9f1aa"
+        "sample-v001/refund-exception-staff/records/circaLocalUnusedRefundExceptionStaffData.js": "6e292b5153ee486b6c64b1762bd1dbfbe6681f32663c98c16c94837117ac8e57"
       }
     },
     "circaLocalDemoCreditStaffAssignment": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "owningDomain": "circa.ewaste",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "RESTRICTED",
       "selectionPolicy": "EXPLICIT",
@@ -1162,43 +1108,19 @@
       "description": "Profile additive group instruction for the one original GREENPERKS_ONLINE human; preserves employee state.",
       "files": {
         "sample-v001/credit-staff/headers/circaLocalDemoCreditStaffHeader.js": "349a20267cfc1fdff1785421970b436d3f56310adfeb97158b75fa270c7c7043",
-        "sample-v001/credit-staff/records/circaLocalDemoCreditStaffData.js": "57411e4c704e4dcf3678fca636fa2d8866ea6aa459bcb4a3cf3f996784154654"
-      }
-    },
-    "circaLocalOpeningRole": {
-      "kind": "DATA_RELEASE",
-      "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.1",
-      "owningDomain": "circa.ewaste",
-      "lifecycle": "REFERENCE",
-      "destinationRole": "PLATFORM",
-      "environmentScope": [
-        "LOCAL"
-      ],
-      "sensitivity": "RESTRICTED",
-      "selectionPolicy": "EXPLICIT",
-      "versioningPolicy": "NONE",
-      "publicationPolicy": "NONE",
-      "initialPublicationPolicy": "NONE",
-      "removalPolicy": "RETAIN",
-      "displayName": "Circa Local opening Inventory role",
-      "description": "Approved Inventory operation permission only; no broad Commerce or schema administration.",
-      "files": {
-        "sample-v001/opening-role/headers/circaLocalOpeningRoleHeader.js": "4a52eee617807529bdf3e4c6cb5022eaa617ce045399c18fae63b666582ba0d1",
-        "sample-v001/opening-role/records/circaLocalOpeningGroupData.js": "44c48ed3af06ef02c1ce5b74c57e85a945a6cfb3c4c7649148dffa411e820b92"
+        "sample-v001/credit-staff/records/circaLocalDemoCreditStaffData.js": "2a9059011f63da9f9cb49a850050fd2b96fba2f505f31eac4eb9c3c4fc1468fb"
       }
     },
     "circaLocalOpeningStaffAssignments": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "owningDomain": "circa.ewaste",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
       "environmentScope": [
-        "LOCAL"
+        "ALL"
       ],
       "sensitivity": "RESTRICTED",
       "selectionPolicy": "EXPLICIT",
@@ -1210,7 +1132,7 @@
       "description": "Profile additive groups for the exact original retail, repair and recycling administrators.",
       "files": {
         "sample-v001/opening-staff/headers/circaLocalOpeningStaffHeader.js": "e610c688986629418e8388641da677051f8623456cf409b22e558d9ea8f2dc47",
-        "sample-v001/opening-staff/records/circaLocalOpeningStaffData.js": "603805e12519c127095e8d9d9cccd96840ff1950f37d9e648c04adde62dbd17f"
+        "sample-v001/opening-staff/records/circaLocalOpeningStaffData.js": "e72c7799b0bb9556c77b2dccf2afc0b1fc94cdb46318e69fef5ea9f8d4e7140d"
       }
     }
   }

@@ -13,10 +13,10 @@
 
 /**
  * @module nodics.kickoff/modules/config/properties
- * @description Shared Nodics Kickoff project-module configuration defaults.
+ * @description Preserves an empty configuration boundary for the non-runtime module group.
  * @layer config
  * @owner kickoffModules
- * @override Later active project modules may override these defaults through configuration layering.
+ * @override This group supplies no defaults; selected child modules own their contributions.
  */
 module.exports = {
 

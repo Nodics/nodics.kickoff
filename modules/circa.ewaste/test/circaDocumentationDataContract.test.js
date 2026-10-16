@@ -53,7 +53,7 @@ test('canonical Circa inventory separates outlet scopes, role adoption and live 
     const table = inventory.blocks.find(block => block.kind === 'table' && block.headers[0] === 'Section');
     assert.deepEqual(table.rows.map(row => row[0]).sort(), Object.keys(manifest.sections).sort());
     assert(inventory.searchText.includes(`All ${Object.keys(manifest.sections).length} current business manifest sections`));
-    for (const name of ['circaLocalUnusedRefundExceptionRole', 'circaLocalUnusedRefundExceptionStaffAssignment']) {
+    for (const name of ['circaLocalUnusedRefundExceptionStaffAssignment']) {
         const section = manifest.sections[name];
         assert.deepEqual(table.rows.find(row => row[0] === name).slice(1, 4),
             [section.sourceRoot, section.version, section.destinationRole]);
@@ -67,7 +67,7 @@ test('canonical Circa inventory separates outlet scopes, role adoption and live 
         assert(inventory.searchText.includes(boundary), boundary);
     }
     const outlet = table.rows.find(row => row[0] === 'circaMerchantOutletAccess');
-    assert.deepEqual(outlet.slice(1, 4), ['sample-v001', '0.0.1', 'PLATFORM']);
+    assert.deepEqual(outlet.slice(1, 4), ['sample-v001', manifest.sections.circaMerchantOutletAccess.version, 'PLATFORM']);
     const scopes = Object.values(require('../data/sample-v001/outlet-access/records/circaMerchantOutletScopeData'));
     const scopeTable = inventory.blocks.find(block => block.kind === 'table' && block.headers[2] === 'Exact Store scope');
     assert.deepEqual(scopeTable.rows.map(row => row.slice(1)).sort(), scopes.map(row => [row.enterpriseCode, row.scopeCode]).sort());

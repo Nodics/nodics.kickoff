@@ -6,6 +6,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
+const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configuration");
 const manifest = require("../data/manifest.json");
 const root = path.resolve(__dirname, "../data");
 
@@ -79,6 +80,165 @@ test("Circa administrator retains setup group assignments without granting owner
   assert(admin);
   assert(admin.userGroups.includes("wasteEnterpriseAdministratorUserGroup"));
   assert(admin.userGroups.includes("runtimeConfigAdminUserGroup"));
+});
+
+test("predefined customer and staff personas retain distinct active identities and canonical base roles", () => {
+  const customers = records("profile", "circaCustomerData");
+  const staff = records("operations", "circaOperationalEmployeeData");
+  const fixture = require(path.join(frameworkRoot,
+    "nodics.platform/modules/profile/test/helpers/identityCatalogueFixture"));
+  const targets = Object.fromEntries(fixture.records("UserGroup").map(row => [row.code, row]));
+  const baseRoles = Object.values(require(path.join(frameworkRoot,
+    "nodics.waste/modules/wasteCore/data/init-v001/records/identity/wasteCoreUserGroupData")));
+  for (const group of baseRoles) {
+    assert.deepEqual(group.permissions, targets[group.code].permissions);
+    assert.deepEqual(group.parentGroups, targets[group.code].parentGroups);
+    assert.equal(group.active, true);
+  }
+  assert.deepEqual(customers.map(row => row.code), ["circa-customer", "circa-seller", "circa-recipient"]);
+  assert.equal(staff.length, 21);
+  const identities = [...customers, ...staff];
+  assert.equal(new Set(identities.map(row => row.code)).size, identities.length);
+  assert.equal(new Set(identities.map(row => row.loginId)).size, identities.length);
+  for (const row of identities) {
+    assert.equal(row.active, true, row.code);
+    assert.equal(row.principalType, customers.includes(row) ? "customer" : "human", row.code);
+    assert(row.userGroups.length > 0, row.code);
+    for (const group of row.userGroups) assert(targets[group], `${row.code}: unknown base group`);
+  }
+  for (const customer of customers) {
+    assert.equal(customer.ownerType, "customer");
+    assert.equal(customer.ownerId, customer.loginId);
+    assert.deepEqual(customer.userGroups, ["customerUserGroup"]);
+  }
+  const journeys = [
+    ["circa-integrated-administrator", "wasteEnterpriseAdministratorUserGroup", "waste.verification.record", "waste.review.approve"],
+    ["circa-integrated-operator", "wasteCentreOperatorUserGroup", "waste.review.queue.read"],
+    ["circa-verifier", "wasteVerifierUserGroup", "waste.verification.record"],
+    ["circa-approver", "wasteApproverUserGroup", "waste.review.approve"],
+    ["circa-auditor", "wasteAuditorUserGroup", "waste.audit.read"],
+    ["circa-marketplace-moderator", "wasteMarketplaceModeratorUserGroup", "waste.marketplace.moderate"],
+  ];
+  for (const [code, group, ...permissions] of journeys) {
+    const employee = staff.find(row => row.code === code);
+    assert(employee?.userGroups.includes(group), code);
+    for (const permission of permissions) assert(targets[group].permissions.includes(permission), `${code}: ${permission}`);
+  }
+  for (const group of ["wasteCentreOperatorUserGroup", "wasteAuditorUserGroup"])
+    for (const permission of ["waste.verification.record", "waste.review.approve"])
+      assert(!targets[group].permissions.includes(permission), `${group}: read-only review boundary`);
+  assert(!targets.wasteVerifierUserGroup.permissions.includes("waste.review.approve"));
+  assert(!targets.wasteApproverUserGroup.permissions.includes("waste.verification.record"));
+});
+
+test("canonical scope matching gives integrated administrator all 21 fixtures without widening granular reviewers", () => {
+  const access = require(path.join(frameworkRoot,
+    "nodics.waste/modules/wasteCore/src/service/defaultWasteOperationalAccessService"));
+  const staff = records("operations", "circaOperationalEmployeeData");
+  const scopes = records("operations", "circaOperationalScopeData");
+  const points = records("waste", "circaWasteCollectionPointData");
+  const submissions = records("waste", "circaWasteSubmissionData");
+  assert.equal(scopes.length, 22);
+  assert.equal(submissions.length, 21);
+  for (const scope of scopes) {
+    assert.equal(scope.active, true);
+    assert.equal(scope.status, "ACTIVE");
+    assert.equal(scope.effect, "ALLOW");
+    assert.equal(scope.inheritanceMode, "DIRECT");
+    assert.equal(scope.tenantCode, "default");
+  }
+  const visible = code => {
+    const employee = staff.find(row => row.code === code);
+    assert(employee, code);
+    const grants = scopes.filter(scope => scope.principalCode === employee.loginId);
+    assert.equal(grants.length, 1, code);
+    return submissions.filter(row => points.some(point => point.code === access.pointCode(row) &&
+      grants.some(scope => access.matchesPoint(scope, point, { tenant: "default" }))));
+  };
+  for (const code of ["circa-integrated-administrator", "circa-integrated-operator"])
+    assert.deepEqual(visible(code).map(row => row.code), submissions.map(row => row.code));
+  assert.equal(visible("circa-integrated-administrator").filter(row => row.submissionStatus === "SUBMITTED").length, 5);
+  for (const code of ["circa-administrator", "circa-verifier", "circa-approver", "circa-auditor", "circa-marketplace-moderator"])
+    assert.equal(visible(code).length, 0, `${code}: no seeded positive fixture in this scope`);
+  for (const code of ["circa-centre-operator", "circa-verifier", "circa-approver"]) {
+    const employee = staff.find(row => row.code === code);
+    const grant = scopes.find(scope => scope.principalCode === employee.loginId);
+    assert.equal(grant.scopeType, "BUSINESS_UNIT");
+    assert.equal(grant.scopeCode, "WCP_SAMPLE_COLLECTION_CENTRE_YOU_AND_CO");
+    assert.equal(access.matchesPoint(grant, { code: grant.scopeCode }, { tenant: "default" }), true);
+    assert(points.every(point => !access.matchesPoint(grant, point, { tenant: "default" })));
+  }
+});
+
+test("Local selected role dependencies are fresh and ordered while refund exception remains separately selected", t => {
+  const previous = global.CONFIG;
+  t.after(() => { global.CONFIG = previous; });
+  const runtime = loadRuntime("platformServer", "kickoffLocal");
+  global.CONFIG = { get: key => runtime[key] };
+  const initialization = require(path.join(frameworkRoot,
+    "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
+  const observer = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nPublish/src/service/defaultPublicationSetupObservationService"));
+  const importer = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
+  const config = runtime.backofficeApplicationInitialization;
+  const profile = { ...config.profiles.circa, target: { ...config.target, ...config.profiles.circa.target } };
+  const steps = initialization.preparationSteps(profile);
+  const order = initialization.preparationGroups(profile, {}, steps.filter(step => step.phase === "BEFORE_PUBLICATION"))
+    .flatMap(group => group.steps.map(step => step.code));
+  const plan = require("../config/setup-observation/circa-native-reviewed.json");
+  assert.equal(plan.profileDigest, observer.digest(profile));
+  const wasteData = path.join(frameworkRoot, "nodics.waste/modules/wasteCore/data");
+  const wasteManifest = require(path.join(wasteData, "manifest.json"));
+  const baseRoleFile = "init-v001/records/identity/wasteCoreUserGroupData.js";
+  assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(wasteData, baseRoleFile))).digest("hex"),
+    wasteManifest.sections.accessGroups.files[baseRoleFile], "Waste-owned base-role dependency must remain fresh");
+  const prerequisites = ["product:accessGroups", "publish:accessGroups",
+    "promotion:accessGroups", "order:accessGroups",
+    "circa.ewaste:profile", "circa.ewaste:operations", "circa.ewaste:circaCommerceStaffAssignments",
+    "circa.ewaste:circaMerchantOutletAccess", "loyaltyWallet:specialAccessRoles",
+    "circa.ewaste:circaLocalDemoCreditStaffAssignment", "inventory:specialAccessRoles",
+    "circa.ewaste:circaLocalOpeningStaffAssignments"];
+  for (const code of prerequisites) {
+    const selected = steps.filter(step => step.code === code);
+    assert.equal(selected.length, 1, code);
+    const step = selected[0];
+    assert.equal(step.required, true, code);
+    assert.equal(step.trigger, "USER", code);
+    assert.equal(step.phase, "BEFORE_PUBLICATION", code);
+    assert.equal(step.targetRuntimeRole, "PLATFORM", code);
+    const stage = plan.stages.find(stage => stage.code === code);
+    assert(stage, code);
+    assert.deepEqual(stage.descriptor, observer.stepIdentity(step));
+    const [moduleName, sectionCode] = code.split(":");
+    const owners = {"loyaltyWallet":"nodics.loyalty/modules/loyaltyWallet","import":"nodics.foundation/modules/nData/nImport/import","inventory":"nodics.commerce/modules/baseCommerce/modules/inventory","order":"nodics.commerce/modules/checkout/modules/order","product":"nodics.commerce/modules/baseCommerce/modules/product","publish":"nodics.foundation/modules/nPublish","promotion":"nodics.commerce/modules/baseCommerce/modules/promotion"};
+    const directory = moduleName === "circa.ewaste" ? root : path.join(frameworkRoot, owners[moduleName], "data");
+    const releaseManifest = require(path.join(directory, "manifest.json"));
+    const section = releaseManifest.sections[sectionCode];
+    const release = importer.inspectManifest({ name: moduleName }, section.dataType,
+      path.join(directory, "manifest.json"), section, sectionCode, true);
+    assert.equal(stage.release.checksum, release.checksum, code);
+    for (const [file, checksum] of Object.entries(section.files))
+      assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(directory, file))).digest("hex"), checksum, file);
+  }
+  const before = (dependency, dependent) => assert(order.indexOf(dependency) >= 0 &&
+    order.indexOf(dependency) < order.indexOf(dependent), `${dependency} before ${dependent}`);
+  for (const code of prerequisites.filter(code => ["product:accessGroups", "publish:accessGroups", "promotion:accessGroups", "order:accessGroups"].includes(code)))
+    before(code, "circa.ewaste:circaCommerceStaffAssignments");
+  for (const staff of ["circaCommerceStaffAssignments", "circaLocalDemoCreditStaffAssignment", "circaLocalOpeningStaffAssignments"])
+    before("circa.ewaste:operations", `circa.ewaste:${staff}`);
+  before("loyaltyWallet:specialAccessRoles", "circa.ewaste:circaLocalDemoCreditStaffAssignment");
+  before("inventory:specialAccessRoles", "circa.ewaste:circaLocalOpeningStaffAssignments");
+  for (const sectionCode of ["circaLocalUnusedRefundExceptionStaffAssignment"]) {
+    const code = `circa.ewaste:${sectionCode}`;
+    assert(!steps.some(step => step.code === code), `${code}: not automatically selected`);
+    assert(!plan.stages.some(stage => stage.code === code), `${code}: not part of this sealed setup`);
+    const section = manifest.sections[sectionCode];
+    assert.equal(section.selectionPolicy, "EXPLICIT");
+    assert.equal(section.destinationRole, "PLATFORM");
+    assert.equal(section.lifecycle, "REFERENCE");
+    assert.deepEqual(section.environmentScope, ["ALL"]);
+  }
 });
 
 test("the existing three centres retain identities and use their explicit demo owner", () => {
@@ -234,7 +394,7 @@ test("one Circa setup requires all demo sections and retains explicit operator-t
     assert.equal(selected[0].required, true);
     assert.equal(selected[0].trigger, "USER");
   }
-  assert.equal(config.circaEWaste.demoImportAdmission, undefined,
+  assert.equal(config.circaEWaste, undefined,
     "Demo configuration must not claim stock or coupon issuance qualification");
   assert.equal(config.profileCustomerEligibility, undefined);
   assert.equal(config.promotion?.sellerAuthorization, undefined);

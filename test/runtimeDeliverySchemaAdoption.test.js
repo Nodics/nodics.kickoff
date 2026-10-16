@@ -2,7 +2,9 @@
 /** @module test/runtimeDeliverySchemaAdoption @description Verifies reference-runtime adoption of the Communication-owned schema, without provisioning or activating providers. @layer test @owner nodics.kickoff */
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const { loadRuntime } = require("./helpers/configuration");
+const { loadRuntime, frameworkRoot } = require("./helpers/configuration");
+const schemaOwner = require(require('node:path').join(frameworkRoot,
+  'nodics.foundation/modules/nSystem/src/service/config/defaultRuntimeConfigurationSchemaService'));
 
 test("Local Engagement adopts the delivery owner's schema without loading the Circa application", () => {
   const engagement = loadRuntime("engagementServer", "kickoffLocal", {});
@@ -17,19 +19,20 @@ test("Local Engagement adopts the delivery owner's schema without loading the Ci
   const reference =
     engagement.communication.providers.TELEGRAM.credentialReferences[0];
   assert.equal(schema.fields[0].credentialReference, reference);
-  assert.deepEqual(schema.fields[0].path, ["credentials", reference, "value"]);
-  assert.equal(engagement.credentials[reference].value, null);
+  assert.equal(schema.fields[0].path, undefined);
+  assert.deepEqual(schemaOwner.resolveFieldPath(schema.fields[0]), ["credentials", reference, "value"]);
+  assert.ok(!Object.hasOwn(schema.fields[0], 'value'), 'Schema metadata never embeds a configured credential');
   assert.equal(
-    platform.runtimeConfigurationSchemas.telegramDelivery,
+    platform.runtimeConfigurationSchemas?.telegramDelivery,
     undefined,
   );
   assert.equal(
     platform.runtimeConfigurationSchemas.telegramExternalIdentity.ownerModule,
-    "circa.ewaste",
+    "profile",
   );
   assert.equal(
     require("../modules/circa.ewaste/config/properties")
-      .runtimeConfigurationSchemas.telegramDelivery,
+      .runtimeConfigurationSchemas,
     undefined,
   );
   assert.equal(

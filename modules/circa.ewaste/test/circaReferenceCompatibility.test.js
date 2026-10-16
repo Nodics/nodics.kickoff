@@ -278,8 +278,8 @@ test("actual Circa selectors declare the owner references and keep sample import
   assert.deepEqual(foundation[0].releaseCodes, [
     "wasteMaterial:core-v001",
     "eWaste:core-reference",
-    "circa.ewaste:waste-policy",
   ]);
+  assert.deepEqual(foundation[1], { dataType: "sample", releaseCodes: ["circa.ewaste:waste-policy"] });
   const packs =
     properties.backofficeApplicationInitialization.profiles.circa.dataPackages
       .value;

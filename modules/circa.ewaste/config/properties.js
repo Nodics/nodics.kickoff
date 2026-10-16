@@ -11,848 +11,442 @@
 
 "use strict";
 
-/** @module circa.ewaste/config/properties @description Owns Circa application identity, presentation and illustrative deployment policies over eWaste. @layer config @owner circa.ewaste @override Later project layers replace these sample values. */
+/** @module circa.ewaste/config/properties @description Declares Circa demo identity, presentation, fixtures and inert data-pack composition over framework owners. @layer config @owner circa.ewaste @override Customer projects replace sample data selections and branding. */
 module.exports = {
-  enterpriseManagement: {
-    accessAssignments: {
-      roles: {
-        CIRCA_LOCAL_UNUSED_REFUND_EXCEPTION: {
-          label: "Circa Local Unused Coupon Review",
-          description: "Adjudicates only the separately enabled original unused-coupon refund exception; grants no payment or redeemed-benefit authority.",
-          groupCodes: ["circaLocalUnusedRefundExceptionUserGroup"],
-          scopeType: "ENTERPRISE",
-          delegable: true,
-          assignmentPermissions: [],
-        },
-        CIRCA_LOCAL_DEMO_CREDIT: {
-          label: "Circa Local Demo Credit",
-          description: "Imports the separately approved Local demo credit through its exact Loyalty source admission.",
-          groupCodes: ["circaLocalDemoCreditUserGroup"],
-          scopeType: "ENTERPRISE",
-          delegable: true,
-          assignmentPermissions: [],
-        },
-        CIRCA_LOCAL_OPENING_INVENTORY: {
-          label: "Circa Local Opening Inventory",
-          description: "Receives approved first stock through Inventory under the original issuer enterprise.",
-          groupCodes: ["commerceInventoryOpeningUserGroup"],
-          scopeType: "ENTERPRISE",
-          delegable: true,
-          assignmentPermissions: [],
-        },
-      },
-    },
-  },
-  tooling: {
-    acceptance: {
-      wasteManagement: {
-        fixture: {
-          dataModule: "circa.ewaste",
-          ruleRecordsPath:
-            "data/core-v001/waste-policy/records/eWasteAcceptanceRuleData.js",
-          impactProfileRecordsPath:
-            "data/core-v001/waste-policy/records/eWasteImpactProfileData.js",
-          impactProfileCode: "CIRCA_VERIFIED_DEVICE_RECOVERY",
-          runId: "circa-waste-acceptance-001",
-          submissionCode: "CIRCA_ACCEPTANCE_SUB_001",
-          resultCode: "CIRCA_ACCEPTANCE_IMPACT_001",
-          requiresReceipt: true,
-          collectionPoint: {
-            code: "CIRCA_ACCEPTANCE_CP_001",
-            collectionPointType: "E_WASTE_DROP_OFF",
+  "tooling": {
+    "acceptance": {
+      "wasteManagement": {
+        "fixture": {
+          "dataModule": "circa.ewaste",
+          "ruleRecordsPath": "data/sample-v001/waste-policy/records/eWasteAcceptanceRuleData.js",
+          "impactProfileRecordsPath": "data/sample-v001/waste-policy/records/eWasteImpactProfileData.js",
+          "impactProfileCode": "CIRCA_VERIFIED_DEVICE_RECOVERY",
+          "runId": "circa-waste-acceptance-001",
+          "submissionCode": "CIRCA_ACCEPTANCE_SUB_001",
+          "resultCode": "CIRCA_ACCEPTANCE_IMPACT_001",
+          "requiresReceipt": true,
+          "collectionPoint": {
+            "code": "CIRCA_ACCEPTANCE_CP_001",
+            "collectionPointType": "E_WASTE_DROP_OFF"
           },
-          facts: {
-            familyCode: "ELECTRONICS",
-            categoryCode: "SMART_HOME_DEVICE",
-            itemTypeCode: "UNKNOWN_ELECTRONIC_ITEM",
-            materialTypeCodes: ["CIRCUIT_BOARD", "COPPER", "PLASTIC_CASING"],
-            conditionGrade: "RECYCLABLE",
-            quantity: 2,
-            weight: "3.5",
+          "facts": {
+            "familyCode": "ELECTRONICS",
+            "categoryCode": "SMART_HOME_DEVICE",
+            "itemTypeCode": "UNKNOWN_ELECTRONIC_ITEM",
+            "materialTypeCodes": [
+              "CIRCUIT_BOARD",
+              "COPPER",
+              "PLASTIC_CASING"
+            ],
+            "conditionGrade": "RECYCLABLE",
+            "quantity": 2,
+            "weight": "3.5"
           },
-          expectedMetrics: [
-            { metricCode: "EWASTE_WEIGHT_KG", value: "3.5" },
-            { metricCode: "RECOVERABLE_MATERIAL_ESTIMATE_KG", value: "2.52" },
-          ],
-        },
-      },
-    },
+          "expectedMetrics": [
+            {
+              "metricCode": "EWASTE_WEIGHT_KG",
+              "value": "3.5"
+            },
+            {
+              "metricCode": "RECOVERABLE_MATERIAL_ESTIMATE_KG",
+              "value": "2.52"
+            }
+          ]
+        }
+      }
+    }
   },
-  data: {
-    dataReleases: {
-      targetValidators: {
-        inventory: "DefaultCircaDemoCommerceImportAdmissionService",
-        promotion: "DefaultCircaDemoCommerceImportAdmissionService",
-      },
-      runtimeRoleProfiles: {
-        WASTE: {
-          initializationProfiles: {
-            localWasteFoundation: {
-              enabled: true,
-              label: "Local Waste foundation",
-              description:
-                "Install Waste Management reference releases for schema-driven family, category, material, collection, evidence, receipt, and impact presets.",
-              completionMessage:
-                "The Local Waste foundation is ready. Operators can validate collection eligibility, submissions, evidence, receipts, and impact calculations.",
-              steps: {
-                $config: "replace",
-                value: [
+  "data": {
+    "dataReleases": {
+      "runtimeRoleProfiles": {
+        "PLATFORM": {
+          "initializationProfiles": {
+            "circaIdentityAuthority": {
+              "enabled": true,
+              "label": "Circa identity authority",
+              "description": "Fresh Circa installations require this explicit role-definition prerequisite before demo setup. Existing demo installations are not replayed.",
+              "completionMessage": "Circa role definitions are installed. Staff assignments remain separate governed actions.",
+              "steps": {
+                "$config": "replace",
+                "value": [
                   {
-                    dataType: "core",
-                    releaseCodes: [
+                    "dataType": "init",
+                    "releaseCodes": [
+                      "loyaltyWallet:specialAccessGroups",
+                      "loyaltyWallet:specialAccessRoles",
+                      "import:specialAccessGroups",
+                      "import:specialAccessRoles",
+                      "inventory:specialAccessGroups",
+                      "inventory:specialAccessRoles",
+                      "order:specialAccessGroups",
+                      "order:specialAccessRoles"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "WASTE": {
+          "initializationProfiles": {
+            "localWasteFoundation": {
+              "enabled": true,
+              "label": "Waste foundation",
+              "description": "Install Waste Management reference releases for schema-driven family, category, material, collection, evidence, receipt, and impact presets.",
+              "completionMessage": "The Waste foundation is ready. Operators can validate collection eligibility, submissions, evidence, receipts, and impact calculations.",
+              "steps": {
+                "$config": "replace",
+                "value": [
+                  {
+                    "dataType": "core",
+                    "releaseCodes": [
                       "wasteMaterial:core-v001",
-                      "eWaste:core-reference",
-                      "circa.ewaste:waste-policy",
-                    ],
+                      "eWaste:core-reference"
+                    ]
                   },
-                ],
-              },
-            },
+                  {
+                    "dataType": "sample",
+                    "releaseCodes": [
+                      "circa.ewaste:waste-policy"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "cms": {
+    "publication": {
+      "baselines": {
+        "circa": {
+          "releaseCode": "circa.ewaste:content",
+          "releaseVersion": "0.0.2",
+          "dataType": "sample",
+          "rootType": "site",
+          "rootCode": "circaSite",
+          "sourceVersion": "0"
+        }
+      }
+    }
+  },
+  "backofficeApplicationInitialization": {
+    "profiles": {
+      "circa": {
+        "code": "circa",
+        "type": "STOREFRONT_DOMAIN_BUNDLE",
+        "owner": "circa.ewaste",
+        "applicationCode": "CIRCA_EWASTE",
+        "siteCode": "circaSite",
+        "baselineCode": "circa",
+        "presentation": {
+          "title": "Circa eWaste",
+          "visual": {
+            "mediaCode": "circa-hero-circular-value",
+            "alt": "Circa circular value"
           },
-        },
-      },
-    },
-  },
-  product: {
-    localization: {
-      supportedLocales: ["en", "ar"],
-      defaultLocale: "en",
-      fallbackLocales: ["en"],
-      requiredLocales: ["en"],
-    },
-    runtimeRoleProfiles: {
-      COMMERCE_STAGED: {
-        marketplaceAuthoring: {
-          enabled: true,
-          catalogVersion: "circaStaged",
-          locales: ["en", "ar"],
-        },
-      },
-    },
-  },
-  cart: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        customerApi: {
-          defaultJurisdiction: "AE",
-          defaultCurrency: "AED",
-        },
-      },
-    },
-  },
-  fulfillmentCore: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        customerShipping: {
-          methods: {
-            $config: "replace",
-            value: [
-              {
-                code: "STANDARD",
-                label: "Standard",
-                price: "0.00",
-                currency: "USD",
-                promise: "3-5 business days",
-                requiresAddress: true,
-                returnEligible: true,
-              },
-              {
-                code: "STANDARD_AED",
-                label: "Standard",
-                price: "0.00",
-                currency: "AED",
-                promise: "3-5 business days",
-                requiresAddress: true,
-                returnEligible: true,
-              },
-            ],
-          },
-          returnMethods: {
-            $config: "replace",
-            value: [
-              {
-                code: "PICKUP",
-                label: "Pickup from address",
-                requiresAddress: true,
-              },
-              {
-                code: "DROP_OFF",
-                label: "Drop off",
-                requiresAddress: false,
-              },
-              {
-                code: "STORE_RETURN",
-                label: "Store return",
-                requiresAddress: false,
-              },
-            ],
-          },
-        },
-      },
-    },
-  },
-  circaEWaste: {
-    journey: {
-      contractVersion: 2,
-      arrivalRadiusMetres: {
-        $config: "env",
-        name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
-        type: "number",
-        fallback: 50,
-      },
-      conversationMaximumCharacters: 1500,
-      reviewAssignment: {
-        queueCode: "CIRCA_EWASTE_REVIEW",
-        label: "Circa review team",
-      },
-      depositInstruction:
-        "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions.",
-    },
-    presentation: {
-      brandName: "Circa",
-      brandByline: "by Nodics",
-      sampleMode: true,
-      walletLabels: {
-        points: "Reward points",
-        circaCarbon: "Carbon units",
-      },
-    },
-    rewardValuation: {
-      version: "circa-weight-rewards-v2",
-      illustrative: true,
-      programCode: "circa",
-      pointsRewardTypeCode: "points",
-      carbonRewardTypeCode: "circaCarbon",
-      pointsPerKg: 10,
-      carbonUnitsPerEstimatedKg: 1,
-    },
-    application: {
-      code: "CIRCA_EWASTE",
-      enabled: true,
-      displayName: "Nodics Circa eWaste",
-      frontendModuleName: "nodics.circa.eWaste",
-      projectModuleName: "circa.ewaste",
-      visual: {
-        mediaCode: "circa-hero-circular-value",
-        alt: "Circa circular value",
-      },
-      requiredScenarioModules: ["eWaste", "wasteRecycling"],
-      frameworkModuleName: "nodics.waste",
-      backendModuleName: "eWaste",
-    },
-    journeys: {
-      submission: {
-        enabled: true,
-      },
-      approvedAsset: {
-        enabled: true,
-      },
-      marketplace: {
-        enabled: true,
-      },
-      gift: {
-        enabled: true,
-      },
-      donation: {
-        enabled: true,
-      },
-      couponRedemption: {
-        enabled: true,
-      },
-      recyclingHandoff: {
-        enabled: true,
-      },
-    },
-  },
-  order: {
-    disputes: {
-      enabled: true,
-      orderCodePrefixes: ["CIRCA_ORDER_"],
-    },
-    refunds: {
-      enabled: true,
-      orderCodePrefixes: ["CIRCA_ORDER_"],
-      defaultOwnerPort: "eWaste",
-      ownerPorts: {
-        eWaste: {
-          moduleName: "eWaste",
-          connectionName: "waste",
-          targetAuthority: {
-            runtimeRole: "WASTE",
-          },
-          apiPrefix: "/internal/order-reversals",
-        },
-      },
-    },
-  },
-  promotion: {
-    legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"],
-  },
-  digitalCore: {
-    merchantRedemption: {
-      enabled: true,
-    },
-  },
-  profileExternalIdentity: {
-    enabled: true,
-    applications: {
-      "circa.ewaste": {
-        enabled: true,
-        provider: "TELEGRAM",
-        enterpriseCode: {
-          $config: "ref",
-          path: "defaultEnterprise",
-        },
-        credentialReference: "telegram.bot.circa",
-        requireBrowserHandoff: true,
-      },
-    },
-  },
-  runtimeConfigurationSchemas: {
-    telegramExternalIdentity: {
-      code: "telegramExternalIdentity",
-      ownerModule: "circa.ewaste",
-      label: "Circa Telegram external identity",
-      description:
-        "Logical bot credential required to verify Circa Telegram Mini App launch assertions. Source config declares the Circa application binding; operational values come from governed runtime configuration.",
-      refreshBehavior: "runtime",
-      updatePermission: "runtime.config.request.create",
-      viewPermission: "runtime.config.effective.view",
-      fields: [
-        {
-          code: "botToken",
-          label: "Telegram bot token",
-          type: "string",
-          required: true,
-          sensitive: true,
-          credentialReference: "telegram.bot.circa",
-          path: ["credentials", "telegram.bot.circa", "value"],
-          pattern: "^\\d+:[^\\s]+$",
-          restartRequired: false,
-          unconfiguredValues: ["", "sample", "placeholder", "changeme"],
-        },
-      ],
-    },
-  },
-  bidding: {
-    enabled: true,
-    policyVersion: "circa-digital-bids-v1",
-    amountScale: 0,
-    maximumAmount: "100000",
-    stores: {
-      circaMainStore: {
-        enterpriseCode: "default",
-        currency: "POINTS",
-        locale: "en",
-        orderCodePrefix: "CIRCA_ORDER_BID_",
-        allowOwnerReference: true,
-      },
-    },
-  },
-  cms: {
-    publication: {
-      baselines: {
-        circa: {
-          releaseCode: "circa.ewaste:content",
-          releaseVersion: "0.0.1",
-          dataType: "sample",
-          rootType: "site",
-          rootCode: "circaSite",
-          sourceVersion: "0",
-        },
-      },
-    },
-  },
-  backofficeApplicationInitialization: {
-    profiles: {
-      circa: {
-        code: "circa",
-        type: "STOREFRONT_DOMAIN_BUNDLE",
-        owner: "circa.ewaste",
-        applicationCode: "CIRCA_EWASTE",
-        siteCode: "circaSite",
-        baselineCode: "circa",
-        presentation: {
-          title: "Circa eWaste",
-          visual: {
-            mediaCode: "circa-hero-circular-value",
-            alt: "Circa circular value",
-          },
-          kind: "PROJECT",
-          category: "application",
-          order: 240,
-          summary:
-            "Circa customer demo with enterprises, collection centres, assets, rewards and partner offers.",
-          requiredFunctionalModules: [
+          "kind": "PROJECT",
+          "category": "application",
+          "order": 240,
+          "summary": "Circa customer demo with enterprises, collection centres, assets, rewards and partner offers.",
+          "requiredFunctionalModules": [
             {
-              code: "nodics.location",
-              label: "Location capability",
+              "code": "nodics.location",
+              "label": "Location capability"
             },
             {
-              code: "nodics.waste",
-              label: "Waste Management capability",
+              "code": "nodics.waste",
+              "label": "Waste Management capability"
             },
             {
-              code: "nodics.loyalty",
-              label: "Loyalty capability",
+              "code": "nodics.loyalty",
+              "label": "Loyalty capability"
             },
             {
-              code: "nodics.commerce",
-              label: "Commerce capability",
-            },
+              "code": "nodics.commerce",
+              "label": "Commerce capability"
+            }
           ],
-          activationPolicy: {
-            approvalRequiredForOnline: true,
-            requiredDataTrigger: "USER",
-            sampleDataTrigger: "USER",
-          },
+          "activationPolicy": {
+            "approvalRequiredForOnline": true,
+            "requiredDataTrigger": "USER",
+            "sampleDataTrigger": "USER"
+          }
         },
-        dataPackages: {
-          $config: "replace",
-          value: [
+        "dataPackages": {
+          "$config": "replace",
+          "value": [
             {
-              code: "media:mediaPublicationWorkflow",
-              kind: "Media publication approval workflow",
-              required: true,
-              trigger: "USER",
-              dataType: "init",
-              targetServer: "process",
-              targetRuntimeRole: "PROCESS",
+              "code": "media:mediaPublicationWorkflow",
+              "kind": "Media publication approval workflow",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "init",
+              "targetServer": "process",
+              "targetRuntimeRole": "PROCESS"
             },
             {
-              code: "locationMap:init-v001",
-              kind: "Map provider foundation",
-              required: true,
-              trigger: "USER",
-              dataType: "init",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
+              "code": "locationMap:init-v001",
+              "kind": "Map provider foundation",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "init",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
             },
             {
-              code: "locationMap:core-map-reference",
-              kind: "Map styles and layers",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
+              "code": "locationMap:core-map-reference",
+              "kind": "Map styles and layers",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
             },
             {
-              code: "wasteMaterial:core-v001",
-              kind: "Waste material foundation",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
+              "code": "wasteMaterial:core-v001",
+              "kind": "Waste material foundation",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
             },
             {
-              code: "eWaste:core-reference",
-              kind: "Electronics submission presets",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
+              "code": "eWaste:core-reference",
+              "kind": "Electronics submission presets",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "core",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
             },
             {
-              code: "circa.ewaste:waste-policy",
-              kind: "Circa collection policy",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
+              "code": "circa.ewaste:waste-policy",
+              "kind": "Circa collection policy",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
             },
             {
-              code: "wasteCollection:sample-profile-addresses",
-              kind: "Collection network addresses",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "platformServer",
-              targetRuntimeRole: "PLATFORM",
+              "code": "wasteCollection:sample-profile-addresses",
+              "kind": "Collection network addresses",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
             },
             {
-              code: "circa.ewaste:profile",
-              kind: "Local sample customer profiles",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "platformServer",
-              targetRuntimeRole: "PLATFORM",
+              "code": "circa.ewaste:profile",
+              "kind": "Local sample customer profiles",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
             },
             {
-              code: "circa.ewaste:operations",
-              kind: "Local operator access",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "platformServer",
-              targetRuntimeRole: "PLATFORM",
+              "code": "circa.ewaste:operations",
+              "kind": "Local operator access",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
             },
             {
-              code: "wasteCollection:sample-locations",
-              kind: "Collection network locations",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
+              "code": "wasteCollection:sample-locations",
+              "kind": "Collection network locations",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
             },
             {
-              code: "circa.ewaste:location",
-              kind: "Collection centre locations",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "locationServer",
-              targetRuntimeRole: "LOCATION",
+              "code": "circa.ewaste:location",
+              "kind": "Collection centre locations",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "locationServer",
+              "targetRuntimeRole": "LOCATION"
             },
             {
-              code: "wasteCollection:sample-collection-points",
-              kind: "Collection network points",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
+              "code": "wasteCollection:sample-collection-points",
+              "kind": "Collection network points",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
             },
             {
-              code: "circa.ewaste:waste",
-              kind: "Demo assets and collection journeys",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "wasteServer",
-              targetRuntimeRole: "WASTE",
+              "code": "circa.ewaste:waste",
+              "kind": "Demo assets and collection journeys",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wasteServer",
+              "targetRuntimeRole": "WASTE"
             },
             {
-              code: "circa.ewaste:loyalty",
-              kind: "Local reward programme",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "loyaltyServer",
-              targetRuntimeRole: "LOYALTY",
+              "code": "circa.ewaste:loyalty",
+              "kind": "Local reward programme",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "loyaltyServer",
+              "targetRuntimeRole": "LOYALTY"
             },
             {
-              code: "circa.ewaste:store",
-              kind: "Store and redemption outlet references",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:store",
+              "kind": "Store and redemption outlet references",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:commerce",
-              kind: "Circular catalogue source",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "commerceStaged",
-              targetRuntimeRole: "COMMERCE_STAGED",
+              "code": "circa.ewaste:commerce",
+              "kind": "Circular catalogue source",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "commerceStaged",
+              "targetRuntimeRole": "COMMERCE_STAGED"
             },
             {
-              code: "circa.ewaste:circaGreenPerksBudget",
-              kind: "GreenPerks issuer opening budget",
-              operatorEnterpriseCode: "GREENPERKS_RETAIL",
-              required: true,
-              trigger: "USER",
-              phase: "AFTER_PUBLICATION",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:circaGreenPerksBudget",
+              "kind": "GreenPerks issuer opening budget",
+              "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+              "required": true,
+              "trigger": "USER",
+              "phase": "AFTER_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:circaGreenPerksIssuance",
-              kind: "GreenPerks protected coupon issuance after consent",
-              operatorEnterpriseCode: "GREENPERKS_RETAIL",
-              required: true,
-              trigger: "USER",
-              phase: "AFTER_PUBLICATION",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:circaGreenPerksIssuance",
+              "kind": "GreenPerks protected coupon issuance after consent",
+              "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+              "required": true,
+              "trigger": "USER",
+              "phase": "AFTER_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:circaRenewWorksBudget",
-              kind: "RenewWorks issuer opening budget",
-              operatorEnterpriseCode: "RENEWWORKS_REPAIR_REUSE",
-              required: true,
-              trigger: "USER",
-              phase: "AFTER_PUBLICATION",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:circaRenewWorksBudget",
+              "kind": "RenewWorks issuer opening budget",
+              "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+              "required": true,
+              "trigger": "USER",
+              "phase": "AFTER_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:circaRenewWorksIssuance",
-              kind: "RenewWorks protected coupon issuance after consent",
-              operatorEnterpriseCode: "RENEWWORKS_REPAIR_REUSE",
-              required: true,
-              trigger: "USER",
-              phase: "AFTER_PUBLICATION",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:circaRenewWorksIssuance",
+              "kind": "RenewWorks protected coupon issuance after consent",
+              "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+              "required": true,
+              "trigger": "USER",
+              "phase": "AFTER_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:circaLoopCycleBudget",
-              kind: "LoopCycle issuer opening budget",
-              operatorEnterpriseCode: "LOOPCYCLE_RECYCLING",
-              required: true,
-              trigger: "USER",
-              phase: "AFTER_PUBLICATION",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:circaLoopCycleBudget",
+              "kind": "LoopCycle issuer opening budget",
+              "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+              "required": true,
+              "trigger": "USER",
+              "phase": "AFTER_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:circaLoopCycleIssuance",
-              kind: "LoopCycle protected coupon issuance after consent",
-              operatorEnterpriseCode: "LOOPCYCLE_RECYCLING",
-              required: true,
-              trigger: "USER",
-              phase: "AFTER_PUBLICATION",
-              dataType: "sample",
-              targetServer: "commerce",
-              targetRuntimeRole: "COMMERCE",
+              "code": "circa.ewaste:circaLoopCycleIssuance",
+              "kind": "LoopCycle protected coupon issuance after consent",
+              "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+              "required": true,
+              "trigger": "USER",
+              "phase": "AFTER_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "commerce",
+              "targetRuntimeRole": "COMMERCE"
             },
             {
-              code: "circa.ewaste:content",
-              kind: "Website content",
-              required: true,
-              trigger: "USER",
-              dataType: "sample",
-              targetServer: "wcmsStaged",
-              targetRuntimeRole: "WCMS_STAGED",
+              "code": "circa.ewaste:content",
+              "kind": "Website content",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wcmsStaged",
+              "targetRuntimeRole": "WCMS_STAGED"
             },
             {
-              code: "circa.ewaste:customer-workspace",
-              kind: "Customer item workspace content",
-              required: true,
-              trigger: "USER",
-              dataType: "core",
-              targetServer: "wcmsStaged",
-              targetRuntimeRole: "WCMS_STAGED",
+              "code": "circa.ewaste:customer-workspace",
+              "kind": "Customer item workspace content",
+              "required": true,
+              "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "wcmsStaged",
+              "targetRuntimeRole": "WCMS_STAGED"
             },
             {
-              code: "circa.ewaste:media",
-              type: "MEDIA_ASSET_MANIFEST",
-              kind: "Website media",
-              required: true,
-              trigger: "USER",
-              targetServer: "wcmsStaged",
-              targetRuntimeRole: "WCMS_STAGED",
-              manifestModule: "circa.ewaste",
-              manifestPath:
-                "data/sample-v001/content/assets/circa-media/assetManifest.js",
-              businessPurpose: "CIRCA_SAMPLE_CONTENT",
-            },
-          ],
-        },
-      },
-    },
+              "code": "circa.ewaste:media",
+              "type": "MEDIA_ASSET_MANIFEST",
+              "kind": "Website media",
+              "required": true,
+              "trigger": "USER",
+              "targetServer": "wcmsStaged",
+              "targetRuntimeRole": "WCMS_STAGED",
+              "manifestModule": "circa.ewaste",
+              "manifestPath": "data/sample-v001/content/assets/circa-media/assetManifest.js",
+              "businessPurpose": "CIRCA_SAMPLE_CONTENT"
+            }
+          ]
+        }
+      }
+    }
   },
-  media: {
-    customerUploads: {
-      enabled: true,
-    },
-  },
-  waste: {
-    projectOverlay: {
-      enabled: true,
-      module: "circa.ewaste",
-      releaseCode: "circa.ewaste:waste-policy",
-      layerKind: "PROJECT",
-    },
-    operations: {
-      requireScopes: true,
-      requireVerification: true,
-      requireDifferentApprover: false,
-    },
-  },
-  wasteImpact: {
-    calculation: {
-      providerService: "DefaultEWasteOpenAiImpactProviderService",
-      fallbackProviderServices: {
-        $config: "replace",
-        value: ["DefaultEWasteWarmImpactProviderService"],
+  "eWaste": {
+    "application": {
+      "code": "CIRCA_EWASTE",
+      "displayName": "Nodics Circa eWaste",
+      "frontendModuleName": "nodics.circa.eWaste",
+      "projectModuleName": "circa.ewaste",
+      "visual": {
+        "mediaCode": "circa-hero-circular-value",
+        "alt": "Circa circular value"
       },
-      timeoutMs: 90000,
-      failureMode: "RESULT",
-      // CFG-08 KEEP_COMPATIBILITY_PIN: illustrative policy for explicit later-layer
-      // mock opt-in only; this subtree never activates a provider. Review removal
-      // or relocation once external mock selections and their provenance are qualified.
-      mock: {
-        defaultWeightsKg: {
-          default: 1,
-          itemTypes: {
-            SMARTPHONE: 0.2,
-            MOBILE_PHONE: 0.2,
-            LAPTOP: 2.5,
-            COMPUTER_MONITOR: 5,
-            TABLET_DEVICE: 0.6,
-            DESKTOP_TOWER: 7,
-            CHARGER: 0.2,
-            CABLE: 0.1,
-            EARPHONES: 0.1,
-            POWER_BANK_DEVICE: 0.3,
-            SMALL_HOME_APPLIANCE: 3,
-          },
-        },
-        factors: {
-          default: 1,
-        },
-        factorSetVersion: "circa-illustrative-v1",
-      },
+      "requiredScenarioModules": [
+        "eWaste",
+        "wasteRecycling"
+      ]
     },
-  },
-  eWaste: {
-    channelAuthentication: {
-      enabled: true,
-      channels: {
-        TELEGRAM: {
-          enabled: true,
-          applicationCode: "circa.ewaste",
-          seamlessSignIn: true,
-        },
-      },
-    },
-    outcomeCommunication: {
-      enabled: true,
-      connectionName: "engagement",
-      templateCode: "WASTE_REVIEW_OUTCOME_V1",
-    },
-    targetAuthorities: {
-      engagement: {
-        runtimeRole: "ENGAGEMENT",
-      },
-      commerce: {
-        runtimeRole: "COMMERCE",
-      },
-      commerceStaged: {
-        runtimeRole: "COMMERCE_STAGED",
-      },
-      wcms: {
-        runtimeRole: "WCMS_STAGED",
-      },
-    },
-    marketplace: {
-      priceBookCode: "circaPointsPriceBook",
-      warehouseCode: "circaDigitalRegistry",
-      transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
-      storeCode: "circaMainStore",
-      catalogVersion: "circaStaged",
-      currency: "POINTS",
-      programCode: "circa",
-      rewardTypeCode: "points",
-      carbonRewardTypeCode: "circaCarbon",
-      carbonScale: 3,
-      rewardScale: 2,
-      jurisdiction: "CIRCA_SAMPLE",
-      saleMode: "DIGITAL_OWNERSHIP",
-      couponCarbonMode: "UNCHANGED",
-      autoPublishListings: true,
-      listingPresentation: {
-        description:
-          "Local sample digital asset ownership. No physical delivery is included.",
-        imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
-        sample: true,
-        warehouseName: "Circa sample digital registry",
-      },
-      orderCodePrefix: "CIRCA_ORDER_",
-      refundsEnabled: true,
-    },
-    applicationCode: "CIRCA_EWASTE",
-    rewardValuationService: "DefaultCircaEWasteRewardValuationService",
-    conversation: {
-      rewardGuidance:
-        "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor.",
-    },
-    runtimeRoleProfiles: {
-      WASTE: {
-        conversation: {
-          project: "circa.ewaste",
-          adapter: "ollama",
-          profile: "customerGuidance",
-        },
-      },
-    },
-  },
-  apiExposure: {
-    categories: {
-      circaCustomer: {
-        enabled: true,
-      },
-    },
-  },
-  copilot: {
-    runtimeRoleProfiles: {
-      WASTE: {
-        providers: {
-          enabled: true,
-          default: {
-            maximumRequestBytes: 8000000,
-          },
-          adapters: {
-            openai: {
-              enabled: true,
-              credential: {
-                mode: "SECRET_REFERENCE",
-                secretRef: "credentials:openai.circa",
-              },
-              model: {
-                name: "gpt-5.6-luna",
-              },
-              generation: {
-                reasoningEffort: "none",
-              },
-              connection: {
-                timeoutMs: 85000,
-              },
-            },
-            ollama: {
-              enabled: true,
-              model: {
-                name: "gemma3:4b",
-              },
-              generation: {
-                numPredict: 1200,
-              },
-            },
-          },
-          profiles: {
-            eWastePhotoMetadata: {
-              maximumOutputTokens: 2400,
-              structuredOutput: true,
-              imageDetail: "high",
-            },
-            structuredTool: {
-              maximumOutputTokens: 1200,
-            },
-            customerGuidance: {
-              temperature: 0.1,
-              topP: 0.9,
-              maximumOutputTokens: 500,
-              structuredOutput: true,
-            },
-          },
-        },
-      },
-    },
-  },
-  wasteSubmission: {
-    runtimeRoleProfiles: {
-      WASTE: {
-        metadataSuggestion: {
-          enabled: true,
-          adapter: "openai",
-          profile: "eWastePhotoMetadata",
-        },
-      },
-    },
-  },
+    "applicationCode": "CIRCA_EWASTE",
+    "presentation": {
+      "brandName": "Circa",
+      "brandByline": "by Nodics",
+      "sampleMode": true,
+      "walletLabels": {
+        "points": "Reward points",
+        "circaCarbon": "Carbon units"
+      }
+    }
+  }
 };

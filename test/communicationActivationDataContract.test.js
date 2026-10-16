@@ -32,9 +32,7 @@ console.log('Kickoff communication activation-data selectors validated');
 /** Project-specific SMTP adoption checks use the existing effective-runtime harness. */
 const test = require('node:test');
 const approvedLocalCaptureRecipients = [
-    'admin@axis-onboarding-acceptance.test', 'operator@axis-onboarding-acceptance.test',
-    'applicant@axis-onboarding-acceptance.test', 'reviewer@axis-onboarding-acceptance.test',
-    'reviewer2@axis-onboarding-acceptance.test', 'reviewer3@axis-onboarding-acceptance.test'
+    'admin@circa-ui-acceptance-20261013.test', 'operator@circa-ui-acceptance-20261013.test'
 ];
 test('Local employee email remains disabled and credential-free until explicit runtime input', () => {
     const runtime = loadRuntime('engagementServer', 'kickoffLocal', {});
@@ -88,12 +86,12 @@ test('Implicit TLS may be explicitly selected without weakening inherited certif
     assert.equal(runtime.smtpCommsProvider.smtp.allowInsecureLoopback, false);
     assert.equal(runtime.smtpCommsProvider.enabled, false);
 });
-test('Approved Local capture uses the existing SMTP owner with six recipients and loopback-only plaintext', () => {
+test('Approved Local capture uses the existing SMTP owner with exactly two recipients and loopback-only plaintext', () => {
     const runtime = loadRuntime('engagementServer', 'kickoffLocal', {
         NODICS_EMPLOYEE_SMTP_ENABLED: 'true',
         NODICS_EMPLOYEE_EMAIL_SENDER: 'noreply@nodics-local.test',
-        NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT: 'admin@axis-onboarding-acceptance.test',
-        NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_2: 'operator@axis-onboarding-acceptance.test',
+        NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT: 'admin@circa-ui-acceptance-20261013.test',
+        NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_2: 'operator@circa-ui-acceptance-20261013.test',
         NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_3: 'applicant@axis-onboarding-acceptance.test',
         NODICS_EMPLOYEE_SMTP_HOST: '127.0.0.1', NODICS_EMPLOYEE_SMTP_PORT: '2525',
         NODICS_EMPLOYEE_SMTP_SECURE: 'false', NODICS_EMPLOYEE_SMTP_REQUIRE_TLS: 'false',
@@ -178,7 +176,13 @@ test('Local deployment adopts Profile resource defaults without activating Profi
             assert.ok(template.htmlTemplate.includes('<html'));
         }
         assert.deepEqual(runtime.properties.communication.trustedSourceModules, ['eWaste', 'profile']);
-        assert.equal(runtime.properties.communication.templates.WASTE_REVIEW_OUTCOME_V1.version, 2);
+        assert.equal(runtime.properties.communication.templates.WASTE_REVIEW_OUTCOME_V1, undefined);
+        for (const channel of ['TELEGRAM', 'IN_APP']) {
+            const outcome = templates.resolve({ templateCode: 'WASTE_REVIEW_OUTCOME_V1', channel, locale: 'en' }, runtime.properties.communication);
+            assert.equal(outcome.version, 2);
+            assert.equal(outcome.ownerModule, 'eWaste');
+            assert.equal(outcome.purpose, 'WASTE_REVIEW_OUTCOME');
+        }
         assert.deepEqual(runtime.properties.communication.providers.TELEGRAM.credentialReferences, ['telegram.bot.circa']);
         assert.equal(runtime.properties.smtpCommsProvider.enabled, false);
         assert.equal(profile.enterpriseManagement.registration.enabled, false);
