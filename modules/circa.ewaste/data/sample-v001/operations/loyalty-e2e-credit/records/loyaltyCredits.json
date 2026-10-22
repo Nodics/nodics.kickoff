@@ -1,0 +1,23 @@
+{
+  "contractVersion": 1,
+  "credits": [
+    {
+      "code": "CIRCA_KICKOFF_LOCAL_E2E_CUSTOMER_POINTS_20261020",
+      "customerCode": "circa-customer",
+      "walletCode": "WALLET_ED16C8FCF19E1FE586E3DA5D",
+      "programCode": "circa",
+      "rewardTypeCode": "points",
+      "amount": "7645",
+      "approvalReference": "CIRCA_KICKOFF_LOCAL_E2E_FUNDING_20261020",
+      "expectedBalance": {
+        "available": "0.00",
+        "reserved": "0.00",
+        "earned": "7763.00",
+        "spent": "7763.00",
+        "expired": "0.00",
+        "reversed": "82.00",
+        "revision": 86
+      }
+    }
+  ]
+}

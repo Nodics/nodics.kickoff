@@ -51,7 +51,10 @@ Startup validates retained authority without restoring permissions, credentials
 or lockouts. Subsequent access changes require governed Profile/Axis operations;
 configuration changes never rewrite tenant namespace ceilings or assignments.
 Production deployments can disable sample operations through the existing
-`data.dataReleases.types.sample` configuration. Never adopt demo credentials or
+`data.dataReleases.types.sample` configuration. Circa's Digital bundle listing
+destination is an explicit sample release because Store, category, price book and
+reward references are governed project business selections, not framework defaults.
+Never adopt demo credentials or
 fictional credit, stock or fulfillment into a real customer deployment.
 
 Simulation remains disabled by default, explicitly deployment-allowlisted and
@@ -100,6 +103,29 @@ This inert plan does not issue coupons or provide approval, consent or
 stock. Both locales retain digital classification. The five asset offers require
 the independent Digital ownership/eWaste binding, policies and installed owner
 qualification; a coupon-only owner must refuse them, never use physical stock.
+
+The forward `circa.ewaste:circaProductMediaReferences@0.0.3` release replaces the
+URL-only localization media descriptors for all 43 Products with the canonical
+Media codes already declared by the Circa content pack. It retains every other
+effective localization value, including the five asset-classification
+successors. Failed `0.0.1` and `0.0.2` attempts remain preserved; `0.0.3` carries
+the required Product-owned localization version successors under a unique
+nImport file prefix instead of rewriting that history. Import and publication
+remain separate governed operations:
+`circaProductMediaPublicationPlan` contains only the 43 successor Product roots,
+while `circaCatalogueMediaCurrentPublicationPlan` is the complete effective
+46-root catalogue view. Earlier Commerce, classification and publication bytes,
+installed receipts and approval history remain immutable; source presence does
+not authorize import, approval, Online activation or search reindexing.
+
+Fresh `kickoffLocal` application setup selects the immutable
+`circa.ewaste:circaLocalDemoCredit` source, whose revision-0 guard matches the
+fresh sample wallet. The separate `circaLocalE2ECustomerWalletCredit` remains an
+explicit continuation source for the exact retained revision-86 state and is not
+part of fresh application readiness. Loyalty owns validation, transactional
+posting and replay protection. Kickoff owns only the exact sample instructions,
+Local approval pins and deployment selection. Source presence and passing tests
+do not establish that either credit was imported.
 
 The demo includes seven enterprises, fourteen partner staff plus seven operational
 staff (twenty-one total), three customer personas, four redemption

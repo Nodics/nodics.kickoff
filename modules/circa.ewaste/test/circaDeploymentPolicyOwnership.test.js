@@ -16,6 +16,16 @@ const guidanceProfile = require(
 ).copilot.providers.profiles.customerGuidance;
 const snapshots = require("./fixtures/circaResolvedDeploymentPolicyBeforeExtraction.json");
 const demo = require("../config/properties");
+const retiredSelectors = new Set([
+  "eWaste.catalogue.discoveryBatchSize",
+  "eWaste.marketplace.carbonRewardTypeCode",
+  "eWaste.marketplace.carbonScale",
+  "eWaste.marketplace.catalogueDiscovery",
+  "eWaste.marketplace.couponCarbonMode",
+  "eWaste.marketplace.listingPresentation.warehouseName",
+  "eWaste.marketplace.refundsEnabled",
+  "eWaste.marketplace.rewardScale",
+]);
 for (const snapshot of snapshots)
   test(
     snapshot.environment +
@@ -32,6 +42,31 @@ for (const snapshot of snapshots)
         const actual =
           selector.split(".").reduce((value, key) => value?.[key], runtime) ??
           null;
+        if (retiredSelectors.has(selector) || selector.startsWith("eWaste.journeys.") ||
+            selector.startsWith("waste.projectOverlay.")) {
+          assert.equal(actual, null, `${selector} must not restore retired configuration`);
+          continue;
+        }
+        if (selector === "eWaste.conversation.rewardGuidance" && expected !== null) {
+          const profiles = require(path.join(__dirname, "../../../envs",
+            snapshot.environment, "config/properties")).eWaste.runtimeRoleProfiles;
+          const selectedGuidance = profiles.COMMERCE.conversation.rewardGuidance;
+          assert.equal(selectedGuidance, profiles.WASTE.conversation.rewardGuidance);
+          assert.equal(actual, selectedGuidance);
+          assert.match(actual, /original contributor entitlements stay with the contributor/);
+          continue;
+        }
+        if (selector === "eWaste.journey.arrivalRadiusMetres" &&
+            snapshot.environment === "kickoffDockerLocal" &&
+            !activeModuleNames(runtime).includes("eWaste")) {
+          assert.equal(actual, null, "Unselected owners must not acquire copied radius defaults");
+          continue;
+        }
+        if (selector === "waste.operations.requireDifferentApprover" &&
+            !activeModuleNames(runtime).includes("wasteCore")) {
+          assert.equal(actual, null, "Unselected Waste Core contributes no approver default");
+          continue;
+        }
         if (
           selector === "eWaste.journey.arrivalRadiusMetres" &&
           expected !== null &&

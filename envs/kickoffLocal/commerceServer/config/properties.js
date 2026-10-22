@@ -28,6 +28,26 @@ module.exports = {
               },
             ],
           },
+          {
+            tenant: "default",
+            principalEnterpriseCode: "default",
+            serviceId: "apiAdmin",
+            projectCode: "nodics.kickoff",
+            environmentCode: "kickoffLocal",
+            serverCode: "commerceServer",
+            instanceCode: "kickoff-local-commerce-1",
+            assignmentCode: "kickoff-local-commerce-runtime-deployment",
+            placements: [
+              {
+                storeCode: "agoraMainStore",
+                enterpriseCode: "default",
+              },
+              {
+                storeCode: "circaMainStore",
+                enterpriseCode: "GREENPERKS_ONLINE",
+              },
+            ],
+          },
         ],
       },
     },
@@ -65,6 +85,7 @@ module.exports = {
   },
   digitalCore: {
     merchantRedemption: { pricedProvider: { qualified: true } },
+    bundleListings: { enabled: true },
     // Local admission for the reviewed original-sale test, not financial acceptance evidence.
     digitalOwnership: {
       enabled: true,

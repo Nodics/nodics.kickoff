@@ -269,9 +269,9 @@ test("all nine monetary cases price the actual new source goods through the exac
   }
 });
 
-test("native fresh setup exposes all goods and bounded role stages with canonical revision-5 observation", t => {
-  const previous = { CONFIG: global.CONFIG };
-  t.after(() => Object.assign(global, previous));
+test("native fresh setup exposes all goods and bounded role stages with the current reviewed observation", t => {
+  const savedGlobals = { CONFIG: global.CONFIG };
+  t.after(() => Object.assign(global, savedGlobals));
   const runtime = loadRuntime("platformServer", "kickoffLocal");
   const initialization = require(path.join(frameworkRoot,
     "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
@@ -289,9 +289,11 @@ test("native fresh setup exposes all goods and bounded role stages with canonica
   const groups = initialization.preparationGroups(profile, {}, steps.filter(step => step.phase === "BEFORE_PUBLICATION"));
   const order = groups.flatMap(group => group.steps.map(step => step.code));
   const predecessor = require("../config/setup-observation/history/circa-native-reviewed-revision-3.json");
+  const previousObservation = require("../config/setup-observation/history/circa-native-reviewed-revision-7.json");
   const plan = require("../config/setup-observation/circa-native-reviewed.json");
   assert.equal(predecessor.revision, 3);
-  assert.equal(plan.revision, 5);
+  assert.equal(previousObservation.revision, 7);
+  assert.equal(plan.revision, 16);
   const retained = require("../config/setup-observation/history/circa-native-reviewed-revision-4.json");
   assert.equal(plan.profileDigest, observer.digest(profile));
   const corrected = new Set(proposal.issuerPacks.map(pack => "circa.ewaste:" + pack.commerceSection));

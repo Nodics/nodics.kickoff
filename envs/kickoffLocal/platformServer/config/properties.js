@@ -6,7 +6,25 @@
  * @override Later deployment layers may narrow application selections without replacing framework preparation or owner authorization.
  */
 module.exports = {
-profileRuntimeEnterpriseResolution: {
+  tooling: {
+    acceptance: {
+      circaLoyaltyRewardCheckout: {
+        customer: {
+          email: "customer@circa.local",
+          firstName: "Circa",
+          lastName: "Customer",
+        },
+        shippingAddress: {
+          line1: "Local acceptance fixture",
+          city: "Dubai",
+          region: "Dubai",
+          postalCode: "00000",
+          country: "AE",
+        },
+      },
+    },
+  },
+  profileRuntimeEnterpriseResolution: {
     enabled: true,
     callers: { $config: "replace", value: [{
       tenant: "default", principalEnterpriseCode: "default", serviceId: "apiAdmin",
@@ -258,7 +276,7 @@ profileRuntimeEnterpriseResolution: {
                     dataType: "sample",
                     targetServer: "commerceStaged",
                     targetRuntimeRole: "COMMERCE_STAGED",
-                    publicationPlan: require("../../../../modules/circa.ewaste/data/sample-v001/publication/current-catalogue/records/publicationPlan.json"),
+                    publicationPlan: require("../../../../modules/circa.ewaste/data/sample-v008/publication/current-catalogue/records/publicationPlan.json"),
                   },
                   {
                     code: "circa.ewaste:circaAssetClassificationPublicationPlan",
@@ -271,7 +289,7 @@ profileRuntimeEnterpriseResolution: {
                     dataType: "sample",
                     targetServer: "commerceStaged",
                     targetRuntimeRole: "COMMERCE_STAGED",
-                    publicationPlan: require("../../../../modules/circa.ewaste/data/sample-v001/asset-publication/records/publicationPlan.json"),
+                    publicationPlan: require("../../../../modules/circa.ewaste/data/sample-v008/asset-publication/records/publicationPlan.json"),
                   },
                   {
                     code: "circa.ewaste:circaGreenPerksPublicationPlan",
@@ -394,7 +412,7 @@ profileRuntimeEnterpriseResolution: {
                   },
                   {
                     "code": "circa.ewaste:circaLocalDemoCredit",
-                    "kind": "Approved guarded one-time Local demo POINTS credit",
+                    "kind": "Approved guarded kickoffLocal fresh-demo customer POINTS credit",
                     "order": 190,
                     "required": true,
                     "trigger": "USER",

@@ -9,6 +9,7 @@
 
  */
 
+/** @module envs/kickoffLocal/loyaltyServer/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffLocal/loyaltyServer */
 module.exports = {
   databaseTransactions: { maximumCommitTimeMs: 10000 },
   loyalty: {
@@ -28,6 +29,16 @@ module.exports = {
               "991a3f063caeaef83ada14a426c824650bdc5eef9c9cb43a5872ef2545e1c1d8",
             instructionCode: "CIRCA_LOCAL_DEMO_BUYER_POINTS",
             approvalReference: "CIRCA_LOCAL_DEMO_POINT_CREDIT_20261009",
+          },
+          {
+            environmentCode: "kickoffLocal",
+            enterpriseCode: "GREENPERKS_ONLINE",
+            releaseCode: "circa.ewaste:circaLocalE2ECustomerWalletCredit",
+            version: "0.0.1",
+            checksum:
+              "639d05972d3ae328f5b0a903d7ed51b953603eb8d9fbde1ecb5ec73071bc0b90",
+            instructionCode: "CIRCA_KICKOFF_LOCAL_E2E_CUSTOMER_POINTS_20261020",
+            approvalReference: "CIRCA_KICKOFF_LOCAL_E2E_FUNDING_20261020",
           },
         ],
       },

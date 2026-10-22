@@ -94,7 +94,69 @@ function assertFreshContentSuccessor(section, before, sourceRoot) {
   assert.equal(reviewed.size, 0, "Every approved CMS ownership file must retain its historical baseline");
 }
 
-test("all Circa releases remain portable with only the explicit fresh CMS content successor", () => {
+function assertLoyaltySuccessor(section, before) {
+  assert.equal(section.sourceRoot, "sample-v004");
+  assert.equal(section.version, "0.0.2");
+  const retained = manifest.retainedRoots?.["sample-v001"]?.sections?.loyalty;
+  assert.deepEqual(retained, {
+    ...before,
+    environmentScope: ["ALL"],
+    selectionPolicy: "EXPLICIT",
+  }, "The original loyalty release must remain sealed in retainedRoots");
+
+  const normalized = Object.fromEntries(Object.entries(section.files).map(([file, hash]) =>
+    [file.replace(/^sample-v004\//, "sample-v001/"), hash]));
+  assert.deepEqual(Object.keys(normalized).sort(), Object.keys(before.files).sort());
+  const programFile = "sample-v001/loyalty/records/circaLoyaltyProgramData.js";
+  for (const [file, hash] of Object.entries(before.files)) {
+    if (file === programFile) assert.notEqual(normalized[file], hash, "The successor must carry the reviewed program change");
+    else assert.equal(normalized[file], hash, file + ": unrelated loyalty records must remain byte-identical");
+  }
+}
+
+function assertOperationsSuccessor(section, before) {
+  assert.equal(section.sourceRoot, "sample-v007");
+  assert.equal(section.version, "0.0.2");
+  const retained = manifest.retainedRoots?.["sample-v001"]?.sections?.operations;
+  assert.deepEqual(retained, {
+    ...before,
+    environmentScope: ["ALL"],
+    selectionPolicy: "EXPLICIT",
+  }, "The original operations release must remain sealed in retainedRoots");
+
+  const normalized = Object.fromEntries(Object.entries(section.files).map(([file, hash]) =>
+    [file.replace(/^sample-v007\//, "sample-v001/"), hash]));
+  assert.deepEqual(Object.keys(normalized).sort(), Object.keys(before.files).sort());
+  const changed = new Set([
+    "sample-v001/operations/headers/circaOperationsHeader.js",
+    "sample-v001/operations/records/circaEnterpriseData.js",
+    "sample-v001/operations/records/circaOperationalEmployeeData.js",
+    "sample-v001/operations/records/circaOperationalScopeData.js",
+  ]);
+  for (const [file, hash] of Object.entries(before.files)) {
+    if (changed.has(file)) assert.notEqual(normalized[file], hash, file + ": successor change must be explicit");
+    else assert.equal(normalized[file], hash, file + ": unrelated operations records must remain byte-identical");
+  }
+}
+
+function assertPublicationPlanSuccessor(code, section, before) {
+  assert.equal(section.sourceRoot, "sample-v008");
+  assert.equal(section.version, "0.0.2");
+  const retained = manifest.retainedRoots?.["sample-v001"]?.sections?.[code];
+  assert.deepEqual(retained, {
+    ...before,
+    environmentScope: ["ALL"],
+    selectionPolicy: "EXPLICIT",
+  }, code + ": the original publication plan must remain sealed in retainedRoots");
+  const currentFiles = Object.entries(section.files);
+  assert.equal(currentFiles.length, 1);
+  const [file, hash] = currentFiles[0];
+  const originalFile = file.replace(/^sample-v008\//, "sample-v001/");
+  assert.equal(Object.hasOwn(before.files, originalFile), true, code + ": successor path must preserve plan identity");
+  assert.notEqual(hash, before.files[originalFile], code + ": successor must carry the reviewed plan correction");
+}
+
+test("all Circa releases remain portable with only the explicit reviewed successors", () => {
   const sourceRoot = path.resolve(__dirname, "../data");
   const roots = new Map();
   for (const section of Object.values(manifest.sections)) {
@@ -106,15 +168,36 @@ test("all Circa releases remain portable with only the explicit fresh CMS conten
   }
   const before = require("./fixtures/circaPreExtractionManifest.json");
   const extracted = new Set(["waste-policy","customer-workspace","circaLocalDemoCreditStaffAssignment","circaLocalOpeningStaffAssignments","circaLocalUnusedRefundExceptionStaffAssignment","circaLocalDemoCreditRole","circaLocalOpeningRole","circaLocalUnusedRefundExceptionRole"]);
+  const publicationSuccessors = new Set([
+    "circaCatalogueCurrentPublicationPlan",
+    "circaAssetClassificationPublicationPlan",
+  ]);
   for (const [code, section] of Object.entries(before.sections)) {
     if (extracted.has(code)) continue;
     const current = manifest.sections[code];
     assert(current, code + ": retained release must exist");
     // Historical seals do not inspect live metadata; pin its only permitted changes here.
     assert.deepEqual(current, { ...section, environmentScope: ["ALL"], selectionPolicy: "EXPLICIT",
-      ...(code === "content" ? { version: "0.0.2", files: current.files } : {}) }, code);
+      ...(code === "content" ? { version: "0.0.2", files: current.files } : {}),
+      ...(code === "loyalty" ? { sourceRoot: "sample-v004", version: "0.0.2", files: current.files } : {}),
+      ...(code === "operations" ? { sourceRoot: "sample-v007", version: "0.0.2",
+        description: current.description, files: current.files } : {}),
+      ...(publicationSuccessors.has(code) ? { sourceRoot: "sample-v008", version: "0.0.2",
+        description: current.description, files: current.files, capability: current.capability } : {}) }, code);
     if (code === "content") {
       assertFreshContentSuccessor(manifest.sections.content, section, sourceRoot);
+      continue;
+    }
+    if (code === "loyalty") {
+      assertLoyaltySuccessor(current, section);
+      continue;
+    }
+    if (code === "operations") {
+      assertOperationsSuccessor(current, section);
+      continue;
+    }
+    if (publicationSuccessors.has(code)) {
+      assertPublicationPlanSuccessor(code, current, section);
       continue;
     }
     assert.deepEqual(manifest.sections[code].files, section.files, code);

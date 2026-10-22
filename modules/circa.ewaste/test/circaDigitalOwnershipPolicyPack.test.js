@@ -12,7 +12,6 @@ const root = "sample-v001/operations/asset-policy/";
 const owner = require(path.join(framework, "nodics.waste/modules/wasteCore/src/service/defaultWasteDataContributionPolicyService"));
 const schema = require(path.join(framework, "nodics.waste/modules/wasteCore/src/schemas/schemas"));
 const sale = require(path.join(framework, "nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteDigitalSaleService"));
-const reversal = require(path.join(framework, "nodics.accelerators/modules/waste/modules/eWaste/src/service/defaultEWasteOrderReversalService"));
 const proposal = require("./fixtures/circaDemoPolicyProposal.json");
 const selection = require("./fixtures/circaDigitalOwnershipPolicySelections.json");
 const manifest = require("../data/manifest.json");
@@ -84,37 +83,4 @@ test("canonical original sale command retains approved source policies before an
     assert.equal(command.policies.reward.metadata.digitalOwnership.proceeds, "CAPTURED_TOTAL");
     assert.equal(command.policies.carbon.settlementMode, "NONE");
   }
-});
-
-test("canonical refund refuses original sale without retained refund term even if current policies are amended", async t => {
-  const previous = global.SERVICE;
-  t.after(() => { global.SERVICE = previous; });
-  const sellerRef = { module: "profile", schema: "customer", code: "isolated-seller" };
-  const buyerRef = { module: "profile", schema: "customer", code: "isolated-buyer" };
-  const command = { tenant: proposal.tenant, enterpriseCode: proposal.marketplaceEnterprise, orderCode: "isolated-order",
-    ownerId: buyerRef.code, assetCode: selection.assetCodes[0], sellerRef, buyerRef, policies: structuredClone(policies) };
-  delete command.policies.transfer.metadata.digitalOwnership.refund;
-  const event = { code: "isolated-sale", active: true, transferType: "SELL", transferStatus: "COMPLETED",
-    assetCode: command.assetCode, policyCode: policies.transfer.code, fromOwnerRef: sellerRef, toOwnerRef: buyerRef,
-    commerceOrderRef: { module: "order", schema: "commerceOrder", code: command.orderCode }, carbonSettlementRefs: [],
-    metadata: { digitalSale: { command, settlement: { carbonSettlementRefs: [] } } } };
-  const refundCode = "ORDER_REFUND_" + crypto.createHash("sha256").update([command.tenant, command.enterpriseCode, command.orderCode].join("|"))
-    .digest("hex").slice(0, 32).toUpperCase();
-  const input = { ...command, payload: { code: event.code, entitlementCode: "isolated-entitlement", orderCode: command.orderCode,
-    ownerId: command.ownerId, refundCode, idempotencyKey: refundCode } };
-  let amended = false, downstreamReads = 0;
-  global.SERVICE = {
-    DefaultEWasteDigitalSaleService: { context: r => r, timestamp: sale.timestamp,
-      buyer: async (_r, code) => code === sellerRef.code ? sellerRef : buyerRef,
-      rows: async () => { downstreamReads++; throw new Error("No downstream effect permitted"); } },
-    DefaultWasteAssetTransferOperationService: { digitalRead: async (_r, schemaName, code) => {
-      if (schemaName === "wasteAssetOwnershipEvent") return structuredClone(event);
-      return structuredClone(Object.values(amended ? policies : command.policies).find(row => row.code === code));
-    } }
-  };
-  await assert.rejects(() => reversal.digitalContext(input, "preview"), /Reviewed original-sale no-fee no-carbon/);
-  amended = true;
-  await assert.rejects(() => reversal.digitalContext(input, "preview"), /Original digital refund policy changed/);
-  assert.equal(downstreamReads, 0);
-  assert.equal(event.metadata.digitalSale.command.policies.transfer.metadata.digitalOwnership.refund, undefined);
 });

@@ -38,11 +38,12 @@ entries and the signed deployment identity. Profile owns governed assignment
 updates; startup validates retained grants without expanding them. This is not
 SMTP or notification delivery qualification.
 
-- Keep the Local Circa arrival-radius fallback at 200 metres in this server's
-  properties; the application fallback remains 50 metres. Preserve the explicit
-  environment override and test effective startup without an injected radius.
-- The server index must follow the Circa application index so deployment policy
-  overrides application defaults through the standard nConfig loading order.
+- Inherit the Local arrival-radius override (200 metres) from the environment's
+  eWaste WASTE role profile; do not repeat its descriptor in this server.
+  eWaste owns the 50-metre default. Test effective preparation with and without
+  injected radius input, preserving owner-before-environment/server load order.
+- Runtime activation and release selection use existing module/data metadata.
+  Do not restore dead `waste.accelerator` or `waste.projectOverlay` markers.
 
 - Verified customer channel handoffs require `profile.externalIdentity.prepare`
   from its owner-defined Profile-managed pack and this deployment's governed

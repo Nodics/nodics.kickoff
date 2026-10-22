@@ -35,6 +35,83 @@ const coreProperties = require("../modules/kickoffCore/config/properties");
 const metadata = require("../modules/kickoffCore/package.json");
 
 require("node:test")(
+  "Local and Docker inherit owner precision without retired marketplace reversal selections",
+  () => {
+    for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+      const local = require("../envs/" + environment + "/config/properties");
+      for (const profile of Object.values(local.eWaste.runtimeRoleProfiles)) {
+        assert.equal(profile.catalogue, undefined);
+        if (!profile.marketplace) continue;
+        for (const key of ["rewardScale", "carbonScale", "refundsEnabled",
+          "catalogueDiscovery", "couponCarbonMode", "carbonRewardTypeCode"])
+          assert.equal(Object.hasOwn(profile.marketplace, key), false, key);
+        assert.equal(profile.marketplace.listingPresentation.warehouseName, undefined);
+      }
+      const effective = loadRuntime("wasteServer", environment);
+      for (const key of ["rewardScale", "carbonScale", "refundsEnabled"])
+        assert.equal(Object.hasOwn(effective.eWaste.marketplace, key), false, key);
+    }
+  },
+);
+
+require("node:test")(
+  "Local Commerce explicitly enables Digital bundle listings without widening other deployments",
+  () => {
+    const owner = require(
+      path.join(
+        frameworkRoot,
+        "nodics.commerce/modules/digitalCommerce/modules/digitalCore/config/properties",
+      ),
+    );
+    assert.equal(owner.digitalCore.bundleListings.enabled, false);
+    assert.equal(
+      loadRuntime("commerceServer", "kickoffLocal").digitalCore.bundleListings
+        .enabled,
+      true,
+    );
+    for (const [server, environment] of [
+      ["commerceStagedServer", "kickoffLocal"],
+      ["commerceServer", "kickoffDockerLocal"],
+      ["commerceStagedServer", "kickoffDockerLocal"],
+    ]) {
+      assert.equal(
+        loadRuntime(server, environment).digitalCore.bundleListings.enabled,
+        false,
+        `${server}/${environment}`,
+      );
+    }
+  },
+);
+
+require("node:test")(
+  "Local OpenAI adopts a stable external credential through the existing owner reference",
+  () => {
+    const local = require("../envs/kickoffLocal/config/properties");
+    assert.deepEqual(local.credentials["openai.circa"].value, {
+      $config: "env",
+      name: "OPENAI_API_KEY",
+    });
+    const variables = { OPENAI_API_KEY: "unit-only-openai-credential" };
+    const first = loadRuntime("wasteServer", "kickoffLocal", variables);
+    const repeated = loadRuntime("wasteServer", "kickoffLocal", variables);
+    for (const properties of [first, repeated]) {
+      assert.equal(
+        properties.credentials["openai.circa"].value,
+        variables.OPENAI_API_KEY,
+      );
+      assert.equal(
+        properties.copilot.providers.adapters.openai.credential.secretRef,
+        "credentials:openai.circa",
+      );
+    }
+    const absent = loadRuntime("wasteServer", "kickoffLocal", {
+      OPENAI_API_KEY: "",
+    });
+    assert.equal(absent.credentials["openai.circa"].value == null, true);
+  },
+);
+
+require("node:test")(
   "Engagement resolves Profile communication destinations without widening other deployments",
   () => {
     const baseline = runtimePermissions.loyaltyServer;
@@ -1152,6 +1229,142 @@ for (const profile of Object.values(
     "Deployment transports stay in the selected environment/server",
   );
 }
+
+for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+  require("node:test")(
+    `${environment} Waste inherits approval and journey defaults without required customer copies`,
+    () => {
+      const local = require(`../envs/${environment}/config/properties`);
+      const server = require(`../envs/${environment}/wasteServer/config/properties`);
+      assert.equal(
+        local.waste.runtimeRoleProfiles.COMMERCE.projectOverlay,
+        undefined,
+      );
+      assert.equal(server.waste?.accelerator, undefined);
+      if (environment === "kickoffLocal")
+        assert.equal(server.eWaste.journey, undefined);
+      assert.equal(
+        Object.hasOwn(
+          local.waste.runtimeRoleProfiles.COMMERCE.operations,
+          "requireDifferentApprover",
+        ),
+        false,
+      );
+      for (const role of ["COMMERCE", "WASTE"])
+        assert.equal(
+          Object.hasOwn(local.eWaste.runtimeRoleProfiles[role], "journeys"),
+          false,
+          role + " must inherit journey inclusion",
+        );
+
+      const runtime = loadRuntime("wasteServer", environment, {});
+      const modules = activeModuleNames(runtime);
+      for (const owner of ["wasteCore", "eWaste"]) {
+        assert(modules.includes(owner));
+        assert(modules.indexOf(owner) < modules.indexOf(environment));
+      }
+      const defaults = require(
+        path.join(
+          frameworkRoot,
+          "nodics.waste/modules/wasteCore/config/properties",
+        ),
+      ).waste.operations;
+      assert.equal(
+        runtime.waste.operations.requireDifferentApprover,
+        defaults.requireDifferentApprover,
+      );
+      assert.equal(runtime.waste.operations.requireScopes, true);
+      assert.equal(runtime.waste.operations.requireVerification, true);
+      assert.equal(
+        runtime.eWaste.journey.arrivalRadiusMetres,
+        environment === "kickoffLocal" ? 200 : 50,
+      );
+      assert.equal(
+        runtime.eWaste.journey.reviewAssignment.queueCode,
+        local.eWaste.runtimeRoleProfiles.WASTE.journey.reviewAssignment.queueCode,
+      );
+      assert.equal(
+        runtime.eWaste.journey.depositInstruction,
+        local.eWaste.runtimeRoleProfiles.WASTE.journey.depositInstruction,
+      );
+      assert.equal(runtime.eWaste.application.enabled, true);
+      if (environment === "kickoffLocal")
+        assert.equal(runtime.eWaste.outcomeCommunication.enabled, true);
+      assert.equal(runtime.eWaste.journeys, undefined);
+      assert.equal(runtime.waste.projectOverlay, undefined);
+      assert.equal(runtime.waste.accelerator, undefined);
+    },
+  );
+}
+
+require("node:test")(
+  "Docker arrival input inherits the active owner default while Local keeps its intentional radius",
+  () => {
+    const docker = require("../envs/kickoffDockerLocal/config/properties");
+    for (const role of ["COMMERCE", "WASTE"]) {
+      assert.deepEqual(
+        docker.eWaste.runtimeRoleProfiles[role].journey.arrivalRadiusMetres,
+        {
+          $config: "env",
+          name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
+          type: "number",
+        },
+        "Docker declares only the optional deployment input, not an owner default",
+      );
+    }
+    const { execFileSync } = require("node:child_process");
+    for (const environment of ["kickoffDockerLocal", "kickoffLocal"]) {
+      for (const input of [undefined, "", "125"]) {
+        const result = JSON.parse(
+          execFileSync(
+            process.execPath,
+            [
+              "-e",
+              `
+                const path = require("node:path");
+                const options = JSON.parse(process.argv[1]);
+                // Change only the cached owner contribution in this isolated process.
+                const owner = require(path.join(options.frameworkRoot,
+                  "nodics.accelerators/modules/waste/modules/eWaste/config/properties"));
+                owner.eWaste.journey.arrivalRadiusMetres = 73;
+                const probe = require(path.join(options.frameworkRoot,
+                  "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
+                const result = probe.resolve(options);
+                process.stdout.write(JSON.stringify({
+                  radius: result.properties.eWaste.journey.arrivalRadiusMetres,
+                  ownerActive: result.modules.includes("eWaste"),
+                }));
+              `,
+              JSON.stringify({
+                projectRoot: path.resolve(__dirname, ".."),
+                frameworkRoot,
+                environment,
+                server: "wasteServer",
+              }),
+            ],
+            {
+              encoding: "utf8",
+              timeout: 30000,
+              env: {
+                PATH: process.env.PATH,
+                HOME: process.env.HOME,
+                ...(input === undefined
+                  ? {}
+                  : { CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: input }),
+              },
+            },
+          ),
+        );
+        assert.equal(result.ownerActive, true);
+        assert.equal(
+          result.radius,
+          input === "125" ? 125 : environment === "kickoffLocal" ? 200 : 73,
+          `${environment} must preserve owner inheritance and explicit input precedence`,
+        );
+      }
+    }
+  },
+);
 
 for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
   const waste = loadRuntime("wasteServer", environment, {});

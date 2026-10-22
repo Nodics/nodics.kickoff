@@ -27,6 +27,54 @@
       },
       "selectionPolicy": "EXPLICIT"
     },
+    "customerParticipationAssignments": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "displayName": "Circa customer participation assignments",
+      "description": "Credential-free assignment of capability-owned participant groups to existing Circa sample customers.",
+      "owningDomain": "profile",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/customer-participation/headers/circaCustomerParticipationHeader.js": "68ae77f29c062f9bb4201ac002c6a601d35d3128ca35d7637c841c42aac59ab2",
+        "sample-v001/customer-participation/records/circaCustomerParticipationData.js": "8020a814d8e3c4120946c8f8e381357b0026d2d5f34af27b3b8a32eb785f6b29"
+      }
+    },
+    "customerDigitalParticipationAssignments": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v005",
+      "version": "0.0.1",
+      "displayName": "Circa customer Digital participation assignments",
+      "description": "Credential-free assignment of the Digital-owned bundle participant group to existing Circa sample customers.",
+      "owningDomain": "profile",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "PLATFORM",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "RESTRICTED",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v005/customer-digital-participation/headers/circaCustomerDigitalParticipationHeader.js": "009e65054c0e3e4aacc9de55e041af539239bd7c2d743b755a25eb96c00c551d",
+        "sample-v005/customer-digital-participation/records/circaCustomerDigitalParticipationData.js": "1e3a026a79e3cbc53ea5a71e52081faa2ec6d12ec91e3e0d0f45ea17f4915cf1"
+      }
+    },
     "location": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
@@ -112,8 +160,8 @@
     "loyalty": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "sourceRoot": "sample-v004",
+      "version": "0.0.2",
       "displayName": "Circa loyalty sample",
       "description": "Explicit local Circa sample loyalty records",
       "owningDomain": "loyalty",
@@ -128,12 +176,12 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js": "1cff17d44117414452e2dee92b184fd795149d6ed63e2802fc36688d81688083",
-        "sample-v001/loyalty/records/circaLoyaltyProgramData.js": "32ed35ca5bafa8110437ade81eaf93cfd0a94afdbaa5ec17f0cd01651c3c3e1b",
-        "sample-v001/loyalty/records/circaLoyaltyRewardTypeData.js": "83cb8a664bcfdd2969494230fdf4b517e35f532363825a3740a52141d19e6c86",
-        "sample-v001/loyalty/records/circaLoyaltyWalletData.js": "2b7878a1180a24624938d63f8ee00d854a1ca245a53a26ae79babcad0e0e90ef",
-        "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js": "6919580ddf70756743e6e5777b79c7449d4fbf34c8dffa7ebaf50c1f6560b83f",
-        "sample-v001/loyalty/records/circaRewardLedgerEntryData.js": "6f96a5ac3be3a40cb48f0e6d568b7489b9943b1aa4126abbe6e012002707131d"
+        "sample-v004/loyalty/headers/circaLoyaltySampleHeader.js": "1cff17d44117414452e2dee92b184fd795149d6ed63e2802fc36688d81688083",
+        "sample-v004/loyalty/records/circaLoyaltyProgramData.js": "2052b862ad9eff52f1ab32facd5e8ca55309740a9b938316578aa05f5da65f4b",
+        "sample-v004/loyalty/records/circaLoyaltyRewardTypeData.js": "83cb8a664bcfdd2969494230fdf4b517e35f532363825a3740a52141d19e6c86",
+        "sample-v004/loyalty/records/circaLoyaltyWalletData.js": "2b7878a1180a24624938d63f8ee00d854a1ca245a53a26ae79babcad0e0e90ef",
+        "sample-v004/loyalty/records/circaLoyaltyWalletRewardBalanceData.js": "6919580ddf70756743e6e5777b79c7449d4fbf34c8dffa7ebaf50c1f6560b83f",
+        "sample-v004/loyalty/records/circaRewardLedgerEntryData.js": "6f96a5ac3be3a40cb48f0e6d568b7489b9943b1aa4126abbe6e012002707131d"
       },
       "selectionPolicy": "EXPLICIT"
     },
@@ -225,13 +273,37 @@
       "displayName": "Circa Commerce catalogue",
       "selectionPolicy": "EXPLICIT"
     },
+    "circaDigitalBundleListingContexts": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v006",
+      "version": "0.0.1",
+      "displayName": "Circa Digital bundle listing destinations",
+      "description": "Reviewed Circa participant bundle destination using existing Store, Product category, Pricing book and Loyalty reward references.",
+      "owningDomain": "circa.ewaste",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v006/digital-listing-context/headers/circaDigitalBundleListingContextHeader.js": "0450df21508d098d715c77535cbc7d1ecc9af66e5c92c505d252f2b85a25e487",
+        "sample-v006/digital-listing-context/records/circaDigitalBundleListingContextData.js": "ddd6fb3fa0efd023fdb8d3f72663371eca0561b8bad4d2b7dac5f41b3de48593"
+      }
+    },
     "operations": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "sourceRoot": "sample-v007",
+      "version": "0.0.2",
       "displayName": "Circa operational roles",
-      "description": "Unified v001 Circa demo partner enterprises, staff and explicitly scoped operational access.",
+      "description": "Reviewed Circa demo partner enterprises and staff with platform administration removed from the operational scope successor.",
       "owningDomain": "circa.ewaste",
       "lifecycle": "REFERENCE",
       "destinationRole": "PLATFORM",
@@ -244,11 +316,11 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/operations/headers/circaOperationsHeader.js": "0a2ff742980ad568e0e511c33c7a4b3325b5826af7bea78296fa2b21f29872a9",
-        "sample-v001/operations/records/circaEnterpriseData.js": "ded0ad61ac9241fa8dfdadfe96776512fe8f72e19b482697b02722519f615e43",
-        "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
-        "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
-        "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b"
+        "sample-v007/operations/headers/circaOperationsHeader.js": "8e487871e47154439bc48f3b8eac433f72bf79baf49af2dfab92d4dd45d984e5",
+        "sample-v007/operations/records/circaEnterpriseData.js": "98d0e89758e0ed1e4e12b1a8d0a2c43e5f5d90daf249ab748b81b526468bf66f",
+        "sample-v007/operations/records/circaOperationalEmployeeData.js": "bca9b477d9bbc83f400c3ba8f940cde90a0424d5a0d45fd019a9d52c0caf78d9",
+        "sample-v007/operations/records/circaOperationalScopeData.js": "8a34d79038156c1490181017549698718ebdbdb511c32fe349d01bf7447e9e94",
+        "sample-v007/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b"
       },
       "selectionPolicy": "EXPLICIT"
     },
@@ -688,8 +760,8 @@
     "circaCatalogueCurrentPublicationPlan": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
-      "sourceRoot": "sample-v001",
-      "version": "0.0.1",
+      "sourceRoot": "sample-v008",
+      "version": "0.0.2",
       "owningDomain": "product",
       "lifecycle": "PUBLISHABLE",
       "destinationRole": "COMMERCE_STAGED",
@@ -703,9 +775,9 @@
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "selectionPolicy": "EXPLICIT",
       "displayName": "Circa current catalogue publication",
-      "description": "Full effective 46-root catalogue selection: five corrected asset Product successors at source version 2 and 41 unchanged original intents. Select instead of the historical catalogue plan for current readiness; the five-root successor subset remains independently available.",
+      "description": "Full effective 46-root catalogue selection: five corrected asset Product roots at source version 1 and 41 unchanged original intents. Select instead of the historical catalogue plan for current readiness; the five-root successor subset remains independently available.",
       "files": {
-        "sample-v001/publication/current-catalogue/records/publicationPlan.json": "8de3510f3a94f1146da2238e5311ffb9927b6fead8fb1858c3995b39a9183761"
+        "sample-v008/publication/current-catalogue/records/publicationPlan.json": "d2d74b749da9d375b3848ebc706aeb3ca9b6d6f7b53ae71ad8dc44e7f55a4696"
       },
       "capability": {
         "code": "circa.ewaste",
@@ -751,6 +823,69 @@
     "circaAssetClassificationPublicationPlan": {
       "kind": "DATA_RELEASE",
       "dataType": "sample",
+      "sourceRoot": "sample-v008",
+      "version": "0.0.2",
+      "owningDomain": "product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa corrected asset republication",
+      "description": "Separate GREENPERKS_ONLINE governed first publication for exactly five Product roots after classification import; draft root version 0 is required and source version 1 is sealed through Product. Preserve the publication identities and approval history.",
+      "files": {
+        "sample-v008/asset-publication/records/publicationPlan.json": "7de9533c255e69797e633806075d9b2168da57e4f7976f1afbd3b9f5bc9e3808"
+      },
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa corrected asset publication",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Separately request ordinary governed publication of the five corrected Product graphs; preserve approvals, journals and payment policies."
+      }
+    },
+    "circaProductMediaReferences": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.3",
+      "owningDomain": "product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa canonical Product Media references",
+      "description": "Complete en/ar Product localization version successors for all 43 Circa catalogue Products. Replaces URL-only Product media descriptors with canonical Media codes while retaining every other effective business value and preserving failed 0.0.1 and 0.0.2 attempts.",
+      "files": {
+        "sample-v001/product-media-v003/headers/circaProductMediaV003Header.js": "4f649abc8f4d26910b52bcc1cc938c2e65144e1b594062fb4ec518672061b21f",
+        "sample-v001/product-media-v003/records/circaProductMediaV003LocalizationData.js": "25d64b481648b548921013063a8cf02829f5a6cb088951f67aafec9ca90a93a1"
+      },
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa Product Media correction",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Give every Circa Product a governed Media identity that Product discovery can expose through canonical delivery URLs without changing historical releases."
+      }
+    },
+    "circaProductMediaPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
       "sourceRoot": "sample-v001",
       "version": "0.0.1",
       "owningDomain": "product",
@@ -765,18 +900,49 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "selectionPolicy": "EXPLICIT",
-      "displayName": "Circa corrected asset republication",
-      "description": "Separate GREENPERKS_ONLINE governed successor publication for exactly five Product roots after classification import; original root version 1 is required and source version 2 is sealed through Product. Preserve prior publication identities and approval history.",
+      "displayName": "Circa canonical Media Product republication",
+      "description": "Separate GREENPERKS_ONLINE governed successor publication for all 43 Product roots after the canonical Media-reference import. It preserves prior publication identities, approvals and receipts.",
       "files": {
-        "sample-v001/asset-publication/records/publicationPlan.json": "be9cec90b6bed7f8cc48ed160a929943d44d29782809f3957cb7b78e675bd851"
+        "sample-v001/product-media-publication/records/publicationPlan.json": "d4b7ef6264b34bc0bd41ec93227ddf09beaa23407082ed24893b85aa9374e707"
       },
       "capability": {
         "code": "circa.ewaste",
-        "displayName": "Circa corrected asset publication",
+        "displayName": "Circa canonical Media Product publication",
         "type": "APPLICATION",
         "group": "APPLICATION_CONTENT",
         "extendsCapability": "ewaste",
-        "businessOutcome": "Separately request ordinary governed republication of the five corrected Product graphs; preserve original approvals, journals and payment policies."
+        "businessOutcome": "Request ordinary governed republication of every corrected Circa Product graph without replaying or rewriting earlier publication history."
+      }
+    },
+    "circaCatalogueMediaCurrentPublicationPlan": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "owningDomain": "product",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "COMMERCE_STAGED",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa Media-current catalogue publication",
+      "description": "Full effective 46-root catalogue selection after canonical Product Media repair: all 43 Product roots at source version 2 and three unchanged non-Product roots.",
+      "files": {
+        "sample-v001/publication/media-current-catalogue/records/publicationPlan.json": "619442d7f3d264b7655b412e960336a7ce5e3102f10a885eda7e184c945c3f21"
+      },
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa Media-current catalogue publication",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Qualify the complete effective catalogue after canonical Media correction while retaining all historical release and publication evidence."
       }
     },
     "circaLocalDemoCredit": {
@@ -801,6 +967,30 @@
       "installer": "LOYALTY_SAMPLE_CREDITS",
       "files": {
         "sample-v001/operations/loyalty-credit/records/loyaltyCredits.json": "19cdd9068da60789f36ff2fe0f72ebfd485ff14b3dc96dfe654a48c3db3e7641"
+      }
+    },
+    "circaLocalE2ECustomerWalletCredit": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "selectionPolicy": "EXPLICIT",
+      "displayName": "Circa kickoffLocal E2E customer wallet POINTS credit",
+      "description": "One governed 7,645 POINTS successor credit guarded by the observed kickoffLocal customer-wallet counters and revision. It does not replay the historical demo credit or define reusable Loyalty behavior.",
+      "owningDomain": "loyaltyWallet",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "LOYALTY",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "installer": "LOYALTY_SAMPLE_CREDITS",
+      "files": {
+        "sample-v001/operations/loyalty-e2e-credit/records/loyaltyCredits.json": "b38087229d5488b6ebd187a6f807a306c8e40ccd00dc867ab6b590e3e5c7ad93"
       }
     },
     "circaDigitalOwnershipPolicies": {
@@ -1133,6 +1323,145 @@
       "files": {
         "sample-v001/opening-staff/headers/circaLocalOpeningStaffHeader.js": "e610c688986629418e8388641da677051f8623456cf409b22e558d9ea8f2dc47",
         "sample-v001/opening-staff/records/circaLocalOpeningStaffData.js": "e72c7799b0bb9556c77b2dccf2afc0b1fc94cdb46318e69fef5ea9f8d4e7140d"
+      }
+    }
+  },
+  "retainedRoots": {
+    "sample-v001": {
+      "scope": "SECTIONS",
+      "files": {
+        "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js": "1cff17d44117414452e2dee92b184fd795149d6ed63e2802fc36688d81688083",
+        "sample-v001/loyalty/records/circaLoyaltyProgramData.js": "32ed35ca5bafa8110437ade81eaf93cfd0a94afdbaa5ec17f0cd01651c3c3e1b",
+        "sample-v001/loyalty/records/circaLoyaltyRewardTypeData.js": "83cb8a664bcfdd2969494230fdf4b517e35f532363825a3740a52141d19e6c86",
+        "sample-v001/loyalty/records/circaLoyaltyWalletData.js": "2b7878a1180a24624938d63f8ee00d854a1ca245a53a26ae79babcad0e0e90ef",
+        "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js": "6919580ddf70756743e6e5777b79c7449d4fbf34c8dffa7ebaf50c1f6560b83f",
+        "sample-v001/loyalty/records/circaRewardLedgerEntryData.js": "6f96a5ac3be3a40cb48f0e6d568b7489b9943b1aa4126abbe6e012002707131d",
+        "sample-v001/operations/headers/circaOperationsHeader.js": "0a2ff742980ad568e0e511c33c7a4b3325b5826af7bea78296fa2b21f29872a9",
+        "sample-v001/operations/records/circaEnterpriseData.js": "ded0ad61ac9241fa8dfdadfe96776512fe8f72e19b482697b02722519f615e43",
+        "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
+        "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
+        "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b",
+        "sample-v001/publication/current-catalogue/records/publicationPlan.json": "8de3510f3a94f1146da2238e5311ffb9927b6fead8fb1858c3995b39a9183761",
+        "sample-v001/asset-publication/records/publicationPlan.json": "be9cec90b6bed7f8cc48ed160a929943d44d29782809f3957cb7b78e675bd851"
+      },
+      "sections": {
+        "loyalty": {
+          "kind": "DATA_RELEASE",
+          "dataType": "sample",
+          "sourceRoot": "sample-v001",
+          "version": "0.0.1",
+          "displayName": "Circa loyalty sample",
+          "description": "Explicit local Circa sample loyalty records",
+          "owningDomain": "loyalty",
+          "lifecycle": "REFERENCE",
+          "destinationRole": "LOYALTY",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "INTERNAL",
+          "versioningPolicy": "NONE",
+          "publicationPolicy": "NONE",
+          "initialPublicationPolicy": "NONE",
+          "removalPolicy": "RETAIN",
+          "files": {
+            "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js": "1cff17d44117414452e2dee92b184fd795149d6ed63e2802fc36688d81688083",
+            "sample-v001/loyalty/records/circaLoyaltyProgramData.js": "32ed35ca5bafa8110437ade81eaf93cfd0a94afdbaa5ec17f0cd01651c3c3e1b",
+            "sample-v001/loyalty/records/circaLoyaltyRewardTypeData.js": "83cb8a664bcfdd2969494230fdf4b517e35f532363825a3740a52141d19e6c86",
+            "sample-v001/loyalty/records/circaLoyaltyWalletData.js": "2b7878a1180a24624938d63f8ee00d854a1ca245a53a26ae79babcad0e0e90ef",
+            "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js": "6919580ddf70756743e6e5777b79c7449d4fbf34c8dffa7ebaf50c1f6560b83f",
+            "sample-v001/loyalty/records/circaRewardLedgerEntryData.js": "6f96a5ac3be3a40cb48f0e6d568b7489b9943b1aa4126abbe6e012002707131d"
+          },
+          "selectionPolicy": "EXPLICIT"
+        },
+        "operations": {
+          "kind": "DATA_RELEASE",
+          "dataType": "sample",
+          "sourceRoot": "sample-v001",
+          "version": "0.0.1",
+          "displayName": "Circa operational roles",
+          "description": "Unified v001 Circa demo partner enterprises, staff and explicitly scoped operational access.",
+          "owningDomain": "circa.ewaste",
+          "lifecycle": "REFERENCE",
+          "destinationRole": "PLATFORM",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "RESTRICTED",
+          "versioningPolicy": "NONE",
+          "publicationPolicy": "NONE",
+          "initialPublicationPolicy": "NONE",
+          "removalPolicy": "RETAIN",
+          "files": {
+            "sample-v001/operations/headers/circaOperationsHeader.js": "0a2ff742980ad568e0e511c33c7a4b3325b5826af7bea78296fa2b21f29872a9",
+            "sample-v001/operations/records/circaEnterpriseData.js": "ded0ad61ac9241fa8dfdadfe96776512fe8f72e19b482697b02722519f615e43",
+            "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
+            "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
+            "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b"
+          },
+          "selectionPolicy": "EXPLICIT"
+        },
+        "circaCatalogueCurrentPublicationPlan": {
+          "kind": "DATA_RELEASE",
+          "dataType": "sample",
+          "sourceRoot": "sample-v001",
+          "version": "0.0.1",
+          "owningDomain": "product",
+          "lifecycle": "PUBLISHABLE",
+          "destinationRole": "COMMERCE_STAGED",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "PUBLIC",
+          "versioningPolicy": "IMMUTABLE",
+          "publicationPolicy": "REQUIRED",
+          "initialPublicationPolicy": "ADMIN_INITIATED",
+          "removalPolicy": "UNPUBLISH_OR_RETIRE",
+          "selectionPolicy": "EXPLICIT",
+          "displayName": "Circa current catalogue publication",
+          "description": "Full effective 46-root catalogue selection: five corrected asset Product successors at source version 2 and 41 unchanged original intents. Select instead of the historical catalogue plan for current readiness; the five-root successor subset remains independently available.",
+          "files": {
+            "sample-v001/publication/current-catalogue/records/publicationPlan.json": "8de3510f3a94f1146da2238e5311ffb9927b6fead8fb1858c3995b39a9183761"
+          },
+          "capability": {
+            "code": "circa.ewaste",
+            "displayName": "Circa current catalogue publication",
+            "type": "APPLICATION",
+            "group": "APPLICATION_CONTENT",
+            "extendsCapability": "ewaste",
+            "businessOutcome": "Qualify every current catalogue root together after forward asset classification while preserving original releases and publication history."
+          }
+        },
+        "circaAssetClassificationPublicationPlan": {
+          "kind": "DATA_RELEASE",
+          "dataType": "sample",
+          "sourceRoot": "sample-v001",
+          "version": "0.0.1",
+          "owningDomain": "product",
+          "lifecycle": "PUBLISHABLE",
+          "destinationRole": "COMMERCE_STAGED",
+          "environmentScope": [
+            "ALL"
+          ],
+          "sensitivity": "PUBLIC",
+          "versioningPolicy": "IMMUTABLE",
+          "publicationPolicy": "REQUIRED",
+          "initialPublicationPolicy": "ADMIN_INITIATED",
+          "removalPolicy": "UNPUBLISH_OR_RETIRE",
+          "selectionPolicy": "EXPLICIT",
+          "displayName": "Circa corrected asset republication",
+          "description": "Separate GREENPERKS_ONLINE governed successor publication for exactly five Product roots after classification import; original root version 1 is required and source version 2 is sealed through Product. Preserve prior publication identities and approval history.",
+          "files": {
+            "sample-v001/asset-publication/records/publicationPlan.json": "be9cec90b6bed7f8cc48ed160a929943d44d29782809f3957cb7b78e675bd851"
+          },
+          "capability": {
+            "code": "circa.ewaste",
+            "displayName": "Circa corrected asset publication",
+            "type": "APPLICATION",
+            "group": "APPLICATION_CONTENT",
+            "extendsCapability": "ewaste",
+            "businessOutcome": "Separately request ordinary governed republication of the five corrected Product graphs; preserve original approvals, journals and payment policies."
+          }
+        }
       }
     }
   }

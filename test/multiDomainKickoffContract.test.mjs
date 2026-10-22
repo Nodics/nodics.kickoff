@@ -249,20 +249,29 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
       assert.equal(
         definition.pack,
         "agora.apparel",
-        "Only reviewed Apparel opening operations are in scope",
+        "Only reviewed Apparel Online owner releases are in scope",
       );
-      assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
       assert.equal(section.selectionPolicy, "EXPLICIT");
-      assert(
-        ["INVENTORY_OPENING_RECEIPTS", "PROMOTION_CAMPAIGN_ISSUANCE"].includes(
-          section.installer,
-        ),
-      );
-      assert(
-        Object.keys(section.files).every((file) =>
-          /^sample-v001\/operations\/records\/.+\.json$/.test(file),
-        ),
-      );
+      if (section.owningDomain === "store") {
+        assert.equal(section.lifecycle, "REFERENCE");
+        assert.equal(section.installer, undefined);
+        assert.deepEqual(Object.keys(section.files).sort(), [
+          "sample-v001/store/headers/agoraApparelStoreReferenceHeader.js",
+          "sample-v001/store/records/agoraApparelStoreData.js",
+        ]);
+      } else {
+        assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
+        assert(
+          ["INVENTORY_OPENING_RECEIPTS", "PROMOTION_CAMPAIGN_ISSUANCE"].includes(
+            section.installer,
+          ),
+        );
+        assert(
+          Object.keys(section.files).every((file) =>
+            /^sample-v001\/operations\/records\/.+\.json$/.test(file),
+          ),
+        );
+      }
     }
     const wcmsSection = sections.find(
       (section) => section.destinationRole === "WCMS_STAGED",
@@ -314,7 +323,9 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
           section.destinationRole === "WCMS_STAGED"
             ? "content"
             : section.destinationRole === "COMMERCE"
-              ? "operations"
+              ? section.owningDomain === "store"
+                ? "store"
+                : "operations"
               : Object.keys(section.files).every((file) =>
                     file.startsWith(section.sourceRoot + "/publication/"),
                   )

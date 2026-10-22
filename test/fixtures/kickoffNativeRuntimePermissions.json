@@ -73,7 +73,9 @@
     "loyalty.rewards.reverse",
     "waste.asset.marketplace.project",
     "waste.asset.sale.transfer",
-    "commerce.pricing.merchant.evidence"
+    "commerce.pricing.merchant.evidence",
+    "commerce.product.read",
+    "commerce.store.read"
   ],
   "commerceStagedServer": [
     "auth.internal.token.read",
@@ -97,7 +99,8 @@
     "publish.lifecycle.requestApproval",
     "commerce.product.publish",
     "waste.asset.listing.intent.read",
-    "commerce.store.read"
+    "commerce.store.read",
+    "commerce.digital.bundle.publish"
   ],
   "wcmsStagedServer": [
     "auth.internal.token.read",
@@ -214,7 +217,8 @@
     "commerce.digital.own.read",
     "profile.externalIdentity.prepare",
     "communication.request",
-    "commerce.product.read"
+    "commerce.product.read",
+    "waste.impact.calculate"
   ],
   "engagementServer": [
     "auth.internal.token.read",

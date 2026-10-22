@@ -82,7 +82,14 @@ test('reference project adopts complete owner suites without local implementatio
     assert.equal(commands[command].command, command);
   }
   const directory = path.join(root, 'scripts/acceptance');
-  assert.deepEqual(fs.existsSync(directory) ? fs.readdirSync(directory).filter(file => file.endsWith('Service.mjs')) : [], []);
+  assert.deepEqual(fs.readdirSync(directory).filter(file => file.endsWith('Service.mjs')), [
+    'defaultProjectCircaEndToEndAcceptanceService.mjs',
+  ]);
+  assert.equal(commands['acceptance:circa-end-to-end'].type, 'projectScript');
+  assert.equal(commands['acceptance:circa-end-to-end'].script,
+    'scripts/acceptance/defaultProjectCircaEndToEndAcceptanceService.mjs');
+  assert.equal(scripts['acceptance:circa-end-to-end'],
+    'nodics project:run acceptance:circa-end-to-end');
 });
 
 test('project uses canonical qualification, fresh-reset and configuration-placement gates', () => {

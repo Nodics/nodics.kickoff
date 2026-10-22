@@ -17,6 +17,7 @@ const path = require('node:path');
 const projectRoot = path.resolve(__dirname, '..');
 
 const { frameworkRoot } = require('./helpers/configuration');
+// Configuration-only projection: no runtime start, lifecycle hooks or providers.
 const prepareRuntime = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
 
 const scenarios = Object.freeze([
@@ -136,9 +137,12 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
             assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
             assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WASTE'), true);
-            assert.equal(CONFIG.get('waste').accelerator.umbrella, 'waste');
-            assert.deepEqual(CONFIG.get('waste').accelerator.scenarioAccelerators, ['eWaste']);
-            assert.equal(CONFIG.get('waste').projectOverlay.module, 'circa.ewaste');
+            assert.equal(CONFIG.get('waste').accelerator, undefined);
+            assert.equal(CONFIG.get('waste').projectOverlay, undefined);
+            assert.deepEqual(CONFIG.get('data').dataReleases.initializationProfiles.localWasteFoundation.steps, [
+                { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },
+                { dataType: 'sample', releaseCodes: ['circa.ewaste:waste-policy'] }
+            ], 'Prepared Waste composition selects owner references and a separate explicit demo sample');
             assert.equal(NODICS.getRawModule('nodics.accelerators'), undefined);
             assert.equal(NODICS.isModuleActive('loyaltyCore'), false);
             assert.equal(NODICS.isModuleActive('promotion'), false);

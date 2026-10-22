@@ -82,12 +82,23 @@ test("Circa administrator retains setup group assignments without granting owner
   assert(admin.userGroups.includes("runtimeConfigAdminUserGroup"));
 });
 
+test("Circa sample scopes never rewrite the framework bootstrap administrator", () => {
+  const scopes = records("operations", "circaOperationalScopeData");
+  assert.equal(scopes.some((scope) => scope.principalCode === "admin"), false);
+  assert.equal(scopes.every((scope) => scope.principalCode.endsWith("@circa.local")), true);
+});
+
 test("predefined customer and staff personas retain distinct active identities and canonical base roles", () => {
   const customers = records("profile", "circaCustomerData");
   const staff = records("operations", "circaOperationalEmployeeData");
   const fixture = require(path.join(frameworkRoot,
     "nodics.platform/modules/profile/test/helpers/identityCatalogueFixture"));
-  const targets = Object.fromEntries(fixture.records("UserGroup").map(row => [row.code, row]));
+  const participantGroups = [
+    "nodics.loyalty/modules/loyaltyWallet/data/init-v004/records/identity/loyaltyParticipantUserGroupData",
+    "nodics.waste/modules/wasteCarbon/data/init-v003/records/identity/wasteCarbonParticipantUserGroupData",
+    "nodics.waste/modules/wasteReward/data/init-v002/records/identity/wasteMaterialValueParticipantUserGroupData",
+  ].flatMap(file => Object.values(require(path.join(frameworkRoot, file))));
+  const targets = Object.fromEntries(fixture.records("UserGroup").concat(participantGroups).map(row => [row.code, row]));
   const baseRoles = Object.values(require(path.join(frameworkRoot,
     "nodics.waste/modules/wasteCore/data/init-v001/records/identity/wasteCoreUserGroupData")));
   for (const group of baseRoles) {
@@ -111,6 +122,29 @@ test("predefined customer and staff personas retain distinct active identities a
     assert.equal(customer.ownerId, customer.loginId);
     assert.deepEqual(customer.userGroups, ["customerUserGroup"]);
   }
+  const participation = records(
+    "customerParticipationAssignments",
+    "circaCustomerParticipationData",
+  );
+  assert.deepEqual(
+    participation.map((row) => row.loginId),
+    customers.map((row) => row.loginId),
+  );
+  for (const assignment of participation) {
+    assert.deepEqual(assignment.expectedGroupCodes, ["customerUserGroup"]);
+    assert.deepEqual(assignment.groupCodes, [
+      "loyaltyParticipantCustomerUserGroup",
+      "wasteCarbonCustomerUserGroup",
+      "wasteMaterialValueCustomerUserGroup",
+    ]);
+  }
+  assert.deepEqual(targets.loyaltyParticipantCustomerUserGroup.permissions, [
+    "loyalty.rewards.transfer",
+    "loyalty.partnerConversion.read",
+    "loyalty.partnerConversion.execute",
+  ]);
+  assert.deepEqual(targets.wasteCarbonCustomerUserGroup.permissions, ["carbon.holdings.read"]);
+  assert.deepEqual(targets.wasteMaterialValueCustomerUserGroup.permissions, ["waste.materialValue.read"]);
   const journeys = [
     ["circa-integrated-administrator", "wasteEnterpriseAdministratorUserGroup", "waste.verification.record", "waste.review.approve"],
     ["circa-integrated-operator", "wasteCentreOperatorUserGroup", "waste.review.queue.read"],
@@ -138,7 +172,7 @@ test("canonical scope matching gives integrated administrator all 21 fixtures wi
   const scopes = records("operations", "circaOperationalScopeData");
   const points = records("waste", "circaWasteCollectionPointData");
   const submissions = records("waste", "circaWasteSubmissionData");
-  assert.equal(scopes.length, 22);
+  assert.equal(scopes.length, 21);
   assert.equal(submissions.length, 21);
   for (const scope of scopes) {
     assert.equal(scope.active, true);

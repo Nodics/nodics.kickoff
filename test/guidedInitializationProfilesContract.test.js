@@ -67,6 +67,7 @@ const allowedDataTypes = new Set(["init", "core", "sample"]);
 
 const {
   loadRuntime,
+  loadEnvironment,
   frameworkRoot,
   activeModuleNames,
 } = require("./helpers/configuration");
@@ -176,6 +177,19 @@ for (const [server, expectation] of Object.entries(requiredProfiles)) {
   }
 }
 
+const environmentProfile = loadEnvironment("kickoffLocal");
+const stagedTopology = environmentProfile.topology.groups.backends.find(
+  (runtime) => runtime.server === "wcmsStagedServer",
+);
+assert(stagedTopology, "kickoffLocal topology must expose WCMS Staged");
+assert.deepEqual(stagedTopology.initializationProfiles, [
+  { code: "localWcmsFoundation", template: "foundation" },
+  {
+    code: "localDocumentationFoundation",
+    template: "axisDocumentationFoundation",
+  },
+]);
+
 const commerceRuntime = loadRuntime("commerceServer");
 assert.equal(
   commerceRuntime.servers.loyalty.endpoint.httpPort,
@@ -207,6 +221,7 @@ assert.deepEqual(
     "nodics.copilot",
     "nodics.waste",
     "nodics.loyalty",
+    "nodics.commerce",
     "nodics.docs",
     "nodics.accelerators/modules/nexus",
   ],
@@ -227,9 +242,23 @@ assert.deepEqual(
   [
     { moduleName: "wasteCore", sections: ["core-reference"] },
     { moduleName: "wasteCollection", sections: ["sample-profile-addresses"] },
+    { moduleName: "wasteCarbon", sections: ["participantAccessGroups"] },
+    { moduleName: "wasteReward", sections: ["participantAccessGroups"] },
     { moduleName: "loyaltyCore", sections: ["core-enterprise-reference"] },
+    {
+      moduleName: "loyaltyWallet",
+      sections: ["specialAccessGroups", "specialAccessRoles", "participantAccessGroups"],
+    },
+    { moduleName: "product", sections: ["accessGroups"] },
+    { moduleName: "promotion", sections: ["accessGroups"] },
+    { moduleName: "order", sections: ["accessGroups", "specialAccessGroups", "specialAccessRoles"] },
+    { moduleName: "inventory", sections: ["specialAccessGroups", "specialAccessRoles"] },
+    {
+      moduleName: "digitalCore",
+      sections: ["bundleParticipantPermissions", "participantAccessGroups"],
+    },
   ],
-  "platformServer must expose capability-owned Profile and collection-centre address samples as Platform-targeted contributions",
+  "platformServer must expose only selected capability-owned Platform-targeted contributions",
 );
 assert.equal(
   platformRuntime.activeModules.modules.includes("wasteCollection"),
@@ -329,16 +358,14 @@ assert.equal(
   true,
   "wasteServer must expose Schema Workbench for standalone BackOffice inspection",
 );
-assert.equal(
-  wasteRuntime.waste.accelerator.umbrella,
-  "waste",
-  "wasteServer must compose the Waste accelerator umbrella",
-);
-assert.deepEqual(
-  wasteRuntime.waste.accelerator.scenarioAccelerators,
-  ["eWaste"],
-  "wasteServer must compose the initial eWaste scenario accelerator",
-);
+for (const moduleName of ["waste", "eWaste", "circa.ewaste"]) {
+  assert(
+    activeModuleNames(wasteRuntime).includes(moduleName),
+    `wasteServer must activate the selected ${moduleName} module`,
+  );
+}
+assert.equal(wasteRuntime.waste.accelerator, undefined);
+assert.equal(wasteRuntime.waste.projectOverlay, undefined);
 assert.deepEqual(
   wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation
     .steps[0].releaseCodes,
@@ -380,10 +407,11 @@ assert.deepEqual(
   [{ moduleName: "wasteCollection", sections: ["sample-locations"] }],
   "locationServer must expose Waste-owned collection-centre location samples as Location-targeted contributions",
 );
-assert.equal(
-  wasteRuntime.waste.projectOverlay.releaseCode,
-  "circa.ewaste:waste-policy",
-);
+const wastePolicy = require("../modules/circa.ewaste/data/manifest.json")
+  .sections["waste-policy"];
+assert.equal(wastePolicy.destinationRole, "WASTE");
+assert.equal(wastePolicy.dataType, "sample");
+assert.equal(wastePolicy.selectionPolicy, "EXPLICIT");
 
 console.log("Kickoff guided initialization profile contract validated");
 

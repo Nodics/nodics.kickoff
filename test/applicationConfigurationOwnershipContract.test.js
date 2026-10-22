@@ -70,6 +70,7 @@ test("reference Waste profiles inherit framework metadata defaults in both envir
 
 test("Native Telegram credential is shared only by its verifier and delivery runtime roles", () => {
   const source = require("../envs/kickoffLocal/config/properties");
+  const variables = {};
   assert.equal(Object.hasOwn(source.credentials, "telegram.bot.circa"), false);
   assert.deepEqual(Object.keys(source.credentials.runtimeRoleProfiles).sort(), [
     "ENGAGEMENT",
@@ -88,12 +89,11 @@ test("Native Telegram credential is shared only by its verifier and delivery run
     },
   );
   for (const server of ["platformServer", "engagementServer"]) {
-    const runtime = loadRuntime(server, "kickoffLocal");
+    const runtime = loadRuntime(server, "kickoffLocal", variables);
     const credential = runtime.credentials["telegram.bot.circa"];
     assert.equal(
       credential?.value ===
-        source.credentials.runtimeRoleProfiles.PLATFORM["telegram.bot.circa"]
-          .value,
+        source.credentials.runtimeRoleProfiles.PLATFORM["telegram.bot.circa"].value,
       true,
       server,
     );
@@ -117,7 +117,7 @@ test("Native Telegram credential is shared only by its verifier and delivery run
     "processServer",
     "locationServer",
   ]) {
-    const runtime = loadRuntime(server, "kickoffLocal");
+    const runtime = loadRuntime(server, "kickoffLocal", variables);
     assert.equal(
       Object.hasOwn(runtime.credentials, "telegram.bot.circa"),
       false,
@@ -343,12 +343,8 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const commerce = loadRuntime("commerceServer", environment);
     assert.equal(commerce.eWaste.conversation.project, undefined);
     assert.equal(activeModuleNames(commerce).includes("eWaste"), false);
-    assert.deepEqual(commerce.order.refunds.ownerPorts.eWaste, {
-      moduleName: "eWaste",
-      connectionName: "waste",
-      targetAuthority: { runtimeRole: "WASTE" },
-      apiPrefix: "/internal/order-reversals",
-    });
+    assert.equal(commerce.order.refunds.ownerPorts.eWaste, undefined,
+      "Retired eWaste reversals must not remain a configured refund port");
     assert.equal(commerce.bidding.holdTiming, "CHECKOUT_AFTER_ACCEPTANCE");
     assert.equal(commerce.bidding.validitySeconds, 86400);
     assert.equal(commerce.digitalCore.merchantRedemption.enabled, true);

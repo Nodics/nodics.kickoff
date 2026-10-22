@@ -146,7 +146,7 @@ test('selected Commerce composition discovers only exact operational contributio
         const apparel = harness.loadRuntime('commerceServer', environment, { NODICS_AGORA_DOMAINS: 'apparel' });
         assert(!harness.activeModuleNames(apparel).includes('agora.apparel'));
         assert.deepEqual(apparel.data.dataReleases.contributions.filter(item => item.moduleName === 'agora.apparel'), [{
-            moduleName: 'agora.apparel', sections: ['agoraApparelOpeningStock', 'agoraApparelPromotionSetup']
+            moduleName: 'agora.apparel', sections: ['agoraApparelStoreReference', 'agoraApparelOpeningStock', 'agoraApparelPromotionSetup']
         }]);
         const unselected = harness.loadRuntime('commerceServer', environment, { NODICS_AGORA_DOMAINS: 'electronics' });
         assert(!unselected.data.dataReleases.contributions.some(item => item.moduleName === 'agora.apparel'));

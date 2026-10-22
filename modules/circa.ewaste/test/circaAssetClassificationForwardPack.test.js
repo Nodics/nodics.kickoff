@@ -21,7 +21,8 @@ const rows = Object.values(
 const previous = Object.values(
   require("../data/sample-v001/commerce/records/circaProductLocalizationData"),
 );
-const plan = require("../data/sample-v001/asset-publication/records/publicationPlan.json");
+const plan = require(path.join(data,
+  Object.keys(manifest.sections.circaAssetClassificationPublicationPlan.files)[0]));
 const header = require("../data/sample-v001/asset-classification/headers/circaAssetClassificationHeader");
 const originals = require("../data/sample-v001/publication/catalogue/records/publicationPlan.json");
 const rootCodes = ["1047", "1051", "1052", "1055", "1092"].map(
@@ -63,13 +64,17 @@ test("historical classification seals retain the frozen pre-extraction sections 
       "Type",
     ].map((name) => "sample-v001/content/records/circaCms" + name + "Data.js"),
   );
+  const bootstrapScopeCorrections = new Set([
+    "sample-v001/operations/records/circaOperationalScopeData.js",
+  ]);
   for (const [file, expected] of Object.entries(baseline.files)) {
     if (file.endsWith("release.descriptor.json")) continue;
     assert.equal(historicalFiles[file], expected, file);
     // Complete policies have importer coverage; the nine CMS successors have exact ownership-only checks.
     if (
       file.includes("/waste-policy/records/") ||
-      ownershipSuccessors.has(file)
+      ownershipSuccessors.has(file) ||
+      bootstrapScopeCorrections.has(file)
     )
       continue;
     const current = path.join(data, file.replace("core-v001/", "sample-v001/"));
@@ -111,10 +116,15 @@ test("three explicit portable Staged sections have independent immutable hashes 
     "circaAssetClassificationPublicationPlan",
     "circaCatalogueCurrentPublicationPlan",
   ];
+  const coordinates = {
+    circaAssetClassification: { sourceRoot: "sample-v001", version: "0.0.1" },
+    circaAssetClassificationPublicationPlan: { sourceRoot: "sample-v008", version: "0.0.2" },
+    circaCatalogueCurrentPublicationPlan: { sourceRoot: "sample-v008", version: "0.0.2" },
+  };
   for (const code of codes) {
     const section = manifest.sections[code];
-    assert.equal(section.version, "0.0.1");
-    assert.equal(section.sourceRoot, "sample-v001");
+    assert.equal(section.version, coordinates[code].version);
+    assert.equal(section.sourceRoot, coordinates[code].sourceRoot);
     assert.equal(section.kind, "DATA_RELEASE");
     assert.equal(section.selectionPolicy, "EXPLICIT");
     assert.equal(section.destinationRole, "COMMERCE_STAGED");
@@ -168,8 +178,8 @@ test("canonical release discovery resolves exact successors without dispatch and
     const release = releases.find((r) => r.sectionCode === code);
     assert(release);
     assert.equal(release.invalidManifest, undefined);
-    assert.equal(release.version, "0.0.1");
-    assert.equal(release.sourceRoot, "sample-v001");
+    assert.equal(release.version, manifest.sections[code].version);
+    assert.equal(release.sourceRoot, manifest.sections[code].sourceRoot);
     assert.deepEqual(
       release.declaredFiles,
       Object.keys(manifest.sections[code].files).sort(),
@@ -230,7 +240,7 @@ test("nImport resolves each original localization version through its generated 
   );
   assert.equal(calls.length, 10);
   for (let i = 0; i < next.length; i++) {
-    assert.equal(next[i].versionId, 5);
+    assert.equal(next[i].versionId, 4);
     const portable = { ...next[i] };
     delete portable.versionId;
     assert.deepEqual(portable, rows[i]);
@@ -260,7 +270,7 @@ test("nImport resolves each original localization version through its generated 
         tenant: "default",
         authData: {},
         originalQuery: { code: "$code" },
-        options: { versionedImport: true },
+        options: { governedVersionedImport: true },
         schemaModel: { rawSchema: { isVersionedEnabled: true } },
       },
       {},
@@ -270,7 +280,7 @@ test("nImport resolves each original localization version through its generated 
   assert(
     dispatches.every(
       (d) =>
-        d.name === "modelSaveInitializerPipeline" && d.r.query.versionId === 5,
+        d.name === "modelSaveInitializerPipeline" && d.r.query.versionId === 4,
     ),
   );
 });
@@ -299,14 +309,14 @@ test("successor publication selects only five original identities with new reque
   };
   for (const item of plan.items) {
     assert(!codes.has(item.code));
-    assert.equal(item.sourceVersion, "2");
+    assert.equal(item.sourceVersion, "1");
     assert.equal(item.domain, "product");
     assert.equal(item.rootType, "product");
     assert.deepEqual(item.input, {
       publicationCode: item.code,
       productCode: item.rootCode,
       storeCode: "circaMainStore",
-      versionId: 1,
+      versionId: 0,
     });
     const request = {
       tenant: "default",
@@ -316,7 +326,7 @@ test("successor publication selects only five original identities with new reque
     await provider.prepareSetup(request, item);
     assert.equal(calls.at(-1).r, request);
     assert.throws(() =>
-      provider.prepareSetup(request, { ...item, sourceVersion: "1" }),
+      provider.prepareSetup(request, { ...item, sourceVersion: "2" }),
     );
   }
   assert.equal(calls.length, 5);

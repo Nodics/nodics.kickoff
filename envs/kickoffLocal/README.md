@@ -2,6 +2,15 @@
 
 Kickoff Local local environment composition boundary for Nodics Kickoff.
 
+This isolated Local deployment raises the Redis owner's offline reset inventory
+bounds for its long-lived authentication namespace. All command, scan and batch
+defaults remain inherited from `redisCache`; this environment defines only its
+required deployment differences.
+
+Fresh-schema startup inherits the Import owner's enabled Init lifecycle. Local
+must not introduce a migration hold that disables mandatory identity and
+platform bootstrap releases.
+
 ## Ownership
 
 This group boundary owns the areas declared in `package.json.nodics.owns`. It must not take ownership of framework source, unrelated customer-project modules, frontend application source, or generated customer-local output.
@@ -22,6 +31,49 @@ allowlists and reviewed credit/refund/provider selections remain deployment-owne
 No other environment is enabled by importing or copying the demo source.
 
 ## Verification
+
+Circa Telegram uses the permanent Mini App URL
+`https://telegram-circa-local.nodics.dev/telegram`. Local CORS allows its exact
+origin. BotFather's menu and Main Mini App URL use this same address; backend
+startup does not rewrite BotFather settings. The frontend on port 3600, backend
+topology and named Cloudflare tunnel must be running.
+
+The development-only `telegram.bot.circa` credential is intentionally stored in
+Local source configuration with the project owner's approval. Platform verification
+and Engagement delivery share this existing reference. It does not require a
+Telegram token environment variable. Production credentials and Cloudflare tunnel
+tokens remain outside source control.
+
+Local OpenAI uses the existing `credentials:openai.circa` reference. Its value
+is supplied by `OPENAI_API_KEY` through nConfig's declarative environment binding,
+not stored in source. Configure the same key in the environment that launches
+the Local topology so it survives new terminal/runtime sessions; a one-session
+export alone is not persistent storage. Missing or empty input supplies no
+credential, and no fallback token is generated. Other environments retain their
+own selections. Source binding checks do not prove provider validity or startup
+inheritance; no runtime restart or external API request is part of those tests.
+
+Fresh native-Local Profile initialization intentionally binds the initial
+service-principal API key to `NODICS_API_KEY`, the same stable generated proof
+used by this Local deployment immediately after Init. The reusable nAuth defaults
+continue to define separate provisioning and runtime-proof inputs; this is a
+Kickoff Local value selection, not a framework credential fallback or restart
+rotation rule.
+
+The development Mac's `dev.nodics.kickoff-local-backend` user LaunchAgent runs
+`npm run topology:start` with the existing
+`NODICS_LOCAL_PRIVATE_CAPTURE_QUALIFIED=true` launch binding. This binding is an
+operator attestation after checking preload, APM, proxy and direct capture paths;
+it is not a tenant approval or a framework default. Requalify it if those paths
+change. Without it, private enterprise startup fails at `ENTER_PRIVATE_CONTEXT`.
+The LaunchAgent is stored outside the repository under `~/Library/LaunchAgents/`;
+supervisor output is under `~/.cloudflared/kickoff-local-backend*.log`.
+
+Retained runtime scopes are governed Profile records. The permanent Circa tunnel
+adoption added `wasteCarbon` to the Local Waste scope and `commercialAgreement`
+to the two Local Commerce scopes through Profile's authenticated update API,
+preserving their permissions and deployment identities. Restart does not recreate
+or expand these grants. Verify them with `npm run acceptance:runtime-grants`.
 
 Local Store placement exposure is selected by the environment's COMMERCE role
 profile; Product Store and intent proof transports are selected by its

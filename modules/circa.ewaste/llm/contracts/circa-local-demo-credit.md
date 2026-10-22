@@ -1,4 +1,4 @@
-# Circa Local Demo Credit
+# Circa Local Demo Credits
 
 The separate `circa.ewaste:circaLocalDemoCredit` sample contribution defines one
 7,645 POINTS instruction for the original `circa-customer` sample wallet. This
@@ -14,6 +14,27 @@ replenishment, real merchant funding or a customer production policy.
 | Review reference | `CIRCA_LOCAL_DEMO_POINT_CREDIT_20261009` |
 | Expected original state | 118 available/earned, zero other counters, revision 0 |
 | Posting | One atomic EARN through Loyalty, retaining original release identity |
+
+That original instruction is installed historical evidence and is never replayed.
+For the separate `kickoffLocal` E2E continuation, the immutable
+`circa.ewaste:circaLocalE2ECustomerWalletCredit` release defines a new 7,645
+POINTS instruction with independent identities and the authoritative observed
+wallet guard below.
+
+| Successor source | Value |
+| --- | --- |
+| Release folder/version | `data/sample-v001`, `0.0.1` |
+| Instruction | `CIRCA_KICKOFF_LOCAL_E2E_CUSTOMER_POINTS_20261020` |
+| Approval reference | `CIRCA_KICKOFF_LOCAL_E2E_FUNDING_20261020` |
+| Expected live state | 0.00 available, 0.00 reserved, 7,763.00 earned, 7,763.00 spent, 0.00 expired, 82.00 reversed, revision 86 |
+| Posting | One atomic 7,645 POINTS EARN through the Loyalty owner |
+
+Only the `kickoffLocal` Loyalty server admits these exact releases, checksums,
+instructions and approval references. Fresh Circa setup selects the original
+revision-0 credit. The successor remains an explicit continuation selection for
+the exact retained revision-86 state after the earlier E2E transactions. A
+counter or revision mismatch must refuse either instruction without writes.
+Source preparation does not claim a live import.
 
 The original `circa.ewaste:loyalty` sample source and its installed receipt remain
 unchanged. Select the new contribution through normal Axis/nImport preparation;
@@ -39,10 +60,12 @@ Runtime service grants cannot replace this human membership.
 The additive owner retains existing groups, credentials, metadata and scopes,
 checks the original enterprise and uses the current groups/security stamp in its
 CAS. Never replay `operations` or save an employee snapshot to install this role.
-After normal session refresh, verify the genuine original human and validate/
-install the unchanged `circaLocalDemoCredit` on LOYALTY before any buyer wallet
-mutation. A changed 118 available/earned or revision-0 guard blocks credit;
-do not retarget it. The original descriptors, hashes and preparation order in
+After normal session refresh, verify the genuine original human. Fresh historical
+setup may validate/install the unchanged `circaLocalDemoCredit` only against its
+original 118 available/earned and revision-0 guard. The E2E continuation instead
+validates/installs `circaLocalE2ECustomerWalletCredit` against its independent
+revision-86 guard; neither release may be retargeted. The original descriptors,
+hashes and preparation order in
 `test/evidence/circa-bounded-human-role-source-handoff-2026-10-09.json` are sealed
 historical evidence, including retired Circa role selections. Preserve those bytes
 and installed receipts; they are not current import instructions. Existing
@@ -54,8 +77,8 @@ The canonical owner contract is
 `loyaltyWallet/llm/contracts/sample-credit-admission.md`. A source manifest or
 passing unit test does not qualify native persistence. If the native provider
 cannot execute a fail-closed multi-record transaction, import must refuse without
-crediting the wallet. Preserve the original instruction on recovery; never issue
-another credit merely because a response or client checkpoint is missing.
+crediting the wallet. Preserve the selected instruction on recovery; never issue
+another successor merely because a response or client checkpoint is missing.
 
 Execute any quantity-one asset purchase/refund float before the coupon-spending
 batch. The unused coupon refund returns its original POINTS before ITEM cases.

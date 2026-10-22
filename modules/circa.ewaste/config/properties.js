@@ -15,6 +15,82 @@
 module.exports = {
   "tooling": {
     "acceptance": {
+      "circaLoyaltyRewardCheckout": {
+        "customerCode": "circa-customer",
+        "walletCode": "WALLET_ED16C8FCF19E1FE586E3DA5D",
+        "productCode": "CIRCA_COUPON_CPN-GRN-30",
+        "variantCode": "CIRCA_COUPON_CPN-GRN-30_VARIANT",
+        "programCode": "circa",
+        "rewardTypeCode": "points",
+        "rewardCurrency": "POINTS",
+        "providerCode": "loyalty-reward-points",
+        "rewardScale": 2,
+        "maximumRewardAmount": "14.00",
+        "cart": {
+          "storeCode": "circaMainStore",
+          "channelCode": "web",
+          "locale": "en",
+          "jurisdiction": "CIRCA_SAMPLE",
+          "currency": "POINTS"
+        }
+      },
+      "circaCommercePublication": {
+        "catalogs": [
+          {
+            "catalogVersion": "circaStaged",
+            "storeCode": "circaMainStore",
+            "locale": "en",
+            "productCodes": [
+              "CIRCA_ASSET_EWA-1047",
+              "CIRCA_ASSET_EWA-1051",
+              "CIRCA_ASSET_EWA-1052",
+              "CIRCA_ASSET_EWA-1055",
+              "CIRCA_ASSET_EWA-1092",
+              "CIRCA_COUPON_CPN-GRN-30",
+              "CIRCA_COUPON_CPN-ECO-15",
+              "CIRCA_COUPON_CPN-SVC-50",
+              "CIRCA_COUPON_GP-C01",
+              "CIRCA_COUPON_GP-C02",
+              "CIRCA_COUPON_GP-C03",
+              "CIRCA_COUPON_GP-C04",
+              "CIRCA_COUPON_GP-C05",
+              "CIRCA_COUPON_GP-C06",
+              "CIRCA_COUPON_GP-C07",
+              "CIRCA_COUPON_GP-C08",
+              "CIRCA_COUPON_GP-C09",
+              "CIRCA_COUPON_GP-C10",
+              "CIRCA_COUPON_GP-C11",
+              "CIRCA_COUPON_GP-C12",
+              "CIRCA_COUPON_GP-B01",
+              "CIRCA_COUPON_GP-B02",
+              "CIRCA_COUPON_GP-B03",
+              "CIRCA_COUPON_GP-B04",
+              "CIRCA_COUPON_GP-B05",
+              "CIRCA_COUPON_GP-B06",
+              "CIRCA_COUPON_GP-B07",
+              "CIRCA_COUPON_GP-B08",
+              "CIRCA_COUPON_GP-B09",
+              "CIRCA_COUPON_GP-B10",
+              "CIRCA_COUPON_GP-B11",
+              "CIRCA_COUPON_GP-B12",
+              "CIRCA_COUPON_GP-A01",
+              "CIRCA_COUPON_GP-A02",
+              "CIRCA_COUPON_GP-A03",
+              "CIRCA_COUPON_GP-A04",
+              "CIRCA_COUPON_GP-A05",
+              "CIRCA_COUPON_GP-A06",
+              "CIRCA_COUPON_GP-A07",
+              "CIRCA_COUPON_GP-A08",
+              "CIRCA_COUPON_GP-A09",
+              "CIRCA_COUPON_GP-A10",
+              "CIRCA_COUPON_GP-A11"
+            ],
+            "mediaModules": [
+              "circa.ewaste"
+            ]
+          }
+        ]
+      },
       "wasteManagement": {
         "fixture": {
           "dataModule": "circa.ewaste",
@@ -72,8 +148,13 @@ module.exports = {
                   {
                     "dataType": "init",
                     "releaseCodes": [
+                      "digitalCore:bundleParticipantPermissions",
+                      "digitalCore:participantAccessGroups",
+                      "loyaltyWallet:participantAccessGroups",
                       "loyaltyWallet:specialAccessGroups",
                       "loyaltyWallet:specialAccessRoles",
+                      "wasteCarbon:participantAccessGroups",
+                      "wasteReward:participantAccessGroups",
                       "import:specialAccessGroups",
                       "import:specialAccessRoles",
                       "inventory:specialAccessGroups",
@@ -242,10 +323,80 @@ module.exports = {
               "targetRuntimeRole": "PLATFORM"
             },
             {
+              "code": "digitalCore:bundleParticipantPermissions",
+              "kind": "Digital bundle participant permissions",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
+              "dataType": "init",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "digitalCore:participantAccessGroups",
+              "kind": "Digital bundle customer participation access",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
+              "dataType": "init",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "loyaltyWallet:participantAccessGroups",
+              "kind": "Loyalty customer participation access",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
+              "dataType": "init",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "wasteCarbon:participantAccessGroups",
+              "kind": "Carbon customer participation access",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
+              "dataType": "init",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "wasteReward:participantAccessGroups",
+              "kind": "Material-value customer participation access",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
+              "dataType": "init",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
               "code": "circa.ewaste:profile",
               "kind": "Local sample customer profiles",
               "required": true,
               "trigger": "USER",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "circa.ewaste:customerParticipationAssignments",
+              "kind": "Customer participation access assignments",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
+              "dataType": "sample",
+              "targetServer": "platformServer",
+              "targetRuntimeRole": "PLATFORM"
+            },
+            {
+              "code": "circa.ewaste:customerDigitalParticipationAssignments",
+              "kind": "Customer Digital bundle participation assignments",
+              "required": true,
+              "trigger": "USER",
+              "phase": "BEFORE_PUBLICATION",
               "dataType": "sample",
               "targetServer": "platformServer",
               "targetRuntimeRole": "PLATFORM"

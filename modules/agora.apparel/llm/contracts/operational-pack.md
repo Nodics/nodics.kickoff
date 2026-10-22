@@ -40,6 +40,7 @@ permission to reset consumed quantities or campaign budgets.
 
 | Manifest section | Source and role | Owner responsibility |
 | --- | --- | --- |
+| agoraApparelStoreReference | sample-v001/store; COMMERCE | Canonical Online `agoraMainStore` master and Profile Enterprise ownership; no catalogue publication or operational balance |
 | agoraApparelCommerceCatalog | sample-v001/commerce; COMMERCE_STAGED | Publishable products, variants, prices, campaign policy, warehouse and search policy |
 | agoraApparelContentCatalog | sample-v001/content; WCMS_STAGED | CMS records and owned image files, coordinated with Media |
 | agoraApparelPublicationPlan | sample-v001/publication; COMMERCE_STAGED | Inert intents for 61 Products, Pricing, Inventory, Tax and three Promotions; no CRUD installer or approval authority |

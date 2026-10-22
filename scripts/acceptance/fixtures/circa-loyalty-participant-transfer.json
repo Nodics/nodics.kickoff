@@ -1,0 +1,31 @@
+{
+  "contractVersion": 1,
+  "approvalReference": "CIRCA_KICKOFF_LOCAL_PARTICIPANT_TRANSFER_20261021",
+  "runCode": "circa-kickoff-local-loyalty-transfer-20261021",
+  "programCode": "circa",
+  "rewardTypeCode": "points",
+  "scale": 2,
+  "customer": {
+    "ownerCode": "circa-customer"
+  },
+  "enterprise": {
+    "ownerCode": "GREENPERKS_ONLINE"
+  },
+  "expectedFeeAmount": "0.00",
+  "enterprisePolicy": {
+    "feeAmount": "0.00",
+    "maximumAmount": "10.00",
+    "maximumDailyAmount": "25.00",
+    "maximumDailyCount": 4,
+    "timeZone": "UTC"
+  },
+  "limitProbeAmount": "10.01",
+  "transfers": {
+    "customerToEnterprise": {
+      "amount": "2.00"
+    },
+    "enterpriseToCustomer": {
+      "amount": "3.00"
+    }
+  }
+}

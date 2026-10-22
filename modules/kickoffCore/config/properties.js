@@ -55,7 +55,6 @@ module.exports = {
           channelCode: "web",
           jurisdiction: "AE",
           currency: "USD",
-          promotionCode: "agoraCapsuleEdit10PercentRule",
           providerToken: {
             $config: "env",
             name: "NODICS_STOREFRONT_PROVIDER_TOKEN",
@@ -752,6 +751,7 @@ module.exports = {
               value: {
                 moduleName: "agora.apparel",
                 sections: [
+                  "agoraApparelStoreReference",
                   "agoraApparelOpeningStock",
                   "agoraApparelPromotionSetup",
                 ],
@@ -770,6 +770,20 @@ module.exports = {
                 "The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.",
               template: "axisDocumentationFoundation",
             },
+          },
+        },
+      },
+      types: {
+        init: {
+          startupProfileSelections: {
+            $config: "replace",
+            value: [
+              {
+                environmentCode: "kickoffLocal",
+                runtimeRole: "PLATFORM",
+                profileCodes: ["nativeRuntimeAuthority"],
+              },
+            ],
           },
         },
       },

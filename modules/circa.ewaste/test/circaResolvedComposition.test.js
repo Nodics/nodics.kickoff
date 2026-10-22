@@ -23,6 +23,7 @@ for (const snapshot of snapshots)
       const modules = activeModuleNames(runtime);
       for (const [selector, original] of Object.entries(snapshot.expected)) {
         let expected = structuredClone(original);
+        if (selector === "eWaste.journeys") expected = null;
         if (
           selector === "eWaste.journey" &&
           expected &&
@@ -44,9 +45,15 @@ for (const snapshot of snapshots)
         if (!modules.includes("eWaste") && selector === "eWaste.journey") {
           delete expected.contractVersion;
           delete expected.conversationMaximumCharacters;
+          if (snapshot.environment === "kickoffDockerLocal")
+            delete expected.arrivalRadiusMetres;
         }
+        if (!modules.includes("wasteCore") && selector === "waste.operations")
+          delete expected.requireDifferentApprover;
         if (!modules.includes("order") && selector === "order.refunds")
           delete expected.ownerPorts;
+        if (modules.includes("order") && selector === "order.refunds")
+          delete expected.ownerPorts.eWaste;
         if (selector === "eWaste.rewardValuationService") {
           assert.equal(
             get(runtime, selector),

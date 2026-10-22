@@ -31,8 +31,11 @@ deliberate demo inputs, not generic defaults. Identity, contact and spending inp
 remain external. Unselected domains must not inherit these deployment opt-ins.
 
 
-Commerce catalog release `0.0.1` (`sample-v001/commerce`) contains publishable catalog/policy
-records only. The pre-customer development iterations are consolidated. Coupons, coupon batches
+Commerce catalog release `0.0.1` (`sample-v001/commerce`) remains byte-for-byte
+frozen. Forward release `agoraApparelStoreReference@0.0.2`
+(`sample-v001/store`) supplies the canonical Online Store master with its Profile
+Enterprise reference through Store's generated service. It neither rewrites the
+catalogue release nor aliases the legacy scalar enterprise field. Coupons, coupon batches
 and stock balances are not imported to Staged. Stock receiving/opening and coupon
 issuance must use their operational Online owners with independent evidence.
 Explicit `sample-v001/operations` contributions now carry opening instructions
@@ -69,8 +72,9 @@ WCMS schemas and publication operations remain framework-owned.
   releases through nTooling and keep old payload bytes, hashes and release codes.
 - Commerce `agoraApparelCommerceCatalog` and the content section use the initial
   `0.0.1` baseline in `sample-v001`, including the corrected Apparel search record
-  prefix. Existing development receipts require governed fresh initialization,
-  not downgrade or replay. Source validation does not claim live publication.
+  prefix. Store ownership correction is the independent immutable `0.0.2` release
+  selected before the catalogue. Existing receipts are never rewritten, downgraded
+  or replayed. Source validation does not claim live installation or publication.
 - Change content release versions and hashes together through the governed release
   lifecycle. Keep local and Docker initialization publication versions aligned;
   read current versions from `data/manifest.json` rather than this guide.

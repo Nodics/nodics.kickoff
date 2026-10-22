@@ -138,6 +138,8 @@ test("real Product projections expose malformed digital metadata as unavailable 
     key === "product" ? { localization: { supportedLocales: ["en", "ar"] }, publication: { searchEnrichment: { inventory: { enabled: true } } } } : {} };
   global.SERVICE = {
     DefaultProductLocalizationPolicyService: localization,
+    DefaultCouponOfferService: require(path.join(frameworkRoot,
+      "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultCouponOfferService")),
     DefaultDigitalCommerceCheckoutService: digital,
     DefaultPromotionOperationService: { couponPoolAvailability: async request => {
       calls.push(request);
@@ -157,7 +159,9 @@ test("real Product projections expose malformed digital metadata as unavailable 
     assert.equal(coupons.length, 38);
     const result = await enrichment.consumerAvailability(request, coupons);
     assert.equal(Object.keys(result).length, 38);
-    for (const value of Object.values(result)) assert.deepEqual(value, { available: false, status: "OUT_OF_STOCK" });
+    for (const value of Object.values(result)) assert.deepEqual(value, {
+      available: false, status: "OUT_OF_STOCK", acquisitionRequirements: null,
+    });
     for (const projection of projections.filter(row => row.productCode.startsWith("CIRCA_ASSET_"))) {
       assert.deepEqual(await enrichment.consumerAvailability(request, [projection]), {
         [projection.productCode]: { available: false, status: "OUT_OF_STOCK" },
@@ -223,7 +227,9 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
         const optional = allPublications.filter(step => !step.required);
         assert.equal(optional.length, 1);
         assert.equal(optional[0].code, "circa.ewaste:circaAssetClassificationPublicationPlan");
-        const successors = require("../data/sample-v001/asset-publication/records/publicationPlan.json");
+        const successorFile = Object.keys(require("../data/manifest.json").sections
+          .circaAssetClassificationPublicationPlan.files)[0];
+        const successors = require(path.resolve(__dirname, "../data", successorFile));
         assert.deepEqual(optional[0].publicationPlan, successors);
         const identity = item => [item.domain, item.rootType, item.rootCode].join(":");
         const replacements = new Map(successors.items.map(item => [identity(item), item]));

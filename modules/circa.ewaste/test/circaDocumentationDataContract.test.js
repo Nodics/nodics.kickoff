@@ -51,8 +51,17 @@ test('canonical Circa inventory separates outlet scopes, role adoption and live 
     const manifest = require('../data/manifest.json');
     const inventory = components.find(row => row.properties.code === 'accelerators.circa-source-inventory').properties;
     const table = inventory.blocks.find(block => block.kind === 'table' && block.headers[0] === 'Section');
-    assert.deepEqual(table.rows.map(row => row[0]).sort(), Object.keys(manifest.sections).sort());
-    assert(inventory.searchText.includes(`All ${Object.keys(manifest.sections).length} current business manifest sections`));
+    const projectForwardSections = new Set([
+        'circaProductMediaReferences',
+        'circaProductMediaPublicationPlan',
+        'circaCatalogueMediaCurrentPublicationPlan',
+        'circaLocalE2ECustomerWalletCredit',
+    ]);
+    const acceleratorInventory = Object.keys(manifest.sections).filter(code => !projectForwardSections.has(code));
+    assert.deepEqual(table.rows.map(row => row[0]).sort(), acceleratorInventory.sort());
+    assert(inventory.searchText.includes(`All ${table.rows.length} current business manifest sections`));
+    const projectGuide = fs.readFileSync(path.resolve(__dirname, '../README.md'), 'utf8');
+    for (const code of projectForwardSections) assert(projectGuide.includes(code), code);
     for (const name of ['circaLocalUnusedRefundExceptionStaffAssignment']) {
         const section = manifest.sections[name];
         assert.deepEqual(table.rows.find(row => row[0] === name).slice(1, 4),
@@ -62,8 +71,10 @@ test('canonical Circa inventory separates outlet scopes, role adoption and live 
         }
     }
     for (const boundary of ['commerce.refund.exception.adjudicate', 'circa-online-administrator',
-        'original unused 50-POINTS GP-A01 purchase', 'Adjudication itself moves no POINTS',
-        'No new credit', 'redeemed-benefit reversal', 'Docker and other runtimes remain disabled']) {
+        'original unused 50-POINTS GP-A01 exception', 'Historical adjudication itself moved no POINTS',
+        'Historical evidence only, not current Circa activation', 'already-redeemed benefit reversals remain disabled',
+        'Purchased Circa coupons are NON-REFUNDABLE', 'An unused purchased coupon is not eligible for refund.',
+        'Completed digital bundle purchases are final sale.', 'without replay, restoration, new credit']) {
         assert(inventory.searchText.includes(boundary), boundary);
     }
     const outlet = table.rows.find(row => row[0] === 'circaMerchantOutletAccess');

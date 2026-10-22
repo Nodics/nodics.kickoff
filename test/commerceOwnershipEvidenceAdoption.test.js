@@ -31,6 +31,9 @@ const selected = {
   commerce: loadRuntime("commerceServer", "kickoffLocal"),
   waste: loadRuntime("wasteServer", "kickoffLocal"),
 };
+const digitalOwnershipDefaults = require(path.join(frameworkRoot,
+  "nodics.commerce/modules/digitalCommerce/modules/digitalCore/config/properties"))
+  .digitalCore.digitalOwnership;
 
 test("Local capability selections pass canonical project validation and remain environment role-owned", () => {
   const projectRoot = path.resolve(__dirname, "..");
@@ -83,9 +86,11 @@ test("Local Commerce selects reviewed sale admission separately from financial a
   assert.equal(policy.enabled, true);
   assert.equal(policy.runtimeRole, p.runtimeRole.code);
   assert.deepEqual(p.digitalCore.digitalOwnership, {
+    ...digitalOwnershipDefaults,
     enabled: true,
     qualified: true,
     owner: {
+      ...digitalOwnershipDefaults.owner,
       moduleName: "eWaste",
       connectionName: "waste",
       targetAuthority: "WASTE",
@@ -154,6 +159,8 @@ test("Local deployment grants retain original scope while adding only required r
       "waste.asset.marketplace.project",
       "waste.asset.sale.transfer",
       "commerce.pricing.merchant.evidence",
+      "commerce.product.read",
+      "commerce.store.read",
     ]),
   );
   // envs/kickoffLocal/wasteServer explicitly selects the bounded Profile customer
@@ -169,6 +176,7 @@ test("Local deployment grants retain original scope while adding only required r
       "loyalty.rewards.reverse",
       "communication.request",
       "commerce.product.read",
+      "waste.impact.calculate",
     ]),
   );
   for (const permissions of [commercePermissions, wastePermissions])
@@ -329,7 +337,7 @@ test("native asset sale grants preserve signed deployment identities and are not
   );
 });
 
-test("Local Staged listing proof adds only read intent authority for the exact original business caller", () => {
+test("Local Staged listing proof adds only selected intent, store and bundle publication authority", () => {
   const staged = loadRuntime("commerceStagedServer", "kickoffLocal");
   const baseline = runtimePermissions.loyaltyServer;
   assert.deepEqual(
@@ -338,6 +346,7 @@ test("Local Staged listing proof adds only read intent authority for the exact o
       ...baseline,
       "waste.asset.listing.intent.read",
       "commerce.store.read",
+      "commerce.digital.bundle.publish",
     ]),
   );
   assert.equal(
@@ -412,7 +421,7 @@ test("Local Staged listing proof adds only read intent authority for the exact o
   }
 });
 
-test("Local Staged Product intent reads select the existing Waste connection without new authority", () => {
+test("Local Staged Product intent reads reuse Waste with the exact selected Staged authority", () => {
   const staged = loadRuntime("commerceStagedServer", "kickoffLocal");
   assert.deepEqual(staged.product.marketplaceAuthoring.intentSource, {
     moduleName: "eWaste",
@@ -442,6 +451,7 @@ test("Local Staged Product intent reads select the existing Waste connection wit
       ...baseline,
       "waste.asset.listing.intent.read",
       "commerce.store.read",
+      "commerce.digital.bundle.publish",
     ]),
   );
   for (const [server, environment] of [
@@ -462,7 +472,7 @@ test("Local Staged Product intent reads select the existing Waste connection wit
   }
 });
 
-test("Local Staged reads only its approved Online Store placement without generic schema authority or module growth", () => {
+test("Local Staged and operational Commerce read only their approved Store placements without generic schema authority or module growth", () => {
   const staged = loadRuntime("commerceStagedServer", "kickoffLocal"),
     online = selected.commerce;
   assert.deepEqual(staged.product.marketplaceAuthoring.storeSource, {
@@ -525,6 +535,23 @@ test("Local Staged reads only its approved Online Store placement without generi
           { storeCode: "circaMainStore", enterpriseCode: "GREENPERKS_ONLINE" },
         ],
       },
+      {
+        tenant: staged.defaultTenant,
+        principalEnterpriseCode: staged.defaultEnterprise,
+        serviceId: "apiAdmin",
+        projectCode: startup.resolveProjectCode(path.resolve(__dirname, "..")),
+        environmentCode: "kickoffLocal",
+        serverCode: "commerceServer",
+        instanceCode: online.runtimeIdentity.instanceCode,
+        assignmentCode: bootstrap.runtimeDeploymentGrantCode(
+          "kickoffLocal",
+          "commerceServer",
+        ),
+        placements: [
+          { storeCode: "agoraMainStore", enterpriseCode: "default" },
+          { storeCode: "circaMainStore", enterpriseCode: "GREENPERKS_ONLINE" },
+        ],
+      },
     ],
   });
   for (const [server, environment] of [
@@ -546,12 +573,14 @@ test("Local Staged reads only its approved Online Store placement without generi
       server + "/" + environment,
     );
     if (server !== "commerceStagedServer" || environment !== "kickoffLocal") {
+      const directCommerceOwner =
+        server === "commerceServer" && environment === "kickoffLocal";
       assert.equal(
         (environment === "kickoffLocal"
           ? runtimePermissions[server]
           : []
         ).includes("commerce.store.read"),
-        false,
+        directCommerceOwner,
       );
       assert.equal(
         runtime.product?.marketplaceAuthoring?.storeSource?.connectionName ??
@@ -563,7 +592,8 @@ test("Local Staged reads only its approved Online Store placement without generi
   }
   assert.equal(
     runtimePermissions.commerceServer.includes("commerce.store.read"),
-    false,
+    true,
+    "Cart uses the local Store owner through the exact reviewed runtime grant",
   );
 });
 
@@ -576,7 +606,9 @@ test("the canonical Store owner enforces the exact Local placement binding befor
       "nodics.commerce/modules/baseCommerce/modules/store/src/service/defaultStorePlacementService",
     ),
   );
-  const pin = online.store.placementRead.callers[0];
+  const pin = online.store.placementRead.callers.find(
+    caller => caller.serverCode === "commerceStagedServer",
+  );
   const auth = {
     principalType: "service",
     tenant: pin.tenant,
@@ -781,7 +813,7 @@ test("Staged's adopted remote extension passes the canonical original ceiling gu
   }
 });
 
-test("Local Waste Product/Pricing read selection preserves business pins and grants no publication caller mapping", () => {
+test("Local Waste and Commerce Product reads preserve business pins and grant no publication caller mapping", () => {
   const waste = selected.waste;
   assert.equal(waste.runtimeIdentity.instanceCode, "kickoff-local-waste-1");
   assert.deepEqual(
@@ -810,8 +842,13 @@ test("Local Waste Product/Pricing read selection preserves business pins and gra
       .length,
     1,
   );
+  assert.equal(
+    runtimePermissions.commerceServer.filter((p) => p === "commerce.product.read")
+      .length,
+    1,
+    "Digital listing composition has read-only Product Store placement authority",
+  );
   for (const [server, environment] of [
-    ["commerceServer", "kickoffLocal"],
     ["commerceStagedServer", "kickoffLocal"],
     ["platformServer", "kickoffLocal"],
     ["wasteServer", "kickoffDockerLocal"],

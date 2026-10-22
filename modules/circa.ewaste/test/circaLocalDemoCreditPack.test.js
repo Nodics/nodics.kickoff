@@ -54,11 +54,12 @@ test("only native Loyalty selects the exact qualified source and atomic provider
   try {
     global.CONFIG = { get: key => key === "data" ? native.data : undefined };
     const release = releases.inspectManifest({ name: "circa.ewaste", index: 1001 }, "sample", path.join(sourceRoot, "manifest.json"), manifest.sections.circaLocalDemoCredit, "circaLocalDemoCredit", true);
-    assert.deepEqual(native.loyalty.sampleCredits.approvedSources, [{
+    assert.equal(native.loyalty.sampleCredits.approvedSources.length, 2);
+    assert.deepEqual(native.loyalty.sampleCredits.approvedSources[0], {
       environmentCode: "kickoffLocal", enterpriseCode: "GREENPERKS_ONLINE", releaseCode: release.releaseCode,
       version: release.version, checksum: release.checksum, instructionCode: payload.credits[0].code,
       approvalReference: payload.credits[0].approvalReference,
-    }]);
+    });
   } finally { global.CONFIG = previous; }
   for (const [server, environment] of [["loyaltyServer", "kickoffDockerLocal"], ["commerceServer", "kickoffLocal"], ["wasteServer", "kickoffLocal"], ["platformServer", "kickoffLocal"]]) {
     const runtime = loadRuntime(server, environment);

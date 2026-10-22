@@ -82,7 +82,7 @@ test("Circa identity authority is a separate explicit fresh-install prerequisite
   const identity = runtime.data.dataReleases.initializationProfiles.circaIdentityAuthority;
   assert.equal(identity.enabled, true);
   assert.match(identity.description, /Fresh Circa installations require.*before demo setup/);
-  assert.deepEqual(identity.steps, [{ dataType: "init", releaseCodes: ["loyaltyWallet:specialAccessGroups", "loyaltyWallet:specialAccessRoles", "import:specialAccessGroups", "import:specialAccessRoles", "inventory:specialAccessGroups", "inventory:specialAccessRoles", "order:specialAccessGroups", "order:specialAccessRoles"] }]);
+  assert.deepEqual(identity.steps, [{ dataType: "init", releaseCodes: ["digitalCore:bundleParticipantPermissions", "digitalCore:participantAccessGroups", "loyaltyWallet:participantAccessGroups", "loyaltyWallet:specialAccessGroups", "loyaltyWallet:specialAccessRoles", "wasteCarbon:participantAccessGroups", "wasteReward:participantAccessGroups", "import:specialAccessGroups", "import:specialAccessRoles", "inventory:specialAccessGroups", "inventory:specialAccessRoles", "order:specialAccessGroups", "order:specialAccessRoles"] }]);
   assert.equal(loadRuntime("wasteServer", "kickoffLocal").data.dataReleases.initializationProfiles.circaIdentityAuthority, undefined);
 });
 

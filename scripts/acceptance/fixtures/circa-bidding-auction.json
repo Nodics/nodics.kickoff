@@ -1,0 +1,61 @@
+{
+  "contractVersion": 1,
+  "approvalReference": "circa-e06-kickoff-local-v1",
+  "tenant": "default",
+  "runCode": "circa-e06-acceptance-v1",
+  "storeCode": "circaMainStore",
+  "maximumWaitMs": 3600000,
+  "cases": {
+    "lifecycle": {
+      "listing": {
+        "productCode": "CIRCA_ASSET_EWA-1042",
+        "variantCode": "CIRCA_ASSET_EWA-1042_VARIANT",
+        "publicationCode": "bundle-operation:627996095c0b046fdb941c555361c727689cbc3953c35b53098daf91a8485488"
+      },
+      "initialAmount": "100",
+      "updatedAmount": "120"
+    },
+    "manualSelection": {
+      "listing": {
+        "productCode": "CIRCA_ASSET_EWA-1047",
+        "variantCode": "CIRCA_ASSET_EWA-1047_VARIANT",
+        "publicationCode": "bundle-operation:abee4b230ce9238699c9199b25e09241a9f80902ebbcf4f6c06c325b54abcbb2"
+      },
+      "higherAmount": "300",
+      "selectedAmount": "200"
+    },
+    "automaticTie": {
+      "listing": {
+        "productCode": "CIRCA_ASSET_EWA-1050",
+        "variantCode": "CIRCA_ASSET_EWA-1050_VARIANT",
+        "publicationCode": "bundle-operation:37b8a733b039e2cce03a634815842916acaefc52eb050fa33f8021f473496489"
+      },
+      "amount": "250"
+    },
+    "cancellationRepublish": {
+      "listing": {
+        "productCode": "CIRCA_ASSET_EWA-1051",
+        "variantCode": "CIRCA_ASSET_EWA-1051_VARIANT",
+        "publicationCode": "bundle-operation:367f032319a077d1a4685c1483f1b3486b60b055f38352933cd3317bead91f05"
+      },
+      "replacementPublicationCode": "bundle-operation:4a0e32d206031249c10b5333820eb02c29312311d10893e3bf26a02f3737d6a6",
+      "amount": "150"
+    },
+    "noBid": {
+      "listing": {
+        "productCode": "CIRCA_ASSET_EWA-1052",
+        "variantCode": "CIRCA_ASSET_EWA-1052_VARIANT",
+        "publicationCode": "bundle-operation:df13d0d94f1b45fbf009e53bfcf29a681edb1cfbf7f883e4e3eb98f899415565"
+      }
+    },
+    "failedAward": {
+      "listing": {
+        "productCode": "CIRCA_ASSET_EWA-1053",
+        "variantCode": "CIRCA_ASSET_EWA-1053_VARIANT",
+        "publicationCode": "bundle-operation:f5d108eba07e18acc2f0b4c749062d43e96d63b4710826e906b72f0c07a0a8c6"
+      },
+      "higherAmount": "400",
+      "lowerAmount": "350"
+    }
+  }
+}

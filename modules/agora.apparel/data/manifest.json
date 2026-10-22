@@ -49,6 +49,30 @@
         "sample-v001/operations/records/promotionSetup.json": "15b5e6793c43e2f089e9c657a442565e903042a4c02fac2ace9eb18e0962d1d0"
       }
     },
+    "agoraApparelStoreReference": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.2",
+      "description": "Agora Apparel canonical Online Store master with Profile Enterprise ownership",
+      "owningDomain": "store",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/store/headers/agoraApparelStoreReferenceHeader.js": "87d68758f3a1eb54de1a009fdad645adfca585405f8dbaf0d5804ae7c6315e6d",
+        "sample-v001/store/records/agoraApparelStoreData.js": "efba9bf54eb3c1eb39add045dbf080500132fa9e8429bf37a0d3bf6adb749068"
+      }
+    },
     "agoraApparelCommerceCatalog": {
       "kind": "DATA_RELEASE",
       "selectionPolicy": "EXPLICIT",

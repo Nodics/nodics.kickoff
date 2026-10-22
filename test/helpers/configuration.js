@@ -1,3 +1,15 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
+/** @module test/helpers/configuration @description Supplies Kickoff fixture coordinates to the framework-owned configuration test harness. @layer test @owner nodics.kickoff */
 "use strict";
 /** Customer fixture coordinates only; configuration consumers and loader mechanics are framework-owned. */
 const path = require("node:path");

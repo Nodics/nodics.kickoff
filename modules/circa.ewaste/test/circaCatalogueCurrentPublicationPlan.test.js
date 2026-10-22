@@ -5,9 +5,11 @@ const test = require("node:test"), assert = require("node:assert/strict");
 const path = require("node:path"), fs = require("node:fs"), crypto = require("node:crypto");
 const { frameworkRoot } = require("../../../test/helpers/configuration");
 const original = require("../data/sample-v001/publication/catalogue/records/publicationPlan.json");
-const successors = require("../data/sample-v001/asset-publication/records/publicationPlan.json");
-const current = require("../data/sample-v001/publication/current-catalogue/records/publicationPlan.json");
 const manifest = require("../data/manifest.json");
+const releasePayload = code => require(path.resolve(__dirname, "../data",
+  Object.keys(manifest.sections[code].files)[0]));
+const successors = releasePayload("circaAssetClassificationPublicationPlan");
+const current = releasePayload("circaCatalogueCurrentPublicationPlan");
 const identity = item => [item.domain, item.rootType, item.rootCode].join(":");
 
 test("effective v001 catalogue retains exactly 46 roots and changes only five exact successor intents", () => {
@@ -21,8 +23,8 @@ test("effective v001 catalogue retains exactly 46 roots and changes only five ex
     const prior = original.items[index]; assert.equal(identity(item), identity(prior));
     if (replacement.has(identity(item))) {
       changed++; assert.deepEqual(item, replacement.get(identity(item)));
-      assert.notEqual(item.code, prior.code); assert.equal(item.sourceVersion, "2");
-      assert.equal(item.input.versionId, 1); assert.equal(prior.sourceVersion, "1");
+      assert.notEqual(item.code, prior.code); assert.equal(item.sourceVersion, "1");
+      assert.equal(item.input.versionId, 0); assert.equal(prior.sourceVersion, "1");
       assert.equal(prior.input.versionId, 0);
     } else {
       unchanged++; assert.deepEqual(item, prior);
@@ -31,8 +33,8 @@ test("effective v001 catalogue retains exactly 46 roots and changes only five ex
   });
   assert.equal(changed, 5); assert.equal(unchanged, 41);
   const section = manifest.sections.circaCatalogueCurrentPublicationPlan;
-  assert.equal(section.sourceRoot, "sample-v001"); assert.equal(section.version, "0.0.1");
-  const file = "sample-v001/publication/current-catalogue/records/publicationPlan.json";
+  assert.equal(section.sourceRoot, "sample-v008"); assert.equal(section.version, "0.0.2");
+  const file = "sample-v008/publication/current-catalogue/records/publicationPlan.json";
   assert.deepEqual(Object.keys(section.files), [file]);
   assert.equal(section.files[file], crypto.createHash("sha256").update(fs.readFileSync(path.resolve(__dirname, "../data", file))).digest("hex"));
 });
@@ -105,17 +107,14 @@ test("five-current and 45-current partial catalogues never qualify the required 
   assert.equal(f.reads.length, 46 * 4);
 });
 
-test("old catalogue readiness becomes stale after five successor activations while the full effective selection becomes current", async t => {
-  const f = fixture(t); original.items.forEach(f.online);
-  assert.equal((await f.status(original)).ready, true);
-  const before = await f.status(current);
-  assert.equal(before.ready, false); assert.equal(before.items.filter(item => item.status === "NOT_REQUESTED").length, 5);
-  successors.items.forEach(f.online);
-  assert.equal((await f.status(successors)).ready, true);
+test("fresh installation uses current request codes and leaves historical requests requiring review", async t => {
+  const f = fixture(t); current.items.forEach(f.online);
+  assert.equal((await f.status(current)).ready, true);
   const historical = await f.status(original);
   assert.equal(historical.ready, false);
   assert.equal(historical.items.filter(item => item.status === "REVIEW_REQUIRED").length, 5);
-  const effective = await f.status(current);
-  assert.equal(effective.ready, true); assert.equal(effective.items.filter(item => item.status === "CURRENT").length, 46);
-  assert.equal(f.publications.length, 51);
+  assert.equal(historical.items.filter(item => item.status === "CURRENT").length, 41);
+  const replacements = new Set(successors.items.map(item => item.code));
+  assert.equal(historical.items.filter(item => replacements.has(item.code)).length, 5);
+  assert.equal(f.publications.length, 46);
 });

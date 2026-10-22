@@ -28,8 +28,7 @@ const documentationContract = require(
 );
 const catalogue = documentationContract.validateDataRelease(root);
 assert.equal(manifest.contentPath, "docs-v001");
-assert.equal(
-  documentationContract.validateReferenceGraph([
+const referenceCatalogues = [
     catalogue,
     documentationContract.readDataCatalogue(
       path.join(
@@ -41,8 +40,10 @@ assert.equal(
     documentationContract.readDataCatalogue(
       path.join(frameworkRoot, "nodics.docs"),
     ),
-  ]).documents,
-  189,
+  ];
+assert.equal(
+  documentationContract.validateReferenceGraph(referenceCatalogues).documents,
+  referenceCatalogues.reduce((count, reference) => count + reference.documents.length, 0),
 );
 assert.equal(
   catalogue.documents.length,

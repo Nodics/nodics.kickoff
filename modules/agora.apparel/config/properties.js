@@ -145,6 +145,15 @@ module.exports = {
                                     "businessPurpose": "AGORA_STOREFRONT_CONTENT"
                                 },
                                 {
+                                    "code": "agora.apparel:agoraApparelStoreReference",
+                                    "kind": "Canonical Store master",
+                                    "required": true,
+                                    "trigger": "USER",
+                                    "dataType": "sample",
+                                    "targetServer": "commerce",
+                                    "targetRuntimeRole": "COMMERCE"
+                                },
+                                {
                                     "code": "agora.apparel:agoraApparelCommerceCatalog",
                                     "kind": "Commerce catalog",
                                     "required": true,

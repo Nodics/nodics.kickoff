@@ -49,7 +49,7 @@ budget and issuance stages remain required. All selected issuer publication
 roots must be CURRENT before that operator can select opening instructions.
 
 Axis uses the same Platform profile; the nine stages are not confined to a helper
-import script. Current observation revision 5 seals 57 required stages through the owner
+import script. Current observation revision 8 seals 57 required stages through the owner
 `configuredSteps`, `stepIdentity`, nImport release inspection and profile digest.
 The original revision-2, revision-3 and revision-4 bytes remain under
 `config/setup-observation/history/`. Historical revision 4 changed only the three

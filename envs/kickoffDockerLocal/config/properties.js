@@ -1,3 +1,15 @@
+/*
+    Nodics - Enterprice Micro-Services Management Framework
+
+    Copyright (c) 2026 Nodics All rights reserved.
+
+    This software is governed by the Nodics Source-Available Commercial License.
+    You may use, copy, modify, deploy, or distribute it only as permitted by the
+    root LICENSE file or a separate written agreement with Nodics.
+
+ */
+
+/** @module envs/kickoffDockerLocal/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffDockerLocal */
 module.exports = {
   runtimeConfigurationSchemas: {
     runtimeRoleProfiles: {
@@ -630,16 +642,9 @@ module.exports = {
   waste: {
     runtimeRoleProfiles: {
       COMMERCE: {
-        projectOverlay: {
-          enabled: true,
-          module: "circa.ewaste",
-          releaseCode: "circa.ewaste:waste-policy",
-          layerKind: "PROJECT",
-        },
         operations: {
           requireScopes: true,
           requireVerification: true,
-          requireDifferentApprover: false,
         },
       },
       COMMERCE_STAGED: {
@@ -734,15 +739,11 @@ module.exports = {
   eWaste: {
     runtimeRoleProfiles: {
       COMMERCE: {
-        catalogue: {
-          discoveryBatchSize: 24,
-        },
         journey: {
           arrivalRadiusMetres: {
             $config: "env",
             name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
             type: "number",
-            fallback: 50,
           },
           reviewAssignment: {
             queueCode: "CIRCA_EWASTE_REVIEW",
@@ -763,29 +764,6 @@ module.exports = {
         application: {
           enabled: true,
         },
-        journeys: {
-          submission: {
-            enabled: true,
-          },
-          approvedAsset: {
-            enabled: true,
-          },
-          marketplace: {
-            enabled: true,
-          },
-          gift: {
-            enabled: true,
-          },
-          donation: {
-            enabled: true,
-          },
-          couponRedemption: {
-            enabled: true,
-          },
-          recyclingHandoff: {
-            enabled: true,
-          },
-        },
         channelAuthentication: {
           enabled: true,
           channels: {
@@ -801,7 +779,6 @@ module.exports = {
           connectionName: "engagement",
         },
         marketplace: {
-          catalogueDiscovery: true,
           priceBookCode: "circaPointsPriceBook",
           warehouseCode: "circaDigitalRegistry",
           transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
@@ -810,26 +787,20 @@ module.exports = {
           currency: "POINTS",
           programCode: "circa",
           rewardTypeCode: "points",
-          carbonRewardTypeCode: "circaCarbon",
-          carbonScale: 3,
-          rewardScale: 2,
           jurisdiction: "CIRCA_SAMPLE",
           saleMode: "DIGITAL_OWNERSHIP",
-          couponCarbonMode: "UNCHANGED",
           autoPublishListings: true,
           listingPresentation: {
             description:
               "Sample digital asset ownership. No physical delivery is included.",
             imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
             sample: true,
-            warehouseName: "Circa sample digital registry",
           },
           orderCodePrefix: "CIRCA_ORDER_",
-          refundsEnabled: true,
         },
         conversation: {
           rewardGuidance:
-            "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor.",
+            "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
         },
       },
       COMMERCE_STAGED: {
@@ -857,15 +828,11 @@ module.exports = {
         path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
       },
       WASTE: {
-        catalogue: {
-          discoveryBatchSize: 24,
-        },
         journey: {
           arrivalRadiusMetres: {
             $config: "env",
             name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
             type: "number",
-            fallback: 50,
           },
           reviewAssignment: {
             queueCode: "CIRCA_EWASTE_REVIEW",
@@ -886,29 +853,6 @@ module.exports = {
         application: {
           enabled: true,
         },
-        journeys: {
-          submission: {
-            enabled: true,
-          },
-          approvedAsset: {
-            enabled: true,
-          },
-          marketplace: {
-            enabled: true,
-          },
-          gift: {
-            enabled: true,
-          },
-          donation: {
-            enabled: true,
-          },
-          couponRedemption: {
-            enabled: true,
-          },
-          recyclingHandoff: {
-            enabled: true,
-          },
-        },
         channelAuthentication: {
           enabled: true,
           channels: {
@@ -924,7 +868,6 @@ module.exports = {
           connectionName: "engagement",
         },
         marketplace: {
-          catalogueDiscovery: true,
           priceBookCode: "circaPointsPriceBook",
           warehouseCode: "circaDigitalRegistry",
           transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
@@ -933,26 +876,20 @@ module.exports = {
           currency: "POINTS",
           programCode: "circa",
           rewardTypeCode: "points",
-          carbonRewardTypeCode: "circaCarbon",
-          carbonScale: 3,
-          rewardScale: 2,
           jurisdiction: "CIRCA_SAMPLE",
           saleMode: "DIGITAL_OWNERSHIP",
-          couponCarbonMode: "UNCHANGED",
           autoPublishListings: true,
           listingPresentation: {
             description:
               "Sample digital asset ownership. No physical delivery is included.",
             imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
             sample: true,
-            warehouseName: "Circa sample digital registry",
           },
           orderCodePrefix: "CIRCA_ORDER_",
-          refundsEnabled: true,
         },
         conversation: {
           rewardGuidance:
-            "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor.",
+            "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
           project: "circa.ewaste",
           adapter: "ollama",
         },

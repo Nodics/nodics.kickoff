@@ -9,6 +9,7 @@
 
  */
 
+/** @module envs/kickoffLocal/locationServer/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffLocal/locationServer */
 module.exports = {
   "publish": { "setup": { "observation": { "enabled": true } } },
   "activeModules": {

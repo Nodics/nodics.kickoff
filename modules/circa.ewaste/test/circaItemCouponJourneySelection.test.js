@@ -187,7 +187,7 @@ test("factory produces fresh JSON objects without authority, credentials or muta
   }
 });
 
-test("actual owner runner accepts the selection but refuses unfunded isolated execution before any HTTP or checkpoint", async () => {
+test("current owner runner rejects the obsolete aggregate selection before any HTTP or checkpoint", async () => {
   const runner = await import(pathToFileURL(path.join(frameworkRoot,
     "nodics.commerce/modules/checkout/modules/checkoutCore/src/service/acceptance/defaultCouponJourneyHttpAcceptanceService.mjs")).href);
   const s = create(options());
@@ -195,14 +195,11 @@ test("actual owner runner accepts the selection but refuses unfunded isolated ex
     ["customer", s.customer.enterpriseCode], ["greenperksCafeOperator", "GREENPERKS_RETAIL"],
     ["greenperksBistroOperator", "GREENPERKS_RETAIL"], [s.refundReview.sessionKey, s.customer.enterpriseCode],
   ].map(([key, enterpriseCode]) => [key, { enterpriseCode, authorization: "Bearer ISOLATED_TEST_ONLY" }]));
-  const result = await runner.runCouponJourneyHttpAcceptance({ execute: true, baseUrl: "http://127.0.0.1:1",
+  await assert.rejects(runner.runCouponAcquisitionAcceptance({ execute: true, baseUrl: "http://127.0.0.1:1",
     selection: s, sessions, fundingObservation: { available: "118", observedAt: new Date().toISOString(),
       walletCode: s.payment.walletCode, ownerId: s.customer.ownerId, enterpriseCode: s.customer.enterpriseCode,
       programCode: "circa", rewardTypeCode: "points" },
     fetch: () => assert.fail("Unfunded selection must never dispatch HTTP"),
     saveCheckpoint: () => assert.fail("Unfunded selection must never write a checkpoint"),
-  });
-  assert.equal(result.state, "FUNDING_REQUIRED");
-  assert.equal(result.requiredAvailable, "6280");
-  assert.equal(result.shortfall, "6162");
+  }), { code: "REVIEWED_LOCAL_COUPON_ACCEPTANCE_SELECTION_REQUIRED" });
 });

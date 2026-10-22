@@ -2,6 +2,11 @@
 
 Platform Server runtime composition and configuration boundary for Nodics Kickoff.
 
+Local Platform declares the Commerce and Loyalty framework roots for their exact
+Platform-targeted data-release contributions. These roots expose selected source
+catalogue entries only; their runtime capabilities remain inactive until selected
+by their owning server compositions, and installation remains operator initiated.
+
 ## Ownership
 
 This server boundary owns the areas declared in `package.json.nodics.owns`. It must not take ownership of framework source, unrelated customer-project modules, frontend application source, or generated customer-local output.

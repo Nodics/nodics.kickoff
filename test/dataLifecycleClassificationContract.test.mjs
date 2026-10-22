@@ -55,5 +55,6 @@ assert.strictEqual(processServerInit.owningDomain, 'editorial');
 assert.deepStrictEqual(Object.keys(processServerInit.files || {}), [
   'init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js'
 ]);
-assert.strictEqual(sections, 3, 'Kickoff project documentation, runtime assignments and Process lifecycle inventory drifted');
+assert.strictEqual(sections, 4,
+  'Kickoff project documentation, runtime principal scope, runtime assignments and Process lifecycle inventory drifted');
 console.log('Kickoff data lifecycle classification contract validated');

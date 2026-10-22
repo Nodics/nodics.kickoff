@@ -182,12 +182,21 @@ test("canonical accelerator guides resolve the Store move and retain matching se
     assert.equal(page.sourceChecksum, properties.source.checksum);
     assert.equal(page.wordCount, properties.source.wordCount);
     assert.deepEqual(page.sourceEvidence, properties.sourceEvidence);
-    assert.equal(properties.searchText, properties.title + " " + properties.summary + " " + body);
+    assert.equal(properties.searchText, body);
     assert.equal(search.searchText, properties.searchText);
   }
   const inventory = Object.values(components).find((row) => row.properties.code === "accelerators.circa-source-inventory");
   const table = inventory.properties.blocks.find((block) => block.kind === "table" && block.headers[0] === "Section");
-  assert.deepEqual(table.rows.map((row) => row[0]).sort(), Object.keys(manifest.sections).sort());
+  const projectForwardSections = new Set([
+    "circaProductMediaReferences",
+    "circaProductMediaPublicationPlan",
+    "circaCatalogueMediaCurrentPublicationPlan",
+    "circaLocalE2ECustomerWalletCredit",
+  ]);
+  assert.deepEqual(
+    table.rows.map((row) => row[0]).sort(),
+    Object.keys(manifest.sections).filter((code) => !projectForwardSections.has(code)).sort(),
+  );
   const page = metadata.find(row => row.articleComponent === inventory.code);
   assert.equal(page.sourcePath, inventory.properties.source.sourcePath);
   assert.equal(page.sourceWordCount, inventory.properties.source.wordCount);

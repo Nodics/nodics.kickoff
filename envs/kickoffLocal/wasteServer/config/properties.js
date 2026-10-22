@@ -79,14 +79,6 @@ module.exports = {
     },
   },
   eWaste: {
-    journey: {
-      arrivalRadiusMetres: {
-        $config: "env",
-        name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
-        type: "number",
-        fallback: 200,
-      },
-    },
     marketplace: {
       listingHandoff: {
         enabled: true,
@@ -142,14 +134,6 @@ module.exports = {
           parameter: "startapp",
         },
       },
-    },
-  },
-  waste: {
-    accelerator: {
-      enabled: true,
-      umbrella: "waste",
-      scenarioAccelerators: ["eWaste"],
-      presetPackCodes: ["EWASTE_CORE_PRESETS"],
     },
   },
   database: {

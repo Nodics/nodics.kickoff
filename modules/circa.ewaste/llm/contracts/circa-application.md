@@ -18,7 +18,7 @@ All demo data is explicitly selected sample data. The `waste-policy` and
 `customer-workspace` releases are 0.0.2 under `sample-v001`; Waste policy samples
 materialize their effective records, retaining demo IDs without importing framework
 JavaScript. Core reference datasets remain separately owned and selected.
-Current setup observation revision 5 describes source composition only. Revisions
+Current setup observation revision 8 describes source composition only. Revisions
 2, 3 and 4 and completed demo evidence are retained unchanged, not installed proof
 for this extraction. No live import, deployment or migration is authorized here.
 

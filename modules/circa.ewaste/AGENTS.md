@@ -167,8 +167,8 @@ delivery and DIGITAL_COMMERCE inventory discriminators without changing any
 other source value. Import through deployment-owned nImport version-aware
 saveAll, then separately select circaAssetClassificationPublicationPlan for five
 ordinary governed Product successor publications under GREENPERKS_ONLINE.
-The plan requires original root version 1 and seals version 2; differing native
-root/business values require reviewed reconciliation, not plan-pin retargeting.
+The fresh plan requires draft root version 0 and seals source version 1; differing
+native root/business values require reviewed reconciliation, not plan-pin retargeting.
 Do not append these steps to an already admitted circa setup plan or rewrite
 prior journals. The inert test/fixtures/circaAssetClassificationSetupSelection.json
 supplies the required BEFORE/AFTER selections for a separately reviewed forward

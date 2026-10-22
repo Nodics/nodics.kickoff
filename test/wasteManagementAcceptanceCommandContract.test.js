@@ -39,17 +39,16 @@ for (const name of ['nodics.waste', 'wasteCore', 'wasteMaterial', 'wasteCollecti
 for (const name of ['nodics.loyalty', 'loyaltyCore', 'promotion', 'commerceServer', 'loyaltyServer'])
   assert(!effective.modules.includes(name), 'Excluded from this customer Waste runtime: ' + name);
 
-const overlay = effective.properties.waste.projectOverlay;
-assert.equal(overlay.enabled, true);
-assert.equal(overlay.module, 'circa.ewaste');
-assert.equal(overlay.releaseCode, 'circa.ewaste:waste-policy');
-assert.equal(overlay.layerKind, 'PROJECT');
+assert.equal(effective.properties.waste.projectOverlay, undefined);
+assert.equal(effective.properties.waste.accelerator, undefined);
 const tooling = require(path.join(frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/defaultToolingCommandService'));
 const modules = tooling.collectModules(projectRoot, tooling.collectModules(frameworkRoot, []));
-const owners = modules.filter(module => module.name === overlay.module);
+const owners = modules.filter(module => module.name === 'circa.ewaste');
 assert.equal(owners.length, 1);
+assert.equal(path.resolve(owners[0].path), path.join(projectRoot, 'modules/circa.ewaste'));
 const dataRoot = path.join(owners[0].path, 'data');
 const section = require(path.join(dataRoot, 'manifest.json')).sections['waste-policy'];
+assert.equal(section.destinationRole, 'WASTE');
 assert.equal(section.dataType, 'sample');
 assert.equal(section.sourceRoot, 'sample-v001');
 assert.equal(section.selectionPolicy, 'EXPLICIT');
@@ -65,7 +64,7 @@ for (const entry of entries) {
   assert.equal(files.length, 1, 'One declared record file per import entry');
   const records = Object.values(require(path.join(dataRoot, files[0])));
   assert(records.length > 0);
-  records.forEach(record => policy.validateRecord(record, overlay.layerKind));
+  records.forEach(record => policy.validateRecord(record, 'PROJECT'));
   recordsBySchema[entry.options.schemaName] = (recordsBySchema[entry.options.schemaName] || []).concat(records);
 }
 for (const [schema, code] of [
@@ -79,6 +78,6 @@ const profile = effective.properties.data.dataReleases.initializationProfiles.lo
 assert.equal(profile.enabled, true);
 assert.deepEqual(profile.steps, [
   { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },
-  { dataType: 'sample', releaseCodes: [overlay.releaseCode] },
+  { dataType: 'sample', releaseCodes: ['circa.ewaste:waste-policy'] },
 ], 'Framework references precede the explicit demo policy without importing demo transactions');
 console.log('Waste framework acceptance adoption validated');

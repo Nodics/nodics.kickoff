@@ -6,6 +6,22 @@
  * @override Later deployment layers may narrow these selections without bypassing framework qualification or authorization.
  */
 module.exports = {
+  // Local fresh installs seed the retained runtime proof that this deployment
+  // will authenticate immediately after Init. nAuth still owns both bindings;
+  // other environments may provision and rotate them independently.
+  bootstrapIdentity: {
+    serviceApiKey: {
+      $config: "env",
+      name: "NODICS_API_KEY",
+      fallback: null,
+    },
+  },
+  redisLocalResetMaintenance: {
+    maximumKeys: 50000,
+    maximumKeyBytes: 16777216,
+    maximumScanPages: 4096,
+    inventoryTimeoutMs: 120000,
+  },
   cart: {
     runtimeRoleProfiles: {
       COMMERCE: {
@@ -243,16 +259,9 @@ module.exports = {
   waste: {
     runtimeRoleProfiles: {
       COMMERCE: {
-        projectOverlay: {
-          enabled: true,
-          module: "circa.ewaste",
-          releaseCode: "circa.ewaste:waste-policy",
-          layerKind: "PROJECT",
-        },
         operations: {
           requireScopes: true,
           requireVerification: true,
-          requireDifferentApprover: false,
         },
       },
       COMMERCE_STAGED: {
@@ -323,9 +332,6 @@ module.exports = {
   eWaste: {
     runtimeRoleProfiles: {
       COMMERCE: {
-        catalogue: {
-          discoveryBatchSize: 24,
-        },
         journey: {
           arrivalRadiusMetres: {
             $config: "env",
@@ -352,29 +358,6 @@ module.exports = {
         application: {
           enabled: true,
         },
-        journeys: {
-          submission: {
-            enabled: true,
-          },
-          approvedAsset: {
-            enabled: true,
-          },
-          marketplace: {
-            enabled: true,
-          },
-          gift: {
-            enabled: true,
-          },
-          donation: {
-            enabled: true,
-          },
-          couponRedemption: {
-            enabled: true,
-          },
-          recyclingHandoff: {
-            enabled: true,
-          },
-        },
         channelAuthentication: {
           enabled: true,
           channels: {
@@ -390,7 +373,6 @@ module.exports = {
           connectionName: "engagement",
         },
         marketplace: {
-          catalogueDiscovery: true,
           priceBookCode: "circaPointsPriceBook",
           warehouseCode: "circaDigitalRegistry",
           transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
@@ -399,26 +381,20 @@ module.exports = {
           currency: "POINTS",
           programCode: "circa",
           rewardTypeCode: "points",
-          carbonRewardTypeCode: "circaCarbon",
-          carbonScale: 3,
-          rewardScale: 2,
           jurisdiction: "CIRCA_SAMPLE",
           saleMode: "DIGITAL_OWNERSHIP",
-          couponCarbonMode: "UNCHANGED",
           autoPublishListings: true,
           listingPresentation: {
             description:
               "Sample digital asset ownership. No physical delivery is included.",
             imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
             sample: true,
-            warehouseName: "Circa sample digital registry",
           },
           orderCodePrefix: "CIRCA_ORDER_",
-          refundsEnabled: true,
         },
         conversation: {
           rewardGuidance:
-            "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor.",
+            "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
         },
       },
       COMMERCE_STAGED: {
@@ -438,9 +414,6 @@ module.exports = {
         path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
       },
       WASTE: {
-        catalogue: {
-          discoveryBatchSize: 24,
-        },
         journey: {
           arrivalRadiusMetres: {
             $config: "env",
@@ -467,29 +440,6 @@ module.exports = {
         application: {
           enabled: true,
         },
-        journeys: {
-          submission: {
-            enabled: true,
-          },
-          approvedAsset: {
-            enabled: true,
-          },
-          marketplace: {
-            enabled: true,
-          },
-          gift: {
-            enabled: true,
-          },
-          donation: {
-            enabled: true,
-          },
-          couponRedemption: {
-            enabled: true,
-          },
-          recyclingHandoff: {
-            enabled: true,
-          },
-        },
         channelAuthentication: {
           enabled: true,
           channels: {
@@ -505,7 +455,6 @@ module.exports = {
           connectionName: "engagement",
         },
         marketplace: {
-          catalogueDiscovery: true,
           priceBookCode: "circaPointsPriceBook",
           warehouseCode: "circaDigitalRegistry",
           transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
@@ -514,26 +463,20 @@ module.exports = {
           currency: "POINTS",
           programCode: "circa",
           rewardTypeCode: "points",
-          carbonRewardTypeCode: "circaCarbon",
-          carbonScale: 3,
-          rewardScale: 2,
           jurisdiction: "CIRCA_SAMPLE",
           saleMode: "DIGITAL_OWNERSHIP",
-          couponCarbonMode: "UNCHANGED",
           autoPublishListings: true,
           listingPresentation: {
             description:
               "Sample digital asset ownership. No physical delivery is included.",
             imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
             sample: true,
-            warehouseName: "Circa sample digital registry",
           },
           orderCodePrefix: "CIRCA_ORDER_",
-          refundsEnabled: true,
         },
         conversation: {
           rewardGuidance:
-            "Approval rewards are added only after review. Potential CO₂e savings use the stated calculation method and assumed treatment. Carbon units are rewards, not issued carbon credits. When an asset is sold or gifted, its attached carbon moves with ownership; original approval rewards stay with the contributor.",
+            "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
           project: "circa.ewaste",
           adapter: "ollama",
         },
@@ -555,16 +498,6 @@ module.exports = {
     },
   },
 
-  // Temporary operator migration hold; restore after exact Init receipts are verified.
-  data: {
-    dataReleases: {
-      types: {
-        init: {
-          startupExecution: false,
-        },
-      },
-    },
-  },
   publish: {
     setup: {
       observation: {
@@ -573,8 +506,8 @@ module.exports = {
             moduleName: "circa.ewaste",
             path: "config/setup-observation/circa-native-reviewed.json",
             checksum:
-              "b4f09c2877c086d7882fcfcc726f2fe2b9fb24d00898e89b69a2d04e8a460a82",
-            revision: 5,
+              "1bbc6ffb9d14b055b0f00a46b29849e3fa8f132c30e9a4640938fddfd6c1ecc5",
+            revision: 16,
           },
         },
         callers: {
@@ -1191,6 +1124,23 @@ module.exports = {
   process: {
     runtimeRoleProfiles: {
       PROCESS: {
+        runtime: {
+          deadLetterRequeue: {
+            enabled: true,
+            maximumRequeues: 1,
+          },
+        },
+        remoteActions: {
+          runtimeEnterpriseScope: {
+            enabled: true,
+            enterpriseCodes: [
+              "GREENPERKS_ONLINE",
+              "GREENPERKS_RETAIL",
+              "RENEWWORKS_REPAIR_REUSE",
+              "LOOPCYCLE_RECYCLING",
+            ],
+          },
+        },
         definitionContributions: {
           ownershipTransitions: [
             {
@@ -1242,9 +1192,9 @@ module.exports = {
     runtimeRoleProfiles: {
       PLATFORM: {
         "telegram.bot.circa": {
-          value: null,
+          value: "8674791214:AAEZhgqWM8fmRvdWuBCOsx3vMEhfRjfFw3g",
           label: "Circa Telegram bot token",
-          status: "UNCONFIGURED",
+          status: "CONFIGURED",
           secret: true,
           credentialKind: "BOT_TOKEN",
         },
@@ -1262,7 +1212,7 @@ module.exports = {
       },
     },
     "openai.circa": {
-      value: null,
+        value: { $config: "env", name: "OPENAI_API_KEY" },
       label: "Circa OpenAI provider token",
       status: "UNCONFIGURED",
       secret: true,
@@ -1273,8 +1223,7 @@ module.exports = {
     cors: {
       allowedOrigins: [
         "http://localhost:3600",
-        "https://arc-orbit-organization-dodge.trycloudflare.com",
-        "https://visits-elsewhere-cross-mortality.trycloudflare.com",
+        "https://telegram-circa-local.nodics.dev",
       ],
       originEndpoints: {
         agora: {
@@ -1509,6 +1458,9 @@ module.exports = {
   },
   tooling: {
     acceptance: {
+      guidedInitialization: {
+        requestTimeoutMs: 60000,
+      },
       browserValidation: {
         enabled: false,
         reason:

@@ -56,17 +56,28 @@ const rules = require(
 
 let persisted;
 let indexed;
+let history;
 
 test.beforeEach(() => {
   persisted = [];
   indexed = [];
+  history = [];
   global.CONFIG = {
     get: (key) =>
       key === "commerceSearch" ? properties.commerceSearch : undefined,
   };
   global.SERVICE = {
+    DefaultCommerceSearchPolicyService: require(path.join(
+      commerceSearchRoot, "src/service/defaultCommerceSearchPolicyService")),
     DefaultCommerceSearchPublicationService: publication,
     DefaultCommerceSearchProjectionBuilderService: builder,
+    DefaultCommerceSearchRuleVersionService: {
+      get: async request => ({ result: history.filter(row => row.code === request.query.code) }),
+      save: async request => {
+        publication.protectHistory(request);
+        history.push(request.model);
+      },
+    },
     DefaultCommerceSearchRuleService: {
       get: async () => ({ result: Object.values(rules) }),
     },
@@ -93,6 +104,8 @@ test("Agora Commerce Search rule publishes and ranks women category cards", asyn
   assert.equal(publishResult.published, 1);
   assert.equal(persisted.length, 1);
   assert.equal(indexed.length, 1);
+  assert.equal(history.length, 1);
+  assert.equal(history[0].ruleCode, Object.values(rules)[0].code);
 
   const cards = [
     { productCode: "agoraSilkScarf" },

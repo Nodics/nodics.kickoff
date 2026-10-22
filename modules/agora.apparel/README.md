@@ -18,10 +18,13 @@ authority. Preserve historical evidence and installed receipts; documentation an
 business releases remain separate, explicitly governed selections. See
 [AGENTS.md](AGENTS.md) and the resolved framework's nSetup customer contract.
 
-The unreleased Commerce and content baseline is `0.0.1` in `sample-v001`,
-including the corrected Apparel search header. Prior development iterations are
-consolidated, not retained customer releases. Existing local receipts require
-governed fresh initialization; installation and publication retain their normal approvals.
+The Commerce and content baseline remains `0.0.1` in `sample-v001`, including
+the corrected Apparel search header. Its frozen bytes and any installed receipts
+remain unchanged. The forward `agoraApparelStoreReference@0.0.2` release owns the
+canonical Online `agoraMainStore` master from `sample-v001/store` and its Profile `enterpriseRef`; it is
+selected independently through the Commerce runtime and is not a compatibility
+alias or a Staged catalogue workaround. Installation and publication retain their
+normal approvals.
 
 Use this README to understand what this module is for, which capability or composition boundary it owns, how it fits its parent hierarchy, and where developers or AI tools should continue reading.
 
@@ -55,8 +58,8 @@ the owner APIs. A return cannot release Payment until every original shipped
 quantity has an accepted inspection; cancellation is limited to undispatched
 holds. Synthetic Local acceptance records do not certify real warehouse events.
 
-The same application profile selects catalog records, CMS content and owned
-assets, followed by explicit Online opening instructions under
+The same application profile selects the canonical Online Store master
+independently from catalog records, CMS content and owned assets, followed by explicit Online opening instructions under
 `data/sample-v001/operations/records`. These are not balance or coupon snapshots.
 The existing CMS and Media approvals remain in effect. Only after publication
 does the profile submit its complete governed Commerce plan: all 61 Product roots,

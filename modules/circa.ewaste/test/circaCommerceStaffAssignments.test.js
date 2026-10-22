@@ -11,7 +11,7 @@ const manifest = require("../data/manifest.json");
 const section = manifest.sections.circaCommerceStaffAssignments;
 const header = require("../data/sample-v001/staff-access/headers/circaCommerceStaffAssignmentHeader");
 const instructions = Object.values(require("../data/sample-v001/staff-access/records/circaCommerceStaffAssignmentData"));
-const employees = Object.values(require("../data/sample-v001/operations/records/circaOperationalEmployeeData"));
+const employees = Object.values(require("../data/sample-v007/operations/records/circaOperationalEmployeeData"));
 const scopes = Object.values(require("../data/sample-v001/outlet-access/records/circaMerchantOutletScopeData"));
 const profileRoot = path.join(frameworkRoot, "nodics.platform/modules/profile");
 const identityFixture = require(path.join(profileRoot, "test/helpers/identityCatalogueFixture"));
@@ -37,8 +37,10 @@ test("new explicit v001 forward section owns only additive instructions and leav
   }
   assert.equal(hash(Object.keys(section.files).sort().map(file => file + ":" + section.files[file]).join("|")),
     "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049");
-  assert.equal(manifest.sections.operations.files["sample-v001/operations/records/circaOperationalEmployeeData.js"],
+  assert.equal(manifest.retainedRoots["sample-v001"].files["sample-v001/operations/records/circaOperationalEmployeeData.js"],
     "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0");
+  assert.equal(manifest.sections.operations.files["sample-v007/operations/records/circaOperationalEmployeeData.js"],
+    hash(fs.readFileSync(path.join(__dirname, "../data/sample-v007/operations/records/circaOperationalEmployeeData.js"))));
   assert.equal(manifest.sections.circaMerchantOutletAccess.files["sample-v001/outlet-access/records/circaMerchantOutletScopeData.js"],
     "e996668088ae93b28ff553eaaaadfd3e2f9e1d2ada5db39548a7c6b53f7b5c80");
   for (const owner of ["nodics.commerce/modules/baseCommerce/modules/product", "nodics.foundation/modules/nPublish", "nodics.commerce/modules/baseCommerce/modules/promotion", "nodics.commerce/modules/checkout/modules/order"]) {

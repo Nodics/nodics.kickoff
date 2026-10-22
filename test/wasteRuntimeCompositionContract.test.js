@@ -55,11 +55,12 @@ async function main() {
     assert.equal(CONFIG.get('servers').default.endpoint.httpPort, 4370);
     assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WASTE'), true);
     assert.equal(CONFIG.get('apiExposure').categories.wasteInternal.enabled, true);
-    assert.equal(CONFIG.get('waste').accelerator.umbrella, 'waste');
-    assert.deepEqual(CONFIG.get('waste').accelerator.scenarioAccelerators, ['eWaste']);
-    assert.deepEqual(CONFIG.get('waste').accelerator.presetPackCodes, ['EWASTE_CORE_PRESETS']);
-    assert.equal(CONFIG.get('waste').projectOverlay.module, 'circa.ewaste');
-    assert.equal(CONFIG.get('waste').projectOverlay.releaseCode, 'circa.ewaste:waste-policy');
+    assert.equal(CONFIG.get('waste').accelerator, undefined);
+    assert.equal(CONFIG.get('waste').projectOverlay, undefined);
+    assert.deepEqual(CONFIG.get('data').dataReleases.initializationProfiles.localWasteFoundation.steps, [
+        { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },
+        { dataType: 'sample', releaseCodes: ['circa.ewaste:waste-policy'] }
+    ], 'Selected core references precede the optional Circa sample policy');
 
     expectedWasteModules.forEach(moduleName => {
         assert.equal(NODICS.isModuleActive(moduleName), true, `${moduleName} should be active for wasteServer`);
@@ -76,6 +77,7 @@ async function main() {
     assert.equal(overlayManifest.sections['waste-policy'].dataType, 'sample');
     assert.equal(overlayManifest.sections['waste-policy'].lifecycle, 'REFERENCE');
     assert.equal(overlayManifest.sections['waste-policy'].sourceRoot, 'sample-v001');
+    assert.equal(overlayManifest.sections['waste-policy'].selectionPolicy, 'EXPLICIT');
     console.log('Kickoff kickoffLocal wasteServer runtime composition passed');
 }
 

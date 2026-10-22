@@ -108,7 +108,7 @@
     "sample-v001/operations/promotion/renewworks/issuance/records/promotionSetup.json": "e9fb521719686c00804a10b43ea59c86658cfa585d9baf5f5294c15b7c5197df",
     "sample-v001/operations/records/circaEnterpriseData.js": "ded0ad61ac9241fa8dfdadfe96776512fe8f72e19b482697b02722519f615e43",
     "sample-v001/operations/records/circaOperationalEmployeeData.js": "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0",
-    "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
+      "sample-v001/operations/records/circaOperationalScopeData.js": "eb286b4543d336706d9a31db7f0b406da005476dcc3cb3e8f66148242ce72caf",
     "sample-v001/operations/records/circaOutletAddressData.js": "7e789529521f20eaf29bfefdd562dc20af3a22613a963e38d6400f69ec22725b",
     "sample-v001/outlet-access/headers/circaOutletAccessHeader.js": "ef1f070e67ff2e4a9ceb2ea12ab3bcdb3c171981597e55593809880adeff5c45",
     "sample-v001/outlet-access/records/circaMerchantOutletScopeData.js": "e996668088ae93b28ff553eaaaadfd3e2f9e1d2ada5db39548a7c6b53f7b5c80",

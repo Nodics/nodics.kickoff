@@ -29,8 +29,9 @@ provider qualification and authority boundaries. See
 Do not repeat the selected environment/server/node in `activeModules.modules`.
 Inherit unchanged environment connection bindings. Endpoint aliases reference
 the canonical deployment values while retaining protocol and authority flags.
-Document intentional equal security/provider pins and their review trigger;
-check resolved values and later consumer overrides before removing repetitions.
+Do not copy equal security/provider values as pins. Mandatory safeguards belong
+to their framework owner; retain only genuine environment differences and
+verify effective resolution before removing repetitions.
 
 Local declares customer browser origins while inheriting framework browser origins.
 Docker Local declares its published ports through `httpHardening.cors`; later layers can narrow the policy.

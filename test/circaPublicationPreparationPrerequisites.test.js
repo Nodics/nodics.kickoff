@@ -32,6 +32,22 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     for (const code of ["circa.ewaste:profile", "circa.ewaste:operations", "circa.ewaste:loyalty"]) {
       assert.equal(steps.find((step) => step.code === code).required, true);
     }
+    const profileIndex = steps.findIndex((step) => step.code === "circa.ewaste:profile");
+    for (const code of ["loyaltyWallet:participantAccessGroups", "wasteCarbon:participantAccessGroups", "wasteReward:participantAccessGroups"]) {
+      const index = steps.findIndex((step) => step.code === code);
+      assert(index >= 0 && index < profileIndex, `${code} must precede the customer profile release`);
+      const step = steps[index];
+      assert.equal(step.required, true);
+      assert.equal(step.phase, "BEFORE_PUBLICATION");
+      assert.equal(step.trigger, "USER");
+      assert.equal(step.dataType, "init");
+      assert.equal(step.targetServer, "platformServer");
+      assert.equal(step.targetRuntimeRole, "PLATFORM");
+    }
+    const assignmentIndex = steps.findIndex((step) => step.code === "circa.ewaste:customerParticipationAssignments");
+    assert(assignmentIndex > profileIndex, "Customer participation assignments require existing customer identities");
+    assert.equal(steps[assignmentIndex].dataType, "sample");
+    assert.equal(steps[assignmentIndex].targetRuntimeRole, "PLATFORM");
     const selectedOwners =
       environment === "kickoffLocal"
         ? [...owners.slice(1), "media"]
@@ -159,9 +175,13 @@ test("required current catalogue supersedes only five original intents without d
   const platform = loadRuntime("platformServer", "kickoffLocal", {});
   const service = require(path.join(frameworkRoot, "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
   const steps = service.preparationSteps(platform.backofficeApplicationInitialization.profiles.circa);
-  const base = path.resolve(__dirname, "../modules/circa.ewaste/data/sample-v001");
+  const dataRoot = path.resolve(__dirname, "../modules/circa.ewaste/data");
+  const base = path.join(dataRoot, "sample-v001");
+  const manifest = require(path.join(dataRoot, "manifest.json"));
   const original = require(path.join(base, "publication/catalogue/records/publicationPlan.json"));
-  const corrected = require(path.join(base, "asset-publication/records/publicationPlan.json"));
+  const correctedFile = Object.keys(manifest.sections.circaAssetClassificationPublicationPlan.files);
+  assert.equal(correctedFile.length, 1);
+  const corrected = require(path.join(dataRoot, correctedFile[0]));
   const required = steps.filter(step => step.required && step.type === "GOVERNED_PUBLICATIONS");
   const current = required.find(step => step.code === "circa.ewaste:circaCatalogueCurrentPublicationPlan");
   assert(current);
@@ -179,7 +199,7 @@ test("required current catalogue supersedes only five original intents without d
     JSON.stringify(item) !== JSON.stringify(original.items.find(row => row.rootCode === item.rootCode)));
   assert.equal(changed.length, 5);
   assert.deepEqual(changed, corrected.items);
-  assert(changed.every(item => item.sourceVersion === "2" && item.input.versionId === 1));
+  assert(changed.every(item => item.sourceVersion === "1" && item.input.versionId === 0));
   const optional = steps.find(step => step.code === "circa.ewaste:circaAssetClassificationPublicationPlan");
   assert.equal(optional.required, false);
   assert.equal(optional.operatorEnterpriseCode, "GREENPERKS_ONLINE");

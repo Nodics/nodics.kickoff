@@ -4,6 +4,39 @@ Date: 2026-09-29
 
 ## Remediation Progress
 
+### 2026-10-20 Bounded Local Configuration Correction
+
+Scope: source-only correction against Kickoff HEAD
+`6d5fd2a4776ed0eb791bec292a72c88303a206d8` and the current framework working tree.
+The sole pre-existing Kickoff diff was the user-authored credential selection;
+it is excluded from this correction and must remain byte-for-byte unchanged.
+
+Changed files: `envs/kickoffLocal/config/properties.js` omits only the inherited
+`waste.operations.requireDifferentApprover: false` and the seven unchanged
+journey inclusions in each of the COMMERCE and WASTE profiles.
+`test/configurationInheritanceContract.test.js` verifies absence, active owner
+ordering, inherited behavior, preserved differing Local policy and deliberate
+later overrides. This audit entry records scope and deferred work. The owning
+rule remains nSetup's customer configuration mandatory default ownership gate.
+
+Validation: the new regression failed before removal on the copied declaration.
+The source-placement audit passes. Reconstructing the three deleted blocks in
+memory matches the pre-edit file SHA-256, proving all other bytes, including the
+credential selection and scale declarations, are unchanged.
+`node --test test/configurationInheritanceContract.test.js` passes all 31 tests,
+including the new omission and later-override regression. `git diff --check`
+passes. Ownership/placement review: PASS for this bounded correction only;
+this does not close the broader audit or establish installed/live acceptance.
+
+Deferred: `eWaste.marketplace.carbonScale` and `rewardScale` require coordinated
+retirement of their legacy reversal consumers/routes and customer declarations.
+Current digital-sale dispatch rejects completed-sale refunds, but the older
+order-reversal route remains wired for non-digital historical events. Do not
+create duplicate eWaste scale defaults: any retained supported operation must
+use canonical Loyalty amount/original-ledger evidence and Carbon issuance/lot
+precision. No reversal, scale, credential, framework, installed-data or receipt
+changes are included here. No live/E2E, startup, publication or migration was run.
+
 ### Final Closure Batch
 
 2026-09-29: **COMPLETE: THREE CLOSURES AND FINAL REGRESSION PASS**, limited to the
@@ -1634,3 +1667,31 @@ Validation: Owner source/test evidence inspected, but full assertion equivalence
 Close all open dispositions with a reviewed owner decision or implemented correction. Run the owning independent tests and project-adoption tests through their canonical gates. Validate selected and unselected runtime roles, later-layer overrides and installed-release migration compatibility. Perform authorized local live acceptance separately; Docker remains deferred as requested. Re-run the inventory and record updated hashes before declaring cleanup complete.
 
 Framework-owned tests establish canonical supported contracts, but cannot force a partner to execute them. Enforce supported-release qualification in the maintained CI/release process and clearly distinguish supported extension points from invariant behavior.
+
+## Circa Follow-Up Source Review, 20 October 2026
+
+The combined legacy-cleanup and changed-implementation ownership review is
+complete at source level. Its canonical evidence is
+`actionsRepo/Circa/06_CAPABILITY_VERIFICATION_AND_IMPLEMENTATION_PLAN.md`
+Section 9.10 and the `document-assets/ownership-review-batch2-*.json` reports
+in the enclosing Nodics workspace. These identify reviewed snapshots, owner
+rationale, intentional deletions, immutable successors and focused checks.
+
+Kickoff retains deployment selections and project adoption checks only for the
+reviewed changes. Generic journey/catalogue behavior stays with framework
+owners. Removed obsolete marketplace precision/refund/scanner settings, copied
+journey/approval defaults, duplicate Local arrival configuration and inert
+overlay/accelerator markers. Docker omits the copied arrival fallback and
+inherits its framework default; Local's intentional 200-metre override and
+explicit environment overrides remain. Module graphs and governed release
+selections, not metadata markers, establish adoption.
+
+All 35 inheritance tests, two Local/Docker catalogue-adoption tests and the
+corrected marker-dependent contracts pass. No credentials were changed or
+printed. The user's Local credential-storage choice remains an explicit
+security exception, not universal configuration/security approval.
+
+This entry closes the current batch's Kickoff handoffs. It does not silently
+close unrelated historical dispositions above or certify installed migration,
+grants, providers, full-suite or E2E acceptance. Full-suite verification and
+publication closeout remain next; E2E execution is reserved for another session.
