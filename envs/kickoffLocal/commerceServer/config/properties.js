@@ -6,6 +6,9 @@
  * @override Later deployment layers may narrow the selected capabilities without bypassing owner authorization.
  */
 module.exports = {
+  commercialAgreement: {
+    catalogueReferences: { mode: "REMOTE" },
+  },
   store: {
     placementRead: {
       enabled: true,
@@ -84,7 +87,74 @@ module.exports = {
     },
   },
   digitalCore: {
-    merchantRedemption: { pricedProvider: { qualified: true } },
+    couponReminders: {
+      enabled: true,
+      leadTimeSeconds: 1296000,
+      sourceCallers: [
+        {
+          tenant: "default",
+          principalEnterpriseCode: "default",
+          enterpriseCode: "GREENPERKS_ONLINE",
+          serviceId: "apiAdmin",
+          projectCode: "nodics.kickoff",
+          environmentCode: "kickoffLocal",
+          serverCode: "platformServer",
+          instanceCode: "kickoff-local-platform-1",
+          assignmentCode: "kickoff-local-platform-runtime-deployment",
+        },
+      ],
+      sweepCallers: [
+        {
+          tenant: "default",
+          principalEnterpriseCode: "default",
+          enterpriseCode: "GREENPERKS_ONLINE",
+          serviceId: "apiAdmin",
+          projectCode: "nodics.kickoff",
+          environmentCode: "kickoffLocal",
+          serverCode: "processServer",
+          instanceCode: "kickoff-local-process-1",
+          assignmentCode: "kickoff-local-process-runtime-deployment",
+        },
+      ],
+      dispatchCallers: [
+        {
+          tenant: "default",
+          principalEnterpriseCode: "default",
+          enterpriseCode: "GREENPERKS_ONLINE",
+          serviceId: "apiAdmin",
+          projectCode: "nodics.kickoff",
+          environmentCode: "kickoffLocal",
+          serverCode: "engagementServer",
+          instanceCode: "kickoff-local-engagement-1",
+          assignmentCode: "kickoff-local-engagement-runtime-deployment",
+        },
+      ],
+      delivery: {
+        communicationConnectionName: "engagement",
+        allowInsecureLoopback: true,
+      },
+    },
+    couponAcquisition: {
+      sourceProof: {
+        callers: {
+          $config: "replace",
+          value: [
+            {
+              tenant: "default",
+              principalEnterpriseCode: "default",
+              enterpriseCode: "GREENPERKS_ONLINE",
+              serviceId: "apiAdmin",
+              projectCode: "nodics.kickoff",
+              environmentCode: "kickoffLocal",
+              serverCode: "wasteServer",
+              instanceCode: "kickoff-local-waste-1",
+              assignmentCode: "kickoff-local-waste-runtime-deployment",
+              phases: ["reserve", "consume", "release"],
+            },
+          ],
+        },
+      },
+    },
     bundleListings: { enabled: true },
     // Local admission for the reviewed original-sale test, not financial acceptance evidence.
     digitalOwnership: {
@@ -218,18 +288,6 @@ module.exports = {
     },
   },
   promotion: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        merchantBenefits: {
-          qualified: true,
-          pricedSource: {
-            qualified: true,
-            connectionName: "commerceServer",
-            allowInsecureLoopback: true,
-          },
-        },
-      },
-    },
     publication: {
       sourceAuthority: {
         connectionName: "commerceStaged",

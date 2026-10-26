@@ -11,10 +11,32 @@
 
 /** @module kickoffLocal/processServer/config/properties @description Selects Local Process deployment and explicit owner callback/start capabilities without granting authority or qualifying their callers. @owner nodics.kickoff @layer configuration */
 module.exports = {
-  "publish": { "setup": { "observation": { "enabled": true } } },
-  "activeModules": {
-    "groups": [],
-    "modules": [
+  cronjob: {
+    scheduleDrafts: {
+      enabled: true,
+      activationEnabled: true,
+      targets: [
+        {
+          code: "circaCouponExpiryReminder",
+          label: "Existing E07 BOTH coupon reminder",
+          tenantCode: "default",
+          enterpriseCode: "default",
+          runOnNode: "node0",
+          triggerCode: "circaCouponExpiryReminderTrigger",
+          expressions: ["0 0 * * * *"],
+          context: {
+            enterpriseCode: "GREENPERKS_ONLINE",
+            entitlementCode:
+              "digitalEntitlement:89b1e6eec0696d231cb391663f31b8bd143c32bc",
+          },
+        },
+      ],
+    },
+  },
+  publish: { setup: { observation: { enabled: true } } },
+  activeModules: {
+    groups: [],
+    modules: [
       "publish",
       "redisCache",
       "nodics.kickoff",
@@ -22,45 +44,48 @@ module.exports = {
       "kickoffApi",
       "kickoffInt",
       "workflow",
-      "cronjob"
-    ]
+      "cronjob",
+    ],
   },
-  "runtimeRole": {
-    "code": "PROCESS",
-    "publication": "OPERATIONAL"
+  runtimeRole: {
+    code: "PROCESS",
+    publication: "OPERATIONAL",
   },
-  "database": {
-    "default": {
-      "mongodb": {
-        "master": {
-          "databaseName": "kickoffLocalProcess"
-        }
-      }
+  database: {
+    default: {
+      mongodb: {
+        master: {
+          databaseName: "kickoffLocalProcess",
+        },
+      },
     },
-    "cronjob": {
-      "mongodb": {
-        "master": {
-          "databaseName": "kickoffLocalCron"
-        }
-      }
-    }
+    cronjob: {
+      mongodb: {
+        master: {
+          databaseName: "kickoffLocalCron",
+        },
+      },
+    },
   },
-  "process": {
-    "runtime": {
-      "internalStarts": {
-        "enabled": true,
-        "allowedDefinitions": { "$config": "replace", "value": ["profileEmployeeApplicationReview"] }
-      }
+  process: {
+    runtime: {
+      internalStarts: {
+        enabled: true,
+        allowedDefinitions: {
+          $config: "replace",
+          value: ["profileEmployeeApplicationReview"],
+        },
+      },
     },
-    "publicationDecisionCallback": {
-      "target": {
-        "connectionName": "cmsStaged"
-      }
+    publicationDecisionCallback: {
+      target: {
+        connectionName: "cmsStaged",
+      },
     },
-    "actionAdapters": {
-      "allowedActions": {
-        "$config": "replace",
-        "value": [
+    actionAdapters: {
+      allowedActions: {
+        $config: "replace",
+        value: [
           "nodics.process.noop",
           "editorial.applyDecision",
           "editorial.publishApproved",
@@ -72,34 +97,36 @@ module.exports = {
           "inventory.applyPublicationDecision",
           "tax.applyPublicationDecision",
           "media.applyPublicationDecision",
-          "profile.applyEmployeeApplicationDecision"
-        ]
-      }
+          "profile.applyEmployeeApplicationDecision",
+          "digitalCore.couponExpirySweep",
+        ],
+      },
     },
-    "remoteActions": {
-      "targets": {
-        "profile": { "connectionName": "profile" },
-        "product": { "connectionName": "commerceStaged" },
-        "pricing": { "connectionName": "commerceStaged" },
-        "promotion": { "connectionName": "commerceStaged" },
-        "inventory": { "connectionName": "commerceStaged" },
-        "tax": { "connectionName": "commerceStaged" },
-        "media": { "connectionName": "cmsStaged" },
-        "editorial": {
-          "connectionName": "cmsStaged"
+    remoteActions: {
+      targets: {
+        digitalCore: { connectionName: "commerce" },
+        profile: { connectionName: "profile" },
+        product: { connectionName: "commerceStaged" },
+        pricing: { connectionName: "commerceStaged" },
+        promotion: { connectionName: "commerceStaged" },
+        inventory: { connectionName: "commerceStaged" },
+        tax: { connectionName: "commerceStaged" },
+        media: { connectionName: "cmsStaged" },
+        editorial: {
+          connectionName: "cmsStaged",
         },
-        "rulesApi": {
-          "connectionName": "rulesApi"
-        }
-      }
-    }
+        rulesApi: {
+          connectionName: "rulesApi",
+        },
+      },
+    },
   },
-  "servers": {
-    "default": {
-      "endpoint": {
-        "httpPort": 4330,
-        "httpsPort": 4331
-      }
-    }
-  }
+  servers: {
+    default: {
+      endpoint: {
+        httpPort: 4330,
+        httpsPort: 4331,
+      },
+    },
+  },
 };

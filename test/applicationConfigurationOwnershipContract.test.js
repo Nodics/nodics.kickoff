@@ -93,7 +93,8 @@ test("Native Telegram credential is shared only by its verifier and delivery run
     const credential = runtime.credentials["telegram.bot.circa"];
     assert.equal(
       credential?.value ===
-        source.credentials.runtimeRoleProfiles.PLATFORM["telegram.bot.circa"].value,
+        source.credentials.runtimeRoleProfiles.PLATFORM["telegram.bot.circa"]
+          .value,
       true,
       server,
     );
@@ -158,7 +159,7 @@ test("Native Waste selects reviewed sale admission and canonical evidence withou
     "/internal/customer-evidence",
   );
   const business = runtime.eWaste.marketplace.digitalOwnership.businessCallers;
-  assert.equal(business.length, 2);
+  assert.equal(business.length, 3);
   assert.equal(business[0].serverCode, "commerceServer");
   assert.equal(business[0].enterpriseCode, "GREENPERKS_ONLINE");
   assert.equal(business[0].principalEnterpriseCode, "default");
@@ -172,12 +173,52 @@ test("Native Waste selects reviewed sale admission and canonical evidence withou
   assert.deepEqual(business[1].permissions, [
     "waste.asset.listing.intent.read",
   ]);
+  assert.deepEqual(business[2], {
+    tenant: "default",
+    principalEnterpriseCode: "default",
+    enterpriseCode: "GREENPERKS_RETAIL",
+    serviceId: "apiAdmin",
+    projectCode: "nodics.kickoff",
+    environmentCode: "kickoffLocal",
+    serverCode: "commerceServer",
+    instanceCode: "kickoff-local-commerce-1",
+    assignmentCode: "kickoff-local-commerce-runtime-deployment",
+    permissions: ["waste.asset.sale.transfer"],
+  });
   const loyalty = loadRuntime("loyaltyServer", "kickoffLocal");
   assert.equal(loyalty.apiExposure.categories.loyaltyInternal.enabled, true);
-  assert.equal(loyalty.loyalty.api.readEvidence.callers.length, 1);
-  assert.equal(
-    loyalty.loyalty.api.readEvidence.callers[0].serverCode,
-    "wasteServer",
+  assert.deepEqual(
+    loyalty.loyalty.api.readEvidence.callers,
+    [
+      [
+        "wasteServer",
+        "GREENPERKS_ONLINE",
+        "kickoff-local-waste-1",
+        "kickoff-local-waste-runtime-deployment",
+      ],
+      [
+        "commerceServer",
+        "GREENPERKS_RETAIL",
+        "kickoff-local-commerce-1",
+        "kickoff-local-commerce-runtime-deployment",
+      ],
+      [
+        "commerceServer",
+        "GREENPERKS_ONLINE",
+        "kickoff-local-commerce-1",
+        "kickoff-local-commerce-runtime-deployment",
+      ],
+    ].map(([serverCode, enterpriseCode, instanceCode, assignmentCode]) => ({
+      tenant: "default",
+      principalEnterpriseCode: "default",
+      enterpriseCode,
+      serviceId: "apiAdmin",
+      projectCode: "nodics.kickoff",
+      environmentCode: "kickoffLocal",
+      serverCode,
+      instanceCode,
+      assignmentCode,
+    })),
   );
   const platform = loadRuntime("platformServer", "kickoffLocal");
   assert.equal(platform.profileCustomerEvidence.enabled, true);
@@ -204,6 +245,7 @@ test("Local communication policy is role-scoped without activating Circa on Enga
   assert.deepEqual(local.communication.trustedSourceModules, [
     "eWaste",
     "profile",
+    "digitalCore",
   ]);
   assert.deepEqual(
     local.communication.providers.TELEGRAM.credentialReferences,
@@ -343,8 +385,11 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const commerce = loadRuntime("commerceServer", environment);
     assert.equal(commerce.eWaste.conversation.project, undefined);
     assert.equal(activeModuleNames(commerce).includes("eWaste"), false);
-    assert.equal(commerce.order.refunds.ownerPorts.eWaste, undefined,
-      "Retired eWaste reversals must not remain a configured refund port");
+    assert.equal(
+      commerce.order.refunds.ownerPorts.eWaste,
+      undefined,
+      "Retired eWaste reversals must not remain a configured refund port",
+    );
     assert.equal(commerce.bidding.holdTiming, "CHECKOUT_AFTER_ACCEPTANCE");
     assert.equal(commerce.bidding.validitySeconds, 86400);
     assert.equal(commerce.digitalCore.merchantRedemption.enabled, true);

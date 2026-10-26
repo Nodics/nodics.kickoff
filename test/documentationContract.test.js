@@ -350,25 +350,14 @@ const approvedProjectionRecords = Object.fromEntries(
     rows.map((row) => ({ ...row, lifecycleState: "ONLINE" })),
   ]),
 );
-const previousDocumentation =
-  require("./fixtures/kickoffDocumentationRelease001.json").sections
-    .documentation;
-assert.equal(
-  documentationContract.validateGeneration(previousDocumentation, manifest),
-  manifest,
-);
+const baselineIdentities = require("./fixtures/kickoffDocumentationBaselineIdentities.json");
 for (const family of ["Page", "Route", "Component", "Media", "PageMetadata"]) {
-  const previous = documentationContract.readDataRecords(
-    root,
-    Object.keys(previousDocumentation.generatedHashes),
-    family,
-  ).records;
   assert.deepEqual(
     selectedRecords(family)
       .map((record) => record.code)
       .sort(),
-    previous.map((record) => record.code).sort(),
-    "Successor retains stable " + family + " references",
+    baselineIdentities[family],
+    "Consolidated baseline retains stable " + family + " references",
   );
 }
 for (const record of selectedRecords("PublicationState")) {
@@ -387,27 +376,17 @@ for (const record of selectedRecords("PublicationState")) {
   }
 }
 for (const [file, hash] of Object.entries(
-  previousDocumentation.generatedHashes,
+  require("./fixtures/kickoffDocumentationRelease001.json").sections.documentation.generatedHashes,
 )) {
+  if (!file.includes("/assets/")) continue;
   assert.equal(
     documentationContract.sha256(
       fs.readFileSync(path.join(root, "data", file)),
     ),
     hash,
-    "Historical release bytes remain unchanged: " + file,
+    "Shared asset bytes remain unchanged: " + file,
   );
-  if (file.includes("/assets/"))
-    assert.equal(
-      manifest.generatedHashes[file],
-      hash,
-      "Assets are reused unchanged",
-    );
-  else
-    assert.equal(
-      manifest.generatedHashes[file],
-      undefined,
-      "Only the successor record/header is selected",
-    );
+  assert.equal(manifest.generatedHashes[file], hash, "Assets are reused unchanged");
 }
 assert.equal(manifest.version, "0.0.2");
 assert(pageMetadataRecords.every((row) => row.lifecycleState === "STAGED"));

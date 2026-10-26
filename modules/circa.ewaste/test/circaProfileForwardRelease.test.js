@@ -12,8 +12,8 @@ const current = require("../data/sample-v001/profile/headers/circaProfileSampleH
 const customers = require("../data/sample-v001/profile/records/circaCustomerData");
 const participationHeader = require("../data/sample-v001/customer-participation/headers/circaCustomerParticipationHeader");
 const participation = require("../data/sample-v001/customer-participation/records/circaCustomerParticipationData");
-const digitalParticipationHeader = require("../data/sample-v005/customer-digital-participation/headers/circaCustomerDigitalParticipationHeader");
-const digitalParticipation = require("../data/sample-v005/customer-digital-participation/records/circaCustomerDigitalParticipationData");
+const digitalParticipationHeader = require("../data/sample-v001/customer-digital-participation/headers/circaCustomerDigitalParticipationHeader");
+const digitalParticipation = require("../data/sample-v001/customer-digital-participation/records/circaCustomerDigitalParticipationData");
 
 test("imported customers satisfy Profile self-read ownership after authentication", () => {
   for (const customer of Object.values(customers)) {
@@ -88,7 +88,7 @@ test("customer sample keeps generated Profile import semantics", () => {
 
 test("Digital bundle participation is a forward credential-free assignment", () => {
   const release = manifest.sections.customerDigitalParticipationAssignments;
-  assert.equal(release.sourceRoot, "sample-v005");
+  assert.equal(release.sourceRoot, "sample-v001");
   assert.equal(release.destinationRole, "PLATFORM");
   assert.equal(release.selectionPolicy, "EXPLICIT");
   assert.equal(

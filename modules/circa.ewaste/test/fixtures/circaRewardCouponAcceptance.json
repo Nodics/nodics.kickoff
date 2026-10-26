@@ -1,0 +1,65 @@
+{
+  "purpose": "REVIEWED_SOURCE_SELECTORS_REQUIRING_FRESH_OWNER_RECEIPTS",
+  "importable": false,
+  "operationalAuthority": false,
+  "runtimeConfigurationChanged": false,
+  "purchase": {
+    "execution": "CANONICAL_CART_CHECKOUT_APIS",
+    "threeCaseAcquisitionProfile": false,
+    "tenant": "default",
+    "customer": { "ownerId": "customer@circa.local", "enterpriseCode": "GREENPERKS_ONLINE" },
+    "walletOwner": { "ownerType": "CUSTOMER", "ownerCode": "circa-customer" },
+    "cart": { "storeCode": "circaMainStore", "channelCode": "web", "locale": "en", "jurisdiction": "CIRCA_SAMPLE", "currency": "POINTS" },
+    "entry": { "productCode": "CIRCA_COUPON_GP-A01", "sku": "CIRCA_COUPON_GP-A01_SKU", "quantity": "1" },
+    "payment": { "paymentMethod": "LOYALTY_REWARD", "walletCode": "WALLET_ED16C8FCF19E1FE586E3DA5D", "programCode": "circa", "rewardTypeCode": "points", "rewardCurrency": "POINTS" },
+    "expectedTotal": "50",
+    "certificateCodes": [],
+    "requests": [
+      { "method": "POST", "path": "/nodics/cart/v0/carts", "body": "original cartCode plus cart selection" },
+      { "method": "POST", "path": "/nodics/cart/v0/carts/{cartCode}/entries", "body": "original entryCode plus entry selection" },
+      { "method": "GET", "path": "/nodics/cart/v0/carts/{cartCode}" },
+      { "method": "POST", "path": "/nodics/cart/v0/carts/{cartCode}/calculations", "body": "original calculationCode and observed cart revision" },
+      { "method": "POST", "path": "/nodics/checkoutCore/v0/checkouts/place", "body": "original cartCode, orderCode, calculationCode, expectedCartRevision plus payment selection", "idempotency": "original purchase key" },
+      { "method": "GET", "path": "/nodics/checkoutCore/v0/checkouts/{orderCode}" },
+      { "method": "GET", "path": "/nodics/order/v0/orders/{orderCode}" },
+      { "method": "GET", "path": "/nodics/digitalCore/v0/entitlements?orderCode={orderCode}" }
+    ],
+    "recovery": "Persist original command identities before dispatch. An uncertain placement is inspected by its original orderCode; never substitute a new key or infer success."
+  },
+  "redemption": {
+    "command": "acceptance:coupon-redemption",
+    "acceptanceName": "circaRewardCouponRedemption",
+    "selection": {
+      "contractVersion": 2,
+      "approvalReference": null,
+      "localDemo": true,
+      "tenant": "default",
+      "runCode": null,
+      "customer": { "ownerId": "customer@circa.local", "enterpriseCode": "GREENPERKS_ONLINE" },
+      "staff": { "enterpriseCode": "GREENPERKS_RETAIL" },
+      "cases": [{
+        "caseCode": "GP-A01",
+        "orderCode": null,
+        "cartCode": null,
+        "entryCode": null,
+        "productCode": "CIRCA_COUPON_GP-A01",
+        "sku": "CIRCA_COUPON_GP-A01_SKU",
+        "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
+        "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+        "outletStoreCode": "greenperks-cafe",
+        "merchantReceiptReference": null,
+        "benefit": { "type": "ITEM", "sourceStage": "SIMULATED_ITEMS", "items": [{ "sku": "GP_BOTTLED_WATER", "quantity": 1, "unit": "EACH" }] }
+      }]
+    },
+    "bindings": {
+      "approvalReference": "Explicit operator approval reference, not source initialization approval",
+      "runCode": "Original reviewed redemption run identity; preserve across recovery",
+      "orderCode": "Completed Checkout code equals Order code and active entitlement orderCode",
+      "cartCode": "Order cartCode equals active entitlement cartCode",
+      "entryCode": "Active entitlement orderEntryCode, joined to the actual purchased Product/SKU",
+      "merchantReceiptReference": "Original operator-reviewed SIM: receipt reference for this Local simulated ITEM delivery"
+    },
+    "receiptAdmission": "Use current customer-scoped owner readbacks. Require exact ownerId, enterpriseCode, Product, SKU, Promotion, ACTIVE COUPON_CODE entitlement and completed purchase. Do not reuse historical receipt IDs. The canonical runner independently revalidates and enforces outlet authority.",
+    "deliveryEvidence": "SIMULATION only; not verified physical delivery, cash settlement or redeemed-benefit reversal"
+  }
+}

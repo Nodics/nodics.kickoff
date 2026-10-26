@@ -100,89 +100,11 @@ module.exports = {
   },
   product: {
     runtimeRoleProfiles: {
-      COMMERCE: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en", "ar"],
-        },
-      },
       COMMERCE_STAGED: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en", "ar"],
-        },
         marketplaceAuthoring: {
           enabled: true,
           catalogVersion: "circaStaged",
           locales: ["en", "ar"],
-        },
-      },
-      ENGAGEMENT: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      LOCATION: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      LOYALTY: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      PLATFORM: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      PROCESS: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      WASTE: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      WCMS_ONLINE: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      WCMS_STAGED: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
         },
       },
     },
@@ -277,7 +199,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
           storeCodes: {
             agoraMainStore: {
               $config: "selected",
@@ -306,7 +227,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       ENGAGEMENT: {
@@ -317,7 +237,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       LOCATION: {
@@ -328,7 +247,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       LOYALTY: {
@@ -339,7 +257,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       PLATFORM: {
@@ -350,7 +267,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       PROCESS: {
@@ -361,7 +277,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       WASTE: {
@@ -372,7 +287,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       WCMS_ONLINE: {
@@ -383,7 +297,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       WCMS_STAGED: {
@@ -394,7 +307,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
     },

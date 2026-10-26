@@ -14,6 +14,28 @@ module.exports = {
   databaseTransactions: { maximumCommitTimeMs: 10000 },
   loyalty: {
     transactions: { enabled: true },
+    reservationDecisions: {
+      callers: {
+        $config: "replace",
+        value: [
+          {
+            tenant: "default",
+            serviceId: "apiAdmin",
+            entCode: "default",
+            projectCode: "nodics.kickoff",
+            environmentCode: "kickoffLocal",
+            serverCode: "commerceServer",
+            instanceCode: "kickoff-local-commerce-1",
+            assignmentCode: "kickoff-local-commerce-runtime-deployment",
+          },
+        ],
+      },
+    },
+    enterpriseTestCredits: {
+      enabled: true,
+      provisioningEnabled: true,
+      allowedEnvironments: { $config: "replace", value: ["kickoffLocal"] },
+    },
     sampleCredits: {
       enabled: true,
       allowedEnvironments: { $config: "replace", value: ["kickoffLocal"] },
@@ -58,6 +80,28 @@ module.exports = {
               serverCode: "wasteServer",
               instanceCode: "kickoff-local-waste-1",
               assignmentCode: "kickoff-local-waste-runtime-deployment",
+            },
+            {
+              tenant: "default",
+              principalEnterpriseCode: "default",
+              enterpriseCode: "GREENPERKS_RETAIL",
+              serviceId: "apiAdmin",
+              projectCode: "nodics.kickoff",
+              environmentCode: "kickoffLocal",
+              serverCode: "commerceServer",
+              instanceCode: "kickoff-local-commerce-1",
+              assignmentCode: "kickoff-local-commerce-runtime-deployment",
+            },
+            {
+              tenant: "default",
+              principalEnterpriseCode: "default",
+              enterpriseCode: "GREENPERKS_ONLINE",
+              serviceId: "apiAdmin",
+              projectCode: "nodics.kickoff",
+              environmentCode: "kickoffLocal",
+              serverCode: "commerceServer",
+              instanceCode: "kickoff-local-commerce-1",
+              assignmentCode: "kickoff-local-commerce-runtime-deployment",
             },
           ],
         },

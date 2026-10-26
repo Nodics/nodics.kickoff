@@ -1,5 +1,16 @@
 # Kickoff Local
 
+Local Commerce Staged explicitly enables Product's existing automatic held-bundle
+publication policy for the Circa marketplace. Only `enabled: true` is overridden
+under the Product COMMERCE_STAGED role profile; transport and policy definitions
+remain Product-owned. Digital holds, current runtime permissions, Pricing evidence
+and original nPublish receipts are still required. Docker remains disabled.
+
+Local Commerce also selects Pricing `bundleListings.enabled` and `qualified`
+for that same held-bundle journey. Record bounds and all publication mechanics
+remain inherited from Pricing. Existing Store-selected books and immutable
+activation receipts remain mandatory; this does not create or reprice a book.
+
 Kickoff Local local environment composition boundary for Nodics Kickoff.
 
 This isolated Local deployment raises the Redis owner's offline reset inventory
@@ -132,3 +143,9 @@ and environment-neutral, then supply the environment-specific value through the
 governed runtime configuration path before restarting the topology. If the
 runtime value is missing, Telegram-specific entry remains unavailable while the
 local browser origin stays usable.
+
+Local Bidding maps `circaMainStore` to its canonical Store merchant,
+`GREENPERKS_ONLINE`, so published bundle price inspection agrees with Checkout's
+merchant partition. The buyer retains its original signed Enterprise and actor.
+Docker and other Store mappings remain independent. Adoption requires the normal
+Commerce build; this configuration does not replay data or grant recovery rights.

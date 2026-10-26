@@ -61,117 +61,41 @@ test('pack bytes are pinned and header delegates to the fixed Profile create-pre
     assert.deepEqual(header.options.tenants, ['default']);
 });
 
-test('approved source successors preserve frozen predecessor authority', () => {
-    assert.equal(section.sourceRoot, 'init-v007');
-    assert.equal(section.version, '0.0.9');
-    const retainedV6 = manifest.retainedRoots['init-v006'];
-    const predecessorV6 = retainedV6.sections.nativeRuntimeAssignments;
-    assert.equal(predecessorV6.sourceRoot, 'init-v006');
-    assert.equal(predecessorV6.version, '0.0.7');
-    assert.deepEqual(predecessorV6.files, retainedV6.files);
-    const retainedV4 = manifest.retainedRoots['init-v004'];
-    const predecessorV4 = retainedV4.sections.nativeRuntimeAssignments;
-    assert.equal(predecessorV4.sourceRoot, 'init-v004');
-    assert.equal(predecessorV4.version, '0.0.6');
-    assert.deepEqual(predecessorV4.files, retainedV4.files);
-    const retainedV3 = manifest.retainedRoots['init-v003'];
-    const predecessorV3 = retainedV3.sections.nativeRuntimeAssignments;
-    assert.equal(predecessorV3.sourceRoot, 'init-v003');
-    assert.equal(predecessorV3.version, '0.0.4');
-    assert.deepEqual(predecessorV3.files, retainedV3.files);
-    const retainedV2 = manifest.retainedRoots['init-v002'];
-    const predecessorV2 = retainedV2.sections.nativeRuntimeAssignments;
-    assert.equal(predecessorV2.sourceRoot, 'init-v002');
-    assert.equal(predecessorV2.version, '0.0.3');
-    assert.deepEqual(predecessorV2.files, retainedV2.files);
-    const retained = manifest.retainedRoots['init-v001'];
-    const predecessorV1 = retained.sections.nativeRuntimeAssignments;
-    assert.equal(predecessorV1.sourceRoot, 'init-v001');
-    assert.equal(predecessorV1.version, '0.0.2');
-    const originalFiles = {
-        'init-v001/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js': 'c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7',
-        'init-v001/runtime-assignments/records/nativeRuntimeAssignmentData.js': 'd6621d1c423351be49ea67415f2ffc1870e97f38fced277336286cd55e26c9fc',
+test('unreleased current baseline uses only init-v001 without retained snapshots', () => {
+    assert.equal(section.sourceRoot, 'init-v001');
+    assert.equal(section.version, '0.0.10');
+    assert.equal(manifest.retainedRoots, undefined);
+    assert.deepEqual(fs.readdirSync(root).filter(name => /^init-v/.test(name)), ['init-v001']);
+    for (const selected of Object.values(manifest.sections)) {
+        assert.equal(selected.sourceRoot, 'init-v001');
+        assert(Object.keys(selected.files).every(file => file.startsWith('init-v001/')));
+    }
+    const declared = Object.values(manifest.sections).flatMap(selected => Object.keys(selected.files)).sort();
+    const actual = fs.readdirSync(path.join(root, 'init-v001'), { recursive: true, withFileTypes: true })
+        .filter(entry => entry.isFile())
+        .map(entry => path.relative(root, path.join(entry.parentPath, entry.name)).split(path.sep).join('/')).sort();
+    assert.deepEqual(actual, declared, 'no unselected predecessor files may remain inside the consolidated root');
+    const targets = new Set();
+    for (const selected of Object.values(manifest.sections)) {
+        const headerPath = Object.keys(selected.files).find(file => file.includes('/headers/'));
+        const recordsPath = Object.keys(selected.files).find(file => file.includes('/records/'));
+        const header = Object.values(require(path.join(root, headerPath)).profile)[0];
+        for (const row of Object.values(require(path.join(root, recordsPath)))) {
+            const target = 'profile:' + header.options.schemaName + ':' + row.code;
+            assert(!targets.has(target), 'duplicate current section target: ' + target);
+            targets.add(target);
+        }
+    }
+    const currentPermissions = {
+        commerceServer: ['commerce.store.read', 'commerce.product.read'],
+        commerceStagedServer: ['commerce.digital.bundle.publish'],
+        wasteServer: ['waste.impact.calculate'],
     };
-    assert.deepEqual(predecessorV1.files, originalFiles);
-    assert.deepEqual(retained.files, originalFiles);
-    for (const [file, expected] of Object.entries(originalFiles)) {
-        assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex'), expected);
+    for (const [server, required] of Object.entries(currentPermissions)) {
+        const row = records.find(item => item.runtimeScope.serverCode === server);
+        for (const permission of required)
+            assert.equal(row.runtimeScope.permissions.filter(code => code === permission).length, 1);
     }
-    assert.deepEqual(section, {
-        ...predecessorV6,
-        sourceRoot: 'init-v007',
-        version: '0.0.9',
-        description: section.description,
-        files: section.files,
-        prerequisites: section.prerequisites,
-    }, 'selection and ownership policy remain unchanged while the framework identity graph advances');
-    const original = require(path.join(root, 'init-v001/runtime-assignments/records/nativeRuntimeAssignmentData'));
-    const version2 = Object.values(require(path.join(root, 'init-v002/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const additions = {
-        commerceServer: 'commercialAgreement',
-        commerceStagedServer: 'commercialAgreement',
-        wasteServer: 'wasteCarbon',
-    };
-    const restored = JSON.parse(JSON.stringify(version2));
-    let count = 0;
-    for (const row of restored) {
-        const added = additions[row.runtimeScope.serverCode];
-        if (!added) continue;
-        assert.equal(row.runtimeScope.environmentCode, 'kickoffLocal');
-        assert.equal(row.runtimeScope.modules.filter(name => name === added).length, 1);
-        row.runtimeScope.modules.splice(row.runtimeScope.modules.indexOf(added), 1);
-        count += 1;
-    }
-    assert.equal(count, 3);
-    assert.deepEqual(restored, original, 'all identities, permissions, other coordinates and original module ordering are preserved');
-});
-
-test('reviewed 0.0.4 assignment adds only the Store placement permission required by Commerce Cart', () => {
-    const predecessor = Object.values(require(path.join(root, 'init-v002/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const version3 = Object.values(require(path.join(root, 'init-v003/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const restored = JSON.parse(JSON.stringify(version3));
-    const commerce = restored.find(row => row.runtimeScope.serverCode === 'commerceServer');
-    assert(commerce);
-    assert.equal(commerce.runtimeScope.permissions.filter(code => code === 'commerce.store.read').length, 1);
-    commerce.runtimeScope.permissions.splice(commerce.runtimeScope.permissions.indexOf('commerce.store.read'), 1);
-    assert.deepEqual(restored, predecessor, 'no identity, module, coordinate or other permission changes are admitted');
-    for (const row of version3.filter(item => item.runtimeScope.serverCode !== 'commerceServer')) {
-        assert.deepEqual(row, predecessor.find(item => item.code === row.code));
-    }
-});
-
-test('reviewed 0.0.6 assignment adds only the Waste impact calculation permission', () => {
-    const predecessor = Object.values(require(path.join(root, 'init-v003/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const version4 = Object.values(require(path.join(root, 'init-v004/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const restored = JSON.parse(JSON.stringify(version4));
-    const waste = restored.find(row => row.runtimeScope.serverCode === 'wasteServer');
-    assert(waste);
-    assert.equal(waste.runtimeScope.permissions.filter(code => code === 'waste.impact.calculate').length, 1);
-    waste.runtimeScope.permissions.splice(waste.runtimeScope.permissions.indexOf('waste.impact.calculate'), 1);
-    assert.deepEqual(restored, predecessor, 'no identity, module, coordinate or other permission changes are admitted');
-    const commerce = version4.find(row => row.runtimeScope.serverCode === 'commerceServer');
-    assert.equal(commerce.runtimeScope.permissions.filter(code => code === 'commerce.store.read').length, 1,
-        'the previously reviewed Commerce Store placement authority is retained');
-});
-
-test('reviewed 0.0.7 assignment adds only Product read required by Digital listing composition', () => {
-    const predecessor = Object.values(require(path.join(root, 'init-v004/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const restored = JSON.parse(JSON.stringify(Object.values(require(path.join(root, 'init-v006/runtime-assignments/records/nativeRuntimeAssignmentData')))));
-    const commerce = restored.find(row => row.runtimeScope.serverCode === 'commerceServer');
-    assert(commerce);
-    assert.equal(commerce.runtimeScope.permissions.filter(code => code === 'commerce.product.read').length, 1);
-    commerce.runtimeScope.permissions.splice(commerce.runtimeScope.permissions.indexOf('commerce.product.read'), 1);
-    assert.deepEqual(restored, predecessor, 'no identity, module, coordinate or other permission changes are admitted');
-});
-
-test('current reviewed assignment adds only Digital proof permission required by Product Staged publication', () => {
-    const predecessor = Object.values(require(path.join(root, 'init-v006/runtime-assignments/records/nativeRuntimeAssignmentData')));
-    const restored = JSON.parse(JSON.stringify(records));
-    const staged = restored.find(row => row.runtimeScope.serverCode === 'commerceStagedServer');
-    assert(staged);
-    assert.equal(staged.runtimeScope.permissions.filter(code => code === 'commerce.digital.bundle.publish').length, 1);
-    staged.runtimeScope.permissions.splice(staged.runtimeScope.permissions.indexOf('commerce.digital.bundle.publish'), 1);
-    assert.deepEqual(restored, predecessor, 'no identity, module, coordinate or other permission changes are admitted');
 });
 
 test('explicit Init seed pins the current full Profile graph including the eWaste-owned listing permission catalogue', () => {
@@ -181,6 +105,16 @@ test('explicit Init seed pins the current full Profile graph including the eWast
         .update(Object.keys(profile.files).sort().map(file => file + ':' + profile.files[file]).join('|'))
         .update('|prerequisites:' + JSON.stringify(references)).digest('hex');
     const principalScope = manifest.sections.nativeRuntimePrincipalScope;
+    const carbonManifest = require(path.join(frameworkRoot, 'nodics.waste/modules/wasteCarbon/data/manifest.json'));
+    const carbonReferences = ['permissionCatalogue', 'transferFinalizationPermission'].map(sectionCode => {
+        const selected = carbonManifest.sections[sectionCode];
+        return { moduleName: 'wasteCarbon', sectionCode, version: selected.version, checksum: crypto.createHash('sha256')
+            .update(Object.keys(selected.files).sort().map(file => file + ':' + selected.files[file]).join('|')).digest('hex') };
+    });
+    assert.deepEqual(principalScope.prerequisites, [
+        { moduleName: 'profile', sectionCode: 'init-v001', version: profile.version, checksum },
+        ...carbonReferences,
+    ]);
     const principalScopeChecksum = crypto.createHash('sha256')
         .update(Object.keys(principalScope.files).sort().map(file => file + ':' + principalScope.files[file]).join('|'))
         .update('|prerequisites:' + JSON.stringify(principalScope.prerequisites)).digest('hex');
@@ -193,8 +127,8 @@ test('explicit Init seed pins the current full Profile graph including the eWast
 });
 test('project-owned principal scope adopts only the exact permissions missing from the framework service group', () => {
     const scope = manifest.sections.nativeRuntimePrincipalScope;
-    assert.equal(scope.sourceRoot, 'init-v008');
-    assert.equal(scope.version, '0.0.3');
+    assert.equal(scope.sourceRoot, 'init-v001');
+    assert.equal(scope.version, '0.0.4');
     assert.equal(scope.selectionPolicy, 'EXPLICIT');
     assert.deepEqual(scope.environmentScope, ['LOCAL']);
     const header = require(path.join(root, scope.sourceRoot,
@@ -214,20 +148,20 @@ test('project-owned principal scope adopts only the exact permissions missing fr
     for (const [file, expected] of Object.entries(scope.files)) {
         assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex'), expected);
     }
-    const predecessor = require(path.join(root, 'init-v005/runtime-principal-scope/records/nativeRuntimePrincipalScopeData')).record0;
-    const successor = require(path.join(root, 'init-v008/runtime-principal-scope/records/nativeRuntimePrincipalScopeData')).record0;
-    const restored = structuredClone(successor);
-    assert.equal(restored.scopeCodes.filter(code => code === 'commerce.digital.bundle.publish').length, 1);
-    restored.scopeCodes.splice(restored.scopeCodes.indexOf('commerce.digital.bundle.publish'), 1);
-    assert.deepEqual(restored, predecessor, 'the principal successor admits only the selected Digital proof permission');
+    assert.equal(instruction.scopeCodes.filter(code => code === 'commerce.digital.bundle.publish').length, 1);
+    assert.equal(new Set(instruction.scopeCodes).size, instruction.scopeCodes.length);
+    assert.equal(instruction.code, 'apiAdmin');
+    assert.equal(instruction.loginId, 'apiAdmin');
 });
 test('every reviewed runtime permission is defined by the selected framework identity graph', () => {
     const profile = require(path.join(frameworkRoot, 'nodics.platform/modules/profile/data/manifest.json')).sections['init-v001'];
-    const requiredModules = new Set(profile.prerequisites.map(reference => reference.moduleName));
+    const selectedReferences = [...profile.prerequisites, ...manifest.sections.nativeRuntimePrincipalScope.prerequisites
+        .filter(reference => reference.moduleName !== 'profile')];
+    const requiredModules = new Set(selectedReferences.map(reference => reference.moduleName));
     const moduleRoots = frameworkModuleRoots(requiredModules);
     assert.equal(moduleRoots.size, requiredModules.size, 'every selected identity owner must be discoverable');
     const catalogue = new Set();
-    for (const reference of profile.prerequisites) {
+    for (const reference of selectedReferences) {
         const moduleRoot = moduleRoots.get(reference.moduleName);
         const manifest = require(path.join(moduleRoot, 'data/manifest.json'));
         const selected = manifest.sections[reference.sectionCode];
@@ -245,6 +179,29 @@ test('runtime assignment initialization is capability-owned, role-scoped and sep
     const runtime = loadRuntime('platformServer', 'kickoffLocal');
     assert.deepEqual(runtime.data.dataReleases.initializationProfiles.nativeRuntimeAuthority.steps,
         [{ dataType: 'init', releaseCodes: ['kickoffCore:nativeRuntimeAssignments'] }]);
+    assert.deepEqual(runtime.backofficeFunctionalModuleActivationData.modules['nodics.commerce'].dataPackages,
+        [{ code: 'store:core-reference', targetModule: 'store', targetServer: 'commerceServer' },
+         { code: 'pricing:administrativeAuthoringPermission', targetModule: 'profile', targetServer: 'platformServer' },
+         { code: 'pricing:administrativePublicationPermission', targetModule: 'profile', targetServer: 'platformServer' }]);
+    assert.deepEqual(runtime.data.dataReleases.contributions.find(row => row.moduleName === 'pricing'),
+        { moduleName: 'pricing', sections: ['administrativeAuthoringPermission', 'administrativePublicationPermission'] });
+    assert(runtime.data.dataReleases.contributions.some(row => row.moduleName === 'product' && row.sections.includes('accessGroups')));
+    const pricingRoot = path.join(frameworkRoot, 'nodics.commerce/modules/baseCommerce/modules/pricing/data');
+    const pricingSection = require(path.join(pricingRoot, 'manifest.json')).sections.administrativeAuthoringPermission;
+    assert.equal(pricingSection.selectionPolicy, 'EXPLICIT');
+    assert.deepEqual(Object.values(require(path.join(pricingRoot, 'init-v001/records/identity/pricingAdministrativeAuthoringPermissionData'))),
+        [{ code: 'commerce.pricing.write', name: 'commerce.pricing.write', active: true, ownerModule: 'pricing' }]);
+    const pricingHeader = require(path.join(pricingRoot, 'init-v001/headers/identity/pricingAdministrativeAuthoringPermissionHeader')).profile.pricingAdministrativeAuthoringPermission;
+    assert.equal(pricingHeader.options.schemaName, 'permission');
+    assert.equal(pricingHeader.options.operation, 'ensureReferenceAll');
+    const publicationSection = require(path.join(pricingRoot, 'manifest.json')).sections.administrativePublicationPermission;
+    assert.equal(publicationSection.selectionPolicy, 'EXPLICIT');
+    assert.equal(publicationSection.version, '0.0.1');
+    assert.deepEqual(Object.values(require(path.join(pricingRoot, 'init-v001/records/identity/pricingAdministrativePublicationPermissionData'))),
+        [{ code: 'commerce.pricing.publish', name: 'commerce.pricing.publish', active: true, ownerModule: 'pricing' }]);
+    const publicationHeader = require(path.join(pricingRoot, 'init-v001/headers/identity/pricingAdministrativePublicationPermissionHeader')).profile.pricingAdministrativePublicationPermission;
+    assert.equal(publicationHeader.options.schemaName, 'permission');
+    assert.equal(publicationHeader.options.operation, 'ensureReferenceAll');
     const platform = require('../envs/kickoffLocal/platformServer/config/properties');
     assert.equal(platform.data, undefined, 'the runtime must not copy release policy or profile definitions');
     const selection = require('../modules/kickoffCore/config/properties').data.dataReleases.types.init.startupProfileSelections;
@@ -270,4 +227,55 @@ test('runtime assignment initialization is capability-owned, role-scoped and sep
         assert(releases.includes(owner + ':specialAccessRoles'), owner);
     }
     assert.equal(demo.circaLocalUnusedRefundExceptionStaffAssignment.selectionPolicy, 'EXPLICIT');
+});
+
+
+test('Local Commerce seller proceeds use the existing Loyalty earning permission and retain all other runtime ceilings', () => {
+    const commerce = recordsByCode['kickoff-local-commerce-runtime-deployment'];
+    assert.equal(commerce.principalCode, 'apiAdmin');
+    assert.equal(commerce.enterpriseCode, 'default');
+    assert.equal(commerce.runtimeScope.environmentCode, 'kickoffLocal');
+    assert(commerce.runtimeScope.modules.includes('loyaltyApi'));
+    assert.deepEqual(commerce.runtimeScope.permissions, permissions.commerceServer);
+    assert.equal(commerce.runtimeScope.permissions.filter(code => code === 'loyalty.rewards.earn').length, 1);
+    assert.deepEqual(records.filter(row => row.runtimeScope.permissions.includes('loyalty.rewards.earn'))
+        .map(row => row.runtimeScope.serverCode).sort(), ['commerceServer', 'wasteServer']);
+    for (const row of records) assert.deepEqual(row.runtimeScope.permissions, permissions[row.runtimeScope.serverCode]);
+    const group = require(path.join(frameworkRoot, 'nodics.platform/modules/profile/data/init-v001/records/identity/profileUserGroupData')).record4;
+    assert(group.permissions.includes('loyalty.rewards.earn'));
+    const catalogue = require(path.join(frameworkRoot, 'nodics.loyalty/modules/loyaltyLedger/data/init-v001/records/identity/loyaltyLedgerPermissionData'));
+    assert(Object.values(catalogue).some(row => row.code === 'loyalty.rewards.earn' && row.ownerModule === 'loyaltyLedger'));
+    const route = require(path.join(frameworkRoot, 'nodics.loyalty/modules/loyaltyApi/src/router/routers')).loyaltyApi.internal.earnRewards;
+    assert.equal(route.key, '/reward-earnings');
+    assert.equal(route.permission, 'loyalty.rewards.earn');
+    assert.deepEqual(route.authTokenTypes, ['service']);
+});
+
+test('Local Commerce carbon transport uses the existing service assignment and exact five owner permissions', () => {
+    const carbonPermissions = ['read', 'reserve', 'release', 'transfer', 'finalize'].map(action => 'carbon.holdings.' + action);
+    const commerce = recordsByCode['kickoff-local-commerce-runtime-deployment'];
+    assert.equal(commerce.principalType, 'service');
+    assert.equal(commerce.principalCode, 'apiAdmin');
+    assert.equal(commerce.runtimeScope.modules.filter(name => name === 'wasteCarbon').length, 1);
+    assert.deepEqual(commerce.runtimeScope.permissions.filter(code => code.startsWith('carbon.')), carbonPermissions);
+    assert.deepEqual(records.filter(row => row.runtimeScope.permissions.some(code => code.startsWith('carbon.')))
+        .map(row => row.code), [commerce.code]);
+    const scope = require('../modules/kickoffCore/data/init-v001/runtime-principal-scope/records/nativeRuntimePrincipalScopeData').record0;
+    assert.deepEqual(scope.scopeCodes.filter(code => code.startsWith('carbon.')), carbonPermissions);
+    assert.equal(scope.code, 'apiAdmin');
+    const runtime = loadRuntime('commerceServer', 'kickoffLocal');
+    assert(runtime.runtimeIdentity.remoteModules.includes('wasteCarbon'));
+    assert(!activeModuleNames(runtime).includes('wasteCarbon'), 'Carbon remains a remote Waste owner');
+});
+
+ test('acquisition refresh analytics is confined to existing Commerce runtime authority with a canonical definition', () => {
+    const permission = 'commerce.promotion.analytics';
+    const commerce = recordsByCode['kickoff-local-commerce-runtime-deployment'];
+    assert.equal(commerce.principalCode, 'apiAdmin');
+    assert.deepEqual(records.filter(row => row.runtimeScope.permissions.includes(permission)).map(row => row.code), [commerce.code]);
+    assert.equal(commerce.runtimeScope.permissions.filter(code => code === permission).length, 1);
+    const scope = require('../modules/kickoffCore/data/init-v001/runtime-principal-scope/records/nativeRuntimePrincipalScopeData').record0;
+    assert.equal(scope.scopeCodes.filter(code => code === permission).length, 1);
+    const catalogue = require(path.join(frameworkRoot, 'nodics.commerce/modules/baseCommerce/modules/promotion/data/init-v001/records/identity/promotionPermissionData'));
+    assert.deepEqual(Object.values(catalogue).filter(row => row.code === permission).map(row => [row.ownerModule, row.active]), [['promotion', true]]);
 });

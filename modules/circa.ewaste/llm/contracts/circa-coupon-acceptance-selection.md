@@ -14,6 +14,13 @@ Product, Variant, Price, PriceBook, Tax, Store and original reviewed policy byte
 `verifyCircaItemCouponSelectionSources()`. Source drift rejects; do not regenerate
 pins or rewrite installed packs merely to pass a checkpoint.
 
+The unreleased v001 catalogue consolidation updates only the executable fixture's
+Product and Variant byte pins after comparing business fields. Campaign, price,
+PriceBook, Tax, Store and approved-policy bytes remain unchanged, as do all 29
+ITEM quantities, their 6280-POINTS total and the separate 50-POINTS refund case.
+Historical execution evidence retains its original pins; this source update is
+not execution approval or permission to replay an installed release.
+
 ```js
 const { createCircaItemCouponJourneySelection } = require('/absolute/kickoff/path/modules/circa.ewaste/test/fixtures/circaItemCouponJourneySelectionFactory.js');
 const selection = createCircaItemCouponJourneySelection({
@@ -69,7 +76,7 @@ context, not fields to send to an API. Do not pass the whole wrapper as selectio
 | Bistro selection | GP-B01..B11, 11 cases; session handle `greenperksBistroOperator` |
 | Either-outlet terms | GP-A01..A06 retain both approved outlets; this reviewed selection uses café only |
 | Separate unused refund | `GP-A01-UNUSED-REFUND`, `CIRCA_COUPON_GP-A01`, `CIRCA_COUPON_GP-A01_SKU`, `CIRCA_COUPON_GP-A01_PROMO`, `50` POINTS |
-| Validity / substitution | 30 days from successful purchase / exact source SKU quantities, no substitutions |
+| Validity / substitution | Fixed through 8 November 2026 end-of-day Asia/Dubai (`2026-11-08T19:59:59.999Z`) / exact source SKU quantities, no substitutions |
 | ITEM budget | `0` monetary budget; not an AED purchase or monetary benefit |
 | Simulator | `LOCAL_SIMULATION`, `SIM:` receipt references, simulated true, deliveryVerified false |
 | Redeemed reversals / monetary qualification | No redeemed reversals executed; monetaryBenefitsQualified false |
@@ -77,7 +84,7 @@ context, not fields to send to an API. Do not pass the whole wrapper as selectio
 Each case in JSON contains its actual stored Product, Variant SKU, Promotion,
 positive decimal-string price, issuer, selected outlet, staff session handle and
 exact `items: [{sku, quantity, unit: 'EACH'}]`. The expected-terms section retains
-the original descriptions, all allowed outlets, 30-day validity, budget and terms.
+the original descriptions, all allowed outlets, approved fixed expiry, budget and terms.
 GP-C09 keeps two cookies; GP-B11 keeps two pasta and two soft drinks. No display
 description is used to infer a delivery SKU or quantity.
 

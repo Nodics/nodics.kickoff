@@ -21,6 +21,9 @@ module.exports = {
         "defaultRewardTypeCode": "points",
         "earningEnabled": true,
         "spendEnabled": true,
+        "transferEnabled": true,
+        "transferRewardTypeCodes": ["points"],
+        "partnerConversionRewardTypeCodes": ["points"],
         "revision": 1,
         "active": true
     }

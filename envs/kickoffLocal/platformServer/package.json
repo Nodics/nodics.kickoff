@@ -51,7 +51,8 @@
         "publish",
         "cms",
         "editorial",
-        "commsApi"
+        "commsApi",
+        "digitalCore"
       ]
     },
     "runtimeTooling": {

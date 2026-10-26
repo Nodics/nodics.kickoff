@@ -1,5 +1,13 @@
 # Commerce Server Agent Contract
 
+Local certificate-coupon acceptance selects Digital's existing acquisition source
+proof for the exact Waste deployment and GREENPERKS_ONLINE merchant only. Keep
+the enablement in the Local COMMERCE role and exact caller coordinates here;
+inherit Digital's role, validation and bounds. This selection does not grant new
+permissions or authorize coupon consumption without the original allocation and
+consideration evidence. Never substitute employee authority or broaden callers
+to recover a failed checkout.
+
 Only this Local consumer selects `enterpriseResolution.runtimeLookup.enabled`.
 Public GREENPERKS_ONLINE placement uses Profile's exact approved runtime/business
 resolver, retaining the default signed deployment identity. This does not grant

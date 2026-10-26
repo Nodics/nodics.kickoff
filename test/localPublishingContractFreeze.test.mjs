@@ -24,6 +24,11 @@ const baselines = require(
 );
 const releases = [
   {
+    pack: "axisDocumentation",
+    file: path.join(frameworkRoot, "nodics.platform/modules/axis/data/manifest.json"),
+    section: "documentation",
+  },
+  {
     pack: "nodicsDocumentation",
     file: path.join(frameworkRoot, "nodics.docs/data/manifest.json"),
     section: "documentation",

@@ -628,13 +628,7 @@ module.exports = {
         },
         applicationUpdates: {
           $config: "replace",
-          value: [
-            {
-              profileCode: "nexusupdate",
-              deliveryProbe: { site: "nexusCorporateSite", path: "/" },
-              marker: "nexus-corporate-1.0.1",
-            },
-          ],
+          value: [],
         },
         rollbackDocumentationProfiles: {
           $config: "replace",
@@ -677,8 +671,6 @@ module.exports = {
           $config: "replace",
           value: [
             "nexus",
-            "nexusupdate",
-            "nexusecosystemrepair",
             "circa",
             "agoraapparel",
             "agoraelectronics",
@@ -721,6 +713,19 @@ module.exports = {
     dataReleases: {
       runtimeRoleProfiles: {
         PLATFORM: {
+          contributions: {
+            $config: "keyed",
+            key: "moduleName",
+            entries: [
+              {
+                moduleName: "pricing",
+                sections: [
+                  "administrativeAuthoringPermission",
+                  "administrativePublicationPermission",
+                ],
+              },
+            ],
+          },
           initializationProfiles: {
             nativeRuntimeAuthority: {
               enabled: true,
@@ -1660,6 +1665,16 @@ module.exports = {
                   code: "store:core-reference",
                   targetModule: "store",
                   targetServer: "commerceServer",
+                },
+                {
+                  code: "pricing:administrativeAuthoringPermission",
+                  targetModule: "profile",
+                  targetServer: "platformServer",
+                },
+                {
+                  code: "pricing:administrativePublicationPermission",
+                  targetModule: "profile",
+                  targetServer: "platformServer",
                 },
               ],
             },

@@ -43,3 +43,11 @@ Profile's default `profileExternalIdentity.maximumAssertionAgeSeconds` is 3600
 (60 minutes). This applies to signed external sign-in proofs, not session
 lifetime; signature and application checks remain enforced. Override this through
 the normal layered configuration if a stricter business policy is required.
+
+The environment selects `apiExposure.runtimeRoleProfiles.PLATFORM.categories.moduleInternal`
+for Local Platform, exposing the existing category for
+private service callbacks, including coupon reminder recipient resolution. This
+category selection preserves each route’s runtime identity, module, permission
+and private-capture checks; it grants no service scope. Framework defaults remain
+disabled and no other deployment is selected by this override. Verify with
+`node --test test/circaCouponRecipientExposureSelection.test.js`.

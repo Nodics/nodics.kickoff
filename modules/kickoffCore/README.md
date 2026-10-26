@@ -5,6 +5,15 @@
 It is activated explicitly by the selected server; the containing `modules/`
 group participates only in structural discovery.
 
+The current unreleased runtime authority baseline lives entirely in
+`data/init-v001`: `runtime-assignments` (section version `0.0.9`) and
+`runtime-principal-scope` (section version `0.0.3`). The manifest pins the current
+Profile identity graph and the assignment-to-scope dependency. No predecessor
+snapshots or retained roots remain. `node --test test/runtimeAssignmentDataPack.test.js`
+from the project root verifies exact reviewed permissions and module ceilings,
+owner operations, source hashes and prerequisite pins. This is source validation,
+not installed authority or permission to replay Init on an existing deployment.
+
 Commerce acceptance selects exact approved publication evidence through
 `NODICS_AGORA_<DOMAIN>_<OWNER>_PUBLICATION_{CODE,ROOT_CODE,SOURCE_VERSION,TARGET_VERSION}`
 bindings. All four default to empty and fail closed. Read the owning contract in

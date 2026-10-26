@@ -81,7 +81,7 @@ module.exports = {
         },
         axisdocs: {
           contentPackCode: "axisDocumentation",
-          releaseVersion: "0.0.1",
+          releaseVersion: "0.0.2",
           sourceVersion: "0",
         },
       },

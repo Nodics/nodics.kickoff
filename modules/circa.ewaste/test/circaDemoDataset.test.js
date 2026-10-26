@@ -94,9 +94,15 @@ test("predefined customer and staff personas retain distinct active identities a
   const fixture = require(path.join(frameworkRoot,
     "nodics.platform/modules/profile/test/helpers/identityCatalogueFixture"));
   const participantGroups = [
-    "nodics.loyalty/modules/loyaltyWallet/data/init-v004/records/identity/loyaltyParticipantUserGroupData",
-    "nodics.waste/modules/wasteCarbon/data/init-v003/records/identity/wasteCarbonParticipantUserGroupData",
-    "nodics.waste/modules/wasteReward/data/init-v002/records/identity/wasteMaterialValueParticipantUserGroupData",
+    "nodics.loyalty/modules/loyaltyWallet/data/init-v001/records/identity/loyaltyParticipantUserGroupData",
+    "nodics.loyalty/modules/loyaltyWallet/data/init-v001/records/identity/loyaltyEnterpriseParticipationGroupData",
+    "nodics.loyalty/modules/loyaltyWallet/data/init-v001/records/identity/loyaltyWalletParticipantReadGroupData",
+    "nodics.loyalty/modules/loyaltyWallet/data/init-v001/records/identity/loyaltyWalletParticipantTransactionGroupData",
+    "nodics.commerce/modules/digitalCommerce/modules/digitalCore/data/init-v001/records/identity/digitalCoreParticipantReadGroupData",
+    "nodics.commerce/modules/digitalCommerce/modules/digitalCore/data/init-v001/records/identity/digitalCoreParticipantTransactionGroupData",
+    "nodics.commerce/modules/digitalCommerce/modules/digitalCore/data/init-v001/records/identity/digitalEnterpriseParticipationGroupData",
+    "nodics.waste/modules/wasteCarbon/data/init-v001/records/identity/wasteCarbonParticipantUserGroupData",
+    "nodics.waste/modules/wasteReward/data/init-v001/records/identity/wasteMaterialValueParticipantUserGroupData",
   ].flatMap(file => Object.values(require(path.join(frameworkRoot, file))));
   const targets = Object.fromEntries(fixture.records("UserGroup").concat(participantGroups).map(row => [row.code, row]));
   const baseRoles = Object.values(require(path.join(frameworkRoot,
@@ -221,18 +227,24 @@ test("Local selected role dependencies are fresh and ordered while refund except
   const order = initialization.preparationGroups(profile, {}, steps.filter(step => step.phase === "BEFORE_PUBLICATION"))
     .flatMap(group => group.steps.map(step => step.code));
   const plan = require("../config/setup-observation/circa-native-reviewed.json");
-  assert.equal(plan.profileDigest, observer.digest(profile));
   const wasteData = path.join(frameworkRoot, "nodics.waste/modules/wasteCore/data");
   const wasteManifest = require(path.join(wasteData, "manifest.json"));
   const baseRoleFile = "init-v001/records/identity/wasteCoreUserGroupData.js";
   assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(wasteData, baseRoleFile))).digest("hex"),
     wasteManifest.sections.accessGroups.files[baseRoleFile], "Waste-owned base-role dependency must remain fresh");
+  const roleDefinitions = require("../config/properties").backofficeApplicationInitialization.profiles.circa
+    .dataPackages.value.filter(pack => pack.order === 90).map(pack => pack.code);
   const prerequisites = ["product:accessGroups", "publish:accessGroups",
     "promotion:accessGroups", "order:accessGroups",
     "circa.ewaste:profile", "circa.ewaste:operations", "circa.ewaste:circaCommerceStaffAssignments",
     "circa.ewaste:circaMerchantOutletAccess", "loyaltyWallet:specialAccessRoles",
     "circa.ewaste:circaLocalDemoCreditStaffAssignment", "inventory:specialAccessRoles",
-    "circa.ewaste:circaLocalOpeningStaffAssignments"];
+    "circa.ewaste:circaLocalOpeningStaffAssignments",
+    ...roleDefinitions];
+  assert.equal(new Set(steps.map(step => step.code)).size, steps.length, "selected stages must be unique");
+  for (const code of prerequisites)
+    assert.equal(steps.filter(step => step.code === code).length, 1, `current profile must retain ${code}`);
+  assert.notEqual(plan.profileDigest, observer.digest(profile), "retained observation plan cannot qualify unadopted role source changes");
   for (const code of prerequisites) {
     const selected = steps.filter(step => step.code === code);
     assert.equal(selected.length, 1, code);
@@ -242,16 +254,25 @@ test("Local selected role dependencies are fresh and ordered while refund except
     assert.equal(step.phase, "BEFORE_PUBLICATION", code);
     assert.equal(step.targetRuntimeRole, "PLATFORM", code);
     const stage = plan.stages.find(stage => stage.code === code);
-    assert(stage, code);
-    assert.deepEqual(stage.descriptor, observer.stepIdentity(step));
+    if (stage) assert.deepEqual(stage.descriptor, observer.stepIdentity(step));
+    else assert(roleDefinitions.includes(code), "only new role definitions await plan adoption");
     const [moduleName, sectionCode] = code.split(":");
-    const owners = {"loyaltyWallet":"nodics.loyalty/modules/loyaltyWallet","import":"nodics.foundation/modules/nData/nImport/import","inventory":"nodics.commerce/modules/baseCommerce/modules/inventory","order":"nodics.commerce/modules/checkout/modules/order","product":"nodics.commerce/modules/baseCommerce/modules/product","publish":"nodics.foundation/modules/nPublish","promotion":"nodics.commerce/modules/baseCommerce/modules/promotion"};
+    const owners = {"loyaltyWallet":"nodics.loyalty/modules/loyaltyWallet","import":"nodics.foundation/modules/nData/nImport/import","inventory":"nodics.commerce/modules/baseCommerce/modules/inventory","order":"nodics.commerce/modules/checkout/modules/order","product":"nodics.commerce/modules/baseCommerce/modules/product","publish":"nodics.foundation/modules/nPublish","promotion":"nodics.commerce/modules/baseCommerce/modules/promotion",
+      cart: "nodics.commerce/modules/checkout/modules/cart",
+      checkoutCore: "nodics.commerce/modules/checkout/modules/checkoutCore",
+      digitalCore: "nodics.commerce/modules/digitalCommerce/modules/digitalCore",
+      bidding: "nodics.commerce/modules/bidding" };
     const directory = moduleName === "circa.ewaste" ? root : path.join(frameworkRoot, owners[moduleName], "data");
     const releaseManifest = require(path.join(directory, "manifest.json"));
     const section = releaseManifest.sections[sectionCode];
     const release = importer.inspectManifest({ name: moduleName }, section.dataType,
       path.join(directory, "manifest.json"), section, sectionCode, true);
-    assert.equal(stage.release.checksum, release.checksum, code);
+    const reviewedChange = require("./fixtures/circaUnreleasedObservationSourceDifferences.json").stages[code];
+    if (stage && reviewedChange) {
+      assert.equal(stage.release.checksum, reviewedChange.retained, code + ": historical plan remains sealed");
+      assert.equal(release.checksum, reviewedChange.current, code + ": exact reviewed source baseline");
+      assert.notEqual(stage.release.checksum, release.checksum, "retained receipt does not authorize changed baseline replay");
+    } else if (stage) assert.equal(stage.release.checksum, release.checksum, code);
     for (const [file, checksum] of Object.entries(section.files))
       assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(directory, file))).digest("hex"), checksum, file);
   }
@@ -263,6 +284,10 @@ test("Local selected role dependencies are fresh and ordered while refund except
     before("circa.ewaste:operations", `circa.ewaste:${staff}`);
   before("loyaltyWallet:specialAccessRoles", "circa.ewaste:circaLocalDemoCreditStaffAssignment");
   before("inventory:specialAccessRoles", "circa.ewaste:circaLocalOpeningStaffAssignments");
+  for (const definition of roleDefinitions) {
+    before(definition, "circa.ewaste:circaCommerceStaffAssignments");
+    assert.equal(steps.find(step => step.code === definition).dataType, "init");
+  }
   for (const sectionCode of ["circaLocalUnusedRefundExceptionStaffAssignment"]) {
     const code = `circa.ewaste:${sectionCode}`;
     assert(!steps.some(step => step.code === code), `${code}: not automatically selected`);
@@ -363,7 +388,7 @@ test("35 new offers retain 12 cafe, 12 bistro, 11 either-outlet terms and origin
     );
     assert.equal(price.currency, "POINTS");
     assert.equal(Number(price.unitAmount), localized.attributes.rewardPrice);
-    assert.equal(promotion.purchasedCouponPolicy.validityDays, 30);
+    assert.deepEqual(promotion.couponOffer.expiry, { mode: "FIXED", at: "2026-11-08T19:59:59.999Z" });
     assert.equal(
       promotion.sellerAuthorizations,
       undefined,

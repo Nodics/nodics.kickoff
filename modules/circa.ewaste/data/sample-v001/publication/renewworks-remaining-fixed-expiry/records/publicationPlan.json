@@ -1,0 +1,43 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108_PUB",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "sourceVersion": "720dda66d1a8e0aa0e614b38926ed44b25d8cb8e43110f7004af6306f299cccc",
+      "input": {
+        "publicationCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108_PUB",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+            "versionId": 3
+          }
+        ]
+      }
+    },
+    {
+      "code": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108_PUB",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "sourceVersion": "fe1bb96498dbbf1782a5e5909ca85fe728cda7a9f0bf9dc69624a490311a28f3",
+      "input": {
+        "publicationCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108_PUB",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+            "versionId": 3
+          }
+        ]
+      }
+    }
+  ]
+}

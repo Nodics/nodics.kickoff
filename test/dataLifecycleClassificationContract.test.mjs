@@ -55,6 +55,13 @@ assert.strictEqual(processServerInit.owningDomain, 'editorial');
 assert.deepStrictEqual(Object.keys(processServerInit.files || {}), [
   'init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js'
 ]);
-assert.strictEqual(sections, 4,
-  'Kickoff project documentation, runtime principal scope, runtime assignments and Process lifecycle inventory drifted');
+const reminder = processServerManifest.sections.circaCouponReminder;
+assert.strictEqual(reminder.installer, 'PROCESS_DEFINITION');
+assert.strictEqual(reminder.destinationRole, 'PROCESS');
+assert.strictEqual(reminder.sourceRoot, 'init-v001');
+assert.deepStrictEqual(Object.keys(reminder.files), [
+  'init-v001/records/process/circaCouponReminderDefinitionData.js'
+]);
+assert.strictEqual(sections, 5,
+  'Kickoff documentation, runtime authority and Editorial/reminder Process lifecycle inventory drifted');
 console.log('Kickoff data lifecycle classification contract validated');

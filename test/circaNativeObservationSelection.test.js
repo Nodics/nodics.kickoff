@@ -69,15 +69,15 @@ test("eight native receivers adopt the same confined exact plan and unchanged de
 test("reviewed Platform assignment fixture preserves the exact observer grant without configuration authority", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal");
   const permissions = runtimePermissions.platformServer;
-  assert.deepEqual(permissions, [...beforePermissions, "publish.setup.observe"]);
+  assert.deepEqual(permissions, [...beforePermissions, "publish.setup.observe", "commerce.digital.notification.read"]);
   assert.deepEqual(platform.publish.setup.observation.profilePlans, { circa: planCode });
 });
 
-test("Circa identity authority is a separate explicit fresh-install prerequisite, leaving the reviewed demo unchanged", () => {
+test("Circa identity authority remains separate while the role successor requires observation review", () => {
   const runtime = loadRuntime("platformServer", "kickoffLocal");
   const config = runtime.backofficeApplicationInitialization;
   const profile = { ...config.profiles.circa, target: { ...config.target, ...config.profiles.circa.target } };
-  assert.equal(observer.digest(profile), plan.profileDigest);
+  assert.notEqual(observer.digest(profile), plan.profileDigest);
   assert(!observer.configuredSteps(profile).some(step => step.code === "circa.ewaste:circaEnterpriseRoles"));
   const identity = runtime.data.dataReleases.initializationProfiles.circaIdentityAuthority;
   assert.equal(identity.enabled, true);
@@ -86,39 +86,65 @@ test("Circa identity authority is a separate explicit fresh-install prerequisite
   assert.equal(loadRuntime("wasteServer", "kickoffLocal").data.dataReleases.initializationProfiles.circaIdentityAuthority, undefined);
 });
 
-test("reviewed plan exactly matches the full current Platform profile without remote profile copies", () => {
+test("retained observation plan cannot qualify the changed role setup profile", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal");
   const config = platform.backofficeApplicationInitialization, raw = config.profiles.circa;
   const profile = { ...raw, target: { ...config.target, ...raw.target } };
-  assert.equal(plan.profileDigest, observer.digest(profile));
+  assert.notEqual(plan.profileDigest, observer.digest(profile));
   assert.equal(plan.tenant, platform.defaultTenant);
   assert.equal(plan.baselineCode, profile.baselineCode);
   const steps = observer.configuredSteps(profile);
-  assert.equal(plan.stages.length, steps.length);
-  for (const step of steps) {
-    const stage = plan.stages.find(item => item.code === step.code);
-    assert(stage);
-    assert.equal(observer.digest(stage.descriptor), observer.digest(observer.stepIdentity(step)));
-    if (step.operatorEnterpriseCode) assert.equal(stage.enterpriseCode, step.operatorEnterpriseCode);
-    assert(receivers.includes(stage.server));
-    assert.equal(stage.descriptor.targetRuntimeRole, loadRuntime(stage.server, "kickoffLocal").runtimeRole.code);
-    if (stage.descriptor.type === "DATA_RELEASE") {
-      assert(stage.release && stage.release.declaredFiles.length);
-      assert.match(stage.release.checksum, /^[a-f0-9]{64}$/);
-    }
-    if (stage.descriptor.type === "GOVERNED_PUBLICATIONS") {
-      assert.deepEqual(stage.online, { server: "commerceServer", runtimeRole: "COMMERCE" });
-      assert.equal(stage.publications, undefined, "no copied final lifecycle claims");
-    }
+  assert(!steps.some(step => /circaRetailParticipant/.test(step.code)));
+  assert(plan.stages.some(stage => /circaRetailParticipant/.test(stage.code)), "historical plan is not rewritten");
+  for (const code of ["digitalCore:enterpriseParticipationAccess", "loyaltyWallet:enterpriseParticipationAccess"]) {
+    assert(steps.some(step => step.code === code));
+    assert(!plan.stages.some(stage => stage.code === code));
   }
   assert.equal(plan.baseline.server, "wcmsStagedServer");
-  const media = plan.stages.find(stage => stage.descriptor.type === "MEDIA_ASSET_MANIFEST");
-  assert.equal(media.assets.length, 18);
-  assert.equal(media.enterpriseCode, "default");
-  for (const server of ["commerceServer", "commerceStagedServer", "loyaltyServer", "locationServer", "wasteServer"]) {
-    const remote = loadRuntime(server, "kickoffLocal").backofficeApplicationInitialization.profiles.circa;
-    assert.notDeepEqual(remote, raw);
+  assert.equal(plan.stages.find(stage => stage.descriptor.type === "MEDIA_ASSET_MANIFEST").assets.length,18);
+});
+
+test("complete role setup is inherited once and keeps definitions before additive assignment", () => {
+  const local = loadRuntime("platformServer", "kickoffLocal");
+  const profile = local.backofficeApplicationInitialization.profiles.circa;
+  const overlay = require("../envs/kickoffLocal/platformServer/config/properties")
+    .backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM.profiles.circa;
+  assert.equal(overlay.dataPackages, undefined);
+  const backoffice = require(path.join(frameworkRoot,
+    "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
+  const steps = backoffice.preparationSteps(profile);
+  assert.equal(new Set(steps.map(step=>step.code)).size,steps.length);
+  const identity = steps.find(step => step.code === "circa.ewaste:operations");
+  const assignment = steps.find(step => step.code === "circa.ewaste:circaCommerceStaffAssignments");
+  assert(identity.order < assignment.order);
+  const definitions = require("../modules/circa.ewaste/config/properties")
+    .backofficeApplicationInitialization.profiles.circa.dataPackages.value.filter(pack=>pack.order===90);
+  for (const definition of definitions) {
+    const selected = steps.filter(step=>step.code===definition.code);
+    assert.equal(selected.length,1);
+    assert.equal(selected[0].dataType,"init");
+    assert.equal(selected[0].required,true);
+    assert(selected[0].order < assignment.order);
   }
+  assert(!steps.some(step=>/circaRetailParticipant|circaRetailPromotionDraft/.test(step.code)));
+});
+test("Local catalogue publication selects the consolidated baseline without correction stages", () => {
+  const profile = loadRuntime("platformServer", "kickoffLocal").backofficeApplicationInitialization.profiles.circa;
+  const steps = observer.configuredSteps(profile);
+  const catalogue = steps.filter(step => step.code === "circa.ewaste:circaCataloguePublicationPlan");
+  assert.equal(catalogue.length, 1);
+  assert.equal(catalogue[0].type, "GOVERNED_PUBLICATIONS");
+  assert.equal(catalogue[0].phase, "AFTER_PUBLICATION");
+  assert.equal(catalogue[0].operatorEnterpriseCode, "GREENPERKS_ONLINE");
+  assert.deepEqual(catalogue[0].publicationPlan,
+    require("../modules/circa.ewaste/data/sample-v001/publication/catalogue/records/publicationPlan.json"));
+  assert(steps.some(step => step.code === "circa.ewaste:commerce"));
+  const removed = ["circaAssetClassification", "circaAssetClassificationPublicationPlan",
+    "circaCatalogueCurrentPublicationPlan", "circaProductMediaReferences",
+    "circaProductMediaPublicationPlan", "circaCatalogueMediaCurrentPublicationPlan"];
+  for (const code of removed) assert(!steps.some(step => step.code === `circa.ewaste:${code}`));
+  for (const issuer of ["GreenPerks", "RenewWorks", "LoopCycle"])
+    assert(steps.some(step => step.code === `circa.ewaste:circa${issuer}PublicationPlan`));
 });
 
 test("native Platform import timeout is a deployment selection outside the sealed profile", () => {
@@ -126,7 +152,9 @@ test("native Platform import timeout is a deployment selection outside the seale
   assert.equal(native.dataReleaseTimeoutMs, 360000);
   assert.equal(native.profiles.circa.dataReleaseTimeoutMs, undefined);
   const profile = { ...native.profiles.circa, target: { ...native.target, ...native.profiles.circa.target } };
-  assert.equal(observer.digest(profile), plan.profileDigest);
+  const digest = observer.digest(profile);
+  native.dataReleaseTimeoutMs = 120000;
+  assert.equal(observer.digest(profile), digest, "transport timeout cannot alter the profile digest");
   assert.equal(loadRuntime("commerceServer", "kickoffLocal").backofficeApplicationInitialization.dataReleaseTimeoutMs, undefined);
   assert.equal(loadRuntime("platformServer", "kickoffDockerLocal").backofficeApplicationInitialization.dataReleaseTimeoutMs, 120000);
 });

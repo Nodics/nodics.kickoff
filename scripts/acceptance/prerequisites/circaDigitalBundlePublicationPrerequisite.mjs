@@ -74,12 +74,6 @@ export async function inspectCircaDigitalBundlePublicationPrerequisite({ project
     realizedCarbonRecordCount: realizedCarbonRecords.length,
   });
 
-  if (!certificateRecords.length) {
-    return Object.freeze({ ready: false, reasonCode: "CIRCA_CERTIFICATE_OWNER_RECORD_REQUIRED", evidence });
-  }
-  if (!realizedCarbonRecords.length) {
-    return Object.freeze({ ready: false, reasonCode: "CIRCA_REALIZED_CARBON_OWNER_RECORD_REQUIRED", evidence });
-  }
   if (!selection) {
     return Object.freeze({ ready: false, reasonCode: "CIRCA_DIGITAL_BUNDLE_PUBLICATION_PROFILE_REQUIRED", evidence });
   }

@@ -22,7 +22,8 @@
     "publish.lifecycle.validate",
     "publish.lifecycle.requestApproval",
     "commerce.product.publish",
-    "publish.setup.observe"
+    "publish.setup.observe",
+    "commerce.digital.notification.read"
   ],
   "processServer": [
     "auth.internal.token.read",
@@ -44,9 +45,11 @@
     "publish.lifecycle.view",
     "publish.lifecycle.validate",
     "publish.lifecycle.requestApproval",
-    "commerce.product.publish"
+    "commerce.product.publish",
+    "commerce.digital.notification.read"
   ],
   "commerceServer": [
+    "commerce.promotion.analytics",
     "auth.internal.token.read",
     "auth.internal.token.read.anyTenant",
     "location.location.read",
@@ -67,6 +70,7 @@
     "publish.lifecycle.validate",
     "publish.lifecycle.requestApproval",
     "commerce.product.publish",
+    "loyalty.rewards.earn",
     "loyalty.rewards.reserve",
     "loyalty.rewards.capture",
     "loyalty.rewards.release",
@@ -75,7 +79,14 @@
     "waste.asset.sale.transfer",
     "commerce.pricing.merchant.evidence",
     "commerce.product.read",
-    "commerce.store.read"
+    "commerce.store.read",
+    "carbon.holdings.read",
+    "carbon.holdings.reserve",
+    "carbon.holdings.release",
+    "carbon.holdings.transfer",
+    "carbon.holdings.finalize",
+    "profile.commerce.notification.recipient.resolve",
+    "communication.request"
   ],
   "commerceStagedServer": [
     "auth.internal.token.read",
@@ -241,6 +252,7 @@
     "publish.lifecycle.validate",
     "publish.lifecycle.requestApproval",
     "commerce.product.publish",
-    "communication.request"
+    "communication.request",
+    "commerce.digital.notification.read"
   ]
 }

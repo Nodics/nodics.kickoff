@@ -1,0 +1,62 @@
+{
+  "Page": [
+    "kickoffDocsPagekickoffConfigurationInheritance",
+    "kickoffDocsPagekickoffCustomization",
+    "kickoffDocsPagekickoffDeploymentQualification",
+    "kickoffDocsPagekickoffFunctionalJourneys",
+    "kickoffDocsPagekickoffLocalAcceptance",
+    "kickoffDocsPagekickoffLocalPublishingOperations",
+    "kickoffDocsPagekickoffLocalRuntime",
+    "kickoffDocsPagekickoffLocalSetupToLive",
+    "kickoffDocsPagekickoffOverview"
+  ],
+  "Route": [
+    "kickoffDocsRoutekickoffConfigurationInheritance",
+    "kickoffDocsRoutekickoffCustomization",
+    "kickoffDocsRoutekickoffDeploymentQualification",
+    "kickoffDocsRoutekickoffFunctionalJourneys",
+    "kickoffDocsRoutekickoffLocalAcceptance",
+    "kickoffDocsRoutekickoffLocalPublishingOperations",
+    "kickoffDocsRoutekickoffLocalRuntime",
+    "kickoffDocsRoutekickoffLocalSetupToLive",
+    "kickoffDocsRoutekickoffOverview"
+  ],
+  "Component": [
+    "kickoffDocsComponentkickoffConfigurationInheritance",
+    "kickoffDocsComponentkickoffCustomization",
+    "kickoffDocsComponentkickoffDeploymentQualification",
+    "kickoffDocsComponentkickoffFunctionalJourneys",
+    "kickoffDocsComponentkickoffLocalAcceptance",
+    "kickoffDocsComponentkickoffLocalPublishingOperations",
+    "kickoffDocsComponentkickoffLocalRuntime",
+    "kickoffDocsComponentkickoffLocalSetupToLive",
+    "kickoffDocsComponentkickoffOverview",
+    "kickoffDocumentationNavigation"
+  ],
+  "Media": [
+    "kickoffDocsImage_2e4c1fe55087470f1bf8e91d",
+    "kickoffDocsImage_36bc205dd8d49920aa3c29a0",
+    "kickoffDocsImage_7073a2b01464d7e66b7356f4",
+    "kickoffDocsImage_71b7abc25764fc9c4232184a",
+    "kickoffDocsImage_832f1b8a4701817190c6b95f",
+    "kickoffDocsImage_852c731f7d316d83dc30316c",
+    "kickoffDocsImage_867d42f0ffe9c29ed8421b5c",
+    "kickoffDocsImage_cbf9b854bea1e3c7db786b66",
+    "kickoffDocsImage_d70850a2699ec18d2b8f54b6",
+    "kickoffDocsImage_db084e3fca2b48dd161b665e",
+    "kickoffDocsImage_edc62b048e82c253de2d9701",
+    "kickoffDocsImage_ef0282d59f58eab4596b6ebb",
+    "kickoffDocsImage_ef9610558e4e57197d456639"
+  ],
+  "PageMetadata": [
+    "kickoffDocsMetadatakickoffConfigurationInheritance",
+    "kickoffDocsMetadatakickoffCustomization",
+    "kickoffDocsMetadatakickoffDeploymentQualification",
+    "kickoffDocsMetadatakickoffFunctionalJourneys",
+    "kickoffDocsMetadatakickoffLocalAcceptance",
+    "kickoffDocsMetadatakickoffLocalPublishingOperations",
+    "kickoffDocsMetadatakickoffLocalRuntime",
+    "kickoffDocsMetadatakickoffLocalSetupToLive",
+    "kickoffDocsMetadatakickoffOverview"
+  ]
+}

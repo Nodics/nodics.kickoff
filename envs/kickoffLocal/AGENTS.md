@@ -40,10 +40,13 @@ in `test/projectAcceptanceFixtures.test.js`, including Circa Store separation,
 inactive-domain exclusion and Docker isolation. Stale test expectations must not
 change deployment selections or imply installed publication acceptance.
 
-Circa's native Promotion selection contains all 38 exact roots from the three
-reviewed issuer publication plans, under `circaMainStore` only. Keep the source
-equality assertion; this selection permits delivery lookup, not issuer consent,
-budget funding, issuance or provider qualification.
+Circa's native Promotion selection preserves the 70 GreenPerks roots (35 baseline
+and 35 fixed-expiry) and replaces only the three legacy RenewWorks/LoopCycle roots
+with their qualified `_FIXED20261108` successors under `circaMainStore` only.
+Keep exact source/rollout assertions and Docker isolation. The new instruction
+packs remain explicitly selected; fresh baseline initialization does not create
+their separately authored policies. Selection permits delivery lookup, not issuer
+consent, budget admission, issuance or provider qualification.
 
 Native Local explicitly selects `promotion.merchantBenefits.itemEvidenceMode:
 SIMULATION` with `DefaultFulfillmentItemSimulationService` and the
@@ -52,3 +55,32 @@ approved demo simulation, not authenticated delivery or used-benefit
 reversals. Admission uses the existing explicit environment allowlist rather
 than a hardcoded environment class. Docker and framework defaults remain off. This selection
 does not qualify Store scopes, issuer consent, installed persistence or publication.
+
+# Local Communication selection
+
+Communication source trust, selected domain templates and Local loopback eligibility
+belong together in `communication.runtimeRoleProfiles.ENGAGEMENT`. Preserve the
+composition-selected employee-mail source when selecting Digital reminders; verify
+the effective role projection rather than relying on a server-level array that a
+later contribution can replace. Framework trust defaults remain unconfigured.
+
+# Local Pricing row delivery
+
+Local COMMERCE explicitly opts into Pricing delivery.rowReleases for its existing
+exact Store/book selections. Rows are discovered beneath those selected books;
+never append row codes to book roots or enable framework/Docker defaults. This
+consumes existing approved publications, not a new publish or issuance command.
+
+Local Bidding's `circaMainStore` merchant must match the canonical Circa Store
+`GREENPERKS_ONLINE`. Keep the signed Retail buyer and participant Enterprise
+separate from merchant placement; Pricing's reader-scope guard remains mandatory.
+This Local selection does not change Docker, framework defaults, other Stores,
+installed receipts or permissions. Preserve the resolved mapping regression in
+`test/commerceOwnershipEvidenceAdoption.test.js`.
+
+Local Digital coupon reminders override the Framework connection alias
+`communication` with the installed `engagement` endpoint in the Commerce runtime.
+The generic definition/default remains in Digital Core. Keep this Local endpoint
+selection independent of recipient, identity, template and Communication trust
+policy; verify the selected alias exists in the effective topology with the
+focused connection-selection regression in `test/circaCouponReminderSelection.test.js`.

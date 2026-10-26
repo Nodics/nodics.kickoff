@@ -52,7 +52,11 @@ test("nine explicit portable additions retain current payload hashes and separat
     assert.deepEqual(section.environmentScope, ["ALL"]);
   }
   assert.equal(claimed.size, 33);
-  assert.equal(sha(fs.readFileSync(path.join(__dirname, "fixtures/circaMonetaryOutletProposal.json"))), selection.approval.proposalSha256);
+  const approvedBytes = fs.readFileSync(path.join(__dirname, "fixtures/circaMonetaryOutletProposalApproved20261009.json"));
+  assert.equal(sha(approvedBytes), selection.approval.proposalSha256, "Retained human approval binds the original bytes");
+  const approved = JSON.parse(approvedBytes);
+  assert.deepEqual({ ...proposal, sourceTerms: { ...proposal.sourceTerms, sha256: approved.sourceTerms.sha256 } }, approved,
+    "Only the explicit current source-byte reference changed; all approved business terms and approval evidence remain exact");
   assert.equal(selection.approval.independentOwnerGatesWaived, false);
   assert.equal(selection.approval.operationalAuthority, false);
 });
@@ -270,7 +274,7 @@ test("all nine monetary cases price the actual new source goods through the exac
 });
 
 test("native fresh setup exposes all goods and bounded role stages with the current reviewed observation", t => {
-  const savedGlobals = { CONFIG: global.CONFIG };
+  const savedGlobals = { CONFIG: global.CONFIG, SERVICE: global.SERVICE, CLASSES: global.CLASSES };
   t.after(() => Object.assign(global, savedGlobals));
   const runtime = loadRuntime("platformServer", "kickoffLocal");
   const initialization = require(path.join(frameworkRoot,
@@ -283,9 +287,24 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
   const profile = { ...config.profiles.circa, target: { ...config.target, ...config.profiles.circa.target } };
   const steps = initialization.preparationSteps(profile);
   const publications = steps.filter(step => step.type === "GOVERNED_PUBLICATIONS");
-  assert.equal(publications.length, 8);
-  assert.equal(publications.filter(step => step.required).length, 7);
-  assert.equal(publications.filter(step => step.required).flatMap(step => step.publicationPlan.items).length, 98);
+  const expectedPublications = [
+    ["circaCataloguePublicationPlan", "GREENPERKS_ONLINE", 46],
+    ["circaGreenPerksPublicationPlan", "GREENPERKS_RETAIL", 35],
+    ["circaRenewWorksPublicationPlan", "RENEWWORKS_REPAIR_REUSE", 2],
+    ["circaLoopCyclePublicationPlan", "LOOPCYCLE_RECYCLING", 1],
+    ["circaGreenPerksOutletPublicationPlan", "GREENPERKS_RETAIL", 6],
+    ["circaRenewWorksOutletPublicationPlan", "RENEWWORKS_REPAIR_REUSE", 4],
+    ["circaLoopCycleOutletPublicationPlan", "LOOPCYCLE_RECYCLING", 4],
+  ];
+  assert.deepEqual(publications.map(step => step.code).sort(),
+    expectedPublications.map(([code]) => "circa.ewaste:" + code).sort());
+  for (const [code, enterprise, roots] of expectedPublications) {
+    const step = publications.find(step => step.code === "circa.ewaste:" + code);
+    assert.equal(step.required, true, code);
+    assert.equal(step.phase, "AFTER_PUBLICATION", code);
+    assert.equal(step.operatorEnterpriseCode, enterprise, code);
+    assert.equal(step.publicationPlan.items.length, roots, code);
+  }
   const groups = initialization.preparationGroups(profile, {}, steps.filter(step => step.phase === "BEFORE_PUBLICATION"));
   const order = groups.flatMap(group => group.steps.map(step => step.code));
   const predecessor = require("../config/setup-observation/history/circa-native-reviewed-revision-3.json");
@@ -293,9 +312,10 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
   const plan = require("../config/setup-observation/circa-native-reviewed.json");
   assert.equal(predecessor.revision, 3);
   assert.equal(previousObservation.revision, 7);
-  assert.equal(plan.revision, 16);
+  assert.equal(plan.revision, runtime.publish.setup.observation.plans[plan.code].revision);
+  assert(plan.revision > previousObservation.revision);
   const retained = require("../config/setup-observation/history/circa-native-reviewed-revision-4.json");
-  assert.equal(plan.profileDigest, observer.digest(profile));
+  assert.notEqual(plan.profileDigest, observer.digest(profile), "Retained observation cannot qualify the changed baseline");
   const corrected = new Set(proposal.issuerPacks.map(pack => "circa.ewaste:" + pack.commerceSection));
   for (const original of predecessor.stages) {
     const current = retained.stages.find(stage => stage.code === original.code);
@@ -307,6 +327,11 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
     }
   }
   global.CONFIG = { get: key => runtime[key] };
+  global.CLASSES = { NodicsError: class extends Error { constructor(code) { super(code); this.code = code; } } };
+  global.SERVICE = { DefaultPublicationSetupObservationService: { ...observer,
+    resolvePlan: () => ({ plan, reference: { moduleName: profile.owner } }) } };
+  assert.throws(() => initialization.setupObservationPlan(profile, { tenant: runtime.defaultTenant }),
+    { code: "ERR_BOF_00081" }, "Real BackOffice refuses the historical profile before any owner dispatch");
   for (const code of [...sectionCodes, ...coordinatedRoleSections, "circaLocalDemoCredit"]) {
     const releaseCode = "circa.ewaste:" + code;
     const step = steps.find(step => step.code === releaseCode);
@@ -318,7 +343,12 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
     if (step.type !== "DATA_RELEASE") continue;
     const actual = imports.inspectManifest({ name: "circa.ewaste", index: "3100.90" }, "sample",
       path.join(dataRoot, "manifest.json"), manifest.sections[code], code, true);
-    assert.equal(stage.release.checksum, actual.checksum);
+    const reviewedChange = require("./fixtures/circaUnreleasedObservationSourceDifferences.json").stages[releaseCode];
+    if (reviewedChange) {
+      assert.equal(stage.release.checksum, reviewedChange.retained);
+      assert.equal(actual.checksum, reviewedChange.current);
+      assert.notEqual(stage.release.checksum, actual.checksum);
+    } else assert.equal(stage.release.checksum, actual.checksum);
     assert.deepEqual(stage.release.declaredFiles, actual.declaredFiles);
     assert.deepEqual(actual.declaredFiles, Object.keys(manifest.sections[code].files).sort(), "No sibling issuer file may expand into this release");
   }

@@ -1,0 +1,44 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_E07_CERTIFICATES_20261025_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_E07_CERTIFICATES_20261025_PROMO",
+      "policyFingerprint": "79be476374a71ff47880e5061171666b8c16799d42018354263479dead248b41",
+      "commandReference": "opening-CIRCA_E07_CERTIFICATES_20261025_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaE07Budget",
+        "version": "0.0.1",
+        "checksum": "7e5e21c14aeadae5bb60b53fc603cb12571fa6eaccc96be7e27ab713deba72e9"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_E07_BOTH_20261025_PROMO",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_E07_BOTH_20261025_PROMO",
+      "policyFingerprint": "1c3d800f58a3332f1fc3e72e6c0332647f89cd6c50074d316250a2064c5eb47d",
+      "commandReference": "opening-CIRCA_E07_BOTH_20261025_PROMO",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaE07Budget",
+        "version": "0.0.1",
+        "checksum": "7e5e21c14aeadae5bb60b53fc603cb12571fa6eaccc96be7e27ab713deba72e9"
+      }
+    }
+  ],
+  "couponBatches": [
+    {
+      "promotionCode": "CIRCA_E07_CERTIFICATES_20261025_PROMO",
+      "batchCode": "CIRCA_E07_CERTIFICATES_20261025_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_E07_CERTIFICATES_20261025_PROMO"
+    },
+    {
+      "promotionCode": "CIRCA_E07_BOTH_20261025_PROMO",
+      "batchCode": "CIRCA_E07_BOTH_20261025_BATCH",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_E07_BOTH_20261025_PROMO"
+    }
+  ]
+}

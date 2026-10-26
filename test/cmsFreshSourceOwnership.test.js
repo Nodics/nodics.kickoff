@@ -65,24 +65,6 @@ registerSourceOwnershipTests(repoRoot, [
     ].map((family) => "kickoffDocumentationRelease002" + family + "Data"),
   },
   {
-    header: "data/docs-v001/headers/kickoffDocumentationContentPackHeader.js",
-    // Retain sealed historical bytes; authoring requires a separate forward release.
-    sealedHistoricalSource: true,
-    dir: "data/docs-v001/records/documentation",
-    site: "kickoffDocumentationSite",
-    catalog: "documentationContentCatalog",
-    prefixes: [
-      "kickoffDocumentationSiteData",
-      "kickoffDocumentationTypeCodeData",
-      "kickoffDocumentationRendererData",
-      "kickoffDocumentationTemplateData",
-      "kickoffDocumentationSlotData",
-      "kickoffDocumentationComponentData",
-      "kickoffDocumentationPageData",
-      "kickoffDocumentationRouteData",
-    ],
-  },
-  {
     header:
       "modules/circa.ewaste/data/sample-v001/content/headers/circaContentHeader.js",
     dir: "modules/circa.ewaste/data/sample-v001/content/records",

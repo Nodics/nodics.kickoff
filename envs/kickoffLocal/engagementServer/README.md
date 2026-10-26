@@ -31,6 +31,13 @@ new recipient. Verify installed authority separately.
 
 ## Employee email test binding
 
+Local coupon reminders select the Digital source, its IN_APP template and loopback
+eligibility through the environment's Communication ENGAGEMENT role profile.
+The explicit source selection retains Waste and the composition-selected Profile
+email source. Digital remains remote; source trust is independent of runtime grants,
+recipient preferences and successful delivery. Docker and framework defaults stay
+unchanged. `test/circaCouponReminderSelection.test.js` verifies the effective merge.
+
 This server selects the existing SMTP provider for controlled employee-email
 checks. Sending stays disabled without `NODICS_EMPLOYEE_SMTP_ENABLED=true` and
 complete approved test inputs. Secrets resolve in this sending runtime, not in

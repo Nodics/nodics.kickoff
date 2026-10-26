@@ -96,22 +96,6 @@ module.exports = {
     publication: {
       enabled: true,
       baselines: {
-        nexusincremental: {
-          releaseCode: "nexus.web:nexusCorporateIncrementalProof",
-          releaseVersion: "0.0.1",
-          dataType: "sample",
-          rootType: "site",
-          rootCode: "nexusCorporateSite",
-          sourceVersion: "0",
-        },
-        nexusprofessionalcopy: {
-          releaseCode: "nexus.web:nexusCorporateProfessionalCopyUpdate",
-          releaseVersion: "0.0.1",
-          dataType: "sample",
-          rootType: "site",
-          rootCode: "nexusCorporateSite",
-          sourceVersion: "0",
-        },
         axis: {
           releaseVersion: "0.0.2",
         },
@@ -125,7 +109,7 @@ module.exports = {
         },
         axisdocs: {
           contentPackCode: "axisDocumentation",
-          releaseVersion: "0.0.1",
+          releaseVersion: "0.0.2",
           sourceVersion: "0",
         },
       },

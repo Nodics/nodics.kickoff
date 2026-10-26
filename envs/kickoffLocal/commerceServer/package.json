@@ -7,7 +7,11 @@
   "description": "Reference customer full Commerce server.",
   "nodics": {
     "runtimeConfigurationContributions": [
-      { "moduleName": "eWaste", "namespace": "digitalCore", "runtimeRole": "COMMERCE" }
+      {
+        "moduleName": "eWaste",
+        "namespace": "digitalCore",
+        "runtimeRole": "COMMERCE"
+      }
     ],
     "kind": "server",
     "extends": [
@@ -36,7 +40,10 @@
         "loyaltyApi",
         "wasteCore",
         "media",
-        "eWaste"
+        "eWaste",
+        "wasteCarbon",
+        "workflow",
+        "commsApi"
       ]
     },
     "runtimeTooling": {

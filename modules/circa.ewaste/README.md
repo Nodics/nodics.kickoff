@@ -15,6 +15,16 @@ Documentation and business releases are independently selected and governed.
 See [AGENTS.md](AGENTS.md) for the standing ownership contract. This guidance update
 does not establish completed source migration or current installed readiness.
 
+The separately authored 35-offer fixed-expiry rollout uses explicit
+[budget and secure-issuance instructions](llm/contracts/local-fixed-expiry-operational-selection.md).
+It preserves approved limits and original installed releases; selection is not
+automatic initialization, consent, publication, issuance or completed acceptance.
+
+The [remaining three fixed-expiry selections](llm/contracts/remaining-fixed-expiry-operational-selection.md)
+cover RenewWorks/LoopCycle with unchanged approved caps and separately pinned
+publication, first-time admission and issuance. They require original issuer
+authoring and native administrative approval; planned source pins are not live evidence.
+
 ## Historical v001 Demo Dataset And Adoption Evidence
 
 The dataset details, named accounts, role-pack ordering and previous setup below
@@ -104,19 +114,16 @@ stock. Both locales retain digital classification. The five asset offers require
 the independent Digital ownership/eWaste binding, policies and installed owner
 qualification; a coupon-only owner must refuse them, never use physical stock.
 
-The forward `circa.ewaste:circaProductMediaReferences@0.0.3` release replaces the
-URL-only localization media descriptors for all 43 Products with the canonical
-Media codes already declared by the Circa content pack. It retains every other
-effective localization value, including the five asset-classification
-successors. Failed `0.0.1` and `0.0.2` attempts remain preserved; `0.0.3` carries
-the required Product-owned localization version successors under a unique
-nImport file prefix instead of rewriting that history. Import and publication
-remain separate governed operations:
-`circaProductMediaPublicationPlan` contains only the 43 successor Product roots,
-while `circaCatalogueMediaCurrentPublicationPlan` is the complete effective
-46-root catalogue view. Earlier Commerce, classification and publication bytes,
-installed receipts and approval history remain immutable; source presence does
-not authorize import, approval, Online activation or search reindexing.
+The unreleased `commerce` baseline includes canonical Media references for all
+43 Products and 86 en/ar localizations, plus digital ownership classification
+for the five assets across their root, variant and localized records. There are
+no separate classification/media patch packs or successor version IDs to import.
+`circaCataloguePublicationPlan` is the single 46-root catalogue selection:
+43 Products, Pricing, Inventory and Tax. Product publication still seals draft
+version 0 as source version 1 through its owner; import and approval remain
+separate operations. Historical fixtures, installed receipts and approval evidence
+are preserved. This source consolidation does not authorize live initialization,
+approval, Online activation or search reindexing.
 
 Fresh `kickoffLocal` application setup selects the immutable
 `circa.ewaste:circaLocalDemoCredit` source, whose revision-0 guard matches the
@@ -276,3 +283,8 @@ regression covers all twenty Native/Docker runtimes, including unselected roles.
 Impact assessment is mandatory in the eWaste owner journey. Reference consumers
 preserve domain-prepared assessment and provider/profile failures for retry;
 partial input-only coverage remains explicit and does not imply carbon calculation.
+
+The [Enterprise role baseline](llm/contracts/enterprise-role-baseline.md) composes
+complete administrator participation and bounded operator delegation from owner
+roles. It documents fresh setup ordering, import effects and the separate reviewed
+installed-data migration, including required successor observation-plan review.

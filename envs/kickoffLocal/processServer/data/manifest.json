@@ -24,6 +24,29 @@
         "init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js": "17a8035e71bf114b72406c555cf32bc5cb5fe052de2d844b6d25af04053c00f0"
       },
       "sourceRoot": "init-v001"
+    },
+    "circaCouponReminder": {
+      "kind": "DATA_RELEASE",
+      "dataType": "init",
+      "version": "0.0.1",
+      "displayName": "Circa Local coupon reminder",
+      "description": "Optional immutable Process ACTION definition for one reviewed Local coupon reminder.",
+      "owningDomain": "digitalCore",
+      "lifecycle": "OPERATIONAL_VERSIONED",
+      "destinationRole": "PROCESS",
+      "environmentScope": [
+        "ALL"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "installer": "PROCESS_DEFINITION",
+      "files": {
+        "init-v001/records/process/circaCouponReminderDefinitionData.js": "d20b838b9502019cca43ce39fd1db20603c5c7cb89b0d7d1729cf3e9af74a5e1"
+      },
+      "sourceRoot": "init-v001"
     }
   }
 }

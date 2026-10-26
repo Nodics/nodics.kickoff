@@ -11,17 +11,18 @@ const manifest = require("../data/manifest.json");
 const section = manifest.sections.circaCommerceStaffAssignments;
 const header = require("../data/sample-v001/staff-access/headers/circaCommerceStaffAssignmentHeader");
 const instructions = Object.values(require("../data/sample-v001/staff-access/records/circaCommerceStaffAssignmentData"));
-const employees = Object.values(require("../data/sample-v007/operations/records/circaOperationalEmployeeData"));
+const employees = Object.values(require("../data/sample-v001/operations/records/circaOperationalEmployeeData"));
 const scopes = Object.values(require("../data/sample-v001/outlet-access/records/circaMerchantOutletScopeData"));
 const profileRoot = path.join(frameworkRoot, "nodics.platform/modules/profile");
 const identityFixture = require(path.join(profileRoot, "test/helpers/identityCatalogueFixture"));
-const roles = identityFixture.roles();
+const baseline = require("./enterpriseRoleBaselineFixture");
+const roles = baseline.roles;
 const hash = value => crypto.createHash("sha256").update(value).digest("hex");
 
-test("new explicit v001 forward section owns only additive instructions and leaves installed role/operations/outlet sections unchanged", () => {
+test("explicit v001 assignment owns only additive instructions beside baseline identities and outlets", () => {
   assert.equal(section.kind, "DATA_RELEASE");
   assert.equal(section.dataType, "sample");
-  assert.equal(section.version, "0.0.1");
+  assert.equal(section.version, "0.0.1", "unreleased consolidation must not create a live-adoption successor");
   assert.equal(section.sourceRoot, "sample-v001");
   assert.equal(section.destinationRole, "PLATFORM");
   assert.equal(section.selectionPolicy, "EXPLICIT");
@@ -35,12 +36,10 @@ test("new explicit v001 forward section owns only additive instructions and leav
     assert(file.startsWith("sample-v001/staff-access/"));
     assert(!Object.entries(manifest.sections).some(([code, release]) => code !== "circaCommerceStaffAssignments" && Object.hasOwn(release.files || {}, file)));
   }
-  assert.equal(hash(Object.keys(section.files).sort().map(file => file + ":" + section.files[file]).join("|")),
-    "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049");
-  assert.equal(manifest.retainedRoots["sample-v001"].files["sample-v001/operations/records/circaOperationalEmployeeData.js"],
-    "a2fa708b1511545c77fba28556306a02f492c925939c74b8fe20903511643dc0");
-  assert.equal(manifest.sections.operations.files["sample-v007/operations/records/circaOperationalEmployeeData.js"],
-    hash(fs.readFileSync(path.join(__dirname, "../data/sample-v007/operations/records/circaOperationalEmployeeData.js"))));
+  assert.equal(section.prerequisites, undefined); // Init definitions are ordered setup steps, not Sample edges.
+  assert.equal(manifest.retainedRoots, undefined);
+  assert.equal(manifest.sections.operations.files["sample-v001/operations/records/circaOperationalEmployeeData.js"],
+    hash(fs.readFileSync(path.join(__dirname, "../data/sample-v001/operations/records/circaOperationalEmployeeData.js"))));
   assert.equal(manifest.sections.circaMerchantOutletAccess.files["sample-v001/outlet-access/records/circaMerchantOutletScopeData.js"],
     "e996668088ae93b28ff553eaaaadfd3e2f9e1d2ada5db39548a7c6b53f7b5c80");
   for (const owner of ["nodics.commerce/modules/baseCommerce/modules/product", "nodics.foundation/modules/nPublish", "nodics.commerce/modules/baseCommerce/modules/promotion", "nodics.commerce/modules/checkout/modules/order"]) {
@@ -73,8 +72,8 @@ test("instructions cannot use generic employee replacement, saveAll, credentials
     assert.equal(original[0].metadata.enterpriseCode, instruction.enterpriseCode);
     assert.deepEqual(instruction.groupCodes, instruction.roleCodes.flatMap(code => roles[code].groupCodes));
   }
-  assert.equal(new Set(instructions.map(row => row.code)).size, 7);
-  assert.equal(new Set(instructions.map(row => row.loginId)).size, 7);
+  assert.equal(new Set(instructions.map(row => row.code)).size, 10);
+  assert.equal(new Set(instructions.map(row => row.loginId)).size, 10);
 });
 
 test("actual nImport service resolution refuses an unavailable additive owner operation without falling back to saveAll", async t => {
@@ -97,7 +96,8 @@ test("actual nImport service resolution refuses an unavailable additive owner op
 });
 
 test("all exact publisher/issuer/merchant assignments are predefined without granting issuer authority to marketplace or merchants", () => {
-  assert.deepEqual(instructions.map(row => [row.code, row.enterpriseCode, row.roleCodes]), [
+  const specialized = new Set(["COMMERCE_SETUP_PUBLISHER", "COMMERCE_AXIS_REFUND_REVIEWER", "COMMERCE_COUPON_ISSUER", "MERCHANT_OPERATOR"]);
+  assert.deepEqual(instructions.slice(0, 7).map(row => [row.code, row.enterpriseCode, row.roleCodes.filter(code => specialized.has(code))]), [
     ["circa-online-administrator", "GREENPERKS_ONLINE", ["COMMERCE_SETUP_PUBLISHER", "COMMERCE_AXIS_REFUND_REVIEWER"]],
     ["circa-retail-administrator", "GREENPERKS_RETAIL", ["COMMERCE_SETUP_PUBLISHER", "COMMERCE_COUPON_ISSUER"]],
     ["circa-repair-administrator", "RENEWWORKS_REPAIR_REUSE", ["COMMERCE_SETUP_PUBLISHER", "COMMERCE_COUPON_ISSUER"]],

@@ -26,64 +26,21 @@ const test = require("node:test");
 const root = path.resolve(__dirname, "..");
 const kickoffCoreProperties = require(path.join(root, "modules", "kickoffCore", "config", "properties.js"));
 
-test("project releases retain consolidated roots and the explicitly approved native authority successor with pinned bytes", () => {
-  const crypto = require("node:crypto");
+test("project baseline adopts framework validation for v001 files, checksums and dependency pins", () => {
   const { frameworkRoot } = require("./helpers/configuration");
-  const releaseOwner = require(path.join(frameworkRoot, "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
-  let releases = 0;
-  const inspect = (directory) => {
-    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-      if (!entry.isDirectory() || entry.name.startsWith(".") ||
-        ["node_modules", "test", "tests", "temp", "logs", "generated", "dist"].includes(entry.name)) continue;
-      const next = path.join(directory, entry.name);
-      if (entry.name !== "data") { inspect(next); continue; }
-      const file = path.join(next, "manifest.json");
-      if (!fs.existsSync(file)) continue;
-      const manifest = JSON.parse(fs.readFileSync(file));
-      const nativeAuthority = file === path.join(root, "modules", "kickoffCore", "data", "manifest.json");
-      const circaHistory = file === path.join(root, "modules", "circa.ewaste", "data", "manifest.json");
-      assert.deepEqual(Object.keys(manifest.retainedRoots || {}), nativeAuthority
-        ? ["init-v005", "init-v006", "init-v004", "init-v003", "init-v002", "init-v001"]
-        : circaHistory ? ["sample-v001"] : [], file);
-      if (nativeAuthority || circaHistory) releaseOwner.validateRetainedRoots(next, manifest);
-      for (const source of fs.readdirSync(next)) {
-        if (/^(init|core|sample|docs)-v\d{3}$/.test(source)) {
-          if (nativeAuthority && ["init-v002", "init-v003", "init-v004", "init-v005", "init-v006", "init-v007", "init-v008"].includes(source)) continue;
-          if (circaHistory && /^sample-v00[1-8]$/.test(source)) continue;
-          assert.match(source, /-v001$/, file);
-        }
-      }
-      for (const [code, section] of Object.entries(manifest.sections || {})) {
-        if (!["DATA_RELEASE", "CONTENT_PACK"].includes(section.kind)) continue;
-        const approvedRoot = nativeAuthority && code === "nativeRuntimeAssignments" ? "init-v007" :
-          nativeAuthority && code === "nativeRuntimePrincipalScope" ? "init-v008" : undefined;
-        const sourcePattern = approvedRoot ? new RegExp("^" + approvedRoot + "(?:/|$)") :
-          circaHistory ? /^(?:sample-v00[1-8]|docs-v001)(?:\/|$)/ : /^(?:init|core|sample|docs)-v001(?:\/|$)/;
-        releases++;
-        assert.match(section.version, /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/, file);
-        assert.notEqual(section.version, "0.0.0", "Installed releases cannot use mutable development receipts: " + file);
-        if (section.sourceRoot || section.contentPath) {
-          assert.match(section.sourceRoot || section.contentPath, approvedRoot ? new RegExp("^" + approvedRoot + "$") : sourcePattern, file);
-        }
-        for (const [relative, digest] of Object.entries(section.files || section.generatedHashes || {})) {
-          assert.match(relative, sourcePattern, file);
-          assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(next, relative))).digest("hex"), digest, relative);
-        }
-      }
-    }
-  };
-  inspect(root);
-  assert(releases > 10);
+  const owner = require(path.join(frameworkRoot, "nodics.foundation/modules/nTooling/src/service/project/defaultProjectDataManifestService"));
+  const result = owner.validateUnreleasedBaseline({ projectRoot: root, dependencyRoots: [frameworkRoot] });
+  assert.equal(result.effects, false);
+  assert(result.sections.length > 10);
 });
 
-test("native runtime assignments select the approved source successor without rewriting installed-pin history", () => {
+test("native runtime baseline pins the current Profile authority without mutating installed history", () => {
   const crypto = require("node:crypto");
   const { frameworkRoot } = require("./helpers/configuration");
-  const releaseOwner = require(path.join(frameworkRoot, "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
   const section = require("../modules/kickoffCore/data/manifest.json").sections.nativeRuntimeAssignments;
   const profile = require(path.join(frameworkRoot, "nodics.platform/modules/profile/data/manifest.json")).sections["init-v001"];
-  assert.equal(section.sourceRoot, "init-v007");
-  assert.equal(section.version, "0.0.9", "Approved runtime authority dependency changes require an explicit release version");
+  assert.equal(section.sourceRoot, "init-v001");
+  assert.equal(section.version, "0.0.10", "Approved runtime authority dependency changes require an explicit release version");
   assert.equal(profile.version, "0.0.8");
   const prerequisite = section.prerequisites.find(ref => ref.moduleName === "profile" && ref.sectionCode === "init-v001");
   assert(prerequisite, "Assignments must pin Profile bootstrap authority");
@@ -92,12 +49,6 @@ test("native runtime assignments select the approved source successor without re
     .update(Object.keys(release.files).sort().map(file => file + ":" + release.files[file]).join("|"))
     .update(release.prerequisites?.length ? "|prerequisites:" + JSON.stringify(release.prerequisites) : "").digest("hex");
   assert.equal(prerequisite.checksum, checksum(profile), "The pin covers the complete prerequisite metadata, including partitions");
-  const owner = { ...releaseOwner, configuration: () => ({ allowDowngrade: false }), error: (code, message) => new Error(code + ": " + message) };
-  const historical = { version: "0.0.1", checksum: "previous-installed-pin", status: "CURRENT" };
-  const before = structuredClone(historical);
-  assert.equal(owner.validateUpgradePolicy({ ...section, checksum: checksum(section) }, historical), true);
-  assert.throws(() => owner.validateUpgradePolicy({ ...section, version: historical.version, checksum: checksum(section) }, historical), /without a version change/);
-  assert.deepEqual(historical, before, "Successor validation preserves historical installation evidence");
 });
 
 test("Local and Docker administration consume customer profiles without domain services", () => {

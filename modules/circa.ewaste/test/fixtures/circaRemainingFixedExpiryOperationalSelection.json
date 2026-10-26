@@ -1,0 +1,221 @@
+{
+  "contractVersion": 1,
+  "purpose": "APPROVED_LOCAL_PLANNED_COMMANDS_NOT_INSTALLED_EVIDENCE",
+  "importable": false,
+  "liveExecutionCompleted": false,
+  "tenant": "default",
+  "sellerEnterpriseCode": "GREENPERKS_ONLINE",
+  "storeCode": "circaMainStore",
+  "expiry": "2026-11-08T19:59:59.999Z",
+  "ownerLifetimeLimit": 1,
+  "budgetAdmission": {
+    "mode": "FIRST_TIME_EXISTING_APPROVED_CAPS",
+    "totalLimit": "11000",
+    "additionalAuthorizedAmount": "0",
+    "replenishment": false
+  },
+  "records": [
+    {
+      "originalPromotionCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
+      "issuerEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "promotionCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "productCode": "CIRCA_COUPON_CPN-GRN-30_FIXED20261108",
+      "sku": "CIRCA_COUPON_CPN-GRN-30_FIXED20261108_SKU",
+      "batchCode": "CIRCA_COUPON_CPN-GRN-30_BATCH_FIXED20261108",
+      "priceRowCode": "CIRCA_COUPON_CPN-GRN-30_POINTS_FIXED20261108",
+      "originalPriceRowCode": "CIRCA_COUPON_CPN-GRN-30_POINTS",
+      "quantity": 100,
+      "budgetLimit": "3000",
+      "expectedVersionId": 3,
+      "expectedRevision": 3,
+      "policyFingerprint": "967fe0844c983d902634a881b46510eb6ddbb1c2eb0a111280668246a5bc4007",
+      "publicationCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108_PUB",
+      "sourceVersion": "720dda66d1a8e0aa0e614b38926ed44b25d8cb8e43110f7004af6306f299cccc",
+      "draft": {
+        "code": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+        "name": "AED 30 repair credit",
+        "priority": 25,
+        "validFrom": "2026-01-01T00:00:00.000Z",
+        "validTo": "2026-12-31T23:59:59.000Z",
+        "conditions": {
+          "couponRequired": true,
+          "customerOwnsCouponCode": true,
+          "sourceProductCode": "CIRCA_COUPON_CPN-GRN-30_FIXED20261108",
+          "storeCodes": [
+            "renewworks-repair"
+          ]
+        },
+        "actions": {
+          "discountType": "AMOUNT",
+          "discountValue": "30",
+          "reasonCode": "CIRCA_SAMPLE_OFFER",
+          "discountAmount": "30"
+        },
+        "budget": {
+          "limit": "3000"
+        },
+        "couponOffer": {
+          "version": 1,
+          "supply": {
+            "mode": "LIMITED",
+            "quantity": 100
+          },
+          "ownerLimit": 1,
+          "expiry": {
+            "mode": "FIXED",
+            "at": "2026-11-08T19:59:59.999Z"
+          },
+          "requirements": {
+            "type": "REWARDS",
+            "priceRef": "CIRCA_COUPON_CPN-GRN-30_POINTS_FIXED20261108"
+          },
+          "terms": [
+            "Redeem AED 30 repair credit once at renewworks-repair.",
+            "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+            "Fictional local demonstration offer; no real-world venue participation or cash value."
+          ]
+        },
+        "vendorEnterpriseRef": {
+          "moduleName": "profile",
+          "schemaName": "enterprise",
+          "code": "GREENPERKS_ONLINE"
+        }
+      }
+    },
+    {
+      "originalPromotionCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
+      "issuerEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+      "promotionCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "productCode": "CIRCA_COUPON_CPN-SVC-50_FIXED20261108",
+      "sku": "CIRCA_COUPON_CPN-SVC-50_FIXED20261108_SKU",
+      "batchCode": "CIRCA_COUPON_CPN-SVC-50_BATCH_FIXED20261108",
+      "priceRowCode": "CIRCA_COUPON_CPN-SVC-50_POINTS_FIXED20261108",
+      "originalPriceRowCode": "CIRCA_COUPON_CPN-SVC-50_POINTS",
+      "quantity": 100,
+      "budgetLimit": "5000",
+      "expectedVersionId": 3,
+      "expectedRevision": 3,
+      "policyFingerprint": "07ef0d1fad17b6c25c63e3656ef3b427e2d15bcc9444d5fc7b92470530fb680b",
+      "publicationCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108_PUB",
+      "sourceVersion": "fe1bb96498dbbf1782a5e5909ca85fe728cda7a9f0bf9dc69624a490311a28f3",
+      "draft": {
+        "code": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+        "name": "AED 50 device diagnosis",
+        "priority": 25,
+        "validFrom": "2026-01-01T00:00:00.000Z",
+        "validTo": "2027-01-20T23:59:59.000Z",
+        "conditions": {
+          "couponRequired": true,
+          "customerOwnsCouponCode": true,
+          "sourceProductCode": "CIRCA_COUPON_CPN-SVC-50_FIXED20261108",
+          "storeCodes": [
+            "renewworks-repair"
+          ]
+        },
+        "actions": {
+          "discountType": "AMOUNT",
+          "discountValue": "50",
+          "reasonCode": "CIRCA_SAMPLE_OFFER",
+          "discountAmount": "50"
+        },
+        "budget": {
+          "limit": "5000"
+        },
+        "couponOffer": {
+          "version": 1,
+          "supply": {
+            "mode": "LIMITED",
+            "quantity": 100
+          },
+          "ownerLimit": 1,
+          "expiry": {
+            "mode": "FIXED",
+            "at": "2026-11-08T19:59:59.999Z"
+          },
+          "requirements": {
+            "type": "REWARDS",
+            "priceRef": "CIRCA_COUPON_CPN-SVC-50_POINTS_FIXED20261108"
+          },
+          "terms": [
+            "Redeem AED 50 device diagnosis once at renewworks-repair.",
+            "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+            "Fictional local demonstration offer; no real-world venue participation or cash value."
+          ]
+        },
+        "vendorEnterpriseRef": {
+          "moduleName": "profile",
+          "schemaName": "enterprise",
+          "code": "GREENPERKS_ONLINE"
+        }
+      }
+    },
+    {
+      "originalPromotionCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
+      "issuerEnterpriseCode": "LOOPCYCLE_RECYCLING",
+      "promotionCode": "CIRCA_COUPON_CPN-ECO-15_PROMO_FIXED20261108",
+      "productCode": "CIRCA_COUPON_CPN-ECO-15_FIXED20261108",
+      "sku": "CIRCA_COUPON_CPN-ECO-15_FIXED20261108_SKU",
+      "batchCode": "CIRCA_COUPON_CPN-ECO-15_BATCH_FIXED20261108",
+      "priceRowCode": "CIRCA_COUPON_CPN-ECO-15_POINTS_FIXED20261108",
+      "originalPriceRowCode": "CIRCA_COUPON_CPN-ECO-15_POINTS",
+      "quantity": 100,
+      "budgetLimit": "3000",
+      "expectedVersionId": 3,
+      "expectedRevision": 3,
+      "policyFingerprint": "29786b1979c45cdc9463d3c7017693a107515ac92aa094546dbaee0fa8668228",
+      "publicationCode": "CIRCA_COUPON_CPN-ECO-15_PROMO_FIXED20261108_PUB",
+      "sourceVersion": "d80933af9bd5dd820ed7400be8680867f98baf7914b2f06a3279139ccc97641d",
+      "draft": {
+        "code": "CIRCA_COUPON_CPN-ECO-15_PROMO_FIXED20261108",
+        "name": "15% recycled accessories offer",
+        "priority": 25,
+        "validFrom": "2026-01-01T00:00:00.000Z",
+        "validTo": "2026-11-15T23:59:59.000Z",
+        "conditions": {
+          "couponRequired": true,
+          "customerOwnsCouponCode": true,
+          "sourceProductCode": "CIRCA_COUPON_CPN-ECO-15_FIXED20261108",
+          "storeCodes": [
+            "loopcycle-accessories"
+          ]
+        },
+        "actions": {
+          "discountType": "PERCENT",
+          "discountValue": "15",
+          "reasonCode": "CIRCA_SAMPLE_OFFER",
+          "percent": "15",
+          "maximumDiscountAmount": "30"
+        },
+        "budget": {
+          "limit": "3000"
+        },
+        "couponOffer": {
+          "version": 1,
+          "supply": {
+            "mode": "LIMITED",
+            "quantity": 100
+          },
+          "ownerLimit": 1,
+          "expiry": {
+            "mode": "FIXED",
+            "at": "2026-11-08T19:59:59.999Z"
+          },
+          "requirements": {
+            "type": "REWARDS",
+            "priceRef": "CIRCA_COUPON_CPN-ECO-15_POINTS_FIXED20261108"
+          },
+          "terms": [
+            "Redeem 15% recycled accessories offer once at loopcycle-accessories.",
+            "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+            "Fictional local demonstration offer; no real-world venue participation or cash value."
+          ]
+        },
+        "vendorEnterpriseRef": {
+          "moduleName": "profile",
+          "schemaName": "enterprise",
+          "code": "GREENPERKS_ONLINE"
+        }
+      }
+    }
+  ]
+}

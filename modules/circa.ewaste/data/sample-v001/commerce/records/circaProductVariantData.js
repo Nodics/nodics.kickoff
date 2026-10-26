@@ -23,9 +23,12 @@ module.exports = {
       "fulfillmentStrategy": "DIGITAL_COMMERCE",
       "kind": "ASSET",
       "assetCode": "EWA-1047",
-      "sample": true
+      "sample": true,
+      "digitalDeliveryType": "DIGITAL_OWNERSHIP",
+      "inventoryStrategy": "DIGITAL_COMMERCE"
     },
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record1": {
     "tenant": "default",
@@ -42,9 +45,12 @@ module.exports = {
       "fulfillmentStrategy": "DIGITAL_COMMERCE",
       "kind": "ASSET",
       "assetCode": "EWA-1051",
-      "sample": true
+      "sample": true,
+      "digitalDeliveryType": "DIGITAL_OWNERSHIP",
+      "inventoryStrategy": "DIGITAL_COMMERCE"
     },
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record2": {
     "tenant": "default",
@@ -61,9 +67,12 @@ module.exports = {
       "fulfillmentStrategy": "DIGITAL_COMMERCE",
       "kind": "ASSET",
       "assetCode": "EWA-1052",
-      "sample": true
+      "sample": true,
+      "digitalDeliveryType": "DIGITAL_OWNERSHIP",
+      "inventoryStrategy": "DIGITAL_COMMERCE"
     },
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record3": {
     "tenant": "default",
@@ -80,9 +89,12 @@ module.exports = {
       "fulfillmentStrategy": "DIGITAL_COMMERCE",
       "kind": "ASSET",
       "assetCode": "EWA-1055",
-      "sample": true
+      "sample": true,
+      "digitalDeliveryType": "DIGITAL_OWNERSHIP",
+      "inventoryStrategy": "DIGITAL_COMMERCE"
     },
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record4": {
     "tenant": "default",
@@ -99,9 +111,12 @@ module.exports = {
       "fulfillmentStrategy": "DIGITAL_COMMERCE",
       "kind": "ASSET",
       "assetCode": "EWA-1092",
-      "sample": true
+      "sample": true,
+      "digitalDeliveryType": "DIGITAL_OWNERSHIP",
+      "inventoryStrategy": "DIGITAL_COMMERCE"
     },
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record5": {
     "tenant": "default",

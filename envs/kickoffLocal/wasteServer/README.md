@@ -63,7 +63,19 @@ verification.
 
 The separate Staged listing-proof caller is pinned to the original Local Commerce
 Staged identity and `GREENPERKS_ONLINE`, with only
-`waste.asset.listing.intent.read`. The existing Commerce sale caller is unchanged.
+`waste.asset.listing.intent.read`. The existing Online Commerce sale caller is unchanged.
+
+Local also selects `GREENPERKS_RETAIL` for the existing `commerceServer` runtime's
+approved Enterprise certificate/bundle buy, sell and gift journeys. The exact
+tenant, principal enterprise, service, project, environment, instance and retained
+deployment-assignment coordinates are unchanged; the new entry contains only
+`waste.asset.sale.transfer`. It does not add marketplace projection, Staged access,
+human permissions or another target. Commerce still proves the current human,
+typed owner and operation permission; Waste retains private runtime admission,
+revision, lock and financial evidence checks. This is a deployment override, not
+a framework default or proof of installed success. After the coordinated Waste
+build, recheck Retail certificate holdings under a fresh Employee session. An
+empty successful page is valid; a rejected dependency is not empty holdings.
 
 After the Pricing writer-admission guard was independently reviewed, native
 Local separately selects `commerce.product.read` and remote `pricing` for the

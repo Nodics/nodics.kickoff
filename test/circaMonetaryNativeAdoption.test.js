@@ -8,7 +8,7 @@ const test = require("node:test"), assert = require("node:assert/strict");
 const { loadRuntime } = require("./helpers/configuration");
 const proposal = require("../modules/circa.ewaste/test/fixtures/circaMonetaryOutletProposal.json");
 
-test("monetary admission retains the exact original Commerce runtime and three reviewed issuer scopes", () => {
+test("Pricing admission retains reviewed issuer scopes without selecting integrated coupon redemption", () => {
   const p = loadRuntime("commerceServer", "kickoffLocal"), policy = p.pricing.merchantEvidence;
   assert.equal(policy.qualified, true);
   assert.equal(policy.businessCallers.enabled, true);
@@ -20,11 +20,14 @@ test("monetary admission retains the exact original Commerce runtime and three r
     instanceCode: p.runtimeIdentity.instanceCode, assignmentCode: "kickoff-local-commerce-runtime-deployment"
   });
   assert.equal(p.apiExposure.categories.commerceMerchantPricing.enabled, true);
-  assert.equal(p.promotion.merchantBenefits.qualified, true);
-  assert.equal(p.promotion.merchantBenefits.pricedSource.qualified, true);
-  assert.equal(p.promotion.merchantBenefits.pricedSource.allowInsecureLoopback, true);
-  assert.equal(p.promotion.merchantBenefits.itemEvidenceMode, "SIMULATION");
-  assert.equal(p.digitalCore.merchantRedemption.pricedProvider.qualified, true);
+  assert.equal(p.promotion.merchantBenefits.enabled, false);
+  assert.equal(p.promotion.merchantBenefits.qualified, false);
+  assert.equal(p.promotion.merchantBenefits.pricedSource.qualified, false);
+  assert.equal(p.promotion.merchantBenefits.pricedSource.allowInsecureLoopback, false);
+  assert.equal(p.promotion.merchantBenefits.itemEvidenceMode, "VERIFIED");
+  assert.equal(p.digitalCore.merchantRedemption.pricedProvider.qualified, false);
+  assert.equal(p.promotion.merchantBenefits.itemEvidenceService, null);
+  assert.equal(p.digitalCore.merchantRedemption.providerService, "DefaultDigitalCommerceMerchantScreenProviderService");
   assert.equal(p.databaseTransactions.enabled, true);
   assert.equal(p.databaseTransactions.failClosed, true);
 });

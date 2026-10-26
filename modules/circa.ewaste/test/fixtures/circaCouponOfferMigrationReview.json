@@ -1,0 +1,30 @@
+{
+  "purpose": "SOURCE_MAPPING_REVIEW_NOT_OPERATIONAL_AUTHORITY",
+  "importable": false,
+  "status": "SOURCE_IMPLEMENTED_LIVE_ADOPTION_BLOCKED",
+  "offerCount": 38,
+  "agreedPolicy": {
+    "expiryMode": "FIXED",
+    "independentOfPurchaseTime": true,
+    "newOffersRetainLegacyPurchaseRelativeExpiry": false
+  },
+  "proposal": {
+    "status": "APPROVED_LOCAL_NEW_OFFERS_ONLY",
+    "expiryDate": "2026-11-08",
+    "expiryTimeZone": "Asia/Dubai",
+    "expiresAt": "2026-11-08T19:59:59.999Z",
+    "lifetimeSupply": 100,
+    "ownerLimit": 1
+  },
+  "unambiguousMappings": {
+    "requirementsType": "REWARDS",
+    "priceRef": "Exact Pricing row code joined by conditions.sourceProductCode; retain Pricing amount and currency",
+    "benefits": "Preserve existing actions and conditions without widening outlet or minimum-subtotal rights",
+    "terms": "Preserve non-expiry benefit restrictions; replace the legacy 30-days-from-purchase promise in NEW offers with the approved purchase-independent FIXED expiry"
+  },
+  "unresolved": {
+    "sourceImplementation": "All 38 current CouponOffer records, policy/publication pins, instruction checksums and manifest seals updated; semantic source identities preserved.",
+    "liveAdoption": "Live adoption pending: existing Retail and Online operators report canCreate:false on Commerce Staged. New-draft currently pins vendor to issuer, not the approved marketplace. Do not grant permissions, override scope or replay installed data."
+  },
+  "installedAdoption": "No replay, reset, reissue, in-place conversion or replacement of retained publications/coupons. Preserve source semantic IDs in the unreleased baseline; use distinct new live owner-created offers through normal publication/consent/participation/issuance. Existing receipts retain original identities and rights."
+}

@@ -1,5 +1,59 @@
 # Circa Reviewed Promotion Setup
 
+The remaining three RenewWorks/LoopCycle replacements have a separate
+[source-pinned adoption selection](remaining-fixed-expiry-operational-selection.md).
+It records first-time admission of the existing 3000/5000/3000 caps, planned
+version-3 publication pins and the original-issuer authoring gate. Do not replay
+the separately tracked 35 GreenPerks replacements. The dated 2026-10-23 capability
+observations below are historical, not a current permissions or adoption verdict.
+
+## Current Offer Migration Blocker
+
+The 38 `sample-v001` Promotion policies now use the current CouponOffer contract.
+Installed legacy policies and their receipts remain unchanged; source conversion
+does not qualify checkout for those installed offers.
+The nonimportable `test/fixtures/circaCouponOfferMigrationReview.json` records
+the approved terms, source implementation and blocked live adoption. NEW offers use purchase-independent
+`FIXED` expiry; this decision is settled, not a choice between FIXED, NONE or
+purchase-relative expiry. Do not carry the legacy 30-days-from-purchase promise
+into new offers. Existing issued rights and historical receipts remain unchanged.
+
+The human approved NEW Local offers with expiry at the end of November 8, 2026
+in Asia/Dubai: `2026-11-08T19:59:59.999Z` (23:59:59.999 UTC+04:00), lifetime
+supply of 100 TOTAL per offer, and one purchase per canonical Customer or
+Enterprise owner. This is independent of purchase time and separate from the
+seller-consent expiry. Preserve declared non-expiry benefits and restrictions.
+Approval does not establish implementation, publication, issuance or checkout.
+
+New source capture/publication validation must reject a Product-bound coupon
+without a valid current offer. Existing retained-policy reads and historical
+receipts remain unchanged. Until reviewed terms can be represented, do not
+claim this source pack is publishable or that its coupon journey passed.
+
+With these exact terms approved, correct the unreleased reference in place and
+reseal affected source manifests/instruction fingerprints through owner tooling.
+That is not installed adoption. Existing immutable offers/coupons/publications
+must not be converted, overwritten, reissued or replaced. Use explicit normal
+owner-created offers with distinct new live identities, publication, seller consent,
+redeemer participation and issuance for any separately authorized live adoption.
+Retain semantic source IDs in the unreleased baseline; never import the changed
+baseline over this installed environment. Coordinate any required runtime restart
+with the topology owner; the source guard is not proof of deployed enforcement.
+Fresh source qualification can instead use a separately authorized empty test
+environment, never a reset/replay of this funded acceptance environment.
+
+The 2026-10-23 signed Commerce Staged reads for both existing Retail and Online
+administrators returned `canCreate:false` and read-only authoring. Do not infer
+whether permission or source-storage qualification caused this from the boolean
+alone. The new-draft service also fixes issuer and vendor to the signed enterprise;
+the reviewed marketplace distribution needs GREENPERKS_ONLINE as vendor. Resolve
+these owner boundaries before any creation, without an auth-scope override,
+permission grant, compatibility prefill, or direct persistence. Proposed live
+Product, SKU, Pricing and Promotion identities append `_FIXED20261108` to their
+source identities; they are new records, not aliases for installed coupons.
+No such live records have been created. Publication, consent, participation,
+issuance, checkout and redemption remain unexecuted for the new identities.
+
 ## Authority And Baseline
 
 These are customer-owned, fictional `kickoffLocal` instructions, not framework
@@ -233,6 +287,54 @@ quantity is not a claim that any units were issued or made available Online.
 Asset display metadata no longer promises carbon transfer: the reviewed policy
 is NO_NEW_MINT_OR_LEDGER_MOVEMENT. Existing canonical Waste seller ownership
 remains unchanged; the marketplace catalogue enterprise is a distinct role.
+
+## E07 Certificate And Combined Offer Selections
+
+The separately selected `circa.ewaste:circaE07Budget` and
+`circa.ewaste:circaE07Issuance` sections are Local-only `sample-v001`, version
+`0.0.1`, under the existing `PROMOTION_CAMPAIGN_ISSUANCE` owner. They contain only
+`CIRCA_E07_CERTIFICATES_20261025_PROMO` and `CIRCA_E07_BOTH_20261025_PROMO`, issued
+by GREENPERKS_RETAIL and sold by GREENPERKS_ONLINE. No older section is selected,
+replaced or replenished. Both approved policies have limit zero, LIMITED supply
+100, lifetime owner limit one, one GP_BOTTLED_WATER/EACH benefit, and fixed expiry
+2026-11-08T19:59:59.999Z. CERTIFICATES requires one TABLET certificate; BOTH
+requires one CABLE_CHARGER certificate and its exact `_POINTS` price row. Both
+require CUSTOMER_HELD. Product/Pricing separately own zero/one POINTS prices.
+
+The nonimportable `test/fixtures/circaE07OperationalSelection.json` retains the
+reviewed drafts and accepted publication digests from the named 2026-10-25 E07
+evidence. Canonical Promotion draft normalization and `capturePolicy` at source
+version/revision 3 reproduce those complete release digests. The campaign policy
+fingerprints, distinct from publication release digests, are:
+
+| Offer | Budget policy fingerprint |
+| --- | --- |
+| CERTIFICATES | `79be476374a71ff47880e5061171666b8c16799d42018354263479dead248b41` |
+| BOTH | `1c3d800f58a3332f1fc3e72e6c0332647f89cd6c50074d316250a2064c5eb47d` |
+
+After confirming each existing publication CURRENT and its exact Store/root
+delivery, the signed Retail operator selects only `circaE07Budget` through
+`/nodics/import/v0/sample/validate` then `/sample/install`, with
+`releaseCodes: ["circa.ewaste:circaE07Budget"]` and
+`expectedReleases: {"circa.ewaste:circaE07Budget": "0.0.1"}`. This admits the two
+new zero-limit operational campaigns; it neither modifies old budgets nor grants
+seller authority. Then review Online seller authorization separately for
+GREENPERKS_ONLINE with current revision, reviewed expiry and
+ISSUED_COUPON_BENEFIT_V1. Bilateral redeemer participation remains independent.
+
+Only after original admission and consent are qualified select `circaE07Issuance`
+with the analogous exact release/version envelope. Its two 100-unit intents use
+Product code plus `_BATCH`; campaign command references are `opening-` plus
+Promotion code and issuance references are `issue-` plus Promotion code.
+The issuance pack retains the original new budget contribution checksum, not a
+bare JSON file hash. No raw batch endpoint, token, stock snapshot or consent flag
+is included. Reconcile uncertain original commands before any retry; never
+replace identifiers or regenerate stock. No publication replay is selected here.
+
+`test/circaE07OperationalInstructions.test.js` checks exact approved terms,
+canonical pins, changed-policy rejection, disjoint old/new campaign selections,
+declared byte hashes and the actual inert nImport reader/Promotion parser.
+These source checks do not qualify live admission, consent, issuance or purchase.
 
 ## Source Pins And Recovery
 

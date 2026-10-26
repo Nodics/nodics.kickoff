@@ -27,20 +27,29 @@
       "nodics.communication",
       "nodics.engagement",
       "nodics.accelerators/modules/nexus",
-      "nodics.accelerators/modules/waste/modules/eWaste"
+      "nodics.accelerators/modules/waste/modules/eWaste",
+      "nodics.commerce/modules/digitalCommerce/modules/digitalCore"
     ],
     "runtimeIdentity": {
       "instanceCode": "kickoff-local-engagement-1",
       "remoteModules": [
         "profile",
-        "backoffice"
+        "backoffice",
+        "digitalCore"
       ]
     },
     "runtimeTooling": {
       "code": "engagement",
       "script": "start:engagement",
       "order": 4
-    }
+    },
+    "runtimeConfigurationContributions": [
+      {
+        "moduleName": "digitalCore",
+        "namespace": "communication",
+        "runtimeRole": "ENGAGEMENT"
+      }
+    ]
   },
   "description": "Customer Engagement Server runtime composition and configuration boundary for this Nodics project."
 }

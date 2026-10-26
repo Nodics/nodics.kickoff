@@ -1,11 +1,11 @@
 {
   "contractVersion": 1,
   "code": "circa-native-reviewed",
-  "revision": 16,
+  "revision": 17,
   "tenant": "default",
   "profileCode": "circa",
   "baselineCode": "circa",
-  "profileDigest": "037d9d01a7bd56f9d6ac2a76bb83830cd08e9cbfb134760eb3ddbcc5d6c97890",
+  "profileDigest": "716c8dbd10a7bad98b52af7123dc3e5e92f5119ebd826e4c57f84af04e649584",
   "stages": [
     {
       "code": "product:productPublicationWorkflow",
@@ -25,7 +25,7 @@
         "sectionCode": "productPublicationWorkflow",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "897b7abbc393b85091a832eae1b53ed52a2ec7b50ba94f574cbc24afaf9f87c8",
+        "checksum": "004121f1ee452988bcb575b64b96387a61deac7b25a7bebe9371e374195efa7d",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/records/process/productPublicationWorkflowDefinitionData.js"
@@ -452,6 +452,321 @@
       }
     },
     {
+      "code": "loyaltyWallet:participantReadAccess",
+      "descriptor": {
+        "code": "loyaltyWallet:participantReadAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "loyaltyWallet",
+        "releaseCode": "loyaltyWallet:participantReadAccess",
+        "sectionCode": "participantReadAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "c2bd944e5b9609d2e0c1d5e126a5fc78c10b30fed5ccd4676e4f90ced55e176e",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_loyaltyWalletParticipantReadGroupHeader.js",
+          "init-v001/headers/identity/020_loyaltyWalletParticipantReadRoleHeader.js",
+          "init-v001/records/identity/loyaltyWalletParticipantReadGroupData.js",
+          "init-v001/records/identity/loyaltyWalletParticipantReadRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "loyaltyWallet",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:participantReadAccess",
+      "descriptor": {
+        "code": "order:participantReadAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:participantReadAccess",
+        "sectionCode": "participantReadAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "663be52729e783c5bdbc81da005e6784ec6aff6ecc7a82ec032023cba29719f9",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_orderParticipantReadGroupHeader.js",
+          "init-v001/headers/identity/020_orderParticipantReadRoleHeader.js",
+          "init-v001/records/identity/orderParticipantReadGroupData.js",
+          "init-v001/records/identity/orderParticipantReadRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "digitalCore:participantReadAccess",
+      "descriptor": {
+        "code": "digitalCore:participantReadAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "digitalCore",
+        "releaseCode": "digitalCore:participantReadAccess",
+        "sectionCode": "participantReadAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "c56507bdb6a707977cd46528d3c307ef056899fe35e5aa56e432942e5122fe39",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_digitalCoreParticipantReadGroupHeader.js",
+          "init-v001/headers/identity/020_digitalCoreParticipantReadRoleHeader.js",
+          "init-v001/records/identity/digitalCoreParticipantReadGroupData.js",
+          "init-v001/records/identity/digitalCoreParticipantReadRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "digitalCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "cart:participantTransactionAccess",
+      "descriptor": {
+        "code": "cart:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "cart",
+        "releaseCode": "cart:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "86b10e5d9c27575733986b09b3d5ad10709c493766abef06c2acede8575ab956",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_cartParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_cartParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/cartParticipantTransactionGroupData.js",
+          "init-v001/records/identity/cartParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "cart",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "checkoutCore:participantTransactionAccess",
+      "descriptor": {
+        "code": "checkoutCore:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "checkoutCore",
+        "releaseCode": "checkoutCore:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "28ab6239579ff2f9755f7a40ef385eac9ed728491b6c6c70cf9b402c29f5312c",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_checkoutCoreParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_checkoutCoreParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/checkoutCoreParticipantTransactionGroupData.js",
+          "init-v001/records/identity/checkoutCoreParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "checkoutCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:participantTransactionAccess",
+      "descriptor": {
+        "code": "order:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "5fe8dbe92cbadb4dacd95098fd910f3a91ac567c381fa3a3a0db5612f73ea9d1",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_orderParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_orderParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/orderParticipantTransactionGroupData.js",
+          "init-v001/records/identity/orderParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "digitalCore:participantTransactionAccess",
+      "descriptor": {
+        "code": "digitalCore:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "digitalCore",
+        "releaseCode": "digitalCore:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "f890a4d787906ab195a5cc888db7935729d78c5b4a8af50e44fd37e825890713",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_digitalCoreParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_digitalCoreParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/digitalCoreParticipantTransactionGroupData.js",
+          "init-v001/records/identity/digitalCoreParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "digitalCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "bidding:participantTransactionAccess",
+      "descriptor": {
+        "code": "bidding:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "bidding",
+        "releaseCode": "bidding:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "2928993a506e6c0e14cd63de87120f660dd202c48e3bad660778df1d03222f71",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_biddingParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_biddingParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/biddingParticipantTransactionGroupData.js",
+          "init-v001/records/identity/biddingParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "bidding",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "loyaltyWallet:participantTransactionAccess",
+      "descriptor": {
+        "code": "loyaltyWallet:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "loyaltyWallet",
+        "releaseCode": "loyaltyWallet:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "8ecbb7f80bd3f25cbac9d0370176f5bb8fad44dbe27d233fdba8e6ec77145973",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_loyaltyWalletParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_loyaltyWalletParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/loyaltyWalletParticipantTransactionGroupData.js",
+          "init-v001/records/identity/loyaltyWalletParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "loyaltyWallet",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
       "code": "circa.ewaste:circaCommerceStaffAssignments",
       "descriptor": {
         "code": "circa.ewaste:circaCommerceStaffAssignments",
@@ -553,42 +868,9 @@
       }
     },
     {
-      "code": "circa.ewaste:circaAssetClassification",
+      "code": "circa.ewaste:circaCataloguePublicationPlan",
       "descriptor": {
-        "code": "circa.ewaste:circaAssetClassification",
-        "dataType": "sample",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "COMMERCE_STAGED",
-        "targetServer": "commerceStaged",
-        "type": "DATA_RELEASE"
-      },
-      "server": "commerceStagedServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "circa.ewaste",
-        "releaseCode": "circa.ewaste:circaAssetClassification",
-        "sectionCode": "circaAssetClassification",
-        "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "877d57fb3ce2e235ea8979162cba7868f6275fb2cfc6631ac2174f19d0bf7fc2",
-        "sourceRoot": "sample-v001",
-        "declaredFiles": [
-          "sample-v001/asset-classification/headers/circaAssetClassificationHeader.js",
-          "sample-v001/asset-classification/records/circaAssetClassificationLocalizationData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "product",
-        "lifecycle": "PUBLISHABLE",
-        "destinationRole": "COMMERCE_STAGED",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "circa.ewaste:circaCatalogueCurrentPublicationPlan",
-      "descriptor": {
-        "code": "circa.ewaste:circaCatalogueCurrentPublicationPlan",
+        "code": "circa.ewaste:circaCataloguePublicationPlan",
         "dataType": "sample",
         "operatorEnterpriseCode": "GREENPERKS_ONLINE",
         "phase": "AFTER_PUBLICATION",
@@ -596,11 +878,11 @@
           "contractVersion": 1,
           "items": [
             {
-              "code": "circa-product-CIRCA_ASSET_EWA-1047-classification-v001",
+              "code": "circa-product-CIRCA_ASSET_EWA-1047-v001",
               "domain": "product",
               "input": {
                 "productCode": "CIRCA_ASSET_EWA-1047",
-                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1047-classification-v001",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1047-v001",
                 "storeCode": "circaMainStore",
                 "versionId": 0
               },
@@ -609,11 +891,11 @@
               "sourceVersion": "1"
             },
             {
-              "code": "circa-product-CIRCA_ASSET_EWA-1051-classification-v001",
+              "code": "circa-product-CIRCA_ASSET_EWA-1051-v001",
               "domain": "product",
               "input": {
                 "productCode": "CIRCA_ASSET_EWA-1051",
-                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1051-classification-v001",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1051-v001",
                 "storeCode": "circaMainStore",
                 "versionId": 0
               },
@@ -622,11 +904,11 @@
               "sourceVersion": "1"
             },
             {
-              "code": "circa-product-CIRCA_ASSET_EWA-1052-classification-v001",
+              "code": "circa-product-CIRCA_ASSET_EWA-1052-v001",
               "domain": "product",
               "input": {
                 "productCode": "CIRCA_ASSET_EWA-1052",
-                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1052-classification-v001",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1052-v001",
                 "storeCode": "circaMainStore",
                 "versionId": 0
               },
@@ -635,11 +917,11 @@
               "sourceVersion": "1"
             },
             {
-              "code": "circa-product-CIRCA_ASSET_EWA-1055-classification-v001",
+              "code": "circa-product-CIRCA_ASSET_EWA-1055-v001",
               "domain": "product",
               "input": {
                 "productCode": "CIRCA_ASSET_EWA-1055",
-                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1055-classification-v001",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1055-v001",
                 "storeCode": "circaMainStore",
                 "versionId": 0
               },
@@ -648,11 +930,11 @@
               "sourceVersion": "1"
             },
             {
-              "code": "circa-product-CIRCA_ASSET_EWA-1092-classification-v001",
+              "code": "circa-product-CIRCA_ASSET_EWA-1092-v001",
               "domain": "product",
               "input": {
                 "productCode": "CIRCA_ASSET_EWA-1092",
-                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1092-classification-v001",
+                "publicationCode": "circa-product-CIRCA_ASSET_EWA-1092-v001",
                 "storeCode": "circaMainStore",
                 "versionId": 0
               },
@@ -1466,7 +1748,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "f242b0b606e3a8e0c58f22069bcf1ad4911768eba69f77095af79ab66f605250"
+              "sourceVersion": "f894c06a35173897b625ccd5d6a3890df32672f3529279e170e97b223759b48e"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C02_PROMO-v001",
@@ -1485,7 +1767,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "da884296e94b209bc8771da21b258d3056f52c46be7d279b4156e52344de9a11"
+              "sourceVersion": "5ddc700f2be61aa8ee07a07f43eb37a11e9726725b62b6407fd2115e3aaaa04c"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C03_PROMO-v001",
@@ -1504,7 +1786,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "63cd3d81a50d3db7c74da5b3013e68574cb2d3862db922120328e4ef56599652"
+              "sourceVersion": "275f873a6549eea13e53d99f9d29bdd51aea61024929712ea66d7cde59294e75"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C04_PROMO-v001",
@@ -1523,7 +1805,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "3a16adedc2f520f5428b4b284e994bd233728aa10c7766857ac3b4d1f9bff2d5"
+              "sourceVersion": "5d1b7e8bfd99e93174134340fa6cae5a45dff9201016e61b0a7cf7b120ba5f16"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C05_PROMO-v001",
@@ -1542,7 +1824,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "1e88611824dcf601273150db9b34f23ab2353cc08aa89e3a61c1e8c87abce49f"
+              "sourceVersion": "2c50e0f25926f2b5542d5d37eb22e495c8f0a5cbcd78c97ec973456854b8d2ac"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C06_PROMO-v001",
@@ -1561,7 +1843,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "bb85a006df5168a7031b33f277d3b6966db5077367887e25e5f391490b01af50"
+              "sourceVersion": "1a7932998e920430662a0d73f5f4518f11cd25c41b7e24b0ae5c5ecded7b5c3e"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C07_PROMO-v001",
@@ -1580,7 +1862,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "d7ea9da02ec5947ce3c6ab9935ea58b875043dbb6fac515fda38eecd1f98f1d5"
+              "sourceVersion": "4d3d8da929b01836c6c353755e6958d4bf9941c18a74a102d0e167f98e7988c7"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C08_PROMO-v001",
@@ -1599,7 +1881,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "98a63751dff43543112e8387e6928890cd0a1d5c2c40f3dd9d295033b15678c9"
+              "sourceVersion": "77d9ed304938f56891cc82b9f935cc39565a2f85189bf2a7b4b9c7a7efc7bb59"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C09_PROMO-v001",
@@ -1618,7 +1900,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "d61bccd226b0ad9be4f08f576810d8e59390fd158725cd828932e91952301873"
+              "sourceVersion": "0b236fa8e70497ee68f83c130ace4fd5032deddee3a05f8d19d12db77098c162"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C10_PROMO-v001",
@@ -1637,7 +1919,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "1a1094c3010e5afbb0a06ca4c5381236cca6d54830fbbaafba80353d534fff08"
+              "sourceVersion": "fb44164048f06ac8ecbefa799a01e5169726b0cf17e5c30559531e7da7f9452f"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C11_PROMO-v001",
@@ -1656,7 +1938,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "f6e8ba675384ead1908d7e407074c63bd31c2c71a7beafe6a7594422819eb0bb"
+              "sourceVersion": "c765aff3d9cb651a7cb7422884fe5863bb4a33b40c27103e7f7dc82255643732"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-C12_PROMO-v001",
@@ -1675,7 +1957,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "30f6e15fc6e7c7b0e14645f4468fe764763a1f4175f403668acd1c1cf7e42faf"
+              "sourceVersion": "56b7926c6f2bc38780488bb18ab44dcb4d3180436b77f7a77378872600accbc9"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B01_PROMO-v001",
@@ -1694,7 +1976,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "da29e240e488c9ad70f6e6e113fc54855ef9f82f031de8be33e7c008c7c4cdd2"
+              "sourceVersion": "c28bcdfdd7cf8d46cc6f84b9986d6d46ef797e81923c2e2261e47439b1505544"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B02_PROMO-v001",
@@ -1713,7 +1995,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "7536a4aa9cd0bd52d2899fbf028e7130eec790799224ee6c2714f419894042f2"
+              "sourceVersion": "b6a73377c28724fb4bae4bf15b72ec090ff4ae49821f29776c6a5c2723345b66"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B03_PROMO-v001",
@@ -1732,7 +2014,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "72df9a9e9123b72421c68f10e1ffa3f009c4ac5a80e2eb611274bb2228af454a"
+              "sourceVersion": "11308a298676b85f81ab67f9a761b1e28d83a7c6a043e52b318ddbd428e3fac6"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B04_PROMO-v001",
@@ -1751,7 +2033,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "39ed6b6d264123da72fffb1153e2cedc6ce943ae5c6843ab00ec06a5dbc2b780"
+              "sourceVersion": "b1c21ee399c391d74c7f430aa8a19277ff82898d5736f5bf6553f878ba30f051"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B05_PROMO-v001",
@@ -1770,7 +2052,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "8e6d16767acc45372828b686174dcacc4b84fab75fad84c8c86e482d071c0a25"
+              "sourceVersion": "ac8612bda08e484f7b860e46df8c31bbcd42935a84cdd2d8d822ad276c4c66f8"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B06_PROMO-v001",
@@ -1789,7 +2071,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "13b36ee05e0fa442c24e0a031fad4baa4faa05905f6e5d5b3c2d517420e44ef6"
+              "sourceVersion": "ecfea20c80c820c757b5d5a4677983592102453ffd6c7e0f65c0a0d34b223d86"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B07_PROMO-v001",
@@ -1808,7 +2090,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "a25fe58128a1a01db53ec18aa27650c21200e5d640be45326e0c55f494e5287e"
+              "sourceVersion": "dcd1635399ac2362416f4a4bc8682fe0661319f5ffd4029cafb8a9d05e1e18f6"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B08_PROMO-v001",
@@ -1827,7 +2109,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "dcb74a568a4eeea6eacb9dfde2449bddbacafcfd3723c40c4b8d9be11d5fe8e9"
+              "sourceVersion": "ee3ed108babe8b4c582352b7c741a0884d0f801a7088a794f62725c9929b2b1e"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B09_PROMO-v001",
@@ -1846,7 +2128,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "64fb3ede513951f66f453abfb23a59982c76bc229e23bee54c55b478a7fba08b"
+              "sourceVersion": "335e47f823bbc93a17ee5d29f58f9816a1e4fd15110135bd45fbd04412055518"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B10_PROMO-v001",
@@ -1865,7 +2147,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "13b142763231b40d78d3310c09a4a21829c623ba60bda08920fe7a8b8f3b8cca"
+              "sourceVersion": "a9887550d08c4dd1da8beb88a872f0c683c150500d790d15b758e707e6b6cea3"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B11_PROMO-v001",
@@ -1884,7 +2166,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "2efdfaaef0a285ffda6b7ed6dd4ae002f8a5b41376322ba1360c6de4554d2658"
+              "sourceVersion": "cb17e5312f7f464bee29067a7cd7565e0d72d808f2e092609bd9e72bb105d794"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-B12_PROMO-v001",
@@ -1903,7 +2185,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "b2d64214676f6c25e0d050bc51abd4298800f139ef104e6e40d94d57495291cf"
+              "sourceVersion": "d1da85e32fafffba3e8ec8ce8c411bb352eafbc7358dff75a56cb3b3180f47c7"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A01_PROMO-v001",
@@ -1922,7 +2204,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "423f10363d4919c2ae17ca9478951d11f0f5ae7aa3d07433e4242714fd6954ac"
+              "sourceVersion": "4e3b79d4bbbdb49a8f3f57f721780ce7cf26cda873c0af5d3a7dbc7daf00fc66"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A02_PROMO-v001",
@@ -1941,7 +2223,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "687114349961e29d1fcf3985f4922bb3a6d26f4c2775fc9097e4d4572182f3e8"
+              "sourceVersion": "f78ce21cbc17bbd8d6445e9652242a80fd1793b85f893c34a8aa9f7d0b225319"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A03_PROMO-v001",
@@ -1960,7 +2242,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "6dbc0dde793abd474ababe292df0d11f1a0bd51f3fa726ed90f620a313202f0f"
+              "sourceVersion": "0da6ddc56146b27bdb6c96f7420ad329b154671a7c27a275e16f1f1ea8cd49a0"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A04_PROMO-v001",
@@ -1979,7 +2261,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "ed13782bb4ffcd80c71d8eeda196a2a938c913ab1f16711c460a333d5ffb02e5"
+              "sourceVersion": "b621e15f07d213ba6e1182d7aab4412233f12c5b603b661545648299215bdf58"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A05_PROMO-v001",
@@ -1998,7 +2280,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "852874b6c6380142a3bd52e0b826534434e5950a699dd1cb0c08f16bac5341d1"
+              "sourceVersion": "e03354e9c2de7dac642802db77a8776eb9aac5142711994ac0d3c5928026302c"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A06_PROMO-v001",
@@ -2017,7 +2299,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "8e74c096a448da11bfecf14a6647800fa3414f7ceecb13bdb28d9bab8bc6cb57"
+              "sourceVersion": "ff98bfa4971097c1491eaf8ed904ab8f812a4a72b96587ad6b4d5c536ff67d23"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A07_PROMO-v001",
@@ -2036,7 +2318,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "fb2880fca0d1d1a701f1de8f64c3b11a89e34efc603cd2cd50c36dfa3b8b7f7c"
+              "sourceVersion": "fdc506ae140cb79c23b904db0be77f4ba29ace26ded249105dd44f27e096d3cf"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A08_PROMO-v001",
@@ -2055,7 +2337,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "8b5acdf1190033605c94b00c94edbb28a7e65b41574841935e4bc534d13d0a9c"
+              "sourceVersion": "c7be544bb3b120947bdd7cecb04d4aacf567ed73425e75840ffd28fd30b8c75c"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A09_PROMO-v001",
@@ -2074,7 +2356,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "9b3b0768050d8551eedab14083692842796bc011673d53613cc96d387df678ce"
+              "sourceVersion": "0bec8ce114ab09e56b50fb9393fd37a2e9e250a31e1403e487126a7878920500"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A10_PROMO-v001",
@@ -2093,7 +2375,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "bf807b9e6ed9be7bbb799b7ea9de65fc45b47d990f4c094a9022e804ac5638b2"
+              "sourceVersion": "d0ec864ee294a16ea21af80af3eab2277d633e13d3a0f1d71f8a2beb123dd19c"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_GP-A11_PROMO-v001",
@@ -2112,7 +2394,7 @@
               },
               "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "78a2fec4a815f1fdc101225b359833b30682a65232252b5c474698dc600a2891"
+              "sourceVersion": "63b03c33b29b62ca8b8a05b8f4f6e27976d3b91c161baf8af811727d79ad52aa"
             }
           ]
         },
@@ -2154,7 +2436,7 @@
               },
               "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "5935b5252b3aed50cc878a37f53c5a3634b02ecc8ddf16c402ea2b9338f81f71"
+              "sourceVersion": "783ff9d1252d1759569f6ee798afab6ef858e967ba001264a98507a25299eb34"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_CPN-SVC-50_PROMO-v001",
@@ -2173,7 +2455,7 @@
               },
               "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "8f58ba0253ff54d9653e8f9b72ea6936feca6018425fd11cef36706f97653569"
+              "sourceVersion": "068c64b125c9fb794e4814e25f4e68b79251b28d99c59071f3347b8e4f70fc8b"
             }
           ]
         },
@@ -2215,7 +2497,7 @@
               },
               "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "fd4a7a9e76584c93acbdba88eb3161f7f7a5aeb00fc2848d7e2706d968442698"
+              "sourceVersion": "d3c828bdf10939cb903c6deda81443698fc6eed12ec9d48c07695bc3dd542a5e"
             }
           ]
         },
@@ -3278,32 +3560,23 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "releaseCode": "digitalCore:bundleParticipantPermissions",
-        "selectionPolicy": "EXPLICIT",
-        "prerequisites": [],
-        "sectionCode": "bundleParticipantPermissions",
         "moduleName": "digitalCore",
-        "displayName": "Digital bundle participant permissions",
-        "canonicalIdentity": "digitalCore",
+        "releaseCode": "digitalCore:bundleParticipantPermissions",
+        "sectionCode": "bundleParticipantPermissions",
         "dataType": "init",
         "version": "0.0.1",
-        "description": "Digital-owned permission required to compose, gift and publish self-owned bundles.",
-        "checksum": "df311ce222f297af63a848a13fb52c21e7b89592002ad442362cf5b775074c0a",
+        "checksum": "cefeccf352ca72d3fd91b90497869e0dc76fadcb52b516dfb4e8272d22d6cea9",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/digitalBundleParticipantPermissionHeader.js",
+          "init-v001/records/identity/digitalBundleParticipantPermissionData.js"
+        ],
+        "prerequisites": [],
         "owningDomain": "digitalCore",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
           "ALL"
-        ],
-        "sensitivity": "RESTRICTED",
-        "versioningPolicy": "NONE",
-        "publicationPolicy": "NONE",
-        "initialPublicationPolicy": "NONE",
-        "removalPolicy": "RETAIN",
-        "sourceRoot": "init-v002",
-        "declaredFiles": [
-          "init-v002/headers/identity/digitalBundleParticipantPermissionHeader.js",
-          "init-v002/records/identity/digitalBundleParticipantPermissionData.js"
         ]
       }
     },
@@ -3320,8 +3593,17 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
+        "moduleName": "digitalCore",
         "releaseCode": "digitalCore:participantAccessGroups",
-        "selectionPolicy": "EXPLICIT",
+        "sectionCode": "participantAccessGroups",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "9842ac6bf7f05acd0296c5b4359e9115e4b86764f4c9237592a51d627ef2f14a",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/digitalBundleParticipantUserGroupHeader.js",
+          "init-v001/records/identity/digitalBundleParticipantUserGroupData.js"
+        ],
         "prerequisites": [
           {
             "moduleName": "profile",
@@ -3334,33 +3616,15 @@
             "moduleName": "digitalCore",
             "sectionCode": "bundleParticipantPermissions",
             "version": "0.0.1",
-            "checksum": "df311ce222f297af63a848a13fb52c21e7b89592002ad442362cf5b775074c0a",
+            "checksum": "cefeccf352ca72d3fd91b90497869e0dc76fadcb52b516dfb4e8272d22d6cea9",
             "partition": "DEFAULT"
           }
         ],
-        "sectionCode": "participantAccessGroups",
-        "moduleName": "digitalCore",
-        "displayName": "Digital bundle participant access groups",
-        "canonicalIdentity": "digitalCore",
-        "dataType": "init",
-        "version": "0.0.1",
-        "description": "Customer participation group for self-owned Digital bundle composition, gifting and publication.",
-        "checksum": "13b322044fe3c617f8b68cacdb3aefe607cca370c3d4ede97ed9dbcd2465c3e0",
         "owningDomain": "digitalCore",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
           "ALL"
-        ],
-        "sensitivity": "RESTRICTED",
-        "versioningPolicy": "NONE",
-        "publicationPolicy": "NONE",
-        "initialPublicationPolicy": "NONE",
-        "removalPolicy": "RETAIN",
-        "sourceRoot": "init-v002",
-        "declaredFiles": [
-          "init-v002/headers/identity/digitalBundleParticipantUserGroupHeader.js",
-          "init-v002/records/identity/digitalBundleParticipantUserGroupData.js"
         ]
       }
     },
@@ -3382,11 +3646,11 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "8b79bc9a578a7e4ef174a8225a85633187bbbfbf26ccf1da0617fdcab7a47aa5",
-        "sourceRoot": "init-v004",
+        "checksum": "f5b2d89f39a04936797582fac096982b860c1ad8d76a38855d8738c23288f65f",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "init-v004/headers/identity/loyaltyParticipantUserGroupHeader.js",
-          "init-v004/records/identity/loyaltyParticipantUserGroupData.js"
+          "init-v001/headers/identity/loyaltyParticipantUserGroupHeader.js",
+          "init-v001/records/identity/loyaltyParticipantUserGroupData.js"
         ],
         "prerequisites": [
           {
@@ -3400,7 +3664,7 @@
             "moduleName": "loyaltyWallet",
             "sectionCode": "transferPermissions",
             "version": "0.0.1",
-            "checksum": "345060888d02ab4f321b92a0367826e487666f37469acf21c1a0e3f3e6ca4ded",
+            "checksum": "df049e825596d034535eba67b80fa9c8b3ebafc71250696a7a85e385b5ba5770",
             "partition": "DEFAULT"
           }
         ],
@@ -3430,11 +3694,11 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "e0b1e1ac875f08347d72935fd4f1a2d8fd208991a85119770cc289df3babea34",
-        "sourceRoot": "init-v003",
+        "checksum": "2c87defb4858a03d530b72058aaa59e86f21f8f1ac41683ff87cbc1dbce0f940",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "init-v003/headers/identity/wasteCarbonParticipantUserGroupHeader.js",
-          "init-v003/records/identity/wasteCarbonParticipantUserGroupData.js"
+          "init-v001/headers/identity/wasteCarbonParticipantUserGroupHeader.js",
+          "init-v001/records/identity/wasteCarbonParticipantUserGroupData.js"
         ],
         "prerequisites": [
           {
@@ -3478,11 +3742,11 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "634c6f7296417aad28c36ba38f45e747fa7d47d2105ab566351896a7c0616316",
-        "sourceRoot": "init-v002",
+        "checksum": "c1ac1f50a1e0b416d01fa618ba4965ef3089cb87946f22cb2d3a44050e156c3a",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "init-v002/headers/identity/wasteMaterialValueParticipantUserGroupHeader.js",
-          "init-v002/records/identity/wasteMaterialValueParticipantUserGroupData.js"
+          "init-v001/headers/identity/wasteMaterialValueParticipantUserGroupHeader.js",
+          "init-v001/records/identity/wasteMaterialValueParticipantUserGroupData.js"
         ],
         "prerequisites": [
           {
@@ -3588,32 +3852,23 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "releaseCode": "circa.ewaste:customerDigitalParticipationAssignments",
-        "selectionPolicy": "EXPLICIT",
-        "prerequisites": [],
-        "sectionCode": "customerDigitalParticipationAssignments",
         "moduleName": "circa.ewaste",
-        "displayName": "Circa customer Digital participation assignments",
-        "canonicalIdentity": "circa.ewaste",
+        "releaseCode": "circa.ewaste:customerDigitalParticipationAssignments",
+        "sectionCode": "customerDigitalParticipationAssignments",
         "dataType": "sample",
         "version": "0.0.1",
-        "description": "Credential-free assignment of the Digital-owned bundle participant group to existing Circa sample customers.",
-        "checksum": "260de6162eeb799cb140795b7b4f94314c23436ade8e36cee74814451a73eca4",
+        "checksum": "e014cf89cf83ed48165a6166b800e8ad91561833e7a9181c9762b6a21c721862",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/customer-digital-participation/headers/circaCustomerDigitalParticipationHeader.js",
+          "sample-v001/customer-digital-participation/records/circaCustomerDigitalParticipationData.js"
+        ],
+        "prerequisites": [],
         "owningDomain": "profile",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
           "ALL"
-        ],
-        "sensitivity": "RESTRICTED",
-        "versioningPolicy": "NONE",
-        "publicationPolicy": "NONE",
-        "initialPublicationPolicy": "NONE",
-        "removalPolicy": "RETAIN",
-        "sourceRoot": "sample-v005",
-        "declaredFiles": [
-          "sample-v005/customer-digital-participation/headers/circaCustomerDigitalParticipationHeader.js",
-          "sample-v005/customer-digital-participation/records/circaCustomerDigitalParticipationData.js"
         ]
       }
     },
@@ -3635,14 +3890,14 @@
         "sectionCode": "operations",
         "dataType": "sample",
         "version": "0.0.2",
-        "checksum": "6568b54a49a543904041c491fdfe97726587076f59fb2155a06d94de0454ce66",
-        "sourceRoot": "sample-v007",
+        "checksum": "8556ee0602702914c35d06f539d2084056456685a69c6a6aa2d03ac71aabd0d6",
+        "sourceRoot": "sample-v001",
         "declaredFiles": [
-          "sample-v007/operations/headers/circaOperationsHeader.js",
-          "sample-v007/operations/records/circaEnterpriseData.js",
-          "sample-v007/operations/records/circaOperationalEmployeeData.js",
-          "sample-v007/operations/records/circaOperationalScopeData.js",
-          "sample-v007/operations/records/circaOutletAddressData.js"
+          "sample-v001/operations/headers/circaOperationsHeader.js",
+          "sample-v001/operations/records/circaEnterpriseData.js",
+          "sample-v001/operations/records/circaOperationalEmployeeData.js",
+          "sample-v001/operations/records/circaOperationalScopeData.js",
+          "sample-v001/operations/records/circaOutletAddressData.js"
         ],
         "prerequisites": [],
         "owningDomain": "circa.ewaste",
@@ -3812,36 +4067,27 @@
       "server": "loyaltyServer",
       "enterpriseCode": "default",
       "release": {
-        "releaseCode": "circa.ewaste:loyalty",
-        "selectionPolicy": "EXPLICIT",
-        "prerequisites": [],
-        "sectionCode": "loyalty",
         "moduleName": "circa.ewaste",
-        "displayName": "Circa loyalty sample",
-        "canonicalIdentity": "circa.ewaste",
+        "releaseCode": "circa.ewaste:loyalty",
+        "sectionCode": "loyalty",
         "dataType": "sample",
         "version": "0.0.2",
-        "description": "Explicit local Circa sample loyalty records",
-        "checksum": "bc657219febc50e8547a9514357ee6f7ab3733a9a08fcaea507c7f150406237a",
+        "checksum": "178341374702d959b40c8008459c83fcf2ac2850ae60673f0c43cbbbcc55d4d6",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js",
+          "sample-v001/loyalty/records/circaLoyaltyProgramData.js",
+          "sample-v001/loyalty/records/circaLoyaltyRewardTypeData.js",
+          "sample-v001/loyalty/records/circaLoyaltyWalletData.js",
+          "sample-v001/loyalty/records/circaLoyaltyWalletRewardBalanceData.js",
+          "sample-v001/loyalty/records/circaRewardLedgerEntryData.js"
+        ],
+        "prerequisites": [],
         "owningDomain": "loyalty",
         "lifecycle": "REFERENCE",
         "destinationRole": "LOYALTY",
         "environmentScope": [
           "ALL"
-        ],
-        "sensitivity": "INTERNAL",
-        "versioningPolicy": "NONE",
-        "publicationPolicy": "NONE",
-        "initialPublicationPolicy": "NONE",
-        "removalPolicy": "RETAIN",
-        "sourceRoot": "sample-v004",
-        "declaredFiles": [
-          "sample-v004/loyalty/headers/circaLoyaltySampleHeader.js",
-          "sample-v004/loyalty/records/circaLoyaltyProgramData.js",
-          "sample-v004/loyalty/records/circaLoyaltyRewardTypeData.js",
-          "sample-v004/loyalty/records/circaLoyaltyWalletData.js",
-          "sample-v004/loyalty/records/circaLoyaltyWalletRewardBalanceData.js",
-          "sample-v004/loyalty/records/circaRewardLedgerEntryData.js"
         ]
       }
     },
@@ -3896,7 +4142,7 @@
         "sectionCode": "commerce",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "6cc0d6f150a8d5598a8584f68c2a454a6427394f31f35006ce9ca0d935765c5a",
+        "checksum": "2677866cca45f52f6db3e240d4f783f56f0892f0ef657c3ba175fbc4eee20114",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/commerce/headers/circaCommerceCatalogHeader.js",
@@ -4536,6 +4782,72 @@
         "moduleName": "circa.ewaste",
         "path": "data/sample-v001/content/assets/circa-media/assetManifest.js",
         "checksum": "4cd605fa6afbf5e5d554ad2df11564542c0ace5f80ac5b471428d6236b27badc"
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRetailParticipantReadAssignment",
+      "descriptor": {
+        "code": "circa.ewaste:circaRetailParticipantReadAssignment",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRetailParticipantReadAssignment",
+        "sectionCode": "circaRetailParticipantReadAssignment",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "7716f75cae950212219de30081f1248f7618efc3cbc9e43b863d366b2b777be2",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/participant-read/headers/circaRetailParticipantReadAssignmentHeader.js",
+          "sample-v001/participant-read/records/circaRetailParticipantReadAssignmentData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaRetailParticipantTransactionAssignment",
+      "descriptor": {
+        "code": "circa.ewaste:circaRetailParticipantTransactionAssignment",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRetailParticipantTransactionAssignment",
+        "sectionCode": "circaRetailParticipantTransactionAssignment",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "37f36d055e932bdcd364ee39ae7d0c56c2e3d63633a718aafc143be491dc5565",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/participant-transactions/headers/circaRetailParticipantTransactionAssignmentHeader.js",
+          "sample-v001/participant-transactions/records/circaRetailParticipantTransactionAssignmentData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL"
+        ]
       }
     }
   ],

@@ -9,7 +9,7 @@
 
  */
 "use strict";
-/** @module circa.ewaste/test/circaItemSimulationSelection @description Checks the approved native-local simulation selection and all 29 application bundles through framework consumers, not installed provider, issuance or real-delivery acceptance. @layer test @owner circa.ewaste */
+/** @module circa.ewaste/test/circaItemSimulationSelection @description Checks inherited standard staff-recording selection and refusal of unselected integrated delivery for 29 unchanged application bundles; not live redemption acceptance. @layer test @owner circa.ewaste */
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const { test } = require("node:test");
@@ -21,14 +21,16 @@ const boundary = service("nodics.commerce/modules/fulfillment/modules/fulfillmen
 const campaigns = Object.values(require("../data/sample-v001/commerce/records/circaPromotionData"))
   .filter(row => row.actions?.benefitType === "ITEM");
 
-test("native Local explicitly selects simulation while Docker and framework defaults remain unqualified", () => {
+test("native Local and Docker inherit unselected integrated benefits and the standard merchant-screen provider", () => {
   for (const server of ["commerceServer", "commerceStagedServer"]) {
     const native = loadRuntime(server, "kickoffLocal");
     const docker = loadRuntime(server, "kickoffDockerLocal");
     assert.equal(native.environment.class, "LOCAL");
-    assert.equal(native.promotion.merchantBenefits.itemEvidenceMode, "SIMULATION");
-    assert.equal(native.promotion.merchantBenefits.itemEvidenceService, "DefaultFulfillmentItemSimulationService");
-    assert.equal(native.promotion.merchantBenefits.qualified, server === "commerceServer");
+    assert.equal(native.promotion.merchantBenefits.enabled, false);
+    assert.equal(native.digitalCore.merchantRedemption.providerService, "DefaultDigitalCommerceMerchantScreenProviderService");
+    assert.equal(native.promotion.merchantBenefits.itemEvidenceMode, "VERIFIED");
+    assert.equal(native.promotion.merchantBenefits.itemEvidenceService, null);
+    assert.equal(native.promotion.merchantBenefits.qualified, false);
     assert.deepEqual(native.fulfillmentCore.itemSimulation.environmentAllowlist, ["kickoffLocal"]);
     assert.equal(native.fulfillmentCore.itemSimulation.enabled, true);
     assert.equal(docker.promotion.merchantBenefits.itemEvidenceMode, "VERIFIED");
@@ -36,7 +38,7 @@ test("native Local explicitly selects simulation while Docker and framework defa
   }
 });
 
-test("all 29 Circa ITEM promises retain their exact quantities and produce only unverified simulations", async t => {
+test("all 29 Circa ITEM promises remain unchanged and cannot invoke unselected integrated delivery", async t => {
   const previous = { CONFIG: global.CONFIG, SERVICE: global.SERVICE, CLASSES: global.CLASSES, NODICS: global.NODICS };
   t.after(() => Object.assign(global, previous));
   const configuration = loadRuntime("commerceServer", "kickoffLocal");
@@ -56,19 +58,15 @@ test("all 29 Circa ITEM promises retain their exact quantities and produce only 
       const request = { tenant: campaign.tenant, enterpriseCode: "GREENPERKS_ONLINE",
         storeCode, storeRevision: 1, targetCode: "isolated-redemption",
         payload: { merchantReceiptReference: "SIM:" + campaign.code + ":" + storeCode } };
-      const result = await itemOwner.validate(request, original, coupon);
-      assert.equal(result.simulated, true, campaign.code);
-      assert.equal(result.verified, false, campaign.code);
-      assert.equal(result.sourceStage, "SIMULATED_ITEMS");
-      assert.equal(result.storeCode, storeCode);
-      assert.equal(result.deliveredAt, undefined);
-      assert.deepEqual(result.items, itemOwner.items(campaign.actions.items));
+      assert.equal(itemOwner.simulationSelected(), false);
+      await assert.rejects(itemOwner.validate(request, original, coupon), { code: "ERR_PROMOTION_BENEFIT_UNCONFIRMED" });
+
     }
   }
   assert.deepEqual(campaigns, before);
 });
 
-test("only native Online Commerce selects reviewed coupon, monetary and ownership admission", () => {
+test("native Online Commerce preserves coupon and ownership admission while integrated benefits remain unqualified", () => {
   for (const [server, environment] of [["commerceServer", "kickoffLocal"], ["commerceStagedServer", "kickoffLocal"],
     ["commerceServer", "kickoffDockerLocal"]]) {
     const p = loadRuntime(server, environment);
@@ -81,9 +79,9 @@ test("only native Online Commerce selects reviewed coupon, monetary and ownershi
     assert.equal(p.digitalCore.merchantRedemption.storeScope.enabled, selected);
     assert.equal(p.digitalCore.merchantRedemption.storeScope.qualified, selected);
     assert.equal(p.apiExposure.categories.commerceSellerAuthorizationManagement.enabled, selected);
-    assert.equal(p.promotion.merchantBenefits.qualified, selected);
-    assert.equal(p.promotion.merchantBenefits.pricedSource.qualified, selected);
-    assert.equal(p.digitalCore.merchantRedemption.pricedProvider.qualified, selected);
+    assert.equal(p.promotion.merchantBenefits.qualified, false);
+    assert.equal(p.promotion.merchantBenefits.pricedSource.qualified, false);
+    assert.equal(p.digitalCore.merchantRedemption.pricedProvider.qualified, false);
     assert.equal(p.pricing.merchantEvidence.qualified, selected);
     assert.equal(p.digitalCore.digitalOwnership.qualified, selected);
     assert.deepEqual(p.promotion.setupPacing, selected

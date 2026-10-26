@@ -17,6 +17,8 @@ const guidanceProfile = require(
 const snapshots = require("./fixtures/circaResolvedDeploymentPolicyBeforeExtraction.json");
 const demo = require("../config/properties");
 const retiredSelectors = new Set([
+  // Historical snapshots retain this removed adapter selection; current roles must not.
+  "order.refunds.defaultOwnerPort",
   "eWaste.catalogue.discoveryBatchSize",
   "eWaste.marketplace.carbonRewardTypeCode",
   "eWaste.marketplace.carbonScale",
@@ -42,9 +44,18 @@ for (const snapshot of snapshots)
         const actual =
           selector.split(".").reduce((value, key) => value?.[key], runtime) ??
           null;
+        if (selector === "bidding.stores.circaMainStore.enterpriseCode" && snapshot.environment === "kickoffLocal" && expected !== null) {
+          assert.equal(actual, "GREENPERKS_ONLINE", "Reviewed marketplace Enterprise owns this Store; the historical snapshot is not current authority");
+          continue;
+        }
         if (retiredSelectors.has(selector) || selector.startsWith("eWaste.journeys.") ||
             selector.startsWith("waste.projectOverlay.")) {
           assert.equal(actual, null, `${selector} must not restore retired configuration`);
+          continue;
+        }
+        if (selector.startsWith("product.localization.") &&
+            !activeModuleNames(runtime).includes("product")) {
+          assert.equal(actual, null, "Inactive Product contributes no locale defaults");
           continue;
         }
         if (selector === "eWaste.conversation.rewardGuidance" && expected !== null) {

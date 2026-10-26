@@ -1,5 +1,36 @@
 # Circa Reference Composition Contract
 
+The [Enterprise role baseline](llm/contracts/enterprise-role-baseline.md) uses
+framework-owned capability definitions and exact customer identity assignments.
+Do not add task-specific profiles. Verify actual Profile catalogue names before
+broader profile mapping; existing native Admin handles administrative tests and
+participant journeys retain their original actors. Internal groups are not profiles.
+Preserve bounded operators, original Enterprise bindings and DENY scopes. The approved
+seven Enterprise demo admins compose existing Digital/Loyalty internal groups
+in initial employee data only; retain init90 definitions, operations95 and
+additive assignments100. Existing installations require exact additive Profile
+updates, never replay of the employee snapshot or changes to role definitions. Keep
+Init definitions before the late Sample assignment, never cross-type manifest
+dependencies. Existing Local adoption is a separately reviewed delta, not a
+finance or Employee-snapshot replay. Superseded one-off assignments are removed;
+the retained observation plan requires separate successor review before aggregate
+setup can be CURRENT. Never rewrite an admitted journal to match changed source.
+
+The optional fixed-expiry rollout uses independently selected budget/issuance
+instructions for 35 separately authored approved new identities. Follow
+`llm/contracts/local-fixed-expiry-operational-selection.md`. Preserve all approved
+limits, exact policy pins and the new budget contribution checksum in issuance.
+Never replay the old installed releases or make these instructions automatic
+baseline prerequisites. No grants, counters, consent or token records belong in
+the instruction payload; Promotion and nImport remain the only executing owners.
+
+The remaining three approved RenewWorks/LoopCycle replacements use
+`llm/contracts/remaining-fixed-expiry-operational-selection.md`. Preserve the
+3000/5000/3000 caps as first-time admissions, no additional amount. Their source
+version-3 fingerprints are planned values requiring actual governed readback,
+not observed approval. SuperAdmin review is not issuer authoring authority;
+never rewrite legacy policies, replay the 35 or drop intended Store coverage.
+
 Follow the project root and modules AGENTS. This `circa.ewaste` reference extension
 owns demo data/composition ONLY: Circa identity, site composition, branding,
 content, sample data and explicit release/scenario composition selections.
@@ -91,16 +122,15 @@ installed payload bytes, release identities, historic observations and completed
 transactions, including stable codes containing `Local`. These are identifiers,
 not runtime admission predicates. Never replay sample identities or finance.
 
-The human additionally approved explicitly simulated ITEM delivery for native
-testing and keeping already-redeemed benefit reversals disabled. `kickoffLocal`
-currently selects the framework's SIMULATION owner and exact environment
-allowlist; Docker remains off. Other demo environments require their own explicit
-configuration selection and qualification. Preserve all 29 original bundle quantities and
-visible simulated/unverified labels with SIM: receipt handles. This is not real
-delivery, Store/consent/private-persistence qualification or import authorization
-for installed history. Unused coupon and original asset refunds retain their
-separate policies. See the local application contract; no duplicate guide belongs
-in this project module's documentation data.
+Current Local standard Axis coupon redemption inherits Promotion merchantBenefits
+disabled, VERIFIED mode and no item evidence service, plus Digital's standard
+merchant-screen provider with pricedProvider unqualified. Do not copy these
+framework defaults into Kickoff. Existing Fulfillment simulator enablement does
+not select it for Promotion. Standard recording attests external use only; it is
+not verified goods delivery or simulation. Preserve historical simulation receipts
+and all 29 original ITEM quantities without replay. Isolated framework tests may
+explicitly select simulation; do not rewrite those fixtures to match deployment.
+No source configuration test establishes live redemption or grants authority.
 
 Approved Local human roles use separate sample contributions: credit role then
 credit staff assignment for only the original online administrator, and opening
@@ -160,19 +190,19 @@ selection. Preserve its original transfer refund metadata before genuine sale
 reservation, full captured POINTS proceeds to the original seller and NONE
 carbon settlement. Never patch an older retained sale to add refund eligibility.
 Product variants and both localization families must retain DIGITAL attributes.
-The installed sample-v001 sections remain immutable. The separately selected
-sample-v001 circaAssetClassification section contains only ten en/ar Product
-localization successors for the five original assets. It adds DIGITAL_OWNERSHIP
-delivery and DIGITAL_COMMERCE inventory discriminators without changing any
-other source value. Import through deployment-owned nImport version-aware
-saveAll, then separately select circaAssetClassificationPublicationPlan for five
-ordinary governed Product successor publications under GREENPERKS_ONLINE.
+The unreleased commerce baseline contains the five assets' DIGITAL_OWNERSHIP
+delivery and DIGITAL_COMMERCE inventory discriminators in roots, variants and
+both localization families. All 43 Product roots and their en/ar localizations
+reference canonical Media codes. Do not restore separate classification/media
+patch imports or duplicate publication selections. Import commerce through the
+deployment-owned nImport boundary, then select circaCataloguePublicationPlan
+for the 46-root catalogue under GREENPERKS_ONLINE.
 The fresh plan requires draft root version 0 and seals source version 1; differing
 native root/business values require reviewed reconciliation, not plan-pin retargeting.
 Do not append these steps to an already admitted circa setup plan or rewrite
-prior journals. The inert test/fixtures/circaAssetClassificationSetupSelection.json
-supplies the required BEFORE/AFTER selections for a separately reviewed forward
-setup profile; native profile/observation digest selection stays deployment-owned.
+prior journals. Existing test evidence and frozen historical fixtures remain
+historical; consolidating source never rewrites installed receipts or authorizes
+fresh initialization. Native profile selection stays deployment-owned.
 Unsupported asset delivery must reject through its owner, never fall back to
 physical balances. Do not manufacture seller consent, campaign budgets or item
 fulfillment from catalogue labels or the demoPurchaseUnits quantity target.
@@ -208,3 +238,9 @@ Kickoff extension templates retain their supported extension points.
 Impact assessment and failure/retry behavior belong to eWaste. Reference consumers
 must preserve its prepared assessment and explicit partial/unknown coverage;
 demo composition cannot turn failed assessment into an empty ready draft.
+
+The non-importable test/fixtures/circaMonetaryOutletProposal.json is an unreleased
+source proposal, not an installed receipt. Its sourceTerms path/hash pins current
+canonical campaign bytes for focused tests. Refresh that source reference when
+reviewed source changes, preserve exact checksum validation and unapproved/no-
+operational-authority metadata, and never rewrite historical acceptance receipts.

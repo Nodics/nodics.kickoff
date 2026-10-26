@@ -1,0 +1,220 @@
+{
+  "contractVersion": 1,
+  "importable": false,
+  "sourceRoot": "sample-v001",
+  "purpose": "APPROVED_LOCAL_E14_E10_OWNER_COMMAND_INPUTS_NOT_INSTALLATION_EVIDENCE",
+  "tenant": "default",
+  "enterpriseCode": "GREENPERKS_RETAIL",
+  "storeCode": "circaMainStore",
+  "priceBookRead": {
+    "method": "POST",
+    "path": "/nodics/pricing/v0/pricebook/safe-search",
+    "headers": {
+      "X-Enterprise-Code": "GREENPERKS_RETAIL"
+    },
+    "body": {
+      "pageNumber": 1,
+      "pageSize": 10,
+      "filters": {
+        "operator": "AND",
+        "items": [
+          {
+            "field": "code",
+            "operator": "EQUALS",
+            "value": "circaLocalGreenPerksAed"
+          }
+        ]
+      }
+    }
+  },
+  "bindings": {
+    "bookVersionId": "Copy the exact active AED book version from the fresh governed Pricing read into each priceCreate.command.bookVersionId.",
+    "packageAndPriceVersions": "Zero is the expected first owner-created version, not a supplied create field. Require independent readback versionId 0 for both distinct new identities before recording each agreement; otherwise stop and reconcile."
+  },
+  "records": [
+    {
+      "productCreate": {
+        "targetEnterpriseCode": "GREENPERKS_RETAIL",
+        "command": {
+          "code": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025",
+          "name": "Local service package fixed",
+          "catalogVersion": "circa-local-service-v001",
+          "productType": "SERVICE",
+          "fulfillmentStrategy": "SERVICE",
+          "status": "ACTIVE"
+        }
+      },
+      "priceCreate": {
+        "targetEnterpriseCode": "GREENPERKS_RETAIL",
+        "command": {
+          "code": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025_AED",
+          "priceBookCode": "circaLocalGreenPerksAed",
+          "productCode": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025",
+          "unitAmount": "0",
+          "currency": "AED",
+          "minQuantity": "1"
+        }
+      },
+      "agreementRecord": {
+        "code": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025_AGREEMENT",
+        "enterpriseCode": "GREENPERKS_RETAIL",
+        "expectedRevision": 0,
+        "commandId": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025_AGREEMENT_CREATE",
+        "terms": {
+          "model": "FIXED_PRICE",
+          "paymentTerms": "PREPAID",
+          "packageRef": {
+            "module": "product",
+            "schema": "product",
+            "code": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025",
+            "versionId": 0
+          },
+          "priceRef": {
+            "module": "pricing",
+            "schema": "priceRow",
+            "code": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025_AED",
+            "versionId": 0
+          },
+          "services": "Synthetic Local coupon discovery visibility demonstration.",
+          "allowances": "Visibility for the selected existing coupon during the stated demonstration window.",
+          "effectiveFrom": "2026-10-25T00:00:00.000Z",
+          "effectiveTo": "2026-11-08T19:59:59.999Z",
+          "serviceStart": "2026-10-25T00:00:00.000Z",
+          "paymentSchedule": "Zero AED Local demonstration; no payment due and no automatic charging.",
+          "renewal": {
+            "mode": "NONE"
+          },
+          "terminationTerms": "Demonstration coverage ends at the stated end time; no renewal.",
+          "financialTreatment": "Zero consideration. No invoice, debit, funding, refund or prorated credit is requested.",
+          "evidenceRef": "LOCAL-DEMO-E14-E10-20261025",
+          "financialReferences": [],
+          "benefits": [
+            {
+              "code": "visibility",
+              "source": "PACKAGE_INCLUDED",
+              "targetType": "SELECTED_COUPONS",
+              "productCodes": [
+                "CIRCA_E07_CERTIFICATES_20261025"
+              ],
+              "storeCode": "circaMainStore",
+              "validFrom": "2026-10-25T00:00:00.000Z",
+              "validTo": "2026-11-08T19:59:59.999Z",
+              "evidenceRef": "LOCAL-DEMO-E14-E10-20261025"
+            }
+          ]
+        }
+      },
+      "searchRule": {
+        "code": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025_BOOST",
+        "name": "Local package_included visibility",
+        "storeCode": "circaMainStore",
+        "locale": "en",
+        "scopeType": "GLOBAL",
+        "status": "APPROVED",
+        "validFrom": "2026-10-25T00:00:00.000Z",
+        "validTo": "2026-11-08T19:59:59.999Z",
+        "actions": [],
+        "priority": 100,
+        "revision": 1,
+        "benefitRef": {
+          "agreementCode": "CIRCA_LOCAL_VISIBILITY_FIXED_20261025_AGREEMENT",
+          "enterpriseCode": "GREENPERKS_RETAIL",
+          "benefitCode": "visibility"
+        }
+      }
+    },
+    {
+      "productCreate": {
+        "targetEnterpriseCode": "GREENPERKS_RETAIL",
+        "command": {
+          "code": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025",
+          "name": "Local service package subscription",
+          "catalogVersion": "circa-local-service-v001",
+          "productType": "SERVICE",
+          "fulfillmentStrategy": "SERVICE",
+          "status": "ACTIVE"
+        }
+      },
+      "priceCreate": {
+        "targetEnterpriseCode": "GREENPERKS_RETAIL",
+        "command": {
+          "code": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025_AED",
+          "priceBookCode": "circaLocalGreenPerksAed",
+          "productCode": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025",
+          "unitAmount": "0",
+          "currency": "AED",
+          "minQuantity": "1"
+        }
+      },
+      "agreementRecord": {
+        "code": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025_AGREEMENT",
+        "enterpriseCode": "GREENPERKS_RETAIL",
+        "expectedRevision": 0,
+        "commandId": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025_AGREEMENT_CREATE",
+        "terms": {
+          "model": "SUBSCRIPTION",
+          "paymentTerms": "PREPAID",
+          "packageRef": {
+            "module": "product",
+            "schema": "product",
+            "code": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025",
+            "versionId": 0
+          },
+          "priceRef": {
+            "module": "pricing",
+            "schema": "priceRow",
+            "code": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025_AED",
+            "versionId": 0
+          },
+          "services": "Synthetic Local coupon discovery visibility demonstration.",
+          "allowances": "Visibility for the selected existing coupon during the stated demonstration window.",
+          "effectiveFrom": "2026-10-25T00:00:00.000Z",
+          "effectiveTo": "2026-11-08T19:59:59.999Z",
+          "serviceStart": "2026-10-25T00:00:00.000Z",
+          "paymentSchedule": "Zero AED Local demonstration; no payment due and no automatic charging.",
+          "renewal": {
+            "mode": "NONE"
+          },
+          "terminationTerms": "Demonstration coverage ends at the stated end time; no renewal.",
+          "financialTreatment": "Zero consideration. No invoice, debit, funding, refund or prorated credit is requested.",
+          "evidenceRef": "LOCAL-DEMO-E14-E10-20261025",
+          "financialReferences": [],
+          "benefits": [
+            {
+              "code": "visibility",
+              "source": "ADD_ON",
+              "targetType": "SELECTED_COUPONS",
+              "productCodes": [
+                "CIRCA_E07_BOTH_20261025"
+              ],
+              "storeCode": "circaMainStore",
+              "validFrom": "2026-10-25T00:00:00.000Z",
+              "validTo": "2026-11-08T19:59:59.999Z",
+              "evidenceRef": "LOCAL-DEMO-E14-E10-20261025",
+              "additionalBenefitTerms": "Zero AED Local add-on visibility; no charge or automatic extension."
+            }
+          ],
+          "billingPeriod": "Monthly descriptive schedule only; zero AED; no recurring billing."
+        }
+      },
+      "searchRule": {
+        "code": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025_BOOST",
+        "name": "Local add_on visibility",
+        "storeCode": "circaMainStore",
+        "locale": "en",
+        "scopeType": "GLOBAL",
+        "status": "APPROVED",
+        "validFrom": "2026-10-25T00:00:00.000Z",
+        "validTo": "2026-11-08T19:59:59.999Z",
+        "actions": [],
+        "priority": 100,
+        "revision": 1,
+        "benefitRef": {
+          "agreementCode": "CIRCA_LOCAL_VISIBILITY_SUBSCRIPTION_20261025_AGREEMENT",
+          "enterpriseCode": "GREENPERKS_RETAIL",
+          "benefitCode": "visibility"
+        }
+      }
+    }
+  ]
+}

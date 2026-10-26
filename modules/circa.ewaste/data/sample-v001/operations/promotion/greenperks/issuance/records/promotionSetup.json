@@ -4,455 +4,455 @@
       "promotionCode": "CIRCA_COUPON_GP-C01_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C01_PROMO",
-      "policyFingerprint": "c6c3a555d5c1b7c9de0739e9d2b06f7d507dd7d9e28df6e1f3051ee4b8d6eda3",
+      "policyFingerprint": "6adb2c39354d83a637146077035521bc1680f3ec6e7079c9b7b1c474afdb4083",
       "commandReference": "opening-CIRCA_COUPON_GP-C01_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C02_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C02_PROMO",
-      "policyFingerprint": "7942f8f23f0fc8db81b748fa3f66f6a89ce12ee3e25551765bb80c37b4811f62",
+      "policyFingerprint": "fd340891b183b79e5c647d83bdd9acf73b28a8dcbf5161de0332138906a71fc9",
       "commandReference": "opening-CIRCA_COUPON_GP-C02_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C03_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C03_PROMO",
-      "policyFingerprint": "bdb5457580e617fdbb19fed12c89f6c7b9a8c10751555393ae1c6bfe50fe4d49",
+      "policyFingerprint": "874e521effbc6cb8e4826af4fe2363682ce61bfe5127bbe2c41f4321825f4f69",
       "commandReference": "opening-CIRCA_COUPON_GP-C03_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C04_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C04_PROMO",
-      "policyFingerprint": "938ddbd19614065d66c414c0f3204000a84e8b8debdb8f8dc76b0c347b579306",
+      "policyFingerprint": "30e026affdea8750097c818b7cad12c7ef27e4069d289bfa1bf44048522918a3",
       "commandReference": "opening-CIRCA_COUPON_GP-C04_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C05_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C05_PROMO",
-      "policyFingerprint": "b6088b78709a429e46a6415ef02adef66c7c351ceef6d82028f75496b387c197",
+      "policyFingerprint": "888c9e2f55ae27a00aeaa50aea93752f1e79e47f9c610504896394db63f287c1",
       "commandReference": "opening-CIRCA_COUPON_GP-C05_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C06_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C06_PROMO",
-      "policyFingerprint": "cf1a0d593e411d835d3b8c8d7548b1b9e4d57c3f4c55090704c102ed82da6802",
+      "policyFingerprint": "34926bf3d5e32e1a53e173b2d183e6229acfee2a51609a9e4b9aedc712bd9395",
       "commandReference": "opening-CIRCA_COUPON_GP-C06_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C07_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C07_PROMO",
-      "policyFingerprint": "4086aa3fdfc6974171115cfed623fd31e7149ada2c00188e77a4d95fbe09fb8a",
+      "policyFingerprint": "809a8bc6ceb9b74f910ac6ba27230173639803e4558b89651c0b93ab8532ac3c",
       "commandReference": "opening-CIRCA_COUPON_GP-C07_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C08_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C08_PROMO",
-      "policyFingerprint": "a91ea43d0594ca87349900ece23ce3a96065359a2fff98d92f3165ac608a7d48",
+      "policyFingerprint": "a5c476bb3eb062d5db83b89e4103af58817734d61bac27fca122270b005f4aff",
       "commandReference": "opening-CIRCA_COUPON_GP-C08_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C09_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C09_PROMO",
-      "policyFingerprint": "570870a73da1ddafd4fd500bcd55a8b1333463ec68e4d256559ddeb3f4cfb33a",
+      "policyFingerprint": "dc8f5e041a039204749ae089661b7578269a8ecf6997294281e55cd0159508eb",
       "commandReference": "opening-CIRCA_COUPON_GP-C09_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C10_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C10_PROMO",
-      "policyFingerprint": "ff84945402fce0b331c216cb84a8a69411ebd76f5ad846abdd410518e9e62bf4",
+      "policyFingerprint": "525f6b54bd362191e899a546b8dcbc72024204aa71e7c181f71aff857beb9dd4",
       "commandReference": "opening-CIRCA_COUPON_GP-C10_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C11_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C11_PROMO",
-      "policyFingerprint": "80ee6625a870f144bb5d63a2b75a47abc8a9818c294c91fd8b3d51fd41b2a9a5",
+      "policyFingerprint": "5ae37d8c5c62810fb76c1d801e31702796a07454a672dcd3aa9960275b45613d",
       "commandReference": "opening-CIRCA_COUPON_GP-C11_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-C12_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-C12_PROMO",
-      "policyFingerprint": "22a6e0ad8df7c2b0e6771b301121b3601e1f9aaa17b5100185da39392317bdbe",
+      "policyFingerprint": "39b2117979cb6d56b52810055e9e49cff70172eb5f6bec83509de69e6a0d0f3a",
       "commandReference": "opening-CIRCA_COUPON_GP-C12_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B01_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B01_PROMO",
-      "policyFingerprint": "3bc5c87ed3c9160afb1d6d63fb29804c9fec9a7c30576726e03bcc88698ef5a1",
+      "policyFingerprint": "46571240a292902322b56bd5922e05ba718c0accbcedff7a2b66eba78a16366e",
       "commandReference": "opening-CIRCA_COUPON_GP-B01_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B02_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B02_PROMO",
-      "policyFingerprint": "582a1b0e8f5e15369b832b0b288142d8274148c0b61d83c441028588b2e7764c",
+      "policyFingerprint": "ee29913f15fc0425afc7c48674e3642c1a4f6620fe7eb93c41c423398bb9fe0b",
       "commandReference": "opening-CIRCA_COUPON_GP-B02_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B03_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B03_PROMO",
-      "policyFingerprint": "a3548fbbc9c1a4d763f8c00c3a44288b84492ba67427954fbead481d44ab978e",
+      "policyFingerprint": "bca03be8dc865091c00648888eb02e74945fc253c100d3fed94c4867fd83d221",
       "commandReference": "opening-CIRCA_COUPON_GP-B03_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B04_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B04_PROMO",
-      "policyFingerprint": "520cd100fabdf9422112ac15003edc3f51dc1ab6ecc527ac048b3f2a4b617d27",
+      "policyFingerprint": "a648e1fe458ad8279314efef730099710212c510e35798015a8680320d1982cc",
       "commandReference": "opening-CIRCA_COUPON_GP-B04_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B05_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B05_PROMO",
-      "policyFingerprint": "461a9b38265435f5c782e35b8be2d06fd9a54de746894c1710ed8f994bb3e952",
+      "policyFingerprint": "7cd639899700145361af989e095fff3622ed2ce6abd0e6747baf375636f85bd7",
       "commandReference": "opening-CIRCA_COUPON_GP-B05_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B06_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B06_PROMO",
-      "policyFingerprint": "3d53ae20465fb57f6e14331f4d0df43c33c1ba13fa4e5f680632024edd3f8fb8",
+      "policyFingerprint": "204f8c760e4210372bd7bd669d6d72c3684e5ab27b8456a47610bde700b1a727",
       "commandReference": "opening-CIRCA_COUPON_GP-B06_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B07_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B07_PROMO",
-      "policyFingerprint": "f55a82214f89f2bf30a8a4ce68032813f3eafcf8998e0866a1b3d354c3283fc6",
+      "policyFingerprint": "bfd78d94200384f5a7fcd359e4ec077f9d81f150abd32b4f10ff022f5454fe4e",
       "commandReference": "opening-CIRCA_COUPON_GP-B07_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B08_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B08_PROMO",
-      "policyFingerprint": "bec7c7c8101082b9436fc7dc7a81316da144827d40cabf49c1f7f12b6ae4ef3c",
+      "policyFingerprint": "adde6727e7bae7fbae7bea89ee6a5fdd7ce5e28bf5d2ea3c5c1a81bf54f25780",
       "commandReference": "opening-CIRCA_COUPON_GP-B08_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B09_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B09_PROMO",
-      "policyFingerprint": "c810fc755af7a4145eb4a74b9e85d39d7e40eda2c926bd409323f29bff0b4ad7",
+      "policyFingerprint": "8794f5fa13bbd761d3ba054c05d8c3241425ba02c20ac36c8d69905a9a865c4e",
       "commandReference": "opening-CIRCA_COUPON_GP-B09_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B10_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B10_PROMO",
-      "policyFingerprint": "6ea3af94f60b42c931761a4b02513f1e46c8710d7e63bbe6c32bc871874a4c8a",
+      "policyFingerprint": "2b63793226a051480f8d0d8b152059938dfb34ad14bd132196bb181437cad67a",
       "commandReference": "opening-CIRCA_COUPON_GP-B10_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B11_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B11_PROMO",
-      "policyFingerprint": "a39d9280094606c108e20f2f3af26141921e8a64f0f1354f03c896a8a3df1fc0",
+      "policyFingerprint": "71c467b4c3dc57c538efca7b5b56d9e26e270cb08899ace6f7127163db4d739f",
       "commandReference": "opening-CIRCA_COUPON_GP-B11_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-B12_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-B12_PROMO",
-      "policyFingerprint": "4183d42e449653c3572d6b4c3e09cd64834a8dc13bb01447ad32f3abec520a20",
+      "policyFingerprint": "486e097a8b5dff3cc68cb6458c8dd0b7ec9b24b00415e0518106d5174c3024bb",
       "commandReference": "opening-CIRCA_COUPON_GP-B12_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A01_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A01_PROMO",
-      "policyFingerprint": "e59de0b450ad4afba2aa24a5e38fe0969669c30a54a80a7dde33be9d82b0d7a6",
+      "policyFingerprint": "ac612a1300e39d32af2273e8332df2c263c140ae1fcb5b0c7683784ecd4d2b05",
       "commandReference": "opening-CIRCA_COUPON_GP-A01_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A02_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A02_PROMO",
-      "policyFingerprint": "db58c8c8b7179f77741f2a16db3f327fcdeb664baaf7b42196374fe6656e1b62",
+      "policyFingerprint": "b4353a75b1cdfc3156d36b2f508f8ff1f20318cc9c6d2b2c01cd719ed4ab851a",
       "commandReference": "opening-CIRCA_COUPON_GP-A02_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A03_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A03_PROMO",
-      "policyFingerprint": "a5b2baeb0b74c2e372498a133766ad27024f4f07550543af977bf941fd1b70d1",
+      "policyFingerprint": "79b8602685bb01bc7bab1c933ad2e648f17f8890debcc9631474f17aa0683c97",
       "commandReference": "opening-CIRCA_COUPON_GP-A03_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A04_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A04_PROMO",
-      "policyFingerprint": "acefbb70baab27e8930bf791315092aa0bdde5006151cbd85e69dca77576ead9",
+      "policyFingerprint": "3bf694a3092b6650d27f6cf4066f20143ebfee785671d2829d1847fdccdd1740",
       "commandReference": "opening-CIRCA_COUPON_GP-A04_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A05_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A05_PROMO",
-      "policyFingerprint": "4c9d64023e03f28db39fe909d7356e73314cdd3b82348e73dcfdfa8ee67be703",
+      "policyFingerprint": "efa04e9279b31cb20380cc1f27641b57e742df5ecfad206f2f715d618af6648b",
       "commandReference": "opening-CIRCA_COUPON_GP-A05_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A06_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A06_PROMO",
-      "policyFingerprint": "fd0e1311593c60bacb9c53677f7c5d754968e0b0b230d74afc6b857c8a1be26a",
+      "policyFingerprint": "20d6c802af25442536490a6de24904d9c517c6aad82372936949c8604fc0d748",
       "commandReference": "opening-CIRCA_COUPON_GP-A06_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A07_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A07_PROMO",
-      "policyFingerprint": "abaf8e08b596e4977b99439ef211de65811569b6deb572d1961d8d6c05f6d9cf",
+      "policyFingerprint": "bc8fa938e46f759576cf176860d630177f8e8858292ffd717246aacc43812442",
       "commandReference": "opening-CIRCA_COUPON_GP-A07_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A08_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A08_PROMO",
-      "policyFingerprint": "2a84047c72a879092f9b15c83dd3a381893345125a6d3754487004372ddffddf",
+      "policyFingerprint": "d93d1712e751a9e368db9d26169f15f331c1be1c46b4ab86d098babf01074b1a",
       "commandReference": "opening-CIRCA_COUPON_GP-A08_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A09_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A09_PROMO",
-      "policyFingerprint": "c752ed44dffe5adced145c837c2a6198e0dcdc44315d6cf9be439a554803a6ad",
+      "policyFingerprint": "6f7bf3795e4eaf4c64c4fea3a0855693d0873b14af7eb2eab90690274a3056f8",
       "commandReference": "opening-CIRCA_COUPON_GP-A09_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A10_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A10_PROMO",
-      "policyFingerprint": "1f984a8a7260f8eea9ce4b4eaca72eb12b1331aa7d028b28ca6c1c73bd601c2e",
+      "policyFingerprint": "1e7a12c07524edc775b4b2748c2bff810031fb257f70c25aaa8a1b866d1221b4",
       "commandReference": "opening-CIRCA_COUPON_GP-A10_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_GP-A11_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_GP-A11_PROMO",
-      "policyFingerprint": "99188eb139f2ee9c65e7e1c272359b87b012b461e86e57d859d7ad4f8581ead4",
+      "policyFingerprint": "940e6fdbaeea2f311460cfdc768d599122058992d3c581168f1672def4802e37",
       "commandReference": "opening-CIRCA_COUPON_GP-A11_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaGreenPerksBudget",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010"
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
       }
     }
   ],

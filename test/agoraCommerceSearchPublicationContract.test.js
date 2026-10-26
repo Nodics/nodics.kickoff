@@ -66,6 +66,9 @@ test.beforeEach(() => {
     get: (key) =>
       key === "commerceSearch" ? properties.commerceSearch : undefined,
   };
+  global.CLASSES = { NodicsError: class extends Error {
+    constructor(code) { super(code); this.code = code; }
+  } };
   global.SERVICE = {
     DefaultCommerceSearchPolicyService: require(path.join(
       commerceSearchRoot, "src/service/defaultCommerceSearchPolicyService")),
@@ -83,8 +86,17 @@ test.beforeEach(() => {
     },
     DefaultCommerceSearchRuleProjectionService: {
       save: async (request) => persisted.push(request.model),
-      doSave: async (request) => indexed.push(request),
-      doSearch: async () => ({ result: indexed.map((item) => item.model) }),
+      doSave: async request => {
+        assert.equal(request.options.refresh, 'wait_for');
+        indexed.push(structuredClone(request));
+        return { result: [{ _id: request.model.code, result: 'created', _shards: { failed: 0 } }] };
+      },
+      doSearch: async request => {
+        const rows = indexed.filter(item => !request.query.ids || request.query.ids.values.includes(item.model.code));
+        return { timed_out: false, _shards: { failed: 0 }, hits: {
+          total: { value: rows.length, relation: 'eq' }, hits: rows.map(item => ({ _id: item.model.code,
+            _source: JSON.parse(JSON.stringify(item.model)) })) } };
+      },
     },
   };
 });

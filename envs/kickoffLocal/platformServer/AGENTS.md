@@ -40,3 +40,10 @@ identities. Reviewed updates to existing assignments use authorized Profile
 operations followed by fresh authentication, never credential-bearing data replay.
 Neither definitions nor demo assignments grant review, activation, financial
 qualification or tenant bypass.
+
+Local Platform selects the existing `apiExposure.categories.moduleInternal`
+category for private reminder recipient callbacks. Keep this opt-in in the environment’s
+`apiExposure.runtimeRoleProfiles.PLATFORM`, never in server properties;
+framework definitions remain disabled. Exposure never grants route
+permissions, runtime assignments or capture qualification. Preserve the actual
+composed-router positive and missing-permission selection regression.

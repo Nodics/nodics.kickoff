@@ -26,6 +26,14 @@ validate the active owner and index order. Preserve explicit reset, secret,
 provider qualification and authority boundaries. See
 [the project configuration guide](../data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js).
 
+Product owns locale defaults, and Workflow owns dead-letter retry bounds. Keep
+only actual locale differences and explicit requeue enablement here. A locale
+override on a runtime without Product is not justified merely by differing from
+its baseline: remove it when there is no consumer or deliberate selection.
+Do not restore the retired eWaste refund defaultOwnerPort. Order selects Digital
+or the existing evidence-bound Fulfillment owner; absent an admitted owner, retain
+NO_AUTOMATIC_REVERSAL_OWNER rather than guessing a replacement or restoring an adapter.
+
 Do not repeat the selected environment/server/node in `activeModules.modules`.
 Inherit unchanged environment connection bindings. Endpoint aliases reference
 the canonical deployment values while retaining protocol and authority flags.

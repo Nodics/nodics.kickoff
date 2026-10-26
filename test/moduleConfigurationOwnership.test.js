@@ -64,6 +64,103 @@ const ewaste = require(
   ),
 );
 
+test("Commerce inherits Product locales and Process inherits retry bounds without widening activation", () => {
+  const product = require(
+    path.join(
+      frameworkRoot,
+      "nodics.commerce/modules/baseCommerce/modules/product/config/properties",
+    ),
+  ).product;
+  const workflow = require(
+    path.join(
+      frameworkRoot,
+      "nodics.process/modules/workflow/config/properties",
+    ),
+  ).process;
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const source = require(`../envs/${environment}/config/properties`);
+    for (const role of ["COMMERCE", "COMMERCE_STAGED"]) {
+      assert.equal(
+        source.product.runtimeRoleProfiles[role]?.localization,
+        undefined,
+      );
+    }
+    for (const server of ["commerceServer", "commerceStagedServer"]) {
+      for (const selection of ["all", "none"]) {
+        const runtime = loadRuntime(server, environment, {
+          NODICS_AGORA_DOMAINS: selection,
+        });
+        assert(activeModuleNames(runtime).includes("product"));
+        assert.deepEqual(runtime.product.localization, product.localization);
+      }
+    }
+    for (const profile of Object.values(source.product.runtimeRoleProfiles)) {
+      assert.equal(profile.localization, undefined);
+    }
+    const waste = loadRuntime("wasteServer", environment);
+    assert.equal(activeModuleNames(waste).includes("product"), false);
+    assert.equal(waste.product?.localization, undefined);
+    assert.equal(
+      waste.eWaste.outcomeCommunication.detailLinks.IN_APP.parameter,
+      "submission",
+    );
+    const process = loadRuntime("processServer", environment);
+    assert(activeModuleNames(process).includes("workflow"));
+    assert.equal(
+      process.process.runtime.deadLetterRequeue.maximumRequeues,
+      workflow.runtime.deadLetterRequeue.maximumRequeues,
+    );
+    assert.equal(
+      process.process.runtime.deadLetterRequeue.enabled,
+      environment === "kickoffLocal",
+    );
+    assert.equal(
+      source.process?.runtimeRoleProfiles?.PROCESS?.runtime?.deadLetterRequeue
+        ?.maximumRequeues,
+      undefined,
+    );
+  }
+});
+
+test("reference roles omit unconsumed locales and retired refund selections", () => {
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const source = require(`../envs/${environment}/config/properties`);
+    for (const profile of Object.values(source.order.runtimeRoleProfiles)) {
+      assert.equal(profile.refunds?.defaultOwnerPort, undefined);
+    }
+    for (const server of [
+      "platformServer",
+      "wasteServer",
+      "processServer",
+      "wcmsStagedServer",
+      "wcmsOnlineServer",
+      "locationServer",
+      "loyaltyServer",
+      "engagementServer",
+    ]) {
+      const runtime = loadRuntime(server, environment);
+      assert.equal(activeModuleNames(runtime).includes("product"), false);
+      assert.equal(runtime.product?.localization, undefined);
+      assert.equal(runtime.order?.refunds?.defaultOwnerPort, undefined);
+    }
+    for (const server of ["commerceServer", "commerceStagedServer"]) {
+      for (const selection of ["all", "none"]) {
+        const runtime = loadRuntime(server, environment, {
+          NODICS_AGORA_DOMAINS: selection,
+        });
+        assert.equal(runtime.order.refunds.defaultOwnerPort, undefined);
+        assert.equal(runtime.order.refunds.ownerPorts.eWaste, undefined);
+        assert.equal(
+          runtime.order.refunds.ownerByStore.agoraMainStore,
+          server === "commerceServer" && selection === "all"
+            ? "fulfillmentCore"
+            : undefined,
+        );
+      }
+    }
+  }
+});
+
 test("root config and empty extension hooks retain explicit project boundaries", () => {
   assert(
     require("../package.json")
@@ -306,6 +403,24 @@ test("reference publication catalogue inherits the existing Product pagination c
     ),
     "12",
   );
+});
+
+test("Local Enterprise test funding overrides only the selected Loyalty deployment", () => {
+  const local = loadRuntime("loyaltyServer", "kickoffLocal").loyalty.enterpriseTestCredits;
+  const docker = loadRuntime("loyaltyServer", "kickoffDockerLocal").loyalty.enterpriseTestCredits;
+  assert.equal(local.enabled, true);
+  assert.equal(local.provisioningEnabled, true);
+  assert.deepEqual(local.allowedEnvironments, ["kickoffLocal"]);
+  assert.equal(docker.enabled, false);
+  assert.equal(docker.provisioningEnabled, false);
+  assert.deepEqual(docker.allowedEnvironments, []);
+  for (const key of ["maximumReasonLength", "platformAdministratorEvidencePath"]) {
+    assert.equal(local[key], docker[key], key);
+  }
+  const selected = require("../envs/kickoffLocal/loyaltyServer/config/properties.js")
+    .loyalty.enterpriseTestCredits;
+  assert.deepEqual(Object.keys(selected).sort(),
+    ["allowedEnvironments", "enabled", "provisioningEnabled"]);
 });
 
 test("final integration: active owner graph supplies defaults for Native and Docker without widening optional capabilities", () => {

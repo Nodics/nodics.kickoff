@@ -401,9 +401,20 @@ async function prepareScenario(scenario) {
                         : domain === 'tax' ? issuer.taxPolicyCode : good.warehouseCode]];
                 }));
                 const circaRoots = domain === 'promotion'
-                    ? ['greenperks', 'renewworks', 'loopcycle'].flatMap(issuer => require(
+                    ? ['greenperks'].flatMap(issuer => require(
                         '../modules/circa.ewaste/data/sample-v001/publication/' + issuer + '/records/publicationPlan.json'
-                    ).items.map(row => row.rootCode))
+                    ).items.map(row => row.rootCode)).concat([
+                        'circaGreenPerksFixedExpiryBudget', 'circaRenewWorksRemainingFixedExpiryBudget',
+                        'circaLoopCycleRemainingFixedExpiryBudget', 'circaE07Budget',
+                    ].flatMap(code => {
+                        const manifest = require('../modules/circa.ewaste/data/manifest.json');
+                        const files = Object.keys(manifest.sections[code].files).filter(file => file.endsWith('/records/promotionSetup.json'));
+                        assert.equal(files.length, 1, code + ': exact selected owner instruction');
+                        return require(path.join(projectRoot, 'modules/circa.ewaste/data', files[0])).campaigns.map(row => {
+                            assert.equal(row.storeCode, 'circaMainStore');
+                            return row.rootCode;
+                        });
+                    }))
                     : [{ pricing: 'circaPointsPriceBook', tax: 'circaSamplePointsPolicy', inventory: 'circaDigitalRegistry' }[domain]];
                 const apparelRoots = {
                     pricing: ['agoraApparelRetailUsd'], tax: ['agoraAeVatPolicy'], inventory: ['agoraApparelWarehouse'],

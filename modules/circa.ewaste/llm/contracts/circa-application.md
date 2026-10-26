@@ -286,30 +286,28 @@ Exact ITEM bundles can use Promotion's independently selected verified-delivery
 port, but no authenticated receipt adapter is installed or qualified by this change.
 Neither a staff confirmation nor a description proves item fulfillment.
 
-The human separately approved simulated ITEM delivery for local-demo testing and
-keeping already-redeemed benefit reversals disabled. Native `kickoffLocal` selects
-the existing Promotion `merchantBenefits` mode `SIMULATION`, enabled true,
-service `DefaultFulfillmentItemSimulationService`; Fulfillment enables only the
-exact selected environment allowlist `[kickoffLocal]`. Other demo deployments
-use the same keys with their own explicit environment names; no environment
-class comparison or additional configuration registry is involved. Real delivery
-qualification remains false; Docker and framework defaults remain off.
+Current native Local standard Axis recording inherits the framework's disabled
+Promotion merchantBenefits, VERIFIED mode and null itemEvidenceService. The
+standard Digital merchant-screen provider remains selected; pricedProvider is
+unqualified. Local no longer selects integrated ITEM simulation or monetary
+benefit transport. These are inherited owner defaults, not values to copy into
+project configuration. Existing qualified Pricing evidence transport is a separate
+capability and does not enable integrated coupon redemption.
 
-All 29 approved ITEM declarations keep their original exact SKU/quantity/EACH
-promises. A `SIM:` reference yields SIMULATED_ITEMS with simulated true, verified
-and immutable false, and no deliveredAt or monetary amount. The same merchant
-claim/receipt/redemption coordination applies, including original issuer staff,
-Store revision, consent, scope and protected persistence. Queue, confirmation and
-receipt inspection must explicitly show simulation/unverified goods. Success
-means demo orchestration only, not physical delivery or native acceptance from a
-fixture. Used-benefit RELEASE remains unsupported; this approval does not widen
-unused purchase refund or original-sale asset refund policy.
+All 29 approved ITEM declarations retain their original exact SKU/quantity/EACH
+promises. Standard merchant validation/confirmation records staff attestation of
+external use only, with original issuer/staff/Store scope, retained terms, fixed
+expiry and single-use checks. It establishes neither verified physical delivery
+nor simulation, financial settlement or reimbursement. Fulfillment's retained
+Local simulator enablement alone does not select Promotion's simulation path.
+Historical SIM: receipts remain explicitly simulated/unverified evidence; this
+source correction neither rewrites them nor authorizes repeating redemption.
 
-`test/circaItemSimulationSelection.test.js` checks effective native versus Docker
-configuration and passes all 29 unchanged source bundles through the real
-framework consumer/simulator. It performs no issuance, import, grant, delivery or
-runtime mutation. Refer to the owning Promotion/Fulfillment contracts for shared
-details rather than copying their guides into this project.
+`test/circaItemSimulationSelection.test.js` checks effective Local/Docker inherited
+selection and refusal of unselected integrated item delivery for the unchanged
+29 source bundles. Deliberately isolated framework simulation fixtures remain
+unchanged. These tests perform no issuance, import, grant, runtime adoption or
+live staff confirmation; use the Promotion/Fulfillment owner contracts for behavior.
 
 Source tests consume real Product projection, enrichment, DigitalCore and exact
 financial capture services with isolated persistence/supply ports. They verify
@@ -326,7 +324,7 @@ payment, private reveal or full Circa journey acceptance.
 | GreenPerks supply | All 35 policies have approved budgets, including zero for 29 exact ITEM bundles; variant targets are 100 | Original budget admission and later issuance; quantity targets are not issued supply |
 | Cross-enterprise issuance | Issuer GREENPERKS_RETAIL differs from vendor GREENPERKS_ONLINE; bounded delegated issuance source exists, not installed acceptance | Joint qualification of Promotion issuance, live consent and issuer-policy distribution owners |
 | Seller consent | Separate nonimportable issuer checklist retains vendor, expiry and ISSUED_COUPON_BENEFIT_V1 purpose; no grant imported | Existing signed issuer GRANT/REVOKE command and projected purpose, current revision, permission and revocation evidence |
-| Item benefits | Explicit SIMULATION exercises exact bundles with unverified tags; historical LOCAL_SIMULATION results remain unverified | Exact deployment allowlist and owner qualification for demo; authenticated owner integration separately for real delivery |
+| Item benefits | Standard Axis staff recording inherits disabled integrated benefits; historical simulation remains unverified | Fresh staff/Store/retained-rights admission for recording; independent integration qualification for verified delivery |
 | Asset delivery | Five quantity-one ownership offers have a separate local-only three-policy source selection; not coupon units or installed bindings | Genuine Waste listing, retained Digital binding, original capture and seller proceeds; refund term retained before sale, never backfilled |
 | Store master data | Independent required `circa.ewaste:store` REFERENCE pack, v001, COMMERCE before publication | Verify fresh installation separately; existing rows and receipts need governed adoption, not rejected supply import |
 | Docker Local | Commerce publication owners and five Process definitions are not selected/qualified | Deployment-specific integration and acceptance before enabling the coordinated step |
@@ -588,3 +586,14 @@ by Product/Commerce. Waste owns the asset lifecycle and ownership transition.
 Shop cards should show asset image, verified name, category/material, carbon
 credits attached, asking reward points or bid state, seller display name or
 masked identity, collection/transfer mode, and verification badge.
+
+### Unreleased monetary proposal source reference
+
+`test/fixtures/circaMonetaryOutletProposal.json` is a non-importable, unapproved
+source fixture rather than an installed or historical acceptance receipt. Its
+`sourceTerms` hash binds the current canonical `circaPromotionData.js` bytes;
+reviewed campaign source updates require refreshing this reference, not weakening
+the exact checksum assertion. The fixture remains outside manifests and grants
+no operational authority. Historical receipts and acceptance evidence retain their
+original bytes. Updating this source reference neither adopts the monetary
+integration nor changes deployed offers, budgets or completed purchases.

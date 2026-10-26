@@ -105,9 +105,9 @@ test("all 29 exact ITEM selections join real Product, SKU, issuer, outlet, price
     const terms = fixture.expectedTerms.campaigns.find(t => t.promotionCode === c.promotionCode);
     assert.deepEqual(terms.allowedOutletStoreCodes, campaign.conditions.storeCodes);
     assert.deepEqual(terms.items, c.items);
-    assert.deepEqual(terms.terms, campaign.purchasedCouponPolicy.terms);
-    assert.equal(terms.validityDays, 30);
-    assert.equal(terms.validityDays, campaign.purchasedCouponPolicy.validityDays);
+    assert.deepEqual(terms.terms, campaign.couponOffer.terms);
+    assert.deepEqual(terms.expiry, campaign.couponOffer.expiry);
+    assert.equal(terms.validityDays, undefined);
     assert.equal(terms.budget, "0");
     assert.equal(terms.budget, campaign.budget.limit);
   }

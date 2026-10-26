@@ -1,0 +1,167 @@
+{
+  "contractVersion": 1,
+  "importable": false,
+  "purpose": "APPROVED_LOCAL_E07_INSTRUCTIONS_NOT_INSTALLATION_EVIDENCE",
+  "evidence": {
+    "offerPlan": "e07-offer-plan-20261025.json",
+    "publicationPlan": "e07-publication-plan-20261025.json",
+    "publicationOnline": "e07-publication-online-20261025.json"
+  },
+  "tenant": "default",
+  "issuerEnterpriseCode": "GREENPERKS_RETAIL",
+  "sellerEnterpriseCode": "GREENPERKS_ONLINE",
+  "storeCode": "circaMainStore",
+  "records": [
+    {
+      "promotionCode": "CIRCA_E07_CERTIFICATES_20261025_PROMO",
+      "productCode": "CIRCA_E07_CERTIFICATES_20261025",
+      "priceRowCode": "CIRCA_E07_CERTIFICATES_20261025_POINTS",
+      "unitAmount": "0",
+      "batchCode": "CIRCA_E07_CERTIFICATES_20261025_BATCH",
+      "quantity": 100,
+      "expectedVersionId": 3,
+      "expectedRevision": 3,
+      "policyFingerprint": "79be476374a71ff47880e5061171666b8c16799d42018354263479dead248b41",
+      "sourceVersion": "b634b731ec4618d3ca10f85bd2c1f7b09d30ff6cb9afae75a957eaa67005b1b9",
+      "publicationCode": "CIRCA_E07_CERTIFICATES_20261025_PROMO_PUB",
+      "draft": {
+        "code": "CIRCA_E07_CERTIFICATES_20261025_PROMO",
+        "name": "Local certificate coupon acceptance",
+        "priority": 25,
+        "validFrom": "2026-01-01T00:00:00.000Z",
+        "validTo": "2026-11-08T19:59:59.999Z",
+        "vendorEnterpriseRef": {
+          "moduleName": "profile",
+          "schemaName": "enterprise",
+          "code": "GREENPERKS_ONLINE"
+        },
+        "conditions": {
+          "couponRequired": true,
+          "customerOwnsCouponCode": true,
+          "sourceProductCode": "CIRCA_E07_CERTIFICATES_20261025",
+          "storeCodes": [
+            "greenperks-cafe",
+            "greenperks-bistro"
+          ]
+        },
+        "actions": {
+          "benefitType": "ITEM",
+          "benefitDescription": "Bottled water",
+          "reasonCode": "CIRCA_SAMPLE_OFFER",
+          "items": [
+            {
+              "sku": "GP_BOTTLED_WATER",
+              "quantity": 1,
+              "unit": "EACH"
+            }
+          ]
+        },
+        "budget": {
+          "limit": "0"
+        },
+        "couponOffer": {
+          "version": 1,
+          "supply": {
+            "mode": "LIMITED",
+            "quantity": 100
+          },
+          "ownerLimit": 1,
+          "expiry": {
+            "mode": "FIXED",
+            "at": "2026-11-08T19:59:59.999Z"
+          },
+          "requirements": {
+            "type": "CERTIFICATES",
+            "certificates": {
+              "quantity": 1,
+              "categoryCode": "TABLET",
+              "milestoneCode": "CUSTOMER_HELD"
+            }
+          },
+          "terms": [
+            "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+            "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+            "Fictional local demonstration offer; no real-world venue participation or cash value.",
+            "Exact listed SKU quantities only; no substitutions."
+          ]
+        }
+      }
+    },
+    {
+      "promotionCode": "CIRCA_E07_BOTH_20261025_PROMO",
+      "productCode": "CIRCA_E07_BOTH_20261025",
+      "priceRowCode": "CIRCA_E07_BOTH_20261025_POINTS",
+      "unitAmount": "1",
+      "batchCode": "CIRCA_E07_BOTH_20261025_BATCH",
+      "quantity": 100,
+      "expectedVersionId": 3,
+      "expectedRevision": 3,
+      "policyFingerprint": "1c3d800f58a3332f1fc3e72e6c0332647f89cd6c50074d316250a2064c5eb47d",
+      "sourceVersion": "2181653c67b0c32b93fa7e2da79a92cb3f85da5e2b1f2fb6250e7efb7d26812d",
+      "publicationCode": "CIRCA_E07_BOTH_20261025_PROMO_PUB",
+      "draft": {
+        "code": "CIRCA_E07_BOTH_20261025_PROMO",
+        "name": "Local certificate and reward coupon acceptance",
+        "priority": 25,
+        "validFrom": "2026-01-01T00:00:00.000Z",
+        "validTo": "2026-11-08T19:59:59.999Z",
+        "vendorEnterpriseRef": {
+          "moduleName": "profile",
+          "schemaName": "enterprise",
+          "code": "GREENPERKS_ONLINE"
+        },
+        "conditions": {
+          "couponRequired": true,
+          "customerOwnsCouponCode": true,
+          "sourceProductCode": "CIRCA_E07_BOTH_20261025",
+          "storeCodes": [
+            "greenperks-cafe",
+            "greenperks-bistro"
+          ]
+        },
+        "actions": {
+          "benefitType": "ITEM",
+          "benefitDescription": "Bottled water",
+          "reasonCode": "CIRCA_SAMPLE_OFFER",
+          "items": [
+            {
+              "sku": "GP_BOTTLED_WATER",
+              "quantity": 1,
+              "unit": "EACH"
+            }
+          ]
+        },
+        "budget": {
+          "limit": "0"
+        },
+        "couponOffer": {
+          "version": 1,
+          "supply": {
+            "mode": "LIMITED",
+            "quantity": 100
+          },
+          "ownerLimit": 1,
+          "expiry": {
+            "mode": "FIXED",
+            "at": "2026-11-08T19:59:59.999Z"
+          },
+          "requirements": {
+            "type": "BOTH",
+            "priceRef": "CIRCA_E07_BOTH_20261025_POINTS",
+            "certificates": {
+              "quantity": 1,
+              "categoryCode": "CABLE_CHARGER",
+              "milestoneCode": "CUSTOMER_HELD"
+            }
+          },
+          "terms": [
+            "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+            "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+            "Fictional local demonstration offer; no real-world venue participation or cash value.",
+            "Exact listed SKU quantities only; no substitutions."
+          ]
+        }
+      }
+    }
+  ]
+}

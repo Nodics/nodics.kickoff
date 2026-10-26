@@ -5,8 +5,8 @@
     "nativeRuntimePrincipalScope": {
       "kind": "DATA_RELEASE",
       "dataType": "init",
-      "sourceRoot": "init-v008",
-      "version": "0.0.3",
+      "sourceRoot": "init-v001",
+      "version": "0.0.4",
       "displayName": "Reviewed native runtime principal scope",
       "description": "Exact Local service credential scope transition required by the reviewed runtime deployment grants; no reusable framework defaults are copied into project configuration.",
       "owningDomain": "profile",
@@ -22,23 +22,35 @@
       "removalPolicy": "RETAIN",
       "selectionPolicy": "EXPLICIT",
       "files": {
-        "init-v008/runtime-principal-scope/headers/nativeRuntimePrincipalScopeHeader.js": "9c2717e6132b7a048eb0206d58fcc12b465f1c3025b690db52af94cc8ac43f10",
-        "init-v008/runtime-principal-scope/records/nativeRuntimePrincipalScopeData.js": "037157289af54e6d7cb8c7fefa90d9ef9ad815298cfa49b805c84017d21e6253"
+        "init-v001/runtime-principal-scope/headers/nativeRuntimePrincipalScopeHeader.js": "9c2717e6132b7a048eb0206d58fcc12b465f1c3025b690db52af94cc8ac43f10",
+        "init-v001/runtime-principal-scope/records/nativeRuntimePrincipalScopeData.js": "eed5d14ba074e29b75decaeaa7575f07053f2d39c82713bdaede4a308d1a6e52"
       },
       "prerequisites": [
         {
           "moduleName": "profile",
           "sectionCode": "init-v001",
           "version": "0.0.8",
-          "checksum": "f953f9e515896ff760e33711150e6981e3ded82ebcf295bd99d602bce94e1ce8"
+          "checksum": "b59adee76de5f25d186bada5a3cd0ce047410e522d0e7eb00b5956a316ef8b78"
+        },
+        {
+          "moduleName": "wasteCarbon",
+          "sectionCode": "permissionCatalogue",
+          "version": "0.0.1",
+          "checksum": "6a71b997ef08f8e7626d0a32f9d7177d9ef73f51dc4e87b66758f13cc1b09ba3"
+        },
+        {
+          "moduleName": "wasteCarbon",
+          "sectionCode": "transferFinalizationPermission",
+          "version": "0.0.2",
+          "checksum": "86c3ad0b68a5cf3bc191ebd19328d9bd272d8f9ecaf028bb0d4d36adfc8010cd"
         }
       ]
     },
     "nativeRuntimeAssignments": {
       "kind": "DATA_RELEASE",
       "dataType": "init",
-      "sourceRoot": "init-v007",
-      "version": "0.0.9",
+      "sourceRoot": "init-v001",
+      "version": "0.0.10",
       "displayName": "Reviewed native runtime assignments",
       "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; startup installation requires the exact selected environment and runtime role profile.",
       "owningDomain": "profile",
@@ -54,277 +66,23 @@
       "removalPolicy": "RETAIN",
       "selectionPolicy": "EXPLICIT",
       "files": {
-        "init-v007/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-        "init-v007/runtime-assignments/records/nativeRuntimeAssignmentData.js": "5d38aae3fc6fab370fc6bd2d69bb0b059bd070f8c74b10b6f6bd618ce648bae8"
+        "init-v001/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
+        "init-v001/runtime-assignments/records/nativeRuntimeAssignmentData.js": "00c66a9f6342f625a3265dc172126e5dde2a3894df4aaef53c27391933e64fa1"
       },
       "prerequisites": [
         {
           "moduleName": "profile",
           "sectionCode": "init-v001",
           "version": "0.0.8",
-          "checksum": "f953f9e515896ff760e33711150e6981e3ded82ebcf295bd99d602bce94e1ce8"
+          "checksum": "b59adee76de5f25d186bada5a3cd0ce047410e522d0e7eb00b5956a316ef8b78"
         },
         {
           "moduleName": "kickoffCore",
           "sectionCode": "nativeRuntimePrincipalScope",
-          "version": "0.0.3",
-          "checksum": "dbab6895a4a63c3e190e9dfaa7dcd91ab3b6ab0061dda69151ae374bdcbbabcc"
+          "version": "0.0.4",
+          "checksum": "ff0e14a137ae0b2afefa04293adb1dfa7dbe561ce8aef3f6525b5523b6390890"
         }
       ]
-    }
-  },
-  "retainedRoots": {
-    "init-v005": {
-      "files": {
-        "init-v005/runtime-principal-scope/headers/nativeRuntimePrincipalScopeHeader.js": "9c2717e6132b7a048eb0206d58fcc12b465f1c3025b690db52af94cc8ac43f10",
-        "init-v005/runtime-principal-scope/records/nativeRuntimePrincipalScopeData.js": "7edf5e09bf02eee7070dbea6e33151aa12c7ef801d9cee941b39d23f8a0f98c6"
-      },
-      "sections": {
-        "nativeRuntimePrincipalScope": {
-          "kind": "DATA_RELEASE",
-          "dataType": "init",
-          "sourceRoot": "init-v005",
-          "version": "0.0.1",
-          "displayName": "Reviewed native runtime principal scope",
-          "description": "Exact Local service credential scope transition required by the reviewed runtime deployment grants; no reusable framework defaults are copied into project configuration.",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL"
-          ],
-          "sensitivity": "RESTRICTED",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "selectionPolicy": "EXPLICIT",
-          "files": {
-            "init-v005/runtime-principal-scope/headers/nativeRuntimePrincipalScopeHeader.js": "9c2717e6132b7a048eb0206d58fcc12b465f1c3025b690db52af94cc8ac43f10",
-            "init-v005/runtime-principal-scope/records/nativeRuntimePrincipalScopeData.js": "7edf5e09bf02eee7070dbea6e33151aa12c7ef801d9cee941b39d23f8a0f98c6"
-          },
-          "prerequisites": [
-            {
-              "moduleName": "profile",
-              "sectionCode": "init-v001",
-              "version": "0.0.7",
-              "checksum": "7e4e8d1e7d6fe35af15a3efe26555c6b193f8b9061b83b361a2754f3c7f73471"
-            }
-          ]
-        }
-      }
-    },
-    "init-v006": {
-      "files": {
-        "init-v006/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-        "init-v006/runtime-assignments/records/nativeRuntimeAssignmentData.js": "22bfa097998eea9520312ba5b328e08cb0e9419e00058fcb89947c4a24e1a894"
-      },
-      "sections": {
-        "nativeRuntimeAssignments": {
-          "kind": "DATA_RELEASE",
-          "dataType": "init",
-          "sourceRoot": "init-v006",
-          "version": "0.0.7",
-          "displayName": "Reviewed native runtime assignments",
-          "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; startup installation requires the exact selected environment and runtime role profile.",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL"
-          ],
-          "sensitivity": "RESTRICTED",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "selectionPolicy": "EXPLICIT",
-          "files": {
-            "init-v006/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-            "init-v006/runtime-assignments/records/nativeRuntimeAssignmentData.js": "22bfa097998eea9520312ba5b328e08cb0e9419e00058fcb89947c4a24e1a894"
-          },
-          "prerequisites": [
-            {
-              "moduleName": "profile",
-              "sectionCode": "init-v001",
-              "version": "0.0.7",
-              "checksum": "7e4e8d1e7d6fe35af15a3efe26555c6b193f8b9061b83b361a2754f3c7f73471"
-            },
-            {
-              "moduleName": "kickoffCore",
-              "sectionCode": "nativeRuntimePrincipalScope",
-              "version": "0.0.1",
-              "checksum": "6738163c1a6644d07e7a392e553077d2ae1a23af24dd040dd44bafac6b597d3c"
-            }
-          ]
-        }
-      }
-    },
-    "init-v004": {
-      "files": {
-        "init-v004/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-        "init-v004/runtime-assignments/records/nativeRuntimeAssignmentData.js": "e796d98cc97d3764fcc4f6536e819c8dd6d5982783d4c67ff1399a8344d978ca"
-      },
-      "sections": {
-        "nativeRuntimeAssignments": {
-          "kind": "DATA_RELEASE",
-          "dataType": "init",
-          "sourceRoot": "init-v004",
-          "version": "0.0.6",
-          "displayName": "Reviewed native runtime assignments",
-          "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; startup installation requires the exact selected environment and runtime role profile.",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL"
-          ],
-          "sensitivity": "RESTRICTED",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "selectionPolicy": "EXPLICIT",
-          "files": {
-            "init-v004/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-            "init-v004/runtime-assignments/records/nativeRuntimeAssignmentData.js": "e796d98cc97d3764fcc4f6536e819c8dd6d5982783d4c67ff1399a8344d978ca"
-          },
-          "prerequisites": [
-            {
-              "moduleName": "profile",
-              "sectionCode": "init-v001",
-              "version": "0.0.7",
-              "checksum": "7e4e8d1e7d6fe35af15a3efe26555c6b193f8b9061b83b361a2754f3c7f73471"
-            },
-            {
-              "moduleName": "kickoffCore",
-              "sectionCode": "nativeRuntimePrincipalScope",
-              "version": "0.0.1",
-              "checksum": "6738163c1a6644d07e7a392e553077d2ae1a23af24dd040dd44bafac6b597d3c"
-            }
-          ]
-        }
-      }
-    },
-    "init-v003": {
-      "files": {
-        "init-v003/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-        "init-v003/runtime-assignments/records/nativeRuntimeAssignmentData.js": "2665e9642ce6fd6f1ac1e8c14bff510a5d2efcd0eff18b6a23b46131a8a2fc21"
-      },
-      "sections": {
-        "nativeRuntimeAssignments": {
-          "kind": "DATA_RELEASE",
-          "dataType": "init",
-          "sourceRoot": "init-v003",
-          "version": "0.0.4",
-          "displayName": "Reviewed native runtime assignments",
-          "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; never runs at startup.",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL"
-          ],
-          "sensitivity": "RESTRICTED",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "selectionPolicy": "EXPLICIT",
-          "files": {
-            "init-v003/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-            "init-v003/runtime-assignments/records/nativeRuntimeAssignmentData.js": "2665e9642ce6fd6f1ac1e8c14bff510a5d2efcd0eff18b6a23b46131a8a2fc21"
-          },
-          "prerequisites": [
-            {
-              "moduleName": "profile",
-              "sectionCode": "init-v001",
-              "version": "0.0.6",
-              "checksum": "db6ca8bd03f1d22791b884e14225393539cd0cc30813e67130a9d77b34c442e2"
-            }
-          ]
-        }
-      }
-    },
-    "init-v002": {
-      "files": {
-        "init-v002/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-        "init-v002/runtime-assignments/records/nativeRuntimeAssignmentData.js": "c1529cd6ff3f36ad2754c1695bed19bccf40fe4ca6fa8cad30ccdd8ede57a21e"
-      },
-      "sections": {
-        "nativeRuntimeAssignments": {
-          "kind": "DATA_RELEASE",
-          "dataType": "init",
-          "sourceRoot": "init-v002",
-          "version": "0.0.3",
-          "displayName": "Reviewed native runtime assignments",
-          "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; never runs at startup.",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL"
-          ],
-          "sensitivity": "RESTRICTED",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "selectionPolicy": "EXPLICIT",
-          "files": {
-            "init-v002/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-            "init-v002/runtime-assignments/records/nativeRuntimeAssignmentData.js": "c1529cd6ff3f36ad2754c1695bed19bccf40fe4ca6fa8cad30ccdd8ede57a21e"
-          },
-          "prerequisites": [
-            {
-              "moduleName": "profile",
-              "sectionCode": "init-v001",
-              "version": "0.0.6",
-              "checksum": "db6ca8bd03f1d22791b884e14225393539cd0cc30813e67130a9d77b34c442e2"
-            }
-          ]
-        }
-      }
-    },
-    "init-v001": {
-      "files": {
-        "init-v001/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-        "init-v001/runtime-assignments/records/nativeRuntimeAssignmentData.js": "d6621d1c423351be49ea67415f2ffc1870e97f38fced277336286cd55e26c9fc"
-      },
-      "sections": {
-        "nativeRuntimeAssignments": {
-          "kind": "DATA_RELEASE",
-          "dataType": "init",
-          "sourceRoot": "init-v001",
-          "version": "0.0.2",
-          "displayName": "Reviewed native runtime assignments",
-          "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; never runs at startup.",
-          "owningDomain": "profile",
-          "lifecycle": "REFERENCE",
-          "destinationRole": "PLATFORM",
-          "environmentScope": [
-            "LOCAL"
-          ],
-          "sensitivity": "RESTRICTED",
-          "versioningPolicy": "NONE",
-          "publicationPolicy": "NONE",
-          "initialPublicationPolicy": "NONE",
-          "removalPolicy": "RETAIN",
-          "selectionPolicy": "EXPLICIT",
-          "files": {
-            "init-v001/runtime-assignments/headers/nativeRuntimeAssignmentHeader.js": "c3e662c47750a0897bbeebe98c288ee09c740aea95768b135e04aed25e5916c7",
-            "init-v001/runtime-assignments/records/nativeRuntimeAssignmentData.js": "d6621d1c423351be49ea67415f2ffc1870e97f38fced277336286cd55e26c9fc"
-          },
-          "prerequisites": [
-            {
-              "moduleName": "profile",
-              "sectionCode": "init-v001",
-              "version": "0.0.3",
-              "checksum": "2d5fe908c8040c109ccc71fdb2b2cad7e32a522fbe7cb627765ebf715a362c35"
-            }
-          ]
-        }
-      }
     }
   }
 }

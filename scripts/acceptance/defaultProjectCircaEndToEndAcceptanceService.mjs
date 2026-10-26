@@ -94,8 +94,8 @@ export const OWNER_OPERATIONS = Object.freeze({
     command: "acceptance:loyalty-participant-transfer",
     arguments: ["--execute", "--selection=scripts/acceptance/fixtures/circa-loyalty-participant-transfer.json"],
     mutation: "OWNER_API_WRITE",
-    sourcePrerequisite:
-      "Circa source does not yet provide the funded Enterprise points wallet and governed transfer-limit selections required by the reviewed transfer fixture.",
+    // Wallet provisioning, funding and policy selection are separate governed setup.
+    // The owner runner admits fresh participant sessions, wallets, balances and limits.
   }),
   "digital-whole-bundle-gift": Object.freeze({
     owner: "Digital Core",
@@ -189,7 +189,7 @@ export const OWNER_OPERATIONS = Object.freeze({
     arguments: ["--execute", "--acceptance=circaCouponOfferLifecycle"],
     mutation: "OWNER_API_WRITE",
     sourcePrerequisite:
-      "Circa has no reviewed lifecycle profile or project-owned canonical Promotion operations adapter for two-unit supply, owner allowance and participation withdrawal.",
+      "Circa has no reviewed lifecycle selection bound to canonical Promotion and Commerce operations for configured stock, owner allowance and participation withdrawal.",
   }),
   "coupon-catalogue-availability": Object.freeze({
     owner: "Product",

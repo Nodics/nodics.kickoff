@@ -36,7 +36,9 @@ test('Apparel reviewed reversals select only the retained application Store and 
         assert(active[kind].orderCodePrefixes.includes('CIRCA_ORDER_'));
     }
     assert.equal(active.refunds.ownerByStore.agoraMainStore, 'fulfillmentCore');
-    assert.equal(active.refunds.defaultOwnerPort, 'eWaste');
+    // Refund ownership is selected per Store; the physical demo must not
+    // introduce a fallback into another accelerator's domain.
+    assert.equal(active.refunds.defaultOwnerPort, undefined);
     for (const selection of ['none', 'electronics', 'telco']) {
         const unselected = loadRuntime('commerceServer', 'kickoffLocal', { NODICS_AGORA_DOMAINS: selection });
         const policy = unselected.order;

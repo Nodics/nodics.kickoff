@@ -11,6 +11,12 @@ const dataRoot = path.join(moduleRoot, "data");
 const framework = path.resolve(moduleRoot, "../../../nodics.ai");
 const promotionRoot = path.join(framework, "nodics.commerce/modules/baseCommerce/modules/promotion");
 const publication = require(path.join(promotionRoot, "src/service/defaultPromotionPublicationService"));
+test.beforeEach(t => {
+  const prior = { CONFIG: global.CONFIG, SERVICE: global.SERVICE };
+  t.after(() => Object.assign(global, prior));
+  global.CONFIG = { get: () => require(path.join(promotionRoot, "config/properties")).promotion };
+  global.SERVICE = { DefaultCouponOfferService: require(path.join(promotionRoot, "src/service/defaultCouponOfferService")) };
+});
 const setup = require(path.join(promotionRoot, "src/service/defaultPromotionSetupContributionService"));
 const proposal = require("./fixtures/circaDemoPolicyProposal.json");
 const manifest = require("../data/manifest.json");
@@ -37,7 +43,8 @@ test("approved policies retain every exact budget, item bundle, issuer and outle
     assert.deepEqual(row.budget, { limit: original?.budget || proposal.greenPerks.monetaryBudgets[short] || "0" });
     assert.equal(row.sellerAuthorizations, undefined);
     assert.equal(row.budgetAdmission, undefined);
-    assert.equal(row.purchasedCouponPolicy.validityDays, 30);
+    assert.equal(row.purchasedCouponPolicy, undefined);
+    assert.deepEqual(row.couponOffer.expiry, { mode: "FIXED", at: "2026-11-08T19:59:59.999Z" });
     if (original) {
       assert.deepEqual(row.conditions.storeCodes, [original.outlet]);
       assert.equal(row.actions.discountValue, original.percent || original.amount);
@@ -45,7 +52,7 @@ test("approved policies retain every exact budget, item bundle, issuer and outle
     }
     if (proposal.greenPerks.itemsByCampaign[short]) {
       assert.deepEqual(row.actions.items, proposal.greenPerks.itemsByCampaign[short].map(item => ({ ...item, unit: "EACH" })));
-      assert(row.purchasedCouponPolicy.terms.includes("Exact listed SKU quantities only; no substitutions."));
+      assert(row.couponOffer.terms.includes("Exact listed SKU quantities only; no substitutions."));
     }
     for (const code of row.conditions.storeCodes) assert.equal(stores.find(store => store.code === code)?.enterpriseRef.code, issuer);
   }
@@ -191,16 +198,15 @@ test("separate issuer review instructions retain exact benefit purpose in the ca
   assert.equal(review.issuers.flatMap(row => row.campaignCodes).length, 38);
 });
 
-test("retained Promotion policies preserve the schema-owned purchase-relative validity and disclosed terms", () => {
+test("new source captures retain approved fixed terms and fingerprint any expiry change", () => {
   const schema = require(path.join(promotionRoot, "src/schemas/schemas"));
   assert.equal(schema.promotion.promotion.definition.purchasedCouponPolicy.type, "object");
   for (const row of policies) {
     const scope = { tenant: row.tenant, enterpriseCode: row.enterpriseCode };
     const policy = publication.capturePolicy("promotion", { ...row, versionId: 0 }, scope);
-    assert.deepEqual(policy.purchasedCouponPolicy, row.purchasedCouponPolicy,
-      "Retained publication must not silently drop the approved 30-day purchased rights");
+    assert.deepEqual(policy.couponOffer, row.couponOffer);
     const changed = publication.capturePolicy("promotion", { ...row, versionId: 0,
-      purchasedCouponPolicy: { ...row.purchasedCouponPolicy, validityDays: 31 } }, scope);
+      couponOffer: { ...row.couponOffer, expiry: { mode: "FIXED", at: "2026-11-09T19:59:59.999Z" } } }, scope);
     assert.notEqual(publication.fingerprint(changed), publication.fingerprint(policy));
   }
 });

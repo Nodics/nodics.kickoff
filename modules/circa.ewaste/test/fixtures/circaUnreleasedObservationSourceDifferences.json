@@ -1,0 +1,91 @@
+{
+  "testOnly": true,
+  "operationalAuthority": false,
+  "reason": "Approved unreleased v001/access consolidation and canonical header byte changes; historical reviewed observation remains unchanged and cannot qualify current source.",
+  "stages": {
+    "product:productPublicationWorkflow": {
+      "retained": "004121f1ee452988bcb575b64b96387a61deac7b25a7bebe9371e374195efa7d",
+      "current": "07193fe46238c3323e38a24de16588e032c0471f61fe277598a8f11d37c02f2f"
+    },
+    "product:accessGroups": {
+      "retained": "b0465d025065192f3abd1492de958223557a04e361fd5d76b2b8937bfad6a987",
+      "current": "7709ab168d1333f6c14e81882071cb576cbbbe0c2e46795de1bbf3ac6675c9fb"
+    },
+    "promotion:accessGroups": {
+      "retained": "3b68a10257f64335fba1cfb77597860bd51754bc3d2ca97a18679f405e295844",
+      "current": "642958f362319e7b5457ac5270630f19c6b30800e1e3df1e584ed7c7677ed245"
+    },
+    "order:accessGroups": {
+      "retained": "a09781ed3826c4a4809b4313986c90f6e1988e0f074bc154fb48c386aa4a0cf6",
+      "current": "214c4a0b8ed588a745a3a5046d79ac826e711cde0d2e788339ad6c331f071048"
+    },
+    "import:specialAccessRoles": {
+      "retained": "f4f7c0213e21efc803d2400b2a989f3d3141a826320c460de0b84595b2ffed5b",
+      "current": "1ba08a70c1ed94313618181b95ca4e7e8c5c1482995353c6a928fae46ae02e8f"
+    },
+    "loyaltyWallet:specialAccessRoles": {
+      "retained": "30aee0dee584bc0ca455e7cebc5ffb3fab955e1083c9ff0413bb22dbafb92b16",
+      "current": "d94e84db50bb60b72adfc322d19fd2d81d96c7fb77ecd79b8a762a366b0c62ac"
+    },
+    "inventory:specialAccessRoles": {
+      "retained": "36d1e0286432ce7f27074bc4093a2b35d82a6c25d91a1aa434f2605bab4214a9",
+      "current": "7771dc08d2d91a0195a958d4f45d9e6549e60f63aeefea99323df77ee086cfd8"
+    },
+    "digitalCore:participantAccessGroups": {
+      "retained": "9842ac6bf7f05acd0296c5b4359e9115e4b86764f4c9237592a51d627ef2f14a",
+      "current": "de2518518f39bf3ac39a8abe119a382749d68d975aeb2ea5bc9de0c9cb899311"
+    },
+    "loyaltyWallet:participantAccessGroups": {
+      "retained": "f5b2d89f39a04936797582fac096982b860c1ad8d76a38855d8738c23288f65f",
+      "current": "2812e1f5d1fbe85f9eed4bb8c1c87bb819d58566811621f4664aedc5bda21cb4"
+    },
+    "circa.ewaste:operations": {
+      "retained": "8556ee0602702914c35d06f539d2084056456685a69c6a6aa2d03ac71aabd0d6",
+      "current": "2e21da32c812cc70bf63bc84a3fe82a066bdd1a5d38907a320a7cb35ac9b7363"
+    },
+    "order:participantReadAccess": {
+      "retained": "663be52729e783c5bdbc81da005e6784ec6aff6ecc7a82ec032023cba29719f9",
+      "current": "a390ab68b9076563be20e40907565fe4dcf0628e183f9e600257a18fc065bdf2"
+    },
+    "publish:accessGroups": {
+      "retained": "28cb993e9e0921c36eb54be7e89548a3ebb2cb691e805b32f1b56904223f49ba",
+      "current": "0a05769f4a5822e7cd8a0abc3b1601a4e3ed6e3c1777704f1bac621730876c9b"
+    },
+    "circa.ewaste:circaCommerceStaffAssignments": {
+      "retained": "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049",
+      "current": "09e5ed4742be2f0cb603c2224d461436f993017425e2ecd07c971563c19392b2"
+    },
+    "circa.ewaste:loyalty": {
+      "retained": "178341374702d959b40c8008459c83fcf2ac2850ae60673f0c43cbbbcc55d4d6",
+      "current": "708f1bc9287e1a36f4392fa454df635cbcccf89344c3fafe92bed6b5b94efbdd"
+    },
+    "circa.ewaste:commerce": {
+      "retained": "2677866cca45f52f6db3e240d4f783f56f0892f0ef657c3ba175fbc4eee20114",
+      "current": "41a2f8d8ebc8c1206c511cabdda1bc39fbd9641a91d94f5eeba7eadccffa816d"
+    },
+    "circa.ewaste:circaGreenPerksBudget": {
+      "retained": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010",
+      "current": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75"
+    },
+    "circa.ewaste:circaGreenPerksIssuance": {
+      "retained": "672dff3f1058dec8ba3eacc22d752ccc1bd505aa72213351a2d63d86fa4ba964",
+      "current": "d9313e4079a6a397536571f304bfa3bc6738c00c1d5c50056177ce8c5572f0c5"
+    },
+    "circa.ewaste:circaRenewWorksBudget": {
+      "retained": "73a38ca000acbc07afa81ff3c1090d39a084ef77b5d33f88bf4a411fa8b0ad64",
+      "current": "14287985d38f3b836624dece1dbdf6abe9e340990a03f7a69599ecf68682ea5b"
+    },
+    "circa.ewaste:circaRenewWorksIssuance": {
+      "retained": "624aa90d3fd3243fb39cb8edb8c3ac66063736246d57d58f47d664549a076ae0",
+      "current": "291f37eb61a4be41db5e14b4b0281e4edc322131b88fc130c94ee6d446220a5e"
+    },
+    "circa.ewaste:circaLoopCycleBudget": {
+      "retained": "7a3e013e7050f0b3d33da65bb5234a3ee80f65a0bce928b11b2fb361333c2dd3",
+      "current": "5b935a9bdc342723bc4ee2724f9ecc8448611da3516f7cea5add8991715bf4c0"
+    },
+    "circa.ewaste:circaLoopCycleIssuance": {
+      "retained": "799a3cd2718d63418c05cb97c49c08e5fa62ff756ddf58cf9081b143be37cb14",
+      "current": "0aeb99b937f006008b9185f0b8939dd480e35cea48ae3bb4aedbe6ec0cd15b84"
+    }
+  }
+}

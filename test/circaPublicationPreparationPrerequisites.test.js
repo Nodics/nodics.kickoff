@@ -29,13 +29,30 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       ),
     );
     const steps = service.preparationSteps(profiles.circa);
-    for (const code of ["circa.ewaste:profile", "circa.ewaste:operations", "circa.ewaste:loyalty"]) {
-      assert.equal(steps.find((step) => step.code === code).required, true);
+    for (const code of [
+      "circa.ewaste:profile",
+      "circa.ewaste:operations",
+      "circa.ewaste:loyalty",
+    ]) {
+      assert.equal(
+        steps.find((step) => step.code === code)?.required,
+        true,
+        `${code} must remain required`,
+      );
     }
-    const profileIndex = steps.findIndex((step) => step.code === "circa.ewaste:profile");
-    for (const code of ["loyaltyWallet:participantAccessGroups", "wasteCarbon:participantAccessGroups", "wasteReward:participantAccessGroups"]) {
+    const profileIndex = steps.findIndex(
+      (step) => step.code === "circa.ewaste:profile",
+    );
+    for (const code of [
+      "loyaltyWallet:participantAccessGroups",
+      "wasteCarbon:participantAccessGroups",
+      "wasteReward:participantAccessGroups",
+    ]) {
       const index = steps.findIndex((step) => step.code === code);
-      assert(index >= 0 && index < profileIndex, `${code} must precede the customer profile release`);
+      assert(
+        index >= 0 && index < profileIndex,
+        `${code} must precede the customer profile release`,
+      );
       const step = steps[index];
       assert.equal(step.required, true);
       assert.equal(step.phase, "BEFORE_PUBLICATION");
@@ -44,20 +61,31 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       assert.equal(step.targetServer, "platformServer");
       assert.equal(step.targetRuntimeRole, "PLATFORM");
     }
-    const assignmentIndex = steps.findIndex((step) => step.code === "circa.ewaste:customerParticipationAssignments");
-    assert(assignmentIndex > profileIndex, "Customer participation assignments require existing customer identities");
+    const assignmentIndex = steps.findIndex(
+      (step) => step.code === "circa.ewaste:customerParticipationAssignments",
+    );
+    assert(
+      assignmentIndex > profileIndex,
+      "Customer participation assignments require existing customer identities",
+    );
     assert.equal(steps[assignmentIndex].dataType, "sample");
     assert.equal(steps[assignmentIndex].targetRuntimeRole, "PLATFORM");
     const selectedOwners =
       environment === "kickoffLocal"
         ? [...owners.slice(1), "media"]
         : ["media"];
-    const contentIndex = steps.findIndex((step) => step.code === "circa.ewaste:content");
+    const contentIndex = steps.findIndex(
+      (step) => step.code === "circa.ewaste:content",
+    );
     assert(contentIndex >= 0);
     for (const owner of selectedOwners) {
-      const workflowIndex = steps.findIndex((step) => step.code === `${owner}:${owner}PublicationWorkflow`);
-      assert(workflowIndex >= 0 && workflowIndex < contentIndex,
-        "Required Process definitions must precede website content alongside other owner prerequisites");
+      const workflowIndex = steps.findIndex(
+        (step) => step.code === `${owner}:${owner}PublicationWorkflow`,
+      );
+      assert(
+        workflowIndex >= 0 && workflowIndex < contentIndex,
+        "Required Process definitions must precede website content alongside other owner prerequisites",
+      );
     }
     assert.deepEqual(
       steps
@@ -124,84 +152,177 @@ test("Local selected publication providers match the workflow prerequisites, not
 test("native Circa preparation selects additive staff access without credential-bearing operations replay", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal", {});
   const docker = loadRuntime("platformServer", "kickoffDockerLocal", {});
-  const service = require(path.join(frameworkRoot, "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
-  const steps = service.preparationSteps(platform.backofficeApplicationInitialization.profiles.circa);
-  const dockerSteps = service.preparationSteps(docker.backofficeApplicationInitialization.profiles.circa);
-  for (const [code, dataType] of [["product:accessGroups", "init"], ["publish:accessGroups", "init"], ["promotion:accessGroups", "init"], ["order:accessGroups", "init"], ["circa.ewaste:circaMerchantOutletAccess", "sample"], ["circa.ewaste:circaCommerceStaffAssignments", "sample"]]) {
-    const step = steps.find(row => row.code === code);
+  const service = require(
+    path.join(
+      frameworkRoot,
+      "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService",
+    ),
+  );
+  const steps = service.preparationSteps(
+    platform.backofficeApplicationInitialization.profiles.circa,
+  );
+  const dockerSteps = service.preparationSteps(
+    docker.backofficeApplicationInitialization.profiles.circa,
+  );
+  for (const [code, dataType] of [
+    ["product:accessGroups", "init"],
+    ["publish:accessGroups", "init"],
+    ["promotion:accessGroups", "init"],
+    ["order:accessGroups", "init"],
+    ["circa.ewaste:circaMerchantOutletAccess", "sample"],
+    ["circa.ewaste:circaCommerceStaffAssignments", "sample"],
+  ]) {
+    const step = steps.find((row) => row.code === code);
     assert(step, code);
     assert.equal(step.required, true);
     assert.equal(step.phase, "BEFORE_PUBLICATION");
     assert.equal(step.trigger, "USER");
     assert.equal(step.dataType, dataType);
     assert.equal(step.targetRuntimeRole, "PLATFORM");
-    assert.equal(dockerSteps.some(row => row.code === code), false);
+    assert.equal(
+      dockerSteps.some((row) => row.code === code),
+      [
+        "publish:accessGroups",
+        "circa.ewaste:circaCommerceStaffAssignments",
+      ].includes(code),
+    );
   }
-  assert.equal(steps.some(row => row.code === "profile:commerceRefundReviewerRole"), false,
-    "Axis reviewer includes its own permissions and needs no second HTTP role pack");
+  assert.equal(
+    steps.some((row) => row.code === "profile:commerceRefundReviewerRole"),
+    false,
+    "Axis reviewer includes its own permissions and needs no second HTTP role pack",
+  );
 });
 
-test("fresh preparation separates dependent staff and classification batches after their source imports", () => {
+test("fresh preparation separates dependent staff batches after their source imports", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal", {});
   const profile = platform.backofficeApplicationInitialization.profiles.circa;
-  const service = require(path.join(frameworkRoot, "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
-  const steps = service.preparationSteps(profile)
-    .filter(step => step.phase === "BEFORE_PUBLICATION");
+  const service = require(
+    path.join(
+      frameworkRoot,
+      "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService",
+    ),
+  );
+  const steps = service
+    .preparationSteps(profile)
+    .filter((step) => step.phase === "BEFORE_PUBLICATION");
   const sorted = steps.slice().sort((a, b) => a.order - b.order);
-  const groups = service.preparationGroups(profile, { authData: { principalId: "reviewed-operator" } }, steps);
+  const groups = service.preparationGroups(
+    profile,
+    { authData: { principalId: "reviewed-operator" } },
+    steps,
+  );
   for (const [dependent, prerequisites] of [
-    ["circa.ewaste:circaCommerceStaffAssignments", [
-      "circa.ewaste:operations", "product:accessGroups",
-      "publish:accessGroups", "promotion:accessGroups",
-      "order:accessGroups",
-    ]],
-    ["circa.ewaste:circaAssetClassification", ["circa.ewaste:commerce"]],
+    [
+      "circa.ewaste:circaCommerceStaffAssignments",
+      [
+        "circa.ewaste:operations",
+        "product:accessGroups",
+        "publish:accessGroups",
+        "promotion:accessGroups",
+        "order:accessGroups",
+      ],
+    ],
   ]) {
-    const position = sorted.findIndex(step => step.code === dependent);
-    const groupIndex = groups.findIndex(group => group.steps.some(step => step.code === dependent));
+    const position = sorted.findIndex((step) => step.code === dependent);
+    const groupIndex = groups.findIndex((group) =>
+      group.steps.some((step) => step.code === dependent),
+    );
     assert(position >= 0 && groupIndex >= 0, dependent);
-    assert.deepEqual(groups[groupIndex].steps.map(step => step.code), [dependent],
-      "dependent import is isolated from nImport intra-batch release sorting");
+    assert.deepEqual(
+      groups[groupIndex].steps.map((step) => step.code),
+      [dependent],
+      "dependent import is isolated from nImport intra-batch release sorting",
+    );
     for (const prerequisite of prerequisites) {
-      const prerequisitePosition = sorted.findIndex(step => step.code === prerequisite);
-      const prerequisiteGroup = groups.findIndex(group => group.steps.some(step => step.code === prerequisite));
-      assert(prerequisitePosition >= 0 && prerequisitePosition < position, prerequisite);
-      assert(prerequisiteGroup >= 0 && prerequisiteGroup < groupIndex, prerequisite);
+      const prerequisitePosition = sorted.findIndex(
+        (step) => step.code === prerequisite,
+      );
+      const prerequisiteGroup = groups.findIndex((group) =>
+        group.steps.some((step) => step.code === prerequisite),
+      );
+      assert(
+        prerequisitePosition >= 0 && prerequisitePosition < position,
+        prerequisite,
+      );
+      assert(
+        prerequisiteGroup >= 0 && prerequisiteGroup < groupIndex,
+        prerequisite,
+      );
     }
   }
 });
 
-test("required current catalogue supersedes only five original intents without duplicate mandatory versions", () => {
+test("required baseline catalogue uses original authority and versions without duplicate patch selections", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal", {});
-  const service = require(path.join(frameworkRoot, "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
-  const steps = service.preparationSteps(platform.backofficeApplicationInitialization.profiles.circa);
+  const service = require(
+    path.join(
+      frameworkRoot,
+      "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService",
+    ),
+  );
+  const steps = service.preparationSteps(
+    platform.backofficeApplicationInitialization.profiles.circa,
+  );
   const dataRoot = path.resolve(__dirname, "../modules/circa.ewaste/data");
   const base = path.join(dataRoot, "sample-v001");
   const manifest = require(path.join(dataRoot, "manifest.json"));
-  const original = require(path.join(base, "publication/catalogue/records/publicationPlan.json"));
-  const correctedFile = Object.keys(manifest.sections.circaAssetClassificationPublicationPlan.files);
-  assert.equal(correctedFile.length, 1);
-  const corrected = require(path.join(dataRoot, correctedFile[0]));
-  const required = steps.filter(step => step.required && step.type === "GOVERNED_PUBLICATIONS");
-  const current = required.find(step => step.code === "circa.ewaste:circaCatalogueCurrentPublicationPlan");
+  const original = require(
+    path.join(base, "publication/catalogue/records/publicationPlan.json"),
+  );
+  const required = steps.filter(
+    (step) => step.required && step.type === "GOVERNED_PUBLICATIONS",
+  );
+  const current = required.find(
+    (step) => step.code === "circa.ewaste:circaCataloguePublicationPlan",
+  );
   assert(current);
   assert.equal(current.operatorEnterpriseCode, "GREENPERKS_ONLINE");
   assert.equal(current.publicationPlan.items.length, 46);
   assert.equal(required.length, 7);
-  assert.equal(required.flatMap(step => step.publicationPlan.items).length, 98);
-  const outletPlans = ["greenperks", "renewworks", "loopcycle"].map(issuer =>
-    require(path.join(base, "merchant-outlets", issuer, "publication/records/publicationPlan.json")));
+  assert.equal(
+    required.flatMap((step) => step.publicationPlan.items).length,
+    98,
+  );
+  const outletPlans = ["greenperks", "renewworks", "loopcycle"].map((issuer) =>
+    require(
+      path.join(
+        base,
+        "merchant-outlets",
+        issuer,
+        "publication/records/publicationPlan.json",
+      ),
+    ),
+  );
   for (const plan of outletPlans) {
-    assert(required.some(step => JSON.stringify(step.publicationPlan) === JSON.stringify(plan)));
+    assert(
+      required.some(
+        (step) => JSON.stringify(step.publicationPlan) === JSON.stringify(plan),
+      ),
+    );
   }
-  assert.equal(steps.some(step => step.code === "circa.ewaste:circaCataloguePublicationPlan"), false);
-  const changed = current.publicationPlan.items.filter(item =>
-    JSON.stringify(item) !== JSON.stringify(original.items.find(row => row.rootCode === item.rootCode)));
-  assert.equal(changed.length, 5);
-  assert.deepEqual(changed, corrected.items);
-  assert(changed.every(item => item.sourceVersion === "1" && item.input.versionId === 0));
-  const optional = steps.find(step => step.code === "circa.ewaste:circaAssetClassificationPublicationPlan");
-  assert.equal(optional.required, false);
-  assert.equal(optional.operatorEnterpriseCode, "GREENPERKS_ONLINE");
-  assert.equal(optional.phase, "AFTER_PUBLICATION");
+  assert.deepEqual(current.publicationPlan, original);
+  assert.equal(current.phase, "AFTER_PUBLICATION");
+  const products = original.items.filter((item) => item.domain === "product");
+  assert.equal(products.length, 43);
+  assert(
+    products.every(
+      (item) => item.sourceVersion === "1" && item.input.versionId === 0,
+    ),
+  );
+  for (const section of [
+    "circaAssetClassification",
+    "circaAssetClassificationPublicationPlan",
+    "circaCatalogueCurrentPublicationPlan",
+    "circaProductMediaReferences",
+    "circaProductMediaPublicationPlan",
+    "circaCatalogueMediaCurrentPublicationPlan",
+  ]) {
+    assert.equal(manifest.sections[section], undefined, section);
+    assert.equal(
+      steps.some((step) => step.code === "circa.ewaste:" + section),
+      false,
+      section,
+    );
+  }
 });

@@ -1,0 +1,250 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C01_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C01_PROMO_FIXED20261108",
+      "policyFingerprint": "a7895e0905473438b075bfe7926210165ad52bb745c67bc613ce7b09cd72bcf7",
+      "commandReference": "opening-CIRCA_COUPON_GP-C01_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C02_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C02_PROMO_FIXED20261108",
+      "policyFingerprint": "1e79c21c9c9e296f1639f04f72ba441f9b3fc39f355ec3d746658e4ae30eb3e5",
+      "commandReference": "opening-CIRCA_COUPON_GP-C02_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C03_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C03_PROMO_FIXED20261108",
+      "policyFingerprint": "702166776ff077a9eb6c899b3d1081c1b4097ebc8838efffe9a7509cc912a5a8",
+      "commandReference": "opening-CIRCA_COUPON_GP-C03_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C04_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C04_PROMO_FIXED20261108",
+      "policyFingerprint": "1ad1a0c2796d071f70c3b516c80ae07cb981b294e603528b38e852302c6b107b",
+      "commandReference": "opening-CIRCA_COUPON_GP-C04_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C05_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C05_PROMO_FIXED20261108",
+      "policyFingerprint": "7792474f70e08fbff828f4b7cc91498d8a9d7c2c933e4bc7abd6e0ae0a6932fb",
+      "commandReference": "opening-CIRCA_COUPON_GP-C05_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C06_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C06_PROMO_FIXED20261108",
+      "policyFingerprint": "1add7453217899cedccc59db87d040cd7e940c50949e40efb1968316a8c51e64",
+      "commandReference": "opening-CIRCA_COUPON_GP-C06_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C07_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C07_PROMO_FIXED20261108",
+      "policyFingerprint": "c8c60dbcfdcbafcc0bee185b3a2f54433fbf3805956185c80e0265f22f46093d",
+      "commandReference": "opening-CIRCA_COUPON_GP-C07_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C08_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C08_PROMO_FIXED20261108",
+      "policyFingerprint": "47937292377c6eabfe5c51a96e02e79e69de18e6838d52107e8dda5d725df286",
+      "commandReference": "opening-CIRCA_COUPON_GP-C08_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C09_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C09_PROMO_FIXED20261108",
+      "policyFingerprint": "2fff8d325580859d40ca0cdeab19bf465361f98912b09fbb0399a7c117336a73",
+      "commandReference": "opening-CIRCA_COUPON_GP-C09_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C10_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C10_PROMO_FIXED20261108",
+      "policyFingerprint": "66514e2b3f6f3926a3a97acf9caa2c729e83072c96bafe0d85519bf055fc6ad1",
+      "commandReference": "opening-CIRCA_COUPON_GP-C10_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C11_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C11_PROMO_FIXED20261108",
+      "policyFingerprint": "3e5ebca37b70a5339670fa37fc27313879d106cecd0b4519cc54ff560032d96f",
+      "commandReference": "opening-CIRCA_COUPON_GP-C11_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-C12_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-C12_PROMO_FIXED20261108",
+      "policyFingerprint": "ea9e9fac0242767dde8b944962d562440914a6be56e00775ebac46d87e347845",
+      "commandReference": "opening-CIRCA_COUPON_GP-C12_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B01_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B01_PROMO_FIXED20261108",
+      "policyFingerprint": "596311869ba7c975e68a605896828b54119f16278087781cdd34a9fdd965f399",
+      "commandReference": "opening-CIRCA_COUPON_GP-B01_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B02_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B02_PROMO_FIXED20261108",
+      "policyFingerprint": "195fc81186d19999fbf06b73e1f2de9e5e7f0af33ca884d84a052e5b3f3cd876",
+      "commandReference": "opening-CIRCA_COUPON_GP-B02_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B03_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B03_PROMO_FIXED20261108",
+      "policyFingerprint": "b53301b4fe1502ef585bf9585dccd47370e7f568d951450765306efc3aad6677",
+      "commandReference": "opening-CIRCA_COUPON_GP-B03_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B04_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B04_PROMO_FIXED20261108",
+      "policyFingerprint": "645b29105c760b6d64e37a990bd3b859e5587cf4cf63b07074ca628ace22a8c3",
+      "commandReference": "opening-CIRCA_COUPON_GP-B04_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B05_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B05_PROMO_FIXED20261108",
+      "policyFingerprint": "1338ebfb2effc9cea91e890c01d2e1dd0785db9cacf070fc5f854f2327d1ba32",
+      "commandReference": "opening-CIRCA_COUPON_GP-B05_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B06_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B06_PROMO_FIXED20261108",
+      "policyFingerprint": "eab8745517e22f11086cb354b37cdf67b2edd5b171103a9088e3eebd901bc606",
+      "commandReference": "opening-CIRCA_COUPON_GP-B06_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B07_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B07_PROMO_FIXED20261108",
+      "policyFingerprint": "765bd490101bbe47242abe50d2535b3ff05e89bf3c679f30a6c0ab8f03592606",
+      "commandReference": "opening-CIRCA_COUPON_GP-B07_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B08_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B08_PROMO_FIXED20261108",
+      "policyFingerprint": "a228722b16c76d9ee50a7d8a0b688d2e86acd5f7470741600f8db8645de81879",
+      "commandReference": "opening-CIRCA_COUPON_GP-B08_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B09_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B09_PROMO_FIXED20261108",
+      "policyFingerprint": "f80dc703c15aa36544e85b9cd6fc794ecb711a6d6eac34d35ae2770714eabaa3",
+      "commandReference": "opening-CIRCA_COUPON_GP-B09_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B10_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B10_PROMO_FIXED20261108",
+      "policyFingerprint": "207194e3f1d7e7cc819ca3ff13dcc05632200bfaf4bf93d5f0887c9ae12cb203",
+      "commandReference": "opening-CIRCA_COUPON_GP-B10_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B11_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B11_PROMO_FIXED20261108",
+      "policyFingerprint": "17572c03ca7d3ed0d4bfb9cfb0f03142eb252ce08da6b7088ffef62a53b65d59",
+      "commandReference": "opening-CIRCA_COUPON_GP-B11_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-B12_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-B12_PROMO_FIXED20261108",
+      "policyFingerprint": "e79468c51b539bacfc80915705409ea1f9fdf8cd5ddde4a2c1b9318ad93dc408",
+      "commandReference": "opening-CIRCA_COUPON_GP-B12_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A01_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A01_PROMO_FIXED20261108",
+      "policyFingerprint": "7f3cbd7cbc4a39ea98f0e239576b516c781d4f2eb03b74c67a2fa9280a79a741",
+      "commandReference": "opening-CIRCA_COUPON_GP-A01_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A02_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A02_PROMO_FIXED20261108",
+      "policyFingerprint": "bfa4555e78e9551acf319b9998bbba8d5fee9bbf908e361e67aaa478e3bde586",
+      "commandReference": "opening-CIRCA_COUPON_GP-A02_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A03_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A03_PROMO_FIXED20261108",
+      "policyFingerprint": "5c5b38c02239c504fc73b36589f8ac1ca9aa9f528e0066212ed51ade4b012293",
+      "commandReference": "opening-CIRCA_COUPON_GP-A03_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A04_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A04_PROMO_FIXED20261108",
+      "policyFingerprint": "a0fbd87f5b4309d581090a7237d3d19f9c7322be84aa6c8b4936ab7f3ab93c4f",
+      "commandReference": "opening-CIRCA_COUPON_GP-A04_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A05_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A05_PROMO_FIXED20261108",
+      "policyFingerprint": "5c862d3c3a60bc1c1d558302bb956498b97a9e57435085448d595fa2f35d639c",
+      "commandReference": "opening-CIRCA_COUPON_GP-A05_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A06_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A06_PROMO_FIXED20261108",
+      "policyFingerprint": "6eb74762c5de1d050404440799e73caf4b4a7a79b6f7d1193cee009ecc34b35d",
+      "commandReference": "opening-CIRCA_COUPON_GP-A06_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A07_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A07_PROMO_FIXED20261108",
+      "policyFingerprint": "d0c8702d2a7cc9740fa88fe72e7db54d94e3f89843479ba616fd08ba6efe5d68",
+      "commandReference": "opening-CIRCA_COUPON_GP-A07_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A08_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A08_PROMO_FIXED20261108",
+      "policyFingerprint": "f4eca1b5c34cf47829ac2956095b2fe134a8637c310df9749133d6fb383406fb",
+      "commandReference": "opening-CIRCA_COUPON_GP-A08_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A09_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A09_PROMO_FIXED20261108",
+      "policyFingerprint": "9d107694ebd6ef6b282cb23a590709d2639aab3fcbf0c2f3692917570e7fd81b",
+      "commandReference": "opening-CIRCA_COUPON_GP-A09_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A10_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A10_PROMO_FIXED20261108",
+      "policyFingerprint": "ab11228e18fb39044bf392fba9002bcfda61af330be51530f8f4525a503faaa7",
+      "commandReference": "opening-CIRCA_COUPON_GP-A10_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_GP-A11_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_GP-A11_PROMO_FIXED20261108",
+      "policyFingerprint": "78b36e4063abb492bba27f28fab56d63251d75a4c762f4a4ea5c8248289c7075",
+      "commandReference": "opening-CIRCA_COUPON_GP-A11_PROMO_FIXED20261108"
+    }
+  ],
+  "couponBatches": []
+}

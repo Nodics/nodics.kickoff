@@ -8,12 +8,22 @@ module.exports = {
     "enterpriseCode": "GREENPERKS_ONLINE",
     "roleCodes": [
       "COMMERCE_SETUP_PUBLISHER",
-      "COMMERCE_AXIS_REFUND_REVIEWER"
+      "COMMERCE_AXIS_REFUND_REVIEWER",
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
     ],
     "groupCodes": [
       "commerceSetupPublisherUserGroup",
       "commercePublicationStarterUserGroup",
-      "commerceAxisRefundReviewerUserGroup"
+      "commerceAxisRefundReviewerUserGroup",
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
     ]
   },
   "record1": {
@@ -22,12 +32,24 @@ module.exports = {
     "enterpriseCode": "GREENPERKS_RETAIL",
     "roleCodes": [
       "COMMERCE_SETUP_PUBLISHER",
-      "COMMERCE_COUPON_ISSUER"
+      "COMMERCE_COUPON_ISSUER",
+      "PROMOTION_EDIT",
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
     ],
     "groupCodes": [
       "commerceSetupPublisherUserGroup",
       "commercePublicationStarterUserGroup",
-      "commerceCouponIssuerUserGroup"
+      "commerceCouponIssuerUserGroup",
+      "promotionBusinessEditUserGroup",
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
     ]
   },
   "record2": {
@@ -36,12 +58,24 @@ module.exports = {
     "enterpriseCode": "RENEWWORKS_REPAIR_REUSE",
     "roleCodes": [
       "COMMERCE_SETUP_PUBLISHER",
-      "COMMERCE_COUPON_ISSUER"
+      "COMMERCE_COUPON_ISSUER",
+      "PROMOTION_EDIT",
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
     ],
     "groupCodes": [
       "commerceSetupPublisherUserGroup",
       "commercePublicationStarterUserGroup",
-      "commerceCouponIssuerUserGroup"
+      "commerceCouponIssuerUserGroup",
+      "promotionBusinessEditUserGroup",
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
     ]
   },
   "record3": {
@@ -50,12 +84,24 @@ module.exports = {
     "enterpriseCode": "LOOPCYCLE_RECYCLING",
     "roleCodes": [
       "COMMERCE_SETUP_PUBLISHER",
-      "COMMERCE_COUPON_ISSUER"
+      "COMMERCE_COUPON_ISSUER",
+      "PROMOTION_EDIT",
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
     ],
     "groupCodes": [
       "commerceSetupPublisherUserGroup",
       "commercePublicationStarterUserGroup",
-      "commerceCouponIssuerUserGroup"
+      "commerceCouponIssuerUserGroup",
+      "promotionBusinessEditUserGroup",
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
     ]
   },
   "record4": {
@@ -89,6 +135,63 @@ module.exports = {
     ],
     "groupCodes": [
       "commerceMerchantUserGroup"
+    ]
+  },
+  "record7": {
+    "code": "circa-integrated-administrator",
+    "loginId": "integrated.administrator@circa.local",
+    "enterpriseCode": "CIRCA_INTEGRATED_SERVICES",
+    "roleCodes": [
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
+    ],
+    "groupCodes": [
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
+    ]
+  },
+  "record8": {
+    "code": "circa-logistics-administrator",
+    "loginId": "logistics.administrator@circa.local",
+    "enterpriseCode": "LOOPLINK_LOGISTICS",
+    "roleCodes": [
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
+    ],
+    "groupCodes": [
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
+    ]
+  },
+  "record9": {
+    "code": "circa-group-administrator",
+    "loginId": "group.administrator@circa.local",
+    "enterpriseCode": "GREENPERKS_GROUP",
+    "roleCodes": [
+      "COMMERCE_OWN_CART_PARTICIPANT",
+      "COMMERCE_OWN_CHECKOUT_PARTICIPANT",
+      "COMMERCE_OWN_LIFECYCLE_PARTICIPANT",
+      "COMMERCE_OWN_ORDER_READER",
+      "COMMERCE_BID_PARTICIPANT"
+    ],
+    "groupCodes": [
+      "commerceOwnCartParticipantUserGroup",
+      "commerceOwnCheckoutParticipantUserGroup",
+      "commerceOwnLifecycleParticipantUserGroup",
+      "commerceOwnOrderReaderUserGroup",
+      "commerceBidParticipantUserGroup"
     ]
   }
 };

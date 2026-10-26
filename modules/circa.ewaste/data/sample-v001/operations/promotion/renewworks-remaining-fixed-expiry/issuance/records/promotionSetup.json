@@ -1,0 +1,44 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "policyFingerprint": "967fe0844c983d902634a881b46510eb6ddbb1c2eb0a111280668246a5bc4007",
+      "commandReference": "opening-CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRenewWorksRemainingFixedExpiryBudget",
+        "version": "0.0.1",
+        "checksum": "43e9af2452387fa9b90781696992ec58bd51e1a8eb837d1b3b0389d3d8663979"
+      }
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "policyFingerprint": "07ef0d1fad17b6c25c63e3656ef3b427e2d15bcc9444d5fc7b92470530fb680b",
+      "commandReference": "opening-CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "admissionContribution": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaRenewWorksRemainingFixedExpiryBudget",
+        "version": "0.0.1",
+        "checksum": "43e9af2452387fa9b90781696992ec58bd51e1a8eb837d1b3b0389d3d8663979"
+      }
+    }
+  ],
+  "couponBatches": [
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "batchCode": "CIRCA_COUPON_CPN-GRN-30_BATCH_FIXED20261108",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "batchCode": "CIRCA_COUPON_CPN-SVC-50_BATCH_FIXED20261108",
+      "quantity": 100,
+      "commandReference": "issue-CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108"
+    }
+  ]
+}

@@ -4,26 +4,26 @@
       "promotionCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
-      "policyFingerprint": "4b3290ba116806bea3481682dc0ad1433d13e29c181fbcca91a1a52af6d2f239",
+      "policyFingerprint": "87f474625cc04dff9a0156cb37cc3b386a4bf9efd07346e9a9aeba49d71d0358",
       "commandReference": "opening-CIRCA_COUPON_CPN-GRN-30_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaRenewWorksBudget",
         "version": "0.0.1",
-        "checksum": "73a38ca000acbc07afa81ff3c1090d39a084ef77b5d33f88bf4a411fa8b0ad64"
+        "checksum": "14287985d38f3b836624dece1dbdf6abe9e340990a03f7a69599ecf68682ea5b"
       }
     },
     {
       "promotionCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
       "storeCode": "circaMainStore",
       "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO",
-      "policyFingerprint": "fca177dc07549c9ae8d52f539837c4fe121b1f8e9c741d3173c464af844303e2",
+      "policyFingerprint": "c3f140ed895aa30e28dfa4912480a025c793e3754ebd768c18595c5056076cf8",
       "commandReference": "opening-CIRCA_COUPON_CPN-SVC-50_PROMO",
       "admissionContribution": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:circaRenewWorksBudget",
         "version": "0.0.1",
-        "checksum": "73a38ca000acbc07afa81ff3c1090d39a084ef77b5d33f88bf4a411fa8b0ad64"
+        "checksum": "14287985d38f3b836624dece1dbdf6abe9e340990a03f7a69599ecf68682ea5b"
       }
     }
   ],

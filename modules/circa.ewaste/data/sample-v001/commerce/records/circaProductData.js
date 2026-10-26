@@ -21,13 +21,14 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/asset-laptop.svg",
+        "mediaCode": "circa-asset-laptop",
         "altText": "Damaged ThinkPad T480"
       }
     },
     "categoryCodes": [
       "circaAssets"
-    ]
+    ],
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record1": {
     "tenant": "default",
@@ -42,13 +43,14 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/asset-monitor.svg",
+        "mediaCode": "circa-asset-monitor",
         "altText": "Office LED Monitor"
       }
     },
     "categoryCodes": [
       "circaAssets"
-    ]
+    ],
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record2": {
     "tenant": "default",
@@ -63,13 +65,14 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/asset-router.svg",
+        "mediaCode": "circa-asset-router",
         "altText": "Home Wi-Fi Router"
       }
     },
     "categoryCodes": [
       "circaAssets"
-    ]
+    ],
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record3": {
     "tenant": "default",
@@ -84,13 +87,14 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/asset-camera.svg",
+        "mediaCode": "circa-asset-camera",
         "altText": "Compact Digital Camera"
       }
     },
     "categoryCodes": [
       "circaAssets"
-    ]
+    ],
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record4": {
     "tenant": "default",
@@ -105,13 +109,14 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/asset-router.svg",
+        "mediaCode": "circa-asset-router",
         "altText": "Mesh Router Pair"
       }
     },
     "categoryCodes": [
       "circaAssets"
-    ]
+    ],
+    "digitalDeliveryType": "DIGITAL_OWNERSHIP"
   },
   "record5": {
     "tenant": "default",
@@ -126,7 +131,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "AED 30 repair credit"
       }
     },
@@ -148,7 +153,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "15% recycled accessories offer"
       }
     },
@@ -170,7 +175,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "AED 50 device diagnosis"
       }
     },
@@ -192,7 +197,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Espresso - Hills Cafe"
       }
     },
@@ -214,7 +219,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Americano - Hills Cafe"
       }
     },
@@ -236,7 +241,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Cappuccino - Hills Cafe"
       }
     },
@@ -258,7 +263,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Latte - Hills Cafe"
       }
     },
@@ -280,7 +285,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Tea - Hills Cafe"
       }
     },
@@ -302,7 +307,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Iced coffee - Hills Cafe"
       }
     },
@@ -324,7 +329,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Croissant - Hills Cafe"
       }
     },
@@ -346,7 +351,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Muffin - Hills Cafe"
       }
     },
@@ -368,7 +373,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Cookie pair - Hills Cafe"
       }
     },
@@ -390,7 +395,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Coffee and croissant - Hills Cafe"
       }
     },
@@ -412,7 +417,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Tea and cake slice - Hills Cafe"
       }
     },
@@ -434,7 +439,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Breakfast sandwich and coffee - Hills Cafe"
       }
     },
@@ -456,7 +461,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Soup of the day - Hills Bistro"
       }
     },
@@ -478,7 +483,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Side salad - Hills Bistro"
       }
     },
@@ -500,7 +505,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Starter plate - Hills Bistro"
       }
     },
@@ -522,7 +527,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Sandwich - Hills Bistro"
       }
     },
@@ -544,7 +549,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Pasta dish - Hills Bistro"
       }
     },
@@ -566,7 +571,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Pizza - Hills Bistro"
       }
     },
@@ -588,7 +593,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Main-course salad - Hills Bistro"
       }
     },
@@ -610,7 +615,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Dessert - Hills Bistro"
       }
     },
@@ -632,7 +637,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Main and soft drink - Hills Bistro"
       }
     },
@@ -654,7 +659,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Two-course lunch - Hills Bistro"
       }
     },
@@ -676,7 +681,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Meal for two - Hills Bistro"
       }
     },
@@ -698,7 +703,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "AED 25 bill discount - Hills Bistro"
       }
     },
@@ -720,7 +725,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Bottled water - GreenPerks"
       }
     },
@@ -742,7 +747,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Tea - GreenPerks"
       }
     },
@@ -764,7 +769,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Americano - GreenPerks"
       }
     },
@@ -786,7 +791,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Fresh juice - GreenPerks"
       }
     },
@@ -808,7 +813,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Soft drink - GreenPerks"
       }
     },
@@ -830,7 +835,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "Dessert and tea - GreenPerks"
       }
     },
@@ -852,7 +857,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "AED 10 bill discount - GreenPerks"
       }
     },
@@ -874,7 +879,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "AED 20 bill discount - GreenPerks"
       }
     },
@@ -896,7 +901,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "AED 30 bill discount - GreenPerks"
       }
     },
@@ -918,7 +923,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "10% bill discount - GreenPerks"
       }
     },
@@ -940,7 +945,7 @@ module.exports = {
     "fulfillmentStrategy": "DIGITAL_COMMERCE",
     "media": {
       "primaryImage": {
-        "url": "/media/coupon-market.svg",
+        "mediaCode": "circa-coupon-market",
         "altText": "15% bill discount - GreenPerks"
       }
     },

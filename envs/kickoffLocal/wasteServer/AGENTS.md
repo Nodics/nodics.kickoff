@@ -70,7 +70,12 @@ Native digital ownership evidence selects only Commerce, Loyalty and Platform
 target roles here, requests the `digitalCore` and `product` remote modules, and
 requires bounded `commerce.digital.own.read` in the governed Profile assignment.
 The native selection admits only the original Commerce deployment's `apiAdmin`
-runtime for the GREENPERKS_ONLINE business scope, and selects Profile's exact
+runtime for the GREENPERKS_ONLINE business scope and the explicitly selected
+GREENPERKS_RETAIL certificate/bundle buy/sell/gift scope. Retail selects only
+`waste.asset.sale.transfer`, not marketplace projection or Staged listing access.
+Commerce must retain fresh human permission and typed owner checks; this exact
+runtime delegation does not grant employee rights or bypass financial evidence.
+The deployment also selects Profile's exact
 customer-evidence route with its bounded read permission. These declarations
 do not prove an installed Profile grant. Native-Local sale admission is selected
 for reviewed connected acceptance only; its flags never replace installed owner,

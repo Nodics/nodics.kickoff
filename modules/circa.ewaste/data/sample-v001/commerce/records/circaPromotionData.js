@@ -51,11 +51,24 @@ module.exports = {
       "schemaName": "enterprise",
       "code": "GREENPERKS_ONLINE"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_CPN-GRN-30_POINTS"
+      },
       "terms": [
         "Redeem AED 30 repair credit once at renewworks-repair.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value."
       ]
     }
@@ -104,11 +117,24 @@ module.exports = {
       "schemaName": "enterprise",
       "code": "GREENPERKS_ONLINE"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_CPN-ECO-15_POINTS"
+      },
       "terms": [
         "Redeem 15% recycled accessories offer once at loopcycle-accessories.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value."
       ]
     }
@@ -156,11 +182,24 @@ module.exports = {
       "schemaName": "enterprise",
       "code": "GREENPERKS_ONLINE"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_CPN-SVC-50_POINTS"
+      },
       "terms": [
         "Redeem AED 50 device diagnosis once at renewworks-repair.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value."
       ]
     }
@@ -204,15 +243,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Espresso once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -220,6 +250,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C01_POINTS"
+      },
+      "terms": [
+        "Redeem Espresso once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record4": {
@@ -261,15 +313,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Americano once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -277,6 +320,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C02_POINTS"
+      },
+      "terms": [
+        "Redeem Americano once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record5": {
@@ -318,15 +383,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Cappuccino once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -334,6 +390,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C03_POINTS"
+      },
+      "terms": [
+        "Redeem Cappuccino once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record6": {
@@ -375,15 +453,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Latte once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -391,6 +460,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C04_POINTS"
+      },
+      "terms": [
+        "Redeem Latte once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record7": {
@@ -432,15 +523,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Tea once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -448,6 +530,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C05_POINTS"
+      },
+      "terms": [
+        "Redeem Tea once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record8": {
@@ -489,15 +593,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Iced coffee once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -505,6 +600,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C06_POINTS"
+      },
+      "terms": [
+        "Redeem Iced coffee once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record9": {
@@ -546,15 +663,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Croissant once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -562,6 +670,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C07_POINTS"
+      },
+      "terms": [
+        "Redeem Croissant once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record10": {
@@ -603,15 +733,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Muffin once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -619,6 +740,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C08_POINTS"
+      },
+      "terms": [
+        "Redeem Muffin once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record11": {
@@ -660,15 +803,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Cookie pair once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -676,6 +810,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C09_POINTS"
+      },
+      "terms": [
+        "Redeem Cookie pair once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record12": {
@@ -722,15 +878,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -738,6 +885,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C10_POINTS"
+      },
+      "terms": [
+        "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record13": {
@@ -784,15 +953,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -800,6 +960,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C11_POINTS"
+      },
+      "terms": [
+        "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record14": {
@@ -846,15 +1028,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -862,6 +1035,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-C12_POINTS"
+      },
+      "terms": [
+        "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record15": {
@@ -903,15 +1098,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Soup of the day once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -919,6 +1105,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B01_POINTS"
+      },
+      "terms": [
+        "Redeem Soup of the day once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record16": {
@@ -960,15 +1168,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Side salad once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -976,6 +1175,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B02_POINTS"
+      },
+      "terms": [
+        "Redeem Side salad once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record17": {
@@ -1017,15 +1238,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Starter plate once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1033,6 +1245,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B03_POINTS"
+      },
+      "terms": [
+        "Redeem Starter plate once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record18": {
@@ -1074,15 +1308,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Sandwich once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1090,6 +1315,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B04_POINTS"
+      },
+      "terms": [
+        "Redeem Sandwich once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record19": {
@@ -1131,15 +1378,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Pasta dish once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1147,6 +1385,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B05_POINTS"
+      },
+      "terms": [
+        "Redeem Pasta dish once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record20": {
@@ -1188,15 +1448,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Pizza once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1204,6 +1455,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B06_POINTS"
+      },
+      "terms": [
+        "Redeem Pizza once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record21": {
@@ -1245,15 +1518,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Main-course salad once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1261,6 +1525,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B07_POINTS"
+      },
+      "terms": [
+        "Redeem Main-course salad once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record22": {
@@ -1302,15 +1588,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Dessert once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1318,6 +1595,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B08_POINTS"
+      },
+      "terms": [
+        "Redeem Dessert once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record23": {
@@ -1364,15 +1663,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1380,6 +1670,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B09_POINTS"
+      },
+      "terms": [
+        "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record24": {
@@ -1426,15 +1738,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1442,6 +1745,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B10_POINTS"
+      },
+      "terms": [
+        "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record25": {
@@ -1488,15 +1813,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Meal for two once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1504,6 +1820,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B11_POINTS"
+      },
+      "terms": [
+        "Redeem Meal for two once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record26": {
@@ -1540,15 +1878,6 @@ module.exports = {
       "discountAmount": "25.00",
       "reasonCode": "CIRCA_SAMPLE_OFFER"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem AED 25 bill discount once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Minimum eligible bill subtotal AED 100.00."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1556,6 +1885,28 @@ module.exports = {
     },
     "budget": {
       "limit": "2500"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-B12_POINTS"
+      },
+      "terms": [
+        "Redeem AED 25 bill discount once at GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 100.00."
+      ]
     }
   },
   "record27": {
@@ -1598,15 +1949,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1614,6 +1956,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A01_POINTS"
+      },
+      "terms": [
+        "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record28": {
@@ -1656,15 +2020,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1672,6 +2027,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A02_POINTS"
+      },
+      "terms": [
+        "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record29": {
@@ -1714,15 +2091,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1730,6 +2098,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A03_POINTS"
+      },
+      "terms": [
+        "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record30": {
@@ -1772,15 +2162,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1788,6 +2169,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A04_POINTS"
+      },
+      "terms": [
+        "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record31": {
@@ -1830,15 +2233,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1846,6 +2240,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A05_POINTS"
+      },
+      "terms": [
+        "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record32": {
@@ -1893,15 +2309,6 @@ module.exports = {
         }
       ]
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Exact listed SKU quantities only; no substitutions."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1909,6 +2316,28 @@ module.exports = {
     },
     "budget": {
       "limit": "0"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A06_POINTS"
+      },
+      "terms": [
+        "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Exact listed SKU quantities only; no substitutions."
+      ]
     }
   },
   "record33": {
@@ -1946,15 +2375,6 @@ module.exports = {
       "discountAmount": "10.00",
       "reasonCode": "CIRCA_SAMPLE_OFFER"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Minimum eligible bill subtotal AED 40.00."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -1962,6 +2382,28 @@ module.exports = {
     },
     "budget": {
       "limit": "1000"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A07_POINTS"
+      },
+      "terms": [
+        "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 40.00."
+      ]
     }
   },
   "record34": {
@@ -1999,15 +2441,6 @@ module.exports = {
       "discountAmount": "20.00",
       "reasonCode": "CIRCA_SAMPLE_OFFER"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Minimum eligible bill subtotal AED 80.00."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -2015,6 +2448,28 @@ module.exports = {
     },
     "budget": {
       "limit": "2000"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A08_POINTS"
+      },
+      "terms": [
+        "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 80.00."
+      ]
     }
   },
   "record35": {
@@ -2052,15 +2507,6 @@ module.exports = {
       "discountAmount": "30.00",
       "reasonCode": "CIRCA_SAMPLE_OFFER"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Minimum eligible bill subtotal AED 120.00."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -2068,6 +2514,28 @@ module.exports = {
     },
     "budget": {
       "limit": "3000"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A09_POINTS"
+      },
+      "terms": [
+        "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 120.00."
+      ]
     }
   },
   "record36": {
@@ -2106,16 +2574,6 @@ module.exports = {
       "reasonCode": "CIRCA_SAMPLE_OFFER",
       "percent": "10.00"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Minimum eligible bill subtotal AED 50.00.",
-        "Maximum discount AED 20.00."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -2123,6 +2581,29 @@ module.exports = {
     },
     "budget": {
       "limit": "2000"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A10_POINTS"
+      },
+      "terms": [
+        "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 50.00.",
+        "Maximum discount AED 20.00."
+      ]
     }
   },
   "record37": {
@@ -2161,16 +2642,6 @@ module.exports = {
       "reasonCode": "CIRCA_SAMPLE_OFFER",
       "percent": "15.00"
     },
-    "purchasedCouponPolicy": {
-      "validityDays": 30,
-      "terms": [
-        "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
-        "Fictional local demonstration offer; no real-world venue participation or cash value.",
-        "Minimum eligible bill subtotal AED 100.00.",
-        "Maximum discount AED 40.00."
-      ]
-    },
     "enterpriseRef": {
       "moduleName": "profile",
       "schemaName": "enterprise",
@@ -2178,6 +2649,29 @@ module.exports = {
     },
     "budget": {
       "limit": "4000"
+    },
+    "couponOffer": {
+      "version": 1,
+      "supply": {
+        "mode": "LIMITED",
+        "quantity": 100
+      },
+      "ownerLimit": 1,
+      "expiry": {
+        "mode": "FIXED",
+        "at": "2026-11-08T19:59:59.999Z"
+      },
+      "requirements": {
+        "type": "REWARDS",
+        "priceRef": "CIRCA_COUPON_GP-A11_POINTS"
+      },
+      "terms": [
+        "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
+        "Fictional local demonstration offer; no real-world venue participation or cash value.",
+        "Minimum eligible bill subtotal AED 100.00.",
+        "Maximum discount AED 40.00."
+      ]
     }
   }
 };

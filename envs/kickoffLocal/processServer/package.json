@@ -42,7 +42,8 @@
         "promotion",
         "inventory",
         "tax",
-        "media"
+        "media",
+        "digitalCore"
       ]
     },
     "runtimeTooling": {

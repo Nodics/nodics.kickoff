@@ -67,14 +67,17 @@ data/
   files concise.
 - Project, environment, and server contributions load after product modules by
   index and customize services through the standard merge process.
-- The unreleased data directories are consolidated into `v001` within each data
-  type. Section versions are independently pinned in the owning manifest;
-  changed or frozen content may have explicit semantic successors. Do not force
-  those versions back to `0.0.1` merely because the directory remains `v001`.
-  Existing local installations may retain receipts for earlier bytes. Inspect
-  installed history and use an explicitly approved governed fresh initialization
-  or reset where needed; never rewrite receipts, bypass drift protection or replay
-  Init over an established deployment. Future frozen releases use forward versions.
+- Before the first customer release, maintain one current `v001` baseline per
+  owning module and data type. Fold approved changes into that baseline and remove
+  superseded source snapshots and retained-root compatibility metadata. Manifest
+  section versions are independent of folder names; do not invent additional
+  shipped datasets merely because a Local test installation already exists.
+  Keep deliberately versioned upgrade fixtures under their test owner, separate
+  from shipped data. Historical execution evidence remains unchanged.
+  Consolidating source does not rewrite installed receipts or authorize a reset:
+  use separately approved governed fresh initialization for live adoption, never
+  bypass checksum drift or replay baseline identity/finance over an existing
+  installation. Real customer releases will use normal version governance.
 - Add environments and servers only when Nodics Kickoff owns those runnable
   topologies.
 - Keep runtime clean/build behavior scoped to the effective module graph for the

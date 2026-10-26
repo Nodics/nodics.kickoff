@@ -1,8 +1,22 @@
 # Loyalty Server Agent Contract
 
-Native business-enterprise read evidence admits only the original Waste
-deployment for GREENPERKS_ONLINE; preserve its default principal enterprise and
-empty token groups. This read policy does not authorize reward posting, open a
+Local selects only the existing Commerce runtime as a caller of Loyalty's
+reservation-decision contract. Wallet owns the definitions and empty default;
+this server supplies the exact approved deployment binding, not permissions.
+Retain canonical runtime proof and independent reserve/release/read checks.
+Selection cannot establish historical no-effects or authorize old-checkout cleanup.
+
+This isolated Local deployment explicitly selects native Super Admin test-wallet
+provisioning and test credit. Framework defaults remain off. Provisioning creates
+zero balances only; funding is a separate confirmed, idempotent command. Preserve
+the kickoffLocal-only allowlist, fresh Profile authority, program eligibility,
+test markers and transaction/index qualification. Never relabel an ordinary
+wallet or treat this selection as employee funding authority.
+
+Native business-enterprise read evidence admits the original Waste deployment
+for GREENPERKS_ONLINE and the exact Local Commerce deployment for
+GREENPERKS_RETAIL and GREENPERKS_ONLINE. Preserve each default principal enterprise,
+empty token groups and exact runtime coordinates; foreign environments remain denied. This read policy does not authorize reward posting, open a
 wallet, fund a buyer or establish a native sale/refund result.
 
 Only this native deployment selects Loyalty's optional fail-closed transaction

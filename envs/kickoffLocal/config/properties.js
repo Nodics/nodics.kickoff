@@ -6,6 +6,47 @@
  * @override Later deployment layers may narrow these selections without bypassing framework qualification or authorization.
  */
 module.exports = {
+  checkoutCore: {
+    auction: {
+      cartContexts: {
+        circaMainStore: {
+          tenant: "default",
+          enterpriseCode: "GREENPERKS_ONLINE",
+          currency: "POINTS",
+          jurisdiction: "CIRCA_SAMPLE",
+        },
+      },
+    },
+  },
+  wasteMaterialValue: {
+    mock: { enabled: true },
+    evidence: {
+      valuationProviderService: "DefaultWasteMaterialValueMockProviderService",
+      paymentProviderService: "DefaultWasteMaterialValueMockProviderService",
+      allowSynthetic: true,
+      qualificationRef: {
+        module: "wasteReward",
+        schema: "wasteMaterialValueMockEvidence",
+        code: "circa-e16-valuation-mock-v001",
+      },
+    },
+  },
+  wasteCarbon: {
+    mock: { enabled: true },
+    evidence: {
+      providerService: "DefaultWasteCarbonMockProviderService",
+      allowSynthetic: true,
+      qualificationRef: {
+        module: "wasteCarbon",
+        schema: "wasteCarbonMockEvidence",
+        code: "circa-e15-carbon-mock-v001",
+      },
+    },
+  },
+  loyalty: {
+    partnerRewardConversion: { enabled: true, mock: { enabled: true } },
+    auctions: { enabled: true },
+  },
   // Local fresh installs seed the retained runtime proof that this deployment
   // will authenticate immediately after Init. nAuth still owns both bindings;
   // other environments may provision and rotate them independently.
@@ -51,7 +92,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
           storeCodes: {
             agoraMainStore: {
               $config: "selected",
@@ -80,7 +120,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       LOCATION: {
@@ -91,7 +130,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       LOYALTY: {
@@ -102,7 +140,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       PLATFORM: {
@@ -113,7 +150,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       WASTE: {
@@ -124,7 +160,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
       WCMS_STAGED: {
@@ -135,7 +170,6 @@ module.exports = {
         refunds: {
           enabled: true,
           orderCodePrefixes: ["CIRCA_ORDER_"],
-          defaultOwnerPort: "eWaste",
         },
       },
     },
@@ -189,7 +223,7 @@ module.exports = {
         maximumAmount: "100000",
         stores: {
           circaMainStore: {
-            enterpriseCode: "default",
+            enterpriseCode: "GREENPERKS_ONLINE",
             currency: "POINTS",
             locale: "en",
             orderCodePrefix: "CIRCA_ORDER_BID_",
@@ -506,8 +540,8 @@ module.exports = {
             moduleName: "circa.ewaste",
             path: "config/setup-observation/circa-native-reviewed.json",
             checksum:
-              "1bbc6ffb9d14b055b0f00a46b29849e3fa8f132c30e9a4640938fddfd6c1ecc5",
-            revision: 16,
+              "9340a939abfe68ce99ab635ec0ed01819c1052ebbbae4b5da7fc8fee82e43fe2",
+            revision: 17,
           },
         },
         callers: {
@@ -551,9 +585,11 @@ module.exports = {
   pricing: {
     runtimeRoleProfiles: {
       COMMERCE: {
+        bundleListings: { enabled: true, qualified: true },
         publication: {
           delivery: {
             enabled: true,
+            rowReleases: true,
             storeCodes: {
               $config: "replace",
               value: [
@@ -684,13 +720,30 @@ module.exports = {
     },
   },
   promotion: {
-    merchantBenefits: {
-      enabled: true,
-      itemEvidenceMode: "SIMULATION",
-      itemEvidenceService: "DefaultFulfillmentItemSimulationService",
-    },
     runtimeRoleProfiles: {
       COMMERCE: {
+        acquisitionReporting: {
+          channelOptions: [{ code: "web", name: "Website" }],
+          enabled: true,
+          refresh: {
+            enabled: true,
+            callers: {
+              $config: "replace",
+              value: [
+                {
+                  tenant: "default",
+                  principalEnterpriseCode: "default",
+                  serviceId: "apiAdmin",
+                  projectCode: "nodics.kickoff",
+                  environmentCode: "kickoffLocal",
+                  serverCode: "commerceServer",
+                  instanceCode: "kickoff-local-commerce-1",
+                  assignmentCode: "kickoff-local-commerce-runtime-deployment",
+                },
+              ],
+            },
+          },
+        },
         legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"],
         sellerAuthorization: {
           enabled: true,
@@ -759,9 +812,46 @@ module.exports = {
                   "CIRCA_COUPON_GP-A09_PROMO",
                   "CIRCA_COUPON_GP-A10_PROMO",
                   "CIRCA_COUPON_GP-A11_PROMO",
-                  "CIRCA_COUPON_CPN-GRN-30_PROMO",
-                  "CIRCA_COUPON_CPN-SVC-50_PROMO",
-                  "CIRCA_COUPON_CPN-ECO-15_PROMO",
+                  "CIRCA_COUPON_GP-C01_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C02_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C03_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C04_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C05_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C06_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C07_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C08_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C09_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C10_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C11_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-C12_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B01_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B02_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B03_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B04_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B05_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B06_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B07_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B08_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B09_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B10_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B11_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-B12_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A01_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A02_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A03_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A04_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A05_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A06_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A07_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A08_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A09_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A10_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_GP-A11_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+                  "CIRCA_COUPON_CPN-ECO-15_PROMO_FIXED20261108",
+                  "CIRCA_E07_CERTIFICATES_20261025_PROMO",
+                  "CIRCA_E07_BOTH_20261025_PROMO",
                 ],
                 agoraMainStore: {
                   $config: "selected",
@@ -807,6 +897,8 @@ module.exports = {
   digitalCore: {
     runtimeRoleProfiles: {
       COMMERCE: {
+        couponAcquisition: { sourceProof: { enabled: true } },
+        bundles: { carbon: { qualified: true } },
         merchantRedemption: {
           enabled: true,
           storeScope: {
@@ -937,6 +1029,7 @@ module.exports = {
     runtimeRoleProfiles: {
       PLATFORM: {
         categories: {
+          moduleInternal: { enabled: true },
           profileTenantProvisioning: {
             enabled: {
               $config: "env",
@@ -971,6 +1064,7 @@ module.exports = {
           commerceSellerAuthorizationManagement: { enabled: true },
           commerceMerchantPricing: { enabled: true },
           commerceOwnershipEvidence: { enabled: true },
+          commerceCouponAcquisitionEvidence: { enabled: true },
         },
       },
     },
@@ -978,16 +1072,11 @@ module.exports = {
   product: {
     runtimeRoleProfiles: {
       COMMERCE_STAGED: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en", "ar"],
-        },
         marketplaceAuthoring: {
           enabled: true,
           catalogVersion: "circaStaged",
           locales: ["en", "ar"],
+          bundlePublication: { enabled: true },
           storeSource: {
             connectionName: "commerce",
             allowInsecureLoopback: true,
@@ -1007,12 +1096,6 @@ module.exports = {
         },
       },
       COMMERCE: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en", "ar"],
-        },
         discovery: {
           activationScopes: {
             $config: "replace",
@@ -1079,46 +1162,6 @@ module.exports = {
           },
         },
       },
-      LOCATION: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      LOYALTY: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      PLATFORM: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      WASTE: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
-      WCMS_STAGED: {
-        localization: {
-          supportedLocales: ["en", "ar"],
-          defaultLocale: "en",
-          fallbackLocales: ["en"],
-          requiredLocales: ["en"],
-        },
-      },
     },
   },
   process: {
@@ -1127,7 +1170,6 @@ module.exports = {
         runtime: {
           deadLetterRequeue: {
             enabled: true,
-            maximumRequeues: 1,
           },
         },
         remoteActions: {
@@ -1212,7 +1254,7 @@ module.exports = {
       },
     },
     "openai.circa": {
-        value: { $config: "env", name: "OPENAI_API_KEY" },
+      value: { $config: "env", name: "OPENAI_API_KEY" },
       label: "Circa OpenAI provider token",
       status: "UNCONFIGURED",
       secret: true,
@@ -1362,7 +1404,11 @@ module.exports = {
   communication: {
     runtimeRoleProfiles: {
       ENGAGEMENT: {
-        trustedSourceModules: ["eWaste"],
+        trustedSourceModules: {
+          $config: "replace",
+          value: ["eWaste", "profile", "digitalCore"],
+        },
+        sourceEligibilityTransport: { allowInsecureLoopback: true },
         providers: {
           TELEGRAM: {
             type: "TELEGRAM",
@@ -1372,9 +1418,11 @@ module.exports = {
         templateResources: {
           modules: {
             eWaste: true,
+            digitalCore: true,
           },
           selections: {
             WASTE_REVIEW_OUTCOME_V1: true,
+            DIGITAL_COUPON_EXPIRING_IN_APP: true,
           },
         },
       },

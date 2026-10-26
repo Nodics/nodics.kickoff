@@ -1,0 +1,19 @@
+{
+  "campaigns": [
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108",
+      "policyFingerprint": "967fe0844c983d902634a881b46510eb6ddbb1c2eb0a111280668246a5bc4007",
+      "commandReference": "opening-CIRCA_COUPON_CPN-GRN-30_PROMO_FIXED20261108"
+    },
+    {
+      "promotionCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "storeCode": "circaMainStore",
+      "rootCode": "CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108",
+      "policyFingerprint": "07ef0d1fad17b6c25c63e3656ef3b427e2d15bcc9444d5fc7b92470530fb680b",
+      "commandReference": "opening-CIRCA_COUPON_CPN-SVC-50_PROMO_FIXED20261108"
+    }
+  ],
+  "couponBatches": []
+}

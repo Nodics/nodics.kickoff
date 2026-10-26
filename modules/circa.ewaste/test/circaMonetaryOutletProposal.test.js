@@ -20,37 +20,18 @@ const cart = service("modules/checkout/modules/cart/src/service/defaultCartOpera
 const routes = service("modules/checkout/modules/cart/src/router/routers").cart.customer;
 const shortCode = row => row.code.replace("CIRCA_COUPON_", "").replace(/_PROMO$/, "");
 
-test("native monetary Pricing transport resolves the declared Commerce alias without changing the logical API", t => {
-  const previous = Object.fromEntries(["CONFIG", "CLASSES", "SERVICE", "NODICS", "UTILS"].map(key => [key, global[key]]));
-  t.after(() => Object.assign(global, previous));
-  const runtime = loadRuntime("commerceServer");
-  const foundation = file => require(path.join(frameworkRoot, "nodics.foundation", file));
-  const modules = { ...foundation("modules/nService/src/service/module/defaultModulesConfigurationService"), LOG: { debug() {} } };
-  const router = { ...foundation("modules/nRouter/src/service/router/defaultRouterService"), LOG: { debug() {}, error() {} } };
-  const transport = { ...foundation("modules/nService/src/service/module/defaultModuleService"), LOG: { debug() {} } };
-  global.CONFIG = { get: key => runtime[key] };
-  global.UTILS = { isBlank: value => !value || !Object.keys(value).length };
-  global.NODICS = { getRawModule: name => ({ metaData: { prefix: name } }) };
-  global.SERVICE = { DefaultModulesConfigurationService: modules, DefaultRouterService: router,
-    DefaultLoggerService: { createLogger: () => ({ debug() {}, error() {} }) } };
-  global.CLASSES = { ModuleConfiguration: foundation("modules/nService/src/lib/moduleConfiguration"),
-    NodeConfiguration: foundation("modules/nService/src/lib/nodeConfiguration") };
-  modules.prepareModulesConfiguration();
-  const connectionName = runtime.promotion.merchantBenefits.pricedSource.connectionName;
-  assert.equal(connectionName, "commerceServer");
-  assert.equal(modules.isAvailableModuleConfig(connectionName), true);
-  assert.equal(modules.isAvailableModuleConfig("pricing"), false);
-  const request = transport.buildRequest({ moduleName: "pricing", connectionName,
-    apiName: "/internal/merchant/priced-transaction", methodName: "POST", followRedirects: false,
-    secureTransport: { required: true, allowInsecureLoopback: true } });
-  const endpoint = new URL(request.uri);
-  assert.equal(endpoint.port, "4350");
-  assert.equal(endpoint.pathname, "/nodics/pricing/v0/internal/merchant/priced-transaction");
-  assert.doesNotThrow(() => transport.assertSecureTransport(request));
-  assert.notEqual(loadRuntime("commerceServer", "kickoffDockerLocal").promotion.merchantBenefits.pricedSource.connectionName, "commerceServer");
+test("Local inherits unselected monetary benefit transport rather than pinning a Commerce alias", () => {
+  const defaults = service("modules/baseCommerce/modules/promotion/config/properties").promotion.merchantBenefits;
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const runtime = loadRuntime("commerceServer", environment);
+    assert.deepEqual(runtime.promotion.merchantBenefits, defaults);
+    assert.equal(runtime.promotion.merchantBenefits.enabled, false);
+    assert.equal(runtime.promotion.merchantBenefits.pricedSource.qualified, false);
+    assert.equal(runtime.digitalCore.merchantRedemption.pricedProvider.qualified, false);
+  }
 });
 
-test("historical proposal remains outside import packs and preserves its original review metadata and source bytes", () => {
+test("unreleased proposal remains outside import packs and pins current canonical source bytes without approval", () => {
   assert.equal(proposal.status, "PROPOSED_LOCAL_DEMO_ONLY_REQUIRES_HUMAN_REVIEW");
   assert.equal(proposal.importable, false);
   assert.equal(proposal.operationalAuthority, false);

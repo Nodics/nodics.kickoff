@@ -34,10 +34,12 @@ module.exports = {
       rewardPrice: 34,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-laptop.svg",
+        mediaCode: "circa-asset-laptop",
         altText: "Damaged ThinkPad T480",
       },
     },
@@ -68,10 +70,12 @@ module.exports = {
       rewardPrice: 26,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-monitor.svg",
+        mediaCode: "circa-asset-monitor",
         altText: "Office LED Monitor",
       },
     },
@@ -102,10 +106,12 @@ module.exports = {
       rewardPrice: 16,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-router.svg",
+        mediaCode: "circa-asset-router",
         altText: "Home Wi-Fi Router",
       },
     },
@@ -136,10 +142,12 @@ module.exports = {
       rewardPrice: 20,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-camera.svg",
+        mediaCode: "circa-asset-camera",
         altText: "Compact Digital Camera",
       },
     },
@@ -170,10 +178,12 @@ module.exports = {
       rewardPrice: 16,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-router.svg",
+        mediaCode: "circa-asset-router",
         altText: "Mesh Router Pair",
       },
     },
@@ -207,7 +217,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 30 repair credit",
       },
     },
@@ -241,7 +251,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "15% recycled accessories offer",
       },
     },
@@ -275,7 +285,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 50 device diagnosis",
       },
     },
@@ -306,10 +316,12 @@ module.exports = {
       rewardPrice: 34,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-laptop.svg",
+        mediaCode: "circa-asset-laptop",
         altText: "Damaged ThinkPad T480",
       },
     },
@@ -340,10 +352,12 @@ module.exports = {
       rewardPrice: 26,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-monitor.svg",
+        mediaCode: "circa-asset-monitor",
         altText: "Office LED Monitor",
       },
     },
@@ -374,10 +388,12 @@ module.exports = {
       rewardPrice: 16,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-router.svg",
+        mediaCode: "circa-asset-router",
         altText: "Home Wi-Fi Router",
       },
     },
@@ -408,10 +424,12 @@ module.exports = {
       rewardPrice: 20,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-camera.svg",
+        mediaCode: "circa-asset-camera",
         altText: "Compact Digital Camera",
       },
     },
@@ -442,10 +460,12 @@ module.exports = {
       rewardPrice: 16,
       carbonSettlement: "NO_NEW_MINT_OR_LEDGER_MOVEMENT",
       saleMode: "DIGITAL_OWNERSHIP",
+      digitalDeliveryType: "DIGITAL_OWNERSHIP",
+      inventoryStrategy: "DIGITAL_COMMERCE",
     },
     media: {
       primaryImage: {
-        url: "/media/asset-router.svg",
+        mediaCode: "circa-asset-router",
         altText: "Mesh Router Pair",
       },
     },
@@ -479,7 +499,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 30 repair credit",
       },
     },
@@ -513,7 +533,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "15% recycled accessories offer",
       },
     },
@@ -547,7 +567,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 50 device diagnosis",
       },
     },
@@ -562,7 +582,7 @@ module.exports = {
     locale: "en",
     name: "Espresso - Hills Cafe",
     description:
-      "Redeem Espresso once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Espresso once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c01",
     status: "READY",
     attributes: {
@@ -582,13 +602,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Espresso once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Espresso - Hills Cafe",
       },
     },
@@ -603,7 +623,7 @@ module.exports = {
     locale: "en",
     name: "Americano - Hills Cafe",
     description:
-      "Redeem Americano once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Americano once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c02",
     status: "READY",
     attributes: {
@@ -623,13 +643,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Americano once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Americano - Hills Cafe",
       },
     },
@@ -644,7 +664,7 @@ module.exports = {
     locale: "en",
     name: "Cappuccino - Hills Cafe",
     description:
-      "Redeem Cappuccino once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Cappuccino once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c03",
     status: "READY",
     attributes: {
@@ -664,13 +684,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Cappuccino once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Cappuccino - Hills Cafe",
       },
     },
@@ -685,7 +705,7 @@ module.exports = {
     locale: "en",
     name: "Latte - Hills Cafe",
     description:
-      "Redeem Latte once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Latte once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c04",
     status: "READY",
     attributes: {
@@ -705,13 +725,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Latte once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Latte - Hills Cafe",
       },
     },
@@ -726,7 +746,7 @@ module.exports = {
     locale: "en",
     name: "Tea - Hills Cafe",
     description:
-      "Redeem Tea once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Tea once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c05",
     status: "READY",
     attributes: {
@@ -746,13 +766,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Tea once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Tea - Hills Cafe",
       },
     },
@@ -767,7 +787,7 @@ module.exports = {
     locale: "en",
     name: "Iced coffee - Hills Cafe",
     description:
-      "Redeem Iced coffee once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Iced coffee once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c06",
     status: "READY",
     attributes: {
@@ -787,13 +807,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Iced coffee once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Iced coffee - Hills Cafe",
       },
     },
@@ -808,7 +828,7 @@ module.exports = {
     locale: "en",
     name: "Croissant - Hills Cafe",
     description:
-      "Redeem Croissant once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Croissant once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c07",
     status: "READY",
     attributes: {
@@ -828,13 +848,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Croissant once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Croissant - Hills Cafe",
       },
     },
@@ -849,7 +869,7 @@ module.exports = {
     locale: "en",
     name: "Muffin - Hills Cafe",
     description:
-      "Redeem Muffin once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Muffin once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c08",
     status: "READY",
     attributes: {
@@ -869,13 +889,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Muffin once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Muffin - Hills Cafe",
       },
     },
@@ -890,7 +910,7 @@ module.exports = {
     locale: "en",
     name: "Cookie pair - Hills Cafe",
     description:
-      "Redeem Cookie pair once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Cookie pair once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c09",
     status: "READY",
     attributes: {
@@ -910,13 +930,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Cookie pair once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Cookie pair - Hills Cafe",
       },
     },
@@ -931,7 +951,7 @@ module.exports = {
     locale: "en",
     name: "Coffee and croissant - Hills Cafe",
     description:
-      "Redeem Coffee and croissant once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Coffee and croissant once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c10",
     status: "READY",
     attributes: {
@@ -951,13 +971,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Coffee and croissant - Hills Cafe",
       },
     },
@@ -972,7 +992,7 @@ module.exports = {
     locale: "en",
     name: "Tea and cake slice - Hills Cafe",
     description:
-      "Redeem Tea and cake slice once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Tea and cake slice once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c11",
     status: "READY",
     attributes: {
@@ -992,13 +1012,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Tea and cake slice - Hills Cafe",
       },
     },
@@ -1013,7 +1033,7 @@ module.exports = {
     locale: "en",
     name: "Breakfast sandwich and coffee - Hills Cafe",
     description:
-      "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c12",
     status: "READY",
     attributes: {
@@ -1033,13 +1053,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Breakfast sandwich and coffee - Hills Cafe",
       },
     },
@@ -1054,7 +1074,7 @@ module.exports = {
     locale: "en",
     name: "Soup of the day - Hills Bistro",
     description:
-      "Redeem Soup of the day once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Soup of the day once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b01",
     status: "READY",
     attributes: {
@@ -1074,13 +1094,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Soup of the day once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Soup of the day - Hills Bistro",
       },
     },
@@ -1095,7 +1115,7 @@ module.exports = {
     locale: "en",
     name: "Side salad - Hills Bistro",
     description:
-      "Redeem Side salad once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Side salad once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b02",
     status: "READY",
     attributes: {
@@ -1115,13 +1135,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Side salad once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Side salad - Hills Bistro",
       },
     },
@@ -1136,7 +1156,7 @@ module.exports = {
     locale: "en",
     name: "Starter plate - Hills Bistro",
     description:
-      "Redeem Starter plate once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Starter plate once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b03",
     status: "READY",
     attributes: {
@@ -1156,13 +1176,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Starter plate once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Starter plate - Hills Bistro",
       },
     },
@@ -1177,7 +1197,7 @@ module.exports = {
     locale: "en",
     name: "Sandwich - Hills Bistro",
     description:
-      "Redeem Sandwich once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Sandwich once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b04",
     status: "READY",
     attributes: {
@@ -1197,13 +1217,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Sandwich once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Sandwich - Hills Bistro",
       },
     },
@@ -1218,7 +1238,7 @@ module.exports = {
     locale: "en",
     name: "Pasta dish - Hills Bistro",
     description:
-      "Redeem Pasta dish once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Pasta dish once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b05",
     status: "READY",
     attributes: {
@@ -1238,13 +1258,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Pasta dish once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Pasta dish - Hills Bistro",
       },
     },
@@ -1259,7 +1279,7 @@ module.exports = {
     locale: "en",
     name: "Pizza - Hills Bistro",
     description:
-      "Redeem Pizza once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Pizza once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b06",
     status: "READY",
     attributes: {
@@ -1279,13 +1299,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Pizza once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Pizza - Hills Bistro",
       },
     },
@@ -1300,7 +1320,7 @@ module.exports = {
     locale: "en",
     name: "Main-course salad - Hills Bistro",
     description:
-      "Redeem Main-course salad once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Main-course salad once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b07",
     status: "READY",
     attributes: {
@@ -1320,13 +1340,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Main-course salad once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Main-course salad - Hills Bistro",
       },
     },
@@ -1341,7 +1361,7 @@ module.exports = {
     locale: "en",
     name: "Dessert - Hills Bistro",
     description:
-      "Redeem Dessert once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Dessert once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b08",
     status: "READY",
     attributes: {
@@ -1361,13 +1381,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Dessert once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Dessert - Hills Bistro",
       },
     },
@@ -1382,7 +1402,7 @@ module.exports = {
     locale: "en",
     name: "Main and soft drink - Hills Bistro",
     description:
-      "Redeem Main and soft drink once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Main and soft drink once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b09",
     status: "READY",
     attributes: {
@@ -1402,13 +1422,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Main and soft drink - Hills Bistro",
       },
     },
@@ -1423,7 +1443,7 @@ module.exports = {
     locale: "en",
     name: "Two-course lunch - Hills Bistro",
     description:
-      "Redeem Two-course lunch once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Two-course lunch once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b10",
     status: "READY",
     attributes: {
@@ -1443,13 +1463,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Two-course lunch - Hills Bistro",
       },
     },
@@ -1464,7 +1484,7 @@ module.exports = {
     locale: "en",
     name: "Meal for two - Hills Bistro",
     description:
-      "Redeem Meal for two once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Meal for two once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b11",
     status: "READY",
     attributes: {
@@ -1484,13 +1504,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Meal for two once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Meal for two - Hills Bistro",
       },
     },
@@ -1505,7 +1525,7 @@ module.exports = {
     locale: "en",
     name: "AED 25 bill discount - Hills Bistro",
     description:
-      "Redeem AED 25 bill discount once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00.",
+      "Redeem AED 25 bill discount once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00.",
     slug: "circa_coupon_gp-b12",
     status: "READY",
     attributes: {
@@ -1525,14 +1545,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 25 bill discount once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 100.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 25 bill discount - Hills Bistro",
       },
     },
@@ -1547,7 +1567,7 @@ module.exports = {
     locale: "en",
     name: "Bottled water - GreenPerks",
     description:
-      "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a01",
     status: "READY",
     attributes: {
@@ -1567,13 +1587,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Bottled water - GreenPerks",
       },
     },
@@ -1588,7 +1608,7 @@ module.exports = {
     locale: "en",
     name: "Tea - GreenPerks",
     description:
-      "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a02",
     status: "READY",
     attributes: {
@@ -1608,13 +1628,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Tea - GreenPerks",
       },
     },
@@ -1629,7 +1649,7 @@ module.exports = {
     locale: "en",
     name: "Americano - GreenPerks",
     description:
-      "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a03",
     status: "READY",
     attributes: {
@@ -1649,13 +1669,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Americano - GreenPerks",
       },
     },
@@ -1670,7 +1690,7 @@ module.exports = {
     locale: "en",
     name: "Fresh juice - GreenPerks",
     description:
-      "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a04",
     status: "READY",
     attributes: {
@@ -1690,13 +1710,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Fresh juice - GreenPerks",
       },
     },
@@ -1711,7 +1731,7 @@ module.exports = {
     locale: "en",
     name: "Soft drink - GreenPerks",
     description:
-      "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a05",
     status: "READY",
     attributes: {
@@ -1731,13 +1751,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Soft drink - GreenPerks",
       },
     },
@@ -1752,7 +1772,7 @@ module.exports = {
     locale: "en",
     name: "Dessert and tea - GreenPerks",
     description:
-      "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a06",
     status: "READY",
     attributes: {
@@ -1772,13 +1792,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Dessert and tea - GreenPerks",
       },
     },
@@ -1793,7 +1813,7 @@ module.exports = {
     locale: "en",
     name: "AED 10 bill discount - GreenPerks",
     description:
-      "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 40.00.",
+      "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 40.00.",
     slug: "circa_coupon_gp-a07",
     status: "READY",
     attributes: {
@@ -1813,14 +1833,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 40.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 10 bill discount - GreenPerks",
       },
     },
@@ -1835,7 +1855,7 @@ module.exports = {
     locale: "en",
     name: "AED 20 bill discount - GreenPerks",
     description:
-      "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 80.00.",
+      "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 80.00.",
     slug: "circa_coupon_gp-a08",
     status: "READY",
     attributes: {
@@ -1855,14 +1875,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 80.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 20 bill discount - GreenPerks",
       },
     },
@@ -1877,7 +1897,7 @@ module.exports = {
     locale: "en",
     name: "AED 30 bill discount - GreenPerks",
     description:
-      "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 120.00.",
+      "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 120.00.",
     slug: "circa_coupon_gp-a09",
     status: "READY",
     attributes: {
@@ -1897,14 +1917,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 120.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 30 bill discount - GreenPerks",
       },
     },
@@ -1919,7 +1939,7 @@ module.exports = {
     locale: "en",
     name: "10% bill discount - GreenPerks",
     description:
-      "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 50.00. Maximum discount AED 20.00.",
+      "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 50.00. Maximum discount AED 20.00.",
     slug: "circa_coupon_gp-a10",
     status: "READY",
     attributes: {
@@ -1939,7 +1959,7 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 50.00.",
         "Maximum discount AED 20.00.",
@@ -1947,7 +1967,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "10% bill discount - GreenPerks",
       },
     },
@@ -1962,7 +1982,7 @@ module.exports = {
     locale: "en",
     name: "15% bill discount - GreenPerks",
     description:
-      "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00. Maximum discount AED 40.00.",
+      "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00. Maximum discount AED 40.00.",
     slug: "circa_coupon_gp-a11",
     status: "READY",
     attributes: {
@@ -1982,7 +2002,7 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 100.00.",
         "Maximum discount AED 40.00.",
@@ -1990,7 +2010,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "15% bill discount - GreenPerks",
       },
     },
@@ -2005,7 +2025,7 @@ module.exports = {
     locale: "ar",
     name: "Espresso - Hills Cafe",
     description:
-      "Redeem Espresso once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Espresso once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c01",
     status: "READY",
     attributes: {
@@ -2025,13 +2045,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Espresso once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Espresso - Hills Cafe",
       },
     },
@@ -2046,7 +2066,7 @@ module.exports = {
     locale: "ar",
     name: "Americano - Hills Cafe",
     description:
-      "Redeem Americano once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Americano once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c02",
     status: "READY",
     attributes: {
@@ -2066,13 +2086,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Americano once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Americano - Hills Cafe",
       },
     },
@@ -2087,7 +2107,7 @@ module.exports = {
     locale: "ar",
     name: "Cappuccino - Hills Cafe",
     description:
-      "Redeem Cappuccino once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Cappuccino once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c03",
     status: "READY",
     attributes: {
@@ -2107,13 +2127,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Cappuccino once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Cappuccino - Hills Cafe",
       },
     },
@@ -2128,7 +2148,7 @@ module.exports = {
     locale: "ar",
     name: "Latte - Hills Cafe",
     description:
-      "Redeem Latte once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Latte once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c04",
     status: "READY",
     attributes: {
@@ -2148,13 +2168,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Latte once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Latte - Hills Cafe",
       },
     },
@@ -2169,7 +2189,7 @@ module.exports = {
     locale: "ar",
     name: "Tea - Hills Cafe",
     description:
-      "Redeem Tea once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Tea once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c05",
     status: "READY",
     attributes: {
@@ -2189,13 +2209,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Tea once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Tea - Hills Cafe",
       },
     },
@@ -2210,7 +2230,7 @@ module.exports = {
     locale: "ar",
     name: "Iced coffee - Hills Cafe",
     description:
-      "Redeem Iced coffee once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Iced coffee once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c06",
     status: "READY",
     attributes: {
@@ -2230,13 +2250,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Iced coffee once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Iced coffee - Hills Cafe",
       },
     },
@@ -2251,7 +2271,7 @@ module.exports = {
     locale: "ar",
     name: "Croissant - Hills Cafe",
     description:
-      "Redeem Croissant once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Croissant once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c07",
     status: "READY",
     attributes: {
@@ -2271,13 +2291,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Croissant once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Croissant - Hills Cafe",
       },
     },
@@ -2292,7 +2312,7 @@ module.exports = {
     locale: "ar",
     name: "Muffin - Hills Cafe",
     description:
-      "Redeem Muffin once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Muffin once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c08",
     status: "READY",
     attributes: {
@@ -2312,13 +2332,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Muffin once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Muffin - Hills Cafe",
       },
     },
@@ -2333,7 +2353,7 @@ module.exports = {
     locale: "ar",
     name: "Cookie pair - Hills Cafe",
     description:
-      "Redeem Cookie pair once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Cookie pair once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c09",
     status: "READY",
     attributes: {
@@ -2353,13 +2373,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Cookie pair once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Cookie pair - Hills Cafe",
       },
     },
@@ -2374,7 +2394,7 @@ module.exports = {
     locale: "ar",
     name: "Coffee and croissant - Hills Cafe",
     description:
-      "Redeem Coffee and croissant once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Coffee and croissant once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c10",
     status: "READY",
     attributes: {
@@ -2394,13 +2414,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Coffee and croissant once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Coffee and croissant - Hills Cafe",
       },
     },
@@ -2415,7 +2435,7 @@ module.exports = {
     locale: "ar",
     name: "Tea and cake slice - Hills Cafe",
     description:
-      "Redeem Tea and cake slice once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Tea and cake slice once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c11",
     status: "READY",
     attributes: {
@@ -2435,13 +2455,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Tea and cake slice once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Tea and cake slice - Hills Cafe",
       },
     },
@@ -2456,7 +2476,7 @@ module.exports = {
     locale: "ar",
     name: "Breakfast sandwich and coffee - Hills Cafe",
     description:
-      "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-c12",
     status: "READY",
     attributes: {
@@ -2476,13 +2496,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Breakfast sandwich and coffee once at GreenPerks Hills Cafe.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Breakfast sandwich and coffee - Hills Cafe",
       },
     },
@@ -2497,7 +2517,7 @@ module.exports = {
     locale: "ar",
     name: "Soup of the day - Hills Bistro",
     description:
-      "Redeem Soup of the day once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Soup of the day once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b01",
     status: "READY",
     attributes: {
@@ -2517,13 +2537,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Soup of the day once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Soup of the day - Hills Bistro",
       },
     },
@@ -2538,7 +2558,7 @@ module.exports = {
     locale: "ar",
     name: "Side salad - Hills Bistro",
     description:
-      "Redeem Side salad once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Side salad once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b02",
     status: "READY",
     attributes: {
@@ -2558,13 +2578,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Side salad once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Side salad - Hills Bistro",
       },
     },
@@ -2579,7 +2599,7 @@ module.exports = {
     locale: "ar",
     name: "Starter plate - Hills Bistro",
     description:
-      "Redeem Starter plate once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Starter plate once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b03",
     status: "READY",
     attributes: {
@@ -2599,13 +2619,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Starter plate once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Starter plate - Hills Bistro",
       },
     },
@@ -2620,7 +2640,7 @@ module.exports = {
     locale: "ar",
     name: "Sandwich - Hills Bistro",
     description:
-      "Redeem Sandwich once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Sandwich once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b04",
     status: "READY",
     attributes: {
@@ -2640,13 +2660,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Sandwich once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Sandwich - Hills Bistro",
       },
     },
@@ -2661,7 +2681,7 @@ module.exports = {
     locale: "ar",
     name: "Pasta dish - Hills Bistro",
     description:
-      "Redeem Pasta dish once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Pasta dish once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b05",
     status: "READY",
     attributes: {
@@ -2681,13 +2701,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Pasta dish once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Pasta dish - Hills Bistro",
       },
     },
@@ -2702,7 +2722,7 @@ module.exports = {
     locale: "ar",
     name: "Pizza - Hills Bistro",
     description:
-      "Redeem Pizza once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Pizza once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b06",
     status: "READY",
     attributes: {
@@ -2722,13 +2742,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Pizza once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Pizza - Hills Bistro",
       },
     },
@@ -2743,7 +2763,7 @@ module.exports = {
     locale: "ar",
     name: "Main-course salad - Hills Bistro",
     description:
-      "Redeem Main-course salad once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Main-course salad once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b07",
     status: "READY",
     attributes: {
@@ -2763,13 +2783,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Main-course salad once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Main-course salad - Hills Bistro",
       },
     },
@@ -2784,7 +2804,7 @@ module.exports = {
     locale: "ar",
     name: "Dessert - Hills Bistro",
     description:
-      "Redeem Dessert once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Dessert once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b08",
     status: "READY",
     attributes: {
@@ -2804,13 +2824,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Dessert once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Dessert - Hills Bistro",
       },
     },
@@ -2825,7 +2845,7 @@ module.exports = {
     locale: "ar",
     name: "Main and soft drink - Hills Bistro",
     description:
-      "Redeem Main and soft drink once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Main and soft drink once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b09",
     status: "READY",
     attributes: {
@@ -2845,13 +2865,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Main and soft drink once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Main and soft drink - Hills Bistro",
       },
     },
@@ -2866,7 +2886,7 @@ module.exports = {
     locale: "ar",
     name: "Two-course lunch - Hills Bistro",
     description:
-      "Redeem Two-course lunch once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Two-course lunch once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b10",
     status: "READY",
     attributes: {
@@ -2886,13 +2906,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Two-course lunch once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Two-course lunch - Hills Bistro",
       },
     },
@@ -2907,7 +2927,7 @@ module.exports = {
     locale: "ar",
     name: "Meal for two - Hills Bistro",
     description:
-      "Redeem Meal for two once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Meal for two once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-b11",
     status: "READY",
     attributes: {
@@ -2927,13 +2947,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Meal for two once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Meal for two - Hills Bistro",
       },
     },
@@ -2948,7 +2968,7 @@ module.exports = {
     locale: "ar",
     name: "AED 25 bill discount - Hills Bistro",
     description:
-      "Redeem AED 25 bill discount once at GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00.",
+      "Redeem AED 25 bill discount once at GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00.",
     slug: "circa_coupon_gp-b12",
     status: "READY",
     attributes: {
@@ -2968,14 +2988,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 25 bill discount once at GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 100.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 25 bill discount - Hills Bistro",
       },
     },
@@ -2990,7 +3010,7 @@ module.exports = {
     locale: "ar",
     name: "Bottled water - GreenPerks",
     description:
-      "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a01",
     status: "READY",
     attributes: {
@@ -3010,13 +3030,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Bottled water once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Bottled water - GreenPerks",
       },
     },
@@ -3031,7 +3051,7 @@ module.exports = {
     locale: "ar",
     name: "Tea - GreenPerks",
     description:
-      "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a02",
     status: "READY",
     attributes: {
@@ -3051,13 +3071,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Tea - GreenPerks",
       },
     },
@@ -3072,7 +3092,7 @@ module.exports = {
     locale: "ar",
     name: "Americano - GreenPerks",
     description:
-      "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a03",
     status: "READY",
     attributes: {
@@ -3092,13 +3112,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Americano once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Americano - GreenPerks",
       },
     },
@@ -3113,7 +3133,7 @@ module.exports = {
     locale: "ar",
     name: "Fresh juice - GreenPerks",
     description:
-      "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a04",
     status: "READY",
     attributes: {
@@ -3133,13 +3153,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Fresh juice once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Fresh juice - GreenPerks",
       },
     },
@@ -3154,7 +3174,7 @@ module.exports = {
     locale: "ar",
     name: "Soft drink - GreenPerks",
     description:
-      "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a05",
     status: "READY",
     attributes: {
@@ -3174,13 +3194,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Soft drink once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Soft drink - GreenPerks",
       },
     },
@@ -3195,7 +3215,7 @@ module.exports = {
     locale: "ar",
     name: "Dessert and tea - GreenPerks",
     description:
-      "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value.",
+      "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value.",
     slug: "circa_coupon_gp-a06",
     status: "READY",
     attributes: {
@@ -3215,13 +3235,13 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem Dessert and tea once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "Dessert and tea - GreenPerks",
       },
     },
@@ -3236,7 +3256,7 @@ module.exports = {
     locale: "ar",
     name: "AED 10 bill discount - GreenPerks",
     description:
-      "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 40.00.",
+      "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 40.00.",
     slug: "circa_coupon_gp-a07",
     status: "READY",
     attributes: {
@@ -3256,14 +3276,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 10 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 40.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 10 bill discount - GreenPerks",
       },
     },
@@ -3278,7 +3298,7 @@ module.exports = {
     locale: "ar",
     name: "AED 20 bill discount - GreenPerks",
     description:
-      "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 80.00.",
+      "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 80.00.",
     slug: "circa_coupon_gp-a08",
     status: "READY",
     attributes: {
@@ -3298,14 +3318,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 20 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 80.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 20 bill discount - GreenPerks",
       },
     },
@@ -3320,7 +3340,7 @@ module.exports = {
     locale: "ar",
     name: "AED 30 bill discount - GreenPerks",
     description:
-      "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 120.00.",
+      "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 120.00.",
     slug: "circa_coupon_gp-a09",
     status: "READY",
     attributes: {
@@ -3340,14 +3360,14 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem AED 30 bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 120.00.",
       ],
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "AED 30 bill discount - GreenPerks",
       },
     },
@@ -3362,7 +3382,7 @@ module.exports = {
     locale: "ar",
     name: "10% bill discount - GreenPerks",
     description:
-      "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 50.00. Maximum discount AED 20.00.",
+      "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 50.00. Maximum discount AED 20.00.",
     slug: "circa_coupon_gp-a10",
     status: "READY",
     attributes: {
@@ -3382,7 +3402,7 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem 10% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 50.00.",
         "Maximum discount AED 20.00.",
@@ -3390,7 +3410,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "10% bill discount - GreenPerks",
       },
     },
@@ -3405,7 +3425,7 @@ module.exports = {
     locale: "ar",
     name: "15% bill discount - GreenPerks",
     description:
-      "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid for 30 days from successful purchase. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00. Maximum discount AED 40.00.",
+      "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro. Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time. Fictional local demonstration offer; no real-world venue participation or cash value. Minimum eligible bill subtotal AED 100.00. Maximum discount AED 40.00.",
     slug: "circa_coupon_gp-a11",
     status: "READY",
     attributes: {
@@ -3425,7 +3445,7 @@ module.exports = {
       validityDays: 30,
       terms: [
         "Redeem 15% bill discount once at GreenPerks Hills Cafe or GreenPerks Hills Bistro.",
-        "Valid for 30 days from successful purchase.",
+        "Valid through 8 November 2026, 23:59:59.999 Asia/Dubai (2026-11-08T19:59:59.999Z), independent of purchase time.",
         "Fictional local demonstration offer; no real-world venue participation or cash value.",
         "Minimum eligible bill subtotal AED 100.00.",
         "Maximum discount AED 40.00.",
@@ -3433,7 +3453,7 @@ module.exports = {
     },
     media: {
       primaryImage: {
-        url: "/media/coupon-market.svg",
+        mediaCode: "circa-coupon-market",
         altText: "15% bill discount - GreenPerks",
       },
     },

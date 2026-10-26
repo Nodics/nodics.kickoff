@@ -161,6 +161,15 @@ test("Local deployment grants retain original scope while adding only required r
       "commerce.pricing.merchant.evidence",
       "commerce.product.read",
       "commerce.store.read",
+      "commerce.promotion.analytics",
+      "loyalty.rewards.earn",
+      "carbon.holdings.read",
+      "carbon.holdings.reserve",
+      "carbon.holdings.release",
+      "carbon.holdings.transfer",
+      "carbon.holdings.finalize",
+      "profile.commerce.notification.recipient.resolve",
+      "communication.request",
     ]),
   );
   // envs/kickoffLocal/wasteServer explicitly selects the bounded Profile customer
@@ -189,6 +198,9 @@ test("Local deployment grants retain original scope while adding only required r
     "wasteCore",
     "media",
     "eWaste",
+    "wasteCarbon",
+    "workflow",
+    "commsApi",
   ]);
   assert.deepEqual(
     new Set(selected.waste.runtimeIdentity.remoteModules),
@@ -324,7 +336,7 @@ test("native asset sale grants preserve signed deployment identities and are not
   }
   assert.equal(
     runtimePermissions.commerceServer.includes("loyalty.rewards.earn"),
-    false,
+    true,
   );
   assert.equal(
     runtimePermissions.wasteServer.includes("waste.asset.sale.transfer"),
@@ -375,7 +387,13 @@ test("Local Staged listing proof adds only selected intent, store and bundle pub
   );
   const callers =
     selected.waste.eWaste.marketplace.digitalOwnership.businessCallers;
-  assert.equal(callers.length, 2);
+  assert.equal(callers.length, 3);
+  assert.deepEqual(callers.filter(c => c.enterpriseCode === "GREENPERKS_RETAIL"), [{
+    tenant: "default", principalEnterpriseCode: "default", enterpriseCode: "GREENPERKS_RETAIL",
+    serviceId: "apiAdmin", projectCode: "nodics.kickoff", environmentCode: "kickoffLocal",
+    serverCode: "commerceServer", instanceCode: "kickoff-local-commerce-1",
+    assignmentCode: "kickoff-local-commerce-runtime-deployment", permissions: ["waste.asset.sale.transfer"],
+  }]);
   assert.deepEqual(
     callers.find((c) => c.serverCode === "commerceStagedServer"),
     {
@@ -1107,4 +1125,18 @@ test("Local Pricing writer bindings retain exact qualified Staged/Online identit
       if (value === undefined) delete global[key];
       else global[key] = value;
   }
+});
+
+
+test("Local Bidding Circa merchant matches canonical Store without changing Docker or other stores", () => {
+  const stores = require("../modules/circa.ewaste/data/sample-v001/store/records/circaStoreData");
+  const store = Object.values(stores).find(row => row.code === "circaMainStore");
+  const local = selected.commerce.bidding.stores;
+  const docker = loadRuntime("commerceServer", "kickoffDockerLocal").bidding.stores;
+  assert.equal(store.enterpriseRef.code, "GREENPERKS_ONLINE");
+  assert.equal(local.circaMainStore.enterpriseCode, store.enterpriseRef.code);
+  assert.equal(docker.circaMainStore.enterpriseCode, "default");
+  assert.deepEqual(local.circaMainStore, { ...docker.circaMainStore, enterpriseCode: store.enterpriseRef.code });
+  const otherStores = values => Object.fromEntries(Object.entries(values).filter(([code]) => code !== "circaMainStore"));
+  assert.deepEqual(otherStores(local), otherStores(docker));
 });

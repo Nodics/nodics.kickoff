@@ -6,7 +6,7 @@ const runtimeAssignments = require("../modules/kickoffCore/data/init-v001/runtim
 
 /** Reads actual source-pack selections, not installed authority or an assumed empty deployment. */
 function seedPermissions(server, environment = "kickoffLocal") {
-  return runtimeAssignments
+  return Object.values(runtimeAssignments)
     .filter(
       (row) =>
         row.active === true &&
@@ -35,6 +35,130 @@ const coreProperties = require("../modules/kickoffCore/config/properties");
 const metadata = require("../modules/kickoffCore/package.json");
 
 require("node:test")(
+  "Only Local Loyalty selects the approved existing Commerce reservation-decision caller",
+  () => {
+    const expected = [
+      {
+        tenant: "default",
+        serviceId: "apiAdmin",
+        entCode: "default",
+        projectCode: "nodics.kickoff",
+        environmentCode: "kickoffLocal",
+        serverCode: "commerceServer",
+        instanceCode: "kickoff-local-commerce-1",
+        assignmentCode: "kickoff-local-commerce-runtime-deployment",
+      },
+    ];
+    const owner = require(
+      path.join(
+        frameworkRoot,
+        "nodics.loyalty/modules/loyaltyWallet/config/properties",
+      ),
+    ).loyalty.reservationDecisions;
+    const selected =
+      require("../envs/kickoffLocal/loyaltyServer/config/properties").loyalty
+        .reservationDecisions;
+    assert.deepEqual(owner.callers, [], "framework defaults grant no caller");
+    assert.deepEqual(
+      selected,
+      {
+        callers: { $config: "replace", value: expected },
+      },
+      "deployment owns only the exact caller selection, not owner defaults",
+    );
+    const effective = loadRuntime("loyaltyServer", "kickoffLocal");
+    assert.deepEqual(effective.loyalty.reservationDecisions, {
+      ...owner,
+      callers: expected,
+    });
+    assert.equal(
+      expected[0].instanceCode,
+      require("../envs/kickoffLocal/commerceServer/package.json").nodics
+        .runtimeIdentity.instanceCode,
+    );
+    const assignments = Object.values(runtimeAssignments).filter(
+      (row) => row.code === expected[0].assignmentCode,
+    );
+    assert.equal(assignments.length, 1);
+    for (const key of [
+      "projectCode",
+      "environmentCode",
+      "serverCode",
+      "instanceCode",
+    ])
+      assert.equal(assignments[0].runtimeScope[key], expected[0][key]);
+    for (const permission of [
+      "loyalty.rewards.reserve",
+      "loyalty.rewards.release",
+      "loyalty.wallet.read",
+    ])
+      assert.ok(
+        seedPermissions("commerceServer").includes(permission),
+        permission,
+      );
+    for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+      for (const server of [
+        "loyaltyServer",
+        "commerceServer",
+        "commerceStagedServer",
+        "wasteServer",
+        "platformServer",
+      ]) {
+        if (environment === "kickoffLocal" && server === "loyaltyServer")
+          continue;
+        assert.deepEqual(
+          loadRuntime(server, environment).loyalty?.reservationDecisions
+            ?.callers || [],
+          [],
+          environment +
+            "/" +
+            server +
+            " must not inherit the Local caller selection",
+        );
+      }
+    }
+    assert.deepEqual(
+      effective.loyalty.api.readEvidence.callers,
+      [
+        [
+          "wasteServer",
+          "GREENPERKS_ONLINE",
+          "kickoff-local-waste-1",
+          "kickoff-local-waste-runtime-deployment",
+        ],
+        [
+          "commerceServer",
+          "GREENPERKS_RETAIL",
+          "kickoff-local-commerce-1",
+          "kickoff-local-commerce-runtime-deployment",
+        ],
+        [
+          "commerceServer",
+          "GREENPERKS_ONLINE",
+          "kickoff-local-commerce-1",
+          "kickoff-local-commerce-runtime-deployment",
+        ],
+      ].map(([serverCode, enterpriseCode, instanceCode, assignmentCode]) => ({
+        tenant: "default",
+        principalEnterpriseCode: "default",
+        enterpriseCode,
+        serviceId: "apiAdmin",
+        projectCode: "nodics.kickoff",
+        environmentCode: "kickoffLocal",
+        serverCode,
+        instanceCode,
+        assignmentCode,
+      })),
+    );
+    assert.deepEqual(
+      loadRuntime("loyaltyServer", "kickoffDockerLocal").loyalty.api
+        .readEvidence.callers,
+      [],
+    );
+  },
+);
+
+require("node:test")(
   "Local and Docker inherit owner precision without retired marketplace reversal selections",
   () => {
     for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
@@ -42,14 +166,27 @@ require("node:test")(
       for (const profile of Object.values(local.eWaste.runtimeRoleProfiles)) {
         assert.equal(profile.catalogue, undefined);
         if (!profile.marketplace) continue;
-        for (const key of ["rewardScale", "carbonScale", "refundsEnabled",
-          "catalogueDiscovery", "couponCarbonMode", "carbonRewardTypeCode"])
+        for (const key of [
+          "rewardScale",
+          "carbonScale",
+          "refundsEnabled",
+          "catalogueDiscovery",
+          "couponCarbonMode",
+          "carbonRewardTypeCode",
+        ])
           assert.equal(Object.hasOwn(profile.marketplace, key), false, key);
-        assert.equal(profile.marketplace.listingPresentation.warehouseName, undefined);
+        assert.equal(
+          profile.marketplace.listingPresentation.warehouseName,
+          undefined,
+        );
       }
       const effective = loadRuntime("wasteServer", environment);
       for (const key of ["rewardScale", "carbonScale", "refundsEnabled"])
-        assert.equal(Object.hasOwn(effective.eWaste.marketplace, key), false, key);
+        assert.equal(
+          Object.hasOwn(effective.eWaste.marketplace, key),
+          false,
+          key,
+        );
     }
   },
 );
@@ -117,7 +254,11 @@ require("node:test")(
     const baseline = runtimePermissions.loyaltyServer;
     const engagement = loadRuntime("engagementServer", "kickoffLocal");
     const permissions = seedPermissions("engagementServer");
-    assert.deepEqual(permissions, [...baseline, "communication.request"]);
+    assert.deepEqual(permissions, [
+      ...baseline,
+      "communication.request",
+      "commerce.digital.notification.read",
+    ]);
     assert.equal(
       permissions.filter((value) => value === "communication.request").length,
       1,
@@ -127,7 +268,6 @@ require("node:test")(
       true,
     );
     for (const server of [
-      "commerceServer",
       "commerceStagedServer",
       "loyaltyServer",
       "locationServer",
@@ -168,6 +308,7 @@ require("node:test")(
         "loyalty.rewards.reverse",
         "communication.request",
         "commerce.product.read",
+        "waste.impact.calculate",
       ].sort(),
     );
     assert.equal(
@@ -190,13 +331,13 @@ require("node:test")(
       ]) {
         assert.equal(
           permissions.includes(permission),
-          false,
+          server === "commerceServer" && permission === "commerce.product.read",
           server + ": " + permission,
         );
       }
       assert.equal(
         permissions.includes("communication.request"),
-        server === "platformServer",
+        ["platformServer", "commerceServer"].includes(server),
         server +
           ": preserve Platform's existing registration Communication grant without widening siblings",
       );
@@ -666,6 +807,17 @@ require("node:test")(
         "waste.asset.marketplace.project",
         "waste.asset.sale.transfer",
         "commerce.pricing.merchant.evidence",
+        "commerce.product.read",
+        "commerce.store.read",
+        "commerce.promotion.analytics",
+        "communication.request",
+        "profile.commerce.notification.recipient.resolve",
+        "loyalty.rewards.earn",
+        "carbon.holdings.read",
+        "carbon.holdings.reserve",
+        "carbon.holdings.release",
+        "carbon.holdings.transfer",
+        "carbon.holdings.finalize",
       ]),
     );
     for (const permission of permissions)
@@ -973,9 +1125,11 @@ require("node:test")(
         NODICS_COPILOT_AXIS_KNOWLEDGE_ENABLED: "false",
         NODICS_COPILOT_AXIS_ROOT: "",
       });
-      assert.equal(runtime.copilot.core.environment,
+      assert.equal(
+        runtime.copilot.core.environment,
         environment === "kickoffLocal" ? environment : undefined,
-        "Inactive Docker Copilot must not acquire framework defaults through customer copies");
+        "Inactive Docker Copilot must not acquire framework defaults through customer copies",
+      );
       const knowledge = runtime.copilot.knowledge;
       assert.equal(
         knowledge.ingestion.ingestOnStart,
@@ -1235,7 +1389,9 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     `${environment} Waste inherits approval and journey defaults without required customer copies`,
     () => {
       const local = require(`../envs/${environment}/config/properties`);
-      const server = require(`../envs/${environment}/wasteServer/config/properties`);
+      const server = require(
+        `../envs/${environment}/wasteServer/config/properties`,
+      );
       assert.equal(
         local.waste.runtimeRoleProfiles.COMMERCE.projectOverlay,
         undefined,
@@ -1281,7 +1437,8 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       );
       assert.equal(
         runtime.eWaste.journey.reviewAssignment.queueCode,
-        local.eWaste.runtimeRoleProfiles.WASTE.journey.reviewAssignment.queueCode,
+        local.eWaste.runtimeRoleProfiles.WASTE.journey.reviewAssignment
+          .queueCode,
       );
       assert.equal(
         runtime.eWaste.journey.depositInstruction,
@@ -1778,6 +1935,17 @@ require("node:test")(
       .runtimeRoleProfiles.COMMERCE_STAGED.marketplaceAuthoring;
     const runtime = loadRuntime("commerceStagedServer", "kickoffLocal");
     assert(activeModuleNames(runtime).includes("product"));
+    assert.equal(owner.bundlePublication.enabled, false);
+    assert.deepEqual(local.bundlePublication, { enabled: true });
+    assert.deepEqual(runtime.product.marketplaceAuthoring.bundlePublication, {
+      ...owner.bundlePublication,
+      enabled: true,
+    });
+    assert.equal(
+      loadRuntime("commerceStagedServer", "kickoffDockerLocal").product
+        .marketplaceAuthoring.bundlePublication.enabled,
+      false,
+    );
     for (const [key, moduleName, connectionName, runtimeRole] of [
       ["storeSource", "store", "commerce", "COMMERCE"],
       ["intentSource", "eWaste", "waste", "WASTE"],
@@ -1837,6 +2005,32 @@ require("node:test")(
         "Native qualification must not select Docker targets",
       );
     }
+  },
+);
+
+require("node:test")(
+  "Local bundle Pricing inherits owner bounds without enabling Docker",
+  () => {
+    const owner = require(
+      path.join(
+        frameworkRoot,
+        "nodics.commerce/modules/baseCommerce/modules/pricing/config/properties",
+      ),
+    ).pricing.bundleListings;
+    const local = require("../envs/kickoffLocal/config/properties").pricing
+      .runtimeRoleProfiles.COMMERCE.bundleListings;
+    assert.deepEqual(local, { enabled: true, qualified: true });
+    assert.equal(owner.enabled, false);
+    assert.equal(owner.qualified, false);
+    assert.deepEqual(
+      loadRuntime("commerceServer", "kickoffLocal").pricing.bundleListings,
+      { ...owner, ...local },
+    );
+    assert.deepEqual(
+      loadRuntime("commerceServer", "kickoffDockerLocal").pricing
+        .bundleListings,
+      owner,
+    );
   },
 );
 
@@ -2091,11 +2285,13 @@ require("node:test")(
       assert.deepEqual(effective.publish.approvalWorkflow.target, prior);
       assert.equal(declaration.publish.providers, undefined);
       for (const domain of server === "commerceStagedServer"
-        ? ["product", "pricing", "inventory", "tax", "promotion"] : ["media"]) {
+        ? ["product", "pricing", "inventory", "tax", "promotion"]
+        : ["media"]) {
         assert.equal(
           effective.publish.providers.workflowProviders[domain],
           "DefaultPublicationApprovalWorkflowService",
-          server + ": selected Staged role inherits the owner's provider registration",
+          server +
+            ": selected Staged role inherits the owner's provider registration",
         );
       }
       const override = {
