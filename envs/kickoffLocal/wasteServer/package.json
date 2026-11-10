@@ -8,7 +8,8 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.waste"
+      "nodics.waste",
+      "nodics.location"
     ],
     "runtimeModuleRoots": [
       "nodics.waste",
@@ -20,7 +21,8 @@
       "nodics.copilot/modules/copilotPolicy",
       "nodics.copilot/modules/copilotKnowledge",
       "nodics.copilot/modules/copilotConversation",
-      "nodics.discovery"
+      "nodics.discovery",
+      "nodics.location"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
@@ -36,7 +38,8 @@
     "displayName": "Waste Server",
     "runtimeAliases": [
       "waste",
-      "rulesApi"
+      "rulesApi",
+      "location"
     ],
     "runtimeIdentity": {
       "instanceCode": "kickoff-local-waste-1",
@@ -64,7 +67,8 @@
       "dependsOn": [
         "platform"
       ],
-      "order": 7
+      "order": 7,
+      "readinessTimeoutMs": 180000
     }
   }
 }

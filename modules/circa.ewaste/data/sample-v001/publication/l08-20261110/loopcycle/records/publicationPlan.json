@@ -1,0 +1,24 @@
+{
+  "contractVersion": 1,
+  "items": [
+    {
+      "code": "CIRCA_COUPON_CPN-ECO-15_PROMO_L08_20261110_PUB",
+      "domain": "promotion",
+      "rootType": "promotion",
+      "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO_L08_20261110",
+      "sourceVersion": "9d05b2999eb8b41bcd867ddc4a4de9c6323ecf82522ca8f269d0dccc0ee51274",
+      "input": {
+        "publicationCode": "CIRCA_COUPON_CPN-ECO-15_PROMO_L08_20261110_PUB",
+        "rootType": "promotion",
+        "rootCode": "CIRCA_COUPON_CPN-ECO-15_PROMO_L08_20261110",
+        "references": [
+          {
+            "schema": "promotion",
+            "code": "CIRCA_COUPON_CPN-ECO-15_PROMO_L08_20261110",
+            "versionId": 3
+          }
+        ]
+      }
+    }
+  ]
+}

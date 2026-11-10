@@ -1,7 +1,7 @@
 {
   "testOnly": true,
   "operationalAuthority": false,
-  "reason": "Approved unreleased v001/access consolidation and canonical header byte changes; historical reviewed observation remains unchanged and cannot qualify current source.",
+  "reason": "Reviewed source checksum differences between native observation revisions 17 and 18.",
   "stages": {
     "product:productPublicationWorkflow": {
       "retained": "004121f1ee452988bcb575b64b96387a61deac7b25a7bebe9371e374195efa7d",
@@ -9,35 +9,47 @@
     },
     "product:accessGroups": {
       "retained": "b0465d025065192f3abd1492de958223557a04e361fd5d76b2b8937bfad6a987",
-      "current": "7709ab168d1333f6c14e81882071cb576cbbbe0c2e46795de1bbf3ac6675c9fb"
+      "current": "4b19aea018afc99eec52219a0409a0397e412e423ab6a00d3d5ca00a415bfd13"
     },
     "promotion:accessGroups": {
       "retained": "3b68a10257f64335fba1cfb77597860bd51754bc3d2ca97a18679f405e295844",
-      "current": "642958f362319e7b5457ac5270630f19c6b30800e1e3df1e584ed7c7677ed245"
+      "current": "2c567ae1d59b95a605afedabb614752b2c4a9971f111e9d3405403e67dc2d0d1"
     },
     "order:accessGroups": {
       "retained": "a09781ed3826c4a4809b4313986c90f6e1988e0f074bc154fb48c386aa4a0cf6",
-      "current": "214c4a0b8ed588a745a3a5046d79ac826e711cde0d2e788339ad6c331f071048"
+      "current": "b8b11d8cf93cb7f8f393e76fdd0fb0681ebca90970f31f7c65d2da41373caba8"
     },
     "import:specialAccessRoles": {
       "retained": "f4f7c0213e21efc803d2400b2a989f3d3141a826320c460de0b84595b2ffed5b",
-      "current": "1ba08a70c1ed94313618181b95ca4e7e8c5c1482995353c6a928fae46ae02e8f"
+      "current": "3c2b4c64c5952bd6d7b3589fec1fa7c846868c58371b619ce3a60be9c66f7bdd"
     },
     "loyaltyWallet:specialAccessRoles": {
       "retained": "30aee0dee584bc0ca455e7cebc5ffb3fab955e1083c9ff0413bb22dbafb92b16",
-      "current": "d94e84db50bb60b72adfc322d19fd2d81d96c7fb77ecd79b8a762a366b0c62ac"
+      "current": "773f5f40210bfd0871574adf8c8ecad1f2d9eafd517414e2f54bc4f4db2cacdd"
     },
     "inventory:specialAccessRoles": {
       "retained": "36d1e0286432ce7f27074bc4093a2b35d82a6c25d91a1aa434f2605bab4214a9",
-      "current": "7771dc08d2d91a0195a958d4f45d9e6549e60f63aeefea99323df77ee086cfd8"
+      "current": "9fda2a93658a51cabf004154faa1d7b63d58097d04260ec9d924c526dfe4ab6d"
+    },
+    "eWaste:core-reference": {
+      "retained": "cbc9e3e59bc31b72d1d70337b8e6481142026fd572addf695870d8b199ccfedf",
+      "current": "8c95221b5c75a0a522d0fe87c7207ff156135e3e40afa3d26bbff10bfa9b9e4b"
     },
     "digitalCore:participantAccessGroups": {
       "retained": "9842ac6bf7f05acd0296c5b4359e9115e4b86764f4c9237592a51d627ef2f14a",
-      "current": "de2518518f39bf3ac39a8abe119a382749d68d975aeb2ea5bc9de0c9cb899311"
+      "current": "d7fd98636175c7acc3b7b914a880b496f25ec87b1b65f23a07e137d8e233286a"
     },
     "loyaltyWallet:participantAccessGroups": {
       "retained": "f5b2d89f39a04936797582fac096982b860c1ad8d76a38855d8738c23288f65f",
-      "current": "2812e1f5d1fbe85f9eed4bb8c1c87bb819d58566811621f4664aedc5bda21cb4"
+      "current": "98e958c9257ecfb63a35dc4e16c773b4855eaf881c293747b12d5525b43ace58"
+    },
+    "wasteCarbon:participantAccessGroups": {
+      "retained": "2c87defb4858a03d530b72058aaa59e86f21f8f1ac41683ff87cbc1dbce0f940",
+      "current": "92134d3b446ea8daed2e7259c05818e9386910db66d10804fea12a1706c107a0"
+    },
+    "wasteReward:participantAccessGroups": {
+      "retained": "c1ac1f50a1e0b416d01fa618ba4965ef3089cb87946f22cb2d3a44050e156c3a",
+      "current": "ae581222f14ad7d3b5fc11f504cfb7529d717515caebb71ba82a067b8402367f"
     },
     "circa.ewaste:operations": {
       "retained": "8556ee0602702914c35d06f539d2084056456685a69c6a6aa2d03ac71aabd0d6",
@@ -49,11 +61,15 @@
     },
     "publish:accessGroups": {
       "retained": "28cb993e9e0921c36eb54be7e89548a3ebb2cb691e805b32f1b56904223f49ba",
-      "current": "0a05769f4a5822e7cd8a0abc3b1601a4e3ed6e3c1777704f1bac621730876c9b"
+      "current": "4d47083f2082be7115c3215f77097e6f1d87ae4c9c7648cdbea61e2bdf6f76a1"
     },
     "circa.ewaste:circaCommerceStaffAssignments": {
       "retained": "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049",
       "current": "09e5ed4742be2f0cb603c2224d461436f993017425e2ecd07c971563c19392b2"
+    },
+    "circa.ewaste:waste": {
+      "retained": "e087eeafac052538c91be3c1afaf7acb5fa5fd26e2cb74bd64ac93de0c1d495f",
+      "current": "870ffa0ca356c29b9b61c60d354077854164d8061bd1527c42b4eb10b2a35aa5"
     },
     "circa.ewaste:loyalty": {
       "retained": "178341374702d959b40c8008459c83fcf2ac2850ae60673f0c43cbbbcc55d4d6",
@@ -61,7 +77,7 @@
     },
     "circa.ewaste:commerce": {
       "retained": "2677866cca45f52f6db3e240d4f783f56f0892f0ef657c3ba175fbc4eee20114",
-      "current": "41a2f8d8ebc8c1206c511cabdda1bc39fbd9641a91d94f5eeba7eadccffa816d"
+      "current": "f54b1f691d92235ce10fa5aa4f1950f8ce766892195a958fe40db221380c127e"
     },
     "circa.ewaste:circaGreenPerksBudget": {
       "retained": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010",

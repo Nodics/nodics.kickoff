@@ -24,9 +24,7 @@ const scenarios = Object.freeze([
     Object.freeze({
         server: 'commerceServer',
         expectedModules: Object.freeze([
-            'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
-            'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
-            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'search', 'elastic', 'store',
+            'nodics.foundation', 'search', 'elastic', 'store',
             'product', 'pricing', 'tax', 'promotion', 'inventory',
             'commerceSearchCore', 'commerceSearch', 'baseCommerce', 'checkoutCore', 'cart', 'order',
             'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
@@ -46,7 +44,8 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('stripeProvider').enabled, true);
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(require('./helpers/configuration').searchConfiguration(CONFIG.getProperties(), 'product').options.engine, 'elastic');
-            assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.equal(NODICS.isModuleActive('discoveryProjection'), false);
+            assert.equal(NODICS.isModuleActive('nodics.discovery'), false);
             assert.equal(NODICS.isModuleActive('search'), true);
             assert.equal(NODICS.isModuleActive('elastic'), true);
             assert.equal(NODICS.isModuleActive('agora.apparel'), false);
@@ -56,9 +55,7 @@ const scenarios = Object.freeze([
     Object.freeze({
         server: 'commerceStagedServer',
         expectedModules: Object.freeze([
-            'nodics.foundation', 'discoveryConfig', 'discoverySource', 'discoveryMapping',
-            'discoveryProjection', 'discoveryPublication', 'discoveryQuery',
-            'discoveryRanking', 'discoveryRuntime', 'nodics.discovery', 'search', 'elastic', 'store',
+            'nodics.foundation', 'search', 'elastic', 'store',
             'product', 'pricing', 'tax', 'promotion', 'inventory',
             'commerceSearchCore', 'commerceSearch', 'baseCommerce', 'checkoutCore', 'cart', 'order',
             'checkout', 'paymentCore', 'cardPayment', 'walletPayment',
@@ -82,10 +79,10 @@ const scenarios = Object.freeze([
             assert.equal(CONFIG.get('stripeProvider').maturity, 'NOT_APPLICABLE_FOR_STAGED_CATALOG');
             assert.equal(CONFIG.get('search').product.options.enabled, true);
             assert.equal(require('./helpers/configuration').searchConfiguration(CONFIG.getProperties(), 'product').options.engine, 'elastic');
-            assert.equal(CONFIG.get('search').discoveryProjection.options.enabled, true);
+            assert.equal(NODICS.isModuleActive('discoveryProjection'), false);
+            assert.equal(NODICS.isModuleActive('nodics.discovery'), false);
             assert.equal(NODICS.isModuleActive('search'), true);
             assert.equal(NODICS.isModuleActive('elastic'), true);
-            assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'COMMERCE_STAGED'), true);
             assert.equal(NODICS.isModuleActive('agora.apparel'), true);
             const selected = require(path.join(coreRoot, 'modules/nConfig/src/service/defaultConfigurationBindingService')).resolveDomainComposition(CONFIG.get('activeModules').compositions.agora).domains;
             assert.equal(NODICS.isModuleActive('apparelProduct'), selected.includes('apparel'));
@@ -136,10 +133,9 @@ const scenarios = Object.freeze([
         verify: function (coreRoot) {
             assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
             assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
-            assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WASTE'), true);
             assert.equal(CONFIG.get('waste').accelerator, undefined);
             assert.equal(CONFIG.get('waste').projectOverlay, undefined);
-            assert.deepEqual(CONFIG.get('data').dataReleases.initializationProfiles.localWasteFoundation.steps, [
+            assert.deepEqual(CONFIG.get('data').dataReleases.initializationProfileDefaults.localWasteFoundation.steps, [
                 { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },
                 { dataType: 'sample', releaseCodes: ['circa.ewaste:waste-policy'] }
             ], 'Prepared Waste composition selects owner references and a separate explicit demo sample');
@@ -149,7 +145,7 @@ const scenarios = Object.freeze([
         }
     }),
     Object.freeze({
-        server: 'locationServer',
+        server: 'wasteServer',
 
         expectedModules: Object.freeze([
             'nodics.foundation',
@@ -166,25 +162,24 @@ const scenarios = Object.freeze([
             'kickoffApi',
             'kickoffInt',
             'kickoffLocal',
-            'locationServer'
+            'wasteServer'
         ]),
         expectedApiExposure: Object.freeze(['serviceRegistry', 'schemaApi', 'dataImport', 'locationInternal']),
         verify: function (coreRoot) {
-            assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalLocation');
-            assert.equal(CONFIG.get('runtimeRole').code, 'LOCATION');
-            assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'LOCATION'), true);
+            assert.equal(CONFIG.get('database').locationCore.mongodb.master.databaseName, 'kickoffLocalLocation');
+            assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
             assert.equal(NODICS.isModuleActive('locationCore'), true);
             assert.equal(CONFIG.get('servers').profile.remoteOnly, true);
-            assert.equal(CONFIG.get('servers').default.endpoint.httpPort, 4380);
+            assert.equal(CONFIG.get('servers').default.endpoint.httpPort, 4370);
             assert.equal(NODICS.isModuleActive('store'), false);
-            assert.equal(NODICS.isModuleActive('wasteCollection'), false);
+            assert.equal(NODICS.isModuleActive('wasteCollection'), true);
             assert.equal(NODICS.isModuleActive('workflow'), false);
         }
     }),
     Object.freeze({
-        server: 'engagementServer',
-        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'kickoffLocal', 'engagementServer']),
-        verify: function (coreRoot) { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
+        server: 'processServer',
+        expectedModules: Object.freeze(['nodics.foundation', 'publish', 'commsSchema', 'commsCore', 'commsVerification', 'localCommsProvider', 'commsApi', 'nodics.communication', 'engagementCore', 'customerReview', 'customerFeedback', 'testimonial', 'contactSubmission', 'engagementComms', 'engagementApi', 'nodics.engagement', 'nodics.kickoff', 'kickoffCore', 'kickoffApi', 'kickoffInt', 'nexus.web', 'kickoffLocal', 'processServer']),
+        verify: function (coreRoot) { assert.equal(CONFIG.get('engagement').capabilities.contactSubmission, true); assert.equal(CONFIG.get('engagement').capabilities.testimonial, true); assert.equal(CONFIG.get('engagement').capabilities.customerReview, true); assert.equal(CONFIG.get('database').engagementCore.mongodb.master.databaseName, 'kickoffLocalEngagement'); }
     }),
     Object.freeze({
         server: 'platformServer',
@@ -234,7 +229,6 @@ const scenarios = Object.freeze([
         expectedApiExposure: Object.freeze(['serviceRegistry', 'dataImport', 'copilotApi']),
         verify: function (coreRoot) {
             assert.equal(CONFIG.get('runtimeRole').code, 'PLATFORM');
-            assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'PLATFORM'), true);
             assert.equal(CONFIG.get('copilot').providers.default.adapter, 'ollama');
             assert.equal(CONFIG.get('copilot').conversation.storage, 'GENERATED_SERVICE');
             assert.equal(CONFIG.get('copilot').conversation.allowVolatileLocalStorage, false);
@@ -335,16 +329,26 @@ const scenarios = Object.freeze([
 ]);
 
 async function prepareScenario(scenario) {
-    const { coreRoot } = prepareRuntime({
+    const { coreRoot } = await prepareRuntime({
         projectRoot, frameworkRoot, environment: 'kickoffLocal', server: scenario.server,
         expectedApiExposure: scenario.expectedApiExposure,
     });
 
     assert.equal(NODICS.isModuleActive('kickoffAdministration'), false, 'Synthetic administration module must not be selected');
     assert.equal(NODICS.isModuleActive('kickoffCore'), true, 'Project-owned administration defaults live in Kickoff Core');
-    assert.equal(Boolean(CONFIG.get('backofficeApplicationInitialization')?.runtimeRoleProfiles), false, 'BackOffice runtime-role profiles are projected out of effective config');
-    assert.equal(Boolean(CONFIG.get('backofficeApplicationInitialization')?.profiles?.agoraapparel), scenario.server === 'platformServer', 'Shared BackOffice administration profiles must be scoped to Platform runtime role');
-    assert.equal(Boolean(CONFIG.get('backofficeFunctionalModuleActivationData')?.modules?.['nodics.commerce']), scenario.server === 'platformServer', 'Shared BackOffice functional activation data must be scoped to Platform runtime role');
+    assert.equal(Boolean(CONFIG.get('backofficeApplicationInitialization')?.runtimeRoleProfiles), false, 'Effective configuration must not contain retired role-profile declarations');
+    const apparel = CONFIG.get('backofficeApplicationInitialization')?.profiles?.agoraapparel;
+    if (scenario.server === 'platformServer') assert.ok(apparel);
+    if (apparel) assert.equal(apparel.owner, 'agora.apparel');
+    assert.equal(NODICS.isModuleActive('backoffice'), scenario.server === 'platformServer',
+        'Only Platform may serve the shared BackOffice administration profiles');
+    // Framework contribution metadata can be inherited on any runtime loading
+    // Commerce. The project route for its Profile imports is the exact Platform server.
+    const commercePackages = CONFIG.get('backofficeFunctionalModuleActivationData')?.modules?.['nodics.commerce']?.dataPackages ?? [];
+    if (scenario.server === 'platformServer') assert.ok(commercePackages.length > 0);
+    for (const pack of commercePackages.filter(({ targetModule }) => targetModule === 'profile')) {
+        assert.equal(pack.targetServer, 'platformServer', `${pack.code} must target the Platform Profile owner`);
+    }
 
     const selectedDomains = require(path.join(coreRoot, 'modules/nConfig/src/service/defaultConfigurationBindingService')).resolveDomainComposition(CONFIG.get('activeModules').compositions.agora).domains;
     const capabilityDomains = new Set(selectedDomains);
@@ -370,7 +374,7 @@ async function prepareScenario(scenario) {
         const staged = scenario.server === 'commerceStagedServer';
         const outletProposal = require('../modules/circa.ewaste/test/fixtures/circaMonetaryOutletProposal.json');
         const outletStores = outletProposal.outletGoods.map(good => good.storeCode);
-        const agoraStores = { apparel: 'agoraMainStore', electronics: 'agoraElectronicsStore', telco: 'agoraTelcoStore' };
+        const agoraStores = { apparel: 'agoraApparelStore', electronics: 'agoraElectronicsStore', telco: 'agoraTelcoStore' };
         assert.equal(CONFIG.get('apiExposure').categories.productPublicationSource.enabled, staged);
         assert.equal(CONFIG.get('apiExposure').categories.productPublicationTarget.enabled, !staged);
         assert.equal(CONFIG.get('product').publication.target.connectionName, 'commerce');
@@ -401,7 +405,9 @@ async function prepareScenario(scenario) {
                         : domain === 'tax' ? issuer.taxPolicyCode : good.warehouseCode]];
                 }));
                 const circaRoots = domain === 'promotion'
-                    ? ['greenperks'].flatMap(issuer => require(
+                    ? ['greenperks', 'renewworks', 'loopcycle'].flatMap(issuer => require(
+                        '../modules/circa.ewaste/data/sample-v001/publication/l08-20261110/' + issuer + '/records/publicationPlan.json'
+                    ).items.map(row => row.rootCode)).concat(['greenperks'].flatMap(issuer => require(
                         '../modules/circa.ewaste/data/sample-v001/publication/' + issuer + '/records/publicationPlan.json'
                     ).items.map(row => row.rootCode)).concat([
                         'circaGreenPerksFixedExpiryBudget', 'circaRenewWorksRemainingFixedExpiryBudget',
@@ -414,7 +420,7 @@ async function prepareScenario(scenario) {
                             assert.equal(row.storeCode, 'circaMainStore');
                             return row.rootCode;
                         });
-                    }))
+                    })))
                     : [{ pricing: 'circaPointsPriceBook', tax: 'circaSamplePointsPolicy', inventory: 'circaDigitalRegistry' }[domain]];
                 const apparelRoots = {
                     pricing: ['agoraApparelRetailUsd'], tax: ['agoraAeVatPolicy'], inventory: ['agoraApparelWarehouse'],
@@ -422,11 +428,11 @@ async function prepareScenario(scenario) {
                 }[domain];
                 const apparelSelected = selectedDomains.includes('apparel');
                 assert.deepEqual(delivery.storeCodes,
-                    ['circaMainStore', ...Object.keys(outletRoots), ...(apparelSelected ? ['agoraMainStore'] : [])],
+                    ['circaMainStore', ...Object.keys(outletRoots), ...(apparelSelected ? ['agoraApparelStore'] : [])],
                     `${domain} delivery must not change unselected stores`);
                 assert.deepEqual(delivery.rootCodes, [], `${domain} must not select roots across Store scopes`);
                 assert.deepEqual(delivery.rootCodesByStore,
-                    { circaMainStore: circaRoots, ...outletRoots, ...(apparelSelected ? { agoraMainStore: apparelRoots } : {}) },
+                    { circaMainStore: circaRoots, ...outletRoots, ...(apparelSelected ? { agoraApparelStore: apparelRoots } : {}) },
                     `${domain} must select its exact reviewed policy roots for each Store`);
             }
             assert.deepEqual(CONFIG.get('schemaPolicies')[domain].publicationVersioned,
@@ -446,11 +452,13 @@ async function prepareScenario(scenario) {
         );
     }
     if (scenario.server === 'wcmsStagedServer' || scenario.server === 'wcmsOnlineServer') {
-        assert.deepEqual(CONFIG.get('schemaPolicies').media.publicationVersioned,
-            scenario.server === 'wcmsStagedServer'
-                ? { isVersionedEnabled: true, versionedReadMode: 'CURRENT' }
-                : { isVersionedEnabled: false },
-            'Only the migrated Staged Media metadata source selects history');
+        const policy = CONFIG.get('schemaPolicies').media.publicationVersioned;
+        const staged = scenario.server === 'wcmsStagedServer';
+        assert.equal(policy.isVersionedEnabled, staged, 'Only Staged Media selects history');
+        if (staged) {
+            assert.equal(policy.versionedReadMode, 'CURRENT');
+            assert.deepEqual(policy.backoffice.operations, ['search', 'read', 'create', 'update']);
+        }
         if (scenario.server === 'wcmsStagedServer') {
             for (const moduleName of ['vDatabase', 'vService', 'vMongodb']) assert.equal(NODICS.isModuleActive(moduleName), true);
         }

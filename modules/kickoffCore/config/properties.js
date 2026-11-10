@@ -13,28 +13,12 @@
 
 /**
  * @module nodics.kickoff/modules/kickoffCore/config/properties
- * @description Nodics Kickoff core project-module configuration defaults.
+ * @description Selects Kickoff project data and composition extensions; reusable defaults remain Framework-owned.
  * @layer config
  * @owner kickoffCore
- * @override Later active modules may override these defaults through configuration layering.
+ * @override Later customer layers override actual project selections through normal configuration layering.
  */
 module.exports = {
-  communication: {
-    runtimeRoleProfiles: {
-      ENGAGEMENT: {
-        $config: "selected",
-        name: "employeeMail",
-        field: "domains",
-        includes: "employee",
-        value: {
-          trustedSourceModules: ["eWaste", "profile"],
-          templateResources: {
-            modules: { profile: true },
-          },
-        },
-      },
-    },
-  },
   tooling: {
     acceptance: {
       // Apparel journey and composition-selected catalog fixtures remain customer-owned.
@@ -50,9 +34,9 @@ module.exports = {
           secondaryProductCode: "agoraOxfordShirt",
           secondaryVariantCode: "agoraOxfordShirtIvoryM",
           categoryCode: "agoraWomen",
-          storeCode: "agoraMainStore",
+          storeCode: "agoraApparelStore",
           locale: "en",
-          channelCode: "web",
+          channelCode: "agoraApparelWeb",
           jurisdiction: "AE",
           currency: "USD",
           providerToken: {
@@ -83,7 +67,7 @@ module.exports = {
               includes: "apparel",
               value: {
                 catalogVersion: "agoraApparelStaged",
-                storeCode: "agoraMainStore",
+                storeCode: "agoraApparelStore",
                 locale: "en",
                 productCodes: [
                   "agoraLinenWrapDress",
@@ -590,11 +574,7 @@ module.exports = {
       },
       editorialLive: {
         siteCode: "nexusCorporateSite",
-        contributionPath:
-          "data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js",
-        manifestPath: "data/manifest.json",
-        contributionSection: "init-v001",
-        contributionCode: "processServer:init-v001",
+        contributionCode: "editorial:editorialWorkflows",
       },
       localBootstrap: {
         publicOriginKey: "nexus",
@@ -680,23 +660,6 @@ module.exports = {
       },
     },
   },
-  cms: {
-    runtimeRoleProfiles: {
-      WCMS_STAGED: {
-        publication: {
-          baselines: {
-            kickoffdocs: {
-              contentPackCode: "kickoffDocumentation",
-              releaseVersion: "0.0.2",
-              rootType: "site",
-              rootCode: "kickoffDocumentationSite",
-              sourceVersion: "0",
-            },
-          },
-        },
-      },
-    },
-  },
   data: {
     contentPacks: {
       packs: {
@@ -710,95 +673,10 @@ module.exports = {
         },
       },
     },
-    dataReleases: {
-      runtimeRoleProfiles: {
-        PLATFORM: {
-          contributions: {
-            $config: "keyed",
-            key: "moduleName",
-            entries: [
-              {
-                moduleName: "pricing",
-                sections: [
-                  "administrativeAuthoringPermission",
-                  "administrativePublicationPermission",
-                ],
-              },
-            ],
-          },
-          initializationProfiles: {
-            nativeRuntimeAuthority: {
-              enabled: true,
-              label: "Reviewed native runtime assignments",
-              description:
-                "Explicitly install reviewed native deployment assignments after Profile identity authority. Existing grants remain unchanged; other deployments require governed Profile bindings.",
-              completionMessage:
-                "Deployment assignment import completed without modifying retained authority. Inspect current grants through Profile before qualification.",
-              steps: {
-                $config: "replace",
-                value: [
-                  {
-                    dataType: "init",
-                    releaseCodes: ["kickoffCore:nativeRuntimeAssignments"],
-                  },
-                ],
-              },
-            },
-          },
-        },
-        COMMERCE: {
-          contributions: [
-            {
-              $config: "selected",
-              name: "agora",
-              field: "domains",
-              includes: "apparel",
-              value: {
-                moduleName: "agora.apparel",
-                sections: [
-                  "agoraApparelStoreReference",
-                  "agoraApparelOpeningStock",
-                  "agoraApparelPromotionSetup",
-                ],
-              },
-            },
-          ],
-        },
-        WCMS_STAGED: {
-          initializationProfiles: {
-            localDocumentationFoundation: {
-              enabled: true,
-              label: "Local Documentation foundation",
-              description:
-                "Install the WCMS initialization releases required before documentation content packs can be reviewed and published.",
-              completionMessage:
-                "The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.",
-              template: "axisDocumentationFoundation",
-            },
-          },
-        },
-      },
-      types: {
-        init: {
-          startupProfileSelections: {
-            $config: "replace",
-            value: [
-              {
-                environmentCode: "kickoffLocal",
-                runtimeRole: "PLATFORM",
-                profileCodes: ["nativeRuntimeAuthority"],
-              },
-            ],
-          },
-        },
-      },
-    },
+
   },
   activeModules: {
     compositions: {
-      employeeMail: {
-        domains: [{ code: "employee" }],
-      },
       agora: {
         environmentVariable: "NODICS_AGORA_DOMAINS",
         selection: "all",
@@ -808,7 +686,7 @@ module.exports = {
             frameworkGroup: "apparel",
             projectPack: "agora.apparel",
             publication: {
-              storeCode: "agoraMainStore",
+              storeCode: "agoraApparelStore",
               catalogVersion: "agoraApparelStaged",
               releaseCode: "agoraApparelCommerceCatalog",
               recordPrefix: "agoraApparel",
@@ -1040,11 +918,6 @@ module.exports = {
           checkoutCore: true,
           commerceSearchCore: true,
           digitalCore: true,
-          discoveryConfig: true,
-          discoveryMapping: true,
-          discoveryProjection: true,
-          discoveryRanking: true,
-          discoverySource: true,
           electronicsProduct: {
             $config: "selected",
             name: "agora",
@@ -1128,10 +1001,6 @@ module.exports = {
         },
         searchIndexes: [
           {
-            moduleName: "discoveryProjection",
-            indexName: "discoveryDocumentProjection",
-          },
-          {
             moduleName: "product",
             indexName: "productLocalized",
           },
@@ -1164,11 +1033,6 @@ module.exports = {
           checkoutCore: true,
           commerceSearchCore: true,
           digitalCore: true,
-          discoveryConfig: true,
-          discoveryMapping: true,
-          discoveryProjection: true,
-          discoveryRanking: true,
-          discoverySource: true,
           electronicsProduct: {
             $config: "selected",
             name: "agora",
@@ -1242,10 +1106,6 @@ module.exports = {
           ],
         },
         searchIndexes: [
-          {
-            moduleName: "discoveryProjection",
-            indexName: "discoveryDocumentProjection",
-          },
           {
             moduleName: "product",
             indexName: "productLocalized",
@@ -1379,364 +1239,110 @@ module.exports = {
       },
     },
   },
-  backofficeLocalReset: {
-    providers: {
-      $config: "replace",
-      value: [
-        {
-          code: "wcmsStaged",
-          connectionName: "wcmsStaged",
-          targetAuthority: {
-            server: "wcmsStagedServer",
-            runtimeRole: {
-              code: "WCMS_STAGED",
-              publication: "STAGED",
-            },
-          },
-        },
-        {
-          code: "wcmsOnline",
-          connectionName: "wcmsOnline",
-          targetAuthority: {
-            server: "wcmsOnlineServer",
-            runtimeRole: {
-              code: "WCMS_ONLINE",
-              publication: "ONLINE",
-            },
-          },
-        },
-        {
-          code: "process",
-          connectionName: "process",
-          targetAuthority: {
-            server: "processServer",
-            runtimeRole: {
-              code: "PROCESS",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-        {
-          code: "location",
-          connectionName: "location",
-          targetAuthority: {
-            server: "locationServer",
-            runtimeRole: {
-              code: "LOCATION",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-        {
-          code: "commerce",
-          connectionName: "commerce",
-          targetAuthority: {
-            server: "commerceServer",
-            runtimeRole: {
-              code: "COMMERCE",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-        {
-          code: "commerceStaged",
-          connectionName: "commerceStaged",
-          targetAuthority: {
-            server: "commerceStagedServer",
-            runtimeRole: {
-              code: "COMMERCE_STAGED",
-              publication: "STAGED",
-            },
-          },
-        },
-        {
-          code: "engagement",
-          connectionName: "engagement",
-          targetAuthority: {
-            server: "engagementServer",
-            runtimeRole: {
-              code: "ENGAGEMENT",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-        {
-          code: "loyalty",
-          connectionName: "loyalty",
-          targetAuthority: {
-            server: "loyaltyServer",
-            runtimeRole: {
-              code: "LOYALTY",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-        {
-          code: "waste",
-          connectionName: "waste",
-          targetAuthority: {
-            server: "wasteServer",
-            runtimeRole: {
-              code: "WASTE",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-        {
-          code: "platform",
-          connectionName: "default",
-          targetAuthority: {
-            server: "platformServer",
-            runtimeRole: {
-              code: "PLATFORM",
-              publication: "OPERATIONAL",
-            },
-          },
-        },
-      ],
-    },
-  },
-  copilot: {
-    runtimeRoleProfiles: {
-      PLATFORM: {
-        core: {
-          customerProject: "kickoff",
-        },
-        api: {
-          enabled: true,
-        },
-        workbench: {
-          target: {
-            connectionName: "commerceStaged",
-            targetAuthority: {
-              runtimeRole: "COMMERCE_STAGED",
-            },
-          },
-        },
-        knowledge: {
-          ingestion: {
-            enabled: {
-              $config: "env",
-              name: "NODICS_COPILOT_KNOWLEDGE_ENABLED",
-              fallback: true,
-              type: "boolean",
-            },
-            ingestOnStart: {
-              $config: "env",
-              name: "NODICS_COPILOT_KNOWLEDGE_INGEST_ON_START",
-              fallback: true,
-              type: "boolean",
-            },
-            startup: {
-              serviceId: "kickoff-local-knowledge-indexer",
-              logSummary: true,
-            },
-          },
-          retrieval: {
-            enabled: {
-              $config: "env",
-              name: "NODICS_COPILOT_KNOWLEDGE_ENABLED",
-              fallback: true,
-              type: "boolean",
-            },
-          },
-        },
-        providers: {
-          enabled: true,
-          default: {
-            adapter: "ollama",
-          },
-          adapters: {
-            ollama: {
-              enabled: true,
-            },
-          },
-        },
-      },
-    },
-  },
-  engagement: {
-    runtimeRoleProfiles: {
-      ENGAGEMENT: {
-        capabilities: {
-          testimonial: true,
-          customerReview: true,
-          customerFeedback: true,
-        },
-      },
-    },
-  },
-  customerFeedback: {
-    runtimeRoleProfiles: {
-      ENGAGEMENT: { enabled: true },
-    },
-  },
-  apiExposure: {
-    runtimeRoleProfiles: {
-      WCMS_STAGED: {
-        categories: {
-          dataExport: {
-            enabled: true,
-          },
-        },
-      },
-      WCMS_ONLINE: {
-        categories: {
-          schemaApi: {
-            enabled: false,
-          },
-          schemaMaintenance: {
-            enabled: false,
-          },
-          dataImport: {
-            enabled: false,
-          },
-          dataExport: {
-            enabled: false,
-          },
-          mediaManagement: {
-            enabled: false,
-          },
-        },
-      },
-      PROCESS: {
-        categories: {
-          dataExport: {
-            enabled: false,
-          },
-        },
-      },
-    },
-  },
   backofficeApplicationInitialization: {
-    runtimeRoleProfiles: {
-      PLATFORM: {
-        target: {
-          connectionName: "wcmsStaged",
+    target: {
+      connectionName: "wcmsStaged",
+    },
+    profiles: {
+      frameworkdocs: {
+        enabled: true,
+      },
+      axisdocs: {
+        enabled: true,
+      },
+      kickoffdocs: {
+        code: "kickoffdocs",
+        reader: {
+          route: "/docs/nodics-kickoff",
+          guide: "project",
+          projectId: "kickoff",
+          projectLabel: "Kickoff",
+          channelReferences: [
+            { channelId: "circa", channelLabel: "Circa", sourceId: "circadocs" },
+            { channelId: "agora", channelLabel: "Agora", sourceId: "docs-apparelproduct" },
+            { channelId: "agora", channelLabel: "Agora", sourceId: "docs-electronicsproduct" },
+            { channelId: "agora", channelLabel: "Agora", sourceId: "docs-telcosubscription" },
+            { channelId: "nexus", channelLabel: "Nexus", sourceId: "docs-nexus-web" },
+          ],
         },
-        profiles: {
-          frameworkdocs: {
-            enabled: true,
-          },
-          axisdocs: {
-            enabled: true,
-          },
-          kickoffdocs: {
-            code: "kickoffdocs",
-            type: "DOCUMENTATION_BUNDLE",
-            owner: "nodics.kickoff",
-            applicationCode: "axis",
-            siteCode: "kickoffDocumentationSite",
-            baselineCode: "kickoffdocs",
-            contentPackCode: "kickoffDocumentation",
-            presentation: {
-              title: "Nodics Kickoff Documentation",
-              kind: "DOCUMENTATION",
-              category: "documentation",
-              order: 500,
-              summary:
-                "Reference-project documentation content pack and Online delivery profile.",
-              requiredServers: [
-                "Platform",
-                "WCMS Staged",
-                "WCMS Online",
-                "Process",
-              ],
-              activationPolicy: {
-                approvalRequiredForOnline: true,
-                requiredDataTrigger: "USER",
-                sampleDataTrigger: "USER",
-              },
-            },
+        type: "DOCUMENTATION_BUNDLE",
+        owner: "nodics.kickoff",
+        applicationCode: "axis",
+        siteCode: "kickoffDocumentationSite",
+        baselineCode: "kickoffdocs",
+        contentPackCode: "kickoffDocumentation",
+        presentation: {
+          title: "Nodics Kickoff Documentation",
+          kind: "DOCUMENTATION",
+          category: "documentation",
+          order: 500,
+          summary:
+            "Reference-project documentation content pack and Online delivery profile.",
+          requiredServers: [
+            "Platform",
+            "WCMS Staged",
+            "WCMS Online",
+            "Process",
+          ],
+          activationPolicy: {
+            approvalRequiredForOnline: true,
+            requiredDataTrigger: "USER",
+            sampleDataTrigger: "USER",
           },
         },
       },
     },
   },
   backofficeFunctionalModuleActivationData: {
-    runtimeRoleProfiles: {
-      PLATFORM: {
-        modules: {
-          "nodics.commerce": {
-            dataPackages: {
-              $config: "replace",
-              value: [
-                {
-                  code: "store:core-reference",
-                  targetModule: "store",
-                  targetServer: "commerceServer",
-                },
-                {
-                  code: "pricing:administrativeAuthoringPermission",
-                  targetModule: "profile",
-                  targetServer: "platformServer",
-                },
-                {
-                  code: "pricing:administrativePublicationPermission",
-                  targetModule: "profile",
-                  targetServer: "platformServer",
-                },
-              ],
-            },
-          },
-          "nodics.rulesEngine": {
-            dataPackages: {
-              $config: "replace",
-              value: [
-                {
-                  code: "rulesApi:rulesPolicyApproval",
-                  targetModule: "workflow",
-                  targetServer: "processServer",
-                },
-              ],
-            },
-          },
-          "nodics.loyalty": {
-            dataPackages: {
-              $config: "replace",
-              value: [
-                {
-                  code: "loyaltyCore:core-enterprise-reference",
-                  targetModule: "profile",
-                  targetServer: "platformServer",
-                  targetDatabase: {
-                    $config: "runtime",
-                    name: "platformServer",
-                    path: "database.default.mongodb.master.databaseName",
-                  },
-                },
-              ],
-            },
-          },
-          "nodics.waste": {
-            dataPackages: {
-              $config: "replace",
-              value: [
-                {
-                  code: "wasteCore:core-reference",
-                  targetModule: "profile",
-                  targetServer: "platformServer",
-                  targetDatabase: {
-                    $config: "runtime",
-                    name: "platformServer",
-                    path: "database.default.mongodb.master.databaseName",
-                  },
-                },
-                {
-                  code: "wasteCollection:sample-profile-addresses",
-                  targetModule: "profile",
-                  targetServer: "platformServer",
-                  targetDatabase: {
-                    $config: "runtime",
-                    name: "platformServer",
-                    path: "database.default.mongodb.master.databaseName",
-                  },
-                },
-              ],
-            },
-          },
+    modules: {
+      "nodics.waste": {
+        dataPackages: { $config: "keyed", key: "code", entries: [{"code":"wasteCore:enterpriseRoles","targetServer":"platformServer"},{"code":"wasteCore:businessAccessRoles","targetServer":"platformServer"}] },
+      },
+      "nodics.engagement": {
+        dataPackages: { $config: "keyed", key: "code", entries: [{"code":"engagementCore:accessGroups","targetServer":"platformServer"}] },
+      },
+      "nodics.wcms": {
+        dataPackages: {
+          $config: "keyed",
+          key: "code",
+          entries: [
+            ...[{"code":"cms:accessGroups","targetServer":"platformServer"},{"code":"cms:enterpriseRoles","targetServer":"platformServer"},{"code":"cms:businessAccessRoles","targetServer":"platformServer"}],
+            { code: "editorial:editorialWorkflows", targetModule: "workflow", targetServer: "processServer" },
+          ],
         },
       },
+      "nodics.commerce": {
+        dataPackages: {
+          $config: "keyed",
+          key: "code",
+          entries: [
+            ...[{"code":"store:accessGroups","targetServer":"platformServer"},{"code":"product:enterpriseRoles","targetServer":"platformServer"},{"code":"product:businessAccessRoles","targetServer":"platformServer"},{"code":"promotion:enterpriseRoles","targetServer":"platformServer"},{"code":"promotion:businessAccessRoles","targetServer":"platformServer"},{"code":"order:enterpriseRoles","targetServer":"platformServer"},{"code":"order:businessAccessRoles","targetServer":"platformServer"},{"code":"digitalCore:enterpriseRoles","targetServer":"platformServer"}],
+            {
+              code: "pricing:administrativeAuthoringPermission",
+              targetModule: "profile",
+              targetServer: "platformServer",
+            },
+            {
+              code: "pricing:administrativePublicationPermission",
+              targetModule: "profile",
+              targetServer: "platformServer",
+            },
+          ],
+        },
+      },
+      "nodics.rulesEngine": {
+        dataPackages: {
+          $config: "replace",
+          value: [
+            {
+              code: "rulesApi:rulesPolicyApproval",
+              targetModule: "workflow",
+              targetServer: "processServer",
+            },
+          ],
+        },
+      },
+
     },
   },
 };

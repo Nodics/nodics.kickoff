@@ -9,7 +9,7 @@
 
  */
 
-'use strict';
+"use strict";
 
 /**
  * @module nodics.kickoff/modules/kickoffInt/config/properties
@@ -18,29 +18,4 @@
  * @owner kickoffInt
  * @override Later active modules may override these defaults through configuration layering.
  */
-module.exports = {
-    data: {
-        dataReleases: {
-            runtimeRoleProfiles: {
-                PROCESS: {
-                    contributions: [
-                        { moduleName: 'editorial', sections: ['editorialWorkflows'] }
-                    ]
-                }
-            }
-        }
-    },
-    process: {
-        definitionContributions: {
-            reviewerAssignments: {
-                editorialApproval: {
-                    ownerModule: 'editorial',
-                    contributionOwner: 'editorial',
-                    nodeAssignees: {
-                        editorialReview: 'editorialReviewQueue'
-                    }
-                }
-            }
-        }
-    }
-};
+module.exports = {};

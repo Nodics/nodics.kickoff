@@ -27,6 +27,17 @@ const compose = fs.readFileSync(
   "utf8",
 );
 const environmentProfile = require("./helpers/configuration").loadContainer();
+const { loadRuntime } = require("./helpers/configuration");
+{
+  const docker = loadRuntime("platformServer", "kickoffDockerLocal");
+  assert.notEqual(docker.publish?.setup?.observation?.enabled, true);
+  assert.equal(docker.backofficeApplicationInitialization.dataReleaseTimeoutMs, 120000);
+  const previousPackages = require("../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json");
+  assert.deepEqual(docker.backofficeApplicationInitialization.profiles.circa.dataPackages.map(row => row.code),
+    previousPackages.map(({ code }) => /^circa\.ewaste:network-(enterprises|addresses|locations|points)$/.test(code)
+      ? code + "-docker"
+      : code));
+}
 const kickoffCoreProperties = require("../modules/kickoffCore/config/properties");
 
 const projectCommands = projectCommandService.resolveCommands(root);

@@ -1,12 +1,79 @@
 {
   "contractVersion": 1,
   "code": "circa-native-reviewed",
-  "revision": 17,
+  "revision": 20,
   "tenant": "default",
   "profileCode": "circa",
   "baselineCode": "circa",
-  "profileDigest": "716c8dbd10a7bad98b52af7123dc3e5e92f5119ebd826e4c57f84af04e649584",
+  "profileDigest": "5ddc5b8ae7e2a841ae6ecb84be8790d4bae6ac56ec3605e2f3139fc49ffc6c2d",
   "stages": [
+    {
+      "code": "circa.ewaste:waste-opening-impact",
+      "descriptor": {
+        "code": "circa.ewaste:waste-opening-impact",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:waste-opening-impact",
+        "sectionCode": "waste-opening-impact",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "7a73e70a1a98e07ef17c3c00315a5b1b529449bc77081fbc54ab1c814c9d1d15",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/waste/records/circaWasteImpactResultData.json"
+        ],
+        "prerequisites": [],
+        "installer": "WASTE_OPENING_IMPACT",
+        "owningDomain": "wasteImpact",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:waste-opening-assets",
+      "descriptor": {
+        "code": "circa.ewaste:waste-opening-assets",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:waste-opening-assets",
+        "sectionCode": "waste-opening-assets",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "94b21da84f05722d642979e1adaf690ecb6b3f98cf22732fc08ab1edf10ead63",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/waste/records/circaWasteAssetData.json",
+          "sample-v001/waste/records/circaWasteAssetOwnershipEventData.json"
+        ],
+        "prerequisites": [],
+        "installer": "WASTE_OPENING_ASSETS",
+        "owningDomain": "wasteCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "WASTE",
+        "environmentScope": [
+          "LOCAL"
+        ]
+      }
+    },
     {
       "code": "product:productPublicationWorkflow",
       "descriptor": {
@@ -25,7 +92,7 @@
         "sectionCode": "productPublicationWorkflow",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "004121f1ee452988bcb575b64b96387a61deac7b25a7bebe9371e374195efa7d",
+        "checksum": "07193fe46238c3323e38a24de16588e032c0471f61fe277598a8f11d37c02f2f",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/records/process/productPublicationWorkflowDefinitionData.js"
@@ -189,8 +256,8 @@
         "releaseCode": "product:accessGroups",
         "sectionCode": "accessGroups",
         "dataType": "init",
-        "version": "0.0.4",
-        "checksum": "b0465d025065192f3abd1492de958223557a04e361fd5d76b2b8937bfad6a987",
+        "version": "0.0.1",
+        "checksum": "4b19aea018afc99eec52219a0409a0397e412e423ab6a00d3d5ca00a415bfd13",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/productUserGroupHeader.js",
@@ -214,28 +281,28 @@
           {
             "moduleName": "product",
             "sectionCode": "permissionCatalogue",
-            "version": "0.0.2",
+            "version": "0.0.1",
             "checksum": "9445bba8f5f3bb3a2d068efeeeb09b7e554ff88216377e81e75a56a522fa2af9",
             "partition": "DEFAULT"
           },
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f"
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
           },
           {
             "moduleName": "profile",
             "sectionCode": "permissionCatalogue",
-            "version": "0.0.2",
-            "checksum": "d8e66433a75b9be46ef429aebe4aead6720ccd447628e3928f50605002d63b29",
+            "version": "0.0.1",
+            "checksum": "b37fbb6fcdab6399de2e4feb50eab3c9e0cd73626db22ae920553269c945daf4",
             "partition": "DEFAULT"
           },
           {
             "moduleName": "promotion",
             "sectionCode": "permissionCatalogue",
-            "version": "0.0.2",
-            "checksum": "4a6f14f8deea41e2d29d41c7e909cb49debb6d1bfba1f9a7f676f6ce3de998d5",
+            "version": "0.0.1",
+            "checksum": "402b7ebffc05ac529f465c228700437b830cfb0f873a15ac92d5b7b5b9a3a9c8",
             "partition": "DEFAULT"
           },
           {
@@ -247,53 +314,6 @@
           }
         ],
         "owningDomain": "product",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "publish:accessGroups",
-      "descriptor": {
-        "code": "publish:accessGroups",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "publish",
-        "releaseCode": "publish:accessGroups",
-        "sectionCode": "accessGroups",
-        "dataType": "init",
-        "version": "0.0.4",
-        "checksum": "28cb993e9e0921c36eb54be7e89548a3ebb2cb691e805b32f1b56904223f49ba",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/publishUserGroupHeader.js",
-          "init-v001/records/identity/publishUserGroupData.js"
-        ],
-        "prerequisites": [
-          {
-            "moduleName": "profile",
-            "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f"
-          },
-          {
-            "moduleName": "workflow",
-            "sectionCode": "permissionCatalogue",
-            "version": "0.0.1",
-            "checksum": "9566b57a2b8b6230534305adaef173c7e1ecf28d5493c7193e9dd79c54d3a35e",
-            "partition": "DEFAULT"
-          }
-        ],
-        "owningDomain": "publish",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -318,8 +338,8 @@
         "releaseCode": "promotion:accessGroups",
         "sectionCode": "accessGroups",
         "dataType": "init",
-        "version": "0.0.4",
-        "checksum": "3b68a10257f64335fba1cfb77597860bd51754bc3d2ca97a18679f405e295844",
+        "version": "0.0.1",
+        "checksum": "2c567ae1d59b95a605afedabb614752b2c4a9971f111e9d3405403e67dc2d0d1",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/promotionUserGroupHeader.js",
@@ -350,21 +370,21 @@
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f"
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
           },
           {
             "moduleName": "profile",
             "sectionCode": "permissionCatalogue",
-            "version": "0.0.2",
-            "checksum": "d8e66433a75b9be46ef429aebe4aead6720ccd447628e3928f50605002d63b29",
+            "version": "0.0.1",
+            "checksum": "b37fbb6fcdab6399de2e4feb50eab3c9e0cd73626db22ae920553269c945daf4",
             "partition": "DEFAULT"
           },
           {
             "moduleName": "promotion",
             "sectionCode": "permissionCatalogue",
-            "version": "0.0.2",
-            "checksum": "4a6f14f8deea41e2d29d41c7e909cb49debb6d1bfba1f9a7f676f6ce3de998d5",
+            "version": "0.0.1",
+            "checksum": "402b7ebffc05ac529f465c228700437b830cfb0f873a15ac92d5b7b5b9a3a9c8",
             "partition": "DEFAULT"
           }
         ],
@@ -393,8 +413,8 @@
         "releaseCode": "order:accessGroups",
         "sectionCode": "accessGroups",
         "dataType": "init",
-        "version": "0.0.4",
-        "checksum": "a09781ed3826c4a4809b4313986c90f6e1988e0f074bc154fb48c386aa4a0cf6",
+        "version": "0.0.1",
+        "checksum": "b8b11d8cf93cb7f8f393e76fdd0fb0681ebca90970f31f7c65d2da41373caba8",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/orderUserGroupHeader.js",
@@ -432,366 +452,18 @@
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f"
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
           },
           {
             "moduleName": "profile",
             "sectionCode": "permissionCatalogue",
-            "version": "0.0.2",
-            "checksum": "d8e66433a75b9be46ef429aebe4aead6720ccd447628e3928f50605002d63b29",
+            "version": "0.0.1",
+            "checksum": "b37fbb6fcdab6399de2e4feb50eab3c9e0cd73626db22ae920553269c945daf4",
             "partition": "DEFAULT"
           }
         ],
         "owningDomain": "order",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "loyaltyWallet:participantReadAccess",
-      "descriptor": {
-        "code": "loyaltyWallet:participantReadAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "loyaltyWallet",
-        "releaseCode": "loyaltyWallet:participantReadAccess",
-        "sectionCode": "participantReadAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "c2bd944e5b9609d2e0c1d5e126a5fc78c10b30fed5ccd4676e4f90ced55e176e",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_loyaltyWalletParticipantReadGroupHeader.js",
-          "init-v001/headers/identity/020_loyaltyWalletParticipantReadRoleHeader.js",
-          "init-v001/records/identity/loyaltyWalletParticipantReadGroupData.js",
-          "init-v001/records/identity/loyaltyWalletParticipantReadRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "loyaltyWallet",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "order:participantReadAccess",
-      "descriptor": {
-        "code": "order:participantReadAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "order",
-        "releaseCode": "order:participantReadAccess",
-        "sectionCode": "participantReadAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "663be52729e783c5bdbc81da005e6784ec6aff6ecc7a82ec032023cba29719f9",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_orderParticipantReadGroupHeader.js",
-          "init-v001/headers/identity/020_orderParticipantReadRoleHeader.js",
-          "init-v001/records/identity/orderParticipantReadGroupData.js",
-          "init-v001/records/identity/orderParticipantReadRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "order",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "digitalCore:participantReadAccess",
-      "descriptor": {
-        "code": "digitalCore:participantReadAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "digitalCore",
-        "releaseCode": "digitalCore:participantReadAccess",
-        "sectionCode": "participantReadAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "c56507bdb6a707977cd46528d3c307ef056899fe35e5aa56e432942e5122fe39",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_digitalCoreParticipantReadGroupHeader.js",
-          "init-v001/headers/identity/020_digitalCoreParticipantReadRoleHeader.js",
-          "init-v001/records/identity/digitalCoreParticipantReadGroupData.js",
-          "init-v001/records/identity/digitalCoreParticipantReadRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "digitalCore",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "cart:participantTransactionAccess",
-      "descriptor": {
-        "code": "cart:participantTransactionAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "cart",
-        "releaseCode": "cart:participantTransactionAccess",
-        "sectionCode": "participantTransactionAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "86b10e5d9c27575733986b09b3d5ad10709c493766abef06c2acede8575ab956",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_cartParticipantTransactionGroupHeader.js",
-          "init-v001/headers/identity/020_cartParticipantTransactionRoleHeader.js",
-          "init-v001/records/identity/cartParticipantTransactionGroupData.js",
-          "init-v001/records/identity/cartParticipantTransactionRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "cart",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "checkoutCore:participantTransactionAccess",
-      "descriptor": {
-        "code": "checkoutCore:participantTransactionAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "checkoutCore",
-        "releaseCode": "checkoutCore:participantTransactionAccess",
-        "sectionCode": "participantTransactionAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "28ab6239579ff2f9755f7a40ef385eac9ed728491b6c6c70cf9b402c29f5312c",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_checkoutCoreParticipantTransactionGroupHeader.js",
-          "init-v001/headers/identity/020_checkoutCoreParticipantTransactionRoleHeader.js",
-          "init-v001/records/identity/checkoutCoreParticipantTransactionGroupData.js",
-          "init-v001/records/identity/checkoutCoreParticipantTransactionRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "checkoutCore",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "order:participantTransactionAccess",
-      "descriptor": {
-        "code": "order:participantTransactionAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "order",
-        "releaseCode": "order:participantTransactionAccess",
-        "sectionCode": "participantTransactionAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "5fe8dbe92cbadb4dacd95098fd910f3a91ac567c381fa3a3a0db5612f73ea9d1",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_orderParticipantTransactionGroupHeader.js",
-          "init-v001/headers/identity/020_orderParticipantTransactionRoleHeader.js",
-          "init-v001/records/identity/orderParticipantTransactionGroupData.js",
-          "init-v001/records/identity/orderParticipantTransactionRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "order",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "digitalCore:participantTransactionAccess",
-      "descriptor": {
-        "code": "digitalCore:participantTransactionAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "digitalCore",
-        "releaseCode": "digitalCore:participantTransactionAccess",
-        "sectionCode": "participantTransactionAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "f890a4d787906ab195a5cc888db7935729d78c5b4a8af50e44fd37e825890713",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_digitalCoreParticipantTransactionGroupHeader.js",
-          "init-v001/headers/identity/020_digitalCoreParticipantTransactionRoleHeader.js",
-          "init-v001/records/identity/digitalCoreParticipantTransactionGroupData.js",
-          "init-v001/records/identity/digitalCoreParticipantTransactionRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "digitalCore",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "bidding:participantTransactionAccess",
-      "descriptor": {
-        "code": "bidding:participantTransactionAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "bidding",
-        "releaseCode": "bidding:participantTransactionAccess",
-        "sectionCode": "participantTransactionAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "2928993a506e6c0e14cd63de87120f660dd202c48e3bad660778df1d03222f71",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_biddingParticipantTransactionGroupHeader.js",
-          "init-v001/headers/identity/020_biddingParticipantTransactionRoleHeader.js",
-          "init-v001/records/identity/biddingParticipantTransactionGroupData.js",
-          "init-v001/records/identity/biddingParticipantTransactionRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "bidding",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "loyaltyWallet:participantTransactionAccess",
-      "descriptor": {
-        "code": "loyaltyWallet:participantTransactionAccess",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "loyaltyWallet",
-        "releaseCode": "loyaltyWallet:participantTransactionAccess",
-        "sectionCode": "participantTransactionAccess",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "8ecbb7f80bd3f25cbac9d0370176f5bb8fad44dbe27d233fdba8e6ec77145973",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/identity/010_loyaltyWalletParticipantTransactionGroupHeader.js",
-          "init-v001/headers/identity/020_loyaltyWalletParticipantTransactionRoleHeader.js",
-          "init-v001/records/identity/loyaltyWalletParticipantTransactionGroupData.js",
-          "init-v001/records/identity/loyaltyWalletParticipantTransactionRoleData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "loyaltyWallet",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
-      "code": "circa.ewaste:circaCommerceStaffAssignments",
-      "descriptor": {
-        "code": "circa.ewaste:circaCommerceStaffAssignments",
-        "dataType": "sample",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "circa.ewaste",
-        "releaseCode": "circa.ewaste:circaCommerceStaffAssignments",
-        "sectionCode": "circaCommerceStaffAssignments",
-        "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "d3bf5bb49bbe38a148ef97d1f8b2174946ec501d6adad496bc5d478bd587e049",
-        "sourceRoot": "sample-v001",
-        "declaredFiles": [
-          "sample-v001/staff-access/headers/circaCommerceStaffAssignmentHeader.js",
-          "sample-v001/staff-access/records/circaCommerceStaffAssignmentData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "circa.ewaste",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -2436,7 +2108,7 @@
               },
               "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
               "rootType": "promotion",
-              "sourceVersion": "783ff9d1252d1759569f6ee798afab6ef858e967ba001264a98507a25299eb34"
+              "sourceVersion": "4a8042df531f38731a0faa028b83cd9c1fb42c098ed4e9e9b2584a64e6ad40b3"
             },
             {
               "code": "circa-promotion-CIRCA_COUPON_CPN-SVC-50_PROMO-v001",
@@ -2529,8 +2201,8 @@
         "releaseCode": "import:specialAccessRoles",
         "sectionCode": "specialAccessRoles",
         "dataType": "init",
-        "version": "0.0.3",
-        "checksum": "f4f7c0213e21efc803d2400b2a989f3d3141a826320c460de0b84595b2ffed5b",
+        "version": "0.0.1",
+        "checksum": "3c2b4c64c5952bd6d7b3589fec1fa7c846868c58371b619ce3a60be9c66f7bdd",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/importSpecialAccessRoleHeader.js",
@@ -2540,8 +2212,8 @@
           {
             "moduleName": "import",
             "sectionCode": "specialAccessGroups",
-            "version": "0.0.2",
-            "checksum": "78406c04fd4811ceddd0b955ce9122d2fc1246a7ec39e424a720ff83b7a994d0"
+            "version": "0.0.1",
+            "checksum": "7a4e4acdb1599b2576700cba3a36f74c938a37554e18b2f4f3d41fdfa7d23ef6"
           }
         ],
         "owningDomain": "import",
@@ -2569,8 +2241,8 @@
         "releaseCode": "loyaltyWallet:specialAccessRoles",
         "sectionCode": "specialAccessRoles",
         "dataType": "init",
-        "version": "0.0.3",
-        "checksum": "30aee0dee584bc0ca455e7cebc5ffb3fab955e1083c9ff0413bb22dbafb92b16",
+        "version": "0.0.1",
+        "checksum": "773f5f40210bfd0871574adf8c8ecad1f2d9eafd517414e2f54bc4f4db2cacdd",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/loyaltyWalletSpecialAccessRoleHeader.js",
@@ -2580,8 +2252,8 @@
           {
             "moduleName": "loyaltyWallet",
             "sectionCode": "specialAccessGroups",
-            "version": "0.0.2",
-            "checksum": "755fa6fa3381cb1e86f430b767c746f17aebb6b7942444d377a2a7c8ccfc9ddd"
+            "version": "0.0.1",
+            "checksum": "15200837017575ee6f0f407ef2f1808ca1cc1064dfed1c401f12f43a9c91d969"
           }
         ],
         "owningDomain": "loyaltyWallet",
@@ -2609,7 +2281,7 @@
         "releaseCode": "circa.ewaste:circaLocalDemoCreditStaffAssignment",
         "sectionCode": "circaLocalDemoCreditStaffAssignment",
         "dataType": "sample",
-        "version": "0.0.2",
+        "version": "0.0.1",
         "checksum": "9b4350399c313d006f22d723151dce0c15036ecd5d6afb1cfcb08ad0c381e884",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
@@ -2642,8 +2314,8 @@
         "releaseCode": "inventory:specialAccessRoles",
         "sectionCode": "specialAccessRoles",
         "dataType": "init",
-        "version": "0.0.3",
-        "checksum": "36d1e0286432ce7f27074bc4093a2b35d82a6c25d91a1aa434f2605bab4214a9",
+        "version": "0.0.1",
+        "checksum": "9fda2a93658a51cabf004154faa1d7b63d58097d04260ec9d924c526dfe4ab6d",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/inventorySpecialAccessRoleHeader.js",
@@ -2653,8 +2325,8 @@
           {
             "moduleName": "inventory",
             "sectionCode": "specialAccessGroups",
-            "version": "0.0.2",
-            "checksum": "e22a732e1b4111b2a6586799e37e670e62cdf342a3da7e76dce5e45547bf4b37"
+            "version": "0.0.1",
+            "checksum": "795a9bc1d80cd3973dd15bf7f88d5095bd6dc4be57c30efae54ba87154e04245"
           }
         ],
         "owningDomain": "inventory",
@@ -2682,7 +2354,7 @@
         "releaseCode": "circa.ewaste:circaLocalOpeningStaffAssignments",
         "sectionCode": "circaLocalOpeningStaffAssignments",
         "dataType": "sample",
-        "version": "0.0.2",
+        "version": "0.0.1",
         "checksum": "0f081e586eefae3346b7be896b9131bec755c062ef17794d7231edb84e11cf89",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
@@ -2825,11 +2497,11 @@
         "dataType": "sample",
         "operatorEnterpriseCode": "GREENPERKS_ONLINE",
         "phase": "AFTER_PUBLICATION",
-        "targetRuntimeRole": "LOYALTY",
-        "targetServer": "loyaltyServer",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerceServer",
         "type": "DATA_RELEASE"
       },
-      "server": "loyaltyServer",
+      "server": "commerceServer",
       "enterpriseCode": "GREENPERKS_ONLINE",
       "release": {
         "moduleName": "circa.ewaste",
@@ -3319,49 +2991,16 @@
       }
     },
     {
-      "code": "locationMap:init-v001",
-      "descriptor": {
-        "code": "locationMap:init-v001",
-        "dataType": "init",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "LOCATION",
-        "targetServer": "locationServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "locationServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "locationMap",
-        "releaseCode": "locationMap:init-v001",
-        "sectionCode": "init-v001",
-        "dataType": "init",
-        "version": "0.0.1",
-        "checksum": "3c793d0872377fc5ee2f360f37b65a2c3077789606b88d66e9806de4ca5c7b99",
-        "sourceRoot": "init-v001",
-        "declaredFiles": [
-          "init-v001/headers/location/defaultLocationMapProviderConfigurationHeader.js",
-          "init-v001/records/location/defaultLocationMapProviderConfigurationData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "location",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "LOCATION",
-        "environmentScope": [
-          "ALL"
-        ]
-      }
-    },
-    {
       "code": "locationMap:core-map-reference",
       "descriptor": {
         "code": "locationMap:core-map-reference",
         "dataType": "core",
         "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "LOCATION",
-        "targetServer": "locationServer",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
         "type": "DATA_RELEASE"
       },
-      "server": "locationServer",
+      "server": "wasteServer",
       "enterpriseCode": "default",
       "release": {
         "moduleName": "locationMap",
@@ -3425,6 +3064,72 @@
       }
     },
     {
+      "code": "locationType:collection-categories",
+      "descriptor": {
+        "code": "locationType:collection-categories",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "locationType",
+        "releaseCode": "locationType:collection-categories",
+        "sectionCode": "collection-categories",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "05445724167e18356e63d7c2ba9a45543cf9a30fa3365d1b9fbffad2320f26bf",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/location/collectionCategoryHeader.js",
+          "core-v001/records/location/collectionCategoryData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "locationType",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "wasteCollection:collection-capabilities",
+      "descriptor": {
+        "code": "wasteCollection:collection-capabilities",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteCollection",
+        "releaseCode": "wasteCollection:collection-capabilities",
+        "sectionCode": "collection-capabilities",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "a5ca4b6c42441ea28b03e3a5ba2e071a064798bf9b4f79e03acb6173f21b79ab",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/location/wasteCollectionCapabilityHeader.js",
+          "core-v001/records/location/wasteCollectionCapabilityData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "wasteCollection",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
       "code": "eWaste:core-reference",
       "descriptor": {
         "code": "eWaste:core-reference",
@@ -3442,7 +3147,7 @@
         "sectionCode": "core-reference",
         "dataType": "core",
         "version": "0.0.1",
-        "checksum": "cbc9e3e59bc31b72d1d70337b8e6481142026fd572addf695870d8b199ccfedf",
+        "checksum": "8c95221b5c75a0a522d0fe87c7207ff156135e3e40afa3d26bbff10bfa9b9e4b",
         "sourceRoot": "core-v001",
         "declaredFiles": [
           "core-v001/headers/waste/eWastePresetHeader.js",
@@ -3492,7 +3197,7 @@
         "releaseCode": "circa.ewaste:waste-policy",
         "sectionCode": "waste-policy",
         "dataType": "sample",
-        "version": "0.0.2",
+        "version": "0.0.1",
         "checksum": "e2c0e5dddbdfbdadd240e32f64b430fa25a3a94a4092a339353df4ae6c311d70",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
@@ -3513,9 +3218,43 @@
       }
     },
     {
-      "code": "wasteCollection:sample-profile-addresses",
+      "code": "eWaste:drop-off-location",
       "descriptor": {
-        "code": "wasteCollection:sample-profile-addresses",
+        "code": "eWaste:drop-off-location",
+        "dataType": "core",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "eWaste",
+        "releaseCode": "eWaste:drop-off-location",
+        "sectionCode": "drop-off-location",
+        "dataType": "core",
+        "version": "0.0.1",
+        "checksum": "d2c54211d2bf8e0c83b6452cbc63d8ffc1cf6d2ba4f1215b9e776f6850647156",
+        "sourceRoot": "core-v001",
+        "declaredFiles": [
+          "core-v001/headers/location/eWasteDropOffCapabilityHeader.js",
+          "core-v001/records/location/eWasteDropOffCapabilityData.js",
+          "core-v001/records/location/eWasteDropOffTypeData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "eWaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "LOCATION",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:network-enterprises",
+      "descriptor": {
+        "code": "circa.ewaste:network-enterprises",
         "dataType": "sample",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "PLATFORM",
@@ -3525,19 +3264,54 @@
       "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "wasteCollection",
-        "releaseCode": "wasteCollection:sample-profile-addresses",
-        "sectionCode": "sample-profile-addresses",
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:network-enterprises",
+        "sectionCode": "network-enterprises",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "5e845c31f9a94694f0aef9538492cac03535db7f1910b181bace047a8c2b3945",
+        "checksum": "b628c51699887184194eaf13cfdc29fa86e9e5b3637ae1f22c5a3f5c465b1e57",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
-          "sample-v001/headers/profile/sampleCollectionCentreAddressHeader.js",
-          "sample-v001/records/profile/sampleCollectionCentreAddressData.js"
+          "sample-v001/network-enterprises/headers/profile/circaNetworkEnterpriseHeader.js",
+          "sample-v001/network-enterprises/records/profile/circaNetworkEnterpriseData.js"
         ],
         "prerequisites": [],
-        "owningDomain": "waste",
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "LOCAL",
+          "DEVELOPMENT",
+          "TEST"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:network-addresses",
+      "descriptor": {
+        "code": "circa.ewaste:network-addresses",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:network-addresses",
+        "sectionCode": "network-addresses",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "9605d9737e04e87fdd1110b768a28bf40d53c7e1c2dc96734fb1a0d5937ecbf2",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/network-addresses/headers/profile/sampleCollectionCentreAddressHeader.js",
+          "sample-v001/network-addresses/records/profile/sampleCollectionCentreAddressData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "circa.ewaste",
         "lifecycle": "REFERENCE",
         "destinationRole": "PLATFORM",
         "environmentScope": [
@@ -3598,7 +3372,7 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "9842ac6bf7f05acd0296c5b4359e9115e4b86764f4c9237592a51d627ef2f14a",
+        "checksum": "d7fd98636175c7acc3b7b914a880b496f25ec87b1b65f23a07e137d8e233286a",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/digitalBundleParticipantUserGroupHeader.js",
@@ -3608,8 +3382,8 @@
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660",
             "partition": "DEFAULT"
           },
           {
@@ -3646,7 +3420,7 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "f5b2d89f39a04936797582fac096982b860c1ad8d76a38855d8738c23288f65f",
+        "checksum": "98e958c9257ecfb63a35dc4e16c773b4855eaf881c293747b12d5525b43ace58",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/loyaltyParticipantUserGroupHeader.js",
@@ -3656,8 +3430,8 @@
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660",
             "partition": "DEFAULT"
           },
           {
@@ -3694,7 +3468,7 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "2c87defb4858a03d530b72058aaa59e86f21f8f1ac41683ff87cbc1dbce0f940",
+        "checksum": "92134d3b446ea8daed2e7259c05818e9386910db66d10804fea12a1706c107a0",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/wasteCarbonParticipantUserGroupHeader.js",
@@ -3704,8 +3478,8 @@
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660",
             "partition": "DEFAULT"
           },
           {
@@ -3742,7 +3516,7 @@
         "sectionCode": "participantAccessGroups",
         "dataType": "init",
         "version": "0.0.1",
-        "checksum": "c1ac1f50a1e0b416d01fa618ba4965ef3089cb87946f22cb2d3a44050e156c3a",
+        "checksum": "ae581222f14ad7d3b5fc11f504cfb7529d717515caebb71ba82a067b8402367f",
         "sourceRoot": "init-v001",
         "declaredFiles": [
           "init-v001/headers/identity/wasteMaterialValueParticipantUserGroupHeader.js",
@@ -3752,8 +3526,8 @@
           {
             "moduleName": "profile",
             "sectionCode": "accessGroups",
-            "version": "0.0.3",
-            "checksum": "bc6a5dcb7a49e369e7bdb53475d737ce9a5f42cf9781dd80fdb738ecc63c130f",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660",
             "partition": "DEFAULT"
           },
           {
@@ -3889,8 +3663,8 @@
         "releaseCode": "circa.ewaste:operations",
         "sectionCode": "operations",
         "dataType": "sample",
-        "version": "0.0.2",
-        "checksum": "8556ee0602702914c35d06f539d2084056456685a69c6a6aa2d03ac71aabd0d6",
+        "version": "0.0.1",
+        "checksum": "2e21da32c812cc70bf63bc84a3fe82a066bdd1a5d38907a320a7cb35ac9b7363",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/headers/circaOperationsHeader.js",
@@ -3909,34 +3683,1239 @@
       }
     },
     {
-      "code": "wasteCollection:sample-locations",
+      "code": "digitalCore:enterpriseParticipationAccess",
       "descriptor": {
-        "code": "wasteCollection:sample-locations",
-        "dataType": "sample",
+        "code": "digitalCore:enterpriseParticipationAccess",
+        "dataType": "init",
         "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "LOCATION",
-        "targetServer": "locationServer",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
         "type": "DATA_RELEASE"
       },
-      "server": "locationServer",
+      "server": "platformServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "wasteCollection",
-        "releaseCode": "wasteCollection:sample-locations",
-        "sectionCode": "sample-locations",
-        "dataType": "sample",
+        "moduleName": "digitalCore",
+        "releaseCode": "digitalCore:enterpriseParticipationAccess",
+        "sectionCode": "enterpriseParticipationAccess",
+        "dataType": "init",
         "version": "0.0.1",
-        "checksum": "739e18a9b3ab2a817be0431d4afe0eb841163595f73bc983899542b97a509868",
-        "sourceRoot": "sample-v001",
+        "checksum": "de78ddef12a21e4c7d110d0a48c67615e35a3c412eee96eb38af3076cc74348a",
+        "sourceRoot": "init-v001",
         "declaredFiles": [
-          "sample-v001/headers/location/sampleCollectionCentreLocationHeader.js",
-          "sample-v001/records/location/sampleCollectionCentreLocationCapabilityData.js",
-          "sample-v001/records/location/sampleCollectionCentreLocationCategoryData.js",
-          "sample-v001/records/location/sampleCollectionCentreLocationData.js",
-          "sample-v001/records/location/sampleCollectionCentreLocationTypeData.js"
+          "init-v001/headers/identity/020_digitalEnterpriseParticipationGroupHeader.js",
+          "init-v001/records/identity/digitalEnterpriseParticipationGroupData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "digitalCore",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "5d7626014d06296a0e33e00e4a22d18fa8a6e52d48bb41e8daaecbe787e49ae1",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "digitalCore",
+            "sectionCode": "participantReadAccess",
+            "version": "0.0.1",
+            "checksum": "6f00e9e812fb6f2b7d8b86c14f1fa2c34907af36aa1a4d0cd76f207ded1322a8",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "digitalCore",
+            "sectionCode": "participantTransactionAccess",
+            "version": "0.0.1",
+            "checksum": "103528acd20fc28aeecf14b217f1656e2937cf5a84cd3f275343e0e71303e688",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "digitalCore",
+            "sectionCode": "bundleParticipantPermissions",
+            "version": "0.0.1",
+            "checksum": "cefeccf352ca72d3fd91b90497869e0dc76fadcb52b516dfb4e8272d22d6cea9",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "digitalCore",
+            "sectionCode": "enterpriseParticipationPermissions",
+            "version": "0.0.1",
+            "checksum": "3704d2d74cb501f847cc8eb5ed757ea235892dcc719727f238f93d8b561408f1",
+            "partition": "DEFAULT"
+          }
+        ],
+        "owningDomain": "digitalCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "loyaltyWallet:enterpriseParticipationAccess",
+      "descriptor": {
+        "code": "loyaltyWallet:enterpriseParticipationAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "loyaltyWallet",
+        "releaseCode": "loyaltyWallet:enterpriseParticipationAccess",
+        "sectionCode": "enterpriseParticipationAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "e32ed5456ed6c0e766e70f4b0713493b86f253e5cc00b569f86162301f958bfe",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_loyaltyEnterpriseParticipationGroupHeader.js",
+          "init-v001/records/identity/loyaltyEnterpriseParticipationGroupData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "loyaltyWallet",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "838336cb02e48538bb992bd7d2140b0b784b8ffa582451a18bef88399ed1499f",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "loyaltyWallet",
+            "sectionCode": "participantReadAccess",
+            "version": "0.0.1",
+            "checksum": "0fbe30554e6ca16f4958fc6419157d6e42a22a5c3d99130d413d73e62b531fe2",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "loyaltyWallet",
+            "sectionCode": "participantTransactionAccess",
+            "version": "0.0.1",
+            "checksum": "d0aa5acf4a5d57a2ad60e9d5082566c3bea91cb3e6b4004b8a2c4b25a209bba5",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "loyaltyWallet",
+            "sectionCode": "transferPermissions",
+            "version": "0.0.1",
+            "checksum": "df049e825596d034535eba67b80fa9c8b3ebafc71250696a7a85e385b5ba5770",
+            "partition": "DEFAULT"
+          }
+        ],
+        "owningDomain": "loyaltyWallet",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "cart:permissionCatalogue",
+      "descriptor": {
+        "code": "cart:permissionCatalogue",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "cart",
+        "releaseCode": "cart:permissionCatalogue",
+        "sectionCode": "permissionCatalogue",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "22e57e29550e28cfe59b12556a8c015c74b99e2ebe8a0f3cfef1172630a7ff10",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/cartPermissionHeader.js",
+          "init-v001/records/identity/cartPermissionData.js"
         ],
         "prerequisites": [],
-        "owningDomain": "waste",
+        "owningDomain": "cart",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "cart:participantTransactionAccess",
+      "descriptor": {
+        "code": "cart:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "cart",
+        "releaseCode": "cart:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "86b10e5d9c27575733986b09b3d5ad10709c493766abef06c2acede8575ab956",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_cartParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_cartParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/cartParticipantTransactionGroupData.js",
+          "init-v001/records/identity/cartParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "cart",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "checkoutCore:permissionCatalogue",
+      "descriptor": {
+        "code": "checkoutCore:permissionCatalogue",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "checkoutCore",
+        "releaseCode": "checkoutCore:permissionCatalogue",
+        "sectionCode": "permissionCatalogue",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "cbde0dbbc1d48eb02f78e504ca89c2615f09d0207a67be9bfecd2913cbf77b49",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/checkoutCorePermissionHeader.js",
+          "init-v001/records/identity/checkoutCorePermissionData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "checkoutCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "checkoutCore:participantTransactionAccess",
+      "descriptor": {
+        "code": "checkoutCore:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "checkoutCore",
+        "releaseCode": "checkoutCore:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "28ab6239579ff2f9755f7a40ef385eac9ed728491b6c6c70cf9b402c29f5312c",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_checkoutCoreParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_checkoutCoreParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/checkoutCoreParticipantTransactionGroupData.js",
+          "init-v001/records/identity/checkoutCoreParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "checkoutCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:permissionCatalogue",
+      "descriptor": {
+        "code": "order:permissionCatalogue",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:permissionCatalogue",
+        "sectionCode": "permissionCatalogue",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "7b8cfbcac58a8f106aa3e066bd200a0ea32e3b23fc22619602ea85a5e241c421",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/orderPermissionHeader.js",
+          "init-v001/records/identity/orderPermissionData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:participantTransactionAccess",
+      "descriptor": {
+        "code": "order:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "5fe8dbe92cbadb4dacd95098fd910f3a91ac567c381fa3a3a0db5612f73ea9d1",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_orderParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_orderParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/orderParticipantTransactionGroupData.js",
+          "init-v001/records/identity/orderParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:participantReadAccess",
+      "descriptor": {
+        "code": "order:participantReadAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:participantReadAccess",
+        "sectionCode": "participantReadAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "a390ab68b9076563be20e40907565fe4dcf0628e183f9e600257a18fc065bdf2",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_orderParticipantReadGroupHeader.js",
+          "init-v001/headers/identity/020_orderParticipantReadRoleHeader.js",
+          "init-v001/records/identity/orderParticipantReadGroupData.js",
+          "init-v001/records/identity/orderParticipantReadRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "bidding:permissionCatalogue",
+      "descriptor": {
+        "code": "bidding:permissionCatalogue",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "bidding",
+        "releaseCode": "bidding:permissionCatalogue",
+        "sectionCode": "permissionCatalogue",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "51aaaa1db53964a57a5d8e9f47d903743eae12c0c2cc2ffa25c17e5a90248fc8",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/biddingPermissionHeader.js",
+          "init-v001/records/identity/biddingPermissionData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "bidding",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "bidding:participantTransactionAccess",
+      "descriptor": {
+        "code": "bidding:participantTransactionAccess",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "bidding",
+        "releaseCode": "bidding:participantTransactionAccess",
+        "sectionCode": "participantTransactionAccess",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "2928993a506e6c0e14cd63de87120f660dd202c48e3bad660778df1d03222f71",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/010_biddingParticipantTransactionGroupHeader.js",
+          "init-v001/headers/identity/020_biddingParticipantTransactionRoleHeader.js",
+          "init-v001/records/identity/biddingParticipantTransactionGroupData.js",
+          "init-v001/records/identity/biddingParticipantTransactionRoleData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "bidding",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "profile:enterpriseRoles",
+      "descriptor": {
+        "code": "profile:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "profile",
+        "releaseCode": "profile:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "a513e28ac8187f20a238d13eb42ab640f56428b74e30fd69b3816f8a8cc860a8",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/profileEnterpriseRoleHeader.js",
+          "init-v001/records/identity/profileEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "axis",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "8eba020540491b01e5ddf9fb85ae3d4f7c8d9bdae5cea4d77e584a60851f03de"
+          },
+          {
+            "moduleName": "profile",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
+          },
+          {
+            "moduleName": "profile",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "b37fbb6fcdab6399de2e4feb50eab3c9e0cd73626db22ae920553269c945daf4",
+            "partition": "DEFAULT"
+          }
+        ],
+        "owningDomain": "profile",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "cms:accessGroups",
+      "descriptor": {
+        "code": "cms:accessGroups",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "cms",
+        "releaseCode": "cms:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "2877722b7ee4d20b63d4c55d82d4d4f0ff75d2352b92fb03cac49e50cc4a70ab",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/cmsUserGroupHeader.js",
+          "init-v001/records/identity/cmsUserGroupData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "axis",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "8eba020540491b01e5ddf9fb85ae3d4f7c8d9bdae5cea4d77e584a60851f03de"
+          },
+          {
+            "moduleName": "cms",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "ef0ae0b518de51b906ff36e9c8459c8da923133f3fa056cb83698a17142b3d73",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "editorial",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "b96be3694de6ed7b00209597ac395f01676a6a37c8b842f8b969c61fe005edff",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "profile",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
+          },
+          {
+            "moduleName": "publish",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "a02257cb5a9ea08397b4662e2b720f4a2e0f5318421d8a01e7daa7b0e6ca9376",
+            "partition": "DEFAULT"
+          }
+        ],
+        "owningDomain": "cms",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "cms:enterpriseRoles",
+      "descriptor": {
+        "code": "cms:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "cms",
+        "releaseCode": "cms:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "891e3a03faebc80073847990c64e7c1937b113c847e0c9f4432704cabde1fb50",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/cmsEnterpriseRoleHeader.js",
+          "init-v001/records/identity/cmsEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "axis",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "8eba020540491b01e5ddf9fb85ae3d4f7c8d9bdae5cea4d77e584a60851f03de"
+          }
+        ],
+        "owningDomain": "cms",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "cms:businessAccessRoles",
+      "descriptor": {
+        "code": "cms:businessAccessRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "cms",
+        "releaseCode": "cms:businessAccessRoles",
+        "sectionCode": "businessAccessRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "de8304f1a70a4adc0e942879ef2ad547c773dfd0778facf4420214467e80c70c",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/cmsBusinessAccessRoleHeader.js",
+          "init-v001/records/identity/cmsBusinessAccessRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "cms",
+            "sectionCode": "businessAccessGroups",
+            "version": "0.0.1",
+            "checksum": "04dd93803f98b4017d11834503b6cb61aad650661cebba87b0cd91fa9ecc19c4"
+          }
+        ],
+        "owningDomain": "cms",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "store:accessGroups",
+      "descriptor": {
+        "code": "store:accessGroups",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "store",
+        "releaseCode": "store:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "ecd615e5267b1746aecd0b1f1b7cc6c7c6322188e959588a7d9344f534eb69df",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/storeUserGroupHeader.js",
+          "init-v001/records/identity/storeUserGroupData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "cart",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "22e57e29550e28cfe59b12556a8c015c74b99e2ebe8a0f3cfef1172630a7ff10",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "catalog",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "85aa1657fb6ce92d185d96053cdbd8a012a2f7f3a8d2381b85457b0809cea5f1",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "commerceSearchCore",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "20944c16c4d799ddec4050c66fc104fc6e3ba40a1606fc390ada240335bfea99",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "fulfillmentCore",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "d43b69913c35c3d2fafe0f4f34a6df6f8c5aada28883cf634bfb27705704c39b",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "inventory",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "39a027106d9be809e1a809c0290808dc283faac29f6f7dbcb316ef2092a16baf",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "order",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "7b8cfbcac58a8f106aa3e066bd200a0ea32e3b23fc22619602ea85a5e241c421",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "paymentCore",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "dfd04d385707064e2593fc6bb275bc9d1a87c11d389d6e7ab401cc7c2aef659f",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "pricing",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "66a39f80bced4791582594168c4b9097455bd1d37481e0491665bc095a4fd721",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "product",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "9445bba8f5f3bb3a2d068efeeeb09b7e554ff88216377e81e75a56a522fa2af9",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "profile",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
+          },
+          {
+            "moduleName": "promotion",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "402b7ebffc05ac529f465c228700437b830cfb0f873a15ac92d5b7b5b9a3a9c8",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "store",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "a4989b176f5eb13747bbca9d31972e4e6525e04269d25246f40c756c549b60d3",
+            "partition": "DEFAULT"
+          },
+          {
+            "moduleName": "tax",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "076049ab3ff8f4854907d197ca630e89afcb32f25b2fcb8901529e9538bbeb8a",
+            "partition": "DEFAULT"
+          }
+        ],
+        "owningDomain": "store",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "product:businessAccessRoles",
+      "descriptor": {
+        "code": "product:businessAccessRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "product",
+        "releaseCode": "product:businessAccessRoles",
+        "sectionCode": "businessAccessRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "f73a547f0a21d594fc7e31f3f2a9e783daaac8fb15c73e7784e41663ff07221e",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/productBusinessAccessRoleHeader.js",
+          "init-v001/records/identity/productBusinessAccessRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "product",
+            "sectionCode": "businessAccessGroups",
+            "version": "0.0.1",
+            "checksum": "122752d767b6d3bbe82270f1bd41a514af33d3647330dadf97e4acef8010a00e"
+          }
+        ],
+        "owningDomain": "product",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:businessAccessRoles",
+      "descriptor": {
+        "code": "order:businessAccessRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:businessAccessRoles",
+        "sectionCode": "businessAccessRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "847bb2d8db1b515c4a9794b68819ee91c57ceec9c4ca03d8dd25ed271a657fee",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/orderBusinessAccessRoleHeader.js",
+          "init-v001/records/identity/orderBusinessAccessRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "order",
+            "sectionCode": "businessAccessGroups",
+            "version": "0.0.1",
+            "checksum": "b24013803bca01579310944555f7a7c05ed996b219f1dda2b867d8035cd36578"
+          }
+        ],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "wasteCore:enterpriseRoles",
+      "descriptor": {
+        "code": "wasteCore:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteCore",
+        "releaseCode": "wasteCore:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "7a084029eb71090a3ee5abce5adede0ddcdbe30767d7feaee5a443d8938e27de",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/wasteCoreEnterpriseRoleHeader.js",
+          "init-v001/records/identity/wasteCoreEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "wasteCore",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "e1cf2a419480a12359c790d7252d9462380137841ad04dd7161d98ae0b0a4d08"
+          }
+        ],
+        "owningDomain": "wasteCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "wasteCore:businessAccessRoles",
+      "descriptor": {
+        "code": "wasteCore:businessAccessRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "wasteCore",
+        "releaseCode": "wasteCore:businessAccessRoles",
+        "sectionCode": "businessAccessRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "8d094904a279af5f3454094f3c115217b2fea436778fcb6a070b5dd20f80485b",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/wasteCoreBusinessAccessRoleHeader.js",
+          "init-v001/records/identity/wasteCoreBusinessAccessRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "wasteCore",
+            "sectionCode": "businessAccessGroups",
+            "version": "0.0.1",
+            "checksum": "5361498fe72056d2f53021082f01e50a4a06f954ed7d47e661aadeb53d974ad1"
+          }
+        ],
+        "owningDomain": "wasteCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "product:enterpriseRoles",
+      "descriptor": {
+        "code": "product:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "product",
+        "releaseCode": "product:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "4c519946f7f1d8b26507c6b35e3f283b6d745e8abb27c194aa88921794a859ad",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/productEnterpriseRoleHeader.js",
+          "init-v001/records/identity/productEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "product",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "4b19aea018afc99eec52219a0409a0397e412e423ab6a00d3d5ca00a415bfd13"
+          },
+          {
+            "moduleName": "publish",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "4d47083f2082be7115c3215f77097e6f1d87ae4c9c7648cdbea61e2bdf6f76a1"
+          }
+        ],
+        "owningDomain": "product",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "publish:accessGroups",
+      "descriptor": {
+        "code": "publish:accessGroups",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "publish",
+        "releaseCode": "publish:accessGroups",
+        "sectionCode": "accessGroups",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "4d47083f2082be7115c3215f77097e6f1d87ae4c9c7648cdbea61e2bdf6f76a1",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/publishUserGroupHeader.js",
+          "init-v001/records/identity/publishUserGroupData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "profile",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "e1457ac1bab12d45866b6deae73980cc6708cea378991d93e17893b03e1d3660"
+          },
+          {
+            "moduleName": "workflow",
+            "sectionCode": "permissionCatalogue",
+            "version": "0.0.1",
+            "checksum": "9566b57a2b8b6230534305adaef173c7e1ecf28d5493c7193e9dd79c54d3a35e",
+            "partition": "DEFAULT"
+          }
+        ],
+        "owningDomain": "publish",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "promotion:enterpriseRoles",
+      "descriptor": {
+        "code": "promotion:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "promotion",
+        "releaseCode": "promotion:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "2adf8ce7ca8eb558ac0377bfaad6dbeb96a256ca64d24a06218d3dfa9005f84c",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/promotionEnterpriseRoleHeader.js",
+          "init-v001/records/identity/promotionEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "promotion",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "2c567ae1d59b95a605afedabb614752b2c4a9971f111e9d3405403e67dc2d0d1"
+          }
+        ],
+        "owningDomain": "promotion",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "promotion:businessAccessRoles",
+      "descriptor": {
+        "code": "promotion:businessAccessRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "promotion",
+        "releaseCode": "promotion:businessAccessRoles",
+        "sectionCode": "businessAccessRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "b075027339da3356187224a440f3e53346097f5bff6175bb13a6eba2aea40239",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/promotionBusinessAccessRoleHeader.js",
+          "init-v001/records/identity/promotionBusinessAccessRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "promotion",
+            "sectionCode": "businessAccessGroups",
+            "version": "0.0.1",
+            "checksum": "64aec518e1a063c2c8b4305a42c60a8fa868666a4c57a7f4f2dfc8b24510c963"
+          }
+        ],
+        "owningDomain": "promotion",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "order:enterpriseRoles",
+      "descriptor": {
+        "code": "order:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "order",
+        "releaseCode": "order:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "5d7aa19b8e0b5bbad842041f47688b41025fb7d0193d50452823dbc438d5d77f",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/orderEnterpriseRoleHeader.js",
+          "init-v001/records/identity/orderEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "order",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "b8b11d8cf93cb7f8f393e76fdd0fb0681ebca90970f31f7c65d2da41373caba8"
+          }
+        ],
+        "owningDomain": "order",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "digitalCore:enterpriseRoles",
+      "descriptor": {
+        "code": "digitalCore:enterpriseRoles",
+        "dataType": "init",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "digitalCore",
+        "releaseCode": "digitalCore:enterpriseRoles",
+        "sectionCode": "enterpriseRoles",
+        "dataType": "init",
+        "version": "0.0.1",
+        "checksum": "255f815ec0e9ede91ec883a719f3799d6aed953d0e5efefbb78d308abad20846",
+        "sourceRoot": "init-v001",
+        "declaredFiles": [
+          "init-v001/headers/identity/digitalCoreEnterpriseRoleHeader.js",
+          "init-v001/records/identity/digitalCoreEnterpriseRoleData.js"
+        ],
+        "prerequisites": [
+          {
+            "moduleName": "digitalCore",
+            "sectionCode": "accessGroups",
+            "version": "0.0.1",
+            "checksum": "47dbf8c23fa445e116f32742d35c6cd9b9ee945b5919a321b0ddea889ec67a29"
+          }
+        ],
+        "owningDomain": "digitalCore",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:circaCommerceStaffAssignments",
+      "descriptor": {
+        "code": "circa.ewaste:circaCommerceStaffAssignments",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "PLATFORM",
+        "targetServer": "platformServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "platformServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:circaCommerceStaffAssignments",
+        "sectionCode": "circaCommerceStaffAssignments",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "09e5ed4742be2f0cb603c2224d461436f993017425e2ecd07c971563c19392b2",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/staff-access/headers/circaCommerceStaffAssignmentHeader.js",
+          "sample-v001/staff-access/records/circaCommerceStaffAssignmentData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "circa.ewaste",
+        "lifecycle": "REFERENCE",
+        "destinationRole": "PLATFORM",
+        "environmentScope": [
+          "ALL"
+        ]
+      }
+    },
+    {
+      "code": "circa.ewaste:network-locations",
+      "descriptor": {
+        "code": "circa.ewaste:network-locations",
+        "dataType": "sample",
+        "phase": "BEFORE_PUBLICATION",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
+        "type": "DATA_RELEASE"
+      },
+      "server": "wasteServer",
+      "enterpriseCode": "default",
+      "release": {
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:network-locations",
+        "sectionCode": "network-locations",
+        "dataType": "sample",
+        "version": "0.0.1",
+        "checksum": "a17869d46b4221243da7e9cb84d6afc0996225c051532b49ded19cab8bafdd92",
+        "sourceRoot": "sample-v001",
+        "declaredFiles": [
+          "sample-v001/network-locations/headers/location/sampleCollectionCentreLocationHeader.js",
+          "sample-v001/network-locations/records/location/sampleCollectionCentreLocationData.js"
+        ],
+        "prerequisites": [],
+        "owningDomain": "circa.ewaste",
         "lifecycle": "REFERENCE",
         "destinationRole": "LOCATION",
         "environmentScope": [
@@ -3952,11 +4931,11 @@
         "code": "circa.ewaste:location",
         "dataType": "sample",
         "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "LOCATION",
-        "targetServer": "locationServer",
+        "targetRuntimeRole": "WASTE",
+        "targetServer": "wasteServer",
         "type": "DATA_RELEASE"
       },
-      "server": "locationServer",
+      "server": "wasteServer",
       "enterpriseCode": "default",
       "release": {
         "moduleName": "circa.ewaste",
@@ -3980,9 +4959,9 @@
       }
     },
     {
-      "code": "wasteCollection:sample-collection-points",
+      "code": "circa.ewaste:network-points",
       "descriptor": {
-        "code": "wasteCollection:sample-collection-points",
+        "code": "circa.ewaste:network-points",
         "dataType": "sample",
         "phase": "BEFORE_PUBLICATION",
         "targetRuntimeRole": "WASTE",
@@ -3992,20 +4971,19 @@
       "server": "wasteServer",
       "enterpriseCode": "default",
       "release": {
-        "moduleName": "wasteCollection",
-        "releaseCode": "wasteCollection:sample-collection-points",
-        "sectionCode": "sample-collection-points",
+        "moduleName": "circa.ewaste",
+        "releaseCode": "circa.ewaste:network-points",
+        "sectionCode": "network-points",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "b9840f3bc60f1b3a920632b406cfa8d02bc23c283031d14332255101e91d10eb",
+        "checksum": "61f5c2b2142e8c1d0ec3329c7071fc3a2f9d959deea5968e7baeedc35fe510f7",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
-          "sample-v001/headers/waste/sampleCollectionCentrePointHeader.js",
-          "sample-v001/records/waste/sampleCollectionCentrePointData.js",
-          "sample-v001/records/waste/sampleCollectionCentrePointTypeData.js"
+          "sample-v001/network-points/headers/waste/sampleCollectionCentrePointHeader.js",
+          "sample-v001/network-points/records/waste/sampleCollectionCentrePointData.js"
         ],
         "prerequisites": [],
-        "owningDomain": "waste",
+        "owningDomain": "circa.ewaste",
         "lifecycle": "REFERENCE",
         "destinationRole": "WASTE",
         "environmentScope": [
@@ -4033,15 +5011,12 @@
         "sectionCode": "waste",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "e087eeafac052538c91be3c1afaf7acb5fa5fd26e2cb74bd64ac93de0c1d495f",
+        "checksum": "870ffa0ca356c29b9b61c60d354077854164d8061bd1527c42b4eb10b2a35aa5",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/waste/headers/circaWasteSampleHeader.js",
-          "sample-v001/waste/records/circaWasteAssetData.js",
-          "sample-v001/waste/records/circaWasteAssetOwnershipEventData.js",
           "sample-v001/waste/records/circaWasteCollectionPointData.js",
           "sample-v001/waste/records/circaWasteEvidenceData.js",
-          "sample-v001/waste/records/circaWasteImpactResultData.js",
           "sample-v001/waste/records/circaWasteSubmissionData.js",
           "sample-v001/waste/records/circaWasteVerificationData.js"
         ],
@@ -4060,19 +5035,19 @@
         "code": "circa.ewaste:loyalty",
         "dataType": "sample",
         "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "LOYALTY",
-        "targetServer": "loyaltyServer",
+        "targetRuntimeRole": "COMMERCE",
+        "targetServer": "commerceServer",
         "type": "DATA_RELEASE"
       },
-      "server": "loyaltyServer",
+      "server": "commerceServer",
       "enterpriseCode": "default",
       "release": {
         "moduleName": "circa.ewaste",
         "releaseCode": "circa.ewaste:loyalty",
         "sectionCode": "loyalty",
         "dataType": "sample",
-        "version": "0.0.2",
-        "checksum": "178341374702d959b40c8008459c83fcf2ac2850ae60673f0c43cbbbcc55d4d6",
+        "version": "0.0.1",
+        "checksum": "708f1bc9287e1a36f4392fa454df635cbcccf89344c3fafe92bed6b5b94efbdd",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/loyalty/headers/circaLoyaltySampleHeader.js",
@@ -4142,7 +5117,7 @@
         "sectionCode": "commerce",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "2677866cca45f52f6db3e240d4f783f56f0892f0ef657c3ba175fbc4eee20114",
+        "checksum": "f54b1f691d92235ce10fa5aa4f1950f8ce766892195a958fe40db221380c127e",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/commerce/headers/circaCommerceCatalogHeader.js",
@@ -4186,7 +5161,7 @@
         "sectionCode": "circaGreenPerksBudget",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "a5b3479f2e49db8fdd8da19177b0b19e8be4a09882bb423c4a7b7cdc85d29010",
+        "checksum": "804a1a1d0e3fd6180dc0350ba3f898d2ee4e5f9e32c2a2d186190eb3edbd5f75",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/promotion/greenperks/budget/records/promotionSetup.json"
@@ -4220,7 +5195,7 @@
         "sectionCode": "circaGreenPerksIssuance",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "672dff3f1058dec8ba3eacc22d752ccc1bd505aa72213351a2d63d86fa4ba964",
+        "checksum": "d9313e4079a6a397536571f304bfa3bc6738c00c1d5c50056177ce8c5572f0c5",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/promotion/greenperks/issuance/records/promotionSetup.json"
@@ -4254,7 +5229,7 @@
         "sectionCode": "circaRenewWorksBudget",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "73a38ca000acbc07afa81ff3c1090d39a084ef77b5d33f88bf4a411fa8b0ad64",
+        "checksum": "14287985d38f3b836624dece1dbdf6abe9e340990a03f7a69599ecf68682ea5b",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/promotion/renewworks/budget/records/promotionSetup.json"
@@ -4288,7 +5263,7 @@
         "sectionCode": "circaRenewWorksIssuance",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "624aa90d3fd3243fb39cb8edb8c3ac66063736246d57d58f47d664549a076ae0",
+        "checksum": "291f37eb61a4be41db5e14b4b0281e4edc322131b88fc130c94ee6d446220a5e",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/promotion/renewworks/issuance/records/promotionSetup.json"
@@ -4322,7 +5297,7 @@
         "sectionCode": "circaLoopCycleBudget",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "7a3e013e7050f0b3d33da65bb5234a3ee80f65a0bce928b11b2fb361333c2dd3",
+        "checksum": "5b935a9bdc342723bc4ee2724f9ecc8448611da3516f7cea5add8991715bf4c0",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/promotion/loopcycle/budget/records/promotionSetup.json"
@@ -4356,7 +5331,7 @@
         "sectionCode": "circaLoopCycleIssuance",
         "dataType": "sample",
         "version": "0.0.1",
-        "checksum": "799a3cd2718d63418c05cb97c49c08e5fa62ff756ddf58cf9081b143be37cb14",
+        "checksum": "0aeb99b937f006008b9185f0b8939dd480e35cea48ae3bb4aedbe6ec0cd15b84",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
           "sample-v001/operations/promotion/loopcycle/issuance/records/promotionSetup.json"
@@ -4388,7 +5363,7 @@
         "releaseCode": "circa.ewaste:content",
         "sectionCode": "content",
         "dataType": "sample",
-        "version": "0.0.2",
+        "version": "0.0.1",
         "checksum": "1b2eae31d4c08efc6a2b5d11b45b2d98067c5b280b43e7f8335ed771c4cc5865",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
@@ -4451,7 +5426,7 @@
         "releaseCode": "circa.ewaste:customer-workspace",
         "sectionCode": "customer-workspace",
         "dataType": "sample",
-        "version": "0.0.2",
+        "version": "0.0.1",
         "checksum": "92237ba47e380230524f4537a7786da709fbb89368c49005d958553f0832cb80",
         "sourceRoot": "sample-v001",
         "declaredFiles": [
@@ -4783,78 +5758,12 @@
         "path": "data/sample-v001/content/assets/circa-media/assetManifest.js",
         "checksum": "4cd605fa6afbf5e5d554ad2df11564542c0ace5f80ac5b471428d6236b27badc"
       }
-    },
-    {
-      "code": "circa.ewaste:circaRetailParticipantReadAssignment",
-      "descriptor": {
-        "code": "circa.ewaste:circaRetailParticipantReadAssignment",
-        "dataType": "sample",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "circa.ewaste",
-        "releaseCode": "circa.ewaste:circaRetailParticipantReadAssignment",
-        "sectionCode": "circaRetailParticipantReadAssignment",
-        "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "7716f75cae950212219de30081f1248f7618efc3cbc9e43b863d366b2b777be2",
-        "sourceRoot": "sample-v001",
-        "declaredFiles": [
-          "sample-v001/participant-read/headers/circaRetailParticipantReadAssignmentHeader.js",
-          "sample-v001/participant-read/records/circaRetailParticipantReadAssignmentData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "circa.ewaste",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "LOCAL"
-        ]
-      }
-    },
-    {
-      "code": "circa.ewaste:circaRetailParticipantTransactionAssignment",
-      "descriptor": {
-        "code": "circa.ewaste:circaRetailParticipantTransactionAssignment",
-        "dataType": "sample",
-        "phase": "BEFORE_PUBLICATION",
-        "targetRuntimeRole": "PLATFORM",
-        "targetServer": "platformServer",
-        "type": "DATA_RELEASE"
-      },
-      "server": "platformServer",
-      "enterpriseCode": "default",
-      "release": {
-        "moduleName": "circa.ewaste",
-        "releaseCode": "circa.ewaste:circaRetailParticipantTransactionAssignment",
-        "sectionCode": "circaRetailParticipantTransactionAssignment",
-        "dataType": "sample",
-        "version": "0.0.1",
-        "checksum": "37f36d055e932bdcd364ee39ae7d0c56c2e3d63633a718aafc143be491dc5565",
-        "sourceRoot": "sample-v001",
-        "declaredFiles": [
-          "sample-v001/participant-transactions/headers/circaRetailParticipantTransactionAssignmentHeader.js",
-          "sample-v001/participant-transactions/records/circaRetailParticipantTransactionAssignmentData.js"
-        ],
-        "prerequisites": [],
-        "owningDomain": "circa.ewaste",
-        "lifecycle": "REFERENCE",
-        "destinationRole": "PLATFORM",
-        "environmentScope": [
-          "LOCAL"
-        ]
-      }
     }
   ],
   "baseline": {
     "server": "wcmsStagedServer",
-    "runtimeRole": "WCMS_STAGED",
     "enterpriseCode": "default",
-    "descriptorDigest": "e011b0a13cce47869978cbacf0aa6892a06f51d819f7ee5fbbcb7e255251c2f4"
+    "runtimeRole": "WCMS_STAGED",
+    "descriptorDigest": "757d94ff45d7af8a2d4c075c326ae6d805c64ee77eca3081826bd1a2658e8c08"
   }
 }

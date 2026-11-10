@@ -16,7 +16,7 @@
       "nodics.platform"
     ],
     "runtimeConfigurationContributions": [
-      { "moduleName": "axis", "namespace": "cms", "runtimeRole": "WCMS_ONLINE" }
+      { "moduleName": "axis", "namespace": "cms" }
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,

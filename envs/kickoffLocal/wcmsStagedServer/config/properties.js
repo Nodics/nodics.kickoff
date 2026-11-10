@@ -10,12 +10,42 @@
  */
 
 /** @module envs/kickoffLocal/wcmsStagedServer/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffLocal/wcmsStagedServer */
+const circaNative = require("../../config/circaRuntimeOverrides.json");
+
 module.exports = {
+  // Local governed-file acceptance: retain export.run and separate Media delivery authorization.
+  apiExposure: {
+    categories: {
+      dataExport: { enabled: true },
+    },
+  },
+  data: { dataReleases: { initializationProfiles: {
+    localWcmsFoundation: {
+      template: "foundation",
+      label: "Content authoring foundation",
+      description: "Review the initialization and reference releases available on the content authoring runtime.",
+      completionMessage: "The authoring foundation is current. Review publication and Online delivery separately.",
+    },
+        localDocumentationFoundation: {
+          enabled: true,
+          label: "Local Documentation foundation",
+          description:
+            "Install the WCMS initialization releases required before documentation content packs can be reviewed and published.",
+          completionMessage:
+            "The Local Documentation foundation is ready. Import documentation packs through Setup and Accelerators or the Documentation dashboard, then publish approved content Online.",
+          template: "axisDocumentationFoundation",
+        },
+  } } },
   // Controlled local qualification; retained/versioned Media forbids physical cleanup.
   media: {
+    customerUploads: {
+      enabled: true,
+    },
     publication: {
       versionProviderEnabled: true,
-      target: { connectionName: "cmsOnline" },
+      target: {
+        connectionName: "cmsOnline",
+      },
     },
   },
   publish: {
@@ -33,6 +63,7 @@ module.exports = {
       "circa.ewaste",
       "search",
       "elastic",
+      "catalog",
       "cms",
       "editorial",
       "media",
@@ -96,15 +127,16 @@ module.exports = {
     publication: {
       enabled: true,
       baselines: {
-        axis: {
+        kickoffdocs: {
+          contentPackCode: "kickoffDocumentation",
           releaseVersion: "0.0.2",
-        },
-        axisassistant: {
-          releaseVersion: "0.0.1",
+          rootType: "site",
+          rootCode: "kickoffDocumentationSite",
+          sourceVersion: "0",
         },
         frameworkdocs: {
           contentPackCode: "nodicsDocumentation",
-          releaseVersion: "0.0.2",
+          releaseVersion: "0.0.6",
           sourceVersion: "0",
         },
         axisdocs: {
@@ -138,6 +170,54 @@ module.exports = {
       endpoint: {
         httpPort: 4312,
         httpsPort: 4313,
+      },
+    },
+  },
+  order: {
+    disputes: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+    refunds: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+  },
+  profileExternalIdentity: circaNative.profileExternalIdentity,
+  bidding: {
+    enabled: true,
+    policyVersion: "circa-digital-bids-v1",
+    amountScale: 0,
+    maximumAmount: "100000",
+    stores: {
+      circaMainStore: {
+        enterpriseCode: "GREENPERKS_ONLINE",
+        currency: "POINTS",
+        locale: "en",
+        orderCodePrefix: "CIRCA_ORDER_BID_",
+        allowOwnerReference: true,
+      },
+    },
+  },
+  waste: {
+    operations: {
+      requireScopes: true,
+      requireVerification: true,
+    },
+  },
+  eWaste: circaNative.eWaste,
+  promotion: {
+    legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"],
+  },
+  digitalCore: {
+    merchantRedemption: {
+      enabled: true,
+    },
+  },
+  httpHardening: {
+    cors: {
+      originEndpointOverrides: {
+        nexus: false,
       },
     },
   },
