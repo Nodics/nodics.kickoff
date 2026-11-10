@@ -30,7 +30,7 @@
           "moduleName": "profile",
           "sectionCode": "init-v001",
           "version": "0.0.9",
-          "checksum": "ba1c8a9bf932066c1bf447214728954e562ed8598f521737a7ad263267efd3f2"
+          "checksum": "fdf2b7664602d42257b4b37b474e7d41112cbfb692697d7d2c66a7dd9b029a72"
         },
         {
           "moduleName": "wasteCarbon",
@@ -74,13 +74,13 @@
           "moduleName": "profile",
           "sectionCode": "init-v001",
           "version": "0.0.9",
-          "checksum": "ba1c8a9bf932066c1bf447214728954e562ed8598f521737a7ad263267efd3f2"
+          "checksum": "fdf2b7664602d42257b4b37b474e7d41112cbfb692697d7d2c66a7dd9b029a72"
         },
         {
           "moduleName": "kickoffCore",
           "sectionCode": "nativeRuntimePrincipalScope",
           "version": "0.0.5",
-          "checksum": "ad0e0255a69e61ab981220fb50ef20a301082ad4328fc509057f1d58802f9710"
+          "checksum": "4594d09c5320db2499fdad7cc4b0840d61b4ff6ec7e658d0f688232984e296bd"
         }
       ]
     }
