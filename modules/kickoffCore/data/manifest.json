@@ -6,7 +6,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "init",
       "sourceRoot": "init-v001",
-      "version": "0.0.4",
+      "version": "0.0.5",
       "displayName": "Reviewed native runtime principal scope",
       "description": "Exact Local service credential scope transition required by the reviewed runtime deployment grants; no reusable framework defaults are copied into project configuration.",
       "owningDomain": "profile",
@@ -29,8 +29,8 @@
         {
           "moduleName": "profile",
           "sectionCode": "init-v001",
-          "version": "0.0.8",
-          "checksum": "b59adee76de5f25d186bada5a3cd0ce047410e522d0e7eb00b5956a316ef8b78"
+          "version": "0.0.9",
+          "checksum": "ba1c8a9bf932066c1bf447214728954e562ed8598f521737a7ad263267efd3f2"
         },
         {
           "moduleName": "wasteCarbon",
@@ -50,7 +50,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "init",
       "sourceRoot": "init-v001",
-      "version": "0.0.10",
+      "version": "0.0.11",
       "displayName": "Reviewed native runtime assignments",
       "description": "Explicit Profile deployment assignments for the reviewed native deployment. Preserves existing revocations and narrowed grants; startup installation requires the exact selected environment and runtime role profile.",
       "owningDomain": "profile",
@@ -73,14 +73,14 @@
         {
           "moduleName": "profile",
           "sectionCode": "init-v001",
-          "version": "0.0.8",
-          "checksum": "b59adee76de5f25d186bada5a3cd0ce047410e522d0e7eb00b5956a316ef8b78"
+          "version": "0.0.9",
+          "checksum": "ba1c8a9bf932066c1bf447214728954e562ed8598f521737a7ad263267efd3f2"
         },
         {
           "moduleName": "kickoffCore",
           "sectionCode": "nativeRuntimePrincipalScope",
-          "version": "0.0.4",
-          "checksum": "ff0e14a137ae0b2afefa04293adb1dfa7dbe561ce8aef3f6525b5523b6390890"
+          "version": "0.0.5",
+          "checksum": "ad0e0255a69e61ab981220fb50ef20a301082ad4328fc509057f1d58802f9710"
         }
       ]
     }

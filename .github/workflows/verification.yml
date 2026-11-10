@@ -17,7 +17,7 @@ jobs:
     name: Verify reference runtime on Node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     env:
-      NATIVE_LOCAL_RELEASE: ${{ startsWith(github.ref, 'refs/heads/codex/release-native-local/') }}
+      NATIVE_LOCAL_RELEASE: ${{ startsWith(github.ref, 'refs/heads/codex/release-native-local/') || vars.NODICS_KICKOFF_DOCKER_LOCAL_PAUSED == 'true' }}
     services:
       mongodb:
         image: mongo:7

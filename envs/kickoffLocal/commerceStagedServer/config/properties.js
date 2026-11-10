@@ -592,6 +592,8 @@ module.exports = {
         allowInsecureLoopback: true,
       },
       intentSource: {
+        moduleName: "eWaste",
+        targetAuthority: { publication: "OPERATIONAL" },
         connectionName: "waste",
         allowInsecureLoopback: true,
       },

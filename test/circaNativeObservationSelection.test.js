@@ -12,7 +12,7 @@ const root = path.resolve(__dirname, "..");
 const receivers = ["platformServer", "processServer", "commerceServer", "commerceStagedServer",
   "wcmsStagedServer", "wasteServer"];
 const planCode = "circa-native-reviewed";
-const selectedFile = "config/setup-observation/circa-native-reviewed-l08-20261110.json";
+const selectedFile = "config/setup-observation/circa-native-reviewed-revision-22.json";
 const bytes = fs.readFileSync(path.join(root, "modules/circa.ewaste", selectedFile));
 const plan = JSON.parse(bytes);
 const checksum = crypto.createHash("sha256").update(bytes).digest("hex");
@@ -130,6 +130,10 @@ test("revision 20 changes only two owner-confirmed participation release pins", 
 });
 
 test("Native revision 21 changes only its nine reviewed Promotion stages", () => {
+  const retainedFile = path.join(root, "modules/circa.ewaste/config/setup-observation/circa-native-reviewed-l08-20261110.json");
+  const bytes = fs.readFileSync(retainedFile);
+  const plan = JSON.parse(bytes);
+  const checksum = crypto.createHash("sha256").update(bytes).digest("hex");
   const retained = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json");
   assert.equal(plan.revision, retained.revision + 1);
   assert.equal(checksum, "f800ff475030707f2b1d843bf643ed1eb99ad0ab5aa16cbaf87201d40014b359");
@@ -147,6 +151,31 @@ test("Native revision 21 changes only its nine reviewed Promotion stages", () =>
       assert.equal(stage.server, original.server);
     }
   }
+});
+
+test("Native revision 22 preserves reviewed stages while advancing release pins", () => {
+  const previous = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-l08-20261110.json");
+  assert.equal(plan.revision, previous.revision + 1);
+  const { revision, baseline, stages, ...policy } = plan;
+  const { revision: oldRevision, baseline: oldBaseline, stages: oldStages, ...oldPolicy } = previous;
+  assert.deepEqual(policy, oldPolicy);
+  assert.equal(stages.length, oldStages.length);
+  assert.deepEqual({ ...baseline, descriptorDigest: oldBaseline.descriptorDigest }, oldBaseline);
+  const changed = [];
+  for (const [index, stage] of stages.entries()) {
+    const old = oldStages[index];
+    if (stage.release?.version !== old.release?.version || stage.release?.checksum !== old.release?.checksum) {
+      assert(stage.release && old.release);
+      const { version, checksum, prerequisites, ...source } = stage.release;
+      const { version: oldVersion, checksum: oldChecksum, prerequisites: oldPrerequisites, ...oldSource } = old.release;
+      assert.deepEqual(source, oldSource, stage.code);
+      assert.deepEqual(prerequisites.map(({moduleName, sectionCode, partition}) => ({moduleName, sectionCode, partition})),
+        oldPrerequisites.map(({moduleName, sectionCode, partition}) => ({moduleName, sectionCode, partition})), stage.code);
+      assert.deepEqual({ ...stage, release: old.release }, old);
+      changed.push(stage.code);
+    } else assert.deepEqual(stage, old);
+  }
+  assert.equal(changed.length, 37);
 });
 
 test("revision 17 to 18 retains its reviewed checksum differences", () => {
