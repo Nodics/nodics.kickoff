@@ -87,16 +87,16 @@ test('Staged WCMS keeps customer content packs local while Online remains delive
     assert(staged.activeModules.modules.includes('agora.apparel'));
     assert(staged.activeModules.modules.includes('nexus.web'));
     assert.equal(staged.runtimeRole.publication, 'STAGED');
-    assert.equal(require('./helpers/configuration').validateDestination(staged, 'WCMS_STAGED'), true);
 
     assert.equal(online.activeModules.modules.includes('agora.apparel'), false);
     assert.equal(online.activeModules.modules.includes('nexus.web'), false);
     assert.equal(online.runtimeRole.publication, 'ONLINE');
-    assert.deepEqual(online.data.dataReleases.allowedDestinationRoles, []);
+    assert.equal(Object.hasOwn(online.data.dataReleases, 'allowedDestinationRoles'), false,
+        'Retired role-keyed import policy must not be restored; explicit owner admission applies');
 });
 
 // Runtime proof is deployment-owned; omission must never inherit the shared sample key.
-test('All ten Local runtimes resolve distinct retained proof without sample fallback', () => {
+test('All seven Local runtimes resolve distinct retained proof without sample fallback', () => {
     const helper = require('./helpers/configuration');
     const selections = [
         'platformServer',
@@ -105,9 +105,6 @@ test('All ten Local runtimes resolve distinct retained proof without sample fall
         'wcmsOnlineServer',
         'commerceServer',
         'commerceStagedServer',
-        'engagementServer',
-        'loyaltyServer',
-        'locationServer',
         'wasteServer'
     ];
     const instances = new Set();

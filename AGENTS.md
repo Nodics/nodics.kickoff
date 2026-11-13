@@ -69,8 +69,8 @@ data/
   index and customize services through the standard merge process.
 - Before the first customer release, maintain one current `v001` baseline per
   owning module and data type. Fold approved changes into that baseline and remove
-  superseded source snapshots and retained-root compatibility metadata. Manifest
-  section versions are independent of folder names; do not invent additional
+  superseded source snapshots and retained-root compatibility metadata. Release 0 Init, Core and Sample sections
+  use manifest version `0.0.1`. Do not invent additional
   shipped datasets merely because a Local test installation already exists.
   Keep deliberately versioned upgrade fixtures under their test owner, separate
   from shipped data. Historical execution evidence remains unchanged.

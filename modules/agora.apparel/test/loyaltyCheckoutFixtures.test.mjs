@@ -38,9 +38,9 @@ test('Apparel declares product choices but binds every identity, contact, addres
   assert.equal(resolved.productCode, 'agoraStylePass5Coupon');
   assert.equal(resolved.variantCode, 'agoraStylePass5CouponDigital');
   assert.equal(resolved.providerCode, 'loyalty-reward-points');
-  assert.deepEqual(resolved.cart, { storeCode: 'agoraMainStore', channelCode: 'web', locale: 'en', jurisdiction: 'AE', currency: 'USD' });
-  assert.equal(application.cms.runtimeRoleProfiles.WCMS_STAGED.publication.baselines.agoraapparel.rootCode, 'agoraApparelSite');
-  assert.equal(application.backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM.profiles.agoraapparel.owner, 'agora.apparel');
+  assert.deepEqual(resolved.cart, { storeCode: 'agoraApparelStore', channelCode: 'agoraApparelWeb', locale: 'en', jurisdiction: 'AE', currency: 'USD' });
+  assert.equal(application.cms.publication.baselines.agoraapparel.rootCode, 'agoraApparelSite');
+  assert.equal(application.backofficeApplicationInitialization.profiles.agoraapparel.owner, 'agora.apparel');
   assert.equal(JSON.stringify(application), original);
 });
 

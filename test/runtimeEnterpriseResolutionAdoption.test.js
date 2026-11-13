@@ -13,7 +13,8 @@ test("Local namespace resolution admits only existing Commerce deployment and fo
   const commerce = loadRuntime("commerceServer", "kickoffLocal"), platform = loadRuntime("platformServer", "kickoffLocal");
   assert.equal(commerce.enterpriseResolution.runtimeLookup.enabled, true);
   assert.equal(platform.profileRuntimeEnterpriseResolution.enabled, true);
-  assert.equal(platform.profileRuntimeEnterpriseResolution.runtimeRole, platform.runtimeRole.code);
+  assert.equal(platform.runtimeRole.publication, "OPERATIONAL");
+  assert.equal(platform.profileRuntimeEnterpriseResolution.runtimeRole, undefined);
   assert.equal(platform.apiExposure.categories.profileManagement.enabled, true);
   assert.deepEqual(platform.profileRuntimeEnterpriseResolution.callers, [{
     tenant: commerce.defaultTenant, principalEnterpriseCode: commerce.defaultEnterprise, serviceId: "apiAdmin",

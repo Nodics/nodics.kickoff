@@ -73,6 +73,7 @@ test("actual nImport byte reader and Promotion parser accept only the exact new 
   CONFIG.get("data").dataReleases.installers.PROMOTION_CAMPAIGN_ISSUANCE = "DefaultPromotionSetupContributionService";
   SERVICE.DefaultDataReleaseService = ports.service;
   const setup = require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionSetupContributionService"));
+  SERVICE.DefaultPromotionSetupContributionService = setup;
   const discovered = ports.service.discoverReleases("sample");
   for (const phase of ["Budget", "Issuance"]) {
     const contribution = discovered.find(row => row.sectionCode === "circaGreenPerksFixedExpiry" + phase);

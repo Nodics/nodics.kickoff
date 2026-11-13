@@ -6,6 +6,7 @@
  * @owner nodics.kickoff
  */
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
@@ -49,6 +50,22 @@ export function circaOwnerSourceRecordIndex(projectRoot) {
             records.set(`${moduleName}:${schema}:${record.code}`, Object.freeze({ module: moduleName, schema, code: record.code }));
           }
         }
+      }
+    }
+  }
+  // Opening assets use the Waste API installer and have no generated import header.
+  const manifest = path.join(dataRoot, "manifest.json");
+  const release = fs.existsSync(manifest) ? loadSource(manifest).sections?.["waste-opening-assets"] : undefined;
+  const assetPath = "sample-v001/waste/records/circaWasteAssetData.json";
+  if (release?.installer === "WASTE_OPENING_ASSETS" &&
+      release.owningDomain === "wasteCore" && release.destinationRole === "WASTE" &&
+      release.selectionPolicy === "EXPLICIT" && typeof release.files?.[assetPath] === "string") {
+    const bytes = fs.readFileSync(path.join(dataRoot, assetPath));
+    if (createHash("sha256").update(bytes).digest("hex") === release.files[assetPath]) {
+      for (const record of Object.values(JSON.parse(bytes))) {
+        if (typeof record?.code !== "string") continue;
+        records.set(`wasteCore:wasteAsset:${record.code}`,
+          Object.freeze({ module: "wasteCore", schema: "wasteAsset", code: record.code }));
       }
     }
   }

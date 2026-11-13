@@ -7,7 +7,6 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.discovery",
       "nodics.commerce",
       "nodics.accelerators"
     ],
@@ -22,7 +21,19 @@
       "publish": false,
       "web": false
     },
-    "displayName": "Docker Local Commerce Server"
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-commerce-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
+    "displayName": "Docker Local Commerce Server",
+    "runtimeModuleRoots": [
+      "nodics.discovery",
+      "nodics.commerce",
+      "nodics.accelerators"
+    ]
   },
   "description": "Docker Local Commerce Server runtime composition and configuration boundary for this Nodics project."
 }

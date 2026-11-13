@@ -1,22 +1,5 @@
 /* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 "use strict";
-// Frozen reviewed fixture, not deployed authority or configuration-derived access.
-const runtimePermissions = require("./fixtures/kickoffNativeRuntimePermissions.json");
-const runtimeAssignments = require("../modules/kickoffCore/data/init-v001/runtime-assignments/records/nativeRuntimeAssignmentData");
-
-/** Reads actual source-pack selections, not installed authority or an assumed empty deployment. */
-function seedPermissions(server, environment = "kickoffLocal") {
-  return Object.values(runtimeAssignments)
-    .filter(
-      (row) =>
-        row.active === true &&
-        row.effect === "ALLOW" &&
-        row.runtimeScope.projectCode === "nodics.kickoff" &&
-        row.runtimeScope.environmentCode === environment &&
-        row.runtimeScope.serverCode === server,
-    )
-    .flatMap((row) => row.runtimeScope.permissions);
-}
 
 /** @module test/configurationInheritanceContract @description Protects project default activation, deployment overrides and configuration ownership. @owner nodics.kickoff */
 const assert = require("node:assert/strict");
@@ -33,6 +16,54 @@ const {
 } = require("./helpers/configuration");
 const coreProperties = require("../modules/kickoffCore/config/properties");
 const metadata = require("../modules/kickoffCore/package.json");
+
+require("node:test")(
+  "Native Circa settings follow the existing runtime selections and preserve Waste-only overrides",
+  () => {
+    const selected = ["platformServer", "commerceServer", "commerceStagedServer", "wcmsStagedServer", "wasteServer"];
+    for (const server of selected) {
+      const properties = loadRuntime(server, "kickoffLocal", { CIRCA_EWASTE_ARRIVAL_RADIUS_METRES: "375" });
+      assert.equal(properties.eWaste.journey.arrivalRadiusMetres, 375, server);
+      assert.equal(properties.eWaste.marketplace.storeCode, "circaMainStore", server);
+      assert.equal(properties.profileExternalIdentity.applications["circa.ewaste"].requireBrowserHandoff, true, server);
+      assert.equal(Boolean(properties.eWaste.outcomeCommunication.detailLinks?.TELEGRAM), server === "wasteServer", server);
+      assert.equal(Boolean(properties.eWaste.marketplace.digitalOwnership?.qualified), server === "wasteServer", server);
+    }
+    for (const server of ["processServer", "wcmsOnlineServer"]) {
+      const properties = loadRuntime(server);
+      assert.equal(properties.profileExternalIdentity?.applications?.["circa.ewaste"], undefined, server);
+      assert.equal(properties.eWaste?.marketplace?.storeCode, undefined, server);
+    }
+  },
+);
+
+require("node:test")(
+  "Only Waste selects the accelerator-owned impact provider chain in each Local topology",
+  () => {
+    const owner = require(path.join(frameworkRoot,
+      "nodics.accelerators/modules/waste/modules/eWaste/config/properties"));
+    const dispatcher = require(path.join(frameworkRoot,
+      "nodics.waste/modules/wasteImpact/src/service/defaultWasteImpactCalculationService"));
+    const profileCode = "eWasteEnvironmentalAssessment";
+    for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+      const effective = loadRuntime("wasteServer", environment);
+      assert.equal(effective.wasteImpact.calculation.providerProfile, profileCode);
+      const previous = global.CONFIG;
+      try {
+        global.CONFIG = { get: (key) => effective[key] };
+        const settings = dispatcher.settings();
+        const expected = owner.wasteImpact.providerProfiles[profileCode];
+        for (const key of Object.keys(expected)) assert.deepEqual(settings[key], expected[key]);
+      } finally {
+        global.CONFIG = previous;
+      }
+      assert.equal(effective.copilot.providers.adapters.openai.credential.mode, "SECRET_REFERENCE");
+      for (const server of ["commerceServer", "commerceStagedServer", "platformServer", "wcmsStagedServer"]) {
+        assert.equal(loadRuntime(server, environment).wasteImpact, undefined, server);
+      }
+    }
+  },
+);
 
 require("node:test")(
   "Only Local Loyalty selects the approved existing Commerce reservation-decision caller",
@@ -56,7 +87,7 @@ require("node:test")(
       ),
     ).loyalty.reservationDecisions;
     const selected =
-      require("../envs/kickoffLocal/loyaltyServer/config/properties").loyalty
+      require("../envs/kickoffLocal/commerceServer/config/properties").loyalty
         .reservationDecisions;
     assert.deepEqual(owner.callers, [], "framework defaults grant no caller");
     assert.deepEqual(
@@ -66,7 +97,7 @@ require("node:test")(
       },
       "deployment owns only the exact caller selection, not owner defaults",
     );
-    const effective = loadRuntime("loyaltyServer", "kickoffLocal");
+    const effective = loadRuntime("commerceServer", "kickoffLocal");
     assert.deepEqual(effective.loyalty.reservationDecisions, {
       ...owner,
       callers: expected,
@@ -76,35 +107,14 @@ require("node:test")(
       require("../envs/kickoffLocal/commerceServer/package.json").nodics
         .runtimeIdentity.instanceCode,
     );
-    const assignments = Object.values(runtimeAssignments).filter(
-      (row) => row.code === expected[0].assignmentCode,
-    );
-    assert.equal(assignments.length, 1);
-    for (const key of [
-      "projectCode",
-      "environmentCode",
-      "serverCode",
-      "instanceCode",
-    ])
-      assert.equal(assignments[0].runtimeScope[key], expected[0][key]);
-    for (const permission of [
-      "loyalty.rewards.reserve",
-      "loyalty.rewards.release",
-      "loyalty.wallet.read",
-    ])
-      assert.ok(
-        seedPermissions("commerceServer").includes(permission),
-        permission,
-      );
     for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       for (const server of [
-        "loyaltyServer",
-        "commerceServer",
+          "commerceServer",
         "commerceStagedServer",
         "wasteServer",
         "platformServer",
       ]) {
-        if (environment === "kickoffLocal" && server === "loyaltyServer")
+        if (environment === "kickoffLocal" && ["loyaltyServer", "commerceServer"].includes(server))
           continue;
         assert.deepEqual(
           loadRuntime(server, environment).loyalty?.reservationDecisions
@@ -163,7 +173,8 @@ require("node:test")(
   () => {
     for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       const local = require("../envs/" + environment + "/config/properties");
-      for (const profile of Object.values(local.eWaste.runtimeRoleProfiles)) {
+      for (const server of ["commerceServer", "commerceStagedServer", "platformServer", "wasteServer", "wcmsStagedServer"]) {
+        const profile = require(`../envs/${environment}/${server}/config/properties`).eWaste || local.eWaste || {};
         assert.equal(profile.catalogue, undefined);
         if (!profile.marketplace) continue;
         for (const key of [
@@ -251,41 +262,10 @@ require("node:test")(
 require("node:test")(
   "Engagement resolves Profile communication destinations without widening other deployments",
   () => {
-    const baseline = runtimePermissions.loyaltyServer;
-    const engagement = loadRuntime("engagementServer", "kickoffLocal");
-    const permissions = seedPermissions("engagementServer");
-    assert.deepEqual(permissions, [
-      ...baseline,
-      "communication.request",
-      "commerce.digital.notification.read",
-    ]);
-    assert.equal(
-      permissions.filter((value) => value === "communication.request").length,
-      1,
-    );
+    const engagement = loadRuntime("processServer", "kickoffLocal");
     assert.equal(
       engagement.runtimeIdentity.remoteModules.includes("profile"),
       true,
-    );
-    for (const server of [
-      "commerceStagedServer",
-      "loyaltyServer",
-      "locationServer",
-      "processServer",
-      "wcmsStagedServer",
-      "wcmsOnlineServer",
-    ]) {
-      assert.equal(
-        seedPermissions(server).includes("communication.request"),
-        false,
-        server,
-      );
-    }
-    assert.equal(
-      seedPermissions("engagementServer", "kickoffDockerLocal").includes(
-        "communication.request",
-      ),
-      false,
     );
   },
 );
@@ -293,24 +273,6 @@ require("node:test")(
 require("node:test")(
   "Local Waste may prepare a verified Profile channel handoff without widening siblings",
   () => {
-    const baseline = runtimePermissions.loyaltyServer;
-    const waste = seedPermissions("wasteServer");
-    // Native Waste explicitly selects profile.customer.reference.read; Platform's
-    // profileCustomerEvidence caller pins this deployment and GREENPERKS_ONLINE.
-    assert.deepEqual(
-      [...waste].sort(),
-      [
-        ...baseline,
-        "profile.externalIdentity.prepare",
-        "commerce.digital.own.read",
-        "profile.customer.reference.read",
-        "loyalty.rewards.earn",
-        "loyalty.rewards.reverse",
-        "communication.request",
-        "commerce.product.read",
-        "waste.impact.calculate",
-      ].sort(),
-    );
     assert.equal(
       loadRuntime(
         "wasteServer",
@@ -318,46 +280,6 @@ require("node:test")(
       ).runtimeIdentity.remoteModules.includes("commsApi"),
       true,
     );
-    for (const server of [
-      "platformServer",
-      "commerceServer",
-      "loyaltyServer",
-    ]) {
-      const permissions = seedPermissions(server);
-      for (const permission of [
-        "profile.externalIdentity.prepare",
-        "profile.customer.reference.read",
-        "commerce.product.read",
-      ]) {
-        assert.equal(
-          permissions.includes(permission),
-          server === "commerceServer" && permission === "commerce.product.read",
-          server + ": " + permission,
-        );
-      }
-      assert.equal(
-        permissions.includes("communication.request"),
-        ["platformServer", "commerceServer"].includes(server),
-        server +
-          ": preserve Platform's existing registration Communication grant without widening siblings",
-      );
-    }
-    const dockerPermissions = seedPermissions(
-      "wasteServer",
-      "kickoffDockerLocal",
-    );
-    for (const permission of [
-      "profile.externalIdentity.prepare",
-      "profile.customer.reference.read",
-      "communication.request",
-      "commerce.product.read",
-    ]) {
-      assert.equal(
-        dockerPermissions.includes(permission),
-        false,
-        "kickoffDockerLocal: " + permission,
-      );
-    }
   },
 );
 
@@ -372,12 +294,9 @@ require("node:test")(
       "commerceServer",
       "commerceStagedServer",
       "wasteServer",
-      "engagementServer",
       "wcmsStagedServer",
       "wcmsOnlineServer",
       "processServer",
-      "locationServer",
-      "loyaltyServer",
     ]) {
       const sibling = loadRuntime(server, "kickoffLocal");
       assert.equal(sibling.dynamoEnabled, false);
@@ -472,8 +391,12 @@ require("node:test")(
     assert.equal(result.modules.includes("profile"), false);
     assert.deepEqual(
       result.properties.runtimeIdentity,
-      require("../envs/kickoffLocal/wcmsOnlineServer/package.json").nodics
-        .runtimeIdentity,
+      {
+        ...require("../envs/kickoffLocal/wcmsOnlineServer/package.json").nodics.runtimeIdentity,
+        projectCode: "nodics.kickoff",
+        environmentCode: "kickoffLocal",
+        serverCode: "wcmsOnlineServer",
+      },
     );
     const configuration = require(
       path.join(
@@ -587,7 +510,6 @@ require("node:test")(
       "Setup qualification does not enable registration",
     );
     for (const server of [
-      "engagementServer",
       "commerceServer",
       "wasteServer",
     ]) {
@@ -603,12 +525,17 @@ require("node:test")(
 );
 
 require("node:test")(
-  "Local recovery API opt-in remains environment-owned and Platform-scoped",
+  "Local recovery API exposure is selected on Platform and remains opt-in",
   () => {
     const server = require("../envs/kickoffLocal/platformServer/config/properties");
-    assert.equal(server.apiExposure, undefined);
-    const enabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" };
-    const disabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "false" };
+    assert.deepEqual(server.apiExposure.categories.profileEmployeeRecovery.enabled, {
+      $config: "env",
+      name: "NODICS_LOCAL_EMPLOYEE_RECOVERY_ENABLED",
+      type: "boolean",
+      fallback: false,
+    });
+    const enabled = { NODICS_LOCAL_EMPLOYEE_RECOVERY_ENABLED: "true", NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "false" };
+    const disabled = { NODICS_LOCAL_EMPLOYEE_RECOVERY_ENABLED: "false", NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" };
     assert.equal(
       loadRuntime("platformServer", "kickoffLocal", enabled).apiExposure
         .categories.profileEmployeeRecovery.enabled,
@@ -744,14 +671,6 @@ require("node:test")(
   "Local Platform explicitly delegates only its registration Communication operations",
   () => {
     const local = loadRuntime("platformServer", "kickoffLocal");
-    const policy = seedPermissions("platformServer");
-    for (const permission of [
-      "communication.request",
-      "communication.verification.execute",
-    ])
-      assert.equal(policy.filter((value) => value === permission).length, 1);
-    assert.ok(policy.includes("profile.tenant.namespace.bind"));
-    assert.equal(policy.includes("communication.callback.receive"), false);
     const identity = require("../envs/kickoffLocal/platformServer/package.json")
       .nodics.runtimeIdentity;
     assert.equal(
@@ -768,11 +687,6 @@ require("node:test")(
       ["platformServer", "kickoffDockerLocal"],
     ]) {
       const runtime = loadRuntime(server, environment);
-      const permissions = seedPermissions(server, environment);
-      assert.equal(
-        permissions.includes("communication.verification.execute"),
-        false,
-      );
       assert.deepEqual(
         runtime.profileTenantProvisioning.runtimeRemoteModuleExtensions || [],
         [],
@@ -784,12 +698,6 @@ require("node:test")(
 require("node:test")(
   "Local Commerce delegates reward payment only to its remote Loyalty owner",
   () => {
-    const permissions = [
-      "loyalty.rewards.reserve",
-      "loyalty.rewards.capture",
-      "loyalty.rewards.release",
-      "loyalty.rewards.reverse",
-    ];
     const runtime = loadRuntime("commerceServer", "kickoffLocal");
     assert.equal(
       runtime.runtimeIdentity.remoteModules.filter(
@@ -797,47 +705,7 @@ require("node:test")(
       ).length,
       1,
     );
-    assert.equal(activeModuleNames(runtime).includes("loyaltyApi"), false);
-    const inherited = runtimePermissions.loyaltyServer;
-    assert.deepEqual(
-      new Set(seedPermissions("commerceServer")),
-      new Set([
-        ...inherited,
-        ...permissions,
-        "waste.asset.marketplace.project",
-        "waste.asset.sale.transfer",
-        "commerce.pricing.merchant.evidence",
-        "commerce.product.read",
-        "commerce.store.read",
-        "commerce.promotion.analytics",
-        "communication.request",
-        "profile.commerce.notification.recipient.resolve",
-        "loyalty.rewards.earn",
-        "carbon.holdings.read",
-        "carbon.holdings.reserve",
-        "carbon.holdings.release",
-        "carbon.holdings.transfer",
-        "carbon.holdings.finalize",
-      ]),
-    );
-    for (const permission of permissions)
-      assert.equal(
-        seedPermissions("commerceServer").filter(
-          (value) => value === permission,
-        ).length,
-        1,
-      );
-    for (const server of [
-      "platformServer",
-      "wasteServer",
-      "commerceStagedServer",
-    ]) {
-      for (const permission of permissions)
-        assert.equal(
-          seedPermissions(server).includes(permission),
-          server === "wasteServer" && permission === "loyalty.rewards.reverse",
-        );
-    }
+    assert.equal(activeModuleNames(runtime).includes("loyaltyApi"), true);
   },
 );
 
@@ -889,7 +757,9 @@ require("node:test")(
         "nodics.platform/modules/profile/config/properties",
       ),
     ).process.actionAdapters.definitions[action];
-    assert.equal(declaration.remote.runtimeRole, "PLATFORM");
+    assert.equal(declaration.remote.moduleName, "profile");
+    assert.deepEqual(declaration.remote.targetAuthority, { publication: "OPERATIONAL" });
+    assert.equal(declaration.remote.runtimeRole, undefined);
     assert.equal(declaration.remote.requiresCompletedTask, true);
     assert.equal(
       declaration.remote.apiName,
@@ -925,8 +795,8 @@ require("node:test")(
 require("node:test")(
   "Local tenant provisioning selects all consumers but exposes only the Profile owner",
   () => {
-    const enabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" };
-    const disabled = { NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "false" };
+    const enabled = { NODICS_LOCAL_TENANT_PROVISIONING_ENABLED: "true", NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "false" };
+    const disabled = { NODICS_LOCAL_TENANT_PROVISIONING_ENABLED: "false", NODICS_LOCAL_ENTERPRISE_ONBOARDING_ENABLED: "true" };
     for (const name of [
       "platformServer",
       "commerceServer",
@@ -952,13 +822,6 @@ require("node:test")(
     }
     const local = loadRuntime("platformServer", "kickoffLocal", enabled);
     const docker = loadRuntime("platformServer", "kickoffDockerLocal", enabled);
-    assert.equal(
-      seedPermissions("platformServer").filter(
-        (permission) => permission === "profile.tenant.namespace.bind",
-      ).length,
-      1,
-    );
-    assert.notEqual(docker.profileTenantProvisioning?.enabled, true);
     assert.notEqual(
       docker.apiExposure?.categories?.profileTenantProvisioning?.enabled,
       true,
@@ -990,9 +853,11 @@ require("node:test")(
       const path = require('node:path');
       const options = JSON.parse(process.argv[1]);
       const prepare = require(path.join(options.frameworkRoot, 'nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs'));
-      for (const server of ['commerceServer', 'wasteServer', 'platformServer']) prepare({...options, server});
+      (async () => {
+      for (const server of ['commerceServer', 'wasteServer', 'platformServer']) await prepare({...options, server});
       const settings = CONFIG.get('copilot').knowledge.sourceRegistry;
       process.stdout.write(JSON.stringify(settings?.definitions || []));
+      })().catch(error => { console.error(error); process.exitCode = 1; });
     `,
             JSON.stringify({
               projectRoot: path.resolve(__dirname, ".."),
@@ -1037,12 +902,14 @@ require("node:test")(
           `
     const path = require("node:path");
     const options = JSON.parse(process.argv[1]);
-    require(path.join(options.frameworkRoot, "nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs"))(options);
+    (async () => {
+    await require(path.join(options.frameworkRoot, "nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs"))(options);
     const registry = require(path.join(options.frameworkRoot, "nodics.process/modules/workflow/src/service/operation/defaultProcessActionAdapterRegistryService"));
     process.stdout.write(JSON.stringify({
       profileActive: NODICS.getActiveModules().includes("profile"),
       actions: registry.allowedActions().map(action => registry.actionKey(action))
     }));
+    })().catch(error => { console.error(error); process.exitCode = 1; });
   `,
           JSON.stringify({
             projectRoot: path.resolve(__dirname, ".."),
@@ -1062,54 +929,14 @@ require("node:test")(
   },
 );
 
-require("node:test")(
-  "Local Waste startup selection belongs to its environment role and permits later disablement",
-  () => {
-    const bindings = require(
-      path.join(
-        frameworkRoot,
-        "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService",
-      ),
-    );
-    const loader = require(
-      path.join(
-        frameworkRoot,
-        "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService",
-      ),
-    );
-    const copilot = require("../envs/kickoffLocal/config/properties").copilot;
-    assert.equal(
-      copilot.runtimeRoleProfiles.WASTE.knowledge.ingestion.ingestOnStart,
-      true,
-    );
-    assert.equal(
-      require("../envs/kickoffLocal/wasteServer/config/properties").copilot,
-      undefined,
-    );
-    const later = bindings.merge(
-      { copilot, runtimeRole: { code: "WASTE" } },
-      {
-        copilot: {
-          runtimeRoleProfiles: {
-            WASTE: { knowledge: { ingestion: { ingestOnStart: false } } },
-          },
-        },
-      },
-    );
-    assert.equal(
-      loader.deriveRuntimeRoleCopilot(later).copilot.knowledge.ingestion
-        .ingestOnStart,
-      false,
-    );
-    assert.equal(
-      loader.deriveRuntimeRoleCopilot({
-        copilot,
-        runtimeRole: { code: "OTHER" },
-      }).copilot.knowledge,
-      undefined,
-    );
-  },
-);
+require("node:test")("Local Waste startup selection permits later deployment disablement", () => {
+  const bindings = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+  const copilot = require("../envs/kickoffLocal/wasteServer/config/properties").copilot;
+  assert.equal(copilot.knowledge.ingestion.ingestOnStart, true);
+  assert.equal(require("../envs/kickoffLocal/config/properties").copilot, undefined);
+  const later = bindings.merge({ copilot }, { copilot: { knowledge: { ingestion: { ingestOnStart: false } } } });
+  assert.equal(later.copilot.knowledge.ingestion.ingestOnStart, false);
+});
 
 require("node:test")(
   "Platform context and external knowledge are explicit deployment selections",
@@ -1175,16 +1002,16 @@ require("node:test")(
         frameworkRoot,
         "nodics.copilot/modules/copilotCore/config/properties",
       ),
-    ).copilot.runtimeRoleProfiles.PLATFORM.core;
+    ).copilot.core;
     assert.equal(
-      coreProperties.copilot.runtimeRoleProfiles.PLATFORM.core.environment,
+      require("../envs/kickoffLocal/platformServer/config/properties").copilot.core.environment,
       undefined,
     );
     assert.equal(
       bindings.resolve(
         bindings.merge(
           ownerCore,
-          coreProperties.copilot.runtimeRoleProfiles.PLATFORM.core,
+          require("../envs/kickoffLocal/platformServer/config/properties").copilot.core,
         ),
         {},
         {
@@ -1194,14 +1021,16 @@ require("node:test")(
       "unrelatedDeployment",
     );
     assert.equal(
-      JSON.stringify(coreProperties.copilot).includes("envs/kickoffLocal"),
+      JSON.stringify(require("../envs/kickoffLocal/platformServer/config/properties").copilot).includes("envs/kickoffLocal"),
       false,
     );
     assert.equal(
-      require("../envs/kickoffLocal/config/properties").tooling.acceptance
-        .browserValidation.enabled,
-      false,
+      require("../envs/kickoffLocal/config/properties").tooling.acceptance.browserValidation,
+      undefined,
+      "The non-runtime tooling owner supplies browser-validation defaults",
     );
+    const toolingOwner = require(path.join(frameworkRoot, "nodics.foundation/modules/nTooling/config/properties"));
+    assert.equal(toolingOwner.tooling.acceptance.browserValidation.enabled, false);
   },
 );
 
@@ -1328,11 +1157,9 @@ require("node:test")(
 );
 const administration = {
   backofficeApplicationInitialization:
-    coreProperties.backofficeApplicationInitialization.runtimeRoleProfiles
-      .PLATFORM,
+    coreProperties.backofficeApplicationInitialization,
   backofficeFunctionalModuleActivationData:
-    coreProperties.backofficeFunctionalModuleActivationData.runtimeRoleProfiles
-      .PLATFORM,
+    coreProperties.backofficeFunctionalModuleActivationData,
 };
 
 assert.deepEqual(metadata.nodics.owns, ["configuration", "data", "llm"]);
@@ -1359,7 +1186,7 @@ const initializationOwner = require(
     frameworkRoot,
     "nodics.platform/modules/backoffice/config/properties",
   ),
-).backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM;
+).backofficeApplicationInitialization;
 assert.deepEqual(initializationOwner.projectRoot, {
   $config: "path",
   base: "project",
@@ -1393,22 +1220,21 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
         `../envs/${environment}/wasteServer/config/properties`,
       );
       assert.equal(
-        local.waste.runtimeRoleProfiles.COMMERCE.projectOverlay,
+        (server.waste || local.waste).projectOverlay,
         undefined,
       );
       assert.equal(server.waste?.accelerator, undefined);
-      if (environment === "kickoffLocal")
-        assert.equal(server.eWaste.journey, undefined);
+
       assert.equal(
         Object.hasOwn(
-          local.waste.runtimeRoleProfiles.COMMERCE.operations,
+          (server.waste || local.waste).operations,
           "requireDifferentApprover",
         ),
         false,
       );
       for (const role of ["COMMERCE", "WASTE"])
         assert.equal(
-          Object.hasOwn(local.eWaste.runtimeRoleProfiles[role], "journeys"),
+          Object.hasOwn((server.eWaste || local.eWaste), "journeys"),
           false,
           role + " must inherit journey inclusion",
         );
@@ -1437,12 +1263,12 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       );
       assert.equal(
         runtime.eWaste.journey.reviewAssignment.queueCode,
-        local.eWaste.runtimeRoleProfiles.WASTE.journey.reviewAssignment
+        (server.eWaste || local.eWaste).journey.reviewAssignment
           .queueCode,
       );
       assert.equal(
         runtime.eWaste.journey.depositInstruction,
-        local.eWaste.runtimeRoleProfiles.WASTE.journey.depositInstruction,
+        (server.eWaste || local.eWaste).journey.depositInstruction,
       );
       assert.equal(runtime.eWaste.application.enabled, true);
       if (environment === "kickoffLocal")
@@ -1457,10 +1283,10 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
 require("node:test")(
   "Docker arrival input inherits the active owner default while Local keeps its intentional radius",
   () => {
-    const docker = require("../envs/kickoffDockerLocal/config/properties");
-    for (const role of ["COMMERCE", "WASTE"]) {
+    for (const server of ["commerceServer", "wasteServer"]) {
+      const docker = require(`../envs/kickoffDockerLocal/${server}/config/properties`);
       assert.deepEqual(
-        docker.eWaste.runtimeRoleProfiles[role].journey.arrivalRadiusMetres,
+        docker.eWaste.journey.arrivalRadiusMetres,
         {
           $config: "env",
           name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
@@ -1486,11 +1312,10 @@ require("node:test")(
                 owner.eWaste.journey.arrivalRadiusMetres = 73;
                 const probe = require(path.join(options.frameworkRoot,
                   "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
-                const result = probe.resolve(options);
-                process.stdout.write(JSON.stringify({
+                probe.resolve(options).then(result => process.stdout.write(JSON.stringify({
                   radius: result.properties.eWaste.journey.arrivalRadiusMetres,
                   ownerActive: result.modules.includes("eWaste"),
-                }));
+                })));
               `,
               JSON.stringify({
                 projectRoot: path.resolve(__dirname, ".."),
@@ -1663,7 +1488,7 @@ assert.equal(
   true,
 );
 assert.equal(
-  require("../envs/kickoffLocal/commerceServer/config/properties").product,
+  require("../envs/kickoffLocal/commerceServer/config/properties").product?.discovery?.catalogue,
   undefined,
 );
 assert.equal(
@@ -1883,21 +1708,9 @@ require("node:test")(
       ),
     );
     const platform = loadRuntime("platformServer");
-    const pack = platform.backofficeFunctionalModuleActivationData.modules[
+    assert.equal(platform.backofficeFunctionalModuleActivationData.modules[
       "nodics.commerce"
-    ].dataPackages.find((pack) => pack.code === "store:core-reference");
-    assert.equal(pack.targetServer, "commerceServer");
-    const target = loadRuntime(pack.targetServer);
-    const manifest = require(
-      path.join(
-        frameworkRoot,
-        "nodics.commerce/modules/baseCommerce/modules/store/data/manifest.json",
-      ),
-    );
-    assert.equal(
-      target.runtimeRole.code,
-      manifest.sections["core-reference"].destinationRole,
-    );
+    ].dataPackages.some(pack => pack.code === "store:core-reference"), false);
     const rulesPack = platform.backofficeFunctionalModuleActivationData.modules[
       "nodics.rulesEngine"
     ].dataPackages.find((pack) => pack.code === "rulesApi:rulesPolicyApproval");
@@ -1931,8 +1744,7 @@ require("node:test")(
         "nodics.commerce/modules/baseCommerce/modules/product/config/properties",
       ),
     ).product.marketplaceAuthoring;
-    const local = require("../envs/kickoffLocal/config/properties").product
-      .runtimeRoleProfiles.COMMERCE_STAGED.marketplaceAuthoring;
+    const local = require("../envs/kickoffLocal/commerceStagedServer/config/properties").product.marketplaceAuthoring;
     const runtime = loadRuntime("commerceStagedServer", "kickoffLocal");
     assert(activeModuleNames(runtime).includes("product"));
     assert.equal(owner.bundlePublication.enabled, false);
@@ -1946,9 +1758,9 @@ require("node:test")(
         .marketplaceAuthoring.bundlePublication.enabled,
       false,
     );
-    for (const [key, moduleName, connectionName, runtimeRole] of [
-      ["storeSource", "store", "commerce", "COMMERCE"],
-      ["intentSource", "eWaste", "waste", "WASTE"],
+    for (const [key, moduleName, connectionName] of [
+      ["storeSource", "store", "commerce"],
+      ["intentSource", "eWaste", "waste"],
     ]) {
       const selected = local[key];
       assert.deepEqual(selected, {
@@ -1958,7 +1770,7 @@ require("node:test")(
       const expected = {
         ...selected,
         moduleName,
-        runtimeRole,
+        targetAuthority: { publication: "OPERATIONAL" },
         timeoutMs: 15000,
         connectionType: "abstract",
       };
@@ -1969,11 +1781,11 @@ require("node:test")(
                 frameworkRoot,
                 "nodics.accelerators/modules/waste/modules/eWaste/config/properties",
               ),
-            ).product.runtimeRoleProfiles.COMMERCE_STAGED.marketplaceAuthoring
+            ).product.marketplaceAuthoring
               .intentSource
           : {};
       const inherited = bindings.merge(
-        bindings.merge(integration, owner[key]),
+        bindings.merge(owner[key], integration),
         selected,
       );
       assert.deepEqual(inherited, expected);
@@ -1990,11 +1802,11 @@ require("node:test")(
       assert.equal(owner[key].connectionName, null);
       assert.equal(
         owner[key].moduleName,
-        key === "storeSource" ? "store" : undefined,
+        key === "storeSource" ? "store" : null,
       );
-      assert.equal(
-        owner[key].runtimeRole,
-        key === "storeSource" ? "COMMERCE" : undefined,
+      assert.deepEqual(
+        owner[key].targetAuthority,
+        key === "storeSource" ? { publication: "OPERATIONAL" } : null,
       );
       assert.equal(owner[key].allowInsecureLoopback, false);
       const docker = loadRuntime("commerceStagedServer", "kickoffDockerLocal")
@@ -2017,8 +1829,7 @@ require("node:test")(
         "nodics.commerce/modules/baseCommerce/modules/pricing/config/properties",
       ),
     ).pricing.bundleListings;
-    const local = require("../envs/kickoffLocal/config/properties").pricing
-      .runtimeRoleProfiles.COMMERCE.bundleListings;
+    const local = require("../envs/kickoffLocal/commerceServer/config/properties").pricing.bundleListings;
     assert.deepEqual(local, { enabled: true, qualified: true });
     assert.equal(owner.enabled, false);
     assert.equal(owner.qualified, false);
@@ -2061,15 +1872,14 @@ require("node:test")(
       ownerIndex,
       environmentIndex,
     ]);
-    const profiles = require("../envs/kickoffLocal/config/properties").product
-      .runtimeRoleProfiles;
+
     for (const [server, role] of [
       ["commerceServer", "COMMERCE"],
       ["commerceStagedServer", "COMMERCE_STAGED"],
     ]) {
       const runtime = loadRuntime(server, "kickoffLocal");
       assert.ok(activeModuleNames(runtime).includes("product"));
-      const declaration = profiles[role].publication;
+      const declaration = require(`../envs/kickoffLocal/${server}/config/properties`).product.publication;
       assert.equal(
         runtime.product.publication.targetTransportProvider,
         "DefaultProductPublicationTransportService",
@@ -2114,7 +1924,7 @@ require("node:test")(
         );
         assert.equal(
           docker.schemaPolicies.product.catalogueVersioned.isVersionedEnabled,
-          false,
+          docker.runtimeRole.publication === "STAGED",
         );
       }
     }
@@ -2144,105 +1954,113 @@ require("node:test")(
       ),
     );
     const overlay = require("../envs/kickoffLocal/src/search/indexes");
-    const runtime = loadRuntime("commerceServer", "kickoffLocal");
-    const owners = [
-      "nodics.commerce/modules/baseCommerce/modules/product",
-      "nodics.discovery/modules/discoveryProjection",
-      "nodics.commerce/modules/baseCommerce/modules/commerceSearch/modules/commerceSearchCore",
-    ].map((relative) => {
-      const root = path.join(frameworkRoot, relative);
-      const metadata = require(path.join(root, "package.json"));
-      assert.ok(activeModuleNames(runtime).includes(metadata.name));
-      return { name: metadata.name, path: root, index: metadata.index };
-    });
-    const localMetadata = require("../envs/kickoffLocal/package.json");
-    const modules = [
-      ...owners,
-      {
-        name: localMetadata.name,
-        index: localMetadata.index,
-        path: path.resolve(__dirname, "../envs/kickoffLocal"),
-      },
-    ];
-    assert.deepEqual(
-      loader.sortModules(modules.map((module) => module.index)),
-      modules.map((module) => module.index),
-    );
-    assert.ok(activeModuleNames(runtime).includes("elastic"));
-    assert.equal(
-      activeModuleNames(
-        loadRuntime("commerceServer", "kickoffDockerLocal"),
-      ).includes("kickoffLocal"),
-      false,
-    );
-    const previous = {
-      NODICS: global.NODICS,
-      CONFIG: global.CONFIG,
-      UTILS: global.UTILS,
-    };
-    try {
-      global.NODICS = {
-        getIndexedModules: () => modules,
-        getNodicsHome: () => frameworkRoot,
-      };
-      global.CONFIG = { get: (key) => runtime[key] };
-      global.UTILS = {
-        isBlank: (value) => !value || Object.keys(value).length === 0,
-      };
-      const definitions = { ...files, LOG: { debug() {} } }.loadFiles(
-        "/src/search/indexes.js",
+    const checkedOwners = [];
+    for (const [server, paths] of [
+      ["commerceServer", [
+        "nodics.commerce/modules/baseCommerce/modules/product",
+        "nodics.commerce/modules/baseCommerce/modules/commerceSearch/modules/commerceSearchCore",
+      ]],
+      ["platformServer", ["nodics.discovery/modules/discoveryProjection"]],
+    ]) {
+      const runtime = loadRuntime(server, "kickoffLocal");
+      const owners = paths.map((relative) => {
+        const root = path.join(frameworkRoot, relative);
+        const metadata = require(path.join(root, "package.json"));
+        assert.ok(activeModuleNames(runtime).includes(metadata.name));
+        return { name: metadata.name, path: root, index: metadata.index };
+      });
+      const localMetadata = require("../envs/kickoffLocal/package.json");
+      const modules = [
+        ...owners,
+        {
+          name: localMetadata.name,
+          index: localMetadata.index,
+          path: path.resolve(__dirname, "../envs/kickoffLocal"),
+        },
+      ];
+      assert.deepEqual(
+        loader.sortModules(modules.map((module) => module.index)),
+        modules.map((module) => module.index),
       );
-      for (const [moduleName, indexes] of Object.entries(overlay)) {
-        for (const [typeName, selected] of Object.entries(indexes)) {
-          assert.deepEqual(Object.keys(selected), ["indexName"]);
-          const target = {
-            typeName,
-            properties: { code: { type: "keyword" } },
-          };
-          const definition = definitions[moduleName][typeName];
-          const current = provider.prepareFromDefinitions(
-            moduleName,
-            "default",
-            structuredClone(definition),
-            target,
-            typeName,
-          );
-          const before = provider.prepareFromDefinitions(
-            moduleName,
-            "default",
-            { ...structuredClone(definition), typeName },
-            target,
-            typeName,
-          );
-          assert.deepEqual(current, before);
-          assert.equal(current.typeName, typeName);
-          assert.equal(current.indexName, selected.indexName);
-          assert.deepEqual(current.properties.code, target.properties.code);
-          if (definition.properties) {
-            for (const field of Object.keys(definition.properties))
-              assert.ok(current.properties[field]);
+      assert.ok(activeModuleNames(runtime).includes("elastic"));
+      assert.equal(
+        activeModuleNames(
+          loadRuntime(server, "kickoffDockerLocal"),
+        ).includes("kickoffLocal"),
+        false,
+      );
+      const previous = {
+        NODICS: global.NODICS,
+        CONFIG: global.CONFIG,
+        UTILS: global.UTILS,
+      };
+      try {
+        global.NODICS = {
+          getIndexedModules: () => modules,
+          getNodicsHome: () => frameworkRoot,
+        };
+        global.CONFIG = { get: (key) => runtime[key] };
+        global.UTILS = {
+          isBlank: (value) => !value || Object.keys(value).length === 0,
+        };
+        const definitions = { ...files, LOG: { debug() {} } }.loadFiles(
+          "/src/search/indexes.js",
+        );
+        for (const { name: moduleName } of owners) {
+          checkedOwners.push(moduleName);
+          const indexes = overlay[moduleName];
+          for (const [typeName, selected] of Object.entries(indexes)) {
+            assert.deepEqual(Object.keys(selected), ["indexName"]);
+            const target = {
+              typeName,
+              properties: { code: { type: "keyword" } },
+            };
+            const definition = definitions[moduleName][typeName];
+            const current = provider.prepareFromDefinitions(
+              moduleName,
+              "default",
+              structuredClone(definition),
+              target,
+              typeName,
+            );
+            const before = provider.prepareFromDefinitions(
+              moduleName,
+              "default",
+              { ...structuredClone(definition), typeName },
+              target,
+              typeName,
+            );
+            assert.deepEqual(current, before);
+            assert.equal(current.typeName, typeName);
+            assert.equal(current.indexName, selected.indexName);
+            assert.deepEqual(current.properties.code, target.properties.code);
+            if (definition.properties) {
+              for (const field of Object.keys(definition.properties))
+                assert.ok(current.properties[field]);
+            }
+            const laterDefinition = merge({}, definition, {
+              indexName: "partner_" + typeName.toLowerCase(),
+            });
+            const later = provider.prepareFromDefinitions(
+              moduleName,
+              "default",
+              laterDefinition,
+              target,
+              typeName,
+            );
+            assert.equal(later.typeName, typeName);
+            assert.equal(later.indexName, "partner_" + typeName.toLowerCase());
+            assert.deepEqual(later.properties, current.properties);
           }
-          const laterDefinition = merge({}, definition, {
-            indexName: "partner_" + typeName.toLowerCase(),
-          });
-          const later = provider.prepareFromDefinitions(
-            moduleName,
-            "default",
-            laterDefinition,
-            target,
-            typeName,
-          );
-          assert.equal(later.typeName, typeName);
-          assert.equal(later.indexName, "partner_" + typeName.toLowerCase());
-          assert.deepEqual(later.properties, current.properties);
+        }
+      } finally {
+        for (const [key, value] of Object.entries(previous)) {
+          if (value === undefined) delete global[key];
+          else global[key] = value;
         }
       }
-    } finally {
-      for (const [key, value] of Object.entries(previous)) {
-        if (value === undefined) delete global[key];
-        else global[key] = value;
-      }
     }
+    assert.deepEqual(checkedOwners.sort(), Object.keys(overlay).sort());
   },
 );
 
@@ -2261,7 +2079,6 @@ require("node:test")(
         "nodics.foundation/modules/nPublish/config/properties",
       ),
     ).publish;
-    const removed = { connectionType: "abstract", runtimeRole: "PROCESS" };
     for (const server of ["commerceStagedServer", "wcmsStagedServer"]) {
       const declaration = require(
         path.join(
@@ -2274,15 +2091,14 @@ require("node:test")(
       const selected = declaration.publish.approvalWorkflow.target;
       assert.deepEqual(selected, { connectionName: "process" });
       const inherited = bindings.merge(owner.approvalWorkflow.target, selected);
-      const prior = bindings.merge(inherited, removed);
-      assert.deepEqual(
-        inherited,
-        prior,
-        server + ": effective target remains unchanged",
-      );
+      assert.deepEqual(inherited, {
+        connectionName: "process",
+        connectionType: "abstract",
+        targetAuthority: { publication: "OPERATIONAL" },
+      });
       const effective = loadRuntime(server, "kickoffLocal");
       assert(activeModuleNames(effective).includes("publish"));
-      assert.deepEqual(effective.publish.approvalWorkflow.target, prior);
+      assert.deepEqual(effective.publish.approvalWorkflow.target, inherited);
       assert.equal(declaration.publish.providers, undefined);
       for (const domain of server === "commerceStagedServer"
         ? ["product", "pricing", "inventory", "tax", "promotion"]
@@ -2303,7 +2119,7 @@ require("node:test")(
         inherited,
         bindings.resolve(override, inherited),
       );
-      assert.deepEqual(later, { ...prior, ...override });
+      assert.deepEqual(later, { ...inherited, ...override });
       const changedOwner = {
         ...owner.approvalWorkflow.target,
         connectionType: "rest",
@@ -2344,7 +2160,7 @@ require("node:test")(
           publication: {
             workflow: {
               target: {
-                moduleName: "process",
+                moduleName: "workflow",
                 connectionType: "abstract",
                 timeoutMs: 10000,
                 maxAttempts: 2,

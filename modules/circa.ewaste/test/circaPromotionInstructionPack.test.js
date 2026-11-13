@@ -21,7 +21,7 @@ const setup = require(path.join(promotionRoot, "src/service/defaultPromotionSetu
 const proposal = require("./fixtures/circaDemoPolicyProposal.json");
 const manifest = require("../data/manifest.json");
 const plan = require("../data/sample-v001/publication/records/publicationPlan.json");
-const policies = Object.values(require("../data/sample-v001/commerce/records/circaPromotionData"));
+const policies = Object.values(require("./fixtures/history/circaPromotionReviewedData"));
 const stores = Object.values(require("../data/sample-v001/store/records/circaStoreData"));
 const groups = [["GreenPerks", "greenperks", "GREENPERKS_RETAIL"],
   ["RenewWorks", "renewworks", "RENEWWORKS_REPAIR_REUSE"],
@@ -125,6 +125,7 @@ test("all six setup payloads pass the actual nImport exact-byte reader and Promo
   const get = CONFIG.get;
   CONFIG.get = key => key === "promotion" ? { budgetAdmission: { maximumCampaignsPerContribution: 50 } } : get(key);
   CONFIG.get("data").dataReleases.installers.PROMOTION_CAMPAIGN_ISSUANCE = "DefaultPromotionSetupContributionService";
+  SERVICE.DefaultPromotionSetupContributionService = setup;
   SERVICE.DefaultDataReleaseService = ports.service;
   const discovered = ports.service.discoverReleases("sample");
   for (const [title] of groups) for (const phase of ["Budget", "Issuance"]) {

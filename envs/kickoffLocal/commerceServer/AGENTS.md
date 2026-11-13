@@ -73,3 +73,8 @@ later changes require authorized Profile operations. Startup validates retained
 authority without restoring revoked or disabled grants. Reward-payment rights
 come from owner-defined access packs and this runtime's governed assignment,
 not server permission properties; test exact assignment scope and sibling denials.
+
+Native Local mock checkout selects the existing `greenperks-cafe` /
+`GREENPERKS_RETAIL` Store placement for the exact Commerce deployment only.
+Staged callers and other environments retain their existing pairs. This deployment
+selection does not grant generic Store access or qualify a real payment provider.

@@ -35,9 +35,6 @@ const servers = [
   "processServer",
   "commerceServer",
   "commerceStagedServer",
-  "engagementServer",
-  "loyaltyServer",
-  "locationServer",
   "wasteServer",
 ];
 const log = { debug() {}, info() {}, warn() {}, error() {} };
@@ -72,7 +69,7 @@ test("native Local auth and Profile refresh namespaces are isolated without chan
   assert.equal(docker.engines.redis.options.prefix, "localRuntimeAuth");
 });
 
-test("native Local's real layered search loader isolates every enabled static index while retaining logical consumers", (context) => {
+test("native Local's real layered search loader isolates every enabled static index while retaining logical consumers", async (context) => {
   const helpers = [
     "toUpperCaseFirstChar",
     "toLowerCaseFirstChar",
@@ -110,7 +107,7 @@ test("native Local's real layered search loader isolates every enabled static in
   );
   const overlay = require("../envs/kickoffLocal/src/search/indexes");
   for (const server of servers) {
-    const runtime = prepare({
+    const runtime = await prepare({
       projectRoot,
       frameworkRoot,
       environment: "kickoffLocal",
@@ -154,10 +151,8 @@ test("native Local's real layered search loader isolates every enabled static in
     schemaLoader.loadSearchSchemaFromSchema(["default"]);
     schemaLoader.loadSearchSchema(["default"]);
     const selected = search.getAllRawSearchSchema();
-    let count = 0;
     for (const [moduleName, tenants] of Object.entries(selected)) {
       for (const [logicalName, definition] of Object.entries(tenants.default)) {
-        count++;
         assert.equal(definition.typeName, logicalName);
         assert.equal(
           definition.indexName,
@@ -168,19 +163,20 @@ test("native Local's real layered search loader isolates every enabled static in
         assert.equal(definition.enabled, true);
       }
     }
-    const expectedCount = ["commerceServer", "commerceStagedServer"].includes(
-      server,
-    )
-      ? 4
-      : [
-            "platformServer",
-            "wasteServer",
-            "wcmsStagedServer",
-            "wcmsOnlineServer",
-          ].includes(server)
-        ? 1
-        : 0;
-    assert.equal(count, expectedCount, server);
+    const commerce = ["commerceServer", "commerceStagedServer"].includes(server);
+    const expected = commerce
+      ? ["commerceSearchCore/commerceSearchRuleProjection", "product/productLocalized", "product/productSearchProjection"]
+      : server === "processServer" ? [] : ["discoveryProjection/discoveryDocumentProjection"];
+    const actual = Object.entries(selected).flatMap(([moduleName, tenants]) =>
+      Object.keys(tenants.default).map((name) => moduleName + "/" + name)).sort();
+    assert.deepEqual(actual, expected, server);
+    const reset = foundation(
+      "nSystem/src/service/operations/defaultLocalResetProviderService",
+    ).policy();
+    const resetTargets = (reset.searchIndexes || []).map(
+      ({ moduleName, indexName }) => moduleName + "/" + indexName,
+    ).sort();
+    assert.deepEqual(resetTargets, actual, `${server}: reset targets must match enabled Local indexes`);
     if (server.startsWith("wcms")) {
       assert.equal(
         CONFIG.get("wcmsExperience").projection.indexName,
@@ -193,7 +189,7 @@ test("native Local's real layered search loader isolates every enabled static in
       assert.equal(selected.wcmsExperience, undefined);
     }
   }
-  prepare({
+  await prepare({
     projectRoot,
     frameworkRoot,
     environment: "kickoffDockerLocal",

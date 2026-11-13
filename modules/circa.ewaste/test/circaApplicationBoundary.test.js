@@ -20,30 +20,45 @@ test("Circa setup consumes the linked collection network releases in dependency 
   const contribution =
     config.backofficeApplicationInitialization.profiles.circa.dataPackages;
   assert.equal(contribution.$config, "replace");
-  const packages = contribution.value;
-  const expected = [
-    ["wasteCollection:sample-profile-addresses", "platformServer", "PLATFORM"],
-    ["wasteCollection:sample-locations", "locationServer", "LOCATION"],
-    ["wasteCollection:sample-collection-points", "wasteServer", "WASTE"],
+  const { loadRuntime } = require("../../../test/helpers/configuration");
+  const profile = loadRuntime("platformServer", "kickoffDockerLocal").backofficeApplicationInitialization.profiles.circa;
+  const dependencies = [
+    ["locationType:collection-categories", "locationServer", "LOCATION", "core"],
+    ["wasteCollection:collection-capabilities", "locationServer", "LOCATION", "core"],
+    ["eWaste:core-reference", "wasteServer", "WASTE", "core"],
+    ["eWaste:drop-off-location", "locationServer", "LOCATION", "core"],
+    ["circa.ewaste:network-enterprises", "platformServer", "PLATFORM", "sample"],
+    ["circa.ewaste:network-addresses", "platformServer", "PLATFORM", "sample"],
+    ["circa.ewaste:network-locations", "locationServer", "LOCATION", "sample"],
+    ["circa.ewaste:network-points", "wasteServer", "WASTE", "sample"],
+    ["circa.ewaste:operations", "platformServer", "PLATFORM", "sample"],
   ];
-  const positions = expected.map(([code, targetServer, targetRuntimeRole]) => {
-    const selected = packages.filter((entry) => entry.code === code);
-    assert.equal(selected.length, 1, `${code} must be included exactly once`);
-    assert.deepEqual(
-      { ...selected[0], kind: undefined },
-      {
-        code,
-        targetServer,
-        targetRuntimeRole,
-        dataType: "sample",
-        required: true,
-        trigger: "USER",
-        kind: undefined,
-      },
-    );
-    return packages.indexOf(selected[0]);
-  });
-  assert(positions[0] < positions[1] && positions[1] < positions[2]);
+  const framework = path.resolve(__dirname, "../../..", process.env.NODICS_FRAMEWORK_ROOT || "../nodics.ai");
+  const service = require(path.join(framework, "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
+  const steps = service.preparationSteps(profile);
+  let previousOrder = 0;
+  for (const [code, targetServer, targetRuntimeRole, dataType] of dependencies) {
+    const selected = steps.filter(step => step.code === code);
+    assert.equal(selected.length, 1, code);
+    const [step] = selected;
+    assert.equal(step.targetServer, targetServer);
+    assert.equal(step.targetRuntimeRole, targetRuntimeRole);
+    assert.equal(step.dataType, dataType);
+    assert.equal(step.required, true);
+    assert.equal(step.trigger, "USER");
+    assert(step.order > previousOrder, code);
+    previousOrder = step.order;
+  }
+  const local = loadRuntime("platformServer").backofficeApplicationInitialization.profiles.circa;
+  const localSteps = service.preparationSteps(local);
+  previousOrder = 0;
+  for (const [code, server, role] of dependencies) {
+    const step = localSteps.find(item => item.code === code);
+    assert.equal(step.targetServer, role === "LOCATION" ? "wasteServer" : server);
+    assert.equal(step.targetRuntimeRole, role === "LOCATION" ? "WASTE" : role);
+    assert(step.order > previousOrder, code);
+    previousOrder = step.order;
+  }
 });
 test("the single Circa demo requires identity, operations and rewards without bypassing owner admission", () => {
   const packages =
@@ -70,11 +85,7 @@ test("the single Circa demo requires identity, operations and rewards without by
   assert.equal(media.manifestModule, "circa.ewaste");
   assert.match(media.manifestPath, /^data\/sample-v001\//);
   const preparation = require("../../../../nodics.ai/nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService");
-  const profile = {
-    ...config.backofficeApplicationInitialization.profiles.circa,
-    dataPackages: packages,
-  };
-  const steps = preparation.preparationSteps(profile);
+  const steps = preparation.preparationSteps(require("../../../test/helpers/configuration").loadRuntime("platformServer").backofficeApplicationInitialization.profiles.circa);
   assert(steps.every((item) => item.required !== false));
   assert.equal(
     config.profileCustomerEligibility,

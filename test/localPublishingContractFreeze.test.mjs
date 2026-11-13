@@ -10,6 +10,12 @@ const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const frameworkRoot = configuration.frameworkRoot;
 const require = createRequire(import.meta.url);
+const dataReleases = require(
+  path.join(
+    frameworkRoot,
+    "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService.js",
+  ),
+);
 const contentPacks = require(
   path.join(
     frameworkRoot,
@@ -98,10 +104,24 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     configuration.loadRuntime("processServer", environment).runtimeRole.code,
     "PROCESS",
   );
-  assert.equal(
-    staged.data.dataReleases.initializationProfiles.localWcmsFoundation.enabled,
-    true,
-  );
+  // nImport owns optional enabled semantics and template expansion. Prove actual
+  // selection instead of requiring a redundant raw enabled:true override.
+  const resolveProfiles = (configuration) => dataReleases.initializationProfiles.call({
+    configuration: () => configuration,
+    error: (code, message) => Object.assign(new Error(message), { code }),
+  });
+  if (environment === "kickoffLocal") {
+    assert.ok(resolveProfiles(staged.data.dataReleases).localWcmsFoundation);
+    const disabledProfiles = structuredClone(staged.data.dataReleases);
+    disabledProfiles.initializationProfiles.localWcmsFoundation.enabled = false;
+    assert.equal(resolveProfiles(disabledProfiles).localWcmsFoundation, undefined);
+  } else {
+    assert.equal(
+      resolveProfiles(staged.data.dataReleases).localWcmsFoundation,
+      undefined,
+      "Docker does not select the native Local foundation profile",
+    );
+  }
   for (const release of releases) {
     const manifest = readJson(release.file);
     const baseline = release.baseline
@@ -109,17 +129,8 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       : Object.values(staged.cms.publication.baselines).find(
           (value) => value.contentPackCode === release.pack,
         );
-    if (
-      release.baseline === "axisassistant" &&
-      environment === "kickoffDockerLocal"
-    ) {
-      assert.equal(
-        baseline.releaseVersion,
-        undefined,
-        "Docker does not select the optional assistant release; owner registration must not qualify it",
-      );
-      continue;
-    }
+    // Axis owns the standard assistant release descriptor in both deployments.
+    // Matching this pin does not install its Core data or qualify Docker storage.
     assert.equal(
       baseline?.releaseVersion,
       manifest.sections[release.section].version,

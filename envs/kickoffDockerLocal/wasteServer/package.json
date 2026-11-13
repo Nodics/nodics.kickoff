@@ -33,6 +33,13 @@
       "publish": false,
       "web": false
     },
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-waste-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
     "displayName": "Docker Local Waste Server",
     "runtimeAliases": [
       "waste",

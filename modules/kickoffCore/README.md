@@ -2,17 +2,18 @@
 
 `kickoffCore` owns shared project capability customizations for `nodics.kickoff`.
 
+Shared documentation configuration contributes the content source and application
+profile. Each Staged deployment owns its explicit publication baseline; the
+authoring selection must remain outside shared configuration so Online delivery
+retains its own publication boundary. Validate both Local and Docker Local with
+`test/localPublishingContractFreeze.test.mjs` after changing a selected release.
+
 It is activated explicitly by the selected server; the containing `modules/`
 group participates only in structural discovery.
 
-The current unreleased runtime authority baseline lives entirely in
-`data/init-v001`: `runtime-assignments` (section version `0.0.9`) and
-`runtime-principal-scope` (section version `0.0.3`). The manifest pins the current
-Profile identity graph and the assignment-to-scope dependency. No predecessor
-snapshots or retained roots remain. `node --test test/runtimeAssignmentDataPack.test.js`
-from the project root verifies exact reviewed permissions and module ceilings,
-owner operations, source hashes and prerequisite pins. This is source validation,
-not installed authority or permission to replay Init on an existing deployment.
+Profile owns the installation's shared internal service account. Each runtime
+declares its identity and requests modules from the canonical deployment graph.
+The seven-runtime source gate is `test/runtimeAssignmentDataPack.test.js`.
 
 Commerce acceptance selects exact approved publication evidence through
 `NODICS_AGORA_<DOMAIN>_<OWNER>_PUBLICATION_{CODE,ROOT_CODE,SOURCE_VERSION,TARGET_VERSION}`
@@ -20,10 +21,10 @@ bindings. All four default to empty and fail closed. Read the owning contract in
 `llm/contracts/README.md` before qualifying a deployment; these selections do not
 publish or approve data.
 
-The Communication ENGAGEMENT role profile selects Profile's framework-owned
-template resources and trusted sources, gated by existing nConfig composition.
-`activeModules.compositions.employeeMail` defaults to `none`; only the Local
-Engagement server selects `employee`. Module presence does not activate email, credentials,
+Framework commsCore owns the complete employee-mail composition and Profile
+resource selection through nConfig. Its selection defaults to `none`; only the
+Local Process server selects `employee`. Kickoff retains the actual sending
+runtime's source allowlist; selecting resources grants no source trust. Module presence does not activate email, credentials,
 registration or recovery. Provider mechanics and security defaults remain in the
 framework; SMTP inputs stay in the sending deployment.
 

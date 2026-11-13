@@ -15,7 +15,6 @@ import { test } from "node:test";
 import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
-import crypto from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 const require = createRequire(import.meta.url);
@@ -38,53 +37,11 @@ test("Local and Docker Process select protocol names and deployment connections"
       ),
       [{ moduleName: "editorial", sections: ["editorialWorkflows"] }],
     );
-    const transitions =
-      config.process.definitionContributions.ownershipTransitions;
-    if (environment === "kickoffLocal") {
-      assert.deepEqual(
-        transitions.map((item) => item.definitionCode),
-        ["editorialApproval", "editorialPublication"],
-      );
-      assert(
-        transitions.every(
-          (item) =>
-            item.mode === "RETAIN" &&
-            item.source.releaseCode === "processServer:init-v001" &&
-            item.target.releaseCode === "editorial:editorialWorkflows" &&
-            /^[a-f0-9]{64}$/.test(item.publishedChecksum),
-        ),
-      );
-      const source =
-        require("../../../envs/kickoffLocal/processServer/data/manifest.json")
-          .sections["init-v001"];
-      const target = require(
-        path.join(
-          frameworkRoot,
-          "nodics.wcms/modules/editorial/data/manifest.json",
-        ),
-      ).sections.editorialWorkflows;
-      const checksum = (section) =>
-        crypto
-          .createHash("sha256")
-          .update(
-            Object.keys(section.files)
-              .sort()
-              .map((file) => file + ":" + section.files[file])
-              .join("|"),
-          )
-          .digest("hex");
-      for (const transition of transitions) {
-        assert.equal(transition.source.version, source.version);
-        assert.equal(transition.source.checksum, checksum(source));
-        assert.equal(transition.target.version, target.version);
-        assert.equal(transition.target.checksum, checksum(target));
-      }
-    } else
-      assert.deepEqual(
-        transitions,
-        [],
-        "Local evidence cannot authorize Docker adoption",
-      );
+    assert.deepEqual(
+      config.data.dataReleases.contributions.filter(item => item.moduleName === "rulesApi"),
+      [{ moduleName: "rulesApi", sections: ["rulesPolicyApproval"] }],
+    );
+    assert.deepEqual(config.process.definitionContributions.ownershipTransitions, []);
     assert.deepEqual(config.process.actionAdapters.allowedActions, [
       "nodics.process.noop",
       "editorial.applyDecision",
@@ -130,38 +87,24 @@ test("Local and Docker Process select protocol names and deployment connections"
   );
 });
 
-test("customer reviewer policy consumes Editorial graphs while retaining the released Local payload", () => {
+test("Kickoff consumes neutral Editorial graphs without assigning a queue", () => {
   const payload = require(
     path.join(
       frameworkRoot,
       "nodics.wcms/modules/editorial/data/init-v001/records/process/editorialWorkflowDefinitionData.js",
     ),
   );
-  const legacyPath = new URL(
-    "../../../envs/kickoffLocal/processServer/data/init-v001/records/process/defaultEditorialProcessDefinitionContributionData.js",
-    import.meta.url,
-  );
-  assert.equal(
-    crypto
-      .createHash("sha256")
-      .update(fs.readFileSync(legacyPath))
-      .digest("hex"),
-    "17a8035e71bf114b72406c555cf32bc5cb5fe052de2d844b6d25af04053c00f0",
-  );
-  const legacy = require(legacyPath.pathname);
   const owner = require(
     path.join(
       frameworkRoot,
       "nodics.process/modules/workflow/src/service/definition/defaultProcessDefinitionContributionService.js",
     ),
   );
-  const customerPolicy = require("../config/properties.js").process
-    .definitionContributions.reviewerAssignments;
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const config = loadRuntime("processServer", environment);
     assert.deepEqual(
       config.process.definitionContributions.reviewerAssignments,
-      customerPolicy,
+      {},
     );
     assert.equal(
       fs.existsSync(
@@ -183,7 +126,7 @@ test("customer reviewer policy consumes Editorial graphs while retaining the rel
         moduleName: "editorial",
       }),
     );
-    assert.deepEqual(effective, legacy.definitions);
+    assert.deepEqual(effective, payload.definitions);
     const unrelated = structuredClone(payload.definitions[0]);
     assert.deepEqual(
       adapter.customizeDefinition(unrelated, { moduleName: "other" }),
@@ -204,26 +147,39 @@ test("actual Local/Docker package projection and selected profiles never automat
   const probe = `
     const path = require('node:path');
     const input = JSON.parse(process.argv[1]);
-    require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectConfigurationProbeService')).resolve(input);
-    global.CLASSES = { NodicsError: class extends Error { constructor(code, message) { super(message); this.code = code; } } };
-    const registration = require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nService/src/service/module/defaultModuleRegistrationAgentService'));
-    const releases = require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService'));
-    global.SERVICE = { ...global.SERVICE,
-      DefaultCustomerRegistrationService: require(path.join(input.frameworkRoot, 'nodics.platform/modules/profile/src/service/customer/defaultCustomerRegistrationService')) };
-    // Only persistence ports are isolated; discovery, selection and profile construction are the actual owners.
-    const service = { ...releases, getInstallations: async () => [],
-      executePreparedPlan: async (request, plan) => ({ plannedCodes: plan.releases.map(release => release.releaseCode) }) };
     (async () => {
-      const profiles = await service.getInitializationProfiles({ tenant: 'default' });
-      const startup = await service.installStartupReleases({ tenant: 'default' });
+      await require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nTooling/src/service/project/defaultProjectConfigurationProbeService')).resolve(input);
+      global.CLASSES.NodicsError = class extends Error { constructor(code, message) { super(message); this.code = code; } };
+      const registration = require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nService/src/service/module/defaultModuleRegistrationAgentService'));
+      const releases = require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService'));
+      global.SERVICE = { ...global.SERVICE,
+        DefaultProcessDefinitionContributionService: require(path.join(input.frameworkRoot, 'nodics.process/modules/workflow/src/service/definition/defaultProcessDefinitionContributionService')),
+        DefaultSchemaAuthoringPolicyService: require(path.join(input.frameworkRoot, 'nodics.foundation/modules/nDatabase/database/src/service/schema/defaultSchemaAuthoringPolicyService')),
+        DefaultCustomerRegistrationService: require(path.join(input.frameworkRoot, 'nodics.platform/modules/profile/src/service/customer/defaultCustomerRegistrationService')) };
+      // Only persistence ports are isolated; discovery, selection and profile construction are the actual owners.
+      const service = { ...releases, getInstallations: async () => [],
+        executePreparedPlan: async (request, plan) => ({ plannedCodes: plan.releases.map(release => release.releaseCode) }) };
+      const profiles = [];
+      for (const [code, profile] of Object.entries(service.initializationProfiles())) {
+        // Resolve Editorial profiles and implicit selections through nImport. Explicit
+        // profiles naming only other owners cannot install an Editorial workflow.
+        if (profile.steps.some(step => !step.releaseCodes || step.releaseCodes.some(value => value.startsWith('editorial:'))))
+          profiles.push(await service.buildInitializationProfile(code, profile, { tenant: 'default' }));
+      }
+      const startup = await service.installStartupReleases({ tenant: 'default', modules: NODICS.getActiveModules().filter(name => name === 'editorial') });
       process.stdout.write(JSON.stringify({
         role: CONFIG.get('runtimeRole').code,
         startupEnabled: service.configuration().types.init.enabled !== false &&
           service.configuration().types.init.startupExecution !== false,
         editorialActive: NODICS.getActiveModules().includes('editorial'),
+        availableReminderReleases: service.discoverReleases('init').filter(release =>
+          release.moduleName === 'digitalCore' && release.capability?.code === 'digitalCouponReminders' &&
+          release.selectionPolicy === 'EXPLICIT' && service.isDestinationCompatible(release)).map(release => release.sectionCode).sort(),
+        foundationAdmitted: service.discoverReleases('init').some(release =>
+          release.releaseCode === 'editorial:init-v001' && service.isDestinationCompatible(release)),
         packages: registration.buildActivationDataPackages('editorial', NODICS.getRawModule('editorial')),
         discoverable: service.discoverReleases('init').some(release => release.releaseCode === 'editorial:editorialWorkflows'),
-        profiles: profiles.data.map(profile => ({ code: profile.code, codes: profile.steps.flatMap(step => step.releases.map(release => release.releaseCode)) })),
+        profiles: profiles.map(profile => ({ code: profile.code, codes: profile.steps.flatMap(step => step.releases.map(release => release.releaseCode)) })),
         startup
       }));
     })().catch(error => { console.error(error); process.exitCode = 1; });
@@ -262,6 +218,8 @@ test("actual Local/Docker package projection and selected profiles never automat
         ),
       );
       assert.equal(result.role, role);
+      if (environment === "kickoffLocal" && server === "processServer")
+        assert.deepEqual(result.availableReminderReleases, ["couponReminderSchedule", "couponReminderTrigger", "couponReminderWorkflow"]);
       const optional = result.packages.find(
         (pack) => pack.code === "editorial:editorialWorkflows",
       );
@@ -297,14 +255,10 @@ test("actual Local/Docker package projection and selected profiles never automat
         false,
       );
       if (server === "wcmsStagedServer") {
-        assert.ok(
-          result.profiles.some((profile) =>
-            profile.codes.includes("editorial:init-v001"),
-          ),
-        );
         if (result.startupEnabled) {
-          assert.ok(
-            result.startup.plannedCodes.includes("editorial:init-v001"),
+          assert.equal(
+            (result.startup.plannedCodes || []).includes("editorial:init-v001"),
+            result.foundationAdmitted,
           );
         } else {
           assert.deepEqual(

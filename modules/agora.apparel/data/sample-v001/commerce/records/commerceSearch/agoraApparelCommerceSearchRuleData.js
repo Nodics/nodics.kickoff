@@ -23,7 +23,7 @@ module.exports = Object.freeze({
     code: "agoraWomenRanking",
     tenant: "default",
     name: "Agora Women Category Ranking",
-    storeCode: "agoraMainStore",
+    storeCode: "agoraApparelStore",
     locale: "en",
     scopeType: "CATEGORY",
     categoryCode: "agoraWomen",

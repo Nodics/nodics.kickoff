@@ -244,7 +244,7 @@ test("Local selected role dependencies are fresh and ordered while refund except
   assert.equal(new Set(steps.map(step => step.code)).size, steps.length, "selected stages must be unique");
   for (const code of prerequisites)
     assert.equal(steps.filter(step => step.code === code).length, 1, `current profile must retain ${code}`);
-  assert.notEqual(plan.profileDigest, observer.digest(profile), "retained observation plan cannot qualify unadopted role source changes");
+  assert.equal(plan.profileDigest, observer.digest(profile));
   for (const code of prerequisites) {
     const selected = steps.filter(step => step.code === code);
     assert.equal(selected.length, 1, code);
@@ -254,10 +254,13 @@ test("Local selected role dependencies are fresh and ordered while refund except
     assert.equal(step.phase, "BEFORE_PUBLICATION", code);
     assert.equal(step.targetRuntimeRole, "PLATFORM", code);
     const stage = plan.stages.find(stage => stage.code === code);
-    if (stage) assert.deepEqual(stage.descriptor, observer.stepIdentity(step));
-    else assert(roleDefinitions.includes(code), "only new role definitions await plan adoption");
+    assert.deepEqual(stage.descriptor, observer.stepIdentity(step), code);
     const [moduleName, sectionCode] = code.split(":");
     const owners = {"loyaltyWallet":"nodics.loyalty/modules/loyaltyWallet","import":"nodics.foundation/modules/nData/nImport/import","inventory":"nodics.commerce/modules/baseCommerce/modules/inventory","order":"nodics.commerce/modules/checkout/modules/order","product":"nodics.commerce/modules/baseCommerce/modules/product","publish":"nodics.foundation/modules/nPublish","promotion":"nodics.commerce/modules/baseCommerce/modules/promotion",
+      profile: "nodics.platform/modules/profile",
+      cms: "nodics.wcms/modules/cms",
+      store: "nodics.commerce/modules/baseCommerce/modules/store",
+      wasteCore: "nodics.waste/modules/wasteCore",
       cart: "nodics.commerce/modules/checkout/modules/cart",
       checkoutCore: "nodics.commerce/modules/checkout/modules/checkoutCore",
       digitalCore: "nodics.commerce/modules/digitalCommerce/modules/digitalCore",
@@ -267,12 +270,7 @@ test("Local selected role dependencies are fresh and ordered while refund except
     const section = releaseManifest.sections[sectionCode];
     const release = importer.inspectManifest({ name: moduleName }, section.dataType,
       path.join(directory, "manifest.json"), section, sectionCode, true);
-    const reviewedChange = require("./fixtures/circaUnreleasedObservationSourceDifferences.json").stages[code];
-    if (stage && reviewedChange) {
-      assert.equal(stage.release.checksum, reviewedChange.retained, code + ": historical plan remains sealed");
-      assert.equal(release.checksum, reviewedChange.current, code + ": exact reviewed source baseline");
-      assert.notEqual(stage.release.checksum, release.checksum, "retained receipt does not authorize changed baseline replay");
-    } else if (stage) assert.equal(stage.release.checksum, release.checksum, code);
+    assert.equal(stage.release.checksum, release.checksum, code);
     for (const [file, checksum] of Object.entries(section.files))
       assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(directory, file))).digest("hex"), checksum, file);
   }

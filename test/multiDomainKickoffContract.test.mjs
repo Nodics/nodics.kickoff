@@ -240,26 +240,23 @@ test("domain manifests isolate Commerce and WCMS releases and verify every immut
       new Set([
         "COMMERCE_STAGED",
         "WCMS_STAGED",
-        ...(definition.pack === "agora.apparel" ? ["COMMERCE"] : []),
+        "COMMERCE",
       ]),
     );
     for (const section of sections.filter(
       (item) => item.destinationRole === "COMMERCE",
     )) {
-      assert.equal(
-        definition.pack,
-        "agora.apparel",
-        "Only reviewed Apparel Online owner releases are in scope",
-      );
       assert.equal(section.selectionPolicy, "EXPLICIT");
       if (section.owningDomain === "store") {
         assert.equal(section.lifecycle, "REFERENCE");
         assert.equal(section.installer, undefined);
         assert.deepEqual(Object.keys(section.files).sort(), [
-          "sample-v001/store/headers/agoraApparelStoreReferenceHeader.js",
-          "sample-v001/store/records/agoraApparelStoreData.js",
+          `sample-v001/store/headers/${definition.prefix}StoreReferenceHeader.js`,
+          ...["PointOfService", "SalesChannel", "Store"].map(schema =>
+            `sample-v001/store/records/${definition.prefix}${schema}Data.js`),
         ]);
       } else {
+        assert.equal(definition.pack, "agora.apparel");
         assert.equal(section.lifecycle, "OPERATIONAL_VERSIONED");
         assert(
           ["INVENTORY_OPENING_RECEIPTS", "PROMOTION_CAMPAIGN_ISSUANCE"].includes(

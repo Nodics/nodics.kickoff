@@ -17,5 +17,12 @@ WORKDIR /workspace/nodics.kickoff
 RUN npm install --omit=dev --ignore-scripts \
     && npm cache clean --force
 
+# Generate runtime artifacts in the image from its own source and dependencies.
+RUN set -eu; \
+    for serverPackage in envs/kickoffDockerLocal/*/package.json; do \
+        serverPath="${serverPackage%/package.json}"; \
+        node_modules/.bin/nodics build --environment=kickoffDockerLocal --server="${serverPath##*/}" --source-only; \
+    done
+
 USER node
 ENTRYPOINT ["node"]

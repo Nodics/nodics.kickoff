@@ -448,11 +448,11 @@ test("Optional E12 coordinator requires its authored job and profiles despite co
   assert.equal(prerequisite.ready, false);
   assert.equal(
     prerequisite.reasonCode,
-    "CIRCA_COUPON_REMINDER_CRON_JOB_REQUIRED",
+    "CIRCA_COUPON_REMINDER_ACCEPTANCE_PROFILES_REQUIRED",
   );
-  assert.equal(prerequisite.evidence.reminderJobCount, 0);
-  assert.equal(prerequisite.evidence.digitalConfigured, false);
-  assert.equal(prerequisite.evidence.profileConfigured, false);
+  assert.equal(prerequisite.evidence.reminderJobCount, 1);
+  assert.equal(prerequisite.evidence.digitalConfigured, true);
+  assert.equal(prerequisite.evidence.profileConfigured, true);
   assert.equal(prerequisite.evidence.communicationConfigured, true);
   assert.equal(prerequisite.evidence.digitalProfilePresent, false);
   assert.equal(prerequisite.evidence.cronProfilePresent, false);
@@ -489,12 +489,12 @@ test("Optional E12 coordinator requires its authored job and profiles despite co
   );
   assert.equal(
     report.operations[0].reason,
-    "CIRCA_COUPON_REMINDER_CRON_JOB_REQUIRED",
+    "CIRCA_COUPON_REMINDER_ACCEPTANCE_PROFILES_REQUIRED",
   );
   assert(
     report.operations.every(
       (operation) =>
-        operation.reason === "CIRCA_COUPON_REMINDER_CRON_JOB_REQUIRED",
+        operation.reason === "CIRCA_COUPON_REMINDER_ACCEPTANCE_PROFILES_REQUIRED",
     ),
   );
   assert.equal(report.scenarios[0].status, ACCEPTANCE_STATUSES.BLOCKED);

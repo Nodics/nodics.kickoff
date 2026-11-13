@@ -1,0 +1,46 @@
+{
+  "case": [
+    "B02",
+    "B03",
+    "B04"
+  ],
+  "kind": "CIRCA_AXIS_ONBOARDING_SAMPLE_SCENARIO",
+  "importable": false,
+  "applicationDataMechanism": "Advertised Profile APIs and Axis only; this JSON is input, not a seeded identity or receipt.",
+  "enterprise": {
+    "code": "CIRCA_SAMPLE_ONBOARDING",
+    "name": "Circa Sample Onboarding"
+  },
+  "administrator": {
+    "email": "onboarding.administrator@circa.local",
+    "firstName": "Circa Sample",
+    "lastName": "Administrator"
+  },
+  "operator": {
+    "email": "onboarding.operator@circa.local",
+    "firstName": "Circa Sample",
+    "lastName": "Operator",
+    "roleCode": "CONTENT_EDIT"
+  },
+  "uninvitedEmail": "uninvited.sample@circa.local",
+  "liveActivation": {
+    "enterprise": {
+      "code": "CIRCA_SAMPLE_ACTIVATION",
+      "name": "Circa Sample Live Activation"
+    },
+    "administrator": {
+      "email": "activation.administrator@circa.local",
+      "firstName": "Circa Live",
+      "lastName": "Administrator"
+    },
+    "operator": {
+      "email": "activation.operator@circa.local",
+      "firstName": "Circa Live",
+      "lastName": "Operator",
+      "roleCode": "CONTENT_EDIT"
+    },
+    "withdrawalEmail": "uninvited.sample@circa.local"
+  },
+  "delivery": "Authenticated127.0.0.1 SMTP capture; exact fixture recipients; no relay.",
+  "credentials": "Generated privately and submitted only through the permitted owner completion API. No browser new-credential entry."
+}

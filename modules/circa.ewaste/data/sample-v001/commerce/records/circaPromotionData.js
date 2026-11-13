@@ -53,6 +53,7 @@ module.exports = {
     },
     "couponOffer": {
       "version": 1,
+      "expiryReminderEnabled": true,
       "supply": {
         "mode": "LIMITED",
         "quantity": 100

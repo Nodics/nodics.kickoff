@@ -29,6 +29,9 @@ const effective = probe.read({ projectRoot, frameworkRoot, environment: environm
 assert(effective.modules.includes(environment.environment), 'Selected environment must be indexed');
 assert(effective.modules.includes(waste.server), 'Selected Waste server must be indexed');
 assert.equal(effective.properties.runtimeRole.code, 'WASTE');
+assert.equal(effective.properties.runtimeRole.publication, 'OPERATIONAL');
+assert(effective.modules.includes('locationCore'));
+assert.equal(effective.properties.database.locationMap.mongodb.master.databaseName, 'kickoffLocalLocation');
 assert.equal(effective.properties.servers.default.endpoint.httpPort, waste.port);
 assert.equal(effective.properties.apiExposure.categories.wasteInternal.enabled, true);
 for (const name of ['nodics.waste', 'wasteCore', 'wasteMaterial', 'wasteCollection',
@@ -74,7 +77,10 @@ for (const [schema, code] of [
   ['wasteCollectionAcceptanceRule', 'CIRCA_DROP_OFF_SMART_HOME']
 ]) assert(recordsBySchema[schema]?.some(record => record.code === code), 'Customer overlay must contain ' + code);
 
-const profile = effective.properties.data.dataReleases.initializationProfiles.localWasteFoundation;
+const releaseOwner = require(path.join(frameworkRoot, 'nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService'));
+const profile = releaseOwner.initializationProfiles.call({ ...releaseOwner,
+  configuration: () => effective.properties.data.dataReleases,
+}).localWasteFoundation;
 assert.equal(profile.enabled, true);
 assert.deepEqual(profile.steps, [
   { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },

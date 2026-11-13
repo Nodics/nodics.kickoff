@@ -25,7 +25,7 @@ const require = createRequire(import.meta.url);
 const fixtureUrl = new URL("../scripts/acceptance/fixtures/circa-bidding-auction.json", import.meta.url);
 const fixture = JSON.parse(await readFile(fixtureUrl, "utf8"));
 const assets = Object.values(require(
-  "../modules/circa.ewaste/data/sample-v001/waste/records/circaWasteAssetData.js",
+  "../modules/circa.ewaste/data/sample-v001/waste/records/circaWasteAssetData.json",
 ));
 
 test("auction selection uses existing Circa asset, tenant and Store identities without credentials", () => {

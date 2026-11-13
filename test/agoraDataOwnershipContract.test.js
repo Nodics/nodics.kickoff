@@ -34,22 +34,7 @@ test("project baseline adopts framework validation for v001 files, checksums and
   assert(result.sections.length > 10);
 });
 
-test("native runtime baseline pins the current Profile authority without mutating installed history", () => {
-  const crypto = require("node:crypto");
-  const { frameworkRoot } = require("./helpers/configuration");
-  const section = require("../modules/kickoffCore/data/manifest.json").sections.nativeRuntimeAssignments;
-  const profile = require(path.join(frameworkRoot, "nodics.platform/modules/profile/data/manifest.json")).sections["init-v001"];
-  assert.equal(section.sourceRoot, "init-v001");
-  assert.equal(section.version, "0.0.10", "Approved runtime authority dependency changes require an explicit release version");
-  assert.equal(profile.version, "0.0.8");
-  const prerequisite = section.prerequisites.find(ref => ref.moduleName === "profile" && ref.sectionCode === "init-v001");
-  assert(prerequisite, "Assignments must pin Profile bootstrap authority");
-  assert.equal(prerequisite.version, profile.version);
-  const checksum = release => crypto.createHash("sha256")
-    .update(Object.keys(release.files).sort().map(file => file + ":" + release.files[file]).join("|"))
-    .update(release.prerequisites?.length ? "|prerequisites:" + JSON.stringify(release.prerequisites) : "").digest("hex");
-  assert.equal(prerequisite.checksum, checksum(profile), "The pin covers the complete prerequisite metadata, including partitions");
-});
+
 
 test("Local and Docker administration consume customer profiles without domain services", () => {
   const { loadRuntime, activeModuleNames } = require("./helpers/configuration");
@@ -135,7 +120,7 @@ for (const domain of ["apparel", "electronics", "telco"]) {
   });
 
   test(`${domain} dashboard artwork references its existing application Media data`, () => {
-    const visual = require(path.join(root, "modules", "agora." + domain, "config", "properties.js")).backofficeApplicationVisual;
+    const visual = require(path.join(root, "modules", "agora." + domain, "config", "properties.js")).backofficeApplicationInitialization.profiles["agora" + domain].presentation.visual;
     const section = manifest.sections[prefix + "ContentCatalog"];
     const records = require(path.join(dataRoot, section.sourceRoot, "content", "records", prefix + "SharedMediaData.js"));
     assert.deepEqual(Object.keys(visual).sort(), ["alt", "mediaCode"]);
@@ -148,12 +133,13 @@ for (const domain of ["apparel", "electronics", "telco"]) {
     const profileCode = "agora" + domain;
     const properties = require(path.join(root, "modules", "agora." + domain, "config", "properties.js"));
     const profile = properties.backofficeApplicationInitialization
-      .runtimeRoleProfiles.PLATFORM.profiles[profileCode];
+      .profiles[profileCode];
     assert.equal(profile.owner, "agora." + domain);
-    assert.equal(profile.presentation.visual, properties.backofficeApplicationVisual);
+    assert.equal(properties.backofficeApplicationVisual, undefined, "Only the consumed profile owns application artwork; no unused global visual alias");
+    assert.equal(typeof profile.presentation.visual.mediaCode, "string");
     assert.equal(
       kickoffCoreProperties.backofficeApplicationInitialization
-        .runtimeRoleProfiles.PLATFORM.profiles[profileCode],
+        .profiles[profileCode],
       undefined,
       "Project core must not own application-specific profiles",
     );

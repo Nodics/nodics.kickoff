@@ -426,10 +426,18 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const profile = runtime.backofficeApplicationInitialization.profiles.circa;
     const moduleSteps = require("../config/properties")
       .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+    const bindings = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
+    const initializer = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService"));
+    const deployment = initializer.deploymentPropertyContext({
+      projectRoot: path.resolve(__dirname, "../../.."),
+      frameworkRoot,
+      environmentCode: environment,
+      serverCode: "platformServer",
+    });
     for (const shared of moduleSteps) {
       assert.deepEqual(
         profile.dataPackages.find((step) => step.code === shared.code),
-        shared,
+        bindings.resolve(shared, runtime, deployment),
         `Deployment selection must preserve shared package ${shared.code} and target`,
       );
     }

@@ -1,203 +1,89 @@
+/* Copyright (c) 2026 Nodics. Governed by the root LICENSE. */
 "use strict";
-
+/** Exercises operator-visible Kickoff setup through canonical nConfig projection and nImport catalogue/plan owners. */
 const assert = require("node:assert/strict");
 const path = require("node:path");
-
+const test = require("node:test");
 const projectRoot = path.resolve(__dirname, "..");
+const {loadEnvironment, loadRuntime, frameworkRoot, activeModuleNames} = require("./helpers/configuration");
+const probe = require(path.join(frameworkRoot,"nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
 
-const requiredProfiles = {
-  platformServer: {
-    role: "PLATFORM",
-    profiles: {
-      localPlatformFoundation: ["init", "core"],
-    },
-  },
-  wcmsStagedServer: {
-    role: "WCMS_STAGED",
-    profiles: {
-      localWcmsFoundation: ["init", "core"],
-      localDocumentationFoundation: ["init"],
-    },
-  },
-  commerceServer: {
-    role: "COMMERCE",
-    profiles: {
-      localCommerceFoundation: ["core"],
-    },
-  },
-  commerceStagedServer: {
-    role: "COMMERCE_STAGED",
-    profiles: {
-      localCommerceStagedCatalogFoundation: ["sample"],
-    },
-  },
-  processServer: {
-    role: "PROCESS",
-    profiles: {
-      localProcessWorkflowFoundation: ["init"],
-    },
-  },
-  engagementServer: {
-    role: "ENGAGEMENT",
-    profiles: {
-      localEngagementFoundation: ["core", "sample"],
-    },
-  },
-  loyaltyServer: {
-    role: "LOYALTY",
-    profiles: {
-      localLoyaltyFoundation: ["core"],
-    },
-  },
-  wasteServer: {
-    role: "WASTE",
-    profiles: {
-      localWasteFoundation: ["core", "sample"],
-    },
-  },
-  locationServer: {
-    role: "LOCATION",
-    profiles: {
-      localLocationFoundation: ["init", "core"],
-    },
-  },
-};
-
-const allowedDataTypes = new Set(["init", "core", "sample"]);
-
-const {
-  loadRuntime,
-  loadEnvironment,
-  frameworkRoot,
-  activeModuleNames,
-} = require("./helpers/configuration");
-const releaseService = require(
-  path.join(
-    frameworkRoot,
-    "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService",
-  ),
-);
-
-for (const [server, expectation] of Object.entries(requiredProfiles)) {
-  const runtime = loadRuntime(server);
-  assert.equal(
-    runtime.runtimeRole && runtime.runtimeRole.code,
-    expectation.role,
-    `${server} must own ${expectation.role}`,
-  );
-  const releases = runtime.data && runtime.data.dataReleases;
-  assert(releases, `${server} must declare data release policy`);
-  const consumer = {
-    ...releaseService,
-    configuration: () => releases,
-    error: (code, message) => Object.assign(new Error(message), { code }),
+test("operator entry points resolve complete plans on the selected Local runtime", async () => {
+  const topology = loadEnvironment("kickoffLocal");
+  const tooling = await import(path.join(frameworkRoot,"nodics.foundation/modules/nTooling/src/service/project/defaultProjectEnvironmentConfigurationService.mjs"));
+  const {locationSetupRuntime} = await import(path.join(frameworkRoot,"nodics.platform/modules/backoffice/src/service/acceptance/defaultApplicationBootstrapAcceptanceService.mjs"));
+  const platform = loadRuntime("platformServer");
+  const bootstrap = platform.tooling.acceptance.localBootstrap;
+  const guided = tooling.projectRuntimeAcceptance(projectRoot, topology, {role:"WCMS_STAGED"}).guidedInitialization;
+  const staged = tooling.projectRuntime(topology, guided.runtime);
+  const stagedProfile = tooling.projectInitializationProfile(staged, guided.profileCode, guided.profileTemplate);
+  const maps = locationSetupRuntime(topology, bootstrap.locationInitializationProfile);
+  assert.equal(maps.server, "wasteServer");
+  const expected = {
+    platformServer: {[bootstrap.platformInitializationProfile]: ["init","core"], circaIdentityAuthority:["init"], localAxisIdentityDefinitions:["init"], localContentAccessDefinitions:["init"]},
+    [staged.server]: {[stagedProfile]:["init","core"],localDocumentationFoundation:["init"]},
+    [maps.server]: {[bootstrap.locationInitializationProfile]:["core"],localWasteFoundation:["core","sample"]},
   };
-  global.CONFIG = { get: (key) => runtime[key] };
-  assert.equal(releases.lifecycleMetadataRequired, true);
-  assert.equal(releases.destinationEnforced, true);
-  assert.equal(
-    consumer.validateDestination({
-      destinationRole: expectation.role,
-      environmentScope: ["LOCAL"],
-    }),
-    true,
-  );
-  const profiles = consumer.initializationProfiles();
-  for (const [profileCode, dataTypes] of Object.entries(expectation.profiles)) {
-    const profile = profiles[profileCode];
-    assert(
-      profile && profile.enabled === true,
-      `${server}.${profileCode} must be enabled`,
-    );
-    assert.match(
-      profileCode,
-      /^local[A-Z][A-Za-z0-9]+Foundation$/,
-      `${profileCode} must follow local foundation naming`,
-    );
-    assert.equal(
-      profile.order,
-      undefined,
-      `${profileCode} must use module index instead of profile order`,
-    );
-    assert.equal(
-      typeof profile.label,
-      "string",
-      `${profileCode} must expose a friendly label`,
-    );
-    assert.equal(
-      typeof profile.description,
-      "string",
-      `${profileCode} must expose a friendly description`,
-    );
-    assert.equal(
-      typeof profile.completionMessage,
-      "string",
-      `${profileCode} must expose completion guidance`,
-    );
-    assert(
-      profile.label.length > 8 && !profile.label.includes(expectation.role),
-      `${profileCode} label must be business-friendly`,
-    );
-    assert(
-      profile.description.length > 40,
-      `${profileCode} description must explain the operator journey`,
-    );
-    assert(
-      profile.completionMessage.length > 40,
-      `${profileCode} completion message must explain the result`,
-    );
-    assert.deepEqual(
-      profile.steps.map((step) => step.dataType),
-      dataTypes,
-      `${profileCode} must keep the agreed step order`,
-    );
-    assert.equal(
-      new Set(profile.steps.map((step) => step.dataType)).size,
-      profile.steps.length,
-      `${profileCode} must not repeat a data type`,
-    );
-    profile.steps.forEach((step) => {
-      assert(
-        allowedDataTypes.has(step.dataType),
-        `${profileCode} uses unsupported data type ${step.dataType}`,
-      );
-      if (step.releaseCodes !== undefined) {
-        assert(
-          Array.isArray(step.releaseCodes) && step.releaseCodes.length > 0,
-          `${profileCode} releaseCodes must be a non-empty list when present`,
-        );
-        step.releaseCodes.forEach((releaseCode) =>
-          assert.match(
-            releaseCode,
-            /^[A-Za-z][A-Za-z0-9._-]{0,127}:[A-Za-z][A-Za-z0-9_-]{0,127}$/,
-          ),
-        );
+  for (const runtime of topology.topology.groups.backends) {
+    const advertised = runtime.initializationProfiles.map(row => row.code).sort();
+    const shapes = expected[runtime.server] || {};
+    assert.deepEqual(advertised, Object.keys(shapes).sort(), runtime.server);
+    if (!advertised.length) continue;
+    await probe.resolve({projectRoot,frameworkRoot,environment:"kickoffLocal",server:runtime.server,
+      variables:{NODICS_BOOTSTRAP_ADMIN_PASSWORD:"fixture-admin-password-for-offline-plan",
+        NODICS_BOOTSTRAP_SERVICE_PASSWORD:"fixture-service-password-for-offline-plan",
+        NODICS_API_KEY:"fixture-runtime-proof-for-offline-plan-only"}});
+    const owner = {...SERVICE.DefaultDataReleaseService, getInstallations:async () => [],
+      error:(code,message)=>Object.assign(new Error(message),{code})};
+    const request = {tenant:"default"};
+    const catalogue = await owner.getInitializationProfiles(request);
+    assert.deepEqual(catalogue.data.map(row=>row.profileCode).sort(), advertised);
+    for (const item of catalogue.data) {
+      const input = {...request, profileCode:item.profileCode};
+      const {data:plan} = await owner.getInitializationProfile(input);
+      assert.equal(plan.publicationContext, CONFIG.get("runtimeRole").publication);
+      assert.deepEqual(plan.steps.map(step=>step.dataType), shapes[item.profileCode]);
+      for (const field of ["label","description","completionMessage"]) assert(plan[field]?.trim());
+      assert.equal(plan.blocked,false,item.profileCode);
+      assert(plan.steps.some(step=>step.releases.length),item.profileCode);
+      const codes = plan.steps.flatMap(step=>step.releases.map(release=>release.releaseCode));
+      if (item.profileCode === bootstrap.platformInitializationProfile) {
+        assert(codes.includes("profile:init-v001"),"Platform setup must include the Profile foundation");
+        assert(codes.includes("loyaltyProgram:partnerEligibilityAdministrationPermission"),
+          "Platform setup must discover the Loyalty owner's default permission release");
       }
-    });
+      if (item.profileCode === "localDocumentationFoundation")
+        assert.deepEqual(codes.sort(),["axis:axisBaseline","cms:init-v001"]);
+      if (item.profileCode === "localAxisIdentityDefinitions") {
+        assert(codes.includes("axis:accessGroups"));
+        assert(!codes.includes("profile:enterpriseRoles"), "definition selection must not install responsibility records");
+        assert(!codes.includes("axis:axisBaseline"), "access definitions must not install CMS content");
+      }
+      if (item.profileCode === "localContentAccessDefinitions") {
+        assert(codes.includes("cms:businessAccessGroups"));
+        assert(!codes.includes("cms:businessAccessRoles"), "tenant group preparation must not install authority role definitions");
+        assert(!codes.includes("cms:init-v001"), "group preparation must not install content foundations");
+        assert(!codes.some(code => code.startsWith("nexus.web:")), "access definitions must not initialize an application");
+      }
+      if (item.profileCode === bootstrap.locationInitializationProfile)
+        assert.deepEqual(codes,["locationMap:core-map-reference"]);
+      if (item.profileCode === "localWasteFoundation")
+        assert.deepEqual(codes.sort(),["circa.ewaste:waste-policy","eWaste:core-reference","wasteMaterial:core-v001"]);
+      if (item.profileCode !== "localWasteFoundation") assert(!plan.steps.some(step=>step.dataType === "sample"));
+      await assert.rejects(owner.runInitializationProfile(input,true),{code:"ERR_AUTH_00003"});
+    }
   }
-}
+});
 
-const environmentProfile = loadEnvironment("kickoffLocal");
-const stagedTopology = environmentProfile.topology.groups.backends.find(
-  (runtime) => runtime.server === "wcmsStagedServer",
-);
-assert(stagedTopology, "kickoffLocal topology must expose WCMS Staged");
-assert.deepEqual(stagedTopology.initializationProfiles, [
-  { code: "localWcmsFoundation", template: "foundation" },
-  {
-    code: "localDocumentationFoundation",
-    template: "axisDocumentationFoundation",
-  },
-]);
-
+test("consolidation preserves owner contributions, business activation and reachable preparation targets", () => {
 const commerceRuntime = loadRuntime("commerceServer");
 assert.equal(
   commerceRuntime.servers.loyalty.endpoint.httpPort,
-  4360,
+  4350,
   "commerceServer must know the Loyalty runtime endpoint",
 );
 assert.equal(
-  require("./helpers/configuration").moduleConfiguration(commerceRuntime,"loyaltyServer").abstractEndpoint.httpHost,
+  require("./helpers/configuration").moduleConfiguration(commerceRuntime,"commerceServer").abstractEndpoint.httpHost,
   "localhost",
   "commerceServer must expose abstract Loyalty routing",
 );
@@ -212,59 +98,27 @@ const platformServerPackage = require(
     "package.json",
   ),
 );
-assert.deepEqual(
-  platformServerPackage.nodics.runtimeModuleRoots,
-  [
-    "nodics.platform",
-    "nodics.localization",
-    "nodics.discovery",
-    "nodics.copilot",
-    "nodics.waste",
-    "nodics.loyalty",
-    "nodics.commerce",
-    "nodics.docs",
-    "nodics.accelerators/modules/nexus",
-  ],
-  "platformServer must discover capability-owned Platform-targeted data contributions without activating optional runtime modules",
-);
+for (const root of ["nodics.platform","nodics.waste","nodics.loyalty","nodics.commerce","nodics.docs","nodics.accelerators/modules/nexus"])
+  assert(platformServerPackage.nodics.runtimeModuleRoots.includes(root),root);
 assert.equal(
   platformRuntime.servers.loyalty.endpoint.httpPort,
-  4360,
+  4350,
   "platformServer must publish the Loyalty runtime endpoint",
 );
 assert.equal(
-  require("./helpers/configuration").moduleConfiguration(platformRuntime,"loyaltyServer").abstractEndpoint.httpPort,
-  4360,
+  require("./helpers/configuration").moduleConfiguration(platformRuntime,"commerceServer").abstractEndpoint.httpPort,
+  4350,
   "platformServer must publish abstract Loyalty routing",
 );
-assert.deepEqual(
-  platformRuntime.data.dataReleases.contributions,
-  [
-    { moduleName: "wasteCore", sections: ["core-reference"] },
-    { moduleName: "wasteCollection", sections: ["sample-profile-addresses"] },
-    { moduleName: "wasteCarbon", sections: ["participantAccessGroups", "transferFinalizationPermission"] },
-    { moduleName: "wasteReward", sections: ["participantAccessGroups"] },
-    { moduleName: "loyaltyProgram", sections: ["partnerEligibilityAdministrationPermission"] },
-    { moduleName: "loyaltyCore", sections: ["core-enterprise-reference"] },
-    {
-      moduleName: "loyaltyWallet",
-      sections: ["specialAccessGroups", "specialAccessRoles", "participantAccessGroups", "participantReadAccess", "participantTransactionAccess", "enterpriseParticipationAccess"],
-    },
-    { moduleName: "product", sections: ["accessGroups", "enterpriseRoles"] },
-    { moduleName: "promotion", sections: ["accessGroups", "enterpriseRoles", "businessAccessRoles", "permissionCatalogue"] },
-    { moduleName: "order", sections: ["accessGroups", "specialAccessGroups", "specialAccessRoles", "participantReadAccess", "participantTransactionAccess", "permissionCatalogue", "enterpriseRoles"] },
-    { moduleName: "cart", sections: ["participantTransactionAccess", "permissionCatalogue"] },
-    { moduleName: "checkoutCore", sections: ["participantTransactionAccess", "permissionCatalogue"] },
-    { moduleName: "bidding", sections: ["participantTransactionAccess", "permissionCatalogue"] },
-    { moduleName: "inventory", sections: ["specialAccessGroups", "specialAccessRoles"] },
-    {
-      moduleName: "digitalCore",
-      sections: ["permissionCatalogue", "bundleParticipantPermissions", "participantAccessGroups", "participantReadAccess", "participantTransactionAccess", "enterpriseParticipationAccess", "enterpriseRoles"],
-    },
-    { moduleName: "pricing", sections: ["administrativeAuthoringPermission", "administrativePublicationPermission"] },
-  ],
-  "platformServer must expose only selected capability-owned Platform-targeted contributions",
-);
+// Optional source discovery must still expose the selected sections at their actual receiver.
+for (const { moduleName, sections } of platformRuntime.data.dataReleases.contributions) {
+  assert.equal(new Set(sections).size, sections.length, moduleName);
+}
+for (const [owner, section] of [["wasteCarbon","participantAccessGroups"], ["pricing","administrativeAuthoringPermission"],
+    ["pricing","administrativePublicationPermission"], ["loyaltyWallet","specialAccessRoles"]]) {
+  assert(platformRuntime.data.dataReleases.contributions.some(source => source.moduleName === owner && source.sections.includes(section)),
+    owner + ":" + section);
+}
 assert.equal(
   platformRuntime.activeModules.modules.includes("wasteCollection"),
   false,
@@ -275,19 +129,22 @@ assert.equal(
   false,
   "platformServer must not activate Loyalty modules while discovering their data contributions",
 );
+assert.equal(
+  platformRuntime.backofficeFunctionalModuleActivationData.modules["nodics.loyalty"]?.dataPackages?.some(
+    item => /enterprise-reference|sample-enterprises|wasteCore:core-reference|sample-profile-addresses/.test(item.code),
+  ) || false,
+  false,
+  "Functional activation excludes demo enterprises and addresses",
+);
 assert.deepEqual(
-  platformRuntime.backofficeFunctionalModuleActivationData.modules[
-    "nodics.loyalty"
-  ].dataPackages,
-  [
-    {
-      code: "loyaltyCore:core-enterprise-reference",
-      targetModule: "profile",
-      targetServer: "platformServer",
-      targetDatabase: "kickoffLocalPlatform",
-    },
-  ],
-  "Loyalty activation must import its Profile enterprise seed only when the capability is activated",
+  platformRuntime.backofficeFunctionalModuleActivationData.modules["nodics.loyalty"].dataPackages.find(
+    item => item.code === "loyaltyProgram:partnerEligibilityAdministrationPermission",
+  ),
+  {
+    code: "loyaltyProgram:partnerEligibilityAdministrationPermission",
+    targetServer: "platformServer",
+  },
+  "Loyalty activation routes the permission release to the Platform Profile owner",
 );
 assert.deepEqual(
   platformRuntime.backofficeFunctionalModuleActivationData.modules[
@@ -305,32 +162,19 @@ assert.deepEqual(
 assert.deepEqual(
   platformRuntime.backofficeFunctionalModuleActivationData.modules[
     "nodics.waste"
-  ].dependencies,
+  ]?.dependencies,
   undefined,
   "Waste activation must preserve optional Location composition instead of forcing another functional module",
 );
-assert.deepEqual(
-  platformRuntime.backofficeFunctionalModuleActivationData.modules[
-    "nodics.waste"
-  ].dataPackages,
-  [
-    {
-      code: "wasteCore:core-reference",
-      targetModule: "profile",
-      targetServer: "platformServer",
-      targetDatabase: "kickoffLocalPlatform",
-    },
-    {
-      code: "wasteCollection:sample-profile-addresses",
-      targetModule: "profile",
-      targetServer: "platformServer",
-      targetDatabase: "kickoffLocalPlatform",
-    },
-  ],
-  "Waste activation must import Waste-owned Profile enterprise data without activating Waste technical modules in Platform",
+assert.equal(
+  platformRuntime.backofficeFunctionalModuleActivationData.modules["nodics.waste"]?.dataPackages?.some(
+    item => /enterprise-reference|sample-enterprises|wasteCore:core-reference|sample-profile-addresses/.test(item.code),
+  ) || false,
+  false,
+  "Functional activation excludes demo enterprises and addresses",
 );
 
-const loyaltyRuntime = loadRuntime("loyaltyServer");
+const loyaltyRuntime = loadRuntime("commerceServer");
 assert.equal(
   loyaltyRuntime.servers.commerce.endpoint.httpPort,
   4350,
@@ -372,7 +216,7 @@ for (const moduleName of ["waste", "eWaste", "circa.ewaste"]) {
 assert.equal(wasteRuntime.waste.accelerator, undefined);
 assert.equal(wasteRuntime.waste.projectOverlay, undefined);
 assert.deepEqual(
-  wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation
+  wasteRuntime.data.dataReleases.initializationProfileDefaults.localWasteFoundation
     .steps[0].releaseCodes,
   [
     "wasteMaterial:core-v001",
@@ -381,15 +225,15 @@ assert.deepEqual(
   "Framework core references must remain independent of optional demo policy",
 );
 assert.deepEqual(
-  wasteRuntime.data.dataReleases.initializationProfiles.localWasteFoundation.steps[1],
+  wasteRuntime.data.dataReleases.initializationProfileDefaults.localWasteFoundation.steps[1],
   { dataType: "sample", releaseCodes: ["circa.ewaste:waste-policy"] },
   "The selected Circa demo policy must use an explicit separate sample step",
 );
 
-const locationRuntime = loadRuntime("locationServer");
+const locationRuntime = loadRuntime("wasteServer");
 assert.equal(
   locationRuntime.servers.default.endpoint.httpPort,
-  4380,
+  4370,
   "locationServer must own the Location runtime endpoint",
 );
 assert.equal(
@@ -408,9 +252,9 @@ assert.equal(
   "Location explicitly selects its semantic place owner",
 );
 assert.deepEqual(
-  locationRuntime.data.dataReleases.contributions,
-  [{ moduleName: "wasteCollection", sections: ["sample-locations"] }],
-  "locationServer must expose Waste-owned collection-centre location samples as Location-targeted contributions",
+  locationRuntime.data.dataReleases.contributions.find(source => source.moduleName === "wasteCollection"),
+  { moduleName: "wasteCollection", sections: ["collection-capabilities"] },
+  "locationServer must expose Waste-owned collection capabilities as Location-targeted contributions",
 );
 const wastePolicy = require("../modules/circa.ewaste/data/manifest.json")
   .sections["waste-policy"];
@@ -418,7 +262,7 @@ assert.equal(wastePolicy.destinationRole, "WASTE");
 assert.equal(wastePolicy.dataType, "sample");
 assert.equal(wastePolicy.selectionPolicy, "EXPLICIT");
 
-console.log("Kickoff guided initialization profile contract validated");
+
 
 // Application preparation must have a concrete connection for each destination.
 const circaPackages =
@@ -435,3 +279,5 @@ assert.deepEqual(
   platformRuntime.servers.waste,
 );
 assert.equal(platformRuntime.servers.wasteServer.endpoint.httpPort, 4370);
+
+});

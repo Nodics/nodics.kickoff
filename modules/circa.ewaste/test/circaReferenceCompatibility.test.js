@@ -273,8 +273,9 @@ test("Circa profiles retain their distinct semantics and all current taxonomy re
 test("actual Circa selectors declare the owner references and keep sample imports user-triggered", () => {
   const properties = require("../config/properties");
   const foundation =
-    properties.data.dataReleases.runtimeRoleProfiles.WASTE
-      .initializationProfiles.localWasteFoundation.steps.value;
+    properties.data.dataReleases
+      .initializationProfileDefaults.localWasteFoundation.steps.value;
+  assert.equal(properties.data.dataReleases.initializationProfiles, undefined, "loading Circa alone must not select an operator run");
   assert.deepEqual(foundation[0].releaseCodes, [
     "wasteMaterial:core-v001",
     "eWaste:core-reference",

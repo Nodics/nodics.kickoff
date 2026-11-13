@@ -44,9 +44,17 @@ test("commerce catalogue is selected as unified v001 first-start data", () => {
 test("retired snapshot targets remain refused by canonical owners regardless of demo flags", async (t) => {
   const prior = { SERVICE: global.SERVICE, CONFIG: global.CONFIG };
   t.after(() => Object.assign(global, prior));
-  global.CONFIG = { get: () => ({ publication: { runtimeRole: "ONLINE", delivery: { enabled: true } },
-    sellerAuthorization: { enabled: true, qualified: true } }) };
+  const runtime = {
+    runtimeRole: { publication: "OPERATIONAL" },
+    inventory: { publication: { runtimeRole: "ONLINE" } },
+    promotion: {
+      publication: { runtimeRole: "ONLINE", delivery: { enabled: true } },
+      sellerAuthorization: { enabled: true, qualified: true },
+    },
+  };
+  global.CONFIG = { get: key => runtime[key] };
   global.SERVICE = {
+    DefaultModuleService: { isLocalModuleActive: moduleName => moduleName === "inventory" },
     DefaultInventoryOperationService: require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/inventory/src/service/defaultInventoryOperationService")),
     DefaultPromotionOperationService: require(path.join(framework, "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService")),
   };

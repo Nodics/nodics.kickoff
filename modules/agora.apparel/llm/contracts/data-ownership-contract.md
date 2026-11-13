@@ -31,11 +31,10 @@ deliberate demo inputs, not generic defaults. Identity, contact and spending inp
 remain external. Unselected domains must not inherit these deployment opt-ins.
 
 
-Commerce catalog release `0.0.1` (`sample-v001/commerce`) remains byte-for-byte
-frozen. Forward release `agoraApparelStoreReference@0.0.2`
-(`sample-v001/store`) supplies the canonical Online Store master with its Profile
-Enterprise reference through Store's generated service. It neither rewrites the
-catalogue release nor aliases the legacy scalar enterprise field. Coupons, coupon batches
+The explicit `agoraApparelStoreReference` sample installs `agoraApparelStore`,
+its `agoraApparelWeb` sales channel and `agoraApparelOnline` point of service on
+COMMERCE. The Staged catalogue selects the same store code for publication.
+Coupons, coupon batches
 and stock balances are not imported to Staged. Stock receiving/opening and coupon
 issuance must use their operational Online owners with independent evidence.
 Explicit `sample-v001/operations` contributions now carry opening instructions
@@ -70,11 +69,7 @@ WCMS schemas and publication operations remain framework-owned.
   through the existing manifest's validated `retainedRoots` contract; unclaimed
   version folders can otherwise be discovered as extra imports. Generate forward
   releases through nTooling and keep old payload bytes, hashes and release codes.
-- Commerce `agoraApparelCommerceCatalog` and the content section use the initial
-  `0.0.1` baseline in `sample-v001`, including the corrected Apparel search record
-  prefix. Store ownership correction is the independent immutable `0.0.2` release
-  selected before the catalogue. Existing receipts are never rewritten, downgraded
-  or replayed. Source validation does not claim live installation or publication.
+- Select the operational Store reference before the Staged catalogue.
 - Change content release versions and hashes together through the governed release
   lifecycle. Keep local and Docker initialization publication versions aligned;
   read current versions from `data/manifest.json` rather than this guide.
@@ -84,3 +79,8 @@ WCMS schemas and publication operations remain framework-owned.
 
 Run `npm run test:data-ownership` and `npm run test:multi-domain` from the Kickoff
 root. Application data and profiles remain customer-owned.
+
+
+Dashboard artwork remains customer-owned in the consumed application profile's
+`presentation.visual`. No unused top-level visual property is exported; Media
+identity and asset ownership checks read the actual profile contribution.

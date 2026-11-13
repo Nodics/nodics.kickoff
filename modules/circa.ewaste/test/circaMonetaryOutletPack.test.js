@@ -273,7 +273,7 @@ test("all nine monetary cases price the actual new source goods through the exac
   }
 });
 
-test("native fresh setup exposes all goods and bounded role stages with the current reviewed observation", t => {
+test("native fresh setup exposes all goods and bounded role stages and rejects the superseded observation revision", t => {
   const savedGlobals = { CONFIG: global.CONFIG, SERVICE: global.SERVICE, CLASSES: global.CLASSES };
   t.after(() => Object.assign(global, savedGlobals));
   const runtime = loadRuntime("platformServer", "kickoffLocal");
@@ -315,7 +315,9 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
   assert.equal(plan.revision, runtime.publish.setup.observation.plans[plan.code].revision);
   assert(plan.revision > previousObservation.revision);
   const retained = require("../config/setup-observation/history/circa-native-reviewed-revision-4.json");
-  assert.notEqual(plan.profileDigest, observer.digest(profile), "Retained observation cannot qualify the changed baseline");
+  const historical = require("../config/setup-observation/history/circa-native-reviewed-revision-18.json");
+  assert.notEqual(historical.profileDigest, observer.digest(profile));
+  assert.equal(plan.profileDigest, observer.digest(profile));
   const corrected = new Set(proposal.issuerPacks.map(pack => "circa.ewaste:" + pack.commerceSection));
   for (const original of predecessor.stages) {
     const current = retained.stages.find(stage => stage.code === original.code);
@@ -329,7 +331,7 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
   global.CONFIG = { get: key => runtime[key] };
   global.CLASSES = { NodicsError: class extends Error { constructor(code) { super(code); this.code = code; } } };
   global.SERVICE = { DefaultPublicationSetupObservationService: { ...observer,
-    resolvePlan: () => ({ plan, reference: { moduleName: profile.owner } }) } };
+    resolvePlan: () => ({ plan: historical, reference: { moduleName: profile.owner } }) } };
   assert.throws(() => initialization.setupObservationPlan(profile, { tenant: runtime.defaultTenant }),
     { code: "ERR_BOF_00081" }, "Real BackOffice refuses the historical profile before any owner dispatch");
   for (const code of [...sectionCodes, ...coordinatedRoleSections, "circaLocalDemoCredit"]) {
@@ -339,16 +341,20 @@ test("native fresh setup exposes all goods and bounded role stages with the curr
     assert.equal(step.required, true);
     assert.equal(step.trigger, "USER");
     const stage = plan.stages.find(stage => stage.code === releaseCode);
-    assert.deepEqual(stage.descriptor, observer.stepIdentity(step));
+    const descriptor = observer.stepIdentity(step);
+    if (code === "circaLocalDemoCredit") {
+      assert.equal(stage.server, "commerceServer");
+      const receiver = loadRuntime(descriptor.targetServer, "kickoffLocal");
+      assert.equal(descriptor.targetServer, "commerceServer");
+      assert.equal(receiver.data.dataReleases.installers.LOYALTY_SAMPLE_CREDITS,
+        "DefaultLoyaltySampleCreditContributionService");
+      assert.equal(descriptor.targetRuntimeRole, receiver.runtimeRole.code);
+    }
+    assert.deepEqual(stage.descriptor, descriptor);
     if (step.type !== "DATA_RELEASE") continue;
     const actual = imports.inspectManifest({ name: "circa.ewaste", index: "3100.90" }, "sample",
       path.join(dataRoot, "manifest.json"), manifest.sections[code], code, true);
-    const reviewedChange = require("./fixtures/circaUnreleasedObservationSourceDifferences.json").stages[releaseCode];
-    if (reviewedChange) {
-      assert.equal(stage.release.checksum, reviewedChange.retained);
-      assert.equal(actual.checksum, reviewedChange.current);
-      assert.notEqual(stage.release.checksum, actual.checksum);
-    } else assert.equal(stage.release.checksum, actual.checksum);
+    assert.equal(stage.release.checksum, actual.checksum);
     assert.deepEqual(stage.release.declaredFiles, actual.declaredFiles);
     assert.deepEqual(actual.declaredFiles, Object.keys(manifest.sections[code].files).sort(), "No sibling issuer file may expand into this release");
   }
@@ -418,7 +424,7 @@ test("inert setup steps and outlet-only delivery declarations consume current ow
         [domain === "pricing" ? pack.priceBookCode : domain === "tax" ? pack.taxPolicyCode : good.warehouseCode]);
     }
     assert.equal(publication.deliveryEnabled({ storeCode: "circaMainStore" }), false);
-    assert.equal(publication.deliveryEnabled({ storeCode: "agoraMainStore" }), false);
+    assert.equal(publication.deliveryEnabled({ storeCode: "agoraApparelStore" }), false);
   }
   for (const issuer of selection.issuers) {
     const pack = proposal.issuerPacks.find(p => p.issuerEnterpriseCode === issuer.operatorEnterpriseCode);

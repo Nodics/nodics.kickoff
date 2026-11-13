@@ -39,15 +39,14 @@ Source preparation does not claim a live import.
 The original `circa.ewaste:loyalty` sample source and its installed receipt remain
 unchanged. Select the new contribution through normal Axis/nImport preparation;
 do not reimport the wallet snapshot or call reward-earnings as a manual top-up.
-Native `kickoffLocal` selects the exact reviewed source in its Loyalty server
-policy. Docker and all other deployments remain disabled. The signed
+Native `kickoffLocal` selects the exact reviewed source in the Commerce runtime that hosts Loyalty Wallet. Docker and all other deployments remain disabled. The signed
 GREENPERKS_ONLINE human operator must independently hold `loyalty.sampleCredit.apply`.
 For fresh setup, select `loyaltyWallet:specialAccessGroups` before
 `loyaltyWallet:specialAccessRoles`, and `import:specialAccessGroups` before
 `import:specialAccessRoles`, through their PLATFORM Init releases. These existing
 implementing owners supply the reusable definitions and pinned prerequisites.
 Then explicitly select `circa.ewaste:circaLocalDemoCreditStaffAssignment`, sample
-0.0.2 under `sample-v001`, environment-portable and REFERENCE/RETAIN. Its sole
+0.0.1 under `sample-v001`, environment-portable and REFERENCE/RETAIN. Its sole
 instruction adds roles `LOYALTY_SAMPLE_CREDIT` and `IMPORT_SAMPLE_OPERATOR`, with
 groups `loyaltySampleCreditUserGroup` and `importSampleOperatorUserGroup`, to the
 original `circa-online-administrator` / `online.administrator@circa.local` /

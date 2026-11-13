@@ -17,7 +17,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const test = require('node:test');
 const manifest = require('../data/manifest.json');
-const profile = require('../config/properties').backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM.profiles.agoraapparel;
+const profile = require('../config/properties').backofficeApplicationInitialization.profiles.agoraapparel;
 const steps = profile.dataPackages.value;
 const dataRoot = path.resolve(__dirname, '../data');
 
@@ -30,12 +30,12 @@ test('Apparel reviewed reversals select only the retained application Store and 
     assert.equal(runtime.fulfillmentCore.carrierProvider.liveQualified, false);
     for (const kind of ['disputes', 'refunds']) {
         assert.equal(active[kind].enabled, true);
-        assert.equal(active[kind].storeCodes.agoraMainStore, true);
+        assert.equal(active[kind].storeCodes.agoraApparelStore, true);
         assert.equal(active[kind].storeCodes.agoraElectronicsStore, undefined);
         assert.equal(active[kind].storeCodes.agoraTelcoStore, undefined);
         assert(active[kind].orderCodePrefixes.includes('CIRCA_ORDER_'));
     }
-    assert.equal(active.refunds.ownerByStore.agoraMainStore, 'fulfillmentCore');
+    assert.equal(active.refunds.ownerByStore.agoraApparelStore, 'fulfillmentCore');
     // Refund ownership is selected per Store; the physical demo must not
     // introduce a fallback into another accelerator's domain.
     assert.equal(active.refunds.defaultOwnerPort, undefined);
@@ -43,8 +43,8 @@ test('Apparel reviewed reversals select only the retained application Store and 
         const unselected = loadRuntime('commerceServer', 'kickoffLocal', { NODICS_AGORA_DOMAINS: selection });
         const policy = unselected.order;
         assert.equal(unselected.fulfillmentCore.physicalOperations.enabled, false);
-        assert.notEqual(policy.refunds.storeCodes?.agoraMainStore, true);
-        assert.notEqual(policy.disputes.storeCodes?.agoraMainStore, true);
+        assert.notEqual(policy.refunds.storeCodes?.agoraApparelStore, true);
+        assert.notEqual(policy.disputes.storeCodes?.agoraApparelStore, true);
     }
 });
 
@@ -58,7 +58,7 @@ test('governed publication plan covers all active physical and digital roots and
     for (const item of productIntents) {
         assert.equal(item.input.publicationCode, item.code); assert.equal(item.sourceVersion, '1');
         assert.equal(item.input.productCode, item.rootCode); assert.equal(item.input.versionId, 0);
-        assert.equal(item.input.storeCode, 'agoraMainStore');
+        assert.equal(item.input.storeCode, 'agoraApparelStore');
     }
     for (const [domain, count] of [['pricing', 1], ['inventory', 1], ['tax', 1], ['promotion', 3]]) {
         const intents = payload.items.filter(item => item.domain === domain);
@@ -90,7 +90,7 @@ test('Apparel opening pack covers every active physical variant once without ope
         const variant = physical.find(item => item.code === row.variantCode);
         assert.deepEqual(Object.keys(row).sort(), ['code', 'locale', 'productCode', 'quantity', 'referenceCode', 'sku', 'storeCode', 'variantCode', 'warehouseCode']);
         assert.equal(row.sku, variant.sku); assert.equal(row.productCode, variant.productCode);
-        assert.equal(row.storeCode, 'agoraMainStore'); assert.equal(row.warehouseCode, 'agoraApparelWarehouse');
+        assert.equal(row.storeCode, 'agoraApparelStore'); assert.equal(row.warehouseCode, 'agoraApparelWarehouse');
         assert.equal(row.quantity, '40'); assert(!digital.has(row.variantCode));
     }
 });
@@ -128,7 +128,7 @@ test('campaign instructions pin exact initial policy and bounded coupon intents 
         for (const key of ['enterpriseRef', 'issuerEnterpriseRef', 'vendorEnterpriseRef'])
             assert.deepEqual(row[key], { moduleName: 'profile', schemaName: 'enterprise', code: row.enterpriseCode });
         const campaign = payload.campaigns.find(item => item.promotionCode === row.code);
-        assert(campaign); assert.equal(campaign.rootCode, row.code); assert.equal(campaign.storeCode, 'agoraMainStore');
+        assert(campaign); assert.equal(campaign.rootCode, row.code); assert.equal(campaign.storeCode, 'agoraApparelStore');
         const policy = publication.capturePolicy('promotion', { ...row, versionId: 0 }, { tenant: row.tenant, enterpriseCode: row.enterpriseCode });
         assert.equal(campaign.policyFingerprint, publication.fingerprint(policy));
         const intent = require('../data/sample-v001/publication/records/publicationPlan.json').items

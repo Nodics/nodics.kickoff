@@ -40,7 +40,7 @@ permission to reset consumed quantities or campaign budgets.
 
 | Manifest section | Source and role | Owner responsibility |
 | --- | --- | --- |
-| agoraApparelStoreReference | sample-v001/store; COMMERCE | Canonical Online `agoraMainStore` master and Profile Enterprise ownership; no catalogue publication or operational balance |
+| agoraApparelStoreReference | sample-v001/store; COMMERCE | Canonical Online `agoraApparelStore` master and Profile Enterprise ownership; no catalogue publication or operational balance |
 | agoraApparelCommerceCatalog | sample-v001/commerce; COMMERCE_STAGED | Publishable products, variants, prices, campaign policy, warehouse and search policy |
 | agoraApparelContentCatalog | sample-v001/content; WCMS_STAGED | CMS records and owned image files, coordinated with Media |
 | agoraApparelPublicationPlan | sample-v001/publication; COMMERCE_STAGED | Inert intents for 61 Products, Pricing, Inventory, Tax and three Promotions; no CRUD installer or approval authority |
@@ -51,7 +51,7 @@ permission to reset consumed quantities or campaign budgets.
 
 `inventoryOpening.json` has contract version 1 and 464 instructions: one for
 every active physical variant, 40 whole units each, in
-`agoraApparelWarehouse`, with Store `agoraMainStore` and locale `en`.
+`agoraApparelWarehouse`, with Store `agoraApparelStore` and locale `en`.
 The three digital coupon variants are excluded. Product, variant and SKU must
 match the activated Product policy; the warehouse must belong to the same
 authenticated tenant and enterprise. Source tests derive coverage from the
@@ -138,7 +138,7 @@ owner-checked reveal journey must still run before a coupon can discount checkou
 ## Reviewed reversal selection
 
 The selected environment contributes `order.runtimeRoleProfiles.COMMERCE`
-selectors for the exact Store `agoraMainStore`, conditional on the Apparel
+selectors for the exact Store `agoraApparelStore`, conditional on the Apparel
 composition. The demo module does not own operational enablement. Order resolves that identity from retained
 checkout evidence, never a caller's Store field. The selected physical owner is
 Fulfillment Core; digital purchases retain Digital Core ownership. This selection

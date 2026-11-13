@@ -14,10 +14,7 @@
 /** @module test/circaPlatformSourceCatalogueVisibility @description Verifies Local Platform consumes exact framework-owned Circa prerequisite sources without capability activation. @layer test @owner nodics.kickoff */
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const path = require("node:path");
-const { activeModuleNames, loadRuntime } = require("./helpers/configuration");
-const platformPackage = require("../envs/kickoffLocal/platformServer/package.json");
-const frameworkRoot = path.resolve(__dirname, "../../nodics.ai");
+const { frameworkRoot, activeModuleNames, loadRuntime } = require("./helpers/configuration");
 
 const expected = [
   { moduleName: "product", sections: ["accessGroups"] },
@@ -34,135 +31,64 @@ const expected = [
   },
 ];
 
-test("kickoffLocal Platform observes only the selected Commerce and Loyalty sources", () => {
-  const local = loadRuntime("platformServer", "kickoffLocal", {});
-  const docker = loadRuntime("platformServer", "kickoffDockerLocal", {});
-  const localContributions = local.data.dataReleases.contributions;
-  const dockerContributions = docker.data.dataReleases.contributions;
-
-  assert(platformPackage.nodics.runtimeModuleRoots.includes("nodics.commerce"));
-  for (const selector of expected) {
-    assert.deepEqual(
-      localContributions.find(
-        (entry) => entry.moduleName === selector.moduleName,
-      ),
-      selector,
-    );
-    assert.equal(
-      dockerContributions.some(
-        (entry) => entry.moduleName === selector.moduleName,
-      ),
-      selector.moduleName === "loyaltyWallet",
-      selector.moduleName,
-    );
-  }
-
-  const inactive = new Set([
-    "product",
-    "promotion",
-    "order",
-    "inventory",
-    "loyaltyWallet",
-    "digitalCore",
-  ]);
-  assert.deepEqual(
-    activeModuleNames(local).filter((moduleName) => inactive.has(moduleName)),
-    [],
+test("Circa preparation selects Platform access data without activating Commerce or Loyalty on Platform", () => {
+  const platform = loadRuntime("platformServer", "kickoffLocal", {});
+  const preparation = platform.backofficeApplicationInitialization.profiles.circa.preparation;
+  const platformSteps = preparation.prerequisites.filter(
+    step => step.targetRuntimeRole === "PLATFORM" && step.targetServer === "platformServer",
   );
+  const releases = platform.data.dataReleases;
+  const profile = releases.initializationProfileDefaults[releases.initializationProfiles.circaIdentityAuthority.template];
+  const selected = new Set([
+    ...platformSteps.map(step => step.code),
+    ...profile.steps.flatMap(step => step.releaseCodes),
+  ]);
+  const active = new Set(activeModuleNames(platform));
 
-  const paths = {
-    product: "nodics.commerce/modules/baseCommerce/modules/product",
-    promotion: "nodics.commerce/modules/baseCommerce/modules/promotion",
-    order: "nodics.commerce/modules/checkout/modules/order",
-    inventory: "nodics.commerce/modules/baseCommerce/modules/inventory",
-    loyaltyWallet: "nodics.loyalty/modules/loyaltyWallet",
-    digitalCore:
-      "nodics.commerce/modules/digitalCommerce/modules/digitalCore",
-  };
-  const previousNodics = global.NODICS;
-  const previousConfig = global.CONFIG;
-  global.NODICS = {
-    getActiveModules: () => [],
-    getRawModule: (moduleName) =>
-      paths[moduleName]
-        ? {
-            name: moduleName,
-            path: path.join(frameworkRoot, paths[moduleName]),
-            index: "1.0",
-          }
-        : undefined,
-  };
-  global.CONFIG = { get: (key) => (key === "data" ? local.data : undefined) };
-  try {
-    const releases = require(path.join(
-      frameworkRoot,
-      "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService",
-    ));
-    assert.deepEqual(
-      releases
-        .discoverReleases("init")
-        .filter((release) => inactive.has(release.moduleName))
-        .map((release) => ({
-          code: release.releaseCode,
-          version: release.version,
-          destinationRole: release.destinationRole,
-          invalidManifest: release.invalidManifest === true,
-        })),
-      [
-        {
-          code: "loyaltyWallet:specialAccessRoles",
-          version: "0.0.3",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "product:accessGroups",
-          version: "0.0.4",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "promotion:accessGroups",
-          version: "0.0.4",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "order:accessGroups",
-          version: "0.0.4",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "inventory:specialAccessRoles",
-          version: "0.0.3",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "digitalCore:bundleParticipantPermissions",
-          version: "0.0.1",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "digitalCore:participantAccessGroups",
-          version: "0.0.1",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-        {
-          code: "loyaltyWallet:participantAccessGroups",
-          version: "0.0.1",
-          destinationRole: "PLATFORM",
-          invalidManifest: false,
-        },
-      ],
-    );
-  } finally {
-    if (previousNodics === undefined) delete global.NODICS;
-    else global.NODICS = previousNodics;
-    if (previousConfig === undefined) delete global.CONFIG;
-    else global.CONFIG = previousConfig;
+  for (const { moduleName, sections } of expected) {
+    assert.equal(active.has(moduleName), false, moduleName);
+    for (const section of sections) {
+      const code = moduleName + ":" + section;
+      assert(selected.has(code), "Circa preparation must select " + code);
+    }
+  }
+});
+
+test("native receivers discover and admit Circa Init sources and their exact prerequisites", async () => {
+  const path = require("node:path");
+  const projection = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
+  const platform = loadRuntime("platformServer", "kickoffLocal");
+  const profile = platform.backofficeApplicationInitialization.profiles.circa;
+  const backoffice = require(path.join(frameworkRoot,
+    "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
+  const steps = backoffice.preparationSteps(profile).filter(step => step.required && step.dataType === "init");
+  for (const [server, role] of [["platformServer", "PLATFORM"], ["processServer", "PROCESS"]]) {
+    await projection.resolve({ projectRoot: path.resolve(__dirname, ".."), frameworkRoot, environment: "kickoffLocal", server });
+    const imports = SERVICE.DefaultDataReleaseService;
+    const catalogue = imports.discoverReleases("init");
+    const checked = new Set();
+    function check(code, pin) {
+      const matches = catalogue.filter(release => release.releaseCode === code);
+      assert.equal(matches.length, 1, server + "/" + code);
+      const [release] = matches;
+      assert(!release.invalidManifest, code);
+      if (pin) {
+        assert.equal(release.version, pin.version, code);
+        assert.equal(release.checksum, pin.checksum, code);
+      }
+      if (checked.has(code)) return;
+      checked.add(code);
+      assert.equal(imports.validateDestination(release), true, code);
+      for (const prerequisite of release.prerequisites)
+        check(prerequisite.moduleName + ":" + prerequisite.sectionCode, prerequisite);
+    }
+    const selected = steps.filter(step => step.targetRuntimeRole === role);
+    assert(selected.length > 0, server);
+    for (const step of selected) check(step.code);
+    if (role === "PLATFORM") {
+      for (const step of imports.initializationProfiles().circaIdentityAuthority.steps)
+        for (const code of step.releaseCodes) check(code);
+    }
   }
 });

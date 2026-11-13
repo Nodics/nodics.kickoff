@@ -1,0 +1,86 @@
+{
+  "contractVersion": 2,
+  "module": "kickoffInt",
+  "sections": {
+    "seriesFContentAcceptance": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v002",
+      "version": "0.0.2",
+      "displayName": "Series F scoped content acceptance",
+      "description": "Isolated Kickoff Local business content test fixture.",
+      "owningDomain": "cms",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v002/series-f-acceptance/records/seriesF00catalogData.js": "270d6933c45f900e86abda7d0284282db041dff7f260f6548e05f26ac1c3d8ec",
+        "sample-v002/series-f-acceptance/records/seriesF02cmsTypeCodeData.js": "e647fdb843dc49475a4d9be93077477b1dc3c563ef7153cd25c79d5f9a1199dd",
+        "sample-v002/series-f-acceptance/records/seriesF03cmsTypeCode2RendererData.js": "4c7b65b19a61c5d243b74cc363b028afccf00d08816539f949810bf99676d528",
+        "sample-v002/series-f-acceptance/records/seriesF04cmsComponentTypeGroupData.js": "38eab21b5ce51dd7df0eefb54a61036267672f23304af67c7791175c97b83759",
+        "sample-v002/series-f-acceptance/records/seriesF05cmsSlotDefinitionData.js": "862348b9770bdbe8b4a795fea0f0f64d470ee1581b3a2763953f2d38b8595be5",
+        "sample-v002/series-f-acceptance/records/seriesF06cmsPageTemplateData.js": "be32520e90e1e74fa30d70264d4855933331ff70f4cc485855466392f6c6e714",
+        "sample-v002/series-f-acceptance/records/seriesF01cmsSiteData.js": "9acdd3c14451c5c6659b6e1fae02cf1fd4c0e8a6a98db54f6df88d3943145ffa",
+        "sample-v002/series-f-acceptance/headers/seriesFContentHeader.js": "18adb868fddd4edbae6a75995843db740c52478dbfc45987ae7f4a95de8a3c8b"
+      }
+    },
+    "seriesFMediaAcceptance": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v002",
+      "version": "0.0.1",
+      "displayName": "Series F preview Media acceptance",
+      "description": "Two synthetic Local images for same-tenant association and replacement.",
+      "owningDomain": "media",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v002/series-f-media/assets/fixtureA.png": "6f402c5c4900e65451aa3806a15545639bf2edf339e15addaa1d53d04a86b1fd",
+        "sample-v002/series-f-media/assets/fixtureB.png": "33df995ecd6d93dd7e4d53c7afafc1abef0707cfe5c9ec63fbad2d0df08209fd",
+        "sample-v002/series-f-media/records/seriesFMediaData.js": "ea76a97e39147e63990c06f34c3c2ba95daa9c0fbc62cd7f90182b00fc6f80d1",
+        "sample-v002/series-f-media/headers/seriesFMediaHeader.js": "7182af11350565ff2a65500b38e2083932ad8b7bd6efb0458d972db8c0c17b25"
+      }
+    },
+    "seriesFExperienceAcceptance": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v002",
+      "version": "0.0.1",
+      "displayName": "Series F Experience placements",
+      "description": "Two isolated Kickoff Local placements for targeted and fallback preview.",
+      "owningDomain": "wcmsExperience",
+      "lifecycle": "PUBLISHABLE",
+      "destinationRole": "WCMS_STAGED",
+      "environmentScope": [
+        "LOCAL"
+      ],
+      "sensitivity": "PUBLIC",
+      "versioningPolicy": "IMMUTABLE",
+      "publicationPolicy": "REQUIRED",
+      "initialPublicationPolicy": "ADMIN_INITIATED",
+      "removalPolicy": "UNPUBLISH_OR_RETIRE",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v002/series-f-experience/headers/seriesFExperiencePlacementHeader.js": "77b99f581844f22bf2cd6592730300038270e0c48e8b5ae2497a9a3618c8ad5c",
+        "sample-v002/series-f-experience/records/seriesFExperiencePlacementData.js": "7d49a34824b26df04a5872c6c42bdd6f7d56f01c228c5a50d976e1c75369a284"
+      }
+    }
+  }
+}

@@ -57,14 +57,14 @@ test('native deployment inherits standard publication bindings without a custome
         undefined,
     );
 });
-test('Docker registrations do not qualify source storage or select remote publication targets', () => {
+test('Staged mechanics inherit owner defaults while qualification and destinations retain explicit selections', () => {
     const staged = loadRuntime('commerceStagedServer', 'kickoffDockerLocal');
     const media = loadRuntime('wcmsStagedServer', 'kickoffDockerLocal');
     for (const domain of ['pricing', 'tax', 'inventory', 'promotion']) {
         assert.equal(
             staged.schemaPolicies[domain].publicationVersioned
                 .isVersionedEnabled,
-            false,
+            true,
         );
         assert.equal(
             staged[domain].publication.sourceVersioningQualified,
@@ -75,13 +75,16 @@ test('Docker registrations do not qualify source storage or select remote public
     }
     assert.equal(
         staged.schemaPolicies.product.catalogueVersioned.isVersionedEnabled,
-        false,
+        true,
     );
     assert.equal(staged.product.publication.target.connectionName, null);
     assert.equal(
         media.schemaPolicies.media.publicationVersioned.isVersionedEnabled,
-        false,
+        true,
     );
-    assert.equal(media.media.publication.versionProviderEnabled, false);
-    assert.equal(media.media.publication.target.connectionName, '');
+    const selectedMedia = require('../envs/kickoffDockerLocal/wcmsStagedServer/config/properties').media.publication;
+    assert.equal(selectedMedia.versionProviderEnabled, true);
+    assert.equal(media.media.publication.versionProviderEnabled, selectedMedia.versionProviderEnabled);
+    assert.equal(selectedMedia.target.connectionName, 'cmsOnline');
+    assert.equal(media.media.publication.target.connectionName, selectedMedia.target.connectionName);
 });

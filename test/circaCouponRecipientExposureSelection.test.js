@@ -19,17 +19,9 @@ test("Local Platform exposes coupon recipient route but never grants its missing
   const route = require(path.join(profile, "src/router/routers")).profile.couponNotificationRecipients.resolve;
   assert.equal(require(path.join(profile, "config/properties")).apiExposure.categories.moduleInternal.enabled, false);
   assert.equal(config.apiExposure.categories.moduleInternal.enabled, true);
-  assert.equal(require("../envs/kickoffLocal/platformServer/config/properties").apiExposure, undefined);
-  assert.equal(require("../envs/kickoffLocal/config/properties").apiExposure.runtimeRoleProfiles.PLATFORM.categories.moduleInternal.enabled, true);
-  const initializer = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService"));
-  const selection = require("../envs/kickoffLocal/config/properties").apiExposure.runtimeRoleProfiles.PLATFORM.categories.moduleInternal;
-  for (const code of ["COMMERCE", "COMMERCE_STAGED", "PROCESS", "ENGAGEMENT", "WASTE", "LOYALTY", "LOCATION", "WCMS_STAGED", "WCMS_ONLINE"])
-    for (const enabled of [false, true]) {
-      const baseline = { runtimeRole: { code }, apiExposure: { categories: { moduleInternal: { enabled } } } };
-      const selected = structuredClone(baseline);
-      selected.apiExposure.runtimeRoleProfiles = { PLATFORM: { categories: { moduleInternal: selection } } };
-      assert.deepEqual(initializer.deriveRuntimeRoleProfile(selected, "apiExposure"), baseline, code);
-    }
+  assert.equal(require("../envs/kickoffLocal/config/properties").apiExposure, undefined);
+  assert.equal(require("../envs/kickoffLocal/platformServer/config/properties").apiExposure.categories.moduleInternal.enabled, true);
+  assert.equal(require("../envs/kickoffDockerLocal/platformServer/config/properties").apiExposure, undefined);
   assert.notEqual(loadRuntime("platformServer", "kickoffDockerLocal").apiExposure?.categories?.moduleInternal?.enabled, true);
 
   global.CONFIG = { get: key => key.split(".").reduce((value, part) => value?.[part], config) };

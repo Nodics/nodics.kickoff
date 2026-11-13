@@ -11,7 +11,7 @@ const owner = relative => require(path.join(root, relative));
 owner("modules/loyaltyWallet/test/helpers/runtimeEnums")();
 
 test("Local Commerce exact Retail/Online ledger endpoint reads retain owner/provenance guards and deny foreign environments", async t => {
-  const config = loadRuntime("loyaltyServer", "kickoffLocal");
+  const config = loadRuntime("commerceServer", "kickoffLocal");
   const names = ["CONFIG", "SERVICE", "FACADE", "NODICS", "CLASSES"];
   const previous = Object.fromEntries(names.map(name => [name, Object.getOwnPropertyDescriptor(global, name)]));
   t.after(() => { for (const name of names) { if (previous[name]) Object.defineProperty(global, name, previous[name]); else delete global[name]; } });

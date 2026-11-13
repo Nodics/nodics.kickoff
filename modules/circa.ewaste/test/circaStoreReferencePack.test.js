@@ -28,19 +28,31 @@ const selection = (codes = ["circa.ewaste:store"]) => ({
     expectedReleases: Object.fromEntries(codes.map((code) => [code, "0.0.1"])),
   },
 });
-function fixture(t, options = {}) {
+async function fixture(t, options = {}) {
   const previous = {
+    CLASSES: global.CLASSES,
     CONFIG: global.CONFIG,
     SERVICE: global.SERVICE,
     NODICS: global.NODICS,
   };
   t.after(() => Object.assign(global, previous));
-  return createPorts({
-    modules: { "circa.ewaste": moduleOwner },
+  const prepare = require(path.join(framework,
+    "nodics.foundation/modules/nTooling/test/helpers/projectRuntimePreparation.cjs"));
+  const runtime = await prepare({
+    projectRoot: path.resolve(__dirname, "../../.."), frameworkRoot: framework,
+    environment: "kickoffLocal", server: "commerceServer",
+  });
+  const store = NODICS.getModule("store");
+  assert(runtime.modules.includes("store") && store?.rawSchema?.store);
+  global.CLASSES = previous.CLASSES;
+  const ports = createPorts({
+    modules: { "circa.ewaste": moduleOwner, store },
     runtimeRole: "COMMERCE",
     environment: "kickoffLocal",
     ...options,
   });
+  ports.publication = "OPERATIONAL";
+  return ports;
 }
 
 test("Store-only v001 reference selection retains identities, hashes and required ordering", () => {
@@ -148,7 +160,7 @@ test("canonical release dispatch composes actual Store records and forwards only
   String.prototype.toUpperCaseFirstChar = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
   };
-  const ports = fixture(t, {
+  const ports = await fixture(t, {
     onImport: async (request) => {
       assert.equal(request.dataReleasePlan.length, 1);
       const plan = request.dataReleasePlan[0];
@@ -284,13 +296,17 @@ test("canonical release dispatch composes actual Store records and forwards only
 });
 
 test("wrong destination and stale selected version refuse before Store dispatch or claims", async (t) => {
-  const ports = fixture(t);
-  ports.runtimeRole = "COMMERCE_STAGED";
-  await assert.rejects(
-    () => ports.service.execute(selection()),
-    /destination|runtime role/i,
-  );
-  ports.runtimeRole = "COMMERCE";
+  const ports = await fixture(t);
+  const activeModules = NODICS.getActiveModules;
+  try {
+    NODICS.getActiveModules = () => activeModules().filter(name => name !== "store");
+    await assert.rejects(
+      () => ports.service.execute(selection()),
+      /Selected destination module is unavailable: store/,
+    );
+  } finally {
+    NODICS.getActiveModules = activeModules;
+  }
   const stale = selection();
   stale.releaseRequest.expectedReleases["circa.ewaste:store"] = "0.0.2";
   await assert.rejects(
@@ -302,7 +318,7 @@ test("wrong destination and stale selected version refuse before Store dispatch 
 });
 
 test("same-version installed checksum drift is rejected without receipt rewriting", async (t) => {
-  const ports = fixture(t);
+  const ports = await fixture(t);
   await ports.service.execute(selection());
   ports.installations[0].checksum = "previous-installed-bytes";
   const historical = structuredClone(ports.installations);
@@ -315,7 +331,7 @@ test("same-version installed checksum drift is rejected without receipt rewritin
 });
 
 test("owner failure cannot produce a CURRENT Store receipt", async (t) => {
-  const ports = fixture(t, {
+  const ports = await fixture(t, {
     onImport: async () => {
       throw new Error("Isolated Store persistence refusal");
     },
@@ -329,7 +345,7 @@ test("owner failure cannot produce a CURRENT Store receipt", async (t) => {
 });
 
 test("selecting retired snapshot release with Stores rejects the whole plan before either dispatch", async (t) => {
-  const ports = fixture(t);
+  const ports = await fixture(t);
   CONFIG.get("data").dataReleases.targetValidators = {
     inventory: "DefaultInventoryOperationService",
     promotion: "DefaultPromotionOperationService",

@@ -106,8 +106,34 @@ Circa tests verify remaining role/group unions and the real nImport prerequisite
 plan orders Digital vocabulary before groups. These tests establish source
 contracts, not live role adoption or E04/E11 success.
 
-The retained setup observation plan and old import receipts remain evidence of
-their original inputs. Do not reseal them to make changed source appear current.
+Native observation revision 20 pins the 93 required stages of the effective
+Circa profile across six receiving servers. Its inputs comprise 85 data releases,
+seven publication plans and an 18-asset Media manifest. The nine additional Init releases supply Profile, CMS, Store, Product, Order and
+Waste role or group definitions on Platform before publication. Revision 18 retains
+its original 84-stage file and checksum in history. Revision 19 is also retained. Revision 20 changes only the Digital Core and Loyalty Wallet participation checksums and their transaction-access prerequisites. BackOffice rejects that revision
+for the new profile before dispatch.
+
+Native Demo Credit and the Circa loyalty programme now select the Commerce
+receiver (`commerceServer`, `COMMERCE`). The Loyalty Wallet owner supplies the
+credit installer and source admission. Offline release discovery, destination
+validation and the confined source-byte check pass for Demo Credit.
+
+On native Process, the six publication workflow releases pass owner discovery
+and destination validation alongside the separate Editorial and coupon reminder
+selections. Platform discovers the selected Circa Init and identity-authority
+releases and their pinned prerequisites. The additional
+source roots expose their manifests without activating their runtime modules.
+
+The current RenewWorks publication descriptor selects the recaptured
+`CPN-GRN-30` promotion version
+`4a8042df531f38731a0faa028b83cd9c1fb42c098ed4e9e9b2584a64e6ad40b3`.
+WCMS Staged admits the Circa content and customer-workspace releases. The CMS
+baseline descriptor selects content version `0.0.1`. Waste admits the base
+sample followed by the explicit opening impact and opening asset installers.
+Source qualification used the native configuration, nImport destination
+admission, confined release bytes and the CMS, Media and publication owners.
+Live setup status still requires signed deployment admission and fresh owner
+readbacks for installation and publication.
 
 The existing `wasteEnterpriseAdministratorUserGroup` now composes the canonical
 `carbon.holdings.read` and `waste.materialValue.read` owner vocabulary. Its seven

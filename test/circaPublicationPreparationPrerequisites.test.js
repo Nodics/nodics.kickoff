@@ -131,8 +131,15 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       profiles.nexus.dataPackages
         .filter((step) => step.targetRuntimeRole === "PROCESS")
         .map((step) => step.code),
-      ["media:mediaPublicationWorkflow"],
+      environment === "kickoffLocal"
+        ? ["media:mediaPublicationWorkflow", "nexus.web:nexusEngagementOperational"]
+        : ["media:mediaPublicationWorkflow"],
     );
+    const engagement = profiles.nexus.dataPackages.find(
+      (step) => step.code === "nexus.web:nexusEngagementOperational",
+    );
+    assert.equal(engagement.targetServer,
+      environment === "kickoffLocal" ? "processServer" : "engagementServer");
   });
 }
 test("Local selected publication providers match the workflow prerequisites, not module-name inference", () => {

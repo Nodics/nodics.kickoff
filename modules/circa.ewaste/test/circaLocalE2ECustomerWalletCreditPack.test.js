@@ -12,7 +12,6 @@ const assert = require("node:assert/strict");
 const path = require("node:path");
 const manifest = require("../data/manifest.json");
 const payload = require("../data/sample-v001/operations/loyalty-e2e-credit/records/loyaltyCredits.json");
-const localPlatform = require("../../../envs/kickoffLocal/platformServer/config/properties");
 const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configuration");
 const releases = require(path.join(
   frameworkRoot,
@@ -73,7 +72,11 @@ test("successor guards the observed customer POINTS balance without replaying hi
 });
 
 test("kickoffLocal admits both exact sources and selects only the fresh-demo credit", () => {
-  const runtime = loadRuntime("loyaltyServer", "kickoffLocal");
+  const platform = loadRuntime("platformServer", "kickoffLocal");
+  const packages = platform.backofficeApplicationInitialization.profiles.circa.preparation.prerequisites;
+  const credit = packages.find(row => row.code === "circa.ewaste:circaLocalDemoCredit");
+  const runtime = loadRuntime(credit.targetServer, "kickoffLocal");
+  assert.equal(credit.targetRuntimeRole, runtime.runtimeRole.code);
   const previous = global.CONFIG;
   try {
     global.CONFIG = { get: key => (key === "data" ? runtime.data : undefined) };
@@ -99,8 +102,6 @@ test("kickoffLocal admits both exact sources and selects only the fresh-demo cre
     global.CONFIG = previous;
   }
 
-  const packages =
-    localPlatform.backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM.profiles.circa.preparation.prerequisites.value;
   assert.equal(packages.filter(row => row.code === `circa.ewaste:${sectionCode}`).length, 0);
   assert.equal(packages.filter(row => row.code === "circa.ewaste:circaLocalDemoCredit").length, 1);
   assert.deepEqual(loyaltyDefaults.loyalty.sampleCredits, {

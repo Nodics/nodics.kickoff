@@ -9,15 +9,14 @@
     "runtimeConfigurationContributions": [
       {
         "moduleName": "eWaste",
-        "namespace": "digitalCore",
-        "runtimeRole": "COMMERCE"
+        "namespace": "digitalCore"
       }
     ],
     "kind": "server",
     "extends": [
-      "nodics.discovery",
       "nodics.commerce",
-      "nodics.accelerators"
+      "nodics.accelerators",
+      "nodics.loyalty"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
@@ -49,7 +48,17 @@
     "runtimeTooling": {
       "code": "commerce",
       "script": "start:commerce",
-      "order": 9
-    }
+      "order": 9,
+      "readinessTimeoutMs": 300000
+    },
+    "runtimeAliases": [
+      "loyalty"
+    ],
+    "runtimeModuleRoots": [
+      "nodics.discovery",
+      "nodics.commerce",
+      "nodics.accelerators",
+      "nodics.loyalty"
+    ]
   }
 }

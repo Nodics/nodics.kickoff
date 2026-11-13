@@ -29,7 +29,7 @@ const catalogue = require(
 for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
   const properties = loadRuntime("platformServer", environment);
   global.CONFIG = { get: (key) => properties[key] };
-  global.NODICS = { getServerName: () => "engagementServer" };
+  global.NODICS = { getServerName: () => "processServer" };
   const ownerPackages = agent.buildActivationDataPackages("commsCore", {
     path: path.join(frameworkRoot, "nodics.communication/modules/commsCore"),
   });
@@ -40,7 +40,7 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     packages.length > 0,
     "Selected environment must adopt owner activation packages",
   );
-  assert(packages.every((item) => item.targetServer === "engagementServer"));
+  assert(packages.every((item) => item.targetServer === "processServer"));
   assert.equal(
     properties.backofficeFunctionalModuleActivationData.modules[
       "nodics.communication"
@@ -54,18 +54,19 @@ console.log("Kickoff communication activation-data selectors validated");
 /** Project-specific SMTP adoption checks use the existing effective-runtime harness. */
 const test = require("node:test");
 const approvedLocalCaptureRecipients = [
-  "admin@circa-ui-acceptance-20261013.test",
-  "operator@circa-ui-acceptance-20261013.test",
+  "first@selected-capture.test",
+  "second@selected-capture.local",
+  "missing@selected-capture.test",
 ];
 test("Local employee email remains disabled and credential-free until explicit runtime input", () => {
-  const runtime = loadRuntime("engagementServer", "kickoffLocal", {});
+  const runtime = loadRuntime("processServer", "kickoffLocal", {});
   assert.equal(runtime.smtpCommsProvider.enabled, false);
   assert.equal(runtime.smtpCommsProvider.mode, "SMTP");
   assert.equal(runtime.smtpCommsProvider.testOnly, true);
   assert.equal(runtime.smtpCommsProvider.liveQualified, false);
   assert.deepEqual(
     runtime.smtpCommsProvider.allowedRecipients,
-    approvedLocalCaptureRecipients,
+    [],
   );
   assert.equal(
     runtime.runtimeConfiguration.credentials.kickoffEmployeeMail.pass,
@@ -79,7 +80,7 @@ test("Local employee email remains disabled and credential-free until explicit r
   assert.equal(runtime.communication.providers.EMAIL.type, "SMTP");
 });
 test("Local employee SMTP overrides bind in the sending runtime and inherit secure defaults", () => {
-  const runtime = loadRuntime("engagementServer", "kickoffLocal", {
+  const runtime = loadRuntime("processServer", "kickoffLocal", {
     NODICS_EMPLOYEE_SMTP_ENABLED: "true",
     NODICS_EMPLOYEE_EMAIL_SENDER: "sender@example.test",
     NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT: "recipient@example.test",
@@ -91,8 +92,8 @@ test("Local employee SMTP overrides bind in the sending runtime and inherit secu
   assert.equal(runtime.smtpCommsProvider.enabled, true);
   assert.deepEqual(
     runtime.smtpCommsProvider.allowedRecipients,
-    approvedLocalCaptureRecipients,
-    "Environment recipients cannot broaden the approved Local capture allowlist",
+    ["recipient@example.test", "other@example.test", "another@example.test"],
+    "Only the explicit private deployment recipient inputs are selected",
   );
   assert.equal(runtime.smtpCommsProvider.smtp.host, "smtp.example.test");
   assert.equal(runtime.smtpCommsProvider.smtp.port, 587);
@@ -128,21 +129,21 @@ test("Employee email binding does not spread credentials into Platform or other 
 test("Employee SMTP uses typed environment bindings and refuses malformed enablement", () => {
   assert.throws(
     () =>
-      loadRuntime("engagementServer", "kickoffLocal", {
+      loadRuntime("processServer", "kickoffLocal", {
         NODICS_EMPLOYEE_SMTP_ENABLED: "yes",
       }),
     /boolean must be true or false/,
   );
   assert.throws(
     () =>
-      loadRuntime("engagementServer", "kickoffLocal", {
+      loadRuntime("processServer", "kickoffLocal", {
         NODICS_EMPLOYEE_SMTP_PORT: "not-a-port",
       }),
     /number must be finite/,
   );
 });
 test("Implicit TLS may be explicitly selected without weakening inherited certificate policy", () => {
-  const runtime = loadRuntime("engagementServer", "kickoffLocal", {
+  const runtime = loadRuntime("processServer", "kickoffLocal", {
     NODICS_EMPLOYEE_SMTP_PORT: "465",
     NODICS_EMPLOYEE_SMTP_SECURE: "true",
   });
@@ -151,16 +152,16 @@ test("Implicit TLS may be explicitly selected without weakening inherited certif
   assert.equal(runtime.smtpCommsProvider.smtp.allowInsecureLoopback, false);
   assert.equal(runtime.smtpCommsProvider.enabled, false);
 });
-test("Approved Local capture uses the existing SMTP owner with exactly two recipients and loopback-only plaintext", () => {
-  const runtime = loadRuntime("engagementServer", "kickoffLocal", {
+test("Approved Local capture uses the existing SMTP owner with only approved test recipients and loopback-only plaintext", () => {
+  const runtime = loadRuntime("processServer", "kickoffLocal", {
     NODICS_EMPLOYEE_SMTP_ENABLED: "true",
     NODICS_EMPLOYEE_EMAIL_SENDER: "noreply@nodics-local.test",
     NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT:
-      "admin@circa-ui-acceptance-20261013.test",
+      approvedLocalCaptureRecipients[0],
     NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_2:
-      "operator@circa-ui-acceptance-20261013.test",
+      approvedLocalCaptureRecipients[1],
     NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT_3:
-      "applicant@axis-onboarding-acceptance.test",
+      approvedLocalCaptureRecipients[2],
     NODICS_EMPLOYEE_SMTP_HOST: "127.0.0.1",
     NODICS_EMPLOYEE_SMTP_PORT: "2525",
     NODICS_EMPLOYEE_SMTP_SECURE: "false",
@@ -205,14 +206,14 @@ test("Approved Local capture uses the existing SMTP owner with exactly two recip
   assert.equal(runtime.communicationVerification.stored.enabled, false);
 });
 test("Local stored verification selects only Profile without granting qualification or sending", () => {
-  const local = loadRuntime("engagementServer", "kickoffLocal", {});
+  const local = loadRuntime("processServer", "kickoffLocal", {});
   assert.equal(local.communicationVerification.stored.enabled, false);
   assert.deepEqual(
     local.communicationVerification.stored.trustedSourceModules,
     ["profile"],
   );
   assert.equal(local.log.requestPrivacy.qualified, false);
-  const selected = loadRuntime("engagementServer", "kickoffLocal", {
+  const selected = loadRuntime("processServer", "kickoffLocal", {
     NODICS_EMPLOYEE_VERIFICATION_STORE_ENABLED: "true",
   });
   assert.equal(selected.communicationVerification.stored.enabled, true);
@@ -227,7 +228,7 @@ test("Local stored verification selects only Profile without granting qualificat
   );
 });
 test("Resolved Kickoff email settings are accepted by the existing provider without opening transport", async () => {
-  const runtime = loadRuntime("engagementServer", "kickoffLocal", {
+  const runtime = loadRuntime("processServer", "kickoffLocal", {
     NODICS_EMPLOYEE_SMTP_ENABLED: "true",
     NODICS_EMPLOYEE_EMAIL_SENDER: "sender@example.test",
     NODICS_EMPLOYEE_EMAIL_TEST_RECIPIENT: "recipient@example.test",
@@ -258,7 +259,7 @@ test("Resolved Kickoff email settings are accepted by the existing provider with
   }
 });
 test("Enabling employee SMTP without required inputs does not claim readiness", async () => {
-  const runtime = loadRuntime("engagementServer", "kickoffLocal", {
+  const runtime = loadRuntime("processServer", "kickoffLocal", {
     NODICS_EMPLOYEE_SMTP_ENABLED: "true",
   });
   const saved = global.CONFIG;
@@ -286,14 +287,14 @@ function employeeTemplateRuntime() {
   return probe.resolve({
     projectRoot: path.resolve(__dirname, ".."),
     frameworkRoot,
-    server: "engagementServer",
+    server: "processServer",
     environment: "kickoffLocal",
   });
 }
-test("Local deployment adopts Profile resource defaults without activating Profile services", () => {
+test("Local deployment adopts Profile resource defaults without activating Profile services", async () => {
   const previous = { NODICS: global.NODICS, CONFIG: global.CONFIG };
   try {
-    const runtime = employeeTemplateRuntime();
+    const runtime = await employeeTemplateRuntime();
     const templates = require(
       path.join(
         frameworkRoot,
@@ -361,10 +362,10 @@ test("Local deployment adopts Profile resource defaults without activating Profi
     Object.assign(global, previous);
   }
 });
-test("Local employee verification resources render HTML/text without credential variables", () => {
+test("Local employee verification resources render HTML/text without credential variables", async () => {
   const previous = { NODICS: global.NODICS, CONFIG: global.CONFIG };
   try {
-    const runtime = employeeTemplateRuntime().properties.communication;
+    const runtime = (await employeeTemplateRuntime()).properties.communication;
     const templates = require(
       path.join(
         frameworkRoot,
@@ -402,7 +403,7 @@ test("Local resources retain source/purpose/channel authorization before any int
     SERVICE: global.SERVICE,
   };
   try {
-    employeeTemplateRuntime();
+    await employeeTemplateRuntime();
     const runtime = require(
       path.join(
         frameworkRoot,
@@ -457,21 +458,18 @@ test("Local resources retain source/purpose/channel authorization before any int
   }
 });
 test("Employee resource adoption remains explicit and isolated from other deployments", () => {
-  const server = require("../envs/kickoffLocal/engagementServer/config/properties");
+  const server = require("../envs/kickoffLocal/processServer/config/properties");
   assert.equal(server.communication.templates, undefined);
   assert.equal(
     server.activeModules.compositions.employeeMail.selection,
     "employee",
   );
-  assert.equal(
-    require("../config/properties").activeModules.compositions.employeeMail
-      .selection,
-    "none",
-  );
-  const selected = require("../modules/kickoffCore/config/properties")
-    .communication.runtimeRoleProfiles.ENGAGEMENT.value;
-  assert.equal(selected.templates, undefined);
-  assert.deepEqual(selected.templateResources.modules, { profile: true });
+  assert.equal(require("../config/properties").activeModules, undefined);
+  const project = require("../modules/kickoffCore/config/properties");
+  assert.equal(project.communication, undefined);
+  assert.equal(project.activeModules.compositions.employeeMail, undefined);
+  const selected = loadRuntime("processServer", "kickoffLocal", {});
+  assert.equal(selected.communication.templateResources.modules.profile, true);
   for (const [server, environment] of [
     ["platformServer", "kickoffLocal"],
     ["engagementServer", "kickoffDockerLocal"],
@@ -483,4 +481,27 @@ test("Employee resource adoption remains explicit and isolated from other deploy
     );
     assert.notEqual(runtime.smtpCommsProvider?.enabled, true);
   }
+});
+
+
+test("Local Process placement resolves the Framework employee Communication connection", () => {
+  const local = loadRuntime("platformServer", "kickoffLocal");
+  const connection = local.enterpriseManagement.accessAssignments.registrationVerification.connectionName;
+  assert.equal(connection, local.profileEmployeeRecovery.mail.connectionName);
+  assert.ok(local.servers[connection]);
+  assert.deepEqual(local.servers[connection].endpoint, local.servers.processServer.endpoint);
+  assert.equal(local.servers[connection].remoteOnly, true);
+});
+
+test("Local employee verification inherits Framework challenge and proof lifetimes", () => {
+  const defaults = require(path.join(frameworkRoot, "nodics.communication/modules/commsVerification/config/properties")).communicationVerification;
+  const selected = require("../envs/kickoffLocal/processServer/config/properties").communicationVerification;
+  assert.equal(selected.ttlSeconds, undefined);
+  assert.equal(selected.stored.proofTtlSeconds, undefined);
+  const local = loadRuntime("processServer", "kickoffLocal", {});
+  assert.equal(local.communicationVerification.ttlSeconds, defaults.ttlSeconds);
+  assert.equal(local.communicationVerification.stored.proofTtlSeconds, defaults.stored.proofTtlSeconds);
+  const docker = loadRuntime("engagementServer", "kickoffDockerLocal", {});
+  assert.equal(docker.communicationVerification.ttlSeconds, defaults.ttlSeconds);
+  assert.equal(docker.communicationVerification.stored.proofTtlSeconds, defaults.stored.proofTtlSeconds);
 });

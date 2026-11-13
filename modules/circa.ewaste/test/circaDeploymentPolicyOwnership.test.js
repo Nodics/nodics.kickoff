@@ -28,6 +28,11 @@ const retiredSelectors = new Set([
   "eWaste.marketplace.refundsEnabled",
   "eWaste.marketplace.rewardScale",
 ]);
+const consolidatedLocalOwners = {
+  engagementServer: { server: "processServer", module: "engagementApi" },
+  locationServer: { server: "wasteServer", module: "locationCore" },
+  loyaltyServer: { server: "commerceServer", module: "loyaltyWallet" },
+};
 for (const snapshot of snapshots)
   test(
     snapshot.environment +
@@ -35,6 +40,15 @@ for (const snapshot of snapshots)
       snapshot.server +
       " retains exact deployment policy and sample selection",
     () => {
+      const successor = snapshot.environment === "kickoffLocal" && consolidatedLocalOwners[snapshot.server];
+      if (successor) {
+        assert.equal(require("node:fs").existsSync(path.join(
+          __dirname, "../../../envs/kickoffLocal", snapshot.server, "package.json",
+        )), false, "Retired runtime must not be independently deployed");
+        const runtime = loadRuntime(successor.server, snapshot.environment);
+        assert(activeModuleNames(runtime).includes(successor.module), "The consolidated runtime must host the real owner");
+        return;
+      }
       const runtime = loadRuntime(snapshot.server, snapshot.environment);
       assert.equal(
         activeModuleNames(runtime).includes("circa.ewaste"),
@@ -59,10 +73,11 @@ for (const snapshot of snapshots)
           continue;
         }
         if (selector === "eWaste.conversation.rewardGuidance" && expected !== null) {
-          const profiles = require(path.join(__dirname, "../../../envs",
-            snapshot.environment, "config/properties")).eWaste.runtimeRoleProfiles;
-          const selectedGuidance = profiles.COMMERCE.conversation.rewardGuidance;
-          assert.equal(selectedGuidance, profiles.WASTE.conversation.rewardGuidance);
+          const environmentSource = require(path.join(__dirname, "../../../envs", snapshot.environment, "config/properties"));
+          const commerce = require(path.join(__dirname, "../../../envs", snapshot.environment, "commerceServer/config/properties"));
+          const waste = require(path.join(__dirname, "../../../envs", snapshot.environment, "wasteServer/config/properties"));
+          const selectedGuidance = (commerce.eWaste || environmentSource.eWaste).conversation.rewardGuidance;
+          assert.equal(selectedGuidance, (waste.eWaste || environmentSource.eWaste).conversation.rewardGuidance);
           assert.equal(actual, selectedGuidance);
           assert.match(actual, /original contributor entitlements stay with the contributor/);
           continue;
@@ -106,6 +121,10 @@ for (const snapshot of snapshots)
             "runtimeConfigurationSchemas.telegramExternalIdentity.fields" &&
           expected !== null
         ) {
+          if (!activeModuleNames(runtime).includes("profile")) {
+            assert.equal(actual, null, "Inactive Profile must not acquire orphan credential fields");
+            continue;
+          }
           const runtimeSchema = require(
             path.join(
               frameworkRoot,
@@ -146,6 +165,7 @@ test("demo composition has no operational policy, provider binding, rate or enab
     "cms",
     "data",
     "eWaste",
+    "locationMapConfiguration",
     "tooling",
   ]);
   assert.deepEqual(Object.keys(demo.eWaste).sort(), [
@@ -154,4 +174,11 @@ test("demo composition has no operational policy, provider binding, rate or enab
     "presentation",
   ]);
   assert.equal(demo.eWaste.application.enabled, undefined);
+  const map = demo.locationMapConfiguration;
+  assert.deepEqual(Object.keys(map), ["applicationOverrides"]);
+  assert.deepEqual(Object.keys(map.applicationOverrides), ["CIRCA"]);
+  assert.deepEqual(Object.keys(map.applicationOverrides.CIRCA), ["COLLECTION_CENTRE_MAP"]);
+  assert.deepEqual(Object.keys(map.applicationOverrides.CIRCA.COLLECTION_CENTRE_MAP).sort(),
+    ["defaultCenterLatitude", "defaultCenterLongitude", "defaultZoom"]);
+
 });

@@ -14,9 +14,9 @@ import configuration from './helpers/configuration.js';
 
 const backendRuntimes = configuration.loadEnvironment('kickoffLocal').topology.groups.backends;
 
-assert.deepEqual(backendRuntimes.map(runtime => runtime.port), [4300, 4314, 4330, 4312, 4340, 4360, 4380, 4370, 4352, 4350]);
+assert.deepEqual(backendRuntimes.map(runtime => runtime.port), [4300, 4314, 4330, 4312, 4370, 4352, 4350]);
 assert.equal(new Set(backendRuntimes.map(runtime => runtime.port)).size, backendRuntimes.length);
-assert.equal(backendRuntimes.length, 10);
+assert.equal(backendRuntimes.length, 7);
 for (const runtime of backendRuntimes.filter(item => item.code !== 'platform')) {
   assert.deepEqual(runtime.dependsOn, ['platform'], `${runtime.code} must wait for Platform before startup admission`);
 }

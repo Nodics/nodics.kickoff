@@ -10,11 +10,7 @@
 - Add project-owned integration behavior here only after checking reusable framework/provider capabilities first.
 - Preserve provider governance, diagnostics, retry/rollback expectations, access control, and layered configuration.
 
-Editorial reviewer assignments belong in this module's `config/properties.js`
-under `process.definitionContributions.reviewerAssignments`. Local and Docker
-Process runtimes consume that policy through Workflow's generic customization;
-do not duplicate service overrides in servers. Queue selection does not authorize
-contribution ownership migration or change immutable released payloads.
+Kickoff uses the unassigned Editorial review task. Customers can supply reviewer policy through Workflow configuration.
 
 The PROCESS role explicitly allows discovery of `editorial:editorialWorkflows`.
 This selection does not activate Editorial or install its EXPLICIT release.

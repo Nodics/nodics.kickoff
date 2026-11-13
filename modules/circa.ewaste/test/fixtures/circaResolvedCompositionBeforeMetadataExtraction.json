@@ -648,7 +648,7 @@
           "CIRCA_ORDER_"
         ],
         "storeCodes": {
-          "agoraMainStore": true
+          "agoraApparelStore": true
         }
       },
       "order.refunds": {
@@ -657,10 +657,10 @@
           "CIRCA_ORDER_"
         ],
         "storeCodes": {
-          "agoraMainStore": true
+          "agoraApparelStore": true
         },
         "ownerByStore": {
-          "agoraMainStore": "fulfillmentCore"
+          "agoraApparelStore": "fulfillmentCore"
         },
         "ownerPorts": {
           "eWaste": {
@@ -1422,7 +1422,7 @@
           "CIRCA_ORDER_"
         ],
         "storeCodes": {
-          "agoraMainStore": true
+          "agoraApparelStore": true
         }
       },
       "order.refunds": {
@@ -1431,10 +1431,10 @@
           "CIRCA_ORDER_"
         ],
         "storeCodes": {
-          "agoraMainStore": true
+          "agoraApparelStore": true
         },
         "ownerByStore": {
-          "agoraMainStore": "fulfillmentCore"
+          "agoraApparelStore": "fulfillmentCore"
         },
         "ownerPorts": {
           "eWaste": {

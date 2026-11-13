@@ -13,8 +13,8 @@ updates, never replay of the employee snapshot or changes to role definitions. K
 Init definitions before the late Sample assignment, never cross-type manifest
 dependencies. Existing Local adoption is a separately reviewed delta, not a
 finance or Employee-snapshot replay. Superseded one-off assignments are removed;
-the retained observation plan requires separate successor review before aggregate
-setup can be CURRENT. Never rewrite an admitted journal to match changed source.
+native observation revision 20 retains the reviewed stage inventory and refreshes two installed participation release pins. Revision 19 stays in history. Aggregate CURRENT
+requires fresh installed-release and publication evidence from the receivers. Never rewrite an admitted journal to match changed source.
 
 The optional fixed-expiry rollout uses independently selected budget/issuance
 instructions for 35 separately authored approved new identities. Follow
@@ -68,7 +68,7 @@ Import samples only into a new environment through governed destination APIs;
 never reset transactional ownership or opening ledgers during a code refactor.
 
 Reference adoption selects only EXPLICIT `sample-v001` demo sections.
-`waste-policy` and `customer-workspace` are version 0.0.2 samples; policy records
+`waste-policy` and `customer-workspace` are version 0.0.1 samples. Policy records
 are complete materialized demo values, not cross-lane partial core overrides.
 Neutral eWaste core reference selection remains separate. No src or nested modules
 directory is permitted, including empty scaffolding. Read the historical data
@@ -115,7 +115,7 @@ retained publication, installed private persistence, ITEM delivery, payment or
 asset-transfer gates. Adopt terms through their existing owner-controlled packs
 and operations; never enable production policy or rewrite installed receipts.
 
-Demo packs are environment-neutral (`environmentScope: ["ALL"]`). Environment
+Each Sample release declares its allowed environments in its manifest. Local test funding, opening samples and mock integrations require Local admission. Environment
 and server properties select providers, deployment identities and approvals;
 source portability neither imports data nor qualifies a deployment. Preserve
 installed payload bytes, release identities, historic observations and completed
@@ -244,3 +244,10 @@ source proposal, not an installed receipt. Its sourceTerms path/hash pins curren
 canonical campaign bytes for focused tests. Refresh that source reference when
 reviewed source changes, preserve exact checksum validation and unapproved/no-
 operational-authority metadata, and never rewrite historical acceptance receipts.
+
+
+## Waste opening samples
+
+The shared Waste sample installs collection points, submissions, evidence and verification records. Native Local selects two further batches on its Waste runtime. Waste Impact installs illustrative estimates from the reviewed impact payload. Waste Core installs each opening creation event and then its asset. Both installers require a human with Sample import and Waste approval permissions, a matching deployment review, the selected tenant and enterprise, and operational co-location of the domain owners listed by preflight. The Docker deployment uses the shared sample only.
+
+For a missing owner, restore the declared Local composition before retrying. For an interrupted batch, run preflight again. Exact existing records count as current. A conflicting or modified record stops installation for operator inspection. Opening estimates and asset references do not post rewards, issue carbon credits or authorize subsequent transfers.

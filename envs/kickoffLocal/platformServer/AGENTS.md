@@ -42,8 +42,8 @@ Neither definitions nor demo assignments grant review, activation, financial
 qualification or tenant bypass.
 
 Local Platform selects the existing `apiExposure.categories.moduleInternal`
-category for private reminder recipient callbacks. Keep this opt-in in the environment’s
-`apiExposure.runtimeRoleProfiles.PLATFORM`, never in server properties;
+category for private reminder recipient callbacks. Keep this actual deployment
+opt-in in this server's ordinary `apiExposure` namespace;
 framework definitions remain disabled. Exposure never grants route
 permissions, runtime assignments or capture qualification. Preserve the actual
 composed-router positive and missing-permission selection regression.

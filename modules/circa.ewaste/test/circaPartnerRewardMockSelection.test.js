@@ -18,7 +18,7 @@ test("E11 Local overrides only two values and inherits every mock provider defau
   assert.deepEqual(local, { enabled: true, mock: { enabled: true } });
   assert.equal(owner.enabled, false);
   assert.equal(owner.mock.enabled, false);
-  assert.deepEqual(loadRuntime("loyaltyServer", "kickoffLocal").loyalty.partnerRewardConversion,
+  assert.deepEqual(loadRuntime("commerceServer", "kickoffLocal").loyalty.partnerRewardConversion,
     { ...owner, enabled: true, mock: { ...owner.mock, enabled: true } });
   assert.deepEqual(loadRuntime("loyaltyServer", "kickoffDockerLocal").loyalty.partnerRewardConversion, owner);
 });

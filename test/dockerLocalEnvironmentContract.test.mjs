@@ -175,16 +175,17 @@ for (const header of [
     `Agora customer authentication requires the ${header} request header`,
   );
 }
-assert.equal(
+assert.deepEqual(
   require("../envs/kickoffDockerLocal/commerceServer/config/properties").cart,
-  undefined,
-  "Cart jurisdiction must be projected from project runtime-role policy",
+  { customerApi: { defaultJurisdiction: "AE", defaultCurrency: "AED" } },
+  "Docker Commerce declares only its Cart market overrides",
 );
 assert.equal(
   loadRuntime("commerceServer").cart.customerApi.defaultJurisdiction,
   "AE",
   "Cart jurisdiction must match the governed reference tax policy",
 );
+assert.equal(loadRuntime("commerceServer").cart.customerApi.defaultCurrency, "AED");
 for (const server of ["wasteServer", "locationServer"]) {
   const properties = loadRuntime(server);
   assert.equal(properties.servers.profile.endpoint.httpHost, "platform");

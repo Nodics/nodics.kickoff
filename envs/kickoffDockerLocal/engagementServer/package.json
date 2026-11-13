@@ -21,6 +21,13 @@
       "publish": false,
       "web": false
     },
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-engagement-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
     "displayName": "Docker Local Engagement Server",
     "runtimeModuleRoots": [
       "nodics.communication",

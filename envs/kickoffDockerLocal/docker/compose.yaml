@@ -11,15 +11,14 @@ x-backend: &backend
   init: true
   security_opt: ["no-new-privileges:true"]
   tmpfs: ["/tmp:rw,noexec,nosuid,size=128m"]
-  environment:
+  environment: &backend-environment
     ENV: kickoffDockerLocal
     NODE_ENV: production
     NODICS_JWT_SECRET: ${AUTH_JWT_SECRET}
     NODICS_API_KEY_PEPPER: ${AUTH_API_KEY_PEPPER}
     NODICS_BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD}
     NODICS_BOOTSTRAP_SERVICE_PASSWORD: ${BOOTSTRAP_SERVICE_PASSWORD}
-    NODICS_BOOTSTRAP_SERVICE_API_KEY: ${BOOTSTRAP_SERVICE_API_KEY}
-    NODICS_RUNTIME_API_KEY: ${BOOTSTRAP_SERVICE_API_KEY}
+    NODICS_API_KEY: ${BOOTSTRAP_SERVICE_API_KEY}
     REDIS_URL: redis://:${REDIS_PASSWORD}@redis-primary:6379
   networks: [operator, application, data]
   depends_on:
@@ -169,17 +168,15 @@ services:
       timeout: 5s
       retries: 30
       start_period: 30s
-    deploy: { resources: { limits: { memory: 1024m, cpus: "1.00" } } }
+    deploy: { resources: { limits: { memory: 2048m, cpus: "1.00" } } }
 
   platform:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:platform"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: platformServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalPlatform,
-      }
+      <<: *backend-environment
+      SERVER: platformServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalPlatform
     ports: ["5300:4300"]
     tmpfs:
       [
@@ -202,11 +199,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:wcms:online"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: wcmsOnlineServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalWcmsOnline,
-      }
+      <<: *backend-environment
+      SERVER: wcmsOnlineServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalWcmsOnline
     ports: ["5314:4314"]
     volumes: ["media-online:/var/lib/nodics/media-online"]
     depends_on:
@@ -239,11 +234,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:process"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: processServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalProcess,
-      }
+      <<: *backend-environment
+      SERVER: processServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalProcess
     ports: ["5330:4330"]
     depends_on:
       {
@@ -274,11 +267,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:wcms:staged"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: wcmsStagedServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalWcmsStaged,
-      }
+      <<: *backend-environment
+      SERVER: wcmsStagedServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalWcmsStaged
     ports: ["5312:4312"]
     volumes: ["media-staged:/var/lib/nodics/media-staged"]
     tmpfs:
@@ -291,6 +282,7 @@ services:
         mongodb: { condition: service_healthy },
         redis-primary: { condition: service_healthy },
         redis-sentinel: { condition: service_healthy },
+        elasticsearch: { condition: service_healthy },
         media-permissions: { condition: service_completed_successfully },
         platform: { condition: service_healthy },
         process: { condition: service_healthy },
@@ -312,11 +304,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:engagement"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: engagementServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalEngagement,
-      }
+      <<: *backend-environment
+      SERVER: engagementServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalEngagement
     ports: ["5340:4340"]
     depends_on:
       {
@@ -347,11 +337,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:loyalty"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: loyaltyServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalLoyalty,
-      }
+      <<: *backend-environment
+      SERVER: loyaltyServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalLoyalty
     ports: ["5360:4360"]
     depends_on:
       {
@@ -382,11 +370,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:commerce"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: commerceServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalCommerce,
-      }
+      <<: *backend-environment
+      SERVER: commerceServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalCommerce
     ports: ["5350:4350"]
     depends_on:
       {
@@ -418,11 +404,9 @@ services:
     command:
       ["node_modules/.bin/nodics", "project:run", "start:commerce:staged"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: commerceStagedServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalCommerceStaged,
-      }
+      <<: *backend-environment
+      SERVER: commerceStagedServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalCommerceStaged
     ports: ["5352:4352"]
     depends_on:
       {
@@ -455,11 +439,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:waste"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: wasteServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalWaste,
-      }
+      <<: *backend-environment
+      SERVER: wasteServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalWaste
     ports: ["5370:4370"]
     depends_on:
       {
@@ -491,11 +473,9 @@ services:
     <<: *backend
     command: ["node_modules/.bin/nodics", "project:run", "start:location"]
     environment:
-      {
-        ENV: kickoffDockerLocal,
-        SERVER: locationServer,
-        NODICS_DATABASE_NAME: kickoffDockerLocalLocation,
-      }
+      <<: *backend-environment
+      SERVER: locationServer
+      NODICS_DATABASE_NAME: kickoffDockerLocalLocation
     ports: ["5380:4380"]
     depends_on:
       {

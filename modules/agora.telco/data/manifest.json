@@ -22,7 +22,7 @@
       "initialPublicationPolicy": "ADMIN_INITIATED",
       "removalPolicy": "UNPUBLISH_OR_RETIRE",
       "files": {
-        "sample-v001/commerce/headers/agoraTelcoCatalogHeader.js": "c074bc17aa44f23601dcb1918ca6f24e9aca011c6d20720bbf1236a0a403a4d4",
+        "sample-v001/commerce/headers/agoraTelcoCatalogHeader.js": "2ff8e0b425b32527782a9727ce7211c46fa60a8d3553fb50d7123205ef07abfb",
         "sample-v001/commerce/records/agoraTelcoAllowanceData.js": "889a40086fbd1c2aa9a24b5379dd4a6d160b23115da25a436e3b73f1e7acc0e4",
         "sample-v001/commerce/records/agoraTelcoPlanData.js": "4b9a3748566978638ac9781eb675ae3ca3c129f9df47960dd2b4f20ae36cecf4",
         "sample-v001/commerce/records/agoraTelcoPriceBookData.js": "3306609cf426ec4fdec28a0263ebfa04c2064f94566133ab574ddee97157f9ea",
@@ -31,7 +31,6 @@
         "sample-v001/commerce/records/agoraTelcoProductLocalizationData.js": "1341f61e2e91bf0ca77d522a74c0a1f1573d2f26815afc92758e3ceb4a7d0b0f",
         "sample-v001/commerce/records/agoraTelcoProductVariantData.js": "e5e9f0a4a7857d7254fc1a7e4b35ade6d45b7de009b3f5af83f162c206a0d07a",
         "sample-v001/commerce/records/agoraTelcoProductVariantLocalizationData.js": "b0d6d4198309290afc3a80cec67971337decbafa7e41ba1728bc9db06a8e7980",
-        "sample-v001/commerce/records/agoraTelcoStoreData.js": "51b06b98d0b743d923bdb5f9de0670e7a3578d326674d22f760dcadbe6140521",
         "sample-v001/commerce/records/agoraTelcoTaxPolicyData.js": "6ba3d4cce2a32c9717fa268bf35e8334ce3bab827df98e957813601f477ccbda",
         "sample-v001/commerce/records/agoraTelcoWarehouseData.js": "dda9df8c515e10393d42797bb3a373bf77107562ed599ec6e1e80262ec5206e2"
       }
@@ -81,6 +80,32 @@
         "sample-v001/content/records/agoraTelcoSharedTypeCodeData.js": "69444c65dd125ef17a81dc63bab8711b161c40b04307c230762fd45523880ac1",
         "sample-v001/content/records/agoraTelcoSiteData.js": "ee0c09cdee2e5a854cc229006ef11bb4f47a923e48a2cdcd007e75af913f1868",
         "sample-v001/content/records/agoraTelcoTypeCodeData.js": "74b4780a86ce5a14614671e49455115c015c5f94b7447f4d540781614e3a827d"
+      }
+    },
+    "agoraTelcoStoreReference": {
+      "kind": "DATA_RELEASE",
+      "dataType": "sample",
+      "sourceRoot": "sample-v001",
+      "version": "0.0.1",
+      "description": "Agora Telco operational Store, Sales Channel and Point of Service",
+      "owningDomain": "store",
+      "lifecycle": "REFERENCE",
+      "destinationRole": "COMMERCE",
+      "environmentScope": [
+        "LOCAL",
+        "LOCAL_PRODUCTION_SIMULATION"
+      ],
+      "sensitivity": "INTERNAL",
+      "versioningPolicy": "NONE",
+      "publicationPolicy": "NONE",
+      "initialPublicationPolicy": "NONE",
+      "removalPolicy": "RETAIN",
+      "selectionPolicy": "EXPLICIT",
+      "files": {
+        "sample-v001/store/headers/agoraTelcoStoreReferenceHeader.js": "b359dded858a59757b19b7e180f0771913f887e7cf917ad428868894896884cc",
+        "sample-v001/store/records/agoraTelcoPointOfServiceData.js": "542b77da21351f5b13f8fb41d2e25f52291ce5d01081ef9e8f08168cb2a6b7b8",
+        "sample-v001/store/records/agoraTelcoSalesChannelData.js": "985e7bdfd559f28acdc54b723e845c2e24e70f9a6532190845bc4c00066344cb",
+        "sample-v001/store/records/agoraTelcoStoreData.js": "cc6d668138b4b6efc289b38a8c655560b72a536a8341be355e424a86f1640fb3"
       }
     }
   }

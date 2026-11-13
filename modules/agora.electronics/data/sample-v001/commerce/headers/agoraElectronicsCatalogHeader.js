@@ -54,5 +54,3 @@ module.exports = {
 module.exports.tax = {
   policies: entry("taxPolicy", "agoraElectronicsTaxPolicyData"),
 };
-
-module.exports.store = { stores: entry("store", "agoraElectronicsStoreData") };

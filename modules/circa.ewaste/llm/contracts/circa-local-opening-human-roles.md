@@ -11,7 +11,7 @@ release history. Role installation does not create goods or stock.
 For fresh setup, select `inventory:specialAccessGroups` before
 `inventory:specialAccessRoles` through their PLATFORM Init releases and pinned
 prerequisites. Then explicitly select
-`circa.ewaste:circaLocalOpeningStaffAssignments`, sample 0.0.2 under `sample-v001`,
+`circa.ewaste:circaLocalOpeningStaffAssignments`, sample 0.0.1 under `sample-v001`,
 environment-portable and REFERENCE/RETAIN. Resolve current owner versions and
 checksums from Inventory's manifest. The group has employee ancestry and only
 `commerce.inventory.operate`. Its exact additive instructions are:

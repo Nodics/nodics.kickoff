@@ -225,7 +225,7 @@ test("Agora Product seed publishes customer-safe English and Arabic Product sear
     const result = await searchPublication.publish(request, {
       product,
       localizations,
-      storeCode: "agoraMainStore",
+      storeCode: "agoraApparelStore",
       currency: "USD",
       categoryCodes,
       variantCodes,
@@ -240,7 +240,7 @@ test("Agora Product seed publishes customer-safe English and Arabic Product sear
   }
 
   assert(indexed.every((item) => item.model.tenant === "default"));
-  assert(indexed.every((item) => item.model.storeCode === "agoraMainStore"));
+  assert(indexed.every((item) => item.model.storeCode === "agoraApparelStore"));
   assert(
     indexed.every(
       (item) =>

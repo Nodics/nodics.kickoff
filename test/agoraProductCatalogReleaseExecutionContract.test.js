@@ -26,14 +26,25 @@ const releaseExecution = require(path.join(
 ));
 let importRequests;
 
-/** Supplies only Agora's real module and selected release destination to the owner harness. */
-function service() {
+/** Runs the real destination admission against Staged schema definitions with an in-memory import port. */
+async function service() {
+  const foundation = (file) => require(path.join(frameworkRoot, "nodics.foundation/modules", file));
+  const prepare = foundation("nTooling/test/helpers/projectRuntimePreparation.cjs");
+  const runtime = await prepare({ projectRoot, frameworkRoot, environment: "kickoffLocal", server: "commerceStagedServer" });
+  const files = foundation("nConfig/src/service/defaultFilesLoaderService");
+  files.LOG = { debug() {}, info() {}, warn() {}, error() {} };
+  const schemas = files.loadFiles("/src/schemas/schemas.js");
+  assert(runtime.modules.includes("agora.apparel"), "Agora Apparel must be active in Commerce Staged");
+  const destinations = runtime.modules.map((name) => [name, { rawSchema: schemas[name] }]);
   const fixture = releaseExecution({
-    modules: { "agora.apparel": {
-      name: "agora.apparel", path: moduleRoot, parent: "kickoffModules",
-      canonicalIdentity: "kickoffModules/agora.apparel",
-      metaData: { nodics: { displayName: "Agora Apparel" } },
-    } },
+    modules: {
+      ...Object.fromEntries(destinations),
+      "agora.apparel": {
+        name: "agora.apparel", path: moduleRoot, parent: "kickoffModules",
+        canonicalIdentity: "kickoffModules/agora.apparel",
+        metaData: { nodics: { displayName: "Agora Apparel" } },
+      },
+    },
     environment: "kickoffLocal",
     runtimeRole: "COMMERCE_STAGED",
   });
@@ -42,7 +53,7 @@ function service() {
 }
 
 test("Agora Apparel commerce catalog release follows Commerce Staged nImport execution contract", async () => {
-  const dataReleaseService = service();
+  const dataReleaseService = await service();
   const releases = dataReleaseService.discoverReleases("sample");
   const release = releases.find(
     (item) => item.releaseCode === "agora.apparel:agoraApparelCommerceCatalog",
@@ -117,7 +128,7 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
 });
 
 test("Agora domain Commerce releases separate each selected domain import plan", async () => {
-  const dataReleaseService = service();
+  const dataReleaseService = await service();
   const releases = dataReleaseService
     .discoverReleases("sample")
     .filter((item) => item.destinationRole === "COMMERCE_STAGED");

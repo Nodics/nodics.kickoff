@@ -10,7 +10,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraLinenWrapDress-v001",
         "productCode": "agoraLinenWrapDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -23,7 +23,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSatinMidiDress-v001",
         "productCode": "agoraSatinMidiDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -36,7 +36,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRibbedKnitTop-v001",
         "productCode": "agoraRibbedKnitTop",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -49,7 +49,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraCottonPoplinShirtWomen-v001",
         "productCode": "agoraCottonPoplinShirtWomen",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -62,7 +62,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraLeatherTote-v001",
         "productCode": "agoraLeatherTote",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -75,7 +75,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSilkScarf-v001",
         "productCode": "agoraSilkScarf",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -88,7 +88,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraOxfordShirt-v001",
         "productCode": "agoraOxfordShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -101,7 +101,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraLinenCampShirt-v001",
         "productCode": "agoraLinenCampShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -114,7 +114,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraTailoredChino-v001",
         "productCode": "agoraTailoredChino",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -127,7 +127,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRelaxedTrouser-v001",
         "productCode": "agoraRelaxedTrouser",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -140,7 +140,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraCanvasBelt-v001",
         "productCode": "agoraCanvasBelt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -153,7 +153,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraWoolCap-v001",
         "productCode": "agoraWoolCap",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -166,7 +166,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraStretchStrapTop-v001",
         "productCode": "agoraStretchStrapTop",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -179,7 +179,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRamiePocketShirt-v001",
         "productCode": "agoraRamiePocketShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -192,7 +192,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRattanHandleBag-v001",
         "productCode": "agoraRattanHandleBag",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -205,7 +205,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraStripedKnitDress-v001",
         "productCode": "agoraStripedKnitDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -218,7 +218,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraBeltWrapDress-v001",
         "productCode": "agoraBeltWrapDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -231,7 +231,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraDoubleButtonTrench-v001",
         "productCode": "agoraDoubleButtonTrench",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -244,7 +244,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraButtonedCottonShirt-v001",
         "productCode": "agoraButtonedCottonShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -257,7 +257,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraLayeredTankTop-v001",
         "productCode": "agoraLayeredTankTop",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -270,7 +270,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraPleatedKnitDress-v001",
         "productCode": "agoraPleatedKnitDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -283,7 +283,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraMinimalSlipDress-v001",
         "productCode": "agoraMinimalSlipDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -296,7 +296,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraCollarKnitCardigan-v001",
         "productCode": "agoraCollarKnitCardigan",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -309,7 +309,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSoftShoulderBag-v001",
         "productCode": "agoraSoftShoulderBag",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -322,7 +322,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSummerKnitVest-v001",
         "productCode": "agoraSummerKnitVest",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -335,7 +335,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraTailoredSleevelessTop-v001",
         "productCode": "agoraTailoredSleevelessTop",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -348,7 +348,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraWideLegLinenPant-v001",
         "productCode": "agoraWideLegLinenPant",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -361,7 +361,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraTexturedCrossbodyBag-v001",
         "productCode": "agoraTexturedCrossbodyBag",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -374,7 +374,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraMinimalBalletFlat-v001",
         "productCode": "agoraMinimalBalletFlat",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -387,7 +387,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraOpenWeaveCardigan-v001",
         "productCode": "agoraOpenWeaveCardigan",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -400,7 +400,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRefinedShortSleeveDress-v001",
         "productCode": "agoraRefinedShortSleeveDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -413,7 +413,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraGoldFrameSunglasses-v001",
         "productCode": "agoraGoldFrameSunglasses",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -426,7 +426,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSoftRibbedDress-v001",
         "productCode": "agoraSoftRibbedDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -439,7 +439,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRelaxedCottonTee-v001",
         "productCode": "agoraRelaxedCottonTee",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -452,7 +452,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraCompactCrossbody-v001",
         "productCode": "agoraCompactCrossbody",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -465,7 +465,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSculptedHoopEarrings-v001",
         "productCode": "agoraSculptedHoopEarrings",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -478,7 +478,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraEverydayColumnDress-v001",
         "productCode": "agoraEverydayColumnDress",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -491,7 +491,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSheerRamieShirt-v001",
         "productCode": "agoraSheerRamieShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -504,7 +504,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraFineKnitPolo-v001",
         "productCode": "agoraFineKnitPolo",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -517,7 +517,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraNaturalCanvasTote-v001",
         "productCode": "agoraNaturalCanvasTote",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -530,7 +530,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraLuxeWrapTop-v001",
         "productCode": "agoraLuxeWrapTop",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -543,7 +543,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraPearlTrimCardigan-v001",
         "productCode": "agoraPearlTrimCardigan",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -556,7 +556,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraBiasCutMidiSkirt-v001",
         "productCode": "agoraBiasCutMidiSkirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -569,7 +569,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraTexturedKnitPullover-v001",
         "productCode": "agoraTexturedKnitPullover",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -582,7 +582,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraPolishedMiniBag-v001",
         "productCode": "agoraPolishedMiniBag",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -595,7 +595,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraCleanLineBlazer-v001",
         "productCode": "agoraCleanLineBlazer",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -608,7 +608,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSoftLinenShort-v001",
         "productCode": "agoraSoftLinenShort",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -621,7 +621,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraClassicDenimShirt-v001",
         "productCode": "agoraClassicDenimShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -634,7 +634,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraOvershirtJacket-v001",
         "productCode": "agoraOvershirtJacket",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -647,7 +647,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSlimCottonTrouser-v001",
         "productCode": "agoraSlimCottonTrouser",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -660,7 +660,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraRelaxedPoloShirt-v001",
         "productCode": "agoraRelaxedPoloShirt",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -673,7 +673,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraWashedChoreJacket-v001",
         "productCode": "agoraWashedChoreJacket",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -686,7 +686,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraEverydayCrewNeck-v001",
         "productCode": "agoraEverydayCrewNeck",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -699,7 +699,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraUtilityCargoTrouser-v001",
         "productCode": "agoraUtilityCargoTrouser",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -712,7 +712,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraLeatherCardHolder-v001",
         "productCode": "agoraLeatherCardHolder",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -725,7 +725,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraSignatureSunglasses-v001",
         "productCode": "agoraSignatureSunglasses",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -738,7 +738,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraNeutralShoulderBag-v001",
         "productCode": "agoraNeutralShoulderBag",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -751,7 +751,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraModernKnitSet-v001",
         "productCode": "agoraModernKnitSet",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -764,7 +764,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraStylePass5Coupon-v001",
         "productCode": "agoraStylePass5Coupon",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -777,7 +777,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraCapsuleEdit10Coupon-v001",
         "productCode": "agoraCapsuleEdit10Coupon",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },
@@ -790,7 +790,7 @@
       "input": {
         "publicationCode": "agora-apparel-product-agoraPrivateSale20Coupon-v001",
         "productCode": "agoraPrivateSale20Coupon",
-        "storeCode": "agoraMainStore",
+        "storeCode": "agoraApparelStore",
         "versionId": 0
       }
     },

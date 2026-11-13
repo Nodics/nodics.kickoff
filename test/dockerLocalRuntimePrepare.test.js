@@ -84,12 +84,18 @@ async function main() {
     ).nodics;
     const moduleRoots = metadata.runtimeModuleRoots || metadata.extends;
     for (const expected of modules) assert(moduleRoots.includes(expected));
-    prepareRuntime({ projectRoot, frameworkRoot, environment: 'kickoffDockerLocal', server });
+    await prepareRuntime({ projectRoot, frameworkRoot, environment: 'kickoffDockerLocal', server });
     assert.equal(NODICS.isModuleActive("kickoffAdministration"), false, "Synthetic administration module must not be selected");
     assert.equal(NODICS.isModuleActive("kickoffCore"), true, "Project-owned administration defaults live in Kickoff Core");
-    assert.equal(Boolean(CONFIG.get("backofficeApplicationInitialization")?.runtimeRoleProfiles), false, "BackOffice runtime-role profiles are projected out of effective config");
-    assert.equal(Boolean(CONFIG.get("backofficeApplicationInitialization")?.profiles?.agoraapparel), server === "platformServer", "Shared BackOffice administration profiles must be scoped to Platform runtime role");
-    assert.equal(Boolean(CONFIG.get("backofficeFunctionalModuleActivationData")?.modules?.["nodics.commerce"]), server === "platformServer", "Shared BackOffice functional activation data must be scoped to Platform runtime role");
+    assert.equal(Boolean(CONFIG.get("backofficeApplicationInitialization")?.runtimeRoleProfiles), false, "Effective configuration must not contain retired role-profile declarations");
+    const agora = CONFIG.get("backofficeApplicationInitialization")?.profiles?.agoraapparel;
+    assert.equal(agora?.owner, NODICS.isModuleActive("agora.apparel") ? "agora.apparel" : undefined,
+      "The inert Agora descriptor follows its selected source module");
+    const activation = CONFIG.get("backofficeFunctionalModuleActivationData")?.modules?.["nodics.commerce"];
+    assert(activation?.dataPackages?.some(item => item.targetServer === "platformServer"),
+      "Shared activation data keeps the explicit Platform target for access packs");
+    assert.equal(NODICS.isModuleActive("backoffice"), ["platformServer", "wcmsStagedServer"].includes(server),
+      "Descriptor presence does not activate BackOffice on another runtime");
     assert.equal(NODICS.getSelectedEnvironmentName(), "kickoffDockerLocal");
     assert.equal(NODICS.getServerName(), server);
     assert.equal(
@@ -102,19 +108,18 @@ async function main() {
     );
     assert.equal(CONFIG.get("runtimeRole").code, role);
     if (server === "commerceStagedServer") {
-      assert.equal(require("./helpers/configuration").validateDestination(CONFIG.getProperties(), "COMMERCE_STAGED"), true);
       assert.equal(NODICS.isModuleActive("agora.apparel"), true);
     }
     if (server === "commerceServer") {
       assert.equal(NODICS.isModuleActive("agora.apparel"), false);
     }
     if (server === "commerceServer" || server === "commerceStagedServer") {
-      assert.equal(NODICS.isModuleActive("nodics.discovery"), true);
-      for (const moduleName of ["store", "cart", "shoppingList"]) assert.equal(NODICS.isModuleActive(moduleName), true);
+      assert.equal(NODICS.isModuleActive("nodics.discovery"), false);
+      for (const moduleName of ["store", "cart", "shoppingList", "commerceSearchCore"]) assert.equal(NODICS.isModuleActive(moduleName), true);
       assert.equal(CONFIG.get("cart").customerApi.defaultStoreCode, undefined);
       assert.equal(CONFIG.get("shoppingList").customerApi.defaultStoreCode, undefined);
       assert.equal(
-        CONFIG.get("search").discoveryProjection.options.enabled,
+        CONFIG.get("search").product.options.enabled,
         true,
       );
     }

@@ -10,867 +10,73 @@
  */
 
 /** @module envs/kickoffDockerLocal/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffDockerLocal */
+const circaSetup = require("../../../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json");
+const dockerNetworkReleases = new Set([
+  "circa.ewaste:network-enterprises",
+  "circa.ewaste:network-addresses",
+  "circa.ewaste:network-locations",
+  "circa.ewaste:network-points",
+]);
+
 module.exports = {
-  runtimeConfigurationSchemas: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        telegramExternalIdentity: {
-          fields: [
-            {
-              credentialReference: "telegram.bot.circa",
-            },
-          ],
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      PLATFORM: {
-        telegramExternalIdentity: {
-          fields: [
-            {
-              credentialReference: "telegram.bot.circa",
-            },
-          ],
-        },
-      },
-      PROCESS: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      WASTE: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: [
-          "runtimeConfigurationSchemas",
-          "runtimeRoleProfiles",
-          "COMMERCE",
-        ],
-      },
-      WCMS_STAGED: {
-        telegramExternalIdentity: {
-          fields: [
-            {
-              credentialReference: "telegram.bot.circa",
-            },
-          ],
-        },
-      },
-    },
-  },
-  product: {
-    runtimeRoleProfiles: {
-      COMMERCE_STAGED: {
-        marketplaceAuthoring: {
-          enabled: true,
-          catalogVersion: "circaStaged",
-          locales: ["en", "ar"],
-        },
-      },
-    },
-  },
-  cart: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        customerApi: {
-          defaultJurisdiction: "AE",
-          defaultCurrency: "AED",
-        },
-      },
-    },
-  },
-  fulfillmentCore: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        customerShipping: {
-          methods: {
-            $config: "replace",
-            value: [
-              {
-                code: "STANDARD",
-                label: "Standard",
-                price: "0.00",
-                currency: "USD",
-                promise: "3-5 business days",
-                requiresAddress: true,
-                returnEligible: true,
-              },
-              {
-                code: "STANDARD_AED",
-                label: "Standard",
-                price: "0.00",
-                currency: "AED",
-                promise: "3-5 business days",
-                requiresAddress: true,
-                returnEligible: true,
-              },
-            ],
-          },
-          returnMethods: {
-            $config: "replace",
-            value: [
-              {
-                code: "PICKUP",
-                label: "Pickup from address",
-                requiresAddress: true,
-              },
-              {
-                code: "DROP_OFF",
-                label: "Drop off",
-                requiresAddress: false,
-              },
-              {
-                code: "STORE_RETURN",
-                label: "Store return",
-                requiresAddress: false,
-              },
-            ],
-          },
-        },
-        physicalOperations: {
-          enabled: {
-            $config: "selected",
-            name: "agora",
-            field: "domains",
-            includes: "apparel",
-            value: true,
-            otherwise: false,
-          },
-        },
-      },
-    },
-  },
-  order: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-          storeCodes: {
-            agoraMainStore: {
-              $config: "selected",
-              name: "agora",
-              field: "domains",
-              includes: "apparel",
-              value: true,
-            },
-          },
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-          storeCodes: {
-            agoraMainStore: {
-              $config: "selected",
-              name: "agora",
-              field: "domains",
-              includes: "apparel",
-              value: true,
-            },
-          },
-          ownerByStore: {
-            agoraMainStore: {
-              $config: "selected",
-              name: "agora",
-              field: "domains",
-              includes: "apparel",
-              value: "fulfillmentCore",
-            },
-          },
-        },
-      },
-      COMMERCE_STAGED: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      ENGAGEMENT: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      LOCATION: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      LOYALTY: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      PLATFORM: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      PROCESS: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      WASTE: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      WCMS_ONLINE: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-      },
-      WCMS_STAGED: {
-        disputes: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
-        },
-        refunds: {
-          enabled: true,
-          orderCodePrefixes: ["CIRCA_ORDER_"],
+  backofficeApplicationInitialization: {
+    profiles: {
+      circa: {
+        dataPackages: {
+          $config: "replace",
+          value: circaSetup.map((step) => dockerNetworkReleases.has(step.code)
+            ? { ...step, code: step.code + "-docker" }
+            : step),
         },
       },
     },
   },
   promotion: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"],
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["promotion", "runtimeRoleProfiles", "COMMERCE"],
-      },
-    },
+    legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"],
   },
   digitalCore: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        merchantRedemption: {
-          enabled: true,
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["digitalCore", "runtimeRoleProfiles", "COMMERCE"],
-      },
+    merchantRedemption: {
+      enabled: true,
     },
   },
   profileExternalIdentity: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
+    enabled: true,
+    applications: {
+      "circa.ewaste": {
         enabled: true,
-        applications: {
-          "circa.ewaste": {
-            enabled: true,
-            provider: "TELEGRAM",
-            enterpriseCode: "default",
-            credentialReference: "telegram.bot.circa",
-            requireBrowserHandoff: true,
-          },
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["profileExternalIdentity", "runtimeRoleProfiles", "COMMERCE"],
+        provider: "TELEGRAM",
+        enterpriseCode: "default",
+        credentialReference: "telegram.bot.circa",
+        requireBrowserHandoff: true,
       },
     },
   },
   bidding: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        enabled: true,
-        policyVersion: "circa-digital-bids-v1",
-        amountScale: 0,
-        maximumAmount: "100000",
-        stores: {
-          circaMainStore: {
-            enterpriseCode: "default",
-            currency: "POINTS",
-            locale: "en",
-            orderCodePrefix: "CIRCA_ORDER_BID_",
-            allowOwnerReference: true,
-          },
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["bidding", "runtimeRoleProfiles", "COMMERCE"],
+    enabled: true,
+    policyVersion: "circa-digital-bids-v1",
+    amountScale: 0,
+    maximumAmount: "100000",
+    stores: {
+      circaMainStore: {
+        enterpriseCode: "default",
+        currency: "POINTS",
+        locale: "en",
+        orderCodePrefix: "CIRCA_ORDER_BID_",
+        allowOwnerReference: true,
       },
     },
   },
   media: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        customerUploads: {
-          enabled: true,
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["media", "runtimeRoleProfiles", "COMMERCE"],
-      },
+    customerUploads: {
+      enabled: true,
     },
   },
   waste: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        operations: {
-          requireScopes: true,
-          requireVerification: true,
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["waste", "runtimeRoleProfiles", "COMMERCE"],
-      },
+    operations: {
+      requireScopes: true,
+      requireVerification: true,
     },
   },
-  wasteImpact: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        calculation: {
-          providerService: "DefaultEWasteOpenAiImpactProviderService",
-          fallbackProviderServices: {
-            $config: "replace",
-            value: ["DefaultEWasteWarmImpactProviderService"],
-          },
-          timeoutMs: 90000,
-          failureMode: "RESULT",
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["wasteImpact", "runtimeRoleProfiles", "COMMERCE"],
-      },
-    },
-  },
-  eWaste: {
-    runtimeRoleProfiles: {
-      COMMERCE: {
-        journey: {
-          arrivalRadiusMetres: {
-            $config: "env",
-            name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
-            type: "number",
-          },
-          reviewAssignment: {
-            queueCode: "CIRCA_EWASTE_REVIEW",
-            label: "Circa review team",
-          },
-          depositInstruction:
-            "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions.",
-        },
-        rewardValuation: {
-          version: "circa-weight-rewards-v2",
-          illustrative: true,
-          programCode: "circa",
-          pointsRewardTypeCode: "points",
-          carbonRewardTypeCode: "circaCarbon",
-          pointsPerKg: 10,
-          carbonUnitsPerEstimatedKg: 1,
-        },
-        application: {
-          enabled: true,
-        },
-        channelAuthentication: {
-          enabled: true,
-          channels: {
-            TELEGRAM: {
-              enabled: true,
-              applicationCode: "circa.ewaste",
-              seamlessSignIn: true,
-            },
-          },
-        },
-        outcomeCommunication: {
-          enabled: true,
-          connectionName: "engagement",
-        },
-        marketplace: {
-          priceBookCode: "circaPointsPriceBook",
-          warehouseCode: "circaDigitalRegistry",
-          transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
-          storeCode: "circaMainStore",
-          catalogVersion: "circaStaged",
-          currency: "POINTS",
-          programCode: "circa",
-          rewardTypeCode: "points",
-          jurisdiction: "CIRCA_SAMPLE",
-          saleMode: "DIGITAL_OWNERSHIP",
-          autoPublishListings: true,
-          listingPresentation: {
-            description:
-              "Sample digital asset ownership. No physical delivery is included.",
-            imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
-            sample: true,
-          },
-          orderCodePrefix: "CIRCA_ORDER_",
-        },
-        conversation: {
-          rewardGuidance:
-            "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
-        },
-      },
-      COMMERCE_STAGED: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      ENGAGEMENT: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOCATION: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      LOYALTY: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PLATFORM: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      PROCESS: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WASTE: {
-        journey: {
-          arrivalRadiusMetres: {
-            $config: "env",
-            name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
-            type: "number",
-          },
-          reviewAssignment: {
-            queueCode: "CIRCA_EWASTE_REVIEW",
-            label: "Circa review team",
-          },
-          depositInstruction:
-            "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions.",
-        },
-        rewardValuation: {
-          version: "circa-weight-rewards-v2",
-          illustrative: true,
-          programCode: "circa",
-          pointsRewardTypeCode: "points",
-          carbonRewardTypeCode: "circaCarbon",
-          pointsPerKg: 10,
-          carbonUnitsPerEstimatedKg: 1,
-        },
-        application: {
-          enabled: true,
-        },
-        channelAuthentication: {
-          enabled: true,
-          channels: {
-            TELEGRAM: {
-              enabled: true,
-              applicationCode: "circa.ewaste",
-              seamlessSignIn: true,
-            },
-          },
-        },
-        outcomeCommunication: {
-          enabled: true,
-          connectionName: "engagement",
-        },
-        marketplace: {
-          priceBookCode: "circaPointsPriceBook",
-          warehouseCode: "circaDigitalRegistry",
-          transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
-          storeCode: "circaMainStore",
-          catalogVersion: "circaStaged",
-          currency: "POINTS",
-          programCode: "circa",
-          rewardTypeCode: "points",
-          jurisdiction: "CIRCA_SAMPLE",
-          saleMode: "DIGITAL_OWNERSHIP",
-          autoPublishListings: true,
-          listingPresentation: {
-            description:
-              "Sample digital asset ownership. No physical delivery is included.",
-            imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
-            sample: true,
-          },
-          orderCodePrefix: "CIRCA_ORDER_",
-        },
-        conversation: {
-          rewardGuidance:
-            "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
-          project: "circa.ewaste",
-          adapter: "ollama",
-        },
-      },
-      WCMS_ONLINE: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-      WCMS_STAGED: {
-        $config: "ref",
-        path: ["eWaste", "runtimeRoleProfiles", "COMMERCE"],
-      },
-    },
-  },
-  copilot: {
-    runtimeRoleProfiles: {
-      WASTE: {
-        providers: {
-          enabled: true,
-          default: {
-            maximumRequestBytes: 8000000,
-          },
-          adapters: {
-            openai: {
-              enabled: true,
-              credential: {
-                mode: "SECRET_REFERENCE",
-                secretRef: "credentials:openai.circa",
-              },
-              model: {
-                name: "gpt-5.6-luna",
-              },
-              generation: {
-                reasoningEffort: "none",
-              },
-              connection: {
-                timeoutMs: 85000,
-              },
-            },
-            ollama: {
-              enabled: true,
-              model: {
-                name: "gemma3:4b",
-              },
-              generation: {
-                numPredict: 1200,
-              },
-            },
-          },
-          profiles: {
-            structuredTool: {
-              maximumOutputTokens: 1200,
-            },
-          },
-        },
-      },
-    },
-  },
-  wasteSubmission: {
-    runtimeRoleProfiles: {
-      WASTE: {
-        metadataSuggestion: {
-          enabled: true,
-          adapter: "openai",
-        },
-      },
-    },
-  },
-
   credentials: {
     "telegram.bot.circa": {
       value: null,
@@ -942,7 +148,6 @@ module.exports = {
   },
   tooling: {
     acceptance: {
-      platformCommand: "acceptance:local",
       commerceCommand: "acceptance:agora-commerce",
       commerceDataCommand: "acceptance:agora-commerce-data",
       commercePublicationCommand: "acceptance:agora-commerce-publication",
@@ -964,9 +169,6 @@ module.exports = {
     },
     container: {
       composeProjectName: "nodics-kickoff-docker-local",
-      composeFile: "envs/kickoffDockerLocal/docker/compose.yaml",
-      generatedDirectory: "envs/kickoffDockerLocal/generated",
-      environmentFile: "docker.env",
       replicaSet: "nodicsDockerLocal",
       mongodbHost: "mongodb",
       redisPrimaryHost: "redis-primary",
@@ -1292,6 +494,13 @@ module.exports = {
     },
   },
   log: {
+    requestPrivacy: {
+      qualified: {
+        $config: "env",
+        name: "NODICS_DOCKER_PRIVATE_CAPTURE_QUALIFIED",
+        type: "boolean",
+      },
+    },
     level: {
       $config: "env",
       name: "NODICS_LOG_LEVEL",

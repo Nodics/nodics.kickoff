@@ -37,12 +37,17 @@ for (const snapshot of snapshots)
         ) {
           expected.arrivalRadiusMetres = 200;
         }
-        // Protocol metadata is now present only where its implementing owner is loaded.
-        if (
-          !modules.includes("eWaste") &&
-          selector === "eWaste.targetAuthorities"
-        )
-          expected = null;
+        // Authority selectors now use publication scopes. The historical fixture retains role names.
+        if (selector === "eWaste.targetAuthorities") {
+          expected = modules.includes("eWaste")
+            ? {
+              commerce: { publication: "OPERATIONAL" },
+              commerceStaged: { publication: "STAGED" },
+              engagement: { publication: "OPERATIONAL" },
+              wcms: { publication: "STAGED" },
+            }
+            : null;
+        }
         if (
           !modules.includes("eWaste") &&
           selector === "eWaste.outcomeCommunication"
@@ -53,6 +58,10 @@ for (const snapshot of snapshots)
           delete expected.conversationMaximumCharacters;
           if (snapshot.environment === "kickoffDockerLocal")
             delete expected.arrivalRadiusMetres;
+        }
+        if (selector === "waste.operations" && expected.profileTarget?.runtimeRole === "PLATFORM") {
+          delete expected.profileTarget.runtimeRole;
+          expected.profileTarget.targetAuthority = { publication: "OPERATIONAL" };
         }
         if (!modules.includes("wasteCore") && selector === "waste.operations")
           delete expected.requireDifferentApprover;
@@ -74,7 +83,7 @@ for (const snapshot of snapshots)
       const schema =
         runtime.runtimeConfigurationSchemas?.telegramExternalIdentity;
       if (!modules.includes("profile"))
-        return assert.equal(schema.ownerModule, undefined);
+        return assert.equal(schema, undefined, "Inactive Profile must not acquire an orphan credential schema");
       assert.equal(schema.ownerModule, "profile");
       assert.equal(schema.fields[0].credentialReference, "telegram.bot.circa");
       assert.equal(

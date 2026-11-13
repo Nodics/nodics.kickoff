@@ -366,8 +366,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js",
-    "sourceChecksum": "a4fb71873afb151ec213f8b5e7bdf4336fd21b9c58c6885d963202dd4cfe9651",
-    "sourceWordCount": 5512,
+    "sourceChecksum": "14f8a0a3b8a56c9016e2b6da7e45a41ccc0457d923882927dd9cfe6795d146ad",
+    "sourceWordCount": 5546,
     "audience": [
       "business-user",
       "administrator",
@@ -392,7 +392,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "maturityState": "IMPLEMENTED",
     "active": true,
-    "wordCount": 5512,
+    "wordCount": 5546,
     "sourceEvidence": [
       "data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js",
       "envs/kickoffLocal/config/properties.js",
@@ -1404,8 +1404,8 @@ module.exports = {
     ],
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js",
-    "sourceChecksum": "444281d613b8141f1c140ab97de15ca782a96cd33a81888c1726d4d924cfd48f",
-    "sourceWordCount": 4358,
+    "sourceChecksum": "cfaded7c66e3b41b114be1f7e8395a4d1d1089e8f5e82a6cb57434d5d36c0242",
+    "sourceWordCount": 4344,
     "audience": [
       "business-user",
       "administrator",
@@ -1430,7 +1430,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "maturityState": "IMPLEMENTED",
     "active": true,
-    "wordCount": 4358,
+    "wordCount": 4344,
     "sourceEvidence": [
       "data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js",
       "modules/kickoffCore/config/properties.js",

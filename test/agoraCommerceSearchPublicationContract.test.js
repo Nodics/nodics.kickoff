@@ -108,7 +108,7 @@ test("Agora Commerce Search rule publishes and ranks women category cards", asyn
     now: "2026-08-15T00:00:00.000Z",
   };
   const publishResult = await publication.publish(request, {
-    storeCode: "agoraMainStore",
+    storeCode: "agoraApparelStore",
     locale: "en",
   });
 
@@ -128,7 +128,7 @@ test("Agora Commerce Search rule publishes and ranks women category cards", asyn
   const ranked = await ranking.rank(
     {
       tenant: "default",
-      storeCode: "agoraMainStore",
+      storeCode: "agoraApparelStore",
       locale: "en",
       query: { categoryCode: "agoraWomen" },
     },

@@ -6,9 +6,16 @@
   "main": "nodics.js",
   "nodics": {
     "kind": "server",
+    "runtimeConfigurationContributions": [
+      {
+        "moduleName": "nodics.loyalty",
+        "namespace": "data"
+      }
+    ],
     "extends": [
       "nodics.platform",
-      "nodics.localization"
+      "nodics.localization",
+      "nodics.discovery"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
@@ -22,6 +29,10 @@
       "web": false
     },
     "displayName": "Docker Local Platform Server",
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-platform-1",
+      "remoteModules": ["cms", "publish", "workflow"]
+    },
     "runtimeAliases": [
       "platform",
       "profile",
@@ -34,6 +45,9 @@
       "nodics.copilot",
       "nodics.waste",
       "nodics.loyalty",
+      "nodics.commerce",
+      "nodics.engagement",
+      "nodics.wcms",
       "nodics.accelerators/modules/nexus"
     ]
   },

@@ -41,7 +41,7 @@ for (const domain of profile.activeModules.compositions.agora.domains) {
     }
     const read = (suffix) =>
       records.get(domain.publication.recordPrefix + suffix) || [];
-    const store = read("StoreData.js")[0];
+    const store = require(path.join(dataRoot, manifest.sections[domain.publication.recordPrefix + "StoreReference"].sourceRoot, "store/records", domain.publication.recordPrefix + "StoreData.js")).record0;
     assert.equal(store.code, domain.publication.storeCode);
     assert.equal(store.status, "ACTIVE");
     const books = new Map(
@@ -74,7 +74,7 @@ for (const domain of profile.activeModules.compositions.agora.domains) {
         domain.publication.recordPrefix + "CatalogHeader.js",
       ),
     );
-    assert.equal(header.store.stores.options.schemaName, "store");
+    assert.equal(header.store, undefined);
     assert.equal(header.tax.policies.options.schemaName, "taxPolicy");
   });
 }

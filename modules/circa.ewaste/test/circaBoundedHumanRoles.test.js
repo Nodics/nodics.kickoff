@@ -23,7 +23,7 @@ test("Local unused-coupon review grants one permission to only the original admi
   const manifest = require("../data/manifest.json");
   for (const name of ["circaLocalUnusedRefundExceptionStaffAssignment"]) {
     const section = manifest.sections[name];
-    assert.equal(section.dataType, "sample"); assert.equal(section.version, "0.0.2");
+    assert.equal(section.dataType, "sample"); assert.equal(section.version, "0.0.1");
     assert.equal(section.destinationRole, "PLATFORM"); assert.equal(section.selectionPolicy, "EXPLICIT");
     assert.deepEqual(section.environmentScope, ["ALL"]);
     assert.equal(Object.keys(section.files).length, 2);

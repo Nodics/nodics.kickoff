@@ -11,6 +11,20 @@
 
 /** @module envs/kickoffDockerLocal/wcmsStagedServer/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffDockerLocal/wcmsStagedServer */
 module.exports = {
+  backofficeRegistration: {
+    connectionName: "platform",
+  },
+  publish: {
+    approvalWorkflow: {
+      target: { connectionName: "process" },
+    },
+  },
+  runtimeConfigurationSchemas: {
+    telegramExternalIdentity: {
+      fields: [{ credentialReference: "telegram.bot.circa" }],
+    },
+  },
+
   activeModules: {
     groups: ["nexus"],
     modules: [
@@ -30,6 +44,7 @@ module.exports = {
       },
       "search",
       "elastic",
+      "catalog",
       "cms",
       "editorial",
       "media",
@@ -59,6 +74,10 @@ module.exports = {
     },
   },
   media: {
+    publication: {
+      versionProviderEnabled: true,
+      target: { connectionName: "cmsOnline" },
+    },
     storage: {
       providers: {
         local: {
@@ -71,12 +90,16 @@ module.exports = {
     publication: {
       enabled: true,
       baselines: {
-        axis: {
+        kickoffdocs: {
+          contentPackCode: "kickoffDocumentation",
           releaseVersion: "0.0.2",
+          rootType: "site",
+          rootCode: "kickoffDocumentationSite",
+          sourceVersion: "0",
         },
         frameworkdocs: {
           contentPackCode: "nodicsDocumentation",
-          releaseVersion: "0.0.2",
+          releaseVersion: "0.0.6",
           sourceVersion: "0",
         },
         axisdocs: {
@@ -149,12 +172,85 @@ module.exports = {
     },
     default: "wcms.staged",
   },
-  schemaPolicies: {
-    runtimeRoleProfiles: {
-      WCMS_STAGED: {
-        media: {
-          publicationVersioned: { isVersionedEnabled: false },
+  order: {
+    disputes: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+    refunds: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+  },
+  eWaste: {
+    journey: {
+      arrivalRadiusMetres: {
+        $config: "env",
+        name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
+        type: "number",
+      },
+      reviewAssignment: {
+        queueCode: "CIRCA_EWASTE_REVIEW",
+        label: "Circa review team",
+      },
+      depositInstruction:
+        "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions.",
+    },
+    rewardValuation: {
+      version: "circa-weight-rewards-v2",
+      illustrative: true,
+      programCode: "circa",
+      pointsRewardTypeCode: "points",
+      carbonRewardTypeCode: "circaCarbon",
+      pointsPerKg: 10,
+      carbonUnitsPerEstimatedKg: 1,
+    },
+    application: {
+      enabled: true,
+    },
+    channelAuthentication: {
+      enabled: true,
+      channels: {
+        TELEGRAM: {
+          enabled: true,
+          applicationCode: "circa.ewaste",
+          seamlessSignIn: true,
         },
+      },
+    },
+    outcomeCommunication: {
+      enabled: true,
+      connectionName: "engagement",
+    },
+    marketplace: {
+      priceBookCode: "circaPointsPriceBook",
+      warehouseCode: "circaDigitalRegistry",
+      transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
+      storeCode: "circaMainStore",
+      catalogVersion: "circaStaged",
+      currency: "POINTS",
+      programCode: "circa",
+      rewardTypeCode: "points",
+      jurisdiction: "CIRCA_SAMPLE",
+      saleMode: "DIGITAL_OWNERSHIP",
+      autoPublishListings: true,
+      listingPresentation: {
+        description:
+          "Sample digital asset ownership. No physical delivery is included.",
+        imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
+        sample: true,
+      },
+      orderCodePrefix: "CIRCA_ORDER_",
+    },
+    conversation: {
+      rewardGuidance:
+        "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
+    },
+  },
+  httpHardening: {
+    cors: {
+      originEndpointOverrides: {
+        nexus: false,
       },
     },
   },

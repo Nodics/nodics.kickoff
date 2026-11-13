@@ -39,3 +39,12 @@ This module explicitly participates in Application Builder through
 customer project declares frontend, domain and preset choices. Preserve the
 module's existing import-manifest and content ownership rules; Builder metadata
 does not import, publish or validate this module's live data.
+
+The explicit `agoraElectronicsStoreReference` sample installs `agoraElectronicsStore`,
+its `agoraElectronicsWeb` sales channel and `agoraElectronicsOnline` point of service on
+COMMERCE. The Staged catalogue selects the same store code for publication.
+
+
+Dashboard artwork remains customer-owned in the consumed application profile's
+`presentation.visual`. No unused top-level visual property is exported; Media
+identity and asset ownership checks read the actual profile contribution.

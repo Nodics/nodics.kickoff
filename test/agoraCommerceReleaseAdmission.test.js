@@ -24,9 +24,11 @@ for (const [application, section, version] of [
   releases.validateRetainedRoots(root, manifest);
   assert.equal(manifest.retainedRoots, undefined);
   assert.equal(active.sourceRoot, 'sample-v001');
+  const priorService = global.SERVICE;
+  global.SERVICE = { DefaultModuleService: { isLocalModuleActive: name => name === "inventory" } };
   const priorConfig = global.CONFIG;
-  global.CONFIG = { get: (key) => key === "runtimeRole" ? { code: "COMMERCE_STAGED" } : key === "promotion" ? { publication: { runtimeRole: "STAGED" } } : undefined };
-  t.after(() => { global.CONFIG = priorConfig; });
+  global.CONFIG = { get: (key) => key === "runtimeRole" ? { code: "COMMERCE_STAGED", publication: "STAGED" } : key === "promotion" ? { publication: { runtimeRole: "STAGED" } } : undefined };
+  t.after(() => { global.CONFIG = priorConfig; global.SERVICE = priorService; });
   const schemas = [];
   const matched = new Set();
   for (const file of Object.keys(active.files).filter((name) => name.includes("/headers/") && name.endsWith(".js"))) {
@@ -35,7 +37,7 @@ for (const [application, section, version] of [
       const schemaName = entry.options?.schemaName;
       if (!schemaName) continue;
       schemas.push(schemaName);
-      assert(!["inventoryBalance", "inventoryMovement", "inventoryReservation", "coupon", "couponBatch", "couponRedemption"].includes(schemaName), schemaName);
+      assert(!["store", "salesChannel", "pointOfService", "inventoryBalance", "inventoryMovement", "inventoryReservation", "coupon", "couponBatch", "couponRedemption"].includes(schemaName), schemaName);
       inventory.validateImportTarget({ schemaName, lifecycle: active.lifecycle });
       promotion.validateImportTarget({ schemaName, lifecycle: active.lifecycle });
       const files = Object.keys(active.files).filter((name) => name.includes("/records/") && path.basename(name).startsWith(entry.options.dataFilePrefix));
@@ -50,5 +52,5 @@ for (const [application, section, version] of [
   assert(schemas.includes("warehouse"));
   assert.deepEqual(Object.keys(active.files).filter((name) => name.includes("/records/") && !matched.has(name)), [], "every release record file must have an import header");
   assert(!Object.keys(active.files).some((file) => /(?:Coupon(?:Batch)?|InventoryBalance)Data\.js$/.test(file)));
-  assert.throws(() => inventory.validateImportTarget({schemaName: "inventoryBalance", lifecycle: "PUBLISHABLE"}), /Staged/);
+  assert.throws(() => inventory.validateImportTarget({schemaName: "inventoryBalance", lifecycle: "PUBLISHABLE"}), /OPERATIONAL runtime/);
 });

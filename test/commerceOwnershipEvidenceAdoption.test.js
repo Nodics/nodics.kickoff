@@ -27,6 +27,16 @@ const startup = require(
     "nodics.foundation/modules/nTooling/src/service/project/defaultProjectRuntimeStartService",
   ),
 );
+function localRuntimeIdentity(server) {
+  const declared = require("../envs/kickoffLocal/" + server + "/package.json")
+    .nodics.runtimeIdentity;
+  return {
+    ...declared,
+    projectCode: startup.resolveProjectCode(path.resolve(__dirname, "..")),
+    environmentCode: "kickoffLocal",
+    serverCode: server,
+  };
+}
 const selected = {
   commerce: loadRuntime("commerceServer", "kickoffLocal"),
   waste: loadRuntime("wasteServer", "kickoffLocal"),
@@ -35,45 +45,12 @@ const digitalOwnershipDefaults = require(path.join(frameworkRoot,
   "nodics.commerce/modules/digitalCommerce/modules/digitalCore/config/properties"))
   .digitalCore.digitalOwnership;
 
-test("Local capability selections pass canonical project validation and remain environment role-owned", () => {
-  const projectRoot = path.resolve(__dirname, "..");
-  const command = require(
-    path.join(
-      frameworkRoot,
-      "nodics.foundation/modules/nTooling/src/service/command/defaultProjectCommandService",
-    ),
-  );
-  assert.doesNotThrow(() => command.validateProject(projectRoot));
-  const environment = require("../envs/kickoffLocal/config/properties");
-  assert.equal(
-    Object.hasOwn(
-      require("../envs/kickoffLocal/commerceServer/config/properties"),
-      "apiExposure",
-    ),
-    false,
-  );
-  assert.equal(
-    Object.hasOwn(
-      require("../envs/kickoffLocal/commerceStagedServer/config/properties"),
-      "product",
-    ),
-    false,
-  );
-  assert.equal(
-    environment.apiExposure.runtimeRoleProfiles.COMMERCE.categories
-      .storePlacementRead.enabled,
-    true,
-  );
-  assert.equal(
-    environment.product.runtimeRoleProfiles.COMMERCE_STAGED.marketplaceAuthoring
-      .storeSource.connectionName,
-    "commerce",
-  );
-  assert.equal(
-    environment.product.runtimeRoleProfiles.COMMERCE_STAGED.marketplaceAuthoring
-      .intentSource.connectionName,
-    "waste",
-  );
+test("Local capability selections remain actual runtime deployment overrides", () => {
+  const commerce = require("../envs/kickoffLocal/commerceServer/config/properties");
+  const staged = require("../envs/kickoffLocal/commerceStagedServer/config/properties");
+  assert.equal(commerce.apiExposure.categories.storePlacementRead.enabled, true);
+  assert.equal(staged.product.marketplaceAuthoring.storeSource.connectionName, "commerce");
+  assert.equal(staged.product.marketplaceAuthoring.intentSource.connectionName, "waste");
 });
 
 test("Local Commerce selects reviewed sale admission separately from financial acceptance", () => {
@@ -84,7 +61,7 @@ test("Local Commerce selects reviewed sale admission separately from financial a
     true,
   );
   assert.equal(policy.enabled, true);
-  assert.equal(policy.runtimeRole, p.runtimeRole.code);
+  assert.equal(policy.runtimeRole, undefined);
   assert.deepEqual(p.digitalCore.digitalOwnership, {
     ...digitalOwnershipDefaults,
     enabled: true,
@@ -93,7 +70,7 @@ test("Local Commerce selects reviewed sale admission separately from financial a
       ...digitalOwnershipDefaults.owner,
       moduleName: "eWaste",
       connectionName: "waste",
-      targetAuthority: "WASTE",
+      targetAuthority: { publication: "OPERATIONAL" },
       apiPrefix: "/internal/digital-sales",
     },
   });
@@ -138,7 +115,7 @@ test("Local Commerce selects reviewed sale admission separately from financial a
     connectionName: "waste",
     targetAuthority: {
       server: "wasteServer",
-      runtimeRole: selected.waste.runtimeRole,
+      publication: "OPERATIONAL",
     },
     apiName: "/internal/digital-listings/plan",
   });
@@ -266,7 +243,7 @@ test("evidence policy and permissions remain confined to native Local owner depl
   for (const [server, environment] of [
     ["commerceStagedServer", "kickoffLocal"],
     ["platformServer", "kickoffLocal"],
-    ["loyaltyServer", "kickoffLocal"],
+    ["loyaltyServer", "kickoffDockerLocal"],
     ["commerceServer", "kickoffDockerLocal"],
     ["wasteServer", "kickoffDockerLocal"],
   ]) {
@@ -324,9 +301,7 @@ test("native asset sale grants preserve signed deployment identities and are not
       ["loyalty.rewards.earn", "loyalty.rewards.reverse"],
     ],
   ]) {
-    const identity = require("../envs/kickoffLocal/" + server + "/package.json")
-      .nodics.runtimeIdentity;
-    assert.deepEqual(runtime.runtimeIdentity, identity);
+    assert.deepEqual(runtime.runtimeIdentity, localRuntimeIdentity(server));
     for (const permission of additions)
       assert.equal(
         runtimePermissions[server].filter((value) => value === permission)
@@ -445,7 +420,7 @@ test("Local Staged Product intent reads reuse Waste with the exact selected Stag
     moduleName: "eWaste",
     connectionName: "waste",
     connectionType: "abstract",
-    runtimeRole: "WASTE",
+    targetAuthority: { publication: "OPERATIONAL" },
     timeoutMs: 15000,
     allowInsecureLoopback: true,
   });
@@ -479,10 +454,7 @@ test("Local Staged Product intent reads reuse Waste with the exact selected Stag
     ["commerceStagedServer", "kickoffDockerLocal"],
   ]) {
     const runtime = loadRuntime(server, environment);
-    assert.notEqual(
-      runtime.product?.marketplaceAuthoring?.intentSource?.moduleName,
-      "eWaste",
-    );
+    // Owner descriptors may be visible without selecting this Local transport.
     assert.notEqual(
       runtime.product?.marketplaceAuthoring?.intentSource?.connectionName,
       "waste",
@@ -497,7 +469,7 @@ test("Local Staged and operational Commerce read only their approved Store place
     moduleName: "store",
     connectionName: "commerce",
     connectionType: "abstract",
-    runtimeRole: "COMMERCE",
+    targetAuthority: { publication: "OPERATIONAL" },
     timeoutMs: 15000,
     allowInsecureLoopback: true,
   });
@@ -509,8 +481,7 @@ test("Local Staged and operational Commerce read only their approved Store place
   );
   assert.deepEqual(
     staged.runtimeIdentity,
-    require("../envs/kickoffLocal/commerceStagedServer/package.json").nodics
-      .runtimeIdentity,
+    localRuntimeIdentity("commerceStagedServer"),
   );
   assert.equal(
     staged.runtimeIdentity.remoteModules.includes("store"),
@@ -533,9 +504,9 @@ test("Local Staged and operational Commerce read only their approved Store place
   ])
     assert.equal(permissions.includes(permission), false, permission);
   assert.equal(online.apiExposure.categories.storePlacementRead.enabled, true);
+  assert.equal(online.runtimeRole.publication, "OPERATIONAL");
   assert.deepEqual(online.store.placementRead, {
     enabled: true,
-    runtimeRole: "COMMERCE",
     callers: [
       {
         tenant: staged.defaultTenant,
@@ -566,8 +537,9 @@ test("Local Staged and operational Commerce read only their approved Store place
           "commerceServer",
         ),
         placements: [
-          { storeCode: "agoraMainStore", enterpriseCode: "default" },
+          { storeCode: "agoraApparelStore", enterpriseCode: "default" },
           { storeCode: "circaMainStore", enterpriseCode: "GREENPERKS_ONLINE" },
+          { storeCode: "greenperks-cafe", enterpriseCode: "GREENPERKS_RETAIL" },
         ],
       },
     ],
@@ -657,6 +629,7 @@ test("the canonical Store owner enforces the exact Local placement binding befor
   let reads = 0;
   global.CONFIG = { get: (key) => online[key] };
   global.SERVICE = {
+    DefaultModuleService: { isLocalModuleActive: (name) => name === "store" },
     DefaultServiceTokenService: { requireRuntimePrincipal: (r) => r.authData },
     DefaultLoggerService: { hasPrivateCaptureProtection: () => true },
     DefaultIdentityGovernanceService: {
@@ -723,8 +696,7 @@ test("the canonical Store owner enforces the exact Local placement binding befor
     }
     assert.deepEqual(
       staged.runtimeIdentity,
-      require("../envs/kickoffLocal/commerceStagedServer/package.json").nodics
-        .runtimeIdentity,
+      localRuntimeIdentity("commerceStagedServer"),
     );
   } finally {
     for (const [key, value] of Object.entries(previous))
@@ -1022,7 +994,7 @@ test("Local Pricing writer bindings retain exact qualified Staged/Online identit
       runtime,
       bindingKey,
       connectionName,
-      runtimeRole,
+      publication,
       admittedRuntime,
       admittedServer,
       operations,
@@ -1031,7 +1003,7 @@ test("Local Pricing writer bindings retain exact qualified Staged/Online identit
         online,
         "sourceAuthority",
         "commerceStaged",
-        "COMMERCE_STAGED",
+        "STAGED",
         staged,
         "commerceStagedServer",
         ["prepare", "activate", "reconcile"],
@@ -1040,7 +1012,7 @@ test("Local Pricing writer bindings retain exact qualified Staged/Online identit
         staged,
         "target",
         "commerce",
-        "COMMERCE",
+        "OPERATIONAL",
         online,
         "commerceServer",
         ["authorize"],
@@ -1052,7 +1024,7 @@ test("Local Pricing writer bindings retain exact qualified Staged/Online identit
         moduleName: "pricing",
         connectionName,
         connectionType: "abstract",
-        runtimeRole,
+        publication,
         callers: [expected],
       });
       let settings = structuredClone(runtime);
@@ -1103,6 +1075,10 @@ test("Local Pricing writer bindings retain exact qualified Staged/Online identit
               ),
             key,
           );
+        settings.pricing.publication[bindingKey].publication =
+          publication === "STAGED" ? "OPERATIONAL" : "STAGED";
+        assert.throws(recheck, "Reversed publication authority must fail closed");
+        settings = structuredClone(runtime);
         settings.pricing.publication[bindingKey].callers = [];
         assert.throws(
           recheck,

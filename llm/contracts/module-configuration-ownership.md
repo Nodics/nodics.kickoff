@@ -12,10 +12,10 @@ inputs.
 
 | Contribution | Retained ownership and justification |
 | --- | --- |
-| `config/properties.js` | Explicit employee-mail composition `none`. This prevents an undeclared customer transport opt-in; it does not enable SMTP or identity actions. |
+| `config/properties.js` | Explicit employee-mail composition `none` and bounded reset destination selections. Canonical import targets derive from existing runtime aliases/metadata, not project-only helper properties. The mail choice prevents an undeclared customer transport opt-in; it does not enable SMTP or identity actions. |
 | `modules/config/properties.js` | Empty structural group. No runtime/default authority. |
 | `modules/kickoffApi/config/properties.js` | Empty customer extension template. Preserve its standard hooks. |
-| `modules/kickoffInt/config/properties.js` | Explicit PROCESS discovery of the Editorial workflow release and reviewer queue assignment. These select a release and operational queue; they do not define Workflow behavior, install records or change release ownership. |
+| `modules/kickoffInt/config/properties.js` | Empty integration extension template. The reusable Editorial workflow adapter is owned by Editorial; no copied adapter defaults remain here. |
 | `modules/kickoffCore/config/properties.js` | Project-wide selections detailed below. Generic context/target mechanics are inherited from owners. |
 | `modules/agora.apparel/config/properties.js` | Demo product/reward/market acceptance inputs, customer-provided checkout inputs, CMS baseline, media identity and reviewed setup/data-package selections. Reward programme/type/precision are fixture business terms, not universal Loyalty defaults. |
 | `modules/agora.electronics/config/properties.js` | Demo CMS baseline, media branding and explicit application/data-package composition. |
@@ -38,7 +38,7 @@ must preserve actual project selections and destructive-operation boundaries.
 
 ## Core Selections Retained
 
-- `communication.runtimeRoleProfiles`: employee-mail-gated trusted source and
+- `communication`: employee-mail-gated trusted source and
   template-resource selections. Trust and transport activation are customer
   decisions; source presence must not enable communication globally.
 - `tooling.acceptance`: selected sample catalogue, publication receipts, editorial
@@ -61,13 +61,13 @@ must preserve actual project selections and destructive-operation boundaries.
   selection into defaults or activate absent owners to eliminate historical names.
 - `backofficeLocalReset.providers`: exact selected server/connection/role targets.
   Keep these customer topology facts separate from reset mechanics and grants.
-- `copilot.runtimeRoleProfiles`: customer-project label, API/provider opt-ins,
+- `copilot`: customer-project label, API/provider opt-ins,
   selected Ollama adapter, ingestion/retrieval/startup enablement, indexer identity,
   logging difference and Staged connection/authority. None becomes a universal
   enabled default. Knowledge owns the inherited index-tenant default.
 - `engagement` and `customerFeedback`: explicit role-scoped customer capability
   opt-ins. Their framework defaults remain independently disabled where applicable.
-- `apiExposure.runtimeRoleProfiles`: deliberate deployment opt-ins and negative
+- `apiExposure.categories`: deliberate deployment opt-ins and negative
   Online/Process exposure pins. Review these only when the runtime's API role is
   deliberately requalified; equality with an owner default is not permission to
   remove an explicit negative exposure boundary.
@@ -83,9 +83,9 @@ must preserve actual project selections and destructive-operation boundaries.
 
 | Removed project declaration | Existing implementing owner |
 | --- | --- |
-| Platform application initialization project-code/root binding mechanics | BackOffice PLATFORM defaults; project/env overrides still resolve through nConfig |
-| Platform Copilot environment-context binding | copilotCore PLATFORM defaults; no named environment or API activation |
-| Platform Workbench Product/Pricing logical module names | copilotWorkbench PLATFORM defaults; connection and authority stay selected by the project |
+| Platform application initialization project-code/root binding mechanics | BackOffice ordinary owner defaults; project/env overrides still resolve through nConfig |
+| Platform Copilot environment-context binding | copilotCore ordinary owner defaults; no named environment or API activation |
+| Platform Workbench Product/Pricing logical module names | copilotWorkbench ordinary owner defaults; connection and authority stay selected by the project |
 | Repeated knowledge `indexTenant: default` | Existing copilotKnowledge ingestion default; later namespace override remains supported |
 | Repeated publication discovery pagination `24 / 1000` | Existing Product acceptance consumer defaults; no Product source change |
 | eWaste backend/framework identities | eWaste application defaults; optional `wasteRecycling` selection remains in Circa |
@@ -168,3 +168,28 @@ independent source owners. Inventory coverage is not an executed test result.
 
 The source corrections have regression cases prepared. Consolidated tests,
 validators, builds and live acceptance have not run in this pass.
+
+
+## Configuration ownership verification in Axis acceptance
+
+The A03 inventory covers all authored property files in both current environments
+and all seven modules. nSystem owns empty schema/value/credential registries and
+nService owns empty authority-context defaults. nRouter preserves existing exposure
+policy when a capability registers a previously undeclared internal category.
+Project files retain actual composition, deployment inputs and governed selections.
+
+Application artwork is declared only in each consumed profile's
+`presentation.visual`; unused global aliases are removed. Backend browser-validation
+defaults are inherited from nTooling. Source credential literals are prohibited:
+Local identity/delivery deployments select a private input and retain independently
+encrypted owner configuration. Qualification must verify post-adoption masked
+readback without exposing, rotating or blindly overwriting existing credentials.
+
+Circa Location/Loyalty target facts use bounded nConfig runtime alias projections.
+Local consolidation and Docker separation therefore keep their existing exact
+canonical destinations without a second project-defined target property catalogue.
+Source equivalence does not import releases, replay setup or rewrite receipts.
+Actual category overrides still require consumer review: Local Platform's internal
+callback opt-in differs from Profile's inherited denial even though another active
+Foundation owner declares the same broad category enabled. Raw literal equality
+alone is not a reason to remove it.

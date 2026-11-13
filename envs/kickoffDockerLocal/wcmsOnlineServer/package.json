@@ -20,6 +20,13 @@
       "publish": false,
       "web": false
     },
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-wcms-online-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
     "displayName": "Docker Local WCMS Online Server",
     "runtimeAliases": [
       "wcmsOnline",

@@ -74,7 +74,7 @@ test('Agora Apparel seeded placements resolve targeted hero while preserving fal
             fixturePlacements: placementValues
         } : undefined
     };
-    global.SERVICE = { DefaultWcmsExperienceProjectionService: projection };
+    global.SERVICE = { DefaultWcmsExperienceProjectionService: {findPlacements: async () => placementValues} };
 
     const resolved = await resolver.resolve({ experience: {
         site: 'agoraApparelSite',

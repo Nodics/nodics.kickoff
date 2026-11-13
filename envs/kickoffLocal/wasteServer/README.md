@@ -94,3 +94,7 @@ runtime-property provenance; do not rewrite retained overrides to force the flag
 Positive native describe/flag readback remains a post-restart acceptance gate.
 Verify with
 `node --test test/commerceOwnershipEvidenceAdoption.test.js`.
+
+## Local startup budget
+
+This four-tenant Local acceptance deployment selects a 180000ms topology readiness deadline in server `package.json` metadata. The Framework default remains 90000ms. Waste must still satisfy the existing nSystem readiness predicate; the override permits bounded tenant preparation and does not qualify whole-application startup performance.

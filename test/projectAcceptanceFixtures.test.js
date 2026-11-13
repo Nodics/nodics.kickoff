@@ -71,7 +71,9 @@ const e07PromotionRoots =
     (row) => row.promotionCode,
   );
 assert.equal(e07PromotionRoots.length, 2);
+const renewedPromotionRoots = circaPromotionRoots.map((code) => code + "_L08_20261110");
 const localCircaPromotionRoots = [
+  ...renewedPromotionRoots,
   ...circaPromotionRoots.slice(0, 35),
   ...fixedExpiryRoots,
   ...remainingExpiryRoots,
@@ -86,7 +88,7 @@ assert(
     .slice(35)
     .every((code) => !localCircaPromotionRoots.includes(code)),
 );
-assert.equal(new Set(localCircaPromotionRoots).size, 75);
+assert.equal(new Set(localCircaPromotionRoots).size, 113);
 assert.deepEqual(
   apparelPromotions
     .filter((row) => row.active === true && row.status === "ACTIVE")
@@ -108,12 +110,12 @@ for (const [domain, circaRoots, apparelRoots] of [
   assert.deepEqual(local.storeCodes, [
     "circaMainStore",
     ...stores,
-    "agoraMainStore",
+    "agoraApparelStore",
   ]);
   assert.deepEqual(local.rootCodesByStore, {
     circaMainStore: circaRoots,
     ...roots,
-    agoraMainStore: apparelRoots,
+    agoraApparelStore: apparelRoots,
   });
   if (domain === "pricing") assert.equal(local.rowReleases, true);
   for (const selection of ["none", "electronics", "telco"]) {
@@ -153,7 +155,7 @@ assert.deepEqual(
   [
     { tenant: "default", storeCode: "circaMainStore" },
     ...outletScopes,
-    { tenant: "default", storeCode: "agoraMainStore" },
+    { tenant: "default", storeCode: "agoraApparelStore" },
     { tenant: "default", storeCode: "agoraElectronicsStore" },
     { tenant: "default", storeCode: "agoraTelcoStore" },
   ],
@@ -165,7 +167,7 @@ assert.deepEqual(
   [
     { tenant: "default", storeCode: "circaMainStore" },
     ...outletScopes,
-    { tenant: "default", storeCode: "agoraMainStore" },
+    { tenant: "default", storeCode: "agoraApparelStore" },
   ],
   "Inactive Agora domains must not participate in activated Product delivery",
 );
@@ -175,10 +177,6 @@ for (const role of ["COMMERCE", "COMMERCE_STAGED"]) {
   assert.deepEqual(
     resetProfiles[role].searchIndexes,
     [
-      {
-        moduleName: "discoveryProjection",
-        indexName: "discoveryDocumentProjection",
-      },
       { moduleName: "product", indexName: "productLocalized" },
       { moduleName: "product", indexName: "productSearchProjection" },
       {
@@ -375,7 +373,7 @@ const staged = loadRuntime("wcmsStagedServer", "kickoffLocal");
 assert.equal(staged.cms.publication.workflow.target.connectionName, "process");
 assert.equal(staged.cms.publication.target.connectionName, "cmsOnline");
 assert.equal(staged.editorial.publication.target.moduleName, "editorial");
-const comms = loadRuntime("engagementServer", "kickoffLocal").communication;
+const comms = loadRuntime("processServer", "kickoffLocal").communication;
 const provider = require(
   path.join(
     frameworkRoot,

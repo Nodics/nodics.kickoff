@@ -24,10 +24,10 @@ for (const environment of ['kickoffLocal', 'kickoffDockerLocal']) {
   assert(activeModuleNames(platform).includes('nexusCore'));
   assert.equal(activeModuleNames(platform).includes('nexus.web'), false);
   assert.equal(activeModuleNames(platform).includes('cms'), false);
-  const engagement = loadRuntime('engagementServer', environment);
+  const engagement = loadRuntime(environment === 'kickoffLocal' ? 'processServer' : 'engagementServer', environment);
   assert(activeModuleNames(engagement).includes('nexus.web'));
   assert.equal(activeModuleNames(engagement).includes('cms'), false, 'Operational content must not activate WCMS');
   const process = loadRuntime('processServer', environment);
-  assert.equal(activeModuleNames(process).includes('nexus.web'), false);
+  assert.equal(activeModuleNames(process).includes('nexus.web'), environment === 'kickoffLocal');
 }
 console.log('Nexus accelerator mapping and independent runtime composition validated');

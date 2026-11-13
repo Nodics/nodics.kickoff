@@ -5,6 +5,7 @@
 **/node_modules
 **/dist
 **/generated
+nodics.kickoff/envs/*/*/src/*/gen
 **/temp
 **/.nodics
 **/.env

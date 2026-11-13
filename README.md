@@ -65,27 +65,17 @@ nodics.kickoff/
       wcmsOnlineServer/
       processServer/
       commerceServer/
-      engagementServer/
-      loyaltyServer/
+      commerceStagedServer/
       wasteServer/
 ```
 
-`platformServer extends nodics.platform`, which makes `nodics.foundation`
-functionally available through Platform. `wcmsStagedServer` and
-`wcmsOnlineServer` extend `nodics.wcms` as separate authoring/publication-source
-and delivery runtimes. `processServer extends nodics.process`, which loads the
-sibling `workflow` and `cronjob` modules in the same Business Process &
-Automation runtime. There is no standalone cronjob server in Kickoff.
-`commerceServer extends nodics.commerce` and composes Process for the full local
-Commerce lifecycle. `engagementServer`
-extends `nodics.engagement`, includes `nodics.communication`, and enables the
-reference contact experience while Process remains a separate runtime
-dependency. `loyaltyServer extends nodics.loyalty` and isolates wallet,
-reward-type, reward-balance, ledger, earning, reservation, and redemption
-operations from Commerce payment-provider journeys. `wasteServer extends
-nodics.waste`, adds the Waste accelerator runtime root, and isolates generic
-Waste Management operations, eWaste presets, and project overlays from Loyalty
-and Location.
+Native Local has seven backend runtimes. Platform remains separate, as do WCMS
+Staged, WCMS Online and Commerce Staged. `commerceServer` hosts Commerce and
+Loyalty; `wasteServer` hosts Waste and Location; `processServer` hosts Process,
+Cron and Engagement/Communication. These are deployment selections, with existing
+module ownership and all eleven database names retained. Cron keeps its separate
+database. Docker topology and frontend applications retain their own deployments.
+Logical role membership does not replace authorization or financial controls.
 Effective runtime loading and service merging remain controlled by module
 indexes.
 
@@ -111,8 +101,10 @@ npm ci
 npm test
 npm run start:platform
 npm run start:commerce
-npm run start:engagement
-npm run start:loyalty
+npm run start:commerce:staged
+npm run start:process
+npm run start:wcms:staged
+npm run start:wcms:online
 npm run start:waste
 npm run test:waste-overlay
 npm run test:waste-runtime
@@ -308,3 +300,25 @@ in through their own package metadata. Use an explicit frontend root, or select
 `--frontend-code` when using an experience workspace with multiple storefronts.
 These choices describe intended reference wiring; generated starter checks do
 not replace Local/Docker deployment acceptance.
+
+The Local Process runtime offers an optional scheduled-review selection. Set
+`NODICS_LOCAL_REVIEW_CRON_ENABLED=true` and an exact existing
+`NODICS_LOCAL_REVIEW_TRIGGER_CODE` only for an operator-reviewed scenario. The
+selected Process trigger must reference a published workflow and the same Cron
+job; provision its inactive draft and review activation through the Cron owner.
+The selection allows one-minute timing on the Local `node0` and never creates a
+trigger, job or timer at startup. It changes neither Framework nor Docker defaults.
+For Cron's own execution command, also supply `NODICS_LOCAL_REVIEW_JOB_CODE` and
+`NODICS_LOCAL_REVIEW_APPROVAL_REFERENCE`; provide the runtime operator token only
+through `NODICS_CRONJOB_ACCEPTANCE_TOKEN`. Inspect persisted execution and downstream
+Process evidence, then explicitly deactivate the job. The reusable lifecycle and
+execution checks remain in Cron's [contract](../nodics.ai/nodics.process/modules/cronjob/llm/contracts/inactive-schedule-drafts.md).
+
+Local Axis employee-onboarding prerequisites select the Framework-owned inert `axisAccessDefinitions` and `axisContentAccessDefinitions` templates. Runtime startup profile selections remain explicit deployment choices. Keep reusable plan steps/copy at the Axis owner; CMS/Profile retain access definitions and assignments. This source placement change does not replay installed data or change existing rights.
+
+Classify a property using the complete indexed stack. On Platform, Profile applies
+a later Framework-disabled `moduleInternal` policy after System defaults; the
+Local `true` is an intentional deployment opt-in for runtime handoffs. Preserve
+that selection rather than removing it because it matches an earlier System
+literal. Reusable defaults and generic category contracts stay with their
+Framework owners. Confirm effective inheritance before moving any value.

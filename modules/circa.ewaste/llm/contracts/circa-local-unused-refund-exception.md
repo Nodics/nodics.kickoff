@@ -24,7 +24,7 @@ PLATFORM Init releases and pinned prerequisites. Order owns the reusable
 `commerce.refund.exception.adjudicate`. Resolve owner versions and checksums from
 Order's manifest. Then explicitly select
 `circa.ewaste:circaLocalUnusedRefundExceptionStaffAssignment`, the environment-portable
-REFERENCE sample 0.0.2 under `sample-v001`. It adds those exact role/group references
+REFERENCE sample 0.0.1 under `sample-v001`. It adds those exact role/group references
 to the original `circa-online-administrator` through Profile's additive
 reference-group owner. No Circa role pack or configuration vocabulary remains.
 Neither selection changes credentials, replaces prior groups, grants scopes,

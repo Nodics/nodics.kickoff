@@ -5,12 +5,13 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
-const { test } = require("node:test");
+const { beforeEach, test } = require("node:test");
 const { frameworkRoot } = require("../../../test/helpers/configuration");
 const fixture = require("./fixtures/circaItemCouponJourneySelection.json");
+const { useReviewedCampaign } = require("./helpers/reviewedCampaign");
 const { createCircaItemCouponJourneySelection: create, verifyCircaItemCouponSelectionSources: verify } = require("./fixtures/circaItemCouponJourneySelectionFactory");
 const records = name => Object.values(require("../data/sample-v001/commerce/records/" + name));
-const campaigns = records("circaPromotionData");
+const campaigns = Object.values(require("./fixtures/history/circaPromotionReviewedData"));
 const prices = records("circaPriceRowData");
 const products = records("circaProductData");
 const variants = records("circaProductVariantData");
@@ -23,6 +24,14 @@ const options = () => ({
   privateCaptureQualified: true,
   refundReview: { sessionKey: "refundReviewer", enterpriseCode: "default",
     comment: "Reviewed isolated unused coupon refund test.", reason: "Reviewed isolated unused coupon original payment refund." },
+});
+
+beforeEach(context => useReviewedCampaign(context));
+
+test("live admission rejects the superseded historical selection against the current campaign", context => {
+  context.mock.restoreAll();
+  assert.throws(() => verify(), { code: "CIRCA_SELECTION_SOURCE_DRIFT" });
+  assert.throws(() => create(options()), { code: "CIRCA_SELECTION_SOURCE_DRIFT" });
 });
 
 test("fixture is nonimportable and every source pin matches existing immutable bytes", () => {

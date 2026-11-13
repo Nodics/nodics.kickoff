@@ -1,9 +1,14 @@
 # Kickoff Local Agent Contract
 
-Local Product listing owner transports belong to this environment's
-`product.runtimeRoleProfiles.COMMERCE_STAGED`, and the Store placement exposure
-belongs to `apiExposure.runtimeRoleProfiles.COMMERCE`. Never place these capability
-namespaces in server properties or widen nTooling's classification gate. Exact
+Keep the shared Native Circa project selections in `config/circaRuntimeOverrides.json`.
+Only the five participating server property files select it. Keep Waste-only
+callers, detail links and conversation settings on Waste, and keep reusable
+capability defaults in Framework.
+
+Local Product listing transports belong to `commerceStagedServer`'s ordinary
+`product` deployment overrides. Store placement exposure belongs to
+`commerceServer`'s ordinary `apiExposure` override. Framework definitions and
+unchanged defaults stay with their implementing modules. Exact
 Store caller/placement pins and signed instance coordinates stay with the runtime
 configuration or assignment data. Rights come from module-owned Profile-managed
 packs and governed Profile assignments, not server permission lists. Test canonical
@@ -59,7 +64,7 @@ does not qualify Store scopes, issuer consent, installed persistence or publicat
 # Local Communication selection
 
 Communication source trust, selected domain templates and Local loopback eligibility
-belong together in `communication.runtimeRoleProfiles.ENGAGEMENT`. Preserve the
+belong together in `processServer`'s ordinary `communication` override. Preserve the
 composition-selected employee-mail source when selecting Digital reminders; verify
 the effective role projection rather than relying on a server-level array that a
 later contribution can replace. Framework trust defaults remain unconfigured.

@@ -9,7 +9,7 @@ const { test } = require("node:test");
 const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configuration");
 const proposal = require("./fixtures/circaMonetaryOutletProposal.json");
 const manifest = require("../data/manifest.json");
-const source = Object.values(require("../data/sample-v001/commerce/records/circaPromotionData"));
+const source = Object.values(require("./fixtures/history/circaPromotionReviewedData"));
 const service = file => require(path.join(frameworkRoot, "nodics.commerce", file));
 const exact = service("modules/baseCommerce/modules/pricing/src/service/defaultExactAmountService");
 const selection = service("modules/baseCommerce/modules/pricing/src/service/defaultPriceSelectionService");
@@ -31,14 +31,14 @@ test("Local inherits unselected monetary benefit transport rather than pinning a
   }
 });
 
-test("unreleased proposal remains outside import packs and pins current canonical source bytes without approval", () => {
+test("unreleased proposal remains outside import packs and pins its reviewed source bytes without approval", () => {
   assert.equal(proposal.status, "PROPOSED_LOCAL_DEMO_ONLY_REQUIRES_HUMAN_REVIEW");
   assert.equal(proposal.importable, false);
   assert.equal(proposal.operationalAuthority, false);
   assert.equal(proposal.review.approved, false);
   assert.equal(proposal.review.independentOwnerGatesWaived, false);
   assert.equal(proposal.review.customerOrProductionPolicy, false);
-  const bytes = fs.readFileSync(path.join(__dirname, "..", proposal.sourceTerms.path));
+  const bytes = fs.readFileSync(require.resolve("./fixtures/history/circaPromotionReviewedData"));
   assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), proposal.sourceTerms.sha256);
   assert(!JSON.stringify(manifest).includes("circaMonetaryOutletProposal"));
   assert.equal(proposal.sourceTerms.changeExistingPackBytes, false);

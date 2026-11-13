@@ -91,6 +91,7 @@ test("actual nImport reader and Promotion parser verify new bytes without import
   CONFIG.get("data").dataReleases.installers.PROMOTION_CAMPAIGN_ISSUANCE = "DefaultPromotionSetupContributionService";
   SERVICE.DefaultDataReleaseService = ports.service;
   const setup = require(path.join(owner, "src/service/defaultPromotionSetupContributionService"));
+  SERVICE.DefaultPromotionSetupContributionService = setup;
   const releases = ports.service.discoverReleases("sample");
   for (const phase of ["Budget", "Issuance"]) {
     const contribution = releases.find(row => row.sectionCode === "circaE07" + phase);

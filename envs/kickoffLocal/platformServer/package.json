@@ -9,6 +9,12 @@
   ],
   "nodics": {
     "kind": "server",
+    "runtimeConfigurationContributions": [
+      {
+        "moduleName": "nodics.loyalty",
+        "namespace": "data"
+      }
+    ],
     "extends": [
       "nodics.platform",
       "nodics.localization",
@@ -24,6 +30,11 @@
       "nodics.waste",
       "nodics.loyalty",
       "nodics.commerce",
+      "nodics.communication",
+      "nodics.engagement",
+      "nodics.location",
+      "nodics.process",
+      "nodics.wcms",
       "nodics.docs",
       "nodics.accelerators/modules/nexus"
     ],
@@ -58,7 +69,8 @@
     "runtimeTooling": {
       "code": "platform",
       "script": "start:platform",
-      "order": 0
+      "order": 0,
+      "readinessTimeoutMs": 180000
     }
   },
   "description": "Platform Server runtime composition and configuration boundary for this Nodics project."

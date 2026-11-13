@@ -7,11 +7,13 @@
   "description": "Reference customer Commerce Staged server for governed Product catalog publication.",
   "nodics": {
     "runtimeConfigurationContributions": [
-      { "moduleName": "eWaste", "namespace": "product", "runtimeRole": "COMMERCE_STAGED" }
+      {
+        "moduleName": "eWaste",
+        "namespace": "product"
+      }
     ],
     "kind": "server",
     "extends": [
-      "nodics.discovery",
       "nodics.commerce",
       "nodics.accelerators"
     ],
@@ -48,7 +50,8 @@
     "runtimeTooling": {
       "code": "commerceStaged",
       "script": "start:commerce:staged",
-      "order": 8
+      "order": 8,
+      "readinessTimeoutMs": 180000
     }
   }
 }

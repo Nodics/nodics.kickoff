@@ -109,8 +109,8 @@ test("instruction preserves exact original buyer counters and excludes carbon or
   assert.deepEqual(Object.keys(payload).sort(), ["contractVersion", "credits"]);
 });
 
-test("only native Loyalty selects the exact qualified source and atomic provider", () => {
-  const native = loadRuntime("loyaltyServer", "kickoffLocal");
+test("native Commerce hosts the Loyalty credit installer with its exact source and atomic provider", () => {
+  const native = loadRuntime("commerceServer", "kickoffLocal");
   assert.equal(native.loyalty.transactions.enabled, true);
   assert.equal(native.loyalty.sampleCredits.enabled, true);
   assert.deepEqual(native.loyalty.sampleCredits.allowedEnvironments, [
@@ -150,7 +150,7 @@ test("only native Loyalty selects the exact qualified source and atomic provider
   }
   for (const [server, environment] of [
     ["loyaltyServer", "kickoffDockerLocal"],
-    ["commerceServer", "kickoffLocal"],
+    ["commerceStagedServer", "kickoffLocal"],
     ["wasteServer", "kickoffLocal"],
     ["platformServer", "kickoffLocal"],
   ]) {

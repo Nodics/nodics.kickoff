@@ -1,0 +1,700 @@
+[
+  {
+    "code": "media:mediaPublicationWorkflow",
+    "kind": "Media publication approval workflow",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "init",
+    "targetServer": "process",
+    "targetRuntimeRole": "PROCESS"
+  },
+  {
+    "code": "locationMap:core-map-reference",
+    "kind": "Map styles and layers",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "core",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "wasteMaterial:core-v001",
+    "kind": "Waste material foundation",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "core",
+    "targetServer": "wasteServer",
+    "targetRuntimeRole": "WASTE"
+  },
+  {
+    "code": "locationType:collection-categories",
+    "kind": "Collection location categories",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "core",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "wasteCollection:collection-capabilities",
+    "kind": "Waste collection capabilities",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "core",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "eWaste:core-reference",
+    "kind": "Electronics submission presets",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "core",
+    "targetServer": "wasteServer",
+    "targetRuntimeRole": "WASTE"
+  },
+  {
+    "code": "circa.ewaste:waste-policy",
+    "kind": "Circa collection policy",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "wasteServer",
+    "targetRuntimeRole": "WASTE"
+  },
+  {
+    "code": "eWaste:drop-off-location",
+    "kind": "Electronic waste drop-off vocabulary",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "core",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "circa.ewaste:network-enterprises",
+    "order": 80,
+    "kind": "Collection network enterprises",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:network-addresses",
+    "order": 81,
+    "kind": "Collection network addresses",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "digitalCore:bundleParticipantPermissions",
+    "kind": "Digital bundle participant permissions",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "digitalCore:participantAccessGroups",
+    "kind": "Digital bundle customer participation access",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "loyaltyWallet:participantAccessGroups",
+    "kind": "Loyalty customer participation access",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "wasteCarbon:participantAccessGroups",
+    "kind": "Carbon customer participation access",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "wasteReward:participantAccessGroups",
+    "kind": "Material-value customer participation access",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:profile",
+    "kind": "Local sample customer profiles",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:customerParticipationAssignments",
+    "kind": "Customer participation access assignments",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:customerDigitalParticipationAssignments",
+    "kind": "Customer Digital bundle participation assignments",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:operations",
+    "kind": "Local operator access",
+    "order": 95,
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "digitalCore:enterpriseParticipationAccess",
+    "kind": "Internal capability definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "loyaltyWallet:enterpriseParticipationAccess",
+    "kind": "Internal capability definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "cart:permissionCatalogue",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "cart:participantTransactionAccess",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "checkoutCore:permissionCatalogue",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "checkoutCore:participantTransactionAccess",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "order:permissionCatalogue",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "order:participantTransactionAccess",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "order:participantReadAccess",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "bidding:permissionCatalogue",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "bidding:participantTransactionAccess",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "profile:enterpriseRoles",
+    "kind": "Enterprise team roles",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "cms:accessGroups",
+    "kind": "Content management access definitions",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "cms:enterpriseRoles",
+    "kind": "Content management access definitions",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "cms:businessAccessRoles",
+    "kind": "Content management access definitions",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "store:accessGroups",
+    "kind": "Store operator access",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "product:businessAccessRoles",
+    "kind": "Product business access levels",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "order:businessAccessRoles",
+    "kind": "Order business access levels",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "wasteCore:enterpriseRoles",
+    "kind": "Waste management access definitions",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "wasteCore:businessAccessRoles",
+    "kind": "Waste management access definitions",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "product:enterpriseRoles",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "publish:accessGroups",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "promotion:enterpriseRoles",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "promotion:businessAccessRoles",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "order:enterpriseRoles",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "digitalCore:enterpriseRoles",
+    "kind": "Enterprise role definition prerequisite",
+    "order": 90,
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "init",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:circaCommerceStaffAssignments",
+    "order": 100,
+    "batchBoundaryBefore": true,
+    "kind": "Enterprise administrator and delegated operator responsibilities",
+    "required": true,
+    "trigger": "USER",
+    "phase": "BEFORE_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "platformServer",
+    "targetRuntimeRole": "PLATFORM"
+  },
+  {
+    "code": "circa.ewaste:network-locations",
+    "order": 82,
+    "kind": "Collection network locations",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "circa.ewaste:location",
+    "kind": "Collection centre locations",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "location",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "circa.ewaste:network-points",
+    "order": 83,
+    "kind": "Collection network points",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "wasteServer",
+    "targetRuntimeRole": "WASTE"
+  },
+  {
+    "code": "circa.ewaste:waste",
+    "order": 85,
+    "kind": "Install demo collection points and reviewed submissions",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "wasteServer",
+    "targetRuntimeRole": "WASTE"
+  },
+  {
+    "code": "circa.ewaste:loyalty",
+    "kind": "Local reward programme",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": {
+      "$config": "runtime",
+      "name": "loyalty",
+      "path": "runtimeIdentity.serverCode"
+    },
+    "targetRuntimeRole": {
+      "$config": "runtime",
+      "name": "loyalty",
+      "path": "runtimeRole.code"
+    }
+  },
+  {
+    "code": "circa.ewaste:store",
+    "kind": "Store and redemption outlet references",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:commerce",
+    "order": 88,
+    "kind": "Circular catalogue source",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "commerceStaged",
+    "targetRuntimeRole": "COMMERCE_STAGED"
+  },
+  {
+    "code": "circa.ewaste:circaGreenPerksBudget",
+    "kind": "GreenPerks issuer opening budget",
+    "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+    "required": true,
+    "trigger": "USER",
+    "phase": "AFTER_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:circaGreenPerksIssuance",
+    "kind": "GreenPerks protected coupon issuance after consent",
+    "operatorEnterpriseCode": "GREENPERKS_RETAIL",
+    "required": true,
+    "trigger": "USER",
+    "phase": "AFTER_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:circaRenewWorksBudget",
+    "kind": "RenewWorks issuer opening budget",
+    "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+    "required": true,
+    "trigger": "USER",
+    "phase": "AFTER_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:circaRenewWorksIssuance",
+    "kind": "RenewWorks protected coupon issuance after consent",
+    "operatorEnterpriseCode": "RENEWWORKS_REPAIR_REUSE",
+    "required": true,
+    "trigger": "USER",
+    "phase": "AFTER_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:circaLoopCycleBudget",
+    "kind": "LoopCycle issuer opening budget",
+    "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+    "required": true,
+    "trigger": "USER",
+    "phase": "AFTER_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:circaLoopCycleIssuance",
+    "kind": "LoopCycle protected coupon issuance after consent",
+    "operatorEnterpriseCode": "LOOPCYCLE_RECYCLING",
+    "required": true,
+    "trigger": "USER",
+    "phase": "AFTER_PUBLICATION",
+    "dataType": "sample",
+    "targetServer": "commerce",
+    "targetRuntimeRole": "COMMERCE"
+  },
+  {
+    "code": "circa.ewaste:content",
+    "kind": "Website content",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "wcmsStaged",
+    "targetRuntimeRole": "WCMS_STAGED"
+  },
+  {
+    "code": "circa.ewaste:customer-workspace",
+    "kind": "Customer item workspace content",
+    "required": true,
+    "trigger": "USER",
+    "dataType": "sample",
+    "targetServer": "wcmsStaged",
+    "targetRuntimeRole": "WCMS_STAGED"
+  },
+  {
+    "code": "circa.ewaste:media",
+    "type": "MEDIA_ASSET_MANIFEST",
+    "kind": "Website media",
+    "required": true,
+    "trigger": "USER",
+    "targetServer": "wcmsStaged",
+    "targetRuntimeRole": "WCMS_STAGED",
+    "manifestModule": "circa.ewaste",
+    "manifestPath": "data/sample-v001/content/assets/circa-media/assetManifest.js",
+    "businessPurpose": "CIRCA_SAMPLE_CONTENT"
+  }
+]

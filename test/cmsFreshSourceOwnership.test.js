@@ -17,7 +17,7 @@
  * @layer test
  */
 const path = require("node:path");
-const { frameworkRoot } = require("./helpers/configuration");
+const { frameworkRoot, loadRuntime } = require("./helpers/configuration");
 const { registerSourceOwnershipTests } = require(
   path.join(
     frameworkRoot,
@@ -26,7 +26,7 @@ const { registerSourceOwnershipTests } = require(
 );
 const repoRoot = path.resolve(__dirname, "..");
 require("node:test").test(
-  "fresh demo CMS ownership uses explicit successor metadata within v001",
+  "fresh demo CMS ownership uses the Release 0 baseline",
   () => {
     const assert = require("node:assert/strict");
     for (const [owner, code] of [
@@ -36,7 +36,7 @@ require("node:test").test(
       const section = require(
         path.join(repoRoot, "modules", owner, "data/manifest.json"),
       ).sections[code];
-      assert.equal(section.version, "0.0.2", owner);
+      assert.equal(section.version, "0.0.1", owner);
       assert(
         Object.keys(section.files).every((file) =>
           file.startsWith("sample-v001/"),
@@ -46,6 +46,25 @@ require("node:test").test(
     }
   },
 );
+require("node:test").test("Staged website selections pin the version of each owner's data release", () => {
+  const assert = require("node:assert/strict");
+  const sourceRoots = {
+    axis: path.join(frameworkRoot, "nodics.platform/modules/axis"),
+    "circa.ewaste": path.join(repoRoot, "modules/circa.ewaste"),
+    "agora.apparel": path.join(repoRoot, "modules/agora.apparel"),
+    "agora.telco": path.join(repoRoot, "modules/agora.telco"),
+    "agora.electronics": path.join(repoRoot, "modules/agora.electronics"),
+  };
+  for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const runtime = loadRuntime("wcmsStagedServer", environment);
+    for (const site of ["axis", "axisassistant", "circa", "agoraapparel", "agoratelco", "agoraelectronics"]) {
+      const selected = runtime.cms.publication.baselines[site];
+      const [owner, section] = selected.releaseCode.split(":");
+      const manifest = require(path.join(sourceRoots[owner], "data/manifest.json"));
+      assert.equal(selected.releaseVersion, manifest.sections[section].version, environment + "/" + site);
+    }
+  }
+});
 registerSourceOwnershipTests(repoRoot, [
   {
     header:
@@ -201,6 +220,10 @@ require("node:test").test(
       };
       global.SERVICE = {
         DefaultCmsDesignerAccessService: access,
+        DefaultCmsDesignerReadService: require(path.join(
+          frameworkRoot,
+          "nodics.wcms/modules/cms/src/service/designer/defaultCmsDesignerReadService",
+        )),
         DefaultSecuredRequestPipelineService: security,
         DefaultIdentityGovernanceService: {
           getSystemAuthData: () => ({

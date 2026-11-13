@@ -15,10 +15,10 @@ module.exports = {
     "default": {
       "mongodb": {
         "master": {
-          "databaseName": "kickoffDockerLocalLocation"
-        }
-      }
-    }
+          "databaseName": "kickoffDockerLocalLocation",
+        },
+      },
+    },
   },
   "servers": {
     "default": {
@@ -26,25 +26,37 @@ module.exports = {
         "httpHost": "0.0.0.0",
         "httpPort": 4380,
         "httpsHost": "0.0.0.0",
-        "httpsPort": 4381
+        "httpsPort": 4381,
       },
       "browserEndpoint": {
         "httpHost": "localhost",
-        "httpPort": 5380
+        "httpPort": 5380,
       },
       "abstractEndpoint": {
         "httpHost": "location",
         "httpPort": {
           "$config": "ref",
-          "path": "servers.default.endpoint.httpPort"
+          "path": "servers.default.endpoint.httpPort",
         },
         "httpsHost": "location",
         "httpsPort": {
           "$config": "ref",
-          "path": "servers.default.endpoint.httpsPort"
-        }
-      }
-    }
+          "path": "servers.default.endpoint.httpsPort",
+        },
+      },
+    },
+  },
+  data: {
+    dataReleases: {
+      contributions: {
+        $config: "keyed",
+        key: "moduleName",
+        entries: [
+          { moduleName: "wasteCollection", sections: ["collection-capabilities"] },
+          { moduleName: "eWaste", sections: ["drop-off-location"] },
+        ],
+      },
+    },
   },
   "activeModules": {
     "groups": [],
@@ -62,8 +74,8 @@ module.exports = {
       "locationDraft",
       "locationApproval",
       "locationProjection",
-      "redisCache"
-    ]
+      "redisCache",
+    ],
   },
   "runtimeAuthorityContexts": {
     "modules": {
@@ -73,12 +85,87 @@ module.exports = {
       "locationSearch": true,
       "locationDraft": true,
       "locationApproval": true,
-      "locationProjection": true
+      "locationProjection": true,
     },
-    "default": "location.operational"
+    "default": "location.operational",
   },
   "runtimeRole": {
     "code": "LOCATION",
-    "publication": "OPERATIONAL"
+    "publication": "OPERATIONAL",
+  },
+  order: {
+    disputes: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+    refunds: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+  },
+  eWaste: {
+    journey: {
+      arrivalRadiusMetres: {
+        $config: "env",
+        name: "CIRCA_EWASTE_ARRIVAL_RADIUS_METRES",
+        type: "number",
+      },
+      reviewAssignment: {
+        queueCode: "CIRCA_EWASTE_REVIEW",
+        label: "Circa review team",
+      },
+      depositInstruction:
+        "Please place your item in the designated eWaste bin at {centreName}, following the centre's handling instructions.",
+    },
+    rewardValuation: {
+      version: "circa-weight-rewards-v2",
+      illustrative: true,
+      programCode: "circa",
+      pointsRewardTypeCode: "points",
+      carbonRewardTypeCode: "circaCarbon",
+      pointsPerKg: 10,
+      carbonUnitsPerEstimatedKg: 1,
+    },
+    application: {
+      enabled: true,
+    },
+    channelAuthentication: {
+      enabled: true,
+      channels: {
+        TELEGRAM: {
+          enabled: true,
+          applicationCode: "circa.ewaste",
+          seamlessSignIn: true,
+        },
+      },
+    },
+    outcomeCommunication: {
+      enabled: true,
+      connectionName: "engagement",
+    },
+    marketplace: {
+      priceBookCode: "circaPointsPriceBook",
+      warehouseCode: "circaDigitalRegistry",
+      transferPolicyCode: "CIRCA_LOCAL_DIGITAL_OWNERSHIP_V1",
+      storeCode: "circaMainStore",
+      catalogVersion: "circaStaged",
+      currency: "POINTS",
+      programCode: "circa",
+      rewardTypeCode: "points",
+      jurisdiction: "CIRCA_SAMPLE",
+      saleMode: "DIGITAL_OWNERSHIP",
+      autoPublishListings: true,
+      listingPresentation: {
+        description:
+          "Sample digital asset ownership. No physical delivery is included.",
+        imageUrl: "/nodics/media/v0/content/circa-asset-laptop",
+        sample: true,
+      },
+      orderCodePrefix: "CIRCA_ORDER_",
+    },
+    conversation: {
+      rewardGuidance:
+        "Approval rewards are added only after review. Potential CO₂e savings are estimates, not issued carbon credits. Certificates, rewards, material value and carbon holdings are separate. Only selected realized and available carbon credits transfer in a bundle; original contributor entitlements stay with the contributor.",
+    },
   },
 };

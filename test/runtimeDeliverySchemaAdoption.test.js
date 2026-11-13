@@ -7,7 +7,7 @@ const schemaOwner = require(require('node:path').join(frameworkRoot,
   'nodics.foundation/modules/nSystem/src/service/config/defaultRuntimeConfigurationSchemaService'));
 
 test("Local Engagement adopts the delivery owner's schema without loading the Circa application", () => {
-  const engagement = loadRuntime("engagementServer", "kickoffLocal", {});
+  const engagement = loadRuntime("processServer", "kickoffLocal", {});
   const platform = loadRuntime("platformServer", "kickoffLocal", {});
   const schema = engagement.runtimeConfigurationSchemas.telegramDelivery;
   assert.equal(schema.ownerModule, "commsCore");
@@ -36,15 +36,14 @@ test("Local Engagement adopts the delivery owner's schema without loading the Ci
     undefined,
   );
   assert.equal(
-    require("../envs/kickoffLocal/engagementServer/config/properties").activeModules.modules.includes(
+    require("../envs/kickoffLocal/processServer/config/properties").activeModules.modules.includes(
       "circa.ewaste",
     ),
     false,
   );
   assert.equal(
-    require("../envs/kickoffLocal/config/properties")
-      .runtimeConfigurationSchemas.runtimeRoleProfiles.ENGAGEMENT
-      .telegramDelivery.ownerModule,
+    require("../envs/kickoffLocal/processServer/config/properties")
+      .runtimeConfigurationSchemas.telegramDelivery.ownerModule,
     undefined,
   );
 });

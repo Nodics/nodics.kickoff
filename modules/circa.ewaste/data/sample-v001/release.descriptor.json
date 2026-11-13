@@ -249,6 +249,66 @@
         "extendsCapability": "ewaste",
         "businessOutcome": "Prepare customer workspace records for the Circa eWaste experience."
       }
+    },
+    "network-enterprises": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare the operator and infrastructure owner of the demonstration collection network."
+      }
+    },
+    "network-addresses": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Prepare Profile addresses for the demonstration collection network."
+      }
+    },
+    "network-locations": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Link the network locations to their Profile addresses and operator."
+      }
+    },
+    "network-points": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Link the network collection points to their locations and enterprises before operational scope assignments."
+      }
+    },
+    "waste-opening-impact": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Install reviewed illustrative opening records through their Waste owner."
+      }
+    },
+    "waste-opening-assets": {
+      "capability": {
+        "code": "circa.ewaste",
+        "displayName": "Circa eWaste",
+        "type": "APPLICATION",
+        "group": "APPLICATION_CONTENT",
+        "extendsCapability": "ewaste",
+        "businessOutcome": "Install reviewed illustrative opening records through their Waste owner."
+      }
     }
   }
 }

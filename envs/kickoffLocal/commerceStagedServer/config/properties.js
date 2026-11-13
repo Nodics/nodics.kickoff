@@ -356,6 +356,8 @@ const circaPublicationReceipts = {
   },
 };
 
+const circaNative = require("../../config/circaRuntimeOverrides.json");
+
 module.exports = {
   tooling: {
     acceptance: {
@@ -419,6 +421,7 @@ module.exports = {
     },
   },
   promotion: {
+    legacyTokenHashPolicies: ["TENANT_COLON_UPPERCASE_SHA256"],
     publication: {
       sourceVersioningQualified: true,
       target: {
@@ -513,5 +516,96 @@ module.exports = {
         httpsPort: 4353,
       },
     },
+  },
+  apiExposure: {
+    categories: {
+      productPublicationSource: {
+        enabled: true,
+      },
+      pricingPublicationAuthoring: {
+        enabled: true,
+      },
+      taxPublicationAuthoring: {
+        enabled: true,
+      },
+      inventoryPublicationAuthoring: {
+        enabled: true,
+      },
+      promotionPublicationAuthoring: {
+        enabled: true,
+      },
+    },
+  },
+  order: {
+    disputes: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+    refunds: {
+      enabled: true,
+      orderCodePrefixes: ["CIRCA_ORDER_"],
+    },
+  },
+  profileExternalIdentity: circaNative.profileExternalIdentity,
+  bidding: {
+    enabled: true,
+    policyVersion: "circa-digital-bids-v1",
+    amountScale: 0,
+    maximumAmount: "100000",
+    stores: {
+      circaMainStore: {
+        enterpriseCode: "GREENPERKS_ONLINE",
+        currency: "POINTS",
+        locale: "en",
+        orderCodePrefix: "CIRCA_ORDER_BID_",
+        allowOwnerReference: true,
+      },
+    },
+  },
+  media: {
+    customerUploads: {
+      enabled: true,
+    },
+  },
+  waste: {
+    operations: {
+      requireScopes: true,
+      requireVerification: true,
+    },
+  },
+  eWaste: circaNative.eWaste,
+  digitalCore: {
+    merchantRedemption: {
+      enabled: true,
+    },
+  },
+  product: {
+    marketplaceAuthoring: {
+      enabled: true,
+      catalogVersion: "circaStaged",
+      locales: ["en", "ar"],
+      bundlePublication: {
+        enabled: true,
+      },
+      storeSource: {
+        connectionName: "commerce",
+        allowInsecureLoopback: true,
+      },
+      intentSource: {
+        connectionName: "waste",
+        allowInsecureLoopback: true,
+      },
+    },
+    publication: {
+      target: {
+        connectionName: "commerce",
+      },
+      source: {
+        connectionName: "commerceStaged",
+      },
+    },
+  },
+  stripeProvider: {
+    maturity: "NOT_APPLICABLE_FOR_STAGED_CATALOG",
   },
 };

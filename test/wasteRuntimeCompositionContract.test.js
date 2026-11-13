@@ -45,19 +45,21 @@ const expectedWasteModules = [
 ];
 
 async function main() {
-    prepare({ projectRoot, frameworkRoot, environment: 'kickoffLocal', server: 'wasteServer' });
+    await prepare({ projectRoot, frameworkRoot, environment: 'kickoffLocal', server: 'wasteServer' });
 
     assert.equal(NODICS.getSelectedEnvironmentName(), 'kickoffLocal');
     assert.equal(NODICS.getServerName(), 'wasteServer');
     assert.equal(CONFIG.get('runtimeRole').code, 'WASTE');
+    assert.equal(CONFIG.get('runtimeRole').roles, undefined, 'Functional ownership comes from the selected module graph');
+    assert.equal(NODICS.isModuleActive('locationCore'), true);
+    assert.equal(CONFIG.get('database').locationMap.mongodb.master.databaseName, 'kickoffLocalLocation');
     assert.equal(CONFIG.get('runtimeRole').publication, 'OPERATIONAL');
     assert.equal(CONFIG.get('database').default.mongodb.master.databaseName, 'kickoffLocalWaste');
     assert.equal(CONFIG.get('servers').default.endpoint.httpPort, 4370);
-    assert.equal(require('./helpers/configuration').validateDestination(CONFIG.getProperties(), 'WASTE'), true);
     assert.equal(CONFIG.get('apiExposure').categories.wasteInternal.enabled, true);
     assert.equal(CONFIG.get('waste').accelerator, undefined);
     assert.equal(CONFIG.get('waste').projectOverlay, undefined);
-    assert.deepEqual(CONFIG.get('data').dataReleases.initializationProfiles.localWasteFoundation.steps, [
+    assert.deepEqual(CONFIG.get('data').dataReleases.initializationProfileDefaults.localWasteFoundation.steps, [
         { dataType: 'core', releaseCodes: ['wasteMaterial:core-v001', 'eWaste:core-reference'] },
         { dataType: 'sample', releaseCodes: ['circa.ewaste:waste-policy'] }
     ], 'Selected core references precede the optional Circa sample policy');

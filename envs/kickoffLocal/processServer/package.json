@@ -7,13 +7,14 @@
   "nodics": {
     "kind": "server",
     "extends": [
-      "nodics.process"
+      "nodics.process",
+      "nodics.communication",
+      "nodics.engagement"
     ],
     "runtimeModule": true,
     "loadableByNodicsModuleLoader": true,
     "owns": [
       "configuration",
-      "data",
       "llm"
     ],
     "runtime": {
@@ -27,7 +28,11 @@
       "nodics.platform",
       "nodics.wcms",
       "nodics.rulesEngine",
-      "nodics.commerce"
+      "nodics.commerce",
+      "nodics.communication",
+      "nodics.engagement",
+      "nodics.accelerators/modules/nexus",
+      "nodics.accelerators/modules/waste/modules/eWaste"
     ],
     "runtimeIdentity": {
       "instanceCode": "kickoff-local-process-1",
@@ -49,8 +54,23 @@
     "runtimeTooling": {
       "code": "process",
       "script": "start:process",
-      "order": 2
-    }
+      "order": 2,
+      "readinessTimeoutMs": 180000
+    },
+    "runtimeConfigurationContributions": [
+      {
+        "moduleName": "nodics.rulesEngine",
+        "namespace": "data"
+      },
+      {
+        "moduleName": "digitalCore",
+        "namespace": "communication"
+      }
+    ],
+    "runtimeAliases": [
+      "engagement",
+      "commsApi"
+    ]
   },
   "description": "Business Process & Automation Server runtime composition and configuration boundary for this Nodics project."
 }

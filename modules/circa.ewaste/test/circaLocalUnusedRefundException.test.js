@@ -30,6 +30,7 @@ test("sibling runtimes and Docker do not enable original unused-coupon exception
   }
 });
 
-test("original campaign and price fixture pins remain unchanged by exception setup", () => {
+test("original campaign and price fixture pins remain unchanged by exception setup", context => {
+  require("./helpers/reviewedCampaign").useReviewedCampaign(context);
   require("./fixtures/circaItemCouponJourneySelectionFactory").verifyCircaItemCouponSelectionSources();
 });

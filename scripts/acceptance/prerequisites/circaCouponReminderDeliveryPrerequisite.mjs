@@ -5,6 +5,7 @@
  * @layer project-acceptance
  * @owner nodics.kickoff
  */
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
@@ -18,83 +19,60 @@ const acceptanceNames = Object.freeze({
 const reminderTemplate = "DIGITAL_COUPON_EXPIRING_IN_APP";
 const reminderAction = Object.freeze({ moduleName: "digitalCore", operation: "couponExpirySweep" });
 
-function sourceFiles(root, predicate) {
-  const files = [];
-  if (!fs.existsSync(root)) return files;
-  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
-    const target = path.join(root, entry.name);
-    if (entry.isDirectory()) files.push(...sourceFiles(target, predicate));
-    else if (predicate(target)) files.push(target);
-  }
-  return files;
-}
-
 function loadSource(file) {
   delete require.cache[require.resolve(file)];
   return require(file);
 }
 
-function processDefinitions(recordFiles) {
-  const definitions = [];
-  for (const file of recordFiles) {
-    const source = loadSource(file);
-    for (const value of Object.values(source || {})) {
-      const rows = Array.isArray(value) ? value : [];
-      for (const row of rows) {
-        const actions = row?.graph?.nodes?.filter(node => node?.type === "ACTION") || [];
-        if (actions.some(node => node.action?.moduleName === reminderAction.moduleName &&
-            node.action?.operation === reminderAction.operation)) definitions.push(row);
-      }
-    }
-  }
-  return definitions;
+function localRuntime(projectRoot, frameworkRoot, server) {
+  const probe = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
+  return probe.read({ projectRoot, frameworkRoot, environment: "kickoffLocal", server, inheritEnvironment: true }).properties;
 }
 
-/** Returns only governed Circa Cron records bound to a Process definition containing the Digital reminder action. */
-export function circaCouponReminderJobs(projectRoot) {
-  const dataRoot = path.join(projectRoot, "modules/circa.ewaste/data");
-  const allFiles = sourceFiles(dataRoot, file => /\.(?:js|json)$/u.test(file));
-  const records = allFiles.filter(file => file.includes(`${path.sep}records${path.sep}`));
-  const definitions = processDefinitions(records);
-  const definitionCodes = new Set(definitions.map(definition => definition.code));
-  const jobs = [];
-
-  for (const headerFile of allFiles.filter(file => file.includes(`${path.sep}headers${path.sep}`))) {
-    const header = loadSource(headerFile);
-    for (const [moduleName, definitions] of Object.entries(header || {})) {
-      for (const definition of Object.values(definitions || {})) {
-        const schema = definition?.options?.schemaName;
-        const prefix = definition?.options?.dataFilePrefix;
-        if (moduleName !== "cronjob" || schema !== "cronJob" || definition?.options?.enabled !== true ||
-            typeof prefix !== "string") continue;
-        for (const recordFile of records.filter(file => path.basename(file, path.extname(file)) === prefix)) {
-          for (const record of Object.values(loadSource(recordFile) || {})) {
-            if (definitionCodes.has(record?.jobDetail?.processTrigger?.triggerCode)) {
-              jobs.push(structuredClone(record));
-            }
-          }
-        }
-      }
-    }
-  }
-  return jobs;
+/** Reads the Digital owner records selected by the effective Process configuration. */
+function selectedReminderJobs(processRuntime, frameworkRoot) {
+  const selection = processRuntime.data?.dataReleases?.contributions?.find(entry => entry.moduleName === "digitalCore");
+  const sections = ["couponReminderWorkflow", "couponReminderTrigger", "couponReminderSchedule"];
+  if (!sections.every(section => selection?.sections.includes(section))) return [];
+  const root = path.join(frameworkRoot, "nodics.commerce/modules/digitalCommerce/modules/digitalCore/data");
+  const manifest = loadSource(path.join(root, "manifest.json"));
+  const records = sections.map(code => {
+    const section = manifest.sections[code];
+    const files = Object.keys(section?.files || {}).filter(file =>
+      /^init-v[0-9]+\/records\/(?:jobs|process)\/[A-Za-z0-9]+Data\.js$/u.test(file));
+    if (section?.selectionPolicy !== "EXPLICIT" || files.length !== 1) return {};
+    const file = path.join(root, files[0]);
+    if (createHash("sha256").update(fs.readFileSync(file)).digest("hex") !== section.files[files[0]]) return {};
+    return loadSource(file);
+  });
+  const [workflow, triggerData, scheduleData] = records;
+  const trigger = triggerData.record1, job = scheduleData.record1;
+  const definition = workflow.definitions?.find(row => row.code === trigger?.definitionCode);
+  if (!definition?.graph.nodes.some(node => node.type === "ACTION" &&
+      node.action?.moduleName === reminderAction.moduleName && node.action.operation === reminderAction.operation) ||
+      trigger.triggerType !== "CRON" || job?.jobDetail?.processTrigger?.triggerCode !== trigger.code ||
+      trigger.cronJobCode !== job.code) return [];
+  return [job];
 }
 
-function localBindings(projectRoot) {
-  const environment = loadSource(path.join(projectRoot, "envs/kickoffLocal/config/properties.js"));
-  const communication = environment?.communication?.runtimeRoleProfiles?.ENGAGEMENT;
-  const digital = environment?.digitalCore?.runtimeRoleProfiles?.COMMERCE?.couponReminders;
-  const profile = environment?.profile?.runtimeRoleProfiles?.PLATFORM?.profileCouponNotifications;
-  const values = selection => Array.isArray(selection) ? selection : selection?.value;
-  const selected = (selection, code) => selection?.[code] === true || selection?.value?.[code] === true;
-  const trustedSources = values(communication?.trustedSourceModules);
-  const sourceCallers = values(digital?.sourceCallers);
+/** Resolves the project-installed owner and its explicit runtime selection. */
+export function circaCouponReminderJobs(projectRoot, frameworkRoot = path.dirname(path.dirname(
+  createRequire(path.join(projectRoot, "package.json")).resolve("nodics.foundation/package.json")))) {
+  return selectedReminderJobs(localRuntime(projectRoot, frameworkRoot, "processServer"), frameworkRoot);
+}
+
+function localBindings(processRuntime, commerceRuntime, platformRuntime) {
+  const communication = processRuntime.communication;
+  const digital = commerceRuntime.digitalCore?.couponReminders;
+  const profile = platformRuntime.profileCouponNotifications;
+  const trustedSources = communication?.trustedSourceModules;
+  const sourceCallers = digital?.sourceCallers;
   return {
     digitalConfigured: digital?.enabled === true && Array.isArray(sourceCallers) && sourceCallers.length > 0,
     profileConfigured: profile?.enabled === true,
     communicationConfigured: Array.isArray(trustedSources) && trustedSources.includes("digitalCore") &&
-      selected(communication?.templateResources?.modules, "digitalCore") &&
-      selected(communication?.templateResources?.selections, reminderTemplate),
+      communication?.templateResources?.modules?.digitalCore === true &&
+      communication?.templateResources?.selections?.[reminderTemplate] === true,
   };
 }
 
@@ -124,10 +102,12 @@ function profileConsistency(profiles, jobs) {
  * Digital/Profile/Communication bindings, and three project selections that point
  * back to those sources.
  */
-export async function inspectCircaCouponReminderDeliveryPrerequisite({ projectRoot }) {
-  const jobs = circaCouponReminderJobs(projectRoot);
+export async function inspectCircaCouponReminderDeliveryPrerequisite({ projectRoot, frameworkRoot }) {
+  const runtime = server => localRuntime(projectRoot, frameworkRoot, server);
+  const processRuntime = runtime("processServer");
+  const jobs = selectedReminderJobs(processRuntime, frameworkRoot);
   const projectProperties = loadSource(path.join(projectRoot, "modules/circa.ewaste/config/properties.js"));
-  const bindings = localBindings(projectRoot);
+  const bindings = localBindings(processRuntime, runtime("commerceServer"), runtime("platformServer"));
   const profiles = profileConsistency(projectProperties?.tooling?.acceptance, jobs);
   const job = jobs.length === 1 ? jobs[0] : null;
   const evidence = Object.freeze({

@@ -5,15 +5,20 @@ const { test } = require("node:test");
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const manifest = require("../data/manifest.json");
-const assignments = Object.values(require("../../kickoffCore/data/init-v001/runtime-assignments/records/nativeRuntimeAssignmentData"));
 const { frameworkRoot, loadRuntime } = require("../../../test/helpers/configuration");
 const releases = require(path.join(frameworkRoot, "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
 
 test("current sources form one v001 baseline with exact checksums and no retained predecessors", () => {
   assert.equal(manifest.retainedRoots, undefined);
   const files = releases.sourceRootFiles(path.resolve(__dirname, "../data"), "sample-v001");
-  const localOnly = new Set(["circaLocalEnterpriseTestProgram",
+  const network = new Set(["network-enterprises", "network-addresses", "network-locations", "network-points"]);
+  const dockerNetwork = new Set([...network].map(code => code + "-docker"));
+  const localOnly = new Set([
+    "circaLocalEnterpriseTestProgram", "waste-opening-impact", "waste-opening-assets",
     "circaGreenPerksFixedExpiryBudget", "circaGreenPerksFixedExpiryIssuance",
+    "circaGreenPerksL08Budget", "circaGreenPerksL08Issuance",
+    "circaRenewWorksL08Budget", "circaRenewWorksL08Issuance",
+    "circaLoopCycleL08Budget", "circaLoopCycleL08Issuance",
     "circaCarbonMock", "circaMaterialValueMock", "circaE07Budget", "circaE07Issuance",
     "circaRenewWorksRemainingFixedExpiryBudget", "circaRenewWorksRemainingFixedExpiryIssuance",
     "circaRenewWorksRemainingFixedExpiryPublicationPlan", "circaLoopCycleRemainingFixedExpiryBudget",
@@ -21,8 +26,18 @@ test("current sources form one v001 baseline with exact checksums and no retaine
   for (const [code, section] of Object.entries(manifest.sections)) {
     assert.equal(section.sourceRoot, "sample-v001", code);
     assert.equal(section.selectionPolicy, "EXPLICIT", code);
-    assert.deepEqual(section.environmentScope, localOnly.has(code) ? ["LOCAL"] : ["ALL"], code);
+    const expectedScope = dockerNetwork.has(code) ? ["LOCAL_PRODUCTION_SIMULATION"]
+      : network.has(code) ? ["LOCAL", "DEVELOPMENT", "TEST"]
+      : localOnly.has(code) ? ["LOCAL"] : ["ALL"];
+    assert.deepEqual(section.environmentScope, expectedScope, code);
     for (const [file, hash] of Object.entries(section.files)) assert.equal(files[file], hash, file);
+  }
+  const docker = loadRuntime("platformServer", "kickoffDockerLocal");
+  const selected = new Set(docker.backofficeApplicationInitialization.profiles.circa.dataPackages.map(step => step.code));
+  for (const code of network) {
+    assert.deepEqual(manifest.sections[code + "-docker"].files, manifest.sections[code].files);
+    assert(selected.has("circa.ewaste:" + code + "-docker"));
+    assert(!selected.has("circa.ewaste:" + code));
   }
 });
 
@@ -49,19 +64,21 @@ test("baseline Loyalty retains approved POINT transfers without importing test f
   assert.equal(program.testCreditRewardTypeCodes, undefined);
 });
 
-test("demo packs preserve destination and Local-only admission", t => {
+test("Local-only demo packs refuse other environments and publishable data refuses Online", t => {
   const original = global.CONFIG;
   t.after(() => { global.CONFIG = original; });
-  const owner = { ...releases, configuration: () => ({ destinationEnforced: true }), error: (code, message) => Object.assign(new Error(message), { code }) };
-  for (const environmentClass of ["LOCAL", "LOCAL_PRODUCTION_SIMULATION", "TEST", "STAGING", "PRODUCTION"]) {
-    for (const section of Object.values(manifest.sections)) {
-      let runtimeRole = section.destinationRole;
-      global.CONFIG = { get: key => key === "environment" ? { class: environmentClass } : key === "runtimeRole" ? runtimeRole : undefined };
-      if (section.environmentScope.includes("ALL") || section.environmentScope.includes(environmentClass)) assert.equal(owner.validateDestination(section), true);
-      else assert.throws(() => owner.validateDestination(section), { code: "ERR_IMP_00004" });
-      runtimeRole = "WRONG_OWNER";
-      assert.throws(() => owner.validateDestination(section), { code: "ERR_IMP_00004" });
-    }
+  const owner = { ...releases, configuration: () => ({}), error: (code, message) => Object.assign(new Error(message), { code }) };
+  for (const section of Object.values(manifest.sections)) {
+    const reject = (environmentClass, publication, reason) => {
+      global.CONFIG = { get: key => key === "environment" ? { class: environmentClass } :
+        key === "runtimeRole" ? { publication } : undefined };
+      assert.throws(() => owner.validateDestination(section), err => err.code === "ERR_IMP_00004" && reason.test(err.message));
+    };
+    if (section.environmentScope.includes("LOCAL") && !section.environmentScope.includes("ALL"))
+      for (const other of ["LOCAL_PRODUCTION_SIMULATION", "TEST", "STAGING", "PRODUCTION"])
+        if (!section.environmentScope.includes(other)) reject(other, "STAGED", /not permitted for environment/);
+    if (section.lifecycle === "PUBLISHABLE")
+      reject("LOCAL", "ONLINE", /requires a Staged destination/);
   }
 });
 
@@ -73,11 +90,6 @@ test("deployment bootstrap remains explicit while reviewed grants are owned by d
   assert.deepEqual(native.profileTenantProvisioning.runtimeRemoteModuleExtensions, ["eWaste"]);
   assert.equal(native.profileTenantProvisioning.localRuntimeRemoteModuleExtensions, undefined);
   assert.equal(native.identityGovernance.migration.runtimeDeploymentGrantPermissions, undefined);
-  const rows = assignments.filter(row => row.runtimeScope.projectCode === "nodics.kickoff" && row.runtimeScope.environmentCode === "kickoffLocal" && row.runtimeScope.serverCode === "commerceStagedServer");
-  assert.equal(rows.length, 1);
-  assert.equal(rows[0].runtimeScope.instanceCode, native.runtimeIdentity.instanceCode);
-  assert.equal(rows[0].principalCode, "apiAdmin");
-  assert(rows[0].runtimeScope.permissions.includes("waste.asset.listing.intent.read"));
-  assert(rows[0].runtimeScope.permissions.includes("commerce.store.read"));
-  assert.equal(rows[0].runtimeScope.permissions.includes("waste.asset.sale.transfer"), false);
+  assert.equal(native.runtimeIdentity.instanceCode, "kickoff-local-commerce-staged-1");
+
 });

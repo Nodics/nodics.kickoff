@@ -1,22 +1,16 @@
 /* Nodics. Copyright (c) 2026. Governed by the root LICENSE. */
 "use strict";
 
-/**
- * @module agora.apparel/data/sample-v001/store/headers/agoraApparelStoreReferenceHeader
- * @description Selects the Agora Apparel Store master through Store's canonical generated service.
- * @layer data-header
- * @owner agora.apparel
- */
+/** @description Imports Agora Apparel operational selling locations. @owner agora.apparel */
+const entry = (schemaName, dataFilePrefix) => ({
+  options: { enabled: true, schemaName, operation: "saveAll", dataFilePrefix },
+  query: { code: "$code", tenant: "$tenant" },
+});
+
 module.exports = {
   store: {
-    agoraApparelStoreData: {
-      options: {
-        enabled: true,
-        schemaName: "store",
-        operation: "saveAll",
-        dataFilePrefix: "agoraApparelStoreData",
-      },
-      query: { code: "$code", tenant: "$tenant" },
-    },
+    stores: entry("store", "agoraApparelStoreData"),
+    channels: entry("salesChannel", "agoraApparelSalesChannelData"),
+    points: entry("pointOfService", "agoraApparelPointOfServiceData"),
   },
 };

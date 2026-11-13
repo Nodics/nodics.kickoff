@@ -33,12 +33,11 @@ receipts; they do not mandate legacy access definitions or authorize data replay
 The refactored source uses owner-contributed definitions and optional demo
 assignments. Current installed state requires separate authorized verification.
 
-Current source selects `waste-policy` and `customer-workspace` at `0.0.2` from
+Current source selects `waste-policy` and `customer-workspace` at `0.0.1` from
 `sample-v001`, independently of framework-owned core references. Policy samples
 are materialized records, not partial overrides composed from a Circa core lane.
 Old core selections survive only in historical evidence and receipts, never as
-current import instructions. Other demo sections keep their own manifest versions;
-do not infer one dataset-wide version. Profile still owns tenant, enterprise,
+current import instructions. All unreleased Init, Core and Sample sections use version `0.0.1`. Documentation packs have independent versions. Profile still owns tenant, enterprise,
 credentials and eligibility checks; Commerce owns coupon issuance and inventory
 admission. Source changes do not establish installed adoption.
 
@@ -53,10 +52,7 @@ server layers retain exact runtime identity and deployment selections. Profile's
 namespace adoption, while default-false
 `identityGovernance.migration.runtimeDeploymentBootstrapEnabled` explicitly
 selects deployment bootstrap. Neither selector supplies permissions. Permission
-definitions and roles come from implementing-owner data packs; runtime grants
-are governed Profile `principalScopeAssignment` data with exact deployment
-coordinates. The explicit `kickoffCore:nativeRuntimeAssignments` pack describes
-only the reviewed native deployment, not a template grant for other environments.
+definitions and roles come from implementing-owner data packs; Profile authenticates the installation service account and signs the selected deployment coordinates and modules.
 Startup validates retained authority without restoring permissions, credentials
 or lockouts. Subsequent access changes require governed Profile/Axis operations;
 configuration changes never rewrite tenant namespace ceilings or assignments.
@@ -148,7 +144,15 @@ Use the existing `circa-customer`, `circa-seller` and `circa-recipient` personas
 from the `profile` pack and staff from `operations`; obtain existing credentials
 only through the authorized private owner/handoff, never this README. Isolated
 new-account registration is a separate onboarding case, not a prerequisite for
-testing the predefined demo. Sample import is fresh-setup-only; never replay
+testing the predefined demo. The non-importable
+[test scenario](test/fixtures/circaAxisOnboardingScenario.json) supplies separate
+fictional Circa first-administrator and employee inputs for Axis onboarding
+acceptance. Its separate `liveActivation` inputs create a new sample enterprise
+after every selected runtime is ready, proving first-use activation without a
+restart and explicit withdrawal of the unused sample invitation. Create these only through Profile's advertised enterprise/invitation
+commands and explicit registration; the fixture contains no credentials, grants
+or installed receipt and is not a sample import. Local messages use the exact
+private capture recipient selection. Sample import is fresh-setup-only; never replay
 identity snapshots or reset completed transactions to recover a login.
 
 Use `circa-integrated-administrator` in CIRCA_INTEGRATED_SERVICES for the twenty-one
@@ -196,7 +200,7 @@ assets, wallets, orders, coupons, media and locations. Sample records are
 intended for explicitly selected fresh demonstration deployments; they must not be
 reimported over real transaction history.
 
-The EXPLICIT `waste-policy` 0.0.2 sample contains complete demo policy records.
+The EXPLICIT `waste-policy` 0.0.1 sample contains complete demo policy records.
 Neutral eWaste 0.0.1 remains a separate core reference selection.
 The required `waste` 0.0.1 sample contains no taxonomy/profile writes and is for
 separately verified fresh environments only.
@@ -232,7 +236,7 @@ actual Telegram end-to-end qualification.
 
 Location recovery distinguishes unavailable and expired readings. Desktop capture may fall back to browser geolocation; arrival requires fresh usable coordinates and direct distance within the configured inclusive radius. Accuracy is optional observation metadata, never an arrival gate. A failed check preserves saved evidence and cannot confirm arrival.
 
-The `customer-workspace` 0.0.2 sample release adds `/account/waste` WCMS composition for
+The `customer-workspace` 0.0.1 sample release adds `/account/waste` WCMS composition for
 customer listing, Quick view and full item detail, with no transactional samples.
 It owns the banner, labels and detail section order. Customer initialization
 includes this release before publishing the Circa site. Existing installations
@@ -287,4 +291,4 @@ partial input-only coverage remains explicit and does not imply carbon calculati
 The [Enterprise role baseline](llm/contracts/enterprise-role-baseline.md) composes
 complete administrator participation and bounded operator delegation from owner
 roles. It documents fresh setup ordering, import effects and the separate reviewed
-installed-data migration, including required successor observation-plan review.
+installed-data migration, and records the native revision 19 source qualification.

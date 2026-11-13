@@ -49,3 +49,7 @@ No generic schema authority, Store write, import, staff or publication grant is
 contributed. This source selection is not native acceptance; rebuild/start and
 installed readback require separate coordinated clearance. Run
 `node --test test/commerceOwnershipEvidenceAdoption.test.js`.
+
+## Local startup budget
+
+This four-tenant Local acceptance deployment selects a 180000ms topology readiness deadline in server `package.json` metadata. The Framework default remains 90000ms. Commerce must still satisfy the existing nSystem readiness predicate; the override permits bounded tenant preparation and does not qualify whole-application startup performance.

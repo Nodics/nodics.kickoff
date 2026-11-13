@@ -12,7 +12,8 @@ test("Pricing admission retains reviewed issuer scopes without selecting integra
   const p = loadRuntime("commerceServer", "kickoffLocal"), policy = p.pricing.merchantEvidence;
   assert.equal(policy.qualified, true);
   assert.equal(policy.businessCallers.enabled, true);
-  assert.equal(policy.businessCallers.runtimeRole, "COMMERCE");
+  assert.equal(p.runtimeRole.publication, "OPERATIONAL");
+  assert.equal(policy.businessCallers.runtimeRole, undefined);
   assert.deepEqual(policy.businessCallers.callers.map(row => row.enterpriseCode), proposal.issuerPacks.map(row => row.issuerEnterpriseCode));
   for (const row of policy.businessCallers.callers) assert.deepEqual(row, {
     tenant: "default", principalEnterpriseCode: "default", enterpriseCode: row.enterpriseCode,

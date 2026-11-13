@@ -1,5 +1,11 @@
 # Kickoff Local
 
+Seven backend hosts: Platform (4300), WCMS Staged (4312), WCMS Online (4314),
+Process + Engagement (4330), Commerce + Loyalty (4350), Commerce Staged (4352),
+and Waste + Location (4370). All eleven database names remain; module-specific
+routing preserves Loyalty, Location, Engagement and separate Cron storage.
+Frontend servers and Docker topology are independent.
+
 Local Commerce Staged explicitly enables Product's existing automatic held-bundle
 publication policy for the Circa marketplace. Only `enabled: true` is overridden
 under the Product COMMERCE_STAGED role profile; transport and policy definitions
@@ -41,6 +47,18 @@ Circa demo release metadata is portable, while `SIMULATION`, exact environment
 allowlists and reviewed credit/refund/provider selections remain deployment-owned.
 No other environment is enabled by importing or copying the demo source.
 
+## Guided operator setup
+
+Open the initialization profile catalogue on the intended import connection.
+Platform offers Platform foundation and the separately selected Circa identity
+definitions. WCMS Staged offers content authoring foundation and documentation
+foundation. Waste hosts the Location map reference profile and the Circa Waste
+profile, whose Core references precede its explicit Sample policy.
+Other capabilities retain their normal release catalogue and application setup
+entry points. Preview a profile, validate it, then install with the permissions
+for each selected data type. Documentation packs and Online publication have
+separate operator actions.
+
 ## Verification
 
 Circa Telegram uses the permanent Mini App URL
@@ -80,11 +98,10 @@ change. Without it, private enterprise startup fails at `ENTER_PRIVATE_CONTEXT`.
 The LaunchAgent is stored outside the repository under `~/Library/LaunchAgents/`;
 supervisor output is under `~/.cloudflared/kickoff-local-backend*.log`.
 
-Retained runtime scopes are governed Profile records. The permanent Circa tunnel
-adoption added `wasteCarbon` to the Local Waste scope and `commercialAgreement`
-to the two Local Commerce scopes through Profile's authenticated update API,
-preserving their permissions and deployment identities. Restart does not recreate
-or expand these grants. Verify them with `npm run acceptance:runtime-grants`.
+Profile authenticates the shared apiAdmin credential for every trusted runtime.
+The canonical loader graph supplies exact placement and requested module scope.
+`npm run acceptance:runtime-grants` inspects the service Employee and selected
+runtime identities. Successful startup independently verifies token issuance.
 
 Local Store placement exposure is selected by the environment's COMMERCE role
 profile; Product Store and intent proof transports are selected by its
@@ -149,3 +166,13 @@ Local Bidding maps `circaMainStore` to its canonical Store merchant,
 merchant partition. The buyer retains its original signed Enterprise and actor.
 Docker and other Store mappings remain independent. Adoption requires the normal
 Commerce build; this configuration does not replay data or grant recovery rights.
+
+### Independent tenant preparation
+
+`NODICS_LOCAL_TENANT_PROVISIONING_ENABLED=true` selects Framework Profile tenant
+bootstrap inventory and namespace preparation independently of employee onboarding
+and recovery. Select it when installed business tenants must be available to the
+selected runtimes, including cross-tenant identity assessment. Framework defaults,
+validation, proof-bound calls, retained deployment grants and namespace pins stay
+with their owners. This selection does not qualify registration or recovery and
+cannot adopt historical missing provenance or widen a retained grant.

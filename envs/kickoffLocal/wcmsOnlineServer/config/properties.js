@@ -88,4 +88,20 @@ module.exports = {
       },
     },
   },
+  apiExposure: {
+    categories: {
+      schemaApi: {
+        enabled: false,
+      },
+      schemaMaintenance: {
+        enabled: false,
+      },
+      dataImport: {
+        enabled: false,
+      },
+      mediaManagement: {
+        enabled: false,
+      },
+    },
+  },
 };

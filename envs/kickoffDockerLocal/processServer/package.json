@@ -21,7 +21,21 @@
       "publish": false,
       "web": false
     },
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-process-1",
+      "remoteModules": [
+        "profile",
+        "backoffice",
+        "media"
+      ]
+    },
     "displayName": "Docker Local Process Server",
+    "runtimeConfigurationContributions": [
+      {
+        "moduleName": "nodics.rulesEngine",
+        "namespace": "data"
+      }
+    ],
     "runtimeModuleRoots": [
       "nodics.process",
       "nodics.wcms",

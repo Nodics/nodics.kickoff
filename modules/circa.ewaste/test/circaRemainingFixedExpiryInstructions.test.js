@@ -9,7 +9,7 @@ const publication = require(path.join(owner, "src/service/defaultPromotionPublic
 const draft = require(path.join(owner, "src/service/defaultPromotionDraftService"));
 const manifest = require("../data/manifest.json");
 const selected = require("./fixtures/circaRemainingFixedExpiryOperationalSelection.json");
-const source = Object.values(require("../data/sample-v001/commerce/records/circaPromotionData"));
+const source = Object.values(require("./fixtures/history/circaPromotionReviewedData"));
 const prior35 = require("./fixtures/circaFixedExpiryOperationalSelection.json");
 const sha = value => crypto.createHash("sha256").update(value).digest("hex");
 const groups = [["RenewWorks", "RENEWWORKS_REPAIR_REUSE", 2], ["LoopCycle", "LOOPCYCLE_RECYCLING", 1]];
@@ -115,6 +115,7 @@ test("actual nImport reader and Promotion parser accept only the new issuer inst
   CONFIG.get("data").dataReleases.installers.PROMOTION_CAMPAIGN_ISSUANCE = "DefaultPromotionSetupContributionService";
   SERVICE.DefaultDataReleaseService = ports.service;
   const setup = require(path.join(owner, "src/service/defaultPromotionSetupContributionService"));
+  SERVICE.DefaultPromotionSetupContributionService = setup;
   const releases = ports.service.discoverReleases("sample");
   for (const [title] of groups) for (const phase of ["Budget", "Issuance"]) {
     const contribution = releases.find(row => row.sectionCode === "circa" + title + "RemainingFixedExpiry" + phase);

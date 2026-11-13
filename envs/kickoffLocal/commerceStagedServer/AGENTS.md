@@ -18,8 +18,8 @@ Online authorization callback through its exact eight-field deployment caller
 pin. Preserve connection, role, source qualification and enterprise selection.
 Waste's separate read scope must never enter this publication writer mapping.
 
-The Local environment's COMMERCE_STAGED Product profile owns `intentSource`
-and `storeSource`; never place the `product` capability namespace here.
+This runtime's ordinary `product` deployment override selects `intentSource`
+and `storeSource`; reusable transport definitions remain Product-owned.
 Product listing `intentSource` selects only the existing `waste` abstract
 connection, `eWaste` module and `WASTE` role. Preserve the 15000ms bound,
 one-attempt/no-redirect owner transport, HTTPS outside loopback and original

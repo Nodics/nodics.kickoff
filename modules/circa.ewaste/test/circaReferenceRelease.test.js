@@ -41,8 +41,8 @@ const selection = (releaseCodes) => ({
     dataType: releaseCodes.includes("circa.ewaste:waste-policy") ? "sample" : "core",
     releaseCodes,
     expectedReleases: {
-      "eWaste:core-reference": "0.0.1",
-      "circa.ewaste:waste-policy": "0.0.2",
+      "eWaste:core-reference": require(path.join(ew, "data/manifest.json")).sections["core-reference"].version,
+      "circa.ewaste:waste-policy": require("../data/manifest.json").sections["waste-policy"].version,
     },
   },
 });
@@ -51,7 +51,7 @@ test("current core discovery and exact sample versions fail closed before import
   const state = createHarness(modules);
   const releases = state.service.discoverReleases("core");
   assert.equal(
-    releases.some((item) => item.invalidManifest),
+    releases.some((item) => Object.hasOwn(modules, item.moduleName) && item.invalidManifest),
     false,
   );
   assert.equal(
@@ -59,7 +59,7 @@ test("current core discovery and exact sample versions fail closed before import
     false,
   );
   const stale = selection(["circa.ewaste:waste-policy"]);
-  stale.releaseRequest.expectedReleases["circa.ewaste:waste-policy"] = "0.0.1";
+  stale.releaseRequest.expectedReleases["circa.ewaste:waste-policy"] = "999.0.0";
   await assert.rejects(state.service.preflight(stale), /changed after selection/);
   await state.service.preflight(selection(["circa.ewaste:waste-policy"]));
   assert.equal(state.imports.length, 0);

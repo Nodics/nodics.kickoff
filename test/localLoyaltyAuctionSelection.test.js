@@ -9,11 +9,11 @@ const service=require(path.join(frameworkRoot,'nodics.loyalty/modules/loyaltyWal
 test('Local enables auctions without copying owner defaults, routes, authority or funding',()=>{
   const selected=require('../envs/kickoffLocal/config/properties').loyalty.auctions;
   assert.deepEqual(selected,{enabled:true});
-  const local=loadRuntime('loyaltyServer','kickoffLocal'),docker=loadRuntime('loyaltyServer','kickoffDockerLocal');
+  const local=loadRuntime('commerceServer','kickoffLocal'),docker=loadRuntime('loyaltyServer','kickoffDockerLocal');
   assert.deepEqual(local.loyalty.auctions,{...wallet.auctions,enabled:true});
   assert.equal(wallet.auctions.enabled,false);assert.equal(docker.loyalty.auctions.enabled,false);
   assert.equal(local.loyalty.transactions.enabled,true);assert.equal(local.apiExposure.categories.loyaltyAuction.enabled,true);
-  assert.equal(local.servers.commerce.endpoint.httpPort,4350);assert.equal(local.servers.commerce.remoteOnly,true);
+  assert.equal(local.servers.commerce.endpoint.httpPort,4350);assert.notEqual(local.servers.commerce.remoteOnly,true);
   assert.equal(local.servers.options.endpointDefaults.httpHost,'localhost');
   assert.equal(local.loyalty.auctions.biddingEvidence.moduleName,'bidding');
   assert.equal(local.loyalty.auctions.biddingEvidence.apiName,'/auctions/funds-evidence');
@@ -26,7 +26,7 @@ test('Local enables auctions without copying owner defaults, routes, authority o
 
 test('effective Local policy clears configuration gate but never admits missing signed context',t=>{
   const previous={CONFIG:global.CONFIG,SERVICE:global.SERVICE};t.after(()=>Object.assign(global,previous));
-  const runtime=loadRuntime('loyaltyServer','kickoffLocal');
+  const runtime=loadRuntime('commerceServer','kickoffLocal');
   global.CONFIG={get:key=>runtime[key]};
   global.SERVICE={DefaultLoyaltyRewardOperationService:{fail:code=>{throw Object.assign(Error(code),{code});}}};
   assert.equal(service.policy().enabled,true);

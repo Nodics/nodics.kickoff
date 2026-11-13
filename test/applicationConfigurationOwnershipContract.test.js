@@ -52,13 +52,14 @@ test("reference Waste profiles inherit framework metadata defaults in both envir
       500,
     );
     assert.equal(runtime.eWaste.conversation.profile, "customerGuidance");
-    const raw = require(`../envs/${environment}/config/properties`);
-    const profiles = raw.copilot.runtimeRoleProfiles.WASTE.providers.profiles;
+    const raw = require(`../envs/${environment}/wasteServer/config/properties`);
+    const profiles = raw.copilot.providers.profiles;
     assert.equal(profiles.eWastePhotoMetadata, undefined);
     assert.equal(profiles.customerGuidance, undefined);
   }
   const commerce = loadRuntime("commerceServer", "kickoffLocal");
-  assert.equal(commerce.store.placementRead.runtimeRole, "COMMERCE");
+  assert.equal(commerce.store.placementRead.runtimeRole, undefined, "Store does not carry a duplicate runtime-role selector");
+  assert.equal(commerce.runtimeRole.publication, "OPERATIONAL");
   assert.equal(commerce.store.placementRead.enabled, true);
   const raw = require("../envs/kickoffLocal/commerceServer/config/properties");
   assert.equal(raw.store.placementRead.runtimeRole, undefined);
@@ -68,63 +69,22 @@ test("reference Waste profiles inherit framework metadata defaults in both envir
   );
 });
 
-test("Native Telegram credential is shared only by its verifier and delivery runtime roles", () => {
+test("Native Telegram credential is shared only by verifier and delivery deployments", () => {
   const source = require("../envs/kickoffLocal/config/properties");
-  const variables = {};
-  assert.equal(Object.hasOwn(source.credentials, "telegram.bot.circa"), false);
-  assert.deepEqual(Object.keys(source.credentials.runtimeRoleProfiles).sort(), [
-    "ENGAGEMENT",
-    "PLATFORM",
-  ]);
-  assert.deepEqual(
-    source.credentials.runtimeRoleProfiles.ENGAGEMENT["telegram.bot.circa"],
-    {
-      $config: "ref",
-      path: [
-        "credentials",
-        "runtimeRoleProfiles",
-        "PLATFORM",
-        "telegram.bot.circa",
-      ],
-    },
-  );
-  for (const server of ["platformServer", "engagementServer"]) {
-    const runtime = loadRuntime(server, "kickoffLocal", variables);
+  assert.equal(source.credentials?.["telegram.bot.circa"], undefined, "Telegram input stays scoped to its actual identity/delivery runtimes");
+  const expected = "synthetic-private-provider-input-for-configuration-test";
+  for (const server of ["platformServer", "processServer"]) {
+    const runtime = loadRuntime(server, "kickoffLocal", { NODICS_TELEGRAM_BOT_TOKEN: expected });
     const credential = runtime.credentials["telegram.bot.circa"];
-    assert.equal(
-      credential?.value ===
-        source.credentials.runtimeRoleProfiles.PLATFORM["telegram.bot.circa"]
-          .value,
-      true,
-      server,
-    );
+    assert.equal(credential?.value === expected, true, server);
     assert.equal(credential.secret, true);
     assert.equal(credential.credentialKind, "BOT_TOKEN");
-    assert.equal(runtime.credentials.runtimeRoleProfiles, undefined);
-    assert.equal(
-      loadRuntime(server, "kickoffDockerLocal").credentials?.[
-        "telegram.bot.circa"
-      ]?.value,
-      null,
-    );
+    const dockerServer = server === "processServer" ? "engagementServer" : server;
+    assert.equal(loadRuntime(dockerServer, "kickoffDockerLocal").credentials?.["telegram.bot.circa"]?.value, null);
   }
-  for (const server of [
-    "wasteServer",
-    "commerceServer",
-    "commerceStagedServer",
-    "loyaltyServer",
-    "wcmsStagedServer",
-    "wcmsOnlineServer",
-    "processServer",
-    "locationServer",
-  ]) {
-    const runtime = loadRuntime(server, "kickoffLocal", variables);
-    assert.equal(
-      Object.hasOwn(runtime.credentials, "telegram.bot.circa"),
-      false,
-      server,
-    );
-    assert.equal(runtime.credentials.runtimeRoleProfiles, undefined, server);
+  for (const server of ["wasteServer", "commerceServer", "commerceStagedServer", "wcmsStagedServer", "wcmsOnlineServer"]) {
+    const runtime = loadRuntime(server, "kickoffLocal", {});
+    assert.equal(Object.hasOwn(runtime.credentials, "telegram.bot.circa"), false, server);
   }
 });
 
@@ -185,7 +145,7 @@ test("Native Waste selects reviewed sale admission and canonical evidence withou
     assignmentCode: "kickoff-local-commerce-runtime-deployment",
     permissions: ["waste.asset.sale.transfer"],
   });
-  const loyalty = loadRuntime("loyaltyServer", "kickoffLocal");
+  const loyalty = loadRuntime("commerceServer", "kickoffLocal");
   assert.equal(loyalty.apiExposure.categories.loyaltyInternal.enabled, true);
   assert.deepEqual(
     loyalty.loyalty.api.readEvidence.callers,
@@ -231,8 +191,8 @@ test("Native Waste selects reviewed sale admission and canonical evidence withou
   assert.equal(docker.eWaste?.marketplace?.digitalOwnership, undefined);
 });
 
-test("Local communication policy is role-scoped without activating Circa on Engagement", () => {
-  const local = loadRuntime("engagementServer");
+test("Local communication policy follows the selected Process runtime without activating Circa", () => {
+  const local = loadRuntime("processServer", "kickoffLocal");
   assert.equal(
     local.communication.templates.WASTE_REVIEW_OUTCOME_V1,
     undefined,
@@ -266,64 +226,27 @@ test("Local communication policy is role-scoped without activating Circa on Enga
   }
 });
 
-test("Customer Engagement opt-ins apply only to the selected role and allow later disablement", () => {
-  const path = require("node:path");
-  const { frameworkRoot } = require("./helpers/configuration");
-  const binding = require(
-    path.join(
-      frameworkRoot,
-      "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService",
-    ),
-  );
-  const loader = require(
-    path.join(
-      frameworkRoot,
-      "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService",
-    ),
-  );
+test("Customer Engagement opt-ins are deployment selections and permit later disablement", () => {
+  const binding = require(require("node:path").join(require("./helpers/configuration").frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
   const core = require("../modules/kickoffCore/config/properties");
+  assert.equal(core.engagement, undefined);
+  assert.equal(core.customerFeedback, undefined);
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
-    const runtime = loadRuntime("engagementServer", environment);
-    for (const capability of [
-      "testimonial",
-      "customerReview",
-      "customerFeedback",
-    ]) {
+    const server = environment === "kickoffLocal" ? "processServer" : "engagementServer";
+    const runtime = loadRuntime(server, environment);
+    const policy = require(`../envs/${environment}/${server}/config/properties`);
+    for (const capability of ["testimonial", "customerReview", "customerFeedback"]) {
       assert.equal(runtime.engagement.capabilities[capability], true);
+      assert.equal(policy.engagement.capabilities[capability], true);
     }
     assert.equal(runtime.customerFeedback.enabled, true);
-    assert.equal(
-      require(`../envs/${environment}/engagementServer/config/properties`)
-        .engagement,
-      undefined,
-    );
+    const disabled = binding.merge(policy, {
+      engagement: { capabilities: { customerFeedback: false } }, customerFeedback: { enabled: false },
+    });
+    assert.equal(disabled.engagement.capabilities.customerFeedback, false);
+    assert.equal(disabled.customerFeedback.enabled, false);
   }
-  const policy = {
-    engagement: core.engagement,
-    customerFeedback: core.customerFeedback,
-  };
-  const unrelated = loader.deriveRuntimeRoleCapabilityProfiles({
-    ...policy,
-    runtimeRole: { code: "OTHER" },
-  });
-  assert.equal(unrelated.engagement.capabilities, undefined);
-  assert.equal(unrelated.customerFeedback.enabled, undefined);
-  const later = binding.merge(policy, {
-    engagement: {
-      runtimeRoleProfiles: {
-        ENGAGEMENT: { capabilities: { customerFeedback: false } },
-      },
-    },
-    customerFeedback: {
-      runtimeRoleProfiles: { ENGAGEMENT: { enabled: false } },
-    },
-  });
-  const disabled = loader.deriveRuntimeRoleCapabilityProfiles({
-    ...later,
-    runtimeRole: { code: "ENGAGEMENT" },
-  });
-  assert.equal(disabled.engagement.capabilities.customerFeedback, false);
-  assert.equal(disabled.customerFeedback.enabled, false);
 });
 
 for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
@@ -346,13 +269,12 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
           const owner = require(`../modules/agora.${domain}/config/properties`);
           assert.deepEqual(
             staged.cms.publication.baselines[code],
-            owner.cms.runtimeRoleProfiles.WCMS_STAGED.publication.baselines[
+            owner.cms.publication.baselines[
               code
             ],
           );
           const profile =
-            owner.backofficeApplicationInitialization.runtimeRoleProfiles
-              .PLATFORM.profiles[code];
+            owner.backofficeApplicationInitialization.profiles[code];
           assert.equal(profile.presentation.category, "application");
           assert.equal(
             profile.presentation.activationPolicy.approvalRequiredForOnline,
@@ -366,7 +288,8 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       }
     }
     const platform = loadRuntime("platformServer", environment);
-    assert.equal(platform.cms.publication.baselines.agoraapparel, undefined);
+    assert.equal(activeModuleNames(platform).includes("cms"), false, "Inert application source metadata never activates the CMS owner on Platform");
+    assert.equal(platform.backofficeApplicationInitialization.profiles.agoraapparel.owner, "agora.apparel");
   });
 
   test(`${environment}: Waste policy stays role-scoped and transport stays deployment-owned`, () => {

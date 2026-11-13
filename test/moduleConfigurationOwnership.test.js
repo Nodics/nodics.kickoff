@@ -79,11 +79,8 @@ test("Commerce inherits Product locales and Process inherits retry bounds withou
   ).process;
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const source = require(`../envs/${environment}/config/properties`);
-    for (const role of ["COMMERCE", "COMMERCE_STAGED"]) {
-      assert.equal(
-        source.product.runtimeRoleProfiles[role]?.localization,
-        undefined,
-      );
+    for (const server of ["commerceServer", "commerceStagedServer"]) {
+      assert.equal(require(`../envs/${environment}/${server}/config/properties`).product?.localization, undefined);
     }
     for (const server of ["commerceServer", "commerceStagedServer"]) {
       for (const selection of ["all", "none"]) {
@@ -94,9 +91,7 @@ test("Commerce inherits Product locales and Process inherits retry bounds withou
         assert.deepEqual(runtime.product.localization, product.localization);
       }
     }
-    for (const profile of Object.values(source.product.runtimeRoleProfiles)) {
-      assert.equal(profile.localization, undefined);
-    }
+
     const waste = loadRuntime("wasteServer", environment);
     assert.equal(activeModuleNames(waste).includes("product"), false);
     assert.equal(waste.product?.localization, undefined);
@@ -115,7 +110,7 @@ test("Commerce inherits Product locales and Process inherits retry bounds withou
       environment === "kickoffLocal",
     );
     assert.equal(
-      source.process?.runtimeRoleProfiles?.PROCESS?.runtime?.deadLetterRequeue
+      require(`../envs/${environment}/processServer/config/properties`).process?.runtime?.deadLetterRequeue
         ?.maximumRequeues,
       undefined,
     );
@@ -125,9 +120,7 @@ test("Commerce inherits Product locales and Process inherits retry bounds withou
 test("reference roles omit unconsumed locales and retired refund selections", () => {
   for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
     const source = require(`../envs/${environment}/config/properties`);
-    for (const profile of Object.values(source.order.runtimeRoleProfiles)) {
-      assert.equal(profile.refunds?.defaultOwnerPort, undefined);
-    }
+    assert.equal(source.order?.refunds?.defaultOwnerPort, undefined);
     for (const server of [
       "platformServer",
       "wasteServer",
@@ -138,6 +131,7 @@ test("reference roles omit unconsumed locales and retired refund selections", ()
       "loyaltyServer",
       "engagementServer",
     ]) {
+      if (environment === "kickoffLocal" && ["locationServer", "loyaltyServer", "engagementServer"].includes(server)) continue;
       const runtime = loadRuntime(server, environment);
       assert.equal(activeModuleNames(runtime).includes("product"), false);
       assert.equal(runtime.product?.localization, undefined);
@@ -151,7 +145,7 @@ test("reference roles omit unconsumed locales and retired refund selections", ()
         assert.equal(runtime.order.refunds.defaultOwnerPort, undefined);
         assert.equal(runtime.order.refunds.ownerPorts.eWaste, undefined);
         assert.equal(
-          runtime.order.refunds.ownerByStore.agoraMainStore,
+          runtime.order.refunds.ownerByStore.agoraApparelStore,
           server === "commerceServer" && selection === "all"
             ? "fulfillmentCore"
             : undefined,
@@ -168,9 +162,15 @@ test("root config and empty extension hooks retain explicit project boundaries",
       .includes("test/moduleConfigurationOwnership.test.js"),
     "Configuration ownership adoption must remain reachable through qualification",
   );
-  assert.deepEqual(require("../config/properties"), {
-    activeModules: { compositions: { employeeMail: { selection: "none" } } },
-  });
+  const rootSelections = require("../config/properties");
+  assert.deepEqual(Object.keys(rootSelections).sort(), ["backofficeLocalReset"]);
+  assert.equal(rootSelections.activeModules, undefined);
+  assert.equal(rootSelections.backofficeLocalReset.providers.$config, "replace");
+  assert(rootSelections.backofficeLocalReset.providers.value.every(target =>
+    target.targetAuthority?.server && target.targetAuthority?.publication),
+    "Root reset entries are explicit deployment scope, never provider mechanics");
+  assert.equal(rootSelections.circaLoyaltyImportTarget, undefined);
+  assert.equal(rootSelections.circaLocationImportTarget, undefined);
   assert.deepEqual(require("../modules/config/properties"), {});
   const group = require("../modules/package.json").nodics;
   assert.equal(group.kind, "group");
@@ -182,10 +182,8 @@ test("root config and empty extension hooks retain explicit project boundaries",
     web: false,
   });
   assert.deepEqual(require("../modules/kickoffApi/config/properties"), {});
-  assert.deepEqual(
-    Object.keys(require("../modules/kickoffInt/config/properties")).sort(),
-    ["data", "process"],
-  );
+  assert.deepEqual(require("../modules/kickoffInt/config/properties"), {},
+    "Integration template does not duplicate the Editorial-owned workflow adapter");
   const boundaries = [
     "",
     "modules",
@@ -212,7 +210,7 @@ test("root config and empty extension hooks retain explicit project boundaries",
 });
 
 test("project declarations omit extracted mechanics while retaining deployment and sample selections", () => {
-  const platform = core.copilot.runtimeRoleProfiles.PLATFORM;
+  const platform = require("../envs/kickoffLocal/platformServer/config/properties").copilot;
   assert.equal(platform.core.environment, undefined);
   assert.equal(platform.workbench.target.productModule, undefined);
   assert.equal(platform.workbench.target.pricingModule, undefined);
@@ -221,12 +219,12 @@ test("project declarations omit extracted mechanics while retaining deployment a
   assert.equal(platform.workbench.target.connectionName, "commerceStaged");
   assert.equal(platform.providers.default.adapter, "ollama");
   assert.equal(
-    core.backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM
+    core.backofficeApplicationInitialization
       .projectRoot,
     undefined,
   );
   assert.equal(
-    core.backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM
+    core.backofficeApplicationInitialization
       .projectCode,
     undefined,
   );
@@ -238,11 +236,7 @@ test("project declarations omit extracted mechanics while retaining deployment a
   ]);
   assert.equal(circa.eWaste.application.code, "CIRCA_EWASTE");
   assert.equal(circa.eWaste.presentation.brandName, "Circa");
-  assert.equal(
-    core.data.dataReleases.runtimeRoleProfiles.PLATFORM.initializationProfiles
-      .nativeRuntimeAuthority.enabled,
-    true,
-  );
+  assert.equal(core.data?.dataReleases?.initializationProfiles?.nativeRuntimeAuthority, undefined);
   for (const [name, ownerRoot] of [
     ["backoffice", "nodics.platform/modules/backoffice"],
     ["copilotWorkbench", "nodics.copilot/modules/copilotWorkbench"],
@@ -258,102 +252,27 @@ test("project declarations omit extracted mechanics while retaining deployment a
   }
 });
 
-test("moved Copilot settings resolve identically for each role/context through actual nConfig merging", () => {
-  const defaults = binding.merge(binding.merge(copilotCore, workbench), {
-    copilot: {
-      knowledge: {
-        ingestion: {
-          indexTenant: knowledge.copilot.knowledge.ingestion.indexTenant,
-        },
-      },
-    },
-  });
-  const previousDefaults = structuredClone(defaults);
-  delete previousDefaults.copilot.runtimeRoleProfiles;
-  const previousProject = structuredClone(core.copilot);
-  const platform = previousProject.runtimeRoleProfiles.PLATFORM;
-  platform.core.environment = { $config: "context", name: "environmentCode" };
-  platform.workbench.target.productModule = "product";
-  platform.workbench.target.pricingModule = "pricing";
-  platform.knowledge.ingestion.indexTenant = "default";
-  for (const environmentCode of [
-    "kickoffLocal",
-    "kickoffDockerLocal",
-    "independentDeployment",
-  ]) {
-    const context = { environmentCode, environmentVariables: {} };
-    for (const role of ["PLATFORM", "WASTE", "COMMERCE", "OTHER"]) {
-      const resolve = (base, project) => {
-        const inherited = binding.resolve(base, {}, context);
-        const merged = binding.merge(
-          inherited,
-          binding.resolve({ copilot: project }, inherited, context),
-        );
-        return loader.deriveRuntimeRoleCapabilityProfiles({
-          ...merged,
-          runtimeRole: { code: role },
-        }).copilot;
-      };
-      assert.deepEqual(
-        resolve(defaults, core.copilot),
-        resolve(previousDefaults, previousProject),
-        environmentCode + ":" + role,
-      );
-    }
+test("Copilot context defaults are inherited by the selected customer deployment", () => {
+  for (const environmentCode of ["kickoffLocal", "kickoffDockerLocal"]) {
+    const deployment = require(`../envs/${environmentCode}/platformServer/config/properties`).copilot;
+    const inherited = binding.merge(copilotCore.copilot, workbench.copilot);
+    const selected = binding.resolve(binding.merge(inherited, deployment), {}, { environmentCode, environmentVariables: {} });
+    assert.equal(selected.core.environment, environmentCode);
+    assert.equal(selected.workbench.target.productModule, "product");
+    assert.equal(selected.workbench.target.pricingModule, "pricing");
+    assert.equal(selected.workbench.target.connectionName, "commerceStaged");
   }
 });
 
-test("BackOffice project context bindings resolve identically without making selected profiles framework defaults", () => {
-  const previousDefaults = structuredClone(
-    backoffice.backofficeApplicationInitialization,
-  );
-  delete previousDefaults.runtimeRoleProfiles;
-  const previousProject = structuredClone(
-    core.backofficeApplicationInitialization,
-  );
-  Object.assign(previousProject.runtimeRoleProfiles.PLATFORM, {
-    projectCode: {
-      $config: "env",
-      name: "NODICS_PROJECT_CODE",
-      fallback: { $config: "context", name: "projectCode" },
-    },
-    projectRoot: { $config: "path", base: "project", relative: "" },
-  });
-  for (const projectCode of ["nodics.kickoff", "example.independent"])
-    for (const role of ["PLATFORM", "OTHER"]) {
-      const context = {
-        projectCode,
-        roots: { project: path.resolve("/workspace", projectCode) },
-        environmentVariables: {},
-      };
-      const resolve = (base, project) => {
-        const inherited = binding.resolve(
-          { backofficeApplicationInitialization: base },
-          {},
-          context,
-        );
-        const merged = binding.merge(
-          inherited,
-          binding.resolve(
-            { backofficeApplicationInitialization: project },
-            inherited,
-            context,
-          ),
-        );
-        return loader.deriveRuntimeRoleCapabilityProfiles({
-          ...merged,
-          runtimeRole: { code: role },
-        }).backofficeApplicationInitialization;
-      };
-      assert.deepEqual(
-        resolve(
-          backoffice.backofficeApplicationInitialization,
-          core.backofficeApplicationInitialization,
-        ),
-        resolve(previousDefaults, previousProject),
-      );
-    }
-  assert.deepEqual(backoffice.backofficeApplicationInitialization.profiles, {});
+test("BackOffice context bindings retain customer descriptor ownership", () => {
+  for (const projectCode of ["nodics.kickoff", "example.independent"]) {
+    const context = { projectCode, roots: { project: path.resolve("/workspace", projectCode) }, environmentVariables: {} };
+    const selected = binding.resolve(binding.merge(backoffice.backofficeApplicationInitialization,
+      core.backofficeApplicationInitialization), {}, context);
+    assert.equal(selected.projectCode, projectCode);
+    assert.equal(selected.projectRoot, context.roots.project);
+    assert.equal(selected.profiles.kickoffdocs.owner, "nodics.kickoff");
+  }
 });
 
 test("reference publication catalogue inherits the existing Product pagination consumer without changing its requests", async () => {
@@ -406,7 +325,7 @@ test("reference publication catalogue inherits the existing Product pagination c
 });
 
 test("Local Enterprise test funding overrides only the selected Loyalty deployment", () => {
-  const local = loadRuntime("loyaltyServer", "kickoffLocal").loyalty.enterpriseTestCredits;
+  const local = loadRuntime("commerceServer", "kickoffLocal").loyalty.enterpriseTestCredits;
   const docker = loadRuntime("loyaltyServer", "kickoffDockerLocal").loyalty.enterpriseTestCredits;
   assert.equal(local.enabled, true);
   assert.equal(local.provisioningEnabled, true);
@@ -417,7 +336,7 @@ test("Local Enterprise test funding overrides only the selected Loyalty deployme
   for (const key of ["maximumReasonLength", "platformAdministratorEvidencePath"]) {
     assert.equal(local[key], docker[key], key);
   }
-  const selected = require("../envs/kickoffLocal/loyaltyServer/config/properties.js")
+  const selected = require("../envs/kickoffLocal/commerceServer/config/properties.js")
     .loyalty.enterpriseTestCredits;
   assert.deepEqual(Object.keys(selected).sort(),
     ["allowedEnvironments", "enabled", "provisioningEnabled"]);

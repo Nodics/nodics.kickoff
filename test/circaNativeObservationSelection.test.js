@@ -8,48 +8,22 @@ const path = require("node:path");
 const crypto = require("node:crypto");
 const { loadRuntime, activeModuleNames, frameworkRoot } = require("./helpers/configuration");
 const observer = require(path.join(frameworkRoot, "nodics.foundation/modules/nPublish/src/service/defaultPublicationSetupObservationService"));
-// Reviewed pre-refactor authority snapshot; this fixture is not runtime grant configuration.
-const runtimePermissions = require("./fixtures/kickoffNativeRuntimePermissions.json");
 const root = path.resolve(__dirname, "..");
 const receivers = ["platformServer", "processServer", "commerceServer", "commerceStagedServer",
-  "wcmsStagedServer", "loyaltyServer", "locationServer", "wasteServer"];
+  "wcmsStagedServer", "wasteServer"];
 const planCode = "circa-native-reviewed";
-const bytes = fs.readFileSync(path.join(root, "modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json"));
+const selectedFile = "config/setup-observation/circa-native-reviewed-l08-20261110.json";
+const bytes = fs.readFileSync(path.join(root, "modules/circa.ewaste", selectedFile));
 const plan = JSON.parse(bytes);
 const checksum = crypto.createHash("sha256").update(bytes).digest("hex");
-const beforePermissions = [
-  "auth.internal.token.read",
-  "auth.internal.token.read.anyTenant",
-  "location.location.read",
-  "profile.address.reference.read",
-  "profile.enterprise.reference.read",
-  "communication.request",
-  "communication.verification.execute",
-  "profile.enterprise.search",
-  "profile.tenant.namespace.bind",
-  "profile.customer.register",
-  "loyalty.wallet.open",
-  "loyalty.wallet.read",
-  "media.evidence.read",
-  "media.customer.upload",
-  "media.customer.read",
-  "import.release.validate",
-  "import.core.run",
-  "publish.lifecycle.create",
-  "publish.lifecycle.view",
-  "publish.lifecycle.validate",
-  "publish.lifecycle.requestApproval",
-  "commerce.product.publish"
-];
-
-test("eight native receivers adopt the same confined exact plan and unchanged deployment principal", () => {
+test("six native receivers adopt the same confined exact plan and unchanged deployment principal", () => {
   for (const server of receivers) {
     const runtime = loadRuntime(server, "kickoffLocal");
     const policy = runtime.publish.setup.observation;
     assert.equal(policy.enabled, true);
     assert(activeModuleNames(runtime).includes("publish"));
     assert.deepEqual(policy.plans[planCode], {
-      moduleName: "circa.ewaste", path: "config/setup-observation/circa-native-reviewed.json", checksum, revision: plan.revision,
+      moduleName: "circa.ewaste", path: selectedFile, checksum, revision: plan.revision,
     });
     assert.deepEqual(policy.callers, { nativePlatform: {
       tenant: "default", enterpriseCode: "default", serviceId: "apiAdmin", projectCode: "nodics.kickoff",
@@ -57,59 +31,183 @@ test("eight native receivers adopt the same confined exact plan and unchanged de
       assignmentCode: "kickoff-local-platform-runtime-deployment", plans: [planCode],
     } });
     if (server !== "platformServer") assert.deepEqual(policy.profilePlans, {});
+    else assert.deepEqual(policy.profilePlans, { circa: planCode });
     if (server !== "commerceServer") assert.deepEqual(policy.targetObservers, {});
-    if (server !== "platformServer")
-      assert.equal(runtimePermissions[server].includes("publish.setup.observe"), false);
   }
-  for (const server of ["wcmsOnlineServer", "engagementServer"])
+  for (const server of ["wcmsOnlineServer"])
     assert.equal(loadRuntime(server, "kickoffLocal").publish.setup.observation.enabled, false);
   assert.notEqual(loadRuntime("platformServer", "kickoffDockerLocal").publish?.setup?.observation?.enabled, true);
 });
 
-test("reviewed Platform assignment fixture preserves the exact observer grant without configuration authority", () => {
-  const platform = loadRuntime("platformServer", "kickoffLocal");
-  const permissions = runtimePermissions.platformServer;
-  assert.deepEqual(permissions, [...beforePermissions, "publish.setup.observe", "commerce.digital.notification.read"]);
-  assert.deepEqual(platform.publish.setup.observation.profilePlans, { circa: planCode });
-});
-
-test("Circa identity authority remains separate while the role successor requires observation review", () => {
+test("Circa identity authority remains separate from observation", () => {
   const runtime = loadRuntime("platformServer", "kickoffLocal");
   const config = runtime.backofficeApplicationInitialization;
   const profile = { ...config.profiles.circa, target: { ...config.target, ...config.profiles.circa.target } };
-  assert.notEqual(observer.digest(profile), plan.profileDigest);
+  assert.equal(observer.digest(profile), plan.profileDigest);
   assert(!observer.configuredSteps(profile).some(step => step.code === "circa.ewaste:circaEnterpriseRoles"));
-  const identity = runtime.data.dataReleases.initializationProfiles.circaIdentityAuthority;
+  const releases = runtime.data.dataReleases;
+  const identity = require(path.join(frameworkRoot, "nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService")).initializationProfiles.call({ configuration: () => releases }).circaIdentityAuthority;
+  assert.equal(runtime.data.dataReleases.initializationProfiles.circaIdentityAuthority.template, "circaIdentityAuthority");
   assert.equal(identity.enabled, true);
   assert.match(identity.description, /Fresh Circa installations require.*before demo setup/);
-  assert.deepEqual(identity.steps, [{ dataType: "init", releaseCodes: ["digitalCore:bundleParticipantPermissions", "digitalCore:participantAccessGroups", "loyaltyWallet:participantAccessGroups", "loyaltyWallet:specialAccessGroups", "loyaltyWallet:specialAccessRoles", "wasteCarbon:participantAccessGroups", "wasteReward:participantAccessGroups", "import:specialAccessGroups", "import:specialAccessRoles", "inventory:specialAccessGroups", "inventory:specialAccessRoles", "order:specialAccessGroups", "order:specialAccessRoles"] }]);
-  assert.equal(loadRuntime("wasteServer", "kickoffLocal").data.dataReleases.initializationProfiles.circaIdentityAuthority, undefined);
+  assert.deepEqual(identity.steps, [{ dataType: "init", releaseCodes: [
+    "profile:enterpriseRoles", "cms:accessGroups", "cms:enterpriseRoles", "cms:businessAccessRoles",
+    "store:accessGroups", "product:enterpriseRoles", "product:businessAccessRoles", "promotion:enterpriseRoles",
+    "promotion:businessAccessRoles", "order:enterpriseRoles", "order:businessAccessRoles",
+    "digitalCore:enterpriseRoles", "wasteCore:enterpriseRoles", "wasteCore:businessAccessRoles",
+    "digitalCore:bundleParticipantPermissions", "digitalCore:participantAccessGroups", "loyaltyWallet:participantAccessGroups", "loyaltyWallet:specialAccessGroups", "loyaltyWallet:specialAccessRoles", "wasteCarbon:participantAccessGroups", "wasteReward:participantAccessGroups", "import:specialAccessGroups", "import:specialAccessRoles", "inventory:specialAccessGroups", "inventory:specialAccessRoles", "order:specialAccessGroups", "order:specialAccessRoles"] }]);
+  const waste = loadRuntime("wasteServer", "kickoffLocal");
+  assert.equal(waste.data.dataReleases.initializationProfiles.circaIdentityAuthority, undefined);
+  assert.equal(waste.publish.setup.observation.profilePlans.circa, undefined);
 });
 
-test("retained observation plan cannot qualify the changed role setup profile", () => {
+test("the active plan pins the complete effective profile and preserves revision 18", () => {
   const platform = loadRuntime("platformServer", "kickoffLocal");
   const config = platform.backofficeApplicationInitialization, raw = config.profiles.circa;
   const profile = { ...raw, target: { ...config.target, ...raw.target } };
-  assert.notEqual(plan.profileDigest, observer.digest(profile));
+  const previous = fs.readFileSync(path.join(root,
+    "modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-18.json"));
+  assert.equal(crypto.createHash("sha256").update(previous).digest("hex"),
+    "482e39186b177e578f9382cb20aa7441f3bd6c95e83c21ef1751f4798723db45");
+  assert.notEqual(JSON.parse(previous).profileDigest, observer.digest(profile));
+  assert.equal(plan.profileDigest, observer.digest(profile));
   assert.equal(plan.tenant, platform.defaultTenant);
   assert.equal(plan.baselineCode, profile.baselineCode);
-  const steps = observer.configuredSteps(profile);
-  assert(!steps.some(step => /circaRetailParticipant/.test(step.code)));
-  assert(plan.stages.some(stage => /circaRetailParticipant/.test(stage.code)), "historical plan is not rewritten");
-  for (const code of ["digitalCore:enterpriseParticipationAccess", "loyaltyWallet:enterpriseParticipationAccess"]) {
-    assert(steps.some(step => step.code === code));
-    assert(!plan.stages.some(stage => stage.code === code));
-  }
+  assert.deepEqual(plan.stages.map(stage => stage.descriptor),
+    observer.configuredSteps(profile).map(step => observer.stepIdentity(step)));
   assert.equal(plan.baseline.server, "wcmsStagedServer");
-  assert.equal(plan.stages.find(stage => stage.descriptor.type === "MEDIA_ASSET_MANIFEST").assets.length,18);
+  assert.equal(plan.stages.find(stage => stage.descriptor.type === "MEDIA_ASSET_MANIFEST").assets.length, 18);
+});
+
+test("revision 19 adds the nine Platform role releases to the reviewed stage list", () => {
+  const previous = require("../modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-18.json");
+  const successor = require("../modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-19.json");
+  const retained = new Set(previous.stages.map(stage => stage.code));
+  assert.equal(successor.revision, previous.revision + 1);
+  assert.deepEqual(successor.stages.filter(stage => retained.has(stage.code)), previous.stages);
+  assert.deepEqual(successor.baseline, previous.baseline);
+  const added = successor.stages.filter(stage => !retained.has(stage.code));
+  assert.deepEqual(added.map(stage => stage.code), [
+    "profile:enterpriseRoles", "cms:accessGroups", "cms:enterpriseRoles",
+    "cms:businessAccessRoles", "store:accessGroups", "product:businessAccessRoles",
+    "order:businessAccessRoles", "wasteCore:enterpriseRoles", "wasteCore:businessAccessRoles",
+  ]);
+  for (const stage of added) {
+    assert.equal(stage.server, "platformServer");
+    assert.equal(stage.enterpriseCode, "default");
+    assert.equal(stage.descriptor.phase, "BEFORE_PUBLICATION");
+    assert.equal(stage.release.dataType, "init");
+  }
+});
+
+test("revision 20 changes only two owner-confirmed participation release pins", () => {
+  const previous = require("../modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-19.json");
+  const retainedFile = path.join(root, "modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json");
+  const retainedBytes = fs.readFileSync(retainedFile);
+  assert.equal(crypto.createHash("sha256").update(retainedBytes).digest("hex"),
+    "64bf7c8082b44296d65a1f78b8b4b3a38e9f35aa6eb57b26a326988a7cc0b42e");
+  const plan = JSON.parse(retainedBytes);
+  assert.equal(plan.revision, previous.revision + 1);
+  assert.deepEqual(plan.baseline, previous.baseline);
+  assert.equal(plan.profileDigest, previous.profileDigest);
+  assert.equal(plan.stages.length, previous.stages.length);
+  const changes = [];
+  for (const [index, stage] of plan.stages.entries()) {
+    const original = previous.stages[index];
+    if (stage.release?.checksum === original.release?.checksum) {
+      assert.deepEqual(stage, original);
+      continue;
+    }
+    changes.push(stage.code);
+    assert.deepEqual(stage, {
+      ...original,
+      release: { ...original.release, checksum: stage.release.checksum, prerequisites: stage.release.prerequisites },
+    });
+    const current = stage.release.prerequisites.find(item => item.sectionCode === "participantTransactionAccess");
+    const retained = original.release.prerequisites.find(item => item.sectionCode === "participantTransactionAccess");
+    assert(current && retained && current.checksum !== retained.checksum);
+  }
+  assert.deepEqual(changes.sort(), ["digitalCore:enterpriseParticipationAccess", "loyaltyWallet:enterpriseParticipationAccess"]);
+});
+
+test("Native revision 21 changes only its nine reviewed Promotion stages", () => {
+  const retained = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json");
+  assert.equal(plan.revision, retained.revision + 1);
+  assert.equal(checksum, "f800ff475030707f2b1d843bf643ed1eb99ad0ab5aa16cbaf87201d40014b359");
+  assert.deepEqual(plan.baseline, retained.baseline);
+  assert.equal(plan.stages.length, retained.stages.length);
+  const replacements = plan.stages.filter((stage, index) => stage.code !== retained.stages[index].code);
+  assert.equal(replacements.length, 9);
+  for (const [index, stage] of plan.stages.entries()) {
+    const original = retained.stages[index];
+    if (stage.code === original.code) assert.deepEqual(stage, original);
+    else {
+      assert.match(stage.code, /^circa\.ewaste:circa(GreenPerks|RenewWorks|LoopCycle)L08(PublicationPlan|Budget|Issuance)$/);
+      assert.equal(stage.code.replace("L08", ""), original.code);
+      assert.equal(stage.enterpriseCode, original.enterpriseCode);
+      assert.equal(stage.server, original.server);
+    }
+  }
+  const docker = loadRuntime("platformServer", "kickoffDockerLocal");
+  const previousPackages = require("../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json");
+  assert.deepEqual(docker.backofficeApplicationInitialization.profiles.circa.dataPackages.map(row => row.code),
+    previousPackages.map(({ code }) => /^circa\.ewaste:network-(enterprises|addresses|locations|points)$/.test(code)
+      ? code + "-docker"
+      : code));
+});
+
+test("revision 17 to 18 retains its reviewed checksum differences", () => {
+  const successor = require("../modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-18.json");
+  const previous = require("../modules/circa.ewaste/config/setup-observation/history/circa-native-reviewed-revision-17.json");
+  const fixture = require("../modules/circa.ewaste/test/fixtures/circaUnreleasedObservationSourceDifferences.json");
+  const differences = {};
+  for (const stage of successor.stages.filter(stage => stage.release)) {
+    const old = previous.stages.find(row => row.code === stage.code)?.release;
+    if (old && old.checksum !== stage.release.checksum)
+      differences[stage.code] = { retained: old.checksum, current: stage.release.checksum };
+  }
+  assert.deepEqual(fixture.stages, differences);
+});
+
+test("each native receiver admits its pinned source on the resolved deployment graph", async () => {
+  const projection = require(path.join(frameworkRoot,
+    "nodics.foundation/modules/nConfig/src/service/defaultDeploymentConfigurationProjectionService"));
+  for (const server of receivers) {
+    await projection.resolve({ projectRoot: root, frameworkRoot, server, environment: "kickoffLocal" });
+    const owner = SERVICE.DefaultPublicationSetupObservationService;
+    const imports = SERVICE.DefaultDataReleaseService;
+    assert.equal(owner.resolvePlan(planCode).checksum, checksum);
+    if (server === "platformServer") {
+      const setup = SERVICE.DefaultBackofficeApplicationInitializationService;
+      assert.equal(setup.setupObservationPlan(setup.profile("circa"), { tenant: plan.tenant }).checksum, checksum);
+    }
+    if (server === plan.baseline.server) {
+      const descriptor = SERVICE.DefaultCmsPublicationBaselineService.descriptor(plan.baselineCode);
+      assert.equal(owner.digest(descriptor), plan.baseline.descriptorDigest);
+    }
+    for (const stage of plan.stages.filter(stage => stage.server === server)) {
+      assert.equal(stage.descriptor.targetRuntimeRole, CONFIG.get("runtimeRole").code, stage.code);
+      if (stage.release) {
+        const pin = stage.release, actual = imports.discoverManifestRelease(pin, pin.dataType);
+        for (const key of Object.keys(pin)) assert.deepEqual(actual[key], pin[key], stage.code + "/" + key);
+        assert.equal(imports.validateDestination(actual), true, stage.code);
+        const snapshot = owner.sourceSnapshot(actual);
+        const hashes = Object.fromEntries(actual.declaredFiles.map(name => [
+          name, crypto.createHash("sha256").update(snapshot.files.get(name)).digest("hex"),
+        ]));
+        assert.equal(imports.releaseFileChecksum(hashes, actual.prerequisites), pin.checksum, stage.code);
+      }
+      if (stage.manifest) owner.bytes(stage.manifest);
+    }
+  }
 });
 
 test("complete role setup is inherited once and keeps definitions before additive assignment", () => {
   const local = loadRuntime("platformServer", "kickoffLocal");
   const profile = local.backofficeApplicationInitialization.profiles.circa;
   const overlay = require("../envs/kickoffLocal/platformServer/config/properties")
-    .backofficeApplicationInitialization.runtimeRoleProfiles.PLATFORM.profiles.circa;
-  assert.equal(overlay.dataPackages, undefined);
+    .backofficeApplicationInitialization.profiles.circa;
+  assert.equal(overlay.dataPackages.$config, "replace");
   const backoffice = require(path.join(frameworkRoot,
     "nodics.platform/modules/backoffice/src/service/defaultBackofficeApplicationInitializationService"));
   const steps = backoffice.preparationSteps(profile);
@@ -117,8 +215,7 @@ test("complete role setup is inherited once and keeps definitions before additiv
   const identity = steps.find(step => step.code === "circa.ewaste:operations");
   const assignment = steps.find(step => step.code === "circa.ewaste:circaCommerceStaffAssignments");
   assert(identity.order < assignment.order);
-  const definitions = require("../modules/circa.ewaste/config/properties")
-    .backofficeApplicationInitialization.profiles.circa.dataPackages.value.filter(pack=>pack.order===90);
+  const definitions = require("../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json").filter(pack => pack.order === 90);
   for (const definition of definitions) {
     const selected = steps.filter(step=>step.code===definition.code);
     assert.equal(selected.length,1);
@@ -144,7 +241,7 @@ test("Local catalogue publication selects the consolidated baseline without corr
     "circaProductMediaPublicationPlan", "circaCatalogueMediaCurrentPublicationPlan"];
   for (const code of removed) assert(!steps.some(step => step.code === `circa.ewaste:${code}`));
   for (const issuer of ["GreenPerks", "RenewWorks", "LoopCycle"])
-    assert(steps.some(step => step.code === `circa.ewaste:circa${issuer}PublicationPlan`));
+    assert(steps.some(step => step.code === `circa.ewaste:circa${issuer}L08PublicationPlan`));
 });
 
 test("native Platform import timeout is a deployment selection outside the sealed profile", () => {

@@ -45,12 +45,7 @@ const frameworkRoot = path.resolve(
   __dirname,
   process.env.NODICS_FRAMEWORK_ROOT || "../../../../nodics.ai",
 );
-const sharedLocations = require(
-  path.join(
-    frameworkRoot,
-    "nodics.waste/modules/wasteCollection/data/sample-v001/records/location/sampleCollectionCentreLocationData",
-  ),
-);
+const networkLocations = require("../data/sample-v001/network-locations/records/location/sampleCollectionCentreLocationData");
 
 const { distance } = require(
   path.join(
@@ -63,17 +58,9 @@ test("Motor City sample collection point stays at First Avenue Mall coordinates"
   const motorCity = Object.values(locations).find(
     (record) => record.code === "cc-dxb-02-location",
   );
-  const alHawai =
-    Object.values(locations).find(
-      (record) =>
-        record.code ===
-        "LOC_SAMPLE_COLLECTION_CENTRE_AL_HAWAI_RESIDENCE_BARSHA_HEIGHTS",
-    ) ||
-    Object.values(sharedLocations).find(
-      (record) =>
-        record.code ===
-        "LOC_SAMPLE_COLLECTION_CENTRE_AL_HAWAI_RESIDENCE_BARSHA_HEIGHTS",
-    );
+  const alHawai = Object.values(networkLocations).find(
+    record => record.code === "LOC_SAMPLE_COLLECTION_CENTRE_AL_HAWAI_RESIDENCE_BARSHA_HEIGHTS",
+  );
   assert(motorCity, "Motor City collection point must exist");
   assert(alHawai, "Al-Hawai comparison point must exist");
   assert(

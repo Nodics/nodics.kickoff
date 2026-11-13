@@ -10,15 +10,15 @@ Advanced roles are supplied by `loyaltyWallet:specialAccessRoles`,
 `import:specialAccessRoles`, `inventory:specialAccessRoles` and
 `order:specialAccessRoles`, with their owner group prerequisites. Demo employees
 and exact additive assignments remain here; no sample role definitions remain.
-Assignment releases are 0.0.2 and do not replay installed employees. The canonical
+Assignment releases are 0.0.1 and do not replay installed employees. The canonical
 Commerce selectors are `product:accessGroups`, `publish:accessGroups`,
 `promotion:accessGroups` and `order:accessGroups`.
 
 All demo data is explicitly selected sample data. The `waste-policy` and
-`customer-workspace` releases are 0.0.2 under `sample-v001`; Waste policy samples
+`customer-workspace` releases are 0.0.1 under `sample-v001`; Waste policy samples
 materialize their effective records, retaining demo IDs without importing framework
 JavaScript. Core reference datasets remain separately owned and selected.
-Current setup observation revision 8 describes source composition only. Revisions
+The selected setup observation is pinned by checksum in the native deployment configuration. Revisions
 2, 3 and 4 and completed demo evidence are retained unchanged, not installed proof
 for this extraction. No live import, deployment or migration is authorized here.
 
@@ -428,7 +428,7 @@ framework/accelerator owners even when Circa first requests the capability.
 
 ### Current Source Selection And Retained History
 
-The selected policy release is `circa.ewaste:waste-policy` version `0.0.2` in
+The selected policy release is `circa.ewaste:waste-policy` version `0.0.1` in
 `sample-v001`. Its demo records are materialized, not partial core-lane overrides
 or runtime JavaScript imports of mutable framework data. `eWaste:core-reference`
 version `0.0.1` remains an independently selected EXPLICIT core release owned by
@@ -444,7 +444,7 @@ customer's references.
 
 Current source preparation uses separate nImport selections: core for the
 framework material/eWaste references, then sample for `circa.ewaste:waste-policy`
-with expected version `0.0.2`. Do not combine the Circa sample in a core request
+with expected version `0.0.1`. Do not combine the Circa sample in a core request
 or require a same-source-root merge. Existing source regression cases retain
 stale-version refusal, materialized policy values, unchanged saved assessments and
 no unrelated core/transaction replay. Their execution remains a separate gate.

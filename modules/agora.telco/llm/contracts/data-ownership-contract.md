@@ -60,3 +60,8 @@ WCMS schemas and publication operations remain framework-owned.
 
 Run `npm run test:data-ownership` and `npm run test:multi-domain` from the Kickoff
 root. Application data and profiles remain customer-owned.
+
+
+Dashboard artwork remains customer-owned in the consumed application profile's
+`presentation.visual`. No unused top-level visual property is exported; Media
+identity and asset ownership checks read the actual profile contribution.

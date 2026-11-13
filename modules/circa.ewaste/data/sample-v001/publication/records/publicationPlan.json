@@ -837,7 +837,7 @@
       "domain": "promotion",
       "rootType": "promotion",
       "rootCode": "CIRCA_COUPON_CPN-GRN-30_PROMO",
-      "sourceVersion": "783ff9d1252d1759569f6ee798afab6ef858e967ba001264a98507a25299eb34",
+      "sourceVersion": "4a8042df531f38731a0faa028b83cd9c1fb42c098ed4e9e9b2584a64e6ad40b3",
       "input": {
         "publicationCode": "circa-promotion-CIRCA_COUPON_CPN-GRN-30_PROMO-v001",
         "rootType": "promotion",

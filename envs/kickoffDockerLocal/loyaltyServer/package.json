@@ -20,6 +20,13 @@
       "publish": false,
       "web": false
     },
+    "runtimeIdentity": {
+      "instanceCode": "kickoff-docker-local-loyalty-1",
+      "remoteModules": [
+        "profile",
+        "backoffice"
+      ]
+    },
     "displayName": "Docker Local Loyalty Server"
   },
   "description": "Docker Local Loyalty Server runtime composition and configuration boundary for this Nodics project."
