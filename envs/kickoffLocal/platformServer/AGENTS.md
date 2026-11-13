@@ -1,5 +1,11 @@
 # Platform Server Agent Contract
 
+Native Circa catalogue observation selects its reviewed environment catalogue,
+including the exact approved Product successors after business edits. Keep the
+original sample publication plan immutable. Update the Native observation revision,
+profile digest and exact approval/target/operation pins together; never follow an
+unreviewed latest pointer or replay sample data to make readiness green.
+
 Runtime public namespace resolution admits only the existing Local Commerce
 deployment and the four reviewed Circa enterprises in its signed default tenant. Keep the exact
 `profileRuntimeEnterpriseResolution.callers` replacement list separate from

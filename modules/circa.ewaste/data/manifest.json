@@ -399,7 +399,7 @@
       "kind": "DATA_RELEASE",
       "dataType": "sample",
       "sourceRoot": "sample-v001",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "displayName": "Circa operational roles",
       "description": "Reviewed Circa demo partner enterprises and staff with platform administration removed from the operational scope successor.",
       "owningDomain": "circa.ewaste",
@@ -414,7 +414,7 @@
       "initialPublicationPolicy": "NONE",
       "removalPolicy": "RETAIN",
       "files": {
-        "sample-v001/operations/headers/circaOperationsHeader.js": "0a2ff742980ad568e0e511c33c7a4b3325b5826af7bea78296fa2b21f29872a9",
+        "sample-v001/operations/headers/circaOperationsHeader.js": "efb125e0ff59e2b5f209ca2c858f7a67a68bf9c223c1a4cde4d2e9a4e1739a50",
         "sample-v001/operations/records/circaEnterpriseData.js": "ded0ad61ac9241fa8dfdadfe96776512fe8f72e19b482697b02722519f615e43",
         "sample-v001/operations/records/circaOperationalEmployeeData.js": "3004d742465af28c4a567a0ee237a850fee94e7a1f40ee93cd329a564da5b906",
         "sample-v001/operations/records/circaOperationalScopeData.js": "e44ba7764ca0821a5bd2627e470aea5c26d19810f3b947f094c47bbca4129f5a",

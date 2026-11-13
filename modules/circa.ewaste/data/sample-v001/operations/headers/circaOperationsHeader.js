@@ -36,7 +36,7 @@ module.exports = {
       options: {
         enabled: true,
         schemaName: "employee",
-        operation: "saveAll",
+        operation: "ensureReferenceAll",
         dataFilePrefix: "circaOperationalEmployeeData",
       },
       query: {

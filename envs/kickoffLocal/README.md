@@ -1,5 +1,11 @@
 # Kickoff Local
 
+The Native catalogue selection in `config/circaReviewedCatalogue.json` follows
+the 35 approved offer-copy successors and the 11 unchanged catalogue roots.
+Observation revision 25 pins the actual reviewed publications and receipts;
+revision 24 and the original sample source remain intact. This is deployment
+evidence, not permission to import, approve or publish again.
+
 Seven backend hosts: Platform (4300), WCMS Staged (4312), WCMS Online (4314),
 Process + Engagement (4330), Commerce + Loyalty (4350), Commerce Staged (4352),
 and Waste + Location (4370). All eleven database names remain; module-specific

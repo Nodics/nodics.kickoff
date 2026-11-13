@@ -393,7 +393,7 @@ module.exports = {
                 dataType: "sample",
                 targetServer: "commerceStaged",
                 targetRuntimeRole: "COMMERCE_STAGED",
-                publicationPlan: require("../../../../modules/circa.ewaste/data/sample-v001/publication/catalogue/records/publicationPlan.json"),
+                publicationPlan: require("../../config/circaReviewedCatalogue.json"),
               },
               {
                 code: "circa.ewaste:circaGreenPerksL08PublicationPlan",

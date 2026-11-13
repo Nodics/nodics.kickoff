@@ -69,10 +69,10 @@ module.exports = {
         plans: {
           "circa-native-reviewed": {
             moduleName: "circa.ewaste",
-            path: "config/setup-observation/circa-native-reviewed-revision-23.json",
+            path: "config/setup-observation/circa-native-reviewed-revision-25.json",
             checksum:
-              "e479a49cc360b3e353ad8f746b4d413625145c012750b19f0a71b20789b08b42",
-            revision: 23,
+              "181cb76a194d553264c09cacb41c45d27c98541849db2afb3779e7d395ac95a0",
+            revision: 25,
           },
         },
         callers: {

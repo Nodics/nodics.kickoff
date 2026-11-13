@@ -504,8 +504,14 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
         );
         assert.equal(selectedItems.length, 84);
         assert.equal(new Set(selectedItems.map((item) => item.code)).size, 84);
+        // Native's retained deployment selects reviewed catalogue successors;
+        // the immutable fresh source pack and the three issuer plans remain separate.
+        // circaNativeObservationSelection verifies all 35 exact changes and 11 retained roots.
+        const reviewedCatalogue = require("../../../envs/kickoffLocal/config/circaReviewedCatalogue.json");
         const selectedSourceItems = ["circaCataloguePublicationPlan", "circaGreenPerksL08PublicationPlan", "circaRenewWorksL08PublicationPlan", "circaLoopCycleL08PublicationPlan"]
-          .flatMap(section => JSON.parse(fs.readFileSync(path.join(dataRoot, Object.keys(manifest.sections[section].files)[0]), "utf8")).items);
+          .flatMap(section => section === "circaCataloguePublicationPlan"
+            ? reviewedCatalogue.items
+            : JSON.parse(fs.readFileSync(path.join(dataRoot, Object.keys(manifest.sections[section].files)[0]), "utf8")).items);
         assert.deepEqual(
           selectedItems.slice().sort((a, b) => a.code.localeCompare(b.code)),
           selectedSourceItems.slice().sort((a, b) => a.code.localeCompare(b.code)),

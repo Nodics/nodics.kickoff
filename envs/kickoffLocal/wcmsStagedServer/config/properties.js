@@ -136,7 +136,7 @@ module.exports = {
         },
         frameworkdocs: {
           contentPackCode: "nodicsDocumentation",
-          releaseVersion: "0.0.6",
+          releaseVersion: "0.0.8",
           sourceVersion: "0",
         },
         axisdocs: {

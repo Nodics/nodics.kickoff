@@ -140,6 +140,12 @@ preparing or recovering an installed environment.
 
 ### Predefined Demo Accounts
 
+The operations release 0.0.3 uses Profile's `ensureReferenceAll` for employees.
+It preserves existing credentials, roles and identity fields; separate reviewed
+Profile commands own role changes. Native observation revision 24 restores this
+exact previously installed release pin without replaying employee data or
+rewriting its installation receipt.
+
 Use the existing `circa-customer`, `circa-seller` and `circa-recipient` personas
 from the `profile` pack and staff from `operations`; obtain existing credentials
 only through the authorized private owner/handoff, never this README. Isolated

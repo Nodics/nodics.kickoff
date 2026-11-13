@@ -84,7 +84,15 @@ const releases = [
   },
 ];
 
-for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
+const supportedEnvironments = ["kickoffLocal", "kickoffDockerLocal"];
+const environmentArgument = process.argv.slice(2);
+assert.ok(environmentArgument.length <= 1, "Pass at most one --environment selection");
+const selectedEnvironment = environmentArgument[0]?.replace(/^--environment=/, "");
+if (selectedEnvironment) {
+  assert.ok(environmentArgument[0].startsWith("--environment=") &&
+    supportedEnvironments.includes(selectedEnvironment), "Unknown publication-check environment");
+}
+for (const environment of selectedEnvironment ? [selectedEnvironment] : supportedEnvironments) {
   const staged = configuration.loadRuntime("wcmsStagedServer", environment);
   const online = configuration.loadRuntime("wcmsOnlineServer", environment);
   assert.equal(staged.cms.publication.runtimeRole, "STAGED");

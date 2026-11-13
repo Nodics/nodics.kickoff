@@ -12,7 +12,7 @@ const root = path.resolve(__dirname, "..");
 const receivers = ["platformServer", "processServer", "commerceServer", "commerceStagedServer",
   "wcmsStagedServer", "wasteServer"];
 const planCode = "circa-native-reviewed";
-const selectedFile = "config/setup-observation/circa-native-reviewed-revision-23.json";
+const selectedFile = "config/setup-observation/circa-native-reviewed-revision-25.json";
 const bytes = fs.readFileSync(path.join(root, "modules/circa.ewaste", selectedFile));
 const plan = JSON.parse(bytes);
 const checksum = crypto.createHash("sha256").update(bytes).digest("hex");
@@ -180,6 +180,7 @@ test("Native revision 22 preserves reviewed stages while advancing release pins"
 });
 
 test("Native revision 23 records canonical selection metadata without changing actors, stages or release bytes", () => {
+  const plan = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-23.json");
   const previous = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-22.json");
   assert.equal(plan.revision, previous.revision + 1);
   const { revision, baseline, stages, ...policy } = plan;
@@ -206,6 +207,31 @@ test("Native revision 23 records canonical selection metadata without changing a
     }
   }
   assert.equal(selections, 85);
+});
+
+test("Native revision 24 restores the exact credential-preserving installed employee release without changing other observations", () => {
+  const plan = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-24.json");
+  const previous = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-23.json");
+  assert.equal(plan.revision, previous.revision + 1);
+  assert.deepEqual({ ...plan, revision: previous.revision, stages: previous.stages }, previous);
+  const changed = [];
+  for (const [index, stage] of plan.stages.entries()) {
+    const old = previous.stages[index];
+    if (stage.code !== "circa.ewaste:operations") {
+      assert.deepEqual(stage, old);
+      continue;
+    }
+    changed.push(stage.code);
+    assert.deepEqual({ ...stage, release: old.release }, old);
+    assert.deepEqual(stage.release, {
+      ...old.release,
+      version: "0.0.3",
+      checksum: "baedde9da11675722339473a6906ebb29edd11f97909814c5f944fbba3392b33",
+    });
+  }
+  assert.deepEqual(changed, ["circa.ewaste:operations"]);
+  const header = require("../modules/circa.ewaste/data/sample-v001/operations/headers/circaOperationsHeader");
+  assert.equal(header.profile.circaOperationalEmployeeData.options.operation, "ensureReferenceAll");
 });
 
 test("revision 17 to 18 retains its reviewed checksum differences", () => {
@@ -277,7 +303,7 @@ test("complete role setup is inherited once and keeps definitions before additiv
   }
   assert(!steps.some(step=>/circaRetailParticipant|circaRetailPromotionDraft/.test(step.code)));
 });
-test("Local catalogue publication selects the consolidated baseline without correction stages", () => {
+test("Local catalogue publication selects its reviewed approved successors without additional setup stages", () => {
   const profile = loadRuntime("platformServer", "kickoffLocal").backofficeApplicationInitialization.profiles.circa;
   const steps = observer.configuredSteps(profile);
   const catalogue = steps.filter(step => step.code === "circa.ewaste:circaCataloguePublicationPlan");
@@ -286,7 +312,7 @@ test("Local catalogue publication selects the consolidated baseline without corr
   assert.equal(catalogue[0].phase, "AFTER_PUBLICATION");
   assert.equal(catalogue[0].operatorEnterpriseCode, "GREENPERKS_ONLINE");
   assert.deepEqual(catalogue[0].publicationPlan,
-    require("../modules/circa.ewaste/data/sample-v001/publication/catalogue/records/publicationPlan.json"));
+    require("../envs/kickoffLocal/config/circaReviewedCatalogue.json"));
   assert(steps.some(step => step.code === "circa.ewaste:commerce"));
   const removed = ["circaAssetClassification", "circaAssetClassificationPublicationPlan",
     "circaCatalogueCurrentPublicationPlan", "circaProductMediaReferences",
@@ -294,6 +320,28 @@ test("Local catalogue publication selects the consolidated baseline without corr
   for (const code of removed) assert(!steps.some(step => step.code === `circa.ewaste:${code}`));
   for (const issuer of ["GreenPerks", "RenewWorks", "LoopCycle"])
     assert(steps.some(step => step.code === `circa.ewaste:circa${issuer}L08PublicationPlan`));
+});
+
+test("Native revision 25 changes only the 35 approved copy successors and pins their exact receipts", () => {
+  const previous = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-24.json");
+  assert.equal(plan.revision, previous.revision + 1);
+  assert.deepEqual(plan.baseline, previous.baseline);
+  assert.equal(plan.stages.length, previous.stages.length);
+  for (const [index, stage] of plan.stages.entries()) {
+    const original = previous.stages[index];
+    if (stage.code !== "circa.ewaste:circaCataloguePublicationPlan") { assert.deepEqual(stage, original); continue; }
+    assert.equal(stage.publications.length, 35);
+    assert.equal(stage.descriptor.publicationPlan.items.length, 46);
+    for (const [i, item] of stage.descriptor.publicationPlan.items.entries()) {
+      const before = original.descriptor.publicationPlan.items[i];
+      if (!before.rootCode.startsWith("CIRCA_COUPON_GP-")) { assert.deepEqual(item, before); continue; }
+      const code = `circa-copy-${before.rootCode.replace("CIRCA_COUPON_", "")}-20261113`;
+      assert.deepEqual(item, { ...before, code, sourceVersion: "3", input: { ...before.input, publicationCode: code, versionId: 2 } });
+      const pin = stage.publications.find(value => value.code === code);
+      assert(Number.isSafeInteger(pin.revision) && pin.revision > 3);
+      assert(pin.operationKey && pin.targetVersion && pin.previousOnlineVersion);
+    }
+  }
 });
 
 test("native Platform import timeout is a deployment selection outside the sealed profile", () => {
