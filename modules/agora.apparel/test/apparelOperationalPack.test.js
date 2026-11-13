@@ -100,7 +100,7 @@ test('operational contributions use v001, explicit Online owners and the post-pu
         const section = manifest.sections[sectionCode];
         assert(section, sectionCode);
         assert.equal(section.kind, 'DATA_RELEASE'); assert.equal(section.dataType, 'sample');
-        assert.equal(section.version, '0.0.1'); assert.equal(section.sourceRoot, 'sample-v001');
+        assert.equal(section.version, '0.0.2'); assert.equal(section.sourceRoot, 'sample-v001');
         assert.equal(section.lifecycle, 'OPERATIONAL_VERSIONED'); assert.equal(section.destinationRole, 'COMMERCE');
         assert.equal(section.selectionPolicy, 'EXPLICIT'); assert.equal(section.publicationPolicy, 'NONE');
         const step = steps.find(item => item.code === 'agora.apparel:' + sectionCode);

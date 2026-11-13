@@ -27,6 +27,18 @@ const compose = fs.readFileSync(
   "utf8",
 );
 const environmentProfile = require("./helpers/configuration").loadContainer();
+const loadRuntime = (server) =>
+  require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
+{
+  const docker = loadRuntime("platformServer");
+  assert.notEqual(docker.publish?.setup?.observation?.enabled, true);
+  assert.equal(docker.backofficeApplicationInitialization.dataReleaseTimeoutMs, 120000);
+  const previousPackages = require("../config/circa-setup-data-packages.json");
+  assert.deepEqual(docker.backofficeApplicationInitialization.profiles.circa.dataPackages.map(row => row.code),
+    previousPackages.map(({ code }) => /^circa\.ewaste:network-(enterprises|addresses|locations|points)$/.test(code)
+      ? code + "-docker"
+      : code));
+}
 const kickoffCoreProperties = require("../modules/kickoffCore/config/properties");
 
 const projectCommands = projectCommandService.resolveCommands(root);
@@ -97,8 +109,6 @@ for (const command of [
 }
 assert.match(compose, /docker\.elastic\.co\/elasticsearch\/elasticsearch/);
 assert.match(compose, /elasticsearch-data/);
-const loadRuntime = (server) =>
-  require("./helpers/configuration").loadRuntime(server, "kickoffDockerLocal");
 const dockerPlatform = loadRuntime("platformServer");
 const dockerLoyalty = loadRuntime("loyaltyServer");
 const dockerEnvironment = require("../envs/kickoffDockerLocal/config/properties");

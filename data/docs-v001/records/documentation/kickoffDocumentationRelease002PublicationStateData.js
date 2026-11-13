@@ -20,7 +20,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -55,7 +55,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -89,7 +89,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -123,7 +123,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -157,7 +157,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -193,7 +193,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -229,7 +229,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -265,7 +265,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -301,7 +301,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -337,7 +337,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -373,7 +373,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -409,7 +409,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -445,7 +445,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -481,7 +481,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -517,7 +517,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -553,7 +553,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -589,7 +589,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -625,7 +625,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -661,7 +661,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -697,7 +697,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -731,7 +731,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -765,7 +765,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -799,7 +799,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -833,7 +833,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -867,7 +867,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -901,7 +901,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -937,7 +937,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -973,7 +973,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1009,7 +1009,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1045,7 +1045,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1081,7 +1081,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1117,7 +1117,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1153,14 +1153,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "5f3c37cb6ff1945757fba5d5a342f21426c1fbb3345c3950aad7db6b5f7399e5",
+    "checksum": "e96524aa95c8e1511fcbd378b1e4c30812fb3681acd8482a63c91e8e6db052c7",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.draft.update"
@@ -1189,7 +1189,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1225,7 +1225,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1259,7 +1259,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1293,7 +1293,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1327,7 +1327,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1361,7 +1361,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1395,7 +1395,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1429,7 +1429,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1463,7 +1463,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1497,14 +1497,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "0c9f4db27e15ea97498a1e9dd871497545d3d29abad3b715378df19a4b401e24",
+    "checksum": "13b6de21faa1d5219eb3c0632a13046f62c4310cae3921212a8d066d0b021357",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1531,14 +1531,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "515d120f4427d63c35331b09642cdc9a9d4b26b945fe3f6f99a435faa76f000f",
+    "checksum": "590dc12e120d1068056bc97dd534b1fa95c75ac42ab23c5d39975fe365aaaecf",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1565,14 +1565,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "c6b5709bcb7cacffe3c5c1671b1284809eae63d846f9433c70a571c88e2416f5",
+    "checksum": "bf649c39195e74eab7061302cc83234603b2e6119a6b3d00164b8792dc989670",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1599,14 +1599,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "1c47db3865d9b5b0f80f398252ed4b6284cfc018bcd26e6b29481381fe9de67d",
+    "checksum": "23167afebe8170f703266dedd3a52424e3c4ad36ee128cae3542021f6e0173c4",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1633,14 +1633,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "c311780a920b0f91e9cbf8beb2390617534d00d72f4dcff55052ee22bd2f60f0",
+    "checksum": "53d2a5ad7048d1bbb7ae38e5bbc56516010b0c878a737ec680907de4cb00a151",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1667,14 +1667,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "1aa9acc856ea2df2bbb011922b5cfd9380aa8737bc9ae2b6cf5bba85b5c5badd",
+    "checksum": "4de00c41a4b35cc7a261692fa2488f7ff8e45ddfbf511778110e590c02fc454e",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1701,14 +1701,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "8378676ff1a713de9bc84162d16be214ca1ea00c4ca92d63d408ca8a90f676f0",
+    "checksum": "eceb42f04fa7afc555af43132a9153ae7b1a021426f42e05eff8fef1c2947fd9",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1735,14 +1735,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "a6e47f855ba4f7f7ca413dcdfd4b911baa77b592c11e08c1e93856ed88886891",
+    "checksum": "653099f51a7362fa39ebaa7a2404e83adfc9ad449495243d2187226324a639d5",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1769,14 +1769,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "1c90f1ba8d048b34b1497b1509c3f09b4854a8bd7a27b3fc105a087df8bfc8af",
+    "checksum": "a30fa46a98f588a6aa47d47c470b108589ad6aaa19f80be18e61d67432341dd1",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -1803,7 +1803,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1837,7 +1837,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1871,7 +1871,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1905,7 +1905,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1939,7 +1939,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -1973,7 +1973,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
@@ -2007,14 +2007,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "7736078ae7b90bdf17208ac630449c07dc878e5f8ad3dd488b3dcb40174b736a",
+    "checksum": "d92b06c49c1256b4706bfc1f208fe0263120ac5cfdf9116b3e7680b42f330624",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2041,14 +2041,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "b2a81f36ff7c0031455cde1e942678e2c76543b013030ece6cfa9208205e0b33",
+    "checksum": "76948f61d4b3538d6af02cd775ab090e3aaf4d934b7fd0a3f4432dc47f92db24",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2075,14 +2075,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "ba3994b2dee4c25bbc9e217fa00e437db7fc7717f41288b273b4e3af7bd73618",
+    "checksum": "acc484e43b16c4a1e61e6a0ab6f4733ae1c153b731df40ce0ddf609c9459b092",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2109,14 +2109,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "30412712e25259d61ad078de81bf9c8bbe082f06f5c9aef9e274da4f2455dda1",
+    "checksum": "efc540ec907a1a15234c8e3727b067fb4c60bf3fed44675e2d9a3978edea2c2b",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2143,14 +2143,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "9ca37bdda5fae11ace4990850bbef17a3d4d544c4dd7b6439a07073665519070",
+    "checksum": "5e8c714ad523d32136bdb0c5629f945c148d34b4fc00ca651f572e077010f091",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2177,14 +2177,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "d46aac619592425e8e05ba9942dda5d32e6c2dc8a7e7e632320ed4f55adc0379",
+    "checksum": "28ec9413ef17f6bf13535457f44868a52672b3be28c43806c849dafbdd1a6a9d",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2211,14 +2211,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "d8ae454891842e8e03db5194ccb8cb3d86a77fe1f8da9f16acc2cda099dbe80b",
+    "checksum": "246e03fb6004a0554b0d813e206a7adbc0a305ee1863db3e5bbc67d0f5c41b56",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2245,14 +2245,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "ba118d68f493da3e6ebb08fdc2a8ff33423a0d04dc71119712b106178bd83b97",
+    "checksum": "8fbd968d10e67f072ccea95d966af93022dc6cca9eee0e54016b52df549d8b76",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"
@@ -2279,14 +2279,14 @@ module.exports = {
     "lifecycleState": "STAGED",
     "publicationCode": "kickoffDocumentation",
     "workflowReference": "kickoffDocumentationReviewWorkflow",
-    "stagedVersion": "0.0.2",
+    "stagedVersion": "0.0.3",
     "validationResult": {
       "generated": true,
       "sourceAuthority": "data/docs-v001/records/documentation",
       "publicationPath": "STAGED_REVIEW_APPROVAL_ONLINE",
       "publicVisibleOnlyWhenOnlineAndPublic": true
     },
-    "checksum": "b33603abe564b7ddcc579142b5cf45b16a77ee3bc5cd1c7be21bb82f5f9d5377",
+    "checksum": "f0972dde941008ec9bcff062de76dd3cc3b283d256135f47bcd63903348a695d",
     "managedInAxis": true,
     "axisAuthoringPermissions": [
       "documentation.search.preview"

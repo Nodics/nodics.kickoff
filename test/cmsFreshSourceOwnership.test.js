@@ -26,7 +26,7 @@ const { registerSourceOwnershipTests } = require(
 );
 const repoRoot = path.resolve(__dirname, "..");
 require("node:test").test(
-  "fresh demo CMS ownership uses the Release 0 baseline",
+  "fresh demo CMS ownership keeps consolidated paths and forward release versions",
   () => {
     const assert = require("node:assert/strict");
     for (const [owner, code] of [
@@ -36,7 +36,7 @@ require("node:test").test(
       const section = require(
         path.join(repoRoot, "modules", owner, "data/manifest.json"),
       ).sections[code];
-      assert.equal(section.version, "0.0.1", owner);
+      assert.equal(section.version, "0.0.2", owner);
       assert(
         Object.keys(section.files).every((file) =>
           file.startsWith("sample-v001/"),

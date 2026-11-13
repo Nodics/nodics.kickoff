@@ -111,8 +111,7 @@ test("Store-only v001 reference selection retains identities, hashes and require
       code: row.code + "-location",
     });
   }
-  const packages = require("../config/properties")
-    .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+  const packages = require("../../../config/circa-setup-data-packages.json");
   const index = packages.findIndex(
     (pack) => pack.code === "circa.ewaste:store",
   );

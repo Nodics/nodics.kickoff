@@ -103,8 +103,7 @@ test("sealed transitive dependencies install identity definitions only; no finan
       else assert(file.startsWith("init-v001/") && file.includes("/identity/"), key + ":" + file);
     }
   }
-  const config = require("../config/properties").backofficeApplicationInitialization.profiles.circa;
-  const packages = config.dataPackages.value;
+  const packages = require("../../../config/circa-setup-data-packages.json");
   const identityIndex = packages.findIndex(p => p.code === "circa.ewaste:operations");
   const assignmentIndex = packages.findIndex(p => p.code === "circa.ewaste:circaCommerceStaffAssignments");
   assert(identityIndex >= 0 && assignmentIndex > identityIndex);
@@ -168,7 +167,7 @@ test("actual nImport resolves the complete Init graph before the separate Sample
   global.NODICS = {getActiveModules:() => activeModuleNames(config),
     getRawModule:name => baseline.roots[name] ? {name,path:baseline.roots[name],index:"100"} : undefined};
   const owner = require(path.join(frameworkRoot,"nodics.foundation/modules/nData/nImport/import/src/service/release/defaultDataReleaseService"));
-  const setup = require("../config/properties").backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+  const setup = require("../../../config/circa-setup-data-packages.json");
   const roots = setup.filter(p => p.order === 90).map(pack => {
     const [moduleName,sectionCode] = pack.code.split(":");
     return owner.discoverManifestRelease({moduleName,sectionCode},"init");

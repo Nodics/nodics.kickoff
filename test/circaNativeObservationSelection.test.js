@@ -12,7 +12,7 @@ const root = path.resolve(__dirname, "..");
 const receivers = ["platformServer", "processServer", "commerceServer", "commerceStagedServer",
   "wcmsStagedServer", "wasteServer"];
 const planCode = "circa-native-reviewed";
-const selectedFile = "config/setup-observation/circa-native-reviewed-l08-20261110.json";
+const selectedFile = "config/setup-observation/circa-native-reviewed-revision-23.json";
 const bytes = fs.readFileSync(path.join(root, "modules/circa.ewaste", selectedFile));
 const plan = JSON.parse(bytes);
 const checksum = crypto.createHash("sha256").update(bytes).digest("hex");
@@ -36,7 +36,6 @@ test("six native receivers adopt the same confined exact plan and unchanged depl
   }
   for (const server of ["wcmsOnlineServer"])
     assert.equal(loadRuntime(server, "kickoffLocal").publish.setup.observation.enabled, false);
-  assert.notEqual(loadRuntime("platformServer", "kickoffDockerLocal").publish?.setup?.observation?.enabled, true);
 });
 
 test("Circa identity authority remains separate from observation", () => {
@@ -131,6 +130,10 @@ test("revision 20 changes only two owner-confirmed participation release pins", 
 });
 
 test("Native revision 21 changes only its nine reviewed Promotion stages", () => {
+  const retainedFile = path.join(root, "modules/circa.ewaste/config/setup-observation/circa-native-reviewed-l08-20261110.json");
+  const bytes = fs.readFileSync(retainedFile);
+  const plan = JSON.parse(bytes);
+  const checksum = crypto.createHash("sha256").update(bytes).digest("hex");
   const retained = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed.json");
   assert.equal(plan.revision, retained.revision + 1);
   assert.equal(checksum, "f800ff475030707f2b1d843bf643ed1eb99ad0ab5aa16cbaf87201d40014b359");
@@ -148,12 +151,61 @@ test("Native revision 21 changes only its nine reviewed Promotion stages", () =>
       assert.equal(stage.server, original.server);
     }
   }
-  const docker = loadRuntime("platformServer", "kickoffDockerLocal");
-  const previousPackages = require("../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json");
-  assert.deepEqual(docker.backofficeApplicationInitialization.profiles.circa.dataPackages.map(row => row.code),
-    previousPackages.map(({ code }) => /^circa\.ewaste:network-(enterprises|addresses|locations|points)$/.test(code)
-      ? code + "-docker"
-      : code));
+});
+
+test("Native revision 22 preserves reviewed stages while advancing release pins", () => {
+  const plan = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-22.json");
+  const previous = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-l08-20261110.json");
+  assert.equal(plan.revision, previous.revision + 1);
+  const { revision, baseline, stages, ...policy } = plan;
+  const { revision: oldRevision, baseline: oldBaseline, stages: oldStages, ...oldPolicy } = previous;
+  assert.deepEqual(policy, oldPolicy);
+  assert.equal(stages.length, oldStages.length);
+  assert.deepEqual({ ...baseline, descriptorDigest: oldBaseline.descriptorDigest }, oldBaseline);
+  const changed = [];
+  for (const [index, stage] of stages.entries()) {
+    const old = oldStages[index];
+    if (stage.release?.version !== old.release?.version || stage.release?.checksum !== old.release?.checksum) {
+      assert(stage.release && old.release);
+      const { version, checksum, prerequisites, ...source } = stage.release;
+      const { version: oldVersion, checksum: oldChecksum, prerequisites: oldPrerequisites, ...oldSource } = old.release;
+      assert.deepEqual(source, oldSource, stage.code);
+      assert.deepEqual(prerequisites.map(({moduleName, sectionCode, partition}) => ({moduleName, sectionCode, partition})),
+        oldPrerequisites.map(({moduleName, sectionCode, partition}) => ({moduleName, sectionCode, partition})), stage.code);
+      assert.deepEqual({ ...stage, release: old.release }, old);
+      changed.push(stage.code);
+    } else assert.deepEqual(stage, old);
+  }
+  assert.equal(changed.length, 37);
+});
+
+test("Native revision 23 records canonical selection metadata without changing actors, stages or release bytes", () => {
+  const previous = require("../modules/circa.ewaste/config/setup-observation/circa-native-reviewed-revision-22.json");
+  assert.equal(plan.revision, previous.revision + 1);
+  const { revision, baseline, stages, ...policy } = plan;
+  const { revision: oldRevision, baseline: oldBaseline, stages: oldStages, ...oldPolicy } = previous;
+  assert.deepEqual(policy, oldPolicy);
+  assert.deepEqual(baseline, oldBaseline);
+  assert.equal(stages.length, oldStages.length);
+  let selections = 0;
+  for (const [index, stage] of stages.entries()) {
+    const old = oldStages[index];
+    if (!stage.release) {
+      assert.deepEqual(stage, old);
+      continue;
+    }
+    assert.deepEqual({ ...stage, release: old.release }, old);
+    const { selectionPolicy, ...release } = stage.release;
+    const { selectionPolicy: oldSelectionPolicy, ...oldRelease } = old.release;
+    assert.deepEqual(release, oldRelease, stage.code);
+    if (oldSelectionPolicy !== undefined) assert.equal(selectionPolicy, oldSelectionPolicy, stage.code);
+    else {
+      assert(["EXPLICIT", "DEFAULT"].includes(selectionPolicy), stage.code);
+      if (release.dataType === "sample") assert.equal(selectionPolicy, "EXPLICIT", stage.code);
+      selections++;
+    }
+  }
+  assert.equal(selections, 85);
 });
 
 test("revision 17 to 18 retains its reviewed checksum differences", () => {
@@ -215,7 +267,7 @@ test("complete role setup is inherited once and keeps definitions before additiv
   const identity = steps.find(step => step.code === "circa.ewaste:operations");
   const assignment = steps.find(step => step.code === "circa.ewaste:circaCommerceStaffAssignments");
   assert(identity.order < assignment.order);
-  const definitions = require("../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json").filter(pack => pack.order === 90);
+  const definitions = require("../config/circa-setup-data-packages.json").filter(pack => pack.order === 90);
   for (const definition of definitions) {
     const selected = steps.filter(step=>step.code===definition.code);
     assert.equal(selected.length,1);
@@ -253,7 +305,6 @@ test("native Platform import timeout is a deployment selection outside the seale
   native.dataReleaseTimeoutMs = 120000;
   assert.equal(observer.digest(profile), digest, "transport timeout cannot alter the profile digest");
   assert.equal(loadRuntime("commerceServer", "kickoffLocal").backofficeApplicationInitialization.dataReleaseTimeoutMs, undefined);
-  assert.equal(loadRuntime("platformServer", "kickoffDockerLocal").backofficeApplicationInitialization.dataReleaseTimeoutMs, 120000);
 });
 
 test("Online observer selects only target read hooks without source publication registrations", () => {

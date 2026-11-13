@@ -1405,7 +1405,7 @@ module.exports = {
     "sourceRepository": "nodics.kickoff",
     "sourcePath": "data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js",
     "sourceChecksum": "cfaded7c66e3b41b114be1f7e8395a4d1d1089e8f5e82a6cb57434d5d36c0242",
-    "sourceWordCount": 4344,
+    "sourceWordCount": 4451,
     "audience": [
       "business-user",
       "administrator",
@@ -1430,7 +1430,7 @@ module.exports = {
     "lifecycleState": "STAGED",
     "maturityState": "IMPLEMENTED",
     "active": true,
-    "wordCount": 4344,
+    "wordCount": 4451,
     "sourceEvidence": [
       "data/docs-v001/records/documentation/kickoffDocumentationRelease002ComponentData.js",
       "modules/kickoffCore/config/properties.js",

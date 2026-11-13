@@ -62,7 +62,7 @@ test("Agora Apparel commerce catalog release follows Commerce Staged nImport exe
   assert(release, "agoraApparelCommerceCatalog release should be discoverable");
   assert.equal(release.dataType, "sample");
   assert.equal(release.sourceRoot, "sample-v001");
-  assert.equal(release.version, "0.0.1");
+  assert.equal(release.version, "0.0.2");
   assert.equal(release.lifecycle, "PUBLISHABLE");
   assert.equal(release.destinationRole, "COMMERCE_STAGED");
   assert.deepEqual(release.environmentScope, [

@@ -39,7 +39,7 @@ function visit(owner, code) {
   }
   return release;
 }
-const setup = require("../config/properties").backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+const setup = require("../../../config/circa-setup-data-packages.json");
 for (const pack of setup.filter(pack => pack.order === 90)) visit(...pack.code.split(":"));
 visit("circa.ewaste", "circaCommerceStaffAssignments");
 // Existing native Waste administrator ancestry is part of the demo employee composition.

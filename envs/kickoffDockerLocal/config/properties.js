@@ -10,7 +10,7 @@
  */
 
 /** @module envs/kickoffDockerLocal/config/properties @description Declares intentional deployment overrides; reusable definitions and defaults remain with implementing framework modules. @layer config @owner envs/kickoffDockerLocal */
-const circaSetup = require("../../../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json");
+const circaSetup = require("../../../config/circa-setup-data-packages.json");
 const dockerNetworkReleases = new Set([
   "circa.ewaste:network-enterprises",
   "circa.ewaste:network-addresses",

@@ -132,14 +132,14 @@ test("Employee SMTP uses typed environment bindings and refuses malformed enable
       loadRuntime("processServer", "kickoffLocal", {
         NODICS_EMPLOYEE_SMTP_ENABLED: "yes",
       }),
-    /boolean must be true or false/,
+    /Configuration projection failed for kickoffLocal\/processServer: CHILD_FAILED/,
   );
   assert.throws(
     () =>
       loadRuntime("processServer", "kickoffLocal", {
         NODICS_EMPLOYEE_SMTP_PORT: "not-a-port",
       }),
-    /number must be finite/,
+    /Configuration projection failed for kickoffLocal\/processServer: CHILD_FAILED/,
   );
 });
 test("Implicit TLS may be explicitly selected without weakening inherited certificate policy", () => {

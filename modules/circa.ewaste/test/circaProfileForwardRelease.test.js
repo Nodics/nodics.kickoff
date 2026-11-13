@@ -72,8 +72,7 @@ test("customer sample keeps generated Profile import semantics", () => {
     current.profile.circaAddressData.options.enterpriseCode,
     undefined,
   );
-  const packages = require("../config/properties")
-    .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+  const packages = require("../../../config/circa-setup-data-packages.json");
   const selected = packages.find(
     (item) => item.code === "circa.ewaste:profile",
   );

@@ -289,9 +289,9 @@ test("native fresh setup exposes all goods and bounded role stages and rejects t
   const publications = steps.filter(step => step.type === "GOVERNED_PUBLICATIONS");
   const expectedPublications = [
     ["circaCataloguePublicationPlan", "GREENPERKS_ONLINE", 46],
-    ["circaGreenPerksPublicationPlan", "GREENPERKS_RETAIL", 35],
-    ["circaRenewWorksPublicationPlan", "RENEWWORKS_REPAIR_REUSE", 2],
-    ["circaLoopCyclePublicationPlan", "LOOPCYCLE_RECYCLING", 1],
+    ["circaGreenPerksL08PublicationPlan", "GREENPERKS_RETAIL", 35],
+    ["circaRenewWorksL08PublicationPlan", "RENEWWORKS_REPAIR_REUSE", 2],
+    ["circaLoopCycleL08PublicationPlan", "LOOPCYCLE_RECYCLING", 1],
     ["circaGreenPerksOutletPublicationPlan", "GREENPERKS_RETAIL", 6],
     ["circaRenewWorksOutletPublicationPlan", "RENEWWORKS_REPAIR_REUSE", 4],
     ["circaLoopCycleOutletPublicationPlan", "LOOPCYCLE_RECYCLING", 4],
@@ -309,7 +309,8 @@ test("native fresh setup exposes all goods and bounded role stages and rejects t
   const order = groups.flatMap(group => group.steps.map(step => step.code));
   const predecessor = require("../config/setup-observation/history/circa-native-reviewed-revision-3.json");
   const previousObservation = require("../config/setup-observation/history/circa-native-reviewed-revision-7.json");
-  const plan = require("../config/setup-observation/circa-native-reviewed.json");
+  const selectedPlan = runtime.publish.setup.observation.plans["circa-native-reviewed"];
+  const plan = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", selectedPlan.path), "utf8"));
   assert.equal(predecessor.revision, 3);
   assert.equal(previousObservation.revision, 7);
   assert.equal(plan.revision, runtime.publish.setup.observation.plans[plan.code].revision);

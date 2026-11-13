@@ -11,9 +11,9 @@ const inventory = require(path.join(frameworkRoot, "nodics.commerce/modules/base
 const promotion = require(path.join(frameworkRoot, "nodics.commerce/modules/baseCommerce/modules/promotion/src/service/defaultPromotionOperationService"));
 
 for (const [application, section, version] of [
-  ["apparel", "agoraApparelCommerceCatalog", "0.0.1"],
-  ["electronics", "agoraElectronicsCommerceCatalog", "0.0.1"],
-  ["telco", "agoraTelcoCommerceCatalog", "0.0.1"],
+  ["apparel", "agoraApparelCommerceCatalog", "0.0.2"],
+  ["electronics", "agoraElectronicsCommerceCatalog", "0.0.2"],
+  ["telco", "agoraTelcoCommerceCatalog", "0.0.2"],
 ]) test(application + " publishes catalog policy without operational records", (t) => {
   const root = path.resolve(__dirname, "../modules/agora." + application + "/data");
   const manifest = require(path.join(root, "manifest.json"));

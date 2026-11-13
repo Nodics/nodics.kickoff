@@ -16,6 +16,6 @@ test('Circa selects only its collection-centre viewport and map reference releas
             }
         }
     });
-    const packages = config.backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+    const packages = require("../../../config/circa-setup-data-packages.json");
     assert.deepEqual(packages.filter(entry => entry.code.startsWith('locationMap:')).map(entry => entry.code), ['locationMap:core-map-reference']);
 });

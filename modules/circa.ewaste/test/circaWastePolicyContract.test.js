@@ -59,7 +59,7 @@ assert.equal(manifest.contractVersion, 2);
 assert.equal(manifest.module, "circa.ewaste");
 assert.equal(section.dataType, "sample");
 assert.equal(section.sourceRoot, "sample-v001");
-assert.equal(section.version, "0.0.1");
+assert.equal(section.version, "0.0.2");
 assert.equal(section.selectionPolicy, "EXPLICIT");
 assert.equal(
   contributionPolicy.validateManifestSection(section).destinationRole,

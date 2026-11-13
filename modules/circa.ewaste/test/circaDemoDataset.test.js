@@ -226,14 +226,14 @@ test("Local selected role dependencies are fresh and ordered while refund except
   const steps = initialization.preparationSteps(profile);
   const order = initialization.preparationGroups(profile, {}, steps.filter(step => step.phase === "BEFORE_PUBLICATION"))
     .flatMap(group => group.steps.map(step => step.code));
-  const plan = require("../config/setup-observation/circa-native-reviewed.json");
+  const selectedPlan = runtime.publish.setup.observation.plans["circa-native-reviewed"];
+  const plan = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", selectedPlan.path), "utf8"));
   const wasteData = path.join(frameworkRoot, "nodics.waste/modules/wasteCore/data");
   const wasteManifest = require(path.join(wasteData, "manifest.json"));
   const baseRoleFile = "init-v001/records/identity/wasteCoreUserGroupData.js";
   assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(wasteData, baseRoleFile))).digest("hex"),
     wasteManifest.sections.accessGroups.files[baseRoleFile], "Waste-owned base-role dependency must remain fresh");
-  const roleDefinitions = require("../config/properties").backofficeApplicationInitialization.profiles.circa
-    .dataPackages.value.filter(pack => pack.order === 90).map(pack => pack.code);
+  const roleDefinitions = require("../../../config/circa-setup-data-packages.json").filter(pack => pack.order === 90).map(pack => pack.code);
   const prerequisites = ["product:accessGroups", "publish:accessGroups",
     "promotion:accessGroups", "order:accessGroups",
     "circa.ewaste:profile", "circa.ewaste:operations", "circa.ewaste:circaCommerceStaffAssignments",
@@ -426,8 +426,7 @@ test("35 new offers retain 12 cafe, 12 bistro, 11 either-outlet terms and origin
 test("one Circa setup requires all demo sections and retains explicit operator-triggered import", () => {
   const config = require("../config/properties");
   const packages =
-    config.backofficeApplicationInitialization.profiles.circa.dataPackages
-      .value;
+    require("../../../config/circa-setup-data-packages.json");
   for (const section of [
     "profile",
     "operations",

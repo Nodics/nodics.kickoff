@@ -15,7 +15,7 @@ const manifest = require('../data/manifest.json');
 
 test('unreleased Apparel baseline retains the current Commerce search binding in v001', () => {
     const active = manifest.sections.agoraApparelCommerceCatalog;
-    assert.equal(active.version, '0.0.1');
+    assert.equal(active.version, '0.0.2');
     assert.equal(active.sourceRoot, 'sample-v001');
     assert.equal(manifest.retainedRoots, undefined);
     for (const [file, hash] of Object.entries(active.files)) {

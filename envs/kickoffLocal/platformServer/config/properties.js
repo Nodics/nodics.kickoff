@@ -5,7 +5,7 @@
  * @owner nodics.kickoff
  * @override Later deployment layers may narrow application selections without replacing framework preparation or owner authorization.
  */
-const circaDataPackages = require("../../../../modules/circa.ewaste/data/sample-v001/setup/circa-setup-data-packages.json");
+const circaDataPackages = require("../../../../config/circa-setup-data-packages.json");
 const renewedPromotionPackages = new Map([
   ["circa.ewaste:circaGreenPerksBudget", "circa.ewaste:circaGreenPerksL08Budget"],
   ["circa.ewaste:circaGreenPerksIssuance", "circa.ewaste:circaGreenPerksL08Issuance"],

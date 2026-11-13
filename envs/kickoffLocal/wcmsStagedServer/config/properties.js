@@ -129,7 +129,7 @@ module.exports = {
       baselines: {
         kickoffdocs: {
           contentPackCode: "kickoffDocumentation",
-          releaseVersion: "0.0.2",
+          releaseVersion: "0.0.3",
           rootType: "site",
           rootCode: "kickoffDocumentationSite",
           sourceVersion: "0",
@@ -141,7 +141,7 @@ module.exports = {
         },
         axisdocs: {
           contentPackCode: "axisDocumentation",
-          releaseVersion: "0.0.2",
+          releaseVersion: "0.0.3",
           sourceVersion: "0",
         },
       },

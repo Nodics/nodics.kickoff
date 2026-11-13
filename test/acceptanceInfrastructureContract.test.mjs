@@ -49,10 +49,13 @@ test('project verification includes its configuration, Commerce and Circa adopti
   assert.equal(require('../modules/circa.ewaste/package.json').scripts, undefined,
     'The reference data pack has no executable lifecycle; project validation owns its tests');
   const workflow = fs.readFileSync(path.join(root, '.github/workflows/verification.yml'), 'utf8');
-  assert(workflow.includes('ref: ${{ vars.NODICS_FRAMEWORK_SHA }}'));
+  assert(workflow.includes('ref: ${{ steps.framework.outputs.sha }}'));
   assert(workflow.includes('NODICS_FRAMEWORK_SHA: ${{ vars.NODICS_FRAMEWORK_SHA }}'));
   assert(workflow.includes('[[ ! "$NODICS_FRAMEWORK_SHA" =~ ^[0-9a-fA-F]{40}$ ]]'));
-  assert(workflow.indexOf('name: Validate framework revision') < workflow.indexOf('name: Checkout selected Nodics framework commit'));
+  assert(workflow.indexOf('name: Select exact Framework revision') >= 0);
+  assert(workflow.indexOf('name: Select exact Framework revision') < workflow.indexOf('name: Checkout selected Nodics framework commit'));
+  assert(workflow.includes('nodics.kickoff/.github/native-local-framework.sha'));
+  assert(workflow.includes('run: npm run test:native-local'));
   assert(workflow.includes('run: npm test'));
   assert(!workflow.includes('ref: feature/'));
 });

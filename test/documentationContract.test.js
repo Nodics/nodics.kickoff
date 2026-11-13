@@ -146,8 +146,8 @@ const wasteVerificationCopies = [
 );
 assert.strictEqual(
   wasteVerificationCopies.length,
-  4,
-  "Waste verification must remain consistent in the article and its three search projections",
+  5,
+  "Waste verification must remain consistent in the article, component, navigation, node and page search projections",
 );
 for (const text of wasteVerificationCopies) {
   assert(
@@ -361,7 +361,7 @@ for (const family of ["Page", "Route", "Component", "Media", "PageMetadata"]) {
   );
 }
 for (const record of selectedRecords("PublicationState")) {
-  assert.equal(record.stagedVersion, "0.0.2");
+  assert.equal(record.stagedVersion, manifest.version);
   assert.equal(record.lifecycleState, "STAGED");
   for (const key of [
     "onlineVersion",
@@ -388,7 +388,7 @@ for (const [file, hash] of Object.entries(
   );
   assert.equal(manifest.generatedHashes[file], hash, "Assets are reused unchanged");
 }
-assert.equal(manifest.version, "0.0.2");
+assert.equal(manifest.version, "0.0.3");
 assert(pageMetadataRecords.every((row) => row.lifecycleState === "STAGED"));
 const projection = documentationService.renderProjection({
   documentation: {

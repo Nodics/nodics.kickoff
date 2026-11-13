@@ -47,6 +47,7 @@ test("Local and Docker Process select protocol names and deployment connections"
       "editorial.applyDecision",
       "editorial.publishApproved",
       "cms.applyPublicationDecision",
+      ...(environment === "kickoffDockerLocal" ? ["media.applyPublicationDecision"] : []),
       "rulesApi.applyDecision",
       ...(environment === "kickoffLocal"
         ? [

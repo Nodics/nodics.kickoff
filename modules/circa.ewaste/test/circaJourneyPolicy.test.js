@@ -230,8 +230,9 @@ test("approved native 200m and application 50m radii retain inclusive boundaries
       assert.equal(arrival.nextAction, distance <= radius ? "PHOTO" : "TRAVEL");
       assert.equal(arrival.policy.arrivalRadiusMetres, radius);
     }
-    assert.equal(properties.wasteImpact.calculation.providerService, "DefaultEWasteOpenAiImpactProviderService");
-    assert.deepEqual(properties.wasteImpact.calculation.fallbackProviderServices,
+    const impact = require("../../../../nodics.ai/nodics.waste/modules/wasteImpact/src/service/defaultWasteImpactCalculationService").settings();
+    assert.equal(impact.providerService, "DefaultEWasteOpenAiImpactProviderService");
+    assert.deepEqual(impact.fallbackProviderServices,
       ["DefaultEWasteWarmImpactProviderService"]);
   }
 });

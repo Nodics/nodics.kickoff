@@ -22,6 +22,21 @@ for (const snapshot of snapshots)
       const runtime = loadRuntime(snapshot.server, snapshot.environment);
       const modules = activeModuleNames(runtime);
       for (const [selector, original] of Object.entries(snapshot.expected)) {
+        if (selector === "wasteImpact.calculation") {
+          if (!modules.includes("wasteImpact")) {
+            assert.equal(runtime.wasteImpact, undefined, "Inactive owners contribute no copied provider defaults");
+          } else {
+            const previous = global.CONFIG;
+            try {
+              global.CONFIG = { get: key => runtime[key] };
+              const settings = require(path.join(frameworkRoot,
+                "nodics.waste/modules/wasteImpact/src/service/defaultWasteImpactCalculationService")).settings();
+              assert.equal(runtime.wasteImpact.calculation.providerProfile, "eWasteEnvironmentalAssessment");
+              assert.deepEqual(settings, original, "The selected owner profile preserves the effective provider contract");
+            } finally { global.CONFIG = previous; }
+          }
+          continue;
+        }
         let expected = structuredClone(original);
         if (selector === "digitalCore.merchantRedemption" && modules.includes("digitalCore")) {
           const defaults = require(path.join(frameworkRoot,

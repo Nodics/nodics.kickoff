@@ -19,7 +19,7 @@ const targets = (value) =>
 test("commerce catalogue is selected as unified v001 first-start data", () => {
   const current = manifest.sections.commerce;
   const productConfig = require("./helpers/deploymentPolicy").runtime("commerceStagedServer").product;
-  assert.equal(current.version, "0.0.1");
+  assert.equal(current.version, "0.0.2");
   assert.equal(current.sourceRoot, "sample-v001");
   assert.equal(current.selectionPolicy, "EXPLICIT");
   assert.equal(current.destinationRole, "COMMERCE_STAGED");

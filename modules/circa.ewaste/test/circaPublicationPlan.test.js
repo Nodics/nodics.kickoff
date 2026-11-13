@@ -96,7 +96,7 @@ test("Circa pins every active Product and financial root exactly once in its v00
   assert.equal(section.kind, "DATA_RELEASE");
   assert.equal(section.dataType, "sample");
   assert.equal(section.sourceRoot, "sample-v001");
-  assert.equal(section.version, "0.0.1");
+  assert.equal(section.version, "0.0.2");
   assert.equal(section.destinationRole, "COMMERCE_STAGED");
   assert.equal(section.selectionPolicy, "EXPLICIT");
   assert.equal(section.versioningPolicy, "IMMUTABLE");
@@ -424,8 +424,7 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
   test(`${environment} selects only supported Circa publication and defers required operations without documentation`, () => {
     const runtime = loadRuntime("platformServer", environment, {});
     const profile = runtime.backofficeApplicationInitialization.profiles.circa;
-    const moduleSteps = require("../config/properties")
-      .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+    const moduleSteps = require("../../../config/circa-setup-data-packages.json");
     const bindings = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/defaultConfigurationBindingService"));
     const initializer = require(path.join(frameworkRoot, "nodics.foundation/modules/nConfig/src/service/DefaultFrameworkInitializerService"));
     const deployment = initializer.deploymentPropertyContext({
@@ -435,9 +434,18 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       serverCode: "platformServer",
     });
     for (const shared of moduleSteps) {
+      let selected = { ...shared };
+      if (environment === "kickoffDockerLocal" && /^circa\.ewaste:network-/.test(selected.code))
+        selected.code += "-docker";
+      if (environment === "kickoffLocal") {
+        const match = /^circa\.ewaste:circa(GreenPerks|RenewWorks|LoopCycle)(Budget|Issuance)$/.exec(selected.code);
+        if (match) {
+          selected.code = `circa.ewaste:circa${match[1]}L08${match[2]}`;
+        }
+      }
       assert.deepEqual(
-        profile.dataPackages.find((step) => step.code === shared.code),
-        bindings.resolve(shared, runtime, deployment),
+        profile.dataPackages.find((step) => step.code === selected.code),
+        bindings.resolve(selected, runtime, deployment),
         `Deployment selection must preserve shared package ${shared.code} and target`,
       );
     }
@@ -467,7 +475,7 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       );
       const publications = allPublications.filter((step) => step.required);
       const operations = steps.filter((step) =>
-        /^circa\.ewaste:circa(GreenPerks|RenewWorks|LoopCycle)(Budget|Issuance)$/.test(
+        /^circa\.ewaste:circa(GreenPerks|RenewWorks|LoopCycle)(L08)?(Budget|Issuance)$/.test(
           step.code,
         ),
       );
@@ -480,7 +488,7 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
       for (const [name, enterprise] of Object.entries(issuers)) {
         for (const stage of ["Budget", "Issuance"]) {
           const step = operations.find(
-            (item) => item.code === `circa.ewaste:circa${name}${stage}`,
+            (item) => item.code === `circa.ewaste:circa${name}${environment === "kickoffLocal" ? "L08" : ""}${stage}`,
           );
           assert.equal(step.targetRuntimeRole, "COMMERCE");
           assert.equal(step.operatorEnterpriseCode, enterprise);
@@ -496,18 +504,20 @@ for (const environment of ["kickoffLocal", "kickoffDockerLocal"]) {
         );
         assert.equal(selectedItems.length, 84);
         assert.equal(new Set(selectedItems.map((item) => item.code)).size, 84);
+        const selectedSourceItems = ["circaCataloguePublicationPlan", "circaGreenPerksL08PublicationPlan", "circaRenewWorksL08PublicationPlan", "circaLoopCycleL08PublicationPlan"]
+          .flatMap(section => JSON.parse(fs.readFileSync(path.join(dataRoot, Object.keys(manifest.sections[section].files)[0]), "utf8")).items);
         assert.deepEqual(
           selectedItems.slice().sort((a, b) => a.code.localeCompare(b.code)),
-          plan.items.slice().sort((a, b) => a.code.localeCompare(b.code)),
+          selectedSourceItems.slice().sort((a, b) => a.code.localeCompare(b.code)),
         );
         for (const publication of publications) {
           assert.equal(publication.targetRuntimeRole, "COMMERCE_STAGED");
           assert.equal(publication.targetServer, "commerceStaged");
           const publicationEnterprises = {
             "circa.ewaste:circaCataloguePublicationPlan": "GREENPERKS_ONLINE",
-            "circa.ewaste:circaGreenPerksPublicationPlan": issuers.GreenPerks,
-            "circa.ewaste:circaRenewWorksPublicationPlan": issuers.RenewWorks,
-            "circa.ewaste:circaLoopCyclePublicationPlan": issuers.LoopCycle,
+            "circa.ewaste:circaGreenPerksL08PublicationPlan": issuers.GreenPerks,
+            "circa.ewaste:circaRenewWorksL08PublicationPlan": issuers.RenewWorks,
+            "circa.ewaste:circaLoopCycleL08PublicationPlan": issuers.LoopCycle,
           };
           assert(Object.hasOwn(publicationEnterprises, publication.code));
           assert.equal(
@@ -606,8 +616,7 @@ test("native Local publication selection inherits all five selected owners and t
       assert.equal(staged[domain].publication.sourceVersioningQualified, true);
     }
   }
-  const raw = require("../config/properties")
-    .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+  const raw = require("../../../config/circa-setup-data-packages.json");
   assert(
     !raw.some((step) => step.type === "GOVERNED_PUBLICATIONS"),
     "Unselected deployments inherit no publication selection",

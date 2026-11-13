@@ -219,7 +219,7 @@ module.exports = {
       baselines: {
         circa: {
           releaseCode: "circa.ewaste:content",
-          releaseVersion: "0.0.1",
+          releaseVersion: "0.0.2",
           dataType: "sample",
           rootType: "site",
           rootCode: "circaSite",

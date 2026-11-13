@@ -405,7 +405,9 @@ async function prepareScenario(scenario) {
                         : domain === 'tax' ? issuer.taxPolicyCode : good.warehouseCode]];
                 }));
                 const circaRoots = domain === 'promotion'
-                    ? ['greenperks'].flatMap(issuer => require(
+                    ? ['greenperks', 'renewworks', 'loopcycle'].flatMap(issuer => require(
+                        '../modules/circa.ewaste/data/sample-v001/publication/l08-20261110/' + issuer + '/records/publicationPlan.json'
+                    ).items.map(row => row.rootCode)).concat(['greenperks'].flatMap(issuer => require(
                         '../modules/circa.ewaste/data/sample-v001/publication/' + issuer + '/records/publicationPlan.json'
                     ).items.map(row => row.rootCode)).concat([
                         'circaGreenPerksFixedExpiryBudget', 'circaRenewWorksRemainingFixedExpiryBudget',
@@ -418,7 +420,7 @@ async function prepareScenario(scenario) {
                             assert.equal(row.storeCode, 'circaMainStore');
                             return row.rootCode;
                         });
-                    }))
+                    })))
                     : [{ pricing: 'circaPointsPriceBook', tax: 'circaSamplePointsPolicy', inventory: 'circaDigitalRegistry' }[domain]];
                 const apparelRoots = {
                     pricing: ['agoraApparelRetailUsd'], tax: ['agoraAeVatPolicy'], inventory: ['agoraApparelWarehouse'],

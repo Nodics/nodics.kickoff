@@ -18,7 +18,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 test("Circa setup consumes the linked collection network releases in dependency order", () => {
   const contribution =
-    config.backofficeApplicationInitialization.profiles.circa.dataPackages;
+    require("../../../envs/kickoffLocal/config/properties").backofficeApplicationInitialization.profiles.circa.dataPackages;
   assert.equal(contribution.$config, "replace");
   const { loadRuntime } = require("../../../test/helpers/configuration");
   const profile = loadRuntime("platformServer", "kickoffDockerLocal").backofficeApplicationInitialization.profiles.circa;
@@ -38,7 +38,8 @@ test("Circa setup consumes the linked collection network releases in dependency 
   const steps = service.preparationSteps(profile);
   let previousOrder = 0;
   for (const [code, targetServer, targetRuntimeRole, dataType] of dependencies) {
-    const selected = steps.filter(step => step.code === code);
+    const selectedCode = /^circa\.ewaste:network-/.test(code) ? code + "-docker" : code;
+    const selected = steps.filter(step => step.code === selectedCode);
     assert.equal(selected.length, 1, code);
     const [step] = selected;
     assert.equal(step.targetServer, targetServer);
@@ -62,8 +63,7 @@ test("Circa setup consumes the linked collection network releases in dependency 
 });
 test("the single Circa demo requires identity, operations and rewards without bypassing owner admission", () => {
   const packages =
-    config.backofficeApplicationInitialization.profiles.circa.dataPackages
-      .value;
+    require("../../../config/circa-setup-data-packages.json");
   for (const code of [
     "circa.ewaste:profile",
     "circa.ewaste:operations",

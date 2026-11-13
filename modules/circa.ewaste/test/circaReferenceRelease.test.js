@@ -181,7 +181,7 @@ test("materialized policy sample imports independently of historical core compos
 test("the required demo pack remains explicit v001 and separate from reference datasets", () => {
   const manifest = require("../data/manifest.json");
   assert.equal(manifest.sections.waste.sourceRoot, "sample-v001");
-  assert.equal(manifest.sections.waste.version, "0.0.1");
+  assert.equal(manifest.sections.waste.version, "0.0.2");
   assert.equal(manifest.sections.waste.selectionPolicy, "EXPLICIT");
   const header = require("../data/sample-v001/waste/headers/circaWasteSampleHeader");
   const targets = Object.values(header).flatMap((entries) =>
@@ -190,8 +190,7 @@ test("the required demo pack remains explicit v001 and separate from reference d
   assert(!targets.includes("wasteCategory"));
   assert(!targets.includes("wasteItemType"));
   assert(!targets.includes("wasteImpactProfile"));
-  const packs = require("../config/properties")
-    .backofficeApplicationInitialization.profiles.circa.dataPackages.value;
+  const packs = require("../../../config/circa-setup-data-packages.json");
   assert.equal(
     packs.find((pack) => pack.code === "circa.ewaste:waste").required,
     true,

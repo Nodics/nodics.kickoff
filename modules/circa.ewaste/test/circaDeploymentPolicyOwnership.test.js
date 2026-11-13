@@ -55,6 +55,20 @@ for (const snapshot of snapshots)
         snapshot.selected,
       );
       for (const [selector, expected] of Object.entries(snapshot.expected)) {
+        if (selector.startsWith("wasteImpact.calculation.")) {
+          if (!activeModuleNames(runtime).includes("wasteImpact")) {
+            assert.equal(runtime.wasteImpact, undefined, "Inactive owners contribute no copied provider defaults");
+          } else {
+            const previous = global.CONFIG;
+            try {
+              global.CONFIG = { get: key => runtime[key] };
+              const settings = require(path.join(frameworkRoot,
+                "nodics.waste/modules/wasteImpact/src/service/defaultWasteImpactCalculationService")).settings();
+              assert.deepEqual(selector.split(".").slice(2).reduce((value, key) => value?.[key], settings) ?? null, expected, selector);
+            } finally { global.CONFIG = previous; }
+          }
+          continue;
+        }
         const actual =
           selector.split(".").reduce((value, key) => value?.[key], runtime) ??
           null;
